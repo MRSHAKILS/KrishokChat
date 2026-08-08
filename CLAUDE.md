@@ -27,3 +27,12 @@
 ### What's Left
 - Phase 6: Frontend wiring (detection ? show info ? chat-more button)
 - Frontend: tabs for disease detection + QA, agent trace animation
+
+### Phase 6: Frontend Integration (2026-08-09)
+- QA chat: same page (tab 2), RAG-powered via stream endpoint
+- Detection: tab 1, upload image -> show crop + disease + info
+- CORS fix: API_BASE = "" + Next.js rewrites proxy to backend
+- Backend CORS: multiple localhost origins allowed
+- QA flow: safety check -> BM25 retrieval -> Gemini-3.1-Flash-Lite generation
+- Bengali keyword augmentation for BM25 (bn->en mapping)
+- Both servers running: backend :8000, frontend :3100
