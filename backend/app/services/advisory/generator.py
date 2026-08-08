@@ -10,10 +10,12 @@ import time
 
 import dotenv
 
-# Load env from project root
-ROOT = pathlib.Path(__file__).resolve().parents[3]
-dotenv.load_dotenv(ROOT / ".env")
-dotenv.load_dotenv(ROOT / ".env.local")
+# Load env from project root (parents[4] = .../backend/app/services/advisory -> .../backend -> .../project)
+ROOT = pathlib.Path(__file__).resolve().parents[4]
+PROJECT_ROOT = ROOT
+BACKEND_ROOT = ROOT / "backend"
+dotenv.load_dotenv(PROJECT_ROOT / ".env", override=False)
+dotenv.load_dotenv(BACKEND_ROOT / ".env.local", override=False)
 
 # Gemini model for generation (free keys)
 GEN_MODEL = os.getenv("GEN_MODEL", "gemini-3.1-flash-lite")

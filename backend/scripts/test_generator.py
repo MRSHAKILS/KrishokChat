@@ -2,11 +2,14 @@
 import sys
 sys.path.insert(0, r"D:\KrishokChat Advisory System\backend")
 
-from app.services.advisory.generator import generate_response, build_prompt
+from app.services.advisory.generator import generate_response, build_prompt, get_gemini_keys
 
 
 def main():
     import traceback
+    # First check keys
+    keys = get_gemini_keys()
+    print(f"[DEBUG] Keys loaded: {len(keys)}")
     # Test 1: Category A disease (potato late blight) with full info
     print("=" * 60)
     print("Test 1: Potato Late Blight (Category A - full info)")
@@ -26,7 +29,7 @@ def main():
             },
         )
         print(f"Response: {result['response'][:300]}")
-        print(f"Grounded: {result['grounded']}, Model: {result.get('model_used')}")
+        print(f"Grounded: {result['grounded']}, Model: {result.get('model_used')}, Error: {result.get('error', 'none')}")
     except Exception as e:
         traceback.print_exc()
     print()
