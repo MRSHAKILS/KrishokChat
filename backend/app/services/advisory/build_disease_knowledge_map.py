@@ -82,8 +82,29 @@ def main():
         if isinstance(classes, dict):
             classes = [classes[str(i)] for i in range(len(classes))]
         details = json.loads(dd_file.read_text(encoding="utf-8")) if dd_file.exists() else {}
-        detail_keys = list(details.keys()) if isinstance(details, dict) else []
-        print(f"  {crop_name}: {len(classes)} classes, {len(detail_keys)} detail keys")
+
+        # Extract class_names from nested disease_details structure
+        detail_class_names = []
+        detail_class_map = {}  # normalized_name -> {description_bn, solution_bn, cause_bn}
+        if isinstance(details, dict):
+            for lib_key, lib_val in details.items():
+                if isinstance(lib_val, dict) and "classes" in lib_val and isinstance(lib_val["classes"], list):
+                    for cls_entry in lib_val["classes"]:
+                        if not isinstance(cls_entry, dict):
+                            continue
+                        cls_name = cls_entry.get("class_name", "")
+                        if not cls_name:
+                            continue
+                        detail_class_names.append(cls_name)
+                        # Normalize: strip parenthetical, lowercase, remove spaces
+                        norm = cls_name.lower().split("(")[0].strip().replace(" ", "").replace("_", "")
+                        detail_class_map[norm] = {
+                            "description_bn": cls_entry.get("description_bn", ""),
+                            "solution_bn": cls_entry.get("solution_bn", ""),
+                            "cause_bn": cls_entry.get("cause_bn", ""),
+                        }
+
+        print(f"  {crop_name}: {len(classes)} classes, {len(detail_class_names)} disease_details entries")
 
         for cls in classes:
             if is_healthy(cls):
@@ -114,15 +135,31 @@ def main():
                 if any(v in hay for v in variants):
                     matched.append(node["id"])
 
+            # Match against disease_details nested classes
             has_details = False
-            matched_detail_keys = []
-            for dk in detail_keys:
-                dklower = dk.lower()
-                if any(v in dklower for v in variants) or dname.lower() in dklower:
+            matched_detail_classes = []
+            dname_norm = dname.lower().replace(" ", "").replace("_", "")
+            for cls_name in detail_class_names:
+                cls_norm = cls_name.lower().split("(")[0].strip().replace(" ", "").replace("_", "")
+                if dname_norm == cls_norm or any(v.replace(" ", "") == cls_norm for v in variants):
                     has_details = True
-                    matched_detail_keys.append(dk)
+                    matched_detail_classes.append(cls_name)
 
-            if matched and has_details:
+            has_description = False
+            has_solution = False
+            has_cause = False
+            if has_details:
+                for cls_name in matched_detail_classes:
+                    norm = cls_name.lower().split("(")[0].strip().replace(" ", "").replace("_", "")
+                    info = detail_class_map.get(norm, {})
+                    if info.get("description_bn"):
+                        has_description = True
+                    if info.get("solution_bn"):
+                        has_solution = True
+                    if info.get("cause_bn"):
+                        has_cause = True
+
+            if matched and has_details and has_description and has_solution:
                 completeness = "A"
             elif matched or has_details:
                 completeness = "B"
@@ -135,7 +172,10 @@ def main():
                 "category": completeness,
                 "rag_node_ids": matched[:5],
                 "has_disease_details": has_details,
-                "matched_detail_keys": matched_detail_keys[:3],
+                "has_description_bn": has_description,
+                "has_solution_bn": has_solution,
+                "has_cause_bn": has_cause,
+                "matched_detail_classes": matched_detail_classes[:3],
             }
 
     # Report

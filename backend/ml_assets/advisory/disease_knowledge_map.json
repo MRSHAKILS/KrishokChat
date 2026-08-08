@@ -2,7 +2,7 @@
   "Rice__Bacterial_Leaf_Blight": {
     "crop": "Rice",
     "disease_name": "Bacterial Leaf Blight",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "IRRI_IRRI_AE9C42_001",
       "IRRI_IRRI_DA722C_001",
@@ -10,13 +10,18 @@
       "CABI_BRASSICA_0E322A_001",
       "CABI_BRASSICA_339170_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Bacterial Leaf Blight (ব্যাকটেরিয়াজনিত পাতা পোড়া)"
+    ]
   },
   "Rice__Brown_Spot": {
     "crop": "Rice",
     "disease_name": "Brown Spot",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "B5_BARCAG_105A6B_002",
       "CABI_CORN_DCA16E_001",
@@ -24,8 +29,13 @@
       "CABI_WHEAT_D3A722_001",
       "B4_DAEEXT_D2B51B_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Brown Spot (বাদামী দাগ রোগ)"
+    ]
   },
   "Rice__Healthy_Leaf": {
     "crop": "Rice",
@@ -33,12 +43,15 @@
     "category": "C",
     "rag_node_ids": [],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Rice__Leaf_Blast": {
     "crop": "Rice",
     "disease_name": "Leaf Blast",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "B5_BARCAG_105A6B_002",
       "B5_BARCAG_DF7B1C_004",
@@ -46,13 +59,18 @@
       "DAE_PEST_26974A_001",
       "DAE_PEST_D1436D_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Leaf Blast (পাতা ব্লাস্ট)"
+    ]
   },
   "Rice__Leaf_Scald": {
     "crop": "Rice",
     "disease_name": "Leaf Scald",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "B5_BARCAG_105A6B_002",
       "B5_BARCAG_DF7B1C_004",
@@ -60,34 +78,49 @@
       "DAE_PEST_26974A_001",
       "DAE_PEST_D1436D_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Leaf Scald (পাতা পোড়া বা লিফ স্ক্যাল্ড)"
+    ]
   },
   "Rice__Narrow_Brown_Leaf_Spot": {
     "crop": "Rice",
     "disease_name": "Narrow Brown Leaf Spot",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "IRRI_IRRI_D62EEF_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Narrow Brown Leaf Spot (সংকীর্ণ বাদামী দাগ রোগ)"
+    ]
   },
   "Rice__Rice_Hispa": {
     "crop": "Rice",
     "disease_name": "Rice Hispa",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "B5_BARCAG_105A6B_002",
       "DAE_PEST_458D1E_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Rice Hispa (ধানের পামরি পোকা)"
+    ]
   },
   "Rice__Sheath_Blight": {
     "crop": "Rice",
     "disease_name": "Sheath Blight",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "DAE_PEST_B940E8_001",
       "IRRI_IRRI_08EFDA_001",
@@ -95,21 +128,31 @@
       "IRRI_IRRI_0F67B4_001",
       "IRRI_IRRI_D62EEF_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Sheath Blight (খোল পচা বা খোল পোড়া রোগ)"
+    ]
   },
   "BlackPoint": {
     "crop": "Wheat",
     "disease_name": "BlackPoint",
-    "category": "C",
+    "category": "B",
     "rag_node_ids": [],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": false,
+    "matched_detail_classes": [
+      "BlackPoint (কালো দাগ রোগ)"
+    ]
   },
   "Blast": {
     "crop": "Wheat",
     "disease_name": "Blast",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "CABI_WHEAT_17CE3C_001",
       "CABI_WHEAT_153BAE_001",
@@ -117,21 +160,31 @@
       "IRRI_IRRI_939CB7_001",
       "IRRI_IRRI_A6AA96_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": false,
+    "matched_detail_classes": [
+      "Blast (গম ব্লাস্ট রোগ)"
+    ]
   },
   "FusariumFootRot": {
     "crop": "Wheat",
     "disease_name": "FusariumFootRot",
-    "category": "C",
+    "category": "B",
     "rag_node_ids": [],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": false,
+    "matched_detail_classes": [
+      "FusariumFootRot (ফুসারিয়াম ফুট রট)"
+    ]
   },
   "Leaf Rust": {
     "crop": "Wheat",
     "disease_name": "Leaf Rust",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "B5_BARCAG_EEC7DC_001",
       "B5_BARCAG_DF7B1C_004",
@@ -139,21 +192,31 @@
       "B5_BARCAG_4AD140_001",
       "CABI_WHEAT_BA3075_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": false,
+    "matched_detail_classes": [
+      "Leaf Rust (পাতা মরিচা রোগ)"
+    ]
   },
   "LeafBlight": {
     "crop": "Wheat",
     "disease_name": "LeafBlight",
-    "category": "C",
+    "category": "B",
     "rag_node_ids": [],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": false,
+    "matched_detail_classes": [
+      "LeafBlight (পাতা ঝলসানো রোগ)"
+    ]
   },
   "Powdery Mildew": {
     "crop": "Wheat",
     "disease_name": "Powdery Mildew",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "CABI_WHEAT_071FA8_001",
       "B5_BARCAG_E68538_002",
@@ -161,13 +224,18 @@
       "B5_BARCAG_E77367_002",
       "B5_BARCAG_330DB9_004"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": false,
+    "matched_detail_classes": [
+      "Powdery Mildew (গুঁড়া মিলডিউ রোগ)"
+    ]
   },
   "Stem Rust": {
     "crop": "Wheat",
     "disease_name": "Stem Rust",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "B4_FRG2024_45092F_001",
       "B4_FRG2024_BE42AD_003",
@@ -175,13 +243,18 @@
       "B4_FRG2024_6FCB69_002",
       "B4_FRG2024_6FCB69_003"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": false,
+    "matched_detail_classes": [
+      "Stem Rust (কাণ্ড মরিচা রোগ)"
+    ]
   },
   "Stripe Rust": {
     "crop": "Wheat",
     "disease_name": "Stripe Rust",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "CABI_WHEAT_49F8AB_001",
       "CABI_WHEAT_D35AA4_001",
@@ -189,21 +262,31 @@
       "CABI_CORN_73612C_001",
       "CABI_CORN_51F4DD_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": false,
+    "matched_detail_classes": [
+      "Stripe Rust (ডোরাকাটা মরিচা রোগ)"
+    ]
   },
   "WheatBlast": {
     "crop": "Wheat",
     "disease_name": "WheatBlast",
-    "category": "C",
+    "category": "B",
     "rag_node_ids": [],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": false,
+    "matched_detail_classes": [
+      "WheatBlast (গম ব্লাস্ট রোগ)"
+    ]
   },
   "Potato__Early_Blight": {
     "crop": "Potato",
     "disease_name": "Early Blight",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "B5_BARCAG_AF08BA_002",
       "B5_BARCAG_AF08BA_004",
@@ -211,21 +294,31 @@
       "CABI_POTATO_F248A8_001",
       "CABI_POTATO_ED1267_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Early Blight (প্রারম্ভিক ব্লাস্ট)"
+    ]
   },
   "Potato__Healthy_Leaf": {
     "crop": "Potato",
     "disease_name": "Healthy Leaf",
-    "category": "C",
+    "category": "B",
     "rag_node_ids": [],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Healthy Leaf (সুস্থ আলু পাতা)"
+    ]
   },
   "Potato__Late_Blight": {
     "crop": "Potato",
     "disease_name": "Late Blight",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "B5_BARCAG_AF08BA_002",
       "CABI_POTATO_42D248_001",
@@ -233,8 +326,13 @@
       "B4_DAEEXT_E39647_001",
       "B4_DAEEXT_BDEE76_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Late Blight (লেট ব্লাস্ট বা আলুর ঝুলসা রোগ)"
+    ]
   },
   "Cabbage__Alternaria_Spot": {
     "crop": "Brassica",
@@ -248,7 +346,10 @@
       "B5_BARCAG_F16272_002"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cabbage__Black_Rot": {
     "crop": "Brassica",
@@ -262,7 +363,10 @@
       "CABI_BRASSICA_ACA411_001"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cabbage__Downy_Mildew": {
     "crop": "Brassica",
@@ -276,7 +380,10 @@
       "CABI_BRASSICA_3C63C1_001"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cabbage__Healthy_Leaf": {
     "crop": "Brassica",
@@ -284,7 +391,10 @@
     "category": "C",
     "rag_node_ids": [],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cauliflower__Alternaria_Disease": {
     "crop": "Brassica",
@@ -298,7 +408,10 @@
       "B5_BARCAG_F16272_002"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cauliflower__Bacterial_Soft_Rot": {
     "crop": "Brassica",
@@ -309,7 +422,10 @@
       "CABI_BRASSICA_D42830_001"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cauliflower__Bacterial_Spot": {
     "crop": "Brassica",
@@ -323,7 +439,10 @@
       "B5_BARCAG_AF08BA_003"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cauliflower__Black_Spot": {
     "crop": "Brassica",
@@ -337,7 +456,10 @@
       "CABI_BRASSICA_ACA411_001"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cauliflower__Downy_Mildew": {
     "crop": "Brassica",
@@ -351,7 +473,10 @@
       "CABI_BRASSICA_3C63C1_001"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cauliflower__Healthy": {
     "crop": "Brassica",
@@ -365,7 +490,10 @@
       "CABI_CORN_3CA8DF_001"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Cauliflower__Nutrient_Deficiency": {
     "crop": "Brassica",
@@ -378,12 +506,15 @@
       "CABI_CORN_0216DD_001"
     ],
     "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_description_bn": false,
+    "has_solution_bn": false,
+    "has_cause_bn": false,
+    "matched_detail_classes": []
   },
   "Common_Rust": {
     "crop": "Corn",
     "disease_name": "Common Rust",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "B5_BARCAG_D65B05_001",
       "B5_BARCAG_F591B6_002",
@@ -391,13 +522,18 @@
       "CABI_CORN_E1A4EA_001",
       "CABI_CORN_42F800_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Common Rust (ভুট্টার সাধারণ মরিচা রোগ)"
+    ]
   },
   "Gray_Leaf_Spot": {
     "crop": "Corn",
     "disease_name": "Gray Leaf Spot",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "CABI_CORN_99FD91_001",
       "B5_BARCAG_A5153A_002",
@@ -405,18 +541,28 @@
       "CABI_WHEAT_D3A722_001",
       "IRRI_IRRI_AE9C42_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Gray Leaf Spot (ভুট্টার ধূসর পাতা পোড়া রোগ)"
+    ]
   },
   "Northern_Leaf_Blight": {
     "crop": "Corn",
     "disease_name": "Northern Leaf Blight",
-    "category": "B",
+    "category": "A",
     "rag_node_ids": [
       "CABI_CORN_63C69F_001",
       "CABI_CORN_78017E_001"
     ],
-    "has_disease_details": false,
-    "matched_detail_keys": []
+    "has_disease_details": true,
+    "has_description_bn": true,
+    "has_solution_bn": true,
+    "has_cause_bn": true,
+    "matched_detail_classes": [
+      "Northern Leaf Blight (ভুট্টার উত্তরীয় পাতা পোড়া রোগ)"
+    ]
   }
 }
