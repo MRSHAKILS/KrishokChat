@@ -1,0 +1,13 @@
+{
+  "num_documents": 2120,
+  "word_vocabulary_size": 26350,
+  "char_ngram_vocabulary_size": 14101,
+  "avg_word_doc_length": 162.91,
+  "min_word_doc_length": 35,
+  "max_word_doc_length": 654,
+  "avg_char_ngram_doc_length": 587.25,
+  "total_word_tokens": 345367,
+  "build_seconds": 2.3,
+  "index_file_mb": 13.73,
+  "corpus_tok_file_mb": 14.48
+}

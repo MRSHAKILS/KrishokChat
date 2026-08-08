@@ -1,0 +1,280 @@
+{
+  "crop_classifier": {
+    "name": "crop_classifier",
+    "classes": [
+      "Brassica",
+      "Corn",
+      "GourdGuava",
+      "Potato",
+      "Solanacea",
+      "Wheat"
+    ],
+    "task": "classify",
+    "model_size_mb": 12.55,
+    "predictions": [
+      {
+        "image": "0001.jpg",
+        "predicted_class": "Solanacea",
+        "confidence": 0.9683,
+        "top3": [
+          {
+            "class": "Solanacea",
+            "conf": 0.9683
+          },
+          {
+            "class": "Brassica",
+            "conf": 0.017
+          },
+          {
+            "class": "Potato",
+            "conf": 0.0146
+          }
+        ]
+      },
+      {
+        "image": "0002.jpg",
+        "predicted_class": "Brassica",
+        "confidence": 1.0,
+        "top3": [
+          {
+            "class": "Brassica",
+            "conf": 1.0
+          },
+          {
+            "class": "Solanacea",
+            "conf": 0.0
+          },
+          {
+            "class": "Potato",
+            "conf": 0.0
+          }
+        ]
+      },
+      {
+        "image": "0001.png",
+        "predicted_class": "Brassica",
+        "confidence": 1.0,
+        "top3": [
+          {
+            "class": "Brassica",
+            "conf": 1.0
+          },
+          {
+            "class": "GourdGuava",
+            "conf": 0.0
+          },
+          {
+            "class": "Solanacea",
+            "conf": 0.0
+          }
+        ]
+      }
+    ]
+  },
+  "rice_disease": {
+    "name": "rice_disease",
+    "classes": [
+      "Rice__Bacterial_Leaf_Blight",
+      "Rice__Brown_Spot",
+      "Rice__Healthy_Leaf",
+      "Rice__Leaf_Blast",
+      "Rice__Leaf_Scald",
+      "Rice__Narrow_Brown_Leaf_Spot",
+      "Rice__Rice_Hispa",
+      "Rice__Sheath_Blight"
+    ],
+    "task": "classify",
+    "model_size_mb": 3.21,
+    "predictions": [
+      {
+        "image": "0001.jpg",
+        "predicted_class": "Rice__Sheath_Blight",
+        "confidence": 1.0,
+        "top3": [
+          {
+            "class": "Rice__Sheath_Blight",
+            "conf": 1.0
+          },
+          {
+            "class": "Rice__Bacterial_Leaf_Blight",
+            "conf": 0.0
+          },
+          {
+            "class": "Rice__Rice_Hispa",
+            "conf": 0.0
+          }
+        ]
+      },
+      {
+        "image": "0002.jpg",
+        "predicted_class": "Rice__Sheath_Blight",
+        "confidence": 1.0,
+        "top3": [
+          {
+            "class": "Rice__Sheath_Blight",
+            "conf": 1.0
+          },
+          {
+            "class": "Rice__Leaf_Blast",
+            "conf": 0.0
+          },
+          {
+            "class": "Rice__Bacterial_Leaf_Blight",
+            "conf": 0.0
+          }
+        ]
+      }
+    ]
+  },
+  "wheat_disease": {
+    "name": "wheat_disease",
+    "classes": [
+      "Brassica",
+      "Corn",
+      "GourdGuava",
+      "Potato",
+      "Solanacea",
+      "Wheat"
+    ],
+    "task": "classify",
+    "predictions": []
+  },
+  "corn_disease": {
+    "name": "corn_disease",
+    "classes": [
+      "Common_Rust",
+      "Gray_Leaf_Spot",
+      "Healthy",
+      "Northern_Leaf_Blight"
+    ],
+    "task": "classify",
+    "predictions": []
+  },
+  "potato_disease": {
+    "name": "potato_disease",
+    "classes": [
+      "Potato__Early_Blight",
+      "Potato__Healthy_Leaf",
+      "Potato__Late_Blight"
+    ],
+    "task": "classify",
+    "model_size_mb": 11.03,
+    "predictions": [
+      {
+        "image": "0001.jpg",
+        "predicted_class": "Potato__Early_Blight",
+        "confidence": 0.9764,
+        "top3": [
+          {
+            "class": "Potato__Early_Blight",
+            "conf": 0.9764
+          },
+          {
+            "class": "Potato__Late_Blight",
+            "conf": 0.0236
+          },
+          {
+            "class": "Potato__Healthy_Leaf",
+            "conf": 0.0
+          }
+        ]
+      },
+      {
+        "image": "0002.jpg",
+        "predicted_class": "Potato__Late_Blight",
+        "confidence": 1.0,
+        "top3": [
+          {
+            "class": "Potato__Late_Blight",
+            "conf": 1.0
+          },
+          {
+            "class": "Potato__Early_Blight",
+            "conf": 0.0
+          },
+          {
+            "class": "Potato__Healthy_Leaf",
+            "conf": 0.0
+          }
+        ]
+      }
+    ]
+  },
+  "brassica_disease": {
+    "name": "brassica_disease",
+    "classes": [
+      "Cabbage__Alternaria_Spot",
+      "Cabbage__Black_Rot",
+      "Cabbage__Downy_Mildew",
+      "Cabbage__Healthy_Leaf",
+      "Cauliflower__Alternaria_Disease",
+      "Cauliflower__Bacterial_Soft_Rot",
+      "Cauliflower__Bacterial_Spot",
+      "Cauliflower__Black_Spot",
+      "Cauliflower__Downy_Mildew",
+      "Cauliflower__Healthy",
+      "Cauliflower__Nutrient_Deficiency"
+    ],
+    "task": "classify",
+    "model_size_mb": 11.05,
+    "predictions": [
+      {
+        "image": "0001.jpg",
+        "predicted_class": "Cauliflower__Downy_Mildew",
+        "confidence": 0.9996,
+        "top3": [
+          {
+            "class": "Cauliflower__Downy_Mildew",
+            "conf": 0.9996
+          },
+          {
+            "class": "Cabbage__Downy_Mildew",
+            "conf": 0.0003
+          },
+          {
+            "class": "Cauliflower__Healthy",
+            "conf": 0.0001
+          }
+        ]
+      },
+      {
+        "image": "0002.jpg",
+        "predicted_class": "Cauliflower__Healthy",
+        "confidence": 1.0,
+        "top3": [
+          {
+            "class": "Cauliflower__Healthy",
+            "conf": 1.0
+          },
+          {
+            "class": "Cauliflower__Nutrient_Deficiency",
+            "conf": 0.0
+          },
+          {
+            "class": "Cauliflower__Black_Spot",
+            "conf": 0.0
+          }
+        ]
+      },
+      {
+        "image": "0001.png",
+        "predicted_class": "Cauliflower__Healthy",
+        "confidence": 1.0,
+        "top3": [
+          {
+            "class": "Cauliflower__Healthy",
+            "conf": 1.0
+          },
+          {
+            "class": "Cauliflower__Downy_Mildew",
+            "conf": 0.0
+          },
+          {
+            "class": "Cauliflower__Bacterial_Spot",
+            "conf": 0.0
+          }
+        ]
+      }
+    ]
+  }
+}

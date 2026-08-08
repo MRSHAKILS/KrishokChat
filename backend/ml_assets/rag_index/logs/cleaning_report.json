@@ -1,0 +1,92 @@
+{
+  "generated_at": "2026-08-08T00:57:45",
+  "source_file": "D:\\KrishokChat Advisory System\\backend\\ml_assets\\rag_index\\raw\\knowledge_nodes.json",
+  "output_file": "D:\\KrishokChat Advisory System\\backend\\ml_assets\\rag_index\\processed\\knowledge_nodes_clean.jsonl",
+  "normalizer": "bnunicodenormalizer",
+  "elapsed_seconds": 23.67,
+  "counts": {
+    "raw_nodes": 2120,
+    "written_nodes": 2120,
+    "duplicates_dropped": 0,
+    "unique_word_forms_normalized": 20086
+  },
+  "coverage": {
+    "empty_content_bn": 5,
+    "empty_title_bn": 1521,
+    "empty_content_en": 557,
+    "empty_content_both": 0,
+    "with_dosage_text": 919,
+    "with_safety_warnings": 477,
+    "with_legal_status": 258,
+    "with_crop_bn": 1296,
+    "with_disease_bn": 242,
+    "expert_verified": 2085
+  },
+  "text_lengths": {
+    "bm25_tokens_mean": 369.8,
+    "bm25_tokens_min": 75,
+    "bm25_tokens_max": 2432,
+    "embed_tokens_mean": 152.3
+  },
+  "normalization_ops": {
+    "fields_normalized": 48038,
+    "words_changed": 1747,
+    "op::BrokenNukta": 1491,
+    "op::InvalidConnector": 85,
+    "op::FixDiacritics": 99,
+    "op::InvalidUnicode": 98,
+    "op::BrokenDiacritics": 9,
+    "op::PunctuationReplacement": 55,
+    "op::base_bangla_compose": 4,
+    "op::ComplexRootNormalization": 15,
+    "op::VowelDiacriticAfterVowel": 3,
+    "op::AssameseReplacement": 2,
+    "words_dropped_by_normalizer": 1
+  },
+  "problem_type_distribution": {
+    "nutrient": 654,
+    "cultivation": 409,
+    "pest": 392,
+    "disease": 303,
+    "variety": 135,
+    "general": 101,
+    "post_harvest": 53,
+    "irrigation": 27,
+    "seed": 27,
+    "food_safety": 15,
+    "weed": 3,
+    "machinery": 1
+  },
+  "category_distribution": {
+    "general": 510,
+    "fertilizer": 376,
+    "cultivation_practice": 357,
+    "pest": 351,
+    "disease": 244,
+    "variety": 106,
+    "cropping_system": 52,
+    "post_harvest": 51,
+    "seed_tech": 24,
+    "irrigation": 21,
+    "food_safety": 15,
+    "ipm": 11,
+    "machinery": 1,
+    "herbicide": 1
+  },
+  "empty_bengali_content_node_ids": [
+    "B4_FRG2024_E52B41_001",
+    "B4_FRG2024_7DEDEC_001",
+    "B4_FRG2024_7DEDEC_002",
+    "B4_FRG2024_C5C91E_001",
+    "B4_FRG2024_DFEEA7_001"
+  ],
+  "derivation_rules": {
+    "crop_bn": "EN->BN crop lexicon over entities.crops + Bengali crop tags",
+    "disease_bn": "EN->BN disease lexicon over entities.diseases + Bengali disease tags",
+    "problem_type": "category mapping, falling back to tag/content keyword hints",
+    "dosage_text": "sentences containing a number + unit (g/L, গ্রাম, কেজি, লিটার, ...)",
+    "safety_warnings": "sentences containing safety keywords (সতর্কতা, বিষ, warning, ...)",
+    "legal_status": "regex label (restricted_or_banned / approved) + evidence snippet",
+    "expert_verified": "publisher in institutional set AND confidence >= 0.85"
+  }
+}

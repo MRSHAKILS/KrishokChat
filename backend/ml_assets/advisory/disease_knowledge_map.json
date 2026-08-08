@@ -1,0 +1,422 @@
+{
+  "Rice__Bacterial_Leaf_Blight": {
+    "crop": "Rice",
+    "disease_name": "Bacterial Leaf Blight",
+    "category": "B",
+    "rag_node_ids": [
+      "IRRI_IRRI_AE9C42_001",
+      "IRRI_IRRI_DA722C_001",
+      "B2B_MORICH2_83F400_005",
+      "CABI_BRASSICA_0E322A_001",
+      "CABI_BRASSICA_339170_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Rice__Brown_Spot": {
+    "crop": "Rice",
+    "disease_name": "Brown Spot",
+    "category": "B",
+    "rag_node_ids": [
+      "B5_BARCAG_105A6B_002",
+      "CABI_CORN_DCA16E_001",
+      "CABI_WHEAT_17CE3C_001",
+      "CABI_WHEAT_D3A722_001",
+      "B4_DAEEXT_D2B51B_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Rice__Healthy_Leaf": {
+    "crop": "Rice",
+    "disease_name": "Healthy Leaf",
+    "category": "C",
+    "rag_node_ids": [],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Rice__Leaf_Blast": {
+    "crop": "Rice",
+    "disease_name": "Leaf Blast",
+    "category": "B",
+    "rag_node_ids": [
+      "B5_BARCAG_105A6B_002",
+      "B5_BARCAG_DF7B1C_004",
+      "DAE_PEST_C8CAB2_001",
+      "DAE_PEST_26974A_001",
+      "DAE_PEST_D1436D_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Rice__Leaf_Scald": {
+    "crop": "Rice",
+    "disease_name": "Leaf Scald",
+    "category": "B",
+    "rag_node_ids": [
+      "B5_BARCAG_105A6B_002",
+      "B5_BARCAG_DF7B1C_004",
+      "DAE_PEST_C8CAB2_001",
+      "DAE_PEST_26974A_001",
+      "DAE_PEST_D1436D_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Rice__Narrow_Brown_Leaf_Spot": {
+    "crop": "Rice",
+    "disease_name": "Narrow Brown Leaf Spot",
+    "category": "B",
+    "rag_node_ids": [
+      "IRRI_IRRI_D62EEF_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Rice__Rice_Hispa": {
+    "crop": "Rice",
+    "disease_name": "Rice Hispa",
+    "category": "B",
+    "rag_node_ids": [
+      "B5_BARCAG_105A6B_002",
+      "DAE_PEST_458D1E_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Rice__Sheath_Blight": {
+    "crop": "Rice",
+    "disease_name": "Sheath Blight",
+    "category": "B",
+    "rag_node_ids": [
+      "DAE_PEST_B940E8_001",
+      "IRRI_IRRI_08EFDA_001",
+      "IRRI_IRRI_939CB7_001",
+      "IRRI_IRRI_0F67B4_001",
+      "IRRI_IRRI_D62EEF_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "BlackPoint": {
+    "crop": "Wheat",
+    "disease_name": "BlackPoint",
+    "category": "C",
+    "rag_node_ids": [],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Blast": {
+    "crop": "Wheat",
+    "disease_name": "Blast",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_WHEAT_17CE3C_001",
+      "CABI_WHEAT_153BAE_001",
+      "CABI_WHEAT_D3A722_001",
+      "IRRI_IRRI_939CB7_001",
+      "IRRI_IRRI_A6AA96_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "FusariumFootRot": {
+    "crop": "Wheat",
+    "disease_name": "FusariumFootRot",
+    "category": "C",
+    "rag_node_ids": [],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Leaf Rust": {
+    "crop": "Wheat",
+    "disease_name": "Leaf Rust",
+    "category": "B",
+    "rag_node_ids": [
+      "B5_BARCAG_EEC7DC_001",
+      "B5_BARCAG_DF7B1C_004",
+      "B5_BARCAG_9331ED_003",
+      "B5_BARCAG_4AD140_001",
+      "CABI_WHEAT_BA3075_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "LeafBlight": {
+    "crop": "Wheat",
+    "disease_name": "LeafBlight",
+    "category": "C",
+    "rag_node_ids": [],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Powdery Mildew": {
+    "crop": "Wheat",
+    "disease_name": "Powdery Mildew",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_WHEAT_071FA8_001",
+      "B5_BARCAG_E68538_002",
+      "B5_BARCAG_997E18_002",
+      "B5_BARCAG_E77367_002",
+      "B5_BARCAG_330DB9_004"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Stem Rust": {
+    "crop": "Wheat",
+    "disease_name": "Stem Rust",
+    "category": "B",
+    "rag_node_ids": [
+      "B4_FRG2024_45092F_001",
+      "B4_FRG2024_BE42AD_003",
+      "B4_FRG2024_6FCB69_001",
+      "B4_FRG2024_6FCB69_002",
+      "B4_FRG2024_6FCB69_003"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Stripe Rust": {
+    "crop": "Wheat",
+    "disease_name": "Stripe Rust",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_WHEAT_49F8AB_001",
+      "CABI_WHEAT_D35AA4_001",
+      "CABI_WHEAT_C82C60_001",
+      "CABI_CORN_73612C_001",
+      "CABI_CORN_51F4DD_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "WheatBlast": {
+    "crop": "Wheat",
+    "disease_name": "WheatBlast",
+    "category": "C",
+    "rag_node_ids": [],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Potato__Early_Blight": {
+    "crop": "Potato",
+    "disease_name": "Early Blight",
+    "category": "B",
+    "rag_node_ids": [
+      "B5_BARCAG_AF08BA_002",
+      "B5_BARCAG_AF08BA_004",
+      "CABI_CORN_99FD91_001",
+      "CABI_POTATO_F248A8_001",
+      "CABI_POTATO_ED1267_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Potato__Healthy_Leaf": {
+    "crop": "Potato",
+    "disease_name": "Healthy Leaf",
+    "category": "C",
+    "rag_node_ids": [],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Potato__Late_Blight": {
+    "crop": "Potato",
+    "disease_name": "Late Blight",
+    "category": "B",
+    "rag_node_ids": [
+      "B5_BARCAG_AF08BA_002",
+      "CABI_POTATO_42D248_001",
+      "CABI_POTATO_834B4F_001",
+      "B4_DAEEXT_E39647_001",
+      "B4_DAEEXT_BDEE76_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cabbage__Alternaria_Spot": {
+    "crop": "Brassica",
+    "disease_name": "Alternaria Spot",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_59B05D_001",
+      "CABI_BRASSICA_4683AC_001",
+      "CABI_BRASSICA_A4B2F3_001",
+      "CABI_BRASSICA_F97DB9_001",
+      "B5_BARCAG_F16272_002"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cabbage__Black_Rot": {
+    "crop": "Brassica",
+    "disease_name": "Black Rot",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_FA8EFD_003",
+      "CABI_BRASSICA_FA8EFD_004",
+      "CABI_BRASSICA_9381A4_001",
+      "CABI_BRASSICA_1F019D_001",
+      "CABI_BRASSICA_ACA411_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cabbage__Downy_Mildew": {
+    "crop": "Brassica",
+    "disease_name": "Downy Mildew",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_77C2B2_001",
+      "CABI_BRASSICA_6FD5BE_001",
+      "CABI_BRASSICA_8F6D93_001",
+      "CABI_BRASSICA_F02F59_001",
+      "CABI_BRASSICA_3C63C1_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cabbage__Healthy_Leaf": {
+    "crop": "Brassica",
+    "disease_name": "Healthy Leaf",
+    "category": "C",
+    "rag_node_ids": [],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cauliflower__Alternaria_Disease": {
+    "crop": "Brassica",
+    "disease_name": "Alternaria Disease",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_59B05D_001",
+      "CABI_BRASSICA_4683AC_001",
+      "CABI_BRASSICA_A4B2F3_001",
+      "CABI_BRASSICA_F97DB9_001",
+      "B5_BARCAG_F16272_002"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cauliflower__Bacterial_Soft_Rot": {
+    "crop": "Brassica",
+    "disease_name": "Bacterial Soft Rot",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_2DA7D1_001",
+      "CABI_BRASSICA_D42830_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cauliflower__Bacterial_Spot": {
+    "crop": "Brassica",
+    "disease_name": "Bacterial Spot",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_7A0C58_001",
+      "CABI_BRASSICA_E79CAF_001",
+      "CABI_BRASSICA_F7F28F_001",
+      "CABI_BRASSICA_8F6D93_001",
+      "B5_BARCAG_AF08BA_003"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cauliflower__Black_Spot": {
+    "crop": "Brassica",
+    "disease_name": "Black Spot",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_FA8EFD_003",
+      "CABI_BRASSICA_FA8EFD_004",
+      "CABI_BRASSICA_9381A4_001",
+      "CABI_BRASSICA_1F019D_001",
+      "CABI_BRASSICA_ACA411_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cauliflower__Downy_Mildew": {
+    "crop": "Brassica",
+    "disease_name": "Downy Mildew",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_77C2B2_001",
+      "CABI_BRASSICA_6FD5BE_001",
+      "CABI_BRASSICA_8F6D93_001",
+      "CABI_BRASSICA_F02F59_001",
+      "CABI_BRASSICA_3C63C1_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cauliflower__Healthy": {
+    "crop": "Brassica",
+    "disease_name": "Healthy",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_F02F59_001",
+      "CABI_BRASSICA_0E322A_001",
+      "CABI_BRASSICA_339170_001",
+      "CABI_BRASSICA_DFC29C_001",
+      "CABI_CORN_3CA8DF_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Cauliflower__Nutrient_Deficiency": {
+    "crop": "Brassica",
+    "disease_name": "Nutrient Deficiency",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_BRASSICA_9B0A3A_001",
+      "CABI_BRASSICA_E302AA_001",
+      "CABI_CORN_3AF6EA_001",
+      "CABI_CORN_0216DD_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Common_Rust": {
+    "crop": "Corn",
+    "disease_name": "Common Rust",
+    "category": "B",
+    "rag_node_ids": [
+      "B5_BARCAG_D65B05_001",
+      "B5_BARCAG_F591B6_002",
+      "CABI_CORN_4690FD_001",
+      "CABI_CORN_E1A4EA_001",
+      "CABI_CORN_42F800_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Gray_Leaf_Spot": {
+    "crop": "Corn",
+    "disease_name": "Gray Leaf Spot",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_CORN_99FD91_001",
+      "B5_BARCAG_A5153A_002",
+      "CABI_CORN_E59109_001",
+      "CABI_WHEAT_D3A722_001",
+      "IRRI_IRRI_AE9C42_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  },
+  "Northern_Leaf_Blight": {
+    "crop": "Corn",
+    "disease_name": "Northern Leaf Blight",
+    "category": "B",
+    "rag_node_ids": [
+      "CABI_CORN_63C69F_001",
+      "CABI_CORN_78017E_001"
+    ],
+    "has_disease_details": false,
+    "matched_detail_keys": []
+  }
+}

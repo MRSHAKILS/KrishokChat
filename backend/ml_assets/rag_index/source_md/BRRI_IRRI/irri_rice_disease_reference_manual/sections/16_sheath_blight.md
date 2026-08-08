@@ -1,0 +1,101 @@
+---
+section_id: 'irri_rice_disease_reference_manual_s16'
+document_id: 'irri_rice_disease_reference_manual'
+document_title: 'IRRI Rice Disease Reference Manual (19 Diseases)'
+batch: 'batch 1'
+source_pdf: 'BATCH1_Rice_English_Merged.pdf'
+agency: 'IRRI (International Rice Research Institute)'
+language: 'english'
+crop: 'rice'
+geography: 'generic'
+section_title: 'SHEATH BLIGHT'
+page_list: [76, 77, 78]
+page_count: 3
+source_pages_path: 'page_076, page_077, page_078'
+created: '2026-07-17'
+status: 'included'
+images_copied: 2
+pdf_pages: [76, 78]
+skip: False
+org: 'IRRI'
+---
+
+IRRI Rice Disease Reference Manual (19 Diseases)
+
+IRRI RICE KNOWLEDGE BANK TECHNICAL REFERENCE
+
+# SHEATH BLIGHT
+
+![img-102.jpeg](sections/images/16_p76_img-102.jpeg)
+
+sheath-blight-1
+
+### What it does
+
+Sheath blight is a fungal disease caused by *Rhizoctonia solani*. Infected leaves senesce or dry out and die more rapidly, young tillers can also be destroyed.
+
+As a result, the leaf area of the canopy can significantly be reduced by the disease. This reduction in leaf area, along with the diseased-induced senescence of leaves and young infected tillers are the primary causes of yield reduction.
+
+### Why and where it occurs
+
+Sheath blight occurs in areas with high temperature (28–32°C), high levels of nitrogen fertilizer, and relative humidity of crop canopy from 85–100%.
+
+Plants are more vulnerable to sheath blight during the rainy season.
+
+High seeding rate or close plant spacing, dense canopy, disease in the soil, sclerotia or infection bodies floating on the water, and growing of high yielding improved varieties also favor disease development.
+
+Source: IRRI Rice Knowledge Bank (www.knowledgebank.irri.org)
+
+Page 52 of 67
+
+---
+
+IRRI Rice Disease Reference Manual (19 Diseases)
+
+![img-103.jpeg](sections/images/16_p77_img-103.jpeg)
+
+sheath-blight-2
+
+## How to identify
+
+Symptoms are usually observed from tillering to milk stage in a rice crop and include the following:
+
+- oval or ellipsoidal greenish gray lesions, usually 1-3 cm long, on the leaf sheath, initially just above the soil or water level in the case of conventionally flooded rice.
+- under favorable conditions, these initial lesions multiply and expand to the upper part of the sheaths, the leaves, and then spread to neighboring tillers belonging to different hills (transplanted rice) or plants (direct-seeded rice).
+- lesions on the leaves usually have irregular lesions, often with gray-white centers and brown margins as they grow older.
+- in subtropical environments, the disease is mostly initiated by sclerotia (up to two million of which can be produced per square meter in a diseased crop).
+
+In tropical ecosystems, however, the role of sclerotia in initiating the disease is uncertain. In any case, the pathogen does not produce aerially dispersed spores; its dispersal is essentially dependent on hyphae running on plant tissues and producing new infections
+
+Sheath blight has symptoms similar to stem rot and stemborer infestation. To confirm the cause of disease, check for irregular lesions usually found on the leaf sheaths (initially water-soaked to greenish gray and later becomes grayish white with brown margin). Also check for presence of sclerotia.
+
+## Why is it important
+
+Sheath blight is considered to be an important disease next to rice blast. Rice sheath blight is an increasing concern for rice production especially in intensified production systems.
+
+In Japan, the disease has caused a yield loss of as high as 20% and affected about 120,000–190,000 hectares. A yield loss of 25% was reported if the flag leaves are infected. In the United States, a yield loss of 50% was reported when susceptible cultivars were planted. Sheath blight has also caused a yield loss of 6% in tropical Asia.
+
+Source: IRRI Rice Knowledge Bank (www.knowledgebank.irri.org)
+
+Page 53 of 67
+
+---
+
+IRRI Rice Disease Reference Manual (19 Diseases)
+
+## How to manage
+
+There is currently no resistant rice variety available for cultivation. The main management options available to minimize sheath blight include:
+
+- use a reasonable level of fertilizer adapted to the cropping season.
+- use reasoned density of crop establishment (direct seeding or transplanting).
+- carefully control of weeds, especially on the levees.
+- drain rice fields relatively early in the cropping season to reduce sheath blight epidemics.
+- use fungicide to treat seeds.
+- improve canopy architecture by reducing seeding rate or providing wider plant spacing.
+
+Content experts: Adam Sparks (email: a.sparks@irri.org), NP Castilla, and CM Vera Cruz
+
+Source: IRRI Rice Knowledge Bank (www.knowledgebank.irri.org)
+
+Page 54 of 67

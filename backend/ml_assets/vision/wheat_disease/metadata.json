@@ -1,0 +1,17 @@
+{
+  "model_name": "wheat-disease",
+  "version": "2.0.0",
+  "framework": "ultralytics-yolo11",
+  "task": "classify",
+  "source": "WheatBest.pt (wheatBT.zip from user downloads, 2026-08-08)",
+  "replaced": {
+    "previous": "fake placeholder (byte-identical copy of crop_classifier, 12,545,559 bytes)",
+    "reason": "verified fake via byte-identical size; real model is 9,437,091 bytes with 11 genuine wheat classes"
+  },
+  "classes": [
+    "BlackPoint", "Blast", "FusariumFootRot", "Healthy", "HealthyLeaf",
+    "Leaf Rust", "LeafBlight", "Powdery Mildew", "Stem Rust", "Stripe Rust", "WheatBlast"
+  ],
+  "input_size": [640, 640],
+  "test_images": "test_images/wheat_disease/ (800 images, 11 classes)"
+}

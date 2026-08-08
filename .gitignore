@@ -19,10 +19,11 @@ env/
 dist/
 build/
 
-# Environment
+# Environment — NEVER COMMIT
 .env
 .env.local
 .env.*.local
+*.env
 
 # Logs
 backend/app/logs/*

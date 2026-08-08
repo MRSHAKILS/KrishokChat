@@ -1,0 +1,4375 @@
+{
+ "total": 437,
+ "rows": [
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0001.jpg",
+   "expected_family": "Brassica",
+   "crop": "Solanacea",
+   "crop_conf": 0.9689,
+   "disease": "No disease model available for this crop",
+   "disease_conf": 0.0,
+   "has_info": false
+  },
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0002.jpg",
+   "expected_family": "Brassica",
+   "crop": "Potato",
+   "crop_conf": 0.5428,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.6578,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9973,
+   "disease": "Cabbage__Alternaria_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Alternaria_Spot",
+   "disease_conf": 0.9687,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.8019,
+   "disease": "Cabbage__Alternaria_Spot",
+   "disease_conf": 0.5989,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9999,
+   "disease": "Cabbage__Alternaria_Spot",
+   "disease_conf": 0.9969,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9999,
+   "disease": "Cabbage__Alternaria_Spot",
+   "disease_conf": 0.9357,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0008.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9764,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.8913,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0009.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9943,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 0.4719,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Alternaria_Spot",
+   "image": "0010.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9999,
+   "disease": "Cabbage__Alternaria_Spot",
+   "disease_conf": 0.9995,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Black_Rot",
+   "image": "0001.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Black_Rot",
+   "disease_conf": 0.7233,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Black_Rot",
+   "image": "0002.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Black_Rot",
+   "disease_conf": 0.9948,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Black_Rot",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Solanacea",
+   "crop_conf": 0.6785,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.5851,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Black_Rot",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9981,
+   "disease": "Cabbage__Alternaria_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Black_Rot",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.7855,
+   "disease": "Cabbage__Black_Rot",
+   "disease_conf": 0.7905,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Black_Rot",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Solanacea",
+   "crop_conf": 0.8399,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9292,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Black_Rot",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Black_Rot",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Downy_Mildew",
+   "image": "0001.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9998,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.5668,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Downy_Mildew",
+   "image": "0002.webp",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9838,
+   "disease": "Cabbage__Downy_Mildew",
+   "disease_conf": 0.9987,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Downy_Mildew",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.8791,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9959,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Downy_Mildew",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9979,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.8892,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Downy_Mildew",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9601,
+   "disease": "Cabbage__Downy_Mildew",
+   "disease_conf": 0.935,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0001.jpg",
+   "expected_family": "Brassica",
+   "crop": "Solanacea",
+   "crop_conf": 0.9683,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.6495,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0002.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.6987,
+   "disease": "Cabbage__Black_Rot",
+   "disease_conf": 0.649,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9972,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9824,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9977,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.9997,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Potato",
+   "crop_conf": 0.6224,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.5765,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9959,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.6748,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0008.jpg",
+   "expected_family": "Brassica",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.8738,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0009.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9966,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Cabbage__Healthy_Leaf",
+   "image": "0010.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.5362,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.9953,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0001.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0002.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 0.9998,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9996,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 0.9998,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0008.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9996,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0009.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9133,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Alternaria_Disease",
+   "image": "0010.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0001.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9616,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0002.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9987,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 0.9998,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9996,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 0.9973,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0008.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9998,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0009.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Soft_Rot",
+   "image": "0010.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9991,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0001.png",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9959,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 0.9998,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0002.png",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0004.png",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 0.9963,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0008.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0009.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 0.9989,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Bacterial_Spot",
+   "image": "0010.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0001.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0002.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0008.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0009.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Black_Spot",
+   "image": "0010.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Black_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0001.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9678,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9996,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0002.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9998,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9845,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9985,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9989,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0008.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0009.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Downy_Mildew",
+   "image": "0010.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9969,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.8067,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0001.png",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0002.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0005.png",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 0.9998,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0008.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0009.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Healthy",
+   "image": "0010.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0001.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0002.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0003.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0004.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0005.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0006.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0007.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0008.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0009.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Cauliflower__Nutrient_Deficiency",
+   "image": "0010.jpg",
+   "expected_family": "Brassica",
+   "crop": "Brassica",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Nutrient_Deficiency",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9857,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9803,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9996,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9999,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9993,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9993,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9138,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9979,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9994,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Bacterial_Spot",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9986,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.793,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9999,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9784,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9997,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9978,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9997,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9967,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9999,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9972,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9923,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.6203,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9943,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9831,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9994,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9997,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Cercospora_Leaf_Spot",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9992,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.5108,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9983,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9874,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9999,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9957,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9669,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9544,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9996,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Curl_Virus",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.8456,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9948,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9433,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9938,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9793,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9999,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9086,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9902,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Chili__Healthy_Leaf",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9723,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.7833,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9991,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9821,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.5681,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.5068,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9989,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9998,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9664,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9925,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.8782,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Healthy_Leaf",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.8459,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.8925,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9926,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9981,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9998,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.6836,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.8816,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9921,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9991,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9998,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9995,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9998,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Insect_Pest_Disease",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.8351,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9999,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9995,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9999,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9998,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.5648,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.889,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Leaf_Spot_Disease",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9739,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9989,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9779,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9957,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Mosaic_Virus_Disease",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9582,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9805,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9262,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.6818,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9795,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.6957,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.5515,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9991,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9937,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.5788,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9976,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.5835,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9943,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.994,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.954,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9936,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9998,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.7463,
+   "has_info": true
+  },
+  {
+   "folder": "Eggplant__Wilt_Disease",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9575,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0001.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.4857,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0002.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9406,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0003.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Downy_Mildew",
+   "disease_conf": 0.3857,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0004.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.8777,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0005.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9908,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0006.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.601,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0007.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.8839,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0008.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.678,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0009.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9378,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Alternaria_Leaf_Blight",
+   "image": "0010.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.7605,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Downy_Mildew",
+   "image": "0001.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9317,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9863,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Downy_Mildew",
+   "image": "0002.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.7857,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Downy_Mildew",
+   "image": "0003.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.5421,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Downy_Mildew",
+   "image": "0004.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Downy_Mildew",
+   "disease_conf": 0.7962,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Downy_Mildew",
+   "image": "0005.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.6959,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Downy_Mildew",
+   "image": "0006.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.891,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Downy_Mildew",
+   "image": "0007.png",
+   "expected_family": "GourdGuava",
+   "crop": "Solanacea",
+   "crop_conf": 0.6493,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.783,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Downy_Mildew",
+   "image": "0008.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Downy_Mildew",
+   "disease_conf": 0.9305,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Healthy_Leaf",
+   "image": "0001.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9913,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Healthy_Leaf",
+   "image": "0002.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9886,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Healthy_Leaf",
+   "image": "0003.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9729,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Healthy_Leaf",
+   "image": "0004.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.999,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Healthy_Leaf",
+   "image": "0005.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.974,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9908,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Healthy_Leaf",
+   "image": "0006.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.983,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Healthy_Leaf",
+   "image": "0007.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.7448,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Healthy_Leaf",
+   "image": "0008.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.998,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Healthy_Leaf",
+   "image": "0009.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.5785,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0001.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9572,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0002.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.7097,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0003.png",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.8727,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0004.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.6765,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0005.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.986,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.7912,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0006.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.4089,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0007.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.8017,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0008.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.5492,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0009.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.3791,
+   "has_info": true
+  },
+  {
+   "folder": "Gourd__Mosaic_Virus",
+   "image": "0010.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9984,
+   "disease": "Cabbage__Healthy_Leaf",
+   "disease_conf": 0.3132,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0001.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9684,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0002.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cabbage__Downy_Mildew",
+   "disease_conf": 0.4558,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0003.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9991,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9905,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0004.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9938,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0005.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9958,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.924,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0006.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9997,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0007.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.881,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 0.8763,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0008.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.4988,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0009.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.999,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.578,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Algal_Leaf_Spot",
+   "image": "0010.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9968,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9829,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Dry_Leaf",
+   "image": "0001.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9885,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9873,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Dry_Leaf",
+   "image": "0002.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.8215,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9969,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Dry_Leaf",
+   "image": "0003.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9192,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Dry_Leaf",
+   "image": "0004.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9995,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 0.6338,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Dry_Leaf",
+   "image": "0005.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9893,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9993,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Dry_Leaf",
+   "image": "0006.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.7972,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9217,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Dry_Leaf",
+   "image": "0007.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9988,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9977,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Dry_Leaf",
+   "image": "0008.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9975,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9971,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Dry_Leaf",
+   "image": "0009.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "Solanacea",
+   "crop_conf": 0.4344,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.872,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0001.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9994,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0002.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9942,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0003.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9993,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9134,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0004.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.7064,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0005.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.956,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0006.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9387,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.988,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0007.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9997,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9644,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0008.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9989,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9659,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0009.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 0.4664,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Healthy",
+   "image": "0010.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9981,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.6363,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0001.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9978,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.6636,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0002.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9786,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.5979,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0003.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9918,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.7854,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0004.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.877,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9926,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0005.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9918,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.8535,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0006.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9197,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.6464,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0007.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9993,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.4518,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0008.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "Potato",
+   "crop_conf": 0.5209,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9589,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0009.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9985,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.8637,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Insect_Pest_Disease",
+   "image": "0010.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9847,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0001.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9889,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.8994,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0002.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.5221,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0003.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9958,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0004.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.867,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0005.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9996,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0006.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9968,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9884,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0007.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "Potato",
+   "crop_conf": 0.5319,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.529,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0008.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 1.0,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0009.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.941,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9303,
+   "has_info": true
+  },
+  {
+   "folder": "Guava__Red_Rust",
+   "image": "0010.jpg",
+   "expected_family": "GourdGuava",
+   "crop": "GourdGuava",
+   "crop_conf": 0.7259,
+   "disease": "Cauliflower__Bacterial_Soft_Rot",
+   "disease_conf": 0.4678,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0001.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.9998,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0002.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9989,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0003.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0004.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.9844,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0005.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0006.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0007.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.9998,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0008.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.9489,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0009.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.998,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9997,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Early_Blight",
+   "image": "0010.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.9994,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0001.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Healthy_Leaf",
+   "disease_conf": 0.9744,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0002.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0003.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0004.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Healthy_Leaf",
+   "disease_conf": 0.9998,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0005.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Healthy_Leaf",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0006.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Healthy_Leaf",
+   "disease_conf": 0.9987,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0007.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9897,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0008.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Healthy_Leaf",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0009.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Healthy_Leaf",
+   "disease_conf": 0.9965,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Healthy_Leaf",
+   "image": "0010.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0001.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.9807,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9764,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0002.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0003.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.8622,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0004.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0005.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0006.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.9998,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.6317,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0007.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.5319,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0008.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.9998,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0009.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9569,
+   "has_info": true
+  },
+  {
+   "folder": "Potato__Late_Blight",
+   "image": "0010.jpg",
+   "expected_family": "Potato",
+   "crop": "Potato",
+   "crop_conf": 0.9679,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0001.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 0.9696,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0002.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9998,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 0.9959,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0003.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0004.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 0.9859,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0005.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9988,
+   "disease": "Rice__Leaf_Blast",
+   "disease_conf": 0.4406,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0006.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.8968,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 0.9978,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0007.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9995,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 0.999,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0008.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9863,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 0.3928,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0009.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9997,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 0.9934,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Bacterial_Leaf_Blight",
+   "image": "0010.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9997,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 0.9996,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0001.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9977,
+   "disease": "Rice__Brown_Spot",
+   "disease_conf": 0.9756,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0002.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9718,
+   "disease": "Rice__Brown_Spot",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0003.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.6502,
+   "disease": "Rice__Brown_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0004.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.7168,
+   "disease": "Rice__Brown_Spot",
+   "disease_conf": 0.9979,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0005.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.8474,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 0.8206,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0006.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9689,
+   "disease": "Rice__Brown_Spot",
+   "disease_conf": 0.9997,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0007.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.8444,
+   "disease": "Rice__Bacterial_Leaf_Blight",
+   "disease_conf": 0.7331,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0008.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.9568,
+   "disease": "Northern_Leaf_Blight",
+   "disease_conf": 0.5403,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0009.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.5264,
+   "disease": "Rice__Brown_Spot",
+   "disease_conf": 0.9997,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Brown_Spot",
+   "image": "0010.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9999,
+   "disease": "Rice__Leaf_Scald",
+   "disease_conf": 0.9864,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0001.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.8822,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 0.9995,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0002.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9994,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 0.9923,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0003.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.8985,
+   "disease": "Gray_Leaf_Spot",
+   "disease_conf": 0.5118,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0004.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.6523,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0005.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.6004,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0006.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9982,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0007.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0008.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9922,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0009.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.9544,
+   "disease": "Gray_Leaf_Spot",
+   "disease_conf": 0.7222,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Healthy_Leaf",
+   "image": "0010.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.802,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0001.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Leaf_Blast",
+   "disease_conf": 0.813,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0002.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.63,
+   "disease": "Northern_Leaf_Blight",
+   "disease_conf": 0.6583,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0003.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9986,
+   "disease": "Rice__Leaf_Blast",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0004.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.5854,
+   "disease": "Northern_Leaf_Blight",
+   "disease_conf": 0.6759,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0005.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.8155,
+   "disease": "Rice__Leaf_Blast",
+   "disease_conf": 0.9665,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0006.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.5736,
+   "disease": "Rice__Leaf_Blast",
+   "disease_conf": 0.9267,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0007.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.8035,
+   "disease": "Gray_Leaf_Spot",
+   "disease_conf": 0.4064,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0008.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.962,
+   "disease": "Rice__Leaf_Blast",
+   "disease_conf": 0.5008,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0009.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9999,
+   "disease": "Rice__Leaf_Blast",
+   "disease_conf": 0.9985,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Blast",
+   "image": "0010.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.7311,
+   "disease": "Rice__Leaf_Blast",
+   "disease_conf": 0.8409,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0001.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9993,
+   "disease": "Rice__Leaf_Scald",
+   "disease_conf": 0.8445,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0002.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.9134,
+   "disease": "Northern_Leaf_Blight",
+   "disease_conf": 0.6785,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0003.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Leaf_Scald",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0004.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.5205,
+   "disease": "Rice__Leaf_Scald",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0005.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.998,
+   "disease": "Rice__Leaf_Scald",
+   "disease_conf": 0.9992,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0006.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9094,
+   "disease": "Rice__Leaf_Scald",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0007.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9902,
+   "disease": "Rice__Leaf_Scald",
+   "disease_conf": 0.9884,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0008.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9989,
+   "disease": "Rice__Leaf_Scald",
+   "disease_conf": 0.8245,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0009.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9994,
+   "disease": "Rice__Narrow_Brown_Leaf_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Leaf_Scald",
+   "image": "0010.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.8121,
+   "disease": "Northern_Leaf_Blight",
+   "disease_conf": 0.8046,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0001.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.5682,
+   "disease": "Rice__Narrow_Brown_Leaf_Spot",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0002.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9999,
+   "disease": "Rice__Narrow_Brown_Leaf_Spot",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0003.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9947,
+   "disease": "Rice__Narrow_Brown_Leaf_Spot",
+   "disease_conf": 0.997,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0004.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9999,
+   "disease": "Rice__Narrow_Brown_Leaf_Spot",
+   "disease_conf": 0.9995,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0005.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.9993,
+   "disease": "Northern_Leaf_Blight",
+   "disease_conf": 0.3961,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0006.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9999,
+   "disease": "Rice__Narrow_Brown_Leaf_Spot",
+   "disease_conf": 0.9891,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0007.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.8893,
+   "disease": "Rice__Narrow_Brown_Leaf_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0008.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.882,
+   "disease": "Rice__Narrow_Brown_Leaf_Spot",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0009.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.7603,
+   "disease": "Northern_Leaf_Blight",
+   "disease_conf": 0.7456,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Narrow_Brown_Leaf_Spot",
+   "image": "0010.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Narrow_Brown_Leaf_Spot",
+   "disease_conf": 0.9988,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0001.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.8399,
+   "disease": "Rice__Rice_Hispa",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0002.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9997,
+   "disease": "Rice__Rice_Hispa",
+   "disease_conf": 0.997,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0003.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.7918,
+   "disease": "Rice__Rice_Hispa",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0004.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9612,
+   "disease": "Rice__Rice_Hispa",
+   "disease_conf": 0.9581,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0005.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.6588,
+   "disease": "Gray_Leaf_Spot",
+   "disease_conf": 0.7621,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0006.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.587,
+   "disease": "Rice__Rice_Hispa",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0007.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.9989,
+   "disease": "Gray_Leaf_Spot",
+   "disease_conf": 0.9916,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0008.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Rice_Hispa",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0009.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.8551,
+   "disease": "Rice__Rice_Hispa",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Rice_Hispa",
+   "image": "0010.jpg",
+   "expected_family": "Rice",
+   "crop": "Corn",
+   "crop_conf": 0.7382,
+   "disease": "Gray_Leaf_Spot",
+   "disease_conf": 0.5298,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0001.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0002.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 1.0,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0003.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9998,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 0.9644,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0004.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.6193,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 0.9988,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0005.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.8689,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0006.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.6952,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0007.jpg",
+   "expected_family": "Rice",
+   "crop": "Brassica",
+   "crop_conf": 0.3989,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9479,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0008.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9954,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0009.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.9997,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 0.4862,
+   "has_info": true
+  },
+  {
+   "folder": "Rice__Sheath_Blight",
+   "image": "0010.jpg",
+   "expected_family": "Rice",
+   "crop": "Wheat",
+   "crop_conf": 0.999,
+   "disease": "Rice__Sheath_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.7322,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9991,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.965,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9833,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.6165,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9593,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.4587,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9987,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9986,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.5177,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Wheat",
+   "crop_conf": 0.6438,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 0.9629,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.8466,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Bacterial_Spot",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9995,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.8825,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.8799,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9861,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9038,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.981,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "GourdGuava",
+   "crop_conf": 0.9945,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 0.8724,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.7121,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9599,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "GourdGuava",
+   "crop_conf": 0.8816,
+   "disease": "Cauliflower__Downy_Mildew",
+   "disease_conf": 0.9727,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.6089,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9659,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9929,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.7877,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Early_Blight",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9999,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.8992,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9998,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9806,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.7312,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Wheat",
+   "crop_conf": 0.9908,
+   "disease": "Rice__Leaf_Blast",
+   "disease_conf": 0.4343,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Wheat",
+   "crop_conf": 0.9994,
+   "disease": "Rice__Leaf_Scald",
+   "disease_conf": 0.6236,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Brassica",
+   "crop_conf": 0.4677,
+   "disease": "Cauliflower__Bacterial_Spot",
+   "disease_conf": 0.9832,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9747,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9184,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.8489,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.9882,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9999,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9996,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9863,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.6122,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Healthy_Leaf",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "GourdGuava",
+   "crop_conf": 0.7302,
+   "disease": "Cauliflower__Alternaria_Disease",
+   "disease_conf": 0.8118,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "GourdGuava",
+   "crop_conf": 0.8825,
+   "disease": "Cauliflower__Healthy",
+   "disease_conf": 0.9939,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.5319,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.9994,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.85,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9757,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9941,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.7755,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Brassica",
+   "crop_conf": 0.4721,
+   "disease": "Cabbage__Downy_Mildew",
+   "disease_conf": 0.2951,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.8241,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9981,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9997,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9919,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9857,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Late_Blight",
+   "image": "0010.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.8891,
+   "disease": "Potato__Early_Blight",
+   "disease_conf": 0.8757,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Mosaic_Virus",
+   "image": "0001.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.6596,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Mosaic_Virus",
+   "image": "0002.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9608,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9999,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Mosaic_Virus",
+   "image": "0003.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9975,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9926,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Mosaic_Virus",
+   "image": "0004.jpg",
+   "expected_family": "Solanacea",
+   "crop": "GourdGuava",
+   "crop_conf": 0.7555,
+   "disease": "Cabbage__Alternaria_Spot",
+   "disease_conf": 0.9975,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Mosaic_Virus",
+   "image": "0005.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 0.505,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 1.0,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Mosaic_Virus",
+   "image": "0006.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9717,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9923,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Mosaic_Virus",
+   "image": "0007.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Potato",
+   "crop_conf": 0.9609,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.9928,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Mosaic_Virus",
+   "image": "0008.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Solanacea",
+   "crop_conf": 1.0,
+   "disease": "Potato__Late_Blight",
+   "disease_conf": 0.999,
+   "has_info": true
+  },
+  {
+   "folder": "Tomato__Mosaic_Virus",
+   "image": "0009.jpg",
+   "expected_family": "Solanacea",
+   "crop": "Wheat",
+   "crop_conf": 0.4552,
+   "disease": "Rice__Healthy_Leaf",
+   "disease_conf": 0.9472,
+   "has_info": true
+  }
+ ]
+}

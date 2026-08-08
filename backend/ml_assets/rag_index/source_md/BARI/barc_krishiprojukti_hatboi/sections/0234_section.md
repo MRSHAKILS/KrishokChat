@@ -1,0 +1,19 @@
+---
+document: "krishiProjuktiHatboi_10.pdf"
+source_pdf: "krishiProjuktiHatboi_10.pdf"
+org: "BARI"
+batch: "batch 7"
+language: "Bengali"
+pdf_page_range: [1, 650]
+section_title: "পাউডারী মিলডিউ"
+pdf_pages: [130, 130]
+level: 3
+kind: "section"
+skip: False
+images_copied: 0
+tables_copied: 0
+---
+
+### পাউডারী মিলডিউ
+
+*Erysiphe polygoni* নামক ছত্রাক দ্বারা এই রোগ সৃষ্টি হয়। এ রোগের আক্রমণ হলে পাতায় সাদা পাউডারের মত ছোট ছোট দাগ দেখা যায়। ধীরে ধীরে এ দাগ কাণ্ড, ফুল ও ফলে বিস্তার লাভ করে। রোগের আক্রমণ বেশি হলে সমস্ত গাছ আক্রান্ত হয় ও মারা যায়।
