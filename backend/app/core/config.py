@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     backend_host: str = "0.0.0.0"
     backend_port: int = 8000
-    frontend_origin: str = "http://localhost:3000"
+    frontend_origin: str = "http://localhost:3000,http://localhost:3100,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3100"
 
     retrieval_top_k: int = 5
     rag_backend: str = "FAISS"

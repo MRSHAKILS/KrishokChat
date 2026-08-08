@@ -18,8 +18,8 @@ def _load():
     with open(idx_path, "rb") as f:
         data = pickle.load(f)
     if isinstance(data, dict):
-        _index = data.get("index", data.get("bm25"))
-        _corpus = data.get("docs", data.get("corpus", []))
+        _index = data.get("bm25", data.get("index"))
+        _corpus = data.get("nodes", data.get("corpus", data.get("docs", [])))
     else:
         _index = data
         _corpus = []
