@@ -89,7 +89,7 @@ def _precheck(query: str) -> dict | None:
     return None
 
 
-def classify_query(query: str) -> dict:
+def classify_query(query: str, crop: str = None, disease: str = None) -> dict:
     pre = _precheck(query)
     if pre:
         return pre
@@ -107,6 +107,13 @@ def classify_query(query: str) -> dict:
         return {"category": "low_confidence", "confidence": 0.0,
                 "reasoning": "No API key", "canned_response": None}
 
+    # Build context for better classification
+    context = ""
+    if crop and disease:
+        context = f"\n\nContext: The user previously uploaded an image that was detected as {crop} with {disease} disease. The query likely relates to this."
+    elif crop:
+        context = f"\n\nContext: The user previously uploaded an image of {crop}. The query likely relates to this."
+
     time.sleep(1.5)
 
     try:
@@ -120,7 +127,7 @@ def classify_query(query: str) -> dict:
                 "Classify this agricultural query into exactly ONE category.\n"
                 "Categories: safe_agri, banned_or_restricted_chemical, "
                 "self_harm_or_poisoning_risk, off_topic, prompt_injection, low_confidence\n\n"
-                f"Query: {query}\n\n"
+                f"Query: {query}{context}\n\n"
                 'Respond ONLY as JSON: {"category": "...", "reasoning": "..."}'
             ),
             config=genai.types.GenerateContentConfig(

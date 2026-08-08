@@ -29,8 +29,8 @@ async def qa_endpoint(request: QARequest):
     detected_crop = getattr(request, 'crop', None)
     detected_disease = getattr(request, 'disease', None)
 
-    # Stage 1: Safety
-    safety = classify_query(query)
+    # Stage 1: Safety (with detected crop/disease context)
+    safety = classify_query(query, detected_crop, detected_disease)
     cat = safety["category"]
 
     if cat in {"banned_or_restricted_chemical", "self_harm_or_poisoning_risk", "off_topic", "prompt_injection"}:
@@ -108,9 +108,9 @@ async def qa_stream(request: QARequest):
             ev = AgentStageEvent(stage=stage, status=status, detail=detail)
             return f"data: {ev.model_dump_json()}\n\n"
 
-        # Stage 1: Safety
+        # Stage 1: Safety (with detected crop/disease context)
         yield emit("safety", "start")
-        safety = classify_query(query)
+        safety = classify_query(query, detected_crop, detected_disease)
         cat = safety["category"]
         yield emit("safety", "complete", cat)
 
