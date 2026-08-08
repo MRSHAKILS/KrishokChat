@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+backend/app/logs/*
+!backend/app/logs/.gitkeep
+*.log
+
+# ML Assets (large binaries - DO NOT COMMIT)
+backend/ml_assets/yolo/*.pt
+backend/ml_assets/yolo/*.onnx
+backend/ml_assets/classifier/*.pt
+backend/ml_assets/classifier/*.onnx
+backend/ml_assets/classifier/*.h5
+backend/ml_assets/classifier/*.pkl
+backend/ml_assets/gemma/*.gguf
+backend/ml_assets/gemma/*.safetensors
+backend/ml_assets/rag_index/*.faiss
+backend/ml_assets/rag_index/*.index
+backend/ml_assets/rag_index/*.pkl
+backend/ml_assets/rag_index/*.json
+!backend/ml_assets/**/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test coverage
+htmlcov/
+.coverage
+.pytest_cache/
