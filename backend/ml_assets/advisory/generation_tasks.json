@@ -1,0 +1,380 @@
+[
+  {
+    "class": "BlackPoint",
+    "crop": "Wheat",
+    "disease": "BlackPoint",
+    "has_rag": false,
+    "has_details": true,
+    "needs": "rag_node",
+    "details_content": {
+      "class_name": "BlackPoint (কালো দাগ রোগ)",
+      "description_bn": "গমের পরিপক্বতার পর্যায়ে বৃষ্টি হলে কালো দাগ (Black point) রোগ হতে পারে। এতে শীষের দানা কালো দাগযুক্ত হয়ে যায় এবং বীজের মান নষ্ট হয়।",
+      "solution_bn": "প্রতি লিটার পানিতে 0.5 মিলি হারে Tilt 250 EC শীষ বের হওয়ার সময় এবং ১৫ দিন পর দুইবার স্প্রে করুন। প্রতি কেজি বীজে 3 গ্রাম হারে Provax-200 দিয়ে বীজ শোধন করুন।"
+    },
+    "rag_content": null
+  },
+  {
+    "class": "FusariumFootRot",
+    "crop": "Wheat",
+    "disease": "FusariumFootRot",
+    "has_rag": false,
+    "has_details": true,
+    "needs": "rag_node",
+    "details_content": {
+      "class_name": "FusariumFootRot (ফুসারিয়াম ফুট রট)",
+      "description_bn": "ফুসারিয়াম ফুট রট Fusarium ছত্রাকজনিত মাটিবাহিত রোগ। গাছের গোড়া পচে যায়, গাছ হলুদ হয়ে শুকিয়ে যায় এবং দানা ঝলসে যায়।",
+      "solution_bn": "প্রতি কেজি বীজে 3 গ্রাম Provax-200 দিয়ে বীজ শোধন করুন। রোগ প্রতিরোধী জাত ব্যবহার করুন এবং ফসলের পরিক্রমা (crop rotation) অনুসরণ করুন।"
+    },
+    "rag_content": null
+  },
+  {
+    "class": "LeafBlight",
+    "crop": "Wheat",
+    "disease": "LeafBlight",
+    "has_rag": false,
+    "has_details": true,
+    "needs": "rag_node",
+    "details_content": {
+      "class_name": "LeafBlight (পাতা ঝলসানো রোগ)",
+      "description_bn": "Bipolaris leaf blight বা পাতা ঝলসানো রোগ বাংলাদেশে গমের প্রধান রোগ। পাতায় বাদামি-ধূসর ডিম্বাকৃতি দাগ তৈরি হয়, যা বড় হয়ে পাতা ঝলসে দেয়।",
+      "solution_bn": "প্রতি লিটার পানিতে 0.5 মিলি হারে Tilt 250 EC শীষ বের হওয়ার সময় এবং ১৫ দিন পর দুইবার স্প্রে করুন। রোগ প্রতিরোধী ও সহনশীল জাত ব্যবহার করুন।"
+    },
+    "rag_content": null
+  },
+  {
+    "class": "WheatBlast",
+    "crop": "Wheat",
+    "disease": "WheatBlast",
+    "has_rag": false,
+    "has_details": true,
+    "needs": "rag_node",
+    "details_content": {
+      "class_name": "WheatBlast (গম ব্লাস্ট রোগ)",
+      "description_bn": "গম ব্লাস্ট Magnaporthe oryzae Triticum ছত্রাকের কারণে হয়। শীষে আক্রমণ করলে দানা ঝলসে সাদা-ধূসর হয়ে যায়। উষ্ণ ও আর্দ্র আবহাওয়ায় দ্রুত ছড়ায় এবং ফলন মারাত্মকভাবে কমিয়ে দেয়।",
+      "solution_bn": "রোগ প্রতিরোধী জাত ব্যবহার করুন। ব্লাস্ট আক্রান্ত এলাকায় স্থানীয় কৃষি কর্মকর্তার পরামর্শ নিন এবং রোগ প্রতিরোধী বীজ ব্যবহার করুন।"
+    },
+    "rag_content": null
+  },
+  {
+    "class": "Potato__Healthy_Leaf",
+    "crop": "Potato",
+    "disease": "Healthy Leaf",
+    "has_rag": false,
+    "has_details": true,
+    "needs": "rag_node",
+    "details_content": {
+      "class_name": "Healthy Leaf (সুস্থ আলু পাতা)",
+      "description_bn": "সুস্থ আলু গাছের পাতা গাঢ় সবুজ, চকচকে এবং সম্পূর্ণ দাগমুক্ত থাকে। পাতার গঠন সুদৃঢ় হয় এবং কোনো ধরণের ছত্রাক, ব্যাকটেরিয়া বা পোকার আক্রমণের লক্ষণ দেখা যায় না। শিকড় ও টিউবার স্বাভাবিকভাবে বিকশিত হয়। মেশিন লার্নিং বা কম্পিউটার ভিশন মডেলের জন্য এই 'সুস্থ' ক্লাসটি অত্যন্ত গুরুত্বপূর্ণ, কারণ এটি রোগাক্রান্ত পাতা থেকে পার্থক্য নির্ণয়ে রেফারেন্স হিসেবে কাজ করে।",
+      "cause_bn": "গুণগত মানসম্পন্ন সার্টিফাইড বীজ আলু, মাটির সঠিক প্রস্তুতি, সময়মতো সেচ ও নিষ্কাশন ব্যবস্থা, এবং সুষম মাত্রায় NPK সার প্রয়োগ সুস্থ গাছ বজায় রাখতে সাহায্য করে। নিয়মিত মাঠ পরিদর্শন এবং সমন্বিত বালাই ব্যবস্থাপনা (IPM) অনুসরণ করলে গাছ সুস্থ থাকে।",
+      "solution_bn": "সুস্থ ফসল বজায় রাখতে জৈব সারের ব্যবহার বাড়ানো এবং রাসায়নিকের অপব্যবহার এড়ানো উচিত। জমিতে জলাবদ্ধতা যেন না হয় সেদিকে খেয়াল রাখতে হবে। নিয়মিত পর্যবেক্ষণ করে কোনো প্রাথমিক লক্ষণ দেখা দিলেই দ্রুত ব্যবস্থা নিতে হবে। সঠিক চাষাবাদ পদ্ধতি ও পরিচর্যা নিশ্চিত করাই সুস্থ আলু উৎপাদনের মূল চাবিকাঠি।"
+    },
+    "rag_content": null
+  },
+  {
+    "class": "Cabbage__Alternaria_Spot",
+    "crop": "Brassica",
+    "disease": "Alternaria Spot",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_59B05D_001",
+      "category": "disease",
+      "title_bn": "",
+      "title_en": "Black spot, Grey leaf spot, and Target spot (Alternaria spp.)",
+      "content_bn": "Black spot, Grey leaf spot এবং Target spot রোগগুলো Alternaria প্রজাতি, বিশেষ করে সবচেয়ে সাধারণ Alternaria brassicicola দ্বারা হয়ে থাকে। বীজতলায় এই রোগগুলোর লক্ষণ পাতার দাগ এবং চারা পচা (damping off) হিসেবে দেখা দিতে পারে। বৈশিষ্ট্যগত লক্ষণগুলোর মধ্যে রয়েছে ছোট গাঢ় বাদামী বা কালো পাতার দাগ যা সময়ের সাথে সাথে বড় হয়, এবং প্রায়শই একটি নির্দিষ্ট লক্ষ্যবস্তুর মতো রিং প্যাটার্ন প্রদর্শন করে। আক্রান্ত দাগগুলোতে হাত দিলে ছত্রাকের রেণু সমন্বিত একটি গুঁড়োময় কালো পদার্থ আঙুলে লেগে যেতে পারে।",
+      "content_en": "Black spot, Grey leaf spot, and Target spot are caused by Alternaria species, most commonly Alternaria brassicicola. These diseases can be observed in the seedbed as leaf spots and damping off. Characteristic symptoms include small dark brown or black leaf spots that enlarge over time, often displaying a distinct target ring pattern. A dusty black material, consisting of fungal spores, may be visible on fingers after touching the affected spots.",
+      "summary": "Black spot, Grey leaf spot, and Target spot are fungal diseases caused by Alternaria species, commonly Alternaria brassicicola, affecting Brassica crops.",
+      "tags": [
+        "Black spot",
+        "Grey leaf spot",
+        "Target spot",
+        "Alternaria",
+        "Brassica disease",
+        "Fungal disease"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Black spot Grey leaf spot Target spot. Brassica Disease Manuals (Plantwise). pp. 58-58.",
+      "section_title": "Black spot Grey leaf spot Target spot",
+      "bm25_text": "Black spot, Grey leaf spot, and Target spot (Alternaria spp.) Black spot, Grey leaf spot, and Target spot (Alternaria spp.) Black spot, Grey leaf spot এবং Target spot রোগগুলো Alternaria প্রজাতি, বিশেষ করে সবচেয়ে সাধারণ Alternaria brassicicola দ্বারা হয়ে থাকে। বীজতলায় এই রোগগুলোর লক্ষণ পাতার দাগ এবং চারা পচা (damping off) হিসেবে দেখা দিতে পারে। বৈশিষ্ট্যগত লক্ষণগুলোর মধ্যে রয়েছে ছোট গাঢ় বাদামী বা কালো পাতার দাগ যা সময়ের সাথে সাথে বড় হয়, এবং প্রায়শই একটি নির্দিষ্ট লক্ষ্যবস্তুর মতো রিং প্যাটার্ন প্রদর্শন করে। আক্রান্ত দাগগুলোতে হাত দিলে ছত্রাকের রেণু সমন্বিত একটি গুঁড়োময় কালো পদার্থ আঙুলে লেগে যেতে পারে। Black spot, Grey leaf spot, and Target spot are caused by Alternaria species, most commonly Alternaria brassicicola. These diseases can be observed in the seedbed as leaf spots and damping off. Characteristic symptoms include small dark brown or black leaf spots that enlarge over time, often displaying a distinct target ring pattern. A dusty black material, consisting of fungal spores, may be visible on fingers after touching the affected spots. Black spot, Grey leaf spot, and Target spot are fungal diseases caused by Alternaria species, commonly Alternaria brassicicola, affecting Brassica crops. disease disease Black spot Grey leaf spot Target spot Alternaria Brassica disease Fungal disease",
+      "embed_text": "Black spot, Grey leaf spot, and Target spot (Alternaria spp.) Black spot, Grey leaf spot এবং Target spot রোগগুলো Alternaria প্রজাতি, বিশেষ করে সবচেয়ে সাধারণ Alternaria brassicicola দ্বারা হয়ে থাকে। বীজতলায় এই রোগগুলোর লক্ষণ পাতার দাগ এবং চারা পচা (damping off) হিসেবে দেখা দিতে পারে। বৈশিষ্ট্যগত লক্ষণগুলোর মধ্যে রয়েছে ছোট গাঢ় বাদামী বা কালো পাতার দাগ যা সময়ের সাথে সাথে বড় হয়, এবং প্রায়শই একটি নির্দিষ্ট লক্ষ্যবস্তুর মতো রিং প্যাটার্ন প্রদর্শন করে। আক্রান্ত দাগগুলোতে হাত দিলে ছত্রাকের রেণু সমন্বিত একটি গুঁড়োময় কালো পদার্থ আঙুলে লেগে যেতে পারে। Black spot, Grey leaf spot, and Target spot are caused by Alternaria species, most commonly Alternaria brassicicola. These diseases can be observed in the seedbed as leaf spots and damping off. Characteristic symptoms include small dark brown or black leaf spots that enlarge over time, often displaying a distinct target ring pattern. A dusty black material, consisting of fungal spores, may be visible on fingers after touching the affected spots. Black spot, Grey leaf spot, and Target spot are fungal diseases caused by Alternaria species, commonly Alternaria brassicicola, affecting Brassica crops."
+    }
+  },
+  {
+    "class": "Cabbage__Black_Rot",
+    "crop": "Brassica",
+    "disease": "Black Rot",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_FA8EFD_003",
+      "category": "pest",
+      "title_bn": "",
+      "title_en": "Webworm (Heltula undalis)",
+      "content_bn": "ওয়েবওয়ার্ম (Heltula )-এর লার্ভাগুলো হালকা গোলাপি-বাদামী ডোরাসহ ক্রিমি সাদা এবং মাথাটি গাঢ় বাদামী বা কালো রঙের হয়। এরা ১২-১৫ মিলিমিটার পর্যন্ত বড় হয় এবং পাতার নিচের অংশ খায়, প্রায়শই ময়লা ও মলমূত্র মিশ্রিত জালে নিজেদের ঢেকে রাখে। এর পূর্ণাঙ্গ পোকা হলো বালুটে বাদামী রঙের একটি মথ, যার ডানার ওপর একটি কালো দাগ এবং জিগজ্যাগ করা হালকা বাদামী রেখা থাকে। আক্রমণ গাছের বৃদ্ধিতে বাধা সৃষ্টি করে, একাধিক বর্ধিষ্ণু অংশ তৈরি করে, পাতা সুরঙ্গ করে এবং কাণ্ডে ছিদ্র তৈরি করে।",
+      "content_en": "The webworm (Heltula undalis) larvae are creamy white with light pinkish-brown stripes and a dark brown or black head. They grow up to 12-15 mm and feed on the underside of leaves, often covering themselves in webs mixed with dirt and frass. The adult is a sandy brown moth with a black spot and zigzagging light brown lines on its wings. Infestation leads to plant stunting, multiple growing points, leaf mining, and bore holes in stems.",
+      "summary": "Webworms are larvae that feed on brassica leaves and stems, causing stunting and bore holes.",
+      "tags": [
+        "webworm",
+        "Heltula undalis",
+        "brassica",
+        "pest"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Common pests and diseases on cocoyam in Ghana. Brassica Disease Manuals (Plantwise). pp. 20-20.",
+      "section_title": "Common pests and diseases on cocoyam in Ghana",
+      "bm25_text": "Webworm (Heltula undalis) Webworm (Heltula undalis) ওয়েবওয়ার্ম (Heltula )-এর লার্ভাগুলো হালকা গোলাপি-বাদামী ডোরাসহ ক্রিমি সাদা এবং মাথাটি গাঢ় বাদামী বা কালো রঙের হয়। এরা ১২-১৫ মিলিমিটার পর্যন্ত বড় হয় এবং পাতার নিচের অংশ খায়, প্রায়শই ময়লা ও মলমূত্র মিশ্রিত জালে নিজেদের ঢেকে রাখে। এর পূর্ণাঙ্গ পোকা হলো বালুটে বাদামী রঙের একটি মথ, যার ডানার ওপর একটি কালো দাগ এবং জিগজ্যাগ করা হালকা বাদামী রেখা থাকে। আক্রমণ গাছের বৃদ্ধিতে বাধা সৃষ্টি করে, একাধিক বর্ধিষ্ণু অংশ তৈরি করে, পাতা সুরঙ্গ করে এবং কাণ্ডে ছিদ্র তৈরি করে। The webworm (Heltula undalis) larvae are creamy white with light pinkish-brown stripes and a dark brown or black head. They grow up to 12-15 mm and feed on the underside of leaves, often covering themselves in webs mixed with dirt and frass. The adult is a sandy brown moth with a black spot and zigzagging light brown lines on its wings. Infestation leads to plant stunting, multiple growing points, leaf mining, and bore holes in stems. Webworms are larvae that feed on brassica leaves and stems, causing stunting and bore holes. pest pest webworm Heltula undalis brassica pest",
+      "embed_text": "Webworm (Heltula undalis) ওয়েবওয়ার্ম (Heltula )-এর লার্ভাগুলো হালকা গোলাপি-বাদামী ডোরাসহ ক্রিমি সাদা এবং মাথাটি গাঢ় বাদামী বা কালো রঙের হয়। এরা ১২-১৫ মিলিমিটার পর্যন্ত বড় হয় এবং পাতার নিচের অংশ খায়, প্রায়শই ময়লা ও মলমূত্র মিশ্রিত জালে নিজেদের ঢেকে রাখে। এর পূর্ণাঙ্গ পোকা হলো বালুটে বাদামী রঙের একটি মথ, যার ডানার ওপর একটি কালো দাগ এবং জিগজ্যাগ করা হালকা বাদামী রেখা থাকে। আক্রমণ গাছের বৃদ্ধিতে বাধা সৃষ্টি করে, একাধিক বর্ধিষ্ণু অংশ তৈরি করে, পাতা সুরঙ্গ করে এবং কাণ্ডে ছিদ্র তৈরি করে। The webworm (Heltula undalis) larvae are creamy white with light pinkish-brown stripes and a dark brown or black head. They grow up to 12-15 mm and feed on the underside of leaves, often covering themselves in webs mixed with dirt and frass. The adult is a sandy brown moth with a black spot and zigzagging light brown lines on its wings. Infestation leads to plant stunting, multiple growing points, leaf mining, and bore holes in stems. Webworms are larvae that feed on brassica leaves and stems, causing stunting and bore holes."
+    }
+  },
+  {
+    "class": "Cabbage__Downy_Mildew",
+    "crop": "Brassica",
+    "disease": "Downy Mildew",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_77C2B2_001",
+      "category": "disease",
+      "title_bn": "",
+      "title_en": "Downy Mildew of Brassica",
+      "content_bn": "ডাউনি মিলডিউ মূলত পাতার রোগ, যদিও এটি চারাগাছের কাণ্ড এবং ফুলকপির সাদা অংশকেও আক্রান্ত করতে পারে। কিছু ক্ষেত্রে, সংক্রমণটি শিরায় সীমাবদ্ধ থাকতে পারে। আবহাওয়ার পরিস্থিতির ওপর ভিত্তি করে লক্ষণগুলো ভিন্ন হয়: ঠান্ডা আবহাওয়ায় প্রাথমিক হলুদ ভাব সামান্য হতে পারে, তবে সময়ের সাথে সাথে বা গরম ও শুষ্ক আবহাওয়ায়, আক্রান্ত উদ্ভিদের অংশ হলুদ এবং পরবর্তীতে বাদামী হয়ে যায়।",
+      "content_en": "Downy mildew is primarily a leaf disease, though it can also affect the stems of seedlings and the white region of cauliflower. In some cases, the infection may be vein-limited. Symptoms vary based on weather conditions: in cool weather, there may be little initial yellowing, but over time or during hot, dry weather, the affected plant material turns yellow and eventually brown.",
+      "summary": "Downy mildew, caused by Hyaloperonospora brassicae, is a leaf disease affecting brassica crops, characterized by yellowing and browning of plant tissue.",
+      "tags": [
+        "Downy Mildew",
+        "Brassica",
+        "Hyaloperonospora brassicae",
+        "Plant Disease"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Downy Mildew. Brassica Disease Manuals (Plantwise). pp. 64-64.",
+      "section_title": "Downy Mildew",
+      "bm25_text": "Downy Mildew of Brassica Downy Mildew of Brassica ডাউনি মিলডিউ মূলত পাতার রোগ, যদিও এটি চারাগাছের কাণ্ড এবং ফুলকপির সাদা অংশকেও আক্রান্ত করতে পারে। কিছু ক্ষেত্রে, সংক্রমণটি শিরায় সীমাবদ্ধ থাকতে পারে। আবহাওয়ার পরিস্থিতির ওপর ভিত্তি করে লক্ষণগুলো ভিন্ন হয়: ঠান্ডা আবহাওয়ায় প্রাথমিক হলুদ ভাব সামান্য হতে পারে, তবে সময়ের সাথে সাথে বা গরম ও শুষ্ক আবহাওয়ায়, আক্রান্ত উদ্ভিদের অংশ হলুদ এবং পরবর্তীতে বাদামী হয়ে যায়। Downy mildew is primarily a leaf disease, though it can also affect the stems of seedlings and the white region of cauliflower. In some cases, the infection may be vein-limited. Symptoms vary based on weather conditions: in cool weather, there may be little initial yellowing, but over time or during hot, dry weather, the affected plant material turns yellow and eventually brown. Downy mildew, caused by Hyaloperonospora brassicae, is a leaf disease affecting brassica crops, characterized by yellowing and browning of plant tissue. disease disease Downy Mildew Brassica Hyaloperonospora brassicae Plant Disease",
+      "embed_text": "Downy Mildew of Brassica ডাউনি মিলডিউ মূলত পাতার রোগ, যদিও এটি চারাগাছের কাণ্ড এবং ফুলকপির সাদা অংশকেও আক্রান্ত করতে পারে। কিছু ক্ষেত্রে, সংক্রমণটি শিরায় সীমাবদ্ধ থাকতে পারে। আবহাওয়ার পরিস্থিতির ওপর ভিত্তি করে লক্ষণগুলো ভিন্ন হয়: ঠান্ডা আবহাওয়ায় প্রাথমিক হলুদ ভাব সামান্য হতে পারে, তবে সময়ের সাথে সাথে বা গরম ও শুষ্ক আবহাওয়ায়, আক্রান্ত উদ্ভিদের অংশ হলুদ এবং পরবর্তীতে বাদামী হয়ে যায়। Downy mildew is primarily a leaf disease, though it can also affect the stems of seedlings and the white region of cauliflower. In some cases, the infection may be vein-limited. Symptoms vary based on weather conditions: in cool weather, there may be little initial yellowing, but over time or during hot, dry weather, the affected plant material turns yellow and eventually brown. Downy mildew, caused by Hyaloperonospora brassicae, is a leaf disease affecting brassica crops, characterized by yellowing and browning of plant tissue."
+    }
+  },
+  {
+    "class": "Cauliflower__Alternaria_Disease",
+    "crop": "Brassica",
+    "disease": "Alternaria Disease",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_59B05D_001",
+      "category": "disease",
+      "title_bn": "",
+      "title_en": "Black spot, Grey leaf spot, and Target spot (Alternaria spp.)",
+      "content_bn": "Black spot, Grey leaf spot এবং Target spot রোগগুলো Alternaria প্রজাতি, বিশেষ করে সবচেয়ে সাধারণ Alternaria brassicicola দ্বারা হয়ে থাকে। বীজতলায় এই রোগগুলোর লক্ষণ পাতার দাগ এবং চারা পচা (damping off) হিসেবে দেখা দিতে পারে। বৈশিষ্ট্যগত লক্ষণগুলোর মধ্যে রয়েছে ছোট গাঢ় বাদামী বা কালো পাতার দাগ যা সময়ের সাথে সাথে বড় হয়, এবং প্রায়শই একটি নির্দিষ্ট লক্ষ্যবস্তুর মতো রিং প্যাটার্ন প্রদর্শন করে। আক্রান্ত দাগগুলোতে হাত দিলে ছত্রাকের রেণু সমন্বিত একটি গুঁড়োময় কালো পদার্থ আঙুলে লেগে যেতে পারে।",
+      "content_en": "Black spot, Grey leaf spot, and Target spot are caused by Alternaria species, most commonly Alternaria brassicicola. These diseases can be observed in the seedbed as leaf spots and damping off. Characteristic symptoms include small dark brown or black leaf spots that enlarge over time, often displaying a distinct target ring pattern. A dusty black material, consisting of fungal spores, may be visible on fingers after touching the affected spots.",
+      "summary": "Black spot, Grey leaf spot, and Target spot are fungal diseases caused by Alternaria species, commonly Alternaria brassicicola, affecting Brassica crops.",
+      "tags": [
+        "Black spot",
+        "Grey leaf spot",
+        "Target spot",
+        "Alternaria",
+        "Brassica disease",
+        "Fungal disease"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Black spot Grey leaf spot Target spot. Brassica Disease Manuals (Plantwise). pp. 58-58.",
+      "section_title": "Black spot Grey leaf spot Target spot",
+      "bm25_text": "Black spot, Grey leaf spot, and Target spot (Alternaria spp.) Black spot, Grey leaf spot, and Target spot (Alternaria spp.) Black spot, Grey leaf spot এবং Target spot রোগগুলো Alternaria প্রজাতি, বিশেষ করে সবচেয়ে সাধারণ Alternaria brassicicola দ্বারা হয়ে থাকে। বীজতলায় এই রোগগুলোর লক্ষণ পাতার দাগ এবং চারা পচা (damping off) হিসেবে দেখা দিতে পারে। বৈশিষ্ট্যগত লক্ষণগুলোর মধ্যে রয়েছে ছোট গাঢ় বাদামী বা কালো পাতার দাগ যা সময়ের সাথে সাথে বড় হয়, এবং প্রায়শই একটি নির্দিষ্ট লক্ষ্যবস্তুর মতো রিং প্যাটার্ন প্রদর্শন করে। আক্রান্ত দাগগুলোতে হাত দিলে ছত্রাকের রেণু সমন্বিত একটি গুঁড়োময় কালো পদার্থ আঙুলে লেগে যেতে পারে। Black spot, Grey leaf spot, and Target spot are caused by Alternaria species, most commonly Alternaria brassicicola. These diseases can be observed in the seedbed as leaf spots and damping off. Characteristic symptoms include small dark brown or black leaf spots that enlarge over time, often displaying a distinct target ring pattern. A dusty black material, consisting of fungal spores, may be visible on fingers after touching the affected spots. Black spot, Grey leaf spot, and Target spot are fungal diseases caused by Alternaria species, commonly Alternaria brassicicola, affecting Brassica crops. disease disease Black spot Grey leaf spot Target spot Alternaria Brassica disease Fungal disease",
+      "embed_text": "Black spot, Grey leaf spot, and Target spot (Alternaria spp.) Black spot, Grey leaf spot এবং Target spot রোগগুলো Alternaria প্রজাতি, বিশেষ করে সবচেয়ে সাধারণ Alternaria brassicicola দ্বারা হয়ে থাকে। বীজতলায় এই রোগগুলোর লক্ষণ পাতার দাগ এবং চারা পচা (damping off) হিসেবে দেখা দিতে পারে। বৈশিষ্ট্যগত লক্ষণগুলোর মধ্যে রয়েছে ছোট গাঢ় বাদামী বা কালো পাতার দাগ যা সময়ের সাথে সাথে বড় হয়, এবং প্রায়শই একটি নির্দিষ্ট লক্ষ্যবস্তুর মতো রিং প্যাটার্ন প্রদর্শন করে। আক্রান্ত দাগগুলোতে হাত দিলে ছত্রাকের রেণু সমন্বিত একটি গুঁড়োময় কালো পদার্থ আঙুলে লেগে যেতে পারে। Black spot, Grey leaf spot, and Target spot are caused by Alternaria species, most commonly Alternaria brassicicola. These diseases can be observed in the seedbed as leaf spots and damping off. Characteristic symptoms include small dark brown or black leaf spots that enlarge over time, often displaying a distinct target ring pattern. A dusty black material, consisting of fungal spores, may be visible on fingers after touching the affected spots. Black spot, Grey leaf spot, and Target spot are fungal diseases caused by Alternaria species, commonly Alternaria brassicicola, affecting Brassica crops."
+    }
+  },
+  {
+    "class": "Cauliflower__Bacterial_Soft_Rot",
+    "crop": "Brassica",
+    "disease": "Bacterial Soft Rot",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_2DA7D1_001",
+      "category": "disease",
+      "title_bn": "",
+      "title_en": "Bacterial soft rot on cabbage",
+      "content_bn": "Publisher: CABI Section/Topic: Bacterial soft rot on cabbage ব্যাকটেরিয়াল সফট রট, যা Erwinia carotovora subsp. carotovora নামক রোগজীবাণুর কারণে হয়, বাঁধাকপি এবং এর সমগোত্রীয় ফসল যেমন শালগম, রুটাবাগা, ব্রোকলি ও ফুলকপিকে আক্রমণ করে। এই রোগটি জলযুক্ত ক্ষতের আকারে প্রকাশ পায় যা দ্রুত প্রসারিত হয় এবং উদ্ভিদের টিস্যুকে নরম, পিচ্ছিল ও কালচে করে তোলে, সেইসাথে একটি দুর্গন্ধ ছড়ায়। রোগ ব্যবস্থাপনা মূলত বিস্তার রোধের জন্য শস্য পরিচর্যা পদ্ধতি এবং সংক্রমণ কমানোর জন্য রাসায়নিক পদক্ষেপের ওপর জোর দেয়।",
+      "content_en": "Bacterial soft rot, caused by the pathogen Erwinia carotovora subsp. carotovora, affects cabbage and related crops like turnip, rutabaga, broccoli, and cauliflower. The disease manifests as water-soaked lesions that expand rapidly, turning the plant tissue soft, mushy, and dark, while emitting an offensive odor. Management focuses on cultural practices to prevent spread and chemical interventions to minimize infection.",
+      "summary": "Bacterial soft rot, caused by Erwinia carotovora subsp. carotovora, is a destructive disease of cabbage characterized by mushy, foul-smelling lesions that spread rapidly through the plant head.",
+      "tags": [
+        "Bacterial soft rot",
+        "Cabbage",
+        "Erwinia carotovora",
+        "Disease management",
+        "বাঁধাকপি",
+        "ব্যাকটেরিয়াজনিত পচন রোগ"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Bacterial soft rot on cabbage. Brassica Disease Manuals (Plantwise). pp. 105-105.",
+      "section_title": "Bacterial soft rot on cabbage",
+      "bm25_text": "Bacterial soft rot on cabbage Bacterial soft rot on cabbage Publisher: CABI Section/Topic: Bacterial soft rot on cabbage ব্যাকটেরিয়াল সফট রট, যা Erwinia carotovora subsp. carotovora নামক রোগজীবাণুর কারণে হয়, বাঁধাকপি এবং এর সমগোত্রীয় ফসল যেমন শালগম, রুটাবাগা, ব্রোকলি ও ফুলকপিকে আক্রমণ করে। এই রোগটি জলযুক্ত ক্ষতের আকারে প্রকাশ পায় যা দ্রুত প্রসারিত হয় এবং উদ্ভিদের টিস্যুকে নরম, পিচ্ছিল ও কালচে করে তোলে, সেইসাথে একটি দুর্গন্ধ ছড়ায়। রোগ ব্যবস্থাপনা মূলত বিস্তার রোধের জন্য শস্য পরিচর্যা পদ্ধতি এবং সংক্রমণ কমানোর জন্য রাসায়নিক পদক্ষেপের ওপর জোর দেয়। Bacterial soft rot, caused by the pathogen Erwinia carotovora subsp. carotovora, affects cabbage and related crops like turnip, rutabaga, broccoli, and cauliflower. The disease manifests as water-soaked lesions that expand rapidly, turning the plant tissue soft, mushy, and dark, while emitting an offensive odor. Management focuses on cultural practices to prevent spread and chemical interventions to minimize infection. Bacterial soft rot, caused by Erwinia carotovora subsp. carotovora, is a destructive disease of cabbage characterized by mushy, foul-smelling lesions that spread rapidly through the plant head. disease disease Bacterial soft rot Cabbage Erwinia carotovora Disease management বাঁধাকপি ব্যাকটেরিয়াজনিত পচন রোগ",
+      "embed_text": "Bacterial soft rot on cabbage Publisher: CABI Section/Topic: Bacterial soft rot on cabbage ব্যাকটেরিয়াল সফট রট, যা Erwinia carotovora subsp. carotovora নামক রোগজীবাণুর কারণে হয়, বাঁধাকপি এবং এর সমগোত্রীয় ফসল যেমন শালগম, রুটাবাগা, ব্রোকলি ও ফুলকপিকে আক্রমণ করে। এই রোগটি জলযুক্ত ক্ষতের আকারে প্রকাশ পায় যা দ্রুত প্রসারিত হয় এবং উদ্ভিদের টিস্যুকে নরম, পিচ্ছিল ও কালচে করে তোলে, সেইসাথে একটি দুর্গন্ধ ছড়ায়। রোগ ব্যবস্থাপনা মূলত বিস্তার রোধের জন্য শস্য পরিচর্যা পদ্ধতি এবং সংক্রমণ কমানোর জন্য রাসায়নিক পদক্ষেপের ওপর জোর দেয়। Bacterial soft rot, caused by the pathogen Erwinia carotovora subsp. carotovora, affects cabbage and related crops like turnip, rutabaga, broccoli, and cauliflower. The disease manifests as water-soaked lesions that expand rapidly, turning the plant tissue soft, mushy, and dark, while emitting an offensive odor. Management focuses on cultural practices to prevent spread and chemical interventions to minimize infection. Bacterial soft rot, caused by Erwinia carotovora subsp. carotovora, is a destructive disease of cabbage characterized by mushy, foul-smelling lesions that spread rapidly through the plant head."
+    }
+  },
+  {
+    "class": "Cauliflower__Bacterial_Spot",
+    "crop": "Brassica",
+    "disease": "Bacterial Spot",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_7A0C58_001",
+      "category": "disease",
+      "title_bn": "",
+      "title_en": "Black Rot (Xanthomonas campestris)",
+      "content_bn": "ব্ল্যাক রট, যা *Xanthomonas campestris* ব্যাকটেরিয়ার কারণে হয়ে থাকে, ব্রাসিকা ফসলের একটি অত্যন্ত সাধারণ রোগ। এটি বয়স্ক পাতার কিনারা থেকে বা পোকার দ্বারা ক্ষতিগ্রস্থ স্থান থেকে ভেতরের দিকে ছড়িয়ে পড়া বৈশিষ্ট্যপূর্ণ V আকৃতির ক্ষতের মাধ্যমে সনাক্ত করা যায়। এই ক্ষতের বর্ধিত কিনারা সাধারণত হলুদ দেখায়, অন্যদিকে ক্ষতের পুরোনো ও কেন্দ্রীয় অংশগুলো বাদামী হয়ে যায়।",
+      "content_en": "Black rot, caused by the bacterium Xanthomonas campestris, is a very common disease affecting Brassica crops. It is identified by characteristic V-shaped lesions that spread inward from the edges of older leaves or from areas damaged by insects. The advancing edge of these lesions typically appears yellow, while the older, central parts of the lesion turn brown.",
+      "summary": "Black rot is a common bacterial disease in Brassica crops characterized by V-shaped lesions starting from leaf edges or insect damage.",
+      "tags": [
+        "Black Rot",
+        "Xanthomonas campestris",
+        "Brassica",
+        "Bacterial disease"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Black Rot. Brassica Disease Manuals (Plantwise). pp. 60-60.",
+      "section_title": "Black Rot",
+      "bm25_text": "Black Rot (Xanthomonas campestris) Black Rot (Xanthomonas campestris) ব্ল্যাক রট, যা *Xanthomonas campestris* ব্যাকটেরিয়ার কারণে হয়ে থাকে, ব্রাসিকা ফসলের একটি অত্যন্ত সাধারণ রোগ। এটি বয়স্ক পাতার কিনারা থেকে বা পোকার দ্বারা ক্ষতিগ্রস্থ স্থান থেকে ভেতরের দিকে ছড়িয়ে পড়া বৈশিষ্ট্যপূর্ণ V আকৃতির ক্ষতের মাধ্যমে সনাক্ত করা যায়। এই ক্ষতের বর্ধিত কিনারা সাধারণত হলুদ দেখায়, অন্যদিকে ক্ষতের পুরোনো ও কেন্দ্রীয় অংশগুলো বাদামী হয়ে যায়। Black rot, caused by the bacterium Xanthomonas campestris, is a very common disease affecting Brassica crops. It is identified by characteristic V-shaped lesions that spread inward from the edges of older leaves or from areas damaged by insects. The advancing edge of these lesions typically appears yellow, while the older, central parts of the lesion turn brown. Black rot is a common bacterial disease in Brassica crops characterized by V-shaped lesions starting from leaf edges or insect damage. disease disease Black Rot Xanthomonas campestris Brassica Bacterial disease",
+      "embed_text": "Black Rot (Xanthomonas campestris) ব্ল্যাক রট, যা *Xanthomonas campestris* ব্যাকটেরিয়ার কারণে হয়ে থাকে, ব্রাসিকা ফসলের একটি অত্যন্ত সাধারণ রোগ। এটি বয়স্ক পাতার কিনারা থেকে বা পোকার দ্বারা ক্ষতিগ্রস্থ স্থান থেকে ভেতরের দিকে ছড়িয়ে পড়া বৈশিষ্ট্যপূর্ণ V আকৃতির ক্ষতের মাধ্যমে সনাক্ত করা যায়। এই ক্ষতের বর্ধিত কিনারা সাধারণত হলুদ দেখায়, অন্যদিকে ক্ষতের পুরোনো ও কেন্দ্রীয় অংশগুলো বাদামী হয়ে যায়। Black rot, caused by the bacterium Xanthomonas campestris, is a very common disease affecting Brassica crops. It is identified by characteristic V-shaped lesions that spread inward from the edges of older leaves or from areas damaged by insects. The advancing edge of these lesions typically appears yellow, while the older, central parts of the lesion turn brown. Black rot is a common bacterial disease in Brassica crops characterized by V-shaped lesions starting from leaf edges or insect damage."
+    }
+  },
+  {
+    "class": "Cauliflower__Black_Spot",
+    "crop": "Brassica",
+    "disease": "Black Spot",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_FA8EFD_003",
+      "category": "pest",
+      "title_bn": "",
+      "title_en": "Webworm (Heltula undalis)",
+      "content_bn": "ওয়েবওয়ার্ম (Heltula )-এর লার্ভাগুলো হালকা গোলাপি-বাদামী ডোরাসহ ক্রিমি সাদা এবং মাথাটি গাঢ় বাদামী বা কালো রঙের হয়। এরা ১২-১৫ মিলিমিটার পর্যন্ত বড় হয় এবং পাতার নিচের অংশ খায়, প্রায়শই ময়লা ও মলমূত্র মিশ্রিত জালে নিজেদের ঢেকে রাখে। এর পূর্ণাঙ্গ পোকা হলো বালুটে বাদামী রঙের একটি মথ, যার ডানার ওপর একটি কালো দাগ এবং জিগজ্যাগ করা হালকা বাদামী রেখা থাকে। আক্রমণ গাছের বৃদ্ধিতে বাধা সৃষ্টি করে, একাধিক বর্ধিষ্ণু অংশ তৈরি করে, পাতা সুরঙ্গ করে এবং কাণ্ডে ছিদ্র তৈরি করে।",
+      "content_en": "The webworm (Heltula undalis) larvae are creamy white with light pinkish-brown stripes and a dark brown or black head. They grow up to 12-15 mm and feed on the underside of leaves, often covering themselves in webs mixed with dirt and frass. The adult is a sandy brown moth with a black spot and zigzagging light brown lines on its wings. Infestation leads to plant stunting, multiple growing points, leaf mining, and bore holes in stems.",
+      "summary": "Webworms are larvae that feed on brassica leaves and stems, causing stunting and bore holes.",
+      "tags": [
+        "webworm",
+        "Heltula undalis",
+        "brassica",
+        "pest"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Common pests and diseases on cocoyam in Ghana. Brassica Disease Manuals (Plantwise). pp. 20-20.",
+      "section_title": "Common pests and diseases on cocoyam in Ghana",
+      "bm25_text": "Webworm (Heltula undalis) Webworm (Heltula undalis) ওয়েবওয়ার্ম (Heltula )-এর লার্ভাগুলো হালকা গোলাপি-বাদামী ডোরাসহ ক্রিমি সাদা এবং মাথাটি গাঢ় বাদামী বা কালো রঙের হয়। এরা ১২-১৫ মিলিমিটার পর্যন্ত বড় হয় এবং পাতার নিচের অংশ খায়, প্রায়শই ময়লা ও মলমূত্র মিশ্রিত জালে নিজেদের ঢেকে রাখে। এর পূর্ণাঙ্গ পোকা হলো বালুটে বাদামী রঙের একটি মথ, যার ডানার ওপর একটি কালো দাগ এবং জিগজ্যাগ করা হালকা বাদামী রেখা থাকে। আক্রমণ গাছের বৃদ্ধিতে বাধা সৃষ্টি করে, একাধিক বর্ধিষ্ণু অংশ তৈরি করে, পাতা সুরঙ্গ করে এবং কাণ্ডে ছিদ্র তৈরি করে। The webworm (Heltula undalis) larvae are creamy white with light pinkish-brown stripes and a dark brown or black head. They grow up to 12-15 mm and feed on the underside of leaves, often covering themselves in webs mixed with dirt and frass. The adult is a sandy brown moth with a black spot and zigzagging light brown lines on its wings. Infestation leads to plant stunting, multiple growing points, leaf mining, and bore holes in stems. Webworms are larvae that feed on brassica leaves and stems, causing stunting and bore holes. pest pest webworm Heltula undalis brassica pest",
+      "embed_text": "Webworm (Heltula undalis) ওয়েবওয়ার্ম (Heltula )-এর লার্ভাগুলো হালকা গোলাপি-বাদামী ডোরাসহ ক্রিমি সাদা এবং মাথাটি গাঢ় বাদামী বা কালো রঙের হয়। এরা ১২-১৫ মিলিমিটার পর্যন্ত বড় হয় এবং পাতার নিচের অংশ খায়, প্রায়শই ময়লা ও মলমূত্র মিশ্রিত জালে নিজেদের ঢেকে রাখে। এর পূর্ণাঙ্গ পোকা হলো বালুটে বাদামী রঙের একটি মথ, যার ডানার ওপর একটি কালো দাগ এবং জিগজ্যাগ করা হালকা বাদামী রেখা থাকে। আক্রমণ গাছের বৃদ্ধিতে বাধা সৃষ্টি করে, একাধিক বর্ধিষ্ণু অংশ তৈরি করে, পাতা সুরঙ্গ করে এবং কাণ্ডে ছিদ্র তৈরি করে। The webworm (Heltula undalis) larvae are creamy white with light pinkish-brown stripes and a dark brown or black head. They grow up to 12-15 mm and feed on the underside of leaves, often covering themselves in webs mixed with dirt and frass. The adult is a sandy brown moth with a black spot and zigzagging light brown lines on its wings. Infestation leads to plant stunting, multiple growing points, leaf mining, and bore holes in stems. Webworms are larvae that feed on brassica leaves and stems, causing stunting and bore holes."
+    }
+  },
+  {
+    "class": "Cauliflower__Downy_Mildew",
+    "crop": "Brassica",
+    "disease": "Downy Mildew",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_77C2B2_001",
+      "category": "disease",
+      "title_bn": "",
+      "title_en": "Downy Mildew of Brassica",
+      "content_bn": "ডাউনি মিলডিউ মূলত পাতার রোগ, যদিও এটি চারাগাছের কাণ্ড এবং ফুলকপির সাদা অংশকেও আক্রান্ত করতে পারে। কিছু ক্ষেত্রে, সংক্রমণটি শিরায় সীমাবদ্ধ থাকতে পারে। আবহাওয়ার পরিস্থিতির ওপর ভিত্তি করে লক্ষণগুলো ভিন্ন হয়: ঠান্ডা আবহাওয়ায় প্রাথমিক হলুদ ভাব সামান্য হতে পারে, তবে সময়ের সাথে সাথে বা গরম ও শুষ্ক আবহাওয়ায়, আক্রান্ত উদ্ভিদের অংশ হলুদ এবং পরবর্তীতে বাদামী হয়ে যায়।",
+      "content_en": "Downy mildew is primarily a leaf disease, though it can also affect the stems of seedlings and the white region of cauliflower. In some cases, the infection may be vein-limited. Symptoms vary based on weather conditions: in cool weather, there may be little initial yellowing, but over time or during hot, dry weather, the affected plant material turns yellow and eventually brown.",
+      "summary": "Downy mildew, caused by Hyaloperonospora brassicae, is a leaf disease affecting brassica crops, characterized by yellowing and browning of plant tissue.",
+      "tags": [
+        "Downy Mildew",
+        "Brassica",
+        "Hyaloperonospora brassicae",
+        "Plant Disease"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Downy Mildew. Brassica Disease Manuals (Plantwise). pp. 64-64.",
+      "section_title": "Downy Mildew",
+      "bm25_text": "Downy Mildew of Brassica Downy Mildew of Brassica ডাউনি মিলডিউ মূলত পাতার রোগ, যদিও এটি চারাগাছের কাণ্ড এবং ফুলকপির সাদা অংশকেও আক্রান্ত করতে পারে। কিছু ক্ষেত্রে, সংক্রমণটি শিরায় সীমাবদ্ধ থাকতে পারে। আবহাওয়ার পরিস্থিতির ওপর ভিত্তি করে লক্ষণগুলো ভিন্ন হয়: ঠান্ডা আবহাওয়ায় প্রাথমিক হলুদ ভাব সামান্য হতে পারে, তবে সময়ের সাথে সাথে বা গরম ও শুষ্ক আবহাওয়ায়, আক্রান্ত উদ্ভিদের অংশ হলুদ এবং পরবর্তীতে বাদামী হয়ে যায়। Downy mildew is primarily a leaf disease, though it can also affect the stems of seedlings and the white region of cauliflower. In some cases, the infection may be vein-limited. Symptoms vary based on weather conditions: in cool weather, there may be little initial yellowing, but over time or during hot, dry weather, the affected plant material turns yellow and eventually brown. Downy mildew, caused by Hyaloperonospora brassicae, is a leaf disease affecting brassica crops, characterized by yellowing and browning of plant tissue. disease disease Downy Mildew Brassica Hyaloperonospora brassicae Plant Disease",
+      "embed_text": "Downy Mildew of Brassica ডাউনি মিলডিউ মূলত পাতার রোগ, যদিও এটি চারাগাছের কাণ্ড এবং ফুলকপির সাদা অংশকেও আক্রান্ত করতে পারে। কিছু ক্ষেত্রে, সংক্রমণটি শিরায় সীমাবদ্ধ থাকতে পারে। আবহাওয়ার পরিস্থিতির ওপর ভিত্তি করে লক্ষণগুলো ভিন্ন হয়: ঠান্ডা আবহাওয়ায় প্রাথমিক হলুদ ভাব সামান্য হতে পারে, তবে সময়ের সাথে সাথে বা গরম ও শুষ্ক আবহাওয়ায়, আক্রান্ত উদ্ভিদের অংশ হলুদ এবং পরবর্তীতে বাদামী হয়ে যায়। Downy mildew is primarily a leaf disease, though it can also affect the stems of seedlings and the white region of cauliflower. In some cases, the infection may be vein-limited. Symptoms vary based on weather conditions: in cool weather, there may be little initial yellowing, but over time or during hot, dry weather, the affected plant material turns yellow and eventually brown. Downy mildew, caused by Hyaloperonospora brassicae, is a leaf disease affecting brassica crops, characterized by yellowing and browning of plant tissue."
+    }
+  },
+  {
+    "class": "Cauliflower__Healthy",
+    "crop": "Brassica",
+    "disease": "Healthy",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_F02F59_001",
+      "category": "disease",
+      "title_bn": "",
+      "title_en": "Chinese kale - Downy mildew",
+      "content_bn": "Publisher: CABI Section/Topic: Chinese kale - Downy mildew ডাউনি মিলডিউ (Peronospora brassicae) চাইনিজ কেল-এর একটি অত্যন্ত ক্ষতিকর রোগ। এর ব্যবস্থাপনায় সমন্বিত চাষপদ্ধতিগত প্রতিরোধ, নিয়মিত ক্ষেত পরিদর্শন এবং রাসায়নিক প্রতিকারের সংমিশ্রণ প্রয়োজন হয়। প্রধান চাষপদ্ধতিগত পদক্ষেপগুলোর মধ্যে রয়েছে সুনিষ্কাশিত মাটি নিশ্চিত করা, সুস্থ চারা ব্যবহার করা, বায়ু চলাচলের জন্য গাছের মধ্যে সঠিক দূরত্ব বজায় রাখা এবং ক্রুসিফেরা জাতীয় নয় এমন ফসলের সাথে শস্যাবর্তন করা। ফসল তোলার পর, রোগের জীবাণু বা inoculum কমানোর জন্য ফসলের অবশিষ্টাংশ মাটিতে চাষ করে মিশিয়ে দিতে হবে। রাসায়নিক দমনের বিকল্পগুলোর মধ্যে রয়েছে রসুনের কোয়া নির্যাস, Carbendazim (2-3g/lit), Difenoconazole (5ml/10lit water), এবং Mancozeb (2-3g/1lit water)। সবসময় লেবেলের নির্দেশাবলী অনুসরণ করুন এবং রোগ প্রতিরোধ ক্ষমতা (resistance) এড়াতে FRAC গ্রুপগুলো পরিবর্তন করে ব্যবহার করুন।",
+      "content_en": "Downy mildew (Peronospora brassicae) is a significant disease in Chinese kale. Management involves a combination of cultural prevention, regular scouting, and chemical intervention. Key cultural practices include ensuring well-drained soil, using healthy seedlings, maintaining proper plant spacing for aeration, and practicing crop rotation with non-brassica crops. After harvest, plant debris should be ploughed under to reduce inoculum. Chemical control options include garlic bulb extract, Carbendazim (2-3g/lit), Difenoconazole (5ml/10lit water), and Mancozeb (2-3g/1lit water). Always follow label instructions and rotate FRAC groups to prevent resistance.",
+      "summary": "Downy mildew, caused by Peronospora brassicae, is a fungal disease affecting Chinese kale that can be managed through cultural practices, regular monitoring, and targeted chemical control.",
+      "tags": [
+        "Chinese kale",
+        "Downy mildew",
+        "Peronospora brassicae",
+        "Brassica",
+        "Disease management"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Chinese kale - Downy mildew. Brassica Disease Manuals (Plantwise). pp. 113-113.",
+      "section_title": "Chinese kale - Downy mildew",
+      "bm25_text": "Chinese kale - Downy mildew Chinese kale - Downy mildew Publisher: CABI Section/Topic: Chinese kale - Downy mildew ডাউনি মিলডিউ (Peronospora brassicae) চাইনিজ কেল-এর একটি অত্যন্ত ক্ষতিকর রোগ। এর ব্যবস্থাপনায় সমন্বিত চাষপদ্ধতিগত প্রতিরোধ, নিয়মিত ক্ষেত পরিদর্শন এবং রাসায়নিক প্রতিকারের সংমিশ্রণ প্রয়োজন হয়। প্রধান চাষপদ্ধতিগত পদক্ষেপগুলোর মধ্যে রয়েছে সুনিষ্কাশিত মাটি নিশ্চিত করা, সুস্থ চারা ব্যবহার করা, বায়ু চলাচলের জন্য গাছের মধ্যে সঠিক দূরত্ব বজায় রাখা এবং ক্রুসিফেরা জাতীয় নয় এমন ফসলের সাথে শস্যাবর্তন করা। ফসল তোলার পর, রোগের জীবাণু বা inoculum কমানোর জন্য ফসলের অবশিষ্টাংশ মাটিতে চাষ করে মিশিয়ে দিতে হবে। রাসায়নিক দমনের বিকল্পগুলোর মধ্যে রয়েছে রসুনের কোয়া নির্যাস, Carbendazim (2-3g/lit), Difenoconazole (5ml/10lit water), এবং Mancozeb (2-3g/1lit water)। সবসময় লেবেলের নির্দেশাবলী অনুসরণ করুন এবং রোগ প্রতিরোধ ক্ষমতা (resistance) এড়াতে FRAC গ্রুপগুলো পরিবর্তন করে ব্যবহার করুন। Downy mildew (Peronospora brassicae) is a significant disease in Chinese kale. Management involves a combination of cultural prevention, regular scouting, and chemical intervention. Key cultural practices include ensuring well-drained soil, using healthy seedlings, maintaining proper plant spacing for aeration, and practicing crop rotation with non-brassica crops. After harvest, plant debris should be ploughed under to reduce inoculum. Chemical control options include garlic bulb extract, Carbendazim (2-3g/lit), Difenoconazole (5ml/10lit water), and Mancozeb (2-3g/1lit water). Always follow label instructions and rotate FRAC groups to prevent resistance. Downy mildew, caused by Peronospora brassicae, is a fungal disease affecting Chinese kale that can be managed through cultural practices, regular monitoring, and targeted chemical control. disease disease Chinese kale Downy mildew Peronospora brassicae Brassica Disease management",
+      "embed_text": "Chinese kale - Downy mildew Publisher: CABI Section/Topic: Chinese kale - Downy mildew ডাউনি মিলডিউ (Peronospora brassicae) চাইনিজ কেল-এর একটি অত্যন্ত ক্ষতিকর রোগ। এর ব্যবস্থাপনায় সমন্বিত চাষপদ্ধতিগত প্রতিরোধ, নিয়মিত ক্ষেত পরিদর্শন এবং রাসায়নিক প্রতিকারের সংমিশ্রণ প্রয়োজন হয়। প্রধান চাষপদ্ধতিগত পদক্ষেপগুলোর মধ্যে রয়েছে সুনিষ্কাশিত মাটি নিশ্চিত করা, সুস্থ চারা ব্যবহার করা, বায়ু চলাচলের জন্য গাছের মধ্যে সঠিক দূরত্ব বজায় রাখা এবং ক্রুসিফেরা জাতীয় নয় এমন ফসলের সাথে শস্যাবর্তন করা। ফসল তোলার পর, রোগের জীবাণু বা inoculum কমানোর জন্য ফসলের অবশিষ্টাংশ মাটিতে চাষ করে মিশিয়ে দিতে হবে। রাসায়নিক দমনের বিকল্পগুলোর মধ্যে রয়েছে রসুনের কোয়া নির্যাস, Carbendazim (2-3g/lit), Difenoconazole (5ml/10lit water), এবং Mancozeb (2-3g/1lit water)। সবসময় লেবেলের নির্দেশাবলী অনুসরণ করুন এবং রোগ প্রতিরোধ ক্ষমতা (resistance) এড়াতে FRAC গ্রুপগুলো পরিবর্তন করে ব্যবহার করুন। Downy mildew (Peronospora brassicae) is a significant disease in Chinese kale. Management involves a combination of cultural prevention, regular scouting, and chemical intervention. Key cultural practices include ensuring well-drained soil, using healthy seedlings, maintaining proper plant spacing for aeration, and practicing crop rotation with non-brassica crops. After harvest, plant debris should be ploughed under to reduce inoculum. Chemical control options include garlic bulb extract, Carbendazim (2-3g/lit), Difenoconazole (5ml/10lit water), and Mancozeb (2-3g/1lit water). Always follow label instructions and rotate FRAC groups to prevent resistance. Downy mildew, caused by Peronospora brassicae, is a fungal disease affecting Chinese kale that can be managed through cultural practices, regular monitoring, and targeted chemical control."
+    }
+  },
+  {
+    "class": "Cauliflower__Nutrient_Deficiency",
+    "crop": "Brassica",
+    "disease": "Nutrient Deficiency",
+    "has_rag": true,
+    "has_details": false,
+    "needs": "details",
+    "details_content": null,
+    "rag_content": {
+      "id": "CABI_BRASSICA_9B0A3A_001",
+      "category": "disease",
+      "title_bn": "",
+      "title_en": "Boron deficiency in Brassica",
+      "content_bn": "বোরনের ঘাটতির লক্ষণ সাধারণত প্রথমে কচি পাতায় দেখা যায়, যা সঠিকভাবে প্রসারিত হতে ব্যর্থ হয় এবং সহজে ভেঙে যায়। এই ঘাটতির একটি বৈশিষ্ট্যপূর্ণ লক্ষণ হলো কাণ্ড ভেতর থেকে ফাঁপা হয়ে যাওয়া। এই সমস্যাটি সাধারণত বেলে বা হালকা অম্লীয় মাটিতে বেশি দেখা যায় এবং খরা এর প্রকোপ আরও বাড়িয়ে দেয়, যা বোরনের লভ্যতা কমিয়ে দেয়। এটি ক্যালসিয়ামের ঘাটতির সাথে খুব সহজেই গুলিয়ে ফেলা যেতে পারে।",
+      "content_en": "Boron deficiency symptoms typically appear first in young leaves, which fail to expand properly and are prone to snapping. A characteristic sign of this deficiency is the hollowing out of stems. This condition is most common in coarse or sandy acid soils and is exacerbated by drought, which reduces boron availability. It can be easily confused with calcium deficiency.",
+      "summary": "Boron deficiency in Brassica crops primarily affects young leaves and stems, often occurring in sandy or acidic soils during drought conditions.",
+      "tags": [
+        "Boron deficiency",
+        "Brassica",
+        "Nutrient deficiency",
+        "Soil health"
+      ],
+      "source_document": "Brassica Disease Manuals (Plantwise)",
+      "publisher": "CABI",
+      "citation": "CABI. Boron deficiency. Brassica Disease Manuals (Plantwise). pp. 78-78.",
+      "section_title": "Boron deficiency",
+      "bm25_text": "Boron deficiency in Brassica Boron deficiency in Brassica বোরনের ঘাটতির লক্ষণ সাধারণত প্রথমে কচি পাতায় দেখা যায়, যা সঠিকভাবে প্রসারিত হতে ব্যর্থ হয় এবং সহজে ভেঙে যায়। এই ঘাটতির একটি বৈশিষ্ট্যপূর্ণ লক্ষণ হলো কাণ্ড ভেতর থেকে ফাঁপা হয়ে যাওয়া। এই সমস্যাটি সাধারণত বেলে বা হালকা অম্লীয় মাটিতে বেশি দেখা যায় এবং খরা এর প্রকোপ আরও বাড়িয়ে দেয়, যা বোরনের লভ্যতা কমিয়ে দেয়। এটি ক্যালসিয়ামের ঘাটতির সাথে খুব সহজেই গুলিয়ে ফেলা যেতে পারে। Boron deficiency symptoms typically appear first in young leaves, which fail to expand properly and are prone to snapping. A characteristic sign of this deficiency is the hollowing out of stems. This condition is most common in coarse or sandy acid soils and is exacerbated by drought, which reduces boron availability. It can be easily confused with calcium deficiency. Boron deficiency in Brassica crops primarily affects young leaves and stems, often occurring in sandy or acidic soils during drought conditions. disease disease Boron deficiency Brassica Nutrient deficiency Soil health",
+      "embed_text": "Boron deficiency in Brassica বোরনের ঘাটতির লক্ষণ সাধারণত প্রথমে কচি পাতায় দেখা যায়, যা সঠিকভাবে প্রসারিত হতে ব্যর্থ হয় এবং সহজে ভেঙে যায়। এই ঘাটতির একটি বৈশিষ্ট্যপূর্ণ লক্ষণ হলো কাণ্ড ভেতর থেকে ফাঁপা হয়ে যাওয়া। এই সমস্যাটি সাধারণত বেলে বা হালকা অম্লীয় মাটিতে বেশি দেখা যায় এবং খরা এর প্রকোপ আরও বাড়িয়ে দেয়, যা বোরনের লভ্যতা কমিয়ে দেয়। এটি ক্যালসিয়ামের ঘাটতির সাথে খুব সহজেই গুলিয়ে ফেলা যেতে পারে। Boron deficiency symptoms typically appear first in young leaves, which fail to expand properly and are prone to snapping. A characteristic sign of this deficiency is the hollowing out of stems. This condition is most common in coarse or sandy acid soils and is exacerbated by drought, which reduces boron availability. It can be easily confused with calcium deficiency. Boron deficiency in Brassica crops primarily affects young leaves and stems, often occurring in sandy or acidic soils during drought conditions."
+    }
+  }
+]
