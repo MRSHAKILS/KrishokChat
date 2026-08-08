@@ -38,7 +38,7 @@ export function QAPanel() {
     setTrace([{ stage: "safety", status: "start" }]);
     try {
       const final = await streamQuestion(query, applyEvent);
-      setResult(final);
+      if (final) setResult(final);
     } catch (e: any) {
       setResult({ query, category: "low_confidence", answer: `Error: ${e.message}`, sources: [], confidence: "error", agent_trace: [{ stage: "safety", status: "complete" }, { stage: "retrieval", status: "complete" }, { stage: "generation", status: "complete" }, { stage: "verifier", status: "complete" }] });
     }
