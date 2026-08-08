@@ -154,11 +154,11 @@
     "disease_name": "Blast",
     "category": "A",
     "rag_node_ids": [
+      "GEN_WHEAT_WheatBlast",
       "CABI_WHEAT_17CE3C_001",
       "CABI_WHEAT_153BAE_001",
       "CABI_WHEAT_D3A722_001",
-      "IRRI_IRRI_939CB7_001",
-      "IRRI_IRRI_A6AA96_001"
+      "IRRI_IRRI_939CB7_001"
     ],
     "has_disease_details": true,
     "has_description_bn": true,
@@ -171,8 +171,10 @@
   "FusariumFootRot": {
     "crop": "Wheat",
     "disease_name": "FusariumFootRot",
-    "category": "B",
-    "rag_node_ids": [],
+    "category": "A",
+    "rag_node_ids": [
+      "GEN_WHEAT_FusariumFootRot"
+    ],
     "has_disease_details": true,
     "has_description_bn": true,
     "has_solution_bn": true,
@@ -203,8 +205,10 @@
   "LeafBlight": {
     "crop": "Wheat",
     "disease_name": "LeafBlight",
-    "category": "B",
-    "rag_node_ids": [],
+    "category": "A",
+    "rag_node_ids": [
+      "GEN_WHEAT_LeafBlight"
+    ],
     "has_disease_details": true,
     "has_description_bn": true,
     "has_solution_bn": true,
@@ -273,8 +277,10 @@
   "WheatBlast": {
     "crop": "Wheat",
     "disease_name": "WheatBlast",
-    "category": "B",
-    "rag_node_ids": [],
+    "category": "A",
+    "rag_node_ids": [
+      "GEN_WHEAT_WheatBlast"
+    ],
     "has_disease_details": true,
     "has_description_bn": true,
     "has_solution_bn": true,
@@ -343,7 +349,7 @@
       "CABI_BRASSICA_4683AC_001",
       "CABI_BRASSICA_A4B2F3_001",
       "CABI_BRASSICA_F97DB9_001",
-      "B5_BARCAG_F16272_002"
+      "GEN_BRASSICA_Cabbage_Alternaria_Spot"
     ],
     "has_disease_details": false,
     "has_description_bn": false,
@@ -405,7 +411,7 @@
       "CABI_BRASSICA_4683AC_001",
       "CABI_BRASSICA_A4B2F3_001",
       "CABI_BRASSICA_F97DB9_001",
-      "B5_BARCAG_F16272_002"
+      "GEN_BRASSICA_Cabbage_Alternaria_Spot"
     ],
     "has_disease_details": false,
     "has_description_bn": false,
@@ -418,6 +424,7 @@
     "disease_name": "Bacterial Soft Rot",
     "category": "B",
     "rag_node_ids": [
+      "GEN_BRASSICA_Cauliflower_Bacterial_Soft_Rot",
       "CABI_BRASSICA_2DA7D1_001",
       "CABI_BRASSICA_D42830_001"
     ],
@@ -436,7 +443,7 @@
       "CABI_BRASSICA_E79CAF_001",
       "CABI_BRASSICA_F7F28F_001",
       "CABI_BRASSICA_8F6D93_001",
-      "B5_BARCAG_AF08BA_003"
+      "GEN_BRASSICA_Cabbage_Black_Rot"
     ],
     "has_disease_details": false,
     "has_description_bn": false,
@@ -484,10 +491,10 @@
     "category": "B",
     "rag_node_ids": [
       "CABI_BRASSICA_F02F59_001",
+      "GEN_BRASSICA_Cabbage_Black_Rot",
       "CABI_BRASSICA_0E322A_001",
       "CABI_BRASSICA_339170_001",
-      "CABI_BRASSICA_DFC29C_001",
-      "CABI_CORN_3CA8DF_001"
+      "CABI_BRASSICA_DFC29C_001"
     ],
     "has_disease_details": false,
     "has_description_bn": false,
@@ -501,6 +508,7 @@
     "category": "B",
     "rag_node_ids": [
       "CABI_BRASSICA_9B0A3A_001",
+      "GEN_BRASSICA_Cauliflower_Nutrient_Deficiency",
       "CABI_BRASSICA_E302AA_001",
       "CABI_CORN_3AF6EA_001",
       "CABI_CORN_0216DD_001"
