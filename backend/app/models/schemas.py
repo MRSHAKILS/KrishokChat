@@ -9,6 +9,8 @@ from pydantic import BaseModel, Field
 class QARequest(BaseModel):
     query: str = Field(..., description="User's agricultural question in Bengali/Banglish")
     session_id: str | None = Field(None, description="Optional session ID for multi-turn")
+    crop: str | None = Field(None, description="Detected crop from image (optional context)")
+    disease: str | None = Field(None, description="Detected disease from image (optional context)")
 
 
 class SourceNode(BaseModel):

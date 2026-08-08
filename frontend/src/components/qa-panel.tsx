@@ -14,7 +14,7 @@ const CATEGORY_BADGE: Record<string, string> = {
   blocked: "bg-red-100 text-red-800",
 };
 
-export function QAPanel() {
+export function QAPanel({ detectedCrop, detectedDisease }: { detectedCrop?: string | null; detectedDisease?: string | null }) {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState<QAResponse | null>(null);
   const [trace, setTrace] = useState<AgentStageEvent[]>([]);
@@ -37,7 +37,7 @@ export function QAPanel() {
     setResult(null);
     setTrace([{ stage: "safety", status: "start" }]);
     try {
-      const final = await streamQuestion(query, applyEvent);
+      const final = await streamQuestion(query, applyEvent, detectedCrop, detectedDisease);
       if (final) setResult(final);
     } catch (e: any) {
       setResult({ query, category: "low_confidence", answer: `Error: ${e.message}`, sources: [], confidence: "error", agent_trace: [{ stage: "safety", status: "complete" }, { stage: "retrieval", status: "complete" }, { stage: "generation", status: "complete" }, { stage: "verifier", status: "complete" }] });

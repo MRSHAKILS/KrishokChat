@@ -66,11 +66,13 @@ export async function askQuestion(query: string): Promise<QAResponse> {
 export async function streamQuestion(
   query: string,
   onEvent: (e: AgentStageEvent) => void,
+  crop?: string | null,
+  disease?: string | null,
 ): Promise<QAResponse> {
   const res = await fetch(`${API_BASE}/api/qa/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query, crop, disease }),
   });
   if (!res.ok) throw new Error(`qa stream failed: ${res.status}`);
   const reader = res.body?.getReader();

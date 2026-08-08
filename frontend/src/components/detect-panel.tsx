@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { classifyCrop, detectDisease, ClassifyResponse, DetectResponse } from "@/lib/api";
 
-export function DetectPanel() {
+export function DetectPanel({ onDetected }: { onDetected?: (crop: string, disease: string) => void }) {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [result, setResult] = useState<DetectResponse | null>(null);
@@ -49,6 +49,9 @@ export function DetectPanel() {
       const r = await detectDisease(file);
       setResult(r);
       setTrace((t) => [...t, `রোগ: ${r.disease} (${(r.disease_confidence * 100).toFixed(0)}%)`, "তথ্য যাচাই সম্পন্ন"]);
+      if (onDetected && r.disease && !r.disease.toLowerCase().includes("healthy")) {
+        onDetected(r.crop, r.disease);
+      }
     } catch (e: any) {
       setError(e.message);
     }

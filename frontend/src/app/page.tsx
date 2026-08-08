@@ -6,6 +6,11 @@ import { DetectPanel } from "@/components/detect-panel";
 import { QAPanel } from "@/components/qa-panel";
 
 export default function Home() {
+  const [detectedContext, setDetectedContext] = useState<{
+    crop: string;
+    disease: string;
+  } | null>(null);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-green-700 text-white py-4 px-6 shadow">
@@ -28,14 +33,19 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-lg font-bold text-gray-800 mb-4">ফসলের রোগ নির্ণয়</h2>
               <p className="text-sm text-gray-500 mb-4">পাতার ছবি আপলোড করুন — ফসল শনাক্ত করে নির্দিষ্ট রোগ মডেল দিয়ে বিশ্লেষণ করা হবে।</p>
-              <DetectPanel />
+              <DetectPanel onDetected={(crop, disease) => setDetectedContext({ crop, disease })} />
             </div>
           </TabsContent>
           <TabsContent value="qa">
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-lg font-bold text-gray-800 mb-4">কৃষি পরামর্শ</h2>
+              {detectedContext ? (
+                <div className="mb-3 px-3 py-2 bg-green-50 border border-green-200 rounded text-xs text-green-700">
+                  সনাক্ত: <strong>{detectedContext.crop}</strong> — <strong>{detectedContext.disease}</strong>
+                </div>
+              ) : null}
               <p className="text-sm text-gray-500 mb-4">বাংলায় যেকোনো কৃষি প্রশ্ন করুন — নিরাপত্তা যাচাই, তথ্য সংগ্রহ, উত্তর তৈরি, এবং যাচাইকরণের ধাপগুলো দেখুন।</p>
-              <QAPanel />
+              <QAPanel detectedCrop={detectedContext?.crop} detectedDisease={detectedContext?.disease} />
             </div>
           </TabsContent>
         </Tabs>
