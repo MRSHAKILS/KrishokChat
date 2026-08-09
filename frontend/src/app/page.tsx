@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DetectPanel } from "@/components/detect-panel";
 import { QAPanel } from "@/components/qa-panel";
 
