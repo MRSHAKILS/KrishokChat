@@ -226,10 +226,23 @@ def generate_response(query, detected_crop=None, detected_disease=None, intent=N
             "sources": [],
         }
 
-    prompt, has_knowledge = build_prompt(
+    gate_result = build_prompt(
         query, detected_crop, detected_disease, intent,
         retrieved_nodes or [], disease_details
     )
+
+    if len(gate_result) == 5:
+        prompt, gate_mode, confidence, gate_reason, nodes_used = gate_result
+    else:
+        canned, gate_mode, confidence, gate_reason, nodes_used = gate_result
+        return {
+            "response": canned,
+            "grounded": False,
+            "sources": [],
+            "gate_mode": gate_mode,
+            "confidence": confidence,
+            "gate_reason": gate_reason,
+        }
 
     model = model or GEN_MODEL
     key = next_key(keys)
@@ -246,18 +259,18 @@ def generate_response(query, detected_crop=None, detected_disease=None, intent=N
             ),
         )
         _last_call[id(key)] = time.time()
-
         response_text = resp.text.strip()
 
         return {
             "response": response_text,
-            "grounded": has_knowledge,
-            "sources": [n.get("id", "") for n in (retrieved_nodes or [])[:3]],
+            "grounded": gate_mode in ("FULLY_GROUNDED", "PARTIALLY_GROUNDED"),
+            "sources": [n.get("id", "") for n in nodes_used],
+            "gate_mode": gate_mode,
+            "confidence": confidence,
+            "gate_reason": gate_reason,
             "model_used": model,
-            "has_knowledge": has_knowledge,
         }
     except Exception as e:
-        # Fallback: try next key
         try:
             key2 = next_key(keys)
             from google import genai
@@ -273,19 +286,21 @@ def generate_response(query, detected_crop=None, detected_disease=None, intent=N
             _last_call[id(key2)] = time.time()
             return {
                 "response": resp.text.strip(),
-                "grounded": has_knowledge,
-                "sources": [n.get("id", "") for n in (retrieved_nodes or [])[:3]],
+                "grounded": gate_mode in ("FULLY_GROUNDED", "PARTIALLY_GROUNDED"),
+                "sources": [n.get("id", "") for n in nodes_used],
+                "gate_mode": gate_mode,
+                "confidence": confidence,
+                "gate_reason": gate_reason,
                 "model_used": "gemini-2.5-flash-lite (fallback)",
-                "has_knowledge": has_knowledge,
             }
         except Exception as e2:
             return {
                 "response": (
                     "দুঃখিত, এখন উত্তর তৈরি করতে সমস্যা হচ্ছে। "
-                    f"{'এই রোগের তথ্য ডাটাবেসে নেই। ' if not has_knowledge else ''}"
                     "কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।"
                 ),
                 "grounded": False,
                 "sources": [],
+                "gate_mode": gate_mode,
                 "error": str(e2),
             }
