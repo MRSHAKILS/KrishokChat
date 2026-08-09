@@ -47,8 +47,18 @@ async def qa_endpoint(request: QARequest):
             ],
         )
 
-    # Stage 2: Retrieval (augment Bengali query with English keywords for BM25)
+    # Stage 2: Retrieval (augment with English keywords from detected crop/disease)
     augmented = query
+    crop_disease_en = ""
+    if detected_crop:
+        crop_disease_en += f" {detected_crop.lower()}"
+    if detected_disease:
+        disease_term = detected_disease.lower().replace("__", " ").replace("_", " ")
+        crop_disease_en += f" {disease_term}"
+        # Also add core disease name without crop prefix
+        core = detected_disease.split("__")[-1] if "__" in detected_disease else detected_disease
+        crop_disease_en += f" {core.lower().replace('_', ' ')}"
+    # Add English equivalents from Bengali query
     bn_to_en = {
         "আলুর": "potato", "ধান": "rice", "গম": "wheat", "ভুট্টা": "corn",
         "ফুলকপি": "cauliflower", "বাঁধাকপি": "cabbage", "টমেটো": "tomato",
@@ -59,7 +69,11 @@ async def qa_endpoint(request: QARequest):
     for bn, en in bn_to_en.items():
         if bn in query.lower():
             augmented += f" {en}"
-    sources = retrieve(augmented, top_k=5)
+    # Always append detected crop/disease English terms for BM25 matching
+    augmented += crop_disease_en
+    if intent:
+        augmented += f" {intent}"
+    sources = retrieve(augmented.strip(), top_k=5)
 
     # Stage 3: Generation (grounded in retrieved sources)
     disease_details = get_disease_details(detected_crop, detected_disease) if detected_crop and detected_disease else None
