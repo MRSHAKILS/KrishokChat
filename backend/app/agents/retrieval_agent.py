@@ -46,14 +46,17 @@ def retrieve(query: str, top_k: int = 5) -> list[dict]:
     except Exception:
         return []
     import numpy as np
-    top_idx = np.argsort(scores)[::-1][:top_k]
+    # Filter: only keep docs with score > 20% of max
+    max_score = max(scores) if len(scores) > 0 else 0
+    min_threshold = max_score * 0.2 if max_score > 0 else 0
+    top_idx = np.argsort(scores)[::-1][:top_k * 2]  # Take more, then filter
     results = []
     for i in top_idx:
         if i >= len(corpus):
             continue
         doc = corpus[i]
         score = float(scores[i])
-        if score <= 0:
+        if score <= min_threshold:
             continue
         results.append({
             "id": doc.get("id", f"doc_{i}"),
@@ -66,4 +69,5 @@ def retrieve(query: str, top_k: int = 5) -> list[dict]:
             "citation": doc.get("citation", ""),
             "category": doc.get("category", ""),
         })
-    return results
+    # Return only top_k after filtering
+    return results[:top_k]

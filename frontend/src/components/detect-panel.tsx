@@ -1,40 +1,22 @@
 "use client";
-
 import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { classifyCrop, detectDisease, ClassifyResponse, DetectResponse } from "@/lib/api";
+import { motionTokens, fadeUp } from "@/lib/motionTokens";
 
 export function DetectPanel({ onDetected }: { onDetected?: (crop: string, disease: string) => void }) {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [result, setResult] = useState<DetectResponse | null>(null);
-  const [cropOnly, setCropOnly] = useState<ClassifyResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [trace, setTrace] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   function onSelect(f: File) {
     setFile(f);
     setPreview(URL.createObjectURL(f));
     setResult(null);
-    setCropOnly(null);
     setError(null);
-    setTrace([]);
-  }
-
-  async function runClassify() {
-    if (!file) return;
-    setLoading(true);
-    setError(null);
-    setTrace((t) => [...t, "ফসল শ্রেণীবদ্ধ হচ্ছে..."]);
-    try {
-      const r = await classifyCrop(file);
-      setCropOnly(r);
-      setTrace((t) => [...t, `ফসল: ${r.crop} (${(r.confidence * 100).toFixed(0)}%)`]);
-    } catch (e: any) {
-      setError(e.message);
-    }
-    setLoading(false);
   }
 
   async function runDetect() {
@@ -42,13 +24,9 @@ export function DetectPanel({ onDetected }: { onDetected?: (crop: string, diseas
     setLoading(true);
     setError(null);
     setResult(null);
-    setTrace(["ফসল শ্রেণীবদ্ধ হচ্ছে..."]);
-    await new Promise((r) => setTimeout(r, 400));
-    setTrace((t) => [...t, "রোগ নির্ণয় হচ্ছে..."]);
     try {
       const r = await detectDisease(file);
       setResult(r);
-      setTrace((t) => [...t, `রোগ: ${r.disease} (${(r.disease_confidence * 100).toFixed(0)}%)`, "তথ্য যাচাই সম্পন্ন"]);
       if (onDetected && r.disease && !r.disease.toLowerCase().includes("healthy")) {
         onDetected(r.crop, r.disease);
       }
@@ -59,78 +37,120 @@ export function DetectPanel({ onDetected }: { onDetected?: (crop: string, diseas
   }
 
   return (
-    <div className="space-y-4">
-      <div
-        className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-green-400 transition-colors"
+    <div className="space-y-5">
+      {/* Upload zone */}
+      <motion.div
+        whileHover={{ scale: 1.005, borderColor: "#2d7d46" }}
+        transition={{ duration: motionTokens.duration.fast }}
+        className="border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center cursor-pointer bg-gray-50/50 hover:bg-green-50/30 transition-colors"
         onClick={() => inputRef.current?.click()}
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => { e.preventDefault(); if (e.dataTransfer.files[0]) onSelect(e.dataTransfer.files[0]); }}
       >
         <input ref={inputRef} type="file" accept="image/*" className="hidden"
                onChange={(e) => e.target.files?.[0] && onSelect(e.target.files[0])} />
-        {preview ? (
-          <img src={preview} alt="preview" className="max-h-48 mx-auto rounded" />
-        ) : (
-          <div className="text-gray-500">
-            <div className="text-3xl mb-2">📷</div>
-            <div>ছবি আপলোড করুন অথবে ড্র্যাগ অ্যান্ড ড্রপ করুন</div>
-          </div>
-        )}
-      </div>
-
-      {file && (
-        <div className="flex gap-2">
-          <button onClick={runClassify} disabled={loading}
-                  className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700 disabled:opacity-50">
-            ফসল শনাক্ত করুন
-          </button>
-          <button onClick={runDetect} disabled={loading}
-                  className="flex-1 bg-emerald-700 text-white py-2 rounded hover:bg-emerald-800 disabled:opacity-50">
-            রোগ নির্ণয় করুন
-          </button>
-        </div>
-      )}
-
-      {loading && (
-        <div className="text-sm text-gray-500 animate-pulse">
-          {trace.map((t, i) => <div key={i}>{t}</div>)}
-        </div>
-      )}
-
-      {error && <div className="text-red-600 text-sm bg-red-50 p-2 rounded">{error}</div>}
-
-      {cropOnly && !result && (
-        <div className="bg-green-50 border border-green-200 rounded p-4">
-          <div className="font-bold text-green-800">{cropOnly.crop}</div>
-          <div className="text-sm text-green-600">নিশ্চিতা: {(cropOnly.confidence * 100).toFixed(1)}%</div>
-          {cropOnly.top3.slice(1).map((t) => (
-            <div key={t.class} className="text-xs text-gray-500">{t.class}: {(t.confidence * 100).toFixed(1)}%</div>
-          ))}
-        </div>
-      )}
-
-      {result && (
-        <div className="bg-white border rounded-lg p-5 space-y-3 shadow-sm">
-          <div className="flex items-center gap-2">
-            <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-bold rounded">{result.crop}</span>
-            <span className="text-xs text-gray-500">{(result.crop_confidence * 100).toFixed(0)}% নিশ্চিত</span>
-          </div>
-          <div className="text-2xl font-bold text-red-700">{result.disease.replace(/_/g, " ")}</div>
-          <div className="text-sm text-gray-600">রোগ নিশ্চিতা: {(result.disease_confidence * 100).toFixed(1)}%</div>
-          {result.disease_info && (
-            <div className="space-y-2 pt-2 border-t">
-              {result.disease_info.description_bn && (
-                <div><div className="text-xs font-semibold text-gray-500 uppercase">বিবরণ</div>
-                  <div className="text-sm text-gray-700">{result.disease_info.description_bn}</div></div>
-              )}
-              {result.disease_info.solution_bn && (
-                <div><div className="text-xs font-semibold text-gray-500 uppercase">প্রতিকার</div>
-                  <div className="text-sm text-gray-800 bg-yellow-50 p-2 rounded">{result.disease_info.solution_bn}</div></div>
-              )}
-            </div>
+        <AnimatePresence mode="wait">
+          {preview ? (
+            <motion.div key="preview" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}>
+              <img src={preview} alt="preview" className="max-h-52 mx-auto rounded-xl shadow-md" />
+              <p className="text-xs text-gray-400 mt-2">ছবি পরিবর্তন করতে ক্লিক করুন</p>
+            </motion.div>
+          ) : (
+            <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <div className="text-4xl mb-3">📷</div>
+              <div className="text-sm font-semibold text-gray-700">পাতার ছবি আপলোড করুন</div>
+              <div className="text-xs text-gray-400 mt-1">ড্র্যাগ অ্যান্ড ড্রপ অথবে ক্লিক করুন</div>
+            </motion.div>
           )}
-        </div>
-      )}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Detect button */}
+      <AnimatePresence>
+        {file && (
+          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}>
+            <motion.button
+              onClick={runDetect}
+              disabled={loading}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: motionTokens.duration.fast }}
+              className="w-full bg-gradient-to-r from-[#1a5632] to-[#2d7d46] text-white py-3 rounded-xl font-semibold hover:shadow-lg disabled:opacity-50 transition-all"
+            >
+              {loading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <motion.span animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>⟳</motion.span>
+                  বিশ্লেষণ হচ্ছে...
+                </span>
+              ) : (
+                "🔬 রোগ নির্ণয় করুন"
+              )}
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Error */}
+      <AnimatePresence>
+        {error && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl p-3">
+            {error}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Result card */}
+      <AnimatePresence mode="wait">
+        {result && (
+          <motion.div
+            key={result.disease}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: motionTokens.duration.normal, ease: motionTokens.easing.smooth }}
+            className="bg-white border border-gray-100 rounded-2xl p-5 shadow-md space-y-4"
+          >
+            {/* Crop + Disease header */}
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-2xl">🌱</div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 bg-green-100 text-green-800 text-xs font-bold rounded-full">{result.crop}</span>
+                  <span className="text-xs text-gray-400">{(result.crop_confidence * 100).toFixed(0)}% নিশ্চিত</span>
+                </div>
+                <div className="text-lg font-bold text-gray-900 mt-1">{result.disease.replace(/__/g, " — ").replace(/_/g, " ")}</div>
+                <div className="text-xs text-gray-500">রোগ নিশ্চিতা: {(result.disease_confidence * 100).toFixed(1)}%</div>
+              </div>
+            </div>
+
+            {/* Disease info */}
+            <AnimatePresence>
+              {result.disease_info && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: motionTokens.duration.normal }}
+                  className="space-y-3 pt-3 border-t border-gray-100"
+                >
+                  {result.disease_info.description_bn && (
+                    <div>
+                      <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">বিবরণ</div>
+                      <p className="text-sm text-gray-700 leading-relaxed">{result.disease_info.description_bn}</p>
+                    </div>
+                  )}
+                  {result.disease_info.solution_bn && (
+                    <div className="bg-amber-50 border border-amber-100 rounded-xl p-3">
+                      <div className="text-xs font-semibold text-amber-700 uppercase tracking-wide mb-1">💊 প্রতিকার</div>
+                      <p className="text-sm text-gray-800 leading-relaxed">{result.disease_info.solution_bn}</p>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

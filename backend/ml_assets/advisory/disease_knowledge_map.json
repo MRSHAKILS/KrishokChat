@@ -40,8 +40,10 @@
   "Rice__Healthy_Leaf": {
     "crop": "Rice",
     "disease_name": "Healthy Leaf",
-    "category": "C",
-    "rag_node_ids": [],
+    "category": "B",
+    "rag_node_ids": [
+      "GEN_BRASSICA_Cabbage_Healthy_Leaf"
+    ],
     "has_disease_details": false,
     "has_description_bn": false,
     "has_solution_bn": false,
