@@ -13,6 +13,7 @@ dependencies = [
     "onnxruntime>=1.28.0",
     "python-dotenv>=1.2.2",
     "rank-bm25>=0.2.2",
+    "reportlab>=5.0.0",
     "sentence-transformers>=5.7.0",
     "torch>=2.13.0",
     "torchvision>=0.28.0",
