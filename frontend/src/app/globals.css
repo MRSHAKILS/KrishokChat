@@ -1,29 +1,45 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --font-bengali-sans: "Noto Sans Bengali", sans-serif;
-  --font-bengali-serif: "Noto Serif Bengali", serif;
+@theme {
   --color-primary: #1a5632;
   --color-primary-light: #2d7d46;
+  --color-primary-dark: #143d22;
   --color-accent: #f0c040;
+  --color-accent-dark: #d4a520;
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+  --font-bengali-sans: "Noto Sans Bengali", sans-serif;
+  --font-bengali-serif: "Noto Serif Bengali", serif;
 }
 
-body {
-  font-family: var(--font-bengali-sans);
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-bengali-sans);
+    background-color: #f9fafb;
+    color: #111827;
+  }
+  * {
+    box-sizing: border-box;
+  }
 }
 
-/* Smooth scroll */
-html { scroll-behavior: smooth; }
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #c4c4c4;
+    border-radius: 3px;
+  }
+}
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #c4c4c4; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
-
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

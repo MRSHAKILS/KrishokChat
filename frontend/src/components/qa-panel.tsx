@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { streamQuestion, QAResponse, AgentStageEvent } from "@/lib/api";
 import { AgentTrace } from "@/components/agent-trace";
 import { motionTokens } from "@/lib/motionTokens";
