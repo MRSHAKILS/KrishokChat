@@ -1,8 +1,8 @@
 "use client";
 import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { classifyCrop, detectDisease, ClassifyResponse, DetectResponse } from "@/lib/api";
-import { motionTokens, fadeUp } from "@/lib/motionTokens";
+import { motion, AnimatePresence } from "framer-motion";
+import { detectDisease, DetectResponse } from "@/lib/api";
+import { motionTokens } from "@/lib/motionTokens";
 
 export function DetectPanel({ onDetected }: { onDetected?: (crop: string, disease: string) => void }) {
   const [file, setFile] = useState<File | null>(null);
@@ -38,9 +38,8 @@ export function DetectPanel({ onDetected }: { onDetected?: (crop: string, diseas
 
   return (
     <div className="space-y-5">
-      {/* Upload zone */}
       <motion.div
-        whileHover={{ scale: 1.005, borderColor: "#2d7d46" }}
+        whileHover={{ scale: 1.005 }}
         transition={{ duration: motionTokens.duration.fast }}
         className="border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center cursor-pointer bg-gray-50/50 hover:bg-green-50/30 transition-colors"
         onClick={() => inputRef.current?.click()}
@@ -65,7 +64,6 @@ export function DetectPanel({ onDetected }: { onDetected?: (crop: string, diseas
         </AnimatePresence>
       </motion.div>
 
-      {/* Detect button */}
       <AnimatePresence>
         {file && (
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}>
@@ -90,7 +88,6 @@ export function DetectPanel({ onDetected }: { onDetected?: (crop: string, diseas
         )}
       </AnimatePresence>
 
-      {/* Error */}
       <AnimatePresence>
         {error && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl p-3">
@@ -99,7 +96,6 @@ export function DetectPanel({ onDetected }: { onDetected?: (crop: string, diseas
         )}
       </AnimatePresence>
 
-      {/* Result card */}
       <AnimatePresence mode="wait">
         {result && (
           <motion.div
@@ -107,10 +103,9 @@ export function DetectPanel({ onDetected }: { onDetected?: (crop: string, diseas
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
-            transition={{ duration: motionTokens.duration.normal, ease: motionTokens.easing.smooth }}
+            transition={{ duration: motionTokens.duration.normal }}
             className="bg-white border border-gray-100 rounded-2xl p-5 shadow-md space-y-4"
           >
-            {/* Crop + Disease header */}
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-2xl">🌱</div>
               <div className="flex-1">
@@ -123,7 +118,6 @@ export function DetectPanel({ onDetected }: { onDetected?: (crop: string, diseas
               </div>
             </div>
 
-            {/* Disease info */}
             <AnimatePresence>
               {result.disease_info && (
                 <motion.div
