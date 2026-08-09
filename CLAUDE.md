@@ -36,3 +36,8 @@
 - QA flow: safety check -> BM25 retrieval -> Gemini-3.1-Flash-Lite generation
 - Bengali keyword augmentation for BM25 (bn->en mapping)
 - Both servers running: backend :8000, frontend :3100
+
+### Session End (2026-08-09) — Handoff Notes
+- Servers stopped: backend :8000, frontend :3100
+- Everything committed to git
+- To restart: backend 'uv run uvicorn app.main:app --port 8000', frontend 'npx next dev -p 3100'
