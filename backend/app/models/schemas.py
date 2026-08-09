@@ -11,6 +11,7 @@ class QARequest(BaseModel):
     session_id: str | None = Field(None, description="Optional session ID for multi-turn")
     crop: str | None = Field(None, description="Detected crop from image (optional context)")
     disease: str | None = Field(None, description="Detected disease from image (optional context)")
+    history: list[dict] = Field(default_factory=list, description="Conversation history [{role, content}]")
 
 
 class SourceNode(BaseModel):
