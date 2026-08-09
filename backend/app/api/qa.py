@@ -26,8 +26,14 @@ router = APIRouter()
 async def qa_endpoint(request: QARequest):
     """Non-streaming: full advisory pipeline."""
     query = request.query
-    detected_crop = getattr(request, 'crop', None)
-    detected_disease = getattr(request, 'disease', None)
+    detected_crop = getattr(request, "crop", None)
+    detected_disease = getattr(request, "disease", None)
+
+    # Load history from session store if session_id provided and no history sent
+    history = request.history
+    if request.session_id and not history:
+        from app.services.advisory.session_store import session_store
+        history = session_store.get(request.session_id)
 
     # Stage 1: Safety (with detected crop/disease context)
     safety = classify_query(query, detected_crop, detected_disease)
@@ -86,7 +92,14 @@ async def qa_endpoint(request: QARequest):
         intent=cat,
         retrieved_nodes=sources,
         disease_details=disease_details,
+        history=history,
     )
+
+    # Save to session store
+    if request.session_id:
+        from app.services.advisory.session_store import session_store
+        session_store.append(request.session_id, "user", query)
+        session_store.append(request.session_id, "assistant", gen.get("response", ""))
 
     log_safety_decision(query, cat, "answered", False, None)
 
@@ -115,8 +128,14 @@ async def qa_endpoint(request: QARequest):
 async def qa_stream(request: QARequest):
     """Streaming SSE: emits agent stage events, then final response."""
     query = request.query
-    detected_crop = getattr(request, 'crop', None)
-    detected_disease = getattr(request, 'disease', None)
+    detected_crop = getattr(request, "crop", None)
+    detected_disease = getattr(request, "disease", None)
+
+    # Load history from session store
+    history = request.history
+    if request.session_id and not history:
+        from app.services.advisory.session_store import session_store
+        history = session_store.get(request.session_id)
 
     async def event_gen():
         def emit(stage, status, detail=None):
@@ -174,9 +193,17 @@ async def qa_stream(request: QARequest):
                 intent=intent_for_gen,
                 retrieved_nodes=sources,
                 disease_details=disease_details,
+                history=history,
             )
             yield emit("generation", "complete", "gemini-3.1-flash-lite")
             yield emit("verifier", "complete", "grounded")
+
+            # Save to session store
+            if request.session_id:
+                from app.services.advisory.session_store import session_store
+                session_store.append(request.session_id, "user", query)
+                session_store.append(request.session_id, "assistant", gen.get("response", ""))
+
             log_safety_decision(query, cat, "answered", False, None)
 
         source_nodes = [
