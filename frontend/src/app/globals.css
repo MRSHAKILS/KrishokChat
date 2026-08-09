@@ -1,28 +1,93 @@
 @import "tailwindcss";
 
+/* =========================================================================
+   KrishokChat — "কৃষি পত্রক" (Field Notebook) design system
+   Warm paper + ink + leaf + ochre. Deliberately not a green-gradient AI app.
+   ========================================================================= */
+
 @theme {
-  --color-primary: #1a5632;
-  --color-primary-light: #2d7d46;
-  --color-primary-dark: #143d22;
-  --color-accent: #f0c040;
-  --color-accent-dark: #d4a520;
-  --color-success: #16a34a;
-  --color-danger: #dc2626;
+  /* Surfaces — warm paper, not cold gray */
+  --color-paper: #faf6ef;
+  --color-paper-2: #f2ebdc;
+  --color-bone: #e7dfd0;
+  --color-bone-soft: #efe8da;
+
+  /* Ink — warm near-black, not gray (deepened for legibility) */
+  --color-ink: #1a1611;
+  --color-ink-soft: #3d362e;
+  --color-ink-faint: #6b6256;
+
+  /* Leaf — used as ink/accent, not as a fill */
+  --color-leaf: #2f5d3a;
+  --color-leaf-2: #3e7149;
+  --color-leaf-3: #6b9b78;
+
+  /* Ochre — paddy grain, the "active" highlight */
+  --color-ochre: #c8893c;
+  --color-ochre-soft: #e8c98a;
+
+  /* Clay — warnings, flagged, errors */
+  --color-clay: #a8542b;
+  --color-clay-soft: #e8b8a3;
+
+  /* Functional */
+  --color-success: #2f5d3a;
+  --color-warning: #c8893c;
+  --color-danger: #a8542b;
+
+  /* Typography */
+  --font-display: "Tiro Bangla", var(--font-bengali-serif), serif;
+  --font-body: "Noto Sans Bengali", var(--font-bengali-sans), sans-serif;
   --font-bengali-sans: "Noto Sans Bengali", sans-serif;
   --font-bengali-serif: "Noto Serif Bengali", serif;
+
+  /* Radius — mixed, not all-2xl */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
+
   body {
-    font-family: var(--font-bengali-sans);
-    background-color: #f9fafb;
-    color: #111827;
+    font-family: var(--font-body);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
   * {
     box-sizing: border-box;
+  }
+
+  /* Display type — the serif/sans contrast is the #1 "designed, not generated" signal */
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Tabular numerics for stat panels */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--color-ochre-soft);
+    color: var(--color-ink);
+  }
+
+  /* Focus ring — leaf, not blue */
+  :focus-visible {
+    outline: 2px solid var(--color-leaf);
+    outline-offset: 2px;
   }
 }
 
@@ -35,8 +100,35 @@
     background: transparent;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: #c4c4c4;
+    background: var(--color-bone);
     border-radius: 3px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-faint);
+  }
+
+  /* Subtle paper grain — applied to a single hero surface, not everywhere */
+  .paper-grain {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(168, 84, 43, 0.025) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(200, 137, 60, 0.03) 0%, transparent 45%);
+  }
+
+  /* Hairline rule — warm, not gray */
+  .rule {
+    border-color: var(--color-bone);
+  }
+
+  /* The "active pipeline" ink-dash used in the trace rail */
+  .ink-dash {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-leaf) 0 8px,
+      transparent 8px 14px
+    );
+    background-size: 14px 1px;
+    background-repeat: repeat-x;
+    background-position: center;
   }
 }
 

@@ -1,37 +1,74 @@
 import Link from "next/link";
+import { Phone, ExternalLink } from "lucide-react";
+import { APP, HELPLINE, LINKS } from "@/lib/constants";
+
+const NAV_SECTIONS = [
+  { title: "পণ্য", links: [{ href: "/chat", label: "চ্যাট" }, { href: "/detect", label: "রোগ নির্ণয়" }, { href: "/analytics", label: "পরিসংখ্যান" }] },
+  { title: "গবেষণা", links: [{ href: "/research", label: "পদ্ধতি" }, { href: "/research/safety", label: "নিরাপত্তা" }, { href: "/research/benchmark", label: "ফলাফল" }, { href: "/library", label: "লাইব্রেরি" }] },
+  { title: "প্রতিষ্ঠান", links: [{ href: "/data", label: "উপাত্ত" }, { href: "/about", label: "দল ও পরিচিতি" }, { href: "/contact", label: "যোগাযোগ" }] },
+];
+
+const RESOURCES = [
+  { href: LINKS.huggingface, label: "Hugging Face" },
+  { href: LINKS.arxiv, label: "arXiv" },
+  { href: LINKS.github, label: "GitHub" },
+];
 
 export function Footer() {
   return (
-    <footer className="border-t border-gray-100 bg-white mt-auto">
-      <div className="max-w-6xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
-          <div>
-            <h3 className="font-bold text-gray-900 mb-2">কৃষক চ্যাট</h3>
-            <p className="text-gray-500 text-xs">
-              বাংলাদেশ কৃষি-এআই পরামর্শদাতা — নিরাপদ, ভিত্তিক, বাংলায়।
-            </p>
+    <footer className="mt-auto border-t rule bg-paper-2/50">
+      <div className="mx-auto max-w-6xl px-5 py-6">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-5">
+          {/* Identity — compact */}
+          <div className="col-span-2 sm:col-span-1">
+            <div className="font-display text-base text-ink">{APP.name}</div>
+            <p className="mt-1 text-[11px] leading-tight text-ink-soft">{APP.tagline}</p>
+            <p className="mt-0.5 text-[10px] text-ink-faint">গবেষণা প্রোটোটাইপ — CC-BY-4.0</p>
           </div>
+
+          {/* Nav + Resources in one row */}
+          {NAV_SECTIONS.map((section) => (
+            <div key={section.title}>
+              <h3 className="text-[10px] uppercase tracking-[0.16em] text-ink-faint">{section.title}</h3>
+              <ul className="mt-2 space-y-1.5">
+                {section.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-xs text-ink-soft transition-colors hover:text-leaf">{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* Resources + Helpline combined */}
           <div>
-            <h3 className="font-bold text-gray-900 mb-2">দ্রুত লিংক</h3>
-            <div className="flex flex-col gap-1">
-              <Link href="/detect" className="text-gray-500 hover:text-green-700 transition-colors text-xs">রোগ নির্ণয়</Link>
-              <Link href="/chat" className="text-gray-500 hover:text-green-700 transition-colors text-xs">প্রশ্ন করুন</Link>
-              <Link href="/analytics" className="text-gray-500 hover:text-green-700 transition-colors text-xs">পরিসংখ্যান</Link>
-              <Link href="/about" className="text-gray-500 hover:text-green-700 transition-colors text-xs">পরিচিতি</Link>
+            <h3 className="text-[10px] uppercase tracking-[0.16em] text-ink-faint">সম্পদ</h3>
+            <ul className="mt-2 space-y-1.5">
+              {RESOURCES.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-ink-soft transition-colors hover:text-leaf">
+                    {link.label}<ExternalLink className="h-2.5 w-2.5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-3 flex flex-col gap-1">
+              <a href={`tel:${HELPLINE.krishiCallCenter}`} className="flex items-center gap-1 text-xs text-leaf">
+                <Phone className="h-3 w-3" /><span className="tabular font-medium">{HELPLINE.krishiCallCenter}</span>
+                <span className="text-ink-faint">কৃষি হেল্পলাইন</span>
+              </a>
+              <a href={`tel:${HELPLINE.emergency}`} className="flex items-center gap-1 text-xs text-clay">
+                <Phone className="h-3 w-3" /><span className="tabular font-medium">{HELPLINE.emergency}</span>
+                <span className="text-ink-faint">জরুরি</span>
+              </a>
             </div>
           </div>
-          <div>
-            <h3 className="font-bold text-gray-900 mb-2">সাহায্য</h3>
-            <p className="text-gray-500 text-xs">
-              কৃষক কল সেন্টার: <a href="tel:16123" className="text-green-700 font-semibold">১৬১২৩</a>
-            </p>
-            <p className="text-gray-500 text-xs mt-1">
-              জরুরি: <a href="tel:999" className="text-red-600 font-semibold">৯৯৯</a>
-            </p>
-          </div>
         </div>
-        <div className="border-t border-gray-100 mt-4 pt-4 text-center text-xs text-gray-400">
-          © ২০২৬ KrishokChat — বাংলাদেশ কৃষি-এআই পরামর্ষদাতা v0.1
+
+        <div className="mt-5 border-t rule pt-3">
+          <p className="text-center text-[10px] text-ink-faint">
+            © ২০২৬ {APP.nameEn} · v{APP.version} · North South University
+          </p>
         </div>
       </div>
     </footer>

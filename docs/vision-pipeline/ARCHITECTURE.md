@@ -1,5 +1,11 @@
 # Vision Pipeline — Architecture
 
+> **Superseded implementation note (2026-08-09):** This historical document describes
+> the former monolithic `vision_orchestrator.py`. The active implementation is now
+> `app/application/vision_pipeline.py`, backed by `app/infrastructure/vision/registry.py`
+> and `ultralytics_classifier.py`. The checked-in artifacts are classification models;
+> consult `docs/refactor/PROJECT_HANDOFF.md` before changing behavior.
+
 Detailed architecture of the crop disease detection subsystem: components,
 their interactions, data flow, and the model registry that binds crop labels to
 model weights.

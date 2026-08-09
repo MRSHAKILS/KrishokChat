@@ -2,14 +2,18 @@ import { QAPanel } from "@/components/qa-panel";
 
 export default function ChatPage() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">কৃষি পরামর্শ</h1>
-        <p className="text-sm text-gray-500 mt-1">
-          বাংলায় যেকোনো কৃষি প্রশ্ন করুন — নিরাপত্তা যাচাই, তথ্য সংগ্রহ, উত্তর তৈরি, যাচাইকরণের ধাপগুলো দেখুন।
+        <h1 className="font-display text-3xl text-ink">কৃষি পরামর্শ</h1>
+        <p className="mt-1 text-sm text-ink-soft">
+          বাংলায় যেকোনো কৃষি প্রশ্ন করুন — নিরাপত্তা যাচাই, তথ্য সংগ্রহ, উত্তর তৈরি ও
+          যাচাইকরণের ধাপগুলো সরাসরি দেখুন।
         </p>
       </div>
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 min-h-[60vh]">
+      <div
+        className="flex flex-col rounded-xl border rule bg-paper p-5"
+        style={{ minHeight: "65vh" }}
+      >
         <QAPanel />
       </div>
     </div>

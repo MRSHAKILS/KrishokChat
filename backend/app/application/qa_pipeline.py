@@ -1,0 +1,217 @@
+"""The single authoritative QA pipeline used by both HTTP endpoints."""
+
+from __future__ import annotations
+
+import asyncio
+from collections.abc import AsyncIterator, Awaitable, Callable
+
+from app.application.generation import GroundedAnswerGenerator, REFERRAL
+from app.application.query_builder import build_retrieval_query
+from app.application.safety import SafetyClassifier
+from app.domain.contracts import (
+    PipelineEvent,
+    QAResult,
+    QueryContext,
+    RetrievedSource,
+)
+from app.domain.enums import PipelineStage, SafetyCategory, StageStatus, VerificationConfidence
+from app.domain.safety_policy import canned_response
+from app.ports.audit import AuditSink
+from app.ports.retriever import Retriever
+from app.ports.session import SessionStore
+from app.ports.verifier import Verifier
+
+
+EventCallback = Callable[[PipelineEvent], Awaitable[None]]
+
+
+class QAInput:
+    def __init__(
+        self,
+        *,
+        query: str,
+        session_id: str | None = None,
+        crop: str | None = None,
+        disease: str | None = None,
+        history: list[dict[str, str]] | None = None,
+        seed_sources: list[RetrievedSource] | None = None,
+        channel: str = "chat",
+    ) -> None:
+        self.query = query
+        self.session_id = session_id
+        self.crop = crop
+        self.disease = disease
+        self.history = history or []
+        self.seed_sources = seed_sources or []
+        self.channel = channel
+
+
+class QAPipeline:
+    def __init__(
+        self,
+        *,
+        safety: SafetyClassifier,
+        retriever: Retriever,
+        generator: GroundedAnswerGenerator,
+        verifier: Verifier,
+        audit: AuditSink,
+        sessions: SessionStore,
+        top_k: int = 5,
+    ) -> None:
+        self.safety = safety
+        self.retriever = retriever
+        self.generator = generator
+        self.verifier = verifier
+        self.audit = audit
+        self.sessions = sessions
+        self.top_k = top_k
+
+    async def run(self, request: QAInput, on_event: EventCallback | None = None) -> QAResult:
+        trace: list[PipelineEvent] = []
+
+        async def emit(stage: PipelineStage, status: StageStatus, detail: str | None = None) -> None:
+            event = PipelineEvent(stage=stage, status=status, detail=detail)
+            trace.append(event)
+            if on_event:
+                await on_event(event)
+
+        history = request.history or (
+            self.sessions.get(request.session_id) if request.session_id else []
+        )
+        context = QueryContext(
+            crop=request.crop,
+            disease=request.disease,
+            history=tuple(history),
+        )
+        decision = None
+        sources: list[RetrievedSource] = []
+        verifier_flags: tuple[str, ...] = ()
+        result: QAResult | None = None
+
+        try:
+            await emit(PipelineStage.SAFETY, StageStatus.START)
+            decision = await self.safety.classify(request.query, context)
+            await emit(PipelineStage.SAFETY, StageStatus.COMPLETE, decision.category.value)
+
+            if decision.terminal:
+                for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
+                    await emit(stage, StageStatus.SKIP, "terminal safety decision")
+                result = QAResult(
+                    query=request.query,
+                    category=decision.category,
+                    answer=decision.response or canned_response(decision.category),
+                    confidence=VerificationConfidence.BLOCKED,
+                    trace=tuple(trace),
+                )
+                return result
+
+            await emit(PipelineStage.RETRIEVAL, StageStatus.START)
+            retrieval_query = build_retrieval_query(request.query, context, decision.category.value)
+            retrieved = await asyncio.to_thread(self.retriever.retrieve, retrieval_query, top_k=self.top_k)
+            seen_ids: set[str] = set()
+            sources = []
+            for source in [*request.seed_sources, *retrieved]:
+                if source.id not in seen_ids:
+                    seen_ids.add(source.id)
+                    sources.append(source)
+            await emit(PipelineStage.RETRIEVAL, StageStatus.COMPLETE, f"{len(sources)} sources")
+
+            await emit(PipelineStage.GENERATION, StageStatus.START)
+            if on_event and sources:
+                chunks: list[str] = []
+                async for chunk in self.generator.stream(request.query, context, sources):
+                    chunks.append(chunk)
+                    await on_event(
+                        PipelineEvent(
+                            stage=PipelineStage.GENERATION,
+                            status=StageStatus.COMPLETE,
+                            event_type="token",
+                            text=chunk,
+                        )
+                    )
+                generated = await self.generator.generate_from_text(
+                    "".join(chunks), sources, mode="grounded_stream"
+                )
+            else:
+                generated = await self.generator.generate(request.query, context, sources)
+            await emit(PipelineStage.GENERATION, StageStatus.COMPLETE, generated.model)
+
+            await emit(PipelineStage.VERIFIER, StageStatus.START)
+            verification = self.verifier.verify(generated.answer, sources)
+            verifier_flags = verification.flags
+            await emit(PipelineStage.VERIFIER, StageStatus.COMPLETE, verification.confidence.value)
+
+            result = QAResult(
+                query=request.query,
+                category=decision.category,
+                answer=generated.answer,
+                sources=tuple(sources),
+                confidence=verification.confidence,
+                trace=tuple(trace),
+                verifier_flags=verification.flags,
+                model=generated.model,
+                error=generated.error,
+            )
+            return result
+        except Exception as exc:
+            # Keep the user-facing behavior controlled if an adapter unexpectedly fails.
+            await emit(PipelineStage.VERIFIER, StageStatus.ERROR, str(exc)[:200])
+            category = decision.category if decision else SafetyCategory.LOW_CONFIDENCE
+            result = QAResult(
+                query=request.query,
+                category=category,
+                answer=REFERRAL,
+                sources=tuple(sources),
+                confidence=VerificationConfidence.LOW_CONFIDENCE,
+                trace=tuple(trace),
+                verifier_flags=(str(exc),),
+                error=str(exc),
+            )
+            return result
+        finally:
+            if result is not None:
+                self._audit(request, result, verifier_flags)
+                if request.session_id and result.category is SafetyCategory.SAFE_AGRI:
+                    self.sessions.append(request.session_id, "user", request.query)
+                    self.sessions.append(request.session_id, "assistant", result.answer)
+
+    def _audit(self, request: QAInput, result: QAResult, verifier_flags: tuple[str, ...]) -> None:
+        self.audit.record(
+            {
+                "query": request.query,
+                "category": result.category.value,
+                "action": "blocked-canned-response" if result.category is not SafetyCategory.SAFE_AGRI else "answered",
+                "flagged": result.confidence is VerificationConfidence.FLAGGED_UNVERIFIED,
+                "verifier_flag": "; ".join(verifier_flags) or None,
+                "model": result.model,
+                "source_ids": [source.id for source in result.sources],
+                "error": result.error,
+                "channel": request.channel,
+                "crop": request.crop,
+                "disease": request.disease,
+            }
+        )
+
+    async def stream(self, request: QAInput) -> AsyncIterator[PipelineEvent | QAResult]:
+        queue: asyncio.Queue[PipelineEvent | QAResult | None] = asyncio.Queue()
+
+        async def publish(event: PipelineEvent) -> None:
+            await queue.put(event)
+
+        async def execute() -> None:
+            result = await self.run(request, on_event=publish)
+            await queue.put(result)
+            await queue.put(None)
+
+        task = asyncio.create_task(execute())
+        try:
+            while True:
+                item = await queue.get()
+                if item is None:
+                    break
+                yield item
+        finally:
+            if not task.done():
+                task.cancel()
+            else:
+                await task

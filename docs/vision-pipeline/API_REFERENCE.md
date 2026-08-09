@@ -1,5 +1,11 @@
 # Vision Pipeline — API Reference
 
+> **Current implementation note (2026-08-09):** The endpoint paths remain stable, but the
+> response is now produced by the modular application vision pipeline. It reports
+> `detection_mode: "classification"` and does not fabricate bounding boxes. See
+> `docs/refactor/PROJECT_HANDOFF.md` and `docs/refactor/ARCHITECTURE.md` for the current
+> contract.
+
 HTTP contract for the two vision endpoints. Both are defined in
 `backend/app/services/vision_orchestrator.py` and mounted on the root FastAPI
 app with no prefix.

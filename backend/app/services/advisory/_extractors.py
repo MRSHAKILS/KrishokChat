@@ -1,6 +1,8 @@
 """Shared extractors for advisory workflow."""
 import json
-import pathlib
+from pathlib import Path
+
+from app.core.config import settings
 
 HEALTHY = {"healthy", "healthyleaf", "healthy_leaf", "healthy leaf"}
 
@@ -16,7 +18,7 @@ def extract_disease_name(cls: str) -> str:
 
 
 def load_all_crop_classes():
-    VISION = pathlib.Path(r"D:\KrishokChat Advisory System\backend\ml_assets\vision")
+    VISION = Path(settings.ml_assets_dir) / "vision"
     CROP_MODELS = {
         "Rice": VISION / "rice_disease",
         "Wheat": VISION / "wheat_disease",
@@ -39,7 +41,7 @@ def load_all_crop_classes():
 
 def get_disease_details(crop, disease_name):
     """Get disease details content from nested disease_details.json."""
-    VISION = pathlib.Path(r"D:\KrishokChat Advisory System\backend\ml_assets\vision")
+    VISION = Path(settings.ml_assets_dir) / "vision"
     CROP_MODELS = {
         "Rice": VISION / "rice_disease",
         "Wheat": VISION / "wheat_disease",
@@ -66,7 +68,7 @@ def get_disease_details(crop, disease_name):
 
 
 def load_rag_nodes():
-    NODES_FILE = pathlib.Path(r"D:\KrishokChat Advisory System\backend\ml_assets\rag_index\processed\knowledge_nodes_clean.jsonl")
+    NODES_FILE = Path(settings.ml_assets_dir) / "rag_index" / "processed" / "knowledge_nodes_clean.jsonl"
     nodes = []
     with open(NODES_FILE, encoding="utf-8") as f:
         for line in f:

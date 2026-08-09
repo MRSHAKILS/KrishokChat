@@ -3,7 +3,7 @@ import json
 import pathlib
 import sys
 
-ROOT = pathlib.Path(r"D:\KrishokChat Advisory System\backend")
+ROOT = pathlib.Path(__file__).resolve().parents[3]
 NODES_FILE = ROOT / "ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl"
 VISION = ROOT / "ml_assets/vision"
 OUT_FILE = ROOT / "ml_assets/advisory/disease_knowledge_map.json"

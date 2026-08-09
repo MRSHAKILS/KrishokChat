@@ -1,260 +1,119 @@
-"""POST /api/qa — advisory pipeline with RAG + grounded generation."""
+"""QA HTTP adapters. All behavior is delegated to one application pipeline."""
+
 from __future__ import annotations
 
 import json
-import sys
-import pathlib
+from typing import Annotated
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 
-from app.models.schemas import QARequest, QAResponse, AgentStageEvent, SourceNode
-
-# Add backend to path for imports
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
-
-from app.agents.safety_agent import classify_query
-from app.agents.retrieval_agent import retrieve
-from app.agents.audit_logger import log_safety_decision
-from app.services.advisory.generator import generate_response as gen_response
-from app.services.advisory._extractors import get_disease_details, load_rag_nodes, get_rag_node
+from app.application.container import AppContainer
+from app.application.qa_pipeline import QAInput
+from app.domain.contracts import PipelineEvent, QAResult, RetrievedSource
+from app.models.schemas import AgentStageEvent, QARequest, QAResponse, SourceNode
+from app.api.dependencies import get_container
 
 router = APIRouter()
 
 
-@router.post("/api/qa", response_model=QAResponse)
-async def qa_endpoint(request: QARequest):
-    """Non-streaming: full advisory pipeline."""
-    query = request.query
-    detected_crop = getattr(request, "crop", None)
-    detected_disease = getattr(request, "disease", None)
+ContainerDep = Annotated[AppContainer, Depends(get_container)]
 
-    # Load history from session store if session_id provided and no history sent
-    history = request.history
-    if request.session_id and not history:
-        from app.services.advisory.session_store import session_store
-        history = session_store.get(request.session_id)
 
-    # Stage 1: Safety (with detected crop/disease context)
-    safety = classify_query(query, detected_crop, detected_disease)
-    cat = safety["category"]
-
-    # Only block genuine safety threats — let everything else through
-    if cat in {"banned_or_restricted_chemical", "self_harm_or_poisoning_risk", "prompt_injection"}:
-        canned = safety.get("canned_response") or "অনুগ্রহ করে কৃষি সংক্রান্ত প্রশ্ন করুন।"
-        log_safety_decision(query, cat, "blocked-canned-response", False, None)
-        trace = [
-            AgentStageEvent(stage="safety", status="complete", detail=cat),
-            AgentStageEvent(stage="retrieval", status="skip"),
-            AgentStageEvent(stage="generation", status="skip"),
-            AgentStageEvent(stage="verifier", status="skip"),
-        ]
-        return QAResponse(query=query, category=cat, answer=canned,
-                         sources=[], confidence="blocked", agent_trace=trace)
-
-    # off_topic detected but we have crop/disease context → answer generally
-    if cat == "off_topic" and (detected_crop or detected_disease):
-        cat = "safe_agri"  # Override: user is asking about detected crop
-
-    # Stage 2: Retrieval (augment with English keywords from detected crop/disease)
-    augmented = query
-    crop_disease_en = ""
-    if detected_crop:
-        crop_disease_en += f" {detected_crop.lower()}"
-    if detected_disease:
-        disease_term = detected_disease.lower().replace("__", " ").replace("_", " ")
-        crop_disease_en += f" {disease_term}"
-        core = detected_disease.split("__")[-1] if "__" in detected_disease else detected_disease
-        crop_disease_en += f" {core.lower().replace('_', ' ')}"
-    bn_to_en = {
-        "আলুর": "potato", "ধান": "rice", "গম": "wheat", "ভুট্টা": "corn",
-        "ফুলকপি": "cauliflower", "বাঁধাকপি": "cabbage", "টমেটো": "tomato",
-        "দেরি ব্লাইট": "late blight", "ব্লাস্ট": "blast", "রাস্ট": "rust",
-        "মরিচা": "leaf rust", "প্রতিকার": "treatment", "রোগ": "disease",
-        "বীজ": "seed", "সার": "fertilizer", "কৃষি": "agriculture",
-        "ফসল": "crop", "কাছ": "crops", "নির্ণয়": "detect",
-        "আমাদের": "our", "তোমাদের": "your",
-    }
-    for bn, en in bn_to_en.items():
-        if bn in query.lower():
-            augmented += f" {en}"
-    augmented += crop_disease_en
-    augmented += f" {cat}"
-    sources = retrieve(augmented.strip(), top_k=5)
-
-    # Stage 3: Generation (grounded in retrieved sources)
-    disease_details = get_disease_details(detected_crop, detected_disease) if detected_crop and detected_disease else None
-
-    gen = gen_response(
-        query=query,
-        detected_crop=detected_crop,
-        detected_disease=detected_disease,
-        intent=cat,
-        retrieved_nodes=sources,
-        disease_details=disease_details,
-        history=history,
+def _input(request: QARequest) -> QAInput:
+    return QAInput(
+        query=request.query,
+        session_id=request.session_id,
+        crop=request.crop,
+        disease=request.disease,
+        history=request.history,
     )
 
-    # Save to session store
-    if request.session_id:
-        from app.services.advisory.session_store import session_store
-        session_store.append(request.session_id, "user", query)
-        session_store.append(request.session_id, "assistant", gen.get("response", ""))
 
-    log_safety_decision(query, cat, "answered", False, None)
+def _source(source: RetrievedSource) -> SourceNode:
+    return SourceNode(
+        id=source.id,
+        crop_bn=source.metadata.get("crop_bn") or None,
+        crop_en=source.metadata.get("crop_en") or None,
+        disease_bn=source.metadata.get("disease_bn") or None,
+        question=source.metadata.get("question") or source.metadata.get("section_title") or None,
+        score=source.score,
+        answer=source.content_bn or source.content_en[:400],
+        treatment=source.metadata.get("treatment_summary_bn") or None,
+        source=source.source or source.metadata.get("citation") or None,
+        expert_verified=bool(source.metadata.get("expert_verified", False)),
+    )
 
-    source_nodes = [
-        SourceNode(id=s.get("id", ""), score=s.get("score", 0),
-                   answer=s.get("content_bn") or s.get("content_en", "")[:200],
-                   source=s.get("source", ""))
-        for s in sources[:5]
-    ]
 
-    trace = [
-        AgentStageEvent(stage="safety", status="complete", detail=cat),
-        AgentStageEvent(stage="retrieval", status="complete", detail=f"{len(sources)} sources"),
-        AgentStageEvent(stage="generation", status="complete", detail="gemini-3.1-flash-lite"),
-        AgentStageEvent(stage="verifier", status="complete", detail="grounded"),
-    ]
-
+def _response(result: QAResult) -> QAResponse:
     return QAResponse(
-        query=query, category=cat, answer=gen.get("response", ""),
-        sources=source_nodes, confidence="verified" if sources else "low_confidence",
-        agent_trace=trace,
+        query=result.query,
+        category=result.category.value,
+        answer=result.answer,
+        sources=[_source(source) for source in result.sources],
+        confidence=result.confidence.value,
+        agent_trace=[
+            AgentStageEvent(stage=event.stage.value, status=event.status.value, detail=event.detail)
+            for event in result.trace
+        ],
+        verifier_flags=list(result.verifier_flags),
+        model=result.model or None,
     )
+
+
+@router.post("/api/qa", response_model=QAResponse)
+async def qa_endpoint(payload: QARequest, container: ContainerDep) -> QAResponse:
+    return _response(await container.qa.run(_input(payload)))
 
 
 @router.post("/api/qa/stream")
-async def qa_stream(request: QARequest):
-    """Streaming SSE: emits agent stage events, then final response."""
-    query = request.query
-    detected_crop = getattr(request, "crop", None)
-    detected_disease = getattr(request, "disease", None)
+async def qa_stream(payload: QARequest, container: ContainerDep) -> StreamingResponse:
+    async def event_generator():
+        async for item in container.qa.stream(_input(payload)):
+            if isinstance(item, PipelineEvent):
+                if item.event_type == "token":
+                    yield f"token: {json.dumps({'text': item.text or ''}, ensure_ascii=False)}\n\n"
+                    continue
+                # Keep the existing frontend-compatible event envelope during migration.
+                event = AgentStageEvent(
+                    stage=item.stage.value,
+                    status=item.status.value,
+                    detail=item.detail,
+                )
+                yield f"data: {event.model_dump_json()}\n\n"
+            else:
+                response = _response(item)
+                yield f"final: {response.model_dump_json()}\n\n"
 
-    # Load history from session store
-    history = request.history
-    if request.session_id and not history:
-        from app.services.advisory.session_store import session_store
-        history = session_store.get(request.session_id)
-
-    async def event_gen():
-        def emit(stage, status, detail=None):
-            ev = AgentStageEvent(stage=stage, status=status, detail=detail)
-            return f"data: {ev.model_dump_json()}\n\n"
-
-        # Stage 1: Safety (with detected crop/disease context)
-        yield emit("safety", "start")
-        safety = classify_query(query, detected_crop, detected_disease)
-        cat = safety["category"]
-        yield emit("safety", "complete", cat)
-
-        if cat in {"banned_or_restricted_chemical", "self_harm_or_poisoning_risk", "off_topic", "prompt_injection"}:
-            canned = safety.get("canned_response") or "অনুগ্রহ করে কৃষি সংক্রান্ত প্রশ্ন করুন।"
-            log_safety_decision(query, cat, "blocked-canned-response", False, None)
-            sources = []
-            gen = {"response": canned}
-        else:
-            # Stage 2: Retrieval (augmented)
-            yield emit("retrieval", "start")
-            augmented = query
-            crop_disease_en = ""
-            if detected_crop:
-                crop_disease_en += f" {detected_crop.lower()}"
-            if detected_disease:
-                disease_term = detected_disease.lower().replace("__", " ").replace("_", " ")
-                crop_disease_en += f" {disease_term}"
-                core = detected_disease.split("__")[-1] if "__" in detected_disease else detected_disease
-                crop_disease_en += f" {core.lower().replace('_', ' ')}"
-            bn_to_en = {
-                "আলুর": "potato", "ধান": "rice", "গম": "wheat", "ভুট্টা": "corn",
-                "ফুলকপি": "cauliflower", "বাঁধাকপি": "cabbage", "টমেটো": "tomato",
-                "দেরি ব্লাইট": "late blight", "ব্লাস্ট": "blast", "রাস্ট": "rust",
-                "মরিচা": "leaf rust", "প্রতিকার": "treatment", "রোগ": "disease",
-                "বীজ": "seed", "সার": "fertilizer", "কৃষি": "agriculture",
-                "ফসল": "crop", "কাছ": "crops", "নির্ণয়": "detect",
-                "আমাদের": "our", "তোমাদের": "your",
-            }
-            for bn, en in bn_to_en.items():
-                if bn in query.lower():
-                    augmented += f" {en}"
-            augmented += crop_disease_en
-            augmented += f" {cat}"
-            sources = retrieve(augmented.strip(), top_k=5)
-            yield emit("retrieval", "complete", f"{len(sources)} sources")
-
-            # Stage 3: Generation
-            yield emit("generation", "start")
-            disease_details = get_disease_details(detected_crop, detected_disease) if detected_crop and detected_disease else None
-            intent_for_gen = "general_info" if cat == "off_topic" else cat
-            gen = gen_response(
-                query=query,
-                detected_crop=detected_crop,
-                detected_disease=detected_disease,
-                intent=intent_for_gen,
-                retrieved_nodes=sources,
-                disease_details=disease_details,
-                history=history,
-            )
-            yield emit("generation", "complete", "gemini-3.1-flash-lite")
-            yield emit("verifier", "complete", "grounded")
-
-            # Save to session store
-            if request.session_id:
-                from app.services.advisory.session_store import session_store
-                session_store.append(request.session_id, "user", query)
-                session_store.append(request.session_id, "assistant", gen.get("response", ""))
-
-            log_safety_decision(query, cat, "answered", False, None)
-
-        source_nodes = [
-            SourceNode(id=s.get("id", ""), score=s.get("score", 0),
-                       answer=s.get("content_bn") or s.get("content_en", "")[:200],
-                       source=s.get("source", ""))
-            for s in sources[:5]
-        ]
-
-        trace = [
-            AgentStageEvent(stage="safety", status="complete", detail=cat),
-            AgentStageEvent(stage="retrieval", status="complete", detail=f"{len(sources)} sources"),
-            AgentStageEvent(stage="generation", status="complete", detail="gemini-3.1-flash-lite"),
-            AgentStageEvent(stage="verifier", status="complete", detail="grounded"),
-        ]
-
-        resp = QAResponse(
-            query=query, category=cat, answer=gen.get("response", ""),
-            sources=source_nodes, confidence="verified" if sources else "low_confidence",
-            agent_trace=trace,
-        )
-        yield f"final: {resp.model_dump_json()}\n\n"
-
-    return StreamingResponse(event_gen(), media_type="text/event-stream")
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "Connection": "keep-alive"},
+    )
 
 
 @router.get("/api/safety/metrics")
-async def safety_metrics():
-    """Returns safety audit breakdown."""
-    from pathlib import Path
-    log_path = Path(__file__).resolve().parent.parent / "logs" / "safety_audit.jsonl"
+async def safety_metrics(container: ContainerDep):
+    """Read local audit data for the demo metrics panel; no metrics are fabricated."""
+    path = container.qa.audit.path  # JSONLAuditSink is the configured local adapter.
     entries = []
-    if log_path.exists():
-        with open(log_path, encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if line:
-                    try:
+    if path.exists():
+        with path.open(encoding="utf-8") as handle:
+            for line in handle:
+                try:
+                    if line.strip():
                         entries.append(json.loads(line))
-                    except Exception:
-                        pass
-    by_cat: dict[str, number] = {}
+                except json.JSONDecodeError:
+                    continue
+    by_category: dict[str, int] = {}
     flagged = 0
-    for e in entries:
-        cat = e.get("category", "unknown")
-        by_cat[cat] = by_cat.get(cat, 0) + 1
-        if e.get("flagged"):
-            flagged += 1
+    for entry in entries:
+        category = entry.get("category", "unknown")
+        by_category[category] = by_category.get(category, 0) + 1
+        flagged += int(bool(entry.get("flagged")))
     return {
         "total_queries": len(entries),
-        "by_category": by_cat,
+        "by_category": by_category,
         "flagged_count": flagged,
         "recent": entries[-10:][::-1],
     }

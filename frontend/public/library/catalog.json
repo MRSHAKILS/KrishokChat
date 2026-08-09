@@ -1,0 +1,47 @@
+{
+  "books": [
+    { "id": "brri_rice_pest_guide", "title_bn": "ধানের রোগ ও পোকা দমন গাইড", "title_en": "Bengali Rice Disease & Pest Guide", "publisher": "BRRI", "category": "disease", "pages": 24, "year": "2023", "language": "বাংলা", "excerpt": "ধানের প্রধান রোগ ও পোকার শনাক্তকরণ, লক্ষণ ও দমন ব্যবস্থা।", "pdf": null },
+    { "id": "irri_rice_disease_ref", "title_bn": "ধানের রোগ রেফারেন্স ম্যানুয়াল", "title_en": "Rice Disease Reference Manual", "publisher": "IRRI", "category": "disease", "pages": 67, "year": "2022", "language": "English", "excerpt": "IRRI-এর বিস্তারিত ধান রোগ রেফারেন্স।", "pdf": null },
+
+    { "id": "barc_fert_card", "title_bn": "সার প্রয়োগ কার্ড", "title_en": "Fertilizer Recommendation Card", "publisher": "BARC", "category": "fertilizer", "pages": 8, "year": "2023", "language": "বাংলা", "excerpt": "ফসলভিত্তিক সারের মাত্রার সংক্ষিপ্ত কার্ড।", "pdf": null },
+    { "id": "barc_shata_mala", "title_bn": "শত সুপারিশ মালা", "title_en": "Shata Shuparish Mala", "publisher": "BARC", "category": "fertilizer", "pages": 32, "year": "2023", "language": "বাংলা", "excerpt": "১০০টি কৃষি সুপারিশের সংকলন।", "pdf": null },
+    { "id": "barc_frg_2024", "title_bn": "সার সুপারিশ গাইড ২০২৪", "title_en": "Fertilizer Recommendation Guide 2024", "publisher": "BARC", "category": "fertilizer", "pages": 260, "year": "2024", "language": "বাংলা", "excerpt": "২০২৪ সালের সর্বশেষ সার সুপারিশ গাইড।", "pdf": null },
+    { "id": "barc_handbook", "title_bn": "কৃষি প্রযুক্তি হ্যান্ডবুক", "title_en": "Handbook of Agricultural Technology", "publisher": "BARC", "category": "cultivation", "pages": 230, "year": "2023", "language": "English", "excerpt": "কৃষি প্রযুক্তির বিস্তারিত হ্যান্ডবুক।", "pdf": null },
+
+    { "id": "srdi_soil_sample", "title_bn": "মাটি সংগ্রহ নির্দেশিকা", "title_en": "Soil Sample Collection Guide", "publisher": "SRDI", "category": "soil", "pages": 16, "year": "2023", "language": "বাংলা", "excerpt": "মাটি পরীক্ষার জন্য নমুনা সংগ্রহ পদ্ধতি।", "pdf": null },
+
+    { "id": "moa_fert_order", "title_bn": "সার নিয়ন্ত্রণ আদেশ ১৯৯৯", "title_en": "Fertilizer Control Order 1999", "publisher": "MoA", "category": "regulation", "pages": 45, "year": "1999", "language": "বাংলা", "excerpt": "সার নিয়ন্ত্রণ সংক্রান্ত সরকারি আদেশ।", "pdf": null },
+    { "id": "moa_price_study", "title_bn": "ফসল উৎপাদন মূল্য গবেষণা", "title_en": "Crop Production Price Study", "publisher": "MoA", "category": "economics", "pages": 108, "year": "2020", "language": "English", "excerpt": "বাংলাদেশে ফসল উৎপাদন মূল্যের গবেষণা।", "pdf": null },
+
+    { "id": "bari_morich_2", "title_bn": "মরিচ চাষ (বারি মরিচ-২)", "title_en": "Chili Cultivation (BARI Morich-2)", "publisher": "BARI", "category": "cultivation", "pages": 12, "year": "2023", "language": "বাংলা", "excerpt": "বারি মরিচ-২ জাতের চাষ পদ্ধতি।", "pdf": null },
+    { "id": "bari_peyaj_6", "title_bn": "পেঁয়াজ চাষ (বারি পেঁয়াজ-৬)", "title_en": "Onion Cultivation (BARI Peyaj-6)", "publisher": "BARI", "category": "cultivation", "pages": 14, "year": "2023", "language": "বাংলা", "excerpt": "বারি পেঁয়াজ-৬ জাতের চাষ পদ্ধতি।", "pdf": null },
+    { "id": "bari_shorisha_18", "title_bn": "সরিষা চাষ (বারি সরিষা-১৮)", "title_en": "Mustard Cultivation (BARI Shorisha-18)", "publisher": "BARI", "category": "cultivation", "pages": 10, "year": "2023", "language": "বাংলা", "excerpt": "বারি সরিষা-১৮ জাতের চাষ পদ্ধতি।", "pdf": null },
+    { "id": "bari_hatboi", "title_bn": "কৃষি প্রজুক্তি হাতবই", "title_en": "Krishi Projukti Hatboi", "publisher": "BARI", "category": "cultivation", "pages": 500, "year": "2024", "language": "বাংলা", "excerpt": "বাংলাদেশের সবচেয়ে বিস্তারিত কৃষি প্রজুক্তি হাতবই — সব ফসলের চাষ, রোগ, সার ও পরিচর্যা।", "pdf": null },
+
+    { "id": "cdb_tula", "title_bn": "তুলা উৎপাদন প্রজুক্তি", "title_en": "Cotton Production Technology", "publisher": "CDB", "category": "cultivation", "pages": 20, "year": "2023", "language": "বাংলা", "excerpt": "তুলা চাষের আধুনিক প্রজুক্তি।", "pdf": null },
+    { "id": "bsrti_tut", "title_bn": "আখ জাত ও চাষ", "title_en": "Sugarcane Varieties & Cultivation", "publisher": "BSRTI", "category": "cultivation", "pages": 18, "year": "2023", "language": "বাংলা", "excerpt": "আখের জাত নির্বাচন ও চাষ পদ্ধতি।", "pdf": null },
+
+    { "id": "cabi_potato", "title_bn": "আলুর রোগ ম্যানুয়াল", "title_en": "Potato Disease Manuals", "publisher": "CABI", "category": "disease", "pages": 227, "year": "2022", "language": "বাংলা", "excerpt": "আলুর দেরি ব্লাইট, আর্লি ব্লাইট সহ সব রোগের বিস্তারিত ম্যানুয়াল।", "pdf": "/library/pdfs/cabi_potato_disease_manuals.pdf" },
+    { "id": "cabi_wheat", "title_bn": "গমের রোগ ম্যানুয়াল", "title_en": "Wheat Disease Manuals", "publisher": "CABI", "category": "disease", "pages": 180, "year": "2022", "language": "বাংলা", "excerpt": "গমের প্রধান রোগসমূহের শনাক্তকরণ ও ব্যবস্থাপনা।", "pdf": "/library/pdfs/cabi_wheat_disease_manuals.pdf" },
+    { "id": "cabi_brassica", "title_bn": "ব্রাসিকা রোগ ম্যানুয়াল", "title_en": "Brassica Disease Manuals", "publisher": "CABI", "category": "disease", "pages": 150, "year": "2022", "language": "বাংলা", "excerpt": "বাঁধাকপি, ফুলকপি সহ ব্রাসিকা ফসলের রোগ।", "pdf": "/library/pdfs/cabi_brassica_disease_manuals.pdf" },
+    { "id": "cabi_corn", "title_bn": "ভুট্টার রোগ ম্যানুয়াল", "title_en": "Corn Disease Manuals", "publisher": "CABI", "category": "disease", "pages": 95, "year": "2022", "language": "বাংলা", "excerpt": "ভুট্টার রোগ শনাক্তকরণ ও নিয়ন্ত্রণ।", "pdf": "/library/pdfs/cabi_corn_disease_manuals.pdf" },
+
+    { "id": "nars_pest_info", "title_bn": "পোকা তথ্য বই", "title_en": "All Pest Information Books", "publisher": "NARS", "category": "pest", "pages": 200, "year": "2023", "language": "English", "excerpt": "বাংলাদেশের ক্ষতিকারক পোকার বিস্তারিত তথ্য।", "pdf": null },
+
+    { "id": "dae_pesticide", "title_bn": "নিবন্ধিত কীটনাশক তালিকা", "title_en": "List of Registered Pesticides", "publisher": "DAE", "category": "pesticide", "pages": 120, "year": "2024", "language": "বাংলা", "excerpt": "বাংলাদেশে অনুমোদিত সব কীটনাশকের সরকারি তালিকা।", "pdf": "/library/pdfs/dae_pesticide_whitelist.pdf" },
+    { "id": "dae_extension", "title_bn": "কৃষি সম্প্রসারণ ম্যানুয়াল", "title_en": "Agricultural Extension Manual (4th ed)", "publisher": "DAE", "category": "cultivation", "pages": 438, "year": "2023", "language": "বাংলা", "excerpt": "কৃষি সম্প্রসারণ বিষয়ক বিস্তারিত ম্যানুয়াল — ৪র্থ সংস্করণ।", "pdf": null },
+    { "id": "dae_hort", "title_bn": "শাকসবজি চাষ (৬ পর্ব)", "title_en": "Horticulture Vegetables (6 parts)", "publisher": "DAE", "category": "cultivation", "pages": 96, "year": "2023", "language": "বাংলা", "excerpt": "৬টি শাকসবজির চাষ পদ্ধতি।", "pdf": null },
+
+    { "id": "dls_livestock", "title_bn": "পশুপালন সুপারিশ", "title_en": "Good Livestock Practices", "publisher": "DLS", "category": "livestock", "pages": 330, "year": "2023", "language": "English", "excerpt": "পশুপালনের ভালো চর্চা ও ব্যবস্থাপনা।", "pdf": null },
+    { "id": "dls_ai_guide", "title_bn": "কৃত্রিম প্রজনন নির্দেশিকা", "title_en": "AI Guideline 2019", "publisher": "DLS", "category": "livestock", "pages": 3, "year": "2019", "language": "বাংলা", "excerpt": "গবাদি পশুর কৃত্রিম প্রজনন নির্দেশিকা।", "pdf": "/library/pdfs/dls_ai_guideline_2019.pdf" },
+
+    { "id": "dof_guidebook_2020", "title_bn": "কৃষক গাইডবুক ২০২০", "title_en": "Farmers Guidebook 2020", "publisher": "DoF", "category": "fisheries", "pages": 60, "year": "2020", "language": "বাংলা", "excerpt": "মৎস্য চাষের জন্য কৃষক গাইডবুক।", "pdf": null },
+    { "id": "dof_pond_2017", "title_bn": "পুকুরে মাছ চাষ ২০১৭", "title_en": "Pond Fish Culture 2017", "publisher": "DoF", "category": "fisheries", "pages": 20, "year": "2017", "language": "বাংলা", "excerpt": "পুকুরে মাছ চাষের পদ্ধতি।", "pdf": null },
+    { "id": "dof_household_2011", "title_bn": "আবাসিক পুকুরে মাছ চাষ", "title_en": "Household Pond Aquaculture 2011", "publisher": "DoF", "category": "fisheries", "pages": 80, "year": "2011", "language": "বাংলা", "excerpt": "আবাসিক পুকুরে মাছ চাষের গাইড।", "pdf": null },
+    { "id": "dof_carp_2011", "title_bn": "কার্প পলিকালচার ম্যানুয়াল", "title_en": "Carp Polyculture Manual 2011", "publisher": "DoF", "category": "fisheries", "pages": 89, "year": "2011", "language": "বাংলা", "excerpt": "কার্প মাছের পলিকালচার ম্যানুয়াল।", "pdf": null },
+    { "id": "dof_mola_2014", "title_bn": "কার্প-মোলা পলিকালচার", "title_en": "Carps + Mola Polyculture 2014", "publisher": "DoF", "category": "fisheries", "pages": 3, "year": "2014", "language": "বাংলা", "excerpt": "কার্প ও মোলা মাছের একসাথে চাষ।", "pdf": "/library/pdfs/dof_carps_mola_polyculture_2014.pdf" },
+    { "id": "dof_festoons_2020", "title_bn": "মাছ চাষ ফেস্টুন", "title_en": "Aquaculture Festoons 2020", "publisher": "DoF", "category": "fisheries", "pages": 6, "year": "2020", "language": "বাংলা", "excerpt": "মাছ চাষের প্রশিক্ষণ ফেস্টুন।", "pdf": "/library/pdfs/dof_festoons_aquaculture_2020.pdf" },
+
+    { "id": "fao_polyculture", "title_bn": "পলিকালচার ম্যানুয়াল (FAO)", "title_en": "Polyculture Manual", "publisher": "FAO", "category": "fisheries", "pages": 68, "year": "2018", "language": "English", "excerpt": "FAO-এর কার্প পলিকালচার ম্যানুয়াল।", "pdf": null }
+  ]
+}

@@ -2,13 +2,18 @@
 
 Read this file fully before doing any work. This is a **7-day capstone demo prototype**, not a production system. Every instruction below exists to protect a 3–4 minute live investor demo. When in doubt, choose the simpler option.
 
+> **Mandatory handoff:** Before changing code, read `docs/refactor/PROJECT_HANDOFF.md`,
+> then consult `docs/refactor/ARCHITECTURE.md` for contracts and
+> `docs/refactor/REFACTOR_PLAN.md` for staged work. These files are the persistent
+> implementation memory for future agents; do not replace them with a new ad-hoc plan.
+
 ---
 
 ## 1. What this project is
 
 A full-stack showcase for existing, already-trained Bengali agriculture AI research:
 - A **Bengali agri Q&A assistant** — RAG (BM25 + dense retrieval, already built) feeding a fine-tuned **Gemma-4 4-bit** model.
-- A **crop disease detector** — a crop *classifier* first identifies the crop in an uploaded photo, then routes to a crop-specific **YOLO** model (`.pt` weights already trained, per crop) for disease detection.
+- A **crop disease advisory workflow** — a crop classifier first identifies the crop in an uploaded photo, then routes to a crop-specific Ultralytics model. The currently checked-in models are verified as `task: classify`; do not claim bounding-box object detection unless a real detection artifact is later added.
 - A **research/benchmark panel** — precomputed stats from the author's existing retrieval-benchmark and evaluation work, displayed as credibility content, never computed live.
 - A **safety-aware agentic pipeline** wrapping the Q&A assistant (see Section 4) — this is a headline feature for the poster/demo, so build it for real, not as decoration.
 
@@ -42,6 +47,11 @@ The person you're working for is the researcher and sole engineer. She will revi
 | Object detection | Ultralytics YOLO, `.pt` weights exported to ONNX for inference |
 | Retrieval index | FAISS or Chroma, loaded in-process from a precomputed index on disk |
 | Package managers | `pnpm` for frontend, `uv` (or `venv` + `pip` if `uv` unavailable) for backend |
+
+**Artifact reality note:** the current checked-in Ultralytics artifacts report
+`task: classify`; the vision implementation must preserve the locked Ultralytics/ONNX
+direction for future real detection artifacts, but must not claim boxes from these
+classification weights.
 
 Design system (colors, type, spacing, component conventions) will arrive later as a `DESIGN.md` file generated via Google Stitch. Until that file exists, use plain, unstyled-but-functional shadcn defaults — do not invent a visual identity yourself.
 
@@ -141,6 +151,13 @@ agri-ai-capstone/
     ├── export_yolo_models.py      (batch .pt → .onnx export)
     └── build_rag_index.py         (offline index build, run once, not at request time)
 ```
+
+### 5.1 Persistent architecture rule
+
+The functional source of truth is now under `backend/app/application/`,
+`backend/app/domain/`, `backend/app/ports/`, and `backend/app/infrastructure/`. The
+legacy `agents/` and `services/advisory/` imports are compatibility shims only. Do not
+create a second active pipeline in those directories.
 
 ---
 

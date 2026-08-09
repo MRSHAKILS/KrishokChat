@@ -1,27 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 px-4 text-center">
+    <div className="flex min-h-[55vh] flex-col items-center justify-center gap-6 px-5 text-center">
       <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        className="text-8xl font-bold text-green-600"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="font-display text-6xl text-leaf tabular"
       >
-        404
+        ৪০৪
       </motion.div>
-      <div>
-        <h2 className="text-xl font-bold text-gray-900 mb-2">পাতা পাওয়া যায়নি</h2>
-        <p className="text-sm text-gray-500">
-          আপনি যে পাতাটি খুঁজছেন সেটি পাওয়া যায়নি।
-        </p>
+
+      <div className="space-y-2">
+        <h2 className="font-display text-2xl text-ink">পাতাটি পাওয়া যায়নি</h2>
+        <p className="text-sm text-ink-soft">আপনি যে পাতাটি খুঁজছেন সেটি এখানে নেই।</p>
       </div>
+
       <Link
-        href="/detect"
-        className="bg-[#1a5632] text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-[#143d22] transition-colors"
+        href="/"
+        className="rounded-lg border rule px-6 py-2.5 text-sm font-medium text-ink transition-colors hover:border-leaf hover:text-leaf"
       >
         হোমে ফিরে যান
       </Link>

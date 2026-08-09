@@ -1,317 +1,92 @@
-"""Generator for advisory workflow — calibrated confidence-gated responses.
+"""Legacy wrapper around the single grounded generation adapter.
 
-4-way decision gate based on literature review:
-  🟢 FULLY_GROUNDED  → KB has strong match, answer from KB + LLM synthesis
-  🟡 PARTIALLY_GROUNDED → KB has partial info, answer KB + general LLM + refer
-  🔴 GENERAL_GUIDANCE → KB weak, LLM provides safe general info with disclaimer
-  ⚪ REFER_EXPERT    → KB empty + treatment-critical, refer to 16123
-
-Never hallucinates chemical dosages. Escalates critical treatment gaps to Krishi Call Center.
+New request code must use ``QAPipeline``. Keeping this small wrapper prevents the old
+scripts from reintroducing a second Gemini/OpenRouter implementation.
 """
-import json
+
+from __future__ import annotations
+
+import asyncio
 import os
-import pathlib
-import time
 
-import dotenv
-
-# Load env from project root (parents[4] = .../backend/app/services/advisory -> .../backend -> .../project)
-ROOT = pathlib.Path(__file__).resolve().parents[4]
-PROJECT_ROOT = ROOT
-BACKEND_ROOT = ROOT / "backend"
-dotenv.load_dotenv(PROJECT_ROOT / ".env", override=False)
-dotenv.load_dotenv(BACKEND_ROOT / ".env.local", override=False)
-
-# Gemini model for generation (free keys)
-GEN_MODEL = os.getenv("GEN_MODEL", "gemini-3.1-flash-lite")
-MAX_TOKENS = 1000
+from app.application.container import build_container
+from app.application.generation import GroundedAnswerGenerator
+from app.core.config import settings
+from app.domain.contracts import QueryContext, RetrievedSource
 
 
-def get_gemini_keys():
-    """Get free Gemini API keys from project .env and backend/.env.local."""
-    keys = []
-    # Also load from project root .env
-    for env_path in [ROOT / ".env", ROOT / ".env.local"]:
-        if env_path.exists():
-            dotenv.load_dotenv(env_path, override=False)
-    for i in range(1, 30):
-        k = os.getenv(f"GEMINI_API_KEY_{i}")
-        if k:
-            keys.append(k)
-    k = os.getenv("GEMINI_API_KEY")
-    if k:
-        keys.append(k)
-    return keys
-
-
-_key_idx = 0
-_last_call = {}
-
-
-def next_key(keys):
-    global _key_idx
-    key = keys[_key_idx % len(keys)]
-    _key_idx += 1
-    elapsed = time.time() - _last_call.get(id(key), 0)
-    if elapsed < 1.5:
-        time.sleep(1.5 - elapsed)
-    _last_call[id(key)] = time.time()
-    return key
-
-
-TREATMENT_INTENTS = {"treatment", "prevention"}
-CRITICAL_DOSAGE_WORDS = {"মাত্রা", "dosage", "প্রতি লিটার", "per liter", "ml", "গ্রাম", "gram", "কেজি", "kg"}
-
-
-def is_treatment_critical(intent, query):
-    """Check if query is asking for specific treatment/dosage."""
-    if intent in TREATMENT_INTENTS:
-        return True
-    q = query.lower()
-    return any(w in q for w in CRITICAL_DOSAGE_WORDS)
+def get_gemini_keys() -> list[str]:
+    return [
+        value
+        for name, value in os.environ.items()
+        if name.startswith("GEMINI_API_KEY") and value
+    ]
 
 
 def compute_confidence_gate(retrieved_nodes, detected_crop, detected_disease, intent, query):
-    """4-way confidence gate. Returns mode, confidence, explanation."""
-    nodes = retrieved_nodes or []
-    if not nodes and not detected_disease:
-        if is_treatment_critical(intent, query):
-            return "REFER_EXPERT", 0.1, "no_kb_treatment"
-        return "GENERAL_GUIDANCE", 0.3, "no_kb_general"
-
-    if not nodes:
-        return "GENERAL_GUIDANCE", 0.4, "no_kb_has_context"
-
-    top_score = max((n.get("score", 0) for n in nodes), default=0)
-    top_match = nodes[0]
-    tags = [t.lower() for t in top_match.get("tags", [])]
-    crop_match = detected_crop and detected_crop.lower() in tags
-    disease_match = detected_disease and detected_disease.lower().replace(" ", "_") in tags
-
-    has_treatment = bool(top_match.get("treatment_summary_bn") or
-                        (top_match.get("content_bn") and "প্রতিকার" in top_match.get("content_bn", "")))
-
-    if top_score > 15 and crop_match and (disease_match or not detected_disease):
-        if has_treatment:
-            return "FULLY_GROUNDED", min(0.95, top_score / 25), "kb_strong_treatment"
-        return "PARTIALLY_GROUNDED", 0.7, "kb_strong_no_treatment"
-
-    if top_score > 8 and (crop_match or disease_match):
-        if is_treatment_critical(intent, query):
-            return "PARTIALLY_GROUNDED", 0.6, "kb_partial_critical"
-        return "FULLY_GROUNDED", 0.75, "kb_moderate_safe"
-
-    if top_score > 3:
-        if is_treatment_critical(intent, query):
-            return "PARTIALLY_GROUNDED", 0.5, "kb_weak_critical"
-        return "GENERAL_GUIDANCE", 0.4, "kb_weak_safe"
-
-    if is_treatment_critical(intent, query):
-        return "REFER_EXPERT", 0.2, "kb_none_critical"
-    return "GENERAL_GUIDANCE", 0.3, "kb_none_safe"
+    if not retrieved_nodes:
+        return ("REFER_EXPERT" if intent in {"treatment", "prevention"} else "GENERAL_GUIDANCE", 0.1, "no_sources")
+    score = float(retrieved_nodes[0].get("score", 0))
+    if score > 15:
+        return "FULLY_GROUNDED", min(0.95, score / 25), "strong_retrieval"
+    if score > 3:
+        return "PARTIALLY_GROUNDED", 0.5, "partial_retrieval"
+    return "GENERAL_GUIDANCE", 0.3, "weak_retrieval"
 
 
-def build_prompt(query, detected_crop, detected_disease, intent,
-                 retrieved_nodes, disease_details=None, history=None):
-    """Build a grounded prompt with calibrated instructions based on confidence gate."""
-    gate_mode, confidence, gate_reason = compute_confidence_gate(
-        retrieved_nodes, detected_crop, detected_disease, intent, query
+def _sources(items: list[dict]) -> list[RetrievedSource]:
+    return [
+        RetrievedSource(
+            id=str(item.get("id", "")),
+            score=float(item.get("score", 0)),
+            title_en=str(item.get("title_en", "")),
+            title_bn=str(item.get("title_bn", "")),
+            content_en=str(item.get("content_en", "")),
+            content_bn=str(item.get("content_bn", "")),
+            source=str(item.get("source", "")),
+        )
+        for item in items
+    ]
+
+
+def build_prompt(query, detected_crop, detected_disease, intent, retrieved_nodes, disease_details=None, history=None):
+    context = QueryContext(
+        crop=detected_crop,
+        disease=detected_disease,
+        history=tuple(history or []),
     )
-
-    context_parts = []
-
-    # Add conversation history (excluding current query)
-    if history:
-        context_parts.append("### পূর্ববর্তী কথোপকথন:")
-        for msg in history[-6:]:
-            role = "কৃষক" if msg.get("role") == "user" else "সহায়ক"
-            content = msg.get("content", "")
-            context_parts.append(f"{role}: {content}")
-        context_parts.append("")
-
-    if detected_crop:
-        context_parts.append(f"ফসল: {detected_crop}")
-    if detected_disease:
-        context_parts.append(f"শনাক্ত রোগ: {detected_disease}")
-
-    nodes_used = []
-    if retrieved_nodes:
-        if gate_mode == "FULLY_GROUNDED":
-            nodes_used = retrieved_nodes[:3]
-        elif gate_mode == "PARTIALLY_GROUNDED":
-            nodes_used = retrieved_nodes[:2]
-        elif gate_mode == "GENERAL_GUIDANCE":
-            nodes_used = retrieved_nodes[:1]
-
-        if nodes_used:
-            context_parts.append("\nজ্ঞান ভান্ডার থেকে প্রাপ্ত তথ্য:")
-            for i, node in enumerate(nodes_used):
-                title = node.get("title_en", "") or node.get("title_bn", "")
-                content = node.get("content_bn", "") or node.get("content_en", "")
-                treatment = node.get("treatment_summary_bn", "")
-                if treatment:
-                    content += f" প্রতিকার: {treatment}"
-                prevention = node.get("prevention_bn", "")
-                if prevention:
-                    content += f" প্রতিরোধ: {prevention}"
-                if content:
-                    context_parts.append(f"  [{i+1}] {title}: {content[:300]}")
-
-    if disease_details:
-        desc = disease_details.get("description_bn", "")
-        sol = disease_details.get("solution_bn", "")
-        cause = disease_details.get("cause_bn", "")
-        if desc:
-            context_parts.append(f"\nরোগের বিবরণ: {desc[:300]}")
-        if cause:
-            context_parts.append(f"কারণ: {cause[:200]}")
-        if sol:
-            context_parts.append(f"প্রতিকার: {sol[:300]}")
-
-    context = "\n".join(context_parts)
-
-    # Mode-specific instructions
-    if gate_mode == "FULLY_GROUNDED":
-        instructions = (
-            "১. নিচে দেওয়া তথ্যের ভিত্তিতে সম্পূর্ণ উত্তর দাও\n"
-            "২. ঔষধ/কীটনাশকের নাম ও মাত্রা দেওয়া থাকলে সেগুলো উল্লেখ করো\n"
-            "৩. সংক্ষিপ্ত ও প্রাঞ্জল বাংলায় উত্তর দাও"
-        )
-    elif gate_mode == "PARTIALLY_GROUNDED":
-        instructions = (
-            "১. নিচে দেওয়া তথ্যের ভিত্তিতে উত্তর দাও\n"
-            "২. তথ্য অসম্পূর্ণ হলে সৎভাবে বলো কোনো অংশের তথ্য নেই\n"
-            "৩. নির্দিষ্ট মাত্রা না জানলে বলো 'বিস্তারিত মাত্রা জানতে কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩'\n"
-            "৪. সংক্ষিপ্ত বাংলায় উত্তর দাও"
-        )
-    elif gate_mode == "GENERAL_GUIDANCE":
-        instructions = (
-            "১. এই তথ্য সাধারণ কৃষি জ্ঞান থেকে দাও — এটি নির্দিষ্ট ডাটাবেস নয়\n"
-            "২. কখনোই নির্দিষ্ট ঔষধের মাত্রা দিও না — এটি বিপজ্জনক হতে পারে\n"
-            "৩. শেষে উল্লেখ করো: 'নির্দিষ্ট মাত্রা জানতে কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩'\n"
-            "৪. সংক্ষিপ্ত বাংলায় উত্তর দাও"
-        )
-    else:
+    sources = _sources(retrieved_nodes or [])
+    mode, confidence, reason = compute_confidence_gate(retrieved_nodes or [], detected_crop, detected_disease, intent, query)
+    if mode == "REFER_EXPERT":
         return (
-            "দুঃখিত, এই রোগের নির্দিষ্ট তথ্য আমাদের ডাটাবেসে নেই। "
-            "সঠিক পরামর্শের জন্য কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।",
-            gate_mode, confidence, gate_reason, []
+            "দুঃখিত, এই রোগের নির্দিষ্ট তথ্য আমাদের ডাটাবেসে নেই। সঠিক পরামর্শের জন্য কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।",
+            mode,
+            confidence,
+            reason,
+            [],
         )
-
-    prompt = f"""তুমি একজন বাংলাদেশী কৃষি বিশেষঞ্জ সহায়ক। কৃষকদের কৃষি সমস্যার সমাধান দাও।
-
-নিয়ম:
-{instructions}
-
-প্রসঙ্গ:
-{context}
-
-কৃষকের প্রশ্ন: {query}
-
-উত্তর:"""
-
-    return prompt, gate_mode, confidence, gate_reason, nodes_used
+    return GroundedAnswerGenerator._prompt(query, context, sources), mode, confidence, reason, [source.id for source in sources]
 
 
-def generate_response(query, detected_crop=None, detected_disease=None, intent=None,
-                     retrieved_nodes=None, disease_details=None, model=None):
-    """Generate a grounded response using Gemini free keys.
-
-    Args:
-        query: User's question
-        detected_crop: Crop from YOLO
-        detected_disease: Disease from YOLO
-        intent: Classified intent
-        retrieved_nodes: List of retrieved knowledge nodes
-        disease_details: Disease details from disease_details.json
-        model: Gemini model name (default: from env)
-
-    Returns:
-        dict with response text, grounded flag, sources
-    """
-    keys = get_gemini_keys()
-    if not keys:
-        return {
-            "response": "দুঃখিত, এখন উত্তর দেওয়া সম্ভব নয়। কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।",
-            "grounded": False,
-            "sources": [],
-        }
-
-    gate_result = build_prompt(
-        query, detected_crop, detected_disease, intent,
-        retrieved_nodes or [], disease_details
+def generate_response(query, detected_crop=None, detected_disease=None, intent=None, retrieved_nodes=None, disease_details=None, model=None, history=None):
+    container = build_container(settings)
+    generator = GroundedAnswerGenerator(container.qa.generator.client)
+    sources = _sources(retrieved_nodes or [])
+    result = asyncio.run(
+        generator.generate(
+            query,
+            QueryContext(crop=detected_crop, disease=detected_disease, history=tuple(history or [])),
+            sources,
+        )
     )
-
-    if len(gate_result) == 5:
-        prompt, gate_mode, confidence, gate_reason, nodes_used = gate_result
-    else:
-        canned, gate_mode, confidence, gate_reason, nodes_used = gate_result
-        return {
-            "response": canned,
-            "grounded": False,
-            "sources": [],
-            "gate_mode": gate_mode,
-            "confidence": confidence,
-            "gate_reason": gate_reason,
-        }
-
-    model = model or GEN_MODEL
-    key = next_key(keys)
-
-    try:
-        from google import genai
-        client = genai.Client(api_key=key)
-        resp = client.models.generate_content(
-            model=model,
-            contents=prompt,
-            config=genai.types.GenerateContentConfig(
-                temperature=0.7,
-                max_output_tokens=MAX_TOKENS,
-            ),
-        )
-        _last_call[id(key)] = time.time()
-        response_text = resp.text.strip()
-
-        return {
-            "response": response_text,
-            "grounded": gate_mode in ("FULLY_GROUNDED", "PARTIALLY_GROUNDED"),
-            "sources": [n.get("id", "") for n in nodes_used],
-            "gate_mode": gate_mode,
-            "confidence": confidence,
-            "gate_reason": gate_reason,
-            "model_used": model,
-        }
-    except Exception as e:
-        try:
-            key2 = next_key(keys)
-            from google import genai
-            client = genai.Client(api_key=key2)
-            resp = client.models.generate_content(
-                model="gemini-2.5-flash-lite",
-                contents=prompt,
-                config=genai.types.GenerateContentConfig(
-                    temperature=0.7,
-                    max_output_tokens=MAX_TOKENS,
-                ),
-            )
-            _last_call[id(key2)] = time.time()
-            return {
-                "response": resp.text.strip(),
-                "grounded": gate_mode in ("FULLY_GROUNDED", "PARTIALLY_GROUNDED"),
-                "sources": [n.get("id", "") for n in nodes_used],
-                "gate_mode": gate_mode,
-                "confidence": confidence,
-                "gate_reason": gate_reason,
-                "model_used": "gemini-2.5-flash-lite (fallback)",
-            }
-        except Exception as e2:
-            return {
-                "response": (
-                    "দুঃখিত, এখন উত্তর তৈরি করতে সমস্যা হচ্ছে। "
-                    "কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।"
-                ),
-                "grounded": False,
-                "sources": [],
-                "gate_mode": gate_mode,
-                "error": str(e2),
-            }
+    mode, confidence, reason = compute_confidence_gate(retrieved_nodes or [], detected_crop, detected_disease, intent, query)
+    return {
+        "response": result.answer,
+        "grounded": bool(result.used_source_ids),
+        "sources": list(result.used_source_ids),
+        "gate_mode": mode,
+        "confidence": confidence,
+        "gate_reason": reason,
+        "model_used": result.model,
+        "error": result.error,
+    }
