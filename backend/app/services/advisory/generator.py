@@ -111,13 +111,24 @@ def compute_confidence_gate(retrieved_nodes, detected_crop, detected_disease, in
     return "GENERAL_GUIDANCE", 0.3, "kb_none_safe"
 
 
-def build_prompt(query, detected_crop, detected_disease, intent, retrieved_nodes, disease_details=None):
+def build_prompt(query, detected_crop, detected_disease, intent,
+                 retrieved_nodes, disease_details=None, history=None):
     """Build a grounded prompt with calibrated instructions based on confidence gate."""
     gate_mode, confidence, gate_reason = compute_confidence_gate(
         retrieved_nodes, detected_crop, detected_disease, intent, query
     )
 
     context_parts = []
+
+    # Add conversation history (excluding current query)
+    if history:
+        context_parts.append("### পূর্ববর্তী কথোপকথন:")
+        for msg in history[-6:]:
+            role = "কৃষক" if msg.get("role") == "user" else "সহায়ক"
+            content = msg.get("content", "")
+            context_parts.append(f"{role}: {content}")
+        context_parts.append("")
+
     if detected_crop:
         context_parts.append(f"ফসল: {detected_crop}")
     if detected_disease:
