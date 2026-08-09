@@ -33,19 +33,22 @@ async def qa_endpoint(request: QARequest):
     safety = classify_query(query, detected_crop, detected_disease)
     cat = safety["category"]
 
-    if cat in {"banned_or_restricted_chemical", "self_harm_or_poisoning_risk", "off_topic", "prompt_injection"}:
+    # Only block genuine safety threats — let everything else through
+    if cat in {"banned_or_restricted_chemical", "self_harm_or_poisoning_risk", "prompt_injection"}:
         canned = safety.get("canned_response") or "অনুগ্রহ করে কৃষি সংক্রান্ত প্রশ্ন করুন।"
         log_safety_decision(query, cat, "blocked-canned-response", False, None)
-        return QAResponse(
-            query=query, category=cat, answer=canned,
-            sources=[], confidence="blocked",
-            agent_trace=[
-                AgentStageEvent(stage="safety", status="complete", detail=cat),
-                AgentStageEvent(stage="retrieval", status="skip"),
-                AgentStageEvent(stage="generation", status="skip"),
-                AgentStageEvent(stage="verifier", status="skip"),
-            ],
-        )
+        trace = [
+            AgentStageEvent(stage="safety", status="complete", detail=cat),
+            AgentStageEvent(stage="retrieval", status="skip"),
+            AgentStageEvent(stage="generation", status="skip"),
+            AgentStageEvent(stage="verifier", status="skip"),
+        ]
+        return QAResponse(query=query, category=cat, answer=canned,
+                         sources=[], confidence="blocked", agent_trace=trace)
+
+    # off_topic detected but we have crop/disease context → answer generally
+    if cat == "off_topic" and (detected_crop or detected_disease):
+        cat = "safe_agri"  # Override: user is asking about detected crop
 
     # Stage 2: Retrieval (augment with English keywords from detected crop/disease)
     augmented = query
@@ -55,24 +58,22 @@ async def qa_endpoint(request: QARequest):
     if detected_disease:
         disease_term = detected_disease.lower().replace("__", " ").replace("_", " ")
         crop_disease_en += f" {disease_term}"
-        # Also add core disease name without crop prefix
         core = detected_disease.split("__")[-1] if "__" in detected_disease else detected_disease
         crop_disease_en += f" {core.lower().replace('_', ' ')}"
-    # Add English equivalents from Bengali query
     bn_to_en = {
         "আলুর": "potato", "ধান": "rice", "গম": "wheat", "ভুট্টা": "corn",
         "ফুলকপি": "cauliflower", "বাঁধাকপি": "cabbage", "টমেটো": "tomato",
         "দেরি ব্লাইট": "late blight", "ব্লাস্ট": "blast", "রাস্ট": "rust",
         "মরিচা": "leaf rust", "প্রতিকার": "treatment", "রোগ": "disease",
-        "বীজ": "seed", "সার": "fertilizer",
+        "বীজ": "seed", "সার": "fertilizer", "কৃষি": "agriculture",
+        "ফসল": "crop", "কাছ": "crops", "নির্ণয়": "detect",
+        "আমাদের": "our", "তোমাদের": "your",
     }
     for bn, en in bn_to_en.items():
         if bn in query.lower():
             augmented += f" {en}"
-    # Always append detected crop/disease English terms for BM25 matching
     augmented += crop_disease_en
-    if intent:
-        augmented += f" {intent}"
+    augmented += f" {cat}"
     sources = retrieve(augmented.strip(), top_k=5)
 
     # Stage 3: Generation (grounded in retrieved sources)
@@ -134,19 +135,43 @@ async def qa_stream(request: QARequest):
             sources = []
             gen = {"response": canned}
         else:
-            # Stage 2: Retrieval
+            # Stage 2: Retrieval (augmented)
             yield emit("retrieval", "start")
-            sources = retrieve(query, top_k=5)
+            augmented = query
+            crop_disease_en = ""
+            if detected_crop:
+                crop_disease_en += f" {detected_crop.lower()}"
+            if detected_disease:
+                disease_term = detected_disease.lower().replace("__", " ").replace("_", " ")
+                crop_disease_en += f" {disease_term}"
+                core = detected_disease.split("__")[-1] if "__" in detected_disease else detected_disease
+                crop_disease_en += f" {core.lower().replace('_', ' ')}"
+            bn_to_en = {
+                "আলুর": "potato", "ধান": "rice", "গম": "wheat", "ভুট্টা": "corn",
+                "ফুলকপি": "cauliflower", "বাঁধাকপি": "cabbage", "টমেটো": "tomato",
+                "দেরি ব্লাইট": "late blight", "ব্লাস্ট": "blast", "রাস্ট": "rust",
+                "মরিচা": "leaf rust", "প্রতিকার": "treatment", "রোগ": "disease",
+                "বীজ": "seed", "সার": "fertilizer", "কৃষি": "agriculture",
+                "ফসল": "crop", "কাছ": "crops", "নির্ণয়": "detect",
+                "আমাদের": "our", "তোমাদের": "your",
+            }
+            for bn, en in bn_to_en.items():
+                if bn in query.lower():
+                    augmented += f" {en}"
+            augmented += crop_disease_en
+            augmented += f" {cat}"
+            sources = retrieve(augmented.strip(), top_k=5)
             yield emit("retrieval", "complete", f"{len(sources)} sources")
 
             # Stage 3: Generation
             yield emit("generation", "start")
             disease_details = get_disease_details(detected_crop, detected_disease) if detected_crop and detected_disease else None
+            intent_for_gen = "general_info" if cat == "off_topic" else cat
             gen = gen_response(
                 query=query,
                 detected_crop=detected_crop,
                 detected_disease=detected_disease,
-                intent=cat,
+                intent=intent_for_gen,
                 retrieved_nodes=sources,
                 disease_details=disease_details,
             )

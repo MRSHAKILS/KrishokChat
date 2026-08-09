@@ -150,7 +150,10 @@ def classify_query(query: str, crop: str = None, disease: str = None) -> dict:
                 " অনুমোদিত বিকল্প জানতে কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।"
             )
         elif cat == "off_topic":
-            canned = "এই প্রশ্ন কৃষি সম্পর্কিত নয়। আমি শুধুমাত্র কৃষি বিষয়ে সাহায্য করতে পারি।"
+            canned = (
+                "এই প্রশ্নটি কৃষি সম্পর্কিত মনে হচ্ছে না। আমি শুধুমাত্র কৃষি বিষয়ে সাহায্য করতে পারি।"
+                " ফসল, রোগ, বা কীটনাশক সম্পর্কে জিজ্ঞাসা করুন।"
+            )
         elif cat == "prompt_injection":
             canned = "অনুগ্রহ করে কৃষি সংক্রান্ত প্রশ্ন করুন।"
 
@@ -158,4 +161,4 @@ def classify_query(query: str, crop: str = None, disease: str = None) -> dict:
                 "reasoning": data.get("reasoning", ""), "canned_response": canned}
     except Exception as e:
         return {"category": "low_confidence", "confidence": 0.3,
-                "reasoning": f"API error: {e}", "canned_response": None}
+                "reasoning": "API error: " + str(e), "canned_response": None}
