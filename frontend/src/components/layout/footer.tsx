@@ -29,7 +29,7 @@ export function Footer() {
           {/* Nav + Resources in one row */}
           {NAV_SECTIONS.map((section) => (
             <div key={section.title}>
-              <h3 className="text-[10px] uppercase tracking-[0.16em] text-ink-faint">{section.title}</h3>
+              <h3 className="text-[10px] font-semibold text-ink-faint">{section.title}</h3>
               <ul className="mt-2 space-y-1.5">
                 {section.links.map((link) => (
                   <li key={link.href}>
@@ -42,7 +42,7 @@ export function Footer() {
 
           {/* Resources + Helpline combined */}
           <div>
-            <h3 className="text-[10px] uppercase tracking-[0.16em] text-ink-faint">সম্পদ</h3>
+            <h3 className="text-[10px] font-semibold text-ink-faint">সম্পদ</h3>
             <ul className="mt-2 space-y-1.5">
               {RESOURCES.map((link) => (
                 <li key={link.href}>

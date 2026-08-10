@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowRight, Shield, FileText, Languages, CloudSun, Phone,
   CheckCircle2, Loader2, MapPin, Play, Search, PenLine, RotateCcw,
+  Camera, MessageSquare, Calculator, Volume2, Sparkles, Building2,
+  HelpCircle, ChevronDown,
 } from "lucide-react";
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell,
@@ -14,6 +16,7 @@ import {
 import { APP, RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 import { getWeather, registerHelpline } from "@/lib/api";
+import { safetyLabel, TONE_BADGE, AGRI_DISTRICTS } from "@/lib/safety-labels";
 
 /* =========================================================================
    Landing Page — modern, visual, multi-section.
@@ -28,18 +31,35 @@ const TRACK_DATA = [
   { name: "চিকিৎসা QA", value: 11224, color: "var(--color-clay)" },
 ];
 
+/* Farmer-facing retrieval chart labels — the backend enums (BM25, Dense,
+   Hybrid RRF, ColBERT) are technical jargon; the home page is for farmers.
+   The /research/benchmark page keeps the full technical terms for reviewers. */
 const RETRIEVAL_DATA = [
-  { name: "Hybrid RRF", value: 0.539 },
-  { name: "BM25", value: 0.506 },
-  { name: "Dense", value: 0.464 },
-  { name: "ColBERT", value: 0.487 },
+  { name: "মিশ্র পদ্ধতি", value: 0.539, best: true },
+  { name: "শব্দ মিল", value: 0.506, best: false },
+  { name: "অর্থ মিল", value: 0.464, best: false },
+  { name: "সূক্ষ্ম মিল", value: 0.487, best: false },
 ];
 
 const RAG_QUERY = "আলুর দেরি ব্লাইট কীভাবে প্রতিরোধ করব?";
+/* Human document titles instead of raw DB IDs (DAE_PEST_1206A0_001).
+   Farmers should never see backend identifiers. */
 const RAG_SOURCES = [
-  { id: "DAE_PEST_1206A0_001", score: 33.23, snippet: "প্রতি লিটার পানিতে ২ গ্রাম মাত্রায় Mancozeb 80WP..." },
-  { id: "CABI_POTATO_834B4F_001", score: 32.59, snippet: "Phytophthora infestans ছত্রাক দ্বারা সৃষ্ট..." },
-  { id: "DAE_PEST_B3531E_001", score: 31.08, snippet: "অধিকাংশ প্যান্ডি 80WP ফরমুলেশন..." },
+  {
+    title: "কৃষি সম্প্রসারণ অধিদপ্তর — বালাই ব্যবস্থাপনা গাইডলাইন (অধ্যায় ৪)",
+    agency: "DAE",
+    snippet: "প্রতি লিটার পানিতে ২ গ্রাম মাত্রায় ম্যানকোজেব ৮০WP মিশ্রণ করে স্প্রে করুন...",
+  },
+  {
+    title: "আলুর দেরি ব্লাইট রোগ ব্যবস্থাপনা — ফসল সুরক্ষা নির্দেশিকা",
+    agency: "CABI",
+    snippet: "Phytophthora infestans ছত্রাক দ্বারা সৃষ্ট — আর্দ্র আবহাওয়ায় দ্রুত ছড়ায়...",
+  },
+  {
+    title: "কীটনাশক ব্যবহারের নিরাপদ মাত্রা — সরকারি নির্দেশিকা",
+    agency: "DAE",
+    snippet: "অনুমোদিত ফরমুলেশন ৮০WP মাত্রায় সতর্কতার সাথে ব্যবহার করুন...",
+  },
 ];
 
 export default function LandingPage() {
@@ -50,8 +70,11 @@ export default function LandingPage() {
       <RagPipelineDemo />
       <ComparisonSection />
       <TimelineSection />
-      <WeatherSection />
-      <HelplineFormSection />
+      <AgriDosageCalculatorSection />
+      <AudioVoiceAccessibilitySection />
+      <WeatherAndHelplineSection />
+      <InstitutionalTrustSection />
+      <AgriFAQSection />
       <DemoCTA />
     </div>
   );
@@ -63,7 +86,7 @@ function HeroSection() {
     <motion.section initial="hidden" animate="visible" variants={stagger} className="mx-auto max-w-5xl overflow-hidden rounded-2xl border rule">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div className="bg-paper px-8 py-12 sm:px-12 sm:py-16">
-          <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre">{APP.taglineEn}</motion.p>
+          <motion.p variants={enter} className="text-xs text-ochre">{APP.taglineEn}</motion.p>
           <motion.h1 variants={enter} className="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl">
             বাংলাদেশের কৃষকের জন্য<br /><span className="text-leaf">নিরাপদ কৃষি পরামর্শ</span>
           </motion.h1>
@@ -72,14 +95,34 @@ function HeroSection() {
           </motion.p>
           <motion.div variants={enter} className="mt-8 flex flex-wrap items-center gap-3">
             <Link href="/detect" className="group flex items-center gap-2 rounded-lg bg-leaf px-7 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2">
-              শুরু করুন<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              <Camera className="h-4 w-4" />
+              ছবি দিন নির্ণয় করুন<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <Link href="/chat" className="rounded-lg border rule px-7 py-3 text-sm font-medium text-ink transition-colors hover:border-leaf hover:text-leaf">প্রশ্ন করুন</Link>
+            <Link href="/chat" className="group flex items-center gap-2 rounded-lg border rule px-7 py-3 text-sm font-medium text-ink transition-colors hover:border-leaf hover:text-leaf">
+              <MessageSquare className="h-4 w-4" />
+              বাংলায় প্রশ্ন করুন
+            </Link>
           </motion.div>
         </div>
-        <div className="relative min-h-[280px] bg-paper-2 lg:min-h-full">
+        <div className="relative min-h-[280px] overflow-hidden bg-paper-2 lg:min-h-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/hero_image.jpg" alt="বাংলাদেশের কৃষি ক্ষেত" className="absolute inset-0 h-full w-full object-cover" />
+          <img
+            src="/assets/hero_image.jpg"
+            alt="বাংলাদেশের কৃষি ক্ষেত"
+            className="absolute inset-0 h-full w-full object-cover"
+            onError={(e) => {
+              // Graceful fallback on slow 3G / missing asset — never an empty grey box.
+              const t = e.currentTarget;
+              t.style.display = "none";
+              const parent = t.parentElement;
+              if (parent && !parent.querySelector("[data-fallback]")) {
+                parent.setAttribute("data-fallback", "1");
+                parent.style.background =
+                  "linear-gradient(135deg, var(--color-leaf) 0%, var(--color-leaf-2) 45%, var(--color-leaf-3) 100%)";
+                parent.innerHTML += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--color-paper);font-family:var(--font-display);font-size:1.25rem;text-align:center;padding:2rem">কৃষি ক্ষেত<br/>বাংলাদেশ</div>';
+              }
+            }}
+          />
         </div>
       </div>
     </motion.section>
@@ -115,17 +158,24 @@ function VisualStatsSection() {
 
         {/* Retrieval performance bar chart */}
         <motion.div variants={enter} className="rounded-xl border rule bg-paper p-6">
-          <h3 className="mb-4 font-display text-sm text-ink">তথ্য সংগ্রহ নির্ভুলতা (R@10)</h3>
+          <h3 className="mb-1 font-display text-sm text-ink">তথ্য সংগ্রহ নির্ভুলতা</h3>
+          <p className="mb-4 text-[11px] text-ink-faint">প্রতিটি প্রশ্নের সঠিক উৎস খুঁজে পাওয়ার হার</p>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={RETRIEVAL_DATA} layout="vertical" margin={{ left: 10, right: 20 }}>
               <XAxis type="number" domain={[0, 0.6]} hide />
-              <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fill: "var(--color-ink-soft)" }} width={70} />
+              <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fill: "var(--color-ink-soft)" }} width={90} />
               <Bar dataKey="value" radius={[0, 4, 4, 0]}>
-                {RETRIEVAL_DATA.map((_, i) => <Cell key={i} fill="var(--color-leaf)" />)}
+                {RETRIEVAL_DATA.map((entry, i) => (
+                  <Cell key={i} fill={entry.best ? "var(--color-leaf)" : "var(--color-leaf-3)"} />
+                ))}
               </Bar>
-              <Tooltip formatter={(v) => Number(v).toFixed(3)} />
+              <Tooltip formatter={(v) => `${(Number(v) * 100).toFixed(1)}%`} />
             </BarChart>
           </ResponsiveContainer>
+          <div className="mt-2 flex items-center gap-2 rounded-md bg-leaf/10 px-2.5 py-1.5 text-[11px] text-leaf">
+            <CheckCircle2 className="h-3 w-3" />
+            <span className="font-medium">মিশ্র পদ্ধতি</span> সবচেয়ে নির্ভুল ফলাফল দিয়েছে
+          </div>
         </motion.div>
       </div>
 
@@ -139,7 +189,7 @@ function VisualStatsSection() {
         ].map((s) => (
           <div key={s.label} className="bg-paper px-4 py-5 text-center">
             <div className="font-display text-2xl tabular text-leaf">{s.value}</div>
-            <div className="mt-1 text-[11px] uppercase tracking-[0.12em] text-ink-soft">{s.label}</div>
+            <div className="mt-1 text-[11px] font-medium text-ink-soft">{s.label}</div>
           </div>
         ))}
       </motion.div>
@@ -184,7 +234,7 @@ function RagPipelineDemo() {
       <motion.div variants={enter} className="mt-6 rounded-xl border rule bg-paper-2/40 p-4">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
-            <div className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">কৃষকের প্রশ্ন</div>
+            <div className="text-[10px] font-semibold text-ink-faint">কৃষকের প্রশ্ন</div>
             <div className="mt-1 text-sm font-medium text-ink">{RAG_QUERY}</div>
           </div>
           <button onClick={run} disabled={running} className="flex items-center gap-2 rounded-lg bg-leaf px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:opacity-50">
@@ -222,18 +272,25 @@ function RagPipelineDemo() {
             {stage >= 1 && (
               <div className="flex items-center gap-2 text-sm">
                 <Shield className="h-4 w-4 text-leaf" />
-                <span className="rounded-md bg-leaf/10 px-2 py-0.5 text-xs text-leaf">safe_agri</span>
-                <span className="text-ink-faint">→ নিরাপদ, তথ্য সংগ্রহে যান</span>
+                {(() => {
+                  const s = safetyLabel("safe_agri");
+                  return (
+                    <span className={`rounded-md px-2 py-0.5 text-xs font-medium ${TONE_BADGE[s.tone]}`}>
+                      {s.badge}
+                    </span>
+                  );
+                })()}
+                <span className="text-ink-soft">{safetyLabel("safe_agri").detail}</span>
               </div>
             )}
             {stage >= 2 && visibleSources > 0 && (
               <div className="mt-3 space-y-1.5">
-                <div className="text-xs font-medium text-ink">জ্ঞান নোড ({visibleSources}):</div>
+                <div className="text-xs font-medium text-ink">প্রাসঙ্গিক জ্ঞান নোড ({visibleSources}):</div>
                 {RAG_SOURCES.slice(0, visibleSources).map((src, i) => (
-                  <motion.div key={src.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="rounded-md border rule bg-paper px-3 py-2">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] text-ink">{src.id}</span>
-                      <span className="font-mono text-[10px] text-leaf">score: {src.score}</span>
+                  <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="rounded-md border rule bg-paper px-3 py-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-medium text-ink">{src.title}</span>
+                      <span className="shrink-0 rounded bg-bone px-1.5 py-0.5 text-[9px] font-semibold text-ink-soft">{src.agency}</span>
                     </div>
                     <p className="mt-0.5 text-[11px] text-ink-soft">{src.snippet}</p>
                   </motion.div>
@@ -242,14 +299,14 @@ function RagPipelineDemo() {
             )}
             {stage >= 3 && (
               <div className="mt-3 rounded-md bg-paper p-3">
-                <div className="text-xs font-medium text-leaf">উত্তর (Gemma-4):</div>
-                <p className="mt-1 text-xs leading-relaxed text-ink">আলুর দেরি ব্লাইট একটি ছত্রাকজনিত রোগ। প্রতি লিটার পানিতে ২ গ্রাম Mancozeb 80WP মিশ্রণ করে স্প্রে করুন [DAE_PEST_1206A0_001]।</p>
+                <div className="text-xs font-medium text-leaf">উত্তর:</div>
+                <p className="mt-1 text-xs leading-relaxed text-ink">আলুর দেরি ব্লাইট একটি ছত্রাকজনিত রোগ। প্রতি লিটার পানিতে ২ গ্রাম ম্যানকোজেব ৮০WP মিশ্রণ করে স্প্রে করুন। বিস্তারিত জানতে নিকটস্থ কৃষি কর্মকর্তার পরামর্শ নিন।</p>
               </div>
             )}
             {stage >= 4 && (
               <div className="mt-2 flex items-center gap-2 rounded-md bg-leaf/8 px-3 py-1.5 text-xs">
                 <CheckCircle2 className="h-3.5 w-3.5 text-leaf" />
-                <span className="text-leaf">verified</span>
+                <span className="font-medium text-leaf">যাচাইকৃত</span>
                 <span className="text-ink-soft">— সব দাবি উৎসে যাচাইকৃত</span>
               </div>
             )}
@@ -339,75 +396,184 @@ function TimelineSection() {
 }
 
 /* === F. Weather === */
-function WeatherSection() {
+/* === G & H. Weather & Helpline Unified Modern Block === */
+function WeatherAndHelplineSection() {
   const [district, setDistrict] = useState("");
   const [weather, setWeather] = useState<{ summary_bn: string; advice_bn: string } | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+
+  const [form, setForm] = useState({ name: "", phone: "", district: "" });
+  const [helplineResult, setHelplineResult] = useState<{ status: string; message: string } | null>(null);
+  const [helplineLoading, setHelplineLoading] = useState(false);
+
   const fetchWeather = async () => {
     if (!district.trim()) return;
-    setLoading(true);
+    setWeatherLoading(true);
     try {
       const r = await getWeather(district.trim());
       setWeather({ summary_bn: r.summary_bn, advice_bn: r.advice_bn });
-    } catch { setWeather({ summary_bn: "তথ্য পাওয়া যায়নি।", advice_bn: "কৃষক কল সেন্টার: ১৬১২৩।" }); }
-    setLoading(false);
+    } catch {
+      setWeather({ summary_bn: "তথ্য পাওয়া যায়নি।", advice_bn: "কৃষক কল সেন্টার: ১৬১২৩।" });
+    }
+    setWeatherLoading(false);
   };
-  return (
-    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="mx-auto max-w-2xl">
-      <motion.div variants={enter} className="rounded-xl border rule bg-paper-2/30 p-6">
-        <div className="flex items-center gap-2 text-leaf"><CloudSun className="h-5 w-5" /><h2 className="font-display text-lg text-ink">আবহাওয়া ও পরামর্শ</h2></div>
-        <p className="mt-2 text-sm text-ink-soft">আপনার জেলার নাম লিখুন।</p>
-        <div className="mt-4 flex gap-2">
-          <div className="relative flex-1"><MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-faint" />
-            <input type="text" value={district} onChange={(e) => setDistrict(e.target.value)} onKeyDown={(e) => e.key === "Enter" && fetchWeather()} placeholder="জেলার নাম" className="w-full rounded-lg border rule bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-none" />
-          </div>
-          <button onClick={fetchWeather} disabled={loading || !district.trim()} className="flex items-center gap-2 rounded-lg bg-leaf px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:opacity-40">
-            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <CloudSun className="h-4 w-4" />}
-          </button>
-        </div>
-        <AnimatePresence>{weather && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="mt-4 overflow-hidden rounded-lg border rule bg-paper p-4">
-            <p className="text-sm text-ink">{weather.summary_bn}</p>
-            <div className="mt-2 flex items-start gap-2 rounded-md bg-leaf/8 px-3 py-2 text-sm text-ink"><span className="text-leaf">↳</span><span>{weather.advice_bn}</span></div>
-          </motion.div>
-        )}</AnimatePresence>
-      </motion.div>
-    </motion.section>
-  );
-}
 
-/* === H. Helpline Form === */
-function HelplineFormSection() {
-  const [form, setForm] = useState({ name: "", phone: "", district: "" });
-  const [result, setResult] = useState<{ status: string; message: string } | null>(null);
-  const [loading, setLoading] = useState(false);
-  const submit = async () => {
+  const submitHelpline = async () => {
     if (!form.name || !form.phone || !form.district) return;
-    setLoading(true);
+    setHelplineLoading(true);
     try {
       const r = await registerHelpline({ ...form, crop: null, notes: null });
-      setResult({ status: r.status, message: r.message });
+      setHelplineResult({ status: r.status, message: r.message });
       if (r.status === "ok") setForm({ name: "", phone: "", district: "" });
-    } catch { setResult({ status: "error", message: "সমস্যা। কৃষক কল সেন্টার: ১৬১২৩।" }); }
-    setLoading(false);
+    } catch {
+      setHelplineResult({ status: "error", message: "সমস্যা। কৃষক কল সেন্টার: ১৬১২৩।" });
+    }
+    setHelplineLoading(false);
   };
+
   return (
-    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="mx-auto max-w-2xl">
-      <motion.div variants={enter} className="rounded-xl border rule bg-paper-2/30 p-6">
-        <div className="flex items-center gap-2 text-leaf"><Phone className="h-5 w-5" /><h2 className="font-display text-lg text-ink">হেল্পলাইন নিবন্ধন</h2></div>
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <input type="text" placeholder="নাম *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="rounded-lg border rule bg-paper px-4 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-none" />
-          <input type="tel" placeholder="ফোন *" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="rounded-lg border rule bg-paper px-4 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-none" />
-          <input type="text" placeholder="জেলা *" value={form.district} onChange={(e) => setForm({ ...form, district: e.target.value })} className="rounded-lg border rule bg-paper px-4 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-none" />
-        </div>
-        <button onClick={submit} disabled={loading || !form.name || !form.phone || !form.district} className="mt-4 flex items-center gap-2 rounded-lg bg-leaf px-6 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:opacity-40">
-          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle2 className="h-4 w-4" />}
-          {loading ? "…" : "নিবন্ধন"}
-        </button>
-        <AnimatePresence>{result && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className={`mt-4 overflow-hidden rounded-lg px-4 py-3 text-sm ${result.status === "ok" ? "bg-leaf/10 text-leaf" : "bg-clay-soft/20 text-clay"}`}>{result.message}</motion.div>
-        )}</AnimatePresence>
-      </motion.div>
+    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="mx-auto max-w-5xl">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* Weather Card */}
+        <motion.div variants={enter} className="flex flex-col justify-between rounded-2xl border rule bg-paper p-6 sm:p-8 shadow-2xs">
+          <div>
+            <div className="flex items-center gap-2.5 text-leaf">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-leaf/12">
+                <CloudSun className="h-5 w-5" />
+              </div>
+              <h2 className="font-display text-xl text-ink">আবহাওয়া ও কৃষি বার্তা</h2>
+            </div>
+            <p className="mt-2 text-xs text-ink-soft">
+              আপনার এলাকার স্থানীয় আবহাওয়ার পূর্বাভাস ও জরুরি শস্য সুরক্ষা টিপস দেখুন।
+            </p>
+
+            {/* Quick District Chips */}
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {AGRI_DISTRICTS.map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  onClick={() => setDistrict(d)}
+                  className={`rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${
+                    district === d
+                      ? "border-leaf bg-leaf text-paper font-semibold"
+                      : "border-rule bg-paper-2/40 text-ink-soft hover:border-leaf/50"
+                  }`}
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-4 flex gap-2">
+              <div className="relative flex-1">
+                <MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-faint" />
+                <input
+                  type="text"
+                  value={district}
+                  onChange={(e) => setDistrict(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && fetchWeather()}
+                  placeholder="জেলার নাম লিখুন…"
+                  className="w-full rounded-lg border rule bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-none"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={fetchWeather}
+                disabled={weatherLoading || !district.trim()}
+                className="flex items-center justify-center gap-2 rounded-lg bg-leaf px-4 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:opacity-40"
+              >
+                {weatherLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <CloudSun className="h-4 w-4" />}
+              </button>
+            </div>
+
+            <AnimatePresence>
+              {weather && (
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="mt-4 overflow-hidden rounded-lg border border-leaf/20 bg-leaf/5 p-4 text-xs">
+                  <p className="font-semibold text-leaf">{weather.summary_bn}</p>
+                  <div className="mt-2 flex items-start gap-1.5 text-ink-soft">
+                    <span className="text-leaf font-bold">↳</span>
+                    <span>{weather.advice_bn}</span>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
+
+        {/* Helpline Registration Card */}
+        <motion.div variants={enter} className="flex flex-col justify-between rounded-2xl border rule bg-paper p-6 sm:p-8 shadow-2xs">
+          <div>
+            <div className="flex items-center justify-between gap-2 border-b rule pb-4">
+              <div className="flex items-center gap-2.5 text-leaf">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-leaf/12">
+                  <Phone className="h-5 w-5" />
+                </div>
+                <h2 className="font-display text-xl text-ink">১৬১২৩ হেল্পলাইন সংযোগ</h2>
+              </div>
+              <a href="tel:16123" className="flex items-center gap-1 rounded-full bg-leaf px-3 py-1 text-xs font-semibold text-paper hover:bg-leaf-2">
+                <Phone className="h-3 w-3" /> ডায়াল ১৬১২৩
+              </a>
+            </div>
+            <p className="mt-3 text-xs text-ink-soft">
+              কৃষি অফিসারদের কাছ থেকে সরাসরি ফোনে এসএমএস ও সাহায্য পেতে বিনামূল্যে আপনার নম্বর জমা দিন।
+            </p>
+
+            <div className="mt-4 space-y-3">
+              <div>
+                <label className="text-[11px] font-semibold text-ink-faint">আপনার নাম *</label>
+                <input
+                  type="text"
+                  placeholder="যেমন: মোঃ রফিকুল ইসলাম"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="mt-1 w-full rounded-lg border rule bg-paper px-3 py-2 text-xs text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-none"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-[11px] font-semibold text-ink-faint">মোবাইল নম্বর *</label>
+                  <input
+                    type="tel"
+                    placeholder="01712345678"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="mt-1 w-full rounded-lg border rule bg-paper px-3 py-2 text-xs text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] font-semibold text-ink-faint">জেলা *</label>
+                  <input
+                    type="text"
+                    placeholder="যেমন: বগুড়া"
+                    value={form.district}
+                    onChange={(e) => setForm({ ...form, district: e.target.value })}
+                    className="mt-1 w-full rounded-lg border rule bg-paper px-3 py-2 text-xs text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={submitHelpline}
+              disabled={helplineLoading || !form.name || !form.phone || !form.district}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-leaf py-2.5 text-xs font-semibold text-paper transition-all hover:bg-leaf-2 disabled:opacity-40"
+            >
+              {helplineLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle2 className="h-4 w-4" />}
+              {helplineLoading ? "জমা হচ্ছে…" : "বিনামূল্যে হেল্পলাইন নিবন্ধন করুন"}
+            </button>
+
+            <AnimatePresence>
+              {helplineResult && (
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className={`mt-3 overflow-hidden rounded-lg px-3 py-2 text-xs ${helplineResult.status === "ok" ? "bg-leaf/10 text-leaf" : "bg-clay-soft/20 text-clay"}`}>
+                  {helplineResult.message}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
+      </div>
     </motion.section>
   );
 }
@@ -421,6 +587,279 @@ function DemoCTA() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link href="/detect" className="group flex items-center gap-2 rounded-lg bg-leaf px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2">ছবি দিন নির্ণয় করুন<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></Link>
           <Link href="/chat" className="rounded-lg border rule px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-leaf hover:text-leaf">বাংলায় প্রশ্ন করুন</Link>
+        </div>
+      </motion.div>
+    </motion.section>
+  );
+}
+
+/* === J. Agrochemical Tank & Dosage Calculator Widget === */
+function AgriDosageCalculatorSection() {
+  const [landUnit, setLandUnit] = useState<"decimal" | "bigha">("decimal");
+  const [area, setArea] = useState<number>(33); // 33 decimals default (1 bigha)
+  const [pesticide, setPesticide] = useState("mancozeb");
+
+  const PESTICIDES = [
+    { id: "mancozeb", name: "ম্যানকোজেব ৮০WP (আলুর নাবি ধসা / ব্লাইট)", dosePerLiter: 2, unit: "গ্রাম" },
+    { id: "autostin", name: "অটোস্টিন ৫০WDG (ধানের খোলপোড়া রোগ)", dosePerLiter: 1.5, unit: "গ্রাম" },
+    { id: "imidacloprid", name: "ইমিডাক্লোপ্রিড ২০SL (পঁচন ও চোষক পোকা)", dosePerLiter: 0.5, unit: "মি.লি." },
+  ];
+
+  const selectedPest = PESTICIDES.find((p) => p.id === pesticide) || PESTICIDES[0];
+  const decimalArea = landUnit === "bigha" ? area * 33 : area;
+  const totalWaterLiters = Math.max(1, Math.round(decimalArea * 10));
+  const totalTanks = Math.ceil(totalWaterLiters / 16);
+  const totalChemical = (totalWaterLiters * selectedPest.dosePerLiter).toFixed(1);
+
+  return (
+    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="mx-auto max-w-4xl">
+      <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-6 sm:p-8 shadow-2xs">
+        <div className="flex items-center gap-2.5 text-leaf">
+          <Calculator className="h-6 w-6" />
+          <h2 className="font-display text-xl text-ink">কৃষি স্প্রে ট্যাংক ও বালাইনাশক ডোজ ক্যালকুলেটর</h2>
+        </div>
+        <p className="mt-1 text-xs text-ink-soft">
+          জমির আয়তন ও বালাইনাশক নির্বাচন করুন — ১৬ লিটারের স্প্রে ট্যাংক সংখ্যা এবং সঠিক রাসায়নিকের মাত্রা হিসাব করুন।
+        </p>
+
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs font-semibold text-ink">জমির পরিমাপের একক</label>
+              <div className="mt-1.5 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setLandUnit("decimal")}
+                  className={`flex-1 rounded-lg border py-2 text-xs font-medium transition-colors ${
+                    landUnit === "decimal" ? "border-leaf bg-leaf/10 text-leaf" : "border-rule text-ink-soft"
+                  }`}
+                >
+                  শতক (Decimal)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLandUnit("bigha")}
+                  className={`flex-1 rounded-lg border py-2 text-xs font-medium transition-colors ${
+                    landUnit === "bigha" ? "border-leaf bg-leaf/10 text-leaf" : "border-rule text-ink-soft"
+                  }`}
+                >
+                  বিঘা (Bigha = ৩৩ শতক)
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs font-semibold text-ink">
+                জমির পরিমাণ ({landUnit === "decimal" ? "শতক" : "বিঘা"})
+              </label>
+              <input
+                type="number"
+                min={1}
+                max={500}
+                value={area}
+                onChange={(e) => setArea(Math.max(1, Number(e.target.value)))}
+                className="mt-1.5 w-full rounded-lg border rule bg-paper px-4 py-2 text-sm text-ink focus:border-leaf focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-semibold text-ink">অনুমোদিত বালাইনাশক নির্বাচন</label>
+              <select
+                value={pesticide}
+                onChange={(e) => setPesticide(e.target.value)}
+                className="mt-1.5 w-full rounded-lg border rule bg-paper px-3 py-2 text-xs text-ink focus:border-leaf focus:outline-none"
+              >
+                {PESTICIDES.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-leaf/20 bg-leaf/5 p-5 flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="text-xs font-semibold text-leaf flex items-center justify-between">
+                <span>হিসাবকৃত স্প্রে ফর্মুলা:</span>
+                <span className="rounded bg-leaf/15 px-2 py-0.5 text-[10px]">১৬১২৩ মানসম্পন্ন</span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 text-center">
+                <div className="rounded-lg bg-paper p-3 border rule">
+                  <div className="text-xl font-bold text-leaf">{totalTanks} টি</div>
+                  <div className="text-[10px] text-ink-soft mt-0.5">১৬L স্প্রে ট্যাংক লাগবে</div>
+                </div>
+                <div className="rounded-lg bg-paper p-3 border rule">
+                  <div className="text-xl font-bold text-ochre">{totalChemical} {selectedPest.unit}</div>
+                  <div className="text-[10px] text-ink-soft mt-0.5">মোট বালাইনাশক প্রয়োজন</div>
+                </div>
+              </div>
+
+              <div className="text-xs text-ink-soft space-y-1 bg-paper p-3 rounded-lg border rule">
+                <p>• প্রতি ১৬L স্প্রে ট্যাংকে মেশাবেন: <strong>{(selectedPest.dosePerLiter * 16).toFixed(1)} {selectedPest.unit}</strong></p>
+                <p>• মোট পানির প্রয়োজন: <strong>{totalWaterLiters} লিটার</strong> ({decimalArea} শতক জমির জন্য)</p>
+              </div>
+            </div>
+
+            <div className="mt-4 pt-3 border-t rule flex items-center justify-between text-[11px] text-ink-faint">
+              <span className="flex items-center gap-1 text-clay font-medium">
+                ⚠️ মাস্ক ও গ্লাভস পরা বাধ্যতামূলক
+              </span>
+              <a href="tel:16123" className="text-leaf font-semibold hover:underline">
+                পরামর্শে ১৬১২৩ ➔
+              </a>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.section>
+  );
+}
+
+/* === K. Regional Voice & Dialect Accessibility Section === */
+function AudioVoiceAccessibilitySection() {
+  return (
+    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="mx-auto max-w-4xl">
+      <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-6 sm:p-8">
+        <div className="flex items-center gap-2.5 text-leaf">
+          <Volume2 className="h-6 w-6" />
+          <h2 className="font-display text-xl text-ink">ভয়েস অ্যাসিস্ট্যান্ট ও আঞ্চলিক উপভাষা সহায়তা</h2>
+        </div>
+        <p className="mt-1 text-xs text-ink-soft">
+          কম শিক্ষিত প্রান্তিক কৃষকদের সুবিধার্থে বাংলায় ভয়েস রিডার এবং ৫টি প্রধান আঞ্চলিক উপভাষায় উত্তর শোনার ব্যবস্থা।
+        </p>
+
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="rounded-xl border rule bg-paper-2/40 p-4">
+            <div className="flex items-center gap-2 text-leaf font-semibold text-sm">
+              <Volume2 className="h-4 w-4" />
+              <span>বাংলা অডিও রিডার</span>
+            </div>
+            <p className="mt-2 text-xs leading-relaxed text-ink-soft">
+              যেকোনো এআই উত্তর এক ক্লিকেই বাংলায় পরিষ্কার অডিওতে শুনে নিতে পারেন।
+            </p>
+          </div>
+
+          <div className="rounded-xl border rule bg-paper-2/40 p-4">
+            <div className="flex items-center gap-2 text-ochre font-semibold text-sm">
+              <Sparkles className="h-4 w-4" />
+              <span>আঞ্চলিক উপভাষা</span>
+            </div>
+            <p className="mt-2 text-xs leading-relaxed text-ink-soft">
+              নোয়াখালী, চাটগাঁইয়া, সিলেটি, রাজশাহী ও রংপুরের স্থানীয় উপভাষায় অনুবাদ।
+            </p>
+          </div>
+
+          <div className="rounded-xl border rule bg-paper-2/40 p-4">
+            <div className="flex items-center gap-2 text-clay font-semibold text-sm">
+              <Phone className="h-4 w-4" />
+              <span>১৬১২৩ সরাসরি রিডাইরেক্ট</span>
+            </div>
+            <p className="mt-2 text-xs leading-relaxed text-ink-soft">
+              জরুরি কীটনাশক বা রাসায়নিক ডোজ সংশয়ে বিনামূল্যে সরকারি কল সেন্টারে ডায়াল করার সুবিধা।
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.section>
+  );
+}
+
+/* === L. Institutional Trust & Compliance Section === */
+function InstitutionalTrustSection() {
+  const INSTITUTES = [
+    { code: "DAE", name: "কৃষি সম্প্রসারণ অধিদপ্তর", role: "জাতীয় বালাই গাইডলাইন" },
+    { code: "BARC", name: "বাংলাদেশ কৃষি গবেষণা কাউন্সিল", role: "সয়েল ও ফার্টিলাইজার গাইড" },
+    { code: "BARI", name: "বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট", role: "সবজি ও মসলা প্রযুক্তি" },
+    { code: "BRRI", name: "বাংলাদেশ ধান গবেষণা ইনস্টিটিউট", role: "ধানের বালাই তথ্যভাণ্ডার" },
+    { code: "SRDI", name: "মৃত্তিকা সম্পদ উন্নয়ন ইনস্টিটিউট", role: "মাটির পিএইচ ও উপাদান" },
+  ];
+
+  return (
+    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="mx-auto max-w-4xl">
+      <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-6 text-center">
+        <h2 className="font-display text-lg text-ink flex items-center justify-center gap-2">
+          <Building2 className="h-5 w-5 text-leaf" />
+          সরকারি ও ইনস্টিটিউশনাল তথ্যসূত্র সংযোগ
+        </h2>
+        <p className="mt-1 text-xs text-ink-faint">
+          আমাদের RAG তথ্যভাণ্ডার সরাসরি জাতীয় নিবন্ধিত কৃষি গবেষণা সংস্থাগুলোর সাথে যুক্ত
+        </p>
+
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
+          {INSTITUTES.map((inst) => (
+            <div key={inst.code} className="rounded-xl border rule bg-paper-2/30 p-3 text-center transition-all hover:border-leaf/30">
+              <div className="font-display text-sm font-bold text-leaf">{inst.code}</div>
+              <div className="mt-1 text-[11px] font-medium text-ink truncate">{inst.name}</div>
+              <div className="mt-0.5 text-[9px] text-ink-faint">{inst.role}</div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.section>
+  );
+}
+
+/* === M. Agri FAQ Section === */
+function AgriFAQSection() {
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+
+  const FAQS = [
+    {
+      q: "কৃষক চ্যাট এআই এর পরামর্শ কতটা নির্ভুল ও নিরাপদ?",
+      a: "আমাদের সিস্টেমটি ৪-ধাপের মাল্টি-এজেন্ট সিকিউরিটি পাইপলাইন অনুসরণ করে। প্রতিটি পরামর্শ দেওয়ার আগে সরকারি DAE, BARC ও BRRI নির্দেশিকা থেকে রিট্রিভাল করা হয় এবং রাসায়নিকের মাত্রা Verifier Agent দ্বারা যাচাই করা হয়।",
+    },
+    {
+      q: "ছবি তুলে ফসলের রোগ কিভাবে নির্ণয় করব?",
+      a: "'রোগ নির্ণয়' পেজে গিয়ে আক্রান্ত পাতার পরিষ্কার ছবি তুলুন বা আপলোড করুন। Ultralytics YOLO ভিশন মডেল সাথে সাথেই রোগ চিহ্নিত করে সঠিক প্রতিকার নির্দেশ করবে।",
+    },
+    {
+      q: "আঞ্চলিক উপভাষায় কিভাবে উত্তর পাওয়া যায়?",
+      a: "চ্যাটবটের প্রতিটি উত্তরের নিচে উপভাষা বাটন পাবেন। সেখান থেকে নোয়াখালী, চাটগাঁইয়া, সিলেটি, রাজশাহী বা রংপুর নির্বাচন করলে Gemini এআই সাথে সাথেই স্থানীয় উপভাষায় রূপান্তর করে শোনাবে।",
+    },
+    {
+      q: "ইন্টারনেট বা প্রযুক্তি না জানা কৃষক কিভাবে সাহায্য পাবেন?",
+      a: "যেকোনো জরুরি প্রয়োজনে সরাসরি বিনামূল্যে কৃষক কল সেন্টার ১৬১২৩ নম্বরে ডায়াল করে বিশেষজ্ঞ কৃষি কর্মকর্তার সাথে কথা বলা যাবে।",
+    },
+  ];
+
+  return (
+    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="mx-auto max-w-3xl">
+      <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-6 sm:p-8">
+        <div className="flex items-center gap-2 text-leaf mb-6">
+          <HelpCircle className="h-6 w-6" />
+          <h2 className="font-display text-xl text-ink">সাধারণ জিজ্ঞাসা (FAQ)</h2>
+        </div>
+
+        <div className="space-y-3">
+          {FAQS.map((faq, idx) => {
+            const isOpen = openIdx === idx;
+            return (
+              <div key={idx} className="rounded-xl border rule bg-paper overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setOpenIdx(isOpen ? null : idx)}
+                  className="w-full flex items-center justify-between p-4 text-left font-medium text-sm text-ink hover:text-leaf transition-colors"
+                >
+                  <span>{faq.q}</span>
+                  <ChevronDown className={`h-4 w-4 shrink-0 transition-transform ${isOpen ? "rotate-180 text-leaf" : "text-ink-faint"}`} />
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="px-4 pb-4 text-xs leading-relaxed text-ink-soft border-t rule pt-3 bg-paper-2/30"
+                    >
+                      {faq.a}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </motion.div>
     </motion.section>

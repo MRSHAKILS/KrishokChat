@@ -22,13 +22,13 @@ class Settings(BaseSettings):
     debug: bool = False
 
     ollama_base_url: str = "http://localhost:11434"
-    ollama_model_name: str = "gemma-finetuned:4-bit"
+    ollama_model_name: str = "krishokchat-4b"
     gguf_path: str = "backend/ml_assets/gemma/model.gguf"
 
     # Both intent classification and generation use the same OpenRouter model for
     # this demo. Explicit provider values remain available for tests/replacement.
     llm_provider: str = "openrouter"
-    llm_model_name: str = "gemma-finetuned:4-bit"
+    llm_model_name: str = "krishokchat-4b"
     llm_base_url: str | None = None
     llm_api_key: str | None = None
     llm_timeout_seconds: float = 30.0

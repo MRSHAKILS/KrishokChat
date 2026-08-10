@@ -102,7 +102,7 @@ function DiagnosedCard({ result }: { result: DetectResponse }) {
         <div className="space-y-4 border-t rule p-5">
           {info.description_bn && (
             <div>
-              <div className="mb-1.5 text-[11px] uppercase tracking-[0.16em] text-ink-faint">
+              <div className="mb-1.5 text-[11px] font-semibold text-ink-faint">
                 বিবরণ
               </div>
               <p className="text-sm leading-relaxed text-ink-soft">{info.description_bn}</p>
@@ -110,7 +110,7 @@ function DiagnosedCard({ result }: { result: DetectResponse }) {
           )}
           {info.cause_bn && (
             <div>
-              <div className="mb-1.5 text-[11px] uppercase tracking-[0.16em] text-ink-faint">
+              <div className="mb-1.5 text-[11px] font-semibold text-ink-faint">
                 কারণ
               </div>
               <p className="text-sm leading-relaxed text-ink-soft">{info.cause_bn}</p>
@@ -118,7 +118,7 @@ function DiagnosedCard({ result }: { result: DetectResponse }) {
           )}
           {info.solution_bn && (
             <div className="rounded-lg border border-ochre-soft/50 bg-ochre-soft/15 p-4">
-              <div className="mb-1.5 text-[11px] uppercase tracking-[0.16em] text-ochre">
+              <div className="mb-1.5 text-[11px] font-semibold text-ochre">
                 প্রতিকার
               </div>
               <p className="text-sm leading-relaxed text-ink">{info.solution_bn}</p>
@@ -271,7 +271,7 @@ function InvalidImageCard({ result }: { result: DetectResponse }) {
       </ul>
 
       <div className="mt-4 border-t border-ochre-soft/40 pt-4">
-        <div className="mb-2 text-[11px] uppercase tracking-[0.16em] text-ink-faint">
+        <div className="mb-2 text-[11px] font-semibold text-ink-faint">
           ভালো ছবির জন্য
         </div>
         <ul className="space-y-1.5 text-xs text-ink-soft">

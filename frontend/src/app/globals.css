@@ -14,8 +14,8 @@
 
   /* Ink — warm near-black, not gray (deepened for legibility) */
   --color-ink: #1a1611;
-  --color-ink-soft: #3d362e;
-  --color-ink-faint: #6b6256;
+  --color-ink-soft: #332c25;
+  --color-ink-faint: #5b5146;
 
   /* Leaf — used as ink/accent, not as a fill */
   --color-leaf: #2f5d3a;
@@ -70,6 +70,13 @@
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.01em;
+  }
+
+  /* Bengali যুক্তাক্ষর becomes harder to read when Latin-style tracking is
+     applied. Keep the default script spacing natural; English eyebrow copy
+     can opt into tracking explicitly where it is genuinely useful. */
+  [lang="bn"], [lang="bn"] * {
+    font-kerning: normal;
   }
 
   /* Tabular numerics for stat panels */

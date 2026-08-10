@@ -17,6 +17,9 @@ from app.infrastructure.vision.registry import ArtifactVisionRegistry
 from app.infrastructure.vision.ultralytics_classifier import UltralyticsClassificationRunner
 
 
+LOCAL_MODEL_NAME = "krishokchat-4b"
+
+
 @dataclass
 class AppContainer:
     qa: QAPipeline
@@ -36,6 +39,11 @@ def build_container(settings: Settings) -> AppContainer:
         ttl_seconds=settings.session_ttl_seconds,
     )
     audit = JSONLAuditSink(settings.resolved_audit_log_path)
+    # Local generation client for the "KrishokChat-4B" option — served via Ollama.
+    # Constructing the client does not connect; requests fail closed (referral)
+    # until the model is actually loaded into Ollama.
+    local_settings = Settings(llm_provider="ollama", generation_model_name=LOCAL_MODEL_NAME)
+    local_client = create_llm_client(local_settings, role="generation")
     pipeline = QAPipeline(
         safety=SafetyClassifier(intent_llm),
         retriever=retriever,
@@ -44,6 +52,7 @@ def build_container(settings: Settings) -> AppContainer:
         audit=audit,
         sessions=sessions,
         top_k=settings.retrieval_top_k,
+        generation_clients={LOCAL_MODEL_NAME: local_client},
     )
     vision = VisionPipeline(
         registry=ArtifactVisionRegistry(Path(settings.ml_assets_dir) / "vision"),

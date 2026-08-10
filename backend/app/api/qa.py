@@ -27,10 +27,48 @@ def _input(request: QARequest) -> QAInput:
         crop=request.crop,
         disease=request.disease,
         history=request.history,
+        model=request.model,
     )
 
 
+PUBLISHER_MAP_BN = {
+    "DAE": "কৃষি সম্প্রসারণ অধিদপ্তর (DAE)",
+    "BARC": "বাংলাদেশ কৃষি গবেষণা কাউন্সিল (BARC)",
+    "BARI": "বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (BARI)",
+    "BRRI": "বাংলাদেশ ধান গবেষণা ইনস্টিটিউট (BRRI)",
+    "SRDI": "মৃত্তিকা সম্পদ উন্নয়ন ইনস্টিটিউট (SRDI)",
+    "BSRTI": "বাংলাদেশ রেশম গবেষণা ও প্রশিক্ষণ ইনস্টিটিউট (BSRTI)",
+    "CDB": "তুলা উন্নয়ন বোর্ড (CDB)",
+    "DoF": "মৎস্য অধিদপ্তর (DoF)",
+    "DLS": "প্রাণিসম্পদ অধিদপ্তর (DLS)",
+    "IRRI": "আন্তর্জাতিক ধান গবেষণা ইনস্টিটিউট (IRRI)",
+    "CABI": "সিএবিআই ক্রপ স্পেকট্রাম (CABI)",
+    "WorldFish": "ওয়ার্ল্ডফিশ (WorldFish)",
+    "Ministry of Agriculture": "কৃষি মন্ত্রণালয়, গণপ্রজাতন্ত্রী বাংলাদেশ সরকার",
+    "NARS": "জাতীয় কৃষি গবেষণা সিস্টেম (NARS)",
+}
+
+
 def _source(source: RetrievedSource) -> SourceNode:
+    pub_raw = str(source.metadata.get("publisher") or "").strip()
+    pub_bn = PUBLISHER_MAP_BN.get(pub_raw, pub_raw)
+    if not pub_bn:
+        sid = source.id.upper()
+        if sid.startswith("DAE"):
+            pub_bn = "কৃষি সম্প্রসারণ অধিদপ্তর (DAE)"
+        elif sid.startswith("BARC") or sid.startswith("B4") or sid.startswith("B5"):
+            pub_bn = "বাংলাদেশ কৃষি গবেষণা কাউন্সিল (BARC)"
+        elif sid.startswith("BARI"):
+            pub_bn = "বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (BARI)"
+        elif sid.startswith("BRRI"):
+            pub_bn = "বাংলাদেশ ধান গবেষণা ইনস্টিটিউট (BRRI)"
+        elif sid.startswith("CABI"):
+            pub_bn = "সিএবিআই ক্রপ স্পেকট্রাম (CABI)"
+        elif sid.startswith("IRRI"):
+            pub_bn = "আন্তর্জাতিক ধান গবেষণা ইনস্টিটিউট (IRRI)"
+        else:
+            pub_bn = "জাতীয় কৃষি গবেষণা সংস্থা"
+
     return SourceNode(
         id=source.id,
         crop_bn=source.metadata.get("crop_bn") or None,
@@ -41,6 +79,11 @@ def _source(source: RetrievedSource) -> SourceNode:
         answer=source.content_bn or source.content_en[:400],
         treatment=source.metadata.get("treatment_summary_bn") or None,
         source=source.source or source.metadata.get("citation") or None,
+        publisher=pub_raw or None,
+        publisher_bn=pub_bn,
+        title_bn=source.title_bn or source.metadata.get("title_bn") or None,
+        title_en=source.title_en or source.metadata.get("title_en") or None,
+        citation=source.citation or source.metadata.get("citation") or None,
         expert_verified=bool(source.metadata.get("expert_verified", False)),
     )
 

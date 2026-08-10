@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
-import { FileText, Layers, Lock, Snowflake, GitBranch } from "lucide-react";
+import { FileText, Layers, Lock, Snowflake, GitBranch, ShieldCheck, Search, PenLine, CheckCircle2, ChevronDown } from "lucide-react";
 import { RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 
@@ -89,6 +90,41 @@ const NODE_CONSTRUCTION = [
   { step: 7, label: "ক্লোজড-লুপ পরিমার্জন", detail: "২৮৩ নোড (৯.৮%) পুনরায় তৈরি" },
 ];
 
+const AGENT_STEPS = [
+  {
+    id: "safety",
+    label: "নিরাপত্তা / রাউটার",
+    short: "প্রথমে প্রশ্ন যাচাই",
+    icon: ShieldCheck,
+    detail: "নিরাপত্তা শ্রেণী নির্ধারণ করে। safe_agri না হলে তথ্য সংগ্রহ শুরু হয় না।",
+    contract: "SafetyClassifier.classify → terminal outcome বা safe_agri",
+  },
+  {
+    id: "retrieval",
+    label: "তথ্য সংগ্রহ",
+    short: "প্রমাণ খোঁজা",
+    icon: Search,
+    detail: "প্রি-কম্পিউটেড কৃষি জ্ঞানভাণ্ডার থেকে প্রাসঙ্গিক উৎস খোঁজা হয়।",
+    contract: "Retriever.retrieve → উৎস-সহ প্রাসঙ্গিক জ্ঞান নোড",
+  },
+  {
+    id: "generation",
+    label: "উত্তর তৈরি",
+    short: "উৎস-ভিত্তিক উত্তর",
+    icon: PenLine,
+    detail: "পাওয়া উৎসের ভিত্তিতে বাংলায় উত্তর তৈরি হয়; অনুমানভিত্তিক উত্তর নয়।",
+    contract: "GenerationModel.generate → grounded Bengali answer",
+  },
+  {
+    id: "verifier",
+    label: "যাচাই",
+    short: "দাবি মিলিয়ে দেখা",
+    icon: CheckCircle2,
+    detail: "উত্তরের দাবি ও মাত্রা উৎসের সাথে মিলিয়ে দেখা হয়; অনিশ্চয়তা থাকলে সতর্কতা যোগ হয়।",
+    contract: "Verifier.verify → verified, flagged-unverified বা controlled referral",
+  },
+];
+
 export default function MethodologyPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-20 py-14">
@@ -110,6 +146,8 @@ export default function MethodologyPage() {
           প্রতিটি ধাপ প্রমাণ-সংরক্ষণকারী, প্রতিটি উত্তর উৎসে ফিরে যাচাইযোগ্য।
         </motion.p>
       </motion.section>
+
+      <AgentPipelineExplorer />
 
       {/* === A. Construction Pipeline (animated) === */}
       <motion.section
@@ -250,7 +288,7 @@ export default function MethodologyPage() {
 
         {/* 7-step construction flow */}
         <motion.div variants={enter} className="space-y-2">
-          <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-ochre">
+          <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-ochre">
             <GitBranch className="h-3.5 w-3.5" />
             নোড নির্মাণ প্রক্রিয়া
           </div>
@@ -290,5 +328,60 @@ export default function MethodologyPage() {
         </motion.div>
       </motion.section>
     </div>
+  );
+}
+
+function AgentPipelineExplorer() {
+  const [selected, setSelected] = useState("safety");
+  const active = AGENT_STEPS.find((step) => step.id === selected) ?? AGENT_STEPS[0];
+
+  return (
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      variants={stagger}
+    >
+      <motion.div variants={enter} className="mb-5 text-center">
+        <h2 className="font-display text-2xl text-ink">চার-এজেন্ট উত্তর প্রবাহ</h2>
+        <p className="mt-2 text-sm text-ink-soft">প্রতিটি ধাপের কাজ দেখুন — নিরাপত্তা আগে, যাচাই শেষে।</p>
+      </motion.div>
+
+      <motion.div variants={enter} className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {AGENT_STEPS.map((step, index) => {
+          const Icon = step.icon;
+          const isSelected = selected === step.id;
+          return (
+            <div key={step.id} className="relative">
+              <button
+                type="button"
+                onClick={() => setSelected(step.id)}
+                aria-expanded={isSelected}
+                className={`flex min-h-28 w-full flex-col items-center justify-center rounded-xl border p-3 text-center transition-all ${
+                  isSelected ? "border-leaf bg-leaf/10 shadow-sm" : "rule bg-paper hover:border-leaf/50"
+                }`}
+              >
+                <Icon className={`h-5 w-5 ${isSelected ? "text-leaf" : "text-ink-faint"}`} />
+                <span className={`mt-2 text-sm font-medium ${isSelected ? "text-leaf" : "text-ink"}`}>{step.label}</span>
+                <span className="mt-0.5 text-[10px] text-ink-faint">{step.short}</span>
+                <ChevronDown className={`mt-1 h-3.5 w-3.5 text-ink-faint transition-transform sm:hidden ${isSelected ? "rotate-180" : ""}`} />
+              </button>
+              {index < AGENT_STEPS.length - 1 && <span className="absolute -right-2 top-1/2 z-10 hidden text-leaf sm:block">→</span>}
+            </div>
+          );
+        })}
+      </motion.div>
+
+      <motion.div
+        key={active.id}
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mt-3 rounded-xl border border-leaf/20 bg-leaf/5 p-4"
+      >
+        <div className="text-sm font-medium text-ink">{active.label}</div>
+        <p className="mt-1 text-sm leading-relaxed text-ink-soft">{active.detail}</p>
+        <div className="mt-3 rounded-lg bg-paper px-3 py-2 font-mono text-[10px] text-leaf">{active.contract}</div>
+      </motion.div>
+    </motion.section>
   );
 }

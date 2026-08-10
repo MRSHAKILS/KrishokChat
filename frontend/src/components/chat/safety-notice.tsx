@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ShieldAlert } from "lucide-react";
+import { ShieldAlert, Phone } from "lucide-react";
 import { HELPLINE } from "@/lib/constants";
 import { enter } from "@/lib/motion";
+import { safetyLabel } from "@/lib/safety-labels";
 import { cn } from "@/lib/utils";
 
 /* =========================================================================
@@ -12,16 +13,9 @@ import { cn } from "@/lib/utils";
    off_topic, prompt_injection, low_confidence.
 
    This is NOT an error — it's a deliberate, calm, safe redirect.
-   The tone is non-judgmental and always points to 16123.
+   The tone is non-judgmental and always points to 16123. Labels come
+   from the shared safety-labels map so backend enums never reach the user.
    ========================================================================= */
-
-const CATEGORY_LABELS: Record<string, string> = {
-  banned_or_restricted_chemical: "নিষিদ্ধ রাসায়নিক",
-  self_harm_or_poisoning_risk: "নিরাপত্তা সতর্কতা",
-  off_topic: "কৃষি-বহির্ভূত",
-  prompt_injection: "নির্দেশনা আক্রমণ",
-  low_confidence: "নিম্ন নিশ্চিততা",
-};
 
 export function SafetyNotice({
   category,
@@ -30,7 +24,7 @@ export function SafetyNotice({
   category: string;
   answer: string;
 }) {
-  const label = CATEGORY_LABELS[category] ?? "নিরাপত্তা";
+  const s = safetyLabel(category);
   const isUrgent = category === "self_harm_or_poisoning_risk";
 
   return (
@@ -52,33 +46,37 @@ export function SafetyNotice({
         />
         <span
           className={cn(
-            "text-[11px] uppercase tracking-[0.16em]",
+            "text-[11px] font-semibold",
             isUrgent ? "text-clay" : "text-ochre",
           )}
         >
-          {label}
+          {s.label}
         </span>
       </div>
 
       <p className="mt-2 text-sm leading-relaxed text-ink">{answer}</p>
 
-      <a
-        href={`tel:${HELPLINE.krishiCallCenter}`}
-        className="mt-3 inline-flex items-center gap-2 rounded-md border rule bg-paper px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf"
-      >
-        কৃষক কল সেন্টার
-        <span className="tabular text-leaf">{HELPLINE.krishiCallCenter}</span>
-      </a>
-
-      {isUrgent && (
+      <div className="mt-3 flex flex-wrap gap-2">
         <a
-          href={`tel:${HELPLINE.emergency}`}
-          className="ml-2 inline-flex items-center gap-2 rounded-md border border-clay-soft/40 bg-clay-soft/10 px-3 py-1.5 text-xs font-medium text-clay transition-colors hover:border-clay"
+          href={`tel:${HELPLINE.krishiCallCenter}`}
+          className="inline-flex items-center gap-2 rounded-md border border-leaf/30 bg-leaf/10 px-3 py-1.5 text-xs font-medium text-leaf transition-colors hover:bg-leaf/20"
         >
-          জরুরি সেবা
-          <span className="tabular">{HELPLINE.emergency}</span>
+          <Phone className="h-3.5 w-3.5" />
+          কৃষক কল সেন্টার
+          <span className="tabular">{HELPLINE.krishiCallCenter}</span>
         </a>
-      )}
+
+        {isUrgent && (
+          <a
+            href={`tel:${HELPLINE.emergency}`}
+            className="inline-flex items-center gap-2 rounded-md border border-clay-soft/40 bg-clay-soft/10 px-3 py-1.5 text-xs font-medium text-clay transition-colors hover:border-clay"
+          >
+            <Phone className="h-3.5 w-3.5" />
+            জরুরি সেবা
+            <span className="tabular">{HELPLINE.emergency}</span>
+          </a>
+        )}
+      </div>
     </motion.div>
   );
 }

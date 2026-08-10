@@ -238,7 +238,7 @@ Settings are read from the repo-root `.env`, then overridden by
 | Variable | Default | Purpose |
 |---|---|---|
 | `LLM_PROVIDER` | `openrouter` | Adapter: `openrouter`, `gemini`, `ollama`, `stub` |
-| `LLM_MODEL_NAME` | `gemma-finetuned:4-bit` | Model for both stages unless overridden |
+| `LLM_MODEL_NAME` | `krishokchat-4b` | Model for both stages unless overridden |
 | `LLM_BASE_URL` | *(empty)* | Endpoint override for HTTP-compatible servers |
 | `LLM_API_KEY` | *(empty)* | Provider key (prefer local secret file) |
 | `LLM_TIMEOUT_SECONDS` | `30` | Request bound for remote adapters |
@@ -246,7 +246,7 @@ Settings are read from the repo-root `.env`, then overridden by
 | `LLM_MAX_OUTPUT_TOKENS` | `1000` | Max tokens per generation call |
 | `INTENT_MODEL_NAME` / `GENERATION_MODEL_NAME` | *(empty)* | Role-specific model overrides |
 | `OLLAMA_BASE_URL` | `http://localhost:11434` | Ollama server URL |
-| `OLLAMA_MODEL_NAME` | `gemma-finetuned:4-bit` | Ollama model tag |
+| `OLLAMA_MODEL_NAME` | `krishokchat-4b` | Ollama model tag |
 | `OPENROUTER_MODEL` | `google/gemini-2.5-flash-lite` | OpenRouter model |
 | `GEMINI_MODEL` | `gemini-2.5-flash-lite` | Gemini model |
 | `BACKEND_HOST` / `BACKEND_PORT` | `0.0.0.0` / `8000` | Uvicorn bind address |
@@ -276,6 +276,7 @@ Bengali is preserved with `ensure_ascii=False`.
 | GET | `/health` | Liveness + app version |
 | POST | `/api/qa` | Full QA pipeline, single JSON response |
 | POST | `/api/qa/stream` | QA pipeline as SSE stream (stages, tokens, final) |
+| GET | `/api/models` | Generation model availability (gemini / krishokchat-4b) |
 | GET | `/api/safety/metrics` | Audit-derived counts by category (no fabrication) |
 | POST | `/api/classify` | Crop classification of an uploaded image |
 | POST | `/api/detect` | Crop -> disease -> treatment advisory for an image |
@@ -314,6 +315,37 @@ The frontend renders the stage events as the "agent trace" stepper
 (Checking safety -> Retrieving sources -> Generating answer -> Verifying).
 
 ## Data & Models
+
+### Local model — KrishokChat-4B (optional)
+
+The chat UI offers two generation models: **Gemini 2.5 Flash-Lite** (online,
+default) and **KrishokChat-4B** (local, via Ollama). The local option is
+disabled in the UI until the model is actually registered in Ollama.
+
+Activate it in one command once you have the fine-tuned GGUF:
+
+```powershell
+# GGUF at backend\ml_assets\gemma\model.gguf (default location)
+powershell -ExecutionPolicy Bypass -File scripts\local_model.ps1
+
+# Or: point at a GGUF elsewhere / download it automatically
+powershell -ExecutionPolicy Bypass -File scripts\local_model.ps1 -GgufPath "D:\models\krishokchat-4b-q4.gguf"
+powershell -ExecutionPolicy Bypass -File scripts\local_model.ps1 -DownloadUrl "https://huggingface.co/<org>/<repo>/resolve/main/<file>.gguf"
+```
+
+What it does: ensures the GGUF exists, starts Ollama if needed, registers the
+tag `krishokchat-4b` from `scripts/Modelfile`, restarts the backend, and
+verifies via `GET /api/models`. Manual equivalent:
+
+```powershell
+ollama serve   # or start the Ollama app
+cd backend\ml_assets\gemma
+ollama create krishokchat-4b -f ..\..\..\scripts\Modelfile
+```
+
+Until the tag exists, choosing the local option in the UI fails closed: the
+pipeline returns the 16123 referral with `low_confidence` instead of a
+plausible-but-fake answer.
 
 ### RAG corpus (`backend/ml_assets/rag_index/`)
 

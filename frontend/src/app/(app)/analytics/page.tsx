@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Shield, TrendingUp, AlertTriangle, CheckCircle2, Activity } from "lucide-react";
+import { Shield, TrendingUp, AlertTriangle, CheckCircle2, Activity, Download, Filter } from "lucide-react";
 import { getSafetyMetrics, type SafetyMetrics } from "@/lib/api";
 import { RESEARCH_STATS } from "@/lib/constants";
+import { bn } from "@/lib/bn";
+import { safetyLabel, TONE_BADGE, TONE_DOT, TONE_BAR } from "@/lib/safety-labels";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 
 /* =========================================================================
@@ -15,6 +17,7 @@ import { enter, stagger, dur, ease } from "@/lib/motion";
 export default function AnalyticsPage() {
   const [metrics, setMetrics] = useState<SafetyMetrics | null>(null);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState<"all" | "safe" | "blocked">("all");
 
   useEffect(() => {
     getSafetyMetrics()
@@ -39,7 +42,7 @@ export default function AnalyticsPage() {
   const data: SafetyMetrics = metrics ?? { total_queries: 0, by_category: {}, flagged_count: 0, recent: [] };
   const safe = data.by_category?.safe_agri ?? 0;
   const total = data.total_queries || 0;
-  const blocked = total - safe;
+  const blocked = Math.max(0, total - safe);
   const safePct = total > 0 ? Math.round((safe / total) * 100) : 0;
 
   // Sort categories by count
@@ -49,6 +52,21 @@ export default function AnalyticsPage() {
     .slice(0, 8);
 
   const maxCat = categories.length > 0 ? Math.max(...categories.map(([, v]) => v)) : 1;
+  const recent = (data.recent ?? []).filter((item) => {
+    if (filter === "safe") return item.category === "safe_agri";
+    if (filter === "blocked") return item.category !== "safe_agri";
+    return true;
+  });
+
+  const exportAudit = () => {
+    const blob = new Blob([JSON.stringify({ exported_at: new Date().toISOString(), ...data }, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "krishokchat-safety-audit.json";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="space-y-8">
@@ -67,10 +85,10 @@ export default function AnalyticsPage() {
         variants={stagger}
         className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone lg:grid-cols-4"
       >
-        <StatCard variants={enter} icon={Activity} value={total} label="মোট প্রশ্ন" tone="ink" />
-        <StatCard variants={enter} icon={CheckCircle2} value={safe} label="নিরাপদ কৃষি" tone="leaf" />
-        <StatCard variants={enter} icon={AlertTriangle} value={blocked} label="অবরুদ্ধ" tone="clay" />
-        <StatCard variants={enter} icon={Shield} value={`${safePct}%`} label="নিরাপদ হার" tone="leaf" />
+        <StatCard variants={enter} icon={Activity} value={bn(total)} label="মোট প্রশ্ন" tone="ink" />
+        <StatCard variants={enter} icon={CheckCircle2} value={bn(safe)} label="নিরাপদ কৃষি" tone="leaf" />
+        <StatCard variants={enter} icon={AlertTriangle} value={bn(blocked)} label="অবরুদ্ধ" tone="clay" />
+        <StatCard variants={enter} icon={Shield} value={`${bn(safePct)}%`} label="নিরাপদ হার" tone="leaf" />
       </motion.section>
 
       {/* Donut + category breakdown */}
@@ -96,7 +114,7 @@ export default function AnalyticsPage() {
                 }}
               />
               <div className="absolute inset-3 flex flex-col items-center justify-center rounded-full bg-paper">
-                <span className="font-display text-2xl tabular text-ink">{safePct}%</span>
+                <span className="font-display text-2xl tabular text-ink">{bn(safePct)}%</span>
                 <span className="text-[10px] text-ink-faint">নিরাপদ</span>
               </div>
             </div>
@@ -104,14 +122,14 @@ export default function AnalyticsPage() {
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <div className="h-3 w-3 rounded-full bg-leaf" />
-                <span className="text-sm text-ink">নিরাপদ: {safe}</span>
+                <span className="text-sm text-ink">নিরাপদ: {bn(safe)}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="h-3 w-3 rounded-full bg-clay-soft" />
-                <span className="text-sm text-ink">অবরুদ্ধ: {blocked}</span>
+                <span className="text-sm text-ink">অবরুদ্ধ: {bn(blocked)}</span>
               </div>
               <div className="pt-1 text-xs text-ink-faint">
-                মোট: {total} প্রশ্ন
+                মোট: {bn(total)} প্রশ্ন
               </div>
             </div>
           </motion.div>
@@ -135,23 +153,26 @@ export default function AnalyticsPage() {
           ) : (
             <motion.div variants={enter} className="space-y-2.5">
               {categories.map(([cat, count], i) => {
-                const isSafe = cat === "safe_agri";
+                const categoryLabel = safetyLabel(cat);
                 const pct = Math.round((count / maxCat) * 100);
                 return (
                   <div key={cat} className="flex items-center gap-3">
-                    <div className="w-28 shrink-0 truncate font-mono text-[11px] text-ink-soft">
-                      {cat}
+                    <div className="w-36 shrink-0 truncate">
+                      <span className={`inline-flex max-w-full items-center gap-1.5 truncate rounded-md px-2 py-1 text-[11px] font-medium ${TONE_BADGE[categoryLabel.tone]}`} title={categoryLabel.label}>
+                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${TONE_DOT[categoryLabel.tone]}`} />
+                        <span className="truncate">{categoryLabel.label}</span>
+                      </span>
                     </div>
                     <div className="relative h-6 flex-1 overflow-hidden rounded-md bg-bone">
                       <motion.div
-                        className={`absolute inset-y-0 left-0 rounded-md ${isSafe ? "bg-leaf" : "bg-clay"}`}
+                        className={`absolute inset-y-0 left-0 rounded-md ${TONE_BAR[categoryLabel.tone]}`}
                         initial={{ width: 0 }}
                         whileInView={{ width: `${pct}%` }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.08, duration: dur.slow, ease: ease.smooth }}
                       />
                       <span className="relative flex items-center px-2 text-xs font-medium tabular text-ink">
-                        {count}
+                        {bn(count)}
                       </span>
                     </div>
                   </div>
@@ -178,15 +199,37 @@ export default function AnalyticsPage() {
         ].map((stat) => (
           <motion.div key={stat.label} variants={enter} className="bg-paper-2/30 px-4 py-4 text-center">
             <div className="font-display text-lg tabular text-ochre">{stat.value}</div>
-            <div className="mt-1 text-[10px] uppercase tracking-[0.1em] text-ink-faint">
+            <div className="mt-1 text-[10px] font-medium text-ink-faint">
               {stat.label}
             </div>
           </motion.div>
         ))}
       </motion.section>
 
+      {/* Local audit controls — no external telemetry; export stays on the
+          evaluator's device and uses the already-loaded local audit data. */}
+      <div className="flex flex-col gap-3 rounded-xl border rule bg-paper px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-2 text-sm text-ink-soft">
+          <Filter className="h-4 w-4 text-leaf" />
+          <span>অডিট লগ দেখান</span>
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e.target.value as "all" | "safe" | "blocked")}
+            className="rounded-md border rule bg-paper-2/40 px-2 py-1.5 text-xs text-ink focus:border-leaf focus:outline-none"
+            aria-label="অডিট লগ ফিল্টার"
+          >
+            <option value="all">সব সিদ্ধান্ত</option>
+            <option value="safe">শুধু নিরাপদ</option>
+            <option value="blocked">শুধু আটকানো</option>
+          </select>
+        </div>
+        <button type="button" onClick={exportAudit} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border rule px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf">
+          <Download className="h-3.5 w-3.5" /> অডিট JSON ডাউনলোড
+        </button>
+      </div>
+
       {/* Recent queries */}
-      {data.recent && data.recent.length > 0 && (
+      {recent.length > 0 && (
         <motion.section
           initial="hidden"
           whileInView="visible"
@@ -199,8 +242,9 @@ export default function AnalyticsPage() {
             <TrendingUp className="h-4 w-4 text-ink-faint" />
           </motion.div>
           <motion.ul variants={enter} className="divide-y divide-bone">
-            {data.recent.slice(0, 12).map((r, i) => {
+            {recent.slice(0, 12).map((r, i) => {
               const isBlocked = r.category !== "safe_agri";
+              const categoryLabel = safetyLabel(r.category);
               return (
                 <li key={i} className="flex items-center justify-between gap-4 px-5 py-3">
                   <div className="flex min-w-0 items-center gap-3">
@@ -216,7 +260,7 @@ export default function AnalyticsPage() {
                         isBlocked ? "bg-clay-soft/40 text-clay" : "bg-leaf/10 text-leaf"
                       }`}
                     >
-                      {r.category}
+                      {categoryLabel.label}
                     </span>
                   </div>
                 </li>

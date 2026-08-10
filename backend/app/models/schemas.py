@@ -9,6 +9,7 @@ class QARequest(BaseModel):
     crop: str | None = Field(None, description="Detected crop from image (optional context)")
     disease: str | None = Field(None, description="Detected disease from image (optional context)")
     history: list[dict[str, str]] = Field(default_factory=list, description="Conversation history [{role, content}]")
+    model: str | None = Field(None, description="Generation model choice: 'gemini' (default) or 'krishokchat-4b' (local Ollama)")
 
     @field_validator("query")
     @classmethod
@@ -28,6 +29,11 @@ class SourceNode(BaseModel):
     answer: str | None = None
     treatment: str | None = None
     source: str | None = None
+    publisher: str | None = None
+    publisher_bn: str | None = None
+    title_bn: str | None = None
+    title_en: str | None = None
+    citation: str | None = None
     expert_verified: bool = False
     score: float
 

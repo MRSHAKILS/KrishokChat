@@ -23,6 +23,11 @@ export interface SourceNode {
   answer?: string | null;
   treatment?: string | null;
   source?: string | null;
+  publisher?: string | null;
+  publisher_bn?: string | null;
+  title_bn?: string | null;
+  title_en?: string | null;
+  citation?: string | null;
   expert_verified?: boolean;
 }
 
@@ -112,6 +117,7 @@ export async function streamQuestion(
     disease?: string | null;
     session_id?: string | null;
     history?: Array<{ role: string; content: string }>;
+    model?: string | null;
   },
 ): Promise<QAResponse> {
   const res = await fetch(`${API_BASE}/api/qa/stream`, {
@@ -123,6 +129,7 @@ export async function streamQuestion(
       disease: opts?.disease,
       session_id: opts?.session_id,
       history: opts?.history,
+      model: opts?.model,
     }),
   });
   if (!res.ok) throw new Error(`qa stream failed: ${res.status}`);
@@ -187,6 +194,21 @@ export async function getSafetyMetrics(): Promise<SafetyMetrics> {
   return res.json();
 }
 
+/* ---------- Models availability --------------------------------------- */
+
+export interface ModelOption {
+  id: string;
+  label: string;
+  description: string;
+  available: boolean;
+}
+
+export async function getModels(): Promise<ModelOption[]> {
+  const res = await fetch(`${API_BASE}/api/models`);
+  if (!res.ok) throw new Error(`models failed: ${res.status}`);
+  return res.json();
+}
+
 /* ---------- Weather (Gemini-powered, token-efficient) ------------------ */
 
 export interface WeatherResponse {
@@ -234,5 +256,26 @@ export async function registerHelpline(
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error(`helpline register failed: ${res.status}`);
+  return res.json();
+}
+
+/* ---------- Regional Dialect Translator (Gemini 2.5 Flash Lite) ---------- */
+
+export interface DialectResponse {
+  dialect: string;
+  dialect_name: string;
+  translated_bn: string;
+}
+
+export async function translateDialect(
+  text: string,
+  dialect: string,
+): Promise<DialectResponse> {
+  const res = await fetch(`${API_BASE}/api/dialect/translate`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, dialect }),
+  });
+  if (!res.ok) throw new Error(`dialect translate failed: ${res.status}`);
   return res.json();
 }

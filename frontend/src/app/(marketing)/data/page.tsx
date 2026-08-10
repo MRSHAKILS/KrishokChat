@@ -92,7 +92,7 @@ export default function DataPage() {
             <motion.div key={stat.label} variants={enter} className="bg-paper p-5 text-center">
               <stat.icon className="mx-auto h-5 w-5 text-leaf" />
               <div className="mt-3 font-display text-2xl tabular text-ink">{stat.value}</div>
-              <div className="mt-1 text-[10px] uppercase tracking-[0.1em] text-ink-faint">
+              <div className="mt-1 text-[10px] font-medium text-ink-faint">
                 {stat.label}
               </div>
             </motion.div>
@@ -126,7 +126,7 @@ export default function DataPage() {
 
         {/* Category breakdown — interactive */}
         <motion.div variants={enter} className="mt-6 space-y-2">
-          <div className="mb-2 text-xs uppercase tracking-[0.14em] text-ochre">
+          <div className="mb-2 text-xs font-semibold text-ochre">
             ক্যাটাগরি অনুযায়ী নোড
           </div>
           {NODE_CATEGORIES.map((cat, i) => (

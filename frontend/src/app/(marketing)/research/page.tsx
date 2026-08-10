@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, BookOpen, Database, Shield } from "lucide-react";
+import { ArrowRight, BookOpen, Database, Shield, Copy, Check } from "lucide-react";
 import { RESEARCH_STATS, LINKS } from "@/lib/constants";
 import { enter, stagger } from "@/lib/motion";
 
@@ -27,6 +28,11 @@ const PAPERS = [
       { label: "Hugging Face", href: LINKS.huggingface },
       { label: "arXiv", href: LINKS.arxiv },
     ],
+    bibtex: `@misc{krishokchat2026,
+  title = {KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory},
+  year = {2026},
+  url = {${LINKS.arxiv}}
+}`,
   },
   {
     venue: "SIGIR-AP 2026",
@@ -39,6 +45,10 @@ const PAPERS = [
       { label: "কোয়েরি", value: "৯০০" },
     ],
     links: [],
+    bibtex: `@misc{agritrust2026,
+  title = {AgRiTrust: A Provenance-Grounded Benchmark for Bengali Agricultural Retrieval},
+  year = {2026}
+}`,
   },
 ];
 
@@ -165,7 +175,7 @@ export default function ResearchPage() {
                   {paper.stats.map((stat) => (
                     <div key={stat.label} className="rounded-md bg-paper-2/50 px-3 py-2 text-center">
                       <div className="font-display text-lg tabular text-leaf">{stat.value}</div>
-                      <div className="text-[10px] uppercase tracking-[0.1em] text-ink-faint">
+                      <div className="text-[10px] font-medium text-ink-faint">
                         {stat.label}
                       </div>
                     </div>
@@ -187,8 +197,10 @@ export default function ResearchPage() {
                         <ArrowRight className="h-3 w-3" />
                       </a>
                     ))}
+                    <BibTeXButton citation={paper.bibtex} />
                   </div>
                 )}
+                {paper.links.length === 0 && <div className="mt-4"><BibTeXButton citation={paper.bibtex} /></div>}
               </div>
             </div>
           </motion.div>
@@ -251,5 +263,31 @@ export default function ResearchPage() {
         ))}
       </motion.section>
     </div>
+  );
+}
+
+function BibTeXButton({ citation }: { citation: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(citation);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className="flex min-h-10 items-center gap-1.5 rounded-md border rule px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf"
+      title="BibTeX কপি করুন"
+    >
+      {copied ? <Check className="h-3.5 w-3.5 text-leaf" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? "কপি হয়েছে" : "BibTeX কপি"}
+    </button>
   );
 }

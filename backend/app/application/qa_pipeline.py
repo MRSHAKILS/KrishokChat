@@ -13,6 +13,7 @@ from app.domain.contracts import (
     QAResult,
     QueryContext,
     RetrievedSource,
+    VerificationResult,
 )
 from app.domain.enums import PipelineStage, SafetyCategory, StageStatus, VerificationConfidence
 from app.domain.safety_policy import canned_response
@@ -36,6 +37,7 @@ class QAInput:
         history: list[dict[str, str]] | None = None,
         seed_sources: list[RetrievedSource] | None = None,
         channel: str = "chat",
+        model: str | None = None,
     ) -> None:
         self.query = query
         self.session_id = session_id
@@ -44,6 +46,7 @@ class QAInput:
         self.history = history or []
         self.seed_sources = seed_sources or []
         self.channel = channel
+        self.model = model
 
 
 class QAPipeline:
@@ -57,6 +60,7 @@ class QAPipeline:
         audit: AuditSink,
         sessions: SessionStore,
         top_k: int = 5,
+        generation_clients: dict[str, object] | None = None,
     ) -> None:
         self.safety = safety
         self.retriever = retriever
@@ -65,6 +69,14 @@ class QAPipeline:
         self.audit = audit
         self.sessions = sessions
         self.top_k = top_k
+        # Optional per-request model registry: {"krishokchat-4b": LLMClient}.
+        # The default generator's client is used when no match is found.
+        self.generation_clients = generation_clients or {}
+
+    def _generator_for(self, model: str | None) -> GroundedAnswerGenerator:
+        if model and model in self.generation_clients:
+            return GroundedAnswerGenerator(self.generation_clients[model])
+        return self.generator
 
     async def run(self, request: QAInput, on_event: EventCallback | None = None) -> QAResult:
         trace: list[PipelineEvent] = []
@@ -117,9 +129,10 @@ class QAPipeline:
             await emit(PipelineStage.RETRIEVAL, StageStatus.COMPLETE, f"{len(sources)} sources")
 
             await emit(PipelineStage.GENERATION, StageStatus.START)
+            generator = self._generator_for(request.model)
             if on_event and sources:
                 chunks: list[str] = []
-                async for chunk in self.generator.stream(request.query, context, sources):
+                async for chunk in generator.stream(request.query, context, sources):
                     chunks.append(chunk)
                     await on_event(
                         PipelineEvent(
@@ -129,16 +142,25 @@ class QAPipeline:
                             text=chunk,
                         )
                     )
-                generated = await self.generator.generate_from_text(
+                generated = await generator.generate_from_text(
                     "".join(chunks), sources, mode="grounded_stream"
                 )
             else:
-                generated = await self.generator.generate(request.query, context, sources)
+                generated = await generator.generate(request.query, context, sources)
             await emit(PipelineStage.GENERATION, StageStatus.COMPLETE, generated.model)
 
             await emit(PipelineStage.VERIFIER, StageStatus.START)
             verification = self.verifier.verify(generated.answer, sources)
             verifier_flags = verification.flags
+            # A generation failure must not be stamped verified: the answer is
+            # referral text, not grounded content.
+            if generated.error:
+                verification = VerificationResult(
+                    confidence=VerificationConfidence.LOW_CONFIDENCE,
+                    flags=verification.flags + (f"generation_error: {generated.error[:120]}",),
+                    unverified_claims=verification.unverified_claims,
+                )
+                verifier_flags = verification.flags
             await emit(PipelineStage.VERIFIER, StageStatus.COMPLETE, verification.confidence.value)
 
             result = QAResult(
@@ -189,6 +211,7 @@ class QAPipeline:
                 "channel": request.channel,
                 "crop": request.crop,
                 "disease": request.disease,
+                "model_choice": request.model,
             }
         )
 

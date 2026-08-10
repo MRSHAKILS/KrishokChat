@@ -35,6 +35,41 @@ class WeatherResponse(BaseModel):
     model: str | None = None
 
 
+class ModelOption(BaseModel):
+    id: str
+    label: str
+    description: str
+    available: bool
+
+
+@router.get("/api/models", response_model=list[ModelOption])
+async def list_models(container: ContainerDep) -> list[ModelOption]:
+    """Health-check available generation models. Local model requires Ollama up."""
+    local_available = False
+    try:
+        import httpx
+        resp = httpx.get("http://127.0.0.1:11434/api/tags", timeout=3.0)
+        if resp.status_code == 200:
+            tags = resp.json().get("models", [])
+            local_available = any(m.get("name", "").startswith("krishokchat") for m in tags)
+    except Exception:
+        local_available = False
+    return [
+        ModelOption(
+            id="gemini",
+            label="Gemini 2.5 Flash-Lite",
+            description="অনলাইন মডেল — দ্রুত ও নির্ভরযোগ্য",
+            available=True,
+        ),
+        ModelOption(
+            id="krishokchat-4b",
+            label="KrishokChat-4B",
+            description="লোকাল ফাইন-টিউনড মডেল (Ollama)",
+            available=local_available,
+        ),
+    ]
+
+
 WEATHER_PROMPT = """তুমি বাংলাদেশের একজন কৃষি আবহাওয়া সহায়ক। নিচের জেলার বর্তমান মৌসুমের
 সাধারণ আবহাওয়া অনুমান করে ২-৩ বাক্যে বাংলায় লেখো। তারপর কৃষকের জন্য এক বাক্যে
 পরামর্শ দাও। শুধু এই ফরম্যাটে উত্তর দাও:
@@ -124,3 +159,69 @@ async def helpline_register(payload: HelplineRegister) -> HelplineResponse:
             status="error",
             message="নিবন্ধন সংরক্ষণে সমস্যা। অনুগ্রহ করে কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।",
         )
+
+
+# === Gemini Regional Dialect Translator ===
+
+DIALECT_NAMES = {
+    "noakhali": "নোয়াখালী",
+    "chattagram": "চাটগাঁইয়া (চট্টগ্রাম)",
+    "sylhet": "সিলেটি",
+    "rajshahi": "রাজশাহী/পাবনা",
+    "rangpur": "রংপুর/বগুড়া",
+}
+
+DIALECT_PROMPT = """তুমি বাংলাদেশের একজন অভিজ্ঞ স্থানীয় কৃষি সম্প্রসারণ কর্মকর্তা।
+নিচের প্রমিত বাংলায় লেখা কৃষি পরামর্শটিকে {dialect_name} আঞ্চলিক উপভাষায় সহজ ভাষায় রূপান্তর করো।
+
+নির্দেশনা:
+১. মূল পরামর্শের অর্থ, সুনির্দিষ্ট ডোজ ও রাসায়নিকের নাম অবিকল রাখবে।
+২. উত্তরটি {dialect_name} অঞ্চলের সাধারণ কৃষকদের ব্যবহৃত স্বাভাবিক কথা বলার ঢঙে লেখো।
+৩. কোনো অতিরিক্ত ভূমিকা বা শুভেচ্ছা বার্তা না দিয়ে সরাসরি অনূদিত অংশটুকু লেখো।
+
+প্রমিত পরামর্শ:
+{text}
+
+অনূদিত পরামর্শ ({dialect_name}):"""
+
+
+class DialectRequest(BaseModel):
+    text: str = Field(..., min_length=3, max_length=2000, description="Standard Bengali text to convert")
+    dialect: str = Field(..., description="Target dialect key: noakhali, chattagram, sylhet, rajshahi, rangpur")
+
+
+class DialectResponse(BaseModel):
+    dialect: str
+    dialect_name: str
+    translated_bn: str
+
+
+@router.post("/api/dialect/translate", response_model=DialectResponse)
+async def translate_dialect(payload: DialectRequest, container: ContainerDep) -> DialectResponse:
+    """Convert standard Bengali agricultural advice into authentic regional dialects via Gemini."""
+    import re
+    dialect_key = payload.dialect.strip().lower()
+    dialect_name = DIALECT_NAMES.get(dialect_key, "নোয়াখালী")
+
+    # Clean raw database citation tags like [CABI_WHEAT_...] so Gemini translates pure advice
+    clean_text = re.sub(r"\[[A-Z0-9_]+\]", "", payload.text).strip()
+    prompt = DIALECT_PROMPT.format(dialect_name=dialect_name, text=clean_text)
+
+    try:
+        translated = await container.qa.generator.client.generate(prompt, metadata={"task": "dialect_translation"})
+        translated = translated.strip()
+        if not translated:
+            translated = clean_text
+        return DialectResponse(
+            dialect=dialect_key,
+            dialect_name=dialect_name,
+            translated_bn=translated,
+        )
+    except Exception:
+        # Fallback response on LLM failure
+        return DialectResponse(
+            dialect=dialect_key,
+            dialect_name=dialect_name,
+            translated_bn=clean_text,
+        )
+

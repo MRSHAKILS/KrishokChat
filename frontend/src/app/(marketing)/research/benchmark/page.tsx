@@ -117,8 +117,9 @@ export default function BenchmarkPage() {
         </motion.div>
 
         {/* Table */}
-        <motion.div variants={enter} className="overflow-x-auto rounded-xl border rule">
-          <table className="w-full text-xs sm:text-sm">
+        <motion.div variants={enter} className="relative">
+          <div className="overflow-x-auto rounded-xl border rule">
+            <table className="w-full min-w-[620px] text-xs sm:text-sm">
             <thead>
               <tr className="bg-paper-2">
                 <th className="px-3 py-3 text-left font-display text-ink">মডেল</th>
@@ -143,8 +144,11 @@ export default function BenchmarkPage() {
                     transition={{ delay: i * 0.05 }}
                     className={`bg-paper ${row.sft ? "border-t-2 border-leaf/30" : ""}`}
                   >
-                    <td className={`px-3 py-2.5 ${row.sft ? "font-medium text-leaf" : "text-ink"}`}>
-                      {row.model}
+                     <td className={`px-3 py-2.5 ${row.sft ? "font-medium text-leaf" : "text-ink"}`}>
+                       <div className="flex items-center gap-2">
+                         <span>{row.model}</span>
+                         {row.sft && <span className="shrink-0 rounded-full bg-leaf/10 px-2 py-0.5 text-[9px] font-semibold text-leaf">★ সেরা ফলাফল</span>}
+                       </div>
                     </td>
                     <td className="px-3 py-2.5 text-right tabular text-ink">{f1.toFixed(3)}</td>
                     <td className="px-3 py-2.5 text-right tabular text-ink-soft">{hal.toFixed(2)}</td>
@@ -156,7 +160,10 @@ export default function BenchmarkPage() {
                 );
               })}
             </tbody>
-          </table>
+            </table>
+          </div>
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-10 rounded-r-xl bg-gradient-to-l from-paper via-paper/70 to-transparent sm:hidden" aria-hidden />
+          <p className="mt-2 text-right text-[10px] text-ink-faint sm:hidden">ডানে টানুন →</p>
         </motion.div>
         <motion.p variants={enter} className="mt-2 text-[11px] text-ink-faint">
           KrishokChat-4B ফাইন-টিউনড — GenF1 তীব্রভাবে উন্নত (০.৩১৪ vs সেরা জিরো-শট ০.১৬৫)।
@@ -201,8 +208,9 @@ export default function BenchmarkPage() {
         </motion.div>
 
         {/* Full table */}
-        <motion.div variants={enter} className="mt-6 overflow-x-auto rounded-xl border rule">
-          <table className="w-full text-xs sm:text-sm">
+        <motion.div variants={enter} className="relative mt-6">
+          <div className="overflow-x-auto rounded-xl border rule">
+          <table className="w-full min-w-[560px] text-xs sm:text-sm">
             <thead>
               <tr className="bg-paper-2">
                 <th className="px-3 py-2.5 text-left font-display text-ink">আর্কিটেকচার</th>
@@ -215,8 +223,11 @@ export default function BenchmarkPage() {
             <tbody className="divide-y divide-bone">
               {RETRIEVAL_RESULTS.map((row, i) => (
                 <tr key={i} className={`bg-paper ${row.best ? "bg-leaf/5" : ""}`}>
-                  <td className={`px-3 py-2.5 ${row.best ? "font-medium text-leaf" : "text-ink"}`}>
-                    {row.arch}
+                     <td className={`px-3 py-2.5 ${row.best ? "bg-leaf/5 font-medium text-leaf" : "text-ink"}`}>
+                     <div className="flex items-center gap-2">
+                       <span>{row.arch}</span>
+                       {row.best && <span className="shrink-0 rounded-full bg-leaf/10 px-2 py-0.5 text-[9px] font-semibold text-leaf">★ সেরা ফলাফল</span>}
+                     </div>
                   </td>
                   <td className="px-3 py-2.5 text-right tabular text-ink">{row.r1.toFixed(3)}</td>
                   <td className="px-3 py-2.5 text-right tabular text-ink">{row.r5.toFixed(3)}</td>
@@ -226,6 +237,9 @@ export default function BenchmarkPage() {
               ))}
             </tbody>
           </table>
+          </div>
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-10 rounded-r-xl bg-gradient-to-l from-paper via-paper/70 to-transparent sm:hidden" aria-hidden />
+          <p className="mt-2 text-right text-[10px] text-ink-faint sm:hidden">ডানে টানুন →</p>
         </motion.div>
       </motion.section>
 

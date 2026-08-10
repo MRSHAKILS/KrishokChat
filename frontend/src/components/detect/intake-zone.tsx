@@ -2,7 +2,7 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { RefreshCw, AlertCircle, Upload } from "lucide-react";
+import { RefreshCw, AlertCircle, Upload, ImageIcon, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { dur, ease } from "@/lib/motion";
 import { VISION } from "@/lib/constants";
@@ -17,6 +17,8 @@ export function IntakeZone({
   preview,
   onFile,
   onClear,
+  onSample,
+  sampleLoading,
   qualityWarnings,
   loading,
 }: {
@@ -24,6 +26,8 @@ export function IntakeZone({
   preview: string | null;
   onFile: (f: File) => void;
   onClear: () => void;
+  onSample?: (path: string, name: string) => void;
+  sampleLoading?: boolean;
   qualityWarnings: string[];
   loading: boolean;
 }) {
@@ -131,6 +135,29 @@ export function IntakeZone({
           )}
         </AnimatePresence>
       </motion.div>
+
+      {/* Only verified assets are offered here. More crop-specific samples
+          can be added when real checked-in images become available. */}
+      {!preview && onSample && (
+        <div className="rounded-lg border border-leaf/20 bg-leaf/5 p-3">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <div className="text-sm font-medium text-ink">নমুনা ছবি দিয়ে চেষ্টা করুন</div>
+              <p className="mt-0.5 text-xs text-ink-soft">চেক-ইন করা ধানের পাতার ছবি</p>
+            </div>
+            <ImageIcon className="h-5 w-5 shrink-0 text-leaf" />
+          </div>
+          <button
+            type="button"
+            onClick={() => onSample("/assets/close_rice.jpg", "rice-leaf-sample.jpg")}
+            disabled={sampleLoading || loading}
+            className="mt-3 flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-leaf/30 bg-paper px-3 py-2 text-sm font-medium text-leaf transition-colors hover:bg-leaf/10 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {sampleLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+            {sampleLoading ? "নমুনা প্রস্তুত হচ্ছে…" : "ধানের পাতার নমুনা নিন"}
+          </button>
+        </div>
+      )}
 
       {/* Quality warnings — gentle, actionable, not aggressive */}
       <AnimatePresence>

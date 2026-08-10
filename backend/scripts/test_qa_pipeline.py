@@ -28,4 +28,5 @@ async def main():
     print(f"Confidence: {gen['confidence']}")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

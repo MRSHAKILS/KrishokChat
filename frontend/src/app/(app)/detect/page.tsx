@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Search, Loader2 } from "lucide-react";
+import { Search, Loader2, Camera, MessageCircle } from "lucide-react";
 import { detectDisease, type DetectResponse } from "@/lib/api";
 import { VISION_STAGES, PipelineRail, type RailEvent } from "@/components/detect/pipeline-rail";
 import { IntakeZone } from "@/components/detect/intake-zone";
@@ -24,6 +24,8 @@ export default function DetectPage() {
   const [result, setResult] = useState<DetectResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [activePane, setActivePane] = useState<"detect" | "chat">("detect");
+  const [sampleLoading, setSampleLoading] = useState(false);
   const [detectedContext, setDetectedContext] = useState<{
     crop: string;
     disease: string;
@@ -54,6 +56,21 @@ export default function DetectPage() {
     setResult(null);
     setError(null);
   }, []);
+
+  const handleSample = useCallback(async (samplePath: string, sampleName: string) => {
+    setSampleLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(samplePath);
+      if (!response.ok) throw new Error("sample image unavailable");
+      const blob = await response.blob();
+      handleFile(new File([blob], sampleName, { type: blob.type || "image/jpeg" }));
+    } catch {
+      setError("নমুনা ছবিটি এখন পাওয়া যাচ্ছে না। নিজের ছবি আপলোড করুন।");
+    } finally {
+      setSampleLoading(false);
+    }
+  }, [handleFile]);
 
   const runDetect = useCallback(async () => {
     if (!file) return;
@@ -93,13 +110,43 @@ export default function DetectPage() {
         </p>
       </div>
 
+      {/* Mobile keeps the two workflows focused instead of stacking a long
+          diagnosis, treatment, and chat page. Desktop always shows both. */}
+      <div className="flex rounded-xl border rule bg-paper-2/40 p-1 lg:hidden" role="tablist" aria-label="রোগ নির্ণয় ও পরামর্শ">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activePane === "detect"}
+          onClick={() => setActivePane("detect")}
+          className={`flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors ${
+            activePane === "detect" ? "bg-leaf text-paper shadow-sm" : "text-ink-soft"
+          }`}
+        >
+          <Camera className="h-4 w-4" /> রোগ নির্ণয়
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activePane === "chat"}
+          onClick={() => setActivePane("chat")}
+          className={`relative flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors ${
+            activePane === "chat" ? "bg-leaf text-paper shadow-sm" : "text-ink-soft"
+          }`}
+        >
+          <MessageCircle className="h-4 w-4" /> পরামর্শ চ্যাট
+          {detectedContext && activePane !== "chat" && (
+            <span className="absolute right-3 top-2 h-2 w-2 rounded-full bg-ochre" aria-label="নতুন রোগ নির্ণয়ের তথ্য" />
+          )}
+        </button>
+      </div>
+
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* === LEFT: Detection Flow === */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={stagger}
-          className="space-y-5"
+          className={`space-y-5 ${activePane === "chat" ? "hidden lg:block" : "block"}`}
         >
           {/* ① Intake Zone */}
           <motion.div variants={enter} className="rounded-xl border rule bg-paper p-5">
@@ -108,6 +155,8 @@ export default function DetectPage() {
               preview={preview}
               onFile={handleFile}
               onClear={handleClear}
+              onSample={handleSample}
+              sampleLoading={sampleLoading}
               qualityWarnings={result?.quality_warnings ?? []}
               loading={loading}
             />
@@ -168,7 +217,7 @@ export default function DetectPage() {
                 transition={{ duration: dur.normal, ease: ease.smooth }}
                 className="overflow-hidden rounded-xl border rule bg-paper-2/30 p-5"
               >
-                <div className="mb-3 text-[11px] uppercase tracking-[0.16em] text-ink-faint">
+                <div className="mb-3 text-[11px] font-semibold text-ink-faint">
                   বিশ্লেষণ প্রক্রিয়া
                 </div>
                 <PipelineRail stages={VISION_STAGES} events={railEvents} active={loading} />
@@ -204,7 +253,7 @@ export default function DetectPage() {
         </motion.div>
 
         {/* === RIGHT: Chat Panel (always visible) === */}
-        <section className="flex min-h-[60vh] flex-col rounded-xl border rule bg-paper p-5 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)]">
+        <section className={`min-h-[60vh] flex-col rounded-xl border rule bg-paper p-5 lg:sticky lg:top-20 lg:flex lg:max-h-[calc(100vh-6rem)] ${activePane === "chat" ? "flex" : "hidden lg:flex"}`}>
           <div className="mb-3">
             <h2 className="font-display text-lg text-ink">কৃষি পরামর্শ</h2>
             <ContextBanner

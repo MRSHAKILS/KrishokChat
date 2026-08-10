@@ -1,8 +1,19 @@
 # Ollama Modelfile for KrishokChat fine-tuned Gemma model
-# Place your fine-tuned GGUF alongside this file, then run:
-#   ollama create gemma-finetuned:4-bit -f Modelfile
 #
-# Replace ./model.gguf with the actual filename of your quantized model.
+# The tag created MUST be "krishokchat-4b" — the backend probes Ollama for
+# exactly this name (see backend/app/api/extras.py /api/models).
+#
+# You normally do NOT run this file directly. Use the one-command helper:
+#
+#   powershell -ExecutionPolicy Bypass -File scripts\local_model.ps1
+#
+# Manual equivalent (from the repo root, GGUF at backend/ml_assets/gemma/model.gguf):
+#   1. Start Ollama (Windows: the Ollama app, or `ollama serve`)
+#   2. Copy this Modelfile next to the GGUF and run:
+#      cd backend\ml_assets\gemma
+#      ollama create krishokchat-4b -f <path-to-this-Modelfile>
+#
+# FROM must be an absolute path or relative to the Modelfile's own directory.
 
 FROM ./model.gguf
 

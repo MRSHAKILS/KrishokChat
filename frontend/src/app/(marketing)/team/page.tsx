@@ -164,7 +164,7 @@ export default function TeamPage() {
 
         {/* 5-stage ground truth pipeline */}
         <motion.div variants={enter} className="mt-8">
-          <div className="mb-3 text-xs uppercase tracking-[0.14em] text-ochre">
+          <div className="mb-3 text-xs font-semibold text-ochre">
             গ্রাউন্ড-ট্রুথ তৈরির ৫ ধাপ
           </div>
           <div className="space-y-2">

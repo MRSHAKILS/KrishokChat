@@ -11,8 +11,9 @@ import {
   Play,
   AlertTriangle,
   ChevronDown,
+  Phone,
 } from "lucide-react";
-import { RESEARCH_STATS } from "@/lib/constants";
+import { HELPLINE, RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 
 /* =========================================================================
@@ -31,34 +32,30 @@ const REAL_QUERY = "আলুর দেরি ব্লাইট কীভাব
 
 const REAL_SOURCES = [
   {
-    id: "DAE_PEST_1206A0_001",
-    score: 33.23,
     publisher: "DAE",
     title: "আলুর দেরি ব্লাইট নিয়ন্ত্রণের জন্য কীটনাশক",
+    reference: "কৃষি সম্প্রসারণ অধিদপ্তর — বালাই ব্যবস্থাপনা নির্দেশিকা",
     snippet: "আলুর দেরি ব্লাইট (Late Blight) দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত কীটনাশকগুলি নিবন্ধিত। প্রতি লিটার পানিতে ২ গ্রাম মাত্রায় মিশ্রণ করে স্প্রে করতে হবে।",
     chemicals: ["Mancozeb 80WP", "Metalaxyl"],
   },
   {
-    id: "CABI_POTATO_834B4F_001",
-    score: 32.59,
     publisher: "CABI",
     title: "Potato late blight — লেট ব্লাইট",
+    reference: "CABI — Potato Disease Manuals",
     snippet: "লেট ব্লাইট বা মড়ক রোগ আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে এমন একটি সাধারণ এবং সম্ভাব্য ধ্বংসাত্মক রোগ। এটি Phytophthora infestans ছত্রাক দ্বারা সৃষ্ট।",
     chemicals: ["Copper oxychloride"],
   },
   {
-    id: "DAE_PEST_B3531E_001",
-    score: 31.08,
     publisher: "DAE",
     title: "আলুর মোজাইক বা ধসা রোগ (late blight)",
+    reference: "কৃষি সম্প্রসারণ অধিদপ্তর — ফসল সুরক্ষা নির্দেশিকা",
     snippet: "আলুর মোজাইক বা ধসা রোগ (late blight) দমনের জন্য অধিকাংশ প্যান্ডি 80WP ফরমুলেশনের এবং প্রতি হেক্টরে ১.৫ কেজি মাত্রায় প্রয়োগ করতে হবে।",
     chemicals: ["Mancozeb", "Metalaxyl"],
   },
   {
-    id: "CABI_POTATO_42D248_001",
-    score: 27.71,
     publisher: "CABI",
     title: "Potato Late Blight — লেট ব্লাইট",
+    reference: "CABI — রোগের লক্ষণ ও ব্যবস্থাপনা",
     snippet: "লেট ব্লাইট একটি মারাত্মক ছত্রাকজনিত রোগ যা Phytophthora infestans দ্বারা সৃষ্ট। এটি পাতার নিচে ছোট ছোট সবুজ-বাদামি দাগ হিসেবে শুরু হয়।",
     chemicals: [],
   },
@@ -71,7 +68,7 @@ const REAL_ANSWER = `আলুর দেরি ব্লাইট (Late Blight) 
 • সঠিক নিষ্কাশন ব্যবস্থা নিশ্চিত করুন
 • আক্রান্ত গাছ অবিলম্বে অপসারণ করুন
 
-কীটনাশক: প্রতি লিটার পানিতে ২ গ্রাম Mancozeb 80WP মিশ্রণ করে স্প্রে করুন [DAE_PEST_1206A0_001]।
+কীটনাশক: প্রতি লিটার পানিতে ২ গ্রাম Mancozeb 80WP মিশ্রণ করে স্প্রে করুন।
 
 নিশ্চিত হতে কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।`;
 
@@ -100,6 +97,8 @@ export default function SafetyPage() {
         </motion.p>
       </motion.section>
 
+      <HelplineCallout />
+
       {/* THE animated RAG workflow */}
       <RagWorkflowDemo />
 
@@ -109,6 +108,30 @@ export default function SafetyPage() {
       {/* Audit trail */}
       <AuditTrail />
     </div>
+  );
+}
+
+function HelplineCallout() {
+  return (
+    <motion.a
+      href={`tel:${HELPLINE.krishiCallCenter}`}
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="group relative flex items-center gap-4 overflow-hidden rounded-xl border border-leaf/25 bg-leaf/10 px-5 py-4 transition-colors hover:bg-leaf/15"
+    >
+      <span className="absolute -left-3 -top-3 h-14 w-14 animate-ping rounded-full border border-leaf/30" aria-hidden />
+      <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-leaf text-paper">
+        <Phone className="h-5 w-5" />
+      </div>
+      <div className="min-w-0 flex-1">
+        <div className="font-display text-lg text-ink">কৃষি পরামর্শে নিশ্চিত হতে কল করুন</div>
+        <p className="mt-0.5 text-xs text-ink-soft">নিষিদ্ধ রাসায়নিক, মাত্রা বা জরুরি স্বাস্থ্য ঝুঁকিতে সরকারি কৃষি সহায়তা নিন।</p>
+      </div>
+      <span className="relative shrink-0 rounded-full bg-leaf px-3 py-1.5 text-sm font-semibold text-paper tabular transition-transform group-hover:scale-105">
+        {HELPLINE.krishiCallCenter}
+      </span>
+    </motion.a>
   );
 }
 
@@ -194,7 +217,7 @@ function RagWorkflowDemo() {
       <motion.div variants={enter} className="mb-6 rounded-xl border rule bg-paper-2/40 p-4">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
-            <div className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">কৃষকের প্রশ্ন</div>
+            <div className="text-[10px] font-semibold text-ink-faint">কৃষকের প্রশ্ন</div>
             <div className="mt-1 text-sm font-medium text-ink">{REAL_QUERY}</div>
           </div>
           <button
@@ -253,7 +276,7 @@ function RagWorkflowDemo() {
             >
               <div className="flex items-center gap-3">
                 <span className="rounded-md bg-leaf/10 px-3 py-1 text-sm font-medium text-leaf">
-                  safe_agri
+                  অনুমোদিত কৃষি প্রশ্ন
                 </span>
                 <span className="text-sm text-ink-soft">নির্ভরযোগ্যতা: ০.৯৯</span>
                 <span className="text-xs text-ink-faint">→ প্রশ্নটি নিরাপদ, তথ্য সংগ্রহে যান</span>
@@ -269,21 +292,21 @@ function RagWorkflowDemo() {
               <div className="space-y-2">
                 {REAL_SOURCES.slice(0, visibleSources).map((src, i) => (
                   <motion.div
-                    key={src.id}
+                    key={src.reference}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1, duration: dur.fast }}
                     className="rounded-lg border rule bg-paper p-3"
                   >
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] text-ink-faint">[{i + 1}]</span>
-                        <span className="font-mono text-[11px] text-ink">{src.id}</span>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex min-w-0 items-start gap-2">
+                        <span className="shrink-0 font-mono text-[10px] text-ink-faint">[{i + 1}]</span>
+                        <div className="min-w-0">
+                          <div className="text-[11px] font-medium text-ink">{src.title}</div>
+                          <div className="mt-0.5 truncate text-[10px] text-ink-faint">{src.reference}</div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="rounded-md bg-ochre-soft/30 px-1.5 py-0.5 text-[10px] text-ochre">{src.publisher}</span>
-                        <span className="font-mono text-[10px] tabular text-leaf">score: {src.score.toFixed(2)}</span>
-                      </div>
+                      <span className="shrink-0 rounded-md bg-ochre-soft/30 px-1.5 py-0.5 text-[10px] text-ochre">{src.publisher}</span>
                     </div>
                     <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">{src.snippet}</p>
                     {src.chemicals.length > 0 && (
@@ -329,10 +352,10 @@ function RagWorkflowDemo() {
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <CheckCircle2 className="h-4 w-4 text-leaf" />
-                  <span className="text-ink">উৎস আইডি [DAE_PEST_1206A0_001] — যাচাইকৃত ✓</span>
+                  <span className="text-ink">কৃষি সম্প্রসারণ অধিদপ্তরের উৎস — যাচাইকৃত ✓</span>
                 </div>
                 <div className="mt-2 flex items-center gap-2 rounded-md bg-leaf/8 px-3 py-2 text-sm">
-                  <span className="font-medium text-leaf">নির্ভরযোগ্যতা: verified</span>
+                  <span className="font-medium text-leaf">নির্ভরযোগ্যতা: যাচাইকৃত</span>
                   <span className="text-ink-soft">— সব দাবি উৎসে ফিরে যাচাইকৃত</span>
                 </div>
               </div>

@@ -39,6 +39,8 @@ backend/ml_assets/classifier/*.h5
 backend/ml_assets/classifier/*.pkl
 backend/ml_assets/gemma/*.gguf
 backend/ml_assets/gemma/*.safetensors
+# Raw training checkpoints (multi-GB) — never commit
+backend/ml_assets/gemma/raw/
 backend/ml_assets/rag_index/*.faiss
 backend/ml_assets/rag_index/*.index
 backend/ml_assets/rag_index/*.pkl

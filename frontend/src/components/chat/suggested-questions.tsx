@@ -108,7 +108,7 @@ export function SuggestedQuestions({
       variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
       className="space-y-3"
     >
-      <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.16em] text-ink-faint">
+      <div className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-faint">
         <Sparkles className="h-3 w-3" />
         পরামর্শিত প্রশ্ন
       </div>
@@ -117,10 +117,13 @@ export function SuggestedQuestions({
           <motion.button
             key={q}
             variants={enter}
+            whileHover={{ scale: 1.01, x: 2 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => onPick(q)}
-            className="rounded-lg border rule bg-paper-2/30 px-4 py-2.5 text-left text-sm text-ink-soft transition-all hover:border-leaf hover:bg-paper-2/60 hover:text-ink"
+            className="group flex items-start gap-2 rounded-xl border rule bg-paper-2/30 px-3.5 py-2.5 text-left text-xs sm:text-sm text-ink-soft transition-all hover:border-leaf/50 hover:bg-leaf/5 hover:text-leaf"
           >
-            {q}
+            <span className="mt-0.5 text-leaf opacity-60 transition-opacity group-hover:opacity-100">↳</span>
+            <span className="line-clamp-2 flex-1 leading-snug">{q}</span>
           </motion.button>
         ))}
       </div>

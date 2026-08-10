@@ -14,7 +14,7 @@ export default function ContactPage() {
           className="flex items-center justify-between rounded-xl border rule bg-paper px-5 py-4 transition-colors hover:border-leaf"
         >
           <div>
-            <div className="text-xs uppercase tracking-[0.16em] text-ink-faint">
+            <div className="text-xs font-semibold text-ink-faint">
               কৃষক কল সেন্টার
             </div>
             <div className="mt-0.5 text-sm text-ink">বাংলাদেশ সরকার</div>
@@ -28,7 +28,7 @@ export default function ContactPage() {
           className="flex items-center justify-between rounded-xl border rule bg-paper px-5 py-4 transition-colors hover:border-clay"
         >
           <div>
-            <div className="text-xs uppercase tracking-[0.16em] text-ink-faint">জরুরি</div>
+            <div className="text-xs font-semibold text-ink-faint">জরুরি</div>
             <div className="mt-0.5 text-sm text-ink">জাতীয় জরুরি সেবা</div>
           </div>
           <span className="tabular text-lg font-semibold text-clay">
