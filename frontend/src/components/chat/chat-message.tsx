@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, AlertCircle, Eye, EyeOff, Volume2, VolumeX, Globe, Loader2, Sparkles } from "lucide-react";
+import { ChevronDown, AlertCircle, Eye, EyeOff, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { dur, ease } from "@/lib/motion";
 import { QA_STAGES, PipelineRail, type RailEvent } from "@/components/detect/pipeline-rail";
@@ -10,7 +10,7 @@ import { ConfidenceBadge } from "./confidence-badge";
 import { SourceList } from "./source-list";
 import { SafetyNotice } from "./safety-notice";
 import { HELPLINE } from "@/lib/constants";
-import { translateDialect, type QAResponse, type SourceNode, type AgentStageEvent } from "@/lib/api";
+import { type QAResponse, type SourceNode, type AgentStageEvent } from "@/lib/api";
 
 /* =========================================================================
    ChatMessage — renders one message in the conversation.
@@ -22,10 +22,9 @@ import { translateDialect, type QAResponse, type SourceNode, type AgentStageEven
      - "লেখছে…" indicator
 
    Assistant messages (after completion):
-     - If blocked (non-safe_agri category): SafetyNotice
-     - If answered: answer text + ConfidenceBadge + verifier flags + SourceList
-     - Regional Dialect Translator (Gemini 2.5 Flash Lite) + Voice TTS
-     - Collapsible "ধাপ দেখুন" toggle for the trace
+   - If blocked (non-safe_agri category): SafetyNotice
+   - If answered: answer text + ConfidenceBadge + verifier flags + SourceList
+   - One browser voice control and a collapsible process trace
    ========================================================================= */
 
 export type ChatMessageData =
@@ -64,7 +63,7 @@ export function ChatMessage({
       transition={{ duration: dur.normal, ease: ease.smooth }}
       className="flex justify-start"
     >
-      <div className="w-full max-w-[88%] rounded-lg rounded-bl-sm bg-paper-2 px-4 py-3">
+      <div className="w-full max-w-4xl rounded-xl rounded-bl-sm border rule bg-paper-2/80 px-4 py-4 shadow-sm sm:px-5">
         {streaming ? (
           <StreamingContent events={traceEvents ?? []} />
         ) : message.error ? (
@@ -92,22 +91,26 @@ function StreamingContent({ events }: { events: AgentStageEvent[] }) {
   const genActive = events.some(
     (e) => e.stage === "generation" && (e.status === "start" || e.status === "active"),
   );
+  const activeEvent = [...events]
+    .reverse()
+    .find((event) => event.status === "start" || event.status === "active");
+  const activeLabel = QA_STAGES.find((stage) => stage.key === activeEvent?.stage)?.label;
 
   return (
-    <div className="space-y-3">
-      <PipelineRail stages={QA_STAGES} events={railEvents} active={true} />
-      {genActive && (
-        <motion.div
-          animate={{ opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex items-center gap-1 text-sm text-ink-soft"
-        >
-          <span>লেখছে</span>
-          <span className="flex gap-0.5">
-            <Dot /> <Dot delay={0.15} /> <Dot delay={0.3} />
-          </span>
-        </motion.div>
-      )}
+    <div className="space-y-4">
+      <div className="rounded-xl border rule bg-paper/60 p-3 sm:p-4">
+        <PipelineRail stages={QA_STAGES} events={railEvents} active={true} />
+      </div>
+      <motion.div
+        animate={{ opacity: [0.55, 1, 0.55] }}
+        transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+        className="flex items-center gap-2 text-sm text-ink-soft"
+      >
+        <span>{genActive ? "উত্তর তৈরি হচ্ছে" : activeLabel ? `${activeLabel} চলছে` : "উত্তর প্রস্তুত হচ্ছে"}</span>
+        <span className="flex gap-0.5">
+          <Dot /> <Dot delay={0.15} /> <Dot delay={0.3} />
+        </span>
+      </motion.div>
     </div>
   );
 }
@@ -132,11 +135,12 @@ function ErrorContent({ error }: { error: string }) {
   );
 }
 
-/* --- Completed state: answer + confidence + sources + flags + dialect/voice --- */
+/* --- Completed state: answer + confidence + sources + flags + voice --- */
 
 function formatAnswerWithCleanCitations(text: string, sources: SourceNode[] = []) {
   if (!text) return text;
-  const tagRegex = /\[([A-Z0-9_]+)\]/g;
+  // Match [ID] including uppercase, lowercase, numbers, underscores, hyphens
+  const tagRegex = /\[([A-Za-z0-9_\-]+)\]/g;
   const bnDigits = ["১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "১০"];
 
   return text.replace(tagRegex, (match, id) => {
@@ -174,10 +178,42 @@ function FormattedAnswerText({ text }: { text: string }) {
   );
 }
 
+function getVoicesWhenReady(synth: SpeechSynthesis): Promise<SpeechSynthesisVoice[]> {
+  const voices = synth.getVoices();
+  if (voices.length > 0) return Promise.resolve(voices);
+
+  return new Promise((resolve) => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timeoutId);
+      synth.removeEventListener("voiceschanged", finish);
+      resolve(synth.getVoices());
+    };
+
+    synth.addEventListener("voiceschanged", finish);
+    // Some browsers do not emit voiceschanged until a second synthesis call.
+    // A short timeout still lets the system default voice work.
+    const timeoutId = window.setTimeout(finish, 450);
+  });
+}
+
 function CompletedContent({ response }: { response: QAResponse }) {
   const blocked = response.category !== "safe_agri";
   const [traceOpen, setTraceOpen] = useState(false);
   const [speaking, setSpeaking] = useState(false);
+  const [speechError, setSpeechError] = useState(false);
+  const speechRequest = useRef(0);
+
+  useEffect(() => {
+    return () => {
+      speechRequest.current += 1;
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
 
   // Safety-blocked query → show SafetyNotice
   if (blocked) {
@@ -186,50 +222,65 @@ function CompletedContent({ response }: { response: QAResponse }) {
 
   const cleanAnswer = formatAnswerWithCleanCitations(response.answer, response.sources);
 
-  const toggleSpeech = (textToRead: string) => {
+  const toggleSpeech = async (textToRead: string) => {
     if (typeof window === "undefined") return;
+    const synth = "speechSynthesis" in window ? window.speechSynthesis : null;
+
     if (speaking) {
-      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      speechRequest.current += 1;
+      synth?.cancel();
       setSpeaking(false);
       return;
     }
 
-    const cleanText = textToRead.replaceAll(/\[[A-Z0-9_]+\]/g, "").trim();
+    const cleanText = textToRead
+      .replace(/\[[^\]]+\]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
     if (!cleanText) return;
 
+    if (!synth) {
+      setSpeechError(true);
+      return;
+    }
+
+    const requestId = ++speechRequest.current;
+    setSpeechError(false);
     setSpeaking(true);
 
-    const playFallbackAudio = () => {
-      try {
-        const chunk = encodeURIComponent(cleanText.slice(0, 200));
-        const audio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&q=${chunk}&tl=bn&client=tw-ob`);
-        audio.onended = () => setSpeaking(false);
-        audio.onerror = () => setSpeaking(false);
-        audio.play().catch(() => setSpeaking(false));
-      } catch {
-        setSpeaking(false);
+    synth.cancel();
+    const voices = await getVoicesWhenReady(synth);
+    if (speechRequest.current !== requestId) return;
+
+    const bnVoice = voices.find(
+      (voice) =>
+        voice.lang.toLowerCase().startsWith("bn") ||
+        voice.name.toLowerCase().includes("bengali"),
+    );
+    const selectedVoice = bnVoice ?? voices.find((voice) => voice.default) ?? voices[0];
+    const utterance = new SpeechSynthesisUtterance(cleanText.slice(0, 1000));
+    // Prefer a Bengali system voice. If the device has none, use its default
+    // voice rather than silently failing with language-unavailable.
+    utterance.lang = selectedVoice?.lang ?? "bn-BD";
+    utterance.rate = 0.88;
+    if (selectedVoice) utterance.voice = selectedVoice;
+
+    utterance.onstart = () => setSpeaking(true);
+    utterance.onend = () => setSpeaking(false);
+    utterance.onerror = (event) => {
+      if (event.error !== "canceled" && event.error !== "interrupted") {
+        setSpeechError(true);
       }
+      setSpeaking(false);
     };
 
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const voices = window.speechSynthesis.getVoices();
-      const bnVoice = voices.find(
-        (v) => v.lang.includes("bn") || v.lang.includes("BD") || v.name.toLowerCase().includes("bengali"),
-      );
-
-      const utterance = new SpeechSynthesisUtterance(cleanText.slice(0, 300));
-      utterance.lang = "bn-BD";
-      utterance.rate = 0.88;
-      if (bnVoice) utterance.voice = bnVoice;
-
-      utterance.onend = () => setSpeaking(false);
-      utterance.onerror = () => playFallbackAudio();
-
-      window.speechSynthesis.speak(utterance);
-    } else {
-      playFallbackAudio();
-    }
+    // A brief yield after cancel prevents Chrome from dropping the new
+    // utterance when a previous answer was just stopped.
+    window.setTimeout(() => {
+      if (speechRequest.current !== requestId) return;
+      synth.resume();
+      synth.speak(utterance);
+    }, 40);
   };
 
   return (
@@ -239,20 +290,20 @@ function CompletedContent({ response }: { response: QAResponse }) {
         <FormattedAnswerText text={cleanAnswer} />
       </p>
 
-      {/* Action Row: Confidence + Voice Reader + Trace toggle */}
-      <div className="flex flex-wrap items-center gap-2.5">
+      {/* Keep the answer actions to one useful voice control and one optional
+          detail link. The verification badge is informational, not a button. */}
+      <div className="flex flex-wrap items-center gap-2 border-t rule pt-3">
         <ConfidenceBadge confidence={response.confidence} />
 
-        {/* Voice TTS Speaker button */}
         <button
           onClick={() => toggleSpeech(response.answer)}
           type="button"
           aria-label={speaking ? "আবৃত্তি বন্ধ করুন" : "পরামর্শটি শুনুন"}
           className={cn(
-            "flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium transition-colors",
+            "flex min-h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-medium transition-colors active:scale-[0.98]",
             speaking
-              ? "bg-leaf text-paper"
-              : "bg-leaf/10 text-leaf hover:bg-leaf/20",
+              ? "border-leaf bg-leaf text-paper"
+              : "border-leaf/25 bg-leaf/8 text-leaf hover:bg-leaf/15",
           )}
         >
           {speaking ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
@@ -262,17 +313,20 @@ function CompletedContent({ response }: { response: QAResponse }) {
         {response.agent_trace.length > 0 && (
           <button
             onClick={() => setTraceOpen((v) => !v)}
-            className="flex items-center gap-1 text-[11px] font-semibold text-ink-faint transition-colors hover:text-leaf"
+            aria-expanded={traceOpen}
+            className="flex min-h-9 items-center gap-1 rounded-lg px-2 text-xs font-medium text-ink-faint transition-colors hover:text-leaf"
           >
             {traceOpen ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
-            ধাপ
+            প্রক্রিয়া দেখুন
             <ChevronDown className={cn("h-3 w-3 transition-transform", traceOpen && "rotate-180")} />
           </button>
         )}
       </div>
-
-      {/* Regional Dialect Translator (Gemini 2.5 Flash Lite) */}
-      <DialectTranslator originalText={response.answer} />
+      {speechError && (
+        <p className="text-[11px] text-clay" role="status">
+          এই ব্রাউজারে শব্দ চালু করা যায়নি। ব্রাউজারের শব্দ ও স্পিকারের অনুমতি পরীক্ষা করুন।
+        </p>
+      )}
 
       {/* Verifier flags */}
       {response.verifier_flags.length > 0 && (
@@ -323,182 +377,3 @@ function CompletedContent({ response }: { response: QAResponse }) {
     </div>
   );
 }
-
-/* --- Regional Dialect Translator Sub-component --- */
-
-const DIALECT_OPTIONS = [
-  { id: "noakhali", label: "নোয়াখালী" },
-  { id: "chattagram", label: "চাটগাঁইয়া" },
-  { id: "sylhet", label: "সিলেটি" },
-  { id: "rajshahi", label: "রাজশাহী" },
-  { id: "rangpur", label: "রংপুর" },
-] as const;
-
-function DialectTranslator({ originalText }: { originalText: string }) {
-  const [selected, setSelected] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [translations, setTranslations] = useState<Record<string, { name: string; text: string }>>({});
-  const [speaking, setSpeaking] = useState(false);
-
-  const handleSelect = async (dialectId: string) => {
-    if (selected === dialectId) {
-      setSelected(null);
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-      setSpeaking(false);
-      return;
-    }
-    setSelected(dialectId);
-
-    if (translations[dialectId]) return;
-
-    const opt = DIALECT_OPTIONS.find((o) => o.id === dialectId);
-    const defaultLabel = opt ? opt.label : dialectId;
-
-    setLoading(true);
-    try {
-      const res = await translateDialect(originalText, dialectId);
-      setTranslations((prev) => ({
-        ...prev,
-        [dialectId]: { name: res.dialect_name, text: res.translated_bn },
-      }));
-    } catch {
-      // Fallback clean Bengali advice text without raw DB tags
-      const cleanOriginal = originalText.replaceAll(/\[[A-Z0-9_]+\]/g, "").trim();
-      setTranslations((prev) => ({
-        ...prev,
-        [dialectId]: { name: defaultLabel, text: cleanOriginal },
-      }));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const toggleDialectSpeech = (textToRead: string) => {
-    if (typeof window === "undefined") return;
-    if (speaking) {
-      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-      setSpeaking(false);
-      return;
-    }
-
-    const cleanText = textToRead.replaceAll(/\[[A-Z0-9_]+\]/g, "").trim();
-    if (!cleanText) return;
-
-    setSpeaking(true);
-
-    const playFallbackAudio = () => {
-      try {
-        const chunk = encodeURIComponent(cleanText.slice(0, 200));
-        const audio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&q=${chunk}&tl=bn&client=tw-ob`);
-        audio.onended = () => setSpeaking(false);
-        audio.onerror = () => setSpeaking(false);
-        audio.play().catch(() => setSpeaking(false));
-      } catch {
-        setSpeaking(false);
-      }
-    };
-
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const voices = window.speechSynthesis.getVoices();
-      const bnVoice = voices.find(
-        (v) => v.lang.includes("bn") || v.lang.includes("BD") || v.name.toLowerCase().includes("bengali"),
-      );
-
-      const u = new SpeechSynthesisUtterance(cleanText.slice(0, 300));
-      u.lang = "bn-BD";
-      u.rate = 0.88;
-      if (bnVoice) u.voice = bnVoice;
-
-      u.onend = () => setSpeaking(false);
-      u.onerror = () => playFallbackAudio();
-
-      window.speechSynthesis.speak(u);
-    } else {
-      playFallbackAudio();
-    }
-  };
-
-  const currentTranslation = selected ? translations[selected] : null;
-
-  return (
-    <div className="mt-2 space-y-2 border-t rule pt-2">
-      <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-ink-faint">
-        <span className="flex items-center gap-1 font-semibold text-leaf">
-          <Globe className="h-3 w-3" />
-          উপভাষা:
-        </span>
-        {DIALECT_OPTIONS.map((d) => {
-          const active = selected === d.id;
-          return (
-            <button
-              key={d.id}
-              onClick={() => handleSelect(d.id)}
-              className={cn(
-                "rounded-md px-2 py-0.5 transition-colors",
-                active
-                  ? "bg-leaf text-paper font-medium"
-                  : "bg-paper hover:bg-leaf/10 hover:text-leaf text-ink-soft",
-              )}
-            >
-              {d.label} {active ? "✓" : ""}
-            </button>
-          );
-        })}
-      </div>
-
-      <AnimatePresence mode="wait">
-        {selected && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden rounded-lg border border-leaf/25 bg-leaf/5 p-3"
-          >
-            {loading ? (
-              <div className="flex items-center gap-2 text-xs text-leaf">
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                <span>Gemini এআই উপভাষায় রূপান্তর করছে…</span>
-              </div>
-            ) : currentTranslation ? (
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-xs font-semibold text-leaf">
-                  <span className="flex items-center gap-1">
-                    <Sparkles className="h-3 w-3" />
-                    {currentTranslation.name} উপভাষায় পরামর্শ:
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => toggleDialectSpeech(currentTranslation.text)}
-                      className="flex items-center gap-1 text-[11px] font-medium text-leaf hover:underline"
-                    >
-                      {speaking ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
-                      {speaking ? "থামুন" : "উপভাষায় শুনুন"}
-                    </button>
-                    <button
-                      onClick={() => {
-                        setSelected(null);
-                        if (typeof window !== "undefined" && "speechSynthesis" in window) {
-                          window.speechSynthesis.cancel();
-                        }
-                        setSpeaking(false);
-                      }}
-                      className="text-[11px] font-medium text-ink-faint hover:text-clay"
-                      title="প্রমিত বাংলায় ফিরে যান"
-                    >
-                      ✕ বন্ধ করুন
-                    </button>
-                  </div>
-                </div>
-                <p className="text-xs leading-relaxed text-ink">{currentTranslation.text}</p>
-              </div>
-            ) : null}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-

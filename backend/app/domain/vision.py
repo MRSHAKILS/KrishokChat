@@ -59,6 +59,7 @@ class VisionResult:
     status: VisionStatus
     crop: str | None = None
     crop_confidence: float = 0.0
+    crop_source: str = "model"  # "model" | "user"
     disease: str | None = None
     disease_confidence: float = 0.0
     top3_crops: tuple[dict[str, str | float], ...] = ()

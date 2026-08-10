@@ -66,6 +66,7 @@ export interface DetectResponse {
   detection_mode: string; // "classification" (boxes empty until a real detector exists)
   crop: string | null;
   crop_confidence: number;
+  crop_source: string; // "model" | "user"
   disease: string | null;
   disease_confidence: number;
   boxes: { x: number; y: number; width: number; height: number; label: string; confidence: number }[];
@@ -178,9 +179,15 @@ export async function classifyCrop(file: File): Promise<ClassifyResponse> {
   return res.json();
 }
 
-export async function detectDisease(file: File): Promise<DetectResponse> {
+export async function detectDisease(
+  file: File,
+  opts?: { cropHint?: string },
+): Promise<DetectResponse> {
   const form = new FormData();
   form.append("file", file);
+  if (opts?.cropHint) {
+    form.append("crop_hint", opts.cropHint);
+  }
   const res = await fetch(`${API_BASE}/api/detect`, { method: "POST", body: form });
   if (!res.ok) throw new Error(`detect failed: ${res.status}`);
   return res.json();

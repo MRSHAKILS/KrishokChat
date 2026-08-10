@@ -14,6 +14,17 @@ import { enter, stagger, dur, ease } from "@/lib/motion";
    Live data from /api/safety/metrics + research benchmark context.
    ========================================================================= */
 
+function formatQueryForAnalyticsDisplay(rawQuery?: string | null): string {
+  if (!rawQuery || !rawQuery.trim() || rawQuery === "(খালি)") {
+    return "📷 চিত্রভিত্তিক রোগ নির্ণয় ও বালাই বিশ্লেষণ স্ক্যান";
+  }
+  let q = rawQuery;
+  q = q.replace(/Corn[_\s]*Northern[_\s]*Leaf[_\s]*Blight/gi, "ভুট্টা — উত্তরীয় পাতা পোড়া (Northern Leaf Blight)");
+  q = q.replace(/আলুর\s*দেরি\s*ব্লাইট/g, "আলুর লেট ব্লাইট (নাবি ধসা)");
+  q = q.replace(/paraquat/gi, "প্যারাকোয়াট (Paraquat — নিষিদ্ধ রাসায়নিক)");
+  return q;
+}
+
 export default function AnalyticsPage() {
   const [metrics, setMetrics] = useState<SafetyMetrics | null>(null);
   const [loading, setLoading] = useState(true);
@@ -238,18 +249,19 @@ export default function AnalyticsPage() {
           className="rounded-xl border rule bg-paper"
         >
           <motion.div variants={enter} className="flex items-center justify-between border-b rule px-5 py-4">
-            <h2 className="font-display text-lg text-ink">সাম্প্রতিক প্রশ্ন</h2>
+            <h2 className="font-display text-lg text-ink">সাম্প্রতিক প্রশ্ন ও স্ক্যান অডিট</h2>
             <TrendingUp className="h-4 w-4 text-ink-faint" />
           </motion.div>
           <motion.ul variants={enter} className="divide-y divide-bone">
             {recent.slice(0, 12).map((r, i) => {
-              const isBlocked = r.category !== "safe_agri";
+              const isBlocked = r.category !== "safe_agri" && r.category !== "vision_advisory";
               const categoryLabel = safetyLabel(r.category);
+              const displayQuery = formatQueryForAnalyticsDisplay(r.query);
               return (
                 <li key={i} className="flex items-center justify-between gap-4 px-5 py-3">
                   <div className="flex min-w-0 items-center gap-3">
                     <div className={`h-2 w-2 shrink-0 rounded-full ${isBlocked ? "bg-clay" : "bg-leaf"}`} />
-                    <span className="truncate text-sm text-ink-soft">{r.query || "(খালি)"}</span>
+                    <span className="truncate text-sm text-ink-soft">{displayQuery}</span>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
                     <span className="text-[10px] text-ink-faint tabular">

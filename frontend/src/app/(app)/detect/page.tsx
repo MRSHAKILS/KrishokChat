@@ -26,6 +26,10 @@ export default function DetectPage() {
   const [error, setError] = useState<string | null>(null);
   const [activePane, setActivePane] = useState<"detect" | "chat">("detect");
   const [sampleLoading, setSampleLoading] = useState(false);
+  /* Crop selection — the crop classifier has no Rice class, so the farmer
+     declares the crop and the backend routes to the matching disease model
+     directly. Empty = automatic classification. */
+  const [cropHint, setCropHint] = useState("");
   const [detectedContext, setDetectedContext] = useState<{
     crop: string;
     disease: string;
@@ -64,6 +68,9 @@ export default function DetectPage() {
       const response = await fetch(samplePath);
       if (!response.ok) throw new Error("sample image unavailable");
       const blob = await response.blob();
+      // The verified sample is a rice leaf; the crop model cannot classify
+      // rice itself, so preselect it for a guaranteed rice diagnosis.
+      setCropHint("rice");
       handleFile(new File([blob], sampleName, { type: blob.type || "image/jpeg" }));
     } catch {
       setError("নমুনা ছবিটি এখন পাওয়া যাচ্ছে না। নিজের ছবি আপলোড করুন।");
@@ -78,7 +85,7 @@ export default function DetectPage() {
     setError(null);
     setResult(null);
     try {
-      const r = await detectDisease(file);
+      const r = await detectDisease(file, { cropHint: cropHint || undefined });
       setResult(r);
       if (r.crop && r.disease) {
         setDetectedContext({ crop: r.crop, disease: r.disease });
@@ -97,7 +104,7 @@ export default function DetectPage() {
       }
     }
     setLoading(false);
-  }, [file]);
+  }, [file, cropHint]);
 
   return (
     <div className="space-y-7">
@@ -159,6 +166,8 @@ export default function DetectPage() {
               sampleLoading={sampleLoading}
               qualityWarnings={result?.quality_warnings ?? []}
               loading={loading}
+              cropHint={cropHint}
+              onCropHintChange={setCropHint}
             />
 
             {/* Action button */}

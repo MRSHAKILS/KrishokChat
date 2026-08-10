@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import io
 
-from fastapi import APIRouter, HTTPException, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from PIL import Image, UnidentifiedImageError
 
 from app.api.dependencies import ContainerDep
@@ -58,14 +58,19 @@ async def classify_crop(file: UploadFile, container: ContainerDep) -> ClassifyRe
 
 
 @router.post("/api/detect", response_model=DetectResponse)
-async def detect_disease(file: UploadFile, container: ContainerDep) -> DetectResponse:
+async def detect_disease(
+    file: UploadFile = File(...),
+    crop_hint: str | None = Form(default=None),
+    container: ContainerDep = None,  # type: ignore[assignment]  # FastAPI injects via Annotated dependency
+) -> DetectResponse:
     image = await _read_image(file, max_bytes=container.vision.max_image_bytes)
-    result = await container.vision.detect(image)
+    result = await container.vision.detect(image, crop_hint=crop_hint)
     return DetectResponse(
         status=result.status.value,
         detection_mode="classification",
         crop=result.crop,
         crop_confidence=result.crop_confidence,
+        crop_source=result.crop_source,
         disease=result.disease,
         disease_confidence=result.disease_confidence,
         boxes=[],

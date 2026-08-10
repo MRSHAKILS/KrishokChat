@@ -7,10 +7,14 @@ Python. This prevents a model/class-index mismatch from being hidden in routing 
 from __future__ import annotations
 
 import json
+import logging
 import re
 from pathlib import Path
 
 from app.domain.vision import VisionModelSpec
+
+
+logger = logging.getLogger("krishokchat.vision.registry")
 
 
 def _class_names(path: Path) -> tuple[str, ...]:
@@ -63,7 +67,15 @@ class ArtifactVisionRegistry:
         if not spec or not spec.details_path or not spec.details_path.exists():
             return None
         if model_key not in self._details_cache:
-            self._details_cache[model_key] = json.loads(spec.details_path.read_text(encoding="utf-8"))
+            try:
+                payload = json.loads(spec.details_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError) as exc:
+                # Disease details are optional enrichment. A damaged or empty
+                # details file must not turn a valid model prediction into a
+                # 500 response from /api/detect.
+                logger.warning("Ignoring invalid disease details for %s: %s", model_key, exc)
+                payload = {}
+            self._details_cache[model_key] = payload if isinstance(payload, dict) else {}
         target = _tokens(label.split("__")[-1])
         if not target:
             return None

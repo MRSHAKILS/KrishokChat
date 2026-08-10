@@ -129,14 +129,20 @@
   "wheat_disease": {
     "name": "wheat_disease",
     "classes": [
-      "Brassica",
-      "Corn",
-      "GourdGuava",
-      "Potato",
-      "Solanacea",
-      "Wheat"
+      "BlackPoint",
+      "Blast",
+      "FusariumFootRot",
+      "Healthy",
+      "HealthyLeaf",
+      "Leaf Rust",
+      "LeafBlight",
+      "Powdery Mildew",
+      "Stem Rust",
+      "Stripe Rust",
+      "WheatBlast"
     ],
     "task": "classify",
+    "model_size_mb": 9.44,
     "predictions": []
   },
   "corn_disease": {

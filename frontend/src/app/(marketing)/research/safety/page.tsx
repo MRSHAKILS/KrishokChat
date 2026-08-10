@@ -28,28 +28,28 @@ import { enter, stagger, dur, ease } from "@/lib/motion";
 type Stage = "idle" | "safety" | "retrieval" | "generation" | "verifier" | "done";
 
 // REAL data from our backend test (potato late blight query)
-const REAL_QUERY = "আলুর দেরি ব্লাইট কীভাবে প্রতিরোধ করব?";
+const REAL_QUERY = "আলুর লেট ব্লাইট কীভাবে প্রতিরোধ করব?";
 
 const REAL_SOURCES = [
   {
     publisher: "DAE",
-    title: "আলুর দেরি ব্লাইট নিয়ন্ত্রণের জন্য কীটনাশক",
+    title: "আলুর লেট ব্লাইট (নাবি ধসা) নিয়ন্ত্রণের জন্য কীটনাশক",
     reference: "কৃষি সম্প্রসারণ অধিদপ্তর — বালাই ব্যবস্থাপনা নির্দেশিকা",
-    snippet: "আলুর দেরি ব্লাইট (Late Blight) দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত কীটনাশকগুলি নিবন্ধিত। প্রতি লিটার পানিতে ২ গ্রাম মাত্রায় মিশ্রণ করে স্প্রে করতে হবে।",
+    snippet: "আলুর লেট ব্লাইট (Late Blight / নাবি ধসা) দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত কীটনাশকগুলি নিবন্ধিত। প্রতি লিটার পানিতে ২ গ্রাম মাত্রায় মিশ্রণ করে স্প্রে করতে হবে।",
     chemicals: ["Mancozeb 80WP", "Metalaxyl"],
   },
   {
     publisher: "CABI",
     title: "Potato late blight — লেট ব্লাইট",
     reference: "CABI — Potato Disease Manuals",
-    snippet: "লেট ব্লাইট বা মড়ক রোগ আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে এমন একটি সাধারণ এবং সম্ভাব্য ধ্বংসাত্মক রোগ। এটি Phytophthora infestans ছত্রাক দ্বারা সৃষ্ট।",
+    snippet: "লেট ব্লাইট বা নাবি ধসা রোগ আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে এমন একটি সাধারণ এবং সম্ভাব্য ধ্বংসাত্মক রোগ। এটি Phytophthora infestans ছত্রাক দ্বারা সৃষ্ট।",
     chemicals: ["Copper oxychloride"],
   },
   {
     publisher: "DAE",
-    title: "আলুর মোজাইক বা ধসা রোগ (late blight)",
+    title: "আলুর লেট ব্লাইট (late blight) ব্যবস্থাপনা",
     reference: "কৃষি সম্প্রসারণ অধিদপ্তর — ফসল সুরক্ষা নির্দেশিকা",
-    snippet: "আলুর মোজাইক বা ধসা রোগ (late blight) দমনের জন্য অধিকাংশ প্যান্ডি 80WP ফরমুলেশনের এবং প্রতি হেক্টরে ১.৫ কেজি মাত্রায় প্রয়োগ করতে হবে।",
+    snippet: "আলুর লেট ব্লাইট (late blight) দমনের জন্য ম্যানকোজেব 80WP ফরমুলেশনের ছত্রাকনাশক প্রতি লিটার পানিতে ২ গ্রাম মাত্রায় প্রয়োগ করতে হবে।",
     chemicals: ["Mancozeb", "Metalaxyl"],
   },
   {
@@ -61,7 +61,7 @@ const REAL_SOURCES = [
   },
 ];
 
-const REAL_ANSWER = `আলুর দেরি ব্লাইট (Late Blight) একটি মারাত্মক ছত্রাকজনিত রোগ যা Phytophthora infestans দ্বারা সৃষ্ট। এটি পাতা, কাণ্ড ও কন্দে আক্রমণ করে।
+const REAL_ANSWER = `আলুর লেট ব্লাইট (Late Blight / নাবি ধসা) একটি মারাত্মক ছত্রাকজনিত রোগ যা Phytophthora infestans দ্বারা সৃষ্ট। এটি পাতা, কাণ্ড ও কন্দে আক্রমণ করে।
 
 প্রতিরোধের উপায়:
 • রোগ প্রতিরোধী জাত নির্বাচন করুন

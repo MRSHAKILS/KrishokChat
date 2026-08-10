@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { CheckCircle, HelpCircle, ImageIcon, XCircle, AlertTriangle, Leaf } from "lucide-react";
 import { enter } from "@/lib/motion";
-import { bnPercent, humanizeLabel, diseaseCore } from "@/lib/bn";
+import { bnPercent, humanizeLabel, diseaseCore, cleanKnowledgeText, translateDiseaseToBn, cropBn } from "@/lib/bn";
 import { HELPLINE } from "@/lib/constants";
 import { ConfidenceMeter } from "./confidence-meter";
 import type { DetectResponse } from "@/lib/api";
@@ -55,8 +55,12 @@ function inferStatus(result: DetectResponse): string {
 function DiagnosedCard({ result }: { result: DetectResponse }) {
   const info = result.disease_info;
   const diseaseName = result.disease ? humanizeLabel(result.disease) : "";
-  const diseaseBn = info?.class_name ?? "";
+  const diseaseBn = result.disease ? translateDiseaseToBn(result.disease) : (info?.class_name ?? "");
   const coreDisease = result.disease ? diseaseCore(result.disease) : "";
+
+  const descClean = cleanKnowledgeText(info?.description_bn ?? "");
+  const causeClean = cleanKnowledgeText(info?.cause_bn ?? "");
+  const solClean = cleanKnowledgeText(info?.solution_bn ?? "");
 
   return (
     <motion.div
@@ -74,17 +78,28 @@ function DiagnosedCard({ result }: { result: DetectResponse }) {
           <div className="flex-1 space-y-2.5">
             <div className="flex items-center gap-2">
               <span className="rounded-md bg-leaf/10 px-2 py-0.5 text-xs font-semibold text-leaf">
-                {result.crop ?? "—"}
+                {result.crop_source === "user" ? cropBn(result.crop) : (result.crop ?? "—")}
               </span>
+              {result.crop_source === "user" && (
+                <span className="rounded-md bg-paper-2 px-1.5 py-0.5 text-[10px] font-medium text-ink-faint">
+                  নির্বাচিত
+                </span>
+              )}
             </div>
-            <ConfidenceMeter value={result.crop_confidence} label="ফসল নিশ্চিতা" tone="leaf" compact />
+            {result.crop_source === "user" ? (
+              <div className="text-[11px] text-ink-faint">
+                আপনার নির্বাচন অনুযায়ী {cropBn(result.crop) || ""} রোগ মডেল দিয়ে বিশ্লেষণ হয়েছে
+              </div>
+            ) : (
+              <ConfidenceMeter value={result.crop_confidence} label="ফসল নিশ্চিতা" tone="leaf" compact />
+            )}
           </div>
         </div>
 
         <div className="border-t rule pt-3">
-          <h3 className="font-display text-xl text-ink">{diseaseName || coreDisease}</h3>
-          {diseaseBn && diseaseBn !== diseaseName && (
-            <p className="mt-0.5 text-sm text-ink-soft">{diseaseBn}</p>
+          <h3 className="font-display text-xl text-ink">{diseaseBn || diseaseName || coreDisease}</h3>
+          {diseaseName && diseaseBn !== diseaseName && (
+            <p className="mt-0.5 text-xs text-ink-faint font-mono">{diseaseName}</p>
           )}
           <div className="mt-2.5">
             <ConfidenceMeter
@@ -98,30 +113,30 @@ function DiagnosedCard({ result }: { result: DetectResponse }) {
       </div>
 
       {/* Body: description + cause + solution (from knowledge base) */}
-      {info && (info.description_bn || info.cause_bn || info.solution_bn) && (
+      {info && (descClean || causeClean || solClean) && (
         <div className="space-y-4 border-t rule p-5">
-          {info.description_bn && (
+          {descClean && (
             <div>
               <div className="mb-1.5 text-[11px] font-semibold text-ink-faint">
                 বিবরণ
               </div>
-              <p className="text-sm leading-relaxed text-ink-soft">{info.description_bn}</p>
+              <p className="text-sm leading-relaxed text-ink-soft">{descClean}</p>
             </div>
           )}
-          {info.cause_bn && (
+          {causeClean && (
             <div>
               <div className="mb-1.5 text-[11px] font-semibold text-ink-faint">
                 কারণ
               </div>
-              <p className="text-sm leading-relaxed text-ink-soft">{info.cause_bn}</p>
+              <p className="text-sm leading-relaxed text-ink-soft">{causeClean}</p>
             </div>
           )}
-          {info.solution_bn && (
-            <div className="rounded-lg border border-ochre-soft/50 bg-ochre-soft/15 p-4">
-              <div className="mb-1.5 text-[11px] font-semibold text-ochre">
-                প্রতিকার
+          {solClean && (
+            <div className="rounded-lg border border-leaf/20 bg-leaf/5 p-4">
+              <div className="mb-1.5 text-[11px] font-semibold text-leaf">
+                প্রাথমিক সতর্কতা ও ব্যবস্থা
               </div>
-              <p className="text-sm leading-relaxed text-ink">{info.solution_bn}</p>
+              <p className="text-sm leading-relaxed text-ink">{solClean}</p>
             </div>
           )}
         </div>
@@ -225,6 +240,10 @@ function NoModelCard({ result }: { result: DetectResponse }) {
           <ImageIcon className="mt-0.5 h-4 w-4 shrink-0 text-ink-faint" />
           <p className="leading-relaxed">
             এই ফসলের জন্য বিশেষায়িত রোগ মডেল এখন আমাদের প্রোটোটাইপে নেই।
+            {result.crop_source === "model" && (
+              <> উপরের <strong className="text-ink">ফসল</strong> বাছাই থেকে সঠিক
+              ফসল (যেমন: ধান) নির্বাচন করে আবার চেষ্টা করুন।</>
+            )}{" "}
             ডান পাশের চ্যাটে এই ফসল সম্পর্কে প্রশ্ন করতে পারেন, অথবা
             কৃষক কল সেন্টারে যোগাযোগ করুন।
           </p>

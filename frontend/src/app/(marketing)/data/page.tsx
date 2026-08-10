@@ -29,14 +29,14 @@ const NODE_CATEGORIES = [
 
 const SAMPLE_NODE = {
   id: "DAE_PEST_1206A0_001",
-  title_bn: "আলুর দেরি ব্লাইট",
+  title_bn: "আলুর লেট ব্লাইট (নাবি ধসা)",
   title_en: "Potato Late Blight",
   category: "disease",
   publisher: "DAE",
   source_document: "Potato Disease Manuals (Plantwise)",
   citation: "DAE. Late blight. Potato Disease Manuals. p. 852.",
   content_bn:
-    "আলুর দেরি ব্লাইট (Late Blight) একটি মারাত্মক ছত্রাকজনিত রোগ যা Phytophthora infestans দ্বারা সৃষ্ট। এটি পাতার ও কান্ডের নিচে ছোট ছোট সবুজ-বাদামি দাগ হিসেবে শুরু হয়।",
+    "আলুর লেট ব্লাইট (Late Blight / নাবি ধসা) একটি মারাত্মক ছত্রাকজনিত রোগ যা Phytophthora infestans দ্বারা সৃষ্ট। এটি পাতার ও কাণ্ডের নিচে ছোট ছোট সবুজ-বাদামি দাগ হিসেবে শুরু হয়।",
   entities: ["Phytophthora infestans", "potato", "late blight"],
   chemical_trace: ["Mancozeb 80WP", "Metalaxyl"],
 };

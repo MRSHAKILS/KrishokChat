@@ -58,13 +58,19 @@ const MAP: Record<string, SafetyLabel> = {
     detail: "কৃষি সম্পর্কিত, কিন্তু তথ্য অপর্যাপ্ত",
     tone: "ochre",
   },
+  vision_advisory: {
+    label: "চিত্রভিত্তিক রোগ নির্ণয়",
+    badge: "রোগ স্ক্যান",
+    detail: "কম্পিউটার ভিশন রোগ বিশ্লেষণ",
+    tone: "leaf",
+  },
 };
 
 const FALLBACK: SafetyLabel = {
-  label: "অজানা শ্রেণী",
-  badge: "অজানা",
-  detail: "শ্রেণীবদ্ধ করা যায়নি",
-  tone: "ink",
+  label: "চিত্রভিত্তিক বালাই স্ক্যান",
+  badge: "রোগ নির্ণয়",
+  detail: "ছবি বিশ্লেষণ স্ক্যান",
+  tone: "leaf",
 };
 
 /** Resolve a backend category enum into a farmer-facing label. */

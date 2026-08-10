@@ -10,11 +10,9 @@ import { enter } from "@/lib/motion";
    ========================================================================= */
 
 const DEFAULT_SUGGESTIONS = [
-  "আলুর দেরি ব্লাইট কীভাবে প্রতিরোধ করব?",
+  "আলুর লেট ব্লাইট কীভাবে প্রতিরোধ করব?",
   "ধানের ব্লাস্ট রোগের লক্ষণ কী?",
   "গমের লিফ রাস্ট রোগের চিকিৎসা কী?",
-  "ভুট্টার সাধারণ রোগ গুলো কী কী?",
-  "বাঁধাকপির ডাউনি মিলডিউ কীভাবে ছড়ায়?",
   "ফসলে বাদামী দাগ দেখা দিলে কী করব?",
 ];
 
@@ -41,10 +39,26 @@ const CROP_LABELS: Record<string, string> = {
 };
 
 const DISEASE_LABELS: Record<string, string> = {
-  "late blight": "দেরি ব্লাইট",
-  late_blight: "দেরি ব্লাইট",
-  "early blight": "আর্লি ব্লাইট",
-  early_blight: "আর্লি ব্লাইট",
+  "late blight": "লেট ব্লাইট (নাবি ধসা)",
+  late_blight: "লেট ব্লাইট (নাবি ধসা)",
+  "early blight": "আর্লি ব্লাইট (আগাম ধসা)",
+  early_blight: "আর্লি ব্লাইট (আগাম ধসা)",
+  "northern leaf blight": "উত্তরীয় পাতা পোড়া (Northern Leaf Blight)",
+  northern_leaf_blight: "উত্তরীয় পাতা পোড়া (Northern Leaf Blight)",
+  "gray leaf spot": "ধূসর পাতা দাগ রোগ (Gray Leaf Spot)",
+  gray_leaf_spot: "ধূসর পাতা দাগ রোগ (Gray Leaf Spot)",
+  "common rust": "সাধারণ রাস্ট (Common Rust)",
+  common_rust: "সাধারণ রাস্ট (Common Rust)",
+  "brown spot": "বাদামী দাগ রোগ (Brown Spot)",
+  brown_spot: "বাদামী দাগ রোগ (Brown Spot)",
+  "leaf scald": "পাতা পোড়া রোগ (Leaf Scald)",
+  leaf_scald: "পাতা পোড়া রোগ (Leaf Scald)",
+  "narrow brown spot": "সরু বাদামী দাগ (Narrow Brown Spot)",
+  narrow_brown_spot: "সরু বাদামী দাগ (Narrow Brown Spot)",
+  "rice hispa": "পামরি পোকা (Rice Hispa)",
+  hispa: "পামরি পোকা (Rice Hispa)",
+  "sheath blight": "খোলপোড়া রোগ (Sheath Blight)",
+  sheath_blight: "খোলপোড়া রোগ (Sheath Blight)",
   blast: "ব্লাস্ট",
   "leaf rust": "লিফ রাস্ট",
   leaf_rust: "লিফ রাস্ট",
@@ -53,6 +67,10 @@ const DISEASE_LABELS: Record<string, string> = {
   downy_mildew: "ডাউনি মিলডিউ",
   "bacterial blight": "ব্যাকটেরিয়াল ব্লাইট",
   bacterial_blight: "ব্যাকটেরিয়াল ব্লাইট",
+  "black rot": "কালো পচা রোগ (Black Rot)",
+  black_rot: "কালো পচা রোগ (Black Rot)",
+  "alternaria leaf spot": "অল্টারনারিয়া পাতা দাগ রোগ",
+  alternaria_leaf_spot: "অল্টারনারিয়া পাতা দাগ রোগ",
 };
 
 function labelFor(value: string | null | undefined, labels: Record<string, string>) {
@@ -112,7 +130,7 @@ export function SuggestedQuestions({
         <Sparkles className="h-3 w-3" />
         পরামর্শিত প্রশ্ন
       </div>
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
         {suggestions.map((q) => (
           <motion.button
             key={q}
@@ -120,7 +138,7 @@ export function SuggestedQuestions({
             whileHover={{ scale: 1.01, x: 2 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onPick(q)}
-            className="group flex items-start gap-2 rounded-xl border rule bg-paper-2/30 px-3.5 py-2.5 text-left text-xs sm:text-sm text-ink-soft transition-all hover:border-leaf/50 hover:bg-leaf/5 hover:text-leaf"
+            className="group flex min-h-11 items-start gap-2 rounded-xl border rule bg-paper-2/30 px-3.5 py-2.5 text-left text-xs text-ink-soft transition-colors hover:border-leaf/50 hover:bg-leaf/5 hover:text-leaf sm:text-sm"
           >
             <span className="mt-0.5 text-leaf opacity-60 transition-opacity group-hover:opacity-100">↳</span>
             <span className="line-clamp-2 flex-1 leading-snug">{q}</span>

@@ -62,11 +62,11 @@ export function PipelineRail({
         return (
           <div key={stage.key} className="flex items-stretch" style={{ flex: 1 }}>
             {/* Node + label column */}
-            <motion.div variants={enter} className="flex flex-col items-center" style={{ minWidth: 72 }}>
+            <motion.div variants={enter} className="flex min-w-0 flex-col items-center" style={{ minWidth: 52 }}>
               <RailNode status={status} active={active} />
               <div
                 className={cn(
-                  "mt-2 text-center text-[11px] font-medium leading-tight transition-colors",
+                  "mt-2 max-w-[72px] text-center text-[10px] font-medium leading-tight transition-colors sm:max-w-[100px] sm:text-[11px]",
                   status === "pending" && "text-ink-faint",
                   status === "active" && "text-ochre",
                   status === "complete" && "text-ink",

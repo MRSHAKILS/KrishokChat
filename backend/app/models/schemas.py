@@ -85,6 +85,7 @@ class DetectResponse(BaseModel):
     detection_mode: str = Field(default="classification", description="classification; boxes are empty until a real detector is added")
     crop: str | None = None
     crop_confidence: float = 0.0
+    crop_source: str = Field(default="model", description="model | user — how the crop was determined")
     disease: str | None = None
     disease_confidence: float = 0.0
     boxes: list[DetectionBox] = Field(default_factory=list)

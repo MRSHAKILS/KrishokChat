@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
 import { motion } from "motion/react";
-import { Send, Loader2, Mic, Square, RotateCcw } from "lucide-react";
+import { Send, Loader2, Mic, Square, RotateCcw, ShieldCheck } from "lucide-react";
 import { streamQuestion, getModels, type AgentStageEvent } from "@/lib/api";
 import { ChatMessage, type ChatMessageData } from "@/components/chat/chat-message";
 import { SuggestedQuestions } from "@/components/chat/suggested-questions";
@@ -52,7 +52,12 @@ export function QAPanel({
      touchscreens. The mic transcribes speech directly into the text box.
      Falls back silently where SpeechRecognition is unavailable. */
   const [listening, setListening] = useState(false);
-  const [speechSupported, setSpeechSupported] = useState(false);
+  const speechSupported = useSyncExternalStore(
+    () => () => undefined,
+    getSpeechSupported,
+    () => false,
+  );
+  const [voiceInputError, setVoiceInputError] = useState<string | null>(null);
   const recognitionRef = useRef<unknown>(null);
 
   useEffect(() => {
@@ -61,20 +66,24 @@ export function QAPanel({
       (window as unknown as { SpeechRecognition?: unknown }).SpeechRecognition ||
       (window as unknown as { webkitSpeechRecognition?: unknown }).webkitSpeechRecognition;
     if (!SR) return;
-    setSpeechSupported(true);
     const rec = new (SR as new () => {
       lang: string;
       continuous: boolean;
       interimResults: boolean;
       onresult: ((e: { results: ArrayLike<ArrayLike<{ transcript: string }>>; resultIndex: number }) => void) | null;
       onend: (() => void) | null;
-      onerror: (() => void) | null;
+      onstart: (() => void) | null;
+      onerror: ((event: { error?: string }) => void) | null;
       start: () => void;
       stop: () => void;
     })();
     rec.lang = "bn-BD";
     rec.continuous = false;
     rec.interimResults = true;
+    rec.onstart = () => {
+      setListening(true);
+      setVoiceInputError(null);
+    };
     rec.onresult = (e) => {
       let text = "";
       for (let i = e.resultIndex; i < e.results.length; i++) {
@@ -83,7 +92,14 @@ export function QAPanel({
       setQuery(text);
     };
     rec.onend = () => setListening(false);
-    rec.onerror = () => setListening(false);
+    rec.onerror = (event) => {
+      setListening(false);
+      if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+        setVoiceInputError("মাইক্রোফোনের অনুমতি দিন");
+      } else if (event.error !== "aborted") {
+        setVoiceInputError("আবার চেষ্টা করুন");
+      }
+    };
     recognitionRef.current = rec;
   }, []);
 
@@ -95,6 +111,7 @@ export function QAPanel({
       setListening(false);
     } else {
       setQuery("");
+      setVoiceInputError(null);
       try {
         rec.start();
         setListening(true);
@@ -215,12 +232,11 @@ export function QAPanel({
   const isEmpty = messages.length === 0;
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full min-h-0 flex-col">
       {/* Messages — scroll container */}
       <div
         ref={scrollRef}
-        className="flex-1 space-y-4 overflow-y-auto pr-1 scrollbar-thin"
-        style={{ minHeight: "200px" }}
+        className="min-h-[220px] flex-1 space-y-4 overflow-y-auto pr-1 scrollbar-thin"
       >
         {isEmpty ? (
           <EmptyState
@@ -253,56 +269,48 @@ export function QAPanel({
         )}
       </div>
 
-      {/* Model selector — farmer-facing labels, not technical model IDs.
-         The underlying ids ("gemini", "krishokchat-4b") stay as the value;
-         farmers see "সাধারণ এআই" / "গবেষণা এআই". */}
-      {/* Model selector & Clear actions */}
-      <div className="mt-3 flex items-center justify-between gap-2 border-t rule pt-2">
-        <div className="flex items-center gap-1">
-          {([
-            { id: "gemini", label: "সাধারণ এআই", hint: "অনলাইন" },
-            { id: "krishokchat-4b", label: "গবেষণা এআই", hint: localAvailable ? "লোকাল" : "লোকাল নেই" },
-          ] as const).map((m) => {
-            const disabled = m.id === "krishokchat-4b" && !localAvailable;
-            return (
-              <button
-                key={m.id}
-                onClick={() => setModel(m.id)}
-                disabled={disabled}
-                title={m.id === "krishokchat-4b" ? (localAvailable ? "স্থানীয়ভাবে চালিত গবেষণা মডেল" : "Ollama चालू নয় — মডেল অনুপলব্ধ") : "ডিফল্ট অনলাইন এআই মডেল"}
-                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-medium transition-colors ${
-                  model === m.id
-                    ? "bg-leaf/15 text-leaf ring-1 ring-leaf/30"
-                    : disabled
-                      ? "cursor-not-allowed text-ink-faint"
-                      : "text-ink-faint hover:text-ink-soft"
-                }`}
-              >
-                {m.label}
-                <span className={`rounded-full px-1.5 text-[9px] ${model === m.id ? "bg-leaf/20" : "bg-bone"}`}>
-                  {m.hint}
-                </span>
-              </button>
-            );
-          })}
+      {/* Secondary controls stay quiet. Farmers only need the question box and
+          one clear action; model selection is intentionally not presented as
+          two competing primary buttons. */}
+      <div className="mt-4 flex min-h-8 items-center justify-between gap-3 border-t rule pt-3">
+        <div className="flex min-w-0 items-center gap-1.5 text-[11px] text-ink-faint">
+          <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-leaf" />
+          <span className="truncate">তথ্যসূত্র মিলিয়ে নিরাপদ উত্তর</span>
         </div>
 
-        {!isEmpty && !streaming && (
-          <button
-            onClick={clear}
-            title="নতুন কথোপকথন শুরু করুন"
-            className="flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium text-ink-faint transition-colors hover:bg-clay/10 hover:text-clay"
-          >
-            <RotateCcw className="h-3 w-3" />
-            <span className="hidden sm:inline">কথোপকথন সাফ করুন</span>
-          </button>
-        )}
+        <div className="flex shrink-0 items-center gap-3">
+          {localAvailable && (
+            <label className="flex items-center gap-1.5 text-[11px] text-ink-faint">
+              <span className="hidden sm:inline">উত্তরের ধরন</span>
+              <select
+                value={model}
+                onChange={(event) => setModel(event.target.value as "gemini" | "krishokchat-4b")}
+                className="rounded-md border rule bg-paper px-2 py-1 text-[11px] text-ink-soft focus:border-leaf focus:outline-none"
+                aria-label="উত্তরের ধরন নির্বাচন করুন"
+              >
+                <option value="gemini">সাধারণ</option>
+                <option value="krishokchat-4b">গবেষণা</option>
+              </select>
+            </label>
+          )}
+
+          {!isEmpty && !streaming && (
+            <button
+              onClick={clear}
+              title="নতুন কথোপকথন শুরু করুন"
+              className="flex min-h-8 items-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-ink-faint transition-colors hover:text-clay"
+            >
+              <RotateCcw className="h-3 w-3" />
+              <span className="hidden sm:inline">নতুন করে শুরু</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Input bar — text + voice + send. The mic lets low-literacy farmers
           speak their question in Bengali instead of typing on a phone. */}
-      <div className="mt-2 flex items-end gap-2">
-        <div className="relative flex-1">
+      <div className="mt-2 flex items-stretch gap-2">
+        <div className="relative flex min-h-14 min-w-0 flex-1 items-center rounded-2xl border rule bg-paper transition-colors focus-within:border-leaf focus-within:ring-2 focus-within:ring-leaf/10">
           <textarea
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -314,8 +322,8 @@ export function QAPanel({
             }}
             rows={1}
             maxLength={CHAT.maxMessageLength}
-            placeholder={listening ? "শুনছি… কথা বলুন…" : "আপনার কৃষি সংক্রান্ত প্রশ্ন লিখুন (বাংলায়)…"}
-            className="w-full min-h-[42px] resize-none rounded-lg border rule bg-paper px-4 py-2 pr-12 text-sm text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-none"
+            placeholder={listening ? "শুনছি… কথা বলুন…" : "আপনার কৃষি প্রশ্ন লিখুন (বাংলায়)…"}
+            className="min-h-[52px] w-full resize-none rounded-2xl border-0 bg-transparent px-4 py-3 pr-12 text-sm leading-relaxed text-ink placeholder:text-ink-faint focus:outline-none"
             style={{ maxHeight: "6rem" }}
           />
           {speechSupported && (
@@ -324,14 +332,14 @@ export function QAPanel({
               type="button"
               aria-label={listening ? "রেকর্ড বন্ধ করুন" : "ভয়েস ইনপুট"}
               className={cn(
-                "absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md transition-colors",
+                "absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-xl transition-colors",
                 listening
                   ? "bg-clay/15 text-clay"
                   : "text-ink-faint hover:bg-leaf/10 hover:text-leaf",
               )}
             >
               {listening ? (
-                <Square className="h-3.5 w-3.5 fill-current" />
+                <Square className="h-4 w-4 fill-current" />
               ) : (
                 <Mic className="h-4 w-4" />
               )}
@@ -344,9 +352,10 @@ export function QAPanel({
         <button
           onClick={() => send(query)}
           disabled={streaming || !query.trim()}
+          title="জিজ্ঞাসা করুন"
           className={cn(
-            "flex h-[42px] shrink-0 items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium transition-all disabled:cursor-not-allowed disabled:opacity-40",
-            "bg-leaf text-paper hover:bg-leaf-2",
+            "flex h-14 shrink-0 items-center justify-center gap-2 rounded-2xl px-4 text-sm font-semibold transition-colors active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[116px]",
+            "bg-leaf text-paper shadow-sm hover:bg-leaf-2",
           )}
         >
           {streaming ? (
@@ -354,9 +363,14 @@ export function QAPanel({
           ) : (
             <Send className="h-4 w-4" />
           )}
-          <span className="hidden sm:inline">{streaming ? "…" : "জিজ্ঞাসা"}</span>
+          <span className="hidden sm:inline">জিজ্ঞাসা করুন</span>
         </button>
       </div>
+      {voiceInputError && (
+        <p className="mt-1 text-right text-[11px] text-clay" role="status">
+          {voiceInputError}
+        </p>
+      )}
     </div>
   );
 }
@@ -377,9 +391,9 @@ function EmptyState({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: dur.normal, ease: ease.smooth }}
-      className="flex flex-col items-center justify-center py-8 text-center"
+      className="flex min-h-full flex-col items-center justify-center py-10 text-center"
     >
-      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-leaf/10 text-leaf">
+      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-leaf/10 text-leaf">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
           <path
             d="M4 18C4 11 9 6 20 5C19 14 13 18 4 18Z"
@@ -394,10 +408,10 @@ function EmptyState({
           />
         </svg>
       </div>
-      <h3 className="font-display text-lg text-ink">আসসালামু আলাইকুম!</h3>
-      <p className="mt-1 max-w-sm text-sm leading-relaxed text-ink-soft">
-        বাংলায় আপনার কৃষি সংক্রান্ত যেকোনো প্রশ্ন করুন। আমি নিরাপত্তা যাচাই,
-        তথ্য সংগ্রহ ও যাচাইকরণের মাধ্যমে উত্তর দেব।
+      <p className="mb-1 text-xs font-semibold text-leaf">তথ্যভিত্তিক কৃষি সহায়তা</p>
+      <h3 className="font-display text-xl text-ink">কী জানতে চান?</h3>
+      <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink-soft">
+        ফসলের রোগ, পরিচর্যা বা নিরাপদ ব্যবস্থাপনা নিয়ে বাংলায় প্রশ্ন করুন।
       </p>
       <div className="mt-6 w-full">
         <SuggestedQuestions

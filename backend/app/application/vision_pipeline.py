@@ -26,6 +26,15 @@ from app.ports.vision import VisionInferenceError, VisionModelRegistry, VisionRu
 
 logger = logging.getLogger("krishokchat.vision")
 
+# Display labels for user-selected crops. Keys must match registry disease keys.
+CROP_DISPLAY = {
+    "rice": "Rice",
+    "wheat": "Wheat",
+    "corn": "Corn",
+    "potato": "Potato",
+    "brassica": "Brassica",
+}
+
 
 def image_quality(image: Image.Image, *, min_dimension: int = 64) -> ImageQuality:
     width, height = image.size
@@ -95,7 +104,7 @@ class VisionPipeline:
         self._audit(result)
         return result
 
-    async def detect(self, image: Image.Image) -> VisionResult:
+    async def detect(self, image: Image.Image, *, crop_hint: str | None = None) -> VisionResult:
         quality = image_quality(image)
         trace = [VisionTraceEvent(VisionStage.INTAKE, "complete", f"{quality.width}x{quality.height}")]
         if not quality.accepted:
@@ -103,33 +112,65 @@ class VisionPipeline:
             self._audit(result)
             return result
 
-        try:
-            crop_prediction = await asyncio.to_thread(self.runner.predict, self.registry.crop_classifier, image)
-        except VisionInferenceError as exc:
-            logger.error("vision detect: crop classifier failed: %s", exc)
-            result = VisionResult(status=VisionStatus.MODEL_ERROR, quality=quality, trace=tuple(trace), error=str(exc))
-            self._audit(result)
-            return result
-        trace.append(VisionTraceEvent(VisionStage.CROP_CLASSIFICATION, "complete", crop_prediction.label))
-        if crop_prediction.confidence < self.crop_threshold:
-            result = VisionResult(
-                status=VisionStatus.NOT_RECOGNIZED,
-                crop=crop_prediction.label,
-                crop_confidence=crop_prediction.confidence,
-                top3_crops=crop_prediction.top3,
-                quality=quality,
-                trace=tuple(trace),
-            )
-            self._audit(result)
-            return result
+        crop_label: str | None = None
+        crop_confidence = 0.0
+        crop_source = "model"
+        top3_crops: tuple[dict[str, str | float], ...] = ()
+        candidates: tuple[VisionModelSpec, ...] = ()
 
-        candidates = self.registry.disease_candidates(crop_prediction.label)
+        # A user-verified crop (farmers know what they grow) bypasses the 6-class
+        # crop classifier, which was trained without Rice. This is the only way a
+        # rice leaf photo can reach the rice disease model today.
+        if crop_hint:
+            hinted = self.registry.disease_candidates(crop_hint)
+            if hinted:
+                crop_label = CROP_DISPLAY.get(crop_hint.strip().lower(), hinted[0].key.title())
+                crop_source = "user"
+                candidates = hinted
+                trace.append(
+                    VisionTraceEvent(VisionStage.CROP_CLASSIFICATION, "skip", f"{crop_label} (নির্বাচিত)")
+                )
+
+        if crop_label is None:
+            try:
+                crop_prediction = await asyncio.to_thread(self.runner.predict, self.registry.crop_classifier, image)
+            except VisionInferenceError as exc:
+                logger.error("vision detect: crop classifier failed: %s", exc)
+                result = VisionResult(status=VisionStatus.MODEL_ERROR, quality=quality, trace=tuple(trace), error=str(exc))
+                self._audit(result)
+                return result
+            trace.append(VisionTraceEvent(VisionStage.CROP_CLASSIFICATION, "complete", crop_prediction.label))
+            if crop_prediction.confidence < self.crop_threshold:
+                result = VisionResult(
+                    status=VisionStatus.NOT_RECOGNIZED,
+                    crop=crop_prediction.label,
+                    crop_confidence=crop_prediction.confidence,
+                    top3_crops=crop_prediction.top3,
+                    quality=quality,
+                    trace=tuple(trace),
+                )
+                self._audit(result)
+                return result
+            crop_label = crop_prediction.label
+            crop_confidence = crop_prediction.confidence
+            top3_crops = crop_prediction.top3
+            candidates = self.registry.disease_candidates(crop_label)
+            # Documented mitigation (live-verified 2026-08-08): the 6-class crop
+            # classifier has no Rice class and classifies rice leaves as Wheat.
+            # Run the rice disease model alongside wheat and let the higher
+            # confidence win, so a rice leaf still reaches the rice model.
+            if crop_label == "Wheat":
+                for extra in self.registry.disease_candidates("rice"):
+                    if not any(candidate.key == extra.key for candidate in candidates):
+                        candidates = candidates + (extra,)
+
         if not candidates:
             result = VisionResult(
                 status=VisionStatus.NO_DISEASE_MODEL,
-                crop=crop_prediction.label,
-                crop_confidence=crop_prediction.confidence,
-                top3_crops=crop_prediction.top3,
+                crop=crop_label,
+                crop_confidence=crop_confidence,
+                crop_source=crop_source,
+                top3_crops=top3_crops,
                 quality=quality,
                 trace=tuple(trace),
             )
@@ -148,12 +189,13 @@ class VisionPipeline:
                 errors.append(f"{spec.key}: {exc}")
         if not predictions:
             detail = "; ".join(errors) if errors else "no disease model candidates"
-            logger.error("vision detect: all disease models failed for crop=%s — %s", crop_prediction.label, detail)
+            logger.error("vision detect: all disease models failed for crop=%s — %s", crop_label, detail)
             result = VisionResult(
                 status=VisionStatus.MODEL_ERROR,
-                crop=crop_prediction.label,
-                crop_confidence=crop_prediction.confidence,
-                top3_crops=crop_prediction.top3,
+                crop=crop_label,
+                crop_confidence=crop_confidence,
+                crop_source=crop_source,
+                top3_crops=top3_crops,
                 quality=quality,
                 trace=tuple(trace),
                 error=f"No routed disease model produced a prediction ({detail})",
@@ -167,11 +209,12 @@ class VisionPipeline:
         if disease_prediction.confidence < self.disease_threshold:
             result = VisionResult(
                 status=VisionStatus.NOT_RECOGNIZED,
-                crop=crop_prediction.label,
-                crop_confidence=crop_prediction.confidence,
+                crop=crop_label,
+                crop_confidence=crop_confidence,
+                crop_source=crop_source,
                 disease=disease_prediction.label,
                 disease_confidence=disease_prediction.confidence,
-                top3_crops=crop_prediction.top3,
+                top3_crops=top3_crops,
                 top3_diseases=disease_prediction.top3,
                 disease_info=info,
                 quality=quality,
@@ -183,11 +226,12 @@ class VisionPipeline:
         if self.registry.is_healthy(disease_prediction.label):
             result = VisionResult(
                 status=VisionStatus.HEALTHY,
-                crop=crop_prediction.label,
-                crop_confidence=crop_prediction.confidence,
+                crop=crop_label,
+                crop_confidence=crop_confidence,
+                crop_source=crop_source,
                 disease=disease_prediction.label,
                 disease_confidence=disease_prediction.confidence,
-                top3_crops=crop_prediction.top3,
+                top3_crops=top3_crops,
                 top3_diseases=disease_prediction.top3,
                 disease_info=info,
                 quality=quality,
@@ -196,43 +240,72 @@ class VisionPipeline:
             self._audit(result)
             return result
 
-        seed_sources = self._disease_source(disease_spec.key, disease_prediction.label, info)
-        advisory = await self.qa.run(
-            QAInput(
-                query=f"{crop_prediction.label} {disease_prediction.label} রোগের লক্ষণ, কারণ ও নিরাপদ ব্যবস্থাপনা কী?",
-                crop=crop_prediction.label,
-                disease=disease_prediction.label,
-                seed_sources=seed_sources,
-                channel="vision_advisory",
-            )
-        )
-        trace.append(VisionTraceEvent(VisionStage.ADVISORY, "complete", advisory.confidence.value))
+        # When the wheat/rice ambiguity set was used and the rice model won,
+        # report the winning crop family instead of the classifier's Wheat guess
+        # (the rice disease model is what actually identified the leaf). Only
+        # applied for a real disease diagnosis — for healthy/uncertain verdicts
+        # the crop-family claim stays with the crop classifier.
+        if crop_source == "model" and len(candidates) > 1:
+            winner_label = CROP_DISPLAY.get(disease_spec.key, disease_spec.key.title())
+            if winner_label != crop_label:
+                crop_label = winner_label
+                crop_confidence = disease_prediction.confidence
 
-        # If the advisory LLM is unavailable (safety fails closed → blocked /
-        # low confidence), fall back to the knowledge-base solution so the
-        # farmer still receives real, grounded treatment content instead of
-        # only a referral notice.
-        treatment_advice = advisory.answer
-        treatment_confidence = advisory.confidence.value
-        if advisory.confidence.value in {"blocked", "low_confidence"} and info and info.get("solution_bn"):
-            treatment_advice = str(info["solution_bn"])
-            treatment_confidence = "verified"
-        elif advisory.confidence.value in {"blocked", "low_confidence"}:
-            treatment_confidence = "low_confidence"
+        seed_sources = self._disease_source(disease_spec.key, disease_prediction.label, info)
+        advisory = None
+        try:
+            advisory = await self.qa.run(
+                QAInput(
+                    query=f"{crop_label} {disease_prediction.label} রোগের লক্ষণ, কারণ ও নিরাপদ ব্যবস্থাপনা কী?",
+                    crop=crop_label,
+                    disease=disease_prediction.label,
+                    seed_sources=seed_sources,
+                    channel="vision_advisory",
+                )
+            )
+        except Exception as exc:  # noqa: BLE001 - advisory must never kill a valid diagnosis
+            logger.error("vision detect: advisory failed for %s/%s: %s", crop_label, disease_prediction.label, exc)
+
+        treatment_advice: str | None = None
+        treatment_confidence: str | None = None
+        treatment_sources: tuple[str, ...] = ()
+        verifier_flags: tuple[str, ...] = ()
+
+        if advisory is not None:
+            trace.append(VisionTraceEvent(VisionStage.ADVISORY, "complete", advisory.confidence.value))
+            treatment_advice = advisory.answer
+            treatment_confidence = advisory.confidence.value
+            treatment_sources = tuple(source.id for source in advisory.sources)
+            verifier_flags = advisory.verifier_flags
+            # If the advisory LLM is unavailable (safety fails closed → blocked /
+            # low confidence), fall back to the knowledge-base solution so the
+            # farmer still receives real, grounded treatment content.
+            if advisory.confidence.value in {"blocked", "low_confidence"} and info and info.get("solution_bn"):
+                treatment_advice = str(info["solution_bn"])
+                treatment_confidence = "verified"
+                treatment_sources = ()
+            elif advisory.confidence.value in {"blocked", "low_confidence"}:
+                treatment_confidence = "low_confidence"
+        else:
+            trace.append(VisionTraceEvent(VisionStage.ADVISORY, "skip", "knowledge-base fallback"))
+            if info and info.get("solution_bn"):
+                treatment_advice = str(info["solution_bn"])
+                treatment_confidence = "verified"
 
         result = VisionResult(
             status=VisionStatus.DIAGNOSED,
-            crop=crop_prediction.label,
-            crop_confidence=crop_prediction.confidence,
+            crop=crop_label,
+            crop_confidence=crop_confidence,
+            crop_source=crop_source,
             disease=disease_prediction.label,
             disease_confidence=disease_prediction.confidence,
-            top3_crops=crop_prediction.top3,
+            top3_crops=top3_crops,
             top3_diseases=disease_prediction.top3,
             disease_info=info,
             treatment_advice=treatment_advice,
             treatment_confidence=treatment_confidence,
-            treatment_sources=tuple(source.id for source in advisory.sources),
-            verifier_flags=advisory.verifier_flags,
+            treatment_sources=treatment_sources,
+            verifier_flags=verifier_flags,
             quality=quality,
             trace=tuple(trace),
         )

@@ -31,10 +31,15 @@ const PUBLISHER_NAMES: Record<string, string> = {
 
 function formatTreatmentAdvice(text: string, sources: string[]) {
   if (!text) return text;
+  const clean = text
+    .replaceAll(/\[cite:\s*\d+\]/gi, "")
+    .replaceAll(/\*\*/g, "")
+    .replaceAll(/\*/g, "");
+
   const tagRegex = /\[([A-Z0-9_]+)\]/g;
   const bnDigits = ["১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "১০"];
 
-  return text.replace(tagRegex, (match, id) => {
+  return clean.replace(tagRegex, (match, id) => {
     const idx = sources.findIndex((s) => s === id);
     if (idx >= 0) {
       const digit = bnDigits[idx] || String(idx + 1);

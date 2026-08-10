@@ -25,10 +25,10 @@ import { safetyLabel, TONE_BADGE, AGRI_DISTRICTS } from "@/lib/safety-labels";
    ========================================================================= */
 
 const TRACK_DATA = [
-  { name: "সাধারণ QA", value: 28993, color: "var(--color-leaf)" },
-  { name: "টেবিল QA", value: 25650, color: "var(--color-leaf-2)" },
-  { name: "নিরাপত্তা QA", value: 20112, color: "var(--color-ochre)" },
-  { name: "চিকিৎসা QA", value: 11224, color: "var(--color-clay)" },
+  { name: "সাধারণ কৃষি QA", value: 28993, color: "var(--color-leaf)" },
+  { name: "সার ও সয়েল গাইড QA", value: 25650, color: "var(--color-leaf-2)" },
+  { name: "নিরাপত্তা পলিসি QA", value: 20112, color: "var(--color-ochre)" },
+  { name: "বালাই ব্যবস্থাপনা QA", value: 11224, color: "var(--color-clay)" },
 ];
 
 /* Farmer-facing retrieval chart labels — the backend enums (BM25, Dense,
@@ -41,7 +41,7 @@ const RETRIEVAL_DATA = [
   { name: "সূক্ষ্ম মিল", value: 0.487, best: false },
 ];
 
-const RAG_QUERY = "আলুর দেরি ব্লাইট কীভাবে প্রতিরোধ করব?";
+const RAG_QUERY = "আলুর লেট ব্লাইট কীভাবে প্রতিরোধ করব?";
 /* Human document titles instead of raw DB IDs (DAE_PEST_1206A0_001).
    Farmers should never see backend identifiers. */
 const RAG_SOURCES = [
@@ -51,7 +51,7 @@ const RAG_SOURCES = [
     snippet: "প্রতি লিটার পানিতে ২ গ্রাম মাত্রায় ম্যানকোজেব ৮০WP মিশ্রণ করে স্প্রে করুন...",
   },
   {
-    title: "আলুর দেরি ব্লাইট রোগ ব্যবস্থাপনা — ফসল সুরক্ষা নির্দেশিকা",
+    title: "আলুর লেট ব্লাইট (নাবি ধসা) রোগ ব্যবস্থাপনা — ফসল সুরক্ষা নির্দেশিকা",
     agency: "CABI",
     snippet: "Phytophthora infestans ছত্রাক দ্বারা সৃষ্ট — আর্দ্র আবহাওয়ায় দ্রুত ছড়ায়...",
   },
@@ -300,7 +300,7 @@ function RagPipelineDemo() {
             {stage >= 3 && (
               <div className="mt-3 rounded-md bg-paper p-3">
                 <div className="text-xs font-medium text-leaf">উত্তর:</div>
-                <p className="mt-1 text-xs leading-relaxed text-ink">আলুর দেরি ব্লাইট একটি ছত্রাকজনিত রোগ। প্রতি লিটার পানিতে ২ গ্রাম ম্যানকোজেব ৮০WP মিশ্রণ করে স্প্রে করুন। বিস্তারিত জানতে নিকটস্থ কৃষি কর্মকর্তার পরামর্শ নিন।</p>
+                <p className="mt-1 text-xs leading-relaxed text-ink">আলুর লেট ব্লাইট (নাবি ধসা) একটি ফাঙ্গাসজনিত মারাত্মক রোগ। প্রতি লিটার পানিতে ২ গ্রাম ম্যানকোজেব ৮০WP মিশ্রণ করে স্প্রে করুন। বিস্তারিত জানতে নিকটস্থ কৃষি কর্মকর্তার পরামর্শ নিন।</p>
               </div>
             )}
             {stage >= 4 && (

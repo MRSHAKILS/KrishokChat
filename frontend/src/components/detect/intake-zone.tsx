@@ -2,7 +2,7 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { RefreshCw, AlertCircle, Upload, ImageIcon, Loader2 } from "lucide-react";
+import { RefreshCw, AlertCircle, Upload, ImageIcon, Loader2, Sprout } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { dur, ease } from "@/lib/motion";
 import { VISION } from "@/lib/constants";
@@ -21,6 +21,8 @@ export function IntakeZone({
   sampleLoading,
   qualityWarnings,
   loading,
+  cropHint,
+  onCropHintChange,
 }: {
   file: File | null;
   preview: string | null;
@@ -30,6 +32,8 @@ export function IntakeZone({
   sampleLoading?: boolean;
   qualityWarnings: string[];
   loading: boolean;
+  cropHint: string;
+  onCropHintChange: (value: string) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
@@ -44,6 +48,38 @@ export function IntakeZone({
 
   return (
     <div className="space-y-3">
+      {/* Crop selector — the 6-class crop model cannot recognize every crop
+          (it has no Rice class), so farmers can declare what they grow. The
+          backend then routes directly to the matching disease model. */}
+      <div className="flex flex-wrap items-center gap-2 rounded-lg border rule bg-paper-2/40 px-3 py-2.5">
+        <label
+          htmlFor="crop-hint"
+          className="flex items-center gap-1.5 text-xs font-semibold text-ink-soft"
+        >
+          <Sprout className="h-3.5 w-3.5 text-leaf" />
+          ফসল
+        </label>
+        <select
+          id="crop-hint"
+          value={cropHint}
+          onChange={(e) => onCropHintChange(e.target.value)}
+          className="min-h-9 flex-1 rounded-lg border rule bg-paper px-2.5 py-1.5 text-xs text-ink focus:border-leaf focus:outline-none sm:flex-none"
+          aria-label="ফসল নির্বাচন করুন"
+        >
+          <option value="">অটো — মডেল শনাক্ত করবে</option>
+          <option value="rice">ধান</option>
+          <option value="wheat">গম</option>
+          <option value="corn">ভুট্টা</option>
+          <option value="potato">আলু</option>
+          <option value="brassica">বাঁধাকপি / ফুলকপি</option>
+        </select>
+        {cropHint && (
+          <span className="w-full text-[11px] text-leaf sm:w-auto">
+            এই ফসলের রোগ মডেল দিয়ে বিশ্লেষণ হবে
+          </span>
+        )}
+      </div>
+
       {/* Drop / preview area */}
       <motion.div
         onClick={() => !loading && inputRef.current?.click()}

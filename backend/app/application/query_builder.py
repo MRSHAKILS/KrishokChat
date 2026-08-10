@@ -6,7 +6,9 @@ from app.domain.contracts import QueryContext
 BNGLISH_TERMS = {
     "আলুর": "potato", "আলু": "potato", "ধান": "rice", "গম": "wheat", "ভুট্টা": "corn",
     "ফুলকপি": "cauliflower", "বাঁধাকপি": "cabbage", "টমেটো": "tomato", "মরিচ": "chilli",
-    "দেরি ব্লাইট": "late blight", "ব্লাস্ট": "blast", "রাস্ট": "rust", "মরিচা": "leaf rust",
+    "লেট ব্লাইট": "late blight", "নাবি ধসা": "late blight", "দেরি ব্লাইট": "late blight",
+    "আর্লি ব্লাইট": "early blight", "আগাম ধসা": "early blight",
+    "খোলপোড়া": "sheath blight", "ব্লাস্ট": "blast", "রাস্ট": "rust", "মরিচা": "leaf rust",
     "প্রতিকার": "treatment", "রোগ": "disease", "বীজ": "seed", "সার": "fertilizer",
     "কৃষি": "agriculture", "ফসল": "crop", "নির্ণয়": "diagnosis",
 }

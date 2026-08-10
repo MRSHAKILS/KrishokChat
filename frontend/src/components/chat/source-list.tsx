@@ -24,7 +24,7 @@ export function SourceList({ sources }: { sources: SourceNode[] }) {
         className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-faint transition-colors hover:text-leaf"
       >
         <Building2 className="h-3.5 w-3.5 text-leaf" />
-        প্রমাণিত সরকারি ও গবেষণা তথ্যসূত্র ({sources.length}টি সংস্থাগত উৎস)
+        তথ্যসূত্র দেখুন ({sources.length}টি)
         <ChevronDown className={cn("h-3 w-3 transition-transform", open && "rotate-180")} />
       </button>
 
@@ -79,7 +79,7 @@ export function SourceList({ sources }: { sources: SourceNode[] }) {
                   {/* Citation / Section Note */}
                   {src.citation && (
                     <p className="mt-1 ml-5 text-[11px] italic text-ink-soft bg-paper-2/60 p-2 rounded rule">
-                      "{src.citation.trim()}"
+                      &ldquo;{src.citation.trim()}&rdquo;
                     </p>
                   )}
 
