@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { CheckCircle, HelpCircle, ImageIcon, XCircle, AlertTriangle, Leaf } from "lucide-react";
+import { CheckCircle, HelpCircle, ImageIcon, XCircle, AlertTriangle, Leaf, X } from "lucide-react";
 import { enter } from "@/lib/motion";
 import { bnPercent, humanizeLabel, diseaseCore, cleanKnowledgeText, translateDiseaseToBn, cropBn } from "@/lib/bn";
 import { HELPLINE } from "@/lib/constants";
@@ -14,7 +14,7 @@ import type { DetectResponse } from "@/lib/api";
    dedicated, considered design.
    ========================================================================= */
 
-export function DiagnosisCard({ result }: { result: DetectResponse }) {
+export function DiagnosisCard({ result, onClear }: { result: DetectResponse; onClear?: () => void }) {
   // Defensive: a legacy backend response may lack a `status` field
   // (pre-refactor versions returned disease labels without status).
   // Never surface a bogus "model_error" for a valid legacy response.
@@ -22,7 +22,7 @@ export function DiagnosisCard({ result }: { result: DetectResponse }) {
 
   switch (status) {
     case "diagnosed":
-      return <DiagnosedCard result={result} />;
+      return <DiagnosedCard result={result} onClear={onClear} />;
     case "healthy":
       return <HealthyCard result={result} />;
     case "not_recognized":
@@ -52,7 +52,7 @@ function inferStatus(result: DetectResponse): string {
 
 /* --- 1. DIAGNOSED — the full diagnosis ---------------------------------- */
 
-function DiagnosedCard({ result }: { result: DetectResponse }) {
+function DiagnosedCard({ result, onClear }: { result: DetectResponse; onClear?: () => void }) {
   const info = result.disease_info;
   const diseaseName = result.disease ? humanizeLabel(result.disease) : "";
   const diseaseBn = result.disease ? translateDiseaseToBn(result.disease) : (info?.class_name ?? "");
@@ -71,6 +71,19 @@ function DiagnosedCard({ result }: { result: DetectResponse }) {
     >
       {/* Header: crop + disease */}
       <div className="space-y-3 p-5">
+        {onClear && (
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={onClear}
+              aria-label="নির্ণয় মুছুন"
+              className="flex min-h-9 items-center gap-1.5 rounded-lg px-2.5 text-xs text-ink-faint transition-colors hover:bg-paper-2 hover:text-ink"
+            >
+              <X className="h-3.5 w-3.5" />
+              মুছুন
+            </button>
+          </div>
+        )}
         <div className="flex items-start gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-leaf/10 text-leaf">
             <Leaf className="h-5 w-5" strokeWidth={1.5} />

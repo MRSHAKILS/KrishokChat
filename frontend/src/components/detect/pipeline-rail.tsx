@@ -52,18 +52,22 @@ export function PipelineRail({
       initial="hidden"
       animate="visible"
       variants={stagger}
-      className="flex items-stretch gap-0"
+      className="flex items-start gap-0"
     >
       {stages.map((stage, i) => {
         const ev = events.find((e) => e.stage === stage.key);
-        const status = resolveStatus(ev);
+        const hasRunningStage = events.some((event) => {
+          const eventStatus = resolveStatus(event);
+          return eventStatus === "active" || eventStatus === "complete";
+        });
+        const status = active && !hasRunningStage && i === 0 ? "active" : resolveStatus(ev);
         const isLast = i === stages.length - 1;
 
         return (
           <div key={stage.key} className="flex items-stretch" style={{ flex: 1 }}>
             {/* Node + label column */}
             <motion.div variants={enter} className="flex min-w-0 flex-col items-center" style={{ minWidth: 52 }}>
-              <RailNode status={status} active={active} />
+               <RailNode status={status} active={active} />
               <div
                 className={cn(
                   "mt-2 max-w-[72px] text-center text-[10px] font-medium leading-tight transition-colors sm:max-w-[100px] sm:text-[11px]",

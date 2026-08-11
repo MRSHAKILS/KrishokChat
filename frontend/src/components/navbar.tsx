@@ -25,12 +25,12 @@ const NAV = [
   { href: "/", label: "হোম" },
   { href: "/detect", label: "রোগ নির্ণয়" },
   { href: "/chat", label: "পরামর্শ" },
-  { href: "/analytics", label: "পরিসংখ্যান" },
-  { href: "/research", label: "গবেষণা" },
-  { href: "/library", label: "লাইব্রেরি" },
 ] as const;
 
 const MORE = [
+  { href: "/analytics", label: "লাইভ পরিসংখ্যান", desc: "এজেন্ট সিদ্ধান্ত ও স্থানীয় অডিট" },
+  { href: "/research", label: "গবেষণা ও ফলাফল", desc: "পেপার, benchmark ও নিরাপত্তা নকশা" },
+  { href: "/library", label: "রিসোর্স লাইব্রেরি", desc: "প্রকাশনা ও ডেটাসেট" },
   { href: "/data", label: "উপাত্ত", desc: "ডেটাসেট ও গবেষণা উপাত্ত" },
   { href: "/about", label: "পরিচিতি", desc: "প্রকল্প ও প্রতিষ্ঠান" },
   { href: "/team", label: "দল", desc: "গবেষণা দল ও কৃতিত্ব" },
@@ -53,7 +53,7 @@ export function Navbar() {
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
-  const moreActive = MORE.some((m) => m.href === pathname);
+  const moreActive = MORE.some((m) => pathname === m.href || pathname.startsWith(`${m.href}/`));
 
   return (
     <header className="sticky top-0 z-50 border-b rule bg-paper/85 backdrop-blur-md">
@@ -103,7 +103,7 @@ export function Navbar() {
                 moreActive || moreOpen ? "text-leaf" : "text-ink-soft hover:text-ink",
               )}
             >
-              আরও
+              প্রকল্প
               <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", moreOpen && "rotate-180")} />
             </button>
             <AnimatePresence>
@@ -115,8 +115,11 @@ export function Navbar() {
                   transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute right-0 top-full mt-1 w-64 overflow-hidden rounded-xl border rule bg-paper p-1.5 shadow-lg shadow-ink/5"
                 >
+                  <div className="px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-faint">
+                    Project overview
+                  </div>
                   {MORE.map((m) => {
-                    const active = pathname === m.href;
+                    const active = pathname === m.href || pathname.startsWith(`${m.href}/`);
                     return (
                       <Link
                         key={m.href}

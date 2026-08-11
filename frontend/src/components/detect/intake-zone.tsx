@@ -16,6 +16,7 @@ export function IntakeZone({
   file,
   preview,
   onFile,
+  onValidationError,
   onClear,
   onSample,
   sampleLoading,
@@ -27,6 +28,7 @@ export function IntakeZone({
   file: File | null;
   preview: string | null;
   onFile: (f: File) => void;
+  onValidationError?: (message: string) => void;
   onClear: () => void;
   onSample?: (path: string, name: string) => void;
   sampleLoading?: boolean;
@@ -40,10 +42,17 @@ export function IntakeZone({
 
   const handleSelect = useCallback(
     (f: File) => {
-      if (!f.type.startsWith("image/")) return;
+      if (!VISION.acceptedTypes.includes(f.type)) {
+        onValidationError?.("শুধু JPEG, PNG বা WebP ছবি দিন।");
+        return;
+      }
+      if (f.size > VISION.maxFileSizeMB * 1024 * 1024) {
+        onValidationError?.(`ছবিটি ${VISION.maxFileSizeMB}MB-এর ছোট হতে হবে।`);
+        return;
+      }
       onFile(f);
     },
-    [onFile],
+    [onFile, onValidationError],
   );
 
   return (
@@ -96,8 +105,14 @@ export function IntakeZone({
         }}
         whileHover={file ? undefined : { scale: 1.005 }}
         transition={{ duration: dur.fast, ease: ease.smooth }}
+        role="button"
+        tabIndex={loading ? -1 : 0}
+        onKeyDown={(e) => {
+          if (!loading && (e.key === "Enter" || e.key === " ")) inputRef.current?.click();
+        }}
+        aria-label={preview ? "আপলোড করা ছবি পরিবর্তন করুন" : "পাতার ছবি আপলোড করুন"}
         className={cn(
-          "relative cursor-pointer rounded-xl border-2 p-8 text-center transition-colors",
+          "surface-lift relative cursor-pointer overflow-hidden rounded-xl border-2 p-8 text-center transition-colors focus-visible:ring-2 focus-visible:ring-leaf",
           dragging
             ? "border-leaf bg-leaf/5"
             : file
@@ -131,7 +146,7 @@ export function IntakeZone({
               <img
                 src={preview}
                 alt="আপলোড করা পাতার ছবি"
-                className="mx-auto max-h-52 rounded-lg border border-bone object-contain"
+                className="mx-auto max-h-52 rounded-lg border border-bone object-contain shadow-sm"
               />
               <div className="mt-3 flex items-center justify-center gap-3 text-xs text-ink-faint">
                 <span className="max-w-[160px] truncate">{file?.name ?? "ছবি"}</span>
@@ -141,7 +156,7 @@ export function IntakeZone({
                       e.stopPropagation();
                       onClear();
                     }}
-                    className="flex items-center gap-1 text-ink-soft transition-colors hover:text-leaf"
+                    className="flex min-h-11 items-center gap-1 rounded-lg px-2 text-ink-soft transition-colors hover:text-leaf"
                   >
                     <RefreshCw className="h-3 w-3" />
                     পরিবর্তন
@@ -167,6 +182,20 @@ export function IntakeZone({
               <div className="mt-1 text-[11px] text-ink-faint/70">
                 JPEG · PNG · WebP · সর্বোচ্চ {VISION.maxFileSizeMB}MB
               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence mode="wait">
+          {dragging && !loading && (
+            <motion.div
+              key="drop-ready"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="pointer-events-none absolute inset-2 flex items-center justify-center rounded-lg border border-leaf/30 bg-paper/90 text-sm font-semibold text-leaf"
+            >
+              ছবি ছেড়ে দিন
             </motion.div>
           )}
         </AnimatePresence>

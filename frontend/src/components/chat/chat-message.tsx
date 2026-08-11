@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, AlertCircle, Eye, EyeOff, Volume2, VolumeX } from "lucide-react";
+import { ChevronDown, AlertCircle, Eye, EyeOff, Volume2, VolumeX, Copy, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { dur, ease } from "@/lib/motion";
 import { QA_STAGES, PipelineRail, type RailEvent } from "@/components/detect/pipeline-rail";
+import { AgentTrace } from "@/components/agent-trace";
 import { ConfidenceBadge } from "./confidence-badge";
 import { SourceList } from "./source-list";
 import { SafetyNotice } from "./safety-notice";
@@ -29,16 +30,20 @@ import { type QAResponse, type SourceNode, type AgentStageEvent } from "@/lib/ap
 
 export type ChatMessageData =
   | { role: "user"; content: string }
-  | { role: "assistant"; content: string; response?: QAResponse; error?: string };
+  | { role: "assistant"; content: string; response?: QAResponse; error?: string; retryQuery?: string };
 
 export function ChatMessage({
   message,
   streaming,
   traceEvents,
+  streamedText,
+  onRetry,
 }: {
   message: ChatMessageData;
   streaming?: boolean;
   traceEvents?: AgentStageEvent[];
+  streamedText?: string;
+  onRetry?: () => void;
 }) {
   if (message.role === "user") {
     return (
@@ -48,7 +53,7 @@ export function ChatMessage({
         transition={{ duration: dur.fast, ease: ease.smooth }}
         className="flex justify-end"
       >
-        <div className="max-w-[85%] rounded-lg rounded-br-sm bg-leaf px-4 py-2.5 text-sm leading-relaxed text-paper">
+        <div className="max-w-[85%] rounded-2xl rounded-br-md bg-leaf px-4 py-3 text-sm leading-relaxed text-paper shadow-sm">
           {message.content}
         </div>
       </motion.div>
@@ -63,11 +68,11 @@ export function ChatMessage({
       transition={{ duration: dur.normal, ease: ease.smooth }}
       className="flex justify-start"
     >
-      <div className="w-full max-w-4xl rounded-xl rounded-bl-sm border rule bg-paper-2/80 px-4 py-4 shadow-sm sm:px-5">
+      <div className="w-full max-w-4xl rounded-2xl rounded-bl-md border rule bg-paper-2/75 px-4 py-4 shadow-[0_4px_18px_rgba(52,39,23,0.045)] sm:px-5">
         {streaming ? (
-          <StreamingContent events={traceEvents ?? []} />
+          <StreamingContent events={traceEvents ?? []} text={streamedText ?? ""} />
         ) : message.error ? (
-          <ErrorContent error={message.error} />
+          <ErrorContent error={message.error} onRetry={onRetry} />
         ) : message.response ? (
           <CompletedContent response={message.response} />
         ) : (
@@ -80,7 +85,7 @@ export function ChatMessage({
 
 /* --- Streaming state: pipeline rail + typing indicator --- */
 
-function StreamingContent({ events }: { events: AgentStageEvent[] }) {
+function StreamingContent({ events, text }: { events: AgentStageEvent[]; text: string }) {
   const railEvents: RailEvent[] = events.map((e) => ({
     stage: e.stage,
     status: e.status,
@@ -98,9 +103,19 @@ function StreamingContent({ events }: { events: AgentStageEvent[] }) {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border rule bg-paper/60 p-3 sm:p-4">
-        <PipelineRail stages={QA_STAGES} events={railEvents} active={true} />
-      </div>
+      {text && (
+        <p aria-live="polite" className="whitespace-pre-wrap text-sm leading-relaxed text-ink">
+          {text}
+           <span className="stream-caret ml-1 inline-block h-4 w-0.5 bg-leaf align-middle" />
+        </p>
+      )}
+      <AgentTrace
+        stages={QA_STAGES}
+        events={railEvents}
+        active={true}
+        title="উত্তর তৈরির এজেন্ট প্রবাহ"
+        detail={activeLabel ? `${activeLabel} ধাপ চলছে` : undefined}
+      />
       <motion.div
         animate={{ opacity: [0.55, 1, 0.55] }}
         transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
@@ -127,10 +142,19 @@ function Dot({ delay = 0 }: { delay?: number }) {
 
 /* --- Error state --- */
 
-function ErrorContent({ error }: { error: string }) {
+function ErrorContent({ error, onRetry }: { error: string; onRetry?: () => void }) {
   return (
-    <div className="rounded-md border border-clay-soft/40 bg-clay-soft/15 px-3 py-2 text-sm text-clay">
-      ত্রুটি: {error}
+    <div className="rounded-md border border-clay-soft/40 bg-clay-soft/15 px-3 py-3 text-sm text-clay">
+      <p>ত্রুটি: {error}</p>
+      {onRetry && (
+        <button
+          type="button"
+          onClick={onRetry}
+          className="mt-2 flex min-h-11 items-center rounded-lg font-semibold text-leaf"
+        >
+          আবার চেষ্টা করুন
+        </button>
+      )}
     </div>
   );
 }
@@ -204,6 +228,7 @@ function CompletedContent({ response }: { response: QAResponse }) {
   const [traceOpen, setTraceOpen] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [speechError, setSpeechError] = useState(false);
+  const [copied, setCopied] = useState(false);
   const speechRequest = useRef(0);
 
   useEffect(() => {
@@ -283,24 +308,39 @@ function CompletedContent({ response }: { response: QAResponse }) {
     }, 40);
   };
 
+  const copyAnswer = async () => {
+    try {
+      await navigator.clipboard.writeText(response.answer);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      setCopied(false);
+    }
+  };
+
   return (
     <div className="space-y-3">
       {/* Answer text with styled citation pills */}
-      <p className="whitespace-pre-wrap text-sm leading-relaxed text-ink">
+      <motion.p
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: dur.fast, ease: ease.smooth }}
+        className="whitespace-pre-wrap text-[0.95rem] leading-[1.85] text-ink"
+      >
         <FormattedAnswerText text={cleanAnswer} />
-      </p>
+      </motion.p>
 
       {/* Keep the answer actions to one useful voice control and one optional
           detail link. The verification badge is informational, not a button. */}
       <div className="flex flex-wrap items-center gap-2 border-t rule pt-3">
         <ConfidenceBadge confidence={response.confidence} />
 
-        <button
+         <button
           onClick={() => toggleSpeech(response.answer)}
           type="button"
           aria-label={speaking ? "আবৃত্তি বন্ধ করুন" : "পরামর্শটি শুনুন"}
-          className={cn(
-            "flex min-h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-medium transition-colors active:scale-[0.98]",
+           className={cn(
+             "control-press flex min-h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-medium",
             speaking
               ? "border-leaf bg-leaf text-paper"
               : "border-leaf/25 bg-leaf/8 text-leaf hover:bg-leaf/15",
@@ -308,6 +348,16 @@ function CompletedContent({ response }: { response: QAResponse }) {
         >
           {speaking ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
           <span>{speaking ? "থামুন" : "শুনুন"}</span>
+         </button>
+
+        <button
+          onClick={copyAnswer}
+          type="button"
+          aria-label="উত্তর কপি করুন"
+          className="control-press flex min-h-9 items-center gap-1.5 rounded-lg border border-bone px-3 text-xs font-medium text-ink-faint hover:border-leaf/30 hover:text-leaf"
+        >
+          {copied ? <Check className="h-3.5 w-3.5 text-leaf" /> : <Copy className="h-3.5 w-3.5" />}
+          <span>{copied ? "কপি হয়েছে" : "কপি"}</span>
         </button>
 
         {response.agent_trace.length > 0 && (

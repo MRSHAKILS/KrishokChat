@@ -18,6 +18,14 @@ export const dur = {
   slow: 0.55,
 } as const;
 
+/** Product motion contract: calm enough for repeated field use. */
+export const motionSpec = {
+  interaction: `${dur.fast}s ${ease.sharp.join(",")}`,
+  reveal: `${dur.normal}s ${ease.smooth.join(",")}`,
+  progress: `${dur.slow}s ${ease.smooth.join(",")}`,
+  stagger: 0.07,
+} as const;
+
 /* Stagger for sequenced reveals (stat cards, pipeline nodes) */
 export const stagger: Variants = {
   hidden: {},

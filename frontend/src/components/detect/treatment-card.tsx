@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ShieldCheck, ShieldAlert, ShieldX, FileText, AlertCircle, Phone } from "lucide-react";
+import { ShieldCheck, ShieldAlert, ShieldX, FileText, AlertCircle, Phone, CloudRain, MessageCircle, ChevronDown, ClipboardCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { enter, dur, ease } from "@/lib/motion";
 import { HELPLINE } from "@/lib/constants";
@@ -58,36 +59,72 @@ function getOrgNameForSource(src: string): string {
   return "জাতীয় কৃষি গবেষণা সংস্থা";
 }
 
-export function TreatmentCard({ result }: { result: DetectResponse }) {
+function findDosage(text: string): string | null {
+  const line = text
+    .split(/[\n।]/)
+    .map((part) => part.trim())
+    .find((part) => /ডোজ|মাত্রা|গ্রাম|মি\.?লি|লিটার|কেজি|\b(?:ml|g|kg|l)\b/i.test(part));
+  return line || null;
+}
+
+export function TreatmentCard({
+  result,
+  onFollowUp,
+}: {
+  result: DetectResponse;
+  onFollowUp?: (question: string) => void;
+}) {
+  const [sourcesOpen, setSourcesOpen] = useState(false);
   if (!result.treatment_advice) return null;
 
   const cleanAdvice = formatTreatmentAdvice(result.treatment_advice, result.treatment_sources);
+  const dosage = findDosage(cleanAdvice);
 
   return (
     <motion.div
       variants={enter}
       initial="hidden"
       animate="visible"
-      className="overflow-hidden rounded-xl border rule bg-paper shadow-2xs"
+      className="overflow-hidden rounded-xl border rule bg-paper shadow-[0_8px_28px_rgba(52,39,23,0.06)]"
     >
-      {/* Ochre header strip — the "প্রতিকার" section */}
-      <div className="border-b border-ochre-soft/50 bg-ochre-soft/15 px-5 py-3">
-        <div className="text-[11px] font-semibold text-ochre">প্রতিকার ও ফসল সুরক্ষা নির্দেশিকা</div>
+      {/* The first screenful is deliberately structured for a five-second scan. */}
+      <div className="flex items-center justify-between gap-3 border-b border-ochre-soft/50 bg-ochre-soft/15 px-5 py-3">
+        <div className="flex items-center gap-2 text-[11px] font-semibold text-ochre">
+          <ClipboardCheck className="h-4 w-4" /> এখন কী করবেন
+        </div>
+        {result.treatment_confidence && <ConfidenceBadge confidence={result.treatment_confidence} compact />}
       </div>
 
-      {/* Treatment text */}
-      <div className="p-5">
-        <p className="text-sm leading-relaxed text-ink whitespace-pre-wrap">
-          {cleanAdvice}
-        </p>
+      {/* Immediate action */}
+      <div className="border-b rule p-5">
+        <div className="mb-1 text-[11px] font-semibold text-ink-faint">তাৎক্ষণিক ব্যবস্থা</div>
+        <p className="text-sm leading-relaxed text-ink whitespace-pre-wrap">{cleanAdvice}</p>
+      </div>
+
+      {/* Dosage is explicit when present, never inferred. */}
+      <div className="grid gap-3 border-b rule p-5 sm:grid-cols-2">
+        <div className="rounded-lg border border-ochre-soft/60 bg-ochre-soft/10 p-3">
+          <div className="text-[11px] font-semibold text-ochre">রাসায়নিক মাত্রা</div>
+          <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+            {dosage ?? "এই ফলাফলে আলাদা মাত্রা উল্লেখ নেই। লেবেল ছাড়া ডোজ ঠিক করবেন না।"}
+          </p>
+        </div>
+        <div className="rounded-lg border border-leaf/20 bg-leaf/5 p-3">
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-leaf">
+            <CloudRain className="h-3.5 w-3.5" /> আবহাওয়া বিবেচনা
+          </div>
+          <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+            এই পরামর্শে আপনার এলাকার লাইভ আবহাওয়া নেই। স্প্রে করার আগে বৃষ্টি ও বাতাস দেখে নিন।
+          </p>
+        </div>
       </div>
 
       {/* Dosage guidance is safety-critical */}
-      <div className="mx-5 mb-4 flex items-start gap-2 rounded-lg border border-ochre-soft/60 bg-ochre-soft/15 px-3 py-3 text-xs leading-relaxed text-ink-soft">
+      <div className="mx-5 mb-4 flex items-start gap-2 rounded-lg border border-clay-soft/60 bg-clay-soft/15 px-3 py-3 text-xs leading-relaxed text-ink-soft">
         <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-ochre" />
         <div>
-          <div className="font-semibold text-ochre">কীটনাশক ব্যবহারে সতর্কতা</div>
-          <p className="mt-0.5">ব্যবহারের আগে স্থানীয় কৃষি কর্মকর্তার পরামর্শ নিন। নিশ্চিত হতে কৃষক কল সেন্টারে কল করুন।</p>
+          <div className="font-semibold text-clay">রাসায়নিক ব্যবহারের আগে যাচাই করুন</div>
+          <p className="mt-0.5">উৎসে স্পষ্ট মাত্রা না থাকলে নিজে থেকে ডোজ ঠিক করবেন না। লেবেল ও স্থানীয় কৃষি কর্মকর্তার পরামর্শ মেনে চলুন।</p>
           <a href={`tel:${HELPLINE.krishiCallCenter}`} className="mt-1 inline-flex min-h-9 items-center gap-1 font-semibold text-leaf hover:text-leaf-2">
             <Phone className="h-3.5 w-3.5" /> {HELPLINE.krishiCallCenter}
           </a>
@@ -97,7 +134,9 @@ export function TreatmentCard({ result }: { result: DetectResponse }) {
       {/* Confidence badge */}
       {result.treatment_confidence && (
         <div className="border-t rule px-5 py-3">
-          <ConfidenceBadge confidence={result.treatment_confidence} />
+          <p className="text-[11px] leading-relaxed text-ink-faint">
+            যাচাই অবস্থা পরামর্শের উৎসসমর্থন বোঝায়; এটি রোগ শনাক্তকরণের শতাংশ নয়।
+          </p>
         </div>
       )}
 
@@ -132,33 +171,81 @@ export function TreatmentCard({ result }: { result: DetectResponse }) {
 
       {/* Source list — formal institutional sources */}
       {result.treatment_sources.length > 0 && (
-        <div className="border-t rule px-5 py-3 bg-paper-2/30">
-          <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-leaf">
-            <FileText className="h-3.5 w-3.5 text-leaf" />
-            প্রমাণিত সরকারি ও গবেষণা তথ্যসূত্র ({result.treatment_sources.length}টি উৎস)
-          </div>
-          <ul className="space-y-1.5">
-            {result.treatment_sources.map((src, i) => {
-              const orgName = getOrgNameForSource(src);
-              return (
-                <li key={i} className="flex items-center gap-2 text-xs text-ink">
-                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-leaf text-[9px] font-bold text-paper">
-                    {i + 1}
-                  </span>
-                  <span className="font-semibold text-leaf">{orgName}</span>
-                </li>
-              );
-            })}
-          </ul>
+        <div className="border-t rule bg-paper-2/30 px-5 py-3">
+          <button
+            type="button"
+            onClick={() => setSourcesOpen((open) => !open)}
+            aria-expanded={sourcesOpen}
+            className="control-press flex min-h-10 w-full items-center justify-between gap-3 rounded-lg text-left text-[11px] font-semibold text-leaf"
+          >
+            <span className="flex items-center gap-1.5">
+              <FileText className="h-3.5 w-3.5" />
+              প্রমাণিত সরকারি ও গবেষণা তথ্যসূত্র ({result.treatment_sources.length}টি)
+            </span>
+            <ChevronDown className={cn("h-4 w-4 transition-transform", sourcesOpen && "rotate-180")} />
+          </button>
+          <AnimatePresence mode="wait">
+            {sourcesOpen && (
+              <motion.ul
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: dur.normal, ease: ease.smooth }}
+                className="space-y-1.5 overflow-hidden pt-2"
+              >
+                {result.treatment_sources.map((src, i) => {
+                  const orgName = getOrgNameForSource(src);
+                  return (
+                    <li key={i} className="surface-lift flex items-center gap-2 rounded-lg border rule bg-paper px-3 py-2 text-xs text-ink">
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-leaf text-[9px] font-bold text-paper">
+                        {i + 1}
+                      </span>
+                      <span className="font-semibold text-leaf">{orgName}</span>
+                    </li>
+                  );
+                })}
+              </motion.ul>
+            )}
+          </AnimatePresence>
         </div>
       )}
+
+      {/* Follow-up actions keep the assistant task-oriented instead of ending at a label. */}
+      <div className="border-t rule px-5 py-4">
+        <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-ink-faint">
+          <MessageCircle className="h-3.5 w-3.5 text-leaf" /> পরের কাজ
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {[
+            "রাসায়নিক ছাড়া কীভাবে সামলাব?",
+            "বৃষ্টির আগে কী করব?",
+            "আরও পরিষ্কার ছবি দিলে দেখবেন?",
+          ].map((question) => (
+            <button
+              key={question}
+              type="button"
+              onClick={() => onFollowUp?.(question)}
+              disabled={!onFollowUp}
+               className="control-press min-h-11 rounded-full border border-leaf/25 bg-leaf/5 px-3 text-xs font-medium text-leaf hover:bg-leaf/10 disabled:cursor-default disabled:opacity-70"
+            >
+              {question}
+            </button>
+          ))}
+          <a
+            href={`tel:${HELPLINE.krishiCallCenter}`}
+            className="inline-flex min-h-11 items-center rounded-full border border-bone px-3 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf"
+          >
+            কৃষি বিশেষজ্ঞ: {HELPLINE.krishiCallCenter}
+          </a>
+        </div>
+      </div>
     </motion.div>
   );
 }
 
 /* --- Confidence badge ------------------------------------------------- */
 
-function ConfidenceBadge({ confidence }: { confidence: string }) {
+function ConfidenceBadge({ confidence, compact = false }: { confidence: string; compact?: boolean }) {
   const config = {
     verified: {
       icon: ShieldCheck,
@@ -194,7 +281,7 @@ function ConfidenceBadge({ confidence }: { confidence: string }) {
   const Icon = c.icon;
 
   return (
-    <div className={cn("flex items-center gap-2 rounded-lg border px-3 py-2 text-sm", c.bg, c.border)}>
+    <div className={cn("flex items-center gap-2 rounded-lg border", compact ? "px-2 py-1 text-[11px]" : "px-3 py-2 text-sm", c.bg, c.border)}>
       <Icon className={cn("h-4 w-4 shrink-0", c.color)} strokeWidth={1.5} />
       <span className={cn("font-medium", c.color)}>{c.label}</span>
     </div>

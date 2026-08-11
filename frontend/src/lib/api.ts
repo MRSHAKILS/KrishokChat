@@ -5,6 +5,20 @@
 
 const API_BASE = "";
 
+function createTimedSignal(parent: AbortSignal | undefined, timeoutMs: number) {
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  parent?.addEventListener("abort", abort, { once: true });
+  const timeout = window.setTimeout(abort, timeoutMs);
+  return {
+    signal: controller.signal,
+    dispose: () => {
+      window.clearTimeout(timeout);
+      parent?.removeEventListener("abort", abort);
+    },
+  };
+}
+
 /* ---------- Types ------------------------------------------------------ */
 
 export interface AgentStageEvent {
@@ -119,54 +133,62 @@ export async function streamQuestion(
     session_id?: string | null;
     history?: Array<{ role: string; content: string }>;
     model?: string | null;
+    signal?: AbortSignal;
+    timeoutMs?: number;
   },
 ): Promise<QAResponse> {
-  const res = await fetch(`${API_BASE}/api/qa/stream`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query,
-      crop: opts?.crop,
-      disease: opts?.disease,
-      session_id: opts?.session_id,
-      history: opts?.history,
-      model: opts?.model,
-    }),
-  });
-  if (!res.ok) throw new Error(`qa stream failed: ${res.status}`);
-  const reader = res.body?.getReader();
-  if (!reader) throw new Error("no response body");
-  const decoder = new TextDecoder();
-  let buf = "";
-  let final: QAResponse | null = null;
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buf += decoder.decode(value, { stream: true });
-    const lines = buf.split("\n");
-    buf = lines.pop() || "";
-    for (const line of lines) {
-      const t = line.trim();
-      if (!t) continue;
-      if (t.startsWith("final:")) {
-        final = JSON.parse(t.slice(6).trim());
-      } else if (t.startsWith("data:")) {
-        try {
-          onEvent(JSON.parse(t.slice(5).trim()));
-        } catch {
-          /* ignore malformed */
-        }
-      } else if (t.startsWith("token:")) {
-        try {
-          onToken?.(JSON.parse(t.slice(6).trim()).text);
-        } catch {
-          /* ignore */
+  const request = createTimedSignal(opts?.signal, opts?.timeoutMs ?? 120_000);
+  try {
+    const res = await fetch(`${API_BASE}/api/qa/stream`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query,
+        crop: opts?.crop,
+        disease: opts?.disease,
+        session_id: opts?.session_id,
+        history: opts?.history,
+        model: opts?.model,
+      }),
+      signal: request.signal,
+    });
+    if (!res.ok) throw new Error(`qa stream failed: ${res.status}`);
+    const reader = res.body?.getReader();
+    if (!reader) throw new Error("no response body");
+    const decoder = new TextDecoder();
+    let buf = "";
+    let final: QAResponse | null = null;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split("\n");
+      buf = lines.pop() || "";
+      for (const line of lines) {
+        const t = line.trim();
+        if (!t) continue;
+        if (t.startsWith("final:")) {
+          final = JSON.parse(t.slice(6).trim());
+        } else if (t.startsWith("data:")) {
+          try {
+            onEvent(JSON.parse(t.slice(5).trim()));
+          } catch {
+            /* A malformed progress event must not discard the final answer. */
+          }
+        } else if (t.startsWith("token:")) {
+          try {
+            onToken?.(JSON.parse(t.slice(6).trim()).text);
+          } catch {
+            /* A malformed token must not discard the final answer. */
+          }
         }
       }
     }
+    if (!final) throw new Error("no final response");
+    return final;
+  } finally {
+    request.dispose();
   }
-  if (!final) throw new Error("no final response");
-  return final;
 }
 
 /* ---------- Vision ---------------------------------------------------- */
@@ -181,16 +203,25 @@ export async function classifyCrop(file: File): Promise<ClassifyResponse> {
 
 export async function detectDisease(
   file: File,
-  opts?: { cropHint?: string },
+  opts?: { cropHint?: string; signal?: AbortSignal; timeoutMs?: number },
 ): Promise<DetectResponse> {
   const form = new FormData();
   form.append("file", file);
   if (opts?.cropHint) {
     form.append("crop_hint", opts.cropHint);
   }
-  const res = await fetch(`${API_BASE}/api/detect`, { method: "POST", body: form });
-  if (!res.ok) throw new Error(`detect failed: ${res.status}`);
-  return res.json();
+  const request = createTimedSignal(opts?.signal, opts?.timeoutMs ?? 90_000);
+  try {
+    const res = await fetch(`${API_BASE}/api/detect`, {
+      method: "POST",
+      body: form,
+      signal: request.signal,
+    });
+    if (!res.ok) throw new Error(`detect failed: ${res.status}`);
+    return res.json();
+  } finally {
+    request.dispose();
+  }
 }
 
 /* ---------- Metrics ---------------------------------------------------- */

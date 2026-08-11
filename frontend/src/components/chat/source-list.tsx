@@ -21,14 +21,14 @@ export function SourceList({ sources }: { sources: SourceNode[] }) {
     <div className="mt-3 border-t rule pt-2">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-faint transition-colors hover:text-leaf"
+        className="control-press flex min-h-9 items-center gap-1.5 rounded-lg px-1.5 text-[11px] font-semibold text-ink-faint transition-colors hover:text-leaf"
       >
         <Building2 className="h-3.5 w-3.5 text-leaf" />
         তথ্যসূত্র দেখুন ({sources.length}টি)
         <ChevronDown className={cn("h-3 w-3 transition-transform", open && "rotate-180")} />
       </button>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {open && (
           <motion.ul
             initial={{ opacity: 0, height: 0 }}
@@ -45,7 +45,7 @@ export function SourceList({ sources }: { sources: SourceNode[] }) {
                 <li
                   key={i}
                   id={`source-${i + 1}`}
-                  className="rounded-lg border rule bg-paper p-3 text-xs shadow-2xs transition-all hover:border-leaf/30"
+                  className="surface-lift rounded-lg border rule bg-paper p-3 text-xs shadow-2xs"
                 >
                   {/* Organization Header */}
                   <div className="flex flex-wrap items-center justify-between gap-1.5 border-b rule pb-2">

@@ -7,7 +7,7 @@ import {
   ArrowRight, Shield, FileText, Languages, CloudSun, Phone,
   CheckCircle2, Loader2, MapPin, Play, Search, PenLine, RotateCcw,
   Camera, MessageSquare, Calculator, Volume2, Sparkles, Building2,
-  HelpCircle, ChevronDown,
+  HelpCircle, ChevronDown, ScanLine, Network, BarChart3,
 } from "lucide-react";
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell,
@@ -15,6 +15,8 @@ import {
 } from "recharts";
 import { APP, RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
+import { AgentTrace } from "@/components/agent-trace";
+import { QA_STAGES, type RailEvent } from "@/components/detect/pipeline-rail";
 import { getWeather, registerHelpline } from "@/lib/api";
 import { safetyLabel, TONE_BADGE, AGRI_DISTRICTS } from "@/lib/safety-labels";
 
@@ -64,10 +66,12 @@ const RAG_SOURCES = [
 
 export default function LandingPage() {
   return (
-    <div className="space-y-20 py-10">
+    <div className="space-y-20 py-6 sm:py-10">
       <HeroSection />
-      <VisualStatsSection />
+      <JudgeNav />
+      <CapabilityHub />
       <RagPipelineDemo />
+      <VisualStatsSection />
       <ComparisonSection />
       <TimelineSection />
       <AgriDosageCalculatorSection />
@@ -83,33 +87,41 @@ export default function LandingPage() {
 /* === A. Hero === */
 function HeroSection() {
   return (
-    <motion.section initial="hidden" animate="visible" variants={stagger} className="mx-auto max-w-5xl overflow-hidden rounded-2xl border rule">
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="bg-paper px-8 py-12 sm:px-12 sm:py-16">
-          <motion.p variants={enter} className="text-xs text-ochre">{APP.taglineEn}</motion.p>
-          <motion.h1 variants={enter} className="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl">
-            বাংলাদেশের কৃষকের জন্য<br /><span className="text-leaf">নিরাপদ কৃষি পরামর্শ</span>
-          </motion.h1>
-          <motion.p variants={enter} className="mt-5 max-w-md text-base leading-relaxed text-ink-soft">
-            ফসলের ছবি থেকে রোগ শনাক্ত করুন, বাংলায় পরামর্শ নিন — প্রতিটি উত্তর নিরাপত্তা যাচাই, তথ্য সংগ্রহ, উত্তর তৈরি ও যাচাইকরণের ধাপ দিয়ে আসে।
-          </motion.p>
-          <motion.div variants={enter} className="mt-8 flex flex-wrap items-center gap-3">
-            <Link href="/detect" className="group flex items-center gap-2 rounded-lg bg-leaf px-7 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2">
-              <Camera className="h-4 w-4" />
-              ছবি দিন নির্ণয় করুন<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+    <motion.section initial="hidden" animate="visible" variants={stagger} className="surface-lift relative mx-auto max-w-6xl overflow-hidden rounded-[24px] border border-ink/10 bg-ink shadow-[0_20px_60px_rgba(26,22,17,0.18)]">
+      <div className="grid min-h-[540px] grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="relative z-10 flex flex-col justify-between px-7 py-9 text-paper sm:px-12 sm:py-12">
+          <div>
+            <motion.div variants={enter} className="flex flex-wrap items-center gap-2 text-[11px] font-medium text-ochre-soft">
+              <span className="h-2 w-2 rounded-full bg-ochre" /> {APP.taglineEn}
+              <span className="rounded-full border border-paper/15 px-2 py-0.5 text-paper/65">CAPSTONE DEMO</span>
+            </motion.div>
+            <motion.h1 variants={enter} className="mt-6 max-w-xl font-display text-4xl leading-[1.18] text-paper sm:text-6xl">
+              কৃষকের প্রশ্ন থেকে<br /><span className="text-ochre-soft">বিশ্বাসযোগ্য সিদ্ধান্ত</span>
+            </motion.h1>
+            <motion.p variants={enter} className="mt-5 max-w-lg text-base leading-relaxed text-paper/70">
+              ছবি থেকে রোগের শ্রেণিবিন্যাস, বাংলা প্রশ্নোত্তর এবং উৎস-ভিত্তিক নিরাপত্তা যাচাই — একটি দৃশ্যমান এজেন্টিক কৃষি সহায়তা সিস্টেমে।
+            </motion.p>
+          </div>
+          <motion.div variants={enter} className="mt-10 flex flex-wrap items-center gap-3">
+            <Link href="/detect" className="control-press group flex min-h-12 items-center gap-2 rounded-xl bg-leaf-2 px-5 py-3 text-sm font-semibold text-paper shadow-lg shadow-black/10 hover:bg-leaf-3">
+              <Camera className="h-4 w-4" /> লাইভ ডেমো শুরু করুন <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <Link href="/chat" className="group flex items-center gap-2 rounded-lg border rule px-7 py-3 text-sm font-medium text-ink transition-colors hover:border-leaf hover:text-leaf">
-              <MessageSquare className="h-4 w-4" />
-              বাংলায় প্রশ্ন করুন
+            <Link href="#workflow" className="control-press flex min-h-12 items-center gap-2 rounded-xl border border-paper/20 px-5 py-3 text-sm font-medium text-paper/85 hover:border-paper/50 hover:bg-paper/5">
+              <Play className="h-4 w-4" /> কীভাবে কাজ করে
             </Link>
           </motion.div>
+          <motion.div variants={enter} className="mt-9 grid max-w-md grid-cols-3 gap-4 border-t border-paper/15 pt-5">
+            <HeroMetric value={RESEARCH_STATS.benchmarkInstances} label="মূল্যায়ন ইনস্ট্যান্স" />
+            <HeroMetric value={RESEARCH_STATS.knowledgeNodes} label="জ্ঞান নোড" />
+            <HeroMetric value={RESEARCH_STATS.dialects} label="উপভাষা" />
+          </motion.div>
         </div>
-        <div className="relative min-h-[280px] overflow-hidden bg-paper-2 lg:min-h-full">
+        <div className="relative min-h-[330px] overflow-hidden bg-leaf lg:min-h-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/hero_image.jpg"
             alt="বাংলাদেশের কৃষি ক্ষেত"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover opacity-70 mix-blend-luminosity"
             onError={(e) => {
               // Graceful fallback on slow 3G / missing asset — never an empty grey box.
               const t = e.currentTarget;
@@ -123,8 +135,136 @@ function HeroSection() {
               }
             }}
           />
+          <div className="absolute inset-0 bg-gradient-to-tr from-leaf via-leaf/25 to-transparent" />
+          <motion.div variants={enter} className="absolute inset-x-6 bottom-6 rounded-2xl border border-paper/20 bg-ink/75 p-4 shadow-2xl backdrop-blur-sm sm:inset-x-10 sm:bottom-10">
+            <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.16em] text-paper/55">
+              <span>Agent trace</span><span className="text-leaf-3">LIVE SYSTEM</span>
+            </div>
+            <div className="mt-4 grid grid-cols-4 gap-2">
+              {[{ icon: Shield, label: "নিরাপত্তা" }, { icon: Search, label: "তথ্য" }, { icon: PenLine, label: "উত্তর" }, { icon: CheckCircle2, label: "যাচাই" }].map(({ icon: Icon, label }, i) => (
+                <div key={label} className="relative text-center">
+                  <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-leaf text-paper ring-4 ring-leaf/20"><Icon className="h-4 w-4" /></div>
+                  {i < 3 && <div className="absolute left-[calc(50%+22px)] right-[calc(-50%+13px)] top-4 h-px bg-paper/25" />}
+                  <div className="mt-2 text-[10px] text-paper/75">{label}</div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 rounded-lg bg-paper/10 px-3 py-2 text-xs text-paper/80">প্রতিটি দাবি উৎসে মিলিয়ে তারপর উত্তর দেখানো হয়</div>
+          </motion.div>
         </div>
       </div>
+    </motion.section>
+  );
+}
+
+function HeroMetric({ value, label }: { value: string; label: string }) {
+  return <div><div className="font-display text-xl tabular text-paper">{value}</div><div className="mt-1 text-[10px] leading-tight text-paper/50">{label}</div></div>;
+}
+
+function JudgeNav() {
+  const items = [
+    { href: "#experience", label: "পণ্য" },
+    { href: "#workflow", label: "এজেন্ট প্রবাহ" },
+    { href: "#evidence", label: "গবেষণা প্রমাণ" },
+    { href: "#field", label: "মাঠ ও সহায়তা" },
+  ];
+
+  return (
+    <nav aria-label="প্রকল্পের দ্রুত পর্যবেক্ষণ" className="sticky top-[64px] z-30 mx-auto flex max-w-5xl items-center justify-between gap-3 overflow-x-auto rounded-xl border rule bg-paper/90 px-2 py-2 shadow-sm backdrop-blur-md">
+      <span className="hidden shrink-0 px-2 text-[11px] font-semibold text-ink-faint sm:block">প্রকল্পটি দেখুন</span>
+      <div className="flex min-w-max items-center gap-1">
+        {items.map((item) => (
+          <a key={item.href} href={item.href} className="control-press rounded-lg px-3 py-2 text-xs font-medium text-ink-soft hover:bg-paper-2 hover:text-leaf">
+            {item.label}
+          </a>
+        ))}
+      </div>
+      <Link href="/research" className="hidden shrink-0 items-center gap-1 rounded-lg bg-leaf px-3 py-2 text-xs font-semibold text-paper hover:bg-leaf-2 sm:flex">
+        রিসার্চ ব্রিফ <ArrowRight className="h-3.5 w-3.5" />
+      </Link>
+    </nav>
+  );
+}
+
+type CapabilityKey = "assistant" | "vision" | "evidence";
+
+const CAPABILITIES = {
+  assistant: {
+    icon: MessageSquare,
+    eyebrow: "USER-FACING AI",
+    title: "বাংলায় প্রশ্ন করুন, প্রমাণসহ উত্তর পান",
+    body: "কৃষক স্বাভাবিক ভাষায় জিজ্ঞাসা করেন। Safety Agent আগে সিদ্ধান্ত নেয়, তারপর Retrieval, Generation এবং Verifier উত্তরটি সম্পূর্ণ করে।",
+    cta: "চ্যাট খুলুন",
+    href: "/chat",
+    chips: ["বাংলা প্রশ্ন", "ভয়েস ইনপুট", "উৎসসহ উত্তর"],
+  },
+  vision: {
+    icon: ScanLine,
+    eyebrow: "MULTIMODAL WORKFLOW",
+    title: "পাতার ছবি থেকে রোগের পরামর্শ",
+    body: "ফসলের ছবি দিন, মডেল রোগের শ্রেণিবিন্যাস করে, তারপর একই grounded advisory path থেকে চিকিৎসা-তথ্য আনে।",
+    cta: "রোগ নির্ণয় করুন",
+    href: "/detect",
+    chips: ["ছবি আপলোড", "Confidence", "Follow-up"],
+  },
+  evidence: {
+    icon: Network,
+    eyebrow: "RESEARCH TO PRODUCT",
+    title: "গবেষণা শুধু পেজে নয়, প্রতিটি উত্তরে",
+    body: "২৮৪টি সরকারি প্রকাশনা, জ্ঞান নোড, নিরাপত্তা taxonomy এবং audit trail — গবেষণার ফল সরাসরি user workflow-এ কাজ করে।",
+    cta: "প্রমাণ দেখুন",
+    href: "/research",
+    chips: ["Provenance", "১২ safety class", "Audit trail"],
+  },
+} as const;
+
+function CapabilityHub() {
+  const [active, setActive] = useState<CapabilityKey>("assistant");
+  const panel = CAPABILITIES[active];
+  const Icon = panel.icon;
+
+  return (
+    <motion.section id="experience" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="scroll-mt-32 mx-auto max-w-5xl">
+      <motion.div variants={enter} className="mb-5 flex items-end justify-between gap-4">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ochre">One system, three entry points</p>
+          <h2 className="mt-2 font-display text-2xl text-ink sm:text-3xl">এক নজরে পুরো প্রকল্প</h2>
+        </div>
+        <span className="hidden items-center gap-1.5 text-xs text-ink-faint sm:flex"><BarChart3 className="h-4 w-4 text-leaf" /> user + research + evidence</span>
+      </motion.div>
+      <motion.div variants={enter} className="overflow-hidden rounded-2xl border rule bg-paper shadow-[0_12px_36px_rgba(52,39,23,0.07)]">
+        <div className="grid md:grid-cols-[240px_1fr]">
+          <div className="flex gap-1 overflow-x-auto border-b rule bg-paper-2/35 p-2 md:flex-col md:border-b-0 md:border-r md:p-3">
+            {(Object.keys(CAPABILITIES) as CapabilityKey[]).map((key) => {
+              const item = CAPABILITIES[key];
+              const ItemIcon = item.icon;
+              return (
+                <button key={key} type="button" onClick={() => setActive(key)} className={`control-press flex min-w-[150px] items-center gap-3 rounded-xl px-3 py-3 text-left text-sm md:min-w-0 ${active === key ? "bg-paper text-leaf shadow-sm" : "text-ink-soft hover:bg-paper/60"}`}>
+                  <ItemIcon className="h-4 w-4 shrink-0" />
+                  <span>{key === "assistant" ? "কৃষি সহকারী" : key === "vision" ? "রোগ বিশ্লেষণ" : "গবেষণা প্রমাণ"}</span>
+                </button>
+              );
+            })}
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.div key={active} initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: dur.fast, ease: ease.smooth }} className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[1fr_220px]">
+              <div>
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-leaf/10 text-leaf"><Icon className="h-5 w-5" /></div>
+                <p className="mt-5 text-[10px] font-semibold tracking-[0.16em] text-ochre">{panel.eyebrow}</p>
+                <h3 className="mt-2 max-w-xl font-display text-2xl leading-snug text-ink">{panel.title}</h3>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">{panel.body}</p>
+                <div className="mt-5 flex flex-wrap gap-2">{panel.chips.map((chip) => <span key={chip} className="rounded-full border border-leaf/20 bg-leaf/5 px-2.5 py-1 text-[11px] font-medium text-leaf">{chip}</span>)}</div>
+                <Link href={panel.href} className="control-press mt-6 inline-flex min-h-11 items-center gap-2 rounded-xl bg-leaf px-4 py-2.5 text-sm font-semibold text-paper hover:bg-leaf-2">{panel.cta}<ArrowRight className="h-4 w-4" /></Link>
+              </div>
+              <div className="grid content-center gap-2 rounded-xl border rule bg-paper-2/30 p-4">
+                {["প্রশ্ন/ছবি গ্রহণ", "এজেন্ট সিদ্ধান্ত", "প্রমাণ ও ফলাফল"].map((label, i) => (
+                  <div key={label} className="flex items-center gap-3 rounded-lg bg-paper px-3 py-2.5 text-xs text-ink-soft shadow-sm"><span className="flex h-6 w-6 items-center justify-center rounded-full bg-leaf text-[10px] font-semibold text-paper">{i + 1}</span>{label}</div>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
     </motion.section>
   );
 }
@@ -132,7 +272,7 @@ function HeroSection() {
 /* === B. Visual Stats — charts instead of plain numbers === */
 function VisualStatsSection() {
   return (
-    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="mx-auto max-w-5xl">
+    <motion.section id="evidence" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="scroll-mt-32 mx-auto max-w-5xl">
       <motion.h2 variants={enter} className="mb-6 text-center font-display text-2xl text-ink">প্রকল্পের পরিসংখ্যান</motion.h2>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Track distribution pie chart */}
@@ -216,15 +356,15 @@ function RagPipelineDemo() {
     setTimeout(() => setRunning(false), 4000);
   };
 
-  const stages = [
-    { label: "নিরাপত্তা", icon: Shield },
-    { label: "তথ্য সংগ্রহ", icon: Search },
-    { label: "উত্তর তৈরি", icon: PenLine },
-    { label: "যাচাই", icon: CheckCircle2 },
-  ];
+  const traceEvents: RailEvent[] = QA_STAGES.flatMap((item, i) => {
+    if (stage > i + 1) return [{ stage: item.key, status: "complete" }];
+    if (stage === i + 1 && running) return [{ stage: item.key, status: "active" }];
+    if (stage === 4 && i === 3) return [{ stage: item.key, status: "complete" }];
+    return [];
+  });
 
   return (
-    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="mx-auto max-w-4xl">
+    <motion.section id="workflow" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="scroll-mt-32 mx-auto max-w-4xl">
       <motion.h2 variants={enter} className="text-center font-display text-2xl text-ink">কীভাবে কাজ করে</motion.h2>
       <motion.p variants={enter} className="mx-auto mt-2 max-w-md text-center text-sm text-ink-soft">
         একটি প্রকৃত প্রশ্ন কীভাবে উত্তর হয় — দেখুন।
@@ -244,25 +384,8 @@ function RagPipelineDemo() {
         </div>
       </motion.div>
 
-      {/* Pipeline stages */}
-      <motion.div variants={enter} className="mt-6 flex items-center justify-between gap-1">
-        {stages.map((s, i) => {
-          const active = stage > i;
-          const current = stage === i + 1;
-          return (
-            <div key={s.label} className="flex flex-1 flex-col items-center">
-              <motion.div
-                animate={{ scale: current ? 1.1 : 1, backgroundColor: active || current ? "var(--color-leaf)" : "var(--color-paper)" }}
-                className="flex h-11 w-11 items-center justify-center rounded-full border-2"
-                style={{ borderColor: active || current ? "var(--color-leaf)" : "var(--color-bone)", color: active || current ? "var(--color-paper)" : "var(--color-ink-faint)" }}
-              >
-                <s.icon className="h-5 w-5" />
-              </motion.div>
-              <div className={`mt-2 text-xs ${active || current ? "text-ink" : "text-ink-faint"}`}>{s.label}</div>
-              {i < stages.length - 1 && <div className="mt-1 h-6 w-px" style={{ backgroundColor: stage > i + 1 ? "var(--color-leaf)" : "var(--color-bone)" }} />}
-            </div>
-          );
-        })}
+      <motion.div variants={enter} className="mt-6">
+        <AgentTrace stages={QA_STAGES} events={traceEvents} active={running} title="কৃষক চ্যাট এজেন্ট প্রবাহ" detail="একই trace chat ও diagnosis workspace-এ দেখা যায়" />
       </motion.div>
 
       {/* Results panel */}
@@ -372,25 +495,49 @@ function TimelineSection() {
     { year: "২০২৬", title: "বেঞ্চমার্ক প্রকাশ", desc: "EACL + SIGIR-AP" },
   ];
   return (
-    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="mx-auto max-w-4xl">
-      <motion.h2 variants={enter} className="text-center font-display text-2xl text-ink">আমাদের যাত্রা</motion.h2>
-      <motion.div variants={enter} className="mt-8 space-y-0">
-        {milestones.map((m, i) => (
-          <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15, duration: dur.normal, ease: ease.smooth }} className="flex gap-4">
-            <div className="flex flex-col items-center">
-              <div className={`flex h-10 w-10 items-center justify-center rounded-full font-display text-xs tabular ${i === milestones.length - 1 ? "bg-leaf text-paper" : "border-2 border-leaf bg-paper text-leaf"}`}>{i + 1}</div>
-              {i < milestones.length - 1 && <div className="my-1 h-10 w-px bg-bone" />}
-            </div>
-            <div className={`flex-1 ${i < milestones.length - 1 ? "pb-6" : "pb-0"}`}>
-              <div className="flex items-baseline gap-3">
-                <span className="font-display text-sm text-ochre tabular">{m.year}</span>
-                <span className="font-display text-base text-ink">{m.title}</span>
-              </div>
-              <p className="mt-1 text-sm text-ink-soft">{m.desc}</p>
-            </div>
-          </motion.div>
-        ))}
+    <motion.section id="field" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="scroll-mt-32 mx-auto max-w-5xl">
+      <motion.div variants={enter} className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ochre">From fieldwork to product</p>
+          <h2 className="mt-2 font-display text-2xl text-ink sm:text-3xl">গবেষণা যেভাবে ব্যবহারযোগ্য সিস্টেম হলো</h2>
+        </div>
+        <Link href="/team" className="control-press inline-flex min-h-10 items-center gap-1.5 self-start rounded-lg border rule px-3 text-xs font-medium text-ink-soft hover:border-leaf hover:text-leaf">
+          মাঠ ও দল দেখুন <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
       </motion.div>
+      <div className="grid overflow-hidden rounded-2xl border rule bg-paper shadow-[0_12px_36px_rgba(52,39,23,0.07)] lg:grid-cols-[1.05fr_0.95fr]">
+        <motion.div variants={enter} className="relative min-h-[350px] overflow-hidden bg-leaf">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/assets/researcher_interviewing_farmer.png" alt="মাঠ পর্যায়ে কৃষকের সাক্ষাৎকার" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
+          <div className="absolute inset-x-5 bottom-5 text-paper sm:inset-x-7 sm:bottom-7">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ochre-soft">Rajshahi + Natore field study</div>
+            <div className="mt-2 font-display text-2xl">৩০০ কৃষকের বাস্তব ভাষা ও সমস্যা</div>
+            <p className="mt-1 max-w-lg text-xs leading-relaxed text-paper/70">মাঠ সাক্ষাৎকারের প্রশ্ন থেকে farmer-query benchmark, dialect coverage এবং ব্যবহারযোগ্য Bengali interaction তৈরি হয়েছে।</p>
+          </div>
+        </motion.div>
+        <motion.div variants={enter} className="p-6 sm:p-8">
+          <div className="space-y-0">
+            {milestones.map((m, i) => (
+              <motion.div key={i} initial={{ opacity: 0, x: 12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: dur.normal, ease: ease.smooth }} className="flex gap-4">
+                <div className="flex flex-col items-center">
+                  <div className={`flex h-9 w-9 items-center justify-center rounded-full font-display text-xs tabular ${i === milestones.length - 1 ? "bg-leaf text-paper" : "border border-leaf/30 bg-leaf/5 text-leaf"}`}>{i + 1}</div>
+                  {i < milestones.length - 1 && <div className="my-1 h-10 w-px bg-bone" />}
+                </div>
+                <div className={`flex-1 ${i < milestones.length - 1 ? "pb-5" : "pb-0"}`}>
+                  <div className="flex flex-wrap items-baseline gap-2"><span className="text-[11px] font-semibold text-ochre tabular">{m.year}</span><span className="font-display text-base text-ink">{m.title}</span></div>
+                  <p className="mt-1 text-xs leading-relaxed text-ink-soft">{m.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-xl border rule bg-bone">
+            {[{ value: RESEARCH_STATS.fieldInterviews, label: "সাক্ষাৎকার" }, { value: RESEARCH_STATS.publications, label: "প্রকাশনা" }, { value: RESEARCH_STATS.institutions, label: "প্রতিষ্ঠান" }].map((stat) => (
+              <div key={stat.label} className="bg-paper-2/50 px-2 py-3 text-center"><div className="font-display text-lg tabular text-leaf">{stat.value}</div><div className="text-[9px] text-ink-faint">{stat.label}</div></div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </motion.section>
   );
 }
@@ -616,10 +763,10 @@ function AgriDosageCalculatorSection() {
       <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-6 sm:p-8 shadow-2xs">
         <div className="flex items-center gap-2.5 text-leaf">
           <Calculator className="h-6 w-6" />
-          <h2 className="font-display text-xl text-ink">কৃষি স্প্রে ট্যাংক ও বালাইনাশক ডোজ ক্যালকুলেটর</h2>
+          <h2 className="font-display text-xl text-ink">স্প্রে ট্যাংক পরিকল্পনা সহায়ক</h2>
         </div>
         <p className="mt-1 text-xs text-ink-soft">
-          জমির আয়তন ও বালাইনাশক নির্বাচন করুন — ১৬ লিটারের স্প্রে ট্যাংক সংখ্যা এবং সঠিক রাসায়নিকের মাত্রা হিসাব করুন।
+          জমির আয়তন ও উদাহরণ নির্বাচন করে ১৬ লিটারের ট্যাংক ও মিশ্রণের আনুমানিক পরিকল্পনা দেখুন। ব্যবহারের আগে পণ্যের লেবেল ও কৃষি কর্মকর্তার পরামর্শ যাচাই করুন।
         </p>
 
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -682,7 +829,7 @@ function AgriDosageCalculatorSection() {
             <div className="space-y-3">
               <div className="text-xs font-semibold text-leaf flex items-center justify-between">
                 <span>হিসাবকৃত স্প্রে ফর্মুলা:</span>
-                <span className="rounded bg-leaf/15 px-2 py-0.5 text-[10px]">১৬১২৩ মানসম্পন্ন</span>
+                <span className="rounded bg-ochre-soft/25 px-2 py-0.5 text-[10px] text-ochre">ডেমো হিসাব</span>
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-center">
@@ -812,11 +959,11 @@ function AgriFAQSection() {
     },
     {
       q: "ছবি তুলে ফসলের রোগ কিভাবে নির্ণয় করব?",
-      a: "'রোগ নির্ণয়' পেজে গিয়ে আক্রান্ত পাতার পরিষ্কার ছবি তুলুন বা আপলোড করুন। Ultralytics YOLO ভিশন মডেল সাথে সাথেই রোগ চিহ্নিত করে সঠিক প্রতিকার নির্দেশ করবে।",
+      a: "'রোগ নির্ণয়' পেজে গিয়ে আক্রান্ত পাতার পরিষ্কার ছবি তুলুন বা আপলোড করুন। বর্তমান Ultralytics মডেল ফসল ও রোগের শ্রেণিবিন্যাস করে; এরপর grounded advisory pipeline উৎস-ভিত্তিক পরামর্শ দেখায়।",
     },
     {
       q: "আঞ্চলিক উপভাষায় কিভাবে উত্তর পাওয়া যায়?",
-      a: "চ্যাটবটের প্রতিটি উত্তরের নিচে উপভাষা বাটন পাবেন। সেখান থেকে নোয়াখালী, চাটগাঁইয়া, সিলেটি, রাজশাহী বা রংপুর নির্বাচন করলে Gemini এআই সাথে সাথেই স্থানীয় উপভাষায় রূপান্তর করে শোনাবে।",
+      a: "গবেষণা ডেটাসেটে নোয়াখালী, চাটগাঁইয়া, সিলেটি, রাজশাহী ও রংপুরসহ উপভাষার উদাহরণ আছে। বর্তমান ডেমোতে বাংলা লেখা, ভয়েস ইনপুট ও উত্তর শোনার সুবিধা রয়েছে; আলাদা উপভাষা নির্বাচন ভবিষ্যৎ UI কাজ।",
     },
     {
       q: "ইন্টারনেট বা প্রযুক্তি না জানা কৃষক কিভাবে সাহায্য পাবেন?",

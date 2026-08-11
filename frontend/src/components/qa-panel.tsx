@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
 import { motion } from "motion/react";
-import { Send, Loader2, Mic, Square, RotateCcw, ShieldCheck } from "lucide-react";
+import { Send, Mic, Square, RotateCcw, ShieldCheck, X } from "lucide-react";
 import { streamQuestion, getModels, type AgentStageEvent } from "@/lib/api";
 import { ChatMessage, type ChatMessageData } from "@/components/chat/chat-message";
 import { SuggestedQuestions } from "@/components/chat/suggested-questions";
@@ -35,9 +35,11 @@ const getSpeechSupported = () => {
 export function QAPanel({
   detectedCrop,
   detectedDisease,
+  prefillQuestion,
 }: {
   detectedCrop?: string | null;
   detectedDisease?: string | null;
+  prefillQuestion?: string | null;
 }) {
   const [sessionId] = useState(() => crypto.randomUUID());
   const [query, setQuery] = useState("");
@@ -46,6 +48,39 @@ export function QAPanel({
   const [streaming, setStreaming] = useState(false);
   const [model, setModel] = useState<"gemini" | "krishokchat-4b">("gemini");
   const [localAvailable, setLocalAvailable] = useState<boolean>(false);
+  const [streamedText, setStreamedText] = useState("");
+  const [restored, setRestored] = useState(false);
+  const requestRef = useRef<AbortController | null>(null);
+  const streamingRef = useRef(false);
+  const storageKey = "krishokchat:conversation:v1";
+
+  useEffect(() => {
+    window.queueMicrotask(() => {
+      try {
+        const saved = window.localStorage.getItem(storageKey);
+        if (saved) setMessages(JSON.parse(saved) as ChatMessageData[]);
+      } catch {
+        window.localStorage.removeItem(storageKey);
+      } finally {
+        setRestored(true);
+      }
+    });
+    return () => requestRef.current?.abort();
+  }, []);
+
+  useEffect(() => {
+    if (!restored) return;
+    try {
+      window.localStorage.setItem(storageKey, JSON.stringify(messages.slice(-20)));
+    } catch {
+      // Storage may be unavailable in private mode; chat remains usable in memory.
+    }
+  }, [messages, restored]);
+
+  useEffect(() => {
+    if (!prefillQuestion) return;
+    window.queueMicrotask(() => setQuery(prefillQuestion));
+  }, [prefillQuestion]);
 
   /* ---- Voice input (Web Speech API, Bengali bn-BD) ----
      Rural farmers struggle to type Bengali agricultural terms on small
@@ -134,6 +169,7 @@ export function QAPanel({
   // Scroll management — scroll ONLY the chat container, never the page.
   const scrollRef = useRef<HTMLDivElement>(null);
   const prevMsgCount = useRef(0);
+  const keepScrolled = useRef(true);
 
   useEffect(() => {
     if (messages.length > prevMsgCount.current && scrollRef.current) {
@@ -141,6 +177,12 @@ export function QAPanel({
     }
     prevMsgCount.current = messages.length;
   }, [messages]);
+
+  useEffect(() => {
+    if (streamedText && keepScrolled.current && scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [streamedText]);
 
   const applyEvent = useCallback((ev: AgentStageEvent) => {
     setTraceEvents((prev) => {
@@ -157,16 +199,19 @@ export function QAPanel({
   const send = useCallback(
     async (text: string) => {
       const q = text.trim();
-      if (!q || streaming) return;
+      if (!q || streamingRef.current) return;
 
       const userMsg: ChatMessageData = { role: "user", content: q };
       const newMessages = [...messages, userMsg];
       setMessages(newMessages);
       setStreaming(true);
+      streamingRef.current = true;
+      setStreamedText("");
       setTraceEvents([{ stage: "safety", status: "start" }]);
       setQuery("");
 
       const fullHistory = newMessages
+        .filter((m) => !(m.role === "assistant" && m.error))
         .slice(0, -1)
         .map((m) => ({
           role: m.role,
@@ -174,16 +219,19 @@ export function QAPanel({
         }));
 
       try {
+        const controller = new AbortController();
+        requestRef.current = controller;
         const final = await streamQuestion(
           q,
           applyEvent,
-          undefined,
+          (token) => setStreamedText((prev) => prev + token),
           {
             crop: detectedCrop,
             disease: detectedDisease,
             session_id: sessionId,
             history: fullHistory,
             model,
+            signal: controller.signal,
           },
         );
 
@@ -200,6 +248,13 @@ export function QAPanel({
           return next;
         });
       } catch (e: unknown) {
+        if (requestRef.current?.signal.aborted) {
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: "", error: "অনুরোধটি বাতিল করা হয়েছে। প্রশ্নটি আবার পাঠাতে পারেন।", retryQuery: q },
+          ]);
+          return;
+        }
         const msg = e instanceof Error ? e.message : String(e);
         if (msg.includes("Failed to fetch") || msg.includes("fetch")) {
           setMessages((prev) => [
@@ -208,25 +263,32 @@ export function QAPanel({
               role: "assistant",
               content: "",
               error: "ব্যাকএন্ড সার্ভারে সংযোগ ব্যর্থ। নিশ্চিত করুন যে ব্যাকএন্ড চলছে।",
+              retryQuery: q,
             },
           ]);
         } else {
           setMessages((prev) => [
             ...prev,
-            { role: "assistant", content: "", error: msg },
+            { role: "assistant", content: "", error: msg, retryQuery: q },
           ]);
         }
+      } finally {
+        requestRef.current = null;
+        setStreaming(false);
+        streamingRef.current = false;
+        setStreamedText("");
+        setTraceEvents([]);
       }
-      setStreaming(false);
-      setTraceEvents([]);
     },
-    [messages, streaming, detectedCrop, detectedDisease, sessionId, applyEvent, model],
+    [messages, detectedCrop, detectedDisease, sessionId, applyEvent, model],
   );
 
   const clear = useCallback(() => {
+    requestRef.current?.abort();
     setMessages([]);
     setTraceEvents([]);
     setQuery("");
+    window.localStorage.removeItem(storageKey);
   }, []);
 
   const isEmpty = messages.length === 0;
@@ -236,7 +298,11 @@ export function QAPanel({
       {/* Messages — scroll container */}
       <div
         ref={scrollRef}
-        className="min-h-[220px] flex-1 space-y-4 overflow-y-auto pr-1 scrollbar-thin"
+        onScroll={(event) => {
+          const node = event.currentTarget;
+          keepScrolled.current = node.scrollHeight - node.scrollTop - node.clientHeight < 80;
+        }}
+        className="min-h-[220px] flex-1 space-y-5 overflow-y-auto pr-1 scrollbar-thin"
       >
         {isEmpty ? (
           <EmptyState
@@ -254,12 +320,16 @@ export function QAPanel({
                 msg.role === "user";
               return (
                 <div key={i} className="space-y-4">
-                  <ChatMessage message={msg} />
+                  <ChatMessage
+                    message={msg}
+                    onRetry={msg.role === "assistant" && msg.retryQuery ? () => send(msg.retryQuery!) : undefined}
+                  />
                   {isStreamingBubble && (
                     <ChatMessage
                       message={{ role: "assistant", content: "" }}
                       streaming={true}
                       traceEvents={traceEvents}
+                      streamedText={streamedText}
                     />
                   )}
                 </div>
@@ -310,7 +380,7 @@ export function QAPanel({
       {/* Input bar — text + voice + send. The mic lets low-literacy farmers
           speak their question in Bengali instead of typing on a phone. */}
       <div className="mt-2 flex items-stretch gap-2">
-        <div className="relative flex min-h-14 min-w-0 flex-1 items-center rounded-2xl border rule bg-paper transition-colors focus-within:border-leaf focus-within:ring-2 focus-within:ring-leaf/10">
+        <div className="focus-surface relative flex min-h-14 min-w-0 flex-1 items-center rounded-2xl border rule bg-paper transition-colors">
           <textarea
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -332,7 +402,7 @@ export function QAPanel({
               type="button"
               aria-label={listening ? "রেকর্ড বন্ধ করুন" : "ভয়েস ইনপুট"}
               className={cn(
-                "absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-xl transition-colors",
+                "control-press absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-xl transition-colors",
                 listening
                   ? "bg-clay/15 text-clay"
                   : "text-ink-faint hover:bg-leaf/10 hover:text-leaf",
@@ -350,20 +420,20 @@ export function QAPanel({
           )}
         </div>
         <button
-          onClick={() => send(query)}
-          disabled={streaming || !query.trim()}
-          title="জিজ্ঞাসা করুন"
+          onClick={() => streaming ? requestRef.current?.abort() : send(query)}
+          disabled={!streaming && !query.trim()}
+          title={streaming ? "উত্তর তৈরি বন্ধ করুন" : "জিজ্ঞাসা করুন"}
           className={cn(
-            "flex h-14 shrink-0 items-center justify-center gap-2 rounded-2xl px-4 text-sm font-semibold transition-colors active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[116px]",
+            "control-press flex h-14 shrink-0 items-center justify-center gap-2 rounded-2xl px-4 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[116px]",
             "bg-leaf text-paper shadow-sm hover:bg-leaf-2",
           )}
         >
           {streaming ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <X className="h-4 w-4" />
           ) : (
             <Send className="h-4 w-4" />
           )}
-          <span className="hidden sm:inline">জিজ্ঞাসা করুন</span>
+          <span className="hidden sm:inline">{streaming ? "থামান" : "জিজ্ঞাসা করুন"}</span>
         </button>
       </div>
       {voiceInputError && (
@@ -413,7 +483,7 @@ function EmptyState({
       <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink-soft">
         ফসলের রোগ, পরিচর্যা বা নিরাপদ ব্যবস্থাপনা নিয়ে বাংলায় প্রশ্ন করুন।
       </p>
-      <div className="mt-6 w-full">
+      <div className="mt-7 w-full">
         <SuggestedQuestions
           onPick={onPick}
           crop={detectedCrop}

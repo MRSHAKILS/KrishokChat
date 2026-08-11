@@ -43,12 +43,20 @@ export function ConfidenceMeter({
           {label}
         </span>
       )}
-      <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-bone">
+      <div
+        className="relative h-2 flex-1 overflow-hidden rounded-full bg-bone"
+        role="progressbar"
+        aria-label={label ?? "নিশ্চিততা"}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={pct}
+      >
         <motion.div
           className={cn("absolute inset-y-0 left-0 rounded-full", TONE_FILL[tone])}
-          initial={{ width: 0 }}
-          animate={{ width: `${pct}%` }}
+          initial={{ scaleX: 0, originX: 0 }}
+          animate={{ scaleX: pct / 100, originX: 0 }}
           transition={{ duration: dur.slow, ease: ease.smooth, delay: 0.15 }}
+          style={{ width: "100%" }}
         />
       </div>
       <span className={cn("shrink-0 font-semibold tabular", TONE_TEXT[tone])}>
