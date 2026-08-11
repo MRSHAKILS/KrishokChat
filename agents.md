@@ -31,6 +31,7 @@ The person you're working for is the researcher and sole engineer. She will revi
 6. **Do not silently change the tech stack** decided in Section 3. If something in Section 3 seems wrong for a task, stop and flag it instead of substituting your own choice.
 7. **Before installing any dependency, search the internet for the current stable/recommended version** rather than relying on training data — package ecosystems move fast and pinned versions go stale. Prefer official docs, official GitHub releases, or the official package registry page as the source of truth. Note the version you chose and where you confirmed it (one line in the relevant `README.md` or commit message is enough).
 8. **One task, one agent, one clear deliverable.** If a task description is ambiguous, do the smallest reasonable interpretation and leave a note rather than guessing big.
+9. **The arXiv v1 paper (`arXiv:2606.29243`, "Citation-Grounded Dataset and Benchmark") is DEPRECATED and INVALID.** Never cite it, link it, summarize it, or reuse any number/claim from it. The authoritative papers live in `paper/done papers/` (`KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf`, `AgriTrust.pdf`). Reference them by filename/path only; never invent a new arXiv ID or URL. Full policy: `docs/PAPER_POLICY.md`.
 
 ---
 

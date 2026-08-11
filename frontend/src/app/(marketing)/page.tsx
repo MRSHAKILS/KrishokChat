@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowRight, Shield, FileText, Languages, CloudSun, Phone,
-  CheckCircle2, Loader2, MapPin, Play, Search, PenLine, RotateCcw,
+  CheckCircle2, Loader2, MapPin, Play, RotateCcw,
   Camera, MessageSquare, Calculator, Volume2, Sparkles, Building2,
   HelpCircle, ChevronDown, ScanLine, Network, BarChart3,
 } from "lucide-react";
@@ -87,41 +87,40 @@ export default function LandingPage() {
 /* === A. Hero === */
 function HeroSection() {
   return (
-    <motion.section initial="hidden" animate="visible" variants={stagger} className="surface-lift relative mx-auto max-w-6xl overflow-hidden rounded-[24px] border border-ink/10 bg-ink shadow-[0_20px_60px_rgba(26,22,17,0.18)]">
-      <div className="grid min-h-[540px] grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="relative z-10 flex flex-col justify-between px-7 py-9 text-paper sm:px-12 sm:py-12">
+    <motion.section initial="hidden" animate="visible" variants={stagger} className="surface-lift relative mx-auto max-w-6xl overflow-hidden rounded-[24px] border rule bg-paper shadow-[0_14px_40px_rgba(52,39,23,0.08)]">
+      <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
+        <div className="flex flex-col justify-between px-7 py-9 sm:px-12 sm:py-12 lg:min-h-[510px]">
           <div>
-            <motion.div variants={enter} className="flex flex-wrap items-center gap-2 text-[11px] font-medium text-ochre-soft">
-              <span className="h-2 w-2 rounded-full bg-ochre" /> {APP.taglineEn}
-              <span className="rounded-full border border-paper/15 px-2 py-0.5 text-paper/65">CAPSTONE DEMO</span>
+            <motion.div variants={enter} className="flex flex-wrap items-center gap-2 text-[11px] font-semibold text-leaf">
+              <span className="h-2 w-2 rounded-full bg-ochre" /> {APP.tagline}
             </motion.div>
-            <motion.h1 variants={enter} className="mt-6 max-w-xl font-display text-4xl leading-[1.18] text-paper sm:text-6xl">
-              কৃষকের প্রশ্ন থেকে<br /><span className="text-ochre-soft">বিশ্বাসযোগ্য সিদ্ধান্ত</span>
+            <motion.h1 variants={enter} className="mt-6 max-w-xl font-display text-4xl leading-[1.16] text-ink sm:text-6xl">
+              ফসলের পাশে<br /><span className="text-leaf">সহজ কৃষি পরামর্শ</span>
             </motion.h1>
-            <motion.p variants={enter} className="mt-5 max-w-lg text-base leading-relaxed text-paper/70">
-              ছবি থেকে রোগের শ্রেণিবিন্যাস, বাংলা প্রশ্নোত্তর এবং উৎস-ভিত্তিক নিরাপত্তা যাচাই — একটি দৃশ্যমান এজেন্টিক কৃষি সহায়তা সিস্টেমে।
+            <motion.p variants={enter} className="mt-5 max-w-lg text-base leading-relaxed text-ink-soft">
+              পাতার ছবি দিন, বাংলায় প্রশ্ন করুন, আর আপনার ফসলের জন্য প্রাসঙ্গিক তথ্য ও করণীয় বুঝে নিন।
             </motion.p>
           </div>
           <motion.div variants={enter} className="mt-10 flex flex-wrap items-center gap-3">
-            <Link href="/detect" className="control-press group flex min-h-12 items-center gap-2 rounded-xl bg-leaf-2 px-5 py-3 text-sm font-semibold text-paper shadow-lg shadow-black/10 hover:bg-leaf-3">
+            <Link href="/detect" className="control-press group flex min-h-12 items-center gap-2 rounded-xl bg-leaf px-5 py-3 text-sm font-semibold text-paper shadow-sm hover:bg-leaf-2">
               <Camera className="h-4 w-4" /> লাইভ ডেমো শুরু করুন <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <Link href="#workflow" className="control-press flex min-h-12 items-center gap-2 rounded-xl border border-paper/20 px-5 py-3 text-sm font-medium text-paper/85 hover:border-paper/50 hover:bg-paper/5">
+            <Link href="#workflow" className="control-press flex min-h-12 items-center gap-2 rounded-xl border rule px-5 py-3 text-sm font-medium text-ink-soft hover:border-leaf/50 hover:bg-paper-2">
               <Play className="h-4 w-4" /> কীভাবে কাজ করে
             </Link>
           </motion.div>
-          <motion.div variants={enter} className="mt-9 grid max-w-md grid-cols-3 gap-4 border-t border-paper/15 pt-5">
+          <motion.div variants={enter} className="mt-9 grid max-w-md grid-cols-3 gap-4 border-t rule pt-5">
             <HeroMetric value={RESEARCH_STATS.benchmarkInstances} label="মূল্যায়ন ইনস্ট্যান্স" />
             <HeroMetric value={RESEARCH_STATS.knowledgeNodes} label="জ্ঞান নোড" />
             <HeroMetric value={RESEARCH_STATS.dialects} label="উপভাষা" />
           </motion.div>
         </div>
-        <div className="relative min-h-[330px] overflow-hidden bg-leaf lg:min-h-full">
+        <div className="relative flex min-h-[350px] flex-col justify-end bg-paper-2 p-4 sm:p-6 lg:min-h-full lg:p-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/hero_image.jpg"
             alt="বাংলাদেশের কৃষি ক্ষেত"
-            className="absolute inset-0 h-full w-full object-cover opacity-70 mix-blend-luminosity"
+            className="absolute inset-4 h-[calc(100%-2rem)] w-[calc(100%-2rem)] rounded-[18px] object-cover sm:inset-6 sm:h-[calc(100%-3rem)] sm:w-[calc(100%-3rem)] lg:inset-8 lg:h-[calc(100%-4rem)] lg:w-[calc(100%-4rem)]"
             onError={(e) => {
               // Graceful fallback on slow 3G / missing asset — never an empty grey box.
               const t = e.currentTarget;
@@ -130,26 +129,21 @@ function HeroSection() {
               if (parent && !parent.querySelector("[data-fallback]")) {
                 parent.setAttribute("data-fallback", "1");
                 parent.style.background =
-                  "linear-gradient(135deg, var(--color-leaf) 0%, var(--color-leaf-2) 45%, var(--color-leaf-3) 100%)";
-                parent.innerHTML += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--color-paper);font-family:var(--font-display);font-size:1.25rem;text-align:center;padding:2rem">কৃষি ক্ষেত<br/>বাংলাদেশ</div>';
+                  "linear-gradient(135deg, var(--color-paper-2) 0%, var(--color-bone) 100%)";
+                parent.innerHTML += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--color-ink);font-family:var(--font-display);font-size:1.25rem;text-align:center;padding:2rem">কৃষি ক্ষেত<br/>বাংলাদেশ</div>';
               }
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-tr from-leaf via-leaf/25 to-transparent" />
-          <motion.div variants={enter} className="absolute inset-x-6 bottom-6 rounded-2xl border border-paper/20 bg-ink/75 p-4 shadow-2xl backdrop-blur-sm sm:inset-x-10 sm:bottom-10">
-            <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.16em] text-paper/55">
-              <span>Agent trace</span><span className="text-leaf-3">LIVE SYSTEM</span>
+          <motion.div variants={enter} className="relative z-10 ml-auto w-[min(100%,22rem)] rounded-xl border rule bg-paper p-4 shadow-[0_10px_24px_rgba(52,39,23,0.12)]">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-faint">আজকের সহায়তা</span>
+              <span className="flex items-center gap-1.5 text-[10px] font-semibold text-leaf"><span className="h-1.5 w-1.5 rounded-full bg-leaf" /> প্রস্তুত</span>
             </div>
-            <div className="mt-4 grid grid-cols-4 gap-2">
-              {[{ icon: Shield, label: "নিরাপত্তা" }, { icon: Search, label: "তথ্য" }, { icon: PenLine, label: "উত্তর" }, { icon: CheckCircle2, label: "যাচাই" }].map(({ icon: Icon, label }, i) => (
-                <div key={label} className="relative text-center">
-                  <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-leaf text-paper ring-4 ring-leaf/20"><Icon className="h-4 w-4" /></div>
-                  {i < 3 && <div className="absolute left-[calc(50%+22px)] right-[calc(-50%+13px)] top-4 h-px bg-paper/25" />}
-                  <div className="mt-2 text-[10px] text-paper/75">{label}</div>
-                </div>
-              ))}
+            <p className="mt-3 font-display text-lg leading-snug text-ink">ছবি বা প্রশ্ন দিয়ে শুরু করুন</p>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><Camera className="mb-1 h-4 w-4 text-leaf" />পাতার ছবি</div>
+              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><MessageSquare className="mb-1 h-4 w-4 text-leaf" />বাংলায় প্রশ্ন</div>
             </div>
-            <div className="mt-4 rounded-lg bg-paper/10 px-3 py-2 text-xs text-paper/80">প্রতিটি দাবি উৎসে মিলিয়ে তারপর উত্তর দেখানো হয়</div>
           </motion.div>
         </div>
       </div>
@@ -158,7 +152,7 @@ function HeroSection() {
 }
 
 function HeroMetric({ value, label }: { value: string; label: string }) {
-  return <div><div className="font-display text-xl tabular text-paper">{value}</div><div className="mt-1 text-[10px] leading-tight text-paper/50">{label}</div></div>;
+  return <div><div className="font-display text-xl tabular text-leaf">{value}</div><div className="mt-1 text-[10px] leading-tight text-ink-faint">{label}</div></div>;
 }
 
 function JudgeNav() {

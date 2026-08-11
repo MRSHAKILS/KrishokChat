@@ -65,8 +65,8 @@ const PUBLICATIONS = [
   {
     venue: "EACL 2026 — Data Resource & Benchmark Track",
     title: "KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory",
-    link: LINKS.arxiv,
-    linkLabel: "arXiv",
+    link: null, // No public URL yet (arXiv v1 is deprecated — docs/PAPER_POLICY.md); TODO: add real link when published
+    linkLabel: "",
     extraLink: LINKS.huggingface,
     extraLabel: "Hugging Face",
   },

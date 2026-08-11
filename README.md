@@ -457,5 +457,6 @@ pnpm build
 Version 0.2.0. Research prototype built for a 7-day capstone demo; not intended
 for production use. No license is declared. Related research assets are
 referenced from the frontend (`frontend/src/lib/constants.ts`): the dataset on
-Hugging Face (`RaiyanKhaan/krishokChat`) and the paper on arXiv
-(`2606.29243`).
+Hugging Face (`RaiyanKhaan/krishokChat`). The authoritative research papers are
+the local files in `paper/done papers/` (see `docs/PAPER_POLICY.md` — the old
+arXiv listing is deprecated and must not be cited).

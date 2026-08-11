@@ -300,23 +300,6 @@ export default function DataPage() {
             </div>
             <ExternalLink className="h-4 w-4 text-ink-faint transition-colors group-hover:text-leaf" />
           </a>
-
-          {/* arXiv */}
-          <a
-            href={LINKS.arxiv}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-4 rounded-xl border rule bg-paper p-5 transition-colors hover:border-leaf"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-leaf/10 text-leaf">
-              <FileText className="h-6 w-6" />
-            </div>
-            <div className="flex-1">
-              <div className="font-display text-base text-ink">arXiv</div>
-              <div className="text-xs text-ink-faint">2606.29243</div>
-            </div>
-            <ExternalLink className="h-4 w-4 text-ink-faint transition-colors group-hover:text-leaf" />
-          </a>
         </motion.div>
 
         {/* License */}

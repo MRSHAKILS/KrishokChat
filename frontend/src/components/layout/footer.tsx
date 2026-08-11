@@ -10,7 +10,6 @@ const NAV_SECTIONS = [
 
 const RESOURCES = [
   { href: LINKS.huggingface, label: "Hugging Face" },
-  { href: LINKS.arxiv, label: "arXiv" },
   { href: LINKS.github, label: "GitHub" },
 ];
 
