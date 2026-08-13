@@ -62,3 +62,11 @@ desktop.ini
 htmlcov/
 .coverage
 .pytest_cache/
+
+# Kaggle workspace intermediates — raw/clean image copies + phase-1 experiment
+# arrays (single files >100MB, GitHub hard limit). Official release lives in
+# dataset_release/soil_moisture/ (small, committed).
+dataset_release/Soil Moisture Detection/dataset/raw/
+dataset_release/Soil Moisture Detection/dataset/clean/
+dataset_release/Soil Moisture Detection/dataset/updated_dataset/
+dataset_release/Soil Moisture Detection/dataset/experiments/

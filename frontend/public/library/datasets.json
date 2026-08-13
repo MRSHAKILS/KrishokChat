@@ -134,6 +134,29 @@
       "fields": ["node_id", "title_bn", "content_bn", "content_en", "entities", "citation", "publisher", "source_pages"],
       "splits": { "full": 2946 },
       "color": "ochre"
+    },
+    {
+      "id": "soil_moisture",
+      "name": "Bangladesh Soil Moisture Field Dataset (RGB→kPa)",
+      "name_bn": "বাংলাদেশ মাটি-আর্দ্রতা ডেটাসেট",
+      "count": 722,
+      "size_mb": 0.9,
+      "format": "CSV + JSON + JPEG",
+      "category": "vision",
+      "description": "পাবনা জেলার মাঠপর্যায়ে টেনসিওমিটার দিয়ে সংগ্রহ করা ৭২২টি ছবি — ৬টি মাটির ধরন, ০–২১.৫ kPa পরিসর, ৪৬টি পরিমাপ সিরিজ। ১০৬টি kPa সংশোধন ও লিকেজ-মুক্ত সিরিজ-ভিত্তিক বিভাজন (৪৭২/১১৯/১৩১)।",
+      "description_en": "722 tensiometer-labeled field photos from Pabna District — 6 soil classes, 0–21.5 kPa, 46 series. 106 kPa corrections, leakage-free split (472/119/131).",
+      "use_case": "মাটির আর্দ্রতা রিগ্রেশন, মাটি শ্রেণিবিন্যাস, সেচ সিদ্ধান্ত-সমর্থন গবেষণা",
+      "fields": ["image_id", "kpa_raw", "kpa_bin", "soil_type", "land_type", "crop", "growth_stage", "series_id", "split"],
+      "splits": { "train": 472, "val": 119, "test": 131 },
+      "color": "ochre",
+      "image": "/assets/soil_samples/preview_grid.jpg",
+      "image_caption": "১২টি মাঠের নমুনা — ভেজা থেকে শুকনা",
+      "badge": "প্রথম বাংলাদেশি মাটি-আর্দ্রতা ডেটাসেট",
+      "stats": [
+        { "label": "ছবি", "value": "৭২২" },
+        { "label": "মাটির ধরন", "value": "৬" },
+        { "label": "kPa পরিসর", "value": "০–২১.৫" }
+      ]
     }
   ]
 }

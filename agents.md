@@ -44,7 +44,7 @@ The person you're working for is the researcher and sole engineer. She will revi
 | Animation | Motion (formerly Framer Motion) |
 | LLM chat UX | Vercel AI SDK (streaming) |
 | Backend | FastAPI (Python), single service |
-| LLM serving | Ollama, serving the fine-tuned Gemma-4 4-bit model |
+| LLM serving | Ollama by default; llama.cpp OpenAI-compatible serving is approved for the verified local base+LoRA demo runtime |
 | Object detection | Ultralytics YOLO, `.pt` weights exported to ONNX for inference |
 | Retrieval index | FAISS or Chroma, loaded in-process from a precomputed index on disk |
 | Package managers | `pnpm` for frontend, `uv` (or `venv` + `pip` if `uv` unavailable) for backend |
@@ -53,6 +53,13 @@ The person you're working for is the researcher and sole engineer. She will revi
 `task: classify`; the vision implementation must preserve the locked Ultralytics/ONNX
 direction for future real detection artifacts, but must not claim boxes from these
 classification weights.
+
+**Local-model runtime amendment (2026-08-12):** `scripts/start_krishokchat_local.ps1`
+may serve the verified external Q4_K_M base plus trained KrishokChat LoRA through
+`llama-server` under the existing `krishokchat-4b` model ID. This narrow exception must
+continue to use the shared QA pipeline and may not change safety, retrieval, verification,
+audit, routes, or schemas. Evidence and claim limits are recorded in
+`paper/system_evolution_plan_2026/execution_planning_2026_08_12/14_LOCAL_MODEL_RUNTIME_AMENDMENT_2026_08_12.md`.
 
 Design system (colors, type, spacing, component conventions) will arrive later as a `DESIGN.md` file generated via Google Stitch. Until that file exists, use plain, unstyled-but-functional shadcn defaults — do not invent a visual identity yourself.
 

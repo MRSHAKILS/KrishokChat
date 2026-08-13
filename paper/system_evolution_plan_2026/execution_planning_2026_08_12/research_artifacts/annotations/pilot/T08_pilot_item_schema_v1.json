@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "research_artifacts/annotations/pilot/T08_pilot_item_schema_v1.json",
+  "title": "KrishokChat T08 Pilot Item Schema v1",
+  "description": "Frozen pilot item format for the annotation pilot. Each item is a self-contained unit of analysis (query + answer + evidence passage) drawn from the DEVELOPMENT pool only. Labelers annotate per T07_label_manual_v1 and produce labels that conform to T07_claim_schema_v1; raw labels retain annotator ID and lineage per T07 section 6.",
+  "type": "object",
+  "required": [
+    "item_id",
+    "pilot_version",
+    "schema_version",
+    "guideline_version",
+    "split_pool",
+    "stratum",
+    "t09_group",
+    "cell_id",
+    "query",
+    "answer",
+    "evidence",
+    "annotators"
+  ],
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "pattern": "^PILOT-[0-9]{4}$",
+      "description": "Pilot item ID. Stable across label sets."
+    },
+    "pilot_version": { "type": "string", "const": "T08_pilot_v1" },
+    "schema_version": { "type": "string", "const": "T07_claim_schema_v1" },
+    "guideline_version": { "type": "string", "const": "T07_label_manual_v1" },
+    "split_pool": {
+      "type": "string",
+      "enum": ["dev", "train"],
+      "description": "Never 'test'. Test data must not be used for piloting or label tuning."
+    },
+    "stratum": {
+      "type": "string",
+      "enum": ["disease+chem", "pest+chem", "fertilizer+chem", "non-chem", "other"]
+    },
+    "t09_group": { "type": "string", "description": "Union-find intent group from T09 split manifest." },
+    "cell_id": { "type": "string" },
+    "node_id": { "type": ["string", "null"] },
+    "dialect": { "type": ["string", "null"] },
+    "category": { "type": ["string", "null"] },
+    "qtype": { "type": ["string", "null"] },
+    "query": { "type": "string", "description": "Original query text (raw form preserved)." },
+    "answer": { "type": "string", "description": "Answer text to be split into atomic claims before labeling." },
+    "chemical_trace": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Chemicals named in the answer (from generation metadata)."
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["source_id", "evidence_status", "evidence_text"],
+      "properties": {
+        "source_id": { "type": "string", "description": "Stable source unit ID (source_document)." },
+        "source_document": { "type": ["string", "null"] },
+        "source_md": { "type": ["string", "null"], "description": "Absolute path of the source passage file (may not exist on the labeler's machine)." },
+        "citation": { "type": ["string", "null"] },
+        "publisher": { "type": ["string", "null"] },
+        "evidence_status": {
+          "type": "string",
+          "enum": ["attached", "missing_file", "unreadable"],
+          "description": "attached = evidence_text populated; otherwise labelers must flag that no evidence passage was available."
+        },
+        "content_hash": { "type": ["string", "null"], "description": "SHA-256 of the source passage file." },
+        "evidence_text": { "type": ["string", "null"], "description": "First 4000 chars of the source passage; the labeling basis." }
+      }
+    },
+    "annotators": {
+      "type": "object",
+      "description": "Filled when annotation runs. Raw labels never replaced by consensus (T07 section 6).",
+      "properties": {
+        "annotator_a": { "type": ["string", "null"] },
+        "annotator_b": { "type": ["string", "null"] },
+        "adjudicator": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

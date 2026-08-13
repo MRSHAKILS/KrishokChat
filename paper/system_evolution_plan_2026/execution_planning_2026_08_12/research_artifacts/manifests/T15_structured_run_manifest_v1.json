@@ -1,0 +1,80 @@
+{
+  "manifest_version": "1",
+  "tool": "run_structured_verifier.py v1",
+  "run_id": "T15-20260812T204643Z",
+  "task": "T15 structured verifier candidate",
+  "generated_at_utc": "2026-08-12T20:46:45.032567+00:00",
+  "git": {
+    "revision": "621911a492eb35314d43e553c397b6b24ce54b6f",
+    "dirty_tree": true
+  },
+  "inputs": {
+    "splits": {
+      "T09_treatment_qa_train_v1.jsonl": "d6b3e7a51847df9ae7ddc059ad83e1bab67cc0899bb6a66d1b36485f6ad9b7cc",
+      "T09_treatment_qa_dev_v1.jsonl": "0c1f0cd694f5099a9edd3482f6d012e598de7081098903ac3790e0f0e32883f9",
+      "T09_treatment_qa_test_v1.jsonl": "5cda6c517dababb65ac4b7552d178b9e49b8809c2dddd8e02aaef0783ae99654"
+    },
+    "split_manifest": "1dcad42c5b949182de7b590f7e91919eb3e1356666210a04d2310a478ca056d5"
+  },
+  "code_hashes": {
+    "normalization.py": "f1a02ed92a998a4bb95d229027563e2dd4e8b50dc4f23ac49959287b0026c6f4",
+    "claim_parser.py": "2cfe5adcb1ce47be429d08a21fb9d1bf3e6fce6f6d162450f5bd93d8908716a3",
+    "relation_matcher.py": "4875f65550a209cff3adb36d6bce9f61cb9efe2c005adec70ce5cbc1c140f145",
+    "structured.py": "cad5e2d88836d67f728a66d04b70795e35f40aa912e225d17e8a92f050c7cbb7",
+    "runner": "b950425a2e55554c90a7bdee153ab1c3bf7542c44780717a1d36a1d30c52bc09"
+  },
+  "method": "StructuredVerifier.verify(answer, [RetrievedSource(content_bn=passage)]) per frozen record; parser+normalizer+relation matcher+fail-closed policy; candidate is dead code w.r.t. the runtime pipeline (dosage.py untouched)",
+  "evidence_mode": "record's generating source passage (source_md), full content; matches T12",
+  "determinism": "deterministic; record order follows frozen split order",
+  "seed": null,
+  "thresholds": null,
+  "per_split_counts": {
+    "train": {
+      "records": 6805,
+      "verified": 458,
+      "flagged_unverified": 6347,
+      "low_confidence": 0,
+      "claims": 17089,
+      "certifiable_claims": 117,
+      "attached": 6805,
+      "missing": 0
+    },
+    "dev": {
+      "records": 2152,
+      "verified": 119,
+      "flagged_unverified": 2033,
+      "low_confidence": 0,
+      "claims": 4564,
+      "certifiable_claims": 47,
+      "attached": 2152,
+      "missing": 0
+    },
+    "test": {
+      "records": 2267,
+      "verified": 193,
+      "flagged_unverified": 2074,
+      "low_confidence": 0,
+      "claims": 5342,
+      "certifiable_claims": 15,
+      "attached": 2267,
+      "missing": 0
+    }
+  },
+  "outputs": {
+    "predictions": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T15_structured_predictions_v1.jsonl",
+      "records": 11224,
+      "sha256": "91d7763520149ac35e2cc8669ced598e0700bdcb25d2c07f30d14af3d1b9a7c4"
+    },
+    "failure_log": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T15_failure_log_v1.jsonl",
+      "records": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "claims": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T15_structured_claims_v1.jsonl",
+      "records": 26995,
+      "sha256": "8079d6ec0ae3d0b24cedec405ed429f45e3e1400528607f9afa10bbf340abb93"
+    }
+  }
+}

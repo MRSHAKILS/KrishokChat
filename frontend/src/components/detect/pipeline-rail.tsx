@@ -202,6 +202,15 @@ export const VISION_STAGES: RailStage[] = [
   { key: "advisory", label: STAGE_LABELS.advisory },
 ];
 
+/* Soil console stages — the moisture regression & soil classification nodes
+   stay "skipped" (locked) until a validated model exists. */
+export const SOIL_STAGES: RailStage[] = [
+  { key: "intake", label: STAGE_LABELS.intake },
+  { key: "moisture_regression", label: STAGE_LABELS.moisture_regression },
+  { key: "soil_classification", label: STAGE_LABELS.soil_classification },
+  { key: "advisory", label: STAGE_LABELS.advisory },
+];
+
 export const QA_STAGES: RailStage[] = [
   { key: "safety", label: STAGE_LABELS.safety },
   { key: "retrieval", label: STAGE_LABELS.retrieval },

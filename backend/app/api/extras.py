@@ -44,14 +44,16 @@ class ModelOption(BaseModel):
 
 @router.get("/api/models", response_model=list[ModelOption])
 async def list_models(container: ContainerDep) -> list[ModelOption]:
-    """Health-check available generation models. Local model requires Ollama up."""
+    """Health-check the configured local OpenAI-compatible generation server."""
     local_available = False
     try:
         import httpx
-        resp = httpx.get("http://127.0.0.1:11434/api/tags", timeout=3.0)
+        resp = httpx.get(f"{settings.local_llm_base_url.rstrip('/')}/models", timeout=3.0)
         if resp.status_code == 200:
-            tags = resp.json().get("models", [])
-            local_available = any(m.get("name", "").startswith("krishokchat") for m in tags)
+            models = resp.json().get("data", [])
+            local_available = any(
+                model.get("id") == settings.local_llm_model_name for model in models
+            )
     except Exception:
         local_available = False
     return [
@@ -64,7 +66,7 @@ async def list_models(container: ContainerDep) -> list[ModelOption]:
         ModelOption(
             id="krishokchat-4b",
             label="KrishokChat-4B",
-            description="লোকাল ফাইন-টিউনড মডেল (Ollama)",
+            description="লোকাল ফাইন-টিউনড মডেল",
             available=local_available,
         ),
     ]
@@ -224,4 +226,3 @@ async def translate_dialect(payload: DialectRequest, container: ContainerDep) ->
             dialect_name=dialect_name,
             translated_bn=clean_text,
         )
-

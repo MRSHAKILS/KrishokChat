@@ -2,7 +2,7 @@
 
 These rules apply only inside `paper/system_evolution_plan_2026/` and to future execution of this plan. Root `AGENTS.md`, `docs/PAPER_POLICY.md`, and refactor handoff contracts take precedence.
 
-1. Read `README.md`, `MEMORY.md`, and the assigned task row in `09_AGENT_TASK_GRAPH.md` before work.
+1. **Authority routing:** this parent folder is historical evidence and proposal context. The only active execution authority is `execution_planning_2026_08_12/`. Read its `AGENTS.md`, `README.md`, `MEMORY.md`, and assigned row in `11_FINAL_IMPLEMENTATION_SPEC.md`. Do not execute `09_AGENT_TASK_GRAPH.md` directly.
 2. One agent owns one task and its listed deliverables. Do not invoke other agents unless the orchestrator explicitly assigns coordination.
 3. Do not modify application code during planning tasks. Implementation tasks may edit only the exact domain/port/adapter/container boundaries approved by the task owner.
 4. Never create a second active pipeline under legacy `backend/app/agents/` or `services/advisory/`.
@@ -20,3 +20,4 @@ These rules apply only inside `paper/system_evolution_plan_2026/` and to future 
 16. Do not add planner/critic/supervisor loops, web fallback, new services, auth, telemetry, or object detection.
 17. Record blockers in `MEMORY.md` without overwriting prior evidence. Change plan decisions through an explicit dated amendment.
 18. A task is complete only when its completion criterion passes and its deliverables link to reproducible evidence.
+19. The local GGUF/model-selector work is a separate engineering lane defined by `execution_planning_2026_08_12/13_LOCAL_MODEL_INTEGRATION_PLAN.md` and its dated runtime amendment. It must not alter the frozen research thesis or bypass safety, retrieval, verification, or audit behavior.

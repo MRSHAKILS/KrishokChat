@@ -20,6 +20,8 @@ Expert-adjudicated labels; baseline comparisons; risk-coverage curves; paired di
 
 Stage 0 evidence reconciliation COMPLETE (T01-T04). Ready for T05 reconciliation and T07 schema freeze. Current runtime wires BM25 only (no dense/FAISS), lexical dosage verifier only (no semantic verification), safety-before-retrieval enforced, 11/11 tests passing. Hybrid retrieval and local Gemma performance remain unverified at runtime.
 
+**Execution authority:** the broad parent plan is retained for context but is superseded for execution by `execution_planning_2026_08_12/`. Agents must use that folder's `11_FINAL_IMPLEMENTATION_SPEC.md`; they must not resume tasks from the parent `09_AGENT_TASK_GRAPH.md`.
+
 ## Completed Milestones
 
 - Read repository rules and mandatory handoff documents.

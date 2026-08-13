@@ -27,6 +27,8 @@ The UI is replaceable. Functional behavior must not be embedded in React compone
 | Public HTTP schemas | `backend/app/models/schemas.py` |
 | Vision model artifacts | `backend/ml_assets/vision/**` plus each artifact's `class_names.json`/`metadata.json` |
 | Local audit trail | `backend/app/logs/` (ignored by git) |
+| Active research execution plan | `paper/system_evolution_plan_2026/execution_planning_2026_08_12/` |
+| Local model integration evidence | `paper/system_evolution_plan_2026/execution_planning_2026_08_12/14_LOCAL_MODEL_RUNTIME_AMENDMENT_2026_08_12.md` |
 
 ## Invariants future agents must preserve
 
@@ -85,3 +87,7 @@ No route or frontend component should change for either replacement.
   `docs/vision-pipeline/PAPER_AND_DEMO_CLAIMS.md` for evidence-safe wording.
 - Benchmark endpoint: intentionally still separate; do not fabricate missing metrics.
 - Visual design: intentionally deferred to the frontend/design workflow.
+- Research execution: the dated execution-planning package supersedes the broader parent plan.
+- Local generation: the checked-in `krishokchat.f16.gguf` is truncated and must not be
+  served. The verified demo runtime uses the external Q4_K_M base plus KrishokChat LoRA via
+  `scripts/start_krishokchat_local.ps1`; scientific performance remains unevaluated.

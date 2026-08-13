@@ -1,0 +1,70 @@
+{
+  "total_images": 722,
+  "kPa_range": "0.0 - 21.5",
+  "kPa_bins": {
+    "0-10": 100,
+    "10-20": 506,
+    "20-22": 116
+  },
+  "soil_types": {
+    "bengali_transliteration": {
+      "Doash": "Loam",
+      "Atel": "Clay",
+      "Bele": "Sandy",
+      "Poli": "Silt",
+      "Bele_Doash": "Sandy Loam",
+      "Atel_Doash": "Clay Loam"
+    },
+    "with_usda_equivalents": {
+      "Loam (Doash)": 180,
+      "Clay (Atel)": 156,
+      "Sandy (Bele)": 32,
+      "Silt (Poli)": 85,
+      "Sandy Loam (Bele_Doash)": 143,
+      "Clay Loam (Atel_Doash)": 126
+    },
+    "note": "Labels are USDA soil texture classes in Bengali transliteration. 6 of 12 standard USDA texture classes present in this dataset."
+  },
+  "land_types": {
+    "High": 289,
+    "Low": 117,
+    "Medium": 308
+  },
+  "crops": {
+    "Turmeric": 1,
+    "Lechee": 19,
+    "Mango": 77,
+    "Betel_Nut": 11,
+    "Maize": 44,
+    "Rich": 119,
+    "Jute": 96,
+    "No": 107,
+    "Lemon": 28,
+    "Meheguni": 46,
+    "Okra": 13,
+    "Grass": 81,
+    "Eggplant": 32,
+    "Sponge Gourd": 48
+  },
+  "growth_stages": {
+    "Mature": 280,
+    "Post-Harvest": 48,
+    "Seedling": 100,
+    "Land_Preparation": 25,
+    "Fruiting": 60,
+    "Post_Harvest": 62,
+    "Seed_Sowing": 60,
+    "Pre_hervest": 79
+  },
+  "series_count": 46,
+  "split_counts": {
+    "train": 472,
+    "test": 131,
+    "val": 119
+  },
+  "series_largest": 83,
+  "metadata_matched": 714,
+  "metadata_inferred": 8,
+  "kPa_corrections_from_raw": 106,
+  "canonical_source": "correct_image/ + TraceData.xlsx"
+}

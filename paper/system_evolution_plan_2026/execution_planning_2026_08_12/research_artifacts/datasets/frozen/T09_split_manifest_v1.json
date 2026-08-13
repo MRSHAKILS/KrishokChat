@@ -1,0 +1,101 @@
+{
+  "manifest_version": "1",
+  "tool": "build_splits.py v2",
+  "generated_at_utc": "2026-08-12T19:13:02.805176+00:00",
+  "input": {
+    "path": "E:\\CSE498R\\Agri-LLM\\KrishokChat\\krishokchat_dataset_main\\text_qa\\treatment\\treatment_full.jsonl",
+    "sha256": "dc9b87a04dd49680628b827d9817b154d70510e8198d038082897adad0a50e5f",
+    "records": 11224
+  },
+  "method": "stratified group-level split; union-find group = base intent (cell_id minus qtype suffix) ∪ exact-question ∪ normalized-question; stratum=(category_group, chemical_bearing)",
+  "seed": 20260813,
+  "proportions": {
+    "train": 0.6,
+    "dev": 0.2,
+    "test": 0.2
+  },
+  "grouping": {
+    "unit": "union-find {base_intent, exact_question, norm_question}",
+    "groups_total": 905,
+    "groups_with_multiple_bases": 2,
+    "groups_with_multiple_sources": 1,
+    "source_documents": 47
+  },
+  "strata": {
+    "disease|chem=0": {
+      "groups": 135,
+      "train": 81,
+      "dev": 27,
+      "test": 27
+    },
+    "disease|chem=1": {
+      "groups": 123,
+      "train": 74,
+      "dev": 25,
+      "test": 24
+    },
+    "fertilizer|chem=0": {
+      "groups": 21,
+      "train": 13,
+      "dev": 4,
+      "test": 4
+    },
+    "fertilizer|chem=1": {
+      "groups": 240,
+      "train": 144,
+      "dev": 48,
+      "test": 48
+    },
+    "other|chem=0": {
+      "groups": 17,
+      "train": 10,
+      "dev": 3,
+      "test": 4
+    },
+    "other|chem=1": {
+      "groups": 28,
+      "train": 17,
+      "dev": 6,
+      "test": 5
+    },
+    "pest|chem=0": {
+      "groups": 132,
+      "train": 79,
+      "dev": 26,
+      "test": 27
+    },
+    "pest|chem=1": {
+      "groups": 209,
+      "train": 125,
+      "dev": 42,
+      "test": 42
+    }
+  },
+  "splits": {
+    "train": {
+      "path": "datasets\\frozen\\T09_treatment_qa_train_v1.jsonl",
+      "records": 6805,
+      "groups": 543,
+      "sha256": "d6b3e7a51847df9ae7ddc059ad83e1bab67cc0899bb6a66d1b36485f6ad9b7cc",
+      "size_bytes": 15112014
+    },
+    "dev": {
+      "path": "datasets\\frozen\\T09_treatment_qa_dev_v1.jsonl",
+      "records": 2152,
+      "groups": 181,
+      "sha256": "0c1f0cd694f5099a9edd3482f6d012e598de7081098903ac3790e0f0e32883f9",
+      "size_bytes": 4422946
+    },
+    "test": {
+      "path": "datasets\\frozen\\T09_treatment_qa_test_v1.jsonl",
+      "records": 2267,
+      "groups": 181,
+      "sha256": "5cda6c517dababb65ac4b7552d178b9e49b8809c2dddd8e02aaef0783ae99654",
+      "size_bytes": 4876645
+    }
+  },
+  "schema_guideline": {
+    "schema_version": "T07_claim_schema_v1",
+    "guideline_version": "T07_label_manual_v1"
+  }
+}

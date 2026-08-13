@@ -39,55 +39,38 @@ export default function DetectPage() {
 
   /* Restore the latest scan result on mount so a refresh keeps context
       without keeping the raw image bytes in storage. The result, crop
-      hint, and detected context are initialized from localStorage via
-      lazy useState initializers to avoid cascading setState-in-effect.
-      Guarded for SSR prerender where `window` is undefined. */
-  const [result, setResult] = useState<DetectResponse | null>(() => {
-    try {
-      if (typeof window === "undefined") return null;
-      const saved = window.localStorage.getItem(SCAN_STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved) as {
-          result: DetectResponse;
-          cropHint: string;
-          savedAt: number;
-        };
-        return parsed?.result ?? null;
-      }
-    } catch {
-      // ignore
-    }
-    return null;
-  });
+      hint, and detected context are hydrated from localStorage in a
+      single mount effect AFTER SSR hydration. Starting with the default
+      values keeps the first server and client renders identical (a lazy
+      initializer reading localStorage would produce a hydration
+      mismatch: the server renders null, the client re-renders with the
+      stored value on first paint). */
+  const [result, setResult] = useState<DetectResponse | null>(null);
 
-  const [cropHint, setCropHint] = useState(() => {
-    try {
-      if (typeof window === "undefined") return "";
-      const saved = window.localStorage.getItem(SCAN_STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved) as { cropHint: string };
-        return parsed?.cropHint ?? "";
-      }
-    } catch {
-      // ignore
-    }
-    return "";
-  });
+  const [cropHint, setCropHint] = useState("");
 
-  const [detectedContext, setDetectedContext] = useState<{ crop: string; disease: string } | null>(() => {
+  const [detectedContext, setDetectedContext] = useState<{ crop: string; disease: string } | null>(null);
+
+  /* Hydrate persistent scan state once after the client mounts. */
+  useEffect(() => {
     try {
-      if (typeof window === "undefined") return null;
       const saved = window.localStorage.getItem(SCAN_STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved) as { result: DetectResponse };
-        const r = parsed?.result;
-        return r?.crop && r?.disease ? { crop: r.crop, disease: r.disease } : null;
+      if (!saved) return;
+      const parsed = JSON.parse(saved) as {
+        result: DetectResponse;
+        cropHint: string;
+        savedAt: number;
+      };
+      if (parsed?.result) setResult(parsed.result);
+      if (parsed?.cropHint) setCropHint(parsed.cropHint);
+      const r = parsed?.result;
+      if (r?.crop && r?.disease) {
+        setDetectedContext({ crop: r.crop, disease: r.disease });
       }
     } catch {
-      // ignore
+      // Storage may be unavailable or corrupt; detection context stays in memory.
     }
-    return null;
-  });
+  }, []);
 
   /* Persist the latest scan result separately from chat history. */
   useEffect(() => {

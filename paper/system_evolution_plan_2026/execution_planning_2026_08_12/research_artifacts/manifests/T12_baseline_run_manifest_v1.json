@@ -1,0 +1,69 @@
+{
+  "manifest_version": "1",
+  "tool": "run_lexical_baseline.py v1",
+  "run_id": "T12-20260812T200711Z",
+  "task": "T12 lexical baseline",
+  "generated_at_utc": "2026-08-12T20:07:11.520216+00:00",
+  "git": {
+    "revision": "621911a492eb35314d43e553c397b6b24ce54b6f",
+    "dirty_tree": true
+  },
+  "inputs": {
+    "splits": {
+      "T09_treatment_qa_train_v1.jsonl": "d6b3e7a51847df9ae7ddc059ad83e1bab67cc0899bb6a66d1b36485f6ad9b7cc",
+      "T09_treatment_qa_dev_v1.jsonl": "0c1f0cd694f5099a9edd3482f6d012e598de7081098903ac3790e0f0e32883f9",
+      "T09_treatment_qa_test_v1.jsonl": "5cda6c517dababb65ac4b7552d178b9e49b8809c2dddd8e02aaef0783ae99654"
+    },
+    "split_manifest": "1dcad42c5b949182de7b590f7e91919eb3e1356666210a04d2310a478ca056d5"
+  },
+  "code_hashes": {
+    "dosage.py": "aba1056fe9d9b85d3b8cdec328e09b392224239db9d7cff88e367cfc61f41031",
+    "runner": "5de0012da033e5ccf85f6cb77f2231b255cb2f87548b4c648035e6ada4b1118d"
+  },
+  "method": "DosageVerifier.verify(answer, [RetrievedSource(content_bn=source_md passage)]) per frozen record; no changes to runtime module",
+  "evidence_mode": "record's generating source passage (source_md), full content; unreachable -> no sources -> LOW_CONFIDENCE (runtime no-source branch)",
+  "determinism": "verifier is deterministic; record order follows frozen split order",
+  "seed": null,
+  "thresholds": null,
+  "per_split_counts": {
+    "train": {
+      "verified": 6565,
+      "flagged_unverified": 240,
+      "low_confidence": 0,
+      "records": 6805,
+      "attached": 6805,
+      "missing": 0,
+      "with_claims": 644
+    },
+    "dev": {
+      "verified": 2107,
+      "flagged_unverified": 45,
+      "low_confidence": 0,
+      "records": 2152,
+      "attached": 2152,
+      "missing": 0,
+      "with_claims": 136
+    },
+    "test": {
+      "verified": 2213,
+      "flagged_unverified": 54,
+      "low_confidence": 0,
+      "records": 2267,
+      "attached": 2267,
+      "missing": 0,
+      "with_claims": 214
+    }
+  },
+  "outputs": {
+    "predictions": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T12_lexical_baseline_predictions_v1.jsonl",
+      "records": 11224,
+      "sha256": "3783e8a09d3ee924387314ae44ebfdea7a2883b74314136370eaca20030de7d6"
+    },
+    "failure_log": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T12_failure_log_v1.jsonl",
+      "records": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

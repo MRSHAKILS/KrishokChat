@@ -1,0 +1,61 @@
+{
+  "status": "in_development",
+  "releaseable": false,
+  "note": "All regression models underperform the mean predictor (negative R^2). The dataset is the released asset; the model stays locked until a validated artifact exists (target: positive R^2 on the held-out series).",
+  "baseline": {
+    "strategy": "predict_mean",
+    "rmse_kpa": 4.6,
+    "r2": 0.0
+  },
+  "models": [
+    {
+      "model": "RandomForest (MobileNet features)",
+      "rmse_kpa": 4.7633,
+      "r2": -1.138,
+      "params": "best_hyperparams_grid"
+    },
+    {
+      "model": "XGBoost (MobileNet features)",
+      "rmse_kpa": 4.8289,
+      "r2": -1.198,
+      "params": "best_hyperparams_grid"
+    },
+    {
+      "model": "Ensemble (5 CNNs, weighted)",
+      "rmse_kpa": 5.0766,
+      "r2": -1.429,
+      "params": "ensemble_weights_grid"
+    },
+    {
+      "model": "CNN-Small (tuned)",
+      "rmse_kpa": 5.1597,
+      "r2": -1.509,
+      "params": "cnn_small_2026-07-10"
+    },
+    {
+      "model": "ResNet-18 (tuned)",
+      "rmse_kpa": 5.2145,
+      "r2": -1.563,
+      "params": "resnet18_2026-07-10"
+    },
+    {
+      "model": "EfficientNet-B0 (tuned)",
+      "rmse_kpa": 5.473,
+      "r2": -1.822,
+      "params": "efficientnet_b0_2026-07-10"
+    },
+    {
+      "model": "MobileNet-V3-Large (tuned)",
+      "rmse_kpa": 5.488,
+      "r2": -1.836,
+      "params": "mobilenet_v3_2026-07-10"
+    },
+    {
+      "model": "DenseNet-121 (tuned)",
+      "rmse_kpa": 5.614,
+      "r2": -1.973,
+      "params": "densenet121_2026-07-10"
+    }
+  ],
+  "source": "kaggle output/soild_moisture_experiments_frozen_fixed.ipynb (2026-07-11)"
+}

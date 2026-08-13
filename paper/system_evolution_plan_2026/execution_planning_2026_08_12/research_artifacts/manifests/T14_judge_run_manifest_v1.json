@@ -1,0 +1,67 @@
+{
+  "manifest_version": "1",
+  "tool": "run_llm_judge.py v1",
+  "run_id": "T14-20260813T113621Z",
+  "task": "T14 fixed LLM judge (secondary comparison baseline, NO gold authority)",
+  "generated_at_utc": "2026-08-13T11:36:21.545779+00:00",
+  "git": {
+    "revision": "621911a492eb35314d43e553c397b6b24ce54b6f",
+    "dirty_tree": true
+  },
+  "inputs": {
+    "pilot_file": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\annotations\\pilot\\T08_pilot_items_v1.jsonl",
+      "records": 24,
+      "sha256": "4071259a34f4765642a700c83eed7d5fb0bd89eb03b6f62626af7d297dd13522"
+    }
+  },
+  "code_hashes": {
+    "runner": "788ba86e778bf9f17d18747caf1aefd74119b3cf05f9bd3862fe86f34f093ad8",
+    "openai_compatible_client": "c80547cf05ec4ad0a1cbee2961a1cc8ab3e701d5b8ddbea138b7ae9d6c1b0b0f"
+  },
+  "judge": {
+    "prompt_version": "T14_judge_prompt_v1",
+    "prompt_sha256": "1741220fd64755c70f5284a80634603d1e05eb5f064580766043b9740a70a2a8",
+    "model": "google/gemini-2.5-flash-lite",
+    "provider": "openrouter",
+    "temperature": 0.0,
+    "max_tokens": 800,
+    "response_format": "json_object"
+  },
+  "scope": "T08 pilot items only; split_pool=dev; NO test access (rule 15)",
+  "authority": "secondary comparison only; never gold; never overrides hard safety rules (F10)",
+  "cost": {
+    "prompt_tokens": 33402,
+    "completion_tokens": 10038,
+    "total_tokens": 43440,
+    "calls_with_usage": 23
+  },
+  "counts": {
+    "items": 24,
+    "ok": 23,
+    "failures": 1,
+    "verdicts": {
+      "supported": 12,
+      "partially_supported": 6,
+      "unsupported": 5,
+      "ambiguous": 0
+    }
+  },
+  "outputs": {
+    "raw_cache": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T14_judge_raw_v1.jsonl",
+      "records": 24,
+      "sha256": "9b0008adc7e73af91f2bc73c528878569148d70888da51636545ac956683ac77"
+    },
+    "predictions": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T14_judge_predictions_v1.jsonl",
+      "records": 23,
+      "sha256": "82353164eb76c22279003c04211f9b76d7fe28c32fde9df08afdd4d4943b30cf"
+    },
+    "failure_log": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T14_failure_log_v1.jsonl",
+      "records": 1,
+      "sha256": "53d9cac2d687595fce88df1502b765dab7662b110516a7cd5c73f34c2964b021"
+    }
+  }
+}

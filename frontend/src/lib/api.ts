@@ -224,6 +224,83 @@ export async function detectDisease(
   }
 }
 
+/* ---------- Soil moisture (dataset + locked analyzer) ------------------ */
+
+export interface SoilTypeStat {
+  key: string; // "Doash"
+  usda: string; // "Loam"
+  count: number;
+}
+
+export interface SoilSample {
+  image_id: string;
+  filename: string;
+  soil_type: string;
+  kpa: number;
+  land_type: string;
+  crop: string;
+  growth_stage: string;
+}
+
+export interface SoilModelResult {
+  model: string;
+  rmse_kpa: number;
+  r2: number;
+}
+
+export interface SoilDatasetInfo {
+  available: boolean;
+  total_images: number;
+  kpa_range: number[];
+  kpa_bins: Record<string, number>;
+  soil_types: SoilTypeStat[];
+  land_types: Record<string, number>;
+  crops: Record<string, number>;
+  growth_stages: Record<string, number>;
+  series_count: number;
+  splits: Record<string, number>;
+  metadata_matched: number;
+  metadata_inferred: number;
+  corrections: number;
+  collection: Record<string, string>;
+  model_status: string; // "in_development" | "released"
+  model_results: SoilModelResult[];
+  samples: SoilSample[];
+}
+
+export interface SoilAnalyzeResponse {
+  status: string; // locked | invalid_image | analyzed (future)
+  error?: string | null;
+  dataset: SoilDatasetInfo | null;
+  agent_trace: AgentStageEvent[];
+}
+
+export async function getSoilDataset(): Promise<SoilDatasetInfo> {
+  const res = await fetch(`${API_BASE}/api/soil/dataset`);
+  if (!res.ok) throw new Error(`soil dataset failed: ${res.status}`);
+  return res.json();
+}
+
+export async function analyzeSoil(
+  file: File,
+  opts?: { signal?: AbortSignal; timeoutMs?: number },
+): Promise<SoilAnalyzeResponse> {
+  const form = new FormData();
+  form.append("file", file);
+  const request = createTimedSignal(opts?.signal, opts?.timeoutMs ?? 60_000);
+  try {
+    const res = await fetch(`${API_BASE}/api/soil/analyze`, {
+      method: "POST",
+      body: form,
+      signal: request.signal,
+    });
+    if (!res.ok) throw new Error(`soil analyze failed: ${res.status}`);
+    return res.json();
+  } finally {
+    request.dispose();
+  }
+}
+
 /* ---------- Metrics ---------------------------------------------------- */
 
 export async function getSafetyMetrics(): Promise<SafetyMetrics> {

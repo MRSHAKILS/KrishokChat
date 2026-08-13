@@ -55,6 +55,38 @@ class FakeQA:
         )
 
 
+class FakeQAFailsClosed:
+    """Safety blocks the advisory (e.g. LLM unavailable) — no sources ever."""
+
+    async def run(self, request):
+        return QAResult(
+            query=request.query,
+            category=SafetyCategory.SAFE_AGRI,
+            answer="",
+            sources=(),
+            confidence=VerificationConfidence.BLOCKED,
+        )
+
+
+class FakeQAErrors:
+    """The advisory LLM call itself raises — pipeline must not crash the diagnosis."""
+
+    async def run(self, request):
+        raise RuntimeError("simulated advisory outage")
+
+
+class FakeQANoInfoRegistry(FakeRegistry):
+    """Disease info exists but carries no solution — no knowledge-base fallback."""
+
+    def disease_info(self, model_key: str, label: str):
+        return {
+            "class_name": "Early Blight (আগাম ব্লাইট)",
+            "description_bn": "পাতায় বাদামী দাগ দেখা যায়।",
+            "cause_bn": "ছত্রাকের কারণে হয়।",
+            "solution_bn": "",
+        }
+
+
 class FakeAudit:
     def __init__(self):
         self.entries = []
@@ -94,6 +126,57 @@ class VisionPipelineTests(unittest.TestCase):
         self.assertEqual(result.disease, "Potato__Early_Blight")
         self.assertEqual(result.treatment_confidence, "verified")
         self.assertTrue(result.treatment_advice)
+        self.assertEqual(len(audit.entries), 1)
+
+    # --- T21 regression: source-empty treatment must never be marked verified ---
+
+    def _textured_image(self):
+        image = Image.new("RGB", (128, 128), "white")
+        for x in range(0, 128, 2):
+            for y in range(0, 128, 2):
+                image.putpixel((x, y), (20, 120, 40))
+        return image
+
+    def test_advisory_fails_closed_kb_fallback_is_low_confidence_with_empty_sources(self):
+        """QA blocks (safety fail-closed) -> KB fallback: never 'verified', no sources."""
+        audit = FakeAudit()
+        pipeline = VisionPipeline(
+            registry=FakeRegistry(), runner=FakeRunner(), qa=FakeQAFailsClosed(), audit=audit
+        )
+        result = asyncio.run(pipeline.detect(self._textured_image()))
+        self.assertEqual(result.status, VisionStatus.DIAGNOSED)
+        self.assertEqual(result.treatment_confidence, "low_confidence")
+        self.assertNotEqual(result.treatment_confidence, "verified")
+        self.assertEqual(result.treatment_sources, ())
+        self.assertIn("পরিচর্যা", result.treatment_advice)  # KB solution text served
+        self.assertTrue(any(event.stage.value == "advisory" for event in result.trace))
+        self.assertEqual(len(audit.entries), 1)
+
+    def test_advisory_error_kb_fallback_is_low_confidence_with_empty_sources(self):
+        """QA raises -> advisory skipped -> KB fallback: still never 'verified'."""
+        audit = FakeAudit()
+        pipeline = VisionPipeline(
+            registry=FakeRegistry(), runner=FakeRunner(), qa=FakeQAErrors(), audit=audit
+        )
+        result = asyncio.run(pipeline.detect(self._textured_image()))
+        self.assertEqual(result.status, VisionStatus.DIAGNOSED)
+        self.assertEqual(result.treatment_confidence, "low_confidence")
+        self.assertNotEqual(result.treatment_confidence, "verified")
+        self.assertEqual(result.treatment_sources, ())
+        self.assertIn("পরিচর্যা", result.treatment_advice)
+        self.assertEqual(len(audit.entries), 1)
+
+    def test_no_kb_solution_marks_no_claim_at_all(self):
+        """Disease info without a solution: no treatment claim, no verified status."""
+        audit = FakeAudit()
+        pipeline = VisionPipeline(
+            registry=FakeQANoInfoRegistry(), runner=FakeRunner(), qa=FakeQAErrors(), audit=audit
+        )
+        result = asyncio.run(pipeline.detect(self._textured_image()))
+        self.assertEqual(result.status, VisionStatus.DIAGNOSED)
+        self.assertIsNone(result.treatment_confidence)
+        self.assertIsNone(result.treatment_advice)
+        self.assertEqual(result.treatment_sources, ())
         self.assertEqual(len(audit.entries), 1)
 
 

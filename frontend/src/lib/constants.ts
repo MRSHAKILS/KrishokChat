@@ -25,7 +25,8 @@ export const LINKS = {
   github: "https://github.com/RaiyanKhaan/KrishokChat",
 } as const;
 
-/* Key research numbers — from the two papers, NOT fabricated */
+/* Key research numbers — from the two papers (local copies in `paper/done papers/`),
+   verified 2026-08-13 by text extraction; NOT fabricated */
 export const RESEARCH_STATS = {
   benchmarkInstances: "৮৫,৯৭৯",
   knowledgeNodes: "২,৮৮২",
@@ -36,6 +37,7 @@ export const RESEARCH_STATS = {
   triples: "১৭,৫০১",
   farmerQueries: "১,০০০",
   fieldInterviews: "৩০০",
+  soilImages: "৭২২",
   safetyCategories: "১২",
   hallucinationFloor: "৪.০৫–৭.০০%",
   sftGenF1: "০.৩১৪",
@@ -46,6 +48,15 @@ export const RESEARCH_STATS = {
   denseFarmerR10: "০.০৯৩",
   denseSafetyR10: "০.৯৭০",
   interAnnotatorKappa: "০.৭২",
+  /* AgriTrust paper (§1, §3.3, §5.1): image-linked nodes, entity graph counts,
+     answerable query set, KG-grounded inter-annotator κ */
+  imageLinkedNodes: "১,০২২",
+  imageLinkedShare: "৩৫.৫%",
+  uniqueCrops: "৯১৫",
+  diseaseVariants: "৭০৪",
+  chemicalEntities: "২,৭২৯",
+  answerableQueries: "৯০০",
+  kgGroundedKappa: "০.৭৮",
 } as const;
 
 /* API base is intentionally empty: next.config.ts rewrites /api/* to the backend,
@@ -62,7 +73,7 @@ export const VISION = {
   acceptedTypes: ["image/jpeg", "image/png", "image/webp"] as readonly string[],
 } as const;
 
-/* Pipeline stage labels — used by the trace rail across /detect and /chat */
+/* Pipeline stage labels — used by the trace rail across /detect, /soil and /chat */
 export const STAGE_LABELS = {
   intake: "ছবি গ্রহণ",
   crop_classification: "ফসল শনাক্ত",
@@ -72,4 +83,24 @@ export const STAGE_LABELS = {
   retrieval: "তথ্য সংগ্রহ",
   generation: "উত্তর তৈরি",
   verifier: "যাচাই",
+  moisture_regression: "আর্দ্রতা নির্ণয়",
+  soil_classification: "মাটি শনাক্ত",
+} as const;
+
+/* Soil type map — Bengali transliteration key → Bengali + USDA class.
+   Keys match the frozen manifest in dataset_release/soil_moisture/. */
+export const SOIL_TYPES = {
+  Doash: { bn: "দোআঁশ", usda: "Loam" },
+  Atel: { bn: "এঁটেল", usda: "Clay" },
+  Bele: { bn: "বেলে", usda: "Sandy" },
+  Poli: { bn: "পলি", usda: "Silt" },
+  Bele_Doash: { bn: "বেলে-দোআঁশ", usda: "Sandy Loam" },
+  Atel_Doash: { bn: "এঁটেল-দোআঁশ", usda: "Clay Loam" },
+} as const;
+
+/* Land type labels in Bengali */
+export const LAND_TYPES = {
+  High: "উঁচু",
+  Medium: "মাঝারি",
+  Low: "নিচু",
 } as const;

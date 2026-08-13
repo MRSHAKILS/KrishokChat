@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "research_artifacts/datasets/frozen/T07_claim_schema_v1.json",
+  "title": "KrishokChat T07 Atomic Claim Label Schema v1",
+  "description": "Frozen annotation schema for atomic agrochemical claims. Conforms to 06_CLAIM_SCHEMA_AND_VERIFIER.md. Missing-value rules: null = true absence/non-applicability; unknown = present-but-unresolved.",
+  "type": "object",
+  "required": [
+    "claim_id",
+    "item_id",
+    "query",
+    "answer",
+    "crop",
+    "action",
+    "source_id",
+    "relation",
+    "safety_critical",
+    "schema_version",
+    "guideline_version"
+  ],
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "description": "Dataset-version-scoped atomic claim ID. Never missing."
+    },
+    "item_id": {
+      "type": "string",
+      "description": "Unique item (query+answer+passages) ID."
+    },
+    "query": {
+      "type": "string",
+      "description": "Original query text (preserve raw form)."
+    },
+    "answer": {
+      "type": "string",
+      "description": "Answer text analyzed."
+    },
+    "crop": {
+      "anyOf": [
+        { "type": "string", "enum": ["unknown"] },
+        { "type": "string", "minLength": 1 },
+        { "type": "array", "items": { "type": "string" } },
+        { "type": "null" }
+      ],
+      "description": "Canonical crop or crop group. null only if crop-independent; unknown if unresolved."
+    },
+    "disease_pest": {
+      "anyOf": [
+        { "type": "string", "enum": ["unknown"] },
+        { "type": "string", "minLength": 1 },
+        { "type": "array", "items": { "type": "string" } },
+        { "type": "null" }
+      ],
+      "description": "Disease/pest/symptom complex or target condition."
+    },
+    "action": {
+      "type": "string",
+      "enum": ["apply", "avoid", "mix", "spray", "irrigate", "wait", "monitor", "remove", "refer", "other_reviewed", "unknown"]
+    },
+    "chemical_intervention": {
+      "anyOf": [
+        { "type": "string", "enum": ["unknown"] },
+        { "type": "string", "minLength": 1 },
+        { "type": "array", "items": { "type": "string" } },
+        { "type": "null" }
+      ],
+      "description": "Active ingredient/product/formulation/biological/cultural/mechanical or other intervention."
+    },
+    "formulation": {
+      "anyOf": [
+        { "type": "string", "enum": ["unknown"] },
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ],
+      "description": "Normalized concentration/formulation, e.g. WP/EC/SC and %."
+    },
+    "amount": {
+      "anyOf": [
+        { "type": "number" },
+        { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2, "description": "[min, max] range" },
+        { "type": "null" },
+        { "type": "string", "enum": ["unknown"] }
+      ],
+      "description": "Numeric quantity after Bengali/ASCII normalization; preserve original span in evidence_span/source context."
+    },
+    "unit": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "string", "enum": ["unknown"] },
+        { "type": "null" }
+      ],
+      "description": "Canonical unit attached to amount."
+    },
+    "denominator": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "string", "enum": ["unknown"] },
+        { "type": "null" }
+      ],
+      "description": "Structured quantity base: per water volume, land area, seed mass, plant, container, other."
+    },
+    "interval_frequency": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "string", "enum": ["unknown"] },
+        { "type": "null" }
+      ],
+      "description": "Application interval, repetitions, maximum count, timing schedule (machine key)."
+    },
+    "phi_safety_condition": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "PHI/re-entry/PPE/weather/water/livestock/legal/stage conditions. Empty=no stated condition; use element 'unknown' if condition exists but unparsed (machine key)."
+    },
+    "source_id": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1,
+      "description": "Immutable stable ID(s) for source unit/passage container. Never missing for certifiable claims."
+    },
+    "evidence_span": {
+      "type": "array",
+      "description": "Evidence spans; each entry required for supported/contradicted/partially_supported relations.",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "start", "end", "text", "content_hash"],
+        "properties": {
+          "source_id": { "type": "string" },
+          "start": { "type": "integer", "minimum": 0 },
+          "end": { "type": "integer", "minimum": 0, "description": "exclusive end offset" },
+          "text": { "type": "string", "description": "quoted span text" },
+          "content_hash": { "type": "string", "description": "source-content hash (e.g., SHA-256)" }
+        }
+      }
+    },
+    "polarity": {
+      "type": "string",
+      "enum": ["affirmed", "negated", "conditional", "prohibited", "unknown"]
+    },
+    "applicability": {
+      "type": "array",
+      "description": "Conditions under which evidence applies; empty = unconditional.",
+      "items": { "type": "string" }
+    },
+    "uncertainty": {
+      "type": "object",
+      "description": "Structured record; reasons empty only when no uncertainty identified; runtime score optional, never gold.",
+      "properties": {
+        "source_uncertainty": { "type": "string" },
+        "extraction_confidence": { "type": "number" },
+        "ambiguity_reason": { "type": "string" },
+        "annotation_notes": { "type": "string" }
+      }
+    },
+    "relation": {
+      "type": "string",
+      "enum": ["supported", "contradicted", "partially_supported", "unsupported", "ambiguous", "not_applicable"]
+    },
+    "safety_critical": {
+      "type": "boolean",
+      "description": "True when an error could alter chemical identity, dose, exposure, legal use, timing, PHI, or harmful action."
+    },
+    "safety_critical_reason": {
+      "type": "string",
+      "description": "Human-readable reason for safety_critical; required when true."
+    },
+    "risk_tier": {
+      "type": "string",
+      "enum": ["R1", "R2", "R3", "R4", "R4b"],
+      "description": "Per T07_risk_taxonomy_v1."
+    },
+    "source_conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": { "type": "string" },
+          "span": { "type": "string" },
+          "date": { "type": "string" },
+          "conflict_field": { "type": "string" }
+        }
+      },
+      "description": "All conflicting source IDs/spans/dates/field."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "T07_claim_schema_v1"
+    },
+    "guideline_version": {
+      "type": "string",
+      "const": "T07_label_manual_v1"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "relation": { "enum": ["supported", "contradicted", "partially_supported"] }
+        },
+        "required": ["relation"]
+      },
+      "then": {
+        "required": ["evidence_span"],
+        "properties": {
+          "evidence_span": { "minItems": 1 }
+        }
+      },
+      "else": {}
+    }
+  ]
+}

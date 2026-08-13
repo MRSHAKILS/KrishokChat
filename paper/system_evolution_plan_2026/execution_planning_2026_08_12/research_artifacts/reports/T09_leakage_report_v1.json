@@ -1,0 +1,163 @@
+{
+  "tool": "check_leakage.py v2",
+  "generated_at_utc": "2026-08-12T19:13:47.640579+00:00",
+  "files": {
+    "T09_treatment_qa_train_v1.jsonl": 6805,
+    "T09_treatment_qa_dev_v1.jsonl": 2152,
+    "T09_treatment_qa_test_v1.jsonl": 2267
+  },
+  "checks": {
+    "T09_treatment_qa_train_v1.jsonl vs T09_treatment_qa_dev_v1.jsonl": {
+      "exact_question": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "norm_question": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "norm_nodigits_question": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "exact_answer": {
+        "distinct_texts": 1,
+        "records_a_covered": 7,
+        "records_b_covered": 7
+      },
+      "norm_answer": {
+        "distinct_texts": 1,
+        "records_a_covered": 15,
+        "records_b_covered": 7
+      }
+    },
+    "T09_treatment_qa_train_v1.jsonl vs T09_treatment_qa_test_v1.jsonl": {
+      "exact_question": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "norm_question": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "norm_nodigits_question": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "exact_answer": {
+        "distinct_texts": 3,
+        "records_a_covered": 412,
+        "records_b_covered": 126
+      },
+      "norm_answer": {
+        "distinct_texts": 3,
+        "records_a_covered": 412,
+        "records_b_covered": 126
+      }
+    },
+    "T09_treatment_qa_dev_v1.jsonl vs T09_treatment_qa_test_v1.jsonl": {
+      "exact_question": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "norm_question": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "norm_nodigits_question": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "exact_answer": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      },
+      "norm_answer": {
+        "distinct_texts": 0,
+        "records_a_covered": 0,
+        "records_b_covered": 0
+      }
+    }
+  },
+  "intent_leakage_found": false,
+  "samples": {
+    "T09_treatment_qa_train_v1.jsonl vs T09_treatment_qa_dev_v1.jsonl": {
+      "exact_answer": [
+        {
+          "text": "মাটির উর্বরতা ও ফসলের চাহিদা অনুযায়ী সুষম সার প্রয়োগ।",
+          "records_in_a": 7,
+          "records_in_b": 7,
+          "cells_in_a": 1,
+          "cells_in_b": 1
+        }
+      ],
+      "norm_answer": [
+        {
+          "text": "মাটির উর্বরতা ও ফসলের চাহিদা অনুযায়ী সুষম সার প্রয়োগ।",
+          "records_in_a": 15,
+          "records_in_b": 7,
+          "cells_in_a": 2,
+          "cells_in_b": 1
+        }
+      ]
+    },
+    "T09_treatment_qa_train_v1.jsonl vs T09_treatment_qa_test_v1.jsonl": {
+      "exact_answer": [
+        {
+          "text": "Adverse Weather & Production-Increase Measures\nপেঁয়াজ গাছ মূলত পত্রগুচ্ছ ও বোটার সমন্বয়ে গঠিত। জাতভেদে গাছের উচ্চতা ২০-৬০ সেন্টিমিটার হয়। এর পাতা নীলাভ গাঢ় ",
+          "records_in_a": 132,
+          "records_in_b": 26,
+          "cells_in_a": 3,
+          "cells_in_b": 2
+        },
+        {
+          "text": "Back Cover\nতুলা ফসলে বিভিন্ন ক্ষতিকারক পোকার আক্রমণ যখন নির্দিষ্ট মাত্রায় পৌঁছায়, তখন তা দমনের জন্য ব্যবস্থা গ্রহণ করা প্রয়োজন। নিচে বিভিন্ন পোকার অর্থনৈতিক সীম",
+          "records_in_a": 208,
+          "records_in_b": 10,
+          "cells_in_a": 4,
+          "cells_in_b": 1
+        },
+        {
+          "text": "Climate, Soil & Production-Technology Overview\nবারি মরিচ-২ একটি গ্রীষ্মকালীন উচ্চ ফলনশীল মরিচের জাত। মসলা গবেষণা কেন্দ্র, বিএআরআই, শিবগঞ্জ, বগুড়ার বিজ্ঞানীদের ",
+          "records_in_a": 72,
+          "records_in_b": 90,
+          "cells_in_a": 3,
+          "cells_in_b": 1
+        }
+      ],
+      "norm_answer": [
+        {
+          "text": "adverse weather & production-increase measures পেঁয়াজ গাছ মূলত পত্রগুচ্ছ ও বোটার সমন্বয়ে গঠিত। জাতভেদে গাছের উচ্চতা ২০-৬০ সেন্টিমিটার হয়। এর পাতা নীলাভ গাঢ় ",
+          "records_in_a": 132,
+          "records_in_b": 26,
+          "cells_in_a": 3,
+          "cells_in_b": 2
+        },
+        {
+          "text": "back cover তুলা ফসলে বিভিন্ন ক্ষতিকারক পোকার আক্রমণ যখন নির্দিষ্ট মাত্রায় পৌঁছায়, তখন তা দমনের জন্য ব্যবস্থা গ্রহণ করা প্রয়োজন। নিচে বিভিন্ন পোকার অর্থনৈতিক ",
+          "records_in_a": 208,
+          "records_in_b": 10,
+          "cells_in_a": 4,
+          "cells_in_b": 1
+        },
+        {
+          "text": "climate, soil & production-technology overview বারি মরিচ-২ একটি গ্রীষ্মকালীন উচ্চ ফলনশীল মরিচের জাত। মসলা গবেষণা কেন্দ্র, বিএআরআই, শিবগঞ্জ, বগুড়ার বিজ্ঞানীদের ",
+          "records_in_a": 72,
+          "records_in_b": 90,
+          "cells_in_a": 3,
+          "cells_in_b": 1
+        }
+      ]
+    }
+  }
+}

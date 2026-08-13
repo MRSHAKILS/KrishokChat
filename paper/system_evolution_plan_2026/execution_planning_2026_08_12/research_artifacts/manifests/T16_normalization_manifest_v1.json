@@ -1,0 +1,93 @@
+{
+  "manifest_version": "1",
+  "tool": "run_normalization_harness.py v1",
+  "run_id": "T16-20260813T121247Z",
+  "task": "T16 normalization harness",
+  "generated_at_utc": "2026-08-13T12:12:47.514903+00:00",
+  "git": {
+    "revision": "621911a492eb35314d43e553c397b6b24ce54b6f",
+    "dirty_tree": true
+  },
+  "status": "fixture_mode",
+  "inputs": {
+    "pairs": {
+      "source": "fixtures",
+      "count": 4
+    },
+    "dictionary": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\datasets\\frozen\\T16_reviewed_dictionary_v1.json",
+      "sha256": "142ab96d63bc9e1d421c624793b678a3316e5df2509570495d86c4584b80e712",
+      "status": "pending_T13_review",
+      "records": 0
+    },
+    "overrides": {
+      "safety": "precheck",
+      "retrieve": "index",
+      "confidence_gate": 0.8
+    }
+  },
+  "code_hashes": {
+    "harness": "7f79b8b7a602371e51a3a487a5528c232f4cb7dc7b08b7db8f24f94fdccad0b1",
+    "bm25_index": "2ab484aca38b694937a92a4a27bb2779c9e2ffb89f397d3fa168f7ca19e836c5",
+    "structured_candidate": "cad5e2d88836d67f728a66d04b70795e35f40aa912e225d17e8a92f050c7cbb7",
+    "safety_policy": "474d51b13db0a6bd0238794df125c3cf76b20ae2dbf6f6fe8e58b1166904a993"
+  },
+  "method": "raw/unicode/dictionary passes (deterministic only); unicode = NFC + ZWJ/ZWNJ strip + Bengali->ASCII digits + Latin casefold; dictionary = longest-match single-token lookup, unknown no-op, confidence-gated raw fallback; safety = precheck(before|after); rankings = runtime BM25Retriever top-10; verifier link = T15 candidate",
+  "determinism": "deterministic; pair order follows input order",
+  "seed": null,
+  "thresholds": {
+    "confidence_gate": 0.8,
+    "top_k": 10
+  },
+  "per_pass_counts": [
+    [
+      "dictionary",
+      4
+    ],
+    [
+      "dictionary-variant",
+      4
+    ],
+    [
+      "raw",
+      4
+    ],
+    [
+      "raw-variant",
+      4
+    ],
+    [
+      "unicode",
+      4
+    ],
+    [
+      "unicode-variant",
+      4
+    ]
+  ],
+  "safety_flip_counts": {
+    "none": 21,
+    "same_category": 3
+  },
+  "same_bm25_assertions": {
+    "checked": 12,
+    "violated": 0
+  },
+  "outputs": {
+    "run": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T16_normalization_run_v1.jsonl",
+      "records": 24,
+      "sha256": "cfc14d378b573fb84aea682fd4a7d1cd19c21dd2b8ef6839271e6a292aecb255"
+    },
+    "rankings": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T16_rankings_v1.jsonl",
+      "records": 24,
+      "sha256": "0aca4f2d305e4fc02894b439efddaafb0a87a76d4799c0582a9361dd2e265cc3"
+    },
+    "failure_log": {
+      "path": "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\runs\\T16_failure_log_v1.jsonl",
+      "records": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

@@ -1,5 +1,7 @@
 # KrishokChat System Evolution Plan 2026
 
+> **Execution routing:** This directory contains the original proposal and verified T01-T04 context. It is not the current task queue. All local agents must execute from `execution_planning_2026_08_12/README.md` and `execution_planning_2026_08_12/11_FINAL_IMPLEMENTATION_SPEC.md`. Where the two layers differ, the dated execution package supersedes this parent plan.
+
 ## Decision in one sentence
 
 Preserve the current safety-first pipeline and evaluate two bounded additions: (A) a structured Bengali agricultural claim and dosage verifier with calibrated risk-coverage abstention, and (B) dialect-sensitive retrieval with safety-preserving normalization.
@@ -45,4 +47,4 @@ Authoritative team paper filenames:
 
 ## Use order
 
-Execute `09_AGENT_TASK_GRAPH.md` in dependency order. Do not begin model development before Stage 0 evidence reconciliation and Stage 2 annotation-schema approval.
+Use `09_AGENT_TASK_GRAPH.md` only as historical rationale. Execute the amended graph in `execution_planning_2026_08_12/11_FINAL_IMPLEMENTATION_SPEC.md`. The independent local-model serving lane is defined in `execution_planning_2026_08_12/13_LOCAL_MODEL_INTEGRATION_PLAN.md` and its dated amendment; it does not authorize research implementation.

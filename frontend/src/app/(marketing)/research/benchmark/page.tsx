@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "motion/react";
+import { useState, useRef } from "react";
+import { motion, useInView } from "motion/react";
 import { TrendingUp, AlertTriangle, Globe } from "lucide-react";
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, LabelList } from "recharts";
 import { RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
+import { useCountUp, toBn } from "@/lib/use-count-up";
 
 /* =========================================================================
    Benchmark Results Page — the credibility page with actual paper numbers.
@@ -59,11 +61,36 @@ const FARMER_RESULTS = [
   { model: "GPT-OSS-120B", f1: 0.0002, hal: 14.57 },
 ];
 
+/* Chart labels — display-only shortening of real model names (full names in tables) */
+const GENF1_LABELS: Record<string, string> = {
+  "Gemini-2.5-FL": "Gemini-2.5-FL",
+  "Gemma-4-26B": "Gemma-4",
+  "LLaMA-3.1-8B": "LLaMA-3.1",
+  "Qwen-2.5-7B": "Qwen-2.5",
+  "GPT-OSS-120B": "GPT-OSS",
+  "KrishokChat-4B (SFT)": "KrishokChat-4B",
+};
+
+/* Section kickers — indexed structure, same system as /data */
+const KICKERS = ["০১ · মূল ফলাফল", "০২ · তথ্য সংগ্রহ", "০৩ · রেজিস্টার গ্যাপ", "০৪ · ক্রস-লিঙ্গুয়াল", "০৫ · ফার্মার বেঞ্চমার্ক", "০৬ · হ্যালুসিনেশন ফ্লোর"] as const;
+
+function StatCell({ value, label, delay }: { value: number; label: string; delay: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const n = useCountUp(value, inView);
+  return (
+    <motion.div ref={ref} variants={enter} transition={{ delay }} className="bg-paper p-5 text-center">
+      <div className="font-display text-3xl tabular text-ink">{toBn(n)}</div>
+      <div className="mt-1 text-[10px] font-medium text-ink-faint">{label}</div>
+    </motion.div>
+  );
+}
+
 export default function BenchmarkPage() {
   const [condition, setCondition] = useState<Condition>("cb");
 
   return (
-    <div className="mx-auto max-w-4xl space-y-20 py-14">
+    <div className="mx-auto max-w-6xl space-y-12 py-14">
       {/* === Hero === */}
       <motion.section
         initial="hidden"
@@ -74,12 +101,31 @@ export default function BenchmarkPage() {
         <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre">
           Benchmark Results
         </motion.p>
-        <motion.h1 variants={enter} className="mt-4 font-display text-4xl leading-tight text-ink">
+        <motion.h1 variants={enter} className="mt-4 font-display text-3xl leading-tight text-ink md:text-4xl">
           মূল্যায়ন <span className="text-leaf">ফলাফল</span>
         </motion.h1>
         <motion.p variants={enter} className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
           ৬টি মডেল, ৫টি তথ্য-সংগ্রহ আর্কিটেকচার, ৯০০টি কোয়েরি — সব সংখ্যা গবেষণাপত্র থেকে, কোনো তথ্য তৈরি নয়।
         </motion.p>
+      </motion.section>
+
+      {/* Stat strip — real counts, count-up */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={stagger}
+      >
+        <motion.div variants={enter} className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone sm:grid-cols-4">
+          {[
+            { value: 6, label: "মডেল" },
+            { value: 5, label: "তথ্য-সংগ্রহ আর্কিটেকচার" },
+            { value: 900, label: "মূল্যায়ন কোয়েরি" },
+            { value: 284, label: "সোর্স PDF" },
+          ].map((s, i) => (
+            <StatCell key={s.label} value={s.value} label={s.label} delay={i * 0.04} />
+          ))}
+        </motion.div>
       </motion.section>
 
       {/* === A. Main Results Table === */}
@@ -89,7 +135,8 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.h2 variants={enter} className="mb-3 font-display text-2xl text-ink">
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[0]}</motion.div>
+        <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
           মূল ফলাফল — General & Treatment QA
         </motion.h2>
         <motion.p variants={enter} className="mb-4 text-sm text-ink-soft">
@@ -116,7 +163,51 @@ export default function BenchmarkPage() {
           </button>
         </motion.div>
 
-        {/* Table */}
+        {/* Chart + table — side by side on lg */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <motion.div variants={enter} className="rounded-xl border rule bg-paper p-6">
+          <div className="mb-2 text-xs font-semibold text-ochre">GenF1 তুলনা — {condition === "cb" ? "Closed-Book" : "Oracle"}</div>
+          <ResponsiveContainer width="100%" height={280}>
+            <BarChart
+              data={MAIN_RESULTS.map((m) => ({
+                name: GENF1_LABELS[m.model] ?? m.model,
+                value: condition === "cb" ? m.genF1_cb : m.genF1_or,
+                sft: !!m.sft,
+              }))}
+              margin={{ top: 24, right: 8, left: -18, bottom: 0 }}
+            >
+              <XAxis
+                dataKey="name"
+                interval={0}
+                tick={{ angle: -12, textAnchor: "end", fontSize: 10, fill: "var(--color-ink-faint)" }}
+                axisLine={false}
+                tickLine={false}
+                height={48}
+              />
+              <YAxis
+                domain={[0, 0.35]}
+                tickFormatter={(v) => Number(v).toFixed(2)}
+                tick={{ fontSize: 10, fill: "var(--color-ink-faint)" }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip
+                formatter={(v) => [Number(v).toFixed(3), "GenF1"]}
+                cursor={{ fill: "var(--color-bone)" }}
+                contentStyle={{ borderRadius: 12, border: "1px solid var(--color-bone)", background: "var(--color-paper)", fontSize: 12 }}
+              />
+              <Bar dataKey="value" radius={[6, 6, 0, 0]} isAnimationActive animationDuration={700} animationEasing="ease-out">
+                {MAIN_RESULTS.map((m) => (
+                  <Cell key={m.model} fill={m.sft ? "var(--color-leaf)" : "var(--color-leaf-3)"} />
+                ))}
+                <LabelList dataKey="value" position="top" formatter={(v) => Number(v).toFixed(3)} fill="var(--color-ink-soft)" fontSize={10} />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+          <p className="mt-2 text-[11px] text-ink-faint">
+            ফাইন-টিউনড KrishokChat-4B — সেরা জিরো-শটের চেয়ে {condition === "cb" ? "১.৯×" : "১.২×"} বেশি GenF1 (০.৩১৪ vs ০.১৬৫ / ০.৩০০ vs ০.২৫৩)।
+          </p>
+        </motion.div>
         <motion.div variants={enter} className="relative">
           <div className="overflow-x-auto rounded-xl border rule">
             <table className="w-full min-w-[620px] text-xs sm:text-sm">
@@ -165,6 +256,7 @@ export default function BenchmarkPage() {
           <div className="pointer-events-none absolute right-0 top-0 h-full w-10 rounded-r-xl bg-gradient-to-l from-paper via-paper/70 to-transparent sm:hidden" aria-hidden />
           <p className="mt-2 text-right text-[10px] text-ink-faint sm:hidden">ডানে টানুন →</p>
         </motion.div>
+        </div>
         <motion.p variants={enter} className="mt-2 text-[11px] text-ink-faint">
           KrishokChat-4B ফাইন-টিউনড — GenF1 তীব্রভাবে উন্নত (০.৩১৪ vs সেরা জিরো-শট ০.১৬৫)।
         </motion.p>
@@ -177,7 +269,8 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.h2 variants={enter} className="mb-3 font-display text-2xl text-ink">
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[1]}</motion.div>
+        <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
           তথ্য সংগ্রহ ফলাফল — ৯০০ কোয়েরি
         </motion.h2>
         <motion.p variants={enter} className="mb-6 text-sm text-ink-soft">
@@ -250,7 +343,8 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.h2 variants={enter} className="mb-3 font-display text-2xl text-ink">
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[2]}</motion.div>
+        <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
           রেজিস্টার গ্যাপ আবিষ্কার
         </motion.h2>
         <motion.p variants={enter} className="mb-6 text-sm text-ink-soft">
@@ -295,7 +389,8 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.h2 variants={enter} className="mb-3 font-display text-2xl text-ink">
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[3]}</motion.div>
+        <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
           <Globe className="mr-2 inline h-6 w-6 text-leaf" />
           ক্রস-লিঙ্গুয়াল কলাপস
         </motion.h2>
@@ -343,7 +438,8 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.h2 variants={enter} className="mb-3 font-display text-2xl text-ink">
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[4]}</motion.div>
+        <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
           <TrendingUp className="mr-2 inline h-6 w-6 text-leaf" />
           রিয়েল-ওয়ার্ল্ড ফার্মার বেঞ্চমার্ক
         </motion.h2>
@@ -366,8 +462,19 @@ export default function BenchmarkPage() {
                   <td className={`px-4 py-3 ${row.best ? "font-medium text-leaf" : "text-ink"}`}>
                     {row.model}
                   </td>
-                  <td className="px-4 py-3 text-right tabular font-medium text-ink">
-                    {row.f1.toFixed(4)}
+                  <td className="px-4 py-3 text-right">
+                    <span className="inline-flex items-center justify-end gap-2">
+                      <span className="inline-block h-1.5 w-16 overflow-hidden rounded-full bg-bone">
+                        <motion.span
+                          className="block h-full rounded-full bg-leaf"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${Math.min((row.f1 / 0.25) * 100, 100)}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: dur.normal, ease: ease.smooth }}
+                        />
+                      </span>
+                      <span className="font-medium tabular text-ink">{row.f1.toFixed(4)}</span>
+                    </span>
                   </td>
                   <td className={`px-4 py-3 text-right tabular ${row.hal > 30 ? "text-clay" : "text-ink-soft"}`}>
                     {row.hal.toFixed(2)}
@@ -388,7 +495,8 @@ export default function BenchmarkPage() {
         className="rounded-xl border border-clay-soft/40 bg-clay-soft/8 p-8 text-center"
       >
         <motion.div variants={enter}>
-          <AlertTriangle className="mx-auto h-10 w-10 text-clay" />
+          <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-clay">{KICKERS[5]}</div>
+          <AlertTriangle className="mx-auto mt-4 h-10 w-10 text-clay" />
           <h2 className="mt-4 font-display text-2xl text-ink">রাসায়নিক হ্যালুসিনেশন ফ্লোর</h2>
           <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-ink-soft">
             পরিপূর্ণ অরাকল তথ্য থাকা সত্ত্বেও{" "}

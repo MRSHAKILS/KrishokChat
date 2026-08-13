@@ -1,0 +1,8 @@
+{
+  "artifact": "T16 reviewed dictionary (normalization dictionary pass)",
+  "schema_version": "1",
+  "status": "pending_T13_review",
+  "note": "Empty by design. The dictionary pass treats every token as an unknown term (no-op) until T13 native review produces accepted/rejected dialect variants and dictionary source records. Populating entries before T13 review would fabricate mappings (AGENTS.md rules 15/16). When T13 lands, add records with: id, surface, target, confidence, source_records (paths to T13 accepted variants), pass.",
+  "confidence_gate_default": 0.8,
+  "records": []
+}

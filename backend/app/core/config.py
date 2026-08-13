@@ -23,6 +23,8 @@ class Settings(BaseSettings):
 
     ollama_base_url: str = "http://localhost:11434"
     ollama_model_name: str = "krishokchat-4b"
+    local_llm_base_url: str = "http://127.0.0.1:11435/v1"
+    local_llm_model_name: str = "krishokchat-4b"
     gguf_path: str = "backend/ml_assets/gemma/model.gguf"
 
     # Both intent classification and generation use the same OpenRouter model for
@@ -61,6 +63,7 @@ class Settings(BaseSettings):
     vision_max_image_bytes: int = Field(default=10_000_000, ge=100_000)
 
     ml_assets_dir: str = str(PROJECT_ROOT / "ml_assets")
+    soil_release_dir: str = str(PROJECT_ROOT.parent / "dataset_release" / "soil_moisture")
 
     gemini_key_cooldown_seconds: float = 6.0
     env_file_path: str = str(PROJECT_ROOT.parent / ".env")

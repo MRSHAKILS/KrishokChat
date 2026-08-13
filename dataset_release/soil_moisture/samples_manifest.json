@@ -1,0 +1,125 @@
+{
+  "count": 12,
+  "samples": [
+    {
+      "image_id": "P0001",
+      "filename": "P0001_Doash_8.0kpa.jpg",
+      "soil_type": "Doash",
+      "kpa": 8.0,
+      "kpa_bin": "0-10",
+      "land_type": "High",
+      "crop": "Turmeric",
+      "growth_stage": "Mature"
+    },
+    {
+      "image_id": "P0341",
+      "filename": "P0341_Doash_13.0kpa.jpg",
+      "soil_type": "Doash",
+      "kpa": 13.0,
+      "kpa_bin": "10-20",
+      "land_type": "High",
+      "crop": "Okra",
+      "growth_stage": "Seed_Sowing"
+    },
+    {
+      "image_id": "P0248",
+      "filename": "P0248_Atel_12.5kpa.jpg",
+      "soil_type": "Atel",
+      "kpa": 12.5,
+      "kpa_bin": "10-20",
+      "land_type": "Medium",
+      "crop": "Maize",
+      "growth_stage": "Post_Harvest"
+    },
+    {
+      "image_id": "P0406",
+      "filename": "P0406_Atel_16.5kpa.jpg",
+      "soil_type": "Atel",
+      "kpa": 16.5,
+      "kpa_bin": "10-20",
+      "land_type": "High",
+      "crop": "Grass",
+      "growth_stage": "Mature"
+    },
+    {
+      "image_id": "P0691",
+      "filename": "P0691_Bele_Doash_0.0kpa.jpg",
+      "soil_type": "Bele_Doash",
+      "kpa": 0.0,
+      "kpa_bin": "0-10",
+      "land_type": "Medium",
+      "crop": "Jute",
+      "growth_stage": "Mature"
+    },
+    {
+      "image_id": "P0612",
+      "filename": "P0612_Bele_Doash_14.0kpa.jpg",
+      "soil_type": "Bele_Doash",
+      "kpa": 14.0,
+      "kpa_bin": "10-20",
+      "land_type": "Medium",
+      "crop": "No",
+      "growth_stage": "Pre_hervest"
+    },
+    {
+      "image_id": "P0142",
+      "filename": "P0142_Atel_Doash_10.0kpa.jpg",
+      "soil_type": "Atel_Doash",
+      "kpa": 10.0,
+      "kpa_bin": "10-20",
+      "land_type": "Medium",
+      "crop": "Jute",
+      "growth_stage": "Seedling"
+    },
+    {
+      "image_id": "P0186",
+      "filename": "P0186_Atel_Doash_12.6kpa.jpg",
+      "soil_type": "Atel_Doash",
+      "kpa": 12.6,
+      "kpa_bin": "10-20",
+      "land_type": "Medium",
+      "crop": "No",
+      "growth_stage": "Land_Preparation"
+    },
+    {
+      "image_id": "P0065",
+      "filename": "P0065_Poli_0.0kpa.jpg",
+      "soil_type": "Poli",
+      "kpa": 0.0,
+      "kpa_bin": "0-10",
+      "land_type": "Low",
+      "crop": "Rich",
+      "growth_stage": "Post-Harvest"
+    },
+    {
+      "image_id": "P0107",
+      "filename": "P0107_Poli_0.0kpa.jpg",
+      "soil_type": "Poli",
+      "kpa": 0.0,
+      "kpa_bin": "0-10",
+      "land_type": "Low",
+      "crop": "Rich",
+      "growth_stage": "Post-Harvest"
+    },
+    {
+      "image_id": "P0064",
+      "filename": "P0064_Bele_0.0kpa.jpg",
+      "soil_type": "Bele",
+      "kpa": 0.0,
+      "kpa_bin": "0-10",
+      "land_type": "High",
+      "crop": "Maize",
+      "growth_stage": "Mature"
+    },
+    {
+      "image_id": "P0062",
+      "filename": "P0062_Bele_15.25kpa.jpg",
+      "soil_type": "Bele",
+      "kpa": 15.25,
+      "kpa_bin": "10-20",
+      "land_type": "High",
+      "crop": "Mango",
+      "growth_stage": "Mature"
+    }
+  ]
+}

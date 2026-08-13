@@ -4,6 +4,8 @@
 **Status:** Frozen adjudication package  
 **FINAL DECISION: OPTION B: Keep A, modify B.**
 
+> **Single execution authority:** Local agents start here, not from the parent `09_AGENT_TASK_GRAPH.md`. The parent folder remains required context and T01-T04 evidence, but this dated package supersedes its thesis, priorities, and task graph.
+
 ## Narrow Thesis
 
 `Evidence-linked, relation-aware selective certification for Bengali agrochemical advice under a BM25-only runtime, with dialect/Banglish normalization evaluated as a safety-constrained robustness axis.`
@@ -34,6 +36,8 @@ Workstream A is primary. Workstream B is a secondary evaluation/protocol contrib
 | `10_REVIEWER_PREMORTEM.md` | States likely reviewer objections and minimum remedies. |
 | `11_FINAL_IMPLEMENTATION_SPEC.md` | Gives ordinary agents an executable staged task graph. |
 | `12_CLAIM_LEDGER.md` | Separates safe, forbidden, and unresolved claims. |
+| `13_LOCAL_MODEL_INTEGRATION_PLAN.md` | Priority checklist for adding the GGUF through the existing model selector without changing the pipeline. |
+| `14_LOCAL_MODEL_RUNTIME_AMENDMENT_2026_08_12.md` | Dated amendment and evidence for the working llama.cpp base+LoRA demo runtime. |
 | `MEMORY.md` | Records the adjudicated state for later sessions. |
 | `AGENTS.md` | Sets scoped execution and evidence rules. |
 

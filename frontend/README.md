@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KrishokChat Frontend
+
+Next.js 16.3.0 + React 19.2.8 + Tailwind v4 + motion + shadcn/ui (base-nova).
+
+## Dependency notes
+
+- `cmdk@1.1.1` (exact pin) — command palette; version confirmed via npm registry
+  (https://www.npmjs.com/package/cmdk, published 2025-03-14, React 19 peer: `^18 || ^19`).
+- `recharts@^3.10.1` — already present, reserved for /data visualizations.
 
 ## Getting Started
 

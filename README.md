@@ -282,6 +282,8 @@ Bengali is preserved with `ensure_ascii=False`.
 | POST | `/api/detect` | Crop -> disease -> treatment advisory for an image |
 | GET | `/api/benchmark` | Precomputed retrieval-benchmark stats (see Limitations) |
 | POST | `/api/weather` | Bengali weather summary + agri tip for a district |
+| GET | `/api/soil/dataset` | Frozen soil-moisture dataset stats (722 imgs, 6 soil types) |
+| POST | `/api/soil/analyze` | Soil photo analysis — locked until model verification, returns honest trace |
 | POST | `/api/helpline/register` | Local-only helpline registration (JSONL) |
 
 ### POST /api/qa
@@ -389,6 +391,7 @@ alongside generation scripts and a design doc in `docs/pipeline/scripts/`.
 | `/` | Marketing home |
 | `/chat` | Q&A assistant with agent-trace stepper |
 | `/detect` | Photo upload -> crop/disease/advisory |
+| `/soil` | Soil moisture field console — dataset showcase + locked analyzer |
 | `/analytics` | Safety metrics panel (from audit log) |
 | `/research`, `/research/benchmark`, `/research/methodology`, `/research/safety` | Research/benchmark panel |
 | `/about`, `/team`, `/data`, `/library`, `/contact`, `/auth` | Marketing/support pages |

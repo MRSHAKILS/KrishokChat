@@ -1,0 +1,41 @@
+CLUSTER SAMPLES FOR VISUAL INSPECTION
+============================================================
+
+Cluster 0 (darker, 511 images):
+  P0293 P0293_20.0Kpa.jpg brightness=132.0
+  P0222 P0222_17.0Kpa.jpg brightness=132.1
+  P0596 P0596_14.0Kpa.jpg brightness=131.9
+  P0515 P0515_11.0Kpa.jpg brightness=131.9
+  P0218 P0218_17.0Kpa.jpg brightness=131.9
+  P0211 P0211_17.0Kpa.jpg brightness=131.9
+  P0485 P0485_15.0Kpa.jpg brightness=131.8
+  P0441 P0441_15.6Kpa.jpg brightness=132.2
+  P0614 P0614_14.0Kpa.jpg brightness=131.7
+  P0347 P0347_20.0Kpa.jpg brightness=132.4
+  P0217 P0217_17.0Kpa.jpg brightness=131.6
+  P0659 P0659_14.0Kpa.jpg brightness=131.5
+  P0440 P0440_15.6Kpa.jpg brightness=132.5
+  P0704 P0704_18.0Kpa.jpg brightness=131.5
+  P0198 P0198_12.0Kpa.jpg brightness=132.6
+
+Cluster 1 (brighter, 37 images):
+  P0477 P0477_15.0Kpa.jpg brightness=85.9
+  P0459 P0459_15.0Kpa.jpg brightness=85.4
+  P0446 P0446_14.8Kpa.jpg brightness=85.1
+  P0422 P0422_15.6Kpa.jpg brightness=86.9
+  P0487 P0487_15.0Kpa.jpg brightness=84.9
+  P0438 P0438_15.6Kpa.jpg brightness=84.7
+  P0429 P0429_15.6Kpa.jpg brightness=84.3
+  P0460 P0460_15.0Kpa.jpg brightness=84.1
+  P0431 P0431_15.6Kpa.jpg brightness=84.0
+  P0436 P0436_15.6Kpa.jpg brightness=83.9
+  P0423 P0423_15.6Kpa.jpg brightness=83.7
+  P0730 P0730_15.6Kpa.jpg brightness=83.3
+  P0466 P0466_15.0Kpa.jpg brightness=88.5
+  P0470 P0470_15.0Kpa.jpg brightness=83.3
+  P0461 P0461_15.0Kpa.jpg brightness=88.6
+
+SAME-kPa COMPARISON PAIRS:
+  ~15 kPa: C0=P0485 vs C1=P0477
+  ~16 kPa: C0=P0441 vs C1=P0422
+  ~19 kPa: C0=P0561 vs C1=P0563

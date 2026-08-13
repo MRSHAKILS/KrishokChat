@@ -282,7 +282,7 @@ class VisionPipeline:
             # farmer still receives real, grounded treatment content.
             if advisory.confidence.value in {"blocked", "low_confidence"} and info and info.get("solution_bn"):
                 treatment_advice = str(info["solution_bn"])
-                treatment_confidence = "verified"
+                treatment_confidence = "low_confidence"
                 treatment_sources = ()
             elif advisory.confidence.value in {"blocked", "low_confidence"}:
                 treatment_confidence = "low_confidence"
@@ -290,7 +290,7 @@ class VisionPipeline:
             trace.append(VisionTraceEvent(VisionStage.ADVISORY, "skip", "knowledge-base fallback"))
             if info and info.get("solution_bn"):
                 treatment_advice = str(info["solution_bn"])
-                treatment_confidence = "verified"
+                treatment_confidence = "low_confidence"
 
         result = VisionResult(
             status=VisionStatus.DIAGNOSED,

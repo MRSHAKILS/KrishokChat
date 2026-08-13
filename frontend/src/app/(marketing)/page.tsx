@@ -109,10 +109,11 @@ function HeroSection() {
               <Play className="h-4 w-4" /> কীভাবে কাজ করে
             </Link>
           </motion.div>
-          <motion.div variants={enter} className="mt-9 grid max-w-md grid-cols-3 gap-4 border-t rule pt-5">
+          <motion.div variants={enter} className="mt-9 grid max-w-md grid-cols-2 gap-4 border-t rule pt-5 sm:grid-cols-4">
             <HeroMetric value={RESEARCH_STATS.benchmarkInstances} label="মূল্যায়ন ইনস্ট্যান্স" />
             <HeroMetric value={RESEARCH_STATS.knowledgeNodes} label="জ্ঞান নোড" />
             <HeroMetric value={RESEARCH_STATS.dialects} label="উপভাষা" />
+            <HeroMetric value={RESEARCH_STATS.soilImages} label="মাঠের ছবি" />
           </motion.div>
         </div>
         <div className="relative flex min-h-[350px] flex-col justify-end bg-paper-2 p-4 sm:p-6 lg:min-h-full lg:p-8">
@@ -487,6 +488,7 @@ function TimelineSection() {
     { year: "২০২৫", title: "জ্ঞান গ্রাফ নির্মাণ", desc: "২,৮৮২ নোড, ১৯,৭৬৮ এনটিটি" },
     { year: "২০২৫", title: "মাঠ সাক্ষাৎকার", desc: "রাজশাহী ও নাটোরে ৩০০ কৃষক" },
     { year: "২০২৬", title: "বেঞ্চমার্ক প্রকাশ", desc: "EACL + SIGIR-AP" },
+    { year: "২০২৬", title: "মাটি-আর্দ্রতা ডেটাসেট", desc: "পাবনা মাঠে টেনসিওমিটার — ৭২২ ছবি, ৬ মাটির ধরন" },
   ];
   return (
     <motion.section id="field" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="scroll-mt-32 mx-auto max-w-5xl">

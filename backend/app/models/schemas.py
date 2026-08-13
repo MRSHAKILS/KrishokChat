@@ -101,6 +101,33 @@ class DetectResponse(BaseModel):
     error: str | None = None
 
 
+class SoilDatasetResponse(BaseModel):
+    available: bool = False
+    total_images: int = 0
+    kpa_range: list[float] = Field(default_factory=list)
+    kpa_bins: dict[str, int] = Field(default_factory=dict)
+    soil_types: list[dict] = Field(default_factory=list)
+    land_types: dict[str, int] = Field(default_factory=dict)
+    crops: dict[str, int] = Field(default_factory=dict)
+    growth_stages: dict[str, int] = Field(default_factory=dict)
+    series_count: int = 0
+    splits: dict[str, int] = Field(default_factory=dict)
+    metadata_matched: int = 0
+    metadata_inferred: int = 0
+    corrections: int = 0
+    collection: dict[str, str] = Field(default_factory=dict)
+    model_status: str = "in_development"
+    model_results: list[dict] = Field(default_factory=list)
+    samples: list[dict] = Field(default_factory=list)
+
+
+class SoilAnalyzeResponse(BaseModel):
+    status: str = Field(..., description="locked | invalid_image | analyzed (future)")
+    error: str | None = None
+    dataset: SoilDatasetResponse | None = None
+    agent_trace: list[AgentStageEvent] = Field(default_factory=list)
+
+
 class BenchmarkResponse(BaseModel):
     dataset_stats: dict
     retrieval_benchmarks: dict

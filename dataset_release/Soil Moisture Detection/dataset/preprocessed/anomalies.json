@@ -1,0 +1,76 @@
+{
+    "total_images": 722,
+    "total_active_anomalies": 4,
+    "description": "Active anomalies in the CANONICAL dataset (correct_image/ + TraceData.xlsx). Historical raw/-only issues are not listed here.",
+
+    "contamination": {
+        "P0029": {
+            "filename": "P0029_15.15Kpa.jpg",
+            "kpa": 15.15,
+            "soil_type": "Atel_Doash",
+            "series": "S0029",
+            "contaminant": "human_foot_and_blue_fabric",
+            "action": "exclude_from_training",
+            "severity": "high",
+            "verified_by": "visual_inspection_2026-07-08"
+        },
+        "P0166": {
+            "filename": "P0166_10Kpa.jpg",
+            "kpa": 10.0,
+            "soil_type": "Doash",
+            "series": "S0016",
+            "contaminant": "human_hand_touching_soil",
+            "action": "exclude_from_training",
+            "severity": "high",
+            "verified_by": "visual_inspection_2026-07-08"
+        }
+    },
+
+    "visual_label_mismatches": {
+        "P0002_vs_P0003": {
+            "images": ["P0002_11Kpa.jpg", "P0003_11Kpa.jpg"],
+            "kpa_label": "11.0",
+            "description": "Both labeled 11 kPa but visually different crops (Lechee vs Mango). Brightness differs by only 2.7 (127.9 vs 130.6) so not a gross error; flagged as data-quality note.",
+            "action": "flag_in_metadata",
+            "severity": "medium"
+        }
+    },
+
+    "viewpoint_shift": {
+        "P0677": {
+            "filename": "P0677_8Kpa.jpg",
+            "kpa": 8.0,
+            "soil_type": "Bele",
+            "issue": "wide_angle_field_shot_not_macro_closeup",
+            "description": "Image is a wide landscape of a harvested paddy field (stubble, mud, trees, sky), not a close-up soil texture. Models trained on macro textures may fail on these wide shots.",
+            "action": "flag_in_metadata; consider separate viewpoint bucket in Phase 3",
+            "severity": "medium"
+        }
+    },
+
+    "inferred_metadata_images": {
+        "count": 8,
+        "ids": ["P0171", "P0172", "P0183", "P0184", "P0339", "P0340", "P0670", "P0671"],
+        "method": "nearest_neighbor_inference",
+        "detail": "Not present in TraceData.xlsx. soil_type/crop/land_type inferred from preceding image in same block. All 8 visually confirmed consistent with assigned soil type (visual_inspection_2026-07-08). rain_date/rain_time left empty.",
+        "action": "flag_in_manifest",
+        "severity": "low"
+    },
+
+    "orientation_note": {
+        "portrait_720x1280": 565,
+        "landscape_1280x720": 82,
+        "landscape_1280x964": 41,
+        "portrait_964x1280": 32,
+        "tiny_595x438_or_720x521": 2,
+        "conclusion": "Landscape images are INTENTIONALLY shot horizontally (watermark text renders horizontally, proving not OS-rotated). They are valid soil photos. Must be center-cropped to square before model input. Do NOT auto-rotate."
+    },
+
+    "resolved_issues_not_in_canonical": {
+        "missing_ids": "All 12 (P0017, P0113, etc.) filled by correct_image/",
+        "duplicate_ids": "All 4 (P0176, P0187, P0342, P0677) resolved to single canonical file",
+        "P0114": "Original raw filename typo 101->10 kPa. TraceData.xlsx always had Kpa=10. Not an outlier, not a sensor spike.",
+        "filename_anomalies": "All corrected by field team in correct_image/ (commas, truncated units, missing decimals)",
+        "series_count": "46 (not 60 — old count included artificially created series)"
+    }
+}

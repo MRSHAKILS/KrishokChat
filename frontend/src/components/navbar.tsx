@@ -15,8 +15,10 @@ import { cn } from "@/lib/utils";
    - NO auth buttons. The project is a single-session live demo; login/register
      forms would mislead farmers and demo viewers. Replaced with a permanent,
      high-contrast 16123 Krishi Call Center pill (real verified helpline).
-   - Primary nav surfaces the headline features. Secondary routes (data,
-     contact, about) live under an "আরও" dropdown so the bar never crowds.
+   - Primary nav surfaces the headline features — including the Library
+     (লাইব্রেরি), the public data-resource hub for researchers. Secondary
+     routes (data, contact, about) live under an "প্রকল্প" dropdown so the
+     bar never crowds.
    - The 16123 pill is reachable on BOTH desktop and mobile — it is the
      single most important emergency action on the site.
    ========================================================================= */
@@ -24,13 +26,14 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { href: "/", label: "হোম" },
   { href: "/detect", label: "রোগ নির্ণয়" },
+  { href: "/soil", label: "মাটি" },
   { href: "/chat", label: "পরামর্শ" },
+  { href: "/library", label: "লাইব্রেরি" },
 ] as const;
 
 const MORE = [
   { href: "/analytics", label: "লাইভ পরিসংখ্যান", desc: "এজেন্ট সিদ্ধান্ত ও স্থানীয় অডিট" },
   { href: "/research", label: "গবেষণা ও ফলাফল", desc: "পেপার, benchmark ও নিরাপত্তা নকশা" },
-  { href: "/library", label: "রিসোর্স লাইব্রেরি", desc: "প্রকাশনা ও ডেটাসেট" },
   { href: "/data", label: "উপাত্ত", desc: "ডেটাসেট ও গবেষণা উপাত্ত" },
   { href: "/about", label: "পরিচিতি", desc: "প্রকল্প ও প্রতিষ্ঠান" },
   { href: "/team", label: "দল", desc: "গবেষণা দল ও কৃতিত্ব" },
