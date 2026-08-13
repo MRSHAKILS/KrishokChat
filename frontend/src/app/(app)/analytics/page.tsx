@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Shield, TrendingUp, AlertTriangle, CheckCircle2, Activity, Download, Filter } from "lucide-react";
+import { Shield, TrendingUp, AlertTriangle, CheckCircle2, Activity, Download, Filter, RefreshCw } from "lucide-react";
 import { getSafetyMetrics, type SafetyMetrics } from "@/lib/api";
 import { RESEARCH_STATS } from "@/lib/constants";
 import { bn } from "@/lib/bn";
+import { toBn, useCountUp } from "@/lib/use-count-up";
 import { safetyLabel, TONE_BADGE, TONE_DOT, TONE_BAR } from "@/lib/safety-labels";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 
@@ -28,6 +29,7 @@ function formatQueryForAnalyticsDisplay(rawQuery?: string | null): string {
 export default function AnalyticsPage() {
   const [metrics, setMetrics] = useState<SafetyMetrics | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [filter, setFilter] = useState<"all" | "safe" | "blocked">("all");
 
   useEffect(() => {
@@ -36,6 +38,17 @@ export default function AnalyticsPage() {
       .catch(() => setMetrics({ total_queries: 0, by_category: {}, flagged_count: 0, recent: [] }))
       .finally(() => setLoading(false));
   }, []);
+
+  /* Manual refresh: during a live demo the audit log grows as questions are
+     asked, so a visible refresh re-counts the stats (and re-plays the
+     count-up animations via the key remount below). */
+  const refresh = () => {
+    setRefreshing(true);
+    getSafetyMetrics()
+      .then(setMetrics)
+      .catch(() => {})
+      .finally(() => setRefreshing(false));
+  };
 
   if (loading) {
     return (
@@ -63,6 +76,12 @@ export default function AnalyticsPage() {
     .slice(0, 8);
 
   const maxCat = categories.length > 0 ? Math.max(...categories.map(([, v]) => v)) : 1;
+
+  /* Two-segment donut: safe vs blocked, drawn from the top (SVG arc animation) */
+  const donutSegments = [
+    { name: "safe", frac: safePct / 100, rot: -90, color: "var(--color-leaf)" },
+    { name: "blocked", frac: total > 0 ? 1 - safePct / 100 : 1, rot: -90 + (safePct / 100) * 360, color: "var(--color-clay-soft)" },
+  ];
   const recent = (data.recent ?? []).filter((item) => {
     if (filter === "safe") return item.category === "safe_agri";
     if (filter === "blocked") return item.category !== "safe_agri";
@@ -82,24 +101,36 @@ export default function AnalyticsPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="font-display text-3xl text-ink">পরিসংখ্যান</h1>
-        <p className="mt-1 text-sm text-ink-soft">
-          নিরাপত্তা যাচাই ও প্রশ্নের বিশ্লেষণ — স্থানীয় অডিট লগ থেকে।
-        </p>
+      <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+        <div>
+          <h1 className="font-display text-3xl text-ink">পরিসংখ্যান</h1>
+          <p className="mt-1 text-sm text-ink-soft">
+            নিরাপত্তা যাচাই ও প্রশ্নের বিশ্লেষণ — স্থানীয় অডিট লগ থেকে।
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={refresh}
+          disabled={refreshing}
+          className="inline-flex min-h-10 items-center justify-center gap-2 self-start rounded-lg border rule bg-paper px-4 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <RefreshCw className={`h-3.5 w-3.5 ${refreshing ? "animate-spin" : ""}`} />
+          {refreshing ? "রিফ্রেশ হচ্ছে…" : "রিফ্রেশ"}
+        </button>
       </div>
 
-      {/* Stat cards */}
+      {/* Stat cards — key remount replays the count-up on refresh */}
       <motion.section
+        key={`stats-${total}`}
         initial="hidden"
         animate="visible"
         variants={stagger}
         className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone lg:grid-cols-4"
       >
-        <StatCard variants={enter} icon={Activity} value={bn(total)} label="মোট প্রশ্ন" tone="ink" />
-        <StatCard variants={enter} icon={CheckCircle2} value={bn(safe)} label="নিরাপদ কৃষি" tone="leaf" />
-        <StatCard variants={enter} icon={AlertTriangle} value={bn(blocked)} label="অবরুদ্ধ" tone="clay" />
-        <StatCard variants={enter} icon={Shield} value={`${bn(safePct)}%`} label="নিরাপদ হার" tone="leaf" />
+        <StatCard variants={enter} icon={Activity} value={total} label="মোট প্রশ্ন" tone="ink" />
+        <StatCard variants={enter} icon={CheckCircle2} value={safe} label="নিরাপদ কৃষি" tone="leaf" />
+        <StatCard variants={enter} icon={AlertTriangle} value={blocked} label="অবরুদ্ধ" tone="clay" />
+        <StatCard variants={enter} icon={Shield} value={safePct} suffix="%" label="নিরাপদ হার" tone="leaf" />
       </motion.section>
 
       {/* Donut + category breakdown */}
@@ -116,18 +147,33 @@ export default function AnalyticsPage() {
             নিরাপদ vs অবরুদ্ধ
           </motion.h2>
           <motion.div variants={enter} className="flex items-center gap-6">
-            {/* CSS donut */}
-            <div className="relative h-32 w-32 shrink-0">
-              <div
-                className="h-full w-full rounded-full"
-                style={{
-                  background: `conic-gradient(var(--color-leaf) ${safePct * 3.6}deg, var(--color-clay-soft) 0deg)`,
-                }}
-              />
-              <div className="absolute inset-3 flex flex-col items-center justify-center rounded-full bg-paper">
-                <span className="font-display text-2xl tabular text-ink">{bn(safePct)}%</span>
-                <span className="text-[10px] text-ink-faint">নিরাপদ</span>
-              </div>
+            {/* Animated SVG donut — arcs draw from the top, re-drawn on refresh */}
+            <div key={`donut-${total}`} className="relative h-32 w-32 shrink-0">
+              <svg viewBox="0 0 240 240" className="h-full w-full">
+                {donutSegments.map((s, i) => (
+                  <motion.circle
+                    key={s.name}
+                    cx={120}
+                    cy={120}
+                    r={92}
+                    fill="none"
+                    stroke={s.color}
+                    strokeWidth={30}
+                    pathLength={1}
+                    strokeDasharray={`${s.frac} ${1 - s.frac}`}
+                    transform={`rotate(${s.rot} 120 120)`}
+                    initial={{ opacity: 0, pathLength: 0 }}
+                    animate={{ opacity: 1, pathLength: s.frac }}
+                    transition={{ delay: 0.15 + i * 0.15, duration: dur.slow, ease: ease.smooth }}
+                  />
+                ))}
+                <text x={120} y={116} textAnchor="middle" className="fill-ink font-display" fontSize={30}>
+                  {bn(safePct)}
+                </text>
+                <text x={120} y={138} textAnchor="middle" className="fill-ink-faint" fontSize={10}>
+                  % নিরাপদ
+                </text>
+              </svg>
             </div>
             {/* Legend */}
             <div className="space-y-3">
@@ -162,7 +208,7 @@ export default function AnalyticsPage() {
               কোনো তথ্য নেই।
             </motion.p>
           ) : (
-            <motion.div variants={enter} className="space-y-2.5">
+            <motion.div variants={enter} key={`cats-${total}`} className="space-y-2.5">
               {categories.map(([cat, count], i) => {
                 const categoryLabel = safetyLabel(cat);
                 const pct = Math.round((count / maxCat) * 100);
@@ -308,22 +354,28 @@ export default function AnalyticsPage() {
 /* === Stat card === */
 function StatCard({
   value,
+  suffix,
   label,
   tone,
   icon: Icon,
   variants,
 }: {
-  value: number | string;
+  value: number;
+  suffix?: string;
   label: string;
   tone: "leaf" | "ink" | "clay";
   icon: React.ComponentType<{ className?: string }>;
   variants: typeof enter;
 }) {
   const color = tone === "leaf" ? "text-leaf" : tone === "clay" ? "text-clay" : "text-ink";
+  const n = useCountUp(value, true);
   return (
     <motion.div variants={variants} className="bg-paper p-5">
       <Icon className={`h-5 w-5 ${color}`} />
-      <div className={`mt-3 font-display text-3xl tabular ${color}`}>{value}</div>
+      <div className={`mt-3 font-display text-3xl tabular ${color}`}>
+        {toBn(n)}
+        {suffix ? <span className="text-xl">{suffix}</span> : null}
+      </div>
       <div className="mt-1 text-xs text-ink-soft">{label}</div>
     </motion.div>
   );

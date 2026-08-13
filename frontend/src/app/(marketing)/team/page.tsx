@@ -102,7 +102,7 @@ export default function TeamPage() {
             <motion.div
               key={member.name}
               variants={enter}
-              className="overflow-hidden rounded-xl border rule bg-paper"
+              className="group overflow-hidden rounded-xl border rule bg-paper transition-shadow hover:shadow-[0_12px_32px_rgba(52,39,23,0.10)]"
             >
               {/* Photo */}
               <div className="aspect-square overflow-hidden bg-paper-2">
@@ -110,7 +110,7 @@ export default function TeamPage() {
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                 />
               </div>
               {/* Info */}

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { ArrowRight, BookOpen, Database, Shield, Copy, Check } from "lucide-react";
-import { RESEARCH_STATS, LINKS } from "@/lib/constants";
+import { RESEARCH_STATS, RESEARCH_STATS_N, LINKS } from "@/lib/constants";
+import { toBn, useCountUp } from "@/lib/use-count-up";
 import { enter, stagger } from "@/lib/motion";
 
 /* =========================================================================
@@ -51,6 +52,7 @@ const PAPERS = [
   },
 ];
 
+/* Hallucination floor is a published range — kept as text; the rest count up */
 const KEY_FINDINGS = [
   {
     value: RESEARCH_STATS.hallucinationFloor,
@@ -58,17 +60,17 @@ const KEY_FINDINGS = [
     detail: "পরিপূর্ণ অরাকল তথ্য থাকা সত্ত্বেও এই হার থেকে যায় — সব মডেলে।",
   },
   {
-    value: RESEARCH_STATS.sftGenF1,
+    n: RESEARCH_STATS_N.sftGenF1,
     label: "ফাইন-টিউনড GenF1",
     detail: "বেস্ট জিরো-শট (০.১৬৫) থেকে ১.৯× উন্নত।",
   },
   {
-    value: RESEARCH_STATS.hybridR10,
+    n: RESEARCH_STATS_N.hybridR10,
     label: "হাইব্রিড R@10",
     detail: "BM25+Dense ফিউশন সর্বোচ্চ নির্ভুলতা।",
   },
   {
-    value: RESEARCH_STATS.interAnnotatorKappa,
+    n: RESEARCH_STATS_N.interAnnotatorKappa,
     label: "ইন্টার-নির্দেশক κ",
     detail: "ফার্মার কোয়েরি গোল্ড ম্যাপিং নির্ভরযোগ্য।",
   },
@@ -130,11 +132,7 @@ export default function ResearchPage() {
         </motion.h2>
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone lg:grid-cols-4">
           {KEY_FINDINGS.map((finding) => (
-            <motion.div key={finding.label} variants={enter} className="bg-paper p-6 text-center">
-              <div className="font-display text-3xl tabular text-leaf">{finding.value}</div>
-              <div className="mt-2 text-sm font-medium text-ink">{finding.label}</div>
-              <div className="mt-1 text-xs leading-relaxed text-ink-faint">{finding.detail}</div>
-            </motion.div>
+            <FindingCell key={finding.label} finding={finding} />
           ))}
         </div>
       </motion.section>
@@ -265,8 +263,24 @@ export default function ResearchPage() {
   );
 }
 
-function BibTeXButton({ citation }: { citation: string }) {
-  const [copied, setCopied] = useState(false);
+/* Count-up finding cell — numeric values tween when scrolled into view,
+   range values (hallucination floor) render as verified text. */
+function FindingCell({ finding }: { finding: (typeof KEY_FINDINGS)[number] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const n = useCountUp(finding.n ?? 0, inView);
+  return (
+    <motion.div variants={enter} ref={ref} className="bg-paper p-6 text-center">
+      <div className="font-display text-3xl tabular text-leaf">
+        {finding.n === undefined ? finding.value : toBn(n)}
+      </div>
+      <div className="mt-2 text-sm font-medium text-ink">{finding.label}</div>
+      <div className="mt-1 text-xs leading-relaxed text-ink-faint">{finding.detail}</div>
+    </motion.div>
+  );
+}
+
+function BibTeXButton({ citation }: { citation: string }) {  const [copied, setCopied] = useState(false);
 
   const copy = async () => {
     try {

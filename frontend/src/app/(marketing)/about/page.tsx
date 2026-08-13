@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useInView } from "motion/react";
 import {
   Shield,
   Database,
@@ -9,7 +10,8 @@ import {
   BarChart3,
   BookOpen,
 } from "lucide-react";
-import { RESEARCH_STATS } from "@/lib/constants";
+import { RESEARCH_STATS, RESEARCH_STATS_N } from "@/lib/constants";
+import { toBn, useCountUp } from "@/lib/use-count-up";
 import { enter, stagger } from "@/lib/motion";
 
 /* =========================================================================
@@ -49,6 +51,35 @@ const HUB_LINKS = [
 const INSTITUTIONS = [
   "BARC", "BARI", "DAE", "DLS", "DoF", "CDB", "NARS", "SRDI", "BSRTI", "MoA", "CABI", "IRRI", "WorldFish",
 ];
+
+/* Count-up cell — rAF tween when the cell scrolls into view */
+function CountCell({
+  value,
+  suffix,
+  label,
+  bordered = false,
+}: {
+  value: number;
+  suffix?: string;
+  label: string;
+  bordered?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const n = useCountUp(value, inView);
+  const box = bordered
+    ? "rounded-lg border rule bg-paper px-4 py-3 text-center"
+    : "bg-paper p-4 text-center";
+  return (
+    <div ref={ref} className={box}>
+      <div className="font-display text-xl tabular text-leaf sm:text-2xl">
+        {toBn(n)}
+        {suffix ? <span className="text-base">{suffix}</span> : null}
+      </div>
+      <div className="mt-1 text-[11px] text-ink-faint">{label}</div>
+    </div>
+  );
+}
 
 export default function AboutPage() {
   return (
@@ -94,10 +125,10 @@ export default function AboutPage() {
         </motion.h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {TEAM.map((member) => (
-            <motion.div key={member.name} variants={enter} className="overflow-hidden rounded-xl border rule bg-paper">
+            <motion.div key={member.name} variants={enter} className="group overflow-hidden rounded-xl border rule bg-paper transition-shadow hover:shadow-[0_12px_32px_rgba(52,39,23,0.10)]">
               <div className="aspect-square overflow-hidden bg-paper-2">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={member.image} alt={member.name} className="h-full w-full object-cover" />
+                <img src={member.image} alt={member.name} className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
               </div>
               <div className="p-4 text-center">
                 <div className="font-display text-base text-ink">{member.name}</div>
@@ -131,16 +162,9 @@ export default function AboutPage() {
           </div>
         </motion.div>
         <motion.div variants={enter} className="mt-6 grid grid-cols-3 gap-3">
-          {[
-            { value: RESEARCH_STATS.fieldInterviews, label: "মাঠ সাক্ষাৎকার" },
-            { value: "৬৯", label: "অফিসার যাচাই" },
-            { value: "১০০%", label: "অফিসার সম্মতি" },
-          ].map((stat) => (
-            <div key={stat.label} className="rounded-lg border rule bg-paper px-4 py-3 text-center">
-              <div className="font-display text-xl tabular text-leaf">{stat.value}</div>
-              <div className="mt-1 text-[11px] text-ink-faint">{stat.label}</div>
-            </div>
-          ))}
+          <CountCell bordered value={RESEARCH_STATS_N.fieldInterviews} label="মাঠ সাক্ষাৎকার" />
+          <CountCell bordered value={69} label="অফিসার যাচাই" />
+          <CountCell bordered value={100} suffix="%" label="অফিসার সম্মতি" />
         </motion.div>
       </motion.section>
 
@@ -170,17 +194,10 @@ export default function AboutPage() {
           </p>
         </motion.div>
         <motion.div variants={enter} className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone sm:grid-cols-4">
-          {[
-            { value: RESEARCH_STATS.publications, label: "প্রকাশনা" },
-            { value: RESEARCH_STATS.knowledgeNodes, label: "নোড" },
-            { value: RESEARCH_STATS.benchmarkInstances, label: "ইনস্ট্যান্স" },
-            { value: RESEARCH_STATS.dialects, label: "উপভাষা" },
-          ].map((stat) => (
-            <div key={stat.label} className="bg-paper p-4 text-center">
-              <div className="font-display text-2xl tabular text-leaf">{stat.value}</div>
-              <div className="mt-1 text-[11px] text-ink-faint">{stat.label}</div>
-            </div>
-          ))}
+          <CountCell value={RESEARCH_STATS_N.publications} label="প্রকাশনা" />
+          <CountCell value={RESEARCH_STATS_N.knowledgeNodes} label="নোড" />
+          <CountCell value={RESEARCH_STATS_N.benchmarkInstances} label="ইনস্ট্যান্স" />
+          <CountCell value={RESEARCH_STATS_N.dialects} label="উপভাষা" />
         </motion.div>
       </motion.section>
 

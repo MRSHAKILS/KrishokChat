@@ -59,6 +59,22 @@ export const RESEARCH_STATS = {
   kgGroundedKappa: "০.৭৮",
 } as const;
 
+/* Raw numeric values of the verified strings above — used only for count-up
+   animations (toBn() re-produces the exact Bengali formatting from the number). */
+export const RESEARCH_STATS_N = {
+  benchmarkInstances: 85979,
+  knowledgeNodes: 2882,
+  publications: 284,
+  institutions: 13,
+  dialects: 6,
+  farmerQueries: 1000,
+  fieldInterviews: 300,
+  sftGenF1: 0.314,
+  bestZeroShotGenF1: 0.165,
+  hybridR10: 0.539,
+  interAnnotatorKappa: 0.72,
+} as const;
+
 /* API base is intentionally empty: next.config.ts rewrites /api/* to the backend,
    so the frontend and backend share an origin in dev. */
 export const API_BASE = "";
