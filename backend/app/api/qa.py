@@ -11,7 +11,7 @@ from fastapi.responses import StreamingResponse
 from app.application.container import AppContainer
 from app.application.qa_pipeline import QAInput
 from app.domain.contracts import PipelineEvent, QAResult, RetrievedSource
-from app.models.schemas import AgentStageEvent, QARequest, QAResponse, SourceNode
+from app.models.schemas import AgentStageEvent, QARequest, QAResponse, SourceNode, VerifierClaimOut
 from app.api.dependencies import get_container
 
 router = APIRouter()
@@ -100,6 +100,10 @@ def _response(result: QAResult) -> QAResponse:
             for event in result.trace
         ],
         verifier_flags=list(result.verifier_flags),
+        verifier_claims=[
+            VerifierClaimOut(claim=claim.text, verdict=claim.verdict, reason=claim.reason)
+            for claim in result.verifier_claims
+        ],
         model=result.model or None,
     )
 
@@ -150,13 +154,28 @@ async def safety_metrics(container: ContainerDep):
                     continue
     by_category: dict[str, int] = {}
     flagged = 0
+    verifier_checked = verifier_grounded = verifier_unsupported = 0
+    answered_without_sources = 0
     for entry in entries:
         category = entry.get("category", "unknown")
         by_category[category] = by_category.get(category, 0) + 1
         flagged += int(bool(entry.get("flagged")))
+        # P1: verifier aggregates come from the actual logged verdicts.
+        verifier_checked += int(entry.get("verifier_checked", 0))
+        verifier_grounded += int(entry.get("verifier_grounded", 0))
+        verifier_unsupported += int(entry.get("verifier_unsupported", 0))
+        answered_without_sources += int(bool(entry.get("answered_without_sources", False)))
     return {
         "total_queries": len(entries),
         "by_category": by_category,
         "flagged_count": flagged,
+        "verifier": {
+            "checked": verifier_checked,
+            "grounded": verifier_grounded,
+            "unsupported": verifier_unsupported,
+        },
+        "refusals": {
+            "answered_without_sources": answered_without_sources,
+        },
         "recent": entries[-10:][::-1],
     }

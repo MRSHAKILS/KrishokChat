@@ -161,16 +161,25 @@ class QAPipeline:
                     unverified_claims=verification.unverified_claims,
                 )
                 verifier_flags = verification.flags
+            # P1 annotate-and-drop: unsupported dosage claims are removed from
+            # the final answer (never hard-blocked); an emptied answer maps to
+            # the referral text. The streamed preview may briefly show the raw
+            # text, but the authoritative final event always carries the
+            # sanitized answer.
+            final_answer = generated.answer
+            if verification.sanitized_answer is not None:
+                final_answer = verification.sanitized_answer or REFERRAL
             await emit(PipelineStage.VERIFIER, StageStatus.COMPLETE, verification.confidence.value)
 
             result = QAResult(
                 query=request.query,
                 category=decision.category,
-                answer=generated.answer,
+                answer=final_answer,
                 sources=tuple(sources),
                 confidence=verification.confidence,
                 trace=tuple(trace),
                 verifier_flags=verification.flags,
+                verifier_claims=verification.claims,
                 model=generated.model,
                 error=generated.error,
             )
@@ -198,6 +207,16 @@ class QAPipeline:
                     self.sessions.append(request.session_id, "assistant", result.answer)
 
     def _audit(self, request: QAInput, result: QAResult, verifier_flags: tuple[str, ...]) -> None:
+        # P1 refusal counters (TRUST-SCORE style, honest subset):
+        # - answered_without_sources: a safe-agri query that produced a real
+        #   answer with zero retrieved passages = over-responsiveness signal.
+        #   Today the generator refuses in this case (REFERRAL), so this flag
+        #   guards regressions.
+        answered_without_sources = bool(
+            result.category is SafetyCategory.SAFE_AGRI
+            and not result.sources
+            and result.answer not in ("", REFERRAL)
+        )
         self.audit.record(
             {
                 "query": request.query,
@@ -205,6 +224,14 @@ class QAPipeline:
                 "action": "blocked-canned-response" if result.category is not SafetyCategory.SAFE_AGRI else "answered",
                 "flagged": result.confidence is VerificationConfidence.FLAGGED_UNVERIFIED,
                 "verifier_flag": "; ".join(verifier_flags) or None,
+                "verifier_checked": sum(1 for claim in result.verifier_claims if claim.verdict in ("grounded", "unsupported")),
+                "verifier_grounded": sum(1 for claim in result.verifier_claims if claim.verdict == "grounded"),
+                "verifier_unsupported": sum(1 for claim in result.verifier_claims if claim.verdict == "unsupported"),
+                "verifier_claims": [
+                    {"text": claim.text[:300], "verdict": claim.verdict, "reason": claim.reason[:200]}
+                    for claim in result.verifier_claims
+                ],
+                "answered_without_sources": answered_without_sources,
                 "model": result.model,
                 "source_ids": [source.id for source in result.sources],
                 "error": result.error,

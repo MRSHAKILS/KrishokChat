@@ -57,10 +57,29 @@ class GenerationResult:
 
 
 @dataclass(frozen=True)
+class VerifierClaim:
+    """One atomic claim verdict from the hardened verifier (P1).
+
+    verdict: ``grounded`` | ``unsupported`` | ``no_dosage``.
+    ``no_dosage`` claims carry no measurable quantity and are informational.
+    """
+
+    text: str
+    verdict: str
+    reason: str = ""
+
+
+@dataclass(frozen=True)
 class VerificationResult:
     confidence: VerificationConfidence
     flags: tuple[str, ...] = ()
     unverified_claims: tuple[str, ...] = ()
+    # P1 hardening: per-claim verdicts, annotate-and-drop output, counts.
+    claims: tuple[VerifierClaim, ...] = ()
+    sanitized_answer: str | None = None
+    checked_count: int = 0
+    grounded_count: int = 0
+    unsupported_count: int = 0
 
 
 @dataclass(frozen=True)
@@ -81,5 +100,6 @@ class QAResult:
     confidence: VerificationConfidence = VerificationConfidence.LOW_CONFIDENCE
     trace: tuple[PipelineEvent, ...] = ()
     verifier_flags: tuple[str, ...] = ()
+    verifier_claims: tuple[VerifierClaim, ...] = ()
     model: str = ""
     error: str | None = None

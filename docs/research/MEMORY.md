@@ -15,8 +15,16 @@ roadmap (`docs/research/ROADMAP_2026.md`) before the investor demo.
   silently; roadmap written by orchestrator with the critic's evidence.)
 
 ## Active Phase
-None started. P1 (verifier hardening) is the first move; P3 dense-index build
-is the longest-lead side-lane — start it early.
+**P1 COMPLETE (2026-08-14):** Verifier hardening shipped. `HardenedDosageVerifier`
+(`application/verifier.py` + `infrastructure/verification/dosage_claims.py`)
+replaces the lexical `DosageVerifier` (untouched, research baseline) in the
+container. Per-claim verdicts (grounded/unsupported/no_dosage) with
+chemical+amount+unit binding to the SAME passage; annotate-and-drop sanitized
+answers; TRUST-SCORE-style refusal counters in the audit log;
+`/api/safety/metrics` extended with verifier aggregates + refusals. Verified:
+62/62 pytest (19 new incl. 20-item dosage set + 10 no-false-block), live
+end-to-end QA probe + audit entry. Next: P2 (dual-view metrics on the
+agent-trace stepper).
 
 ## Key Decisions
 - P1: rule-based dosage entailment (chemical/crop/number/unit vs passages),

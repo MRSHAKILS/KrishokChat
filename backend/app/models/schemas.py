@@ -44,6 +44,12 @@ class AgentStageEvent(BaseModel):
     detail: str | None = None
 
 
+class VerifierClaimOut(BaseModel):
+    claim: str
+    verdict: str = Field(..., description="grounded | unsupported | no_dosage")
+    reason: str = ""
+
+
 class QAResponse(BaseModel):
     query: str
     category: str = Field(..., description="safe_agri | banned_or_restricted_chemical | ...")
@@ -52,6 +58,7 @@ class QAResponse(BaseModel):
     confidence: str = Field(..., description="verified | flagged-unverified | low_confidence")
     agent_trace: list[AgentStageEvent] = Field(default_factory=list)
     verifier_flags: list[str] = Field(default_factory=list)
+    verifier_claims: list[VerifierClaimOut] = Field(default_factory=list)
     model: str | None = None
 
 

@@ -18,7 +18,7 @@ from app.infrastructure.retrieval.bm25 import BM25Retriever
 from app.infrastructure.sessions.memory import InMemorySessionStore
 from app.infrastructure.soil.dataset_loader import load_soil_dataset
 from app.infrastructure.storage.postgrest import PostgrestSavedHistoryStore
-from app.infrastructure.verification.dosage import DosageVerifier
+from app.application.verifier import HardenedDosageVerifier
 from app.infrastructure.vision.registry import ArtifactVisionRegistry
 from app.infrastructure.vision.ultralytics_classifier import UltralyticsClassificationRunner
 
@@ -60,7 +60,7 @@ def build_container(settings: Settings) -> AppContainer:
         safety=SafetyClassifier(intent_llm),
         retriever=retriever,
         generator=GroundedAnswerGenerator(generation_llm),
-        verifier=DosageVerifier(),
+        verifier=HardenedDosageVerifier(),
         audit=audit,
         sessions=sessions,
         top_k=settings.retrieval_top_k,
