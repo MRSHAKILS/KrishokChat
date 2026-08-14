@@ -103,3 +103,7 @@ class QAResult:
     verifier_claims: tuple[VerifierClaim, ...] = ()
     model: str = ""
     error: str | None = None
+    # P5: refusal transparency — which deterministic rule fired (e.g.
+    # coverage_training) and the safety decision reason, surfaced to the UI.
+    matched_rules: tuple[str, ...] = ()
+    safety_reason: str | None = None

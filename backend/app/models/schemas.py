@@ -60,6 +60,9 @@ class QAResponse(BaseModel):
     verifier_flags: list[str] = Field(default_factory=list)
     verifier_claims: list[VerifierClaimOut] = Field(default_factory=list)
     model: str | None = None
+    # P5: refusal transparency (present when a deterministic rule refused).
+    matched_rules: list[str] = Field(default_factory=list)
+    safety_reason: str | None = None
 
 
 class ClassifyRequest(BaseModel):

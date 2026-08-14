@@ -78,6 +78,32 @@ export function safetyLabel(category: string): SafetyLabel {
   return MAP[category] ?? FALLBACK;
 }
 
+/* ---- Refusal-rule labels (P5, D1a gate) ----
+   The backend emits deterministic rule ids (e.g. `coverage_training`) in
+   `matched_rules`. These must never reach a farmer verbatim. Map each to a
+   short Bengali reason chip shown on refused answers. Unknown rules fall
+   back to a generic "নির্দিষ্ট নিয়ম" chip so new rules degrade safely. */
+const RULE_MAP: Record<string, string> = {
+  coverage_training: "প্রশিক্ষণ-সংক্রান্ত",
+  coverage_export: "রপ্তানি-সংক্রান্ত",
+  coverage_availability: "প্রাপ্যতা/ঠিকানা",
+  coverage_institutional: "প্রতিষ্ঠানগত তথ্য",
+  coverage_livestock: "প্রাণিসম্পদ-সংক্রান্ত",
+  coverage_assistance: "সরকারি সহায়তা",
+  self_harm_bn: "জরুরি স্বাস্থ্য রিস্ক",
+  self_harm_en: "জরুরি স্বাস্থ্য রিস্ক",
+  restricted_chemical_bn: "নিষিদ্ধ রাসায়নিক",
+  restricted_chemical_en: "নিষিদ্ধ রাসায়নিক",
+  injection_en: "নির্দেশ অনুপ্রবেশ",
+  injection_bn: "নির্দেশ অনুপ্রবেশ",
+  injection_roleplay: "নির্দেশ অনুপ্রবেশ",
+};
+
+/** Resolve a deterministic rule id into a short Bengali refusal-reason chip. */
+export function refusalRuleLabel(rule: string): string {
+  return RULE_MAP[rule] ?? "নির্দিষ্ট নিয়ম";
+}
+
 /** Tone → Tailwind class fragments for a filled badge. */
 export const TONE_BADGE: Record<BadgeTone, string> = {
   leaf: "bg-leaf/10 text-leaf ring-1 ring-leaf/25",

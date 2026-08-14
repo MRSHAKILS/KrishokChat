@@ -242,7 +242,13 @@ function CompletedContent({ response }: { response: QAResponse }) {
 
   // Safety-blocked query → show SafetyNotice
   if (blocked) {
-    return <SafetyNotice category={response.category} answer={response.answer} />;
+    return (
+      <SafetyNotice
+        category={response.category}
+        answer={response.answer}
+        matchedRules={response.matched_rules}
+      />
+    );
   }
 
   const cleanAnswer = formatAnswerWithCleanCitations(response.answer, response.sources);

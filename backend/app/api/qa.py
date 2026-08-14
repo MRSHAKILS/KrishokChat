@@ -105,6 +105,8 @@ def _response(result: QAResult) -> QAResponse:
             for claim in result.verifier_claims
         ],
         model=result.model or None,
+        matched_rules=list(result.matched_rules),
+        safety_reason=result.safety_reason,
     )
 
 
@@ -157,6 +159,7 @@ async def safety_metrics(container: ContainerDep):
     verifier_checked = verifier_grounded = verifier_unsupported = 0
     answered_without_sources = 0
     router_blocked = 0
+    refusal_rules: dict[str, int] = {}
     retrieval_answered = retrieval_hits = 0
     top1_scores: list[float] = []
     source_counts: list[int] = []
@@ -178,6 +181,8 @@ async def safety_metrics(container: ContainerDep):
         # UI stepper renders (dual-view, nothing fabricated).
         if entry.get("action") == "blocked-canned-response":
             router_blocked += 1
+            for rule in entry.get("safety_matched_rules") or []:
+                refusal_rules[rule] = refusal_rules.get(rule, 0) + 1
         if entry.get("category") == "safe_agri" and entry.get("action") == "answered":
             retrieval_answered += 1
             retrieval_hits += int(bool(entry.get("retrieval_hit", False)))
@@ -203,6 +208,7 @@ async def safety_metrics(container: ContainerDep):
         "router": {
             "blocked": router_blocked,
             "refusal_rate": router_blocked / total,
+            "refusal_rules": refusal_rules,
         },
         "retrieval": {
             "answered": retrieval_answered,

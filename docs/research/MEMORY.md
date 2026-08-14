@@ -73,9 +73,15 @@ contract test), `tsc --noEmit` clean, `pnpm build` green, live probe of
 `/api/benchmark` serving pending state.
 **Open work:** 1) researcher + second evaluator fill `scoring_sheet_v1.csv`
 → rerun `11` → stats go live (kappa required for DoD); 2) Q1: Lumectin
-refusal correctness (expert review pending); 3) P5 (refusal-reason UI + panel
-polish); 4) Q4: restore `dataset_release/safety/` dialect map to raise
-expansion hit rate.
+refusal correctness (expert review pending); 3) Q4: restore
+`dataset_release/safety/` dialect map to raise expansion hit rate.
+**P5-polish (refusal-reason UI, done 2026-08-14):** QAResult/QAResponse now
+carry `matched_rules` + `safety_reason`; `/api/safety/metrics` adds per-rule
+`refusal_rules` breakdown; SafetyNotice shows Bengali reason chips (shared
+`refusalRuleLabel` map — backend rule ids never reach farmers), analytics
+pipeline card lists refusal reasons, chat passes matched_rules through.
+Verified 87/87 pytest, tsc + build green, live probe (refused → coverage_training,
+answered → empty).
 
 ## Key Decisions
 - P1: rule-based dosage entailment (chemical/crop/number/unit vs passages),

@@ -116,6 +116,8 @@ class QAPipeline:
                     answer=decision.response or canned_response(decision.category),
                     confidence=VerificationConfidence.BLOCKED,
                     trace=tuple(trace),
+                    matched_rules=decision.matched_rules,
+                    safety_reason=decision.reason or None,
                 )
                 return result
 

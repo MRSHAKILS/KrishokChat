@@ -54,6 +54,8 @@ export interface QAResponse {
   agent_trace: AgentStageEvent[];
   verifier_flags: string[];
   model?: string | null;
+  matched_rules?: string[];
+  safety_reason?: string | null;
 }
 
 export interface ClassifyResponse {
@@ -107,7 +109,7 @@ export interface SafetyMetrics {
     pass_rate: number | null;
   };
   refusals?: { answered_without_sources: number };
-  router?: { blocked: number; refusal_rate: number | null };
+  router?: { blocked: number; refusal_rate: number | null; refusal_rules?: Record<string, number> };
   retrieval?: {
     answered: number;
     hit_rate: number | null;

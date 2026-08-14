@@ -7,7 +7,7 @@ import { getSafetyMetrics, type SafetyMetrics } from "@/lib/api";
 import { RESEARCH_STATS } from "@/lib/constants";
 import { bn } from "@/lib/bn";
 import { toBn, useCountUp } from "@/lib/use-count-up";
-import { safetyLabel, TONE_BADGE, TONE_DOT, TONE_BAR } from "@/lib/safety-labels";
+import { safetyLabel, TONE_BADGE, TONE_DOT, TONE_BAR, refusalRuleLabel } from "@/lib/safety-labels";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 
 /* =========================================================================
@@ -295,6 +295,29 @@ export default function AnalyticsPage() {
             tone="leaf"
           />
         </motion.div>
+
+        {/* P5: refusal reasons — why blocked queries were blocked (D1a gate
+            visibility). Rendered only when the log has rule evidence. */}
+        {(() => {
+          const rules = Object.entries(data.router?.refusal_rules ?? {})
+            .filter(([, count]) => count > 0)
+            .sort(([, a], [, b]) => b - a);
+          if (rules.length === 0) return null;
+          return (
+            <motion.div variants={enter} className="mt-4 flex flex-wrap items-center gap-1.5">
+              <span className="text-[11px] text-ink-faint">অস্বীকৃতির কারণ:</span>
+              {rules.map(([rule, count]) => (
+                <span
+                  key={rule}
+                  className="inline-flex items-center gap-1 rounded-full bg-clay-soft/15 px-2.5 py-1 text-[10px] font-medium text-clay ring-1 ring-clay-soft/40"
+                >
+                  {refusalRuleLabel(rule)}
+                  <span className="tabular text-clay-soft">{bn(count)}</span>
+                </span>
+              ))}
+            </motion.div>
+          );
+        })()}
       </motion.section>
 
       {/* Research context strip */}
