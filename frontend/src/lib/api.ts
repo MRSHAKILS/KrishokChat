@@ -394,3 +394,48 @@ export async function translateDialect(
   if (!res.ok) throw new Error(`dialect translate failed: ${res.status}`);
   return res.json();
 }
+
+/* ---------- Saved history (premium lane; auth via Bearer token) ---------- */
+
+export interface SavedQuery {
+  id: string;
+  query_text: string;
+  answer_text: string;
+  sources: SourceNode[];
+  category: string;
+  created_at: string;
+}
+
+export interface SavedHistoryResponse {
+  items: SavedQuery[];
+  enabled: boolean;
+}
+
+export async function getSavedHistory(accessToken: string): Promise<SavedHistoryResponse> {
+  const res = await fetch(`${API_BASE}/api/history`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!res.ok) throw new Error(`history failed: ${res.status}`);
+  return res.json();
+}
+
+export async function saveAnswer(
+  accessToken: string,
+  data: { query_text: string; answer_text: string; sources: SourceNode[]; category: string },
+): Promise<SavedQuery> {
+  const res = await fetch(`${API_BASE}/api/history`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`history save failed: ${res.status}`);
+  return res.json();
+}
+
+export async function deleteSavedQuery(accessToken: string, id: string): Promise<void> {
+  const res = await fetch(`${API_BASE}/api/history/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!res.ok && res.status !== 404) throw new Error(`history delete failed: ${res.status}`);
+}

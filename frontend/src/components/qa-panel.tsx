@@ -2,8 +2,9 @@
 
 import { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
 import { motion } from "motion/react";
-import { Send, Mic, Square, RotateCcw, ShieldCheck, X } from "lucide-react";
-import { streamQuestion, getModels, type AgentStageEvent } from "@/lib/api";
+import { Send, Mic, Square, RotateCcw, ShieldCheck, X, Bookmark, Check, Loader2 } from "lucide-react";
+import { streamQuestion, getModels, saveAnswer, type AgentStageEvent } from "@/lib/api";
+import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { ChatMessage, type ChatMessageData } from "@/components/chat/chat-message";
 import { SuggestedQuestions } from "@/components/chat/suggested-questions";
 import { dur, ease } from "@/lib/motion";
@@ -50,9 +51,11 @@ export function QAPanel({
   const [localAvailable, setLocalAvailable] = useState<boolean>(false);
   const [streamedText, setStreamedText] = useState("");
   const [restored, setRestored] = useState(false);
+  const [savedMessages, setSavedMessages] = useState<Set<number>>(new Set());
   const requestRef = useRef<AbortController | null>(null);
   const streamingRef = useRef(false);
   const storageKey = "krishokchat:conversation:v1";
+  const { session } = useSupabaseSession();
 
   useEffect(() => {
     window.queueMicrotask(() => {
@@ -324,6 +327,14 @@ export function QAPanel({
                     message={msg}
                     onRetry={msg.role === "assistant" && msg.retryQuery ? () => send(msg.retryQuery!) : undefined}
                   />
+                  {msg.role === "assistant" && msg.response && !savedMessages.has(i) && (
+                    <SaveAnswerButton
+                      accessToken={session?.access_token ?? null}
+                      queryText={messages[i - 1]?.content ?? msg.response.query}
+                      response={msg.response}
+                      onSaved={() => setSavedMessages((prev) => new Set(prev).add(i))}
+                    />
+                  )}
                   {isStreamingBubble && (
                     <ChatMessage
                       message={{ role: "assistant", content: "" }}
@@ -446,6 +457,74 @@ export function QAPanel({
 }
 
 /* --- Empty state: welcome + suggested questions --- */
+
+/* Save-to-account action under completed answers (premium lane, P4).
+   Visible ONLY when signed in; anonymous visitors see nothing (no buttons,
+   no popups — amendment 15 invariant). Failures degrade to a retry label. */
+function SaveAnswerButton({
+  accessToken,
+  queryText,
+  response,
+  onSaved,
+}: {
+  accessToken: string | null;
+  queryText: string;
+  response: import("@/lib/api").QAResponse;
+  onSaved: () => void;
+}) {
+  const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+
+  if (!accessToken) return null;
+
+  // const arrow (not a hoisted declaration) so TS preserves the narrowing above.
+  const handleSave = async () => {
+    setState("saving");
+    try {
+      await saveAnswer(accessToken, {
+        query_text: queryText,
+        answer_text: response.answer,
+        sources: response.sources,
+        category: response.category,
+      });
+      setState("saved");
+      onSaved();
+    } catch {
+      setState("error");
+    }
+  }
+
+  return (
+    <div className="flex items-center gap-2 pl-2">
+      <button
+        onClick={() => void handleSave()}
+        disabled={state === "saving" || state === "saved"}
+        className={cn(
+          "control-press flex min-h-7 items-center gap-1.5 rounded-full border px-2.5 text-[11px] font-medium transition-colors",
+          state === "saved"
+            ? "border-leaf/30 bg-leaf/10 text-leaf"
+            : "rule bg-paper text-ink-faint hover:border-leaf hover:text-leaf",
+          state === "error" && "border-clay/30 text-clay",
+        )}
+      >
+        {state === "saving" ? (
+          <Loader2 className="h-3 w-3 animate-spin" />
+        ) : state === "saved" ? (
+          <Check className="h-3 w-3" />
+        ) : (
+          <Bookmark className="h-3 w-3" />
+        )}
+        {state === "saving"
+          ? "সংরক্ষণ হচ্ছে…"
+          : state === "saved"
+            ? "সংরক্ষিত"
+            : state === "error"
+              ? "আবার চেষ্টা করুন"
+              : "সংরক্ষণ করুন"}
+      </button>
+      {state === "idle" && <span className="text-[10px] text-ink-faint">আমার হিসাবে রাখুন</span>}
+    </div>
+  );
+}
 
 function EmptyState({
   onPick,

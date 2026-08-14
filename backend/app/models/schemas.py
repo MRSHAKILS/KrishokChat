@@ -142,3 +142,19 @@ class SafetyLogEntry(BaseModel):
     action: str
     flagged: bool = False
     verifier_flag: str | None = None
+
+
+class SavedQueryIn(BaseModel):
+    query_text: str = Field(..., min_length=1, max_length=4000)
+    answer_text: str = Field(..., min_length=1, max_length=20_000)
+    sources: list[dict] = Field(default_factory=list)
+    category: str = Field(default="", max_length=100)
+
+
+class SavedQueryOut(BaseModel):
+    id: str
+    query_text: str
+    answer_text: str
+    sources: list[dict] = Field(default_factory=list)
+    category: str = ""
+    created_at: str
