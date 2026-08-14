@@ -15,6 +15,9 @@ from app.infrastructure.audit.jsonl import JSONLAuditSink
 from app.infrastructure.auth.jwks import SupabaseJWKSVerifier
 from app.infrastructure.llm.factory import create_llm_client
 from app.infrastructure.retrieval.bm25 import BM25Retriever
+from app.infrastructure.retrieval.dense import DenseRetriever
+from app.infrastructure.retrieval.expansion import QueryExpander
+from app.infrastructure.retrieval.hybrid import HybridRetriever
 from app.infrastructure.sessions.memory import InMemorySessionStore
 from app.infrastructure.soil.dataset_loader import load_soil_dataset
 from app.infrastructure.storage.postgrest import PostgrestSavedHistoryStore
@@ -39,9 +42,28 @@ class AppContainer:
 def build_container(settings: Settings) -> AppContainer:
     intent_llm = create_llm_client(settings, role="intent")
     generation_llm = create_llm_client(settings, role="generation")
-    retriever = BM25Retriever(
+    bm25_retriever = BM25Retriever(
         index_path=settings.rag_index_path / "indexes" / "bm25_index.pkl",
-        corpus_path=settings.rag_index_path / "processed" / "knowledge_nodes_clean.jsonl",
+        corpus_path=settings.rag_corpus_path,
+    )
+    # P3: dense (FAISS + BGE-M3) channel + RRF fusion. The dense channel uses
+    # the same OpenRouter key as generation; without a key or index it is
+    # unavailable and the hybrid falls back to BM25-only automatically.
+    dense_retriever = DenseRetriever(
+        index_path=settings.rag_dense_faiss_path,
+        ids_path=settings.rag_dense_ids_path,
+        corpus_path=settings.rag_corpus_path,
+        api_key=settings.openrouter_api_key,
+    )
+    expander = QueryExpander(
+        term_map_path=settings.rag_term_map_path,
+        dialect_map_path=settings.rag_dialect_map_path,
+    )
+    retriever = HybridRetriever(
+        bm25=bm25_retriever,
+        dense=dense_retriever,
+        expander=expander,
+        bm25_only=settings.retrieval_bm25_only,
     )
     sessions = InMemorySessionStore(
         max_turns=settings.session_max_turns,

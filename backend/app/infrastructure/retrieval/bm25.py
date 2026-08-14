@@ -10,6 +10,7 @@ from pathlib import Path
 import numpy as np
 
 from app.domain.contracts import RetrievedSource
+from app.infrastructure.retrieval.nodes import source_from_node
 
 
 class BM25Retriever:
@@ -43,19 +44,40 @@ class BM25Retriever:
     def _tokenize(text: str) -> list[str]:
         return text.lower().split()
 
-    def retrieve(self, query: str, *, top_k: int) -> list[RetrievedSource]:
-        if top_k <= 0:
-            return []
+    def _scores(self, query: str) -> np.ndarray | None:
         try:
             index, corpus = self._load()
             if index is None or not corpus:
-                return []
-            scores = index.get_scores(self._tokenize(query))
+                return None
+            return index.get_scores(self._tokenize(query))
         except (OSError, pickle.PickleError, ValueError, AttributeError, TypeError):
-            return []
+            return None
 
-        if len(scores) == 0:
+    def candidates(self, query: str, *, depth: int) -> list[RetrievedSource]:
+        """Raw top-`depth` scored documents (no threshold) — the RRF channel
+        input. `retrieve` keeps its thresholded behavior unchanged."""
+        if depth <= 0:
             return []
+        scores = self._scores(query)
+        if scores is None or len(scores) == 0:
+            return []
+        corpus = self._corpus or []
+        results: list[RetrievedSource] = []
+        for position in np.argsort(scores)[::-1][:depth]:
+            index_position = int(position)
+            if index_position >= len(corpus):
+                continue
+            node = corpus[index_position]
+            results.append(source_from_node(node, float(scores[index_position])))
+        return results
+
+    def retrieve(self, query: str, *, top_k: int) -> list[RetrievedSource]:
+        if top_k <= 0:
+            return []
+        scores = self._scores(query)
+        if scores is None or len(scores) == 0:
+            return []
+        corpus = self._corpus or []
         max_score = float(max(scores))
         threshold = max_score * 0.2 if max_score > 0 else 0.0
         results: list[RetrievedSource] = []
@@ -67,30 +89,7 @@ class BM25Retriever:
             if score <= threshold:
                 continue
             node = corpus[index_position]
-            results.append(
-                RetrievedSource(
-                    id=str(node.get("id", f"doc_{index_position}")),
-                    score=score,
-                    title_en=str(node.get("title_en", "")),
-                    title_bn=str(node.get("title_bn", "")),
-                    content_en=str(node.get("content_en", "")),
-                    content_bn=str(node.get("content_bn", "")),
-                    source=str(node.get("source_document", node.get("source", ""))),
-                    citation=str(node.get("citation", "")),
-                    metadata={
-                        "category": node.get("category", ""),
-                        "tags": node.get("tags", []),
-                        "title_en": node.get("title_en", ""),
-                        "title_bn": node.get("title_bn", ""),
-                        "section_title": node.get("section_title", ""),
-                        "publisher": node.get("publisher", ""),
-                        "citation": node.get("citation", ""),
-                        "summary": node.get("summary", ""),
-                        "treatment_summary_bn": node.get("treatment_summary_bn", ""),
-                        "prevention_bn": node.get("prevention_bn", ""),
-                    },
-                )
-            )
+            results.append(source_from_node(node, score))
             if len(results) == top_k:
                 break
         return results

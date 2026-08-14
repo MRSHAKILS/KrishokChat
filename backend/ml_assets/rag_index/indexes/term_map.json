@@ -1,0 +1,544 @@
+{
+ "version": 1,
+ "created": "2026-08-14T13:12:08+00:00",
+ "source": "corpus bilingual titles (knowledge_nodes_clean.jsonl)",
+ "count": 134,
+ "map": [
+  {
+   "bn": "AEZ ৭: সক্রিয় ব্রহ্মপুত্র-যমুনা প্লাবনভূমির জন্য সার সুপারিশ",
+   "en": "Fertilizer Recommendations for AEZ 7: Active Brahmaputra-Jamuna Floodplain"
+  },
+  {
+   "bn": "এইজেড ২০: পূর্ব সুরমা-কুশিয়ারা প্লাবনভূমি এলাকার সার সুপারিশ",
+   "en": "AEZ 20: Eastern Surma-Kushyara Floodplain Fertilizer Recommendations"
+  },
+  {
+   "bn": "কৃষি পরিবেশ অঞ্চল-১৭: নিম্ন মেঘনা প্রাবনভূমি সার ব্যবস্থাপনা",
+   "en": "Fertilizer Management for AEZ-17: Lower Meghna River Floodplain"
+  },
+  {
+   "bn": "গবাদি পশুর গর্ভাবস্থা ও প্রসবকালীন ব্যবস্থাপনা (গরু ও মহিষ)",
+   "en": "Pregnancy and Parturition Management for Cattle and Buffalo"
+  },
+  {
+   "bn": "AEZ ১৩: গাঙ্গেয় জোয়ার-ভাটা প্লাবনভূমি অঞ্চলের শস্য বিন্যাস",
+   "en": "Cropping Patterns for AEZ 13: Ganges Tidal Floodplain"
+  },
+  {
+   "bn": "মৃত্তিকা সম্পদ উন্নয়ন ইনস্টিটিউট (SRDI) কর্তৃক নাগরিক সেবা",
+   "en": "Citizen Services provided by SRDI"
+  },
+  {
+   "bn": "বিভিন্ন কৃষি পরিবেশ অঞ্চলে (AEZ) মাটির অণুজীবের উপস্থিতি",
+   "en": "Microbial Population in Different Agro-Ecological Zones (AEZ)"
+  },
+  {
+   "bn": "বাংলাদেশে আলুর উৎপাদন ও বাজারজাতকরণ সংক্রান্ত পরিসংখ্যান",
+   "en": "Statistics on Potato Production and Marketing in Bangladesh"
+  },
+  {
+   "bn": "কৃষি পরিবেশ অঞ্চল-২৬ (উচ্চ বরেন্দ্র) এর জন্য সার সুপারিশ",
+   "en": "Fertilizer Recommendation for AEZ 26 (High Barind Tract)"
+  },
+  {
+   "bn": "কৃষি পরিবেশ অঞ্চল-২৮ (মধুপুর গড়): ফসলভিত্তিক সার সুপারিশ",
+   "en": "AEZ 28 (Madhupur Tract): Cropping-System Fertilizer Recommendation"
+  },
+  {
+   "bn": "এইজেড ২৯: উত্তর ও পূর্ব পাহাড়ি অঞ্চলের জন্য সার সুপারিশ",
+   "en": "AEZ 29: Northern and Eastern Hills Fertilizer Recommendations"
+  },
+  {
+   "bn": "বাংলাদেশে ধান উৎপাদন ও বাজারজাতকরণ সংক্রান্ত পরিসংখ্যান",
+   "en": "Statistics on Rice Production and Marketing in Bangladesh"
+  },
+  {
+   "bn": "কৃষি সম্প্রসারণ অধিদপ্তর (DAE) বার্ষিক উৎপাদন পরিকল্পনা",
+   "en": "DAE Annual Production Planning"
+  },
+  {
+   "bn": "বাংলাদেশের ভঙ্গুর বাস্তুসংস্থানের মাটির উর্বরতা অবস্থা",
+   "en": "Soil fertility status in fragile ecosystems of Bangladesh"
+  },
+  {
+   "bn": "বিভিন্ন কৃষি পরিবেশ অঞ্চলে (AEZ) মাটির অণুজীবের সংখ্যা",
+   "en": "Microbial Population in Soils of Different Agro-Ecological Zones (AEZ)"
+  },
+  {
+   "bn": "বাংলাদেশের বিভিন্ন বাস্তুতন্ত্রে কৃষি উৎপাদন চ্যালেঞ্জ",
+   "en": "Agricultural Production Challenges in Different Ecosystems of Bangladesh"
+  },
+  {
+   "bn": "মাটি পরীক্ষা ও ফলন লক্ষ্যমাত্রার ভিত্তিতে সার সুপারিশ",
+   "en": "Location specific and Yield goal basis fertilizer recommendation"
+  },
+  {
+   "bn": "ফলাফল প্রদর্শনী (Result Demonstration) ও এর প্রকারভেদ",
+   "en": "Result Demonstration and its Types"
+  },
+  {
+   "bn": "দপ্তরসংস্থার কৌশলগত উদ্দেশ্য ও কর্মপরিকল্পনা নির্ধারণ",
+   "en": "Strategic Objectives and Operational Planning for Organizations"
+  },
+  {
+   "bn": "কৃষি পরিবেশ অঞ্চল-২০: পূর্ব সুরমা-কুশিয়ারা প্লাবনভূমি",
+   "en": "AEZ 20: Eastern Surma-Kushiyara Floodplain"
+  },
+  {
+   "bn": "এসআরডিআই (SRDI) আঞ্চলিক কার্যালয় ও গবেষণাগারের ঠিকানা",
+   "en": "SRDI Regional Offices and Laboratory Addresses"
+  },
+  {
+   "bn": "উচ্চ বরেন্দ্র অঞ্চলের কৃষি সম্প্রসারণ ও শস্য বিন্যাস",
+   "en": "Agricultural Extension and Cropping Patterns in High Barind Regions"
+  },
+  {
+   "bn": "কৃষি সম্প্রসারণ পরিকল্পনা প্রণয়নের গুরুত্ব ও পদ্ধতি",
+   "en": "Importance and Methodology of DAE Agricultural Extension Planning"
+  },
+  {
+   "bn": "বিভিন্ন কৃষি পরিবেশ অঞ্চলের (AEZ) জন্য সার সুপারিশ",
+   "en": "Fertilizer Recommendations for Different AEZs"
+  },
+  {
+   "bn": "বিভিন্ন কৃষি পরিবেশ অঞ্চলে (AEZ) ফসলের সার সুপারিশ",
+   "en": "Fertilizer Recommendations for Crops in Different AEZs"
+  },
+  {
+   "bn": "বাংলাদেশে ধানের উৎপাদন, চাহিদা ও অর্থনৈতিক প্রবণতা",
+   "en": "Trends in Rice Production, Demand, and Economics in Bangladesh"
+  },
+  {
+   "bn": "কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক গঠিত কৃষক দল",
+   "en": "Farmer Groups Formed by the Department of Agricultural Extension (DAE)"
+  },
+  {
+   "bn": "AEZ 2: সক্রিয় তিস্তা প্লাবনভূমির জন্য সার সুপারিশ",
+   "en": "AEZ 2: Fertilizer Recommendations for Active Tista Floodplain"
+  },
+  {
+   "bn": "রাসায়নিক সারের পুষ্টি উপাদান ও বিষাক্ত ধাতুর সীমা",
+   "en": "Nutrient Composition and Toxic Metal Limits in Fertilizers"
+  },
+  {
+   "bn": "কৃষি সম্প্রসারণ পদ্ধতি: প্রদর্শনী (Demonstration)",
+   "en": "Agricultural Extension Method: Demonstration"
+  },
+  {
+   "bn": "পেঁয়াজ উৎপাদন ও বাজারজাতকরণ সংক্রান্ত পরিসংখ্যান",
+   "en": "Onion Production and Market Statistics"
+  },
+  {
+   "bn": "ছাগল ও ভেড়ার গর্ভাবস্থা ও প্রসবকালীন ব্যবস্থাপনা",
+   "en": "Pregnancy and Parturition Management for Goat and Sheep"
+  },
+  {
+   "bn": "কার্প ও মলা মাছের মিশ্র চাষের পরিচিতি ও উপকারিতা",
+   "en": "Overview and Benefits of Carp and Mola Polyculture"
+  },
+  {
+   "bn": "মাটির পুষ্টি উপাদান পরীক্ষার মানদণ্ড ও ব্যাখ্যা",
+   "en": "Interpretation of Soil Test Values"
+  },
+  {
+   "bn": "জার্মান ঘাস এবং এইজেড ৮ (AEZ 8) সংক্রান্ত তথ্য",
+   "en": "German Grass and AEZ 8 Information"
+  },
+  {
+   "bn": "ধান ও চালের বাজার দর এবং মূল্য পরিবর্তনের কারণ",
+   "en": "Price variation and market trends of paddy and rice"
+  },
+  {
+   "bn": "সার সুপারিশমালা হাতবই-২০১৮: পরিচিতি ও উদ্দেশ্য",
+   "en": "Handbook on Fertilizer Recommendation 2018: Introduction and Purpose"
+  },
+  {
+   "bn": "কৃষি সম্প্রসারণ কার্যক্রমের প্রতিবেদন ফরম্যাট",
+   "en": "Agricultural Extension Activity Reporting Format"
+  },
+  {
+   "bn": "আখাউড়া সোপানভূমি (AEZ 30) এর জন্য সার সুপারিশ",
+   "en": "Fertilizer Recommendations for AEZ 30: Akhaura Terrace"
+  },
+  {
+   "bn": "শহরাঞ্চলে কৃষি উন্নয়ন ও ডিএই-এর লক্ষ্যমাত্রা",
+   "en": "Urban Agricultural Development and DAE Objectives"
+  },
+  {
+   "bn": "ফুল ও শোভাবর্ধক গাছের ক্ষতিকারক পোকা ও মাকড়",
+   "en": "Insect and Mite Pests of Flower and Ornamental Plants"
+  },
+  {
+   "bn": "বোরো ধান (উচ্চ ফলনশীল জাত) সার ব্যবস্থাপনা",
+   "en": "Fertilizer Management for Boro Rice (High Yielding Varieties)"
+  },
+  {
+   "bn": "ধান চাষের লাভজনকতা নির্ণয়ের গাণিতিক পদ্ধতি",
+   "en": "Mathematical Method for Determining Paddy Farming Profitability"
+  },
+  {
+   "bn": "শূকরের গর্ভাবস্থা ও প্রসবকালীন ব্যবস্থাপনা",
+   "en": "Pregnancy and Parturition Management for Pigs"
+  },
+  {
+   "bn": "বাংলাদেশে চালের চাহিদা ও ব্যবহারের পদ্ধতি",
+   "en": "Methodology for Rice Demand and Usage Estimation in Bangladesh"
+  },
+  {
+   "bn": "ব্রাসিকাতে ব্যাকটেরিয়াল সফট রট (ফুলকপি)",
+   "en": "Bacterial Soft Rot"
+  },
+  {
+   "bn": "স্থানীয় (পুরানো) তুঁত জাত: সাদা বোম্বাই",
+   "en": "Local (Old) Mulberry Variety: Sada Bomby"
+  },
+  {
+   "bn": "পদ্ধতি প্রদর্শনী (Method Demonstration)",
+   "en": "Method Demonstration"
+  },
+  {
+   "bn": "শস্য ফসলের ক্ষতিকারক পোকা ও মাইট তালিকা",
+   "en": "List of Insect and Mite Pests of Cereal Crops"
+  },
+  {
+   "bn": "কৃষক ক্লাব ও কৃষি সম্প্রসারণ কার্যক্রম",
+   "en": "Farmers' Clubs and Agricultural Extension Activities"
+  },
+  {
+   "bn": "লবণাক্ত এলাকায় ফসল চাষাবাদ ব্যবস্থাপনা",
+   "en": "Crop Cultivation Management in Saline-Prone Regions"
+  },
+  {
+   "bn": "চিনি জাতীয় ফসলের ক্ষতিকারক পোকা ও মাকড়",
+   "en": "Insect and Mite Pests of Sugar Crops"
+  },
+  {
+   "bn": "কৃষিতে বন্যা, খরা ও লবণাক্ততার প্রভাব",
+   "en": "Effects of Flood, Drought, and Salinity on Agriculture"
+  },
+  {
+   "bn": "কন্দজাতীয় ফসলের ক্ষতিকারক পোকা ও মাকড়",
+   "en": "Insect and Mite Pests of Tuber Crops"
+  },
+  {
+   "bn": "ফুসারিয়াম ফুট রট (Fusarium Foot Rot)",
+   "en": "Fusarium Foot Rot"
+  },
+  {
+   "bn": "কৃষি মেলা (District or Upazila Fair)",
+   "en": "District or Upazila Fair"
+  },
+  {
+   "bn": "মলা ও কার্প মাছ আহরণ এবং বাজারজাতকরণ",
+   "en": "Fish Harvesting and Marketing"
+  },
+  {
+   "bn": "তেলজাতীয় ফসলের ক্ষতিকারক পোকা ও মাকড়",
+   "en": "Insect and Mite Pests of Oilseed Crops"
+  },
+  {
+   "bn": "আঁশজাতীয় ফসলের ক্ষতিকারক পোকা ও মাইট",
+   "en": "Insect and Mite Pests of Fibre Crops"
+  },
+  {
+   "bn": "ফল জাতীয় ফসলের ক্ষতিকারক পোকা ও মাইট",
+   "en": "Insect and Mite Pests of Fruit Crops"
+  },
+  {
+   "bn": "AEZ ভিত্তিক সার সুপারিশ (AEZ 14-19)",
+   "en": "AEZ-wise Fertilizer Recommendations (AEZ 14-19)"
+  },
+  {
+   "bn": "চর এলাকার কৃষি বৈশিষ্ট্য ও সম্ভাবনা",
+   "en": "Agricultural Characteristics and Potential of Char Areas"
+  },
+  {
+   "bn": "জলবায়ু পরিবর্তন ও তাপমাত্রার প্রভাব",
+   "en": "Impact of Global Warming and Cold Wave on Agriculture"
+  },
+  {
+   "bn": "কৃষি উন্নয়নের ভবিষ্যৎ চ্যালেঞ্জসমূহ",
+   "en": "Future Challenges in the Development of Agriculture"
+  },
+  {
+   "bn": "সুগারবিট, খেজুর ও পাম গাছের রোগসমূহ",
+   "en": "Diseases of Sugarbeet, Date Palm, and Palm"
+  },
+  {
+   "bn": "কৃষি পরিবেশ অঞ্চল ও সার সুপারিশমালা",
+   "en": "Agro-Ecological Zones and Fertilizer Recommendation Framework"
+  },
+  {
+   "bn": "বিভিন্ন ফসলের জন্য সার সুপারিশমালা",
+   "en": "Nutrient Recommendation for Various Crops"
+  },
+  {
+   "bn": "জৈব সার ও সবুজ সারের পুষ্টি উপাদান",
+   "en": "Nutrient Concentration in Organic Manures and Green Manures"
+  },
+  {
+   "bn": "জেলা পর্যায়ে প্রশিক্ষণ ব্যবস্থাপনা",
+   "en": "Training Management at District Levels"
+  },
+  {
+   "bn": "শস্যক্ষেতের আগাছা পরিচিতি ও তালিকা",
+   "en": "Identification and List of Weeds in Cereal Crops"
+  },
+  {
+   "bn": "গমের পাতা ঝলসানো রোগ (Leaf Blight)",
+   "en": "Wheat Leaf Blight"
+  },
+  {
+   "bn": "কৈলিফ্লাওয়ারের ব্যাকটেরিয়াল স্পট",
+   "en": "Bacterial Spot"
+  },
+  {
+   "bn": "স্থানীয় তুঁত জাত: তেলিয়া ও দুদিয়া",
+   "en": "Local Mulberry Varieties: Telia and Dudia"
+  },
+  {
+   "bn": "অভিযোগ কেন্দ্র (Complaint Centre)",
+   "en": "Complaint Centre"
+  },
+  {
+   "bn": "নিবন্ধিত বালাইনাশকের তালিকা (DAE)",
+   "en": "List of Registered Agricultural Pesticides (DAE)"
+  },
+  {
+   "bn": "সমন্বিত পুষ্টি ব্যবস্থাপনা (INM)",
+   "en": "Integrated Nutrient Management (INM)"
+  },
+  {
+   "bn": "কৃষি সম্প্রসারণের সংশোধিত পদ্ধতি",
+   "en": "Revised Agricultural Extension Approach"
+  },
+  {
+   "bn": "হাওর অঞ্চলে কৃষি সম্প্রসারণ কৌশল",
+   "en": "Agricultural Extension Strategies in the Haor Region"
+  },
+  {
+   "bn": "বাংলাদেশে ই-কৃষি সম্প্রসারণ সেবা",
+   "en": "e-Extension Services in Bangladesh"
+  },
+  {
+   "bn": "সবজি ফসলের ক্ষতিকারক পোকা ও মাকড়",
+   "en": "Insect and Mite Pests of Vegetable Crops"
+  },
+  {
+   "bn": "ঔষধি গাছের ক্ষতিকারক পোকা ও মাকড়",
+   "en": "Insect and Mite Pests of Medicinal Plants"
+  },
+  {
+   "bn": "বাণিজ্যিক জৈব সারের অনুমোদিত মান",
+   "en": "Approved Standards for Commercial Organic Fertilizer"
+  },
+  {
+   "bn": "কৃষি সম্প্রসারণ পদ্ধতি নির্বাচন",
+   "en": "Selecting Extension Methods"
+  },
+  {
+   "bn": "পশু ও হাঁস-মুরগির প্রজনন পদ্ধতি",
+   "en": "Breeding Methods for Livestock and Poultry"
+  },
+  {
+   "bn": "বনজ গাছের ক্ষতিকারক পোকা ও মাকড়",
+   "en": "Insect and Mite Pests of Forest Trees"
+  },
+  {
+   "bn": "সবজি ফসলের রোগসমূহ (সারসংক্ষেপ)",
+   "en": "Diseases of Vegetable Crops (Summary)"
+  },
+  {
+   "bn": "আল্টারনারিয়া স্পট (ব্রাসিকাতে)",
+   "en": "Alternaria Spot"
+  },
+  {
+   "bn": "গমের কালোদাগ রোগ (Black Point)",
+   "en": "Wheat Black Point Disease"
+  },
+  {
+   "bn": "কামরাঙা গাছের সার ব্যবস্থাপনা",
+   "en": "Fertilizer Management for Carambola"
+  },
+  {
+   "bn": "হাওর অঞ্চলের কৃষি ও বৈশিষ্ট্য",
+   "en": "Agriculture and Characteristics of the Haor Region"
+  },
+  {
+   "bn": "লবণাক্ততা পরবর্তী ফসল চাষাবাদ",
+   "en": "Crop Cultivation after Salinity"
+  },
+  {
+   "bn": "পুকুরে মাছ চাষ: চাষি সহায়িকা",
+   "en": "Pond Fish Culture: Farmers' Guidebook"
+  },
+  {
+   "bn": "আঁশজাতীয় ফসলের আগাছা পরিচিতি",
+   "en": "Identification of Weeds in Fibre Crops"
+  },
+  {
+   "bn": "বাতাবিলেবুর সার ব্যবস্থাপনা",
+   "en": "Fertilizer Management for Pummelo"
+  },
+  {
+   "bn": "সফেদা গাছের সার ব্যবস্থাপনা",
+   "en": "Fertilizer Management for Sapota"
+  },
+  {
+   "bn": "মাটির নমুনা সংগ্রহের পদ্ধতি",
+   "en": "Methods of soil sample collection"
+  },
+  {
+   "bn": "ভেড়া পালন ও প্রজনন নীতিমালা",
+   "en": "Sheep Breeding Practices"
+  },
+  {
+   "bn": "ফল বাগানে আগাছা ব্যবস্থাপনা",
+   "en": "Weed Management in Fruit Orchards"
+  },
+  {
+   "bn": "কৈলীফ্লাওয়ারে কালো দাগ রোগ",
+   "en": "Black Spot"
+  },
+  {
+   "bn": "মাদক ও পানীয় ফসলের রোগসমূহ",
+   "en": "Diseases of Narcotics and Beverage Crops"
+  },
+  {
+   "bn": "ব্রাসিকার ডাউনি মিলডিউ রোগ",
+   "en": "Downy Mildew"
+  },
+  {
+   "bn": "অল্টারনারিয়া রোগ (ফুলকপি)",
+   "en": "Alternaria Disease"
+  },
+  {
+   "bn": "ভাসমান কৃষিতে সার সুপারিশ",
+   "en": "Fertilizer Recommendation for Floating Agriculture"
+  },
+  {
+   "bn": "কচু ও মিষ্টি আলুর রোগসমূহ",
+   "en": "Diseases of Taro and Sweet Potato"
+  },
+  {
+   "bn": "জলপাইয়ের সার ব্যবস্থাপনা",
+   "en": "Fertilizer Management for Indian Olive"
+  },
+  {
+   "bn": "কৃষকের ব্যাংক অ্যাকাউন্ট",
+   "en": "Farmer's Bank Account"
+  },
+  {
+   "bn": "শস্য জাতীয় ফসলের রোগসমূহ",
+   "en": "Diseases of Cereal Crops"
+  },
+  {
+   "bn": "সবজি ফসলের আগাছা পরিচিতি",
+   "en": "Weeds of Vegetable Crops"
+  },
+  {
+   "bn": "তরমুজের সার ব্যবস্থাপনা",
+   "en": "Fertilizer Management for Watermelon"
+  },
+  {
+   "bn": "কৃষক ইনপুট সহায়তা কার্ড",
+   "en": "Farmer Input Assistance Card"
+  },
+  {
+   "bn": "ডাল জাতীয় ফসলের রোগসমূহ",
+   "en": "Diseases of Pulse Crops"
+  },
+  {
+   "bn": "আলু ফসলের আগাছা পরিচিতি",
+   "en": "Weeds of Potato Crops"
+  },
+  {
+   "bn": "হাইড্রোপনিক চাষ পদ্ধতি",
+   "en": "Hydroponic Culture"
+  },
+  {
+   "bn": "সরিষার সার ব্যবস্থাপনা",
+   "en": "Mustard Fertilizer Management"
+  },
+  {
+   "bn": "হলুদের সার ব্যবস্থাপনা",
+   "en": "Fertilizer Management for Turmeric"
+  },
+  {
+   "bn": "মরিচের সার ব্যবস্থাপনা",
+   "en": "Fertilizer Management for Chilli"
+  },
+  {
+   "bn": "তেলজাতীয় ফসলের রোগসমূহ",
+   "en": "Diseases of Oilseed Crops"
+  },
+  {
+   "bn": "আঁশজাতীয় ফসলের রোগসমূহ",
+   "en": "Diseases of Fibre Crops"
+  },
+  {
+   "bn": "ফল জাতীয় ফসলের রোগসমূহ",
+   "en": "Diseases of Fruit Crops"
+  },
+  {
+   "bn": "ব্রাসিকার ডাউনি মিলডিউ",
+   "en": "Downy Mildew"
+  },
+  {
+   "bn": "তিলের সার ব্যবস্থাপনা",
+   "en": "Sesame Fertilizer Management"
+  },
+  {
+   "bn": "ব্রাসিকাতে বোরন ঘাটতি",
+   "en": "Nutrient Deficiency"
+  },
+  {
+   "bn": "মাঠ দিবস (Field Day)",
+   "en": "Field Day"
+  },
+  {
+   "bn": "সুস্থ বাঁধাকপির পাতা",
+   "en": "Healthy Cabbage Leaf"
+  },
+  {
+   "bn": "আখের প্রধান রোগসমূহ",
+   "en": "Major Diseases of Sugarcane"
+  },
+  {
+   "bn": "মসলা ফসলের রোগসমূহ",
+   "en": "Diseases of Spice Crops"
+  },
+  {
+   "bn": "ঔষধি গাছের রোগসমূহ",
+   "en": "Diseases of Medicinal Plants"
+  },
+  {
+   "bn": "ক্যাবেজ ব্ল্যাক রট",
+   "en": "Black Rot"
+  },
+  {
+   "bn": "আলু ফসলের রোগসমূহ",
+   "en": "Diseases of Potato"
+  },
+  {
+   "bn": "বনজ গাছের রোগসমূহ",
+   "en": "Diseases of Forest Trees"
+  },
+  {
+   "bn": "সরজান চাষ পদ্ধতি",
+   "en": "Sorjan Farming Method"
+  },
+  {
+   "bn": "সুস্থ ধানের পাতা",
+   "en": "Healthy Rice Leaf"
+  },
+  {
+   "bn": "গম ব্লাস্ট রোগ",
+   "en": "Wheat Blast Disease"
+  },
+  {
+   "bn": "ছাদ বাগান",
+   "en": "Rooftop Gardening"
+  }
+ ]
+}

@@ -128,7 +128,13 @@ class QAPipeline:
                 if source.id not in seen_ids:
                     seen_ids.add(source.id)
                     sources.append(source)
-            await emit(PipelineStage.RETRIEVAL, StageStatus.COMPLETE, f"{len(sources)} sources")
+            # P3: surface the dialect expansion in the agent trace (honest
+            # evidence the mapping ran; nothing shown when no terms matched).
+            detail = f"{len(sources)} sources"
+            expansion = getattr(self.retriever, "last_expansion", None)
+            if expansion and expansion[2]:
+                detail += " · " + "; ".join(expansion[2][:3])
+            await emit(PipelineStage.RETRIEVAL, StageStatus.COMPLETE, detail)
 
             await emit(PipelineStage.GENERATION, StageStatus.START)
             generator = self._generator_for(request.model)

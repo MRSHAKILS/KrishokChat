@@ -58,6 +58,11 @@ class Settings(BaseSettings):
     session_ttl_seconds: int = Field(default=1800, ge=60)
     audit_log_path: str = "backend/app/logs/safety_audit.jsonl"
 
+    # P3 hybrid retrieval: force the BM25-only fallback even when the dense
+    # (FAISS/BGE-M3) index exists. The dense channel also falls back to BM25
+    # automatically whenever the OpenRouter key or index is unavailable.
+    retrieval_bm25_only: bool = False
+
     vision_crop_confidence_threshold: float = Field(default=0.60, ge=0.0, le=1.0)
     vision_disease_confidence_threshold: float = Field(default=0.55, ge=0.0, le=1.0)
     vision_max_image_bytes: int = Field(default=10_000_000, ge=100_000)
@@ -97,6 +102,28 @@ class Settings(BaseSettings):
     @property
     def rag_index_path(self) -> Path:
         return Path(self.ml_assets_dir) / "rag_index"
+
+    @property
+    def rag_corpus_path(self) -> Path:
+        return self.rag_index_path / "processed" / "knowledge_nodes_clean.jsonl"
+
+    @property
+    def rag_dense_faiss_path(self) -> Path:
+        return self.rag_index_path / "indexes" / "nodes.faiss"
+
+    @property
+    def rag_dense_ids_path(self) -> Path:
+        return self.rag_index_path / "indexes" / "node_ids.json"
+
+    @property
+    def rag_term_map_path(self) -> Path:
+        return self.rag_index_path / "indexes" / "term_map.json"
+
+    @property
+    def rag_dialect_map_path(self) -> Path:
+        # Restored dataset_release/safety/phase4_dialect_map.json is merged
+        # automatically when present; absence degrades nothing.
+        return PROJECT_ROOT.parent / "dataset_release" / "safety" / "phase4_dialect_map.json"
 
     @property
     def resolved_llm_model(self) -> str:

@@ -1,0 +1,19 @@
+{
+  "created": "2026-08-14T13:22:30+00:00",
+  "sample_size": 100,
+  "dense_available": true,
+  "top_k": 5,
+  "note": "coverage smoke only — recall/quality judgments arrive with the P4 golden set",
+  "bm25": {
+    "non_empty_rate": 0.99,
+    "avg_top1_score": 16.679,
+    "avg_sources": 4.95
+  },
+  "hybrid": {
+    "non_empty_rate": 1.0,
+    "avg_top1_score": 0.048,
+    "avg_sources": 5.0
+  },
+  "hybrid_active_rate": 1.0,
+  "expansion_hit_rate": 0.0
+}

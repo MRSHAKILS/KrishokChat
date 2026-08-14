@@ -37,11 +37,13 @@ credibility spine. **P3** and **P5** are parallelizable side-lanes; P3 has the
 longest silent risk (dense index build + retrieval quality) and should start
 early so regressions surface before demo week.
 
-Correction recorded from `paper/system_evolution_plan_2026/MEMORY.md` (T03/T04):
-**the dense/FAISS channel does NOT exist at runtime today** (BM25-only). P3 must
-therefore first BUILD the dense index offline (`scripts/build_rag_index.py`,
-run once, per root AGENTS.md §5) before any RRF fusion claim. No hybrid claim may
-be made until that index exists and is wired.
+STATUS (2026-08-14): **P3 shipped** — dense index BUILT (2,135 nodes, BGE-M3
+via OpenRouter, FAISS IndexFlatIP, sha256 `0f6f711829...cb524`), hybrid RRF
+runtime wired (RRF k=20, candidate_depth=50, `RETRIEVAL_BM25_ONLY` fallback),
+expansion surfaced in trace. 77/77 pytest; live probe shows RRF fusion score
+in audit; smoke eval `ml_assets/rag_index/eval/hybrid_smoke.json` (coverage
+only, no recall claims). Known gap: expansion hit rate 0.6% — restore
+`dataset_release/safety/phase4_dialect_map.json` (110-word map) to raise it.
 
 ---
 
