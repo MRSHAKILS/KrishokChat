@@ -100,7 +100,28 @@ export interface SafetyMetrics {
   total_queries: number;
   by_category: Record<string, number>;
   flagged_count: number;
-  recent: { query: string; category: string; timestamp: string }[];
+  verifier?: {
+    checked: number;
+    grounded: number;
+    unsupported: number;
+    pass_rate: number | null;
+  };
+  refusals?: { answered_without_sources: number };
+  router?: { blocked: number; refusal_rate: number | null };
+  retrieval?: {
+    answered: number;
+    hit_rate: number | null;
+    avg_top1_score: number | null;
+    avg_sources: number | null;
+  };
+  recent: {
+    query: string;
+    category: string;
+    timestamp: string;
+    action?: string;
+    retrieval_hit?: boolean;
+    verifier_passed?: boolean | null;
+  }[];
 }
 
 /* ---------- QA --------------------------------------------------------- */

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Shield, TrendingUp, AlertTriangle, CheckCircle2, Activity, Download, Filter, RefreshCw } from "lucide-react";
+import { Shield, TrendingUp, AlertTriangle, CheckCircle2, Activity, Download, Filter, RefreshCw, Search, ShieldCheck } from "lucide-react";
 import { getSafetyMetrics, type SafetyMetrics } from "@/lib/api";
 import { RESEARCH_STATS } from "@/lib/constants";
 import { bn } from "@/lib/bn";
@@ -87,6 +87,19 @@ export default function AnalyticsPage() {
     if (filter === "blocked") return item.category !== "safe_agri";
     return true;
   });
+
+  /* Pipeline stats (dual-view) — aggregated from the same logged decisions
+     the chat stepper renders; null means "no evidence yet", shown as —. */
+  const verifier = data.verifier;
+  const verifierChecked = verifier?.checked ?? 0;
+  const verifierGrounded = verifier?.grounded ?? 0;
+  const verifierUnsupported = verifier?.unsupported ?? 0;
+  const verifierPassPct = verifier?.pass_rate == null ? null : Math.round(verifier.pass_rate * 100);
+  const routerBlocked = data.router?.blocked ?? 0;
+  const routerRefusalPct = data.router?.refusal_rate == null ? null : Math.round(data.router.refusal_rate * 100);
+  const retrievalHitPct = data.retrieval?.hit_rate == null ? null : Math.round(data.retrieval.hit_rate * 100);
+  const avgTop1 = data.retrieval?.avg_top1_score == null ? "—" : data.retrieval.avg_top1_score.toFixed(2);
+  const avgSources = data.retrieval?.avg_sources == null ? "—" : bn(Math.round(data.retrieval.avg_sources));
 
   const exportAudit = () => {
     const blob = new Blob([JSON.stringify({ exported_at: new Date().toISOString(), ...data }, null, 2)], { type: "application/json" });
@@ -240,6 +253,50 @@ export default function AnalyticsPage() {
         </motion.section>
       </div>
 
+      {/* Pipeline stats — dual-view: these are the same decisions the chat
+          stepper animates live, aggregated from the local audit log. */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={stagger}
+        className="rounded-xl border rule bg-paper p-6"
+      >
+        <motion.div variants={enter} className="mb-1 flex items-center gap-2">
+          <h2 className="font-display text-lg text-ink">পাইপলাইন পরিসংখ্যান</h2>
+          <span className="rounded-md bg-leaf/10 px-2 py-0.5 text-[10px] font-medium text-leaf">লাইভ স্টেপার ডেটা</span>
+        </motion.div>
+        <motion.p variants={enter} className="mb-5 text-xs text-ink-faint">
+          চ্যাটে প্রতিটি ধাপের অ্যানিমেশন যে সিদ্ধান্ত দেখায়, এখানে তারই জমা পরিসংখ্যান।
+        </motion.p>
+        <motion.div variants={enter} className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <StageStat
+            icon={Shield}
+            name="নিরাপত্তা রাউটার"
+            detail={`${bn(routerBlocked)} টি প্রশ্ন আটকানো`}
+            pct={routerRefusalPct}
+            pctLabel="অস্বীকৃতি হার"
+            tone="clay"
+          />
+          <StageStat
+            icon={Search}
+            name="উৎস অনুসন্ধান"
+            detail={`গড় শীর্ষ স্কোর ${avgTop1} · গড় ${avgSources} উৎস`}
+            pct={retrievalHitPct}
+            pctLabel="উৎস হিট হার"
+            tone="ochre"
+          />
+          <StageStat
+            icon={ShieldCheck}
+            name="উত্তর যাচাই"
+            detail={`${bn(verifierGrounded)} / ${bn(verifierChecked)} দাবি ভিত্তিক · ${bn(verifierUnsupported)} অপোষিত`}
+            pct={verifierPassPct}
+            pctLabel="যাচাই পাস হার"
+            tone="leaf"
+          />
+        </motion.div>
+      </motion.section>
+
       {/* Research context strip */}
       <motion.section
         initial="hidden"
@@ -310,6 +367,17 @@ export default function AnalyticsPage() {
                     <span className="truncate text-sm text-ink-soft">{displayQuery}</span>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
+                    {/* Per-step validity dots — router · retrieval · verifier */}
+                    <span className="flex items-center gap-1" title="ধাপ: রাউটার → উৎস → যাচাই">
+                      <span className={`h-1.5 w-1.5 rounded-full ${isBlocked ? "bg-clay" : "bg-leaf"}`} title="নিরাপত্তা রাউটার" />
+                      <span className={`h-1.5 w-1.5 rounded-full ${r.retrieval_hit === false ? "bg-clay-soft" : "bg-leaf"}`} title="উৎস অনুসন্ধান" />
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${
+                          r.verifier_passed == null ? "bg-bone" : r.verifier_passed ? "bg-leaf" : "bg-clay"
+                        }`}
+                        title="উত্তর যাচাই"
+                      />
+                    </span>
                     <span className="text-[10px] text-ink-faint tabular">
                       {r.timestamp ? new Date(r.timestamp).toLocaleTimeString("bn-BD", { hour: "2-digit", minute: "2-digit" }) : ""}
                     </span>
@@ -351,9 +419,48 @@ export default function AnalyticsPage() {
   );
 }
 
+/* === Pipeline stage stat (dual-view card) === */
+function StageStat({
+  icon: Icon,
+  name,
+  detail,
+  pct,
+  pctLabel,
+  tone,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  name: string;
+  detail: string;
+  pct: number | null;
+  pctLabel: string;
+  tone: "leaf" | "ochre" | "clay";
+}) {
+  const color = tone === "leaf" ? "text-leaf" : tone === "clay" ? "text-clay" : "text-ochre";
+  const n = useCountUp(pct ?? 0, true);
+  return (
+    <div className="rounded-xl border rule bg-paper-2/30 p-5">
+      <div className="flex items-center justify-between gap-2">
+        <span className="flex items-center gap-2 text-sm font-medium text-ink">
+          <Icon className={`h-4 w-4 ${color}`} />
+          {name}
+        </span>
+        <span className="shrink-0 text-[10px] text-ink-faint">{pctLabel}</span>
+      </div>
+      <div className={`mt-3 font-display text-3xl tabular ${color}`}>
+        {pct == null ? "—" : (
+          <>
+            {toBn(n)}
+            <span className="text-xl">%</span>
+          </>
+        )}
+      </div>
+      <div className="mt-1 text-xs text-ink-soft">{detail}</div>
+    </div>
+  );
+}
+
 /* === Stat card === */
-function StatCard({
-  value,
+function StatCard({  value,
   suffix,
   label,
   tone,
