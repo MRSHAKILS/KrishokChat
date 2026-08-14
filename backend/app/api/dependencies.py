@@ -7,6 +7,7 @@ from fastapi import Depends, Header, HTTPException, Request, status
 from app.application.auth import AuthService
 from app.application.container import AppContainer
 from app.application.history import HistoryService
+from app.core.config import Settings
 
 
 def get_container(request: Request) -> AppContainer:
@@ -17,6 +18,19 @@ def get_container(request: Request) -> AppContainer:
 
 
 ContainerDep = Annotated[AppContainer, Depends(get_container)]
+
+
+def get_settings(request: Request) -> Settings:
+    """The app's resolved settings (test configs override the module default)."""
+    settings = getattr(request.app.state, "settings", None)
+    if settings is None:
+        from app.core.config import settings as default_settings
+
+        return default_settings
+    return settings
+
+
+SettingsDep = Annotated[Settings, Depends(get_settings)]
 
 
 def _get_auth_service(container: ContainerDep) -> AuthService:

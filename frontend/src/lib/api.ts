@@ -324,6 +324,29 @@ export async function analyzeSoil(
   }
 }
 
+/* ---------- Voice (P5: read-aloud TTS + optional server ASR) ---------- */
+
+/** Synthesize MP3 for a short Bengali answer via the backend edge-tts proxy.
+    Throws on any failure so callers can fall back to browser speechSynthesis. */
+export async function synthesizeSpeech(
+  text: string,
+  opts?: { voice?: string; signal?: AbortSignal; timeoutMs?: number },
+): Promise<Blob> {
+  const request = createTimedSignal(opts?.signal, opts?.timeoutMs ?? 15_000);
+  try {
+    const res = await fetch(`${API_BASE}/api/tts`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, voice: opts?.voice ?? "bn-BD-NabanitaNeural" }),
+      signal: request.signal,
+    });
+    if (!res.ok) throw new Error(`tts failed: ${res.status}`);
+    return res.blob();
+  } finally {
+    request.dispose();
+  }
+}
+
 /* ---------- Metrics ---------------------------------------------------- */
 
 export async function getSafetyMetrics(): Promise<SafetyMetrics> {

@@ -267,5 +267,69 @@ measured. F13 wording must reflect this (see ledger).
 
 ---
 
+---
+
+## F11 — Voice lane (P5): read-aloud TTS shipped, honest limits (2026-08-14)
+
+Scope: budget-free Bengali read-aloud on answer cards (Phase 1) + optional
+ASR path (Phase 2). **No paper claim is added by this lane; it is a product
+UX feature and must stay labeled software/UI, never research evidence.** This
+finding records what it is and, critically, what it is NOT.
+
+**Implementation (paths on disk):**
+- Backend: `backend/app/api/speech.py` — `POST /api/tts`, `GET /api/tts/voices`,
+  `POST /api/tts/prewarm`, `POST /api/transcribe`; `edge-tts` (v7.2.8,
+  verified on PyPI 2026-03-22) via the system's `stream()` API. Voice
+  allowlist: `bn-BD-NabanitaNeural`, `bn-BD-PradeepNeural`.
+- Frontend: `frontend/src/components/chat/read-aloud.tsx` (`ReadAloudButton`,
+  shared Web Audio context resumed in the click gesture); fallback chain =
+  backend edge-tts → browser `speechSynthesis` → text + inline error.
+  `stopAllSpeech()` barge-in on send / mic start.
+- ASR: the Web Speech mic already shipped in `qa-panel.tsx` (pre-existing
+  browser ASR). The backend `/api/transcribe` (Groq `whisper-large-v3-turbo`)
+  is an optional server-side lane gated on `GROQ_API_KEY`; returns 501 when
+  unset. No user key exists yet, so no ASR claim is made.
+
+**Measured on the live demo box (probe `probe_final.py`, UTF-8 on-disk file):**
+
+| Check | Result |
+|---|---|
+| Cold `/api/tts` (bn-BD-NabanitaNeural, 25-char sentence) | 200, 38,736 B MP3, `X-TTS-Cache: miss`, **2,316 ms** |
+| Warm `/api/tts` (same text) | 200, cache hit, **41 ms** |
+| Male voice (PradeepNeural) | 200, 10,656 B, 745 ms |
+| `/api/tts/prewarm` | 200; invalid voice → 400 |
+| `/api/transcribe` (no key) | 501 (fail-closed by design) |
+| Backend pytest | 102/102 (15 new in `tests/test_speech.py`, all mocked) |
+| Frontend `pnpm build` | green (Next.js 16.3.0, TypeScript clean) |
+
+**Honest limits (paper-critical — do not overstate):**
+- `edge-tts` is an **unofficial, keyless, internet-dependent** endpoint. It is
+  not an E2E-guaranteed service and has documented rate-window failures
+  (upstream issue #460). Mitigations: 3-attempt retry (1s/2s backoff),
+  in-memory cache (cap 256), `/api/tts/prewarm`, and a browser-TTS/text
+  fallback chain. DoD (<2s render) is only guaranteed on **cached** audio —
+  the demo script must prewarm the exact answers 2–3 min ahead. Cold synthesis
+  of a long sentence measured 2.3 s (over the 2 s target) on this box.
+- **Standard Bengali only; no dialect claims.** Foundational ASRs fail on
+  Bengali dialects (Ben-10, IJCNLP-AACL 2025); the TTS voices are standard
+  `bn-BD`. `bn-BD` TTS **does** exist via edge-tts (contrary to the ROADMAP's
+  earlier ElevenLabs/Google-only assumption); it is the standard-register
+  voice, not dialect-capable.
+- **Voice lanes need internet.** Typed text remains the fully offline path and
+  is always available; voice is an enhancement, never a replacement.
+- **Engineering-hygiene finding (not a product claim):** PowerShell 5.1 mangles
+  Bengali in piped stdin and argv (OEM codepage), which invalidated earlier
+  "in-process fails / CLI succeeds" probes. Clean UTF-8 on-disk probes show
+  in-process synthesis works identically to CLI (both 26,928 B, ~1.3–1.4 s).
+  The browser→server path is JSON/UTF-8 and is unaffected; the TTS code was
+  never broken. Documented here so the paper's empirical sections are never
+  built on shell-encoding artifacts.
+
+**Not allowed:** "voice input evaluated", "dialect TTS/ASR supported",
+"offline voice", "guaranteed <2s synthesis". Allowed: "answer cards include a
+Bengali read-aloud with a text-only fallback; the demo runs it pre-warmed."
+
+---
+
 *Append-only: future findings get new dated sections; superseded claims are
 marked, never deleted. Update `12_CLAIM_LEDGER.md` alongside.*

@@ -83,6 +83,35 @@ pipeline card lists refusal reasons, chat passes matched_rules through.
 Verified 87/87 pytest, tsc + build green, live probe (refused → coverage_training,
 answered → empty).
 
+**P5 VOICE (read-aloud TTS, done 2026-08-14):** Phase 1 TTS SHIPPED, user
+approved the plan ("Go, but don't ruin other parts") — strictly additive.
+Backend: `speech.py` (`POST /api/tts`, `GET /api/tts/voices`,
+`POST /api/tts/prewarm`, `POST /api/transcribe`), edge-tts 7.2.8 (PyPI-verified
+2026-03-22), real `bn-BD` voices (Nabanita/Pradeep Neural — the ROADMAP's
+"no bn-BD locale" note applied to ElevenLabs/Google, NOT edge-tts), cache
+sha256(voice|text) cap 256, retries ×3 (1s/2s), `app.state.settings` +
+`SettingsDep` pattern (speech.py reads app-injected settings). Frontend:
+`read-aloud.tsx` ReadAloudButton (Web Audio context resumed in click gesture;
+fallback chain backend TTS → speechSynthesis → text + inline error),
+`chat-message.tsx` swapped, `qa-panel.tsx` barge-in (`stopAllSpeech()` on send
+and mic start; Web Speech mic ALREADY existed there). Verified: 102/102 pytest
+(+15 mocked speech tests), pnpm build green, live probe (cold 200 @ 2.3 s
+cache-miss, warm **41 ms cache-hit**, male voice 745 ms, prewarm 200,
+transcribe 501 without key). **DoD <2 s only on cached audio → prewarm exact
+demo answers 2–3 min ahead.** ASR: Groq endpoint ready but NOT wired to UI
+(needs user free key; deferred, zero risk).
+**CRITICAL probe lesson:** PowerShell 5.1 mangles Bengali in piped stdin AND
+argv (OEM codepage → `?`). All earlier "in-process fails / CLI works" probe
+results were encoding artifacts — clean UTF-8 on-disk probes show in-process
+TTS works identically (both 26,928 B, ~1.3 s). Browser→server (JSON/UTF-8) is
+unaffected. Use on-disk UTF-8 .py probes, never piped Bengali.
+**Stale-server lesson:** an old reload-mode uvicorn (PID 13700) hot-reloaded
+new code and owned port 8000; killed, fresh server now owns it (uvicorn
+launcher shim 7508 → real child 17304). Docs updated: ROADMAP P5 STATUS,
+findings log F11 (voice honest limits: unofficial keyless endpoint, upstream
+rate-window flakiness #460, standard Bengali only, internet-dependent, typed
+text always works). Commit pending.
+
 ## Key Decisions
 - P1: rule-based dosage entailment (chemical/crop/number/unit vs passages),
   annotate-and-drop (never hard-block), TRUST-SCORE-style refusal counters.
@@ -116,7 +145,9 @@ handled by pinned sample.
 1. **Researcher: fill `dataset_release/benchmark/scoring_sheet_v1.csv`** (2
    evaluators, per `scoring_rubric_v1.md`), then rerun `11_publish_golden_stats.py`.
 2. Q1: expert review of the Lumectin refusal (`farmer_q_75`) correctness.
-3. P5 (refusal-reason UI + panel polish) after scores land.
+3. **P5 voice follow-ups:** commit the voice lane (code + docs); optional:
+   wire Groq ASR fallback when the user adds a free GROQ_API_KEY; add the
+   prewarm step to the demo script (2–3 min before demo, exact answers).
 4. Q4: restore `dataset_release/safety/phase4_dialect_map.json` (110-word real
    map) to raise the 0.6% expansion hit rate.
 

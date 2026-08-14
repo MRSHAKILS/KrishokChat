@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, AlertCircle, Eye, EyeOff, Volume2, VolumeX, Copy, Check } from "lucide-react";
+import { ChevronDown, AlertCircle, Eye, EyeOff, Copy, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { dur, ease } from "@/lib/motion";
 import { QA_STAGES, PipelineRail, type RailEvent } from "@/components/detect/pipeline-rail";
@@ -10,6 +10,7 @@ import { AgentTrace } from "@/components/agent-trace";
 import { ConfidenceBadge } from "./confidence-badge";
 import { SourceList } from "./source-list";
 import { SafetyNotice } from "./safety-notice";
+import { ReadAloudButton } from "./read-aloud";
 import { HELPLINE } from "@/lib/constants";
 import { type QAResponse, type SourceNode, type AgentStageEvent } from "@/lib/api";
 
@@ -202,43 +203,10 @@ function FormattedAnswerText({ text }: { text: string }) {
   );
 }
 
-function getVoicesWhenReady(synth: SpeechSynthesis): Promise<SpeechSynthesisVoice[]> {
-  const voices = synth.getVoices();
-  if (voices.length > 0) return Promise.resolve(voices);
-
-  return new Promise((resolve) => {
-    let settled = false;
-    const finish = () => {
-      if (settled) return;
-      settled = true;
-      window.clearTimeout(timeoutId);
-      synth.removeEventListener("voiceschanged", finish);
-      resolve(synth.getVoices());
-    };
-
-    synth.addEventListener("voiceschanged", finish);
-    // Some browsers do not emit voiceschanged until a second synthesis call.
-    // A short timeout still lets the system default voice work.
-    const timeoutId = window.setTimeout(finish, 450);
-  });
-}
-
 function CompletedContent({ response }: { response: QAResponse }) {
   const blocked = response.category !== "safe_agri";
   const [traceOpen, setTraceOpen] = useState(false);
-  const [speaking, setSpeaking] = useState(false);
-  const [speechError, setSpeechError] = useState(false);
   const [copied, setCopied] = useState(false);
-  const speechRequest = useRef(0);
-
-  useEffect(() => {
-    return () => {
-      speechRequest.current += 1;
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-    };
-  }, []);
 
   // Safety-blocked query → show SafetyNotice
   if (blocked) {
@@ -252,67 +220,6 @@ function CompletedContent({ response }: { response: QAResponse }) {
   }
 
   const cleanAnswer = formatAnswerWithCleanCitations(response.answer, response.sources);
-
-  const toggleSpeech = async (textToRead: string) => {
-    if (typeof window === "undefined") return;
-    const synth = "speechSynthesis" in window ? window.speechSynthesis : null;
-
-    if (speaking) {
-      speechRequest.current += 1;
-      synth?.cancel();
-      setSpeaking(false);
-      return;
-    }
-
-    const cleanText = textToRead
-      .replace(/\[[^\]]+\]/g, "")
-      .replace(/\s+/g, " ")
-      .trim();
-    if (!cleanText) return;
-
-    if (!synth) {
-      setSpeechError(true);
-      return;
-    }
-
-    const requestId = ++speechRequest.current;
-    setSpeechError(false);
-    setSpeaking(true);
-
-    synth.cancel();
-    const voices = await getVoicesWhenReady(synth);
-    if (speechRequest.current !== requestId) return;
-
-    const bnVoice = voices.find(
-      (voice) =>
-        voice.lang.toLowerCase().startsWith("bn") ||
-        voice.name.toLowerCase().includes("bengali"),
-    );
-    const selectedVoice = bnVoice ?? voices.find((voice) => voice.default) ?? voices[0];
-    const utterance = new SpeechSynthesisUtterance(cleanText.slice(0, 1000));
-    // Prefer a Bengali system voice. If the device has none, use its default
-    // voice rather than silently failing with language-unavailable.
-    utterance.lang = selectedVoice?.lang ?? "bn-BD";
-    utterance.rate = 0.88;
-    if (selectedVoice) utterance.voice = selectedVoice;
-
-    utterance.onstart = () => setSpeaking(true);
-    utterance.onend = () => setSpeaking(false);
-    utterance.onerror = (event) => {
-      if (event.error !== "canceled" && event.error !== "interrupted") {
-        setSpeechError(true);
-      }
-      setSpeaking(false);
-    };
-
-    // A brief yield after cancel prevents Chrome from dropping the new
-    // utterance when a previous answer was just stopped.
-    window.setTimeout(() => {
-      if (speechRequest.current !== requestId) return;
-      synth.resume();
-      synth.speak(utterance);
-    }, 40);
-  };
 
   const copyAnswer = async () => {
     try {
@@ -341,20 +248,7 @@ function CompletedContent({ response }: { response: QAResponse }) {
       <div className="flex flex-wrap items-center gap-2 border-t rule pt-3">
         <ConfidenceBadge confidence={response.confidence} />
 
-         <button
-          onClick={() => toggleSpeech(response.answer)}
-          type="button"
-          aria-label={speaking ? "আবৃত্তি বন্ধ করুন" : "পরামর্শটি শুনুন"}
-           className={cn(
-             "control-press flex min-h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-medium",
-            speaking
-              ? "border-leaf bg-leaf text-paper"
-              : "border-leaf/25 bg-leaf/8 text-leaf hover:bg-leaf/15",
-          )}
-        >
-          {speaking ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
-          <span>{speaking ? "থামুন" : "শুনুন"}</span>
-         </button>
+        <ReadAloudButton text={response.answer} />
 
         <button
           onClick={copyAnswer}
@@ -378,11 +272,6 @@ function CompletedContent({ response }: { response: QAResponse }) {
           </button>
         )}
       </div>
-      {speechError && (
-        <p className="text-[11px] text-clay" role="status">
-          এই ব্রাউজারে শব্দ চালু করা যায়নি। ব্রাউজারের শব্দ ও স্পিকারের অনুমতি পরীক্ষা করুন।
-        </p>
-      )}
 
       {/* Verifier flags */}
       {response.verifier_flags.length > 0 && (

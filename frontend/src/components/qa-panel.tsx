@@ -6,6 +6,7 @@ import { Send, Mic, Square, RotateCcw, ShieldCheck, X, Bookmark, Check, Loader2 
 import { streamQuestion, getModels, saveAnswer, type AgentStageEvent } from "@/lib/api";
 import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { ChatMessage, type ChatMessageData } from "@/components/chat/chat-message";
+import { stopAllSpeech } from "@/components/chat/read-aloud";
 import { SuggestedQuestions } from "@/components/chat/suggested-questions";
 import { dur, ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -148,6 +149,8 @@ export function QAPanel({
       rec.stop();
       setListening(false);
     } else {
+      // Barge-in: speaking a new question stops any answer being read aloud.
+      stopAllSpeech();
       setQuery("");
       setVoiceInputError(null);
       try {
@@ -203,6 +206,9 @@ export function QAPanel({
     async (text: string) => {
       const q = text.trim();
       if (!q || streamingRef.current) return;
+
+      // Barge-in: a new query stops any answer still being read aloud.
+      stopAllSpeech();
 
       const userMsg: ChatMessageData = { role: "user", content: q };
       const newMessages = [...messages, userMsg];

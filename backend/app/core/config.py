@@ -73,6 +73,21 @@ class Settings(BaseSettings):
     gemini_key_cooldown_seconds: float = 6.0
     env_file_path: str = str(PROJECT_ROOT.parent / ".env")
 
+    # P5 voice lane — read-aloud (TTS). edge-tts (keyless, free) synthesizes
+    # through Microsoft Edge's Read Aloud service; the demo machine has no
+    # Bengali system voice, so this is what makes শুনুন read real Bengali.
+    tts_default_voice: str = "bn-BD-NabanitaNeural"
+    tts_timeout_seconds: float = 15.0
+    tts_cache_max_entries: int = 256
+    # Spacing between /api/tts/prewarm items (upstream rate window safety).
+    tts_prewarm_spacing_seconds: float = 10.0
+
+    # P5 voice lane — optional server-side ASR fallback (Groq Whisper free
+    # tier, no credit card). Leave empty to keep the browser Web Speech mic
+    # as the only voice input; /api/transcribe answers 501 without a key.
+    groq_api_key: str | None = None
+    groq_whisper_model: str = "whisper-large-v3-turbo"
+
     # Supabase Auth (amendment 15) — all optional. The anonymous demo never
     # uses these; they only enable the additive auth lane.
     supabase_url: str | None = None

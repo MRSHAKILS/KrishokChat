@@ -154,22 +154,40 @@ arXiv:2601.11537 (golden sets, expert scoring); ACL 2025 Findings
 ### P5 — Voice: TTS read-aloud first, ASR optional
 **Depends on:** nothing (frontend surface; pipeline untouched).
 
-Files:
-- `frontend/src/components/audio/read-aloud.tsx` — listen button on answer
-  cards; Bengali TTS via ElevenLabs v3 (bn) or Google TTS `bn-IN` (NOTE: no
-  `bn-BD` TTS locale exists — state the locale honestly); <2s render target;
-  loading/fail states with graceful silent fallback.
-- Optional: `backend/app/api/speech.py` — `POST /asr` proxying Google STT
-  `bn-BD` (chirp_2) or local Whisper-family model; key stays server-side;
-  recognized text routes through the SAME text pipeline (zero agent changes);
-  any ASR failure falls back to text input with a visible notice.
-- `.env.example` — ASR/TTS keys (optional lane).
-- Tests: manual E2E script for 3 scripted phrases + read-aloud render timing.
+**STATUS (2026-08-14): TTS READ-ALOUD SHIPPED (backend + frontend).** Backend
+`backend/app/api/speech.py`: `POST /api/tts` (edge-tts 7.2.8, real `bn-BD`
+voices — Nabanita/Pradeep Neural; corrected the earlier "no bn-BD TTS locale"
+assumption, which was true for ElevenLabs/Google but not for edge-tts),
+`GET /api/tts/voices`, `POST /api/tts/prewarm`, `POST /api/transcribe`
+(Groq, 501 without key). Frontend: `ReadAloudButton` in
+`frontend/src/components/chat/read-aloud.tsx` with fallback chain
+(backend TTS → browser speechSynthesis → text + inline error), barge-in via
+`stopAllSpeech()` on send/mic. Verified: 102/102 backend pytest (15 new,
+mocked), `pnpm build` green, live probe (cold 200 @ 2,316 ms cache-miss; warm
+**41 ms cache-hit**; male voice 745 ms; prewarm 200; transcribe 501). ASR: Web
+Speech mic already existed in `qa-panel.tsx`; Groq fallback endpoint ready but
+NOT wired to the UI (needs a user free key) — deferred, zero risk.
 
-DoD: read-aloud renders <2s; ASR path reproduces text-typed result for 3
-phrases; failure mode = graceful fallback, never wrong-language answer.
+Files:
+- `backend/app/api/speech.py` — TTS/prewarm/transcribe router; `edge-tts`
+  keyless endpoint (unofficial, internet-dependent, rate-window flakiness
+  documented upstream #460 → retries ×3, cache, prewarm, fallback chain).
+- `frontend/src/components/chat/read-aloud.tsx` — listen button on answer
+  cards; `stopAllSpeech()` + tick store for barge-in.
+- Optional (deferred): wire `POST /api/transcribe` to the mic when a
+  GROQ_API_KEY exists; recognized text routes through the SAME text pipeline
+  (zero agent changes); any ASR failure falls back to text input.
+- `.env.example` — `TTS_DEFAULT_VOICE`, `GROQ_API_KEY`, `GROQ_WHISPER_MODEL`
+  (optional lane).
+
+DoD: read-aloud renders <2s — **MET on cached audio (41 ms); cold synthesis
+measured 2.3 s** → demo must prewarm exact answers 2–3 min ahead
+(`/api/tts/prewarm`, spacing 10 s). ASR path reproduces text-typed result for
+3 phrases — **pending Groq key**; browser mic path is pre-existing. Failure
+mode = graceful fallback, never wrong-language answer.
 **Standard Bengali only — no dialect claims (Ben-10 IJCNLP-AACL 2025:
-foundation ASRs fail on Bengali dialects).**
+foundation ASRs fail on Bengali dialects).** Voice lanes need internet; typed
+text stays the fully offline path. Full evidence: findings log F11.
 
 Evidence: FarmSaarthi JETIR2604936 (87.3% vs 62.1% decision accuracy);
 AIEP arXiv:2601.11537; KrishokBondhu arXiv:2510.18355.
