@@ -13,6 +13,7 @@ from app.application.vision_pipeline import VisionPipeline
 from app.core.config import Settings
 from app.infrastructure.audit.jsonl import JSONLAuditSink
 from app.infrastructure.auth.jwks import SupabaseJWKSVerifier
+from app.infrastructure.cache.demo import DemoAnswerCache
 from app.infrastructure.llm.factory import create_llm_client
 from app.infrastructure.retrieval.bm25 import BM25Retriever
 from app.infrastructure.retrieval.dense import DenseRetriever
@@ -78,6 +79,18 @@ def build_container(settings: Settings) -> AppContainer:
         generation_model_name=settings.local_llm_model_name,
     )
     local_client = create_llm_client(local_settings, role="generation")
+    # B1: demo answer cache — wired ONLY in demo mode. Loads the precomputed
+    # cached_responses.json at startup (or an empty dict) and stores verified
+    # safe answers for exact replay. With DEMO_MODE=false the pipeline runs
+    # live with no cache at all.
+    answer_cache = (
+        DemoAnswerCache(
+            settings.resolved_demo_cache_path,
+            max_entries=settings.demo_cache_max_entries,
+        )
+        if settings.demo_mode
+        else None
+    )
     pipeline = QAPipeline(
         safety=SafetyClassifier(intent_llm),
         retriever=retriever,
@@ -87,6 +100,7 @@ def build_container(settings: Settings) -> AppContainer:
         sessions=sessions,
         top_k=settings.retrieval_top_k,
         generation_clients={LOCAL_MODEL_NAME: local_client},
+        answer_cache=answer_cache,
     )
     vision = VisionPipeline(
         registry=ArtifactVisionRegistry(Path(settings.ml_assets_dir) / "vision"),

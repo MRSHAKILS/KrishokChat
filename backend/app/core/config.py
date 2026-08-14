@@ -53,6 +53,8 @@ class Settings(BaseSettings):
 
     demo_mode: bool = True
     demo_cache_path: str = "demo-assets/cached_responses.json"
+    # B1: cap for the demo answer cache (exact-replay of curated questions).
+    demo_cache_max_entries: int = 100
 
     session_max_turns: int = Field(default=10, ge=1, le=100)
     session_ttl_seconds: int = Field(default=1800, ge=60)
@@ -112,6 +114,11 @@ class Settings(BaseSettings):
     @property
     def resolved_audit_log_path(self) -> Path:
         path = Path(self.audit_log_path)
+        return path if path.is_absolute() else PROJECT_ROOT.parent / path
+
+    @property
+    def resolved_demo_cache_path(self) -> Path:
+        path = Path(self.demo_cache_path)
         return path if path.is_absolute() else PROJECT_ROOT.parent / path
 
     @property

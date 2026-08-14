@@ -18,6 +18,7 @@ from app.domain.contracts import (
 )
 from app.domain.enums import PipelineStage, SafetyCategory, StageStatus, VerificationConfidence
 from app.domain.safety_policy import canned_response
+from app.infrastructure.cache.demo import DemoAnswerCache, qa_result_from_dict, qa_result_to_dict
 from app.ports.audit import AuditSink
 from app.ports.retriever import Retriever
 from app.ports.session import SessionStore
@@ -62,6 +63,7 @@ class QAPipeline:
         sessions: SessionStore,
         top_k: int = 5,
         generation_clients: dict[str, object] | None = None,
+        answer_cache: DemoAnswerCache | None = None,
     ) -> None:
         self.safety = safety
         self.retriever = retriever
@@ -73,6 +75,10 @@ class QAPipeline:
         # Optional per-request model registry: {"krishokchat-4b": LLMClient}.
         # The default generator's client is used when no match is found.
         self.generation_clients = generation_clients or {}
+        # B1 demo answer cache (exact-replay of curated demo questions).
+        # None = caching disabled entirely (default; tests construct the
+        # pipeline without a cache and keep their exact behavior).
+        self.answer_cache = answer_cache
 
     def _generator_for(self, model: str | None) -> GroundedAnswerGenerator:
         if model and model in self.generation_clients:
@@ -101,8 +107,35 @@ class QAPipeline:
         retrieved: list[RetrievedSource] = []
         verifier_flags: tuple[str, ...] = ()
         result: QAResult | None = None
+        cached_hit = False
+        cache_key = (
+            self.answer_cache.key_for(request.query, request.crop, request.disease, request.model)
+            if self.answer_cache is not None
+            else None
+        )
 
         try:
+            if cache_key is not None:
+                payload = self.answer_cache.get(cache_key)
+                if payload is not None:
+                    # B1 exact replay: a previously verified answer for the
+                    # same normalized question + context + model. The stored
+                    # payload keeps its original sources, trace, and verifier
+                    # stamps, so the UI renders identically to a fresh run.
+                    try:
+                        cached_result = qa_result_from_dict(payload)
+                    except (KeyError, ValueError, TypeError):
+                        cached_result = None  # corrupt entry -> treat as miss
+                    if cached_result is not None:
+                        cached_hit = True
+                        result = cached_result
+                        # Replay the original agent trace through the same
+                        # event channel (fast, no new LLM/retrieval work).
+                        for event in result.trace:
+                            if on_event:
+                                await on_event(event)
+                        return result
+
             await emit(PipelineStage.SAFETY, StageStatus.START)
             decision = await self.safety.classify(request.query, context)
             await emit(PipelineStage.SAFETY, StageStatus.COMPLETE, decision.category.value)
@@ -193,6 +226,16 @@ class QAPipeline:
                 model=generated.model,
                 error=generated.error,
             )
+            # B1: store verified safe answers for exact replay. Terminal
+            # refusals are never cached (they must re-run safety every time),
+            # and error results (generation/verification failures) are never
+            # cached — only grounded, answerable content.
+            if (
+                cache_key is not None
+                and result.category is SafetyCategory.SAFE_AGRI
+                and result.error is None
+            ):
+                self.answer_cache.put(cache_key, qa_result_to_dict(result))
             return result
         except Exception as exc:
             # Keep the user-facing behavior controlled if an adapter unexpectedly fails.
@@ -211,7 +254,14 @@ class QAPipeline:
             return result
         finally:
             if result is not None:
-                self._audit(request, result, verifier_flags, decision=decision, retrieved=retrieved)
+                self._audit(
+                    request,
+                    result,
+                    verifier_flags if not cached_hit else result.verifier_flags,
+                    decision=decision,
+                    retrieved=retrieved,
+                    cached=cached_hit,
+                )
                 if request.session_id and result.category is SafetyCategory.SAFE_AGRI:
                     self.sessions.append(request.session_id, "user", request.query)
                     self.sessions.append(request.session_id, "assistant", result.answer)
@@ -223,6 +273,7 @@ class QAPipeline:
         verifier_flags: tuple[str, ...],
         decision: SafetyDecision | None = None,
         retrieved: list[RetrievedSource] | None = None,
+        cached: bool = False,
     ) -> None:
         # P1 refusal counters (TRUST-SCORE style, honest subset):
         # - answered_without_sources: a safe-agri query that produced a real
@@ -249,7 +300,11 @@ class QAPipeline:
                 # v2 = per-step validity fields (router/retrieval/verifier).
                 # Metrics aggregates only count v2 entries so legacy log rows
                 # without these fields cannot distort the live panel.
+                # cached=true = B1 exact replay; the metrics panel counts it
+                # in totals but excludes it from per-stage aggregates (it is
+                # not a new retrieval/verifier event).
                 "pipeline_version": 2,
+                "cached": cached,
                 "query": request.query,
                 "category": result.category.value,
                 "action": "blocked-canned-response" if result.category is not SafetyCategory.SAFE_AGRI else "answered",

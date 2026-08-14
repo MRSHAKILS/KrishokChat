@@ -185,6 +185,64 @@ class SafetyMetricsEndpointTests(unittest.TestCase):
             self.assertEqual(body["retrieval"]["avg_sources"], 2.0)
             self.assertEqual(body["refusals"]["answered_without_sources"], 0)
 
+    def test_cached_replays_count_in_totals_but_not_stage_aggregates(self) -> None:
+        """B1: a cached=true row is a real served query (total + category mix),
+        but it performs no new retrieval/verification work, so it must not
+        distort the per-stage aggregates."""
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = Path(tmp) / "audit.jsonl"
+            live = {
+                "pipeline_version": 2,
+                "query": "ধান গাছে ম্যানকোজেব কত দিতে হবে?",
+                "category": "safe_agri",
+                "action": "answered",
+                "flagged": False,
+                "safety_confidence": 0.99,
+                "safety_reason": "agriculture",
+                "safety_matched_rules": [],
+                "retrieved_count": 2,
+                "retrieval_top1_score": 0.81,
+                "retrieval_hit": True,
+                "verifier_passed": True,
+                "verifier_checked": 2,
+                "verifier_grounded": 2,
+                "verifier_unsupported": 0,
+                "answered_without_sources": False,
+            }
+            replay = dict(live)
+            replay.update(
+                {
+                    "query": "ধান গাছে ম্যানকোজেব কত দিতে হবে?",
+                    "cached": True,
+                    "retrieved_count": 0,
+                    "retrieval_top1_score": None,
+                    "retrieval_hit": False,
+                    "verifier_checked": 0,
+                    "verifier_grounded": 0,
+                    "verifier_unsupported": 0,
+                }
+            )
+            log_path.write_text(
+                "\n".join(json.dumps(e, ensure_ascii=False) for e in [live, replay]) + "\n",
+                encoding="utf-8",
+            )
+
+            settings = Settings(audit_log_path=str(log_path))
+            with TestClient(create_app(config=settings)) as client:
+                body = client.get("/api/safety/metrics").json()
+
+            self.assertEqual(body["total_queries"], 2)
+            self.assertEqual(body["pipeline_queries"], 2)
+            self.assertEqual(body["cached"]["replays"], 1)
+            self.assertEqual(body["by_category"]["safe_agri"], 2)
+            # Stage aggregates reflect only the live run
+            self.assertEqual(body["verifier"]["checked"], 2)
+            self.assertEqual(body["verifier"]["pass_rate"], 1.0)
+            self.assertEqual(body["retrieval"]["answered"], 1)
+            self.assertEqual(body["retrieval"]["hit_rate"], 1.0)
+            self.assertEqual(body["retrieval"]["avg_top1_score"], 0.81)
+            self.assertEqual(body["router"]["blocked"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

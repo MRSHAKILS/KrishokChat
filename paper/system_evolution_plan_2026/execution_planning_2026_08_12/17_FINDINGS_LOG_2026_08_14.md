@@ -335,5 +335,45 @@ Bengali read-aloud with a text-only fallback; the demo runs it pre-warmed."
 
 ---
 
+## F12 — Demo answer cache (B1): exact-replay lane, honesty split (2026-08-15)
+
+**What shipped:** `DemoAnswerCache` (JSON file `demo-assets/cached_responses.json`),
+wired into `QAPipeline` as an optional dependency and into the container only
+when `DEMO_MODE=true`. The 7 curated demo questions are prewarmed by
+`backend/scripts/prewarm_demo_cache.py` (runs the REAL pipeline; audit written
+to a throwaway temp file so demo metrics are never polluted by build runs).
+Cache key = normalized query + crop/disease/model. Only `safe_agri` results
+with no generation error are stored; terminal refusals always re-run safety.
+
+**Honesty rules (paper-critical):**
+- A cached replay is a **previously verified pipeline output** — the stored
+  payload keeps its original sources, agent trace, verifier stamps, and
+  refusal metadata; the UI renders identically to a fresh run. It is not a
+  safety bypass and not a second verification event.
+- Replays still write audit rows with `cached: true`. The metrics panel counts
+  them in totals + category mix but **excludes them from per-stage aggregates**
+  (retrieval hit-rate, top-1 score, verifier pass-rate, router refusal-rate) —
+  so the paper's retrieval/verifier numbers are never inflated by replays.
+- Never cached: terminal refusals, referral/error results. Corrupt entries
+  degrade to a cache miss and self-heal on the next live run.
+
+**Measured on the live demo box:**
+
+| Check | Result |
+|---|---|
+| Prewarm (`uv run python scripts/prewarm_demo_cache.py`) | 3/7 cached (safe_agri: 5.5 s, 6.2 s, 4.7 s); 4 terminal correctly NOT cached (rule lane 0.0–1.3 s) |
+| Live replay `/api/qa` (curated Q1, after prewarm) | **47 ms** (vs 5.5 s live run), category safe_agri, 5 sources, full 8-event trace, `verified`, 0 flags |
+| Audit row for replay | `cached: true`, action `answered` |
+| `/api/safety/metrics` | `cached.replays=1`; totals include it; stage aggregates unchanged |
+| Backend pytest | 115/115 (13 new in `tests/test_demo_cache.py`, 1 new metrics case in `test_audit.py`) |
+
+**Not allowed:** "cached answers are a different system", "cache reduces
+safety checks", "replays counted as new retrieval events". Allowed: "curated
+demo questions replay from a verified-answer cache (~47 ms) built by running
+the real pipeline offline; replays are logged and excluded from live
+per-stage aggregates."
+
+---
+
 *Append-only: future findings get new dated sections; superseded claims are
 marked, never deleted. Update `12_CLAIM_LEDGER.md` alongside.*

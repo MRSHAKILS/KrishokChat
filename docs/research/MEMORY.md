@@ -112,6 +112,25 @@ findings log F11 (voice honest limits: unofficial keyless endpoint, upstream
 rate-window flakiness #460, standard Bengali only, internet-dependent, typed
 text always works). Commit pending.
 
+**B1 DEMO ANSWER CACHE (done 2026-08-15):** exact-replay cache for the
+curated demo questions — `DemoAnswerCache` (`backend/app/infrastructure/cache/demo.py`,
+JSON file at `demo-assets/cached_responses.json`, key = normalized query +
+crop/disease/model, cap 100, thread-safe, atomic tmp+replace writes,
+best-effort persistence). Wired into `QAPipeline` as an OPTIONAL
+`answer_cache` param (None = untouched behavior, existing tests unchanged);
+container builds it only when `demo_mode`. Cache rules: only safe_agri results
+with no generation error are stored; terminal refusals ALWAYS re-run safety;
+corrupt entries degrade to miss and self-heal on the next live run. Replays:
+re-emit the stored agent trace through the event channel (stepper animates
+normally) and audit with `cached:true` — metrics count replays in totals +
+category mix but exclude them from per-stage (retrieval/verifier/router)
+aggregates. Prewarm script `backend/scripts/prewarm_demo_cache.py` runs the
+REAL pipeline over the 7 curated demo questions (writes audit to a throwaway
+temp file — demo metrics never polluted). Verified: 115/115 pytest (+13 new
+cache tests), prewarm cached 3/7 (4 terminal correctly not cached), live
+replay **47 ms** (vs 5.5 s live run) with intact sources/trace/verifier
+stamps; audit row `cached:true`; metrics `cached.replays=1`.
+
 ## Key Decisions
 - P1: rule-based dosage entailment (chemical/crop/number/unit vs passages),
   annotate-and-drop (never hard-block), TRUST-SCORE-style refusal counters.
@@ -128,6 +147,9 @@ text always works). Commit pending.
 - P5: TTS read-aloud first (no bn-BD TTS locale — use bn-IN/other, state
   honestly); ASR optional (bn-BD via Google STT or local Whisper), same text
   pipeline, graceful fallback, standard Bengali only.
+- B1: demo cache replays ONLY verified pipeline outputs (safe_agri, no error);
+  cached replays are honest (audit rows + metrics split); never cache
+  terminal refusals; cache key includes crop/disease/model.
 - Out of scope now: KG/GraphRAG, offline PWA, B2B layer, query routing,
   clarify-slots, 16123 integration (REJECTED), DPO alignment.
 
@@ -145,11 +167,12 @@ handled by pinned sample.
 1. **Researcher: fill `dataset_release/benchmark/scoring_sheet_v1.csv`** (2
    evaluators, per `scoring_rubric_v1.md`), then rerun `11_publish_golden_stats.py`.
 2. Q1: expert review of the Lumectin refusal (`farmer_q_75`) correctness.
-3. **P5 voice follow-ups:** commit the voice lane (code + docs); optional:
-   wire Groq ASR fallback when the user adds a free GROQ_API_KEY; add the
-   prewarm step to the demo script (2–3 min before demo, exact answers).
+3. **B1 follow-ups:** commit the cache lane; add the prewarm step to the demo
+   script (run 2–3 min before demo; then curated questions replay at ~47 ms).
 4. Q4: restore `dataset_release/safety/phase4_dialect_map.json` (110-word real
    map) to raise the 0.6% expansion hit rate.
+5. A1 (menu, next): conversational query rewriting — `build_retrieval_query()`
+   ignores history today (CORAL/ConvSearch-R1 evidence: rewrite-then-retrieve).
 
 ## Key Files
 `docs/competitive-landscape.md`, `docs/research/LITERATURE_SCOUT_2026.md`,

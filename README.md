@@ -259,8 +259,9 @@ Settings are read from the repo-root `.env`, then overridden by
 | `VISION_CROP_CONFIDENCE_THRESHOLD` | `0.60` | Minimum crop-class confidence |
 | `VISION_DISEASE_CONFIDENCE_THRESHOLD` | `0.55` | Minimum disease-class confidence |
 | `VISION_MAX_IMAGE_BYTES` | `10000000` | Upload size limit (10 MB) |
-| `DEMO_MODE` | `true` | Demo caching flag (cache wiring in progress) |
-| `DEMO_CACHE_PATH` | `demo-assets/cached_responses.json` | Cached demo responses |
+| `DEMO_MODE` | `true` | Enables the demo answer cache (exact-replay lane) |
+| `DEMO_CACHE_PATH` | `demo-assets/cached_responses.json` | Cached demo responses (verified pipeline outputs only) |
+| `DEMO_CACHE_MAX_ENTRIES` | `100` | Max entries kept in the demo answer cache |
 | `NEXT_PUBLIC_BACKEND_URL` | `http://localhost:8000` | Frontend -> backend URL |
 
 The frontend additionally reads `frontend/.env.local`
@@ -426,9 +427,10 @@ pnpm build
   `{"status": "not_implemented"}`. Precomputed stats exist under
   `backend/ml_assets/rag_index/eval/` and are wired into frontend copy, but the
   endpoint itself is not filled in.
-- `DEMO_MODE` and `DEMO_CACHE_PATH` are configured in settings but the cache
-  file (`demo-assets/cached_responses.json`) does not exist yet; demo caching
-  is not wired into the pipeline.
+- The demo answer cache (`demo-assets/cached_responses.json`) is populated by
+  `uv run python scripts/prewarm_demo_cache.py` or self-populates on the first
+  live ask in DEMO_MODE; until prewarmed, first-time curated questions run the
+  live pipeline (5–15 s) exactly as before.
 - Vision artifacts are classification-only. Object detection (bounding boxes)
   is supported by the ONNX export path but no detection weights are checked in,
   so nothing claims boxes.

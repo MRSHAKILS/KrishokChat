@@ -167,10 +167,17 @@ async def safety_metrics(container: ContainerDep):
     # pipeline with per-step validity fields). Legacy rows stay visible in
     # `recent` but cannot skew the live panel.
     v2_entries = [e for e in entries if e.get("pipeline_version") == 2]
+    # B1 demo cache: cached=true rows are exact replays of previously verified
+    # answers. They count toward totals and the category mix (they are real
+    # queries served), but are excluded from per-stage aggregates — a replay
+    # performs no new retrieval or verification work.
+    cached_entries = [e for e in v2_entries if e.get("cached")]
+    stage_entries = [e for e in v2_entries if not e.get("cached")]
     for entry in v2_entries:
         category = entry.get("category", "unknown")
         by_category[category] = by_category.get(category, 0) + 1
         flagged += int(bool(entry.get("flagged")))
+    for entry in stage_entries:
         # P1: verifier aggregates come from the actual logged verdicts.
         verifier_checked += int(entry.get("verifier_checked", 0))
         verifier_grounded += int(entry.get("verifier_grounded", 0))
@@ -196,6 +203,9 @@ async def safety_metrics(container: ContainerDep):
         "pipeline_queries": len(v2_entries),
         "by_category": by_category,
         "flagged_count": flagged,
+        "cached": {
+            "replays": len(cached_entries),
+        },
         "verifier": {
             "checked": verifier_checked,
             "grounded": verifier_grounded,
