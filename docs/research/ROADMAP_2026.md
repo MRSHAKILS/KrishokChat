@@ -172,8 +172,11 @@ Files:
 - `backend/app/api/speech.py` — TTS/prewarm/transcribe router; `edge-tts`
   keyless endpoint (unofficial, internet-dependent, rate-window flakiness
   documented upstream #460 → retries ×3, cache, prewarm, fallback chain).
-- `frontend/src/components/chat/read-aloud.tsx` — listen button on answer
-  cards; `stopAllSpeech()` + tick store for barge-in.
+- `frontend/src/components/chat/read-aloud.tsx` (listen button, `stopAllSpeech()`
++ tick store for barge-in; fallback chain = backend TTS → browser
+speechSynthesis **only if a Bengali system voice exists** (otherwise silent +
+inline error — an English voice reading Bengali is phoneme garbage and is
+never played), then text-only).
 - Optional (deferred): wire `POST /api/transcribe` to the mic when a
   GROQ_API_KEY exists; recognized text routes through the SAME text pipeline
   (zero agent changes); any ASR failure falls back to text input.

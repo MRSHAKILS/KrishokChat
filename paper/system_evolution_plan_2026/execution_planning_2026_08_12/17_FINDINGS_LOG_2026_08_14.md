@@ -283,7 +283,11 @@ finding records what it is and, critically, what it is NOT.
   allowlist: `bn-BD-NabanitaNeural`, `bn-BD-PradeepNeural`.
 - Frontend: `frontend/src/components/chat/read-aloud.tsx` (`ReadAloudButton`,
   shared Web Audio context resumed in the click gesture); fallback chain =
-  backend edge-tts → browser `speechSynthesis` → text + inline error.
+  backend edge-tts → browser `speechSynthesis` **gated on a Bengali system
+  voice existing** (the demo box has none; an English voice reading Bengali
+  script is phoneme garbage, so the fallback is disabled there and an inline
+  Bengali error shows instead) → text + inline error. The garbage the user
+  reported was this un-gated browser fallback, not the backend TTS.
   `stopAllSpeech()` barge-in on send / mic start.
 - ASR: the Web Speech mic already shipped in `qa-panel.tsx` (pre-existing
   browser ASR). The backend `/api/transcribe` (Groq `whisper-large-v3-turbo`)

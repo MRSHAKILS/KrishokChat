@@ -7,9 +7,10 @@
      1. Backend /api/tts (edge-tts, real Bengali bn-BD neural voice) played
         through a shared Web Audio context. The context is resumed inside the
         click gesture so browser autoplay policies never block playback.
-     2. Browser speechSynthesis (fallback when the backend is unreachable —
-        the demo machine has no Bengali system voice, so this is degraded
-        but non-crashing).
+     2. Browser speechSynthesis — ONLY when a Bengali system voice exists.
+        On machines without one (like the demo box) it would read Bengali
+        script with an English voice (phoneme garbage), so it is gated off
+        and the button shows an error instead.
      3. Nothing — the answer text remains visible; an inline error appears.
 
    Barge-in: stopAllSpeech() cancels every active player (backend + browser)
@@ -200,13 +201,21 @@ export function ReadAloudButton({
           voice.lang.toLowerCase().startsWith("bn") ||
           voice.name.toLowerCase().includes("bengali"),
       );
-      const selectedVoice = bnVoice ?? voices.find((voice) => voice.default) ?? voices[0];
+
+      // Never read Bengali script with a non-Bengali voice: on machines
+      // without a Bengali system voice (like the demo box) that produces
+      // English-phoneme garbage, which is worse than no audio. Degrade to
+      // silence + a visible message; the answer text stays on screen.
+      if (!bnVoice) {
+        setError(true);
+        setSpeaking(false);
+        return;
+      }
+
       const utterance = new SpeechSynthesisUtterance(cleanText.slice(0, 1000));
-      // Prefer a Bengali system voice. If the device has none, use its default
-      // voice rather than silently failing with language-unavailable.
-      utterance.lang = selectedVoice?.lang ?? "bn-BD";
+      utterance.lang = bnVoice.lang;
+      utterance.voice = bnVoice;
       utterance.rate = 0.88;
-      if (selectedVoice) utterance.voice = selectedVoice;
 
       const player: Player = { synth: utterance };
       playerRef.current = player;
@@ -286,7 +295,8 @@ export function ReadAloudButton({
       </button>
       {error && (
         <p className="text-[11px] text-clay" role="status">
-          এই ব্রাউজারে শব্দ চালু করা যায়নি। ব্রাউজারের শব্দ ও স্পিকারের অনুমতি পরীক্ষা করুন।
+          এই ডিভাইসে বাংলা ভয়েস পাওয়া যায়নি — উত্তরটি পড়ে নিন। ব্রাউজারের শব্দ ও
+          স্পিকারের অনুমতিও পরীক্ষা করুন।
         </p>
       )}
     </>
