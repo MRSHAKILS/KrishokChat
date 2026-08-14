@@ -375,5 +375,42 @@ per-stage aggregates."
 
 ---
 
+## F13 — Conversational query rewriting (A1): follow-ups retrieve, safety untouched (2026-08-15)
+
+**What shipped:** `ConversationalQueryRewriter` (`backend/app/application/rewrite.py`).
+Follow-up queries (deixis markers like "তাহলে", "কতটুকু", "এটা" + non-empty
+history) get ONE cheap LLM call (the same intent model) rewriting them into a
+standalone retrieval query (rewrite-then-retrieve: CORAL NAACL 2025 findings,
+ConvSearch-R1 EMNLP 2025, SELF-multi-RAG). Before A1, retrieval searched the
+raw query while only the generation prompt saw history.
+
+**Honesty/scope rules (paper-critical):**
+- **Retrieval-only.** The safety classifier always sees the RAW surface query;
+  rewriting never weakens or changes a safety decision.
+- **Budget-free gate.** No history → zero calls; no marker → zero calls;
+  rewrite failure/empty → raw query fallback (fail-open for retrieval only).
+  Single-turn questions (incl. the cached demo lane) never trigger a call.
+- **Audited.** Each row records `retrieval_query_used` (exact string searched)
+  and `retrieval_query_rewritten`; the agent trace appends "· rewritten".
+- Disable switch: `QUERY_REWRITE_ENABLED` (default true).
+
+**Measured on the live demo box (probe `probe_a1_rewrite.py`):**
+
+| Check | Result |
+|---|---|
+| Turn 1 fresh question (no history) | 9.5 s live, safe_agri, no rewrite call |
+| Turn 2 follow-up "তাহলে ইউরিয়া কতটুকু দেব?" (same session) | 7.2 s, safe_agri, 5 sources, grounded answer |
+| Audit row (follow-up) | `retrieval_query_rewritten=True`; `query_used = "ধান চাষে ইউরিয়া সার কতটুকু দেব? rice fertilizer safe_agri"` |
+| Cached demo lane regression (curated Q1) | replay **16 ms**, rewrite never fires |
+| Backend pytest | 127/127 (12 new in `tests/test_rewrite.py`) |
+
+**Not allowed:** "history-aware safety classification", "multi-turn retrieval
+evaluated on a benchmark" (no recall/accuracy claim yet — behavior + audit
+only). Allowed: "follow-up questions are rewritten (one gated LLM call) into
+standalone retrieval queries; the safety classifier still evaluates the raw
+user text".
+
+---
+
 *Append-only: future findings get new dated sections; superseded claims are
 marked, never deleted. Update `12_CLAIM_LEDGER.md` alongside.*

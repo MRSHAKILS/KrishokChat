@@ -7,6 +7,7 @@ from app.application.auth import AuthService
 from app.application.generation import GroundedAnswerGenerator
 from app.application.history import HistoryService
 from app.application.qa_pipeline import QAPipeline
+from app.application.rewrite import ConversationalQueryRewriter
 from app.application.safety import SafetyClassifier
 from app.application.soil import SoilService
 from app.application.vision_pipeline import VisionPipeline
@@ -101,6 +102,13 @@ def build_container(settings: Settings) -> AppContainer:
         top_k=settings.retrieval_top_k,
         generation_clients={LOCAL_MODEL_NAME: local_client},
         answer_cache=answer_cache,
+        # A1: follow-ups -> standalone retrieval queries (same cheap intent
+        # model; fires only on follow-up markers with history present).
+        rewriter=(
+            ConversationalQueryRewriter(intent_llm)
+            if settings.query_rewrite_enabled
+            else None
+        ),
     )
     vision = VisionPipeline(
         registry=ArtifactVisionRegistry(Path(settings.ml_assets_dir) / "vision"),

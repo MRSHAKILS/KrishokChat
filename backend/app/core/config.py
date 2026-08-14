@@ -65,6 +65,11 @@ class Settings(BaseSettings):
     # automatically whenever the OpenRouter key or index is unavailable.
     retrieval_bm25_only: bool = False
 
+    # A1: rewrite follow-up queries into standalone retrieval queries using
+    # conversation history (one cheap LLM call, only when a follow-up marker
+    # is present AND history exists). Disable to always search raw queries.
+    query_rewrite_enabled: bool = True
+
     vision_crop_confidence_threshold: float = Field(default=0.60, ge=0.0, le=1.0)
     vision_disease_confidence_threshold: float = Field(default=0.55, ge=0.0, le=1.0)
     vision_max_image_bytes: int = Field(default=10_000_000, ge=100_000)

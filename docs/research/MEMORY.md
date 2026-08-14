@@ -131,6 +131,22 @@ cache tests), prewarm cached 3/7 (4 terminal correctly not cached), live
 replay **47 ms** (vs 5.5 s live run) with intact sources/trace/verifier
 stamps; audit row `cached:true`; metrics `cached.replays=1`.
 
+**A1 QUERY REWRITING (done 2026-08-15):** follow-ups -> standalone retrieval
+queries. `ConversationalQueryRewriter` (`backend/app/application/rewrite.py`):
+heuristic gate (follow-up deixis markers + history non-empty) then one cheap
+LLM call (same intent model) rewriting to a self-contained query; any failure
+falls back to raw (fail-open retrieval, NEVER safety). Retrieval used the raw
+query before (history only reached the generation prompt). Now: rewritten
+query feeds `build_retrieval_query`; safety classifier STILL sees the raw
+query; audit adds `retrieval_query_used` + `retrieval_query_rewritten`; trace
+detail appends "· rewritten". Wired in container when `query_rewrite_enabled`
+(default true; off-switch env). Single-turn questions never trigger a call —
+cached demo lane untouched (verified: curated Q1 still 16 ms replay).
+Verified: 127/127 pytest (+12 rewrite tests), live probe: turn1 9.5 s,
+follow-up "তাহলে ইউরিয়া কতটুকু দেব?" -> rewritten query
+"ধান চাষে ইউরিয়া সার কতটুকু দেব? rice fertilizer safe_agri", 5 sources,
+grounded answer, audit rewritten=True.
+
 ## Key Decisions
 - P1: rule-based dosage entailment (chemical/crop/number/unit vs passages),
   annotate-and-drop (never hard-block), TRUST-SCORE-style refusal counters.
@@ -150,6 +166,9 @@ stamps; audit row `cached:true`; metrics `cached.replays=1`.
 - B1: demo cache replays ONLY verified pipeline outputs (safe_agri, no error);
   cached replays are honest (audit rows + metrics split); never cache
   terminal refusals; cache key includes crop/disease/model.
+- A1: rewriting is retrieval-only — safety classification always sees the raw
+  surface query; rewrite fires only on follow-up markers with history
+  (budget-free: zero cost for single-turn/cached questions).
 - Out of scope now: KG/GraphRAG, offline PWA, B2B layer, query routing,
   clarify-slots, 16123 integration (REJECTED), DPO alignment.
 
@@ -167,12 +186,12 @@ handled by pinned sample.
 1. **Researcher: fill `dataset_release/benchmark/scoring_sheet_v1.csv`** (2
    evaluators, per `scoring_rubric_v1.md`), then rerun `11_publish_golden_stats.py`.
 2. Q1: expert review of the Lumectin refusal (`farmer_q_75`) correctness.
-3. **B1 follow-ups:** commit the cache lane; add the prewarm step to the demo
-   script (run 2–3 min before demo; then curated questions replay at ~47 ms).
+3. **Demo prep:** add the prewarm step to the demo script (run 2–3 min before
+   demo; then curated questions replay at ~16–47 ms).
 4. Q4: restore `dataset_release/safety/phase4_dialect_map.json` (110-word real
    map) to raise the 0.6% expansion hit rate.
-5. A1 (menu, next): conversational query rewriting — `build_retrieval_query()`
-   ignores history today (CORAL/ConvSearch-R1 evidence: rewrite-then-retrieve).
+5. Menu next: C1 coverage-gap mining (`farmer_benchmark_1000.jsonl` vs corpus)
+   or C3 structured advisory cards (Bayer BCS-ELY-style).
 
 ## Key Files
 `docs/competitive-landscape.md`, `docs/research/LITERATURE_SCOUT_2026.md`,

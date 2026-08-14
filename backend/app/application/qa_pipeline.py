@@ -7,6 +7,7 @@ from collections.abc import AsyncIterator, Awaitable, Callable
 
 from app.application.generation import GroundedAnswerGenerator, REFERRAL
 from app.application.query_builder import build_retrieval_query
+from app.application.rewrite import ConversationalQueryRewriter
 from app.application.safety import SafetyClassifier
 from app.domain.contracts import (
     PipelineEvent,
@@ -64,6 +65,7 @@ class QAPipeline:
         top_k: int = 5,
         generation_clients: dict[str, object] | None = None,
         answer_cache: DemoAnswerCache | None = None,
+        rewriter: ConversationalQueryRewriter | None = None,
     ) -> None:
         self.safety = safety
         self.retriever = retriever
@@ -79,6 +81,9 @@ class QAPipeline:
         # None = caching disabled entirely (default; tests construct the
         # pipeline without a cache and keep their exact behavior).
         self.answer_cache = answer_cache
+        # A1 conversational query rewriting (follow-ups -> standalone
+        # retrieval queries). None = raw query retrieval (default).
+        self.rewriter = rewriter
 
     def _generator_for(self, model: str | None) -> GroundedAnswerGenerator:
         if model and model in self.generation_clients:
@@ -108,6 +113,10 @@ class QAPipeline:
         verifier_flags: tuple[str, ...] = ()
         result: QAResult | None = None
         cached_hit = False
+        # A1: the retrieval query (possibly rewritten); audited as-is so the
+        # metrics panel and paper can see exactly what was searched.
+        retrieval_query = request.query
+        rewritten = False
         cache_key = (
             self.answer_cache.key_for(request.query, request.crop, request.disease, request.model)
             if self.answer_cache is not None
@@ -155,7 +164,11 @@ class QAPipeline:
                 return result
 
             await emit(PipelineStage.RETRIEVAL, StageStatus.START)
-            retrieval_query = build_retrieval_query(request.query, context, decision.category.value)
+            if self.rewriter is not None:
+                retrieval_query, rewritten = await self.rewriter.maybe_rewrite(
+                    request.query, context.history
+                )
+            retrieval_query = build_retrieval_query(retrieval_query, context, decision.category.value)
             retrieved = await asyncio.to_thread(self.retriever.retrieve, retrieval_query, top_k=self.top_k)
             seen_ids: set[str] = set()
             sources = []
@@ -166,6 +179,8 @@ class QAPipeline:
             # P3: surface the dialect expansion in the agent trace (honest
             # evidence the mapping ran; nothing shown when no terms matched).
             detail = f"{len(sources)} sources"
+            if rewritten:
+                detail += " · rewritten"
             expansion = getattr(self.retriever, "last_expansion", None)
             if expansion and expansion[2]:
                 detail += " · " + "; ".join(expansion[2][:3])
@@ -261,6 +276,8 @@ class QAPipeline:
                     decision=decision,
                     retrieved=retrieved,
                     cached=cached_hit,
+                    retrieval_query=retrieval_query,
+                    rewritten=rewritten,
                 )
                 if request.session_id and result.category is SafetyCategory.SAFE_AGRI:
                     self.sessions.append(request.session_id, "user", request.query)
@@ -274,6 +291,8 @@ class QAPipeline:
         decision: SafetyDecision | None = None,
         retrieved: list[RetrievedSource] | None = None,
         cached: bool = False,
+        retrieval_query: str | None = None,
+        rewritten: bool = False,
     ) -> None:
         # P1 refusal counters (TRUST-SCORE style, honest subset):
         # - answered_without_sources: a safe-agri query that produced a real
@@ -336,6 +355,8 @@ class QAPipeline:
                 "crop": request.crop,
                 "disease": request.disease,
                 "model_choice": request.model,
+                "retrieval_query_used": retrieval_query or request.query,
+                "retrieval_query_rewritten": rewritten,
             }
         )
 

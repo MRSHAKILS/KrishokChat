@@ -262,6 +262,7 @@ Settings are read from the repo-root `.env`, then overridden by
 | `DEMO_MODE` | `true` | Enables the demo answer cache (exact-replay lane) |
 | `DEMO_CACHE_PATH` | `demo-assets/cached_responses.json` | Cached demo responses (verified pipeline outputs only) |
 | `DEMO_CACHE_MAX_ENTRIES` | `100` | Max entries kept in the demo answer cache |
+| `QUERY_REWRITE_ENABLED` | `true` | Follow-up queries rewritten into standalone retrieval queries (history-aware) |
 | `NEXT_PUBLIC_BACKEND_URL` | `http://localhost:8000` | Frontend -> backend URL |
 
 The frontend additionally reads `frontend/.env.local`

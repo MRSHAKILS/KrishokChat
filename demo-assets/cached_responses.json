@@ -860,5 +860,573 @@
     "reason": ""
    }
   ]
+ },
+ "|||ধান চাষে কী কী সার দিতে হয়": {
+  "query": "ধান চাষে কী কী সার দিতে হয়?",
+  "category": "safe_agri",
+  "answer": "ধান চাষে সুষম সার প্রয়োগ অত্যন্ত গুরুত্বপূর্ণ। সারের মাত্রা নির্ভর করে মৌসুম, মাটির উর্বরতা এবং জাতের ওপর।\n\nসাধারণত, ফসফরাস (TSP), পটাশিয়াম (MP), জিপসাম এবং দস্তা (Zinc) সার জমি শেষ চাষের সময় বেসাল ডোজ হিসেবে প্রয়োগ করা হয়। [B5_BARCAG_D929CD_002]\n\nইউরিয়া সার সাধারণত তিন কিস্তিতে প্রয়োগ করা হয়: বেসাল হিসেবে, কুশি ছাড়ার (tillering) পর্যায়ে এবং কাইকোর (panicle initiation - PI) আসার আগে। [B5_BARCAG_D929CD_002]\n\nবোরো ধানের ক্ষেত্রে, ফসফরাস, পটাশিয়াম, সালফার এবং দস্তা সারের পুরো অংশ শেষ চাষের সময় প্রয়োগ করতে হবে। নাইট্রোজেন সার তিন কিস্তিতে সমানভাবে প্রয়োগ করা উত্তম। হালকা মাটির ক্ষেত্রে পটাশ সারের অর্ধেক শেষ চাষের সময় এবং বাকি অর্ধেক শেষ নাইট্রোজেন উপরিপ্রয়োগের সাথে দিতে হবে। [B4_FRG2024_DD93AB_001]\n\nআজোলা একটি জৈব সার যা ধানের জমিতে নাইট্রোজেন সরবরাহ করতে পারে। ধান রোপণের ১-২ সপ্তাহ পর জমিতে আজোলা প্রয়োগ করা যেতে পারে। [B4_FRG2024_506847_002]\n\nধানের বীজতলায় সাধারণত সার প্রয়োগের প্রয়োজন হয় না। তবে কম উর্বর মাটিতে প্রতি বর্গমিটারে ২ কেজি হারে জৈব সার প্রয়োগ করা যেতে পারে। সালফারের অভাব থাকলে প্রতি বর্গমিটারে ১০ গ্রাম হারে জিপসাম উপরিপ্রয়োগ করতে হবে। [B4_FRG2024_E35BB1_005]\n\nযদি আপনার সারের মাত্রা বা প্রয়োগ পদ্ধতি সম্পর্কে আরও নির্দিষ্ট তথ্যের প্রয়োজন হয়, তবে আপনি কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "sources": [
+   {
+    "id": "B4_FRG2024_DD93AB_001",
+    "score": 0.0476,
+    "title_en": "Fertilizer Management for Boro Rice (High Yielding Varieties)",
+    "title_bn": "বোরো ধান (উচ্চ ফলনশীল জাত) সার ব্যবস্থাপনা",
+    "content_en": "",
+    "content_bn": "বোরো ধানের বিভিন্ন জাতের ফলন লক্ষ্যমাত্রা অনুযায়ী সার প্রয়োগের সুপারিশ করা হয়েছে। সাধারণ নিয়ম অনুযায়ী ফসফরাস (P), পটাশ (K), সালফার (S) এবং দস্তা (Zn) সারের পুরো অংশ শেষ চাষের সময় প্রয়োগ করতে হবে। নাইট্রোজেন সার তিন কিস্তিতে সমানভাবে প্রয়োগ করা উত্তম। হালকা মাটির ক্ষেত্রে পটাশ সারের অর্ধেক শেষ চাষের সময় এবং বাকি অর্ধেক শেষ নাইট্রোজেন উপরিপ্রয়োগের সাথে দিতে হবে।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. Turmeric and some vegetable crops on floating bed. Fertilizer Recommendation Guide 2024. pp. 85-88.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "বোরো ধান",
+      "সার ব্যবস্থাপনা",
+      "Boro rice",
+      "Fertilizer management"
+     ],
+     "title_en": "Fertilizer Management for Boro Rice (High Yielding Varieties)",
+     "title_bn": "বোরো ধান (উচ্চ ফলনশীল জাত) সার ব্যবস্থাপনা",
+     "section_title": "Turmeric and some vegetable crops on floating bed",
+     "publisher": "BARC",
+     "citation": "BARC. Turmeric and some vegetable crops on floating bed. Fertilizer Recommendation Guide 2024. pp. 85-88.",
+     "summary": "বোরো ধানের ফলন লক্ষ্যমাত্রা অনুযায়ী মাটি পরীক্ষা সাপেক্ষে সার প্রয়োগের নির্দেশিকা।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_D929CD_002",
+    "score": 0.0476,
+    "title_en": "Rice Fertilizer Application Schedule",
+    "title_bn": "",
+    "content_en": "Balanced fertilizer application is critical for rice yield. Rates depend on the season, soil fertility, and variety duration. General application rules: - Phosphorus (TSP), Potassium (MP), Gypsum, and Zinc are typically applied as basal doses during final land preparation. - Urea is generally applied in three splits: basal, at tillering stage, and before panicle initiation (PI).",
+    "content_bn": "Publisher: BARC Section/Topic: Rice — Production Technology ধানের ফলনের জন্য সুষম সার প্রয়োগ অত্যন্ত গুরুত্বপূর্ণ। এর মাত্রা মৌসুম, মাটির উর্বরতা এবং জাতের স্থায়িত্বের ওপর নির্ভর করে। সাধারণ প্রয়োগের নিয়মাবলি: - ফসফরাস (TSP), পটাশিয়াম (MP), জিপসাম এবং দস্তা (Zinc) সাধারণত জমি শেষ চাষের সময় বেসাল ডোজ হিসেবে প্রয়োগ করা হয়। - ইউরিয়া সাধারণত তিন কিস্তিতে প্রয়োগ করা হয়: বেসাল হিসেবে, কুশি ছাড়ার (tillering) পর্যায়ে এবং কাইকোর (panicle initiation - PI) আসার আগে।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Rice — Production Technology. Hand Book of Agricultural Technology. pp. 25-28.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "Rice",
+      "Fertilizer",
+      "সার",
+      "Boro",
+      "Aman",
+      "Aus"
+     ],
+     "title_en": "Rice Fertilizer Application Schedule",
+     "title_bn": "",
+     "section_title": "Rice — Production Technology",
+     "publisher": "BARC",
+     "citation": "BARC. Rice — Production Technology. Hand Book of Agricultural Technology. pp. 25-28.",
+     "summary": "Guidelines for balanced fertilizer application in rice based on season, growth duration, and soil fertility.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_FRG2024_77DEAA_001",
+    "score": 0.0455,
+    "title_en": "Fertilizer Recommendation for Garlic (Zero Tillage)",
+    "title_bn": "",
+    "content_en": "For BARI Rashun-1 garlic cultivated under zero tillage (common in Chalan Beel areas), the recommended nutrient application is 160 kg N, 50 kg P, 125 kg K, 25 kg S, and 3 kg Zn per hectare. Application Method: 1. Basal: Apply all Organic Fertilizer (OF), P, K, S, Zn, and one-third of N by broadcasting on muddy soil after removing rice straw. 2. Planting: Dibble cloves shallowly (1/3rd into the soil) and cover the land with rice straw. 3. Topdressing: Apply the remaining N in two equal splits at 25-30 DAP and 55-60 DAP. Apply by topdressing on the straw mulch, gently shaking the straw to reach the soil surface. 4. Irrigation: Provide light irrigation 2-3 hours after N topdressing. Avoid waterlogging.",
+    "content_bn": "Publisher: BARC Section/Topic: TEASLE GOURD (*Momordica cochinchinensis*) চালন বিল এলাকায় সাধারণত প্রচলিত বিনা চাষে চাষকৃত বারি রসুন-১ এর জন্য সুপারিশকৃত পুষ্টি উপাদানের মাত্রা প্রতি হেক্টরে ১৬০ কেজি N, ৫০ কেজি P, ১২৫ কেজি K, ২৫ কেজি S এবং ৩ কেজি Zn। প্রয়োগ পদ্ধতি: ১. মূল সার: ধান কাটানোর পর গাছের অবশিষ্ট খড় সরিয়ে নিয়ে স্যাঁতসেঁতে মাটিতে সমস্ত জৈব সার (OF), P, K, S, Zn এবং এক তৃতীয়াংশ N ছিটিয়ে প্রয়োগ করতে হবে। ২. রোপণ: রসুনের কোয়াগুলো অগভীরভাবে (মাটির ১৩ অংশ ভেতরে) পুঁতে দিতে হবে এবং জমি ধান খড় দিয়ে ঢেকে দিতে হবে। ৩. উপরি প্রয়োগ: অবশিষ্ট N কে সমান দুই ভাগে ভাগ করে ২৫-৩০ DAP এবং ৫৫-৬০ DAP এ প্রয়োগ করতে হবে। খড়ের মাল্চের ওপর উপরি প্রয়োগ করতে হবে এবং সার যেন মাটি পর্যন্ত পৌঁছায় সেজন্য খড়গুলো হালকাভাবে নেড়ে দিতে হবে। ৪. সেচ: N উপরি প্রয়োগের ২-৩ ঘণ্টা পর হালকা সেচ দিতে হবে। জলাবদ্ধতা এড়িয়ে চলতে হবে।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. TEASLE GOURD (*Momordica cochinchinensis*). Fertilizer Recommendation Guide 2024. pp. 124-124.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "Garlic",
+      "Zero Tillage",
+      "Fertilizer",
+      "BARI Rashun-1",
+      "রসুন",
+      "সার ব্যবস্থাপনা"
+     ],
+     "title_en": "Fertilizer Recommendation for Garlic (Zero Tillage)",
+     "title_bn": "",
+     "section_title": "TEASLE GOURD (*Momordica cochinchinensis*)",
+     "publisher": "BARC",
+     "citation": "BARC. TEASLE GOURD (*Momordica cochinchinensis*). Fertilizer Recommendation Guide 2024. pp. 124-124.",
+     "summary": "Nutrient recommendation and application method for BARI Rashun-1 garlic under zero tillage conditions.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_FRG2024_506847_002",
+    "score": 0.0435,
+    "title_en": "Azolla Biofertilizer for Rice",
+    "title_bn": "",
+    "content_en": "Azolla is a floating fern that fixes atmospheric nitrogen in symbiosis with Anabaena azollae. In wetland rice, it provides nitrogen equivalent to 25-40 kg N/ha. Application method: 1. Apply Azolla to standing water at a rate of 3-4 t/ha, 1-2 weeks after transplanting rice. 2. After 2-3 weeks, drain the water and incorporate the Azolla into the soil. 3. Azolla can be grown in the rice field multiple times.",
+    "content_bn": "Publisher: BARC Section/Topic: **AEZ 15: Arial Bil** আজোলা হলো একটি ভাসমান প্যান যা Anabaena -এর সাথে মিথোজীবিতায় বায়ুমণ্ডলীয় নাইট্রোজেন সংবদ্ধ করে। নিচু জমির ধান চাষে এটি ২৫-৪০ kg N/ha এর সমতুল্য নাইট্রোজেন সরবরাহ করে। প্রয়োগ পদ্ধতি: ১. ধান রোপণের ১-২ সপ্তাহ পর ৩-৪ t/ha হারে জমিতে জম-জলে আজোলা প্রয়োগ করুন। ২. ২-৩ সপ্তাহ পর পানি নিষ্কাশন করুন এবং আজোলা মাটিতে মিশিয়ে দিন। ৩. ধান ক্ষেতে আজোলা একাধিকবার চাষ করা যেতে পারে।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. **AEZ 15: Arial Bil**. Fertilizer Recommendation Guide 2024. pp. 62-62.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "Azolla",
+      "rice",
+      "biofertilizer",
+      "nitrogen fixation",
+      "অ্যাজোলা",
+      "ধান"
+     ],
+     "title_en": "Azolla Biofertilizer for Rice",
+     "title_bn": "",
+     "section_title": "**AEZ 15: Arial Bil**",
+     "publisher": "BARC",
+     "citation": "BARC. **AEZ 15: Arial Bil**. Fertilizer Recommendation Guide 2024. pp. 62-62.",
+     "summary": "Azolla is a floating fern that fixes nitrogen in wetland rice fields, providing an equivalent of 25-40 kg N/ha.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_FRG2024_E35BB1_005",
+    "score": 0.0435,
+    "title_en": "",
+    "title_bn": "ধানের বীজতলার সার ব্যবস্থাপনা",
+    "content_en": "",
+    "content_bn": "সাধারণত ধানের বীজতলায় সার প্রয়োগের প্রয়োজন হয় না। তবে কম উর্বর মাটিতে প্রতি বর্গমিটারে ২ কেজি হারে জৈব সার প্রয়োগ করা যেতে পারে। সালফারের অভাব থাকলে প্রতি বর্গমিটারে ১০ গ্রাম হারে জিপসাম উপরিপ্রয়োগ করতে হবে। বোরো মৌসুমে ঠান্ডাজনিত কারণে চারা হলুদ হয়ে গেলে নাইট্রোজেন বা সালফার প্রয়োগে কাজ হয় না; সেক্ষেত্রে বীজতলা স্বচ্ছ পলিথিন দিয়ে ঢেকে দিতে হবে।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. T. Aman rice. Fertilizer Recommendation Guide 2024. pp. 89-90.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "Seedbed",
+      "Rice",
+      "Fertilizer",
+      "বীজতলা",
+      "ধান",
+      "সার"
+     ],
+     "title_en": "",
+     "title_bn": "ধানের বীজতলার সার ব্যবস্থাপনা",
+     "section_title": "T. Aman rice",
+     "publisher": "BARC",
+     "citation": "BARC. T. Aman rice. Fertilizer Recommendation Guide 2024. pp. 89-90.",
+     "summary": "ধানের বীজতলায় সার প্রয়োগের প্রয়োজনীয়তা এবং বিশেষ ক্ষেত্রে সার ব্যবহারের নির্দেশনা।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "ধান চাষে সুষম সার প্রয়োগ অত্যন্ত গুরুত্বপূর্ণ",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "সারের মাত্রা নির্ভর করে মৌসুম, মাটির উর্বরতা এবং জাতের ওপর",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "সাধারণত, ফসফরাস (TSP), পটাশিয়াম (MP), জিপসাম এবং দস্তা (Zinc) সার জমি শেষ চাষের সময় বেসাল ডোজ হিসেবে প্রয়োগ করা হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_D929CD_002]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "ইউরিয়া সার সাধারণত তিন কিস্তিতে প্রয়োগ করা হয়: বেসাল হিসেবে, কুশি ছাড়ার (tillering) পর্যায়ে এবং কাইকোর (panicle initiation - PI) আসার আগে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_D929CD_002]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "বোরো ধানের ক্ষেত্রে, ফসফরাস, পটাশিয়াম, সালফার এবং দস্তা সারের পুরো অংশ শেষ চাষের সময় প্রয়োগ করতে হবে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "নাইট্রোজেন সার তিন কিস্তিতে সমানভাবে প্রয়োগ করা উত্তম",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "হালকা মাটির ক্ষেত্রে পটাশ সারের অর্ধেক শেষ চাষের সময় এবং বাকি অর্ধেক শেষ নাইট্রোজেন উপরিপ্রয়োগের সাথে দিতে হবে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B4_FRG2024_DD93AB_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "আজোলা একটি জৈব সার যা ধানের জমিতে নাইট্রোজেন সরবরাহ করতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "ধান রোপণের ১-২ সপ্তাহ পর জমিতে আজোলা প্রয়োগ করা যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B4_FRG2024_506847_002]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "ধানের বীজতলায় সাধারণত সার প্রয়োগের প্রয়োজন হয় না",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "তবে কম উর্বর মাটিতে প্রতি বর্গমিটারে ২ কেজি হারে জৈব সার প্রয়োগ করা যেতে পারে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "সালফারের অভাব থাকলে প্রতি বর্গমিটারে ১০ গ্রাম হারে জিপসাম উপরিপ্রয়োগ করতে হবে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[B4_FRG2024_E35BB1_005]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার সারের মাত্রা বা প্রয়োগ পদ্ধতি সম্পর্কে আরও নির্দিষ্ট তথ্যের প্রয়োজন হয়, তবে আপনি কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "|||তাহলে ইউরিয়া কতটুকু দেব": {
+  "query": "তাহলে ইউরিয়া কতটুকু দেব?",
+  "category": "safe_agri",
+  "answer": "ধান চাষে ইউরিয়া সারের পরিমাণ নির্ভর করে মৌসুম, মাটির উর্বরতা এবং জাতের ওপর। [B5_BARCAG_D929CD_002]\n\nসাধারণত, ইউরিয়া সার তিন কিস্তিতে প্রয়োগ করা হয়। প্রথম কিস্তি বেসাল হিসেবে জমি তৈরির সময় দেওয়া হয়। [B5_BARCAG_D929CD_002]\n\nবাকি দুই কিস্তি কুশি ছাড়ার (tillering) পর্যায়ে এবং কাইকোর (panicle initiation - PI) আসার আগে প্রয়োগ করা উত্তম। [B5_BARCAG_D929CD_002]\n\nবোরো ধানের ক্ষেত্রে, নাইট্রোজেন সার তিন কিস্তিতে সমানভাবে প্রয়োগ করা ভালো। [B4_FRG2024_DD93AB_001]\n\nযদি আপনার মাটির অবস্থা বা ধানের জাত সম্পর্কে নির্দিষ্ট তথ্য থাকে, তাহলে সঠিক মাত্রা জানতে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "sources": [
+   {
+    "id": "B4_FRG2024_DD93AB_001",
+    "score": 0.0476,
+    "title_en": "Fertilizer Management for Boro Rice (High Yielding Varieties)",
+    "title_bn": "বোরো ধান (উচ্চ ফলনশীল জাত) সার ব্যবস্থাপনা",
+    "content_en": "",
+    "content_bn": "বোরো ধানের বিভিন্ন জাতের ফলন লক্ষ্যমাত্রা অনুযায়ী সার প্রয়োগের সুপারিশ করা হয়েছে। সাধারণ নিয়ম অনুযায়ী ফসফরাস (P), পটাশ (K), সালফার (S) এবং দস্তা (Zn) সারের পুরো অংশ শেষ চাষের সময় প্রয়োগ করতে হবে। নাইট্রোজেন সার তিন কিস্তিতে সমানভাবে প্রয়োগ করা উত্তম। হালকা মাটির ক্ষেত্রে পটাশ সারের অর্ধেক শেষ চাষের সময় এবং বাকি অর্ধেক শেষ নাইট্রোজেন উপরিপ্রয়োগের সাথে দিতে হবে।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. Turmeric and some vegetable crops on floating bed. Fertilizer Recommendation Guide 2024. pp. 85-88.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "বোরো ধান",
+      "সার ব্যবস্থাপনা",
+      "Boro rice",
+      "Fertilizer management"
+     ],
+     "title_en": "Fertilizer Management for Boro Rice (High Yielding Varieties)",
+     "title_bn": "বোরো ধান (উচ্চ ফলনশীল জাত) সার ব্যবস্থাপনা",
+     "section_title": "Turmeric and some vegetable crops on floating bed",
+     "publisher": "BARC",
+     "citation": "BARC. Turmeric and some vegetable crops on floating bed. Fertilizer Recommendation Guide 2024. pp. 85-88.",
+     "summary": "বোরো ধানের ফলন লক্ষ্যমাত্রা অনুযায়ী মাটি পরীক্ষা সাপেক্ষে সার প্রয়োগের নির্দেশিকা।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_DF7B1C_003",
+    "score": 0.0476,
+    "title_en": "Wheat Fertilizer Schedule",
+    "title_bn": "",
+    "content_en": "Recommended fertilizers per hectare are: Urea (220 kg), TSP (150 kg), MP (100 kg), Gypsum (100 kg), and Boric acid (6-7 kg). Apply 2/3 of the urea and all other fertilizers as basal during final land preparation. The remaining 1/3 of urea should be top-dressed at the first irrigation (17-20 days after sowing).",
+    "content_bn": "প্রতি হেক্টরে সারের সুপারিশকৃত পরিমাণ হলো: Urea (220 kg), TSP (150 kg), MP (100 kg), Gypsum (100 kg) এবং Boric acid (6-7 kg)। শেষ চাষের সময় জমি তৈরির সময় মোট ইউরিয়ার ২৩ অংশ এবং বাকি সব সার একসাথে মাটিতে মিশিয়ে দিতে হবে। বাকি ১৩ অংশ ইউরিয়া প্রথম সেচের সময় (বীজ বপনের ১৭- দিন পর) উপরি প্রয়োগ করতে হবে।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Wheat — Production Technology. Hand Book of Agricultural Technology. pp. 38-39.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "Wheat",
+      "Fertilizer",
+      "সার ব্যবস্থাপনা"
+     ],
+     "title_en": "Wheat Fertilizer Schedule",
+     "title_bn": "",
+     "section_title": "Wheat — Production Technology",
+     "publisher": "BARC",
+     "citation": "BARC. Wheat — Production Technology. Hand Book of Agricultural Technology. pp. 38-39.",
+     "summary": "Recommended fertilizer application rates and timing for wheat cultivation.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_FRG2024_506847_002",
+    "score": 0.0455,
+    "title_en": "Azolla Biofertilizer for Rice",
+    "title_bn": "",
+    "content_en": "Azolla is a floating fern that fixes atmospheric nitrogen in symbiosis with Anabaena azollae. In wetland rice, it provides nitrogen equivalent to 25-40 kg N/ha. Application method: 1. Apply Azolla to standing water at a rate of 3-4 t/ha, 1-2 weeks after transplanting rice. 2. After 2-3 weeks, drain the water and incorporate the Azolla into the soil. 3. Azolla can be grown in the rice field multiple times.",
+    "content_bn": "Publisher: BARC Section/Topic: **AEZ 15: Arial Bil** আজোলা হলো একটি ভাসমান প্যান যা Anabaena -এর সাথে মিথোজীবিতায় বায়ুমণ্ডলীয় নাইট্রোজেন সংবদ্ধ করে। নিচু জমির ধান চাষে এটি ২৫-৪০ kg N/ha এর সমতুল্য নাইট্রোজেন সরবরাহ করে। প্রয়োগ পদ্ধতি: ১. ধান রোপণের ১-২ সপ্তাহ পর ৩-৪ t/ha হারে জমিতে জম-জলে আজোলা প্রয়োগ করুন। ২. ২-৩ সপ্তাহ পর পানি নিষ্কাশন করুন এবং আজোলা মাটিতে মিশিয়ে দিন। ৩. ধান ক্ষেতে আজোলা একাধিকবার চাষ করা যেতে পারে।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. **AEZ 15: Arial Bil**. Fertilizer Recommendation Guide 2024. pp. 62-62.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "Azolla",
+      "rice",
+      "biofertilizer",
+      "nitrogen fixation",
+      "অ্যাজোলা",
+      "ধান"
+     ],
+     "title_en": "Azolla Biofertilizer for Rice",
+     "title_bn": "",
+     "section_title": "**AEZ 15: Arial Bil**",
+     "publisher": "BARC",
+     "citation": "BARC. **AEZ 15: Arial Bil**. Fertilizer Recommendation Guide 2024. pp. 62-62.",
+     "summary": "Azolla is a floating fern that fixes nitrogen in wetland rice fields, providing an equivalent of 25-40 kg N/ha.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_D929CD_002",
+    "score": 0.0455,
+    "title_en": "Rice Fertilizer Application Schedule",
+    "title_bn": "",
+    "content_en": "Balanced fertilizer application is critical for rice yield. Rates depend on the season, soil fertility, and variety duration. General application rules: - Phosphorus (TSP), Potassium (MP), Gypsum, and Zinc are typically applied as basal doses during final land preparation. - Urea is generally applied in three splits: basal, at tillering stage, and before panicle initiation (PI).",
+    "content_bn": "Publisher: BARC Section/Topic: Rice — Production Technology ধানের ফলনের জন্য সুষম সার প্রয়োগ অত্যন্ত গুরুত্বপূর্ণ। এর মাত্রা মৌসুম, মাটির উর্বরতা এবং জাতের স্থায়িত্বের ওপর নির্ভর করে। সাধারণ প্রয়োগের নিয়মাবলি: - ফসফরাস (TSP), পটাশিয়াম (MP), জিপসাম এবং দস্তা (Zinc) সাধারণত জমি শেষ চাষের সময় বেসাল ডোজ হিসেবে প্রয়োগ করা হয়। - ইউরিয়া সাধারণত তিন কিস্তিতে প্রয়োগ করা হয়: বেসাল হিসেবে, কুশি ছাড়ার (tillering) পর্যায়ে এবং কাইকোর (panicle initiation - PI) আসার আগে।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Rice — Production Technology. Hand Book of Agricultural Technology. pp. 25-28.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "Rice",
+      "Fertilizer",
+      "সার",
+      "Boro",
+      "Aman",
+      "Aus"
+     ],
+     "title_en": "Rice Fertilizer Application Schedule",
+     "title_bn": "",
+     "section_title": "Rice — Production Technology",
+     "publisher": "BARC",
+     "citation": "BARC. Rice — Production Technology. Hand Book of Agricultural Technology. pp. 25-28.",
+     "summary": "Guidelines for balanced fertilizer application in rice based on season, growth duration, and soil fertility.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_C028DB_001",
+    "score": 0.0435,
+    "title_en": "Registered Herbicides for Rice (18WP Formulation)",
+    "title_bn": "",
+    "content_en": "The following 18WP herbicide products are registered for use in rice cultivation to manage specific weeds. Always follow the recommended dosage rate of 750 gm/ha for these products in rice fields.",
+    "content_bn": "নির্দিষ্ট আগাছা দমনের জন্য ধান চাষে ব্যবহারের উদ্দেশ্যে নিচের 18WP ভেষজনাশক (herbicide) পণ্যগুলো নিবন্ধিত। ধান ক্ষেতে এসব পণ্যের জন্য সর্বদা 750 gm/ha নির্ধারিত মাত্রা অনুসরণ করুন।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_853. List of Registered Agricultural Pesticides (DAE). pp. 853-853.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "rice",
+      "herbicide",
+      "weed management",
+      "18WP",
+      "pesticide registration"
+     ],
+     "title_en": "Registered Herbicides for Rice (18WP Formulation)",
+     "title_bn": "",
+     "section_title": "page_853",
+     "publisher": "DAE",
+     "citation": "DAE. page_853. List of Registered Agricultural Pesticides (DAE). pp. 853-853.",
+     "summary": "List of registered 18WP herbicide products for weed management in rice cultivation.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources · rewritten",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "ধান চাষে ইউরিয়া সারের পরিমাণ নির্ভর করে মৌসুম, মাটির উর্বরতা এবং জাতের ওপর",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_D929CD_002]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "সাধারণত, ইউরিয়া সার তিন কিস্তিতে প্রয়োগ করা হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "প্রথম কিস্তি বেসাল হিসেবে জমি তৈরির সময় দেওয়া হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_D929CD_002]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "বাকি দুই কিস্তি কুশি ছাড়ার (tillering) পর্যায়ে এবং কাইকোর (panicle initiation - PI) আসার আগে প্রয়োগ করা উত্তম",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_D929CD_002]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "বোরো ধানের ক্ষেত্রে, নাইট্রোজেন সার তিন কিস্তিতে সমানভাবে প্রয়োগ করা ভালো",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B4_FRG2024_DD93AB_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার মাটির অবস্থা বা ধানের জাত সম্পর্কে নির্দিষ্ট তথ্য থাকে, তাহলে সঠিক মাত্রা জানতে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
  }
 }
