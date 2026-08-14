@@ -35,10 +35,36 @@ BM25 non-empty 0.99 → hybrid 1.00, dense active 100%).
 **Known limitation (honest):** expansion hit rate 0.6% (6/1,000 queries) —
 title-derived term map is narrow; the 110-word real dialect map
 (`dataset_release/safety/phase4_dialect_map.json`) is MISSING from the
-workspace (never committed) and merges automatically when restored. Fix at
-P4 with the golden set. Next: P4 (gold-label benchmark: 40–60 questions from
-1,001 farmer queries, ≥10 unanswerables, reuses audit v2 fields), P5
-(refusal-reason UI + panel polish).
+workspace (never committed) and merges automatically when restored.
+
+**P4 IN PROGRESS (2026-08-14, commit `684886b`):** golden benchmark shipped.
+Golden set pinned & fully reviewed: `dataset_release/benchmark/golden_qa_v1.jsonl`
+— 46 rows from the 1,001 real farmer queries (pinned sample + 21 overrides;
+`08_build_golden_set.py`): dosage 10, timing 10, pest_disease 10, general 2,
+off_topic 2, unanswerable 12. Every row human-reviewed (3 passes; Bengali
+regex traps: `গান`⊂"লাগানো", `ভর্তি`⊂"ধান ভর্তি", `কবে`⊂"থাকবে",
+`মাত্রা`⊂"তাপমাত্রা", `পরিমাণ`⊂"পর্যাপ্ত পরিমাণ" → boundary patterns).
+Real-pipeline runs (`09_run_golden_eval.py`) on all 46: 45 answered, 1 refused
+(farmer_q_75 — Lumectin dose, safety-classified `banned_or_restricted_chemical`,
+a policy catch to review); verifier flagged 6 of 45 as unsupported.
+**HONEST FINDING — DoD unmet:** unanswerable refusal rate is **0/12 (0%)**
+(target ≥90%); all 12 answered with 5 sources + "verified" (loose retrieval
+neighbors + confident generation). Exposed by P4, not fixed yet — next step
+is a low-confidence referral rule (retrieval top1 score / verifier gate)
+before the demo. Scoring pipeline shipped: `10_scoring_sheet.py` →
+`scoring_sheet_v1.csv` (46 rows, full text) + `scoring_rubric_v1.md`;
+`11_publish_golden_stats.py` → `golden_stats_v1.json` + copy in
+`frontend/src/lib/golden_stats.json` (Cohen's kappa, per-category results,
+validated refusal rate; emits honest `pending_scores` until both evaluators
+fill the sheet). API: `GET /api/benchmark` serves the precomputed artifact
+(replaced stub; never live-computed). Frontend: benchmark page Section G —
+live-system golden eval (mechanical table, unanswerable-refusal callout,
+pending banner, scored table when filled). Verified: 78/78 pytest (+1
+benchmark contract test), `tsc --noEmit` clean, `pnpm build` green, live
+probe of `/api/benchmark` serving pending state.
+**Open work:** 1) researcher + second evaluator fill `scoring_sheet_v1.csv`
+→ rerun `11` → stats go live (kappa required for DoD); 2) the 0% refusal
+finding needs a pipeline fix decision; 3) P5 (refusal-reason UI + panel polish).
 
 ## Key Decisions
 - P1: rule-based dosage entailment (chemical/crop/number/unit vs passages),
@@ -49,7 +75,9 @@ P4 with the golden set. Next: P4 (gold-label benchmark: 40–60 questions from
   trace; smoke eval is coverage-only (no recall claims — P4 golden set adds
   relevance judgments).
 - P4: golden set from 1,001 real farmer queries, ≥10 unanswerables, 2 human
-  evaluators, precomputed panel stats.
+  evaluators, precomputed panel stats. Sample PINNED (override changes never
+  re-sample — golden set is a fixed reviewed artifact, not a generator).
+  Unanswerable refusal DoD ≥90% — currently 0%, exposed, fix pending.
 - P5: TTS read-aloud first (no bn-BD TTS locale — use bn-IN/other, state
   honestly); ASR optional (bn-BD via Google STT or local Whisper), same text
   pipeline, graceful fallback, standard Bengali only.
@@ -61,12 +89,21 @@ Bengali NLI scarcity → rule-based first. RRF regression → BM25 fallback flag
 golden-set A/B. Demo-horizon: never claim hybrid/voice-dialect until live-verified.
 Expansion coverage risk: term map is title-derived (0.6% hit rate) — restore
 `dataset_release/safety/phase4_dialect_map.json` (110-word real map) to raise it.
+**NEW (P4):** unanswerable queries get confident answers (0/12 refused) —
+unsupported-content risk at demo; low-confidence referral rule needed before
+the demo. Scoring churn risk handled by pinned sample.
 
 ## Next Actions
-1. Get researcher approval on the Top-5 (or a subset).
-2. P1 → P2 → P4 critical path; P3 index build in parallel.
-3. Commit each phase per ROADMAP §F.
+1. **Researcher: fill `dataset_release/benchmark/scoring_sheet_v1.csv`** (2
+   evaluators, per `scoring_rubric_v1.md`), then rerun `11_publish_golden_stats.py`.
+2. Decide the unanswerable-refusal fix (low retrieval-top1-score referral
+   rule vs verifier gate) and implement before the demo.
+3. P5 (refusal-reason UI + panel polish) after scores land.
 
 ## Key Files
 `docs/competitive-landscape.md`, `docs/research/LITERATURE_SCOUT_2026.md`,
 `docs/research/CRITIC_GAPS_2026.md`, `docs/research/ROADMAP_2026.md`.
+P4: `dataset_release/benchmark/{golden_qa_v1.jsonl, golden_runs_v1.json,
+scoring_sheet_v1.csv, scoring_rubric_v1.md, golden_review_dump_v1.md,
+golden_stats_v1.json}` + `frontend/src/lib/golden_stats.json`;
+`backend/ml_assets/rag_index/scripts/08..11_*.py`; `backend/app/api/benchmark.py`.
