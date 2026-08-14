@@ -9,6 +9,8 @@ from app.api.benchmark import router as benchmark_router
 from app.api.vision import router as vision_router
 from app.api.soil import router as soil_router
 from app.api.extras import router as extras_router
+from app.api.auth import router as auth_router
+from app.api.history import router as history_router
 from app.core.config import settings
 
 
@@ -39,6 +41,8 @@ def create_app(config=None) -> FastAPI:
     application.include_router(soil_router)
     application.include_router(benchmark_router)
     application.include_router(extras_router)
+    application.include_router(auth_router)
+    application.include_router(history_router)
 
     @application.get("/health")
     async def health_check():

@@ -3,17 +3,21 @@
 from dataclasses import dataclass
 from pathlib import Path
 
+from app.application.auth import AuthService
 from app.application.generation import GroundedAnswerGenerator
+from app.application.history import HistoryService
 from app.application.qa_pipeline import QAPipeline
 from app.application.safety import SafetyClassifier
 from app.application.soil import SoilService
 from app.application.vision_pipeline import VisionPipeline
 from app.core.config import Settings
 from app.infrastructure.audit.jsonl import JSONLAuditSink
+from app.infrastructure.auth.jwks import SupabaseJWKSVerifier
 from app.infrastructure.llm.factory import create_llm_client
 from app.infrastructure.retrieval.bm25 import BM25Retriever
 from app.infrastructure.sessions.memory import InMemorySessionStore
 from app.infrastructure.soil.dataset_loader import load_soil_dataset
+from app.infrastructure.storage.postgrest import PostgrestSavedHistoryStore
 from app.infrastructure.verification.dosage import DosageVerifier
 from app.infrastructure.vision.registry import ArtifactVisionRegistry
 from app.infrastructure.vision.ultralytics_classifier import UltralyticsClassificationRunner
@@ -27,6 +31,8 @@ class AppContainer:
     qa: QAPipeline
     vision: VisionPipeline
     soil: SoilService
+    auth: AuthService
+    history: HistoryService
     llm_name: str
 
 
@@ -73,4 +79,34 @@ def build_container(settings: Settings) -> AppContainer:
         info=load_soil_dataset(Path(settings.soil_release_dir)),
         audit=audit,
     )
-    return AppContainer(qa=pipeline, vision=vision, soil=soil, llm_name=generation_llm.name)
+    # P3: additive auth lane. Constructing the verifier performs NO network I/O
+    # (lazy JWKS fetch on first presented token). Without SUPABASE_URL the
+    # service denies everything — anonymous demo is untouched either way.
+    auth = AuthService(
+        verifier=(
+            SupabaseJWKSVerifier(settings.supabase_jwks_url)
+            if settings.supabase_jwks_url
+            else None
+        ),
+    )
+    # P4 decision 1 (saved history): additive lane. Store construction does
+    # zero network I/O (httpx lazily connects per request). Without Supabase
+    # configuration the service answers 503 — demo routes never call it.
+    history = HistoryService(
+        store=(
+            PostgrestSavedHistoryStore(
+                settings.supabase_url,
+                settings.supabase_service_role_key,
+            )
+            if settings.supabase_url and settings.supabase_service_role_key
+            else None
+        ),
+    )
+    return AppContainer(
+        qa=pipeline,
+        vision=vision,
+        soil=soil,
+        auth=auth,
+        history=history,
+        llm_name=generation_llm.name,
+    )

@@ -2,19 +2,22 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Phone, ChevronDown } from "lucide-react";
+import { Phone, ChevronDown, LogOut } from "lucide-react";
 import { APP, HELPLINE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { SessionArea } from "@/components/auth/session-area";
+import { useSupabaseSession } from "@/lib/supabase/hooks";
+import { createClient } from "@/lib/supabase/client";
 
 /* =========================================================================
    Navbar — top-level navigation.
 
-   Design decisions (from UI audit):
-   - NO auth buttons. The project is a single-session live demo; login/register
-     forms would mislead farmers and demo viewers. Replaced with a permanent,
-     high-contrast 16123 Krishi Call Center pill (real verified helpline).
+   Design decisions (from UI audit + auth amendment 15):
+   - Auth is ADDITIVE and optional: anonymous visitors see a small "লগইন"
+     pill (desktop) / login row (mobile); signed-in visitors see an account
+     chip. Nothing ever redirects or blocks the anonymous demo.
    - Primary nav surfaces the headline features — including the Library
      (লাইব্রেরি), the public data-resource hub for researchers. Secondary
      routes (data, contact, about) live under an "প্রকল্প" dropdown so the
@@ -146,7 +149,7 @@ export function Navbar() {
           </div>
         </nav>
 
-        {/* Right: 16123 call pill + mobile toggle */}
+        {/* Right: 16123 call pill + session area + mobile toggle */}
         <div className="flex shrink-0 items-center gap-2">
           <a
             href={`tel:${HELPLINE.krishiCallCenter}`}
@@ -161,6 +164,7 @@ export function Navbar() {
             <span className="tabular">{HELPLINE.krishiCallCenter}</span>
             <span className="hidden md:inline">কল করুন</span>
           </a>
+          <SessionArea />
           <button
             onClick={() => setOpen((v) => !v)}
             className="flex h-10 w-10 items-center justify-center rounded-md text-ink-soft transition-colors hover:bg-paper-2 lg:hidden"
@@ -183,6 +187,8 @@ export function Navbar() {
             className="overflow-hidden border-t rule lg:hidden"
           >
             <div className="space-y-0.5 px-5 py-3">
+              {/* Account row — additive, never blocking */}
+              <MobileAccountRow />
               {NAV.map((item) => {
                 const active = pathname === item.href;
                 return (
@@ -232,6 +238,50 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </header>
+  );
+}
+
+/* Mobile account row — shows login link or signed-in state with sign-out. */
+function MobileAccountRow() {
+  const { user, loading } = useSupabaseSession();
+  const [signingOut, setSigningOut] = useState(false);
+  const router = useRouter();
+
+  if (loading) return null;
+
+  if (!user) {
+    return (
+      <Link
+        href="/auth"
+        className="block rounded-md px-3 py-2.5 text-sm font-medium text-leaf transition-colors hover:bg-paper-2/60"
+      >
+        লগইন / নিবন্ধন
+      </Link>
+    );
+  }
+
+  async function handleSignOut() {
+    setSigningOut(true);
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.refresh();
+  }
+
+  return (
+    <div className="mb-1 flex items-center justify-between gap-2 rounded-md bg-paper-2/40 px-3 py-2.5">
+      <div className="min-w-0">
+        <div className="truncate text-sm font-medium text-ink">{user.email}</div>
+        <div className="text-xs text-ink-faint">সাইন-ইন করা আছে</div>
+      </div>
+      <button
+        onClick={handleSignOut}
+        disabled={signingOut}
+        className="flex shrink-0 items-center gap-1.5 rounded-md border rule px-2.5 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-ink disabled:opacity-50"
+      >
+        <LogOut className="h-3.5 w-3.5" />
+        {signingOut ? "..." : "লগ আউট"}
+      </button>
+    </div>
   );
 }
 

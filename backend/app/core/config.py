@@ -68,6 +68,23 @@ class Settings(BaseSettings):
     gemini_key_cooldown_seconds: float = 6.0
     env_file_path: str = str(PROJECT_ROOT.parent / ".env")
 
+    # Supabase Auth (amendment 15) — all optional. The anonymous demo never
+    # uses these; they only enable the additive auth lane.
+    supabase_url: str | None = None
+    supabase_publishable_key: str | None = None
+    supabase_service_role_key: str | None = None
+
+    # Google OAuth (archived for deployment + future server-side Google token
+    # checks). The live provider config lives in the Supabase dashboard.
+    google_oauth_client_id: str | None = None
+    google_oauth_client_secret: str | None = None
+
+    @property
+    def supabase_jwks_url(self) -> str | None:
+        if not self.supabase_url:
+            return None
+        return f"{self.supabase_url.rstrip('/')}/auth/v1/.well-known/jwks.json"
+
     @property
     def cors_origins(self) -> list[str]:
         return [origin.strip() for origin in self.frontend_origin.split(",") if origin.strip()]

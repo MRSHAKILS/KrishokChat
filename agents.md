@@ -23,7 +23,7 @@ The person you're working for is the researcher and sole engineer. She will revi
 
 ## 2. Hard rules — do not violate these
 
-1. **No authentication, no user accounts, no admin panel, no multi-tenancy.** This is a single-session live demo.
+1. **Authentication is additive and optional; it may never gate the demo.** Supabase Auth (approved by amendment `paper/system_evolution_plan_2026/execution_planning_2026_08_12/15_SUPABASE_AUTH_AMENDMENT_2026_08_14.md`) provides sign-in for future premium features. The single-session demo remains the default path: with `DEMO_MODE=true` or with no signed-in user, every existing route and feature must behave exactly as before and remain fully offline-capable. No admin panel, no role-based multi-tenancy, no per-tenant data isolation. Auth surfaces (login, register, account menu) must never force redirects, popups, or degradation on anonymous visitors.
 2. **No live web scraping or live index-building.** All retrieval indexes and benchmark numbers are precomputed and loaded from disk.
 3. **No Kubernetes, no Docker Compose with 6 services, no message queues.** One FastAPI backend process, one Next.js frontend process. That's it.
 4. **Do not hardcode secrets/API keys in source.** Use `.env` files, and always create/update `.env.example` alongside any new required variable.
@@ -48,6 +48,7 @@ The person you're working for is the researcher and sole engineer. She will revi
 | Object detection | Ultralytics YOLO, `.pt` weights exported to ONNX for inference |
 | Retrieval index | FAISS or Chroma, loaded in-process from a precomputed index on disk |
 | Package managers | `pnpm` for frontend, `uv` (or `venv` + `pip` if `uv` unavailable) for backend |
+| Authentication | Supabase Auth (hosted + local CLI); `@supabase/supabase-js` ^2.112.3 + `@supabase/ssr` ^0.12.4 (frontend); PyJWT ES256 JWKS verification (backend) |
 
 **Artifact reality note:** the current checked-in Ultralytics artifacts report
 `task: classify`; the vision implementation must preserve the locked Ultralytics/ONNX
