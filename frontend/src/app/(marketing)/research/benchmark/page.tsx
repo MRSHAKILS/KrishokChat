@@ -618,21 +618,39 @@ export default function BenchmarkPage() {
           </p>
         </motion.div>
 
-        {/* Unanswerable refusal — the open problem */}
-        <motion.div variants={enter} className="mt-4 rounded-xl border border-clay-soft/40 bg-clay-soft/8 p-5">
-          <div className="flex items-start gap-3">
-            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-clay" />
-            <div>
-              <div className="text-sm font-semibold text-ink">
-                উত্তরযোগ্য নয় এমন ১২টি প্রশ্নে রেফারাল-হার: {Math.round((STATS.mechanical.unanswerable_refusal_rate ?? 0) * 100)}% (যান্ত্রিক)
+        {/* Unanswerable refusal — gate outcome (D1a, 2026-08-14) */}
+        {(() => {
+          const rate = STATS.mechanical.unanswerable_refusal_rate ?? 0;
+          const met = rate >= 0.9;
+          return (
+            <motion.div variants={enter} className={`mt-4 rounded-xl border p-5 ${met ? "border-leaf/40 bg-leaf/8" : "border-clay-soft/40 bg-clay-soft/8"}`}>
+              <div className="flex items-start gap-3">
+                {met ? (
+                  <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-leaf" />
+                ) : (
+                  <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-clay" />
+                )}
+                <div>
+                  <div className={`text-sm font-semibold ${met ? "text-leaf" : "text-ink"}`}>
+                    উত্তরযোগ্য নয় এমন ১২টি প্রশ্নে রেফারাল-হার: {Math.round(rate * 100)}% (যান্ত্রিক)
+                  </div>
+                  {met ? (
+                    <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+                      কর্পাস-কভারেজ গেট (D1a) সক্রিয়: প্রশিক্ষণ, রপ্তানি, ভেন্ডর/চারা প্রাপ্যতা, প্রতিষ্ঠানগত
+                      ও সরকারি-সহায়তা সংক্রান্ত প্রশ্নে সরাসরি ১৬১২৩ রেফারাল — কোনো জল্পনা-কল্পনা নয়।
+                      অফ-টপিক ২/২-ও প্রত্যাখ্যাত। লক্ষ্য পূরণ হয়েছে (≥৯০%)।
+                    </p>
+                  ) : (
+                    <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+                      কর্পাসে নেই এমন প্রশ্নে সিস্টেম এখনও উত্তরের চেষ্টা করে — এটিই বর্তমান খোলা সমস্যা।
+                      লক্ষ্য: এই হার ৯০%-এ উন্নীত করা।
+                    </p>
+                  )}
+                </div>
               </div>
-              <p className="mt-1 text-xs leading-relaxed text-ink-soft">
-                কর্পাসে নেই এমন প্রশ্নে সিস্টেম এখনও উত্তরের চেষ্টা করে — এটিই বর্তমান খোলা সমস্যা।
-                লক্ষ্য: এই হার ৯০%-এ উন্নীত করা (কম-কনফিডেন্স রেফারাল নিয়ম)।
-              </p>
-            </div>
-          </div>
-        </motion.div>
+            </motion.div>
+          );
+        })()}
 
         {/* Human scores — pending or complete */}
         {STATS.status === "pending_scores" ? (

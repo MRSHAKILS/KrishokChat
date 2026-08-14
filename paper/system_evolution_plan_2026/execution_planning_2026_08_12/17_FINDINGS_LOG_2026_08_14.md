@@ -177,11 +177,7 @@ the safety dataset must wait for restoration + hash verification.
 | Q6 | Gold answers are not expert-written — will the scoring layer (or an agronomist pass) become the paper's gold standard? | F1 | decision |
 
 **D1 — abstention-fix options (researched, ranked by evidence):**
-- **D1a. Query-type referral rules (deterministic).** Keywords for training/
-  export/contact/subsidy intents → `low_confidence` referral. Cheap, no LLM,
-  directly covers the 12/12 failure pattern; risk: over-refusal on answerable
-  queries that mention those words — must be validated on the golden set
-  (answerable 34 must stay ≥ threshold). *Recommended first step.*
+- **D1a. Query-type referral rules (deterministic).** ✅ **IMPLEMENTED 2026-08-14 — see F10.**
 - **D1b. Verifier scope extension.** Check every material claim (not just
   dosage) for entity-level support in the passages; all-unsupported → referral.
   Directly fixes the root cause (F3) but risks false flags on well-grounded
@@ -196,6 +192,56 @@ Score thresholds (any channel) are **disproven** by F4 — do not propose them.
 
 ---
 
+---
+
+## F10 — D1a implemented: corpus-coverage gate (2026-08-14, post-F3 fix)
+
+**Decision D1a landed** (researcher-approved "D1a, go"): a deterministic
+coverage gate in the safety precheck (`backend/app/domain/safety_policy.py`,
+`LOW_CONFIDENCE` pattern group, running LAST after self-harm/injection/banned
+so safety-critical matches always win). Six evidence-derived rule families:
+
+| Rule | Pattern (Bengali + Banglish) | Evidence |
+|---|---|---|
+| `coverage_training` | প্রশিক্ষণ · প্রশিক্ষন (real farmer typo without ষ) · ট্রেনিং · কোর্স · শিখতে · শেখার · হাতে-কলমে | 6/12 golden unanswerable + q690 via typo |
+| `coverage_export` | রপ্তানি · বিদেশে পাঠান · এক্সপোর্ট | q850/851/852 |
+| `coverage_availability` | কোথায় পাওয়া · কোথায় পাব · কোথায় বিক্রি · ঠিকানা | q693/970/993 |
+| `coverage_institutional` | বিভাগের ছাত্র · বিষয়ক তথ্য · সম্প্রসারণ অধিদপ্তর | q718 |
+| `coverage_livestock` | কোয়েল · পোল্ট্রি · মুরগি · হাঁস · palon · quail · koel (Latin!) | q721 (Banglish) |
+| `coverage_assistance` | সরকারি · সরকারী · সহায়তা | q690/895 |
+
+**Design evidence (the traps that shaped it):** (1) the **price rule was
+proposed and DROPPED** — "দাম" ⊂ "বাদামী" (brown) and price queries were not
+in the unanswerable evidence; (2) the Banglish livestock query "koel palon"
+needs Latin-script alternations; (3) mixed queries (e.g. q993 variety +
+seedling availability, q6 variety + vendor) **fail closed wholesale** — the
+conservative cost-ratio choice per the abstention protocol; (4) a query that
+is safety-critical AND coverage-keyworded (e.g. "রপ্তানির জন্য প্যারাকোয়াট")
+resolves to the safety category (priority order).
+
+**Golden re-run (forced, full pipeline, 46/46 fresh):**
+
+| Metric | Before (F2/F3) | After D1a |
+|---|---|---|
+| Unanswerable refused | 0/12 (0%) | **12/12 (100%)** — DoD ≥90% MET |
+| Off-topic refused | 0/2 (0%) | **2/2 (100%)** |
+| Answerable answered | 34/34 | **31/32** (q75 Lumectin banned-refusal unchanged) |
+| Answerable refused by gate | — | **0/32** (gate never fires on answerable) |
+| Verifier flags | 6/46 | 6/46 (flag set varies run-to-run: q12↔q106 flipped this run) |
+
+Live probe (UTF-8): training query → `low_confidence`/blocked/0 sources/
+16123 canned; "বাদামী দাগ" pest + "আমন জাত" queries → `safe_agri` answered
+5 sources. Audit records `safety_matched_rules` per refusal.
+
+**Remaining honest gap (paper-relevant):** the gate is keyword-scoped, not
+semantic. Out-of-corpus queries that use none of the six intents (e.g. a
+novel crop, an unlisted disease, a weird fertilizer claim) still flow to the
+LLM classifier, which may pass them `safe_agri`. The 0/12→12/12 result is
+measured on the golden set; coverage of unseen out-of-corpus queries is not
+measured. F13 wording must reflect this (see ledger).
+
+---
+
 ## Allowed wording (ledger-style, safe as of this log)
 
 - "The pipeline refuses known banned/restricted chemical queries before
@@ -204,11 +250,20 @@ Score thresholds (any channel) are **disproven** by F4 — do not propose them.
   displayed with annotation (annotate-and-drop)."
 - "In a 46-item golden probe, all 12 out-of-corpus questions received
   answers — the current runtime does not abstain on missing evidence."
+  (⚠️ superseded for the gate path by F10/S17: 12/12 now refused; the
+  historical 0/12 statement remains true of the pre-D1a run.)
 - "Hybrid RRF retrieval (BM25 + BGE-M3 dense) is the default runtime path;
   query-expansion hit rate measured at 0.6% on 1,000 farmer queries."
+- "The runtime refuses out-of-corpus queries that match the deterministic
+  coverage gate (training/export/availability/institutional/livestock/
+  assistance intents): 14/14 in the post-D1a golden probe, 0/32 answerable
+  refused by the gate." (F10/S17)
 - NOT allowed: "the system abstains when evidence is missing", "expert-gold
-  benchmark", "unanswerable refusal ≥90%", "recall improved" (no relevance
-  judgments yet), "dialect normalization evaluated" (map absent).
+  benchmark", "unanswerable refusal ≥90%" (as a standing claim — report the
+  measured value instead: 12/12 on the pinned golden set), "recall
+  improved" (no relevance judgments yet), "dialect normalization
+  evaluated" (map absent), "the gate covers all out-of-corpus queries"
+  (keyword-scoped only; unseen intent coverage is unmeasured — F10 gap).
 
 ---
 

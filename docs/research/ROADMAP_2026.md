@@ -138,6 +138,15 @@ Files:
 DoD: inter-evaluator agreement recorded; panel published numbers; refusal rate
 on unanswerables ≥90% at demo time.
 
+**STATUS (2026-08-14):** tooling + pipeline gate SHIPPED. Golden set (46 rows,
+pinned) + real-pipeline runs + scoring pipeline + `/api/benchmark` + frontend
+Section G live (commit `684886b`). Refusal DoD **MET on the golden set: 12/12
+(100%)** via the D1a deterministic coverage gate (`safety_policy.py`
+LOW_CONFIDENCE group; keyword-scoped — unseen out-of-corpus intents unmeasured,
+see `paper/.../17_FINDINGS_LOG_2026_08_14.md` F10 and ledger S17). Remaining:
+2-evaluator scoring sheet → kappa + accuracy numbers publishable (DoD's
+"agreement recorded" half).
+
 Evidence: PubMed 38341517 (chatbot loses exactly on dose/timing); AIEP
 arXiv:2601.11537 (golden sets, expert scoring); ACL 2025 Findings
 (2025.findings-acl.368) — no pure LLM-as-judge.

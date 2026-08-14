@@ -334,3 +334,16 @@ o_dosage) pass, so out-of-corpus answers get erified.
 - Verification: backend suite 78/78; frontend 	sc --noEmit + pnpm build green; live probe of /api/benchmark returns pending state; servers healthy (backend :8000).
 - Gate: P4 TOOLING GO — pipeline fix (abstention) is NOT done; decision D1 (a–d) in 17_FINDINGS_LOG_2026_08_14.md awaits researcher choice; human scoring sheet is the only block for publishable kappa/accuracy numbers.
 - Effective next tasks: (1) researcher picks D1 abstention fix (recommended D1a query-type rules first, validated on the golden set); (2) score the sheet (2 evaluators) -> rerun 11_publish_golden_stats.py; (3) restore dataset_release/safety/ (dialect map + safety dataset) to re-measure expansion; (4) P5 voice lane remains open.
+
+## Amendment: P4 D1a Abstention Fix Shipped (research lane) — 2026-08-14
+
+- Proposed change: researcher-approved decision D1a implemented — deterministic corpus-coverage gate in the safety precheck (`backend/app/domain/safety_policy.py`, LOW_CONFIDENCE pattern group, ordered LAST after self-harm/injection/banned so safety-critical matches always win). Research-lane product change; frozen adjudication runtime untouched; ledger UPDATED (new S17; F13/F15 partially superseded with scoped wording) — see 12_CLAIM_LEDGER.md and 17_FINDINGS_LOG_2026_08_14.md F10 before writing any paper claim.
+- Evidence:
+  - Rules (six families, all evidence-derived): coverage_training (প্রশিক্ষণ|প্রশিক্ষন|ট্রেনিং|কোর্স|শিখতে|শেখার|হাতে-কলমে — farmer typo variant included), coverage_export (রপ্তানি|বিদেশে পাঠান|এক্সপোর্ট), coverage_availability (কোথায় পাওয়া|কোথায় পাব|কোথায় বিক্রি|ঠিকানা), coverage_institutional (বিভাগের ছাত্র|বিষয়ক তথ্য|সম্প্রসারণ অধিদপ্তর), coverage_livestock (কোয়েল|পোল্ট্রি|মুরগি|হাঁস|palon|quail|koel — Banglish q721), coverage_assistance (সরকারি|সরকারী|সহায়তা). Price rule DROPPED: "দাম" ⊂ "বাদামী" (Bengali substring trap, hit answerable q38).
+  - Forced golden re-run (deleted golden_runs_v1.json, 46/46 fresh): unanswerable refused 12/12 (100%), off-topic 2/2, answerable refused by gate 0/32; q75 Lumectin banned-refusal unchanged (1 refused); verifier flags 6/46 (flag set varies run-to-run: q12↔q106 flipped).
+  - Tests: backend 87/87 (+9 new in tests/test_coverage_gate.py incl. golden-set-pinned coverage: 12/12, 2/2, 0/32; typo; Banglish; substring-trap regression; banned-over-coverage priority); frontend tsc + pnpm build green.
+  - Live probe (UTF-8): training query -> low_confidence/blocked/0 sources/16123 canned; "বাদামী দাগ" + "আমন জাত" queries -> safe_agri answered (5 sources). Audit records safety_matched_rules per refusal.
+  - Honest scope: gate is KEYWORD-scoped, not semantic; unseen out-of-corpus intents unmeasured (demo wording must stay scoped; F10).
+- Verification: backend 87/87 pytest; tsc --noEmit clean; pnpm build green; /api/benchmark pending state intact; servers healthy (backend :8000).
+- Gate: P4 DoD refusal criterion MET on the pinned golden set (12/12 >= 90%). Publishable kappa/accuracy numbers remain blocked ONLY on the 2-evaluator scoring sheet.
+- Effective next tasks: (1) researcher + second evaluator score scoring_sheet_v1.csv -> rerun 11_publish_golden_stats.py; (2) Q1 expert review of Lumectin refusal; (3) restore dataset_release/safety/ dialect map; (4) P5 voice lane.

@@ -20,6 +20,7 @@
 | S14 | Verifier flagged 6/46 golden answers (`flagged-unverified`, unsupported numeric claims); flagged answers still displayed (annotate-and-drop). | `dataset_release/benchmark/golden_runs_v1.json`; F2 | "The verifier flags unsupported dosage claims; flagged answers remain displayed with annotation." |
 | S15 | **RRF top1 audit scores are quantized** (1/(20+rank) steps); dense/BM25 raw scores do NOT separate unanswerable from answerable queries (overlapping distributions). | `backend/ml_assets/rag_index/eval/golden_retrieval_probe.json`; F4 | "Retrieval-score magnitude alone cannot gate abstention." |
 | S16 | Golden set provenance: 46 rows from 1,001 real farmer queries, pinned sample, 3-pass reviewed categories; `gold_answer` fields are `expert_provided: false` (pipeline-generated). | `dataset_release/benchmark/golden_qa_v1.jsonl`; F1 | "The golden set is human-categorized; answer correctness awaits two-evaluator scoring." |
+| S17 | **Deterministic corpus-coverage gate (D1a) shipped in the safety precheck** (2026-08-14): six keyword families (training incl. farmer typo `প্রশিক্ষন`, export, availability, institutional, livestock incl. Banglish `koel palon`, government assistance) → `low_confidence` terminal refusal with the 16123 referral, ordered AFTER self-harm/injection/banned rules. Post-D1a forced golden re-run (46/46 fresh): **unanswerable refused 12/12, off-topic 2/2, answerable refused by gate 0/32** (q75 banned-chemical refusal unchanged); live probe + audit `safety_matched_rules` recorded. Gate is keyword-scoped, not semantic — unseen out-of-corpus intents remain unmeasured. | commit (D1a); `backend/app/domain/safety_policy.py`; `backend/tests/test_coverage_gate.py`; `dataset_release/benchmark/golden_runs_v1.json`; `17_FINDINGS_LOG_2026_08_14.md` F10 | "The runtime refuses out-of-corpus queries matching the deterministic coverage gate (14/14 in the golden probe; 0/32 answerable refused)." Do NOT claim gate coverage of all out-of-corpus queries (unmeasured). |
 
 ## Forbidden Claims
 
@@ -37,9 +38,9 @@
 | F10 | An LLM judge supplies gold labels or proves factuality. | Expert labels are required by the protocol. |
 | F11 | Any PDF-extracted number is verified before T05 reconciliation. | `../T01_PDF_EXTRACTION.md:8-10`. |
 | F12 | UI traces, local audit counts, or demo behavior prove farmer benefit, trust, usability, or agronomic outcomes. | No controlled human/outcome study supports these claims. |
-| F13 | The system abstains when evidence is missing / refuses out-of-corpus queries. | Golden probe shows 0/12 unanswerable refused (S13). |
+| F13 | The system abstains when evidence is missing / refuses out-of-corpus queries. | Golden probe shows 0/12 unanswerable refused (S13). **Partially superseded by S17 (2026-08-14):** refusal now holds for queries matching the deterministic coverage gate (keyword-scoped). The general claim remains FORBIDDEN — semantic abstention on unseen out-of-corpus intents is unmeasured (F10). |
 | F14 | The golden answers are expert-verified / expert gold. | `expert_provided: false` provenance; scoring pending (S16). |
-| F15 | Unanswerable refusal rate meets the ≥90% P4 target. | Measured 0% (S13). |
+| F15 | Unanswerable refusal rate meets the ≥90% P4 target. | Measured 0% (S13). **Superseded by S17 (2026-08-14):** post-D1a measurement is 12/12 (100%) on the pinned golden set — report the measured value, do not assert a standing capability. |
 | F16 | Retrieval-score thresholds gate abstention / recall improved. | Probe shows overlapping distributions; no relevance judgments (S15, F4). |
 | F17 | Dialect normalization evaluated / expansion effective. | Dialect map absent from workspace; expansion hit rate 0.6% (S11, F5). |
 

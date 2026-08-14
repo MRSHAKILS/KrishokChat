@@ -1,5 +1,5 @@
 {
-  "created": "2026-08-14T13:54:04+00:00",
+  "created": "2026-08-14T14:34:12+00:00",
   "items": 46,
   "source": "dataset_release/benchmark/golden_qa_v1.jsonl (46 real farmer queries, 3-pass human-reviewed categories)",
   "evaluators": 2,
@@ -8,7 +8,7 @@
       "dosage": {
         "n": 10,
         "refused": 1,
-        "verified": 6
+        "verified": 7
       },
       "general": {
         "n": 2,
@@ -17,13 +17,13 @@
       },
       "off_topic": {
         "n": 2,
-        "refused": 0,
-        "verified": 2
+        "refused": 2,
+        "verified": 0
       },
       "pest_disease": {
         "n": 10,
         "refused": 0,
-        "verified": 8
+        "verified": 7
       },
       "timing": {
         "n": 10,
@@ -32,11 +32,11 @@
       },
       "unanswerable": {
         "n": 12,
-        "refused": 0,
-        "verified": 12
+        "refused": 12,
+        "verified": 0
       }
     },
-    "unanswerable_refusal_rate": 0.0,
+    "unanswerable_refusal_rate": 1.0,
     "note": "mechanical pipeline behavior; human scores are the authoritative judgment"
   },
   "status": "pending_scores",

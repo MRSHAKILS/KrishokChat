@@ -47,24 +47,35 @@ regex traps: `গান`⊂"লাগানো", `ভর্তি`⊂"ধান 
 Real-pipeline runs (`09_run_golden_eval.py`) on all 46: 45 answered, 1 refused
 (farmer_q_75 — Lumectin dose, safety-classified `banned_or_restricted_chemical`,
 a policy catch to review); verifier flagged 6 of 45 as unsupported.
-**HONEST FINDING — DoD unmet:** unanswerable refusal rate is **0/12 (0%)**
-(target ≥90%); all 12 answered with 5 sources + "verified" (loose retrieval
-neighbors + confident generation). Exposed by P4, not fixed yet — next step
-is a low-confidence referral rule (retrieval top1 score / verifier gate)
-before the demo. Scoring pipeline shipped: `10_scoring_sheet.py` →
+**HONEST FINDING — DoD unmet (fixed 2026-08-14):** unanswerable refusal rate
+was **0/12 (0%)** (target ≥90%) — all 12 answered with 5 sources + "verified"
+(loose retrieval neighbors + confident generation). Exposed by P4, then fixed:
+**D1a deterministic corpus-coverage gate shipped** (`safety_policy.py`
+`LOW_CONFIDENCE` pattern group, ordered LAST after self-harm/injection/banned;
+6 keyword families: training incl. farmer typo `প্রশিক্ষন`, export,
+availability, institutional, livestock incl. Banglish `koel palon`, government
+assistance). Forced golden re-run (46/46 fresh): **unanswerable 12/12 refused,
+off-topic 2/2, gate never fires on 0/32 answerable** (q75 banned refusal
+unchanged); live probe + audit `safety_matched_rules`; 87/87 pytest (+9
+coverage-gate tests), tsc + build green. Gate is keyword-scoped, not semantic
+(unseen out-of-corpus intents unmeasured — documented F10/S17, demo wording
+must stay scoped). Scoring pipeline shipped: `10_scoring_sheet.py` →
 `scoring_sheet_v1.csv` (46 rows, full text) + `scoring_rubric_v1.md`;
 `11_publish_golden_stats.py` → `golden_stats_v1.json` + copy in
 `frontend/src/lib/golden_stats.json` (Cohen's kappa, per-category results,
 validated refusal rate; emits honest `pending_scores` until both evaluators
 fill the sheet). API: `GET /api/benchmark` serves the precomputed artifact
 (replaced stub; never live-computed). Frontend: benchmark page Section G —
-live-system golden eval (mechanical table, unanswerable-refusal callout,
-pending banner, scored table when filled). Verified: 78/78 pytest (+1
-benchmark contract test), `tsc --noEmit` clean, `pnpm build` green, live
-probe of `/api/benchmark` serving pending state.
+live-system golden eval (mechanical table, unanswerable-refusal callout now
+DYNAMIC: green leaf state when rate ≥90%, clay warning otherwise, pending
+banner, scored table when filled). Verified: 87/87 pytest (+1 benchmark
+contract test), `tsc --noEmit` clean, `pnpm build` green, live probe of
+`/api/benchmark` serving pending state.
 **Open work:** 1) researcher + second evaluator fill `scoring_sheet_v1.csv`
-→ rerun `11` → stats go live (kappa required for DoD); 2) the 0% refusal
-finding needs a pipeline fix decision; 3) P5 (refusal-reason UI + panel polish).
+→ rerun `11` → stats go live (kappa required for DoD); 2) Q1: Lumectin
+refusal correctness (expert review pending); 3) P5 (refusal-reason UI + panel
+polish); 4) Q4: restore `dataset_release/safety/` dialect map to raise
+expansion hit rate.
 
 ## Key Decisions
 - P1: rule-based dosage entailment (chemical/crop/number/unit vs passages),
@@ -77,7 +88,8 @@ finding needs a pipeline fix decision; 3) P5 (refusal-reason UI + panel polish).
 - P4: golden set from 1,001 real farmer queries, ≥10 unanswerables, 2 human
   evaluators, precomputed panel stats. Sample PINNED (override changes never
   re-sample — golden set is a fixed reviewed artifact, not a generator).
-  Unanswerable refusal DoD ≥90% — currently 0%, exposed, fix pending.
+  Unanswerable refusal DoD ≥90% — **MET post-D1a: 12/12 (100%) on the pinned
+  golden set**; gate is keyword-scoped (unseen intents unmeasured).
 - P5: TTS read-aloud first (no bn-BD TTS locale — use bn-IN/other, state
   honestly); ASR optional (bn-BD via Google STT or local Whisper), same text
   pipeline, graceful fallback, standard Bengali only.
@@ -89,16 +101,18 @@ Bengali NLI scarcity → rule-based first. RRF regression → BM25 fallback flag
 golden-set A/B. Demo-horizon: never claim hybrid/voice-dialect until live-verified.
 Expansion coverage risk: term map is title-derived (0.6% hit rate) — restore
 `dataset_release/safety/phase4_dialect_map.json` (110-word real map) to raise it.
-**NEW (P4):** unanswerable queries get confident answers (0/12 refused) —
-unsupported-content risk at demo; low-confidence referral rule needed before
-the demo. Scoring churn risk handled by pinned sample.
+**NEW (P4):** unanswerable queries got confident answers (0/12 refused) —
+**FIXED by the D1a coverage gate (12/12 now)**; residual risk: unseen
+out-of-corpus intents the keyword gate doesn't cover. Scoring churn risk
+handled by pinned sample.
 
 ## Next Actions
 1. **Researcher: fill `dataset_release/benchmark/scoring_sheet_v1.csv`** (2
    evaluators, per `scoring_rubric_v1.md`), then rerun `11_publish_golden_stats.py`.
-2. Decide the unanswerable-refusal fix (low retrieval-top1-score referral
-   rule vs verifier gate) and implement before the demo.
+2. Q1: expert review of the Lumectin refusal (`farmer_q_75`) correctness.
 3. P5 (refusal-reason UI + panel polish) after scores land.
+4. Q4: restore `dataset_release/safety/phase4_dialect_map.json` (110-word real
+   map) to raise the 0.6% expansion hit rate.
 
 ## Key Files
 `docs/competitive-landscape.md`, `docs/research/LITERATURE_SCOUT_2026.md`,
