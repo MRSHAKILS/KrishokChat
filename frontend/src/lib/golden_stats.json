@@ -1,0 +1,44 @@
+{
+  "created": "2026-08-14T13:54:04+00:00",
+  "items": 46,
+  "source": "dataset_release/benchmark/golden_qa_v1.jsonl (46 real farmer queries, 3-pass human-reviewed categories)",
+  "evaluators": 2,
+  "mechanical": {
+    "per_category": {
+      "dosage": {
+        "n": 10,
+        "refused": 1,
+        "verified": 6
+      },
+      "general": {
+        "n": 2,
+        "refused": 0,
+        "verified": 2
+      },
+      "off_topic": {
+        "n": 2,
+        "refused": 0,
+        "verified": 2
+      },
+      "pest_disease": {
+        "n": 10,
+        "refused": 0,
+        "verified": 8
+      },
+      "timing": {
+        "n": 10,
+        "refused": 0,
+        "verified": 9
+      },
+      "unanswerable": {
+        "n": 12,
+        "refused": 0,
+        "verified": 12
+      }
+    },
+    "unanswerable_refusal_rate": 0.0,
+    "note": "mechanical pipeline behavior; human scores are the authoritative judgment"
+  },
+  "status": "pending_scores",
+  "note": "Scoring sheet not filled yet — the two evaluators score each item (correct/partial/unsupported/refused) per scoring_rubric_v1.md; this file then updates automatically."
+}

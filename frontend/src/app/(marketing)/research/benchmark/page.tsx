@@ -2,11 +2,12 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "motion/react";
-import { TrendingUp, AlertTriangle, Globe } from "lucide-react";
+import { TrendingUp, AlertTriangle, Globe, ShieldCheck, Hourglass } from "lucide-react";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, LabelList } from "recharts";
 import { RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 import { useCountUp, toBn } from "@/lib/use-count-up";
+import goldenStats from "@/lib/golden_stats.json";
 
 /* =========================================================================
    Benchmark Results Page — the credibility page with actual paper numbers.
@@ -19,6 +20,7 @@ import { useCountUp, toBn } from "@/lib/use-count-up";
    D. Cross-lingual collapse
    E. Farmer benchmark
    F. Hallucination floor
+   G. Live-system golden eval (precomputed artifact, pending human scores)
    ========================================================================= */
 
 type Condition = "cb" | "oracle";
@@ -72,7 +74,50 @@ const GENF1_LABELS: Record<string, string> = {
 };
 
 /* Section kickers — indexed structure, same system as /data */
-const KICKERS = ["০১ · মূল ফলাফল", "০২ · তথ্য সংগ্রহ", "০৩ · রেজিস্টার গ্যাপ", "০৪ · ক্রস-লিঙ্গুয়াল", "০৫ · ফার্মার বেঞ্চমার্ক", "০৬ · হ্যালুসিনেশন ফ্লোর"] as const;
+const KICKERS = ["০১ · মূল ফলাফল", "০২ · তথ্য সংগ্রহ", "০৩ · রেজিস্টার গ্যাপ", "০৪ · ক্রস-লিঙ্গুয়াল", "০৫ · ফার্মার বেঞ্চমার্ক", "০৬ · হ্যালুসিনেশন ফ্লোর", "০৭ · গোল্ডেন ইভাল"] as const;
+
+/* Section G — live-system golden eval. Numbers come from the PRECOMPUTED
+   artifact generated offline (scripts/08..11 in backend/ml_assets/rag_index/
+   scripts). Never computed live. Before the two evaluators fill the scoring
+   sheet, the artifact honestly reports status: pending_scores. */
+type CategoryStats = { n: number; refused: number; verified: number };
+type GoldenStats = {
+  status: "scored" | "pending_scores" | "not_built";
+  items: number;
+  evaluators: number;
+  source: string;
+  note?: string;
+  mechanical: {
+    per_category: Record<string, CategoryStats>;
+    unanswerable_refusal_rate: number | null;
+    note: string;
+  };
+  kappa?: number;
+  raw_agreement?: number;
+  category_results?: Record<string, { n: number; correct: number; partial: number; unsupported: number; refused: number; correct_rate: number; acceptable_rate: number }>;
+  unanswerable_refusal_rate_mechanical?: number | null;
+  unanswerable_refusal_rate_validated?: number | null;
+  disagreements?: { row_id: string; e1: string; e2: string }[];
+  disagreement_count?: number;
+};
+const STATS = goldenStats as GoldenStats;
+
+const CATEGORY_BN: Record<string, string> = {
+  dosage: "ডোজ",
+  timing: "সময়",
+  pest_disease: "রোগ / পোকা",
+  general: "সাধারণ",
+  off_topic: "অপ্রাসঙ্গিক",
+  unanswerable: "উত্তরযোগ্য নয়",
+};
+const CATEGORY_ORDER = ["dosage", "timing", "pest_disease", "general", "off_topic", "unanswerable"];
+
+const SCORE_BN: Record<string, string> = {
+  correct: "সঠিক",
+  partial: "আংশিক",
+  unsupported: "অসমর্থিত",
+  refused: "অস্বীকৃত",
+};
 
 function StatCell({ value, label, delay }: { value: number; label: string; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -508,6 +553,149 @@ export default function BenchmarkPage() {
             এই সমস্যা এখনও অমীমাংসিত — তথ্য-সংগ্রহ মানের উন্নতি একা যথেষ্ট নয়।
           </p>
         </motion.div>
+      </motion.section>
+
+      {/* === G. Live-System Golden Eval (precomputed artifact) === */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={stagger}
+      >
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[6]}</motion.div>
+        <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
+          <ShieldCheck className="mr-2 inline h-6 w-6 text-leaf" />
+          লাইভ সিস্টেম — গোল্ডেন ইভাল
+        </motion.h2>
+        <motion.p variants={enter} className="mb-6 text-sm text-ink-soft">
+          ১,০০০টি প্রকৃত ফার্মার প্রশ্ন থেকে ৪৬টি নির্বাচিত, ৩ ধাপে মানব-পর্যালোচিত ক্যাটাগরি।
+          প্রশ্নগুলো এই সিস্টেমের প্রকৃত পাইপলাইন দিয়ে চালানো হয়; সব সংখ্যা অফলাইনে প্রি-কম্পিউটেড।
+        </motion.p>
+
+        {/* Mini stat strip */}
+        <motion.div variants={enter} className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone sm:grid-cols-4">
+          {[
+            { value: STATS.items, label: "গোল্ডেন প্রশ্ন" },
+            { value: STATS.mechanical.per_category.unanswerable?.n ?? 0, label: "উত্তরযোগ্য নয়" },
+            { value: STATS.evaluators, label: "স্বাধীন মূল্যায়নকারী" },
+            { value: STATS.status === "pending_scores" ? 0 : (STATS.kappa ?? 0), label: STATS.status === "pending_scores" ? "কাপা (পেন্ডিং)" : "ইন্টার-রেটার কাপা (κ)" },
+          ].map((s, i) => (
+            <StatCell key={s.label} value={s.value} label={s.label} delay={i * 0.04} />
+          ))}
+        </motion.div>
+
+        {/* Mechanical pipeline behavior */}
+        <motion.div variants={enter} className="relative mt-6">
+          <div className="overflow-x-auto rounded-xl border rule">
+            <table className="w-full min-w-[480px] text-xs sm:text-sm">
+              <thead>
+                <tr className="bg-paper-2">
+                  <th className="px-3 py-2.5 text-left font-display text-ink">ক্যাটাগরি</th>
+                  <th className="px-3 py-2.5 text-right font-display text-ink">n</th>
+                  <th className="px-3 py-2.5 text-right font-display text-ink">অস্বীকৃত (রেফারাল)</th>
+                  <th className="px-3 py-2.5 text-right font-display text-ink">ভেরিফায়ার ✓</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-bone">
+                {CATEGORY_ORDER.filter((c) => STATS.mechanical.per_category[c]).map((cat) => {
+                  const s = STATS.mechanical.per_category[cat];
+                  return (
+                    <tr key={cat} className="bg-paper">
+                      <td className="px-3 py-2.5 font-medium text-ink">{CATEGORY_BN[cat] ?? cat}</td>
+                      <td className="px-3 py-2.5 text-right tabular text-ink">{s.n}</td>
+                      <td className={`px-3 py-2.5 text-right tabular ${cat === "unanswerable" && s.refused === 0 ? "text-clay" : "text-ink"}`}>
+                        {s.refused}
+                      </td>
+                      <td className="px-3 py-2.5 text-right tabular text-ink-soft">{s.verified}/{s.n}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-[11px] text-ink-faint">
+            যান্ত্রিক পাইপলাইন আচরণ — মানব স্কোরই চূড়ান্ত বিচার। ক্যাটাগরি ট্রেনিং/রপ্তানি/যোগাযোগ-ধরনের প্রশ্ন মানে "উত্তরযোগ্য নয়"।
+          </p>
+        </motion.div>
+
+        {/* Unanswerable refusal — the open problem */}
+        <motion.div variants={enter} className="mt-4 rounded-xl border border-clay-soft/40 bg-clay-soft/8 p-5">
+          <div className="flex items-start gap-3">
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-clay" />
+            <div>
+              <div className="text-sm font-semibold text-ink">
+                উত্তরযোগ্য নয় এমন ১২টি প্রশ্নে রেফারাল-হার: {Math.round((STATS.mechanical.unanswerable_refusal_rate ?? 0) * 100)}% (যান্ত্রিক)
+              </div>
+              <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+                কর্পাসে নেই এমন প্রশ্নে সিস্টেম এখনও উত্তরের চেষ্টা করে — এটিই বর্তমান খোলা সমস্যা।
+                লক্ষ্য: এই হার ৯০%-এ উন্নীত করা (কম-কনফিডেন্স রেফারাল নিয়ম)।
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Human scores — pending or complete */}
+        {STATS.status === "pending_scores" ? (
+          <motion.div variants={enter} className="mt-4 rounded-xl border rule bg-paper p-5">
+            <div className="flex items-start gap-3">
+              <Hourglass className="mt-0.5 h-5 w-5 shrink-0 text-ochre" />
+              <div>
+                <div className="text-sm font-semibold text-ink">স্কোরিং পেন্ডিং — ২ স্বাধীন মূল্যায়নকারী</div>
+                <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+                  প্রতিটি উত্তর correct / partial / unsupported / refused স্কেলে মূল্যায়িত হয়।
+                  স্কোর শেষ হলে এখানে κ (ইন্টার-রেটার এগ্রিমেন্ট), ক্যাটাগরি-ভিত্তিক ফলাফল এবং
+                  অস্বীকৃতির নিশ্চিত হার স্বয়ংক্রিয়ভাবে প্রকাশ পাবে।
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div variants={enter} className="mt-6 space-y-4">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                { label: "ইন্টার-রেটার κ", value: STATS.kappa ?? 0, color: "text-leaf" },
+                { label: "র-এগ্রিমেন্ট", value: STATS.raw_agreement ?? 0, color: "text-leaf" },
+                { label: "রেফারাল-হার (নিশ্চিত)", value: STATS.unanswerable_refusal_rate_validated ?? 0, color: "text-clay" },
+                { label: "অসম্মতি", value: STATS.disagreement_count ?? 0, color: "text-ochre" },
+              ].map((chip) => (
+                <div key={chip.label} className="rounded-xl border rule bg-paper p-4 text-center">
+                  <div className={`font-display text-2xl tabular ${chip.color}`}>{toBn(chip.value)}</div>
+                  <div className="mt-1 text-[10px] font-medium text-ink-faint">{chip.label}</div>
+                </div>
+              ))}
+            </div>
+            <div className="overflow-x-auto rounded-xl border rule">
+              <table className="w-full min-w-[560px] text-xs sm:text-sm">
+                <thead>
+                  <tr className="bg-paper-2">
+                    <th className="px-3 py-2.5 text-left font-display text-ink">ক্যাটাগরি</th>
+                    <th className="px-3 py-2.5 text-right font-display text-ink">n</th>
+                    {Object.values(SCORE_BN).map((label) => (
+                      <th key={label} className="px-3 py-2.5 text-right font-display text-ink">{label}</th>
+                    ))}
+                    <th className="px-3 py-2.5 text-right font-display text-ink">সঠিক-হার</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-bone">
+                  {CATEGORY_ORDER.filter((c) => STATS.category_results?.[c]).map((cat) => {
+                    const s = STATS.category_results![cat];
+                    return (
+                      <tr key={cat} className="bg-paper">
+                        <td className="px-3 py-2.5 font-medium text-ink">{CATEGORY_BN[cat] ?? cat}</td>
+                        <td className="px-3 py-2.5 text-right tabular text-ink">{s.n}</td>
+                        <td className="px-3 py-2.5 text-right tabular text-ink">{s.correct}</td>
+                        <td className="px-3 py-2.5 text-right tabular text-ink-soft">{s.partial}</td>
+                        <td className="px-3 py-2.5 text-right tabular text-clay">{s.unsupported}</td>
+                        <td className="px-3 py-2.5 text-right tabular text-ink">{s.refused}</td>
+                        <td className="px-3 py-2.5 text-right tabular font-medium text-leaf">{s.correct_rate.toFixed(3)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+        )}
       </motion.section>
     </div>
   );
