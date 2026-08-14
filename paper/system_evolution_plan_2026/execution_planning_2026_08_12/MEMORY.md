@@ -319,3 +319,18 @@ Do not overwrite this state. Append a dated amendment containing: proposed chang
 - Verification: normalization tests 16/16 pass; research suite 23/23 (16 + 7 judge); backend suite 19/19 pass; servers healthy (backend :8000, frontend :3100, llama :11435 — untouched).
 - Gate: T16 GO for the scaffold — four acceptance criteria exercised offline; dictionary REVIEW part remains gated on T13 native review (when it lands: populate `T16_reviewed_dictionary_v1.json` records, re-run with `--pairs <T13 manifest>`).
 - Effective next tasks: T13 native review (dictionary + pair manifest) is the only remaining block for the real T16 evaluation; T07 sign-off remains the highest-value human step. No further automatable research tasks remain before the expert gates.
+
+## Amendment: P4 Golden Benchmark (research lane) — 2026-08-14
+
+- Proposed change: P4 golden benchmark shipped (research roadmap lane, commits 684886b + 52db332). This is a research-lane product lane; it does not alter the frozen adjudication runtime, but it UPDATES the claim ledger (supersedes F01/S07/F05; new S11–S16, F13–F17) — see 12_CLAIM_LEDGER.md and 17_FINDINGS_LOG_2026_08_14.md before writing any paper claim.
+- Evidence:
+  - Golden set: dataset_release/benchmark/golden_qa_v1.jsonl — 46 rows from 1,001 real farmer queries, pinned sample (seed 7), 3 review passes, 21 overrides; categories dosage 10 / timing 10 / pest_disease 10 / general 2 / off_topic 2 / unanswerable 12. gold_answer provenance is expert_provided: false (pipeline-generated) — human layer = category review + pending 2-evaluator scoring.
+  - Runs: dataset_release/benchmark/golden_runs_v1.json — real pipeline (safety -> hybrid RRF -> generation -> verifier) on all 46. 45 answered / 1 refused (armer_q_75 Lumectin -> banned_or_restricted_chemical, expert review pending). Verifier flagged 6/46 (unsupported numeric claims), all flagged answers still displayed (annotate-and-drop).
+  - HEADLINE: unanswerable refusal rate 0/12 (0%) — dangerous non-abstention; P4 DoD (>=90%) unmet. Root cause: verifier checks only dosage claims; non-dose claims (
+o_dosage) pass, so out-of-corpus answers get erified.
+  - Retrieval probe: ackend/ml_assets/rag_index/eval/golden_retrieval_probe.json — RRF top1 quantized (1/21); dense/BM25 raw scores fully overlapping between groups -> score thresholds cannot gate abstention (content-based gates only).
+  - Scoring pipeline: scoring_sheet_v1.csv (46 rows) + scoring_rubric_v1.md; 11_publish_golden_stats.py -> golden_stats_v1.json (Cohen's kappa + per-category + validated refusal rate; honest pending_scores state). API GET /api/benchmark serves the precomputed artifact; frontend benchmark page Section G renders it (mechanical table + refusal callout + pending banner).
+  - Manifest: esearch_artifacts/manifests/P4_golden_benchmark_manifest_v1.json (all artifact sha256s).
+- Verification: backend suite 78/78; frontend 	sc --noEmit + pnpm build green; live probe of /api/benchmark returns pending state; servers healthy (backend :8000).
+- Gate: P4 TOOLING GO — pipeline fix (abstention) is NOT done; decision D1 (a–d) in 17_FINDINGS_LOG_2026_08_14.md awaits researcher choice; human scoring sheet is the only block for publishable kappa/accuracy numbers.
+- Effective next tasks: (1) researcher picks D1 abstention fix (recommended D1a query-type rules first, validated on the golden set); (2) score the sheet (2 evaluators) -> rerun 11_publish_golden_stats.py; (3) restore dataset_release/safety/ (dialect map + safety dataset) to re-measure expansion; (4) P5 voice lane remains open.

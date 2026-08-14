@@ -1,0 +1,370 @@
+[
+ {
+  "row_id": "farmer_q_12",
+  "category": "dosage",
+  "dense_top1_sim": 0.5961,
+  "dense_top1_id": "B5_BARCAG_7E8574_002",
+  "bm25_top1_score": 10.8208,
+  "bm25_top1_id": "B5_WFGUIDE_EAD428_001"
+ },
+ {
+  "row_id": "farmer_q_197",
+  "category": "dosage",
+  "dense_top1_sim": 0.7147,
+  "dense_top1_id": "B4_FRG2024_18BC55_002",
+  "bm25_top1_score": 16.7972,
+  "bm25_top1_id": "B8_FERT2018_916A10_001"
+ },
+ {
+  "row_id": "farmer_q_222",
+  "category": "dosage",
+  "dense_top1_sim": 0.5796,
+  "dense_top1_id": "B5_BARCAG_D929CD_001",
+  "bm25_top1_score": 12.1646,
+  "bm25_top1_id": "B4_FRG2024_DD93AB_001"
+ },
+ {
+  "row_id": "farmer_q_290",
+  "category": "dosage",
+  "dense_top1_sim": 0.6994,
+  "dense_top1_id": "B4_FRG2024_18BC55_002",
+  "bm25_top1_score": 16.7972,
+  "bm25_top1_id": "B8_FERT2018_916A10_001"
+ },
+ {
+  "row_id": "farmer_q_317",
+  "category": "dosage",
+  "dense_top1_sim": 0.682,
+  "dense_top1_id": "B5_BARCAG_AF08BA_001",
+  "bm25_top1_score": 19.4278,
+  "bm25_top1_id": "BARC_SHATA_01A34C_001"
+ },
+ {
+  "row_id": "farmer_q_360",
+  "category": "dosage",
+  "dense_top1_sim": 0.6091,
+  "dense_top1_id": "B5_BARCAG_DF7B1C_003",
+  "bm25_top1_score": 11.3347,
+  "bm25_top1_id": "B5_WFGUIDE_D9B475_001"
+ },
+ {
+  "row_id": "farmer_q_379",
+  "category": "dosage",
+  "dense_top1_sim": 0.7507,
+  "dense_top1_id": "B5_BARCAG_DF7B1C_003",
+  "bm25_top1_score": 10.9084,
+  "bm25_top1_id": "B4_FRG2024_28A03F_003"
+ },
+ {
+  "row_id": "farmer_q_625",
+  "category": "dosage",
+  "dense_top1_sim": 0.6244,
+  "dense_top1_id": "B8_FERT2018_1551E0_003",
+  "bm25_top1_score": 8.6678,
+  "bm25_top1_id": "B4_FRG2024_28A03F_003"
+ },
+ {
+  "row_id": "farmer_q_75",
+  "category": "dosage",
+  "dense_top1_sim": 0.5913,
+  "dense_top1_id": "DAE_PEST_E2BC36_001",
+  "bm25_top1_score": 14.565,
+  "bm25_top1_id": "B5_WFGUIDE_EAD428_001"
+ },
+ {
+  "row_id": "farmer_q_867",
+  "category": "dosage",
+  "dense_top1_sim": 0.7116,
+  "dense_top1_id": "B2B_PEYAJ6_E1F6F3_002",
+  "bm25_top1_score": 26.7116,
+  "bm25_top1_id": "B8_FERT2018_EC1C44_002"
+ },
+ {
+  "row_id": "farmer_q_45",
+  "category": "general",
+  "dense_top1_sim": 0.5749,
+  "dense_top1_id": "B8_FERT2018_955D1C_001",
+  "bm25_top1_score": 21.0728,
+  "bm25_top1_id": "B6_DOC_71A833_001"
+ },
+ {
+  "row_id": "farmer_q_469",
+  "category": "general",
+  "dense_top1_sim": 0.6561,
+  "dense_top1_id": "B5_BARCAG_467CF2_003",
+  "bm25_top1_score": 12.0567,
+  "bm25_top1_id": "B8_FERT2018_D38E0F_001"
+ },
+ {
+  "row_id": "farmer_q_718",
+  "category": "off_topic",
+  "dense_top1_sim": 0.6369,
+  "dense_top1_id": "B4_DAEEXT_EF8B5F_001",
+  "bm25_top1_score": 21.8594,
+  "bm25_top1_id": "B4_DAEEXT_4DDF7A_001"
+ },
+ {
+  "row_id": "farmer_q_851",
+  "category": "off_topic",
+  "dense_top1_sim": 0.6086,
+  "dense_top1_id": "B5_BARCAG_CFAA8B_003",
+  "bm25_top1_score": 23.7982,
+  "bm25_top1_id": "B8_FERT2018_1551E0_003"
+ },
+ {
+  "row_id": "farmer_q_105",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.6909,
+  "dense_top1_id": "B2B_SHORISHA18_CC7709_001",
+  "bm25_top1_score": 15.7666,
+  "bm25_top1_id": "B2B_SHORISHA18_EC1C44_001"
+ },
+ {
+  "row_id": "farmer_q_106",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.594,
+  "dense_top1_id": "B5_BARCAG_C3AEEE_001",
+  "bm25_top1_score": 12.7247,
+  "bm25_top1_id": "B2B_COTTON_A31239_001"
+ },
+ {
+  "row_id": "farmer_q_156",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.6328,
+  "dense_top1_id": "B2B_COTTON_A31239_001",
+  "bm25_top1_score": 13.8929,
+  "bm25_top1_id": "B2B_COTTON_A31239_001"
+ },
+ {
+  "row_id": "farmer_q_242",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.6618,
+  "dense_top1_id": "B2B_COTTON_4470A5_001",
+  "bm25_top1_score": 18.3549,
+  "bm25_top1_id": "B2B_COTTON_4470A5_002"
+ },
+ {
+  "row_id": "farmer_q_629",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.6236,
+  "dense_top1_id": "CABI_POTATO_A2BB22_001",
+  "bm25_top1_score": 8.6422,
+  "bm25_top1_id": "CABI_WHEAT_89E592_001"
+ },
+ {
+  "row_id": "farmer_q_648",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.6061,
+  "dense_top1_id": "NARS_PESTINFO_0F0CEF_001",
+  "bm25_top1_score": 17.3478,
+  "bm25_top1_id": "NARS_PESTINFO_46E349_001"
+ },
+ {
+  "row_id": "farmer_q_667",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.6845,
+  "dense_top1_id": "B8_FERT2018_175A09_001",
+  "bm25_top1_score": 23.5461,
+  "bm25_top1_id": "NARS_PESTINFO_465EE2_001"
+ },
+ {
+  "row_id": "farmer_q_678",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.6389,
+  "dense_top1_id": "BARC_SHATA_A87A56_001",
+  "bm25_top1_score": 35.6051,
+  "bm25_top1_id": "NARS_PESTINFO_465EE2_001"
+ },
+ {
+  "row_id": "farmer_q_751",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.6355,
+  "dense_top1_id": "B4_DAEEXT_FE83A0_001",
+  "bm25_top1_score": 18.2722,
+  "bm25_top1_id": "B8_FERT2018_91D4BB_001"
+ },
+ {
+  "row_id": "farmer_q_752",
+  "category": "pest_disease",
+  "dense_top1_sim": 0.6357,
+  "dense_top1_id": "B2B_COTTON_A31239_001",
+  "bm25_top1_score": 19.4354,
+  "bm25_top1_id": "B5_BARCAG_CFAA8B_002"
+ },
+ {
+  "row_id": "farmer_q_127",
+  "category": "timing",
+  "dense_top1_sim": 0.6395,
+  "dense_top1_id": "B4_FRG2024_DD93AB_001",
+  "bm25_top1_score": 17.162,
+  "bm25_top1_id": "B2B_MORICH2_17C02E_002"
+ },
+ {
+  "row_id": "farmer_q_29",
+  "category": "timing",
+  "dense_top1_sim": 0.5891,
+  "dense_top1_id": "B2B_MORICH2_0FC22A_002",
+  "bm25_top1_score": 22.6181,
+  "bm25_top1_id": "B4_DAEEXT_2D0899_001"
+ },
+ {
+  "row_id": "farmer_q_38",
+  "category": "timing",
+  "dense_top1_sim": 0.5981,
+  "dense_top1_id": "B4_DAEEXT_690959_001",
+  "bm25_top1_score": 20.4532,
+  "bm25_top1_id": "B4_DAEEXT_A833DD_001"
+ },
+ {
+  "row_id": "farmer_q_389",
+  "category": "timing",
+  "dense_top1_sim": 0.708,
+  "dense_top1_id": "B5_BARCAG_9709F5_002",
+  "bm25_top1_score": 11.815,
+  "bm25_top1_id": "B2B_PEYAJ6_FB7A54_002"
+ },
+ {
+  "row_id": "farmer_q_43",
+  "category": "timing",
+  "dense_top1_sim": 0.5751,
+  "dense_top1_id": "B5_BARCAG_7F363A_001",
+  "bm25_top1_score": 9.9848,
+  "bm25_top1_id": "B2B_COTTON_65CB20_001"
+ },
+ {
+  "row_id": "farmer_q_455",
+  "category": "timing",
+  "dense_top1_sim": 0.6953,
+  "dense_top1_id": "B5_BARCAG_8BF347_001",
+  "bm25_top1_score": 8.7359,
+  "bm25_top1_id": "B5_BARCAG_8BF347_001"
+ },
+ {
+  "row_id": "farmer_q_676",
+  "category": "timing",
+  "dense_top1_sim": 0.6317,
+  "dense_top1_id": "B5_BARCAG_F2DCC4_003",
+  "bm25_top1_score": 32.2218,
+  "bm25_top1_id": "B8_FERT2018_39DABB_001"
+ },
+ {
+  "row_id": "farmer_q_824",
+  "category": "timing",
+  "dense_top1_sim": 0.6097,
+  "dense_top1_id": "BARC_SHATA_01A34C_001",
+  "bm25_top1_score": 17.6313,
+  "bm25_top1_id": "B5_BARCAG_BDABC2_001"
+ },
+ {
+  "row_id": "farmer_q_825",
+  "category": "timing",
+  "dense_top1_sim": 0.5935,
+  "dense_top1_id": "B5_WFGUIDE_C4AE26_001",
+  "bm25_top1_score": 17.6313,
+  "bm25_top1_id": "B5_BARCAG_BDABC2_001"
+ },
+ {
+  "row_id": "farmer_q_97",
+  "category": "timing",
+  "dense_top1_sim": 0.5704,
+  "dense_top1_id": "B5_BARCAG_5B9D78_002",
+  "bm25_top1_score": 11.2649,
+  "bm25_top1_id": "B2B_COTTON_422C3C_001"
+ },
+ {
+  "row_id": "farmer_q_684",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.5924,
+  "dense_top1_id": "B6_DOC_5E6DCF_001",
+  "bm25_top1_score": 18.2351,
+  "bm25_top1_id": "B5_WFGUIDE_ECB86C_001"
+ },
+ {
+  "row_id": "farmer_q_690",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.6071,
+  "dense_top1_id": "B6_DOC_C06CB2_001",
+  "bm25_top1_score": 35.745,
+  "bm25_top1_id": "B4_DAEEXT_C812FF_004"
+ },
+ {
+  "row_id": "farmer_q_693",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.6263,
+  "dense_top1_id": "B4_FRG2024_00A694_002",
+  "bm25_top1_score": 19.54,
+  "bm25_top1_id": "B4_FRG2024_00A694_002"
+ },
+ {
+  "row_id": "farmer_q_721",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.4612,
+  "dense_top1_id": "B6_DOC_E2EB7A_001",
+  "bm25_top1_score": 32.7802,
+  "bm25_top1_id": "B5_BARCAG_E3DCE0_001"
+ },
+ {
+  "row_id": "farmer_q_806",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.623,
+  "dense_top1_id": "B6_DOC_812CF2_001",
+  "bm25_top1_score": 17.4652,
+  "bm25_top1_id": "B6_DOC_4055DE_001"
+ },
+ {
+  "row_id": "farmer_q_850",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.5659,
+  "dense_top1_id": "B2B_PEYAJ6_625B5A_001",
+  "bm25_top1_score": 16.4575,
+  "bm25_top1_id": "B6_DOC_71A833_001"
+ },
+ {
+  "row_id": "farmer_q_852",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.5422,
+  "dense_top1_id": "B5_BARCAG_F6C1B4_001",
+  "bm25_top1_score": 23.7982,
+  "bm25_top1_id": "B8_FERT2018_1551E0_003"
+ },
+ {
+  "row_id": "farmer_q_895",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.5753,
+  "dense_top1_id": "B4_DAEEXT_5C70B6_003",
+  "bm25_top1_score": 18.9602,
+  "bm25_top1_id": "B2B_MORICH2_C1C455_003"
+ },
+ {
+  "row_id": "farmer_q_967",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.6205,
+  "dense_top1_id": "B4_FRG2024_00A694_002",
+  "bm25_top1_score": 14.6493,
+  "bm25_top1_id": "B5_WFGUIDE_ECB86C_001"
+ },
+ {
+  "row_id": "farmer_q_969",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.5998,
+  "dense_top1_id": "B5_WFGUIDE_06C6CC_001",
+  "bm25_top1_score": 18.4154,
+  "bm25_top1_id": "B4_DAEEXT_C812FF_001"
+ },
+ {
+  "row_id": "farmer_q_970",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.5012,
+  "dense_top1_id": "BARC_SHATA_52B520_001",
+  "bm25_top1_score": 9.4379,
+  "bm25_top1_id": "B8_FERT2018_F54CD2_001"
+ },
+ {
+  "row_id": "farmer_q_993",
+  "category": "unanswerable",
+  "dense_top1_sim": 0.5888,
+  "dense_top1_id": "B8_FERT2018_DDA4B8_002",
+  "bm25_top1_score": 20.1907,
+  "bm25_top1_id": "B8_FERT2018_175A09_001"
+ }
+]

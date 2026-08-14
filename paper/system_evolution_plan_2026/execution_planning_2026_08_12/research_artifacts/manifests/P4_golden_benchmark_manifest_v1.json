@@ -1,0 +1,84 @@
+{
+  "manifest_version": "1",
+  "tool": "golden benchmark pipeline: 08_build_golden_set.py / 09_run_golden_eval.py / 10_scoring_sheet.py / 11_publish_golden_stats.py / 12_probe_retrieval_scores.py (v1)",
+  "run_id": "P4-20260814T130000Z",
+  "task": "P4 expert-grounded golden benchmark (research roadmap lane)",
+  "generated_at_utc": "2026-08-14T13:54:00+00:00",
+  "git": {
+    "revision": "684886b (benchmark artifacts) / 52db332 (memory docs)",
+    "dirty_tree": false
+  },
+  "inputs": {
+    "farmer_benchmark_1000": {
+      "path": "backend/ml_assets/rag_index/eval/farmer_benchmark_1000.jsonl",
+      "note": "1,001 real farmer queries; gold_answer provenance expert_provided=false"
+    },
+    "golden_sample": {
+      "seed": 7,
+      "pinned_sample": true,
+      "categories": {
+        "dosage": 10,
+        "timing": 10,
+        "pest_disease": 10,
+        "general": 2,
+        "off_topic": 2,
+        "unanswerable": 12
+      },
+      "review_passes": 3,
+      "overrides": 21
+    }
+  },
+  "model": "google/gemini-2.5-flash-lite via OpenRouter (intent + generation), BAAI/bge-m3 embeddings via OpenRouter (probe only)",
+  "artifacts": {
+    "golden_qa_v1.jsonl": {
+      "path": "dataset_release/benchmark/golden_qa_v1.jsonl",
+      "records": 46,
+      "sha256": "15F774FA6A6F63A78B4D372313E39D0CD42B2BB605A43DC4E5E9629EBB9310FA"
+    },
+    "golden_review_dump_v1.md": {
+      "path": "dataset_release/benchmark/golden_review_dump_v1.md",
+      "sha256": "C6C22016AD1CE7058120DC85784550F9344DF8FA7D5A3A9CEF23B4478C85754D"
+    },
+    "golden_runs_v1.json": {
+      "path": "dataset_release/benchmark/golden_runs_v1.json",
+      "records": 46,
+      "sha256": "1FF698916306D387A6992F442C9F508F5CB6E57D5EBDF74BE7020747AC681EFD",
+      "result": {
+        "answered": 45,
+        "refused": 1,
+        "refusal_row": "farmer_q_75 (Lumectin dosage -> banned_or_restricted_chemical policy catch, expert review pending)",
+        "verifier_verified": 39,
+        "verifier_flagged": 6,
+        "unanswerable_refused": 0
+      }
+    },
+    "scoring_sheet_v1.csv": {
+      "path": "dataset_release/benchmark/scoring_sheet_v1.csv",
+      "records": 46,
+      "sha256": "51BFBCF07A4D85B404E08325E69907127A1A8B58987309E26D66EEFCE0A41066",
+      "status": "pending_human_scores"
+    },
+    "scoring_rubric_v1.md": {
+      "path": "dataset_release/benchmark/scoring_rubric_v1.md",
+      "sha256": "90A088DBA6B078D842AD54F52E44B5D5A6319F5D6C32CACA4DD069359315F8BF"
+    },
+    "golden_stats_v1.json": {
+      "path": "dataset_release/benchmark/golden_stats_v1.json",
+      "sha256": "9B0D83B7C028375E5F42BC8D032C0BC0E3466DB43A9D6AE1DE233CC63264DCF2",
+      "status": "pending_scores"
+    },
+    "golden_retrieval_probe.json": {
+      "path": "backend/ml_assets/rag_index/eval/golden_retrieval_probe.json",
+      "records": 46,
+      "sha256": "62F28F18E1F4686318AA921162CCF29ACA46EAAAF82A10E723E41A7A6D5A6CCB",
+      "finding": "dense/BM25 raw scores do not separate unanswerable from answerable; RRF top1 quantized to 1/21"
+    },
+    "hybrid_smoke.json": {
+      "path": "backend/ml_assets/rag_index/eval/hybrid_smoke.json",
+      "records": 100,
+      "sha256": "3307157319D3A9226B0D1244B5B553BE83E3F408F75F0A4ED22CDA92F8159A27",
+      "note": "P3 coverage-only smoke eval; no recall claims"
+    }
+  },
+  "cost_estimate": "~92 LLM calls (46 x intent+generation) + 46 embedding calls; not metered per-call"
+}
