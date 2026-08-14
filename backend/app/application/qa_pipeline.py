@@ -13,6 +13,7 @@ from app.domain.contracts import (
     QAResult,
     QueryContext,
     RetrievedSource,
+    SafetyDecision,
     VerificationResult,
 )
 from app.domain.enums import PipelineStage, SafetyCategory, StageStatus, VerificationConfidence
@@ -95,8 +96,9 @@ class QAPipeline:
             disease=request.disease,
             history=tuple(history),
         )
-        decision = None
+        decision: SafetyDecision | None = None
         sources: list[RetrievedSource] = []
+        retrieved: list[RetrievedSource] = []
         verifier_flags: tuple[str, ...] = ()
         result: QAResult | None = None
 
@@ -201,12 +203,19 @@ class QAPipeline:
             return result
         finally:
             if result is not None:
-                self._audit(request, result, verifier_flags)
+                self._audit(request, result, verifier_flags, decision=decision, retrieved=retrieved)
                 if request.session_id and result.category is SafetyCategory.SAFE_AGRI:
                     self.sessions.append(request.session_id, "user", request.query)
                     self.sessions.append(request.session_id, "assistant", result.answer)
 
-    def _audit(self, request: QAInput, result: QAResult, verifier_flags: tuple[str, ...]) -> None:
+    def _audit(
+        self,
+        request: QAInput,
+        result: QAResult,
+        verifier_flags: tuple[str, ...],
+        decision: SafetyDecision | None = None,
+        retrieved: list[RetrievedSource] | None = None,
+    ) -> None:
         # P1 refusal counters (TRUST-SCORE style, honest subset):
         # - answered_without_sources: a safe-agri query that produced a real
         #   answer with zero retrieved passages = over-responsiveness signal.
@@ -217,12 +226,37 @@ class QAPipeline:
             and not result.sources
             and result.answer not in ("", REFERRAL)
         )
+        # P2 per-step validity (dual-view): each stage's logged decision is the
+        # exact evidence the UI stepper renders. Router = deterministic rule +
+        # LLM confidence; retrieval = hit/miss + top-1 score from the actual
+        # passages the retriever returned (seed sources excluded, they are
+        # context, not hits); verifier = the pass verdict on the final answer.
+        retrieved_sources = retrieved or []
+        top1_score = None
+        scores = [s.score for s in retrieved_sources if isinstance(getattr(s, "score", None), (int, float))]
+        if scores:
+            top1_score = round(max(scores), 4)
         self.audit.record(
             {
+                # v2 = per-step validity fields (router/retrieval/verifier).
+                # Metrics aggregates only count v2 entries so legacy log rows
+                # without these fields cannot distort the live panel.
+                "pipeline_version": 2,
                 "query": request.query,
                 "category": result.category.value,
                 "action": "blocked-canned-response" if result.category is not SafetyCategory.SAFE_AGRI else "answered",
                 "flagged": result.confidence is VerificationConfidence.FLAGGED_UNVERIFIED,
+                "safety_confidence": round(decision.confidence, 4) if decision else None,
+                "safety_reason": decision.reason[:300] if decision and decision.reason else None,
+                "safety_matched_rules": list(decision.matched_rules) if decision else None,
+                "retrieved_count": len(retrieved_sources),
+                "retrieval_top1_score": top1_score,
+                "retrieval_hit": len(retrieved_sources) > 0,
+                "verifier_passed": (
+                    None
+                    if result.confidence is VerificationConfidence.BLOCKED
+                    else result.confidence is VerificationConfidence.VERIFIED
+                ),
                 "verifier_flag": "; ".join(verifier_flags) or None,
                 "verifier_checked": sum(1 for claim in result.verifier_claims if claim.verdict in ("grounded", "unsupported")),
                 "verifier_grounded": sum(1 for claim in result.verifier_claims if claim.verdict == "grounded"),

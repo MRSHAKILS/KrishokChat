@@ -156,7 +156,15 @@ async def safety_metrics(container: ContainerDep):
     flagged = 0
     verifier_checked = verifier_grounded = verifier_unsupported = 0
     answered_without_sources = 0
-    for entry in entries:
+    router_blocked = 0
+    retrieval_answered = retrieval_hits = 0
+    top1_scores: list[float] = []
+    source_counts: list[int] = []
+    # Pipeline aggregates count only v2 entries (recorded by the current
+    # pipeline with per-step validity fields). Legacy rows stay visible in
+    # `recent` but cannot skew the live panel.
+    v2_entries = [e for e in entries if e.get("pipeline_version") == 2]
+    for entry in v2_entries:
         category = entry.get("category", "unknown")
         by_category[category] = by_category.get(category, 0) + 1
         flagged += int(bool(entry.get("flagged")))
@@ -165,17 +173,42 @@ async def safety_metrics(container: ContainerDep):
         verifier_grounded += int(entry.get("verifier_grounded", 0))
         verifier_unsupported += int(entry.get("verifier_unsupported", 0))
         answered_without_sources += int(bool(entry.get("answered_without_sources", False)))
+        # P2 per-step aggregates: router refusals, retrieval hit-rate and
+        # top-1 scores, all computed from the same logged decisions the
+        # UI stepper renders (dual-view, nothing fabricated).
+        if entry.get("action") == "blocked-canned-response":
+            router_blocked += 1
+        if entry.get("category") == "safe_agri" and entry.get("action") == "answered":
+            retrieval_answered += 1
+            retrieval_hits += int(bool(entry.get("retrieval_hit", False)))
+            if isinstance(entry.get("retrieval_top1_score"), (int, float)):
+                top1_scores.append(float(entry["retrieval_top1_score"]))
+            if isinstance(entry.get("retrieved_count"), int):
+                source_counts.append(int(entry["retrieved_count"]))
+    total = len(v2_entries) or 1
     return {
         "total_queries": len(entries),
+        "pipeline_queries": len(v2_entries),
         "by_category": by_category,
         "flagged_count": flagged,
         "verifier": {
             "checked": verifier_checked,
             "grounded": verifier_grounded,
             "unsupported": verifier_unsupported,
+            "pass_rate": (verifier_grounded / verifier_checked) if verifier_checked else None,
         },
         "refusals": {
             "answered_without_sources": answered_without_sources,
+        },
+        "router": {
+            "blocked": router_blocked,
+            "refusal_rate": router_blocked / total,
+        },
+        "retrieval": {
+            "answered": retrieval_answered,
+            "hit_rate": (retrieval_hits / retrieval_answered) if retrieval_answered else None,
+            "avg_top1_score": (sum(top1_scores) / len(top1_scores)) if top1_scores else None,
+            "avg_sources": (sum(source_counts) / len(source_counts)) if source_counts else None,
         },
         "recent": entries[-10:][::-1],
     }

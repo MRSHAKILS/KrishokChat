@@ -15,16 +15,22 @@ roadmap (`docs/research/ROADMAP_2026.md`) before the investor demo.
   silently; roadmap written by orchestrator with the critic's evidence.)
 
 ## Active Phase
-**P1 COMPLETE (2026-08-14):** Verifier hardening shipped. `HardenedDosageVerifier`
-(`application/verifier.py` + `infrastructure/verification/dosage_claims.py`)
-replaces the lexical `DosageVerifier` (untouched, research baseline) in the
-container. Per-claim verdicts (grounded/unsupported/no_dosage) with
-chemical+amount+unit binding to the SAME passage; annotate-and-drop sanitized
-answers; TRUST-SCORE-style refusal counters in the audit log;
-`/api/safety/metrics` extended with verifier aggregates + refusals. Verified:
-62/62 pytest (19 new incl. 20-item dosage set + 10 no-false-block), live
-end-to-end QA probe + audit entry. Next: P2 (dual-view metrics on the
-agent-trace stepper).
+**P2 COMPLETE (2026-08-14):** Dual-view metrics shipped. Audit entries now
+carry per-step validity evidence (`pipeline_version: 2`): router
+(confidence/reason/matched_rules), retrieval (count/top-1 score/hit), verifier
+(passed verdict) — the exact decisions the chat stepper animates. Metrics
+endpoint aggregates only v2 entries (`pipeline_queries`) so legacy log rows
+can't distort the panel; `/api/safety/metrics` now serves `router`
+(blocked/refusal_rate), `retrieval` (answered/hit_rate/avg_top1/avg_sources),
+`verifier` (pass_rate). Frontend: pipeline-stats section (3 stage cards:
+Router/Retrieval/Verifier) + per-row step dots on the audit list. Test
+pollution of the live demo log eliminated (test_api/test_soil now build
+isolated apps with tmp audit paths — pre-existing quirk where contract tests
+wrote paraquat/soil entries into the demo log). Verified: 66/66 pytest, tsc
+clean, live probe (2 v2 entries, hit_rate 1.0, honest empty pass_rate when
+no dosage claims). Next: P3 (dense/FAISS index build + RRF) — longest lead,
+start as side-lane; then P4 (gold-label offline benchmark reusing audit v2
+fields), P5 (refusal-reason UI + panel polish).
 
 ## Key Decisions
 - P1: rule-based dosage entailment (chemical/crop/number/unit vs passages),
