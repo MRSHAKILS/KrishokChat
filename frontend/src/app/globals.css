@@ -53,6 +53,21 @@
     scroll-behavior: smooth;
   }
 
+  /* Sunlight Outdoor High-Contrast Mode for field visibility */
+  html[data-contrast="sunlight"] {
+    --color-paper: #ffffff;
+    --color-paper-2: #f3eee3;
+    --color-bone: #c7bba8;
+    --color-bone-soft: #dfd6c6;
+    --color-ink: #000000;
+    --color-ink-soft: #17130e;
+    --color-ink-faint: #2e261d;
+    --color-leaf: #1c4524;
+    --color-leaf-2: #24552e;
+    --color-ochre: #ad6d22;
+    --color-clay: #8e3713;
+  }
+
   body {
     font-family: var(--font-body);
     background-color: var(--color-paper);

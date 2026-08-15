@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ShieldCheck, ShieldAlert, ShieldX, FileText, AlertCircle, Phone, CloudRain, MessageCircle, ChevronDown, ClipboardCheck } from "lucide-react";
+import { ShieldCheck, ShieldAlert, ShieldX, FileText, AlertCircle, Phone, CloudRain, MessageCircle, ChevronDown, ClipboardCheck, FileSpreadsheet } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { enter, dur, ease } from "@/lib/motion";
 import { HELPLINE } from "@/lib/constants";
+import { cropBn, translateDiseaseToBn } from "@/lib/bn";
 import type { DetectResponse } from "@/lib/api";
+import { DosageCalculator } from "@/components/detect/dosage-calculator";
+import { PrescriptionModal } from "@/components/detect/prescription-modal";
 
 /* =========================================================================
    TreatmentCard — the grounded advisory result.
@@ -75,6 +78,7 @@ export function TreatmentCard({
   onFollowUp?: (question: string) => void;
 }) {
   const [sourcesOpen, setSourcesOpen] = useState(false);
+  const [prescriptionOpen, setPrescriptionOpen] = useState(false);
   if (!result.treatment_advice) return null;
 
   const cleanAdvice = formatTreatmentAdvice(result.treatment_advice, result.treatment_sources);
@@ -87,12 +91,28 @@ export function TreatmentCard({
       animate="visible"
       className="overflow-hidden rounded-xl border rule bg-paper shadow-[0_8px_28px_rgba(52,39,23,0.06)]"
     >
+      {/* Prescription Modal Popup */}
+      <PrescriptionModal
+        open={prescriptionOpen}
+        onClose={() => setPrescriptionOpen(false)}
+        result={result}
+      />
+
       {/* The first screenful is deliberately structured for a five-second scan. */}
-      <div className="flex items-center justify-between gap-3 border-b border-ochre-soft/50 bg-ochre-soft/15 px-5 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ochre-soft/50 bg-ochre-soft/15 px-5 py-3">
         <div className="flex items-center gap-2 text-[11px] font-semibold text-ochre">
           <ClipboardCheck className="h-4 w-4" /> এখন কী করবেন
         </div>
-        {result.treatment_confidence && <ConfidenceBadge confidence={result.treatment_confidence} compact />}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setPrescriptionOpen(true)}
+            className="control-press inline-flex items-center gap-1.5 rounded-lg border border-leaf/40 bg-leaf/10 px-2.5 py-1 text-xs font-semibold text-leaf hover:bg-leaf hover:text-paper cursor-pointer shadow-2xs"
+          >
+            <FileSpreadsheet className="h-3.5 w-3.5" /> ব্যবস্থাপত্র দেখুন
+          </button>
+          {result.treatment_confidence && <ConfidenceBadge confidence={result.treatment_confidence} compact />}
+        </div>
       </div>
 
       {/* Immediate action */}
@@ -101,10 +121,10 @@ export function TreatmentCard({
         <p className="text-sm leading-relaxed text-ink whitespace-pre-wrap">{cleanAdvice}</p>
       </div>
 
-      {/* Dosage is explicit when present, never inferred. */}
+      {/* Dosage and Weather Consideration */}
       <div className="grid gap-3 border-b rule p-5 sm:grid-cols-2">
         <div className="rounded-lg border border-ochre-soft/60 bg-ochre-soft/10 p-3">
-          <div className="text-[11px] font-semibold text-ochre">রাসায়নিক মাত্রা</div>
+          <div className="text-[11px] font-semibold text-ochre">রাসায়নিক মাত্রা নির্দেশিকা</div>
           <p className="mt-1 text-xs leading-relaxed text-ink-soft">
             {dosage ?? "এই ফলাফলে আলাদা মাত্রা উল্লেখ নেই। লেবেল ছাড়া ডোজ ঠিক করবেন না।"}
           </p>
@@ -117,6 +137,15 @@ export function TreatmentCard({
             এই পরামর্শে আপনার এলাকার লাইভ আবহাওয়া নেই। স্প্রে করার আগে বৃষ্টি ও বাতাস দেখে নিন।
           </p>
         </div>
+      </div>
+
+      {/* Interactive Dosage Calculator Widget */}
+      <div className="border-b rule p-5 bg-paper-2/20">
+        <DosageCalculator
+          defaultDosageText={dosage || cleanAdvice}
+          cropName={result.crop ? cropBn(result.crop) : ""}
+          diseaseName={result.disease ? translateDiseaseToBn(result.disease) : ""}
+        />
       </div>
 
       {/* Dosage guidance is safety-critical */}

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Phone, ChevronDown, LogOut } from "lucide-react";
+import { Phone, ChevronDown, LogOut, Sun } from "lucide-react";
 import { APP, HELPLINE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { SessionArea } from "@/components/auth/session-area";
@@ -24,6 +24,7 @@ import { createClient } from "@/lib/supabase/client";
      bar never crowds.
    - The 16123 pill is reachable on BOTH desktop and mobile — it is the
      single most important emergency action on the site.
+   - Sunlight mode toggle allows high-contrast field visibility under bright sun.
    ========================================================================= */
 
 const NAV = [
@@ -47,7 +48,36 @@ export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [sunlight, setSunlight] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try {
+      const isSun = localStorage.getItem("krishokchat:contrast") === "sunlight";
+      if (isSun) {
+        setSunlight(true);
+        document.documentElement.setAttribute("data-contrast", "sunlight");
+      }
+    } catch {
+      // Storage unavailable
+    }
+  }, []);
+
+  const toggleSunlight = () => {
+    const next = !sunlight;
+    setSunlight(next);
+    try {
+      if (next) {
+        document.documentElement.setAttribute("data-contrast", "sunlight");
+        localStorage.setItem("krishokchat:contrast", "sunlight");
+      } else {
+        document.documentElement.removeAttribute("data-contrast");
+        localStorage.removeItem("krishokchat:contrast");
+      }
+    } catch {
+      // Storage unavailable
+    }
+  };
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -149,8 +179,25 @@ export function Navbar() {
           </div>
         </nav>
 
-        {/* Right: 16123 call pill + session area + mobile toggle */}
+        {/* Right: Sunlight mode + 16123 call pill + session area + mobile toggle */}
         <div className="flex shrink-0 items-center gap-2">
+          {/* Sunlight Mode Toggle */}
+          <button
+            type="button"
+            onClick={toggleSunlight}
+            className={cn(
+              "control-press inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer",
+              sunlight
+                ? "border-ochre bg-ochre/20 text-ochre shadow-2xs ring-1 ring-ochre/50"
+                : "border-bone bg-paper-2/50 text-ink-soft hover:border-leaf/40 hover:bg-paper hover:text-ink"
+            )}
+            title={sunlight ? "সাধারণ মোড চালু করুন" : "মাঠের মোড / তীব্র রোদের স্পষ্ট দৃশ্যমানতা (Sunlight Mode)"}
+            aria-pressed={sunlight}
+          >
+            <Sun className={cn("h-3.5 w-3.5", sunlight && "text-ochre animate-spin-slow")} />
+            <span className="hidden sm:inline">{sunlight ? "মাঠের মোড অন" : "মাঠের মোড"}</span>
+          </button>
+
           <a
             href={`tel:${HELPLINE.krishiCallCenter}`}
             className="group relative hidden items-center gap-2 overflow-hidden rounded-full bg-leaf px-4 py-2 text-sm font-semibold text-paper shadow-sm transition-all hover:bg-leaf-2 hover:shadow-md hover:shadow-leaf/20 sm:flex"

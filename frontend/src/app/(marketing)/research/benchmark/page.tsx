@@ -8,6 +8,7 @@ import { RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 import { useCountUp, toBn } from "@/lib/use-count-up";
 import goldenStats from "@/lib/golden_stats.json";
+import { ModelComparisonInspector } from "@/components/model-comparison-inspector";
 
 /* =========================================================================
    Benchmark Results Page — the credibility page with actual paper numbers.
@@ -74,7 +75,7 @@ const GENF1_LABELS: Record<string, string> = {
 };
 
 /* Section kickers — indexed structure, same system as /data */
-const KICKERS = ["০১ · মূল ফলাফল", "০২ · তথ্য সংগ্রহ", "০৩ · রেজিস্টার গ্যাপ", "০৪ · ক্রস-লিঙ্গুয়াল", "০৫ · ফার্মার বেঞ্চমার্ক", "০৬ · হ্যালুসিনেশন ফ্লোর", "০৭ · গোল্ডেন ইভাল"] as const;
+const KICKERS = ["০১ · মূল ফলাফল", "০২ · তথ্য সংগ্রহ", "০৩ · রেজিস্টার গ্যাপ", "০৪ · ক্রস-লিঙ্গুয়াল", "০৫ · ফার্মার বেঞ্চমার্ক", "০৬ · হ্যালুসিনেশন ফ্লোর ও মডেল তুলনা", "০৭ · গোল্ডেন ইভাল"] as const;
 
 /* Section G — live-system golden eval. Numbers come from the PRECOMPUTED
    artifact generated offline (scripts/08..11 in backend/ml_assets/rag_index/
@@ -531,27 +532,26 @@ export default function BenchmarkPage() {
         </motion.div>
       </motion.section>
 
-      {/* === F. Hallucination Floor === */}
+      {/* === F. Hallucination Floor & Model Diff Inspector === */}
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}
         variants={stagger}
-        className="rounded-xl border border-clay-soft/40 bg-clay-soft/8 p-8 text-center"
+        className="space-y-6"
       >
         <motion.div variants={enter}>
-          <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-clay">{KICKERS[5]}</div>
-          <AlertTriangle className="mx-auto mt-4 h-10 w-10 text-clay" />
-          <h2 className="mt-4 font-display text-2xl text-ink">রাসায়নিক হ্যালুসিনেশন ফ্লোর</h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-ink-soft">
-            পরিপূর্ণ অরাকল তথ্য থাকা সত্ত্বেও{" "}
-            <span className="font-display text-lg text-clay">{RESEARCH_STATS.hallucinationFloor}</span>{" "}
-            রাসায়নিক হ্যালুসিনেশন থেকে যায় — ৬টি ভিন্ন আর্কিটেকচার মডেলে। ডোজ ত্রুটি, বাদ দেওয়া নয়,
-            মাঠে সবচেয়ে বেশি ক্ষতির কারণ।
+          <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[5]}</div>
+          <h2 className="mt-1 mb-2 font-display text-2xl text-ink">
+            রাসায়নিক হ্যালুসিনেশন ফ্লোর ও মডেল তুলনা (A/B Diff Inspector)
+          </h2>
+          <p className="text-sm text-ink-soft max-w-3xl">
+            একই বেঞ্চমার্ক প্রশ্নে জিরো-শট বনাম ফাইন-টিউনড বনাম মাল্টি-এজেন্ট গ্রাউন্ডেড মডেলের পাশাপাশি ফলাফল, রাসায়নিক নিরাপত্তা স্কোর এবং কেন স্টেজ ৪ ভেরিফায়ার গেট আবশ্যক তার ইন্টারঅ্যাক্টিভ বিশ্লেষণ।
           </p>
-          <p className="mt-3 text-xs text-ink-faint">
-            এই সমস্যা এখনও অমীমাংসিত — তথ্য-সংগ্রহ মানের উন্নতি একা যথেষ্ট নয়।
-          </p>
+        </motion.div>
+
+        <motion.div variants={enter}>
+          <ModelComparisonInspector />
         </motion.div>
       </motion.section>
 

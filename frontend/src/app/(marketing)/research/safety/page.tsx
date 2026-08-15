@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { HELPLINE, RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
+import { PipelineSandbox } from "@/components/pipeline-sandbox";
 
 /* =========================================================================
    Safety Design Page — THE product demo, not a paper figure.
@@ -83,7 +84,7 @@ const SAFETY_CATEGORIES = [
 
 export default function SafetyPage() {
   return (
-    <div className="mx-auto max-w-4xl space-y-20 py-14">
+    <div className="mx-auto max-w-4xl space-y-16 py-14">
       {/* Hero */}
       <motion.section initial="hidden" animate="visible" variants={stagger} className="text-center">
         <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre">
@@ -93,14 +94,14 @@ export default function SafetyPage() {
           নিরাপত্তা-সচেতন <span className="text-leaf">এজেন্টিক পাইপলাইন</span>
         </motion.h1>
         <motion.p variants={enter} className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
-          একটি প্রকৃত প্রশ্ন কীভাবে চার ধাপ পার হয়ে উত্তর হয় — নিচের অ্যানিমেশনে দেখুন।
+          একটি প্রশ্ন নির্বাচন করে দেখুন কীভাবে আমাদের চার-ধাপের এজেন্টিক ব্যবস্থা প্রতিটি সিদ্ধান্ত গ্রহণ করে।
         </motion.p>
       </motion.section>
 
       <HelplineCallout />
 
-      {/* THE animated RAG workflow */}
-      <RagWorkflowDemo />
+      {/* Interactive 4-Stage Simulator Sandbox */}
+      <PipelineSandbox />
 
       {/* Safety taxonomy (compact) */}
       <SafetyTaxonomy />

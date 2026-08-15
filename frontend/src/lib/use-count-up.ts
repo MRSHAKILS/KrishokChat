@@ -16,15 +16,17 @@ export function toBn(n: number): string {
 }
 
 export function useCountUp(to: number, active: boolean, duration = 0.9) {
-  const [val, setVal] = useState(0);
   const reduced = useReducedMotion();
+  const [val, setVal] = useState(() => (reduced ? to : 0));
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!active) return;
     if (reduced) {
-      setVal(to);
-      return;
+      rafRef.current = requestAnimationFrame(() => setVal(to));
+      return () => {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      };
     }
     const start = performance.now();
     const tick = (now: number) => {

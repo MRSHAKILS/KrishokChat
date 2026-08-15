@@ -17,11 +17,12 @@ import { motion, AnimatePresence, MotionConfig, useInView } from "motion/react";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, LabelList } from "recharts";
 import {
   Database, ExternalLink, ChevronDown, Tag, FileText, Boxes, ArrowRight,
-  ZoomIn, GitBranch, ChevronRight, FlaskConical,
+  GitBranch, ChevronRight, FlaskConical,
 } from "lucide-react";
 import { RESEARCH_STATS, LINKS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 import { useCountUp, toBn } from "@/lib/use-count-up";
+import { KnowledgeGraphExplorer } from "@/components/knowledge-graph-explorer";
 
 /* ---- real data (all verified against AgriTrust paper) ---- */
 
@@ -151,7 +152,6 @@ function StatCell({ value, label, icon: Icon, ratio, delay }: { value: number; l
 export default function DataPage() {
   const [nodeOpen, setNodeOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [lightbox, setLightbox] = useState(false);
 
   const selected = NODE_CATEGORIES.find((c) => c.name === selectedCategory);
   const selectedFrac = selected ? (selected.count / NODE_TOTAL) * 100 : 0;
@@ -311,71 +311,10 @@ export default function DataPage() {
             )}
           </AnimatePresence>
 
-          {/* Schematic image — PROPER view size + lightbox zoom */}
-          <motion.div variants={enter} className="mt-6">
-            <button
-              onClick={() => setLightbox(true)}
-              className="group relative mx-auto block w-full max-w-[820px] overflow-hidden rounded-xl border rule bg-bone"
-              aria-label="জ্ঞান গ্রাফ স্কিম্যাটিক ইলাস্ট্রেশন বড় করে দেখুন"
-            >
-              <div className="aspect-video w-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/assets/knowledge_graph_gpt.jpg"
-                  alt="জ্ঞান গ্রাফ স্কিম্যাটিক ইলাস্ট্রেশন — বাস্তব পরিসংখ্যান উপরের চার্টে"
-                  className="h-full w-full object-contain"
-                />
-              </div>
-              <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-paper/95 text-ink-soft opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
-                <ZoomIn className="h-4 w-4" />
-              </span>
-            </button>
-            <p className="mt-2 text-[11px] text-ink-faint">
-              চিত্র: জ্ঞান গ্রাফ স্কিম্যাটিক ইলাস্ট্রেশন (জেনারেটেড)। সঠিক পরিসংখ্যানের জন্য উপরের ডোনাট ও বার চার্ট।
-            </p>
+          {/* Interactive Knowledge Graph Explorer */}
+          <motion.div variants={enter} className="mt-8">
+            <KnowledgeGraphExplorer />
           </motion.div>
-
-          {/* Lightbox */}
-          <AnimatePresence>
-            {lightbox && (
-              <motion.div
-                className="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4 backdrop-blur-sm"
-                onClick={() => setLightbox(false)}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: dur.fast, ease: ease.out }}
-              >
-                <motion.div
-                  className="flex max-h-[88vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border rule bg-paper"
-                  onClick={(e) => e.stopPropagation()}
-                  initial={{ opacity: 0, scale: 0.97 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: dur.normal, ease: ease.smooth }}
-                  role="dialog"
-                  aria-modal="true"
-                  aria-label="জ্ঞান গ্রাফ স্কিম্যাটিক — বড় ভিউ"
-                >
-                  <div className="flex items-center justify-between border-b rule px-4 py-3">
-                    <span className="text-sm font-medium text-ink">জ্ঞান গ্রাফ — স্কিম্যাটিক ইলাস্ট্রেশন</span>
-                    <button onClick={() => setLightbox(false)} className="rounded-md px-2 py-1 text-sm text-ink-soft transition-colors hover:bg-bone">বন্ধ করুন</button>
-                  </div>
-                  <div className="flex-1 overflow-auto bg-bone p-4">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/assets/knowledge_graph_gpt.jpg"
-                      alt="জ্ঞান গ্রাফ স্কিম্যাটিক ইলাস্ট্রেশন — বড় ভিউ"
-                      className="mx-auto max-h-[68vh] w-auto max-w-full object-contain"
-                    />
-                  </div>
-                  <div className="border-t rule px-4 py-2 text-[11px] text-ink-faint">
-                    ইলাস্ট্রেশন (জেনারেটেড) — সংখ্যা-সঠিক ভিজ্যুয়ালাইজেশন এই পৃষ্ঠার ০২ নং চার্টে।
-                  </div>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </motion.section>
 
         {/* === ০৩. Sample Knowledge Node === */}
