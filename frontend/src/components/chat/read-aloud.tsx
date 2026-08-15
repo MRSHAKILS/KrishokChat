@@ -1,32 +1,34 @@
 "use client";
 
 /* =========================================================================
-   ReadAloudButton — the P5 read-aloud control for completed answers.
+   ReadAloudButton — Synchronized TTS audio player with sentence tracking.
 
-   Chain (in order, each step degrading gracefully, never breaking chat):
-     1. Backend /api/tts (edge-tts, real Bengali bn-BD neural voice) played
-        through a shared Web Audio context. The context is resumed inside the
-        click gesture so browser autoplay policies never block playback.
-     2. Browser speechSynthesis — ONLY when a Bengali system voice exists.
-        On machines without one (like the demo box) it would read Bengali
-        script with an English voice (phoneme garbage), so it is gated off
-        and the button shows an error instead.
-     3. Nothing — the answer text remains visible; an inline error appears.
-
-   Barge-in: stopAllSpeech() cancels every active player (backend + browser)
-   and bumps a module-level tick. The chat panel calls it when the farmer
-   sends a new query or starts the mic, so stale audio never overlaps the
-   next turn. Each button subscribes to the tick to reset its own UI state.
+   Features:
+     1. Sentence-by-sentence synchronized visual tracking (onSentenceChange).
+     2. Voice speed control (০.৭৫x, ১.০x, ১.২৫x) for field accessibility.
+     3. Animated mini audio wave equalizer.
+     4. Graceful fallback chain: Backend neural voice -> Browser Web Speech API.
+     5. Barge-in: stops on new queries or microphone activation.
    ========================================================================= */
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX, Gauge, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { synthesizeSpeech } from "@/lib/api";
 
 interface Player {
   source?: AudioBufferSourceNode;
   synth?: SpeechSynthesisUtterance;
+}
+
+/* ---- Sentence splitter helper for Bengali text ---- */
+export function splitBengaliSentences(text: string): string[] {
+  if (!text) return [];
+  // Match sentences ending with ।, ?, !, or newlines
+  const matches = text.match(/[^।\n?!]+[।\n?!]*/g);
+  if (!matches || matches.length === 0) return [text.trim()];
+  return matches.map((s) => s.trim()).filter(Boolean);
 }
 
 /* ---- module-level registry + tick (barge-in bus) ---------------------- */
@@ -85,7 +87,7 @@ function ensureAudioContext(): AudioContext | null {
   return sharedCtx;
 }
 
-/* ---- browser speechSynthesis fallback (pre-existing behavior) --------- */
+/* ---- browser speechSynthesis fallback -------------------------------- */
 
 function getVoicesWhenReady(synth: SpeechSynthesis): Promise<SpeechSynthesisVoice[]> {
   const voices = synth.getVoices();
@@ -101,23 +103,24 @@ function getVoicesWhenReady(synth: SpeechSynthesis): Promise<SpeechSynthesisVoic
       resolve(synth.getVoices());
     };
     synth.addEventListener("voiceschanged", finish);
-    // Some browsers do not emit voiceschanged until a second synthesis call.
-    // A short timeout still lets the system default voice work.
     const timeoutId = window.setTimeout(finish, 450);
   });
 }
 
-/* ---- component -------------------------------------------------------- */
+/* ---- Component -------------------------------------------------------- */
 
 export function ReadAloudButton({
   text,
   className,
+  onSentenceChange,
 }: {
   text: string;
   className?: string;
+  onSentenceChange?: (index: number | null) => void;
 }) {
   const [speaking, setSpeaking] = useState(false);
   const [error, setError] = useState(false);
+  const [speed, setSpeed] = useState<0.75 | 1.0 | 1.25>(1.0);
   const requestRef = useRef(0);
   const playerRef = useRef<Player | null>(null);
   const stopTickValue = useStopTick();
@@ -133,9 +136,10 @@ export function ReadAloudButton({
       window.speechSynthesis.cancel();
     }
     setSpeaking(false);
+    onSentenceChange?.(null);
   };
 
-  // Reset this button's UI when any other action barges in (new query, mic).
+  // Reset when any other action barges in
   const mounted = useRef(false);
   useEffect(() => {
     if (!mounted.current) {
@@ -146,48 +150,21 @@ export function ReadAloudButton({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stopTickValue]);
 
-  // Stop playback if the message unmounts (chat cleared, new conversation).
+  // Stop playback on unmount
   useEffect(() => stop, []);
 
-  const playBackend = async (
-    cleanText: string,
-    requestId: number,
-    ctx: AudioContext | null,
-  ): Promise<boolean> => {
-    try {
-      const blob = await synthesizeSpeech(cleanText, { timeoutMs: 12_000 });
-      if (requestRef.current !== requestId) return true; // superseded
-      if (!ctx) return false; // no Web Audio → browser fallback
-
-      const arrayBuffer = await blob.arrayBuffer();
-      const buffer = await ctx.decodeAudioData(arrayBuffer);
-      if (requestRef.current !== requestId) return true; // superseded
-
-      const source = ctx.createBufferSource();
-      source.buffer = buffer;
-      source.connect(ctx.destination);
-      const player: Player = { source };
-      playerRef.current = player;
-      activePlayers.add(player);
-      source.start();
-      setSpeaking(true);
-      source.onended = () => {
-        activePlayers.delete(player);
-        if (playerRef.current === player) playerRef.current = null;
-        if (requestRef.current === requestId) setSpeaking(false);
-      };
-      return true;
-    } catch {
-      return false; // backend unreachable/failed → browser fallback
-    }
+  const cycleSpeed = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSpeed((prev) => (prev === 1.0 ? 1.25 : prev === 1.25 ? 0.75 : 1.0));
   };
 
-  const playBrowser = (cleanText: string, requestId: number) => {
+  const playBrowserSequential = (sentences: string[], requestId: number) => {
     const synth = "speechSynthesis" in window ? window.speechSynthesis : null;
-    if (!synth) {
+    if (!synth || sentences.length === 0) {
       if (requestRef.current === requestId) {
         setError(true);
         setSpeaking(false);
+        onSentenceChange?.(null);
       }
       return;
     }
@@ -202,53 +179,142 @@ export function ReadAloudButton({
           voice.name.toLowerCase().includes("bengali"),
       );
 
-      // Never read Bengali script with a non-Bengali voice: on machines
-      // without a Bengali system voice (like the demo box) that produces
-      // English-phoneme garbage, which is worse than no audio. Degrade to
-      // silence + a visible message; the answer text stays on screen.
       if (!bnVoice) {
         setError(true);
         setSpeaking(false);
+        onSentenceChange?.(null);
         return;
       }
 
-      const utterance = new SpeechSynthesisUtterance(cleanText.slice(0, 1000));
-      utterance.lang = bnVoice.lang;
-      utterance.voice = bnVoice;
-      utterance.rate = 0.88;
+      let currentIndex = 0;
 
-      const player: Player = { synth: utterance };
-      playerRef.current = player;
-      activePlayers.add(player);
-      utterance.onstart = () => {
-        if (requestRef.current === requestId) setSpeaking(true);
-      };
-      utterance.onend = () => {
-        activePlayers.delete(player);
-        if (playerRef.current === player) playerRef.current = null;
-        if (requestRef.current === requestId) setSpeaking(false);
-      };
-      utterance.onerror = (event) => {
-        activePlayers.delete(player);
-        if (playerRef.current === player) playerRef.current = null;
-        if (
-          event.error !== "canceled" &&
-          event.error !== "interrupted" &&
-          requestRef.current === requestId
-        ) {
-          setError(true);
+      const speakNextSentence = () => {
+        if (requestRef.current !== requestId || currentIndex >= sentences.length) {
+          if (requestRef.current === requestId) {
+            setSpeaking(false);
+            onSentenceChange?.(null);
+          }
+          return;
         }
-        setSpeaking(false);
+
+        const sentenceText = sentences[currentIndex]
+          .replace(/\[[^\]]+\]/g, "")
+          .replace(/\s+/g, " ")
+          .trim();
+
+        if (!sentenceText) {
+          currentIndex++;
+          speakNextSentence();
+          return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(sentenceText);
+        utterance.lang = bnVoice.lang;
+        utterance.voice = bnVoice;
+        utterance.rate = speed * 0.9;
+
+        const player: Player = { synth: utterance };
+        playerRef.current = player;
+        activePlayers.add(player);
+
+        utterance.onstart = () => {
+          if (requestRef.current === requestId) {
+            setSpeaking(true);
+            onSentenceChange?.(currentIndex);
+          }
+        };
+
+        utterance.onend = () => {
+          activePlayers.delete(player);
+          if (playerRef.current === player) playerRef.current = null;
+          if (requestRef.current === requestId) {
+            currentIndex++;
+            speakNextSentence();
+          }
+        };
+
+        utterance.onerror = (event) => {
+          activePlayers.delete(player);
+          if (playerRef.current === player) playerRef.current = null;
+          if (
+            event.error !== "canceled" &&
+            event.error !== "interrupted" &&
+            requestRef.current === requestId
+          ) {
+            setError(true);
+          }
+          setSpeaking(false);
+          onSentenceChange?.(null);
+        };
+
+        synth.speak(utterance);
       };
 
-      // A brief yield after cancel prevents Chrome from dropping the new
-      // utterance when a previous answer was just stopped.
+      // Brief delay after cancel
       window.setTimeout(() => {
         if (requestRef.current !== requestId) return;
         synth.resume();
-        synth.speak(utterance);
+        speakNextSentence();
       }, 40);
     });
+  };
+
+  const playBackend = async (
+    cleanText: string,
+    requestId: number,
+    ctx: AudioContext | null,
+    sentences: string[],
+  ): Promise<boolean> => {
+    try {
+      const blob = await synthesizeSpeech(cleanText, { timeoutMs: 12_000 });
+      if (requestRef.current !== requestId) return true;
+      if (!ctx) return false;
+
+      const arrayBuffer = await blob.arrayBuffer();
+      const buffer = await ctx.decodeAudioData(arrayBuffer);
+      if (requestRef.current !== requestId) return true;
+
+      const source = ctx.createBufferSource();
+      source.buffer = buffer;
+      source.playbackRate.value = speed;
+      source.connect(ctx.destination);
+      const player: Player = { source };
+      playerRef.current = player;
+      activePlayers.add(player);
+      source.start();
+      setSpeaking(true);
+
+      // Interpolate sentence highlights across total audio duration
+      const totalDuration = buffer.duration / speed;
+      const sentenceDurations = sentences.map((s) => Math.max(s.length, 1));
+      const totalChars = sentenceDurations.reduce((a, b) => a + b, 0);
+
+      let accumulatedTime = 0;
+      sentences.forEach((_, idx) => {
+        const sentenceFraction = sentenceDurations[idx] / totalChars;
+        const sentenceDurationMs = sentenceFraction * totalDuration * 1000;
+        const startTimeMs = (accumulatedTime / totalChars) * totalDuration * 1000;
+        accumulatedTime += sentenceDurations[idx];
+
+        window.setTimeout(() => {
+          if (requestRef.current === requestId && playerRef.current === player) {
+            onSentenceChange?.(idx);
+          }
+        }, startTimeMs);
+      });
+
+      source.onended = () => {
+        activePlayers.delete(player);
+        if (playerRef.current === player) playerRef.current = null;
+        if (requestRef.current === requestId) {
+          setSpeaking(false);
+          onSentenceChange?.(null);
+        }
+      };
+      return true;
+    } catch {
+      return false;
+    }
   };
 
   const toggle = () => {
@@ -263,42 +329,71 @@ export function ReadAloudButton({
       .trim();
     if (!cleanText) return;
 
+    const sentences = splitBengaliSentences(text);
     const requestId = ++requestRef.current;
     setError(false);
-    setSpeaking(true); // immediate feedback while synthesizing
+    setSpeaking(true);
 
-    // Resume inside the click gesture so autoplay policies never block us.
     const ctx = ensureAudioContext();
-    void playBackend(cleanText, requestId, ctx).then((played) => {
+    void playBackend(cleanText, requestId, ctx, sentences).then((played) => {
       if (!played && requestRef.current === requestId) {
-        playBrowser(cleanText, requestId);
+        playBrowserSequential(sentences, requestId);
       }
     });
   };
 
+  const speedLabelBn = speed === 0.75 ? "০.৭৫x" : speed === 1.25 ? "১.২৫x" : "১.০x";
+
   return (
-    <>
+    <div className="flex items-center gap-1.5">
       <button
         onClick={toggle}
         type="button"
         aria-label={speaking ? "আবৃত্তি বন্ধ করুন" : "পরামর্শটি শুনুন"}
         className={cn(
-          "control-press flex min-h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-medium",
+          "control-press flex min-h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-semibold transition-all cursor-pointer",
           speaking
-            ? "border-leaf bg-leaf text-paper"
+            ? "border-leaf bg-leaf text-paper shadow-xs"
             : "border-leaf/25 bg-leaf/8 text-leaf hover:bg-leaf/15",
           className,
         )}
       >
         {speaking ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
         <span>{speaking ? "থামুন" : "শুনুন"}</span>
+        {speaking && (
+          <span className="flex items-center gap-0.5 ml-0.5">
+            <EqualizerBar height={10} delay={0} />
+            <EqualizerBar height={14} delay={0.2} />
+            <EqualizerBar height={8} delay={0.4} />
+          </span>
+        )}
       </button>
+
+      {/* Voice Speed Toggle Chip */}
+      <button
+        onClick={cycleSpeed}
+        type="button"
+        title="পড়ার গতি পরিবর্তন করুন (০.৭৫x / ১.০x / ১.২৫x)"
+        className="flex min-h-9 items-center gap-1 rounded-lg border border-bone bg-paper px-2 py-1 text-[11px] font-mono font-medium text-ink-soft hover:border-leaf/40 hover:text-leaf transition-colors cursor-pointer"
+      >
+        <span>{speedLabelBn}</span>
+      </button>
+
       {error && (
         <p className="text-[11px] text-clay" role="status">
-          এই ডিভাইসে বাংলা ভয়েস পাওয়া যায়নি — উত্তরটি পড়ে নিন। ব্রাউজারের শব্দ ও
-          স্পিকারের অনুমতিও পরীক্ষা করুন।
+          এই ডিভাইসে বাংলা ভয়েস পাওয়া যায়নি — উত্তরটি পড়ে নিন।
         </p>
       )}
-    </>
+    </div>
+  );
+}
+
+function EqualizerBar({ height, delay }: { height: number; delay: number }) {
+  return (
+    <motion.span
+      animate={{ height: [4, height, 4] }}
+      transition={{ duration: 0.6, repeat: Infinity, delay, ease: "easeInOut" }}
+      className="w-0.5 rounded-full bg-paper block"
+    />
   );
 }

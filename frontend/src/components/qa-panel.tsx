@@ -58,6 +58,60 @@ export function QAPanel({
   const storageKey = "krishokchat:conversation:v1";
   const { session } = useSupabaseSession();
 
+  /* ---- Smooth Token Stream Easing Buffer (requestAnimationFrame) ----
+     Interpolates incoming SSE token chunks smoothly over ~16ms frames rather
+     than instant raw DOM appends, eliminating layout jumps and jittery scrolling. */
+  const targetTextRef = useRef("");
+  const displayedTextRef = useRef("");
+  const rafIdRef = useRef<number | null>(null);
+
+  const startEasingLoop = useCallback(() => {
+    if (rafIdRef.current !== null) return;
+
+    const tick = () => {
+      const target = targetTextRef.current;
+      const current = displayedTextRef.current;
+
+      if (current.length < target.length) {
+        const remaining = target.length - current.length;
+        // Adaptive rate: steady 1-2 chars for small buffer, up to remaining/4 for large burst
+        const step = remaining > 30 ? Math.ceil(remaining / 4) : remaining > 10 ? 3 : remaining > 3 ? 2 : 1;
+        const next = target.slice(0, current.length + step);
+        displayedTextRef.current = next;
+        setStreamedText(next);
+        rafIdRef.current = requestAnimationFrame(tick);
+      } else {
+        rafIdRef.current = null;
+      }
+    };
+
+    rafIdRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  const pushStreamToken = useCallback((token: string) => {
+    targetTextRef.current += token;
+    startEasingLoop();
+  }, [startEasingLoop]);
+
+  const flushStreamBuffer = useCallback(() => {
+    if (rafIdRef.current !== null) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+    displayedTextRef.current = targetTextRef.current;
+    setStreamedText(targetTextRef.current);
+  }, []);
+
+  const resetStreamBuffer = useCallback(() => {
+    if (rafIdRef.current !== null) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+    targetTextRef.current = "";
+    displayedTextRef.current = "";
+    setStreamedText("");
+  }, []);
+
   useEffect(() => {
     window.queueMicrotask(() => {
       try {
@@ -69,7 +123,12 @@ export function QAPanel({
         setRestored(true);
       }
     });
-    return () => requestRef.current?.abort();
+    return () => {
+      requestRef.current?.abort();
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -215,7 +274,8 @@ export function QAPanel({
       setMessages(newMessages);
       setStreaming(true);
       streamingRef.current = true;
-      setStreamedText("");
+      resetStreamBuffer();
+      keepScrolled.current = true;
       setTraceEvents([{ stage: "safety", status: "start" }]);
       setQuery("");
 
@@ -233,7 +293,7 @@ export function QAPanel({
         const final = await streamQuestion(
           q,
           applyEvent,
-          (token) => setStreamedText((prev) => prev + token),
+          (token) => pushStreamToken(token),
           {
             crop: detectedCrop,
             disease: detectedDisease,
@@ -246,6 +306,9 @@ export function QAPanel({
             signal: controller.signal,
           },
         );
+
+        // Ensure all buffered tokens are rendered before swapping to the final response
+        flushStreamBuffer();
 
         // Replace the streaming placeholder with the completed response
         setMessages((prev) => {
@@ -288,20 +351,21 @@ export function QAPanel({
         requestRef.current = null;
         setStreaming(false);
         streamingRef.current = false;
-        setStreamedText("");
+        resetStreamBuffer();
         setTraceEvents([]);
       }
     },
-    [messages, detectedCrop, detectedDisease, sessionId, applyEvent, model],
+    [messages, detectedCrop, detectedDisease, sessionId, applyEvent, model, pushStreamToken, flushStreamBuffer, resetStreamBuffer],
   );
 
   const clear = useCallback(() => {
     requestRef.current?.abort();
+    resetStreamBuffer();
     setMessages([]);
     setTraceEvents([]);
     setQuery("");
     window.localStorage.removeItem(storageKey);
-  }, []);
+  }, [resetStreamBuffer]);
 
   const isEmpty = messages.length === 0;
 

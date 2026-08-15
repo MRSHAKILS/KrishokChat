@@ -1,12 +1,15 @@
 "use client";
 
-import { motion } from "motion/react";
-import { Sparkles } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Sparkles, Languages, HelpCircle } from "lucide-react";
 import { enter } from "@/lib/motion";
+import { DialectSelector, type DialectId } from "./dialect-selector";
+import { cn } from "@/lib/utils";
 
 /* =========================================================================
-   SuggestedQuestions — starter prompts for farmers who don't know what to ask.
-   These are real, practical questions in Bengali based on the supported crops.
+   SuggestedQuestions — starter prompts + Regional Dialect Selector.
+   Empirically grounds the "Register Gap" discovery (AgriTrust paper §4.2).
    ========================================================================= */
 
 const DEFAULT_SUGGESTIONS = [
@@ -117,34 +120,101 @@ export function SuggestedQuestions({
   crop?: string | null;
   disease?: string | null;
 }) {
+  const [mode, setMode] = useState<"standard" | "dialect">("dialect");
+  const [selectedDialect, setSelectedDialect] = useState<DialectId>("rajshahi");
+  const isContextual = Boolean(crop || disease);
   const suggestions = contextualSuggestions(crop, disease);
+
+  if (isContextual) {
+    return (
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+        className="space-y-3"
+      >
+        <div className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-faint">
+          <Sparkles className="h-3 w-3 text-leaf" />
+          পরামর্শিত প্রশ্ন (আক্রান্ত ফসল অনুযায়ী)
+        </div>
+        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+          {suggestions.map((q) => (
+            <motion.button
+              key={q}
+              variants={enter}
+              whileHover={{ scale: 1.01, x: 2 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => onPick(q)}
+              className="group flex min-h-11 items-start gap-2 rounded-xl border rule bg-paper-2/30 px-3.5 py-2.5 text-left text-xs text-ink-soft transition-colors hover:border-leaf/50 hover:bg-leaf/5 hover:text-leaf sm:text-sm cursor-pointer"
+            >
+              <span className="mt-0.5 text-leaf opacity-60 transition-opacity group-hover:opacity-100">↳</span>
+              <span className="line-clamp-2 flex-1 leading-snug">{q}</span>
+            </motion.button>
+          ))}
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
       initial="hidden"
       animate="visible"
       variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
-      className="space-y-3"
+      className="space-y-3.5 text-left"
     >
-      <div className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-faint">
-        <Sparkles className="h-3 w-3" />
-        পরামর্শিত প্রশ্ন
-      </div>
-      <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
-        {suggestions.map((q) => (
-          <motion.button
-            key={q}
-            variants={enter}
-            whileHover={{ scale: 1.01, x: 2 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => onPick(q)}
-            className="group flex min-h-11 items-start gap-2 rounded-xl border rule bg-paper-2/30 px-3.5 py-2.5 text-left text-xs text-ink-soft transition-colors hover:border-leaf/50 hover:bg-leaf/5 hover:text-leaf sm:text-sm"
+      {/* Mode Switcher: Dialect vs Standard */}
+      <div className="flex items-center justify-between border-b rule pb-2">
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-ink">
+          <Languages className="h-3.5 w-3.5 text-leaf" />
+          <span>পরামর্শের নমুনা ও উপভাষা নির্বাচক</span>
+        </div>
+
+        <div className="flex items-center rounded-lg border rule bg-paper p-0.5 text-[11px]">
+          <button
+            onClick={() => setMode("dialect")}
+            className={cn(
+              "rounded-md px-2 py-0.5 transition-colors cursor-pointer font-medium",
+              mode === "dialect" ? "bg-leaf text-paper font-semibold shadow-2xs" : "text-ink-soft hover:text-ink"
+            )}
           >
-            <span className="mt-0.5 text-leaf opacity-60 transition-opacity group-hover:opacity-100">↳</span>
-            <span className="line-clamp-2 flex-1 leading-snug">{q}</span>
-          </motion.button>
-        ))}
+            আঞ্চলিক উপভাষা
+          </button>
+          <button
+            onClick={() => setMode("standard")}
+            className={cn(
+              "rounded-md px-2 py-0.5 transition-colors cursor-pointer font-medium",
+              mode === "standard" ? "bg-leaf text-paper font-semibold shadow-2xs" : "text-ink-soft hover:text-ink"
+            )}
+          >
+            প্রমিত প্রশ্ন
+          </button>
+        </div>
       </div>
+
+      {mode === "dialect" ? (
+        <DialectSelector
+          selectedDialect={selectedDialect}
+          onSelectDialect={setSelectedDialect}
+          onPickQuery={onPick}
+        />
+      ) : (
+        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+          {suggestions.map((q) => (
+            <motion.button
+              key={q}
+              variants={enter}
+              whileHover={{ scale: 1.01, x: 2 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => onPick(q)}
+              className="group flex min-h-11 items-start gap-2 rounded-xl border rule bg-paper-2/30 px-3.5 py-2.5 text-left text-xs text-ink-soft transition-colors hover:border-leaf/50 hover:bg-leaf/5 hover:text-leaf sm:text-sm cursor-pointer"
+            >
+              <span className="mt-0.5 text-leaf opacity-60 transition-opacity group-hover:opacity-100">↳</span>
+              <span className="line-clamp-2 flex-1 leading-snug">{q}</span>
+            </motion.button>
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 }

@@ -246,7 +246,92 @@ export function IntakeZone({
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Field Photography & Viewfinder Framing Guide */}
+      <LeafFramingGuide />
     </div>
+  );
+}
+
+function LeafFramingGuide() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="rounded-lg border rule bg-paper-2/25 p-2.5 text-xs text-ink-soft">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between font-medium text-ink transition-colors hover:text-leaf cursor-pointer"
+      >
+        <span className="flex items-center gap-1.5">
+          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-leaf/12 text-[10px] font-bold text-leaf">
+            ℹ
+          </span>
+          সঠিক ছবি তোলার সহায়িকা (ভিউফাইন্ডার গাইড)
+        </span>
+        <span className="text-[11px] text-leaf">{open ? "সংক্ষিপ্ত করুন ▲" : "দেখুন ▼"}</span>
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="mt-2.5 space-y-2 border-t rule pt-2.5"
+          >
+            <div className="flex items-center justify-center rounded-lg border border-dashed border-leaf/30 bg-leaf/5 py-4">
+              <div className="relative flex h-24 w-36 items-center justify-center rounded-lg border-2 border-leaf/40 bg-paper/80 shadow-2xs">
+                {/* Reticle corner marks */}
+                <div className="absolute top-1 left-1 h-2.5 w-2.5 border-t-2 border-l-2 border-leaf" />
+                <div className="absolute top-1 right-1 h-2.5 w-2.5 border-t-2 border-r-2 border-leaf" />
+                <div className="absolute bottom-1 left-1 h-2.5 w-2.5 border-b-2 border-l-2 border-leaf" />
+                <div className="absolute bottom-1 right-1 h-2.5 w-2.5 border-b-2 border-r-2 border-leaf" />
+                <div className="text-center">
+                  <LeafLineSmall />
+                  <span className="block text-[9px] font-semibold text-leaf mt-0.5">আক্রান্ত অংশ কেন্দ্রে রাখুন</span>
+                </div>
+              </div>
+            </div>
+
+            <ul className="space-y-1.5 text-[11px] text-ink-soft">
+              <li className="flex items-start gap-1.5">
+                <span className="text-leaf font-bold">✓</span>
+                <span><strong>দিনের আলো:</strong> ছায়া বা অতিরিক্ত ফ্ল্যাশ এড়িয়ে সরাসরি স্বাভাবিক আলোতে ছবি তুলুন।</span>
+              </li>
+              <li className="flex items-start gap-1.5">
+                <span className="text-leaf font-bold">✓</span>
+                <span><strong>দূরত্ব:</strong> পাতা থেকে ১৫–২০ সেন্টিমিটার দূরত্বে ক্যামেরা স্থির রেখে তুলুন।</span>
+              </li>
+              <li className="flex items-start gap-1.5">
+                <span className="text-leaf font-bold">✓</span>
+                <span><strong>একক পাতা:</strong> পুরো গাছের বদলে আক্রান্ত একটি পাতার ক্ষত পরিষ্কারভাবে ফ্রেমে রাখুন।</span>
+              </li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function LeafLineSmall() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden className="mx-auto">
+      <path
+        d="M8 38C8 22 18 10 40 8C38 28 26 38 8 38Z"
+        stroke="var(--color-leaf)"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 34C20 28 28 20 36 12"
+        stroke="var(--color-leaf)"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 

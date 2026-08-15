@@ -1,0 +1,19 @@
+{
+  "name": "কৃষক চ্যাট — KrishokChat",
+  "short_name": "KrishokChat",
+  "description": "নিরাপদ, তথ্যভিত্তিক বাংলা কৃষি পরামর্শদাতা ও রোগ নির্ণয় প্ল্যাটফর্ম",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF7",
+  "theme_color": "#2F5D3A",
+  "lang": "bn",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["agriculture", "education", "productivity", "utilities"]
+}

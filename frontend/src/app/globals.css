@@ -168,12 +168,20 @@
   }
 
   .stream-caret {
-    animation: stream-caret 1s steps(1, end) infinite;
+    animation: stream-caret 0.85s ease-in-out infinite alternate;
   }
 
   @keyframes stream-caret {
-    0%, 45% { opacity: 1; }
-    46%, 100% { opacity: 0.25; }
+    0% {
+      opacity: 1;
+      transform: scaleY(1);
+      box-shadow: 0 0 8px rgba(47, 93, 58, 0.45);
+    }
+    100% {
+      opacity: 0.2;
+      transform: scaleY(0.85);
+      box-shadow: 0 0 0px transparent;
+    }
   }
 
   /* The "active pipeline" ink-dash used in the trace rail */

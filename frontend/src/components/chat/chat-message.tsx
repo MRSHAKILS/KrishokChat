@@ -10,7 +10,7 @@ import { AgentTrace } from "@/components/agent-trace";
 import { ConfidenceBadge } from "./confidence-badge";
 import { SourceList } from "./source-list";
 import { SafetyNotice } from "./safety-notice";
-import { ReadAloudButton } from "./read-aloud";
+import { ReadAloudButton, splitBengaliSentences } from "./read-aloud";
 import { HELPLINE } from "@/lib/constants";
 import { type QAResponse, type SourceNode, type AgentStageEvent } from "@/lib/api";
 
@@ -105,10 +105,15 @@ function StreamingContent({ events, text }: { events: AgentStageEvent[]; text: s
   return (
     <div className="space-y-4">
       {text && (
-        <p aria-live="polite" className="whitespace-pre-wrap text-sm leading-relaxed text-ink">
-          {text}
-           <span className="stream-caret ml-1 inline-block h-4 w-0.5 bg-leaf align-middle" />
-        </p>
+        <div className="rounded-xl border border-bone/60 bg-paper/60 p-4 transition-all">
+          <p aria-live="polite" className="whitespace-pre-wrap text-sm leading-relaxed text-ink font-sans">
+            {text}
+            <span
+              className="stream-caret ml-1.5 inline-block h-4 w-1 rounded-full bg-leaf align-middle shadow-[0_0_6px_rgba(47,93,58,0.4)]"
+              aria-hidden="true"
+            />
+          </p>
+        </div>
       )}
       <AgentTrace
         stages={QA_STAGES}
@@ -178,26 +183,50 @@ function formatAnswerWithCleanCitations(text: string, sources: SourceNode[] = []
   }).trim();
 }
 
-function FormattedAnswerText({ text }: { text: string }) {
+function FormattedAnswerText({
+  text,
+  activeSentenceIndex,
+}: {
+  text: string;
+  activeSentenceIndex?: number | null;
+}) {
   if (!text) return null;
-  const parts = text.split(/(\[\s*[১-১০1-9]+\s*\])/g);
+  const sentences = splitBengaliSentences(text);
+
   return (
     <span>
-      {parts.map((part, i) => {
-        const match = part.match(/^\[\s*([১-১০1-9]+)\s*\]$/);
-        if (match) {
-          const num = match[1];
-          return (
-            <span
-              key={i}
-              title={`উৎস [${num}] দেখুন`}
-              className="mx-0.5 inline-flex items-center justify-center rounded bg-leaf/12 px-1.5 py-0.5 font-mono text-xs font-bold text-leaf transition-colors hover:bg-leaf hover:text-paper cursor-pointer"
-            >
-              [{num}]
-            </span>
-          );
-        }
-        return part;
+      {sentences.map((sentence, sIdx) => {
+        const isActive = activeSentenceIndex === sIdx;
+        const parts = sentence.split(/(\[\s*[১-১০1-9]+\s*\])/g);
+
+        return (
+          <span
+            key={sIdx}
+            className={cn(
+              "transition-all duration-200",
+              isActive &&
+                "bg-ochre-soft/35 text-ink font-medium rounded px-1 py-0.5 shadow-2xs border-b border-ochre/40 inline-block my-0.5"
+            )}
+          >
+            {parts.map((part, pIdx) => {
+              const match = part.match(/^\[\s*([১-১০1-9]+)\s*\]$/);
+              if (match) {
+                const num = match[1];
+                return (
+                  <span
+                    key={pIdx}
+                    title={`উৎস [${num}] দেখুন`}
+                    className="mx-0.5 inline-flex items-center justify-center rounded bg-leaf/12 px-1.5 py-0.5 font-mono text-xs font-bold text-leaf transition-colors hover:bg-leaf hover:text-paper cursor-pointer"
+                  >
+                    [{num}]
+                  </span>
+                );
+              }
+              return part;
+            })}
+            {" "}
+          </span>
+        );
       })}
     </span>
   );
@@ -207,6 +236,7 @@ function CompletedContent({ response }: { response: QAResponse }) {
   const blocked = response.category !== "safe_agri";
   const [traceOpen, setTraceOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [activeSentenceIndex, setActiveSentenceIndex] = useState<number | null>(null);
 
   // Safety-blocked query → show SafetyNotice
   if (blocked) {
@@ -233,14 +263,14 @@ function CompletedContent({ response }: { response: QAResponse }) {
 
   return (
     <div className="space-y-3">
-      {/* Answer text with styled citation pills */}
+      {/* Answer text with styled citation pills and synchronized TTS highlighting */}
       <motion.p
         initial={{ opacity: 0, y: 4 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: dur.fast, ease: ease.smooth }}
         className="whitespace-pre-wrap text-[0.95rem] leading-[1.85] text-ink"
       >
-        <FormattedAnswerText text={cleanAnswer} />
+        <FormattedAnswerText text={cleanAnswer} activeSentenceIndex={activeSentenceIndex} />
       </motion.p>
 
       {/* Keep the answer actions to one useful voice control and one optional
@@ -248,7 +278,7 @@ function CompletedContent({ response }: { response: QAResponse }) {
       <div className="flex flex-wrap items-center gap-2 border-t rule pt-3">
         <ConfidenceBadge confidence={response.confidence} />
 
-        <ReadAloudButton text={response.answer} />
+        <ReadAloudButton text={response.answer} onSentenceChange={setActiveSentenceIndex} />
 
         <button
           onClick={copyAnswer}

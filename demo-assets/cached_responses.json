@@ -1428,5 +1428,586 @@
     "reason": ""
    }
   ]
+ },
+ "|||আলুর নাবি ধসা রোগের প্রতিকার কী": {
+  "query": "আলুর নাবি ধসা রোগের প্রতিকার কী?",
+  "category": "safe_agri",
+  "answer": "আলুর নাবি ধসা রোগ (Late Blight) একটি মারাত্মক রোগ যা পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে। এটি বাদামী বা কালো দাগ সৃষ্টি করে এবং পচন ধরায়, ফলে ফলন কমে যায়। এই রোগ ভেজা আবহাওয়ায় দ্রুত ছড়ায়। [CABI_POTATO_834B4F_001]\n\nনাবি ধসা রোগ দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক কিছু কীটনাশক নিবন্ধিত আছে। বেশিরভাগ পণ্যের ক্ষেত্রে প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়। তবে, Rekazeb 80WP এর জন্য প্রতি লিটার পানিতে ১.৫ গ্রাম হারে ব্যবহার করতে হবে। [DAE_PEST_B3531E_001, DAE_PEST_1206A0_001]\n\nকিছু ছত্রাকনাশক (সাধারণত ৬৪ + ৪ ফরমুলেশন) আলুর নাবি ধসা রোগ এবং অন্যান্য ছত্রাকজনিত রোগ দমনে নিবন্ধিত। এগুলোর আদর্শ ডোজ প্রতি লিটার পানিতে ২ গ্রাম। [DAE_PEST_135B8A_001]\n\nরোগ প্রতিরোধের জন্য রোগমুক্ত বীজ ব্যবহার করা, সঠিক সময়ে আলু রোপণ করা (১৫ নভেম্বর - ১৫ ফেব্রুয়ারি), এবং ১৫ দিন পরপর বা লক্ষণ দেখা দিলে ৭ দিন পরপর ছত্রাকনাশক স্প্রে করার পরামর্শ দেওয়া হয়। [B5_BARCAG_AF08BA_002]\n\nযদি আপনার আরও তথ্যের প্রয়োজন হয় বা নির্দিষ্ট কোনো কীটনাশক সম্পর্কে জানতে চান, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "sources": [
+   {
+    "id": "DAE_PEST_B3531E_001",
+    "score": 0.0476,
+    "title_en": "Registered Pesticides for Potato Late Blight",
+    "title_bn": "",
+    "content_en": "The following pesticides are registered by the Department of Agricultural Extension (DAE) for the control of late blight in potato. Most products are 80WP formulations and are recommended at a dosage of 2 g/L of water, with the exception of Rekazeb 80WP which is recommended at 1.5 g/L of water.",
+    "content_bn": "আলুর মোজাইক বা ধসা রোগ (late blight) দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত কীটনাশকগুলো নিবন্ধিত রয়েছে। অধিকাংশ পণ্যই 80WP ফরমুলেশনের এবং প্রতি লিটার পানিতে 2 g/L হারে ব্যবহারের সুপারিশ করা হয়, তবে Rekazeb 80WP এর ক্ষেত্রে প্রতি লিটার পানিতে 1.5 g/L হারে সুপারিশ করা হয়েছে।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_753. List of Registered Agricultural Pesticides (DAE). pp. 753-753.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "potato",
+      "late blight",
+      "pesticide",
+      "DAE",
+      "আলু",
+      "লেট ব্লাইট",
+      "কীটনাশক"
+     ],
+     "title_en": "Registered Pesticides for Potato Late Blight",
+     "title_bn": "",
+     "section_title": "page_753",
+     "publisher": "DAE",
+     "citation": "DAE. page_753. List of Registered Agricultural Pesticides (DAE). pp. 753-753.",
+     "summary": "A list of DAE-registered pesticides (mostly 80WP formulations) for the management of late blight in potato crops.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_135B8A_001",
+    "score": 0.0476,
+    "title_en": "Registered Fungicides for Potato Late Blight and Related Diseases",
+    "title_bn": "",
+    "content_en": "This list provides DAE-registered fungicides (typically 64% + 4% formulation) for the management of late blight in potatoes, as well as early blight, powdery mildew, and other fungal diseases in crops like tomato, mango, and betel vine. The standard recommended dosage for most of these products is 2 g per liter of water.",
+    "content_bn": "এই তালিকাটি আলুর পামসা রোগ (late blight), এবং টমেটো, আম ও পানের মতো ফসলের আর্লি ব্লাইট, পাউডারী মিলডিউ ও অন্যান্য ছত্রাকজনিত রোগ দমনের জন্য -নিবন্ধিত ছত্রাকনাশকগুলো (সাধারণত ৬৪ + ৪ ফরমুলেশন) প্রদান করে। বেশিরভাগ পণ্যের জন্য আদর্শ প্রস্তাবিত ডোজ হলো প্রতি লিটার পানিতে 2 g।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_759. List of Registered Agricultural Pesticides (DAE). pp. 759-759.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "fungicide",
+      "potato",
+      "late blight",
+      "DAE",
+      "pesticide registration",
+      "আলু",
+      "ছত্রাকনাশক"
+     ],
+     "title_en": "Registered Fungicides for Potato Late Blight and Related Diseases",
+     "title_bn": "",
+     "section_title": "page_759",
+     "publisher": "DAE",
+     "citation": "DAE. page_759. List of Registered Agricultural Pesticides (DAE). pp. 759-759.",
+     "summary": "A list of DAE-registered fungicides containing 64% + 4% active ingredients, commonly used for managing late blight in potatoes and various diseases in other crops.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_1206A0_001",
+    "score": 0.0455,
+    "title_en": "Registered Pesticides for Potato Late Blight Management",
+    "title_bn": "",
+    "content_en": "The following pesticides are registered by the Department of Agricultural Extension (DAE) for the management of Late Blight in potatoes. The standard application rate for these products is 2 grams per liter of water.",
+    "content_bn": "আলুর Late Blight দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত কীটনাশকগুলি নিবন্ধিত হয়েছে। এই পণ্যগুলির আদর্শ প্রয়োগের মাত্রা প্রতি লিটার জলে ২ গ্রাম।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_760. List of Registered Agricultural Pesticides (DAE). pp. 760-760.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "potato",
+      "late blight",
+      "pesticide",
+      "DAE",
+      "fungicide",
+      "আলু",
+      "লেট ব্লাইট",
+      "বালাইনাশক"
+     ],
+     "title_en": "Registered Pesticides for Potato Late Blight Management",
+     "title_bn": "",
+     "section_title": "page_760",
+     "publisher": "DAE",
+     "citation": "DAE. page_760. List of Registered Agricultural Pesticides (DAE). pp. 760-760.",
+     "summary": "A list of DAE-registered pesticides containing Metalaxyl-based formulations for the control of Late Blight in potatoes.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_POTATO_834B4F_001",
+    "score": 0.0455,
+    "title_en": "Potato Late Blight Management",
+    "title_bn": "",
+    "content_en": "Late blight is a common and potentially devastating disease of potatoes that affects leaves, stems, and tubers, causing them to turn brown or black and rot. It significantly reduces yield and causes storage rot. Unlike early blight, late blight spots do not have internal rings. The disease thrives in wet weather and can be transmitted through infected seed potatoes.",
+    "content_bn": "Publisher: CABI Section/Topic: Potato late blight লেট ব্লাইট বা মড়ক রোগ আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে এমন একটি সাধারণ এবং সম্ভাব্য ধ্বংসাত্মক রোগ, যার কারণে সেগুলো বাদামী বা কালো হয়ে পচে যায়। এটি ফলন উল্লেখযোগ্যভাবে হ্রাস করে এবং সংরক্ষণের সময় পচন ধরায়। আর্লি ব্লাইটের বিপরীতে, লেট ব্লাইটের দাগগুলোতে কোনো অভ্যন্তরীণ বলয় থাকে না। রোগটি ভেজা আবহাওয়ায় দ্রুত বৃদ্ধি পায় এবং সংক্রামিত বীজ আলুর মাধ্যমে ছড়াতে পারে।",
+    "source": "Potato Disease Manuals (Plantwise)",
+    "citation": "CABI. Potato late blight. Potato Disease Manuals (Plantwise). pp. 232-232.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "potato",
+      "late blight",
+      "Phytophthora infestans",
+      "disease management",
+      "আলু",
+      "লেট ব্লাইট"
+     ],
+     "title_en": "Potato Late Blight Management",
+     "title_bn": "",
+     "section_title": "Potato late blight",
+     "publisher": "CABI",
+     "citation": "CABI. Potato late blight. Potato Disease Manuals (Plantwise). pp. 232-232.",
+     "summary": "Late blight is a devastating potato disease caused by Phytophthora infestans, characterized by brown or black rotting on leaves, stems, and tubers, especially in wet weather.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_AF08BA_002",
+    "score": 0.0417,
+    "title_en": "Management of Potato Fungal Diseases",
+    "title_bn": "",
+    "content_en": "Late blight (Phytophthora infestans) and Stem canker/Black scurf (Rhizoctonia solani) are major fungal threats to potato in Bangladesh. Late blight causes water-soaked spots on leaves and stems, leading to rapid plant death in cool, foggy weather. Management includes using disease-free seeds, early planting (15 Nov - 15 Feb), haulm pulling at 80 DAP, and fungicide sprays (e.g., Dithane M-45, Melody duo, Secure, Acrobat MZ) at 15-day intervals or 7-day intervals if symptoms appear. Stem canker/Black scurf causes sunken brown cankers on stolons and stems. Management includes seed treatment with 3% Boric acid, crop rotation, and rogueing diseased plants.",
+    "content_bn": "Publisher: BARC Section/Topic: Potato — Intercultural Operation মরিচা রোগ (Phytophthora infestans) এবং কাণ্ড পচাকালো স্কর্ফ (Rhizoctonia solani) বাংলাদেশের আলুর প্রধান ছত্রাকজনিত হুমকি। মরিচা রোগ পাতা ও কাণ্ডে পানিভেজা দাগ সৃষ্টি করে, যা ঠাণ্ডা ও কুয়াশাচ্ছন্ন আবহাওয়া দ্রুত গাছের মৃত্যু ঘটায়। ব্যবস্থাপনার মধ্যে রয়েছে রোগমুক্ত বীজ ব্যবহার, সময়মতো রোপণ (১৫ নভেম্বর - ১৫ ফেব্রুয়ারি), ৮০ -তে গাছের উপরিভাগ টেনে তোলা এবং ১৫ দিন পরপর অথবা লক্ষণ দেখা দিলে ৭ দিন পরপর ছত্রাকনাশক স্প্রে করা (যেমন- Dithane M-45, Melody duo, Secure, Acrobat MZ)। কাণ্ড পচাকালো স্কর্ফ স্টোলন এবং কাণ্ডে বসা বাদামী ক্ষতের সৃষ্টি করে। ব্যবস্থাপনার মধ্যে রয়েছে ৩ Boric acid দিয়ে বীজ শোধন, শস্যপর্যায় এবং আক্রান্ত গাছগুলো জমি থেকে অপসারণ করা।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Potato — Intercultural Operation. Hand Book of Agricultural Technology. pp. 54-59.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Potato",
+      "Fungal disease",
+      "Late Blight",
+      "Black Scurf",
+      "আলু",
+      "ছত্রাকজনিত রোগ"
+     ],
+     "title_en": "Management of Potato Fungal Diseases",
+     "title_bn": "",
+     "section_title": "Potato — Intercultural Operation",
+     "publisher": "BARC",
+     "citation": "BARC. Potato — Intercultural Operation. Hand Book of Agricultural Technology. pp. 54-59.",
+     "summary": "Control measures for major fungal diseases of potato, specifically Late Blight and Stem Canker/Black Scurf.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "আলুর নাবি ধসা রোগ (Late Blight) একটি মারাত্মক রোগ যা পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এটি বাদামী বা কালো দাগ সৃষ্টি করে এবং পচন ধরায়, ফলে ফলন কমে যায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই রোগ ভেজা আবহাওয়ায় দ্রুত ছড়ায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_POTATO_834B4F_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "নাবি ধসা রোগ দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক কিছু কীটনাশক নিবন্ধিত আছে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "বেশিরভাগ পণ্যের ক্ষেত্রে প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "তবে, Rekazeb 80WP এর জন্য প্রতি লিটার পানিতে ১.৫ গ্রাম হারে ব্যবহার করতে হবে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[DAE_PEST_B3531E_001, DAE_PEST_1206A0_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "কিছু ছত্রাকনাশক (সাধারণত ৬৪ + ৪ ফরমুলেশন) আলুর নাবি ধসা রোগ এবং অন্যান্য ছত্রাকজনিত রোগ দমনে নিবন্ধিত",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এগুলোর আদর্শ ডোজ প্রতি লিটার পানিতে ২ গ্রাম",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[DAE_PEST_135B8A_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "রোগ প্রতিরোধের জন্য রোগমুক্ত বীজ ব্যবহার করা, সঠিক সময়ে আলু রোপণ করা (১৫ নভেম্বর - ১৫ ফেব্রুয়ারি), এবং ১৫ দিন পরপর বা লক্ষণ দেখা দিলে ৭ দিন পরপর ছত্রাকনাশক স্প্রে করার পরামর্শ দেওয়া হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_AF08BA_002]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয় বা নির্দিষ্ট কোনো কীটনাশক সম্পর্কে জানতে চান, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "|||হামার আলুর পাতা কুকড়ে যাচ্চে ক্যানে": {
+  "query": "হামার আলুর পাতা কুকড়ে যাচ্চে ক্যানে?",
+  "category": "safe_agri",
+  "answer": "আপনার আলুর পাতা কুকড়ে যাওয়ার কয়েকটি কারণ থাকতে পারে।\n\n*   **জাব পোকা:** জাব পোকা (Myzus persicae, Macrosiphum euphorbiae) আলুর একটি প্রধান পোকা। এরা পাতার রস শোষণ করে, যার ফলে পাতা কুকড়ে যেতে পারে। [B5_BARCAG_AF08BA_005]\n*   **অন্যান্য পোকা:** কন্দজাতীয় ফসলের (যেমন আলু) ৩৯টি পোকা ও মাকড়ের মধ্যে ৯টি বাংলাদেশে ব্যাপকভাবে বিস্তৃত এবং ফসলের জন্য অত্যন্ত ক্ষতিকর। এরা চারা, শিকড়, পাতা, কাণ্ড, কুঁড়ি, ফুল ও ফল আক্রান্ত করতে পারে। [NARS_PESTINFO_A73C8F_001]\n\n**কীভাবে পোকা দমন করবেন:**\n\n*   **জাব পোকার জন্য:** নিম বীজের নির্যাস, সাবান পানি, হলুদ রঙের আঠালো ফাঁদ ব্যবহার করা যেতে পারে। এছাড়াও Malathion বা Imidacloprid ()-এর মতো কীটনাশক ব্যবহার করে জাব পোকা দমন করা যায়। [B5_BARCAG_AF08BA_005]\n*   **অন্যান্য পোকার জন্য:** হাত দিয়ে বেছে ফেলা, জমিতে সেচ দেওয়া এবং Chlorpyrifos বা -এর মতো কীটনাশক ব্যবহারের মাধ্যমে কিছু পোকা দমন করা যায়। [B5_BARCAG_AF08BA_005]\n\nযদি আপনি পোকা শনাক্ত করতে বা সঠিক দমন পদ্ধতি সম্পর্কে নিশ্চিত না হন, তবে **কৃষক কল সেন্টার ১৬১২৩** এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "sources": [
+   {
+    "id": "B4_DAEEXT_0E355D_001",
+    "score": 0.0476,
+    "title_en": "Statistics on Potato Production and Marketing in Bangladesh",
+    "title_bn": "বাংলাদেশে আলুর উৎপাদন ও বাজারজাতকরণ সংক্রান্ত পরিসংখ্যান",
+    "content_en": "",
+    "content_bn": "এই নথিতে ১৯৭২-৭৩ থেকে ২০১৯-২০ অর্থবছর পর্যন্ত বাংলাদেশে আলুর আবাদি জমি, মোট উৎপাদন এবং হেক্টর প্রতি ফলনের তথ্য দেওয়া হয়েছে। এছাড়া ১৯৯৯ থেকে ২০১৯ সাল পর্যন্ত আলুর বার্ষিক পাইকারি মূল্যের একটি তালিকা এবং ২০০৯ থেকে ২০১৯ সাল পর্যন্ত বিশ্বের প্রধান আলু উৎপাদনকারী দেশগুলোর সাথে বাংলাদেশের উৎপাদনের তুলনামূলক চিত্র উপস্থাপন করা হয়েছে।",
+    "source": "Crop Production & Price Study 2020",
+    "citation": "Ministry of Agriculture. References. Crop Production & Price Study 2020. pp. 505-508.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "আলু",
+      "উৎপাদন",
+      "ফলন",
+      "বাজারদর",
+      "Potato",
+      "Production",
+      "Yield",
+      "Market Price"
+     ],
+     "title_en": "Statistics on Potato Production and Marketing in Bangladesh",
+     "title_bn": "বাংলাদেশে আলুর উৎপাদন ও বাজারজাতকরণ সংক্রান্ত পরিসংখ্যান",
+     "section_title": "References",
+     "publisher": "Ministry of Agriculture",
+     "citation": "Ministry of Agriculture. References. Crop Production & Price Study 2020. pp. 505-508.",
+     "summary": "এই নথিতে বাংলাদেশে আলুর উৎপাদন, ফলন এবং পাইকারি মূল্যের ঐতিহাসিক পরিসংখ্যান এবং আন্তর্জাতিক প্রেক্ষাপটে আলুর উৎপাদনের তুলনামূলক চিত্র তুলে ধরা হয়েছে।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_CORN_85CCEA_001",
+    "score": 0.0476,
+    "title_en": "Armyworms (Spodoptera spp.)",
+    "title_bn": "",
+    "content_en": "Armyworms (Spodoptera spp. and others) are pests found worldwide that feed on maize leaves. They do not bore into stems. Larvae typically feed on leaf funnels, resulting in extensive damage to emerging leaves. Some species consume leaf tissue while leaving the mid-rib intact. Identification of the pest requires visual observation of the larvae.",
+    "content_bn": "আর্মিওয়ার্ম (Spodoptera spp. and others) হলো বিশ্বব্যাপী প্রাপ্ত পোকা যা ভুট্টার পাতা খায়। এরা মণ্ড বা ডালে ছিদ্র করে না। শূককীট সাধারণত পাতার চোঙ বা ফানেলে খাবার খায়, যার ফলে নতুন বের হওয়া পাতার ব্যাপক ক্ষতি হয়। কিছু প্রজাতি মধ্যশিরা অক্ষত রেখে পাতার টিস্যু খেয়ে ফেলে। এই পোকা শনাক্ত করার জন্য শূককীটগুলোকে খালি চোখে পর্যবেক্ষণ করা প্রয়োজন।",
+    "source": "Maize (Corn) Disease Manuals (Plantwise)",
+    "citation": "CABI. Armyworms. Maize (Corn) Disease Manuals (Plantwise). pp. 196-196.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "Armyworm",
+      "Spodoptera",
+      "Maize pest",
+      "Leaf feeder"
+     ],
+     "title_en": "Armyworms (Spodoptera spp.)",
+     "title_bn": "",
+     "section_title": "Armyworms",
+     "publisher": "CABI",
+     "citation": "CABI. Armyworms. Maize (Corn) Disease Manuals (Plantwise). pp. 196-196.",
+     "summary": "Armyworms are leaf-feeding pests that cause extensive damage to maize leaves and funnels without boring into the stems.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_DAEEXT_5F3D89_001",
+    "score": 0.0455,
+    "title_en": "Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020",
+    "title_bn": "বাংলাদেশে আলুর প্রাপ্যতা ও মূল্য অস্থিরতা: ২০২০ সালের একটি আন্তঃপ্রাতিষ্ঠানিক সমীক্ষা",
+    "content_en": "",
+    "content_bn": "২০২০ সালে আলুর দাম কেজি প্রতি ৫০-৫৫ টাকায় পৌঁছানোর প্রেক্ষাপটে এই সমীক্ষাটি পরিচালিত হয়। সমীক্ষায় দেখা গেছে, আলুর উৎপাদন, চাহিদা এবং সরবরাহের তথ্যে অসামঞ্জস্যতা, হিমাগারে মজুত কম থাকা, সরকারি তদারকির অভাব এবং বাজারে গুজব আলুর মূল্য বৃদ্ধিতে ভূমিকা রেখেছে। সমীক্ষায় আলুর দাম স্থিতিশীল রাখার জন্য কৃষি মূল্য কমিশন গঠন, সঠিক তথ্য প্রচার এবং রপ্তানি ও প্রক্রিয়াজাতকরণ বৃদ্ধির সুপারিশ করা হয়েছে।",
+    "source": "Crop Production & Price Study 2020",
+    "citation": "Ministry of Agriculture. Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020. Crop Production & Price Study 2020. pp. 490-492.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "আলু",
+      "বাজার দর",
+      "Potato",
+      "Market Price",
+      "Cold Storage",
+      "হিমাগার"
+     ],
+     "title_en": "Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020",
+     "title_bn": "বাংলাদেশে আলুর প্রাপ্যতা ও মূল্য অস্থিরতা: ২০২০ সালের একটি আন্তঃপ্রাতিষ্ঠানিক সমীক্ষা",
+     "section_title": "Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020",
+     "publisher": "Ministry of Agriculture",
+     "citation": "Ministry of Agriculture. Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020. Crop Production & Price Study 2020. pp. 490-492.",
+     "summary": "২০২০ সালে বাংলাদেশে আলুর মূল্য বৃদ্ধির কারণ এবং বাজার পরিস্থিতি বিশ্লেষণের ওপর ভিত্তি করে এই সমীক্ষাটি পরিচালিত হয়েছে।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "NARS_PESTINFO_A73C8F_001",
+    "score": 0.0455,
+    "title_en": "Insect and Mite Pests of Tuber Crops",
+    "title_bn": "কন্দজাতীয় ফসলের ক্ষতিকারক পোকা ও মাকড়",
+    "content_en": "",
+    "content_bn": "কন্দজাতীয় ফসলের (যেমন: আলু, মিষ্টি আলু, কচু ও ওল) ক্ষতিকারক পোকা ও মাকড় সম্পর্কে এই তথ্যে আলু ও মিষ্টি আলুর প্রধান পোকাগুলোর তালিকা দেওয়া হয়েছে। মোট ৩৯টি পোকা ও মাকড়ের মধ্যে ৯টি পোকা বাংলাদেশে ব্যাপকভাবে বিস্তৃত এবং ফসলের জন্য অত্যন্ত ক্ষতিকর। আক্রান্ত অংশের মধ্যে চারা, শিকড়, পাতা, কাণ্ড, কুঁড়ি, ফুল ও ফল অন্তর্ভুক্ত।",
+    "source": "All Pest Information Books — 2.6 Insect & Mite Pests of Tuber Crops (pp. 289-291)",
+    "citation": "NARS. 2.6 Insect & Mite Pests of Tuber Crops. All Pest Information Books. pp. 289-291.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "আলু",
+      "মিষ্টি আলু",
+      "পোকা দমন",
+      "Potato",
+      "Sweet potato",
+      "Pest management"
+     ],
+     "title_en": "Insect and Mite Pests of Tuber Crops",
+     "title_bn": "কন্দজাতীয় ফসলের ক্ষতিকারক পোকা ও মাকড়",
+     "section_title": "2.6 Insect & Mite Pests of Tuber Crops",
+     "publisher": "NARS",
+     "citation": "NARS. 2.6 Insect & Mite Pests of Tuber Crops. All Pest Information Books. pp. 289-291.",
+     "summary": "আলু এবং মিষ্টি আলুর প্রধান ক্ষতিকারক পোকা ও মাকড়ের একটি তালিকা, যা তাদের আক্রান্ত করার স্থান এবং গুরুত্বের ভিত্তিতে শ্রেণীবদ্ধ করা হয়েছে।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_AF08BA_005",
+    "score": 0.0435,
+    "title_en": "Management of Potato Insect Pests",
+    "title_bn": "",
+    "content_en": "Major potato insect pests include Cutworm (Agrotis ipsilon), Potato Tuber Moth (Phthorimaea operculella), and Aphids (Myzus persicae, Macrosiphum euphorbiae). Cutworms can be managed by hand-picking, flooding fields, and using insecticides like Chlorpyrifos or Carbofuran. Potato Tuber Moth is controlled by hilling-up, pheromone traps, and dipping tubers in Phenthoat/Deltamethrin. Aphids are managed using Neem seed extract, soap water, yellow sticky traps, and insecticides like Malathion or Imidacloprid (Admire).",
+    "content_bn": "Publisher: BARC Section/Topic: Potato — Intercultural Operation আলুর প্রধান পোকার মধ্যে কাটুই পোকা (Agrotis ipsilon), আলুর টিউবার মথ (Phthorimaea operculella), এবং জাব পোকা (Myzus persicae, Macrosiphum euphorbiae) অন্যতম। হাত দিয়ে বেছে ফেলা, জমিতে সেচ দেওয়া এবং Chlorpyrifos বা -এর মতো কীটনাশক ব্যবহারের মাধ্যমে কাটুই পোকা দমন করা যায়। মাটি তুলে দেওয়া, ফেরোমন ফাঁদ এবং আলুর টিউবার -এ ডুবিয়ে রেখে আলুর টিউবার মথ দমন করা হয়। নিম বীজের নির্যাস, সাবান পানি, হলুদ রঙের আঠালো ফাঁদ এবং Malathion বা Imidacloprid ()-এর মতো কীটনাশক ব্যবহার করে জাব পোকা দমন করা হয়।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Potato — Intercultural Operation. Hand Book of Agricultural Technology. pp. 54-59.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "Potato",
+      "Insect",
+      "Cutworm",
+      "Tuber Moth",
+      "Aphid",
+      "আলু",
+      "পোকা দমন"
+     ],
+     "title_en": "Management of Potato Insect Pests",
+     "title_bn": "",
+     "section_title": "Potato — Intercultural Operation",
+     "publisher": "BARC",
+     "citation": "BARC. Potato — Intercultural Operation. Hand Book of Agricultural Technology. pp. 54-59.",
+     "summary": "Control measures for major potato insect pests: Cutworm, Tuber Moth, and Aphids.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "আপনার আলুর পাতা কুকড়ে যাওয়ার কয়েকটি কারণ থাকতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **জাব পোকা:** জাব পোকা (Myzus persicae, Macrosiphum euphorbiae) আলুর একটি প্রধান পোকা",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এরা পাতার রস শোষণ করে, যার ফলে পাতা কুকড়ে যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_AF08BA_005]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **অন্যান্য পোকা:** কন্দজাতীয় ফসলের (যেমন আলু) ৩৯টি পোকা ও মাকড়ের মধ্যে ৯টি বাংলাদেশে ব্যাপকভাবে বিস্তৃত এবং ফসলের জন্য অত্যন্ত ক্ষতিকর",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এরা চারা, শিকড়, পাতা, কাণ্ড, কুঁড়ি, ফুল ও ফল আক্রান্ত করতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[NARS_PESTINFO_A73C8F_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "**কীভাবে পোকা দমন করবেন:**",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **জাব পোকার জন্য:** নিম বীজের নির্যাস, সাবান পানি, হলুদ রঙের আঠালো ফাঁদ ব্যবহার করা যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এছাড়াও Malathion বা Imidacloprid ()-এর মতো কীটনাশক ব্যবহার করে জাব পোকা দমন করা যায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_AF08BA_005]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **অন্যান্য পোকার জন্য:** হাত দিয়ে বেছে ফেলা, জমিতে সেচ দেওয়া এবং Chlorpyrifos বা -এর মতো কীটনাশক ব্যবহারের মাধ্যমে কিছু পোকা দমন করা যায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_AF08BA_005]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনি পোকা শনাক্ত করতে বা সঠিক দমন পদ্ধতি সম্পর্কে নিশ্চিত না হন, তবে **কৃষক কল সেন্টার ১৬১২৩** এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
  }
 }

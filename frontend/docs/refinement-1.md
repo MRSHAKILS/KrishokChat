@@ -228,10 +228,10 @@ Here is the structured priority matrix for frontend enhancements:
 | **P1** | **Field UX** | **Printable/Shareable "ব্যবস্থাপত্র" PDF/Image Export**| `/detect`, `/chat` | `components/detect/prescription-modal.tsx` | ✅ **[DONE]** |
 | **P1** | **Demo/Research** | **Interactive 2,882-Node Knowledge Graph Explorer**| `/data` | `components/knowledge-graph-explorer.tsx` | ✅ **[DONE]** |
 | **P1** | **Demo/Research** | **Side-by-Side Model A/B & Hallucination Inspector**| `/research/benchmark` | `components/model-comparison-inspector.tsx` | ✅ **[DONE]** |
-| **P1** | **Performance**| **SSE Smooth Token Easing + Blinking Ink Caret** | `/chat`, `/detect` | `components/qa-panel.tsx` | ⏳ **[NEXT]** |
+| **P1** | **Performance**| **SSE Smooth Token Easing + Blinking Ink Caret** | `/chat`, `/detect` | `components/qa-panel.tsx` | ✅ **[DONE]** |
 | **P2** | **Accessibility**| **Sunlight Outdoor High-Contrast Mode** | Global Navbar | `globals.css` + `navbar.tsx` | ✅ **[DONE]** |
-| **P2** | **Field UX** | **Synchronized TTS Audio Sentence Highlighter** | `/chat`, `/detect` | `components/chat/read-aloud.tsx` | ⏳ *Pending* |
-| **P2** | **Performance**| **PWA Offline Advisory Guide Caching** | Global / Library | Next.js Service Worker + IndexedDB | ⏳ *Pending* |
+| **P2** | **Field UX** | **Synchronized TTS Audio Sentence Highlighter** | `/chat`, `/detect` | `components/chat/read-aloud.tsx` | ✅ **[DONE]** |
+| **P2** | **Performance**| **PWA Offline Advisory Guide Caching** | Global / Library | Next.js Service Worker + IndexedDB | ✅ **[DONE]** |
 
 ---
 

@@ -106,7 +106,29 @@ export default function AnalyticsPage() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "krishokchat-safety-audit.json";
+    link.download = `krishokchat-safety-audit-${new Date().toISOString().slice(0, 10)}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const exportAuditCSV = () => {
+    const headers = ["Timestamp", "Query", "Category", "Classification", "Router Status", "Retrieval Hit", "Verifier Passed"];
+    const rows = (data.recent ?? []).map((r) => [
+      r.timestamp ? `"${new Date(r.timestamp).toLocaleString("en-US")}"` : `""`,
+      `"${(r.query || "").replace(/"/g, '""')}"`,
+      `"${r.category || ""}"`,
+      `"${r.category === "safe_agri" || r.category === "vision_advisory" ? "SAFE" : "BLOCKED"}"`,
+      `"${r.action === "refuse" || (r.category !== "safe_agri" && r.category !== "vision_advisory") ? "BLOCKED" : "PASSED"}"`,
+      `"${r.retrieval_hit ? "HIT" : "MISS"}"`,
+      `"${r.verifier_passed == null ? "N/A" : r.verifier_passed ? "PASSED" : "FAILED"}"`,
+    ]);
+
+    const csvContent = "\uFEFF" + [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `krishokchat-safety-audit-${new Date().toISOString().slice(0, 10)}.csv`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -360,9 +382,24 @@ export default function AnalyticsPage() {
             <option value="blocked">শুধু আটকানো</option>
           </select>
         </div>
-        <button type="button" onClick={exportAudit} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border rule px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf">
-          <Download className="h-3.5 w-3.5" /> অডিট JSON ডাউনলোড
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={exportAuditCSV}
+            className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-md border rule bg-paper px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf cursor-pointer"
+          >
+            <Download className="h-3.5 w-3.5 text-leaf" />
+            CSV এক্সপোর্ট
+          </button>
+          <button
+            type="button"
+            onClick={exportAudit}
+            className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-md border rule bg-paper px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf cursor-pointer"
+          >
+            <Download className="h-3.5 w-3.5 text-ochre" />
+            JSON এক্সপোর্ট
+          </button>
+        </div>
       </div>
 
       {/* Recent queries */}
