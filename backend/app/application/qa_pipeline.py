@@ -64,6 +64,7 @@ class QAPipeline:
         sessions: SessionStore,
         top_k: int = 5,
         generation_clients: dict[str, object] | None = None,
+        generation_tuning: dict[str, dict[str, int]] | None = None,
         answer_cache: DemoAnswerCache | None = None,
         rewriter: ConversationalQueryRewriter | None = None,
     ) -> None:
@@ -77,6 +78,10 @@ class QAPipeline:
         # Optional per-request model registry: {"krishokchat-4b": LLMClient}.
         # The default generator's client is used when no match is found.
         self.generation_clients = generation_clients or {}
+        # Optional per-model prompt tuning (e.g. {"krishokchat-4b":
+        # {"max_sources": 3, "max_source_chars": 800}}) applied when the
+        # matching client is selected.
+        self.generation_tuning = generation_tuning or {}
         # B1 demo answer cache (exact-replay of curated demo questions).
         # None = caching disabled entirely (default; tests construct the
         # pipeline without a cache and keep their exact behavior).
@@ -87,7 +92,8 @@ class QAPipeline:
 
     def _generator_for(self, model: str | None) -> GroundedAnswerGenerator:
         if model and model in self.generation_clients:
-            return GroundedAnswerGenerator(self.generation_clients[model])
+            tuning = self.generation_tuning.get(model, {})
+            return GroundedAnswerGenerator(self.generation_clients[model], **tuning)
         return self.generator
 
     async def run(self, request: QAInput, on_event: EventCallback | None = None) -> QAResult:

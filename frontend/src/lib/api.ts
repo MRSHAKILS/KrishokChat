@@ -160,7 +160,8 @@ export async function streamQuestion(
     timeoutMs?: number;
   },
 ): Promise<QAResponse> {
-  const request = createTimedSignal(opts?.signal, opts?.timeoutMs ?? 120_000);
+  // 300s covers the local CPU model (backend enforces its own 30s for remote).
+  const request = createTimedSignal(opts?.signal, opts?.timeoutMs ?? 300_000);
   try {
     const res = await fetch(`${API_BASE}/api/qa/stream`, {
       method: "POST",

@@ -240,6 +240,9 @@ export function QAPanel({
             session_id: sessionId,
             history: fullHistory,
             model,
+            // The local CPU model needs minutes, not seconds, for a grounded
+            // answer; the remote lane keeps the default (backend timeouts rule).
+            timeoutMs: model === "krishokchat-4b" ? 300_000 : undefined,
             signal: controller.signal,
           },
         );

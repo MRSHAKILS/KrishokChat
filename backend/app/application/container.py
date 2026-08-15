@@ -74,10 +74,16 @@ def build_container(settings: Settings) -> AppContainer:
     audit = JSONLAuditSink(settings.resolved_audit_log_path)
     # Local generation client for the KrishokChat selector option. The endpoint
     # is OpenAI-compatible (llama.cpp or Ollama) and remains configuration-driven.
+    # It gets its own timeout/output/retry bounds: CPU inference (~5 tok/s)
+    # cannot fit the remote 30s budget, and retrying a slow local generation is
+    # pointless (the server is still working, not dropping the connection).
     local_settings = Settings(
         llm_provider="ollama",
         llm_base_url=settings.local_llm_base_url,
         generation_model_name=settings.local_llm_model_name,
+        llm_timeout_seconds=settings.local_llm_timeout_seconds,
+        llm_max_output_tokens=settings.local_llm_max_output_tokens,
+        llm_max_retries=settings.local_llm_max_retries,
     )
     local_client = create_llm_client(local_settings, role="generation")
     # B1: demo answer cache — wired ONLY in demo mode. Loads the precomputed
@@ -101,6 +107,12 @@ def build_container(settings: Settings) -> AppContainer:
         sessions=sessions,
         top_k=settings.retrieval_top_k,
         generation_clients={LOCAL_MODEL_NAME: local_client},
+        generation_tuning={
+            LOCAL_MODEL_NAME: {
+                "max_sources": settings.local_llm_source_limit,
+                "max_source_chars": settings.local_llm_source_chars,
+            }
+        },
         answer_cache=answer_cache,
         # A1: follow-ups -> standalone retrieval queries (same cheap intent
         # model; fires only on follow-up markers with history present).

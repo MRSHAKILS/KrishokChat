@@ -41,6 +41,7 @@ def create_llm_client(settings: Settings, *, role: str = "generation"):
             timeout=settings.llm_timeout_seconds,
             temperature=settings.llm_temperature,
             max_output_tokens=settings.llm_max_output_tokens,
+            max_retries=settings.llm_max_retries,
         )
     if provider == "openrouter":
         return OpenAICompatibleClient(
@@ -50,6 +51,7 @@ def create_llm_client(settings: Settings, *, role: str = "generation"):
             timeout=settings.llm_timeout_seconds,
             temperature=settings.llm_temperature,
             max_output_tokens=settings.llm_max_output_tokens,
+            max_retries=settings.llm_max_retries,
         )
     if provider == "gemini":
         key = settings.llm_api_key or settings.gemini_api_key or _first_gemini_key()

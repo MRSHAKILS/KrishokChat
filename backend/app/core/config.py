@@ -36,8 +36,20 @@ class Settings(BaseSettings):
     llm_timeout_seconds: float = 30.0
     llm_temperature: float = 0.2
     llm_max_output_tokens: int = 1000
+    llm_max_retries: int = 3
     intent_model_name: str | None = None
     generation_model_name: str | None = None
+
+    # Local (llama-server/Ollama CPU) model tuning — separate from the remote
+    # client because CPU inference at ~5 tok/s cannot fit a 30s budget. These
+    # apply only to the local_llm_* endpoint wired into the model selector.
+    local_llm_timeout_seconds: float = 300.0
+    local_llm_max_output_tokens: int = 250
+    local_llm_max_retries: int = 1
+    # Prompt-size caps for the local lane: fewer, shorter sources cut the
+    # CPU prompt-eval phase (the dominant cost on this machine).
+    local_llm_source_limit: int = 3
+    local_llm_source_chars: int = 800
 
     openrouter_api_key: str | None = None
     openrouter_model: str = "google/gemini-2.5-flash-lite"

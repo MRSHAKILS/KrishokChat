@@ -10,20 +10,36 @@ REFERRAL = "দুঃখিত, এই প্রশ্নের নির্ভ�
 
 
 class GroundedAnswerGenerator:
-    def __init__(self, client: LLMClient) -> None:
+    def __init__(
+        self,
+        client: LLMClient,
+        *,
+        max_sources: int = 5,
+        max_source_chars: int = 1200,
+    ) -> None:
         self.client = client
+        # Prompt-size caps. The local CPU lane lowers these (fewer, shorter
+        # sources) so prompt evaluation finishes inside its timeout budget.
+        self.max_sources = max_sources
+        self.max_source_chars = max_source_chars
 
     @staticmethod
-    def _prompt(query: str, context: QueryContext, sources: list[RetrievedSource]) -> str:
+    def _prompt(
+        query: str,
+        context: QueryContext,
+        sources: list[RetrievedSource],
+        max_sources: int,
+        max_source_chars: int,
+    ) -> str:
         source_blocks = []
-        for source in sources[:5]:
+        for source in sources[:max_sources]:
             content = source.content_bn or source.content_en
             if source.metadata.get("treatment_summary_bn"):
                 content += f"\nপ্রতিকার: {source.metadata['treatment_summary_bn']}"
             if source.metadata.get("prevention_bn"):
                 content += f"\nপ্রতিরোধ: {source.metadata['prevention_bn']}"
             source_blocks.append(
-                f"[{source.id}] {source.title_bn or source.title_en}\n{content[:1200]}"
+                f"[{source.id}] {source.title_bn or source.title_en}\n{content[:max_source_chars]}"
             )
         history = "\n".join(
             f"{item.get('role', 'user')}: {item.get('content', '')[:500]}"
@@ -57,7 +73,7 @@ class GroundedAnswerGenerator:
     async def generate(self, query: str, context: QueryContext, sources: list[RetrievedSource]) -> GenerationResult:
         if not sources:
             return GenerationResult(answer=REFERRAL, model=self.client.name, mode="no_sources", error="No sources")
-        prompt = self._prompt(query, context, sources)
+        prompt = self._prompt(query, context, sources, self.max_sources, self.max_source_chars)
         try:
             answer = await self.client.generate(prompt, metadata={"source_ids": [source.id for source in sources]})
             return GenerationResult(
@@ -101,7 +117,7 @@ class GroundedAnswerGenerator:
         if not sources:
             yield REFERRAL
             return
-        prompt = self._prompt(query, context, sources)
+        prompt = self._prompt(query, context, sources, self.max_sources, self.max_source_chars)
         try:
             async for chunk in self.client.stream(
                 prompt, metadata={"source_ids": [source.id for source in sources]}
