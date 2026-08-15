@@ -412,5 +412,46 @@ user text".
 
 ---
 
+## F14 — Coverage-gap analysis (C1): retrieval coverage complete; Banglish is the floor (2026-08-15)
+
+**What was measured:** the REAL runtime retrievers (BM25 + BGE-M3 dense + RRF
+k=20 + dialect expansion — container wiring) over ALL 1,000 real farmer
+queries in `farmer_benchmark_1000.jsonl` (not a sample). Script
+`ml_assets/rag_index/scripts/13_coverage_gap_analysis.py`; artifact
+`backend/ml_assets/rag_index/eval/coverage_gaps_v1.json` (per-query records);
+report `docs/research/coverage-gap-report.md`.
+
+| Signal | Value |
+|---|---|
+| Queries with ≥3 retrieved passages | 1,000/1,000 (100%) |
+| BM25 term overlap (non-empty top-1) | 997/1,000 (99.7%) |
+| Dense top-1 cosine median / p10 / min | 0.627 / 0.569 / 0.448 |
+| Dense rescue (BM25 empty → dense found) | 3 queries |
+| Dialect-expansion hits | 6/1,000 (0.6%) |
+
+**Findings (paper-relevant):**
+1. **Retrieval-layer coverage is complete on this benchmark** — every real
+   farmer question retrieves ≥3 passages with a semantic floor of 0.448
+   cosine. Coverage only; never relevance/recall (golden set owns that).
+2. **The distribution floor is Romanized (Banglish) input.** All 12 lowest-
+   cosine queries and all 3 BM25-empty queries are Romanized Bengali (e.g.
+   "amar labu gase a ful thore na", "chad bagan korte koto khoroc hoy").
+   Corpus is Bangla-script; the term map has little Banglish coverage; the
+   dense channel rescues them. This is the actionable coverage gap.
+3. **Dialect expansion is near-silent (0.6%)** because the 110-word real
+   dialect map is absent (Q4/C3) — the direct fix.
+4. **Method lessons:** passage-count buckets are degenerate (BM25's 0.2×max
+   threshold returns ~5 passages whenever any term overlaps) and RRF top-1
+   weights are quantized (every query: 0.0476, rank-1 in one channel) — raw
+   channel scores are the only discriminating evidence and are recorded per
+   query.
+
+**Allowed:** "retrieval coverage on 1,000 real farmer queries: 100% non-empty
+with a dense-similarity floor of 0.448 (median 0.627)". **Not allowed:**
+"recall/quality", "the system can answer all 1,000" (answerability is the
+golden set's claim: 12/12 unanswerable refused post-D1a).
+
+---
+
 *Append-only: future findings get new dated sections; superseded claims are
 marked, never deleted. Update `12_CLAIM_LEDGER.md` alongside.*

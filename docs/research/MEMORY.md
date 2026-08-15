@@ -147,6 +147,21 @@ follow-up "তাহলে ইউরিয়া কতটুকু দেব?" 
 "ধান চাষে ইউরিয়া সার কতটুকু দেব? rice fertilizer safe_agri", 5 sources,
 grounded answer, audit rewritten=True.
 
+**C1 COVERAGE-GAP MINING (done 2026-08-15):** ran the REAL runtime retrievers
+(BM25 + BGE-M3 dense + RRF) over ALL 1,000 farmer_benchmark queries (script
+`ml_assets/rag_index/scripts/13_coverage_gap_analysis.py`, artifact
+`eval/coverage_gaps_v1.json`, 8 workers). Result: retrieval coverage is
+COMPLETE — 100% ≥3 passages, BM25 overlap 99.7%, dense top-1 cosine median
+0.627 / floor 0.448; dense rescued the 3 BM25-empty queries. **The
+distribution floor is Romanized (Banglish) input** — all 12 weakest + all 3
+BM25-empty queries are Banglish (corpus is Bangla-script; term map lacks
+Banglish coverage; dense rescues them). Expansion hit rate 6/1000 (0.6% —
+dialect map missing, C3). Method lessons: passage-count buckets are
+degenerate (BM25 0.2×max threshold returns 5 whenever any term overlaps);
+RRF weights quantized (top-1 always 0.0476, single channel). Report:
+`docs/research/coverage-gap-report.md`. No recall/relevance claim — golden
+set owns that (12/12 refused post-D1a; scoring sheet pending).
+
 ## Key Decisions
 - P1: rule-based dosage entailment (chemical/crop/number/unit vs passages),
   annotate-and-drop (never hard-block), TRUST-SCORE-style refusal counters.
@@ -169,6 +184,9 @@ grounded answer, audit rewritten=True.
 - A1: rewriting is retrieval-only — safety classification always sees the raw
   surface query; rewrite fires only on follow-up markers with history
   (budget-free: zero cost for single-turn/cached questions).
+- C1: retrieval coverage measured on ALL 1,000 farmer queries (not a sample);
+  bucket counts are degenerate → raw channel scores are the evidence; never
+  claim recall/relevance from coverage artifacts.
 - Out of scope now: KG/GraphRAG, offline PWA, B2B layer, query routing,
   clarify-slots, 16123 integration (REJECTED), DPO alignment.
 
@@ -190,8 +208,10 @@ handled by pinned sample.
    demo; then curated questions replay at ~16–47 ms).
 4. Q4: restore `dataset_release/safety/phase4_dialect_map.json` (110-word real
    map) to raise the 0.6% expansion hit rate.
-5. Menu next: C1 coverage-gap mining (`farmer_benchmark_1000.jsonl` vs corpus)
-   or C3 structured advisory cards (Bayer BCS-ELY-style).
+5. Menu next: **C3 restore `phase4_dialect_map.json`** (110-word real map —
+   lifts the 0.6% expansion hit rate, attacks the Banglish floor) or golden
+   scoring sheet. Optional future (scope-gated): Banglish→Bangla expansion
+   map for the high-frequency Romanized terms found by C1.
 
 ## Key Files
 `docs/competitive-landscape.md`, `docs/research/LITERATURE_SCOUT_2026.md`,
