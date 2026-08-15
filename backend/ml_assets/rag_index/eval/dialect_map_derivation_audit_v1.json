@@ -1,0 +1,22 @@
+{
+  "input": {
+    "splits": [
+      "T09_treatment_qa_train_v1.jsonl",
+      "T09_treatment_qa_dev_v1.jsonl",
+      "T09_treatment_qa_test_v1.jsonl"
+    ],
+    "cells": 1440
+  },
+  "dropped": {
+    "dialect_token_is_standard": 848,
+    "cell_no_standard": 321,
+    "substring_orthographic_variant": 142,
+    "single_char_dialect": 60,
+    "no_flanking_context": 215,
+    "non_bengali_script": 62,
+    "below_freq_2": 97,
+    "ambiguous_term_no_dominance": 2
+  },
+  "kept_pairs": 16,
+  "output": "D:\\KrishokChat Advisory System\\dataset_release\\safety\\phase4_dialect_map.json"
+}

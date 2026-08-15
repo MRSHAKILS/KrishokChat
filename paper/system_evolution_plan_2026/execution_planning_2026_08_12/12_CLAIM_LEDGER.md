@@ -42,7 +42,7 @@
 | F14 | The golden answers are expert-verified / expert gold. | `expert_provided: false` provenance; scoring pending (S16). |
 | F15 | Unanswerable refusal rate meets the ≥90% P4 target. | Measured 0% (S13). **Superseded by S17 (2026-08-14):** post-D1a measurement is 12/12 (100%) on the pinned golden set — report the measured value, do not assert a standing capability. |
 | F16 | Retrieval-score thresholds gate abstention / recall improved. | Probe shows overlapping distributions; no relevance judgments (S15, F4). |
-| F17 | Dialect normalization evaluated / expansion effective. | Dialect map absent from workspace; expansion hit rate 0.6% (S11, F5). |
+| F17 | Dialect normalization evaluated / expansion effective. | **Updated 2026-08-15 (C3, F15):** original 110-word map unrecoverable; a 16-pair map was DERIVED deterministically from frozen reviewed T09 splits (zero LLM) — expansion hits on real T09 dialect questions (dev+test, 3,628): 1/3,628 (0.03%) → 1,215/3,628 (33.49%). Claim scope: dialectal-morphology normalization only; Banglish (Romanized) input remains uncovered (F14 floor); do not compare the 0.6% (benchmark population) with 33.49% (T09 population) directly. |
 
 ## TODO and Unverified Claims
 

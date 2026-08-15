@@ -106,6 +106,75 @@ class QueryExpanderTests(unittest.TestCase):
         self.assertEqual(expanded, "ধান চাষ")
         self.assertEqual(matched, [])
 
+    def test_dialect_map_dict_form_merges_with_base_map(self) -> None:
+        """C3 contract: the restored phase4_dialect_map.json in plain
+        {"dialect_term": "standard_term"} dict form must merge with the base
+        term map and drive expansion."""
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            term_path = tmp_path / "term_map.json"
+            term_path.write_text(
+                json.dumps({"map": [{"bn": "ধান", "en": "Rice"}]}, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            dialect_path = tmp_path / "phase4_dialect_map.json"
+            dialect_path.write_text(
+                json.dumps({"হরিয়াল": "Green leafhopper", "সাদা মাথা": "White tip"}, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            expander = QueryExpander(term_path, dialect_map_path=dialect_path)
+            expanded, matched = expander.expand("ধান গাছে হরিয়াল ধরা দিলে কী করব?")
+            self.assertIn("Rice", expanded)
+            self.assertIn("Green leafhopper", expanded)
+            self.assertEqual(len(matched), 2)
+            # Longest-first ordering across the merged maps.
+            self.assertTrue(matched[0].startswith("হরিয়াল") or matched[0].startswith("সাদা মাথা"))
+
+    def test_dialect_map_list_form_with_dialect_standard_keys(self) -> None:
+        """The {dialect, standard} key aliases must load as well as {bn, en}."""
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            dialect_path = tmp_path / "phase4_dialect_map.json"
+            dialect_path.write_text(
+                json.dumps([{"dialect": "মোটা", "standard": "ধানের জাত"}, {"bn": "খৈল", "en": "Oil cake"}], ensure_ascii=False),
+                encoding="utf-8",
+            )
+            expander = QueryExpander(tmp_path / "_missing_term_map", dialect_map_path=dialect_path)
+            expanded, matched = expander.expand("মোটা খৈল কতটুকু দেব?")
+            self.assertIn("Oil cake", expanded)
+            self.assertIn("ধানের জাত", expanded)
+            self.assertEqual(len(matched), 2)
+
+    def test_corrupt_dialect_map_degrades_to_base_map_only(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            term_path = tmp_path / "term_map.json"
+            term_path.write_text(
+                json.dumps({"map": [{"bn": "ধান", "en": "Rice"}]}, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            dialect_path = tmp_path / "phase4_dialect_map.json"
+            dialect_path.write_text("{not valid json", encoding="utf-8")
+            expander = QueryExpander(term_path, dialect_map_path=dialect_path)
+            expanded, matched = expander.expand("ধান গাছে হরিয়াল")
+            self.assertIn("Rice", expanded)
+            self.assertNotIn("Green leafhopper", expanded)
+            self.assertEqual(len(matched), 1)
+
+    def test_shipped_dialect_map_loads_and_applies(self) -> None:
+        """C3: the derived dialect map committed at
+        dataset_release/safety/phase4_dialect_map.json must load through the
+        runtime config path and normalize real dialect morphology."""
+        from app.core.config import settings
+
+        self.assertTrue(settings.rag_dialect_map_path.exists(), "derived dialect map missing")
+        expander = QueryExpander(settings.rag_term_map_path, dialect_map_path=settings.rag_dialect_map_path)
+        expanded, matched = expander.expand("ধান ক্ষেতত পোকার আক্রমণ অইলে লাগি কি করুম?")
+        self.assertIn("ক্ষেতে", expanded)
+        self.assertIn("হলে", expanded)
+        self.assertIn("জন্য", expanded)
+        self.assertEqual(len(matched), 3)
+
 
 class HybridRetrieverTests(unittest.TestCase):
     def _hybrid(self, tmp: Path, bm25: BM25Retriever, dense: FakeDense | None = None, bm25_only: bool = False) -> HybridRetriever:

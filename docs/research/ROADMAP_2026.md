@@ -37,13 +37,17 @@ credibility spine. **P3** and **P5** are parallelizable side-lanes; P3 has the
 longest silent risk (dense index build + retrieval quality) and should start
 early so regressions surface before demo week.
 
-STATUS (2026-08-14): **P3 shipped** — dense index BUILT (2,135 nodes, BGE-M3
+STATUS (2026-08-15): **P3 shipped** — dense index BUILT (2,135 nodes, BGE-M3
 via OpenRouter, FAISS IndexFlatIP, sha256 `0f6f711829...cb524`), hybrid RRF
 runtime wired (RRF k=20, candidate_depth=50, `RETRIEVAL_BM25_ONLY` fallback),
 expansion surfaced in trace. 77/77 pytest; live probe shows RRF fusion score
 in audit; smoke eval `ml_assets/rag_index/eval/hybrid_smoke.json` (coverage
-only, no recall claims). Known gap: expansion hit rate 0.6% — restore
-`dataset_release/safety/phase4_dialect_map.json` (110-word map) to raise it.
+only, no recall claims). **C3 DONE (2026-08-15):** original 110-word map was
+unrecoverable (workspace + git history); a 16-pair map was DERIVED
+deterministically from the frozen reviewed T09 splits (`14_derive_dialect_map.py`),
+lifting expansion hits on real T09 dialect questions from 0.03% to 33.49%.
+Known gap: Romanized (Banglish) input remains the measured distribution floor
+(C1/F14; scope-gated future lane).
 
 ---
 

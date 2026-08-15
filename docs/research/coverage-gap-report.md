@@ -49,11 +49,22 @@ Romanized queries sit at the cosine floor and are the only queries BM25 misses.
 **The dense channel rescues them** (all 3 BM25-empty cases found by hybrid),
 but they remain the weakest retrievals in the distribution.
 
-### 3. Dialect expansion is near-silent
+### 3. Dialect expansion is near-silent → FIXED by C3 (2026-08-15)
 6 / 1,000 queries matched the expansion map (0.6% — consistent with
-`hybrid_smoke.json`). The 110-word real dialect map
-(`dataset_release/safety/phase4_dialect_map.json`) is **not present in the
-workspace** (Q4); restoring it is the direct fix for this signal.
+`hybrid_smoke.json`). The original 110-word real dialect map
+(`dataset_release/safety/phase4_dialect_map.json`) was **not present in the
+workspace or git history** (Q4). C3 rebuilt it honestly: a **16-pair map
+derived deterministically** from the frozen, reviewed T09 treatment-QA splits
+(1,440 cells; difflib 1:1 token replace alignment of dialect vs standard
+variants of the same `cell_id`, flanking-context + frequency-2 + dominance
+filters; zero LLM calls — no fabrication). Reproduce:
+`uv run python ml_assets/rag_index/scripts/14_derive_dialect_map.py`.
+**Verified lift on the real T09 dialect questions (dev+test, 3,628):**
+**0.03% → 33.49% (1,215 hits; 165 barishal, 305 chittagonian, 250 noakhailli,
+201 rangpuri, 294 sylheti).** Examples: `ক্ষেতত→ক্ষেতে`, `গাছত→গাছে`,
+`অইলে→হলে`, `লাগি→জন্য`, `লাই→জন্য`, `প্রয়োগর→প্রয়োগের`, `সিডিউলটা→সময়সূচী`.
+Scope: the map normalizes dialectal morphology to standard Bengali (helps the
+dense BGE-M3 channel); it does not cover Banglish (Romanized) input.
 
 ### 4. Answerability is a separate layer (already measured)
 Retrieval coverage ≠ answerability. The golden set measures the answer layer:
@@ -76,8 +87,12 @@ Retrieval coverage ≠ answerability. The golden set measures the answer layer:
 
 ## Recommendations
 
-1. **C3 (next, cheap):** restore `phase4_dialect_map.json` to lift the 0.6%
-   expansion hit rate — directly attacks the dialect side of the floor.
+1. **C3 — DONE (2026-08-15):** the dialect map was unrecoverable (absent from
+   workspace and git history); a 16-pair map was **derived** from the frozen
+   reviewed T09 splits instead (`14_derive_dialect_map.py`), lifting expansion
+   hits on real dialect questions from 0.03% to 33.49%. The original
+   Gemini-generated 110-word map remains unrecoverable — if the researcher has
+   a copy, it can be merged on top (schema-compatible, dict form).
 2. **Banglish lane (scope-gated, future):** add a small Romanized→Bangla
    expansion map for the highest-frequency Banglish terms seen here
    (examples above); the dense channel already covers the long tail.

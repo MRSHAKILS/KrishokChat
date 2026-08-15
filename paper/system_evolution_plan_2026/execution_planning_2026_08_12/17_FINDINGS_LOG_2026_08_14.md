@@ -453,5 +453,53 @@ golden set's claim: 12/12 unanswerable refused post-D1a).
 
 ---
 
+## F15 — C3 dialect map: original unrecoverable; 16-pair map DERIVED from frozen reviewed data (2026-08-15)
+
+**Blocker found first:** the original Gemini-generated 110-word dialect map
+(`dataset_release/safety/phase4_dialect_map.json`) exists nowhere — not in the
+workspace, not in git history; `dataset_release/safety/` is absent; the T16
+reviewed dictionary is an empty shell (0 records); `docs/pipeline/scripts/`
+does not exist. Rebuilding it from scratch would be fabrication (violates
+no-fabrication rules).
+
+**What was done instead (honest, deterministic, zero LLM calls):** derived a
+REAL dialect→standard map from the frozen, reviewed T09 treatment-QA splits
+(research_artifacts), where each `cell_id` holds the same question in 5
+dialects plus a `standard` variant (1,440 cells, 3,156 distinct standard
+tokens). Script `backend/ml_assets/rag_index/scripts/14_derive_dialect_map.py`:
+difflib 1:1 token 'replace' alignment between the dialect and standard
+questions of the same cell, flanking-context rule (both neighbors must match),
+frequency ≥2 distinct cells, dominance rule (top target ≥2× runner-up),
+dialect token must never appear in any standard question, pure-Bengali-script,
+≥2 chars. Audit: `backend/ml_assets/rag_index/eval/dialect_map_derivation_audit_v1.json`.
+
+**Result:** 16 pairs, every one backed by real sentence pairs with counts and
+cell IDs, spanning all 5 dialect labels — e.g. `ক্ষেতত→ক্ষেতে` (13 cells,
+23 occ, 5 dialects), `গাছত→গাছে`, `অইলে→হলে`, `লাগি→জন্য` (sylheti),
+`লাই→জন্য` (chittagonian), `প্রয়োগর→প্রয়োগের`, `দিবার→প্রয়োগের`,
+`সিডিউলটা→সময়সূচী`, `জেলাগুলাতে→জেলাগুলোতে`, `রোগর→রোগের`. Written in the
+runtime-schema dict form `{"map": {...}, "meta": {lineage}}`.
+
+**Measured lift (real T09 dialect questions, dev+test, 3,628):** expansion
+hits **1/3,628 (0.03%) → 1,215/3,628 (33.49%)** — 165 barishal, 305
+chittagonian, 250 noakhailli, 201 rangpuri, 294 sylheti. Runtime wiring
+verified through `settings.rag_dialect_map_path` (config → file → expander);
+contract tests added (`test_shipped_dialect_map_loads_and_applies` +
+dict-form/list-form/corrupt-file tests in `tests/test_retrieval.py`).
+
+**Scope of the claim:** this normalizes dialectal morphology to standard
+Bengali at the retrieval boundary (helps the dense BGE-M3 channel). It does
+NOT cover Romanized (Banglish) input — that remains the measured distribution
+floor (F14). The 0.6% C1 number was measured on the 1,000-query benchmark
+(mostly standard-script); the 33.49% is measured on T09 dialect-rendered
+questions — different populations, do not compare directly.
+
+**Allowed:** "a 16-pair dialect map derived from reviewed multi-dialect
+training data lifts expansion on real dialect questions from 0.03% to 33.5%".
+**Not allowed:** "110-word map restored", "dialect input fully handled",
+"Banglish handled" (F14 floor stands).
+
+---
+
 *Append-only: future findings get new dated sections; superseded claims are
 marked, never deleted. Update `12_CLAIM_LEDGER.md` alongside.*

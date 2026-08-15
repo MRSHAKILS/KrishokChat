@@ -1,0 +1,37 @@
+{
+  "map": {
+    "অইলে": "হলে",
+    "গাছত": "গাছে",
+    "ক্ষেতত": "ক্ষেতে",
+    "প্রয়োগর": "প্রয়োগের",
+    "সিডিউলটা": "সময়সূচী",
+    "অঞ্চলত": "অঞ্চলে",
+    "করি": "করে",
+    "দেওনের": "প্রয়োগের",
+    "দিবার": "প্রয়োগের",
+    "লাগি": "জন্য",
+    "জেলাগুলাতে": "জেলাগুলোতে",
+    "এলাকাত": "অঞ্চলে",
+    "লাই": "জন্য",
+    "চাষত": "চাষে",
+    "রোগর": "রোগের",
+    "জাতর": "জাতের"
+  },
+  "meta": {
+    "derived_from": [
+      "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\datasets\\frozen\\T09_treatment_qa_train_v1.jsonl",
+      "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\datasets\\frozen\\T09_treatment_qa_dev_v1.jsonl",
+      "D:\\KrishokChat Advisory System\\paper\\system_evolution_plan_2026\\execution_planning_2026_08_12\\research_artifacts\\datasets\\frozen\\T09_treatment_qa_test_v1.jsonl"
+    ],
+    "method": "difflib 1:1 token replace alignment between dialect and standard variants of the same cell_id; pairs require >=2 distinct cells; pure Bengali script; no LLM; no fabrication",
+    "pairs": 16,
+    "dialect_labels": [
+      "barishal",
+      "chittagonian",
+      "noakhailli",
+      "rangpuri",
+      "sylheti"
+    ],
+    "runtime": "QueryExpander appends the standard Bengali term to the query before retrieval (dialect->standard normalization for the dense channel)."
+  }
+}

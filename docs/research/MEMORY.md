@@ -187,14 +187,21 @@ set owns that (12/12 refused post-D1a; scoring sheet pending).
 - C1: retrieval coverage measured on ALL 1,000 farmer queries (not a sample);
   bucket counts are degenerate → raw channel scores are the evidence; never
   claim recall/relevance from coverage artifacts.
+- **C3: NEVER fabricate the dialect map.** The original 110-word map was
+  unrecoverable (workspace + git history) — derived a 16-pair REAL map from
+  the frozen reviewed T09 splits instead (deterministic alignment, zero LLM).
+  If the researcher's original copy resurfaces, merge it (dict-form,
+  schema-compatible) and re-measure.
 - Out of scope now: KG/GraphRAG, offline PWA, B2B layer, query routing,
   clarify-slots, 16123 integration (REJECTED), DPO alignment.
 
 ## Risks
 Bengali NLI scarcity → rule-based first. RRF regression → BM25 fallback flag +
 golden-set A/B. Demo-horizon: never claim hybrid/voice-dialect until live-verified.
-Expansion coverage risk: term map is title-derived (0.6% hit rate) — restore
-`dataset_release/safety/phase4_dialect_map.json` (110-word real map) to raise it.
+Expansion coverage risk: term map is title-derived (0.6% hit rate) — **C3
+FIXED (2026-08-15): derived 16-pair dialect map lifts expansion hits on real
+T09 dialect questions from 0.03% to 33.49%**; Banglish (Romanized) input
+remains the uncovered floor (dense rescues; scope-gated future lane).
 **NEW (P4):** unanswerable queries got confident answers (0/12 refused) —
 **FIXED by the D1a coverage gate (12/12 now)**; residual risk: unseen
 out-of-corpus intents the keyword gate doesn't cover. Scoring churn risk
@@ -206,11 +213,11 @@ handled by pinned sample.
 2. Q1: expert review of the Lumectin refusal (`farmer_q_75`) correctness.
 3. **Demo prep:** add the prewarm step to the demo script (run 2–3 min before
    demo; then curated questions replay at ~16–47 ms).
-4. Q4: restore `dataset_release/safety/phase4_dialect_map.json` (110-word real
-   map) to raise the 0.6% expansion hit rate.
-5. Menu next: **C3 restore `phase4_dialect_map.json`** (110-word real map —
-   lifts the 0.6% expansion hit rate, attacks the Banglish floor) or golden
-   scoring sheet. Optional future (scope-gated): Banglish→Bangla expansion
+4. Optional: if the researcher finds the ORIGINAL 110-word
+   `dataset_release/safety/phase4_dialect_map.json` (July dataset phase), drop
+   it in place (dict form, schema-compatible) and re-measure the hit rate.
+5. Menu next: **golden scoring sheet** (2 evaluators) — the only open
+   quality layer. Optional future (scope-gated): Banglish→Bangla expansion
    map for the high-frequency Romanized terms found by C1.
 
 ## Key Files
