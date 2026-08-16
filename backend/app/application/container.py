@@ -13,7 +13,6 @@ from app.application.soil import SoilService
 from app.application.vision_pipeline import VisionPipeline
 from app.core.config import Settings
 from app.infrastructure.audit.jsonl import JSONLAuditSink
-from app.infrastructure.audit.sqlite import AuditSqliteSink
 from app.infrastructure.auth.jwks import SupabaseJWKSVerifier
 from app.infrastructure.cache.demo import DemoAnswerCache
 from app.infrastructure.llm.factory import create_llm_client
@@ -22,7 +21,6 @@ from app.infrastructure.retrieval.dense import DenseRetriever
 from app.infrastructure.retrieval.expansion import QueryExpander
 from app.infrastructure.retrieval.hybrid import HybridRetriever
 from app.infrastructure.sessions.memory import InMemorySessionStore
-from app.infrastructure.sessions.sqlite import SqliteSessionStore
 from app.infrastructure.soil.dataset_loader import load_soil_dataset
 from app.infrastructure.storage.postgrest import PostgrestSavedHistoryStore
 from app.application.verifier import HardenedDosageVerifier
@@ -75,6 +73,10 @@ def build_container(settings: Settings) -> AppContainer:
     # only, no threads); memory (default) is the original adapter and keeps
     # the demo behavior byte-for-byte. Any unknown value falls back to memory.
     if settings.session_backend == "sqlite":
+        # Lazy import: keeps the T0-03 adapter commit independently revertable
+        # (a revert removes the module; the memory default still boots).
+        from app.infrastructure.sessions.sqlite import SqliteSessionStore
+
         sessions = SqliteSessionStore(
             db_path=settings.resolved_sqlite_db_path,
             max_turns=settings.session_max_turns,
@@ -90,6 +92,10 @@ def build_container(settings: Settings) -> AppContainer:
     # line to the JSONL path /api/safety/metrics reads, so the metrics panel
     # is identical under both backends; jsonl (default) is the original adapter.
     if settings.audit_backend == "sqlite":
+        # Lazy import: keeps the T0-02 adapter commit independently revertable
+        # (a revert removes the module; the jsonl default still boots).
+        from app.infrastructure.audit.sqlite import AuditSqliteSink
+
         audit = AuditSqliteSink(
             path=settings.resolved_audit_log_path,
             db_path=settings.resolved_sqlite_db_path,
