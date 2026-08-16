@@ -2,11 +2,11 @@
 
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Search, Loader2, Camera, MessageCircle, RotateCcw, X, Droplets, MapPin } from "lucide-react";
+import { Search, Loader2, RotateCcw, X } from "lucide-react";
 import { getSoilDataset, analyzeSoil, type SoilDatasetInfo, type SoilAnalyzeResponse } from "@/lib/api";
 import { SOIL_STAGES, type RailEvent } from "@/components/detect/pipeline-rail";
 import { AgentTrace } from "@/components/agent-trace";
-import { QAPanel } from "@/components/qa-panel";
+import { SlideOverAdvisory } from "@/components/chat/slide-over-advisory";
 import { SoilDatasetCard } from "@/components/soil/soil-dataset-card";
 import { SoilLockedCard } from "@/components/soil/soil-locked-card";
 import { stagger, enter, dur, ease } from "@/lib/motion";
@@ -33,12 +33,11 @@ export default function SoilPage() {
   const [preparing, setPreparing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [online, setOnline] = useState(true);
-  const [activePane, setActivePane] = useState<"soil" | "chat">("soil");
+  const [advisoryOpen, setAdvisoryOpen] = useState(false);
   const [dataset, setDataset] = useState<SoilDatasetInfo | null>(null);
   const [datasetError, setDatasetError] = useState(false);
   const [result, setResult] = useState<SoilAnalyzeResponse | null>(null);
   const requestRef = useRef<AbortController | null>(null);
-  const chatRef = useRef<HTMLDivElement | null>(null);
 
   /* Load the frozen dataset info once — never computed live. */
   useEffect(() => {
@@ -148,12 +147,11 @@ export default function SoilPage() {
   }, [result]);
 
   const askInChat = useCallback(() => {
-    setActivePane("chat");
-    window.setTimeout(() => chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+    setAdvisoryOpen(true);
   }, []);
 
   return (
-    <div className="space-y-7">
+    <div className="mx-auto max-w-4xl space-y-7 pb-16">
       {!online && (
         <div role="status" className="sticky top-2 z-20 rounded-lg border border-ochre-soft bg-paper px-4 py-3 text-sm font-medium text-ink shadow-sm">
           ইন্টারনেট সংযোগ নেই। ছবি ও লেখা এই পর্দায় থাকবে; সংযোগ এলে আবার চেষ্টা করুন।
@@ -174,189 +172,142 @@ export default function SoilPage() {
         <p className="mt-1 text-sm text-ink-soft">
           পাবনার মাঠ থেকে সংগ্রহ করা ৭২২টি ছবি ও টেনসিওমিটার তথ্য নিয়ে তৈরি প্রথম বাংলাদেশি
           মাটি-আর্দ্রতা ডেটাসেট। ছবি থেকে আর্দ্রতা মাপার মডেল যাচাই হয়ে গেলে এখানে চালু হবে —
-          আপাতত ডেটাসেট দেখুন ও চ্যাটে প্রশ্ন করুন।
+          আপাতত ডেটাসেট বিশ্লেষণ দেখুন এবং মাটি ও সেচ নিয়ে প্রশ্ন করুন।
         </p>
       </div>
 
-      {/* Mobile pane switcher */}
-      <div className="flex rounded-xl border rule bg-paper-2/40 p-1 lg:hidden" role="tablist" aria-label="মাটি ও পরামর্শ">
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activePane === "soil"}
-          onClick={() => setActivePane("soil")}
-          className={`flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors ${
-            activePane === "soil" ? "bg-leaf text-paper shadow-sm" : "text-ink-soft"
-          }`}
-        >
-          <Droplets className="h-4 w-4" /> মাটি কনসোল
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activePane === "chat"}
-          onClick={() => setActivePane("chat")}
-          className={`flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors ${
-            activePane === "chat" ? "bg-leaf text-paper shadow-sm" : "text-ink-soft"
-          }`}
-        >
-          <MessageCircle className="h-4 w-4" /> পরামর্শ চ্যাট
-        </button>
-      </div>
+      {/* Soil Console Flow (Full-width, centered single-column) */}
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={stagger}
+        className="space-y-6"
+      >
+        {/* ① Intake zone */}
+        <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-5 shadow-[0_10px_28px_rgba(52,39,23,0.05)] sm:p-6">
+          <SoilDropzone
+            file={file}
+            preview={preview}
+            onFile={handleFile}
+            onValidationError={setError}
+            onClear={handleClear}
+            onSample={handleSample}
+            loading={loading || preparing}
+          />
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)]">
-        {/* === LEFT: Soil console === */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={stagger}
-          className={`space-y-5 ${activePane === "chat" ? "hidden lg:block" : "block"}`}
-        >
-          {/* ① Intake zone */}
-          <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-5 shadow-[0_10px_28px_rgba(52,39,23,0.05)] sm:p-6">
-            <SoilDropzone
-              file={file}
-              preview={preview}
-              onFile={handleFile}
-              onValidationError={setError}
-              onClear={handleClear}
-              onSample={handleSample}
-              loading={loading || preparing}
-            />
-
-            {/* Action button */}
-            <AnimatePresence>
-              {file && !result && !loading && !preparing && (
-                <motion.button
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  onClick={runAnalyze}
-                  disabled={!online}
-                  className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-leaf px-4 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  <Search className="h-4 w-4" />
-                  আর্দ্রতা নির্ণয় করুন
-                </motion.button>
-              )}
-            </AnimatePresence>
-
-            {/* Loading indicator */}
-            <AnimatePresence>
-              {(loading || preparing) && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className="mt-3 flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-leaf/10 py-3 text-sm text-leaf"
-                >
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  {preparing ? "ছবি ছোট করে প্রস্তুত হচ্ছে…" : "আর্দ্রতা যাচাই হচ্ছে…"}
-                  {loading && (
-                    <button
-                      type="button"
-                      onClick={() => requestRef.current?.abort()}
-                      className="ml-2 flex min-h-11 items-center gap-1 rounded-lg px-2 font-medium text-clay"
-                    >
-                      <X className="h-4 w-4" /> বাতিল
-                    </button>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Error */}
-            <AnimatePresence>
-              {error && !loading && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="mt-3 rounded-lg border border-clay-soft/50 bg-clay-soft/20 px-4 py-3 text-sm text-clay"
-                >
-                  <p>{error}</p>
-                  {file && (
-                    <button
-                      type="button"
-                      onClick={runAnalyze}
-                      className="mt-2 flex min-h-11 items-center gap-2 rounded-lg font-semibold text-leaf"
-                    >
-                      <RotateCcw className="h-4 w-4" /> আবার চেষ্টা করুন
-                    </button>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          {/* ② Pipeline rail — when analysis runs or produced a trace */}
-          <AnimatePresence mode="wait">
-            {(loading || (result && railEvents.length > 0)) && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: dur.normal, ease: ease.smooth }}
-                className="overflow-hidden"
+          {/* Action button */}
+          <AnimatePresence>
+            {file && !result && !loading && !preparing && (
+              <motion.button
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                onClick={runAnalyze}
+                disabled={!online}
+                className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-leaf px-4 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                <AgentTrace
-                  stages={SOIL_STAGES}
-                  events={railEvents}
-                  active={loading}
-                  title="আর্দ্রতা বিশ্লেষণ প্রবাহ"
-                  detail="ছবি গ্রহণ → আর্দ্রতা নির্ণয় → মাটি শনাক্ত → পরামর্শ"
-                />
+                <Search className="h-4 w-4" />
+                আর্দ্রতা নির্ণয় করুন
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          {/* Loading indicator */}
+          <AnimatePresence>
+            {(loading || preparing) && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="mt-3 flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-leaf/10 py-3 text-sm text-leaf"
+              >
+                <Loader2 className="h-4 w-4 animate-spin" />
+                {preparing ? "ছবি ছোট করে প্রস্তুত হচ্ছে…" : "আর্দ্রতা যাচাই হচ্ছে…"}
+                {loading && (
+                  <button
+                    type="button"
+                    onClick={() => requestRef.current?.abort()}
+                    className="ml-2 flex min-h-11 items-center gap-1 rounded-lg px-2 font-medium text-clay"
+                  >
+                    <X className="h-4 w-4" /> বাতিল
+                  </button>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* ③ Locked-model result */}
-          <AnimatePresence mode="wait">
-            {result && !loading && (
-              <motion.div key="locked" initial="hidden" animate="visible" exit={{ opacity: 0, y: -8 }} variants={enter}>
-                <SoilLockedCard info={dataset} message={result.error} onAskChat={askInChat} />
+          {/* Error */}
+          <AnimatePresence>
+            {error && !loading && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="mt-3 rounded-lg border border-clay-soft/50 bg-clay-soft/20 px-4 py-3 text-sm text-clay"
+              >
+                <p>{error}</p>
+                {file && (
+                  <button
+                    type="button"
+                    onClick={runAnalyze}
+                    className="mt-2 flex min-h-11 items-center gap-2 rounded-lg font-semibold text-leaf"
+                  >
+                    <RotateCcw className="h-4 w-4" /> আবার চেষ্টা করুন
+                  </button>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* ④ Dataset showcase (always visible) */}
-          {dataset && <SoilDatasetCard info={dataset} />}
-          {datasetError && !dataset && (
-            <div className="rounded-2xl border rule bg-paper p-6 text-center text-sm text-ink-soft">
-              ডেটাসেট তথ্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।
-            </div>
-          )}
         </motion.div>
 
-        {/* === RIGHT: Chat Panel (always visible) === */}
-        <section
-          ref={chatRef}
-          className={`min-h-[60vh] flex-col rounded-2xl border rule bg-paper p-5 shadow-[0_10px_28px_rgba(52,39,23,0.05)] lg:sticky lg:top-20 lg:flex lg:max-h-[calc(100vh-6rem)] ${activePane === "chat" ? "flex" : "hidden lg:flex"}`}
-        >
-          <div className="mb-3 border-b rule pb-4">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ochre">SOIL & IRRIGATION ADVISORY</p>
-                <h2 className="mt-1 font-display text-xl text-ink">মাটি ও পানি পরামর্শ</h2>
-              </div>
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-leaf/10 text-leaf" aria-hidden><Droplets className="h-4 w-4" /></span>
-            </div>
-            <div className="mt-3 flex items-center gap-2 rounded-lg border border-leaf/20 bg-leaf/5 px-4 py-3">
-              <MapPin className="h-4 w-4 shrink-0 text-leaf" strokeWidth={1.5} />
-              <div className="text-sm">
-                <span className="font-medium text-leaf">পাবনা জেলা</span>
-                <span className="text-ink-soft"> — দোআঁশ, এঁটেল, বেলে সহ ৬ ধরনের মাটির তথ্য।</span>
-              </div>
-            </div>
-            <p className="mt-2 text-sm text-ink-soft">
-              কখন পানি দেবেন, কোন মাটিতে কোন ফসল ভালো হয় — এসব প্রশ্ন বাংলায় করুন।
-            </p>
+        {/* ② Pipeline rail — when analysis runs or produced a trace */}
+        <AnimatePresence mode="wait">
+          {(loading || (result && railEvents.length > 0)) && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: dur.normal, ease: ease.smooth }}
+              className="overflow-hidden"
+            >
+              <AgentTrace
+                stages={SOIL_STAGES}
+                events={railEvents}
+                active={loading}
+                title="আর্দ্রতা বিশ্লেষণ প্রবাহ"
+                detail="ছবি গ্রহণ → আর্দ্রতা নির্ণয় → মাটি শনাক্ত → পরামর্শ"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ③ Locked-model result */}
+        <AnimatePresence mode="wait">
+          {result && !loading && (
+            <motion.div key="locked" initial="hidden" animate="visible" exit={{ opacity: 0, y: -8 }} variants={enter}>
+              <SoilLockedCard info={dataset} message={result.error} onAskChat={askInChat} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ④ Dataset showcase (always visible) */}
+        {dataset && <SoilDatasetCard info={dataset} />}
+        {datasetError && !dataset && (
+          <div className="rounded-2xl border rule bg-paper p-6 text-center text-sm text-ink-soft">
+            ডেটাসেট তথ্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।
           </div>
-          <div className="flex-1 overflow-hidden">
-            <QAPanel />
-          </div>
-        </section>
-      </div>
+        )}
+      </motion.div>
+
+      {/* Floating Action Trigger & Slide-Over Assistant Drawer */}
+      <SlideOverAdvisory
+        open={advisoryOpen}
+        onToggle={setAdvisoryOpen}
+        triggerEyebrow="মাটি ও সেচ বিশেষজ্ঞ"
+        triggerLabel="মাটি ও সেচ পরামর্শ · প্রশ্ন করুন"
+        title="মাটি ও সেচ পরামর্শদাতা"
+        subtitle="মাটির আর্দ্রতা, সেচ ও ফসল নির্বাচন সম্পর্কিত প্রশ্নোত্তর"
+      />
     </div>
   );
 }

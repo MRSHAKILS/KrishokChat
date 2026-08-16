@@ -4,15 +4,14 @@ import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 
 const SCAN_STORAGE_KEY = "krishokchat:latest-scan:v1";
 import { motion, AnimatePresence } from "motion/react";
-import { Search, Loader2, Camera, MessageCircle, RotateCcw, X } from "lucide-react";
+import { Search, Loader2, RotateCcw, X } from "lucide-react";
 import { detectDisease, type DetectResponse } from "@/lib/api";
 import { VISION_STAGES, type RailEvent } from "@/components/detect/pipeline-rail";
 import { AgentTrace } from "@/components/agent-trace";
 import { IntakeZone } from "@/components/detect/intake-zone";
 import { DiagnosisCard } from "@/components/detect/diagnosis-card";
 import { TreatmentCard } from "@/components/detect/treatment-card";
-import { ContextBanner } from "@/components/detect/context-banner";
-import { QAPanel } from "@/components/qa-panel";
+import { SlideOverAdvisory } from "@/components/chat/slide-over-advisory";
 import { stagger, enter, dur, ease } from "@/lib/motion";
 import { prepareUploadImage } from "@/lib/image";
 
@@ -27,7 +26,7 @@ export default function DetectPage() {
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [activePane, setActivePane] = useState<"detect" | "chat">("detect");
+  const [advisoryOpen, setAdvisoryOpen] = useState(false);
   const [sampleLoading, setSampleLoading] = useState(false);
   const [preparing, setPreparing] = useState(false);
   const [online, setOnline] = useState(true);
@@ -149,7 +148,7 @@ export default function DetectPage() {
 
   const handleFollowUp = useCallback((question: string) => {
     setFollowUpQuestion(question);
-    setActivePane("chat");
+    setAdvisoryOpen(true);
   }, []);
 
   const handleSample = useCallback(async (samplePath: string, sampleName: string) => {
@@ -209,7 +208,7 @@ export default function DetectPage() {
   }, [file, cropHint, loading, online]);
 
   return (
-    <div className="space-y-7">
+    <div className="mx-auto max-w-4xl space-y-7 pb-16">
       {!online && (
         <div role="status" className="sticky top-2 z-20 rounded-lg border border-ochre-soft bg-paper px-4 py-3 text-sm font-medium text-ink shadow-sm">
           ইন্টারনেট সংযোগ নেই। ছবি ও লেখা এই পর্দায় থাকবে; সংযোগ এলে আবার চেষ্টা করুন।
@@ -228,207 +227,152 @@ export default function DetectPage() {
           </div>
         </div>
         <p className="mt-1 text-sm text-ink-soft">
-          পাতার ছবি দিন — ফসল শনাক্ত করে নির্দিষ্ট রোগ মডেল দিয়ে বিশ্লেষণ করা হবে।
-          ডান পাশের চ্যাটে সনাক্ত করা ফসলের ভিত্তিতে প্রশ্ন করুন।
+          পাতার ছবি দিন — ফসল শনাক্ত করে নির্দিষ্ট রোগ মডেল দিয়ে নিখুঁত বিশ্লেষণ ও পরামর্শ দেওয়া হবে।
         </p>
       </div>
 
-      {/* Mobile keeps the two workflows focused instead of stacking a long
-          diagnosis, treatment, and chat page. Desktop always shows both. */}
-      <div className="flex rounded-xl border rule bg-paper-2/40 p-1 lg:hidden" role="tablist" aria-label="রোগ নির্ণয় ও পরামর্শ">
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activePane === "detect"}
-          onClick={() => setActivePane("detect")}
-          className={`flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors ${
-            activePane === "detect" ? "bg-leaf text-paper shadow-sm" : "text-ink-soft"
-          }`}
-        >
-          <Camera className="h-4 w-4" /> রোগ নির্ণয়
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activePane === "chat"}
-          onClick={() => setActivePane("chat")}
-          className={`relative flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors ${
-            activePane === "chat" ? "bg-leaf text-paper shadow-sm" : "text-ink-soft"
-          }`}
-        >
-          <MessageCircle className="h-4 w-4" /> পরামর্শ চ্যাট
-          {detectedContext && activePane !== "chat" && (
-            <span className="absolute right-3 top-2 h-2 w-2 rounded-full bg-ochre" aria-label="নতুন রোগ নির্ণয়ের তথ্য" />
-          )}
-        </button>
-      </div>
+      {/* Detection Flow (Full-width, centered single-column) */}
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={stagger}
+        className="space-y-6"
+      >
+        {/* ① Intake Zone */}
+        <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-5 shadow-[0_10px_28px_rgba(52,39,23,0.05)] sm:p-6">
+          <IntakeZone
+            file={file}
+            preview={preview}
+            onFile={handleFile}
+            onValidationError={setError}
+            onClear={handleClear}
+            onSample={handleSample}
+            sampleLoading={sampleLoading}
+            qualityWarnings={result?.quality_warnings ?? []}
+            loading={loading || preparing}
+            cropHint={cropHint}
+            onCropHintChange={setCropHint}
+          />
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)]">
-        {/* === LEFT: Detection Flow === */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={stagger}
-          className={`space-y-5 ${activePane === "chat" ? "hidden lg:block" : "block"}`}
-        >
-          {/* ① Intake Zone */}
-          <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-5 shadow-[0_10px_28px_rgba(52,39,23,0.05)] sm:p-6">
-            <IntakeZone
-              file={file}
-              preview={preview}
-              onFile={handleFile}
-              onValidationError={setError}
-              onClear={handleClear}
-              onSample={handleSample}
-              sampleLoading={sampleLoading}
-              qualityWarnings={result?.quality_warnings ?? []}
-              loading={loading || preparing}
-              cropHint={cropHint}
-              onCropHintChange={setCropHint}
-            />
-
-            {/* Action button */}
-            <AnimatePresence>
-              {file && !result && !loading && !preparing && (
-                <motion.button
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  onClick={runDetect}
-                  disabled={!online}
-                  className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-leaf px-4 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  <Search className="h-4 w-4" />
-                  নির্ণয় করুন
-                </motion.button>
-              )}
-            </AnimatePresence>
-
-            {/* Loading indicator */}
-            <AnimatePresence>
-              {(loading || preparing) && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className="mt-3 flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-leaf/10 py-3 text-sm text-leaf"
-                >
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  {preparing ? "ছবি ছোট করে প্রস্তুত হচ্ছে…" : "বিশ্লেষণ হচ্ছে…"}
-                  {loading && (
-                    <button
-                      type="button"
-                      onClick={() => requestRef.current?.abort()}
-                      className="ml-2 flex min-h-11 items-center gap-1 rounded-lg px-2 font-medium text-clay"
-                    >
-                      <X className="h-4 w-4" /> বাতিল
-                    </button>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Error */}
-            <AnimatePresence>
-              {error && !loading && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="mt-3 rounded-lg border border-clay-soft/50 bg-clay-soft/20 px-4 py-3 text-sm text-clay"
-                >
-                  <p>{error}</p>
-                  {file && (
-                    <button
-                      type="button"
-                      onClick={runDetect}
-                      className="mt-2 flex min-h-11 items-center gap-2 rounded-lg font-semibold text-leaf"
-                    >
-                      <RotateCcw className="h-4 w-4" /> আবার চেষ্টা করুন
-                    </button>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          {/* ② Pipeline Rail — appears when result has trace or while loading */}
-          <AnimatePresence mode="wait">
-            {(loading || (result && railEvents.length > 0)) && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: dur.normal, ease: ease.smooth }}
-                className="overflow-hidden"
-              >
-                <AgentTrace
-                  stages={VISION_STAGES}
-                  events={railEvents}
-                  active={loading}
-                  title="রোগ বিশ্লেষণ প্রবাহ"
-                  detail="ছবি থেকে শ্রেণিবিন্যাস ও grounded advisory তৈরি হচ্ছে"
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* ③ Diagnosis Card */}
-          <AnimatePresence mode="wait">
-            {result && !loading && (
-              <motion.div
-                key="diagnosis"
-                initial="hidden"
-                animate="visible"
-                exit={{ opacity: 0, y: -8 }}
-                variants={enter}
-              >
-                <DiagnosisCard result={result} onClear={handleClearScan} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* ④ Treatment Card — only when diagnosed with treatment advice.
-              status may be absent on legacy backends; show it whenever
-              treatment advice exists (it only exists for real diagnoses). */}
+          {/* Action button */}
           <AnimatePresence>
-            {result && result.treatment_advice && !loading && (
-              <motion.div initial="hidden" animate="visible" exit={{ opacity: 0 }} variants={enter}>
-                <TreatmentCard result={result} onFollowUp={handleFollowUp} />
+            {file && !result && !loading && !preparing && (
+              <motion.button
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                onClick={runDetect}
+                disabled={!online}
+                className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-leaf px-4 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <Search className="h-4 w-4" />
+                নির্ণয় করুন
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          {/* Loading indicator */}
+          <AnimatePresence>
+            {(loading || preparing) && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="mt-3 flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-leaf/10 py-3 text-sm text-leaf"
+              >
+                <Loader2 className="h-4 w-4 animate-spin" />
+                {preparing ? "ছবি ছোট করে প্রস্তুত হচ্ছে…" : "বিশ্লেষণ হচ্ছে…"}
+                {loading && (
+                  <button
+                    type="button"
+                    onClick={() => requestRef.current?.abort()}
+                    className="ml-2 flex min-h-11 items-center gap-1 rounded-lg px-2 font-medium text-clay"
+                  >
+                    <X className="h-4 w-4" /> বাতিল
+                  </button>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Error */}
+          <AnimatePresence>
+            {error && !loading && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="mt-3 rounded-lg border border-clay-soft/50 bg-clay-soft/20 px-4 py-3 text-sm text-clay"
+              >
+                <p>{error}</p>
+                {file && (
+                  <button
+                    type="button"
+                    onClick={runDetect}
+                    className="mt-2 flex min-h-11 items-center gap-2 rounded-lg font-semibold text-leaf"
+                  >
+                    <RotateCcw className="h-4 w-4" /> আবার চেষ্টা করুন
+                  </button>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
 
-        {/* === RIGHT: Chat Panel (always visible) === */}
-        <section className={`min-h-[60vh] flex-col rounded-2xl border rule bg-paper p-5 shadow-[0_10px_28px_rgba(52,39,23,0.05)] lg:sticky lg:top-20 lg:flex lg:max-h-[calc(100vh-6rem)] ${activePane === "chat" ? "flex" : "hidden lg:flex"}`}>
-          <div className="mb-3 border-b rule pb-4">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ochre">CONTEXTUAL ADVISORY</p>
-                <h2 className="mt-1 font-display text-xl text-ink">কৃষি পরামর্শ</h2>
-              </div>
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-leaf/10 text-leaf" aria-hidden><MessageCircle className="h-4 w-4" /></span>
-            </div>
-            <ContextBanner
-              crop={detectedContext?.crop ?? null}
-              disease={detectedContext?.disease ?? null}
-            />
-            {!detectedContext && (
-              <p className="mt-1 text-sm text-ink-soft">
-                প্রথমে বাম দিকে ফসলের ছবি দিয়ে নির্ণয় করুন। আপনার প্রশ্ন বাংলায় লিখুন।
-              </p>
-            )}
-          </div>
-          <div className="flex-1 overflow-hidden">
-            <QAPanel
-              detectedCrop={detectedContext?.crop}
-              detectedDisease={detectedContext?.disease}
-              prefillQuestion={followUpQuestion}
-            />
-          </div>
-        </section>
-      </div>
+        {/* ② Pipeline Rail — appears when result has trace or while loading */}
+        <AnimatePresence mode="wait">
+          {(loading || (result && railEvents.length > 0)) && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: dur.normal, ease: ease.smooth }}
+              className="overflow-hidden"
+            >
+              <AgentTrace
+                stages={VISION_STAGES}
+                events={railEvents}
+                active={loading}
+                title="রোগ বিশ্লেষণ প্রবাহ"
+                detail="ছবি থেকে শ্রেণিবিন্যাস ও grounded advisory তৈরি হচ্ছে"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ③ Diagnosis Card */}
+        <AnimatePresence mode="wait">
+          {result && !loading && (
+            <motion.div
+              key="diagnosis"
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0, y: -8 }}
+              variants={enter}
+            >
+              <DiagnosisCard result={result} onClear={handleClearScan} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ④ Treatment Card — with spray calculator & prescription slip */}
+        <AnimatePresence>
+          {result && result.treatment_advice && !loading && (
+            <motion.div initial="hidden" animate="visible" exit={{ opacity: 0 }} variants={enter}>
+              <TreatmentCard result={result} onFollowUp={handleFollowUp} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Floating Action Trigger & Slide-Over Assistant Drawer */}
+      <SlideOverAdvisory
+        open={advisoryOpen}
+        onToggle={setAdvisoryOpen}
+        detectedCrop={detectedContext?.crop}
+        detectedDisease={detectedContext?.disease}
+        prefillQuestion={followUpQuestion}
+      />
     </div>
   );
 }

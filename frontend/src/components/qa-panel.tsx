@@ -38,10 +38,12 @@ export function QAPanel({
   detectedCrop,
   detectedDisease,
   prefillQuestion,
+  compact = false,
 }: {
   detectedCrop?: string | null;
   detectedDisease?: string | null;
   prefillQuestion?: string | null;
+  compact?: boolean;
 }) {
   const [sessionId] = useState(() => crypto.randomUUID());
   const [query, setQuery] = useState("");
@@ -385,6 +387,7 @@ export function QAPanel({
             onPick={send}
             detectedCrop={detectedCrop}
             detectedDisease={detectedDisease}
+            compact={compact}
           />
         ) : (
           <>
@@ -603,19 +606,54 @@ function EmptyState({
   onPick,
   detectedCrop,
   detectedDisease,
+  compact = false,
 }: {
   onPick: (q: string) => void;
   detectedCrop?: string | null;
   detectedDisease?: string | null;
+  compact?: boolean;
 }) {
+  if (compact) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: dur.normal, ease: ease.smooth }}
+        className="flex min-h-full flex-col justify-center py-4 text-center"
+      >
+        <div className="mb-2 mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-leaf/10 text-leaf">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M4 18C4 11 9 6 20 5C19 14 13 18 4 18Z"
+              fill="currentColor"
+              opacity="0.85"
+            />
+          </svg>
+        </div>
+        <h3 className="font-display text-base text-ink">কৃষি জিজ্ঞাসা</h3>
+        <p className="mt-0.5 text-xs text-ink-soft max-w-xs mx-auto">
+          ফসলের রোগ বা পরিচর্যা নিয়ে প্রশ্ন করুন
+        </p>
+        <div className="mt-4 w-full text-left">
+          <SuggestedQuestions
+            onPick={onPick}
+            crop={detectedCrop}
+            disease={detectedDisease}
+            showDialects={false}
+          />
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: dur.normal, ease: ease.smooth }}
-      className="flex min-h-full flex-col items-center justify-center py-10 text-center"
+      className="flex min-h-full flex-col items-center justify-center py-8 text-center"
     >
-      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-leaf/10 text-leaf">
+      <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-leaf/10 text-leaf">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
           <path
             d="M4 18C4 11 9 6 20 5C19 14 13 18 4 18Z"
@@ -630,16 +668,17 @@ function EmptyState({
           />
         </svg>
       </div>
-      <p className="mb-1 text-xs font-semibold text-leaf">তথ্যভিত্তিক কৃষি সহায়তা</p>
+      <p className="mb-0.5 text-xs font-semibold text-leaf">তথ্যভিত্তিক কৃষি সহায়তা</p>
       <h3 className="font-display text-xl text-ink">কী জানতে চান?</h3>
-      <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink-soft">
-        ফসলের রোগ, পরিচর্যা বা নিরাপদ ব্যবস্থাপনা নিয়ে বাংলায় প্রশ্ন করুন।
+      <p className="mt-1 max-w-sm text-xs sm:text-sm leading-relaxed text-ink-soft">
+        ফসলের রোগ, পরিচর্যা বা নিরাপদ বালাই ব্যবস্থাপনা নিয়ে প্রশ্ন করুন।
       </p>
-      <div className="mt-7 w-full">
+      <div className="mt-6 w-full text-left">
         <SuggestedQuestions
           onPick={onPick}
           crop={detectedCrop}
           disease={detectedDisease}
+          showDialects={true}
         />
       </div>
     </motion.div>

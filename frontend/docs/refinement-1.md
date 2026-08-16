@@ -243,5 +243,3 @@ This plan provides a comprehensive blueprint to elevate **KrishokChat** from an 
 1. **P0 Step 1:** Implement the **Client-Side Image Compressor** and **Dosage Calculator Widget** on the `/detect` advisory card to immediately enhance both user performance and practical utility.
 2. **P0 Step 2:** Enhance the **4-Stage Safety Pipeline Interactive Sandbox** on `/research/safety` to maximize visual impact during investor pitches and capstone evaluation.
 3. **P1 Step 3:** Polish the **Token Streaming Easing & Waveform Voice Animation** on `/chat`.
-
-Would you like to begin by implementing any specific feature from this roadmap?
