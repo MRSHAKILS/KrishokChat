@@ -30,6 +30,9 @@ backend/app/logs/*
 !backend/app/logs/.gitkeep
 *.log
 
+# Local SQLite database (T0-01 shared storage foundation)
+backend/data/
+
 # ML Assets (large binaries - DO NOT COMMIT)
 backend/ml_assets/yolo/*.pt
 backend/ml_assets/yolo/*.onnx

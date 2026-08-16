@@ -71,6 +71,14 @@ class Settings(BaseSettings):
     session_max_turns: int = Field(default=10, ge=1, le=100)
     session_ttl_seconds: int = Field(default=1800, ge=60)
     audit_log_path: str = "backend/app/logs/safety_audit.jsonl"
+    # T0-01: shared SQLite database for the future audit/sessions adapters.
+    # Resolved relative to project root the same way resolved_audit_log_path is.
+    sqlite_db_path: str = "backend/data/krishokchat.db"
+
+    # T0-04: request-ID header echoed by the middleware (and expected on
+    # inbound requests), plus the log level for the JSON app logger.
+    request_id_header: str = "X-Request-ID"
+    log_level: str = "INFO"
 
     # P3 hybrid retrieval: force the BM25-only fallback even when the dense
     # (FAISS/BGE-M3) index exists. The dense channel also falls back to BM25
@@ -131,6 +139,11 @@ class Settings(BaseSettings):
     @property
     def resolved_audit_log_path(self) -> Path:
         path = Path(self.audit_log_path)
+        return path if path.is_absolute() else PROJECT_ROOT.parent / path
+
+    @property
+    def resolved_sqlite_db_path(self) -> Path:
+        path = Path(self.sqlite_db_path)
         return path if path.is_absolute() else PROJECT_ROOT.parent / path
 
     @property
