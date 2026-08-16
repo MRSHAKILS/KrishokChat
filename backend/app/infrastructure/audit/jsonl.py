@@ -13,6 +13,9 @@ class JSONLAuditSink:
         self._lock = threading.Lock()
 
     def record(self, entry: dict[str, Any]) -> None:
+        # T0-05: the entry dict is spread verbatim, so the telemetry fields
+        # (stage_timings_ms/tokens/provider/cost_estimate/request_id) serialize
+        # additively and pre-T0-05 records (without them) load unchanged.
         payload = {"timestamp": datetime.now(timezone.utc).isoformat(), **entry}
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self._lock, self.path.open("a", encoding="utf-8") as handle:

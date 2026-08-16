@@ -9,6 +9,15 @@ from app.application.generation import GroundedAnswerGenerator, REFERRAL
 from app.application.query_builder import build_retrieval_query
 from app.application.rewrite import ConversationalQueryRewriter
 from app.application.safety import SafetyClassifier
+from app.application.telemetry import (
+    STAGE_NAMES,
+    capture_tokens,
+    current_request_id,
+    estimate_cost,
+    serving_provider,
+    stage_timer,
+)
+from app.core.config import settings
 from app.domain.contracts import (
     PipelineEvent,
     QAResult,
@@ -119,6 +128,13 @@ class QAPipeline:
         verifier_flags: tuple[str, ...] = ()
         result: QAResult | None = None
         cached_hit = False
+        # T0-05: per-stage wall-clock latencies. Every stage name is present;
+        # stages that did not run (terminal/exception paths, cache replays)
+        # stay 0.0 — the trace's SKIP status explains them.
+        timings: dict[str, float] = {name: 0.0 for name in STAGE_NAMES}
+        # The lane object that actually served generation (the generator's
+        # client for GroundedAnswerGenerator, else the generator itself).
+        generation_lane: object | None = None
         # A1: the retrieval query (possibly rewritten); audited as-is so the
         # metrics panel and paper can see exactly what was searched.
         retrieval_query = request.query
@@ -152,8 +168,9 @@ class QAPipeline:
                         return result
 
             await emit(PipelineStage.SAFETY, StageStatus.START)
-            decision = await self.safety.classify(request.query, context)
-            await emit(PipelineStage.SAFETY, StageStatus.COMPLETE, decision.category.value)
+            with stage_timer("safety", timings):
+                decision = await self.safety.classify(request.query, context)
+                await emit(PipelineStage.SAFETY, StageStatus.COMPLETE, decision.category.value)
 
             if decision.terminal:
                 for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
@@ -170,70 +187,74 @@ class QAPipeline:
                 return result
 
             await emit(PipelineStage.RETRIEVAL, StageStatus.START)
-            if self.rewriter is not None:
-                retrieval_query, rewritten = await self.rewriter.maybe_rewrite(
-                    request.query, context.history
-                )
-            retrieval_query = build_retrieval_query(retrieval_query, context, decision.category.value)
-            retrieved = await asyncio.to_thread(self.retriever.retrieve, retrieval_query, top_k=self.top_k)
-            seen_ids: set[str] = set()
-            sources = []
-            for source in [*request.seed_sources, *retrieved]:
-                if source.id not in seen_ids:
-                    seen_ids.add(source.id)
-                    sources.append(source)
-            # P3: surface the dialect expansion in the agent trace (honest
-            # evidence the mapping ran; nothing shown when no terms matched).
-            detail = f"{len(sources)} sources"
-            if rewritten:
-                detail += " · rewritten"
-            expansion = getattr(self.retriever, "last_expansion", None)
-            if expansion and expansion[2]:
-                detail += " · " + "; ".join(expansion[2][:3])
-            await emit(PipelineStage.RETRIEVAL, StageStatus.COMPLETE, detail)
+            with stage_timer("retrieval", timings):
+                if self.rewriter is not None:
+                    retrieval_query, rewritten = await self.rewriter.maybe_rewrite(
+                        request.query, context.history
+                    )
+                retrieval_query = build_retrieval_query(retrieval_query, context, decision.category.value)
+                retrieved = await asyncio.to_thread(self.retriever.retrieve, retrieval_query, top_k=self.top_k)
+                seen_ids: set[str] = set()
+                sources = []
+                for source in [*request.seed_sources, *retrieved]:
+                    if source.id not in seen_ids:
+                        seen_ids.add(source.id)
+                        sources.append(source)
+                # P3: surface the dialect expansion in the agent trace (honest
+                # evidence the mapping ran; nothing shown when no terms matched).
+                detail = f"{len(sources)} sources"
+                if rewritten:
+                    detail += " · rewritten"
+                expansion = getattr(self.retriever, "last_expansion", None)
+                if expansion and expansion[2]:
+                    detail += " · " + "; ".join(expansion[2][:3])
+                await emit(PipelineStage.RETRIEVAL, StageStatus.COMPLETE, detail)
 
             await emit(PipelineStage.GENERATION, StageStatus.START)
-            generator = self._generator_for(request.model)
-            if on_event and sources:
-                chunks: list[str] = []
-                async for chunk in generator.stream(request.query, context, sources):
-                    chunks.append(chunk)
-                    await on_event(
-                        PipelineEvent(
-                            stage=PipelineStage.GENERATION,
-                            status=StageStatus.COMPLETE,
-                            event_type="token",
-                            text=chunk,
+            with stage_timer("generation", timings):
+                generator = self._generator_for(request.model)
+                generation_lane = getattr(generator, "client", None) or generator
+                if on_event and sources:
+                    chunks: list[str] = []
+                    async for chunk in generator.stream(request.query, context, sources):
+                        chunks.append(chunk)
+                        await on_event(
+                            PipelineEvent(
+                                stage=PipelineStage.GENERATION,
+                                status=StageStatus.COMPLETE,
+                                event_type="token",
+                                text=chunk,
+                            )
                         )
+                    generated = await generator.generate_from_text(
+                        "".join(chunks), sources, mode="grounded_stream"
                     )
-                generated = await generator.generate_from_text(
-                    "".join(chunks), sources, mode="grounded_stream"
-                )
-            else:
-                generated = await generator.generate(request.query, context, sources)
-            await emit(PipelineStage.GENERATION, StageStatus.COMPLETE, generated.model)
+                else:
+                    generated = await generator.generate(request.query, context, sources)
+                await emit(PipelineStage.GENERATION, StageStatus.COMPLETE, generated.model)
 
             await emit(PipelineStage.VERIFIER, StageStatus.START)
-            verification = self.verifier.verify(generated.answer, sources)
-            verifier_flags = verification.flags
-            # A generation failure must not be stamped verified: the answer is
-            # referral text, not grounded content.
-            if generated.error:
-                verification = VerificationResult(
-                    confidence=VerificationConfidence.LOW_CONFIDENCE,
-                    flags=verification.flags + (f"generation_error: {generated.error[:120]}",),
-                    unverified_claims=verification.unverified_claims,
-                )
+            with stage_timer("verifier", timings):
+                verification = self.verifier.verify(generated.answer, sources)
                 verifier_flags = verification.flags
-            # P1 annotate-and-drop: unsupported dosage claims are removed from
-            # the final answer (never hard-blocked); an emptied answer maps to
-            # the referral text. The streamed preview may briefly show the raw
-            # text, but the authoritative final event always carries the
-            # sanitized answer.
-            final_answer = generated.answer
-            if verification.sanitized_answer is not None:
-                final_answer = verification.sanitized_answer or REFERRAL
-            await emit(PipelineStage.VERIFIER, StageStatus.COMPLETE, verification.confidence.value)
+                # A generation failure must not be stamped verified: the answer is
+                # referral text, not grounded content.
+                if generated.error:
+                    verification = VerificationResult(
+                        confidence=VerificationConfidence.LOW_CONFIDENCE,
+                        flags=verification.flags + (f"generation_error: {generated.error[:120]}",),
+                        unverified_claims=verification.unverified_claims,
+                    )
+                    verifier_flags = verification.flags
+                # P1 annotate-and-drop: unsupported dosage claims are removed from
+                # the final answer (never hard-blocked); an emptied answer maps to
+                # the referral text. The streamed preview may briefly show the raw
+                # text, but the authoritative final event always carries the
+                # sanitized answer.
+                final_answer = generated.answer
+                if verification.sanitized_answer is not None:
+                    final_answer = verification.sanitized_answer or REFERRAL
+                await emit(PipelineStage.VERIFIER, StageStatus.COMPLETE, verification.confidence.value)
 
             result = QAResult(
                 query=request.query,
@@ -284,6 +305,8 @@ class QAPipeline:
                     cached=cached_hit,
                     retrieval_query=retrieval_query,
                     rewritten=rewritten,
+                    timings=timings,
+                    generation_lane=generation_lane,
                 )
                 if request.session_id and result.category is SafetyCategory.SAFE_AGRI:
                     self.sessions.append(request.session_id, "user", request.query)
@@ -299,6 +322,8 @@ class QAPipeline:
         cached: bool = False,
         retrieval_query: str | None = None,
         rewritten: bool = False,
+        timings: dict[str, float] | None = None,
+        generation_lane: object | None = None,
     ) -> None:
         # P1 refusal counters (TRUST-SCORE style, honest subset):
         # - answered_without_sources: a safe-agri query that produced a real
@@ -320,6 +345,15 @@ class QAPipeline:
         scores = [s.score for s in retrieved_sources if isinstance(getattr(s, "score", None), (int, float))]
         if scores:
             top1_score = round(max(scores), 4)
+        # T0-05: token counts and provider are only recorded when the lane
+        # exposes them (None otherwise); cost stays null until a real price
+        # table exists (see telemetry.estimate_cost).
+        tokens = capture_tokens(generation_lane) if generation_lane is not None else None
+        provider = (
+            serving_provider(generation_lane, settings.llm_provider)
+            if generation_lane is not None
+            else None
+        )
         self.audit.record(
             {
                 # v2 = per-step validity fields (router/retrieval/verifier).
@@ -363,6 +397,14 @@ class QAPipeline:
                 "model_choice": request.model,
                 "retrieval_query_used": retrieval_query or request.query,
                 "retrieval_query_rewritten": rewritten,
+                # T0-05 telemetry — all optional; pre-T0-05 records/consumers
+                # tolerate absence. stage_timings_ms keys are exactly
+                # safety/retrieval/generation/verifier; skipped stages are 0.0.
+                "stage_timings_ms": timings if timings is not None else None,
+                "tokens": tokens,
+                "provider": provider,
+                "cost_estimate": estimate_cost(tokens, provider),
+                "request_id": current_request_id(),
             }
         )
 

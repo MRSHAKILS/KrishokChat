@@ -84,6 +84,10 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_audit_records_dedup ON audit_records (time
 # reserved columns for T0-04 (request_id) and T0-05 (stage_timings_ms,
 # token_usage, provider). Anything not in this list still survives in
 # record_json (full original payload), so no record is ever lost.
+# NOTE: the JSONL record field is ``tokens`` (dict, keys input/output);
+# insert_record maps it onto the reserved ``token_usage`` column. T0-05's
+# ``cost_estimate`` has no reserved column (migrations are locked by the
+# T0-02 tests) and is preserved in record_json only.
 _KNOWN_COLUMNS = (
     "timestamp",
     "query_hash",
@@ -161,6 +165,11 @@ def insert_record(conn: Any, payload: dict[str, Any]) -> int:
     legacy sqlite3 keeps implicit transactions open, so a commit per row is
     required for the row to survive the connection closing."""
     values = {name: _cell(payload[name]) for name in _KNOWN_COLUMNS if name in payload}
+    # T0-05: the JSONL record carries ``tokens`` (dict with input/output); the
+    # reserved column is named ``token_usage`` — map it here so the column is
+    # filled and the mirror JSONL keeps the spec'd field name.
+    if "tokens" in payload and "token_usage" not in values:
+        values["token_usage"] = _cell(payload["tokens"])
     values.setdefault("query_hash", query_hash(payload))
     values["record_json"] = json.dumps(payload, ensure_ascii=False)
     columns = ", ".join(values)
