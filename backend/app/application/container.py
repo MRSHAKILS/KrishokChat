@@ -44,6 +44,23 @@ class AppContainer:
 def build_container(settings: Settings) -> AppContainer:
     intent_llm = create_llm_client(settings, role="intent")
     generation_llm = create_llm_client(settings, role="generation")
+    # T0-06: provider failover chain. With LLM_FAILOVER_CHAIN naming >= 2 valid
+    # providers, generation and the rewrite lane ride a FailoverLLMClient
+    # (skip tripped breakers, fall to the next provider; total failure raises
+    # AllProvidersFailed, which the app maps to its existing fail-closed path).
+    # The safety classifier always keeps the direct factory client — a fallback
+    # chain must never influence a safety decision. Config rollback:
+    # LLM_FAILOVER_CHAIN= (empty) → the exact single-provider client built today.
+    intent_rewrite_llm = intent_llm
+    if settings.llm_failover_chain.strip():
+        # Lazy import: keeps the failover module independently revertable.
+        from app.infrastructure.llm.failover import build_failover_client
+
+        failover_intent = build_failover_client(settings, role="intent")
+        if failover_intent is not None:
+            intent_rewrite_llm = failover_intent
+            # Same settings/chain as above, so this is never None here.
+            generation_llm = build_failover_client(settings, role="generation")
     bm25_retriever = BM25Retriever(
         index_path=settings.rag_index_path / "indexes" / "bm25_index.pkl",
         corpus_path=settings.rag_corpus_path,
@@ -147,7 +164,7 @@ def build_container(settings: Settings) -> AppContainer:
         # A1: follow-ups -> standalone retrieval queries (same cheap intent
         # model; fires only on follow-up markers with history present).
         rewriter=(
-            ConversationalQueryRewriter(intent_llm)
+            ConversationalQueryRewriter(intent_rewrite_llm)
             if settings.query_rewrite_enabled
             else None
         ),

@@ -110,6 +110,16 @@ class Settings(BaseSettings):
     gemini_key_cooldown_seconds: float = 6.0
     env_file_path: str = str(PROJECT_ROOT.parent / ".env")
 
+    # T0-06: provider failover chain — comma-separated provider names in
+    # fallback order (openrouter,gemini,ollama; "auto" is never a chain
+    # entry). Empty (default) = today's single-provider behavior, no wrapper.
+    # Only chains with >= 2 valid providers activate the FailoverLLMClient;
+    # unknown names are logged and skipped, never a startup crash.
+    llm_failover_chain: str = ""
+    # T0-06: circuit-breaker bounds per provider in the failover chain.
+    llm_circuit_max_failures: int = 3
+    llm_circuit_cooldown_seconds: float = 30.0
+
     # P5 voice lane — read-aloud (TTS). edge-tts (keyless, free) synthesizes
     # through Microsoft Edge's Read Aloud service; the demo machine has no
     # Bengali system voice, so this is what makes শুনুন read real Bengali.
