@@ -91,3 +91,25 @@ No route or frontend component should change for either replacement.
 - Local generation: the checked-in `krishokchat.f16.gguf` is truncated and must not be
   served. The verified demo runtime uses the external Q4_K_M base plus KrishokChat LoRA via
   `scripts/start_krishokchat_local.ps1`; scientific performance remains unevaluated.
+- T0-01 (SQLite foundation): done — `backend/app/infrastructure/storage/sqlite.py`
+  (WAL, foreign_keys, busy_timeout 5000, idempotent `schema_migrations` runner with
+  explicit per-migration transactions; no business tables yet), `SQLITE_DB_PATH` +
+  `resolved_sqlite_db_path` in config, `backend/data/` gitignored, tests in
+  `backend/tests/test_storage_sqlite.py`. Audit/session ports are sync, so stdlib
+  sqlite3 — no new dependency.
+- T0-04 (request-ID + structured logging): done — pure-ASGI `RequestIDMiddleware`
+  (`backend/app/api/middleware/request_id.py`, echoes valid `X-Request-ID` else
+  uuid4 hex, contextvar-backed, cleared per request), `JSONFormatter` +
+  `setup_logging` (`backend/app/core/logging.py`, stdlib only, attached to
+  `logging.getLogger("krishokchat")` in the lifespan), `REQUEST_ID_HEADER` +
+  `LOG_LEVEL` in config + `.env.example`, tests in
+  `backend/tests/test_request_id_middleware.py`. ASGI chosen over
+  BaseHTTPMiddleware because the app serves SSE (`/api/qa/stream`). Full suite
+  green (159 passed, 7 skipped).
+- T0-08 (pytest + CI + golden gate): done — dev deps (`pytest`, `pytest-asyncio`,
+  `httpx`) declared in `backend/pyproject.toml`; `backend/scripts/replay_golden.py`
+  replays all 46 golden items offline (stub lane, real pipeline + BM25 index +
+  verifier): 12/12 unanswerable refused, 6/6 eval-flagged carry verifier flags,
+  zero exceptions; smoke suites converted (bm25 retrieval, qa pipeline, live e2e
+  marked `live_llm`); `.github/workflows/ci.yml` runs backend / frontend / golden
+  in parallel. Full suite 159 passed, 7 skipped; `pnpm build` green.
