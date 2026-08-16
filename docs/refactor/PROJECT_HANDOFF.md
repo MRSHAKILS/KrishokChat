@@ -113,3 +113,30 @@ No route or frontend component should change for either replacement.
   zero exceptions; smoke suites converted (bm25 retrieval, qa pipeline, live e2e
   marked `live_llm`); `.github/workflows/ci.yml` runs backend / frontend / golden
   in parallel. Full suite 159 passed, 7 skipped; `pnpm build` green.
+- T0-02 (audit → SQLite adapter): done — `AuditSqliteSink` (`backend/app/infrastructure/audit/sqlite.py`)
+  stores every record in the T0-01 SQLite DB (`audit_records`, migration v2
+  registered on the adapter's own MIGRATIONS list — the shared T0-01 list stays
+  empty per its test — plus idempotent indexes via `ensure_schema`) and mirrors
+  each line to the JSONL path `/api/safety/metrics` reads, so metrics are
+  identical under both backends without touching the route. `AUDIT_BACKEND=jsonl|sqlite`
+  (default jsonl) in config + `.env.example`; container switch in
+  `application/container.py`. Backfill `backend/scripts/backfill_audit_jsonl_to_sqlite.py`
+  is idempotent via a UNIQUE (timestamp, query_hash) index; `--force` reloads.
+  Full suite 170 passed, 7 skipped. Open question: the sqlite sink's JSONL mirror
+  is required only because the metrics endpoint reads `audit.path` directly — a
+  future route refactor could read the DB instead and drop the mirror.
+- T0-03 (sessions → SQLite adapter): done — `SqliteSessionStore`
+  (`backend/app/infrastructure/sessions/sqlite.py`) implements the exact
+  SessionStore port (`get` + `append`) with memory-adapter-identical
+  semantics: `{"role","content"}` message lists capped at `max_turns * 2`,
+  TTL strictly `>` on read AND write, refreshed on `append` only, `get`
+  returns a fresh list. Rows live in the T0-01 DB (`sessions` table,
+  migration v3 on the adapter's own MIGRATIONS list; `last_active_at` index
+  via idempotent `CREATE INDEX IF NOT EXISTS` on first connection, same
+  pattern as T0-02's `ensure_schema`). Cleanup is lazy: purge on init and on
+  every get/append — no threads. `SESSION_BACKEND=memory|sqlite` (default
+  memory) in config + `.env.example`; container switch in
+  `application/container.py`, separate block beside the audit switch. Tests
+  in `backend/tests/test_session_sqlite.py` (14) incl. restart persistence
+  over the same DB file and an HTTP-level restart simulation via TestClient.
+  Full suite 184 passed, 7 skipped.
