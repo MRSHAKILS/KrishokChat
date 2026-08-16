@@ -1,6 +1,6 @@
 # T0-06 — Provider Failover Chain + Circuit Breaker
 
-- **Status:** NOT STARTED
+- **Status:** DONE (2026-08-17)
 - **Tier:** 0 (demo-safe, pre-capstone)
 - **Depends on:** nothing (benefits from T0-05 telemetry for measuring provider health, not required)
 - **Blocks:** nothing

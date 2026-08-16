@@ -1,6 +1,6 @@
 # T0-02 — Audit → SQLite Adapter
 
-- **Status:** NOT STARTED
+- **Status:** DONE (2026-08-17)
 - **Tier:** 0 (demo-safe, pre-capstone)
 - **Depends on:** T0-01 (SQLite foundation, gate passed)
 - **Blocks:** nothing

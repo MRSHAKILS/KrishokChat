@@ -1,6 +1,6 @@
 # T0-05 — Stage Latency + Token/Cost Telemetry in Audit Records
 
-- **Status:** NOT STARTED
+- **Status:** DONE (2026-08-17)
 - **Tier:** 0 (demo-safe, pre-capstone)
 - **Depends on:** T0-04 (request IDs — for correlation; the field is nullable so T0-04 is recommended, not strictly required)
 - **Blocks:** nothing

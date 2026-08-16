@@ -1,6 +1,6 @@
 # T0-04 — Request-ID + Structured Logging Middleware
 
-- **Status:** NOT STARTED
+- **Status:** DONE (2026-08-17)
 - **Tier:** 0 (demo-safe, pre-capstone)
 - **Depends on:** nothing
 - **Blocks:** T0-05

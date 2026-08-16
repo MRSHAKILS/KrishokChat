@@ -1,6 +1,6 @@
 # T0-08 — pytest Declaration + CI + Golden Regression Gate
 
-- **Status:** NOT STARTED
+- **Status:** DONE (2026-08-17)
 - **Tier:** 0 (demo-safe, pre-capstone)
 - **Depends on:** nothing (tests may be written against current behavior)
 - **Blocks:** nothing

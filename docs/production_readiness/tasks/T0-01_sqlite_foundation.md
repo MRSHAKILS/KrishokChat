@@ -1,6 +1,6 @@
 # T0-01 — SQLite Foundation (DB Bootstrap + Migrations)
 
-- **Status:** NOT STARTED
+- **Status:** DONE (2026-08-17)
 - **Tier:** 0 (demo-safe, pre-capstone)
 - **Depends on:** nothing
 - **Blocks:** T0-02, T0-03

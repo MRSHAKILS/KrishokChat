@@ -140,3 +140,39 @@ No route or frontend component should change for either replacement.
   in `backend/tests/test_session_sqlite.py` (14) incl. restart persistence
   over the same DB file and an HTTP-level restart simulation via TestClient.
   Full suite 184 passed, 7 skipped.
+- T0-05 (stage latency + token/cost telemetry in audit records): done —
+  `backend/app/application/telemetry.py` (new: `stage_timer` context manager
+  over the four stage keys, `capture_tokens`/`serving_provider` lane
+  conventions, `estimate_cost` — always null, no price table exists
+  anywhere, `current_request_id` from the T0-04 contextvar); the four stages
+  in `qa_pipeline.py` are wrapped (not edited) and `_audit` now emits the
+  optional `stage_timings_ms` / `tokens` / `provider` / `cost_estimate` /
+  `request_id` fields; jsonl serializes them additively; the sqlite adapter
+  fills its reserved columns (with `tokens` mapped onto the reserved
+  `token_usage` column; `cost_estimate` lives in `record_json` only — no
+  migration added, T0-02's `versions == [2]` test locks MIGRATIONS). Today
+  NO LLM lane exposes usage/provider (adapters discard them;
+  `infrastructure/llm/` is T0-06's scope), so `tokens` is null in production
+  and `provider` falls back to the configured `LLM_PROVIDER`; the local
+  registry lane may mislabel until a per-lane `provider` attribute lands.
+  Tests in `backend/tests/test_audit_telemetry.py` (12). Full suite 196
+  passed, 7 skipped; golden replay 46/46 invariants PASS.
+- T0-06 (provider failover chain + circuit breaker): done —
+  `backend/app/infrastructure/llm/failover.py` (`CircuitBreaker` —
+  trips after `max_failures` consecutive failures, probe after cooldown,
+  resets on success; `FailoverLLMClient` — same LLMClient port as every
+  adapter, ordered `(provider_name, client, breaker)` entries, skips
+  tripped breakers, falls to next on failure, `AllProvidersFailed(LLMError)`
+  when all fail so the app's existing fail-closed path (safety →
+  LOW_CONFIDENCE, generation → referral) applies unchanged; `provider`
+  attribute feeds T0-05 `serving_provider`). `LLM_FAILOVER_CHAIN`
+  (comma-separated fallback order; "auto" is never a chain entry),
+  `LLM_CIRCUIT_MAX_FAILURES=3`, `LLM_CIRCUIT_COOLDOWN_SECONDS=30` in
+  config + `.env.example`. Container wraps generation + rewrite lane only
+  when the chain has ≥2 valid providers (lazy import; unknown names are
+  warned and skipped, never a startup crash); the safety classifier keeps
+  its direct factory client, never part of the chain. Open question: the
+  wrapper sets `name`/`provider` to the last-serving client, so audit
+  `model` reflects the provider that actually answered — the local
+  registry lane still reports the global configured provider. Full suite
+  216 passed, 7 skipped.
