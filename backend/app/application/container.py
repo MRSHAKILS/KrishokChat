@@ -13,6 +13,7 @@ from app.application.soil import SoilService
 from app.application.vision_pipeline import VisionPipeline
 from app.core.config import Settings
 from app.infrastructure.audit.jsonl import JSONLAuditSink
+from app.infrastructure.audit.sqlite import AuditSqliteSink
 from app.infrastructure.auth.jwks import SupabaseJWKSVerifier
 from app.infrastructure.cache.demo import DemoAnswerCache
 from app.infrastructure.llm.factory import create_llm_client
@@ -21,6 +22,7 @@ from app.infrastructure.retrieval.dense import DenseRetriever
 from app.infrastructure.retrieval.expansion import QueryExpander
 from app.infrastructure.retrieval.hybrid import HybridRetriever
 from app.infrastructure.sessions.memory import InMemorySessionStore
+from app.infrastructure.sessions.sqlite import SqliteSessionStore
 from app.infrastructure.soil.dataset_loader import load_soil_dataset
 from app.infrastructure.storage.postgrest import PostgrestSavedHistoryStore
 from app.application.verifier import HardenedDosageVerifier
@@ -67,11 +69,33 @@ def build_container(settings: Settings) -> AppContainer:
         expander=expander,
         bm25_only=settings.retrieval_bm25_only,
     )
-    sessions = InMemorySessionStore(
-        max_turns=settings.session_max_turns,
-        ttl_seconds=settings.session_ttl_seconds,
-    )
-    audit = JSONLAuditSink(settings.resolved_audit_log_path)
+    # T0-03: session backend switch (config rollback: SESSION_BACKEND=memory).
+    # sqlite persists sessions in the shared T0-01 DB across backend restarts
+    # (same get/append semantics incl. TTL and max-turns trimming, lazy purge
+    # only, no threads); memory (default) is the original adapter and keeps
+    # the demo behavior byte-for-byte. Any unknown value falls back to memory.
+    if settings.session_backend == "sqlite":
+        sessions = SqliteSessionStore(
+            db_path=settings.resolved_sqlite_db_path,
+            max_turns=settings.session_max_turns,
+            ttl_seconds=settings.session_ttl_seconds,
+        )
+    else:
+        sessions = InMemorySessionStore(
+            max_turns=settings.session_max_turns,
+            ttl_seconds=settings.session_ttl_seconds,
+        )
+    # T0-02: audit backend switch (config rollback: AUDIT_BACKEND=jsonl).
+    # sqlite stores the same records in the shared SQLite DB and mirrors each
+    # line to the JSONL path /api/safety/metrics reads, so the metrics panel
+    # is identical under both backends; jsonl (default) is the original adapter.
+    if settings.audit_backend == "sqlite":
+        audit = AuditSqliteSink(
+            path=settings.resolved_audit_log_path,
+            db_path=settings.resolved_sqlite_db_path,
+        )
+    else:
+        audit = JSONLAuditSink(settings.resolved_audit_log_path)
     # Local generation client for the KrishokChat selector option. The endpoint
     # is OpenAI-compatible (llama.cpp or Ollama) and remains configuration-driven.
     # It gets its own timeout/output/retry bounds: CPU inference (~5 tok/s)

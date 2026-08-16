@@ -74,6 +74,16 @@ class Settings(BaseSettings):
     # T0-01: shared SQLite database for the future audit/sessions adapters.
     # Resolved relative to project root the same way resolved_audit_log_path is.
     sqlite_db_path: str = "backend/data/krishokchat.db"
+    # T0-02: audit adapter backend — "jsonl" (default; the original adapter
+    # and metrics-panel contract) or "sqlite" (same records in the shared
+    # SQLite DB, mirroring each line to the JSONL path the metrics endpoint
+    # reads). Any unknown value falls back to jsonl in the container.
+    audit_backend: str = "jsonl"
+    # T0-03: session store backend — "memory" (default; the original adapter)
+    # or "sqlite" (sessions persisted in the shared SQLite DB, surviving
+    # backend restarts; same TTL/max-turns semantics). Any unknown value
+    # falls back to memory in the container. Reuses session_ttl_seconds.
+    session_backend: str = "memory"
 
     # T0-04: request-ID header echoed by the middleware (and expected on
     # inbound requests), plus the log level for the JSON app logger.
