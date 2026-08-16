@@ -21,3 +21,15 @@ dependencies = [
     "torchvision>=0.28.0",
     "ultralytics>=8.4.116",
 ]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "live_llm: requires a running backend with a live LLM provider; skipped unless RUN_LIVE_E2E=1",
+]
