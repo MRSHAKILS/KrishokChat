@@ -223,8 +223,10 @@ export function QAPanel({
     }
   }, [listening]);
 
-  // Check local model availability once (Ollama running + model loaded)
-  useEffect(() => {
+  // Check local model availability (llama-server up + model loaded). Re-check
+  // on window focus so starting the local server mid-session reveals the
+  // "গবেষণা" option without a page reload. Any failure stays offline.
+  const checkLocalAvailability = useCallback(() => {
     getModels()
       .then((ms) => {
         const local = ms.find((m) => m.id === "krishokchat-4b");
@@ -232,6 +234,12 @@ export function QAPanel({
       })
       .catch(() => setLocalAvailable(false));
   }, []);
+
+  useEffect(() => {
+    checkLocalAvailability();
+    window.addEventListener("focus", checkLocalAvailability);
+    return () => window.removeEventListener("focus", checkLocalAvailability);
+  }, [checkLocalAvailability]);
 
   // Scroll management — scroll ONLY the chat container, never the page.
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -436,20 +444,30 @@ export function QAPanel({
         </div>
 
         <div className="flex shrink-0 items-center gap-3">
-          {localAvailable && (
-            <label className="flex items-center gap-1.5 text-[11px] text-ink-faint">
-              <span className="hidden sm:inline">উত্তরের ধরন</span>
-              <select
-                value={model}
-                onChange={(event) => setModel(event.target.value as "gemini" | "krishokchat-4b")}
-                className="rounded-md border rule bg-paper px-2 py-1 text-[11px] text-ink-soft focus:border-leaf focus:outline-none"
-                aria-label="উত্তরের ধরন নির্বাচন করুন"
-              >
-                <option value="gemini">সাধারণ</option>
-                <option value="krishokchat-4b">গবেষণা</option>
-              </select>
-            </label>
-          )}
+          {/* The selector is always visible so the choice is discoverable, but
+              the local option is disabled (and labeled offline) when the local
+              llama-server is not reachable — the remote lane stays the default. */}
+          <label
+            className="flex items-center gap-1.5 text-[11px] text-ink-faint"
+            title={
+              localAvailable
+                ? "গবেষণা: লোকাল ফাইন-টিউনড মডেল"
+                : "গবেষণা (অফলাইন): লোকাল সার্ভার চালু হলে পাওয়া যাবে"
+            }
+          >
+            <span className="hidden sm:inline">উত্তরের ধরন</span>
+            <select
+              value={model}
+              onChange={(event) => setModel(event.target.value as "gemini" | "krishokchat-4b")}
+              className="rounded-md border rule bg-paper px-2 py-1 text-[11px] text-ink-soft focus:border-leaf focus:outline-none"
+              aria-label="উত্তরের ধরন নির্বাচন করুন"
+            >
+              <option value="gemini">সাধারণ</option>
+              <option value="krishokchat-4b" disabled={!localAvailable}>
+                গবেষণা{!localAvailable ? " (অফলাইন)" : ""}
+              </option>
+            </select>
+          </label>
 
           {!isEmpty && !streaming && (
             <button
