@@ -102,6 +102,10 @@ class Settings(BaseSettings):
     # inbound requests), plus the log level for the JSON app logger.
     request_id_header: str = "X-Request-ID"
     log_level: str = "INFO"
+    # P0-13: audit retention window in days. The retention job documented in
+    # docs/production_readiness/retention_policy.md purges entries older than
+    # this (jsonl rotate + sqlite DELETE); the app itself never auto-deletes.
+    audit_retention_days: int = Field(default=90, ge=1)
 
     # P0-1: readiness gate. /readyz always reports per-check status and always
     # answers 200 by default (a load balancer may still scrape it); when this

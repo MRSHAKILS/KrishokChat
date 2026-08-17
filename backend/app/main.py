@@ -22,6 +22,7 @@ from app.api.middleware.request_id import RequestIDMiddleware
 # T0-07: optional API-key auth + rate limiting, attached ONLY to the /api/v1
 # surface via per-include dependencies (default-off — anonymous demo untouched).
 from app.api.middleware.api_key import build_v1_guard_state, rate_limit, require_api_key
+from app.core.bootstrap_checks import run_bootstrap_checks
 from app.core.config import settings
 from app.core.logging import setup_logging
 
@@ -94,6 +95,8 @@ def create_app(config=None) -> FastAPI:
     async def lifespan(app: FastAPI):
         # T0-04: JSON-structured app logging before the container starts emitting.
         setup_logging(app_settings.log_level)
+        # P0-4: advisory startup checks (warnings only, never fail the demo).
+        run_bootstrap_checks(app_settings)
         app.state.container = build_container(app_settings)
         app.state.settings = app_settings
         yield
