@@ -172,6 +172,8 @@ def build_container(settings: Settings) -> AppContainer:
         # (LOCAL_LLM_MAX_CONCURRENCY, default 2); cloud lanes pass through.
         local_lane_models=frozenset({LOCAL_MODEL_NAME}),
         local_lane_concurrency=settings.local_llm_max_concurrency,
+        # P0-7: corpus tag in demo-cache keys (invalidate on index rebuild).
+        corpus_version=settings.corpus_version,
     )
     vision = VisionPipeline(
         registry=ArtifactVisionRegistry(Path(settings.ml_assets_dir) / "vision"),

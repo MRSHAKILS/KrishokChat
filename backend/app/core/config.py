@@ -58,6 +58,11 @@ class Settings(BaseSettings):
     # serially per slot; concurrent queries queue on a pipeline semaphore
     # instead of stacking up inside the inference process. 1..16, default 2.
     local_llm_max_concurrency: int = Field(default=2, ge=1, le=16)
+    # P0-7: corpus generation tag baked into demo-cache keys. Bump this after
+    # rebuilding the retrieval index so stale cached demo answers are never
+    # replayed against a different knowledge base (old entries stay in the
+    # JSON file but become unreachable, and are pruned by size cap).
+    corpus_version: str = "2026-08"
 
     openrouter_api_key: str | None = None
     openrouter_model: str = "google/gemini-2.5-flash-lite"

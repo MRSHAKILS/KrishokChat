@@ -162,10 +162,16 @@ class DemoAnswerCache:
         crop: str | None = None,
         disease: str | None = None,
         model: str | None = None,
+        corpus: str | None = None,
     ) -> str:
-        # Crop/disease/model are part of the key so a stored answer is never
-        # replayed into a different context or a different model's lane.
-        return f"{crop or ''}|{disease or ''}|{model or ''}|{self.normalize(query)}"
+        # Crop/disease/model/corpus are part of the key so a stored answer is
+        # never replayed into a different context, a different model's lane,
+        # or a different retrieval-corpus generation (P0-7: bump CORPUS_VERSION
+        # after rebuilding the index to invalidate stale demo replays).
+        return (
+            f"{crop or ''}|{disease or ''}|{model or ''}|{corpus or ''}|"
+            f"{self.normalize(query)}"
+        )
 
     def get(self, key: str) -> dict[str, Any] | None:
         with self._lock:

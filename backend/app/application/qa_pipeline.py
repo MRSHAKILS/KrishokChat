@@ -80,6 +80,7 @@ class QAPipeline:
         rewriter: ConversationalQueryRewriter | None = None,
         local_lane_models: frozenset[str] | None = None,
         local_lane_concurrency: int | None = None,
+        corpus_version: str | None = None,
     ) -> None:
         self.safety = safety
         self.retriever = retriever
@@ -111,6 +112,9 @@ class QAPipeline:
         self.local_lane_concurrency = local_lane_concurrency
         self._local_semaphore: asyncio.Semaphore | None = None
         self._local_semaphore_lock = threading.Lock()
+        # P0-7: corpus-generation tag appended to demo-cache keys. None (old
+        # pipelines/tests) keeps the exact previous key shape.
+        self.corpus_version = corpus_version
 
     def _ensure_local_semaphore(self) -> asyncio.Semaphore:
         sem = self._local_semaphore
@@ -172,7 +176,13 @@ class QAPipeline:
         retrieval_query = request.query
         rewritten = False
         cache_key = (
-            self.answer_cache.key_for(request.query, request.crop, request.disease, request.model)
+            self.answer_cache.key_for(
+                request.query,
+                request.crop,
+                request.disease,
+                request.model,
+                self.corpus_version,
+            )
             if self.answer_cache is not None
             else None
         )

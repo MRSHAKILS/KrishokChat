@@ -93,6 +93,18 @@ class DemoAnswerCacheTests(unittest.TestCase):
             cache.key_for("ধান রোগ", model="krishokchat-4b"),
         )
 
+    def test_corpus_version_part_of_key(self) -> None:
+        """P0-7: a corpus-version bump must invalidate stored demo answers."""
+        cache = DemoAnswerCache(Path(tempfile.mkdtemp()) / "cache.json")
+        self.assertNotEqual(
+            cache.key_for("ধান রোগ", corpus="2026-08"),
+            cache.key_for("ধান রোগ", corpus="2026-09"),
+        )
+        self.assertEqual(
+            cache.key_for("ধান রোগ", corpus="2026-08"),
+            cache.key_for("ধান রোগ", corpus="2026-08"),
+        )
+
     def test_cap_evicts_oldest(self) -> None:
         cache = DemoAnswerCache(Path(tempfile.mkdtemp()) / "cache.json", max_entries=2)
         cache.put("a", {"answer": "1"})
