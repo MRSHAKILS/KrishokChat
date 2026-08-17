@@ -198,3 +198,41 @@ No route or frontend component should change for either replacement.
   `request.state` but not yet written into audit records (T0-05 emit lives
   in qa_pipeline.py — out of this task's scope); `RATE_LIMIT_ANON_ENABLED`
   is opt-in only (spec wording "=false — default off" read as the default).
+- Phase 0 (production hardening, `docs/PRODUCTION_ROLLOUT_PLAN.md`): done —
+  P0-1 `/readyz` (informational by default; `READINESS_STRICT=true` → 503;
+  local file/dir probes only, `_dir_writable_or_creatable` accepts lazy
+  SQLite dirs; `backend/tests/test_health_readiness.py`); P0-2 SSE keep-alive
+  (`SSE_HEARTBEAT_SECONDS=15.0`, `: keepalive` comment on silence,
+  `backend/tests/test_sse_heartbeat.py`); P0-3 uniform 500 envelope
+  (`{"error","request_id","detail"}`, tracebacks to JSON logs only; request
+  ID survives via ASGI scope state because ServerErrorMiddleware runs
+  outside the request-ID middleware and its 500 bypasses the middleware's
+  send wrapper, so the handler echoes the header itself;
+  `backend/tests/test_exception_envelope.py`); P0-4 `.env.example` sync +
+  advisory bootstrap checks (`core/bootstrap_checks.py`, warnings only,
+  never fails boot; `backend/tests/test_bootstrap_checks.py`); P0-5
+  `DOCS_ENABLED=false` hides docs routes; P0-6 local-lane concurrency guard
+  (lazy `asyncio.Semaphore`, `LOCAL_LLM_MAX_CONCURRENCY=2` 1..16, wait-queued
+  not 429, no-op for non-local lanes; `backend/tests/test_local_lane_concurrency.py`);
+  P0-7 `CORPUS_VERSION` in demo-cache keys (bump after index rebuild);
+  P0-8 frontend security headers (no custom Cache-Control — Next 16 serves
+  its own immutable static headers; verified live on dev server); P0-9
+  dependency audit report (backend: 0 vulns/134 pkgs; frontend: 1 high
+  transitive build-time `nanoid` via postcss — unreachable, remediation
+  tracked for Phase 1); P0-10 golden set extended to 50 items with 4
+  prompt-injection cases (`golden_category=injection`, recorded
+  `prompt_injection` categories, terminal-refusal invariants in
+  `replay_golden.py`; `scripts/extend_golden_injection.py` one-shot adder);
+  P0-11 no-op with justification (all 10 `print()` live in legacy CLI
+  build/smoke scripts under `services/advisory/`; request-path code is
+  logger-only); P0-12 `scripts/start_prod.ps1` (uvicorn `--proxy-headers
+  --timeout-graceful-shutdown 30 --limit-concurrency 32` + `pnpm start`,
+  never kills existing listeners) + `logrotate.krishokchat` sample + README
+  production section; P0-13 `docs/production_readiness/retention_policy.md`
+  (`AUDIT_RETENTION_DAYS=90`; app never auto-deletes; operator runbooks);
+  P0-14 this entry. Full suite 273 passed, 7 skipped, 79 subtests; golden
+  replay 50/50 invariants PASS; `pnpm build` clean (21 routes). Open
+  questions: user's live demo backend on :8000 predates P0 code (changes
+  take effect on next restart); llama-server on :11435 still running from
+  the model-selector verification; `nanoid` override decision (Phase 1 W-6);
+  `READINESS_STRICT` remains default-off.
