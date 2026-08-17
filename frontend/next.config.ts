@@ -10,6 +10,24 @@ const nextConfig: NextConfig = {
   experimental: {
     proxyTimeout: 300_000,
   },
+  // P0-8: baseline security headers on every route. Permissions-Policy
+  // deliberately omits microphone/camera — the voice-input demo must keep
+  // working. (No custom Cache-Control here: Next 16 already serves
+  // /_next/static with its own immutable headers, and overriding them
+  // trips the dev-mode warning in next.config validation.)
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "no-referrer" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Permissions-Policy", value: "geolocation=(), payment=()" },
+        ],
+      },
+    ];
+  },
   async rewrites() {
     return [
       { source: "/api/:path*", destination: `${backendUrl}/api/:path*` },
