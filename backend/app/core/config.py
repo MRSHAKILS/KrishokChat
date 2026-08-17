@@ -54,6 +54,10 @@ class Settings(BaseSettings):
     # CPU prompt-eval phase (the dominant cost on this machine).
     local_llm_source_limit: int = 3
     local_llm_source_chars: int = 800
+    # P0-6: local-lane concurrency ceiling. llama.cpp serves requests
+    # serially per slot; concurrent queries queue on a pipeline semaphore
+    # instead of stacking up inside the inference process. 1..16, default 2.
+    local_llm_max_concurrency: int = Field(default=2, ge=1, le=16)
 
     openrouter_api_key: str | None = None
     openrouter_model: str = "google/gemini-2.5-flash-lite"

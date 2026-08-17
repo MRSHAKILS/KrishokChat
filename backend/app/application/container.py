@@ -168,6 +168,10 @@ def build_container(settings: Settings) -> AppContainer:
             if settings.query_rewrite_enabled
             else None
         ),
+        # P0-6: the local llama.cpp lane is gated by the pipeline semaphore
+        # (LOCAL_LLM_MAX_CONCURRENCY, default 2); cloud lanes pass through.
+        local_lane_models=frozenset({LOCAL_MODEL_NAME}),
+        local_lane_concurrency=settings.local_llm_max_concurrency,
     )
     vision = VisionPipeline(
         registry=ArtifactVisionRegistry(Path(settings.ml_assets_dir) / "vision"),

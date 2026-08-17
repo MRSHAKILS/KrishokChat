@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import asyncio
+import threading
 from collections.abc import AsyncIterator, Awaitable, Callable
+from contextlib import asynccontextmanager
 
 from app.application.generation import GroundedAnswerGenerator, REFERRAL
 from app.application.query_builder import build_retrieval_query
@@ -76,6 +78,8 @@ class QAPipeline:
         generation_tuning: dict[str, dict[str, int]] | None = None,
         answer_cache: DemoAnswerCache | None = None,
         rewriter: ConversationalQueryRewriter | None = None,
+        local_lane_models: frozenset[str] | None = None,
+        local_lane_concurrency: int | None = None,
     ) -> None:
         self.safety = safety
         self.retriever = retriever
@@ -98,6 +102,34 @@ class QAPipeline:
         # A1 conversational query rewriting (follow-ups -> standalone
         # retrieval queries). None = raw query retrieval (default).
         self.rewriter = rewriter
+        # P0-6: local-lane concurrency guard. Model names in
+        # ``local_lane_models`` (the llama.cpp lane) are gated by a lazily
+        # created asyncio.Semaphore sized by ``local_lane_concurrency``;
+        # extra requests queue instead of overloading the inference process.
+        # None concurrency (default) = guard entirely off, behavior unchanged.
+        self.local_lane_models = local_lane_models or frozenset()
+        self.local_lane_concurrency = local_lane_concurrency
+        self._local_semaphore: asyncio.Semaphore | None = None
+        self._local_semaphore_lock = threading.Lock()
+
+    def _ensure_local_semaphore(self) -> asyncio.Semaphore:
+        sem = self._local_semaphore
+        if sem is None:
+            with self._local_semaphore_lock:
+                if self._local_semaphore is None:
+                    self._local_semaphore = asyncio.Semaphore(self.local_lane_concurrency)
+                sem = self._local_semaphore
+        return sem
+
+    @asynccontextmanager
+    async def _local_lane_guard(self, model: str | None) -> AsyncIterator[None]:
+        """No-op for non-local lanes; otherwise hold the lane semaphore for
+        the whole generation stage (wait-queued, never 429)."""
+        if self.local_lane_concurrency is None or model not in self.local_lane_models:
+            yield
+            return
+        async with self._ensure_local_semaphore():
+            yield
 
     def _generator_for(self, model: str | None) -> GroundedAnswerGenerator:
         if model and model in self.generation_clients:
@@ -212,25 +244,29 @@ class QAPipeline:
 
             await emit(PipelineStage.GENERATION, StageStatus.START)
             with stage_timer("generation", timings):
-                generator = self._generator_for(request.model)
-                generation_lane = getattr(generator, "client", None) or generator
-                if on_event and sources:
-                    chunks: list[str] = []
-                    async for chunk in generator.stream(request.query, context, sources):
-                        chunks.append(chunk)
-                        await on_event(
-                            PipelineEvent(
-                                stage=PipelineStage.GENERATION,
-                                status=StageStatus.COMPLETE,
-                                event_type="token",
-                                text=chunk,
+                # P0-6: local-lane gate around the generation stage (both the
+                # streaming and non-streaming paths). Non-local lanes pass
+                # through without touching the semaphore.
+                async with self._local_lane_guard(request.model):
+                    generator = self._generator_for(request.model)
+                    generation_lane = getattr(generator, "client", None) or generator
+                    if on_event and sources:
+                        chunks: list[str] = []
+                        async for chunk in generator.stream(request.query, context, sources):
+                            chunks.append(chunk)
+                            await on_event(
+                                PipelineEvent(
+                                    stage=PipelineStage.GENERATION,
+                                    status=StageStatus.COMPLETE,
+                                    event_type="token",
+                                    text=chunk,
+                                )
                             )
+                        generated = await generator.generate_from_text(
+                            "".join(chunks), sources, mode="grounded_stream"
                         )
-                    generated = await generator.generate_from_text(
-                        "".join(chunks), sources, mode="grounded_stream"
-                    )
-                else:
-                    generated = await generator.generate(request.query, context, sources)
+                    else:
+                        generated = await generator.generate(request.query, context, sources)
                 await emit(PipelineStage.GENERATION, StageStatus.COMPLETE, generated.model)
 
             await emit(PipelineStage.VERIFIER, StageStatus.START)
