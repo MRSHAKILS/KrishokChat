@@ -1,0 +1,20 @@
+# P0-12: logrotate sample for the single-box KrishokChat deployment.
+# Target: any Linux box (Debian/Ubuntu) running the backend via systemd or
+# nohup, with uvicorn/next output redirected to these files.
+#
+# Install: sudo cp docs/production_readiness/logrotate.krishokchat /etc/logrotate.d/krishokchat
+# (paths below assume /var/log/krishokchat; adjust to your setup)
+
+/var/log/krishokchat/prod-uvicorn.log
+/var/log/krishokchat/prod-uvicorn.err.log
+/var/log/krishokchat/prod-next.log
+/var/log/krishokchat/prod-next.err.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    copytruncate
+    create 0640 krishokchat krishokchat
+}

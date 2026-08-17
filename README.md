@@ -409,18 +409,49 @@ uv run python -c "from app.main import app; print(app.title, app.version)"
 ```
 
 Integration tests live in `backend/tests/` (`test_api.py`, `test_pipeline.py`,
-`test_vision.py`). Run the offline scripts under `backend/scripts/` for
-retrieval, classifier, and pipeline checks (e.g. `test_qa_pipeline.py`,
-`test_bm25_retrieval.py`). `pytest` is not a declared dependency yet; the tests
-are runnable with the venv's interpreter once added.
+`test_vision.py`, plus the T0/P0 hardening suites). Run the offline scripts
+under `backend/scripts/` for retrieval, classifier, and pipeline checks (e.g.
+`replay_golden.py --assert-invariants`, `test_bm25_retrieval.py`).
 
 Frontend checks:
 
 ```bash
 cd frontend
-pnpm lint
 pnpm build
 ```
+
+## Production Deployment (single box)
+
+Phase 0 hardening is documented in `docs/PRODUCTION_ROLLOUT_PLAN.md` (full
+roadmap with Phase 1–3). The ready-to-use single-box path:
+
+```powershell
+# 1. One-time build + env
+cd backend;  uv sync
+cd ..\frontend;  pnpm build
+
+# 2. Start both services (uvicorn with proxy-headers + graceful shutdown +
+#    bounded concurrency; Next production server)
+powershell -ExecutionPolicy Bypass -File scripts/start_prod.ps1
+```
+
+Runtime controls added in Phase 0:
+
+| Surface | What it does |
+|---|---|
+| `GET /health` | Liveness (always 200 when the process is up) |
+| `GET /readyz` | Readiness per-check (bm25 index, corpus, dense index, sqlite/audit dirs). Informational by default; `READINESS_STRICT=true` → 503 on failure |
+| `DOCS_ENABLED=false` | Hides `/docs`, `/redoc`, `/openapi.json` |
+| SSE heartbeat | `/api/qa/stream` emits `: keepalive` every 15 s of silence (proxy/NAT safe) |
+| 500 envelope | Uniform `{"error","request_id","detail"}` — no traceback in bodies |
+| `LOCAL_LLM_MAX_CONCURRENCY` | Queues local-lane generations (default 2) instead of overloading llama.cpp |
+| `CORPUS_VERSION` | Bumps demo-cache keys after an index rebuild |
+| Frontend headers | `nosniff`, `no-referrer`, `X-Frame-Options: DENY`, scoped `Permissions-Policy` |
+
+Security/reliability notes: dependency audit report in
+`docs/production_readiness/dependency_audit_2026-08-17.md`; audit-log
+retention policy in `docs/production_readiness/retention_policy.md`; sample
+log rotation in `docs/production_readiness/logrotate.krishokchat`.
 
 ## Known Limitations
 
@@ -435,8 +466,6 @@ pnpm build
 - Vision artifacts are classification-only. Object detection (bounding boxes)
   is supported by the ONNX export path but no detection weights are checked in,
   so nothing claims boxes.
-- `pytest` is not in `backend/pyproject.toml`; add it as a dev dependency
-  before treating `backend/tests/` as a runnable suite.
 - Ollama is not installed in the dev environment; the default adapter is
   OpenRouter.
 
