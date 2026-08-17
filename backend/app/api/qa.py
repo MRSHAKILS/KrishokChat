@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 from typing import Annotated
 
@@ -15,6 +16,12 @@ from app.models.schemas import AgentStageEvent, QARequest, QAResponse, SourceNod
 from app.api.dependencies import get_container
 
 router = APIRouter()
+
+# P0-2: SSE keep-alive interval. When the pipeline produces no event for this
+# long (cold local model, slow provider), the route emits an SSE comment line
+# so proxies/NAT do not drop the idle connection. Comments are ignored by
+# EventSource clients, so the event protocol is unchanged.
+SSE_HEARTBEAT_SECONDS = 15.0
 
 
 ContainerDep = Annotated[AppContainer, Depends(get_container)]
@@ -117,8 +124,22 @@ async def qa_endpoint(payload: QARequest, container: ContainerDep) -> QAResponse
 
 @router.post("/api/qa/stream")
 async def qa_stream(payload: QARequest, container: ContainerDep) -> StreamingResponse:
+    # P0-2: SSE keep-alive. Long generation gaps (cold local model, slow
+    # provider) otherwise get cut by proxies/NAT that drop idle connections.
+    # If the pipeline produces nothing for SSE_HEARTBEAT_SECONDS we emit a
+    # comment line (ignored by EventSource and by the frontend SSE parser),
+    # which keeps the connection alive without changing the event protocol.
+    pipeline_items = container.qa.stream(_input(payload))
+
     async def event_generator():
-        async for item in container.qa.stream(_input(payload)):
+        while True:
+            try:
+                item = await asyncio.wait_for(anext(pipeline_items), SSE_HEARTBEAT_SECONDS)
+            except StopAsyncIteration:
+                break
+            except asyncio.TimeoutError:
+                yield ": keepalive\n\n"
+                continue
             if isinstance(item, PipelineEvent):
                 if item.event_type == "token":
                     yield f"token: {json.dumps({'text': item.text or ''}, ensure_ascii=False)}\n\n"
