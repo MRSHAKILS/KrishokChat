@@ -1,5 +1,6 @@
-from contextlib import asynccontextmanager
+import logging
 import os
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import APIRouter, Depends, FastAPI
@@ -23,6 +24,8 @@ from app.api.middleware.request_id import RequestIDMiddleware
 from app.api.middleware.api_key import build_v1_guard_state, rate_limit, require_api_key
 from app.core.config import settings
 from app.core.logging import setup_logging
+
+logger = logging.getLogger("krishokchat.http")
 
 # T0-07: every router mounted under /api/* today is mirrored under /api/v1/*.
 # /api/v1 is the stable, versioned API contract; the legacy paths remain as
@@ -138,6 +141,28 @@ def create_app(config=None) -> FastAPI:
     application.state.rate_limiter = guard_state["rate_limiter"]
     for router in V1_ROUTERS:
         _mount_v1(application, router)
+
+    # P0-3: last-resort exception envelope. Any unhandled error becomes a
+    # uniform 500 JSON with the request ID (never a raw traceback in the
+    # body; stack traces go to the JSON app log instead). The request-ID
+    # middleware sits outside this handler, so the ID is always available.
+    @application.exception_handler(Exception)
+    async def unhandled_exception_handler(request, exc):
+        logger.exception("unhandled error on %s %s", request.method, request.url.path)
+        request_id = getattr(request.state, "request_id", None) or None
+        # The 500 response bypasses the request-ID middleware's send wrapper
+        # (ServerErrorMiddleware sends via the raw send), so echo the header
+        # here to keep body ID and header ID consistent.
+        headers = {app_settings.request_id_header: request_id} if request_id else None
+        return JSONResponse(
+            status_code=500,
+            headers=headers,
+            content={
+                "error": "internal_error",
+                "request_id": request_id,
+                "detail": "An unexpected error occurred. Please try again.",
+            },
+        )
 
     @application.get("/health")
     async def health_check():

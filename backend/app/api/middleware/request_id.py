@@ -36,6 +36,11 @@ class RequestIDMiddleware:
             return
 
         request_id = self._resolve_request_id(scope)
+        # P0-3: also expose the ID via ASGI scope state. Exception handlers run
+        # OUTSIDE this middleware (Starlette's ServerErrorMiddleware catches
+        # after our finally already reset the contextvar), so the contextvar
+        # alone would be blank in 500 envelopes — scope state survives.
+        scope.setdefault("state", {})["request_id"] = request_id
         token = request_id_var.set(request_id)
         try:
             await self.app(scope, receive, self._send_with_request_id(send, request_id))
