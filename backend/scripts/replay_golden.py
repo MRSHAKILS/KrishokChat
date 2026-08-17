@@ -310,6 +310,13 @@ def check_invariants(
 
 
 def main(argv: list[str] | None = None) -> int:
+    # Windows consoles default to cp1252 and cannot encode the Bengali output;
+    # reconfigure so the golden gate runs identically on any platform.
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError):
+            pass
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument(
         "--assert-invariants",
