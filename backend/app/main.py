@@ -1,7 +1,10 @@
 from contextlib import asynccontextmanager
+import os
+from pathlib import Path
 
 from fastapi import APIRouter, Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from fastapi.routing import APIRoute
 
 from app.application.container import build_container
@@ -135,7 +138,60 @@ def create_app(config=None) -> FastAPI:
     async def health_check():
         return {"status": "ok", "version": app_settings.app_version}
 
+    # P0-1: readiness — per-check status for load balancers/orchestrators.
+    # Informational by default (always 200, "degraded" lists soft gaps);
+    # READINESS_STRICT=true turns failed checks into 503. Checks are local
+    # file/dir probes only — no network calls, no model loading.
+    @application.get("/readyz")
+    async def readyz_check():
+        checks: list[dict[str, object]] = []
+        failed: list[str] = []
+
+        def add(name: str, ok: bool, detail: str) -> None:
+            checks.append({"name": name, "ok": ok, "detail": detail})
+            if not ok:
+                failed.append(name)
+
+        bm25_index = Path(app_settings.rag_index_path) / "indexes" / "bm25_index.pkl"
+        add("bm25_index", bm25_index.exists(), str(bm25_index))
+        add("rag_corpus", Path(app_settings.rag_corpus_path).exists(), str(app_settings.rag_corpus_path))
+        dense = Path(app_settings.rag_dense_faiss_path)
+        dense_ok = dense.exists() or app_settings.retrieval_bm25_only or not app_settings.openrouter_api_key
+        add(
+            "dense_index",
+            dense_ok,
+            "bm25-only fallback" if not dense.exists() else str(dense),
+        )
+        for name, path in (
+            ("sqlite_dir", app_settings.resolved_sqlite_db_path.parent),
+            ("audit_dir", app_settings.resolved_audit_log_path.parent),
+        ):
+            ok = _dir_writable_or_creatable(path)
+            add(name, ok, str(path))
+
+        ready = not failed
+        payload = {
+            "status": "ready" if ready else "degraded",
+            "ready": ready,
+            "version": app_settings.app_version,
+            "checks": checks,
+            "degraded": failed,
+        }
+        if app_settings.readiness_strict and not ready:
+            return JSONResponse(status_code=503, content=payload)
+        return payload
+
     return application
+
+
+def _dir_writable_or_creatable(path: Path) -> bool:
+    """True when ``path`` is writable, or when it does not exist yet but its
+    nearest existing ancestor is writable (SQLite sinks create their directory
+    lazily on first write, so a fresh checkout must count as ready)."""
+    probe = path
+    while not probe.exists() and probe != probe.parent:
+        probe = probe.parent
+    return probe.is_dir() and os.access(probe, os.W_OK)
 
 
 app = create_app()

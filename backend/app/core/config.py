@@ -90,6 +90,12 @@ class Settings(BaseSettings):
     request_id_header: str = "X-Request-ID"
     log_level: str = "INFO"
 
+    # P0-1: readiness gate. /readyz always reports per-check status and always
+    # answers 200 by default (a load balancer may still scrape it); when this
+    # flag is true a failed check returns 503 so orchestrators can restart the
+    # box. Default false keeps the demo behavior identical.
+    readiness_strict: bool = False
+
     # P3 hybrid retrieval: force the BM25-only fallback even when the dense
     # (FAISS/BGE-M3) index exists. The dense channel also falls back to BM25
     # automatically whenever the OpenRouter key or index is unavailable.
