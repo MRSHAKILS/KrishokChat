@@ -120,6 +120,18 @@ class Settings(BaseSettings):
     llm_circuit_max_failures: int = 3
     llm_circuit_cooldown_seconds: float = 30.0
 
+    # T0-07: API-key auth + rate limits for the /api/v1 surface. All default
+    # off — the anonymous demo never presents keys and is never limited
+    # (AGENTS.md §2.1). Keys come from the environment as a comma-separated
+    # literal (the SQLite-backed key store is a documented follow-up on
+    # T0-01); they are never logged in full — only a label + sha256 hash.
+    api_key_enabled: bool = False
+    api_keys: str = ""
+    # Per-key (and per-anonymous-IP, see rate_limit_anon_enabled) sliding
+    # window cap on /api/v1/* requests per minute. 0 disables the limiter.
+    rate_limit_per_minute: int = 60
+    rate_limit_anon_enabled: bool = False
+
     # P5 voice lane — read-aloud (TTS). edge-tts (keyless, free) synthesizes
     # through Microsoft Edge's Read Aloud service; the demo machine has no
     # Bengali system voice, so this is what makes শুনুন read real Bengali.

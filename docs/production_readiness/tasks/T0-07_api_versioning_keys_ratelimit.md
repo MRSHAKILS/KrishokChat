@@ -1,6 +1,6 @@
 # T0-07 — API Versioning + API Keys + Rate Limits + Pagination
 
-- **Status:** NOT STARTED
+- **Status:** DONE (2026-08-17)
 - **Tier:** 0 (demo-safe, pre-capstone)
 - **Depends on:** nothing (pairs naturally with T0-02's DB; keys may be stored in SQLite once T0-01 exists)
 - **Blocks:** nothing

@@ -6,7 +6,7 @@ only. New routes only; existing demo endpoints are untouched and ungated.
 
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException, Response, status
+from fastapi import APIRouter, HTTPException, Query, Response, status
 
 from app.api.dependencies import HistoryServiceDep, RequiredUserDep
 from app.application.history import HistoryUnavailableError
@@ -19,13 +19,22 @@ router = APIRouter(prefix="/api/history", tags=["history"])
 def list_history(
     claims: RequiredUserDep,
     service: HistoryServiceDep,
+    # T0-07: optional pagination. page is 1-based; page_size=0 (the default)
+    # returns the full list exactly as before, so existing clients see no
+    # change. The response gains a `total` count (additive field only).
+    page: int = Query(default=1, ge=1),
+    page_size: int = Query(default=0, ge=0),
 ) -> dict:
     """List the current user's saved queries, newest first."""
     try:
         items = service.list(claims["sub"])
     except HistoryUnavailableError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
-    return {"items": items, "enabled": True}
+    total = len(items)
+    if page_size:
+        start = (page - 1) * page_size
+        items = items[start : start + page_size]
+    return {"items": items, "enabled": True, "total": total}
 
 
 @router.post("", response_model=SavedQueryOut, status_code=status.HTTP_201_CREATED)

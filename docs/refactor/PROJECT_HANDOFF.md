@@ -176,3 +176,25 @@ No route or frontend component should change for either replacement.
   `model` reflects the provider that actually answered — the local
   registry lane still reports the global configured provider. Full suite
   216 passed, 7 skipped.
+- T0-07 (API versioning + API keys + rate limits + pagination): done —
+  every router under `/api/*` is mirrored under `/api/v1/*` (stable
+  contract; legacy paths are byte-identical compatibility aliases) via
+  `_mount_v1` in `main.py` (FastAPI cannot prefix-rewrite absolute paths,
+  so each APIRoute is re-registered with the `/api` segment replaced).
+  Optional guard `backend/app/api/middleware/api_key.py`: `require_api_key`
+  (Bearer or X-API-Key; 401 + WWW-Authenticate; constant-time compare;
+  label `env-key-<n>` + sha256 hash logged, never the key) and `rate_limit`
+  (stdlib `SlidingWindowRateLimiter`, per-key or per-anonymous-IP, 429 +
+  Retry-After) attach ONLY to the v1 mounts via per-include dependencies.
+  `API_KEY_ENABLED=false`, `API_KEYS=` (comma-separated env literal — the
+  SQLite-backed key store is a documented follow-up), `RATE_LIMIT_PER_MINUTE=60`,
+  `RATE_LIMIT_ANON_ENABLED=false` in config + `.env.example`; both switches
+  off = limiter pass-through, anonymous demo untouched. Pagination on
+  `/api/history` GET only (the sole list endpoint; no audit list route
+  exists): `page` (1-based, default 1) + `page_size` (default 0 = full list,
+  identical to today) + additive `total`. Tests in
+  `backend/tests/test_api_versioning_keys_ratelimit.py` (30). Full suite
+  246 passed, 7 skipped. Open questions: key label is stashed on
+  `request.state` but not yet written into audit records (T0-05 emit lives
+  in qa_pipeline.py — out of this task's scope); `RATE_LIMIT_ANON_ENABLED`
+  is opt-in only (spec wording "=false — default off" read as the default).
