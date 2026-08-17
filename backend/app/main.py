@@ -100,6 +100,11 @@ def create_app(config=None) -> FastAPI:
         description="Safety-aware Bengali agricultural AI assistant",
         version=app_settings.app_version,
         lifespan=lifespan,
+        # P0-5: DOCS_ENABLED=false hides /docs, /redoc and /openapi.json so a
+        # production box does not expose its API surface.
+        docs_url="/docs" if app_settings.docs_enabled else None,
+        redoc_url="/redoc" if app_settings.docs_enabled else None,
+        openapi_url="/openapi.json" if app_settings.docs_enabled else None,
     )
     application.add_middleware(
         CORSMiddleware,

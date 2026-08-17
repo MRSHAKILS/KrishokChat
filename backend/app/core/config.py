@@ -19,6 +19,10 @@ class Settings(BaseSettings):
     app_name: str = "KrishokChat Advisory System"
     app_version: str = "0.2.0"
     environment: str = "development"
+    # P0-5: docs toggle. DOCS_ENABLED=true (default) keeps /docs, /redoc and
+    # /openapi.json as before; when false the FastAPI app is created without
+    # those routes so a production box can avoid exposing the API surface.
+    docs_enabled: bool = True
     debug: bool = False
 
     ollama_base_url: str = "http://localhost:11434"

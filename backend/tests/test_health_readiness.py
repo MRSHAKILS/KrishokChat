@@ -99,6 +99,24 @@ class HealthReadinessTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertLess(elapsed, 5.0)
 
+    # --- P0-5: docs toggle ------------------------------------------------
+
+    def test_docs_enabled_by_default(self) -> None:
+        with TestClient(create_app()) as client:
+            self.assertEqual(client.get("/docs").status_code, 200)
+            self.assertEqual(client.get("/redoc").status_code, 200)
+            self.assertEqual(client.get("/openapi.json").status_code, 200)
+
+    def test_docs_disabled_hides_api_surface(self) -> None:
+        config = Settings(docs_enabled=False)
+        with TestClient(create_app(config)) as client:
+            self.assertEqual(client.get("/docs").status_code, 404)
+            self.assertEqual(client.get("/redoc").status_code, 404)
+            self.assertEqual(client.get("/openapi.json").status_code, 404)
+            # Functional routes are unaffected.
+            self.assertEqual(client.get("/health").status_code, 200)
+            self.assertEqual(client.get("/readyz").status_code, 200)
+
 
 if __name__ == "__main__":
     unittest.main()
