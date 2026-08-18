@@ -17,6 +17,7 @@ import { APP, RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 import { AgentTrace } from "@/components/agent-trace";
 import { QA_STAGES, type RailEvent } from "@/components/detect/pipeline-rail";
+import { BusinessModelSection } from "@/components/landing/business-model-section";
 import { getWeather, registerHelpline } from "@/lib/api";
 import { safetyLabel, TONE_BADGE, AGRI_DISTRICTS } from "@/lib/safety-labels";
 
@@ -78,6 +79,7 @@ export default function LandingPage() {
       <AudioVoiceAccessibilitySection />
       <WeatherAndHelplineSection />
       <InstitutionalTrustSection />
+      <BusinessModelSection />
       <AgriFAQSection />
       <DemoCTA />
     </div>

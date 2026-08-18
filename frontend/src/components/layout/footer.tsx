@@ -5,7 +5,7 @@ import { APP, HELPLINE, LINKS } from "@/lib/constants";
 const NAV_SECTIONS = [
   { title: "পণ্য", links: [{ href: "/chat", label: "চ্যাট" }, { href: "/detect", label: "রোগ নির্ণয়" }, { href: "/analytics", label: "পরিসংখ্যান" }] },
   { title: "গবেষণা", links: [{ href: "/research", label: "পদ্ধতি" }, { href: "/research/safety", label: "নিরাপত্তা" }, { href: "/research/benchmark", label: "ফলাফল" }, { href: "/library", label: "লাইব্রেরি" }] },
-  { title: "প্রতিষ্ঠান", links: [{ href: "/data", label: "উপাত্ত" }, { href: "/about", label: "দল ও পরিচিতি" }, { href: "/contact", label: "যোগাযোগ" }] },
+  { title: "প্রতিষ্ঠান", links: [{ href: "/data", label: "উপাত্ত" }, { href: "/business", label: "ব্যবসায়িক মডেল" }, { href: "/about", label: "দল ও পরিচিতি" }, { href: "/contact", label: "যোগাযোগ" }] },
 ];
 
 const RESOURCES = [

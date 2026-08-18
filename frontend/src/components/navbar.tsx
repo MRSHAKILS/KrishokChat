@@ -26,6 +26,7 @@ const NAV = [
 const MORE = [
   { href: "/analytics", label: "লাইভ পরিসংখ্যান", desc: "এজেন্ট সিদ্ধান্ত ও স্থানীয় অডিট" },
   { href: "/research", label: "গবেষণা ও ফলাফল", desc: "পেপার, benchmark ও নিরাপত্তা নকশা" },
+  { href: "/business", label: "ব্যবসায়িক মডেল", desc: "টেকসই আয় ও অংশীদারিত্ব" },
   { href: "/data", label: "উপাত্ত", desc: "ডেটাসেট ও গবেষণা উপাত্ত" },
   { href: "/about", label: "পরিচিতি", desc: "প্রকল্প ও প্রতিষ্ঠান" },
   { href: "/team", label: "দল", desc: "গবেষণা দল ও কৃতিত্ব" },
