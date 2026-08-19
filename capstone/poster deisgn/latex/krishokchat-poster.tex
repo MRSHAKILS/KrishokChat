@@ -1,12 +1,10 @@
 % ============================================================
-%  KrishokChat — Capstone Design & Innovation Challenge poster
-%  A0 LANDSCAPE (118.9 x 84.1 cm) · 5 columns
-%  Theme: gemini + custom "krishok" colours
+%  KrishokChat -- Capstone Design & Innovation Challenge poster
+%  A0 LANDSCAPE (118.9 x 84.1 cm) -- 5 columns
+%  Theme: gemini + custom krishok colours
 %
-%  >>> COMPILE WITH LUALATEX <<<   (MiKTeX fontconfig fix, 2026-08-19)
-%
-%  Content: POSTER_CONTENT_PLAN.md (approved)
-%  Numbers: poster_stats.yaml (single source of truth)
+%  COMPILE WITH:  lualatex -interaction=nonstopmode krishokchat-poster.tex
+%  (MiKTeX fontconfig fix 2026-08-19; XeTeX crashes on this install)
 % ============================================================
 
 \documentclass[final]{beamer}
@@ -15,19 +13,22 @@
 \usetheme{gemini}
 \usecolortheme{krishok}
 
+% ---------- Packages ----------
 \usepackage{fontspec}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{colortbl}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta,positioning}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepackage{anyfontsize}
 \usepackage{ragged2e}
 \usepackage{qrcode}
+\usepackage{microtype}
 
-% Body font: Regular weight for print legibility (theme loads Light)
+% ---------- Fonts: override theme Light with Regular for print legibility ----------
 \setsansfont{Lato}[
   Path=./fonts/,
   UprightFont=Lato-Regular.ttf,
@@ -35,8 +36,10 @@
   ItalicFont=Lato-Italic.ttf,
   BoldItalicFont=Lato-Bold.ttf
 ]
+\setbeamerfont{block title}{size=\large,series=\bfseries}
+\setbeamerfont{block body}{size=\normalsize}
 
-% ---------- Bengali ----------
+% ---------- Bengali font ----------
 \newfontfamily\bengalifont{Noto Serif Bengali}[
   Path=./fonts/,
   UprightFont=NotoSerifBengali-Regular.ttf,
@@ -45,28 +48,27 @@
 ]
 \newcommand{\bn}[1]{{\bengalifont #1}}
 
+% ---------- Image paths ----------
 \graphicspath{{./img/}{./assets/}}
 
-% extra chart colour (stays in the grey-green family)
+% ---------- Extra colours ----------
 \definecolor{barGrey}{HTML}{AEBBAF}
 
 % ====================
-% Column geometry — 5 columns
-% (N+1)*sepwidth + N*colwidth = paperwidth
-% 6(0.018) + 5(0.1784) = 0.108 + 0.892 = 1.000
+% Column geometry -- 5 equal columns
+% 6*(0.017) + 5*(0.1796) = 0.102 + 0.898 = 1.000
 % ====================
-\newlength{\sepwidth}\setlength{\sepwidth}{0.018\paperwidth}
-\newlength{\colwidth}\setlength{\colwidth}{0.1784\paperwidth}
-\newlength{\ribbonwidth}\setlength{\ribbonwidth}{0.964\paperwidth}
+\newlength{\sepwidth}\setlength{\sepwidth}{0.017\paperwidth}
+\newlength{\colwidth}\setlength{\colwidth}{0.1796\paperwidth}
+\newlength{\ribbonwidth}\setlength{\ribbonwidth}{0.966\paperwidth}
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
 
 % ====================
-% Compact headline
+% Headline
 % ====================
 \setbeamerfont{headline title}{size=\LARGE,series=\bfseries}
 \setbeamerfont{headline author}{size=\large}
-\setbeamerfont{headline institute}{size=\normalsize}
-\setbeamerfont{block title}{size=\Large,series=\bfseries}
+\setbeamerfont{headline institute}{size=\small}
 
 \setbeamertemplate{headline}{
   \begin{beamercolorbox}{headline}
@@ -75,25 +77,25 @@
       \begin{column}{0.10\paperwidth}
         \centering\includegraphics[height=6.5cm]{assets/NSU_Logo.png}
       \end{column}
-      \begin{column}{0.82\paperwidth}
+      \begin{column}{0.80\paperwidth}
         \centering
-        {\usebeamerfont{headline title}\usebeamercolor[fg]{headline title}\inserttitle\\[0.8ex]}
-        {\usebeamerfont{headline author}\usebeamercolor[fg]{headline author}\insertauthor\\[0.6ex]}
+        {\usebeamerfont{headline title}\usebeamercolor[fg]{headline title}\inserttitle\\[0.6ex]}
+        {\usebeamerfont{headline author}\usebeamercolor[fg]{headline author}\insertauthor\\[0.5ex]}
         {\usebeamerfont{headline institute}\usebeamercolor[fg]{headline institute}\insertinstitute}
       \end{column}
-      \begin{column}{0.08\paperwidth}
+      \begin{column}{0.10\paperwidth}
         \centering
-        {\color{leaf}\fontsize{20}{24}\selectfont\bfseries CAPSTONE\\2026\\[1ex]\normalfont\vspace{-1ex}\fontsize{16}{20}\selectfont NSU \cdot ECE}
+        {\color{leaf}\fontsize{22}{26}\selectfont\bfseries CAPSTONE\\2026\\[0.8ex]%
+        \normalfont\fontsize{16}{20}\selectfont NSU\,\textperiodcentered\,ECE}
       \end{column}
     \end{columns}
     \vskip2ex
-    \begin{beamercolorbox}[wd=\paperwidth,colsep=0.25ex]{headline rule}\end{beamercolorbox}
+    \begin{beamercolorbox}[wd=\paperwidth,colsep=0.3ex]{headline rule}\end{beamercolorbox}
   \end{beamercolorbox}
 }
 
 % ====================
-% Number macros — SINGLE SOURCE OF TRUTH (poster_stats.yaml)
-% If a number is not defined here, it does not go on the poster.
+% Number macros -- SINGLE SOURCE OF TRUTH
 % ====================
 \newcommand{\Nbench}{85{,}979}
 \newcommand{\Nnodes}{2{,}882}
@@ -112,7 +114,6 @@
 \newcommand{\Rdense}{0.464}
 \newcommand{\Rdensecolloq}{0.093}
 \newcommand{\Rdenseformal}{0.970}
-\newcommand{\Rbmcross}{0.004}
 \newcommand{\Rcolbert}{0.487}
 \newcommand{\Rbge}{0.408}
 \newcommand{\FoneOurs}{0.314}
@@ -120,19 +121,19 @@
 \newcommand{\FoneGemini}{0.104}
 \newcommand{\FoneGemma}{0.087}
 \newcommand{\Fonegain}{1.9$\times$}
-\newcommand{\Pval}{$p\!\approx\!6.7\times10^{-5}$}
-\newcommand{\AccBrassica}{97.29\%}
-\newcommand{\AccCorn}{97.23\%}
-\newcommand{\AccRice}{96.49\%}
-\newcommand{\AccPotato}{95.04\%}
-\newcommand{\AccWheat}{88.00\%}
+\newcommand{\Pval}{$p\!\approx\!6.7{\times}10^{-5}$}
+\newcommand{\AccBrassica}{97.3\%}
+\newcommand{\AccCorn}{97.2\%}
+\newcommand{\AccRice}{96.5\%}
+\newcommand{\AccPotato}{95.0\%}
+\newcommand{\AccWheat}{88.0\%}
 \newcommand{\LibCoverage}{436/437}
 \newcommand{\Households}{47 million}
 \newcommand{\YieldLoss}{20--40\%}
 \newcommand{\Ncalls}{92{,}094}
 \newcommand{\Krishi}{16123}
 \newcommand{\Emergency}{999}
-\newcommand{\HallucFloor}{4.05--7.00\%}
+\newcommand{\HallucFloor}{4.1--7.0\%}
 \newcommand{\EntityGap}{92\%}
 \newcommand{\NonCompliance}{0.31\%}
 \newcommand{\Paisa}{2 paisa}
@@ -147,51 +148,64 @@
 % ====================
 % Components
 % ====================
+
+% Placeholder box for GPT-generated diagrams
 \newcommand{\figbox}[2]{%
-  \begin{center}\setlength{\fboxrule}{1pt}\setlength{\fboxsep}{0pt}%
-  {\color{rulegrey}\fbox{\parbox[c][#1][c]{\linewidth}{%
-    \centering\color{leaf}\normalsize\textsc{#2}}}}\end{center}}
+  \begin{center}
+    \setlength{\fboxrule}{1.2pt}\setlength{\fboxsep}{6pt}%
+    {\color{rulegrey}\fbox{%
+      \parbox[c][#1][c]{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
+        \centering\color{leaf!70!black}\small\itshape\sffamily #2}}}%
+  \end{center}}
 
-\newcommand{\yes}{{\color{leaf}\textbf{\Large$\bullet$}}}
-\newcommand{\nomark}{{\color{rulegrey}\textbf{\Large--}}}
-\newcommand{\partmark}{{\color{ochre}\textbf{\Large$\circ$}}}
+% Comparison table bullet marks
+\newcommand{\yes}{{\color{leaf}\bfseries\Large$\bullet$}}
+\newcommand{\nomark}{{\color{rulegrey}\bfseries\Large--}}
+\newcommand{\partmark}{{\color{ochre}\bfseries\Large$\circ$}}
 
+% Proportional horizontal bar (green with light-green bg)
 \newcommand{\solobar}[1]{%
-  \begin{tikzpicture}[baseline=0mm]\fill[leaf](0,0)rectangle({#1*3.0},0.30);\end{tikzpicture}}
+  \begin{tikzpicture}[baseline=0.5mm]
+    \fill[leaf!22](0,0)rectangle(3.0cm,0.28cm);
+    \fill[leaf](0,0)rectangle({#1*3.0cm},0.28cm);
+  \end{tikzpicture}}
 
+% Stat chip (header ribbon)
 \newcommand{\statchip}[3]{%
   \begin{minipage}[t]{\linewidth}\centering
-    {\color{#1}\fontsize{40}{44}\selectfont\textbf{#2}}\\[0.3ex]
-    {\color{ink}\small #3}\end{minipage}}
+    {\color{#1}\fontsize{38}{42}\selectfont\bfseries #2}\\[0.4ex]
+    {\color{ink}\small\sffamily #3}\end{minipage}}
 
+% Metric badge pill
 \newcommand{\badge}[2]{%
-  \colorbox{white}{\parbox[c][2.0cm][c]{0.30\linewidth}{%
-    \centering{\color{leaf}\large\textbf{#1}}\\{\footnotesize #2}}}}
+  \colorbox{leaflight}{\parbox[c][2.2cm][c]{0.44\linewidth}{%
+    \centering{\color{leaf}\large\bfseries #1}\\[0.3ex]{\small\sffamily #2}}}}
 
 % ====================
-% Title
+% Title block
 % ====================
 \title{KrishokChat: A Safety-First Agentic Agricultural Advisory System for Bangladeshi Smallholder Farmers}
 \author{Khan Raiyan Ibne Reza \and Sanjana Aktar Maria \and Shakil Ahmed}
 \institute{Department of Electrical and Computer Engineering, North South University
-  \samelineand Institute of Water and Flood Management, BUET
   \samelineand Advisor: Dr.~Sumaiya Tabassum Nimi}
 
 \footercontent{
-  {\footnotesize
-  [1] KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory --- EACL 2026, under review \quad
-  [2] AgriTrust --- SIGIR-AP 2026, under review \quad
-  [3] AgriVision BD --- edge crop-disease classification report, 2026\\[0.5ex]
-  \texttt{github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System} \quad
-  \texttt{huggingface.co/RaiyanKhaan/KrishokChat-Advisory-System} \quad
-  {\color{clay}\textbf{Emergency triage: \Krishi{} / \Emergency}}}
+  {\footnotesize\sffamily
+  [1]~KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory. \textit{EACL 2026, under review.} \quad
+  [2]~AgriTrust: KG-Grounded Register-Aware Retrieval for Bengali Agricultural Advisory. \textit{SIGIR-AP 2026, under review.} \quad
+  [3]~AgriVision BD: On-Device Crop Disease Classification. \textit{Technical Report, 2026.}\\[0.4ex]
+  Code: \texttt{github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System} \quad
+  Data: \texttt{huggingface.co/RaiyanKhaan/KrishokChat-Advisory-System} \quad
+  {\color{clay}\bfseries Unsafe queries: call \Krishi{} (Krishi Call Center) or \Emergency{} (emergency)}}
 }
 
 % ============================================================
 \begin{document}
 \begin{frame}[t]
 
-% ---------------- ROW 1: STAT RIBBON ----------------
+% ============================================================
+%  ROW 1 -- STAT RIBBON
+% ============================================================
 \begin{columns}[t]
 \separatorcolumn
 \begin{column}{\ribbonwidth}
@@ -199,133 +213,142 @@
     \begin{column}{0.1633\textwidth}\statchip{leaf}{\Nbench}{benchmark instances, 4 tracks}\end{column}
     \begin{column}{0.1633\textwidth}\statchip{leaf}{\Fonegain}{Bengali QA over best zero-shot}\end{column}
     \begin{column}{0.1633\textwidth}\statchip{leaf}{95--97\%}{on-device crop diagnosis}\end{column}
-    \begin{column}{0.1633\textwidth}\statchip{leaf}{$<$30 ms}{offline Android inference}\end{column}
+    \begin{column}{0.1633\textwidth}\statchip{leaf}{$<$30\,ms}{offline Android inference}\end{column}
     \begin{column}{0.1633\textwidth}\statchip{leaf}{\Paisa}{marginal cost per AI answer}\end{column}
     \begin{column}{0.1633\textwidth}\statchip{clay}{\Krishi}{human escalation, always free}\end{column}
   \end{columns}
-  \vspace{0.5ex}{\color{rulegrey}\rule{\linewidth}{2pt}}\vspace{0.5ex}
+  \vspace{0.6ex}{\color{rulegrey}\rule{\linewidth}{2pt}}\vspace{0.4ex}
 \end{column}
 \separatorcolumn
 \end{columns}
 
-% ---------------- ROW 2: FIVE COLUMNS ----------------
+% ============================================================
+%  ROW 2 -- FIVE CONTENT COLUMNS
+% ============================================================
 \begin{columns}[t]
 \separatorcolumn
 
-% ========== COLUMN 1 — WHY: PROBLEM, IDEA, IMPACT ==========
+% ==========  COLUMN 1 -- WHY  ==========
 \begin{column}{\colwidth}
 
   \begin{block}{The Problem}
-    Bangladesh's \Households{} farming households have no reliable advisory in their
-    own language. Undetected crop disease costs \YieldLoss{} of yield. A wrong
-    pesticide dose can poison a family and contaminate the water supply --- and a
-    generic chatbot, asked for a dosage, will always answer, right or wrong.
+    {\small Bangladesh has \Households{} smallholder farming households with no reliable
+    advisory in their own language. A wrong pesticide dose can harm a family and pollute
+    local water. Standard chatbots always give a chemical dosage answer when asked, whether
+    or not the answer is correct. Crop disease left undetected costs \YieldLoss{} of yield.}
   \end{block}
 
-  \begin{block}{The Idea: An Evidence-Grounded Trust Stack}
-    Not a chatbot with an agriculture prompt. A layered trust stack, built on our own
-    research: official publications $\rightarrow$ machine-readable knowledge graph
-    $\rightarrow$ provenance-verified retrieval $\rightarrow$ a safety gate
-    \textbf{before} the model ever runs $\rightarrow$ dosage verification $\rightarrow$
-    an answer with citations, or human escalation.
-
-    Every layer exists because our measurements showed it must (column 4).
-  \end{block}
-
-  \begin{block}{Impact: Safety, Environment, Access}
-    \textbf{Health.} Unsafe agrochemical queries are refused and escalated --- to the
-    \Krishi{} Krishi Call Center and \Emergency{} --- in every tier of the product.
-    Safety is never paywalled.
-
-    \textbf{Environment.} Source-verified dosing cuts over-application of pesticide
-    and fertiliser. Independent Bangladesh sensor-irrigation trials report up to
-    \WaterSave{} water and \UreaSave{} urea savings --- the direction our soil-vision
-    lane targets.
-
-    \textbf{Access.} Runs in Bengali --- standard and dialect --- with voice input,
-    offline on the mid-range Android phones farmers already own.
-  \end{block}
-
-  \begin{block}{What Exists vs What We Added}
-    \begin{tabular}{@{}p{0.52\linewidth}ccc@{}}
-      \toprule
-      \textbf{Capability} & \textbf{Generic} & \textbf{K.B.} & \textbf{Ours} \\ \midrule
-      Safety check before retrieval        & \nomark   & \nomark   & \yes \\
-      14-field dosage verifier             & \nomark   & \nomark   & \yes \\
-      Audit log + analytics panel          & \nomark   & \nomark   & \yes \\
-      Bengali + \Ndialects{} dialects      & \partmark & \partmark & \yes \\
-      Published \Nbench{} benchmark        & \nomark   & \partmark & \yes \\
-      Photo $\rightarrow$ grounded treatment & \partmark & \nomark & \yes \\
-      Field soil dataset                   & \nomark   & \nomark   & \yes \\
-      \bottomrule
-    \end{tabular}
+  \begin{block}{Our Approach: A Layered Trust Stack}
+    {\small We built a system where every answer is tied back to an official government
+    publication. The pipeline runs in strict order:
 
     \vspace{0.5ex}
-    {\footnotesize \yes\ present \quad \partmark\ partial \quad \nomark\ absent
-    \quad K.B.\ = KrishokBondhu}
+    \textbf{Publications} $\rightarrow$ \textbf{Knowledge Graph} $\rightarrow$
+    \textbf{Safety Check} $\rightarrow$ \textbf{Hybrid Retrieval} $\rightarrow$
+    \textbf{Bengali Generation} $\rightarrow$ \textbf{Dosage Verifier}
+    $\rightarrow$ \textbf{Cited Answer or Human Escalation}
+
+    \vspace{0.3ex}
+    Each stage was added because our measurements showed the previous stage was not enough
+    on its own. See column 4 for the failure data behind each decision.}
   \end{block}
 
-  \begin{exampleblock}{Ongoing \& Next}
-    Voice output for low-literacy users $\cdot$ extended dialect coverage $\cdot$
-    soil-vision refinement toward irrigation advisories $\cdot$ district-level pilot
-    with an extension office.
+  \begin{block}{Key Contributions}
+    {\small
+    \begin{enumerate}\setlength{\itemsep}{0.3ex}
+      \item \Nbench-instance Bengali agricultural benchmark across 4 evaluation tracks,
+            every instance citation-traced to source pages.
+      \item \Nnodes-node agricultural knowledge graph from \Npubs{} official publications
+            across \Ninst{} national research institutions.
+      \item Register-aware hybrid retrieval that closes the colloquial/formal language gap
+            measured at R@10 \Rdenseformal{} (formal) vs.\ \Rdensecolloq{} (colloquial).
+      \item Pre-retrieval safety gate for 6 agrochemical risk categories with a 14-field
+            dosage verifier; only \NonCompliance{} non-compliance on 323 unsafe queries.
+      \item On-device crop disease models (1.6--21.8\,MB) achieving 95--97\% top-1 accuracy
+            across 5 crops, with no internet required.
+      \item 722-image soil-moisture dataset with paired tensiometer readings; first
+            field-collected soil dataset for Bangladesh agricultural AI.
+    \end{enumerate}}
+  \end{block}
+
+  \begin{block}{Real-World Impact}
+    {\small
+    \textbf{Health.} Any query involving a banned chemical, overdose risk, or self-harm
+    is blocked and routed to the \Krishi{} Krishi Call Center or \Emergency{}.
+    This safety layer is present in every tier of the product at no cost to the farmer.
+
+    \textbf{Environment.} Correct dosing based on verified sources reduces
+    over-application. Bangladesh sensor-irrigation pilots report up to \WaterSave{} water
+    savings and \UreaSave{} urea savings, pointing in the same direction as our soil work.
+
+    \textbf{Access.} Works in standard Bengali and \Ndialects{} regional dialects,
+    accepts voice input, and runs fully offline on mid-range Android phones.}
+  \end{block}
+
+  \begin{exampleblock}{Roadmap}
+    {\small Voice output for low-literacy users $\cdot$ broader dialect support $\cdot$
+    soil-vision refinement for irrigation advisories $\cdot$
+    district-level pilot with a DAE field extension office.}
   \end{exampleblock}
 
 \end{column}
 
 \separatorcolumn
 
-% ========== COLUMN 2 — WHAT WE BUILT (research) ==========
+% ==========  COLUMN 2 -- RESEARCH FOUNDATION  ==========
 \begin{column}{\colwidth}
 
-  \begin{block}{The Foundation: Four Research Assets}
+  \begin{block}{Research Assets: What We Built and Released}
     {\small
-    \begin{tabular}{@{}p{0.21\linewidth}p{0.27\linewidth}p{0.47\linewidth}@{}}
+    \begin{tabular}{@{}p{0.22\linewidth}p{0.24\linewidth}p{0.48\linewidth}@{}}
       \toprule
-      \textbf{Asset} & \textbf{Scale} & \textbf{Ground truth \& provenance} \\ \midrule
-      Benchmark, 4 tracks & \Nbench{} instances &
-        General QA 28{,}993 · Treatment 11{,}224 (66.3\% chemical-bearing) ·
-        Table 25{,}650 · Safety 20{,}112 --- every instance citation-traced \\
-      Knowledge graph & \Nnodes{} nodes · \Ntriples{} triples &
-        \Nentities{} entities extracted from \Npubs{} publications · \Ninst{}
-        institutions (BARC, BARI, BRRI, DAE, \ldots) \\
-      Farmer-language benchmark & \Nfarmerq{} queries &
-        \Ninterviews{} face-to-face interviews (Rajshahi \& Natore) + farmer
-        groups · \Ndialects{} dialects \\
-      Soil-moisture dataset & \Nsoil{} field RGB images &
-        paired tensiometer readings 0.0--21.5 kPa · 6 USDA textures · \Ncrops{}
-        crops · \Nseries{} leakage-checked series · Pabna, May 2026 \\
+      \textbf{Asset} & \textbf{Scale} & \textbf{What makes it reliable} \\ \midrule
+      Benchmark (4 tracks) & \Nbench{} instances &
+        General QA 28,993 $\cdot$ Treatment 11,224 (66.3\% chemical) $\cdot$
+        Table 25,650 $\cdot$ Safety 20,112. Every instance linked to a source page. \\[0.5ex]
+      Knowledge graph & \Nnodes{} nodes, \Ntriples{} triples &
+        \Nentities{} entities from \Npubs{} publications at \Ninst{} institutions
+        (BARC, BARI, BRRI, DAE and others). \\[0.5ex]
+      Farmer-language queries & \Nfarmerq{} queries &
+        \Ninterviews{} face-to-face interviews in Rajshahi and Natore,
+        capturing \Ndialects{} regional dialects. \\[0.5ex]
+      Soil-moisture dataset & \Nsoil{} field images &
+        Paired tensiometer readings (0.0 to 21.5\,kPa) across \Ncrops{} crops,
+        \Nseries{} series with strict train/test separation. Pabna, May 2026. \\
       \bottomrule
-    \end{tabular}}
+    \end{tabular}
 
-    \vspace{0.5ex}
-    {\footnotesize All released CC-BY-4.0 on Hugging Face.}
+    \vspace{0.4ex}
+    {\footnotesize All four datasets released CC-BY-4.0 on Hugging Face.}}
   \end{block}
 
-  \begin{block}{Grounded in Bangladesh}
-    \begin{center}
-      \includegraphics[width=\linewidth]{D3_grounded_data.png}
-    \end{center}
-    {\footnotesize From official publications to provenance-traced retrieval nodes.}
+  \begin{block}{From Official Publications to Retrieval Nodes}
+    \figbox{7.8cm}{%
+      GPT Diagram: knowledge pipeline flow\\[0.5ex]
+      4:3 landscape, white background, leaf-green arrows\\[0.5ex]
+      Official publications $\rightarrow$ PDF extraction $\rightarrow$
+      entity and relation tagging $\rightarrow$ \Nnodes-node knowledge graph
+      $\rightarrow$ provenance-traced retrieval index}
   \end{block}
 
-  \begin{block}{Built From the Field, Not the Web}
+  \begin{block}{Collected in the Field, Not Scraped from the Web}
     \begin{center}
-      \begin{tabular}{@{}c@{\hspace{0.4cm}}c@{\hspace{0.4cm}}c@{}}
-        \includegraphics[height=5.6cm]{researcher_interviewing_farmer.png} &
-        \includegraphics[height=4.1cm]{soil_wet.jpg} &
-        \includegraphics[height=4.1cm]{soil_dry.jpg} \\[-0.5ex]
-        {\scriptsize 300 farmer interviews} &
-        {\scriptsize 0.0 kPa (wet)} &
-        {\scriptsize 8.0 kPa (dry)} \\
+      \begin{tabular}{@{}c@{\hspace{0.8cm}}c@{}}
+        \includegraphics[height=5.6cm]{soil_wet.jpg} &
+        \includegraphics[height=5.6cm]{soil_dry.jpg} \\[0.3ex]
+        {\footnotesize\bfseries 0.0\,kPa (wet)} &
+        {\footnotesize\bfseries 8.0\,kPa (dry)} \\
       \end{tabular}
     \end{center}
-    \vspace{0.5ex}
+    \vspace{0.3ex}
     {\small
     \begin{itemize}
-      \item \textbf{Page-level provenance} --- every answer traceable to a publication and page.
-      \item \textbf{Physical ground truth} --- tensiometer kPa readings, not annotator opinion.
-      \item \textbf{Series-stratified splits} --- no near-duplicate leakage between train and test.
+      \item Each soil image is paired with a tensiometer reading taken at the same time,
+            giving a physical measurement instead of an annotator label.
+      \item The 46 measurement series are split by series boundary so that near-duplicate
+            images cannot appear in both training and test sets.
+      \item Every benchmark instance links back to a specific page in an official
+            publication, making answers auditable.
     \end{itemize}}
   \end{block}
 
@@ -333,257 +356,306 @@
 
 \separatorcolumn
 
-% ========== COLUMN 3 — MEASURED RESULTS (proof) ==========
+% ==========  COLUMN 3 -- MEASURED RESULTS  ==========
 \begin{column}{\colwidth}
 
-  \begin{alertblock}{Our On-Device Model Beats Far Larger Ones}
+  \begin{alertblock}{Language Model: Fine-Tuned 4B Outperforms Larger Models}
     \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
-        width=\linewidth, height=9.6cm,
-        xbar, xmin=0, xmax=0.36,
-        y axis line style={draw=none},
-        axis x line*=bottom,
+        width=0.94\linewidth, height=8.0cm,
+        xbar, xmin=0, xmax=0.42,
+        axis y line=none,
+        axis x line=bottom,
+        axis line style={draw=ink!25, thin},
         tick style={draw=none},
+        xtick={0,0.10,0.20,0.30},
+        xticklabel style={font=\scriptsize\sffamily, color=ink!60},
+        xlabel style={font=\footnotesize\sffamily, yshift=-3pt},
+        xlabel={Token-F1 score\enspace (Bengali general QA)},
         ytick=data,
-        yticklabels={Gemma-4-26B, Gemini-2.5-Flash-Lite, LLaMA-3.1-8B, KrishokChat-4B (ours)},
-        yticklabel style={font=\small},
-        xticklabel style={font=\small},
-        xlabel={\small Token-F1, Bengali general QA},
-        every node near coord/.append style={font=\small\bfseries,color=ink},
+        yticklabels={
+          Gemma-4-26B,
+          Gemini-2.5-Flash-Lite,
+          LLaMA-3.1-8B,
+          {\bfseries KrishokChat-4B (ours)}
+        },
+        yticklabel style={font=\small\sffamily, align=right},
         nodes near coords,
         nodes near coords align={horizontal},
-        enlarge y limits=0.28,
-        y=11mm,
-        bar width=7mm,
+        every node near coord/.append style={
+          font=\small\bfseries\sffamily, color=ink, xshift=4pt
+        },
+        enlarge y limits=0.20,
+        y=12mm,
+        bar width=8.5mm,
+        xmajorgrids=true,
+        grid style={draw=rulegrey!60, line width=0.3pt},
       ]
-        \addplot[fill=barGrey] coordinates {(0.087,0) (0.104,1) (0.165,2)};
-        \addplot[fill=leaf] coordinates {(0.314,3)};
+        \addplot[fill=ink!14, draw=none]
+          coordinates {(0.087,0) (0.104,1) (0.165,2)};
+        \addplot[fill=leaf, draw=leaf!60!black, line width=0.4pt]
+          coordinates {(0.314,3)};
       \end{axis}
     \end{tikzpicture}
     \end{center}
-    \vspace{-1ex}
-    {\small \textbf{\Fonegain{} the best zero-shot baseline} (\Pval). LoRA fine-tune of
-    Gemma-4-E4B, 4-bit quantised --- deployable on-device.}
+    \vspace{0.3ex}
+    \noindent\colorbox{leaflight}{\parbox[c][1.6cm][c]{\dimexpr\linewidth-2\fboxsep}{%
+      \centering
+      {\color{leaf}\fontsize{28}{32}\selectfont\bfseries\sffamily 1.9$\times$}%
+      \enspace{\color{ink}\small\sffamily gain over best zero-shot model\enspace(\Pval{})}}}
+    \vspace{0.5ex}
+    {\small LoRA fine-tune of Gemma-4-E4B, 4-bit quantised for on-device deployment.}
   \end{alertblock}
 
-  \begin{alertblock}{Retrieval: Hybrid Beats Every Single Method}
+  \begin{alertblock}{Retrieval: Hybrid RRF Fusion Wins Across All Methods}
     \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
-        width=\linewidth, height=7.4cm,
-        xbar, xmin=0, xmax=0.62,
-        y axis line style={draw=none},
-        axis x line*=bottom,
+        width=0.94\linewidth, height=7.0cm,
+        xbar, xmin=0.36, xmax=0.60,
+        axis y line=none,
+        axis x line=bottom,
+        axis line style={draw=ink!25, thin},
         tick style={draw=none},
+        xtick={0.40,0.45,0.50,0.55},
+        xticklabel style={font=\scriptsize\sffamily, color=ink!60},
+        xlabel style={font=\footnotesize\sffamily, yshift=-3pt},
+        xlabel={Recall@10\enspace (900 farmer queries)},
         ytick=data,
-        yticklabels={BGE-M3, Dense, ColBERT, BM25, Hybrid RRF (ours)},
-        yticklabel style={font=\small},
-        xticklabel style={font=\small},
-        xlabel={\small Recall@10, 900 answerable farmer queries},
-        every node near coord/.append style={font=\small\bfseries,color=ink},
+        yticklabels={BGE-M3, Dense, ColBERT, BM25,
+          {\bfseries Hybrid RRF (ours)}},
+        yticklabel style={font=\small\sffamily},
         nodes near coords,
-        enlarge y limits=0.3,
+        nodes near coords align={horizontal},
+        every node near coord/.append style={
+          font=\small\bfseries\sffamily, color=ink, xshift=4pt
+        },
+        enlarge y limits=0.22,
         y=10mm,
-        bar width=5.5mm,
+        bar width=7mm,
+        xmajorgrids=true,
+        grid style={draw=rulegrey!60, line width=0.3pt},
+        clip=false,
       ]
-        \addplot[fill=barGrey] coordinates {(0.408,0) (0.464,1) (0.487,2) (0.506,3)};
-        \addplot[fill=leaf] coordinates {(0.539,4)};
+        \addplot[fill=ink!12, draw=none]
+          coordinates {(0.408,0) (0.464,1) (0.487,2) (0.506,3)};
+        \addplot[fill=leaf, draw=leaf!60!black, line width=0.4pt]
+          coordinates {(0.539,4)};
       \end{axis}
     \end{tikzpicture}
     \end{center}
-    \vspace{-1ex}
-    {\small +9\% over dense retrieval ($p<0.001$, Wilcoxon).}
+    \vspace{-0.3ex}
+    {\small $+$9\% over dense retrieval ($p{<}0.001$, Wilcoxon signed-rank).
+    Formal queries: R@10\,=\,\Rdenseformal{}.\enspace
+    Colloquial: R@10 drops to \Rdensecolloq{} (dense alone).}
   \end{alertblock}
 
-  \begin{alertblock}{Crop Disease, On-Device}
-    \vspace{-0.5ex}
-    {\small
-    \begin{tabular}{@{}lrl@{}}
-      Brassica (11 classes) & \AccBrassica & \solobar{1.00} \\
-      Corn (4 classes)      & \AccCorn     & \solobar{1.00} \\
-      Rice (8 classes)      & \AccRice     & \solobar{0.99} \\
-      Potato (3 classes)    & \AccPotato   & \solobar{0.97} \\
-      Wheat (live sweep)    & \AccWheat    & \solobar{0.90} \\
-    \end{tabular}}
-
-    \vspace{0.5ex}
-    \noindent\begin{tabular}{@{}c@{\hspace{0.15cm}}c@{}}
-      \badge{\LibCoverage}{grounded Bengali treatment (99.8\%)} &
-      \badge{$<$30 ms}{on-device, Android} \\
+  \begin{alertblock}{On-Device Crop Disease Accuracy (Top-1)}
+    \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+        width=0.94\linewidth, height=7.5cm,
+        xbar, xmin=0.82, xmax=1.01,
+        axis y line=none,
+        axis x line=bottom,
+        axis line style={draw=ink!25, thin},
+        tick style={draw=none},
+        xtick={0.85,0.90,0.95,1.00},
+        xticklabels={85\%,90\%,95\%,100\%},
+        xticklabel style={font=\scriptsize\sffamily, color=ink!60},
+        xlabel style={font=\footnotesize\sffamily, yshift=-3pt},
+        xlabel={Top-1 Accuracy\enspace (held-out images)},
+        ytick=data,
+        yticklabels={
+          Wheat (live sweep),
+          Potato (3 classes),
+          Rice (8 classes),
+          Corn (4 classes),
+          Brassica (11 classes)
+        },
+        yticklabel style={font=\small\sffamily},
+        nodes near coords,
+        nodes near coords align={horizontal},
+        every node near coord/.append style={
+          font=\small\bfseries\sffamily, color=ink, xshift=4pt
+        },
+        point meta=explicit symbolic,
+        enlarge y limits=0.18,
+        y=12mm,
+        bar width=8mm,
+        xmajorgrids=true,
+        grid style={draw=rulegrey!60, line width=0.3pt},
+      ]
+        \addplot[fill=leaf!55, draw=none]
+          coordinates {(0.880,0) [88.0\%]};
+        \addplot[fill=leaf!68, draw=none]
+          coordinates {(0.950,1) [95.0\%]};
+        \addplot[fill=leaf!80, draw=none]
+          coordinates {(0.965,2) [96.5\%]};
+        \addplot[fill=leaf!90, draw=none]
+          coordinates {(0.972,3) [97.2\%]};
+        \addplot[fill=leaf,    draw=leaf!60!black, line width=0.4pt]
+          coordinates {(0.973,4) [97.3\%]};
+      \end{axis}
+    \end{tikzpicture}
+    \end{center}
+    \vspace{0.2ex}
+    \noindent\begin{tabular}{@{}c@{\hspace{0.2cm}}c@{}}
+      \badge{\LibCoverage}{Bengali treatment\\verified (99.8\%)} &
+      \badge{$<$30\,ms}{on-device inference\\mid-range Android} \\
     \end{tabular}
   \end{alertblock}
 
-  \begin{alertblock}{Safety Behaviour}
-    {\small 1 of 323 unsafe test queries leaked through --- \NonCompliance{}
-    non-compliance. Fail-closed by design: missing evidence means abstain.}
+  \begin{alertblock}{Safety Gate: 99.7\% of Unsafe Queries Blocked}
+    \begin{center}
+    \begin{tikzpicture}[baseline]
+      \fill[leaflight] (0,0) rectangle (7.2cm, 0.55cm);
+      \fill[leaf]      (0,0) rectangle ({7.2cm * 0.9969}, 0.55cm);
+      \fill[clay]      ({7.2cm * 0.9969},0) rectangle (7.2cm, 0.55cm);
+      \node[font=\scriptsize\bfseries\sffamily, color=white, anchor=west]
+        at (0.08cm, 0.275cm) {322 blocked (99.7\%)};
+      \node[font=\scriptsize\bfseries\sffamily, color=white, anchor=east]
+        at (7.1cm, 0.275cm) {1};
+    \end{tikzpicture}
+    \end{center}
+    \vspace{0.3ex}
+    {\small Out of 323 unsafe test queries, only 1 passed through.
+    When evidence is absent from the knowledge base, the system
+    withholds its answer rather than guessing.}
   \end{alertblock}
 
-  {\scriptsize Test sets: benchmark held-out split · 900 answerable queries ·
-  per-crop held-out images. Disease = classification top-1.}
+  {\scriptsize\sffamily Evaluation: benchmark held-out split, 900 farmer queries,
+  per-crop held-out images. All models run on-device; no API calls.}
 
 \end{column}
 
 \separatorcolumn
 
-% ========== COLUMN 4 — FINDINGS → ARCHITECTURE (application) ==========
+% ==========  COLUMN 4 -- ARCHITECTURE  ==========
 \begin{column}{\colwidth}
 
-  \begin{block}{Four Measured Failures $\rightarrow$ Four Design Decisions}
+  \begin{block}{Why Each Stage Exists: Failure Before Fix}
     {\small
-    \begin{tabular}{@{}p{0.47\linewidth}p{0.49\linewidth}@{}}
+    \begin{tabular}{@{}p{0.46\linewidth}p{0.50\linewidth}@{}}
       \toprule
-      \textbf{Measured failure} & \textbf{Our design answer} \\ \midrule
-      LLMs hallucinate chemical dosages at \HallucFloor{} even with gold evidence
-        & Safety gate \textbf{before} retrieval + 14-field fail-closed verifier \\
-      Dense retrieval collapses on farmer language: R@10 \Rdenseformal{} formal
-        $\rightarrow$ \Rdensecolloq{} colloquial
-        & Hybrid BM25 + dense, RRF fusion \\
-      \EntityGap{} of formal entities never appear in farmer queries ---
-        \bn{পাতা হলুদ হয়ে যাচ্ছে} $\neq$ ``Yellow Mosaic Virus''
-        & Register-aware retrieval across \Ndialects{} dialects \\
-      The national helpline answered \Ncalls{} calls last year
-        & AI triage: auto-answer routine, escalate high-risk to humans \\
+      \textbf{What we measured} & \textbf{What we built in response} \\ \midrule
+      LLMs produce wrong chemical dosages at \HallucFloor{} of queries even when
+        the correct answer is given to them directly
+        & Safety check runs \textbf{before} retrieval, plus a 14-field verifier
+          that refuses to generate if evidence is absent \\[0.5ex]
+      Dense retrieval scores R@10 of \Rdenseformal{} on formal queries but drops
+        to \Rdensecolloq{} on the same questions in colloquial farmer language
+        & Hybrid BM25 + dense retrieval fused with Reciprocal Rank Fusion \\[0.5ex]
+      \EntityGap{} of technical disease terms in official documents do not appear
+        in any form in farmer queries; a farmer writes
+        \bn{পাতা হলুদ হয়ে যাচ্ছে} where the manual says ``Yellow Mosaic Virus''
+        & Retrieval is register-aware across \Ndialects{} dialects \\[0.5ex]
+      The national Krishi Call Center handled \Ncalls{} calls in one year with a
+        fixed human team
+        & AI handles routine queries automatically; agents receive only high-risk
+          cases with a full audit trail \\
       \bottomrule
     \end{tabular}}
   \end{block}
 
-  \begin{block}{System Architecture}
-    \begin{center}
-    \begin{tikzpicture}[
-        stage/.style={rectangle, rounded corners=4pt, fill=leaf, text=white,
-          text width=10.2cm, align=center, minimum height=1.55cm, font=\small\bfseries},
-        query/.style={rectangle, rounded corners=4pt, draw=leaf, thick, fill=leaflight,
-          text width=10.2cm, align=center, minimum height=1.2cm, font=\small\bfseries},
-        result/.style={rectangle, rounded corners=4pt, fill=leaf!85!black, text=white,
-          text width=10.2cm, align=center, minimum height=1.45cm, font=\small\bfseries},
-        exitbox/.style={rectangle, rounded corners=4pt, draw=clay, very thick,
-          fill=white, text=clay, text width=6.4cm, align=center,
-          minimum height=2.3cm, font=\small\bfseries},
-        audit/.style={rectangle, rounded corners=4pt, draw=leaf, dashed, thick,
-          fill=papertint, text=ink, text width=6.4cm, align=center,
-          minimum height=1.9cm, font=\small\bfseries},
-        flow/.style={-{Stealth[length=3mm]}, leaf, very thick},
-        stopflow/.style={-{Stealth[length=3mm]}, clay, very thick},
-        dashflow/.style={-{Stealth[length=3mm]}, leaf, thick, dashed},
-      ]
-      % main pipeline (centered column)
-      \node[query] (q) at (0,0)
-        {FARMER QUERY\\{\footnotesize\mdseries Bengali, any dialect, text or voice}};
-      \node[stage] (s1) at (0,-2.1)
-        {1~SAFETY / ROUTER\\{\footnotesize\mdseries 6 categories · fail-closed}};
-      \node[stage] (s2) at (0,-4.4)
-        {2~HYBRID RETRIEVAL\\{\footnotesize\mdseries BM25 + dense · RRF fusion · top-5}};
-      \node[stage] (s3) at (0,-6.7)
-        {3~GENERATION\\{\footnotesize\mdseries KrishokChat-4B · 4-bit · streamed Bengali}};
-      \node[stage] (s4) at (0,-9.0)
-        {4~VERIFIER\\{\footnotesize\mdseries 14 fields · 6 relations · fail-closed}};
-      \node[result] (a) at (0,-11.2)
-        {GROUNDED BENGALI ANSWER\\{\footnotesize\mdseries with citations to source pages}};
-      % red exit branch
-      \node[exitbox] (stop) at (8.6,-3.2)
-        {STOP\\[0.3ex]{\footnotesize\mdseries banned chemical\\ self-harm risk\\
-        prompt injection\\[0.5ex]
-        $\rightarrow$ \Krishi{} Krishi Call Center\\ $\rightarrow$ \Emergency{} emergency}};
-      % audit rail
-      \node[audit] (log) at (8.6,-8.6)
-        {EVERY DECISION\\{\footnotesize\mdseries logged, local only}\\[0.3ex]
-        {\small AUDIT LOG $\rightarrow$ /ANALYTICS}};
-      % arrows
-      \draw[flow] (q) -- (s1);
-      \draw[flow] (s1) -- (s2);
-      \draw[flow] (s2) -- (s3);
-      \draw[flow] (s3) -- (s4);
-      \draw[flow] (s4) -- (a);
-      \draw[stopflow] (s1.east) -- node[above, font=\footnotesize\bfseries,
-        text=clay]{unsafe} (stop.west);
-      \draw[dashflow] (s4.east) -- (log.west);
-    \end{tikzpicture}
-    \end{center}
-    \vspace{-1ex}
-    {\footnotesize Unsafe categories stop at stage 1 --- retrieval, generation and
-    verification never run.}
+  \begin{block}{System Architecture: 4-Stage Safety Pipeline}
+    \figbox{14.0cm}{%
+      GPT Diagram: vertical 4-stage pipeline\\[0.5ex]
+      Portrait, leaf-green stage boxes, red exit branch, dashed audit rail\\[0.5ex]
+      \textbf{[FARMER QUERY]} Bengali, any dialect, text or voice\\
+      $\downarrow$~\textbf{[1~SAFETY ROUTER]} 6 risk categories, fail-closed
+      \hfill unsafe $\rightarrow$ \textbf{STOP} $\rightarrow$ 16123 / 999\\
+      $\downarrow$~\textbf{[2~HYBRID RETRIEVAL]} BM25 + dense, RRF, top-5 nodes\\
+      $\downarrow$~\textbf{[3~GENERATION]} KrishokChat-4B, 4-bit, Bengali\\
+      $\downarrow$~\textbf{[4~VERIFIER]} 14 fields checked, $\dashrightarrow$ audit log\\
+      $\downarrow$~\textbf{[GROUNDED ANSWER]} with page-level source citations}
   \end{block}
 
-  \begin{block}{Vision: Classify, Then Route}
-    \begin{center}
-      \includegraphics[width=\linewidth]{D2_disease_vision_routing.png}
-    \end{center}
-    {\footnotesize One photo $\rightarrow$ crop router $\rightarrow$ a small per-crop
-    classifier $\rightarrow$ grounded Bengali treatment. The whole vision stack ships
-    inside the app --- no server, no network needed.}
+  \begin{block}{On-Device Disease Classification and Routing}
+    \figbox{9.2cm}{%
+      GPT Diagram: hierarchical routing tree\\[0.5ex]
+      Leaf photo $\rightarrow$ top-level crop classifier (5 crops)
+      $\rightarrow$ per-crop disease model (1.6 to 21.8\,MB, ONNX or TFLite)
+      $\rightarrow$ grounded Bengali treatment (\LibCoverage{} coverage)\\[0.4ex]
+      No server required. No internet connection needed. Under 30\,ms on Android.}
   \end{block}
 
 \end{column}
 
 \separatorcolumn
 
-% ========== COLUMN 5 — PRODUCT · MARKET · MODEL ==========
+% ==========  COLUMN 5 -- PRODUCT, MARKET, BUSINESS  ==========
 \begin{column}{\colwidth}
 
-  \begin{block}{The Product --- Krishi Patrak (\bn{কৃষি পত্রক})}
+  \begin{block}{The Product: Krishi Patrak (\bn{কৃষি পত্রক})}
     \begin{center}
-      \begin{tabular}{@{}c@{\hspace{0.35cm}}c@{\hspace{0.35cm}}c@{}}
-        \includegraphics[width=0.27\linewidth]{shot_chat.png} &
-        \includegraphics[width=0.27\linewidth]{shot_detect.png} &
-        \includegraphics[width=0.27\linewidth]{shot_analytics.png} \\[-0.6ex]
-        {\scriptsize Safety refusal $\rightarrow$ \Krishi} &
-        {\scriptsize Photo $\rightarrow$ diagnosis} &
-        {\scriptsize Audit dashboard} \\
+      \begin{tabular}{@{}c@{\hspace{0.25cm}}c@{\hspace{0.25cm}}c@{}}
+        \includegraphics[width=0.29\linewidth]{shot_chat.png} &
+        \includegraphics[width=0.29\linewidth]{shot_detect.png} &
+        \includegraphics[width=0.29\linewidth]{shot_analytics.png} \\[0.2ex]
+        {\scriptsize\sffamily Safety refusal $\rightarrow$ \Krishi} &
+        {\scriptsize\sffamily Photo $\rightarrow$ diagnosis} &
+        {\scriptsize\sffamily Audit dashboard} \\
       \end{tabular}
     \end{center}
-    \vspace{0.5ex}
-    {\small Bengali-first web + Android: live agent trace on every query, voice input,
-    sunlight mode, offline-capable.}
+    \vspace{0.3ex}
+    {\small A Bengali-first web app and Android app. Every query includes a live
+    agent trace showing the retrieval and verification steps. Supports voice input,
+    a high-contrast sunlight mode, and works with no internet connection.}
   \end{block}
 
   \begin{block}{Market Readiness}
     {\small
-    \textbf{What ships today.} Full-stack web app and Android app · on-device disease
-    models that run with no network · live safety pipeline with audit dashboard ·
-    437-entry treatment library verified end-to-end in live testing.
+    \textbf{What is working now.} Full-stack web and Android app, on-device crop
+    disease models, live safety pipeline with an audit dashboard, and a 437-entry
+    verified treatment library tested end-to-end.
 
-    \textbf{Why offline-first wins this market.} \SmartphoneOwn{} of households own a
-    smartphone, but only \RuralNet{} of rural residents use the internet. An advisory
-    app that needs the network loses half its users on arrival.
+    \textbf{The offline case.} \SmartphoneOwn{} of Bangladeshi households own a
+    smartphone, but only \RuralNet{} of rural residents have internet access.
+    A farming advisory that requires connectivity reaches less than half the intended
+    audience.
 
-    \textbf{Scaling path.} Launch on a hosted API ($\approx$\Paisa{} per answer); at
-    volume, one rented GPU ($\approx$\GpuCost{}/month) serves $\approx$\GpuCap{}
-    answers monthly.}
+    \textbf{Unit economics.} Each AI answer costs roughly \Paisa{} on a shared API.
+    At scale, a single GPU server at \GpuCost{}/month handles around \GpuCap{}
+    answers per month.}
   \end{block}
 
-  \begin{exampleblock}{Business Model: Free for Farmers, Paid by Institutions}
-    \figbox{11.0cm}{FREE vs PREMIUM tier diagram (GPT-generated, 4:3)\\[1ex]
-      FREE: mapped answers from the grounded KB (no LLM --- cannot hallucinate)\\
-      \quad + on-device photo diagnosis + safety gate + offline\\
-      PREMIUM: everything in Free + open-ended conversation on our fine-tuned\\
-      \quad model + priority + voice\\[0.5ex]
-      banner: safety gate and \Krishi{} escalation identical in both tiers}
+  \begin{exampleblock}{Business Model: Farmers Use It Free; Institutions Pay}
+    \figbox{7.2cm}{%
+      GPT Diagram: two-tier product comparison\\[0.4ex]
+      Side by side FREE vs PREMIUM, leaf-green and parchment background\\[0.4ex]
+      FREE: knowledge base lookup (no language model, cannot hallucinate) plus
+      on-device photo diagnosis, safety gate, and offline mode\\[0.3ex]
+      PREMIUM: everything in Free plus open-ended conversation with the fine-tuned
+      model, priority response, and voice interaction\\[0.3ex]
+      Safety gate and \Krishi{} escalation are present in both tiers}
 
-    \vspace{0.5ex}
+    \vspace{0.4ex}
     {\small
-    \textbf{B2G.} AI triage front-end for the Krishi Call Center --- routine questions
-    answered automatically, high-risk cases escalated with a full audit trail. The
-    audit log is the trust asset for DAE / a2i.
+    \textbf{B2G.} The system acts as an AI front desk for the Krishi Call Center.
+    Routine queries are answered automatically. High-risk cases go to a human agent
+    with a complete audit trail that satisfies DAE and a2i reporting requirements.
 
-    \textbf{B2B.} Analytics dashboard for agro-dealers, seed companies and NGOs:
-    district-level insight into what farmers ask and which diseases surge. (ACI's
-    Fosholi monetises its \FosholiUsers{} users the same way.)
+    \textbf{B2B.} An analytics dashboard gives agro-dealers, seed companies, and
+    NGOs district-level data on what farmers are asking and which crop diseases
+    are rising in a given season.
 
-    \textbf{Licensing.} The \Nbench-instance benchmark and \Nsoil-image soil dataset
-    --- CC-BY-4.0 for research, commercial licence for agri-fintech and insurers.}
+    \textbf{Data licensing.} The \Nbench-instance benchmark and \Nsoil-image soil
+    dataset are CC-BY-4.0 for academic use and available under a commercial licence
+    for agri-fintech and crop insurance applications.}
   \end{exampleblock}
 
-  \begin{block}{Papers, Code \& Data}
+  \begin{block}{Papers, Code and Data}
     \begin{center}
-    \begin{tabular}{@{}c@{\hspace{0.8cm}}c@{}}
+    \begin{tabular}{@{}c@{\hspace{1.0cm}}c@{}}
       \qrcode[height=2.8cm]{https://huggingface.co/RaiyanKhaan/KrishokChat-Advisory-System} &
-      \qrcode[height=2.8cm]{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System} \\[-0.5ex]
-      {\scriptsize Dataset (Hugging Face)} & {\scriptsize Code (GitHub)} \\
+      \qrcode[height=2.8cm]{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System} \\[0.3ex]
+      {\scriptsize\sffamily Dataset (Hugging Face)} & {\scriptsize\sffamily Code (GitHub)} \\
     \end{tabular}
     \end{center}
-    \vspace{0.3ex}
-    {\scriptsize Full references in the footer.}
+    \vspace{0.2ex}
+    {\scriptsize\sffamily Full references listed in the footer below.}
   \end{block}
 
 \end{column}
