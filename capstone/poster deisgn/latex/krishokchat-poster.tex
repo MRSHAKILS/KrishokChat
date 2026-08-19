@@ -81,7 +81,11 @@
         \centering
         {\usebeamerfont{headline title}\usebeamercolor[fg]{headline title}\inserttitle\\[0.6ex]}
         {\usebeamerfont{headline author}\usebeamercolor[fg]{headline author}\insertauthor\\[0.5ex]}
-        {\usebeamerfont{headline institute}\usebeamercolor[fg]{headline institute}\insertinstitute}
+        {{\usebeamerfont{headline institute}\usebeamercolor[fg]{headline institute}\insertinstitute}\\[0.5ex]}
+        {{\fontsize{18}{22}\selectfont\sffamily\color{ink!80}%
+          In collaboration with the
+          \textit{Institute of Water and Flood Management} (IWFM),
+          Bangladesh University of Engineering and Technology (BUET)}}
       \end{column}
       \begin{column}{0.10\paperwidth}
         \centering
@@ -273,22 +277,36 @@
 
   \begin{block}{Real-World Impact}
     {\small
-    \textbf{Health.} Any query involving a banned chemical, overdose risk, or self-harm
-    is blocked and routed to the \Krishi{} Krishi Call Center or \Emergency{}.
-    This safety layer is present in every tier of the product at no cost to the farmer.
-
-    \textbf{Environment.} Correct dosing based on verified sources reduces
-    over-application. Bangladesh sensor-irrigation pilots report up to \WaterSave{} water
-    savings and \UreaSave{} urea savings, pointing in the same direction as our soil work.
-
-    \textbf{Access.} Works in standard Bengali and \Ndialects{} regional dialects,
-    accepts voice input, and runs fully offline on mid-range Android phones.}
+    \begin{itemize}\setlength{\itemsep}{0.2ex}
+      \item \textbf{Health.} Unsafe chemical queries are blocked and routed to the
+            \Krishi{} Krishi Call Center or \Emergency{} in every product tier — safety
+            is never paywalled.
+      \item \textbf{Environment.} Verified dosing cuts over-application. Bangladesh pilots
+            report up to \WaterSave{} water savings and \UreaSave{} urea savings.
+      \item \textbf{Access.} Standard Bengali and \Ndialects{} regional dialects, voice
+            input, offline-capable on mid-range Android phones farmers already own.
+    \end{itemize}}
   \end{block}
 
-  \begin{exampleblock}{Roadmap}
-    {\small Voice output for low-literacy users $\cdot$ broader dialect support $\cdot$
-    soil-vision refinement for irrigation advisories $\cdot$
-    district-level pilot with a DAE field extension office.}
+  \begin{exampleblock}{How It Compares and What Comes Next}
+    {\small\renewcommand{\arraystretch}{1.38}\setlength{\tabcolsep}{4pt}
+    \begin{tabular}{@{}p{0.52\linewidth}cc@{}}
+      \toprule
+      \addlinespace[0.2ex]
+      \textbf{Property} & \textbf{Generic AI} & \textbf{Ours} \\
+      \addlinespace[0.2ex]\midrule\addlinespace[0.4ex]
+      Answers traced to a source page    & \nomark & \yes \\[0.25ex]
+      Safety gate before any retrieval   & \nomark & \yes \\[0.25ex]
+      Refuses when evidence is absent    & \nomark & \yes \\[0.25ex]
+      Works offline on Android           & \nomark & \yes \\[0.25ex]
+      Understands Bangladeshi farm dialect & \partmark & \yes \\[0.25ex]
+      \addlinespace[0.1ex]\bottomrule
+    \end{tabular}
+
+    \vspace{0.3ex}
+    {\footnotesize \yes\ fully present\enspace\partmark\ partial\enspace\nomark\ absent}\\[0.4ex]
+    \textbf{Roadmap:}\enspace voice output $\cdot$ extended dialect coverage $\cdot$
+    soil-vision for irrigation advisories $\cdot$ DAE field office pilot.}
   \end{exampleblock}
 
 \end{column}
@@ -299,57 +317,57 @@
 \begin{column}{\colwidth}
 
   \begin{block}{Research Assets: What We Built and Released}
-    {\small
-    \begin{tabular}{@{}p{0.22\linewidth}p{0.24\linewidth}p{0.48\linewidth}@{}}
+    {\small\renewcommand{\arraystretch}{1.50}\setlength{\tabcolsep}{5pt}
+    \begin{tabular}{@{}p{0.20\linewidth}p{0.24\linewidth}p{0.50\linewidth}@{}}
       \toprule
-      \textbf{Asset} & \textbf{Scale} & \textbf{What makes it reliable} \\ \midrule
+      \addlinespace[0.3ex]
+      \textbf{Asset} & \textbf{Scale} & \textbf{Why it is reliable} \\
+      \addlinespace[0.3ex]\midrule\addlinespace[0.6ex]
       Benchmark (4 tracks) & \Nbench{} instances &
         General QA 28,993 $\cdot$ Treatment 11,224 (66.3\% chemical) $\cdot$
-        Table 25,650 $\cdot$ Safety 20,112. Every instance linked to a source page. \\[0.5ex]
+        Table 25,650 $\cdot$ Safety 20,112.
+        Every instance traces to a source page. \\[0.6ex]
       Knowledge graph & \Nnodes{} nodes, \Ntriples{} triples &
         \Nentities{} entities from \Npubs{} publications at \Ninst{} institutions
-        (BARC, BARI, BRRI, DAE and others). \\[0.5ex]
-      Farmer-language queries & \Nfarmerq{} queries &
+        (BARC, BARI, BRRI, DAE and others). \\[0.6ex]
+      Farmer queries & \Nfarmerq{} queries &
         \Ninterviews{} face-to-face interviews in Rajshahi and Natore,
-        capturing \Ndialects{} regional dialects. \\[0.5ex]
-      Soil-moisture dataset & \Nsoil{} field images &
-        Paired tensiometer readings (0.0 to 21.5\,kPa) across \Ncrops{} crops,
-        \Nseries{} series with strict train/test separation. Pabna, May 2026. \\
-      \bottomrule
+        covering \Ndialects{} regional dialects. \\[0.6ex]
+      Soil-moisture images & \Nsoil{} field photos &
+        Tensiometer readings (0.0 to 21.5\,kPa) across \Ncrops{} crops,
+        \Nseries{} series, strict train/test separation. Pabna, 2026. \\[0.3ex]
+      \addlinespace[0.2ex]\bottomrule
     \end{tabular}
 
-    \vspace{0.4ex}
+    \vspace{0.3ex}
     {\footnotesize All four datasets released CC-BY-4.0 on Hugging Face.}}
   \end{block}
 
   \begin{block}{From Official Publications to Retrieval Nodes}
-    \figbox{7.8cm}{%
-      GPT Diagram: knowledge pipeline flow\\[0.5ex]
-      4:3 landscape, white background, leaf-green arrows\\[0.5ex]
-      Official publications $\rightarrow$ PDF extraction $\rightarrow$
-      entity and relation tagging $\rightarrow$ \Nnodes-node knowledge graph
-      $\rightarrow$ provenance-traced retrieval index}
+    \begin{center}
+      \includegraphics[width=\linewidth,height=6.8cm,keepaspectratio]{gounded_in_bangladesh.png}
+    \end{center}
+    \vspace{-0.3ex}
+    {\small The pipeline converts \Npubs{} official publications from \Ninst{} institutions
+    into a structured knowledge graph (\Nnodes{} nodes, \Ntriples{} triples). Every retrieved
+    fact links back to its source document, making answers auditable rather than generated.}
   \end{block}
 
   \begin{block}{Collected in the Field, Not Scraped from the Web}
     \begin{center}
-      \begin{tabular}{@{}c@{\hspace{0.8cm}}c@{}}
-        \includegraphics[height=5.6cm]{soil_wet.jpg} &
-        \includegraphics[height=5.6cm]{soil_dry.jpg} \\[0.3ex]
+      \begin{tabular}{@{}c@{\hspace{0.3cm}}c@{\hspace{0.3cm}}c@{}}
+        \includegraphics[height=5.0cm,keepaspectratio]{researcher_interviewing_farmer.png} &
+        \includegraphics[height=5.0cm]{soil_wet.jpg} &
+        \includegraphics[height=5.0cm]{soil_dry.jpg} \\[0.3ex]
+        {\footnotesize\sffamily \Ninterviews{} farmer interviews} &
         {\footnotesize\bfseries 0.0\,kPa (wet)} &
         {\footnotesize\bfseries 8.0\,kPa (dry)} \\
       \end{tabular}
     \end{center}
     \vspace{0.3ex}
-    {\small
-    \begin{itemize}
-      \item Each soil image is paired with a tensiometer reading taken at the same time,
-            giving a physical measurement instead of an annotator label.
-      \item The 46 measurement series are split by series boundary so that near-duplicate
-            images cannot appear in both training and test sets.
-      \item Every benchmark instance links back to a specific page in an official
-            publication, making answers auditable.
-    \end{itemize}}
+    {\small Each soil image has a tensiometer reading as its label (physical measurement,
+    not annotator opinion). The \Ninterviews{} interviews across Rajshahi and Natore
+    captured how farmers actually describe their problems in \Ndialects{} dialects.}
   \end{block}
 
 \end{column}
@@ -359,174 +377,200 @@
 % ==========  COLUMN 3 -- MEASURED RESULTS  ==========
 \begin{column}{\colwidth}
 
-  \begin{alertblock}{Language Model: Fine-Tuned 4B Outperforms Larger Models}
+  \begin{alertblock}{Language Model: Fine-Tuned 4B vs Larger Baselines}
     \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
-        width=0.94\linewidth, height=8.0cm,
-        xbar, xmin=0, xmax=0.42,
-        axis y line=none,
+        ybar,
+        width=0.94\linewidth, height=8.5cm,
+        ymin=0, ymax=0.40,
+        bar width=16mm,
+        xmin=0.5, xmax=4.5,
+        xtick={1,2,3,4},
+        xticklabels={
+          {Gemma-4\\26B},
+          {Gemini-2.5\\Flash-Lite},
+          {LLaMA-3.1\\8B},
+          {\bfseries KrishokChat\\4B (ours)}
+        },
+        xticklabel style={font=\small\sffamily, align=center, text width=2.2cm},
+        ytick={0,0.10,0.20,0.30},
+        yticklabel style={font=\scriptsize\sffamily, color=ink!60},
+        ylabel={Token-F1 Score},
+        ylabel style={font=\footnotesize\sffamily, yshift=4pt},
         axis x line=bottom,
+        axis y line=left,
         axis line style={draw=ink!25, thin},
         tick style={draw=none},
-        xtick={0,0.10,0.20,0.30},
-        xticklabel style={font=\scriptsize\sffamily, color=ink!60},
-        xlabel style={font=\footnotesize\sffamily, yshift=-3pt},
-        xlabel={Token-F1 score\enspace (Bengali general QA)},
-        ytick=data,
-        yticklabels={
-          Gemma-4-26B,
-          Gemini-2.5-Flash-Lite,
-          LLaMA-3.1-8B,
-          {\bfseries KrishokChat-4B (ours)}
-        },
-        yticklabel style={font=\small\sffamily, align=right},
-        nodes near coords,
-        nodes near coords align={horizontal},
-        every node near coord/.append style={
-          font=\small\bfseries\sffamily, color=ink, xshift=4pt
-        },
-        enlarge y limits=0.20,
-        y=12mm,
-        bar width=8.5mm,
-        xmajorgrids=true,
-        grid style={draw=rulegrey!60, line width=0.3pt},
+        ymajorgrids=true,
+        grid style={draw=rulegrey!55, line width=0.35pt},
+        clip=false,
       ]
-        \addplot[fill=ink!14, draw=none]
-          coordinates {(0.087,0) (0.104,1) (0.165,2)};
-        \addplot[fill=leaf, draw=leaf!60!black, line width=0.4pt]
-          coordinates {(0.314,3)};
+        % Dummy (1 counted series; no grouping offset)
+        \addplot[draw=none, fill=none]
+          coordinates {(1,0.087)(2,0.104)(3,0.165)(4,0.314)};
+        % Baseline bars
+        \addplot[ybar, bar width=16mm, fill=ink!16, draw=none, forget plot,
+          nodes near coords,
+          every node near coord/.style={
+            font=\footnotesize\bfseries\sffamily, color=ink,
+            anchor=south, yshift=4pt}]
+          coordinates {(1,0.087)(2,0.104)(3,0.165)};
+        % Our bar
+        \addplot[ybar, bar width=16mm, fill=leaf, draw=leaf!40!black,
+          line width=0.5pt, forget plot, nodes near coords,
+          every node near coord/.style={
+            font=\small\bfseries\sffamily, color=leaf!20!black,
+            anchor=south, yshift=4pt}]
+          coordinates {(4,0.314)};
       \end{axis}
     \end{tikzpicture}
     \end{center}
-    \vspace{0.3ex}
-    \noindent\colorbox{leaflight}{\parbox[c][1.6cm][c]{\dimexpr\linewidth-2\fboxsep}{%
-      \centering
-      {\color{leaf}\fontsize{28}{32}\selectfont\bfseries\sffamily 1.9$\times$}%
-      \enspace{\color{ink}\small\sffamily gain over best zero-shot model\enspace(\Pval{})}}}
-    \vspace{0.5ex}
+    \vspace{0.2ex}
+    \begin{center}
+      {\color{leaf}\bfseries\sffamily\large 1.9$\times$ gain}\enspace
+      {\small\sffamily over the best zero-shot model\enspace(\Pval{})}
+    \end{center}
+    \vspace{0.2ex}
     {\small LoRA fine-tune of Gemma-4-E4B, 4-bit quantised for on-device deployment.}
   \end{alertblock}
 
-  \begin{alertblock}{Retrieval: Hybrid RRF Fusion Wins Across All Methods}
+  \begin{alertblock}{Retrieval: Hybrid RRF Outperforms All Methods}
     \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
-        width=0.94\linewidth, height=7.0cm,
-        xbar, xmin=0.36, xmax=0.60,
-        axis y line=none,
+        ybar,
+        width=0.94\linewidth, height=7.5cm,
+        ymin=0.35, ymax=0.58,
+        bar width=14mm,
+        xmin=0.5, xmax=5.5,
+        xtick={1,2,3,4,5},
+        xticklabels={
+          BGE-M3, Dense, ColBERT, BM25,
+          {\bfseries Hybrid\\RRF (ours)}
+        },
+        xticklabel style={font=\small\sffamily, align=center, text width=1.9cm},
+        ytick={0.35,0.40,0.45,0.50,0.55},
+        yticklabel style={font=\scriptsize\sffamily, color=ink!60},
+        ylabel={Recall@10},
+        ylabel style={font=\footnotesize\sffamily, yshift=4pt},
         axis x line=bottom,
+        axis y line=left,
         axis line style={draw=ink!25, thin},
         tick style={draw=none},
-        xtick={0.40,0.45,0.50,0.55},
-        xticklabel style={font=\scriptsize\sffamily, color=ink!60},
-        xlabel style={font=\footnotesize\sffamily, yshift=-3pt},
-        xlabel={Recall@10\enspace (900 farmer queries)},
-        ytick=data,
-        yticklabels={BGE-M3, Dense, ColBERT, BM25,
-          {\bfseries Hybrid RRF (ours)}},
-        yticklabel style={font=\small\sffamily},
-        nodes near coords,
-        nodes near coords align={horizontal},
-        every node near coord/.append style={
-          font=\small\bfseries\sffamily, color=ink, xshift=4pt
-        },
-        enlarge y limits=0.22,
-        y=10mm,
-        bar width=7mm,
-        xmajorgrids=true,
-        grid style={draw=rulegrey!60, line width=0.3pt},
+        ymajorgrids=true,
+        grid style={draw=rulegrey!55, line width=0.35pt},
         clip=false,
       ]
-        \addplot[fill=ink!12, draw=none]
-          coordinates {(0.408,0) (0.464,1) (0.487,2) (0.506,3)};
-        \addplot[fill=leaf, draw=leaf!60!black, line width=0.4pt]
-          coordinates {(0.539,4)};
+        \addplot[draw=none, fill=none]
+          coordinates {(1,0.408)(2,0.464)(3,0.487)(4,0.506)(5,0.539)};
+        \addplot[ybar, bar width=14mm, fill=ink!14, draw=none, forget plot,
+          nodes near coords,
+          every node near coord/.style={
+            font=\footnotesize\bfseries\sffamily, color=ink,
+            anchor=south, yshift=4pt}]
+          coordinates {(1,0.408)(2,0.464)(3,0.487)(4,0.506)};
+        \addplot[ybar, bar width=14mm, fill=leaf, draw=leaf!40!black,
+          line width=0.5pt, forget plot, nodes near coords,
+          every node near coord/.style={
+            font=\small\bfseries\sffamily, color=leaf!20!black,
+            anchor=south, yshift=4pt}]
+          coordinates {(5,0.539)};
       \end{axis}
     \end{tikzpicture}
     \end{center}
-    \vspace{-0.3ex}
-    {\small $+$9\% over dense retrieval ($p{<}0.001$, Wilcoxon signed-rank).
-    Formal queries: R@10\,=\,\Rdenseformal{}.\enspace
-    Colloquial: R@10 drops to \Rdensecolloq{} (dense alone).}
+    \vspace{0.2ex}
+    {\small $+$9\% over dense retrieval ($p{<}0.001$). Dense R@10\,=\,\Rdenseformal{}
+    (formal) vs \Rdensecolloq{} in colloquial farmer language.}
   \end{alertblock}
 
   \begin{alertblock}{On-Device Crop Disease Accuracy (Top-1)}
     \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
+        ybar,
         width=0.94\linewidth, height=7.5cm,
-        xbar, xmin=0.82, xmax=1.01,
-        axis y line=none,
+        ymin=82, ymax=101,
+        bar width=14mm,
+        xmin=0.5, xmax=5.5,
+        xtick={1,2,3,4,5},
+        xticklabels={Wheat, Potato, Rice, Corn, Brassica},
+        xticklabel style={font=\small\sffamily, align=center},
+        ytick={85,90,95,100},
+        yticklabels={85\%,90\%,95\%,100\%},
+        yticklabel style={font=\scriptsize\sffamily, color=ink!60},
+        ylabel={Top-1 Accuracy},
+        ylabel style={font=\footnotesize\sffamily, yshift=4pt},
         axis x line=bottom,
+        axis y line=left,
         axis line style={draw=ink!25, thin},
         tick style={draw=none},
-        xtick={0.85,0.90,0.95,1.00},
-        xticklabels={85\%,90\%,95\%,100\%},
-        xticklabel style={font=\scriptsize\sffamily, color=ink!60},
-        xlabel style={font=\footnotesize\sffamily, yshift=-3pt},
-        xlabel={Top-1 Accuracy\enspace (held-out images)},
-        ytick=data,
-        yticklabels={
-          Wheat (live sweep),
-          Potato (3 classes),
-          Rice (8 classes),
-          Corn (4 classes),
-          Brassica (11 classes)
-        },
-        yticklabel style={font=\small\sffamily},
-        nodes near coords,
-        nodes near coords align={horizontal},
-        every node near coord/.append style={
-          font=\small\bfseries\sffamily, color=ink, xshift=4pt
-        },
-        point meta=explicit symbolic,
-        enlarge y limits=0.18,
-        y=12mm,
-        bar width=8mm,
-        xmajorgrids=true,
-        grid style={draw=rulegrey!60, line width=0.3pt},
+        ymajorgrids=true,
+        grid style={draw=rulegrey!55, line width=0.35pt},
+        clip=false,
       ]
-        \addplot[fill=leaf!55, draw=none]
-          coordinates {(0.880,0) [88.0\%]};
-        \addplot[fill=leaf!68, draw=none]
-          coordinates {(0.950,1) [95.0\%]};
-        \addplot[fill=leaf!80, draw=none]
-          coordinates {(0.965,2) [96.5\%]};
-        \addplot[fill=leaf!90, draw=none]
-          coordinates {(0.972,3) [97.2\%]};
-        \addplot[fill=leaf,    draw=leaf!60!black, line width=0.4pt]
-          coordinates {(0.973,4) [97.3\%]};
+        \addplot[draw=none, fill=none]
+          coordinates {(1,88)(2,95)(3,96.5)(4,97.2)(5,97.3)};
+        \addplot[ybar, bar width=14mm, fill=leaf!52, draw=none, forget plot,
+          nodes near coords, point meta=explicit symbolic,
+          every node near coord/.style={
+            font=\footnotesize\bfseries\sffamily, color=ink,
+            anchor=south, yshift=4pt}]
+          coordinates {(1,88) [88\%]};
+        \addplot[ybar, bar width=14mm, fill=leaf!65, draw=none, forget plot,
+          nodes near coords, point meta=explicit symbolic,
+          every node near coord/.style={
+            font=\footnotesize\bfseries\sffamily, color=ink,
+            anchor=south, yshift=4pt}]
+          coordinates {(2,95) [95\%]};
+        \addplot[ybar, bar width=14mm, fill=leaf!78, draw=none, forget plot,
+          nodes near coords, point meta=explicit symbolic,
+          every node near coord/.style={
+            font=\footnotesize\bfseries\sffamily, color=ink,
+            anchor=south, yshift=4pt}]
+          coordinates {(3,96.5) [96.5\%]};
+        \addplot[ybar, bar width=14mm, fill=leaf!90, draw=none, forget plot,
+          nodes near coords, point meta=explicit symbolic,
+          every node near coord/.style={
+            font=\footnotesize\bfseries\sffamily, color=ink,
+            anchor=south, yshift=4pt}]
+          coordinates {(4,97.2) [97.2\%]};
+        \addplot[ybar, bar width=14mm, fill=leaf, draw=leaf!40!black,
+          line width=0.5pt, forget plot,
+          nodes near coords, point meta=explicit symbolic,
+          every node near coord/.style={
+            font=\footnotesize\bfseries\sffamily, color=ink,
+            anchor=south, yshift=4pt}]
+          coordinates {(5,97.3) [97.3\%]};
       \end{axis}
     \end{tikzpicture}
     \end{center}
     \vspace{0.2ex}
-    \noindent\begin{tabular}{@{}c@{\hspace{0.2cm}}c@{}}
+    \noindent\begin{tabular}{@{}c@{\hspace{0.3cm}}c@{}}
       \badge{\LibCoverage}{Bengali treatment\\verified (99.8\%)} &
       \badge{$<$30\,ms}{on-device inference\\mid-range Android} \\
     \end{tabular}
   \end{alertblock}
 
-  \begin{alertblock}{Safety Gate: 99.7\% of Unsafe Queries Blocked}
+  \begin{alertblock}{Safety Gate: 322 of 323 Unsafe Queries Blocked}
     \begin{center}
-    \begin{tikzpicture}[baseline]
-      \fill[leaflight] (0,0) rectangle (7.2cm, 0.55cm);
-      \fill[leaf]      (0,0) rectangle ({7.2cm * 0.9969}, 0.55cm);
-      \fill[clay]      ({7.2cm * 0.9969},0) rectangle (7.2cm, 0.55cm);
-      \node[font=\scriptsize\bfseries\sffamily, color=white, anchor=west]
-        at (0.08cm, 0.275cm) {322 blocked (99.7\%)};
-      \node[font=\scriptsize\bfseries\sffamily, color=white, anchor=east]
-        at (7.1cm, 0.275cm) {1};
+    \begin{tikzpicture}[baseline=(current bounding box.center)]
+      \fill[ink!10] (0,0) rectangle (8.0cm, 0.75cm);
+      \fill[leaf]   (0,0) rectangle ({8.0cm*0.9969}, 0.75cm);
+      \node[font=\small\bfseries\sffamily, color=white, anchor=west]
+        at (0.14cm, 0.375cm) {322 blocked\enspace(99.7\%)};
+      \node[font=\scriptsize\sffamily, color=ink!50, anchor=west]
+        at ({8.0cm*0.9969+0.1cm}, 0.375cm) {1};
     \end{tikzpicture}
     \end{center}
     \vspace{0.3ex}
     {\small Out of 323 unsafe test queries, only 1 passed through.
-    When evidence is absent from the knowledge base, the system
-    withholds its answer rather than guessing.}
+    When evidence is absent, the system withholds its answer rather than guessing.}
   \end{alertblock}
 
-  {\scriptsize\sffamily Evaluation: benchmark held-out split, 900 farmer queries,
-  per-crop held-out images. All models run on-device; no API calls.}
+  {\scriptsize\sffamily Held-out split $\cdot$ 900 farmer queries $\cdot$
+  per-crop test images $\cdot$ all on-device; no API calls.}
+
 
 \end{column}
 
@@ -536,49 +580,48 @@
 \begin{column}{\colwidth}
 
   \begin{block}{Why Each Stage Exists: Failure Before Fix}
-    {\small
-    \begin{tabular}{@{}p{0.46\linewidth}p{0.50\linewidth}@{}}
+    {\small\renewcommand{\arraystretch}{1.48}\setlength{\tabcolsep}{6pt}
+    \begin{tabular}{@{}p{0.46\linewidth}p{0.48\linewidth}@{}}
       \toprule
-      \textbf{What we measured} & \textbf{What we built in response} \\ \midrule
+      \addlinespace[0.3ex]
+      \textbf{What we measured} & \textbf{What we built in response} \\
+      \addlinespace[0.3ex]\midrule\addlinespace[0.6ex]
       LLMs produce wrong chemical dosages at \HallucFloor{} of queries even when
-        the correct answer is given to them directly
-        & Safety check runs \textbf{before} retrieval, plus a 14-field verifier
-          that refuses to generate if evidence is absent \\[0.5ex]
+        the correct answer is provided directly
+        & Safety check runs \textbf{before} any retrieval, plus a 14-field verifier
+          that refuses to output if evidence is absent \\[0.7ex]
       Dense retrieval scores R@10 of \Rdenseformal{} on formal queries but drops
-        to \Rdensecolloq{} on the same questions in colloquial farmer language
-        & Hybrid BM25 + dense retrieval fused with Reciprocal Rank Fusion \\[0.5ex]
-      \EntityGap{} of technical disease terms in official documents do not appear
-        in any form in farmer queries; a farmer writes
-        \bn{পাতা হলুদ হয়ে যাচ্ছে} where the manual says ``Yellow Mosaic Virus''
-        & Retrieval is register-aware across \Ndialects{} dialects \\[0.5ex]
-      The national Krishi Call Center handled \Ncalls{} calls in one year with a
+        to \Rdensecolloq{} on identical questions in colloquial farmer language
+        & Hybrid BM25 + dense retrieval fused with Reciprocal Rank Fusion \\[0.7ex]
+      \EntityGap{} of disease terms in official documents do not appear in any
+        form in farmer queries: \bn{পাতা হলুদ হয়ে যাচ্ছে} vs.\ ``Yellow Mosaic Virus''
+        & Register-aware retrieval across \Ndialects{} dialects \\[0.7ex]
+      The national Krishi Call Center handled \Ncalls{} calls last year with a
         fixed human team
-        & AI handles routine queries automatically; agents receive only high-risk
-          cases with a full audit trail \\
-      \bottomrule
+        & AI answers routine queries automatically; agents get only high-risk
+          cases with a full audit trail \\[0.3ex]
+      \addlinespace[0.2ex]\bottomrule
     \end{tabular}}
   \end{block}
 
   \begin{block}{System Architecture: 4-Stage Safety Pipeline}
-    \figbox{14.0cm}{%
-      GPT Diagram: vertical 4-stage pipeline\\[0.5ex]
-      Portrait, leaf-green stage boxes, red exit branch, dashed audit rail\\[0.5ex]
-      \textbf{[FARMER QUERY]} Bengali, any dialect, text or voice\\
-      $\downarrow$~\textbf{[1~SAFETY ROUTER]} 6 risk categories, fail-closed
-      \hfill unsafe $\rightarrow$ \textbf{STOP} $\rightarrow$ 16123 / 999\\
-      $\downarrow$~\textbf{[2~HYBRID RETRIEVAL]} BM25 + dense, RRF, top-5 nodes\\
-      $\downarrow$~\textbf{[3~GENERATION]} KrishokChat-4B, 4-bit, Bengali\\
-      $\downarrow$~\textbf{[4~VERIFIER]} 14 fields checked, $\dashrightarrow$ audit log\\
-      $\downarrow$~\textbf{[GROUNDED ANSWER]} with page-level source citations}
+    \begin{center}
+      \includegraphics[width=0.88\linewidth,height=15.0cm,keepaspectratio]{system_architecture.png}
+    \end{center}
+    \vspace{-0.4ex}
+    {\small The safety router blocks any query in a high-risk category (banned
+    chemicals, self-harm, pesticide injection) and routes it to the \Krishi{} Krishi
+    Call Center or \Emergency{} before any retrieval runs. Safe queries proceed through
+    hybrid retrieval, generation, and the 14-field verifier before reaching the farmer.}
   \end{block}
 
   \begin{block}{On-Device Disease Classification and Routing}
-    \figbox{9.2cm}{%
-      GPT Diagram: hierarchical routing tree\\[0.5ex]
-      Leaf photo $\rightarrow$ top-level crop classifier (5 crops)
-      $\rightarrow$ per-crop disease model (1.6 to 21.8\,MB, ONNX or TFLite)
-      $\rightarrow$ grounded Bengali treatment (\LibCoverage{} coverage)\\[0.4ex]
-      No server required. No internet connection needed. Under 30\,ms on Android.}
+    \begin{center}
+      \includegraphics[width=\linewidth,height=8.5cm,keepaspectratio]{vision_routing.png}
+    \end{center}
+    \vspace{-0.5ex}
+    {\small \LibCoverage{} verified Bengali treatments. Models run fully on-device;
+    no server, no network. Inference under 30\,ms on a mid-range Android phone.}
   \end{block}
 
 \end{column}
@@ -622,14 +665,9 @@
   \end{block}
 
   \begin{exampleblock}{Business Model: Farmers Use It Free; Institutions Pay}
-    \figbox{7.2cm}{%
-      GPT Diagram: two-tier product comparison\\[0.4ex]
-      Side by side FREE vs PREMIUM, leaf-green and parchment background\\[0.4ex]
-      FREE: knowledge base lookup (no language model, cannot hallucinate) plus
-      on-device photo diagnosis, safety gate, and offline mode\\[0.3ex]
-      PREMIUM: everything in Free plus open-ended conversation with the fine-tuned
-      model, priority response, and voice interaction\\[0.3ex]
-      Safety gate and \Krishi{} escalation are present in both tiers}
+    \begin{center}
+      \includegraphics[width=\linewidth,height=7.0cm,keepaspectratio]{free_vs_premium.png}
+    \end{center}
 
     \vspace{0.4ex}
     {\small

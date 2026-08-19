@@ -6,7 +6,7 @@
 export const APP = {
   name: "কৃষক চ্যাট",
   nameEn: "KrishokChat",
-  tagline: "বাংলাদেশ কৃষি পরামর্শদাতা",
+  tagline: "নিরাপদ ও প্রমাণভিত্তিক বাংলা কৃষি এআই",
   taglineEn: "Safety-aware Bengali Agri-AI Advisory",
   version: "0.2.0",
 } as const;

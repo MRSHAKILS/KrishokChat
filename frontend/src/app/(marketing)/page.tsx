@@ -97,10 +97,10 @@ function HeroSection() {
               <span className="h-2 w-2 rounded-full bg-ochre" /> {APP.tagline}
             </motion.div>
             <motion.h1 variants={enter} className="mt-6 max-w-xl font-display text-4xl leading-[1.16] text-ink sm:text-6xl">
-              ফসলের পাশে<br /><span className="text-leaf">সহজ কৃষি পরামর্শ</span>
+              নিরাপদ ও প্রমাণভিত্তিক<br /><span className="text-leaf">বাংলা কৃষি এআই</span>
             </motion.h1>
             <motion.p variants={enter} className="mt-5 max-w-lg text-base leading-relaxed text-ink-soft">
-              পাতার ছবি দিন, বাংলায় প্রশ্ন করুন, আর আপনার ফসলের জন্য প্রাসঙ্গিক সরকারি তথ্য ও নিরাপদ করণীয় জেনে নিন।
+              ২৮৪টি সরকারি প্রকাশনা ও মাঠ গবেষণায় গ্রাউন্ডেড—পাতার ছবি থেকে অফলাইন রোগ নির্ণয় ও যাচাইকৃত নিরাপদ বাংলা কৃষি পরামর্শ।
             </motion.p>
           </div>
           <motion.div variants={enter} className="mt-10 flex flex-wrap items-center gap-3">
@@ -139,13 +139,13 @@ function HeroSection() {
           />
           <motion.div variants={enter} className="relative z-10 ml-auto w-[min(100%,22rem)] rounded-xl border rule bg-paper p-4 shadow-[0_10px_24px_rgba(52,39,23,0.12)]">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-faint">আজকের সহায়তা</span>
-              <span className="flex items-center gap-1.5 text-[10px] font-semibold text-leaf"><span className="h-1.5 w-1.5 rounded-full bg-leaf" /> প্রস্তুত</span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-faint">মাঠের এআই সেবা</span>
+              <span className="flex items-center gap-1.5 text-[10px] font-semibold text-leaf"><span className="h-1.5 w-1.5 rounded-full bg-leaf" /> সিস্টেম সক্রিয়</span>
             </div>
-            <p className="mt-3 font-display text-lg leading-snug text-ink">ছবি বা প্রশ্ন দিয়ে শুরু করুন</p>
+            <p className="mt-3 font-display text-lg leading-snug text-ink">অফলাইন রোগ নির্ণয় ও পরামর্শ</p>
             <div className="mt-3 grid grid-cols-2 gap-2">
-              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><Camera className="mb-1 h-4 w-4 text-leaf" />পাতার ছবি</div>
-              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><MessageSquare className="mb-1 h-4 w-4 text-leaf" />বাংলায় প্রশ্ন</div>
+              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><Camera className="mb-1 h-4 w-4 text-leaf" />রোগ নির্ণয় (&lt;30ms)</div>
+              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><MessageSquare className="mb-1 h-4 w-4 text-leaf" />যাচাইকৃত উত্তর</div>
             </div>
           </motion.div>
         </div>
