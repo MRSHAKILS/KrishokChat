@@ -3,9 +3,9 @@ import { Phone, ExternalLink } from "lucide-react";
 import { APP, HELPLINE, LINKS } from "@/lib/constants";
 
 const NAV_SECTIONS = [
-  { title: "পণ্য", links: [{ href: "/chat", label: "চ্যাট" }, { href: "/detect", label: "রোগ নির্ণয়" }, { href: "/analytics", label: "পরিসংখ্যান" }] },
-  { title: "গবেষণা", links: [{ href: "/research", label: "পদ্ধতি" }, { href: "/research/safety", label: "নিরাপত্তা" }, { href: "/research/benchmark", label: "ফলাফল" }, { href: "/library", label: "লাইব্রেরি" }] },
-  { title: "প্রতিষ্ঠান", links: [{ href: "/data", label: "উপাত্ত" }, { href: "/business", label: "ব্যবসায়িক মডেল" }, { href: "/about", label: "দল ও পরিচিতি" }, { href: "/contact", label: "যোগাযোগ" }] },
+  { title: "সেবাসমূহ", links: [{ href: "/chat", label: "কৃষি পরামর্শ চ্যাট" }, { href: "/detect", label: "ফসলের রোগ নির্ণয়" }, { href: "/soil", label: "মাটি ও সেচ" }, { href: "/analytics", label: "লাইভ পরিসংখ্যান" }] },
+  { title: "গবেষণা", links: [{ href: "/research", label: "গবেষণা বিবরণ" }, { href: "/research/safety", label: "নিরাপত্তা কাঠামো" }, { href: "/research/benchmark", label: "বেঞ্চমার্ক ফলাফল" }, { href: "/library", label: "রিসোর্স লাইব্রেরি" }] },
+  { title: "প্রতিষ্ঠান ও দল", links: [{ href: "/data", label: "উপাত্ত ও নলেজ গ্রাফ" }, { href: "/business", label: "ব্যবসায়িক মডেল" }, { href: "/about", label: "প্রকল্প পরিচিতি" }, { href: "/team", label: "গবেষক দল" }, { href: "/contact", label: "সাহায্য ও যোগাযোগ" }] },
 ];
 
 const RESOURCES = [

@@ -57,30 +57,30 @@ const KEY_FINDINGS = [
   {
     value: RESEARCH_STATS.hallucinationFloor,
     label: "রাসায়নিক হ্যালুসিনেশন ফ্লোর",
-    detail: "পরিপূর্ণ অরাকল তথ্য থাকা সত্ত্বেও এই হার থেকে যায় — সব মডেলে।",
+    detail: "পরিপূর্ণ সঠিক নথিপত্র থাকা সত্ত্বেও জেনারেটিভ মডেলগুলোতে ৪-৭% রাসায়নিক ভুলের ঝুঁকি থাকে — যা ভেরিফায়ার দ্বারা প্রতিরোধ করা আবশ্যক।",
   },
   {
     n: RESEARCH_STATS_N.sftGenF1,
-    label: "ফাইন-টিউনড GenF1",
-    detail: "বেস্ট জিরো-শট (০.১৬৫) থেকে ১.৯× উন্নত।",
+    label: "ফাইন-টিউনড Gen-F1",
+    detail: "প্রমিত কৃষি নির্দেশিকায় ফাইন-টিউনিংয়ের মাধ্যমে জিরো-শট মডেল (০.১৬৫) থেকে ১.৯ গুণ বেশি নির্ভরযোগ্য উত্তর প্রস্তুত।",
   },
   {
     n: RESEARCH_STATS_N.hybridR10,
-    label: "হাইব্রিড R@10",
-    detail: "BM25+Dense ফিউশন সর্বোচ্চ নির্ভুলতা।",
+    label: "হাইব্রিড রিট্রিভাল (R@10)",
+    detail: "BM25 শব্দ মিল ও ডেন্স ভেক্টর এম্বেডিংয়ের হাইব্রিড RRF ফিউশনে ৫৩.৯% সর্বোচ্চ তথ্য সংগ্রহের নির্ভুলতা।",
   },
   {
     n: RESEARCH_STATS_N.interAnnotatorKappa,
-    label: "ইন্টার-নির্দেশক κ",
-    detail: "ফার্মার কোয়েরি গোল্ড ম্যাপিং নির্ভরযোগ্য।",
+    label: "বিশেষজ্ঞ সম্মতি সূচক (κ)",
+    detail: "মাঠ পর্যায়ের কৃষক প্রশ্ন ও বিশেষজ্ঞ কৃষি কর্মকর্তাদের মধ্যে ০.৭২ উচ্চমাত্রার নির্ভরযোগ্য সম্মতি।",
   },
 ];
 
 const CONTRIBUTIONS = [
-  "৮৫,৯৭৯-ইনস্ট্যান্স, ৪-ট্র্যাক বেঞ্চমার্ক — ২৮৪ সরকারি প্রকাশনা, ১৩ প্রতিষ্ঠান, ৬ উপভাষা",
-  "প্রমাণ-সংরক্ষণকারী নির্মাণ পাইপলাইন — উত্তর নির্যাসিত, তৈরি নয়",
-  "নিরাপত্তা-সচেতন ট্র্যাক পেয়ারিং — রাসায়নিক প্রমাণ-অডিট + ১২-শ্রেণী প্রত্যাখ্যান",
-  "১,০০০-কোয়েরি রিয়েল-ওয়ার্ল্ড ফার্মার বেঞ্চমার্ক — ৩০০টি মাঠ সাক্ষাৎকার থেকে",
+  "৮৫,৯৭৯ বেঞ্চমার্ক প্রশ্নোত্তর — ২৮৪টি সরকারি প্রকাশনা, ১৩টি গবেষণা প্রতিষ্ঠান ও ৬টি আঞ্চলিক উপভাষার সমন্বয়।",
+  "প্রমাণ-ভিত্তিক এক্সট্রাকশন পাইপলাইন — কোনো অনুমাননির্ভর তথ্য নয়, প্রতিটি উত্তর সরাসরি উৎস নথিপত্র থেকে নিষ্কাশিত।",
+  "নিরাপত্তা ও গার্ডরেইল স্তর — ১২-শ্রেণির ঝুঁকি শনাক্তকরণ এবং ক্ষতিকর বা নিষিদ্ধ কীটনাশক প্রত্যাখ্যান ফ্রেমওয়ার্ক।",
+  "১,০০০টি বাস্তব কৃষক প্রশ্নের বেঞ্চমার্ক — রাজশাহী ও নাটোরের ৩০০ জন কৃষকের মাঠ সাক্ষাৎকার থেকে কিউরেটেড।",
 ];
 
 export default function ResearchPage() {
@@ -93,29 +93,28 @@ export default function ResearchPage() {
         variants={stagger}
         className="text-center"
       >
-        <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre">
-          Research
+        <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre font-semibold">
+          গবেষণা সারসংক্ষেপ · RESEARCH BRIEF
         </motion.p>
-        <motion.h1 variants={enter} className="mt-4 font-display text-4xl leading-tight text-ink">
-          প্রমাণ-ভিত্তিক <span className="text-leaf">বাংলা কৃষি এআই</span>
+        <motion.h1 variants={enter} className="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl">
+          প্রমাণভিত্তিক ও নিরাপদ <span className="text-leaf">বাংলা কৃষি এআই</span>
         </motion.h1>
-        <motion.p variants={enter} className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
-          ২৮৪ সরকারি প্রকাশনা, {RESEARCH_STATS.knowledgeNodes} জ্ঞান নোড, {RESEARCH_STATS.benchmarkInstances} মূল্যায়ন ইনস্ট্যান্স —
-          দুটি গবেষণাপত্র, একটি লক্ষ্য: নিরাপদ ও নির্ভরযোগ্য কৃষি পরামর্শ।
+        <motion.p variants={enter} className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-ink-soft">
+          ২৮৪টি সরকারি প্রকাশনা, {RESEARCH_STATS.knowledgeNodes}টি জ্ঞানভাণ্ডার নোড, {RESEARCH_STATS.benchmarkInstances}টি মূল্যায়ন প্রশ্নোত্তর — দুটি গবেষণাপত্র, একটিই লক্ষ্য: কৃষকের জন্য নিরাপদ ও নির্ভরযোগ্য এআই পরামর্শদাতা।
         </motion.p>
         <motion.div variants={enter} className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/research/safety"
             className="group flex items-center gap-2 rounded-lg bg-leaf px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2"
           >
-            নিরাপত্তা নকশা দেখুন
+            নিরাপত্তা ফ্রেমওয়ার্ক দেখুন
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
             href="/chat"
             className="rounded-lg border rule px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-leaf hover:text-leaf"
           >
-            লাইভ ডেমো
+            লাইভ পরামর্শ ডেমো
           </Link>
         </motion.div>
       </motion.section>
@@ -128,7 +127,7 @@ export default function ResearchPage() {
         variants={stagger}
       >
         <motion.h2 variants={enter} className="mb-6 text-center font-display text-2xl text-ink">
-          মূল আবিষ্কার
+          গবেষণার মূল পর্যবেক্ষণ ও ফলাফল
         </motion.h2>
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone lg:grid-cols-4">
           {KEY_FINDINGS.map((finding) => (
@@ -146,7 +145,7 @@ export default function ResearchPage() {
         className="space-y-6"
       >
         <motion.h2 variants={enter} className="text-center font-display text-2xl text-ink">
-          গবেষণাপত্র
+          প্রকাশিত গবেষণাপত্রসমূহ
         </motion.h2>
         {PAPERS.map((paper, i) => (
           <motion.div
@@ -159,7 +158,7 @@ export default function ResearchPage() {
                 <BookOpen className="h-6 w-6" />
               </div>
               <div className="flex-1">
-                <div className="text-xs uppercase tracking-[0.14em] text-ochre">
+                <div className="text-xs uppercase tracking-[0.14em] text-ochre font-semibold">
                   {paper.venue}
                 </div>
                 <h3 className="mt-2 font-display text-lg leading-snug text-ink">
@@ -212,7 +211,7 @@ export default function ResearchPage() {
         variants={stagger}
       >
         <motion.h2 variants={enter} className="mb-6 text-center font-display text-2xl text-ink">
-          অবদান
+          গবেষণার মৌলিক অবদান
         </motion.h2>
         <motion.div variants={enter} className="space-y-3">
           {CONTRIBUTIONS.map((contrib, i) => (
@@ -238,20 +237,20 @@ export default function ResearchPage() {
         className="grid grid-cols-1 gap-4 sm:grid-cols-3"
       >
         {[
-          { href: "/research/safety", icon: Shield, title: "নিরাপত্তা নকশা", desc: "এজেন্টিক পাইপলাইন অ্যানিমেশন" },
-          { href: "/data", icon: Database, title: "উপাত্ত", desc: "জ্ঞান গ্রাফ ও নোড" },
-          { href: "/team", icon: BookOpen, title: "দল", desc: "মাঠ পর্যায়ের কাজ" },
+          { href: "/research/safety", icon: Shield, title: "নিরাপত্তা কাঠামো", desc: "মাল্টি-এজেন্ট গার্ডরেইল ও ভেরিফায়ার" },
+          { href: "/data", icon: Database, title: "উপাত্ত ও নলেজ গ্রাফ", desc: "জ্ঞানভাণ্ডার নোড ও ওপেন ডেটাসেট" },
+          { href: "/team", icon: BookOpen, title: "গবেষক দল", desc: "মাঠ পর্যায়ের কাজ ও পরিচিতি" },
         ].map((card) => (
           <motion.div key={card.href} variants={enter}>
             <Link
               href={card.href}
-              className="group flex items-center gap-4 rounded-xl border rule bg-paper p-5 transition-colors hover:border-leaf"
+              className="group flex items-center gap-4 rounded-xl border rule bg-paper p-5 transition-all hover:border-leaf hover:shadow-xs"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-leaf/10 text-leaf">
                 <card.icon className="h-5 w-5" />
               </div>
               <div className="flex-1">
-                <div className="font-display text-base text-ink">{card.title}</div>
+                <div className="font-display text-base text-ink group-hover:text-leaf">{card.title}</div>
                 <div className="text-xs text-ink-faint">{card.desc}</div>
               </div>
               <ArrowRight className="h-4 w-4 text-ink-faint transition-transform group-hover:translate-x-0.5 group-hover:text-leaf" />

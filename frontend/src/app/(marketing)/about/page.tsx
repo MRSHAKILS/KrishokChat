@@ -42,10 +42,10 @@ const TEAM = [
 ];
 
 const HUB_LINKS = [
-  { href: "/data", icon: Database, title: "উপাত্ত", desc: "জ্ঞান গ্রাফ ও ডেটাসেট" },
-  { href: "/analytics", icon: BarChart3, title: "পরিসংখ্যান", desc: "নিরাপত্তা মূল্যায়ন ড্যাশবোর্ড" },
-  { href: "/research/safety", icon: Shield, title: "নিরাপত্তা নকশা", desc: "এজেন্টিক পাইপলাইন অ্যানিমেশন" },
-  { href: "/research/benchmark", icon: BookOpen, title: "ফলাফল", desc: "মূল্যায়ন সংখ্যা ও চার্ট" },
+  { href: "/data", icon: Database, title: "উপাত্ত ও নলেজ গ্রাফ", desc: "জ্ঞানভাণ্ডার ও উন্মুক্ত ডেটাসেট" },
+  { href: "/analytics", icon: BarChart3, title: "লাইভ পরিসংখ্যান", desc: "এজেন্ট সিদ্ধান্ত ও নিরাপত্তা ড্যাশবোর্ড" },
+  { href: "/research/safety", icon: Shield, title: "নিরাপত্তা কাঠামো", desc: "মাল্টি-এজেন্ট গার্ডরেইল ও ভেরিফায়ার" },
+  { href: "/research/benchmark", icon: BookOpen, title: "বেঞ্চমার্ক ফলাফল", desc: "মডেল মূল্যায়ন ও তুলনামূলক চার্ট" },
 ];
 
 const INSTITUTIONS = [
@@ -76,7 +76,7 @@ function CountCell({
         {toBn(n)}
         {suffix ? <span className="text-base">{suffix}</span> : null}
       </div>
-      <div className="mt-1 text-[11px] text-ink-faint">{label}</div>
+      <div className="mt-1 text-[11px] font-medium text-ink-faint">{label}</div>
     </div>
   );
 }
@@ -86,16 +86,14 @@ export default function AboutPage() {
     <div className="mx-auto max-w-4xl space-y-20 py-14">
       {/* === Mission === */}
       <motion.section initial="hidden" animate="visible" variants={stagger}>
-        <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre">
-          পরিচিতি
+        <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre font-semibold">
+          প্রকল্প পরিচিতি ও লক্ষ্য
         </motion.p>
         <motion.h1 variants={enter} className="mt-3 font-display text-4xl text-ink">
-          কৃষক চ্যাট <span className="text-leaf">প্রকল্প</span>
+          কৃষক চ্যাট <span className="text-leaf">উদ্যোগ</span>
         </motion.h1>
-        <motion.p variants={enter} className="mt-4 text-sm leading-relaxed text-ink-soft">
-          বাংলাদেশে ২৩ কোটি+ বাংলাভাষী মানুষ, কিন্তু কৃষি সম্প্রসারণ কর্মকর্তা অপর্যাপ্ত। কৃষক যখন সাহায্য
-          চান, তখন তাৎক্ষণিক পরামর্শ পাওয়া যায় না। কৃষক চ্যাট এই শূন্যতা পূরণের লক্ষ্যে — একটি নিরাপদ,
-          নির্ভরযোগ্য, বাংলাভাষিক কৃষি পরামর্শ ব্যবস্থা।
+        <motion.p variants={enter} className="mt-4 text-sm leading-relaxed text-ink-soft sm:text-base">
+          বাংলাদেশে ১৭ কোটি+ জনসংখ্যার এক বিশাল অংশ প্রত্যক্ষ ও পরোক্ষভাবে কৃষির সাথে যুক্ত। কিন্তু বিশেষজ্ঞ কৃষি কর্মকর্তার সংখ্যা প্রয়োজনের তুলনায় অপ্রতুল হওয়ায় মাঠের কৃষক তাৎক্ষণিক সঠিক পরামর্শ পেতে সমস্যার সম্মুখীন হন। কৃষক চ্যাট এই শূন্যতা পূরণের লক্ষ্যে তৈরি — সরকারি কৃষি গবেষণা সংস্থাগুলোর নির্দেশিকা ও মাল্টি-এজেন্ট নিরাপত্তা পাইপলাইন দ্বারা পরিচালিত একটি নিরাপদ, নির্ভরযোগ্য ও প্রমাণযোগ্য বাংলা এআই কৃষি পরামর্শ ব্যবস্থা।
         </motion.p>
       </motion.section>
 
@@ -106,12 +104,12 @@ export default function AboutPage() {
             <Link
               key={item.href}
               href={item.href}
-              className="group flex flex-col items-center gap-2 rounded-xl border rule bg-paper p-4 text-center transition-colors hover:border-leaf"
+              className="group flex flex-col items-center gap-2 rounded-xl border rule bg-paper p-4 text-center transition-all hover:border-leaf hover:shadow-xs"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-md bg-leaf/10 text-leaf">
                 <item.icon className="h-5 w-5" />
               </div>
-              <div className="font-display text-sm text-ink">{item.title}</div>
+              <div className="font-display text-sm text-ink group-hover:text-leaf">{item.title}</div>
               <div className="text-[10px] text-ink-faint">{item.desc}</div>
             </Link>
           ))}
@@ -121,7 +119,7 @@ export default function AboutPage() {
       {/* === Team === */}
       <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
         <motion.h2 variants={enter} className="mb-6 font-display text-2xl text-ink">
-          দল
+          গবেষক দল
         </motion.h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {TEAM.map((member) => (
@@ -132,7 +130,7 @@ export default function AboutPage() {
               </div>
               <div className="p-4 text-center">
                 <div className="font-display text-base text-ink">{member.name}</div>
-                <div className="mt-1 text-xs text-ochre">{member.role}</div>
+                <div className="mt-1 text-xs text-ochre font-medium">{member.role}</div>
                 <div className="mt-2 flex items-center justify-center gap-1 text-[11px] text-ink-faint">
                   <MapPin className="h-3 w-3" />
                   {member.affiliation}
@@ -146,39 +144,39 @@ export default function AboutPage() {
       {/* === Fieldwork === */}
       <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
         <motion.h2 variants={enter} className="font-display text-2xl text-ink">
-          মাঠ পর্যায়ের কাজ
+          মাঠ পর্যায়ের গবেষণা ও যাচাই
         </motion.h2>
         <motion.p variants={enter} className="mt-2 text-sm text-ink-soft">
-          রাজশাহী ও নাটোর জেলায় {RESEARCH_STATS.fieldInterviews} জন কৃষকের সাথে সাক্ষাৎকার।
+          রাজশাহী ও নাটোর জেলার মাঠে {RESEARCH_STATS.fieldInterviews} জন কৃষকের সরাসরি সাক্ষাৎকার এবং উপসহকারী কৃষি কর্মকর্তা (SAAO) দ্বারা পরামর্শের মাঠ উপযোগিতা যাচাই।
         </motion.p>
         <motion.div variants={enter} className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="overflow-hidden rounded-xl border rule">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/researcher_interviewing_farmer.png" alt="গবেষক কৃষকের সাক্ষাৎকার" className="aspect-video w-full object-cover" />
+            <img src="/assets/researcher_interviewing_farmer.png" alt="গবেষক কর্তৃক কৃষকের সাক্ষাৎকার গ্রহণ" className="aspect-video w-full object-cover" />
           </div>
           <div className="overflow-hidden rounded-xl border rule">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/small_group_researcher_farmer_discussion.png" alt="গোষ্ঠী আলোচনা" className="aspect-video w-full object-cover" />
+            <img src="/assets/small_group_researcher_farmer_discussion.png" alt="কৃষক দলীয় আলোচনা" className="aspect-video w-full object-cover" />
           </div>
         </motion.div>
         <motion.div variants={enter} className="mt-6 grid grid-cols-3 gap-3">
-          <CountCell bordered value={RESEARCH_STATS_N.fieldInterviews} label="মাঠ সাক্ষাৎকার" />
-          <CountCell bordered value={69} label="অফিসার যাচাই" />
-          <CountCell bordered value={100} suffix="%" label="অফিসার সম্মতি" />
+          <CountCell bordered value={RESEARCH_STATS_N.fieldInterviews} label="কৃষক সাক্ষাৎকার" />
+          <CountCell bordered value={69} label="SAAO কর্মকর্তা যাচাই" />
+          <CountCell bordered value={100} suffix="%" label="বিশেষজ্ঞ সম্মতি" />
         </motion.div>
       </motion.section>
 
       {/* === Institutions === */}
       <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
         <motion.h2 variants={enter} className="mb-3 font-display text-2xl text-ink">
-          প্রতিষ্ঠান সহযোগী
+          সহযোগী গবেষণা ও সরকারি প্রতিষ্ঠানসমূহ
         </motion.h2>
         <motion.p variants={enter} className="mb-4 text-sm text-ink-soft">
-          {RESEARCH_STATS.institutions}টি সরকারি ও গবেষণা প্রতিষ্ঠান থেকে {RESEARCH_STATS.publications}টি প্রকাশনা।
+          {RESEARCH_STATS.institutions}টি জাতীয় ও আন্তর্জাতিক কৃষি প্রতিষ্ঠান থেকে সংগৃহীত {RESEARCH_STATS.publications}টি অনুমোদিত প্রকাশনা।
         </motion.p>
         <motion.div variants={enter} className="flex flex-wrap gap-2">
           {INSTITUTIONS.map((inst) => (
-            <div key={inst} className="rounded-lg border rule bg-paper px-3 py-1.5 text-center">
+            <div key={inst} className="rounded-lg border rule bg-paper px-3 py-1.5 text-center shadow-2xs">
               <span className="font-display text-sm text-ink">{inst}</span>
             </div>
           ))}
@@ -189,15 +187,15 @@ export default function AboutPage() {
       <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="space-y-6">
         <motion.div variants={enter} className="rounded-lg border border-clay-soft/40 bg-clay-soft/8 px-5 py-4">
           <p className="text-sm leading-relaxed text-ink-soft">
-            <span className="font-medium text-clay">গবেষণা প্রোটোটাইপ — উৎপাদন ব্যবহারের জন্য নয়।</span>{" "}
-            ফাইন-টিউনড মডেলের রাসায়নিক হ্যালুসিনেশন রেট ({RESEARCH_STATS.hallucinationFloor}) এখনও অমীমাংসিত।
+            <span className="font-medium text-clay">গবেষণা প্রোটোটাইপ ও নিরাপত্তা বার্তা:</span>{" "}
+            অনিয়ন্ত্রিত এলএলএম-এর রাসায়নিক হ্যালুসিনেশন ঝুঁকি ({RESEARCH_STATS.hallucinationFloor}) প্রতিরোধে আমাদের মাল্টি-এজেন্ট ভেরিফায়ার সিস্টেম সরকারি নির্দেশিকা থেকে যাচাইকৃত সঠিক ডোজ নিশ্চিত করে।
           </p>
         </motion.div>
         <motion.div variants={enter} className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone sm:grid-cols-4">
-          <CountCell value={RESEARCH_STATS_N.publications} label="প্রকাশনা" />
-          <CountCell value={RESEARCH_STATS_N.knowledgeNodes} label="নোড" />
-          <CountCell value={RESEARCH_STATS_N.benchmarkInstances} label="ইনস্ট্যান্স" />
-          <CountCell value={RESEARCH_STATS_N.dialects} label="উপভাষা" />
+          <CountCell value={RESEARCH_STATS_N.publications} label="সরকারি প্রকাশনা" />
+          <CountCell value={RESEARCH_STATS_N.knowledgeNodes} label="জ্ঞানভাণ্ডার নোড" />
+          <CountCell value={RESEARCH_STATS_N.benchmarkInstances} label="বেঞ্চমার্ক প্রশ্নোত্তর" />
+          <CountCell value={RESEARCH_STATS_N.dialects} label="আঞ্চলিক উপভাষা" />
         </motion.div>
       </motion.section>
 

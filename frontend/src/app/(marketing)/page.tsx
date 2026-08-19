@@ -29,19 +29,19 @@ import { safetyLabel, TONE_BADGE, AGRI_DISTRICTS } from "@/lib/safety-labels";
 
 const TRACK_DATA = [
   { name: "সাধারণ কৃষি QA", value: 28993, color: "var(--color-leaf)" },
-  { name: "সার ও সয়েল গাইড QA", value: 25650, color: "var(--color-leaf-2)" },
-  { name: "নিরাপত্তা পলিসি QA", value: 20112, color: "var(--color-ochre)" },
-  { name: "বালাই ব্যবস্থাপনা QA", value: 11224, color: "var(--color-clay)" },
+  { name: "সার ও মাটি নির্দেশিকা QA", value: 25650, color: "var(--color-leaf-2)" },
+  { name: "নিরাপত্তা ও গার্ডরেইল QA", value: 20112, color: "var(--color-ochre)" },
+  { name: "বালাই ও রোগ ব্যবস্থাপনা QA", value: 11224, color: "var(--color-clay)" },
 ];
 
 /* Farmer-facing retrieval chart labels — the backend enums (BM25, Dense,
    Hybrid RRF, ColBERT) are technical jargon; the home page is for farmers.
    The /research/benchmark page keeps the full technical terms for reviewers. */
 const RETRIEVAL_DATA = [
-  { name: "মিশ্র পদ্ধতি", value: 0.539, best: true },
-  { name: "শব্দ মিল", value: 0.506, best: false },
-  { name: "অর্থ মিল", value: 0.464, best: false },
-  { name: "সূক্ষ্ম মিল", value: 0.487, best: false },
+  { name: "হাইব্রিড মিশ্র পদ্ধতি", value: 0.539, best: true },
+  { name: "শব্দ মিল (BM25)", value: 0.506, best: false },
+  { name: "অর্থ মিল (Dense)", value: 0.464, best: false },
+  { name: "টোকেন মিল (ColBERT)", value: 0.487, best: false },
 ];
 
 const RAG_QUERY = "আলুর লেট ব্লাইট কীভাবে প্রতিরোধ করব?";
@@ -100,7 +100,7 @@ function HeroSection() {
               ফসলের পাশে<br /><span className="text-leaf">সহজ কৃষি পরামর্শ</span>
             </motion.h1>
             <motion.p variants={enter} className="mt-5 max-w-lg text-base leading-relaxed text-ink-soft">
-              পাতার ছবি দিন, বাংলায় প্রশ্ন করুন, আর আপনার ফসলের জন্য প্রাসঙ্গিক তথ্য ও করণীয় বুঝে নিন।
+              পাতার ছবি দিন, বাংলায় প্রশ্ন করুন, আর আপনার ফসলের জন্য প্রাসঙ্গিক সরকারি তথ্য ও নিরাপদ করণীয় জেনে নিন।
             </motion.p>
           </div>
           <motion.div variants={enter} className="mt-10 flex flex-wrap items-center gap-3">
@@ -112,10 +112,10 @@ function HeroSection() {
             </Link>
           </motion.div>
           <motion.div variants={enter} className="mt-9 grid max-w-md grid-cols-2 gap-4 border-t rule pt-5 sm:grid-cols-4">
-            <HeroMetric value={RESEARCH_STATS.benchmarkInstances} label="মূল্যায়ন ইনস্ট্যান্স" />
-            <HeroMetric value={RESEARCH_STATS.knowledgeNodes} label="জ্ঞান নোড" />
-            <HeroMetric value={RESEARCH_STATS.dialects} label="উপভাষা" />
-            <HeroMetric value={RESEARCH_STATS.soilImages} label="মাঠের ছবি" />
+            <HeroMetric value={RESEARCH_STATS.benchmarkInstances} label="বেঞ্চমার্ক প্রশ্নোত্তর" />
+            <HeroMetric value={RESEARCH_STATS.knowledgeNodes} label="জ্ঞানভাণ্ডার নোড" />
+            <HeroMetric value={RESEARCH_STATS.dialects} label="আঞ্চলিক উপভাষা" />
+            <HeroMetric value={RESEARCH_STATS.soilImages} label="মাটির মাঠের ছবি" />
           </motion.div>
         </div>
         <div className="relative flex min-h-[350px] flex-col justify-end bg-paper-2 p-4 sm:p-6 lg:min-h-full lg:p-8">

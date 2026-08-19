@@ -12,26 +12,26 @@ import { enter, stagger } from "@/lib/motion";
 
 const LANES = [
   {
-    icon: Building2,
-    name: "ফ্রিমিয়াম + B2B",
-    who: "কৃষক বিনামূল্যে · ডিলার সাবস্ক্রিপশন",
-    value: "কৃষকের জন্য বিনামূল্যে পরামর্শ; ডিলার ও কর্মকর্তার জন্য প্রদত্ত অডিট ড্যাশবোর্ড।",
-    evidence: "PxD ৭.৮M · ACI €৩.৫M",
-    accent: "leaf",
-  },
-  {
     icon: Landmark,
     name: "সরকারি অংশীদারিত্ব",
     who: "DAE · a2i · ১৬১২৩ কল সেন্টার",
-    value: "১৬১২৩-এর জন্য AI ফ্রন্ট-এন্ড — ট্রায়েজ ও এসক্যালেশন, প্রতিযোগিতা নয়।",
-    evidence: "৯২,০৯৪ কল/বছর",
+    value: "১৬১২৩-এর AI ফ্রন্ট-এন্ড — ট্রায়েজ ও এসক্যালেশন, প্রতিযোগিতা নয়।",
+    evidence: "৯২,০৯৪ কল/বছর · B2G প্রাথমিক",
     accent: "ochre",
+  },
+  {
+    icon: Building2,
+    name: "B2B অ্যানালিটিক্স",
+    who: "ডিলার · বীজ কোম্পানি · SAAO",
+    value: "জেলাভিত্তিক রোগ স্পাইক ও রাসায়নিক ডিমান্ড অ্যানালিটিক্স।",
+    evidence: "ACI Fosholi: €৩.৫M · PxD: ৭.৮M",
+    accent: "leaf",
   },
   {
     icon: Database,
     name: "ডেটাসেট ও API লাইসেন্সিং",
     who: "গবেষক · কৃষি-ফিনটেক · NGO",
-    value: "৮৫,৯৭৯-ইনস্ট্যান্স বেঞ্চমার্ক + ৭২২-ইমেজ মাটি ডেটাসেট (CC-BY-4.0)।",
+    value: "৮৫,৯৭৯-ইনস্ট্যান্স বেঞ্চমার্ক + ৭২২-ইমেজ মাটির ডেটাসেট (CC-BY-4.0)।",
     evidence: "CC-BY-4.0 · ২ পেপার",
     accent: "clay",
   },
@@ -59,7 +59,7 @@ export function BusinessModelSection() {
           <h2 className="font-display text-xl text-ink sm:text-2xl">ব্যবসায়িক মডেল ও টেকসই আয়</h2>
         </div>
         <p className="mt-2 text-xs text-ink-faint">
-          কৃষকের জন্য বিনামূল্যে · আয় তিনটি লেন থেকে — Business Model & Sustainability
+          কৃষকের জন্য সর্বদা বিনামূল্যে · প্রতি LLM উত্তর ~২ পয়সা · B2G সর্বোচ্চ অগ্রাধিকার — Business Model & Sustainability
         </p>
       </motion.div>
 

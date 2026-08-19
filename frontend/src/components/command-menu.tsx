@@ -45,15 +45,16 @@ async function loadIndex() {
 
 /* ---- route index ---- */
 const ROUTES = [
-  { href: "/", label: "হোম", hint: "ল্যান্ডিং পেজ", icon: Home },
-  { href: "/library", label: "জ্ঞান ভান্ডার", hint: "বই ও ডেটাসেট", icon: BookOpen },
-  { href: "/data", label: "জ্ঞান গ্রাফ ও উপাত্ত", hint: "নোড · এনটিটি · পরিসংখ্যান", icon: Network },
-  { href: "/soil", label: "মাটি কনসোল", hint: "আর্দ্রতা নির্ণয়", icon: Sprout },
-  { href: "/chat", label: "কৃষি পরামর্শ", hint: "নিরাপত্তা-সচেতন QA", icon: ScanSearch },
-  { href: "/detect", label: "রোগ শনাক্ত", hint: "ছবি-ভিত্তিক", icon: FlaskConical },
-  { href: "/research", label: "গবেষণা", hint: "পদ্ধতি · নিরাপত্তা · বেঞ্চমার্ক", icon: BarChart3 },
-  { href: "/about", label: "প্রকল্প পরিচিতি", hint: "লক্ষ্য ও সুযোগ", icon: Info },
-  { href: "/team", label: "দল", hint: "গবেষক", icon: Users },
+  { href: "/", label: "হোম", hint: "প্রধান পাতা", icon: Home },
+  { href: "/chat", label: "কৃষি পরামর্শ চ্যাট", hint: "নিরাপত্তা-সচেতন প্রশ্নোত্তর", icon: ScanSearch },
+  { href: "/detect", label: "ফসলের রোগ নির্ণয়", hint: "ছবি-ভিত্তিক পাতা স্ক্যান", icon: FlaskConical },
+  { href: "/soil", label: "মাটি ও সেচ", hint: "আর্দ্রতা ও সার সুপারিশ", icon: Sprout },
+  { href: "/library", label: "রিসোর্স লাইব্রেরি", hint: "সরকারি বই ও ডেটাসেট", icon: BookOpen },
+  { href: "/data", label: "উপাত্ত ও নলেজ গ্রাফ", hint: "নোড · এনটিটি · ত্রিপল", icon: Network },
+  { href: "/analytics", label: "লাইভ পরিসংখ্যান", hint: "এজেন্ট সিদ্ধান্ত অডিট", icon: BarChart3 },
+  { href: "/research", label: "গবেষণা ও ফলাফল", hint: "পদ্ধতি · নিরাপত্তা · বেঞ্চমার্ক", icon: BarChart3 },
+  { href: "/about", label: "প্রকল্প পরিচিতি", hint: "উদ্দেশ্য ও সহযোগী প্রতিষ্ঠান", icon: Info },
+  { href: "/team", label: "গবেষক দল", hint: "গবেষক ও মাঠকর্ম", icon: Users },
 ] as const;
 
 function isTypingTarget(t: EventTarget | null): boolean {

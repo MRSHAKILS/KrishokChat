@@ -77,44 +77,44 @@ const SAMPLE_NODE = {
 };
 
 const DATASET_STATS = [
-  { value: STAT_NUMS.nodes, label: "জ্ঞান নোড", icon: Boxes },
-  { value: STAT_NUMS.entities, label: "এনটিটি", icon: Tag },
-  { value: STAT_NUMS.triples, label: "ফ্যাক্টুয়াল ট্রিপল", icon: Database },
-  { value: STAT_NUMS.imageLinked, label: "ইমেজ-লিঙ্কড নোড", icon: FileText, ratio: `${RESEARCH_STATS.imageLinkedShare} of নোড` },
-  { value: STAT_NUMS.crops, label: "অনন্য ফসল", icon: Tag },
-  { value: STAT_NUMS.variants, label: "রোগ ভ্যারিয়েন্ট", icon: Tag },
-  { value: STAT_NUMS.chemicals, label: "রাসায়নিক এনটিটি", icon: Tag },
-  { value: STAT_NUMS.pdfs, label: "সোর্স PDF", icon: FileText },
+  { value: STAT_NUMS.nodes, label: "জ্ঞানভাণ্ডার নোড", icon: Boxes },
+  { value: STAT_NUMS.entities, label: "চিহ্নিত এনটিটি", icon: Tag },
+  { value: STAT_NUMS.triples, label: "সম্পর্ক ট্রিপল", icon: Database },
+  { value: STAT_NUMS.imageLinked, label: "চিত্রযুক্ত জ্ঞান নোড", icon: FileText, ratio: `মোট নোডের ${RESEARCH_STATS.imageLinkedShare}` },
+  { value: STAT_NUMS.crops, label: "স্বতন্ত্র ফসল", icon: Tag },
+  { value: STAT_NUMS.variants, label: "রোগ ও বালাই রূপভেদ", icon: Tag },
+  { value: STAT_NUMS.chemicals, label: "রাসায়নিক উপাদান", icon: Tag },
+  { value: STAT_NUMS.pdfs, label: "সরকারি প্রকাশনা (PDF)", icon: FileText },
 ] as const;
 
 /* Data card groups — values all from RESEARCH_STATS (paper-verified) */
 const CARD_GROUPS = [
   {
-    name: "কর্পাস",
+    name: "কর্পাস ও জ্ঞানভাণ্ডার",
     rows: [
-      ["সোর্স PDF", RESEARCH_STATS.publications],
-      ["প্রতিষ্ঠান", RESEARCH_STATS.institutions],
-      ["জ্ঞান নোড", RESEARCH_STATS.knowledgeNodes],
-      ["ইমেজ-লিঙ্কড নোড", `${RESEARCH_STATS.imageLinkedNodes} (${RESEARCH_STATS.imageLinkedShare})`],
-      ["এনটিটি", RESEARCH_STATS.entities],
-      ["ট্রিপল", RESEARCH_STATS.triples],
-      ["অনন্য ফসল", RESEARCH_STATS.uniqueCrops],
-      ["রোগ ভ্যারিয়েন্ট", RESEARCH_STATS.diseaseVariants],
-      ["রাসায়নিক এনটিটি", RESEARCH_STATS.chemicalEntities],
+      ["সরকারি মূল প্রকাশনা", RESEARCH_STATS.publications],
+      ["উৎস প্রতিষ্ঠান", RESEARCH_STATS.institutions],
+      ["জ্ঞানভাণ্ডার নোড", RESEARCH_STATS.knowledgeNodes],
+      ["চিত্রযুক্ত নোড", `${RESEARCH_STATS.imageLinkedNodes} (${RESEARCH_STATS.imageLinkedShare})`],
+      ["শনাক্তকৃত এনটিটি", RESEARCH_STATS.entities],
+      ["সম্পর্ক ট্রিপল", RESEARCH_STATS.triples],
+      ["স্বতন্ত্র ফসল শ্রেণি", RESEARCH_STATS.uniqueCrops],
+      ["রোগ ও বালাই রূপভেদ", RESEARCH_STATS.diseaseVariants],
+      ["রাসায়নিক উপাদান", RESEARCH_STATS.chemicalEntities],
     ] as [string, string][],
   },
   {
-    name: "বেঞ্চমার্ক",
+    name: "বেঞ্চমার্ক মূল্যায়ন",
     rows: [
-      ["কোয়েরি (মোট)", RESEARCH_STATS.farmerQueries],
-      ["কোয়েরি (মূল্যায়নযোগ্য)", RESEARCH_STATS.answerableQueries],
+      ["কৃষক প্রশ্ন (মোট)", RESEARCH_STATS.farmerQueries],
+      ["মূল্যায়নযোগ্য প্রশ্ন", RESEARCH_STATS.answerableQueries],
     ] as [string, string][],
   },
   {
-    name: "গুণমান — ইন্টার-অ্যানোটেটর κ",
+    name: "বিশেষজ্ঞ যাচাই — ইন্টার-অ্যানোটেটর κ",
     rows: [
-      ["κ (ফার্মার+নিরাপত্তা)", RESEARCH_STATS.interAnnotatorKappa, 72],
-      ["κ (KG-grounded)", RESEARCH_STATS.kgGroundedKappa, 78],
+      ["κ (কৃষক প্রশ্ন + নিরাপত্তা)", RESEARCH_STATS.interAnnotatorKappa, 72],
+      ["κ (নলেজ-গ্রাফ গ্রাউন্ডেড)", RESEARCH_STATS.kgGroundedKappa, 78],
     ] as [string, string, number][],
   },
 ] as const;

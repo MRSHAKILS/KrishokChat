@@ -70,10 +70,10 @@ export default function AccountPage() {
     <motion.div initial="hidden" animate="visible" variants={stagger} className="mx-auto max-w-3xl space-y-6">
       <header className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
-          <p className="mb-2 text-xs font-semibold text-leaf">আমার হিসাব</p>
-          <h1 className="font-display text-2xl text-ink sm:text-3xl">সংরক্ষিত পরামর্শ</h1>
+          <p className="mb-2 text-xs font-semibold text-leaf">ব্যক্তিগত প্রোফাইল ও রেকর্ড</p>
+          <h1 className="font-display text-2xl text-ink sm:text-3xl">সংরক্ষিত কৃষি পরামর্শ</h1>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-soft">
-            লগইন করা ব্যবহারকারীদের জন্য — সংরক্ষিত প্রশ্ন ও উত্তর এখানে রাখা হয়।
+            আপনার সংরক্ষিত প্রশ্নোত্তর ও ব্যবস্থাপত্র পরবর্তীতে পর্যালোচনার জন্য এখানে সুরক্ষিত থাকে।
           </p>
         </div>
       </header>

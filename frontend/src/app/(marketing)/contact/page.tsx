@@ -16,14 +16,14 @@ export default function ContactPage() {
     <div className="mx-auto max-w-2xl space-y-8 py-12">
       {/* Header */}
       <motion.div initial="hidden" animate="visible" variants={stagger}>
-        <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre">
-          যোগাযোগ
+        <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre font-semibold">
+          জরুরি সহায়তা ও যোগাযোগ
         </motion.p>
-        <motion.h1 variants={enter} className="mt-3 font-display text-3xl text-ink">
-          সাহায্য ও পরামর্শ
+        <motion.h1 variants={enter} className="mt-3 font-display text-3xl text-ink sm:text-4xl">
+          কৃষি পরামর্শ ও হেল্পলাইন
         </motion.h1>
         <motion.p variants={enter} className="mt-2 text-sm text-ink-soft">
-          কৃষি সংক্রান্ত যেকোনো প্রশ্নের জন্য নিচের সরকারি নম্বরে সরাসরি কল করুন।
+          কৃষি, বালাই ব্যবস্থাপনা বা কীটনাশক ব্যবহারের যেকোনো জরুরি সন্দেহে সরাসরি নিচের সরকারি হটলাইনে কল করুন।
         </motion.p>
       </motion.div>
 
@@ -39,11 +39,11 @@ export default function ContactPage() {
               <PhoneCall className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-ink-faint">কৃষক কল সেন্টার</div>
-              <div className="mt-0.5 text-sm text-ink">বাংলাদেশ সরকার · সকাল ৯টা–বিকাল ৫টা</div>
+              <div className="text-xs font-semibold text-leaf">কৃষক কল সেন্টার (AIS / DAE)</div>
+              <div className="mt-0.5 text-sm text-ink">সকাল ৯টা–বিকাল ৫টা (শুক্রবার ও সরকারি ছুটি ব্যতীত)</div>
             </div>
           </div>
-          <span className="shrink-0 tabular text-lg font-semibold text-leaf">
+          <span className="shrink-0 tabular text-xl font-bold text-leaf">
             {HELPLINE.krishiCallCenter}
           </span>
         </motion.a>
@@ -58,14 +58,30 @@ export default function ContactPage() {
               <Siren className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-ink-faint">জরুরি</div>
-              <div className="mt-0.5 text-sm text-ink">জাতীয় জরুরি সেবা</div>
+              <div className="text-xs font-semibold text-clay">জাতীয় জরুরি সেবা (৯৯৯)</div>
+              <div className="mt-0.5 text-sm text-ink">কীটনাশক বিষক্রিয়া, দুর্ঘটনা ও তাৎক্ষণিক জরুরি সহায়তা</div>
             </div>
           </div>
-          <span className="shrink-0 tabular text-lg font-semibold text-clay">
+          <span className="shrink-0 tabular text-xl font-bold text-clay">
             {HELPLINE.emergency}
           </span>
         </motion.a>
+      </motion.div>
+
+      {/* Extension Officer / Field Guidance */}
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={stagger}
+        className="rounded-xl border rule bg-paper p-5"
+      >
+        <div className="flex items-center gap-2 text-sm font-semibold text-ink">
+          <ShieldCheck className="h-4 w-4 text-leaf" />
+          মাঠ পর্যায়ের উপসহকারী কৃষি কর্মকর্তা (SAAO)
+        </div>
+        <p className="mt-2 text-xs leading-relaxed text-ink-soft">
+          কীটনাশকের সঠিক ডোজ বা কোনো বিশেষ রোগের ক্ষেত্রে স্থানীয় উপসহকারী কৃষি কর্মকর্তার সাথে পরামর্শ করুন অথবা আপনার নিকটস্থ উপজেলা কৃষি অফিসে নমুনা প্রদর্শন করুন।
+        </p>
       </motion.div>
 
       {/* Prototype note */}
@@ -77,8 +93,7 @@ export default function ContactPage() {
       >
         <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-leaf" />
         <p className="text-xs leading-relaxed text-ink-faint">
-          এই ব্যবস্থা একটি গবেষণা প্রোটোটাইপ — এটি জরুরি সেবার বিকল্প নয়। জরুরি
-          পরিস্থিতিতে সরাসরি ৯৯৯ নম্বরে কল করুন।
+          কৃষক চ্যাট একটি গবেষণা প্রোটোটাইপ। এটি বিশেষজ্ঞ কৃষি সম্প্রসারণ পরামর্শের সহায়ক হিসেবে কাজ করে, কোনো চরম বিষক্রিয়া বা জরুরি অবস্থায় অবিলম্বে সরকারি ৯৯৯ বা নিকটস্থ স্বাস্থ্যকেন্দ্রে যোগাযোগ করুন।
         </p>
       </motion.div>
     </div>

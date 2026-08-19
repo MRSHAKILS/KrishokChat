@@ -32,9 +32,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "কৃষক চ্যাট — KrishokChat | Bangladesh Agri-AI Advisory",
+  title: "কৃষক চ্যাট — KrishokChat | প্রমাণভিত্তিক ও নিরাপদ কৃষি এআই পরামর্শদাতা",
   description:
-    "নিরাপদ, তথ্যভিত্তিক বাংলা কৃষি পরামর্শদাতা। পাতার ছবি থেকে রোগ শনাক্তকরণ এবং গ্রাউন্ডেড চিকিৎসা পরামর্শ।",
+    "বাংলাদেশের কৃষকদের জন্য নির্ভরযোগ্য এআই কৃষি পরামর্শদাতা — পাতার ছবি থেকে রোগ নির্ণয়, সার ও সেচ ব্যবস্থাপনা এবং সরকারি কৃষি নির্দেশিকাভিত্তিক তথ্য।",
   manifest: "/manifest.webmanifest",
 };
 

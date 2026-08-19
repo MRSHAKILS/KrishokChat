@@ -52,27 +52,27 @@ type Dataset = {
 };
 
 const CATEGORIES = [
-  { id: "all", label: "সব" },
-  { id: "disease", label: "রোগ" },
-  { id: "pest", label: "পোকা" },
-  { id: "fertilizer", label: "সার" },
-  { id: "cultivation", label: "চাষ" },
-  { id: "fisheries", label: "মৎস্য" },
-  { id: "livestock", label: "পশুপালন" },
-  { id: "pesticide", label: "কীটনাশক" },
-  { id: "soil", label: "মাটি" },
-  { id: "regulation", label: "আইন" },
+  { id: "all", label: "সব বিষয়" },
+  { id: "disease", label: "রোগ ও প্রতিকার" },
+  { id: "pest", label: "পোকা দমন" },
+  { id: "fertilizer", label: "সার ও পুষ্টি" },
+  { id: "cultivation", label: "চাষাবাদ পদ্ধতি" },
+  { id: "fisheries", label: "মৎস্য সম্পদ" },
+  { id: "livestock", label: "প্রাণিসম্পদ" },
+  { id: "pesticide", label: "বালাইনাশক বিধি" },
+  { id: "soil", label: "মাটি ও সেচ" },
+  { id: "regulation", label: "সরকারি নীতিমালা" },
 ];
 
 const DATASET_CATEGORIES = [
-  { id: "all", label: "সব" },
-  { id: "vision", label: "ভিশন" },
-  { id: "qa", label: "QA" },
-  { id: "safety", label: "নিরাপত্তা" },
-  { id: "benchmark", label: "বেঞ্চমার্ক" },
+  { id: "all", label: "সব ডেটাসেট" },
+  { id: "vision", label: "কম্পিউটার ভিশন" },
+  { id: "qa", label: "কৃষি প্রশ্নোত্তর (QA)" },
+  { id: "safety", label: "নিরাপত্তা ও গার্ডরেইল" },
+  { id: "benchmark", label: "বেঞ্চমার্ক মূল্যায়ন" },
   { id: "multimodal", label: "মাল্টিমোডাল" },
-  { id: "retrieval", label: "রিট্রিভাল" },
-  { id: "corpus", label: "কর্পাস" },
+  { id: "retrieval", label: "তথ্য সংগ্রহ (RAG)" },
+  { id: "corpus", label: "মূল কর্পাস" },
 ];
 
 /* Repo-level HF download command (the catalog lives in one dataset repo). */

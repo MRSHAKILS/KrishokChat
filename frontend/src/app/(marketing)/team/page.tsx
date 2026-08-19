@@ -19,46 +19,46 @@ import { enter, stagger } from "@/lib/motion";
 const TEAM = [
   {
     name: "Khan Raiyan Ibne Reza",
-    role: "Lead Researcher",
+    role: "প্রধান গবেষক · Lead Researcher",
     affiliation: "North South University",
     image: "/assets/researchers image/raiyan_khan.jpg",
   },
   {
     name: "Sanjana Maria",
-    role: "Researcher",
+    role: "গবেষক · Researcher",
     affiliation: "North South University",
     image: "/assets/researchers image/sanjana_maria.jpg",
   },
   {
     name: "Shakil Ahmed",
-    role: "Researcher",
+    role: "গবেষক · Researcher",
     affiliation: "North South University",
     image: "/assets/researchers image/shakil_ahmed.jpg",
   },
 ];
 
 const INSTITUTIONS = [
-  { abbr: "BARC", full: "Bangladesh Agricultural Research Council" },
-  { abbr: "BARI", full: "Bangladesh Agricultural Research Institute" },
-  { abbr: "DAE", full: "Department of Agricultural Extension" },
-  { abbr: "DLS", full: "Department of Livestock Services" },
-  { abbr: "DoF", full: "Department of Fisheries" },
-  { abbr: "CDB", full: "Cotton Development Board" },
-  { abbr: "NARS", full: "National Agricultural Research System" },
-  { abbr: "SRDI", full: "Soil Resource Development Institute" },
-  { abbr: "BSRTI", full: "Bangladesh Sugarcane Research & Training Institute" },
-  { abbr: "MoA", full: "Ministry of Agriculture" },
-  { abbr: "CABI", full: "Centre for Agriculture and Bioscience International" },
-  { abbr: "IRRI", full: "International Rice Research Institute" },
-  { abbr: "WorldFish", full: "WorldFish" },
+  { abbr: "BARC", full: "বাংলাদেশ কৃষি গবেষণা কাউন্সিল (BARC)" },
+  { abbr: "BARI", full: "বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (BARI)" },
+  { abbr: "DAE", full: "কৃষি সম্প্রসারণ অধিদপ্তর (DAE)" },
+  { abbr: "DLS", full: "প্রাণিসম্পদ অধিদপ্তর (DLS)" },
+  { abbr: "DoF", full: "মৎস্য অধিদপ্তর (DoF)" },
+  { abbr: "CDB", full: "তুলা উন্নয়ন বোর্ড (CDB)" },
+  { abbr: "NARS", full: "জাতীয় কৃষি গবেষণা সিস্টেম (NARS)" },
+  { abbr: "SRDI", full: "মৃত্তিকা সম্পদ উন্নয়ন ইনস্টিটিউট (SRDI)" },
+  { abbr: "BSRTI", full: "বাংলাদেশ রেশম গবেষণা ও প্রশিক্ষণ ইনস্টিটিউট" },
+  { abbr: "MoA", full: "কৃষি মন্ত্রণালয়, গণপ্রজাতন্ত্রী বাংলাদেশ সরকার" },
+  { abbr: "CABI", full: "সেন্টার ফর এগ্রিকালচার অ্যান্ড বায়োসায়েন্স ইন্টারন্যাশনাল" },
+  { abbr: "IRRI", full: "আন্তর্জাতিক ধান গবেষণা ইনস্টিটিউট (IRRI)" },
+  { abbr: "WorldFish", full: "ওয়ার্ল্ডফিশ বাংলাদেশ সেন্টার" },
 ];
 
 const FIELDWORK_STAGES = [
-  { stage: 1, label: "কোয়েরি পার্সিং", detail: "প্রতিটি কোয়েরি অ্যাট্রিবিউট টুপলে রূপান্তর" },
-  { stage: 2, label: "কর্পাস ইনডেক্সিং", detail: "ফসল, লক্ষণ, ক্যাটাগরি অনুযায়ী" },
-  { stage: 3, label: "অ্যাট্রিবিউট ছাঁটাই", detail: "২,৯৪৬ → মধ্যম ৫-১৫ প্রার্থী (৯০%+ ছাঁটাই)" },
-  { stage: 4, label: "বিশেষজ্ঞ নির্বাচন", detail: "একজন ডোমেইন বিশেষজ্ঞ একক নোড নির্বাচন" },
-  { stage: 5, label: "রেফারেন্স তৈরি", detail: "যাচাইকৃত নোড থেকে উত্তর তৈরি" },
+  { stage: "১", label: "মাঠে কৃষকের সাথে প্রত্যক্ষ সাক্ষাৎকার", detail: "রাজশাহী ও নাটোর জেলার মাঠে কৃষকদের বাস্তব কৃষি সমস্যার মুখোমুখি সাক্ষাৎকার।" },
+  { stage: "২", label: "জাতীয় কৃষি নথিপত্র ও নির্দেশিকা ম্যাপিং", detail: "DAE, BARC ও BRRI-এর ২৮৪টি সরকারি প্রকাশনা থেকে সঠিক সমাধান চিহ্নিতকরণ।" },
+  { stage: "৩", label: "উপসহকারী কৃষি কর্মকর্তা (SAAO) দ্বারা যাচাই", detail: "৬৯ জন মাঠ পর্যায়ের কৃষি সম্প্রসারণ কর্মকর্তা দ্বারা প্রতিটি উত্তরের নির্ভুলতা অডিট।" },
+  { stage: "৪", label: "আঞ্চলিক উপভাষা ও বালাই পরিভাষা সমরূপীকরণ", detail: "স্থানীয় ও আঞ্চলিক ভাষার প্রশ্নগুলোকে জাতীয় প্রমিত কৃষি পরিভাষায় ম্যাপিং।" },
+  { stage: "৫", label: "মাল্টি-এজেন্ট নিরাপত্তা ও ডোজ নিয়ন্ত্রণ", detail: "কীটনাশক ও রাসায়নিকের মাত্রা Verifier Agent দ্বারা চূড়ান্তভাবে লক করা।" },
 ];
 
 const PUBLICATIONS = [
@@ -196,13 +196,13 @@ export default function TeamPage() {
         {/* Validation stats */}
         <motion.div variants={enter} className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {[
-            { value: RESEARCH_STATS.fieldInterviews, label: "মাঠ সাক্ষাৎকার" },
-            { value: "৬৯", label: "অফিসার যাচাই" },
-            { value: "১০০%", label: "অফিসার সম্মতি" },
+            { value: RESEARCH_STATS.fieldInterviews, label: "কৃষক সাক্ষাৎকার" },
+            { value: "৬৯", label: "SAAO কর্মকর্তা যাচাই" },
+            { value: "১০০%", label: "বিশেষজ্ঞ সম্মতি" },
           ].map((stat) => (
             <div key={stat.label} className="rounded-lg border rule bg-paper px-4 py-3 text-center">
               <div className="font-display text-xl tabular text-leaf">{stat.value}</div>
-              <div className="mt-1 text-[11px] text-ink-faint">{stat.label}</div>
+              <div className="mt-1 text-[11px] font-medium text-ink-faint">{stat.label}</div>
             </div>
           ))}
         </motion.div>
@@ -216,18 +216,18 @@ export default function TeamPage() {
         variants={stagger}
       >
         <motion.h2 variants={enter} className="font-display text-2xl text-ink">
-          প্রতিষ্ঠান সহযোগী
+          সহযোগী গবেষণা ও সরকারি প্রতিষ্ঠানসমূহ
         </motion.h2>
         <motion.p variants={enter} className="mt-2 text-sm text-ink-soft">
-          {RESEARCH_STATS.institutions}টি সরকারি ও গবেষণা প্রতিষ্ঠান থেকে {RESEARCH_STATS.publications}টি প্রকাশনা।
+          {RESEARCH_STATS.institutions}টি সরকারি ও গবেষণা প্রতিষ্ঠান থেকে {RESEARCH_STATS.publications}টি অনুমোদিত প্রকাশনা।
         </motion.p>
         <motion.div variants={enter} className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
           {INSTITUTIONS.map((inst) => (
             <div
               key={inst.abbr}
-              className="rounded-lg border rule bg-paper px-3 py-2.5 text-center"
+              className="rounded-lg border rule bg-paper px-3 py-2.5 text-center shadow-2xs"
             >
-              <div className="font-display text-sm text-ink">{inst.abbr}</div>
+              <div className="font-display text-sm font-bold text-ink">{inst.abbr}</div>
               <div className="mt-0.5 text-[10px] leading-tight text-ink-faint">{inst.full}</div>
             </div>
           ))}
@@ -242,7 +242,7 @@ export default function TeamPage() {
         variants={stagger}
       >
         <motion.h2 variants={enter} className="font-display text-2xl text-ink">
-          গবেষণাপত্র
+          প্রকাশিত গবেষণাপত্র ও রিসোর্স
         </motion.h2>
         <div className="mt-6 space-y-4">
           {PUBLICATIONS.map((paper, i) => (
@@ -255,7 +255,7 @@ export default function TeamPage() {
                 <FileText className="h-5 w-5" />
               </div>
               <div className="flex-1">
-                <div className="text-xs uppercase tracking-[0.14em] text-ochre">
+                <div className="text-xs uppercase tracking-[0.14em] text-ochre font-semibold">
                   {paper.venue}
                 </div>
                 <div className="mt-2 font-display text-sm leading-snug text-ink">
@@ -303,16 +303,16 @@ export default function TeamPage() {
       >
         <motion.div variants={enter}>
           <Users className="mx-auto h-8 w-8 text-leaf" />
-          <h2 className="mt-3 font-display text-lg text-ink">মোট অবদান</h2>
+          <h2 className="mt-3 font-display text-lg text-ink">গবেষণা অবদানের সারসংক্ষেপ</h2>
           <div className="mt-4 grid grid-cols-3 gap-3">
             {[
-              { value: RESEARCH_STATS.benchmarkInstances, label: "ইনস্ট্যান্স" },
-              { value: RESEARCH_STATS.farmerQueries, label: "ফার্মার কোয়েরি" },
+              { value: RESEARCH_STATS.benchmarkInstances, label: "বেঞ্চমার্ক প্রশ্নোত্তর" },
+              { value: RESEARCH_STATS.farmerQueries, label: "বাস্তব কৃষক প্রশ্ন" },
               { value: RESEARCH_STATS.fieldInterviews, label: "মাঠ সাক্ষাৎকার" },
             ].map((stat) => (
               <div key={stat.label}>
                 <div className="font-display text-2xl tabular text-leaf">{stat.value}</div>
-                <div className="mt-1 text-[11px] text-ink-faint">{stat.label}</div>
+                <div className="mt-1 text-[11px] font-medium text-ink-faint">{stat.label}</div>
               </div>
             ))}
           </div>

@@ -18,19 +18,19 @@ import { createClient } from "@/lib/supabase/client";
 const NAV = [
   { href: "/", label: "হোম" },
   { href: "/detect", label: "রোগ নির্ণয়" },
-  { href: "/soil", label: "মাটি" },
-  { href: "/chat", label: "পরামর্শ" },
+  { href: "/soil", label: "মাটি ও সেচ" },
+  { href: "/chat", label: "কৃষি পরামর্শ" },
   { href: "/library", label: "লাইব্রেরি" },
 ] as const;
 
 const MORE = [
   { href: "/analytics", label: "লাইভ পরিসংখ্যান", desc: "এজেন্ট সিদ্ধান্ত ও স্থানীয় অডিট" },
-  { href: "/research", label: "গবেষণা ও ফলাফল", desc: "পেপার, benchmark ও নিরাপত্তা নকশা" },
-  { href: "/business", label: "ব্যবসায়িক মডেল", desc: "টেকসই আয় ও অংশীদারিত্ব" },
-  { href: "/data", label: "উপাত্ত", desc: "ডেটাসেট ও গবেষণা উপাত্ত" },
-  { href: "/about", label: "পরিচিতি", desc: "প্রকল্প ও প্রতিষ্ঠান" },
-  { href: "/team", label: "দল", desc: "গবেষণা দল ও কৃতিত্ব" },
-  { href: "/contact", label: "যোগাযোগ", desc: "জরুরি হেল্পলাইন ও সহায়তা" },
+  { href: "/research", label: "গবেষণা ও ফলাফল", desc: "পেপার, বেঞ্চমার্ক ও নিরাপত্তা ফ্রেমওয়ার্ক" },
+  { href: "/business", label: "ব্যবসায়িক মডেল", desc: "টেকসই অর্থনৈতিক রূপরেখা ও অংশীদারিত্ব" },
+  { href: "/data", label: "উপাত্ত ও নলেজ গ্রাফ", desc: "উন্মুক্ত ডেটাসেট ও জ্ঞানভাণ্ডার" },
+  { href: "/about", label: "প্রকল্প পরিচিতি", desc: "উদ্দেশ্য ও সহযোগী প্রতিষ্ঠান" },
+  { href: "/team", label: "গবেষক দল", desc: "গবেষণা দল ও মাঠ পর্যায়ের কাজ" },
+  { href: "/contact", label: "সাহায্য ও যোগাযোগ", desc: "সরকারি হেল্পলাইন ও পরামর্শ" },
 ] as const;
 
 export function Navbar() {
@@ -141,7 +141,7 @@ export function Navbar() {
                   className="absolute right-0 top-full mt-1.5 w-64 overflow-hidden rounded-xl border rule bg-paper p-1.5 shadow-lg shadow-ink/5 z-50"
                 >
                   <div className="px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-faint">
-                    Project overview
+                    অন্যান্য পৃষ্ঠা ও গবেষণা
                   </div>
                   {MORE.map((m) => {
                     const active = pathname === m.href || pathname.startsWith(`${m.href}/`);

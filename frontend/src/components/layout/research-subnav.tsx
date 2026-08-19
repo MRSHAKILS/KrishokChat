@@ -6,10 +6,10 @@ import { BookOpen, FlaskConical, BarChart3, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const ITEMS = [
-  { href: "/research", label: "ওভারভিউ", icon: BookOpen },
-  { href: "/research/methodology", label: "পদ্ধতি", icon: FlaskConical },
-  { href: "/research/benchmark", label: "ফলাফল", icon: BarChart3 },
-  { href: "/research/safety", label: "নিরাপত্তা", icon: ShieldCheck },
+  { href: "/research", label: "গবেষণা সারসংক্ষেপ", icon: BookOpen },
+  { href: "/research/methodology", label: "কর্পাস ও পদ্ধতি", icon: FlaskConical },
+  { href: "/research/benchmark", label: "বেঞ্চমার্ক ফলাফল", icon: BarChart3 },
+  { href: "/research/safety", label: "নিরাপত্তা ও গার্ডরেইল", icon: ShieldCheck },
 ] as const;
 
 export function ResearchSubnav() {

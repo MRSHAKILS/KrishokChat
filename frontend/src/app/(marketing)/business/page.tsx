@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowRight, ShieldCheck, Landmark, Database, Users,
   Building2, Check, ArrowUpRight, Sparkles, Phone,
+  Cpu, TrendingDown, CreditCard, Star, TrendingUp,
 } from "lucide-react";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 import { APP, HELPLINE } from "@/lib/constants";
@@ -48,31 +49,16 @@ const COLOR: Record<LaneColor, { bg: string; bgSoft: string; text: string; borde
 
 const LANES = [
   {
-    id: "b2b",
-    icon: Building2,
-    name: "ফ্রিমিয়াম + B2B",
-    nameEn: "Freemium + B2B",
-    who: "কৃষক বিনামূল্যে · ডিলার, SAAO, কৃষি কর্মকর্তা সাবস্ক্রিপশন",
-    whoEn: "Farmers free · dealers, SAAOs, extension officers subscribe",
-    color: "leaf",
-    value: "কৃষকের জন্য বিনামূল্যে পরামর্শ ও রোগ নির্ণয়। কৃষি ডিলার, সম্প্রসারণ কর্মকর্তা ও SAAO-দের জন্য প্রদত্ত অডিট ও অ্যানালিটিক্স ড্যাশবোর্ড — প্রতিটি পরামর্শের নিরাপত্তা যাচাই, রাসায়নিক ফ্ল্যাগ, এবং কমপ্লায়েন্স রিপোর্ট।",
-    valueEn: "Free advisory + diagnosis for farmers; paid audit/analytics dashboard for agro-dealers, SAAOs, extension officers.",
-    evidence: [
-      { label: "PxD", value: "৭.৮M ব্যবহারকারী" },
-      { label: "ACI IDSS / Fosholi", value: "€৩.৫M ২০২৫ লক্ষ্য" },
-    ],
-    moat: "অডিট ইঞ্জিনই সবচেয়ে কম পণ্যায়নযোগ্য সম্পদ — অন্য কোনো কৃষি চ্যাটবট এটি রাখে না।",
-  },
-  {
     id: "b2g",
     icon: Landmark,
     name: "সরকারি অংশীদারিত্ব",
-    nameEn: "B2G Government Partnership",
+    nameEn: "B2G — Government Partnership (Primary)",
+    badge: "প্রাথমিক · Primary",
     who: "DAE · a2i · সরকারি কৃষি কল সেন্টার ১৬১২৩",
     whoEn: "DAE · a2i · 16123 Krishi Call Center",
     color: "ochre",
-    value: "১৬১২৩ কৃষি কল সেন্টারের জন্য AI ফ্রন্ট-এন্ড — ট্রায়েজ ও এসক্যালেশন, প্রতিযোগিতা নয়। অনিরাপদ প্রশ্ন মডেলে যাওয়ার আগেই থামানো হয় এবং সরাসরি কল সেন্টারে পাঠানো হয়।",
-    valueEn: "AI front-end to 16123 — triage + escalation, not competition.",
+    value: "১৬১২৩ কৃষি কল সেন্টারের জন্য AI ফ্রন্ট-এন্ড — ট্রায়েজ ও এসক্যালেশন, প্রতিযোগিতা নয়। অনিরাপদ প্রশ্ন মডেলে যাওয়ার আগেই থামানো হয় এবং সরাসরি কল সেন্টারে পাঠানো হয়। প্রতিটি সিদ্ধান্তের অডিট লগ সরকারি ক্রেতার বিশ্বাস অর্জনের মূল সম্পদ।",
+    valueEn: "AI front-end to 16123 — triage + escalation, not competition. Audit log is the trust asset that makes a government buyer comfortable.",
     evidence: [
       { label: "১৬১২৩ কল ভলিউম", value: "৯২,০৯৪ / বছর" },
       { label: "দৈনিক কল", value: "~১৮০–২০০" },
@@ -80,22 +66,82 @@ const LANES = [
     moat: "নিরাপত্তা/অডিট স্তরটি বিশ্বব্যাপী অনন্য — Plantix, Farmer.Chat, KissanAI-এর কোনো সমতুল্য নেই।",
   },
   {
+    id: "b2b",
+    icon: Building2,
+    name: "B2B ড্যাশবোর্ড ও অ্যানালিটিক্স",
+    nameEn: "B2B — Agro-Dealers, Seed & Input Companies",
+    badge: "দ্বিতীয় · Secondary",
+    who: "কৃষি ডিলার · বীজ কোম্পানি · SAAO · NGO",
+    whoEn: "Agro-dealers · seed companies · SAAOs · NGOs",
+    color: "leaf",
+    value: "জেলাভিত্তিক অ্যানালিটিক্স ড্যাশবোর্ড: কোন জেলায় কোন রোগ বাড়ছে, কোন সার বেশি জিজ্ঞেস করা হচ্ছে, কোন রাসায়নিক ফ্ল্যাগ হচ্ছে — এই মার্কেট ইন্টেলিজেন্স ডিলার ও বীজ কোম্পানির জন্য সাবস্ক্রিপশন পণ্য। ACI Fosholi ঠিক এই পথেই €৩.৫M লক্ষ্য রেখেছে।",
+    valueEn: "Sell the analytics/audit dashboard (district-level disease spikes, chemical demand) to input retailers and seed companies as market intelligence.",
+    evidence: [
+      { label: "ACI IDSS / Fosholi লক্ষ্য", value: "€৩.৫M (২০২৫)" },
+      { label: "PxD ব্যবহারকারী", value: "৭.৮M" },
+    ],
+    moat: "অডিট ইঞ্জিনই সবচেয়ে কম পণ্যায়নযোগ্য সম্পদ — অন্য কোনো কৃষি চ্যাটবট এটি রাখে না।",
+  },
+  {
     id: "api",
     icon: Database,
     name: "ডেটাসেট ও API লাইসেন্সিং",
     nameEn: "Dataset + API Licensing",
-    who: "গবেষক · কৃষি-ফিনটেক · NGO",
-    whoEn: "Researchers · agri-fintech · NGOs",
+    badge: "তৃতীয় · Tertiary",
+    who: "গবেষক · কৃষি-ফিনটেক · বীমা · NGO",
+    whoEn: "Researchers · agri-fintech · insurance · NGOs",
     color: "clay",
-    value: "৮৫,৯৭৯-ইনস্ট্যান্স প্রোভিন্যান্স-ট্রেসড বেঞ্চমার্ক ও ৭২২-ইমেজ মাটির আর্দ্রতা ডেটাসেট (CC-BY-4.0)। তৃতীয় পক্ষের যাচাই, গবেষণা লাইসেন্সিং, এবং কৃষি-ফিনটেকের জন্য পরামর্শ API।",
-    valueEn: "85,979 benchmark + 722-image soil dataset (CC-BY-4.0); advisory API for agri-fintech.",
+    value: "৮৫,৯৭৯-ইনস্ট্যান্স প্রোভিন্যান্স-ট্রেসড বেঞ্চমার্ক ও ৭২২-ইমেজ মাটির ডেটাসেট (CC-BY-4.0 গবেষণার জন্য; বাণিজ্যিক লাইসেন্স প্রতিষ্ঠানের জন্য)। কৃষি-ফিনটেক ও ফসল বীমার জন্য গ্রাউন্ডেড পরামর্শ API। বাংলাদেশে এই পরিসরের কোনো প্রোভিন্যান্স-ট্রেসড ডেটাসেট আগে ছিল না।",
+    valueEn: "85,979 benchmark + 722-image soil dataset (CC-BY-4.0 for research, commercial for companies); advisory API for agri-fintech and insurance.",
     evidence: [
       { label: "বেঞ্চমার্ক", value: "৮৫,৯৭৯ ইনস্ট্যান্স" },
-      { label: "লাইসেন্স", value: "CC-BY-4.0" },
+      { label: "মাটির ডেটাসেট", value: "৭২২ ছবি" },
     ],
     moat: "একমাত্র প্রোভিন্যান্স-ট্রেসড বাংলা কৃষি বেঞ্চমার্ক — পুনরুৎপাদনযোগ্য, উদ্ভূতিযোগ্য।",
   },
+  {
+    id: "pro",
+    icon: Star,
+    name: "কৃষক Pro সাবস্ক্রিপশন",
+    nameEn: "Farmer Pro Subscription (Secondary, Small)",
+    badge: "সম্পূরক · Supplementary",
+    who: "বাণিজ্যিক / নগদ-ফসল কৃষক",
+    whoEn: "Commercial / cash-crop farmers who will pay for one-on-one LLM answers",
+    color: "leaf",
+    value: "মাসে ১০০ টাকায় (~$০.৮২) অসীমিত LLM উত্তর, ভয়েস আউটপুট, এবং প্রায়রিটি সাপোর্ট। প্রতি কৃষকে LLM খরচ মাত্র $০.০৩/মাস (Gemini API) — গ্রস মার্জিন ~৯৬%। এটি মূল রাজস্ব লেন নয়; এটি প্রমাণ করে যে ফ্রি টিয়ারের একটি আপগ্রেড পথ আছে।",
+    valueEn: "100 BDT/month — unlimited LLM, voice, priority. ~96% gross margin. Not the core; proves the free tier has an upgrade path.",
+    evidence: [
+      { label: "মূল্য", value: "১০০ টাকা / মাস" },
+      { label: "গ্রস মার্জিন", value: "~৯৬%" },
+    ],
+    moat: "উচ্চ মার্জিনের অর্থ হলো B2B/B2G ভলিউম সরাসরি অবদানে পরিণত হয় — লাভজনকতার ঝুঁকি নেই।",
+  },
 ] as const;
+
+/* Unit economics — verified 2026-08 (RunPod + Gemini public pricing) */
+const COST_ROWS = [
+  {
+    option: "Gemini 2.5 Flash-Lite API",
+    costUSD: "$০.০০০২",
+    costBDT: "~০.০২৪ টাকা",
+    note: "পে-পার-ইউজ, কোনো ফিক্সড কস্ট নেই",
+    highlight: true,
+  },
+  {
+    option: "RunPod RTX 4090 (Serverless)",
+    costUSD: "$০.০০১৮",
+    costBDT: "~০.২২ টাকা",
+    note: "প্রতি সেকেন্ড বিলিং, কোনো এগ্রেস চার্জ নেই",
+    highlight: false,
+  },
+  {
+    option: "RunPod RTX 4090 (সর্বদা-চালু, ব্যাচ)",
+    costUSD: "$০.০০০০৪",
+    costBDT: "~০.০০৫ টাকা",
+    note: "১.৫M+ প্রশ্ন/মাসে সুইচ করুন",
+    highlight: false,
+  },
+];
 
 const READY_NOW = [
   "কাজ করছে এন্ড-টু-এন্ড প্রোটোটাইপ: চ্যাট, রোগ নির্ণয়, মাটি, অডিট, গবেষণা প্যানেল",
@@ -106,11 +152,11 @@ const READY_NOW = [
 ];
 
 const NEXT_STEPS = [
-  "B2B পাইলট — জেলা সম্প্রসারণ অফিসের সাথে",
+  "B2G পাইলট — DAE / a2i-এর সাথে ১৬১২৩ ইন্টিগ্রেশন আলোচনা",
+  "B2B পাইলট — জেলা সম্প্রসারণ অফিসের সাথে অডিট ড্যাশবোর্ড",
   "ভয়েস-আউট TTS — নিম্ন-সাক্ষরতার কৃষকদের জন্য বাংলা অডিও পরামর্শ",
   "বর্ধিত উপভাষা কভারেজ — ৬টি আঞ্চলিক রূপ",
   "মাটির মডেল উন্নয়ন — উচ্চ-নির্ভুল সেচ পরামর্শের জন্য",
-  "সম্পূর্ণ ব্যবসায়িক মূল্যায়ন ও বাজার বিশ্লেষণ",
 ];
 
 export default function BusinessPage() {
@@ -123,13 +169,19 @@ export default function BusinessPage() {
       {/* === Hero === */}
       <HeroSection />
 
-      {/* === Three Revenue Lanes (interactive) === */}
+      {/* === Four Revenue Lanes (interactive) === */}
       <RevenueLanesSection
         activeLane={activeLane}
         setActiveLane={setActiveLane}
         lane={lane}
         LaneIcon={LaneIcon}
       />
+
+      {/* === Unit Economics (NEW) === */}
+      <UnitEconomicsSection />
+
+      {/* === Two-Tier Product Comparison (NEW) === */}
+      <TierComparisonSection />
 
       {/* === The Moat === */}
       <MoatSection />
@@ -167,29 +219,31 @@ function HeroSection() {
           কীভাবে টেকসই হবে <span className="text-leaf">কৃষক চ্যাট?</span>
         </motion.h1>
         <motion.p variants={enter} className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft">
-          কৃষক চ্যাট একটি গবেষণা প্রোটোটাইপ — কিন্তু এর পেছনে একটি সুস্পষ্ট টেকসই আয়ের পথ রয়েছে।
-          কৃষকের জন্য সব পরামর্শ বিনামূল্যে; আয় আসবে তিনটি লেন থেকে — B2B সাবস্ক্রিপশন, সরকারি অংশীদারিত্ব, এবং ডেটাসেট/API লাইসেন্সিং।
+          কৃষকের জন্য সব পরামর্শ সর্বদা বিনামূল্যে। আয় আসবে প্রাতিষ্ঠানিক খাত থেকে —
+          সরকারি অংশীদারিত্ব (B2G), ডিলার অ্যানালিটিক্স (B2B), এবং ডেটাসেট লাইসেন্সিং।
+          প্রতিটি LLM উত্তরের খরচ মাত্র <strong className="text-leaf">দুই পয়সা</strong>।
         </motion.p>
-        <motion.div variants={enter} className="mt-8 grid grid-cols-2 gap-4 sm:max-w-xl sm:grid-cols-3">
+        <motion.div variants={enter} className="mt-8 grid grid-cols-2 gap-4 sm:max-w-2xl sm:grid-cols-4">
           <HeroStat value="৪.৭ কোটি" label="কৃষক পরিবার" />
           <HeroStat value="৯২,০৯৪" label="১৬১২৩ কল/বছর" />
-          <HeroStat value="৩টি" label="আয়ের লেন" />
+          <HeroStat value="~২ পয়সা" label="প্রতি LLM উত্তর" color="ochre" />
+          <HeroStat value="৯৬%" label="গ্রস মার্জিন (Pro)" />
         </motion.div>
       </div>
     </motion.section>
   );
 }
 
-function HeroStat({ value, label }: { value: string; label: string }) {
+function HeroStat({ value, label, color = "leaf" }: { value: string; label: string; color?: "leaf" | "ochre" }) {
   return (
     <div className="rounded-xl border rule bg-paper-2/40 p-4">
-      <div className="font-display text-2xl text-leaf tabular">{value}</div>
+      <div className={`font-display text-2xl tabular ${color === "ochre" ? "text-ochre" : "text-leaf"}`}>{value}</div>
       <div className="mt-1 text-[11px] text-ink-faint">{label}</div>
     </div>
   );
 }
 
-/* === Three Revenue Lanes (interactive tabs) === */
+/* === Four Revenue Lanes (interactive tabs) === */
 function RevenueLanesSection({
   activeLane,
   setActiveLane,
@@ -211,8 +265,8 @@ function RevenueLanesSection({
       className="mx-auto max-w-5xl"
     >
       <motion.div variants={enter} className="mb-6 text-center">
-        <h2 className="font-display text-2xl text-ink sm:text-3xl">তিনটি আয়ের লেন</h2>
-        <p className="mt-2 text-sm text-ink-faint">Three Revenue Lanes — প্রতিটির আছে সুস্পষ্ট গ্রাহক, মূল্য, ও প্রমাণ</p>
+        <h2 className="font-display text-2xl text-ink sm:text-3xl">চারটি আয়ের লেন</h2>
+        <p className="mt-2 text-sm text-ink-faint">Four Revenue Lanes — প্রতিটির আছে সুস্পষ্ট গ্রাহক, মূল্য, ও প্রমাণ · B2G সর্বোচ্চ অগ্রাধিকার</p>
       </motion.div>
 
       {/* Tab list */}
@@ -234,7 +288,7 @@ function RevenueLanesSection({
               <Icon className={`h-5 w-5 shrink-0 ${active ? "text-leaf" : "text-ink-faint"}`} />
               <div className="min-w-0">
                 <div className="text-sm font-semibold leading-tight">{l.name}</div>
-                <div className="mt-0.5 text-[10px] text-ink-faint">{l.nameEn}</div>
+                <div className="mt-0.5 text-[10px] text-ink-faint">{l.badge}</div>
               </div>
               {active && <motion.div layoutId="lane-underline" className="ml-auto h-2 w-2 rounded-full bg-leaf" />}
             </button>
@@ -304,6 +358,182 @@ function RevenueLanesSection({
   );
 }
 
+/* === Unit Economics (NEW) === */
+function UnitEconomicsSection() {
+  return (
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-60px" }}
+      variants={stagger}
+      className="mx-auto max-w-5xl"
+    >
+      <motion.div variants={enter} className="mb-6 text-center">
+        <h2 className="font-display text-2xl text-ink sm:text-3xl">ইউনিট ইকোনমিক্স</h2>
+        <p className="mt-2 text-sm text-ink-faint">Unit Economics — যাচাইকৃত খরচ (RunPod + Gemini, ২০২৬-০৮)</p>
+      </motion.div>
+
+      {/* Credibility spike banner */}
+      <motion.div
+        variants={enter}
+        className="mb-6 rounded-2xl border border-leaf/30 bg-leaf/5 p-5 sm:p-7"
+      >
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-leaf/10">
+              <TrendingDown className="h-6 w-6 text-leaf" />
+            </div>
+            <div>
+              <div className="font-display text-3xl text-leaf">২ পয়সা</div>
+              <div className="text-[11px] text-ink-faint">প্রতি LLM উত্তরের খরচ (Gemini API)</div>
+            </div>
+          </div>
+          <div className="h-px bg-leaf/20 sm:h-12 sm:w-px" />
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ochre/10">
+              <Cpu className="h-6 w-6 text-ochre" />
+            </div>
+            <div>
+              <div className="font-display text-xl text-ink">$৫০০/মাস → ১ কোটি+ উত্তর</div>
+              <div className="text-[11px] text-ink-faint">RunPod RTX 4090, সর্বদা-চালু, ব্যাচ vLLM</div>
+            </div>
+          </div>
+          <div className="h-px bg-leaf/20 sm:h-12 sm:w-px" />
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-clay/10">
+              <CreditCard className="h-6 w-6 text-clay" />
+            </div>
+            <div>
+              <div className="font-display text-xl text-ink">~৯৬% গ্রস মার্জিন</div>
+              <div className="text-[11px] text-ink-faint">Pro কৃষক (১০০ টাকা/মাস, ১৫০ প্রশ্ন)</div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Cost table */}
+      <motion.div variants={enter} className="overflow-hidden rounded-2xl border rule bg-paper">
+        <div className="border-b rule bg-paper-2/40 px-5 py-3">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">
+            এক LLM প্রশ্নের খরচ · ~৮০০ ইনপুট + ৩০০ আউটপুট টোকেন (বাস্তব KrishokChat প্রশ্ন)
+          </p>
+        </div>
+        <div className="divide-y rule">
+          {COST_ROWS.map((row, i) => (
+            <div
+              key={i}
+              className={`grid grid-cols-[1fr_auto] items-center gap-4 px-5 py-4 sm:grid-cols-[2fr_1fr_1fr_2fr] ${
+                row.highlight ? "bg-leaf/3" : ""
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                {row.highlight && <span className="h-1.5 w-1.5 rounded-full bg-leaf" />}
+                <span className={`text-sm ${row.highlight ? "font-semibold text-ink" : "text-ink-soft"}`}>
+                  {row.option}
+                </span>
+              </div>
+              <div className="text-right">
+                <div className="font-display text-sm font-semibold text-leaf tabular">{row.costBDT}</div>
+                <div className="text-[10px] text-ink-faint">{row.costUSD}</div>
+              </div>
+              <div className="hidden text-[11px] text-ink-faint sm:block col-span-2">{row.note}</div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* GPU scale math */}
+      <motion.div variants={enter} className="mt-4 rounded-2xl border rule bg-ochre/5 p-5">
+        <div className="flex items-start gap-3">
+          <Cpu className="mt-0.5 h-4 w-4 shrink-0 text-ochre" />
+          <div>
+            <p className="text-sm font-semibold text-ink">স্কেল হিসাব (GPU সেলফ-হোস্টিং)</p>
+            <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+              একটি RTX 4090 ($০.৬৯/ঘণ্টা RunPod কমিউনিটি) = <strong>~$৪৯৭/মাস</strong> সর্বদা-চালু।
+              ব্যাচড vLLM-এ এটি <strong>প্রায় ১ কোটি ৩০ লাখ প্রশ্ন/মাস</strong> হ্যান্ডেল করে।
+              ১০,০০০ সক্রিয় Pro কৃষক = ১৫ লাখ প্রশ্ন/মাস — মাত্র একটি GPU-তে অনেক জায়গা বাকি থাকে।
+            </p>
+            <p className="mt-2 text-xs text-ink-faint">
+              কৌশল: ভলিউম কম থাকলে Gemini API দিয়ে শুরু (শূন্য ফিক্সড কস্ট)। ১৫ লাখ+ প্রশ্ন/মাস হলে সেলফ-হোস্টে স্যুইচ করুন — তখন মার্জিনাল কস্ট $০.০০০০৪/প্রশ্নে নামে।
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.section>
+  );
+}
+
+/* === Two-Tier Product Comparison (NEW) === */
+function TierComparisonSection() {
+  const FREE_ROWS = [
+    { feature: "চ্যাট উত্তর", freeValue: "গ্রাউন্ডেড KB থেকে সরাসরি ম্যাপ (LLM চলে না)", paidValue: "পূর্ণ LLM (KrishokChat-4B / Gemini), রিট্রিভাল-গ্রাউন্ডেড" },
+    { feature: "চলার জায়গা", freeValue: "অন-ডিভাইস + লাইট সার্ভার লুকআপ", paidValue: "GPU সার্ভার (RunPod) বা Gemini API" },
+    { feature: "আমাদের খরচ", freeValue: "~শূন্য (কোনো GPU, কোনো টোকেন বিল নেই)", paidValue: "~০.০২–০.২২ টাকা/প্রশ্ন" },
+    { feature: "রোগ নির্ণয়", freeValue: "অন-ডিভাইস মডেল (<৩০ ms, বিনামূল্যে)", paidValue: "একই + অ্যানালিটিক্স লগড" },
+    { feature: "নিরাপত্তা পাইপলাইন", freeValue: "✓ সর্বদা চালু", paidValue: "✓ সর্বদা চালু" },
+    { feature: "কে ব্যবহার করে", freeValue: "প্রতিটি ক্ষুদ্র কৃষক — সামাজিক সুবিধা", paidValue: "ডিলার, বীজ কোম্পানি, NGO, সরকার, Pro কৃষক" },
+  ];
+
+  return (
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-60px" }}
+      variants={stagger}
+      className="mx-auto max-w-5xl"
+    >
+      <motion.div variants={enter} className="mb-6 text-center">
+        <h2 className="font-display text-2xl text-ink sm:text-3xl">দুই-স্তর পণ্য কাঠামো</h2>
+        <p className="mt-2 text-sm text-ink-faint">Two-Tier Product — নিরাপত্তা সর্বদা উভয় স্তরে বিনামূল্যে</p>
+      </motion.div>
+
+      <motion.div variants={enter} className="overflow-hidden rounded-2xl border rule bg-paper">
+        {/* Header */}
+        <div className="grid grid-cols-3 border-b rule bg-paper-2/50">
+          <div className="px-5 py-4 text-[11px] font-semibold uppercase tracking-wide text-ink-faint">বৈশিষ্ট্য</div>
+          <div className="border-l rule px-5 py-4">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-leaf" />
+              <span className="text-sm font-semibold text-ink">ফ্রি টিয়ার</span>
+            </div>
+            <p className="mt-0.5 text-[10px] text-ink-faint">প্রতিটি কৃষকের জন্য · বিনামূল্যে সর্বদা</p>
+          </div>
+          <div className="border-l rule bg-ochre/5 px-5 py-4">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-ochre" />
+              <span className="text-sm font-semibold text-ink">প্রাতিষ্ঠানিক / Pro টিয়ার</span>
+            </div>
+            <p className="mt-0.5 text-[10px] text-ink-faint">ডিলার · সরকার · Pro কৃষক</p>
+          </div>
+        </div>
+
+        {/* Rows */}
+        {FREE_ROWS.map((row, i) => (
+          <div key={i} className={`grid grid-cols-3 border-b rule ${i % 2 === 0 ? "bg-paper" : "bg-paper-2/20"}`}>
+            <div className="px-5 py-3.5">
+              <span className="text-xs font-medium text-ink-soft">{row.feature}</span>
+            </div>
+            <div className="border-l rule px-5 py-3.5">
+              <span className="text-xs text-ink-soft">{row.freeValue}</span>
+            </div>
+            <div className="border-l rule bg-ochre/3 px-5 py-3.5">
+              <span className="text-xs text-ink-soft">{row.paidValue}</span>
+            </div>
+          </div>
+        ))}
+
+        {/* Footer note */}
+        <div className="bg-leaf/5 px-5 py-4">
+          <p className="text-center text-xs text-ink-faint">
+            <strong className="text-leaf">নিরাপত্তা উভয় স্তরে সর্বদা চালু</strong> — কৃষককে নিরাপদ থাকার জন্য কখনও অর্থ দিতে হবে না।
+            Safety is always on in both tiers — you never gate safety behind money.
+          </p>
+        </div>
+      </motion.div>
+    </motion.section>
+  );
+}
+
 /* === The Moat === */
 function MoatSection() {
   return (
@@ -338,25 +568,25 @@ function MoatSection() {
 
           {/* Three revenue nodes positioned around — desktop only */}
           <div className="pointer-events-none absolute inset-0 hidden sm:block">
-            {/* Top-right: B2B */}
-            <MoatNode className="absolute right-0 top-2" icon={Building2} label="B2B" subLabel="ডিলার · SAAO" color="leaf" />
-            {/* Bottom-right: B2G */}
-            <MoatNode className="absolute bottom-2 right-8" icon={Landmark} label="B2G" subLabel="১৬১২৩ · DAE" color="ochre" />
+            {/* Top-right: B2G */}
+            <MoatNode className="absolute right-0 top-2" icon={Landmark} label="B2G" subLabel="১৬১২৩ · DAE" color="ochre" />
+            {/* Bottom-right: B2B */}
+            <MoatNode className="absolute bottom-2 right-8" icon={Building2} label="B2B" subLabel="ডিলার · SAAO" color="leaf" />
             {/* Left: API */}
             <MoatNode className="absolute left-0 top-1/2 -translate-y-1/2" icon={Database} label="API" subLabel="ডেটাসেট · ফিনটেক" color="clay" />
           </div>
 
           {/* Mobile: stacked nodes */}
           <div className="ml-4 flex flex-col gap-3 sm:hidden">
-            <MoatNodeMobile icon={Building2} label="B2B" subLabel="ডিলার · SAAO" color="leaf" />
             <MoatNodeMobile icon={Landmark} label="B2G" subLabel="১৬১২৩ · DAE" color="ochre" />
+            <MoatNodeMobile icon={Building2} label="B2B" subLabel="ডিলার · SAAO" color="leaf" />
             <MoatNodeMobile icon={Database} label="API" subLabel="ডেটাসেট · ফিনটেক" color="clay" />
           </div>
         </div>
 
         <p className="mt-4 max-w-2xl text-center text-sm leading-relaxed text-ink-soft mx-auto">
           নিরাপত্তা/অডিট স্তরটি বিশ্বব্যাপী অনন্য — Plantix, Farmer.Chat, KissanAI-এর কোনো সমতুল্য নেই।
-          এটি একই সাথে ডেমোর কেন্দ্রবিন্দু, বিশ্বস্ততার গল্প, এবং ভবিষ্যৎ B2B/B2G আয়ের ভিত্তি।
+          এটি একই সাথে ডেমোর কেন্দ্রবিন্দু, বিশ্বস্ততার গল্প, এবং ভবিষ্যৎ B2G/B2B আয়ের ভিত্তি।
         </p>
       </motion.div>
     </motion.section>
@@ -427,7 +657,7 @@ function ValueFlowSection() {
     >
       <motion.div variants={enter} className="mb-6 text-center">
         <h2 className="font-display text-2xl text-ink sm:text-3xl">মূল্য প্রবাহ</h2>
-        <p className="mt-2 text-sm text-ink-faint">Value Flow — কৃষক বিনামূল্যে, আয় আসে তিনটি উৎস থেকে</p>
+        <p className="mt-2 text-sm text-ink-faint">Value Flow — কৃষক বিনামূল্যে, আয় আসে তিনটি প্রাতিষ্ঠানিক উৎস থেকে</p>
       </motion.div>
 
       <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-6 sm:p-8">
@@ -442,16 +672,16 @@ function ValueFlowSection() {
 
           {/* Three outputs */}
           <div className="flex flex-col gap-2 sm:gap-2.5">
-            <FlowArrow label="B2B" vertical />
-            <FlowNode icon={Building2} title="ডিলার / SAAO" subtitle="সাবস্ক্রিপশন" color="leaf" subtitleColor="leaf" small />
-            <FlowNode icon={Landmark} title="১৬১২৩ / DAE" subtitle="অংশীদারিত্ব" color="ochre" subtitleColor="ochre" small />
+            <FlowArrow label="আয়" vertical />
+            <FlowNode icon={Landmark} title="১৬১২৩ / DAE" subtitle="B2G (প্রথম)" color="ochre" subtitleColor="ochre" small />
+            <FlowNode icon={Building2} title="ডিলার / বীজ কোম্পানি" subtitle="B2B (দ্বিতীয়)" color="leaf" subtitleColor="leaf" small />
             <FlowNode icon={Database} title="গবেষক / ফিনটেক" subtitle="লাইসেন্স" color="clay" subtitleColor="clay" small />
           </div>
         </div>
 
         <p className="mt-6 text-center text-xs text-ink-faint">
           কৃষকের জন্য প্রতিটি পরামর্শ ও রোগ নির্ণয় বিনামূল্যে। আয় আসে অডিট ইঞ্জিনের উপর ভিত্তি করে —
-          ডিলারদের কমপ্লায়েন্স ড্যাশবোর্ড, সরকারি ট্রায়েজ অংশীদারিত্ব, এবং ডেটাসেট/API লাইসেন্সিং থেকে।
+          সরকারি ট্রায়েজ অংশীদারিত্ব (B2G), ডিলারদের অ্যানালিটিক্স ড্যাশবোর্ড (B2B), এবং ডেটাসেট/API লাইসেন্সিং।
         </p>
       </motion.div>
     </motion.section>
@@ -561,9 +791,9 @@ function MarketReadinessSection() {
 function RoadmapSection() {
   const items = [
     { phase: "এখন", title: "কার্যকর প্রোটোটাইপ", desc: "চ্যাট, রোগ নির্ণয়, মাটি, অডিট, গবেষণা — সব কাজ করছে", color: "leaf" },
-    { phase: "নিকট", title: "B2B পাইলট", desc: "একটি জেলা সম্প্রসারণ অফিসের সাথে অডিট ড্যাশবোর্ড পাইলট", color: "ochre" },
-    { phase: "মধ্যমেয়াদি", title: "ভয়েস ও উপভাষা", desc: "TTS অডিও পরামর্শ ও ৬ উপভাষার সম্পূর্ণ কভারেজ", color: "ochre" },
-    { phase: "দীর্ঘমেয়াদি", title: "সরকারি অংশীদারিত্ব", desc: "১৬১২৩ কল সেন্টারের সাথে আনুষ্ঠানিক B2G ইন্টিগ্রেশন", color: "clay" },
+    { phase: "নিকট", title: "B2G আলোচনা শুরু", desc: "DAE / a2i-এর সাথে ১৬১২৩ ইন্টিগ্রেশন ও পাইলট আলোচনা", color: "ochre" },
+    { phase: "মধ্যমেয়াদি", title: "B2B পাইলট + ভয়েস", desc: "জেলা অফিসের অডিট ড্যাশবোর্ড পাইলট; TTS অডিও পরামর্শ", color: "ochre" },
+    { phase: "দীর্ঘমেয়াদি", title: "সম্পূর্ণ অংশীদারিত্ব", desc: "১৬১২৩ B2G ইন্টিগ্রেশন আনুষ্ঠানিক; সেলফ-হোস্টেড GPU স্কেলিং", color: "clay" },
   ] as const;
 
   return (
@@ -614,27 +844,26 @@ function CTASection() {
         variants={enter}
         className="surface-lift rounded-[24px] border rule bg-paper p-8 text-center shadow-[0_10px_30px_rgba(52,39,23,0.06)] sm:p-12"
       >
-        <h2 className="font-display text-2xl text-ink sm:text-3xl">অংশীদারিত্বে আগ্রহী?</h2>
+        <h2 className="font-display text-2xl text-ink sm:text-3xl">সহযোগিতা ও অংশীদারিত্ব</h2>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-soft">
-          আমরা কৃষি সম্প্রসারণ অধিদপ্তমেন্ট, ডিলার নেটওয়ার্ক, গবেষণা প্রতিষ্ঠান ও ফিনটেকের সাথে
-          অংশীদারিত্বে আগ্রহী। আলোচনার জন্য যোগাযোগ করুন।
+          আমরা কৃষি সম্প্রসারণ অধিদপ্তর (DAE), কৃষি ডিলার নেটওয়ার্ক, গবেষণা প্রতিষ্ঠান ও এগ্রি-ফিনটেক উদ্যোগের সাথে পাইলট অংশীদারিত্বে আগ্রহী।
         </p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/contact"
             className="control-press group flex items-center gap-2 rounded-xl bg-leaf px-5 py-3 text-sm font-semibold text-paper shadow-sm hover:bg-leaf-2"
           >
-            যোগাযোগ করুন <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            যোগাযোগ ও বিস্তারিত <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <a
             href={`tel:${HELPLINE.krishiCallCenter}`}
             className="control-press flex items-center gap-2 rounded-xl border rule px-5 py-3 text-sm font-medium text-ink-soft hover:border-leaf/50 hover:bg-paper-2"
           >
-            <Phone className="h-4 w-4 text-leaf" /> ১৬১২৩
+            <Phone className="h-4 w-4 text-leaf" /> ১৬১২৩ কৃষি কল সেন্টার
           </a>
         </div>
         <p className="mt-6 text-[11px] text-ink-faint">
-          {APP.name} একটি গবেষণা প্রোটোটাইপ (v{APP.version}) — বাণিজ্যিক পণ্য নয়। ব্যবসায়িক মডেল ক্যাপস্টোনের জন্য উন্নয়নাধীন।
+          {APP.name} একটি গবেষণা প্রোটোটাইপ (v{APP.version}) — ওপেন-অ্যাক্সেস এবং কৃষকদের জন্য সম্পূর্ণ বিনামূল্যে উন্মুক্ত।
         </p>
       </motion.div>
     </motion.section>
