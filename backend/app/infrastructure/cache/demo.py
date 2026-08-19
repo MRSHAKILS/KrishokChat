@@ -191,6 +191,14 @@ class DemoAnswerCache:
                 self._items.pop(next(iter(self._items)))  # evict oldest (insertion order)
             self._save()
 
+    def delete(self, key: str) -> None:
+        """Remove one entry (used by the prewarm tool to purge stale
+        pre-safety entries whose fresh classification is terminal)."""
+        with self._lock:
+            if key in self._items:
+                del self._items[key]
+                self._save()
+
     def _save(self) -> None:
         try:
             self.path.parent.mkdir(parents=True, exist_ok=True)
