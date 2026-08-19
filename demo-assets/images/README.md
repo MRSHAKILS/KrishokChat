@@ -25,3 +25,12 @@ the project's verified corpora — nothing synthetic, nothing scraped at demo ti
 
 > The wheat disease test images in `wheat_disease/` are augmented variants of real
 > photos; the originals in `full_library/` above were preferred for the demo.
+
+## Support boundary
+
+Tomato images are retained as **unsupported-routing examples**, not as guaranteed
+diagnosis demos. The crop classifier can emit the broad `Solanacea` class, but the
+checked-in registry currently has no `solanacea`/tomato disease model. A reviewer
+asking about tomato should be shown the explicit `no_disease_model` boundary rather
+than a fabricated tomato diagnosis. Supported disease-model families currently
+registered by the backend are rice, wheat, corn, potato, and brassica.

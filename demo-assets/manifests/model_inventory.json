@@ -1,0 +1,41 @@
+{
+  "schema_version": "krishokchat.demo-model-inventory.v1",
+  "generated_from": [
+    "backend/ml_assets/vision/verification_report.json",
+    "backend/ml_assets/rag_index/manifest.json",
+    "docs/refactor/PROJECT_HANDOFF.md",
+    "scripts/start_krishokchat_local.ps1"
+  ],
+  "llm": {
+    "online_configured_lane": "OpenAI-compatible provider configured by LLM_PROVIDER",
+    "default_online_model": "google/gemini-2.5-flash-lite",
+    "intent_and_generation_are_replaceable": true,
+    "local_model_id": "krishokchat-4b",
+    "local_runtime": "external Q4_K_M base plus converted KrishokChat LoRA via llama-server on 127.0.0.1:11435/v1",
+    "checked_in_f16_gguf": "backend/ml_assets/gemma/krishokchat.f16.gguf",
+    "checked_in_f16_status": "truncated; do not serve",
+    "scientific_local_runtime_status": "runtime verified; scientific performance unevaluated"
+  },
+  "retrieval": {
+    "sparse": "BM25Okapi",
+    "dense": "BAAI/bge-m3",
+    "dense_dimension": 1024,
+    "fusion": "RRF k=20",
+    "fallback": "BM25-only when dense index/key/embedding call is unavailable",
+    "index_nodes": 2135,
+    "request_time_index_build": false
+  },
+  "vision": {
+    "task": "classification",
+    "boxes": false,
+    "crop_classifier_classes": ["Brassica", "Corn", "GourdGuava", "Potato", "Solanacea", "Wheat"],
+    "registered_disease_models": ["brassica", "corn", "potato", "rice", "wheat"],
+    "unsupported_crop_boundary": ["tomato/solanacea disease model is not registered"]
+  },
+  "soil": {
+    "dataset_images": 722,
+    "kpa_range": [0.0, 21.5],
+    "split": {"train": 472, "val": 119, "test": 131},
+    "predictor_status": "locked/in_development; no production estimate"
+  }
+}

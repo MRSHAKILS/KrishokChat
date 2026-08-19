@@ -1,0 +1,1 @@
+This is intentionally not an image. Uploading it must return HTTP 400 and must not invoke a vision model.

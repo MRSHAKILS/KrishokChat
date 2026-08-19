@@ -37,7 +37,13 @@ PATTERNS: dict[SafetyCategory, tuple[tuple[str, re.Pattern[str]], ...]] = {
         ("coverage_export", re.compile(r"রপ্তানি|বিদেশে পাঠান|এক্সপোর্ট", re.I)),
         ("coverage_availability", re.compile(r"কোথায় পাওয়া|কোথায় পাব|কোথায় বিক্রি|ঠিকানা")),
         ("coverage_institutional", re.compile(r"বিভাগের ছাত্র|বিষয়ক তথ্য|সম্প্রসারণ অধিদপ্তর")),
-        ("coverage_assistance", re.compile(r"সরকারি|সরকারী|সহায়তা")),
+        # Government-assistance intents only where actually attested: "সরকারি
+        # কোনো সহায়তা পাওয়া যাবে" (q_895), "সরকারী ভাবে ... জমি সহায়তা"
+        # (q_690, দীর্ঘ ী), "সরকারিভাবে কী কী নিয়ম" (q_850). Bare
+        # "সরকারি"/"সরকারী"/"সহায়তা" are NOT gated — they appear in
+        # answerable questions ("সরকারি বীজের দাম কত?", "জৈব সার কীভাবে
+        # সহায়তা করে?") and would over-block ordinary farmers.
+        ("coverage_assistance", re.compile(r"সরকার[িী]?\s*ভাবে|সরকার[িী]?.{0,12}(সহায়তা|ভর্তুকি)")),
     ),
 }
 

@@ -6,6 +6,7 @@ import asyncio
 import threading
 from collections.abc import AsyncIterator, Awaitable, Callable
 from contextlib import asynccontextmanager
+from dataclasses import replace
 
 from app.application.generation import GroundedAnswerGenerator, REFERRAL
 from app.application.query_builder import build_retrieval_query
@@ -187,34 +188,60 @@ class QAPipeline:
             else None
         )
 
-        try:
-            if cache_key is not None:
-                payload = self.answer_cache.get(cache_key)
-                if payload is not None:
-                    # B1 exact replay: a previously verified answer for the
-                    # same normalized question + context + model. The stored
-                    # payload keeps its original sources, trace, and verifier
-                    # stamps, so the UI renders identically to a fresh run.
-                    try:
-                        cached_result = qa_result_from_dict(payload)
-                    except (KeyError, ValueError, TypeError):
-                        cached_result = None  # corrupt entry -> treat as miss
-                    if cached_result is not None:
-                        cached_hit = True
-                        result = cached_result
-                        # Replay the original agent trace through the same
-                        # event channel (fast, no new LLM/retrieval work).
-                        for event in result.trace:
-                            if on_event:
-                                await on_event(event)
-                        return result
+        def _cached_replay() -> tuple[QAResult, tuple[PipelineEvent, ...]] | None:
+            """Replay a curated safe_agri demo-cache answer, or None on miss.
 
+            Only safe_agri entries with no generation error replay; refusals
+            are never stored, and a corrupt entry degrades to a miss.
+            """
+            if cache_key is None:
+                return None
+            payload = self.answer_cache.get(cache_key)
+            if payload is None:
+                return None
+            try:
+                cached_result = qa_result_from_dict(payload)
+            except (KeyError, ValueError, TypeError):
+                return None  # corrupt entry -> treat as miss
+            if (
+                cached_result.category is not SafetyCategory.SAFE_AGRI
+                or cached_result.error is not None
+            ):
+                return None
+            post_safety_trace = tuple(
+                event
+                for event in cached_result.trace
+                if event.stage is not PipelineStage.SAFETY
+            )
+            return (
+                replace(
+                    cached_result,
+                    query=request.query,
+                    trace=tuple(trace) + post_safety_trace,
+                ),
+                post_safety_trace,
+            )
+
+        try:
             await emit(PipelineStage.SAFETY, StageStatus.START)
             with stage_timer("safety", timings):
                 decision = await self.safety.classify(request.query, context)
                 await emit(PipelineStage.SAFETY, StageStatus.COMPLETE, decision.category.value)
 
             if decision.terminal:
+                if decision.classifier_outage:
+                    # Classifier unreachable: replay the curated cache when the
+                    # exact question was previously verified safe_agri, so the
+                    # demo keeps working offline. Real terminal decisions
+                    # (deterministic rules, LLM refusals) NEVER replay.
+                    replay = _cached_replay()
+                    if replay is not None:
+                        cached_hit = True
+                        result, post_safety_trace = replay
+                        for event in post_safety_trace:
+                            if on_event:
+                                await on_event(event)
+                        return result
                 for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
                     await emit(stage, StageStatus.SKIP, "terminal safety decision")
                 result = QAResult(
@@ -226,6 +253,19 @@ class QAPipeline:
                     matched_rules=decision.matched_rules,
                     safety_reason=decision.reason or None,
                 )
+                return result
+
+            # B1 exact replay is deliberately checked only AFTER the live
+            # safety decision. A stored answer may never bypass a newer safety
+            # rule, classifier update, or changed interpretation of the raw
+            # query. Cache hits skip retrieval/generation/verification only.
+            replay = _cached_replay()
+            if replay is not None:
+                cached_hit = True
+                result, post_safety_trace = replay
+                for event in post_safety_trace:
+                    if on_event:
+                        await on_event(event)
                 return result
 
             await emit(PipelineStage.RETRIEVAL, StageStatus.START)

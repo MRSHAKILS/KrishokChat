@@ -28,6 +28,11 @@ class SafetyDecision:
     matched_rules: tuple[str, ...] = ()
     requires_escalation: bool = False
     response: str | None = None
+    # True when the classifier provider was unreachable/invalid and the
+    # fail-closed LOW_CONFIDENCE decision is an outage, not a real judgment.
+    # The pipeline may then replay a curated safe_agri demo-cache answer;
+    # real terminal decisions never replay.
+    classifier_outage: bool = False
 
     @property
     def terminal(self) -> bool:

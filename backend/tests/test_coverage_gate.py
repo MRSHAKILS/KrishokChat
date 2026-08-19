@@ -2,9 +2,10 @@
 
 The gate refuses intents the advisory corpus cannot support (training venues,
 export procedures, vendor/seedling availability, institutional requests,
-livestock, government assistance). Rule set was derived from the 46-item
-golden set: it must catch all 12 unanswerable + 2 off_topic items, never
-touch the 34 answerable items, and never regress safety priority.
+livestock, government assistance). Rule set was derived from the 50-item
+golden set: it must catch all 12 unanswerable + 2 off_topic + 4 injection
+items, never touch the 32 answerable items, and never regress safety
+priority or over-block ordinary government/help phrasings.
 """
 
 from __future__ import annotations
@@ -17,7 +18,7 @@ from pathlib import Path
 from app.application.generation import GroundedAnswerGenerator
 from app.application.qa_pipeline import QAInput, QAPipeline
 from app.application.safety import SafetyClassifier
-from app.domain.contracts import RetrievedSource
+from app.domain.contracts import QueryContext, RetrievedSource
 from app.domain.safety_policy import canned_response, precheck
 from app.domain.enums import SafetyCategory
 from app.infrastructure.verification.dosage import DosageVerifier
@@ -27,7 +28,7 @@ from tests.test_pipeline import FakeAudit, FakeLLM, FakeRetriever, FakeSessions
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 GOLDEN = REPO_ROOT / "dataset_release" / "benchmark" / "golden_qa_v1.jsonl"
 
-UNANSWERABLE = {"unanswerable", "off_topic"}
+TERMINAL_GOLDEN = {"unanswerable", "off_topic", "injection"}
 
 
 def golden_rows() -> list[dict]:
@@ -68,7 +69,7 @@ class CoverageGateTests(unittest.TestCase):
                 self.assertEqual(match[0], SafetyCategory.LOW_CONFIDENCE)
 
     def test_no_answerable_golden_item_touched(self) -> None:
-        rows = [r for r in golden_rows() if r["golden_category"] not in UNANSWERABLE]
+        rows = [r for r in golden_rows() if r["golden_category"] not in TERMINAL_GOLDEN]
         self.assertEqual(len(rows), 32)  # dosage 10 + timing 10 + pest 10 + general 2
         for row in rows:
             with self.subTest(row=row["row_id"]):
@@ -122,6 +123,38 @@ class CoverageGateTests(unittest.TestCase):
         match = precheck("রপ্তানির জন্য প্যারাকোয়াট কীভাবে ব্যবহার করব?")
         self.assertEqual(match[0], SafetyCategory.BANNED_OR_RESTRICTED_CHEMICAL)
         self.assertNotEqual(canned_response(match[0]), canned_response(SafetyCategory.LOW_CONFIDENCE))
+
+    def test_ordinary_government_and_help_phrasings_not_gated(self) -> None:
+        # Bare "সরকারি"/"সরকারী"/"সহায়তা" substrings appear in answerable
+        # questions; only the attested institutional phrasings are gated.
+        for query in (
+            "সরকারি বীজের দাম কত?",          # price query, not assistance intent
+            "সরকারি সারের দাম কত?",
+            "সরকারি হাইব্রিড ধানের জাত কোনটি ভালো?",
+            "জৈব সার কীভাবে সহায়তা করে?",      # organic fertilizer benefit
+            "কীটনাশক ব্যবহারে সহায়তা করতে কী করব?",
+        ):
+            with self.subTest(query=query):
+                self.assertIsNone(precheck(query), f"over-blocked: {query}")
+
+    def test_attested_government_assistance_phrasings_still_gated(self) -> None:
+        # Exact phrasings from the golden unanswerable rows (q_690/q_850/q_895).
+        for query in (
+            "সরকারি কোনো সহায়তা পাওয়া যাবে কি?",
+            "সরকারী ভাবে কি কোন জমি সহায়তা পাওয়া যাবে?",
+            "সরকারিভাবে কী কী নিয়ম মানতে হয়?",
+        ):
+            with self.subTest(query=query):
+                self.assertEqual(precheck(query)[0], SafetyCategory.LOW_CONFIDENCE)
+
+    def test_llm_prompt_never_offers_low_confidence_category(self) -> None:
+        # The router must not decide corpus coverage; retrieval does. The
+        # prompt must not invite the model to refuse ordinary agri questions.
+        prompt = SafetyClassifier._prompt("ধানের রোগ", QueryContext())
+        categories_line = "Categories: safe_agri, banned_or_restricted_chemical, self_harm_or_poisoning_risk,\noff_topic, prompt_injection."
+        self.assertIn(categories_line, prompt)
+        self.assertNotIn("low_confidence", categories_line)
+        self.assertIn("NEVER return low_confidence", prompt)
 
 
 if __name__ == "__main__":

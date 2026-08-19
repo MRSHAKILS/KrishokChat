@@ -1,0 +1,62 @@
+{
+  "schema_version": "krishokchat.evidence-sources.v1",
+  "purpose": "One-line map from every demo/research claim to the file that proves it. Nothing here is computed live.",
+  "entries": [
+    {
+      "claim": "Golden QA set (50 rows: dosage 10, timing 10, pest/disease 10, general 2, off_topic 2, unanswerable 12, injection 4)",
+      "evidence": "dataset_release/benchmark/golden_qa_v1.jsonl"
+    },
+    {
+      "claim": "Golden runs with verifier stamps (50 runs; farmer_q_12 = qualitative example)",
+      "evidence": "dataset_release/benchmark/golden_runs_v1.json"
+    },
+    {
+      "claim": "Benchmark panel numbers (precomputed, never live)",
+      "evidence": "dataset_release/benchmark/*.csv"
+    },
+    {
+      "claim": "Retrieval index: BM25 + BAAI/bge-m3, 1024-d, 2,135 nodes",
+      "evidence": "backend/ml_assets/rag_index/manifest.json (+ indexes/*.faiss, *.pkl, node_ids.json)"
+    },
+    {
+      "claim": "Retrieval coverage: 1000/1000 queries adequate, 0 gaps, 3 dense rescues",
+      "evidence": "backend/ml_assets/rag_index/coverage_gaps_v1.json"
+    },
+    {
+      "claim": "Vision classification verification: 437-row test matrix, all models task=classify",
+      "evidence": "backend/ml_assets/vision/verification_report.json + test_images/test_matrix_results.json"
+    },
+    {
+      "claim": "Vision model classes (crop: Brassica, Corn, GourdGuava, Potato, Solanacea, Wheat; disease: rice, wheat, corn, potato, brassica)",
+      "evidence": "backend/ml_assets/vision/*/class_names.json"
+    },
+    {
+      "claim": "Soil dataset: 722 images, 0.0-21.5 kPa, Pabna, split 472/119/131, analyzer locked (in_development)",
+      "evidence": "dataset_release/soil_moisture/ (dataset files + README)"
+    },
+    {
+      "claim": "Safety dataset: 20,112 multi-dialect T3+T4 records, 12 categories, 6 dialects",
+      "evidence": "dataset_release/safety/README.md + safety_refusal_t3.jsonl + safety_requery_t4.jsonl + phase4_dialect_map.json"
+    },
+    {
+      "claim": "Safety metrics panel = local audit log only",
+      "evidence": "backend/app/logs/safety_audit.jsonl (runtime-generated)"
+    },
+    {
+      "claim": "16123 = Krishi Call Center escalation (real, active)",
+      "evidence": "backend/app/domain/safety_policy.py CANNED_RESPONSES + AGENTS.md §4"
+    },
+    {
+      "claim": "Authoritative papers (never the deprecated arXiv v1)",
+      "evidence": "paper/done papers/KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf + AgriTrust.pdf"
+    },
+    {
+      "claim": "Local model runtime: Q4_K_M external base + LoRA via llama-server, alias krishokchat-4b; checked-in f16 GGUF truncated do-not-serve",
+      "evidence": "scripts/start_krishokchat_local.ps1 + backend/ml_assets/gemma/ (file sizes) + paper/system_evolution_plan_2026/execution_planning_2026_08_12/14_LOCAL_MODEL_RUNTIME_AMENDMENT_2026_08_12.md"
+    },
+    {
+      "claim": "Demo answer cache: 21 curated safe_agri entries, corpus-versioned keys, replay only after live safety (outage replay for curated hits)",
+      "evidence": "demo-assets/cached_responses.json + backend/tests/test_demo_cache.py"
+    }
+  ]
+}

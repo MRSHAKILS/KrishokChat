@@ -2,19 +2,25 @@
 
 Why it exists: the curated demo questions are asked repeatedly against a live
 pipeline. With DEMO_MODE=true the server stores the first verified answer for
-each normalized question and replays it on subsequent hits — instant (~ms),
-zero LLM cost, fully offline-capable. This is a *replay of a previously
-verified pipeline output*, never a bypass of safety or the verifier: only
-safe_agri results with no generation error are stored, and the stored payload
-keeps the original sources, trace, verifier stamps, and refusal metadata so
-the UI renders identically to a fresh run.
+each normalized question and replays it on subsequent hits after a fresh safety
+decision. A hit avoids retrieval, generation, and verification work while the
+safety router still runs every time. Only safe_agri results with no generation
+error are stored, and the stored payload keeps the original sources and
+verifier stamps so the UI renders consistently.
 
 Honesty rules:
 - Cached replays still write audit rows (with ``cached: true``) so the demo
   metrics panel never hides them; the panel excludes replays from
   per-stage aggregates (they are not new retrieval/verifier events).
-- The cache key includes the detected crop/disease context and model, so a
-  cached answer is never replayed into a different context.
+- The cache key includes the detected crop/disease context, model, and corpus
+  version, so a cached answer is never replayed into a different context or
+  after a retrieval-corpus rebuild (P0-7).
+- Cache lookup occurs only after the current safety decision. A real terminal
+  decision (deterministic rule, classifier refusal) always wins and never
+  replays. The single exception: when the classifier provider is unreachable
+  (fail-closed outage), the curated safe_agri entry for the exact question may
+  replay so the demo keeps working offline; anything not in the cache still
+  fails closed.
 """
 
 from __future__ import annotations

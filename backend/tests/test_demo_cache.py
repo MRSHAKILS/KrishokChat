@@ -16,6 +16,14 @@ from app.infrastructure.verification.dosage import DosageVerifier
 from tests.test_pipeline import FakeAudit, FakeLLM, FakeRetriever, FakeSessions
 
 
+class RaisingLLM(FakeLLM):
+    """Classifier provider outage: every classify_json call raises."""
+
+    async def classify_json(self, prompt: str) -> dict[str, Any]:
+        self.classify_calls += 1
+        raise RuntimeError("provider unreachable")
+
+
 def make_pipeline(
     llm: FakeLLM,
     retriever: FakeRetriever,
@@ -155,7 +163,7 @@ class DemoAnswerCacheTests(unittest.TestCase):
 
 
 class PipelineCacheTests(unittest.TestCase):
-    def test_second_run_served_from_cache_without_llm_or_retrieval(self) -> None:
+    def test_second_run_runs_safety_then_uses_cache_without_generation_or_retrieval(self) -> None:
         source = RetrievedSource(id="SRC-1", score=10.0, content_bn="ধানের রোগে পরিষ্কার পানি ব্যবহার করুন।")
         llm = FakeLLM()
         retriever = FakeRetriever([source])
@@ -173,6 +181,7 @@ class PipelineCacheTests(unittest.TestCase):
         # No new LLM/retrieval work on the replay
         self.assertEqual(retriever.calls, 1)
         self.assertEqual(llm.generate_calls, 1)
+        self.assertEqual(llm.classify_calls, 2)
 
     def test_replay_keeps_sources_trace_and_verifier_stamps(self) -> None:
         source = RetrievedSource(id="SRC-1", score=10.0, content_bn="ধানের রোগে পরিষ্কার পানি ব্যবহার করুন।")
@@ -233,6 +242,78 @@ class PipelineCacheTests(unittest.TestCase):
             [event.stage.value for event in events],
             ["safety", "safety", "retrieval", "retrieval", "generation", "generation", "verifier", "verifier"],
         )
+
+    def test_cached_answer_cannot_bypass_new_terminal_safety_decision(self) -> None:
+        source = RetrievedSource(id="SRC-1", score=10.0, content_bn="ধানের রোগে পরিষ্কার পানি ব্যবহার করুন।")
+        llm = FakeLLM()
+        retriever = FakeRetriever([source])
+        audit = FakeAudit()
+        cache = DemoAnswerCache(Path(tempfile.mkdtemp()) / "cache.json")
+        pipeline = make_pipeline(llm, retriever, audit, cache)
+
+        query = "ধান রোগ কীভাবে কমাব?"
+        first = asyncio.run(pipeline.run(QAInput(query=query)))
+        self.assertEqual(first.category, SafetyCategory.SAFE_AGRI)
+        self.assertEqual(len(cache), 1)
+
+        # Simulate a later classifier/policy decision for the exact cached
+        # query. The stored safe answer must not be replayed.
+        llm.classification = {
+            "category": "prompt_injection",
+            "confidence": 0.99,
+            "reason": "updated policy",
+        }
+        second = asyncio.run(pipeline.run(QAInput(query=query)))
+
+        self.assertEqual(second.category, SafetyCategory.PROMPT_INJECTION)
+        self.assertEqual(second.confidence, VerificationConfidence.BLOCKED)
+        self.assertNotEqual(second.answer, first.answer)
+        self.assertEqual(retriever.calls, 1)
+        self.assertEqual(llm.generate_calls, 1)
+        self.assertFalse(audit.entries[-1]["cached"])
+
+    def test_cached_answer_replays_when_classifier_outage(self) -> None:
+        # Provider down: the curated safe_agri answer replays so the demo
+        # keeps working offline; no retrieval/generation work happens.
+        source = RetrievedSource(id="SRC-1", score=10.0, content_bn="ধানের রোগে পরিষ্কার পানি ব্যবহার করুন।")
+        llm = FakeLLM()
+        retriever = FakeRetriever([source])
+        audit = FakeAudit()
+        cache = DemoAnswerCache(Path(tempfile.mkdtemp()) / "cache.json")
+        pipeline = make_pipeline(llm, retriever, audit, cache)
+
+        query = "ধান রোগ কীভাবে কমাব?"
+        first = asyncio.run(pipeline.run(QAInput(query=query)))
+        self.assertEqual(first.category, SafetyCategory.SAFE_AGRI)
+        self.assertEqual(len(cache), 1)
+
+        outage = RaisingLLM()
+        pipeline = make_pipeline(outage, retriever, audit, cache)
+        replay = asyncio.run(pipeline.run(QAInput(query=query)))
+
+        self.assertEqual(replay.category, SafetyCategory.SAFE_AGRI)
+        self.assertEqual(replay.answer, first.answer)
+        self.assertEqual(retriever.calls, 1)  # no new retrieval
+        self.assertEqual(outage.generate_calls, 0)  # no generation
+        self.assertEqual(outage.classify_calls, 1)  # safety still attempted live
+        self.assertTrue(audit.entries[-1]["cached"])
+
+    def test_classifier_outage_without_cache_entry_fails_closed(self) -> None:
+        # Provider down AND question not in the curated cache: fail closed.
+        outage = RaisingLLM()
+        retriever = FakeRetriever([])
+        audit = FakeAudit()
+        cache = DemoAnswerCache(Path(tempfile.mkdtemp()) / "cache.json")
+        pipeline = make_pipeline(outage, retriever, audit, cache)
+
+        result = asyncio.run(pipeline.run(QAInput(query="ধান গাছে নতুন কিছু সমস্যা?")))
+
+        self.assertEqual(result.category, SafetyCategory.LOW_CONFIDENCE)
+        self.assertEqual(result.confidence, VerificationConfidence.BLOCKED)
+        self.assertEqual(retriever.calls, 0)
+        self.assertEqual(outage.generate_calls, 0)
+        self.assertIn("১৬১২৩", result.answer)
+        self.assertFalse(audit.entries[-1]["cached"])
 
     def test_terminal_refusals_never_cached(self) -> None:
         llm = FakeLLM()
