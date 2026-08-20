@@ -27,7 +27,7 @@ class Settings(BaseSettings):
 
     ollama_base_url: str = "http://localhost:11434"
     ollama_model_name: str = "krishokchat-4b"
-    local_llm_base_url: str = "http://127.0.0.1:11435/v1"
+    local_llm_base_url: str = "http://127.0.0.1:11434/v1"
     local_llm_model_name: str = "krishokchat-4b"
     gguf_path: str = "backend/ml_assets/gemma/model.gguf"
 

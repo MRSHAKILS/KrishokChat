@@ -44,15 +44,22 @@ class ModelOption(BaseModel):
 
 @router.get("/api/models", response_model=list[ModelOption])
 async def list_models(container: ContainerDep) -> list[ModelOption]:
-    """Health-check the configured local OpenAI-compatible generation server."""
+    """Health-check the configured local Ollama server for the KrishokChat-4B model."""
     local_available = False
     try:
         import httpx
-        resp = httpx.get(f"{settings.local_llm_base_url.rstrip('/')}/models", timeout=3.0)
+        # Ollama's native /api/tags is the authoritative list of registered models.
+        # The OpenAI-compat /v1/models returns {"data": null} even when models are
+        # loaded, so we use the native endpoint.
+        ollama_base = settings.ollama_base_url.rstrip("/")
+        resp = httpx.get(f"{ollama_base}/api/tags", timeout=3.0)
         if resp.status_code == 200:
-            models = resp.json().get("data", [])
+            models = resp.json().get("models", [])
+            target = settings.local_llm_model_name  # "krishokchat-4b"
             local_available = any(
-                model.get("id") == settings.local_llm_model_name for model in models
+                # Ollama tags look like "krishokchat-4b:latest" — match prefix
+                model.get("name", "").split(":")[0] == target
+                for model in models
             )
     except Exception:
         local_available = False
@@ -65,8 +72,8 @@ async def list_models(container: ContainerDep) -> list[ModelOption]:
         ),
         ModelOption(
             id="krishokchat-4b",
-            label="KrishokChat-4B",
-            description="লোকাল ফাইন-টিউনড মডেল",
+            label="KrishokChat-4B (গবেষণা মডেল)",
+            description="লোকাল ফাইন-টিউনড মডেল — অফলাইনে চলে",
             available=local_available,
         ),
     ]

@@ -1,0 +1,39 @@
+# Ollama Modelfile for KrishokChat fine-tuned Gemma model
+#
+# The tag created MUST be "krishokchat-4b" — the backend probes Ollama for
+# exactly this name (see backend/app/api/extras.py /api/models).
+#
+# You normally do NOT run this file directly. Use the one-command helper:
+#
+#   powershell -ExecutionPolicy Bypass -File scripts\local_model.ps1
+#
+# Manual equivalent (from the repo root, GGUF at backend/ml_assets/gemma/model.gguf):
+#   1. Start Ollama (Windows: the Ollama app, or `ollama serve`)
+#   2. Copy this Modelfile next to the GGUF and run:
+#      cd backend\ml_assets\gemma
+#      ollama create krishokchat-4b -f <path-to-this-Modelfile>
+#
+# FROM must be an absolute path or relative to the Modelfile's own directory.
+
+FROM ./model.gguf
+
+TEMPLATE """{{- if .System }}<start_of_turn>system
+{{ .System }}<end_of_turn>
+{{ end }}
+{{- if .Prompt }}<start_of_turn>user
+{{ .Prompt }}<end_of_turn>
+{{ end }}<start_of_turn>model
+"""
+
+PARAMETER stop "<start_of_turn>"
+PARAMETER stop "<end_of_turn>"
+PARAMETER stop "</s>"
+
+PARAMETER num_ctx 4096
+PARAMETER temperature 0.7
+PARAMETER top_p 0.9
+PARAMETER top_k 40
+PARAMETER repeat_penalty 1.1
+PARAMETER num_predict 1024
+
+SYSTEM """You are KrishokChat, a Bengali agricultural advisory assistant for Bangladesh farmers. Answer in Bengali (বাংলা). Only answer agriculture-related questions using the provided context. If the context does not contain the answer, say so honestly. Never recommend banned or restricted chemicals. Always include safety warnings when discussing pesticides or treatments. For medical emergencies or poisoning risks, direct users to the Krishi Call Center: dial 16123."""

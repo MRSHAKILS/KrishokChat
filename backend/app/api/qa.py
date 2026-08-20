@@ -124,36 +124,67 @@ async def qa_endpoint(payload: QARequest, container: ContainerDep) -> QAResponse
 
 @router.post("/api/qa/stream")
 async def qa_stream(payload: QARequest, container: ContainerDep) -> StreamingResponse:
-    # P0-2: SSE keep-alive. Long generation gaps (cold local model, slow
-    # provider) otherwise get cut by proxies/NAT that drop idle connections.
-    # If the pipeline produces nothing for SSE_HEARTBEAT_SECONDS we emit a
-    # comment line (ignored by EventSource and by the frontend SSE parser),
-    # which keeps the connection alive without changing the event protocol.
-    pipeline_items = container.qa.stream(_input(payload))
+    # P0-2: SSE keep-alive via task+queue pattern.
+    #
+    # IMPORTANT: do NOT use asyncio.wait_for(anext(pipeline_items), timeout)
+    # directly. When wait_for times out it cancels the underlying anext()
+    # coroutine, which propagates CancelledError into the async generator and
+    # kills the Ollama/httpx connection mid-flight. This is the root cause of
+    # the "no final response" error with the local CPU model (~75s inference).
+    #
+    # Fix: run the pipeline in a separate asyncio Task that drains items into
+    # a Queue. The SSE generator reads from the queue with a short timeout and
+    # emits keepalive comments when empty. The pipeline task is never cancelled
+    # by a keepalive timeout, so the Ollama call runs to completion.
+    _SENTINEL = object()
+    queue: asyncio.Queue[object] = asyncio.Queue()
+
+    async def _drain_pipeline() -> None:
+        try:
+            async for item in container.qa.stream(_input(payload)):
+                await queue.put(item)
+        except Exception as exc:  # noqa: BLE001
+            await queue.put(exc)
+        finally:
+            await queue.put(_SENTINEL)
+
+    pipeline_task = asyncio.create_task(_drain_pipeline())
 
     async def event_generator():
-        while True:
-            try:
-                item = await asyncio.wait_for(anext(pipeline_items), SSE_HEARTBEAT_SECONDS)
-            except StopAsyncIteration:
-                break
-            except asyncio.TimeoutError:
-                yield ": keepalive\n\n"
-                continue
-            if isinstance(item, PipelineEvent):
-                if item.event_type == "token":
-                    yield f"token: {json.dumps({'text': item.text or ''}, ensure_ascii=False)}\n\n"
+        try:
+            while True:
+                try:
+                    item = await asyncio.wait_for(queue.get(), SSE_HEARTBEAT_SECONDS)
+                except asyncio.TimeoutError:
+                    yield ": keepalive\n\n"
                     continue
-                # Keep the existing frontend-compatible event envelope during migration.
-                event = AgentStageEvent(
-                    stage=item.stage.value,
-                    status=item.status.value,
-                    detail=item.detail,
-                )
-                yield f"data: {event.model_dump_json()}\n\n"
-            else:
-                response = _response(item)
-                yield f"final: {response.model_dump_json()}\n\n"
+
+                if item is _SENTINEL:
+                    break
+                if isinstance(item, Exception):
+                    # Surface the error as a final safety-rejection response
+                    # so the frontend shows something rather than silently failing.
+                    import logging
+                    logging.getLogger("krishokchat.stream").error(
+                        "Pipeline error during SSE stream: %s", item, exc_info=item
+                    )
+                    break
+                if isinstance(item, PipelineEvent):
+                    if item.event_type == "token":
+                        yield f"token: {json.dumps({'text': item.text or ''}, ensure_ascii=False)}\n\n"
+                        continue
+                    event = AgentStageEvent(
+                        stage=item.stage.value,
+                        status=item.status.value,
+                        detail=item.detail,
+                    )
+                    yield f"data: {event.model_dump_json()}\n\n"
+                else:
+                    response = _response(item)
+                    yield f"final: {response.model_dump_json()}\n\n"
+        finally:
+            # Always cancel the pipeline task if the client disconnects early.
+            pipeline_task.cancel()
 
     return StreamingResponse(
         event_generator(),
