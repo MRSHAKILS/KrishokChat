@@ -1,14 +1,25 @@
 /* =========================================================================
-   KrishokChat Service Worker (PWA Offline Support)
+   KrishokChat Service Worker (PWA Offline Shell — P6 hardening)
    
-   Strategies:
+   Strategies (P6 / W7 — shell-only, per PRODUCTION_ROLLOUT_PLAN.md):
    1. Static Assets & Fonts: Cache-first
    2. Library & Dataset JSON: Stale-while-revalidate (offline fallback)
    3. App Pages: Network-first with Cache fallback
+   Hard invariants:
+   - NEVER cache `/sw.js` itself (would freeze updates)
+   - NEVER cache `/api/*` or `/health` / POST streams (backend-dependent;
+     offline chat is explicitly NOT supported — chat shows offline banner)
+   - Precache shell only; chat/detect POSTs always go to network.
+   Future: migrate to Serwist (@serwist/next 9.5.12, Next 16 official
+   guidance 2026-07 — https://nextjs.org/docs/app/guides/progressive-web-apps
+   + https://serwist.pages.dev/docs/next). Current worker is a minimal
+   shell-only shim that satisfies W7 without the Serwist build step; the
+   Serwist migration is a TODO tracked in frontend/README or inline below.
    ========================================================================= */
 
 const CACHE_NAME = "krishokchat-cache-v1";
 
+// P6: bump this when shell assets change so `activate` cleans old caches.
 const STATIC_PRECACHE = [
   "/",
   "/favicon.ico",
@@ -48,6 +59,16 @@ self.addEventListener("activate", (event) => {
 // Fetch: route-aware caching strategies
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
+
+  // P6 invariant: never cache the worker script itself and never cache API.
+  if (
+    url.pathname === "/sw.js" ||
+    url.pathname.startsWith("/api/") ||
+    url.pathname === "/health" ||
+    url.pathname === "/readyz"
+  ) {
+    return;
+  }
 
   // Ignore non-GET requests or chrome-extension / analytics
   if (event.request.method !== "GET" || !url.protocol.startsWith("http")) {

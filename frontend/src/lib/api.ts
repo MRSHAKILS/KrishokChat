@@ -146,6 +146,42 @@ export async function askQuestion(
   return res.json();
 }
 
+/* ---------- P6: SSE hardening ----------------------- */
+/* Heartbeat interval from backend P0-2 is 15s; stale threshold is 2× + slack. */
+const SSE_HEARTBEAT_STALE_MS = 32_000;
+const SSE_MAX_RETRIES = 3;
+const SSE_BASE_BACKOFF_MS = 400;
+
+function sleepMs(ms: number, signal?: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) return reject(new DOMException("Aborted", "AbortError"));
+    const t = window.setTimeout(resolve, ms);
+    signal?.addEventListener("abort", () => {
+      window.clearTimeout(t);
+      reject(new DOMException("Aborted", "AbortError"));
+    }, { once: true });
+  });
+}
+
+function isAbortError(e: unknown): boolean {
+  return e instanceof DOMException && e.name === "AbortError";
+}
+
+function isRetryableStreamError(e: unknown): boolean {
+  if (e instanceof DOMException && e.name === "AbortError") return false;
+  const msg = e instanceof Error ? e.message : String(e);
+  // Network drops, proxy idle timeouts, or truncated stream (no final)
+  return (
+    msg.includes("Failed to fetch") ||
+    msg.includes("fetch") ||
+    msg.includes("network") ||
+    msg.includes("no final response") ||
+    msg.includes("no response body") ||
+    /qa stream failed: 5\d\d/.test(msg) ||
+    /qa stream failed: 429/.test(msg)
+  );
+}
+
 export async function streamQuestion(
   query: string,
   onEvent: (e: AgentStageEvent) => void,
@@ -158,61 +194,122 @@ export async function streamQuestion(
     model?: string | null;
     signal?: AbortSignal;
     timeoutMs?: number;
+    /** @internal — test hook to override retry count */
+    maxRetries?: number;
+    onReconnectAttempt?: (attempt: number) => void;
   },
 ): Promise<QAResponse> {
-  // 300s covers the local CPU model (backend enforces its own 30s for remote).
-  const request = createTimedSignal(opts?.signal, opts?.timeoutMs ?? 300_000);
-  try {
-    const res = await fetch(`${API_BASE}/api/qa/stream`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query,
-        crop: opts?.crop,
-        disease: opts?.disease,
-        session_id: opts?.session_id,
-        history: opts?.history,
-        model: opts?.model,
-      }),
-      signal: request.signal,
-    });
-    if (!res.ok) throw new Error(`qa stream failed: ${res.status}`);
-    const reader = res.body?.getReader();
-    if (!reader) throw new Error("no response body");
-    const decoder = new TextDecoder();
-    let buf = "";
-    let final: QAResponse | null = null;
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += decoder.decode(value, { stream: true });
-      const lines = buf.split("\n");
-      buf = lines.pop() || "";
-      for (const line of lines) {
-        const t = line.trim();
-        if (!t) continue;
-        if (t.startsWith("final:")) {
-          final = JSON.parse(t.slice(6).trim());
-        } else if (t.startsWith("data:")) {
-          try {
-            onEvent(JSON.parse(t.slice(5).trim()));
-          } catch {
-            /* A malformed progress event must not discard the final answer. */
-          }
-        } else if (t.startsWith("token:")) {
-          try {
-            onToken?.(JSON.parse(t.slice(6).trim()).text);
-          } catch {
-            /* A malformed token must not discard the final answer. */
+  const maxRetries = opts?.maxRetries ?? SSE_MAX_RETRIES;
+  // P6: abort-aware, heartbeat-aware reconnect with exponential backoff.
+  // The outer loop restarts the whole POST on retryable network failure.
+  // The inner read uses a per-chunk idle timeout driven by the backend's
+  // `: keepalive` comment every 15s (P0-2). If no bytes arrive for
+  // HEARTBEAT_STALE_MS we treat the proxy hop as dead and retry.
+  let lastAttemptFinal: QAResponse | null = null;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+    if (opts?.signal?.aborted) throw new DOMException("Aborted", "AbortError");
+    // 300s covers the local CPU model (backend enforces its own 30s for remote).
+    const request = createTimedSignal(opts?.signal, opts?.timeoutMs ?? 300_000);
+    try {
+      const res = await fetch(`${API_BASE}/api/qa/stream`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query,
+          crop: opts?.crop,
+          disease: opts?.disease,
+          session_id: opts?.session_id,
+          history: opts?.history,
+          model: opts?.model,
+        }),
+        signal: request.signal,
+      });
+      if (!res.ok) throw new Error(`qa stream failed: ${res.status}`);
+      const reader = res.body?.getReader();
+      if (!reader) throw new Error("no response body");
+      const decoder = new TextDecoder();
+      let buf = "";
+      let final: QAResponse | null = null;
+
+      // Per-chunk liveness: race each read against a heartbeat stale timer.
+      // The backend emits `: keepalive` every 15s, so a healthy stream never
+      // idles for 32s. If it does, we close the reader and let the outer
+      // retry handle it.
+      const readWithHeartbeat = async (): Promise<ReadableStreamReadResult<Uint8Array>> => {
+        let timer: number | undefined;
+        const timeout = new Promise<never>((_, reject) => {
+          timer = window.setTimeout(() => reject(new Error("sse heartbeat stale")), SSE_HEARTBEAT_STALE_MS);
+          opts?.signal?.addEventListener("abort", () => {
+            window.clearTimeout(timer);
+            reject(new DOMException("Aborted", "AbortError"));
+          }, { once: true });
+        });
+        try {
+          const result = await Promise.race([reader.read(), timeout]);
+          return result as ReadableStreamReadResult<Uint8Array>;
+        } finally {
+          window.clearTimeout(timer);
+        }
+      };
+
+      while (true) {
+        const { done, value } = await readWithHeartbeat();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split("\n");
+        buf = lines.pop() || "";
+        for (const line of lines) {
+          const t = line.trim();
+          if (!t) continue;
+          // P0-2 heartbeat: `: keepalive` comment — invisible to the SSE
+          // parser but proves the proxy hop is still alive. Never surface.
+          if (t.startsWith(":")) continue;
+          if (t.startsWith("final:")) {
+            final = JSON.parse(t.slice(6).trim());
+          } else if (t.startsWith("data:")) {
+            try {
+              onEvent(JSON.parse(t.slice(5).trim()));
+            } catch {
+              /* A malformed progress event must not discard the final answer. */
+            }
+          } else if (t.startsWith("token:")) {
+            try {
+              onToken?.(JSON.parse(t.slice(6).trim()).text);
+            } catch {
+              /* A malformed token must not discard the final answer. */
+            }
           }
         }
       }
+      if (!final) throw new Error("no final response");
+      lastAttemptFinal = final;
+      return final;
+    } catch (e: unknown) {
+      if (isAbortError(e) || opts?.signal?.aborted) throw e;
+      const retryable = isRetryableStreamError(e);
+      const willRetry = retryable && attempt < maxRetries;
+      if (!willRetry) throw e;
+      // Surface a transient "reconnecting" event so the rail can show it
+      // without inventing a new stage — reuse the active stage detail.
+      try {
+        onEvent({ stage: "generation", status: "start", detail: `পুনরায় সংযোগ হচ্ছে… (${attempt + 1}/${maxRetries})` });
+      } catch { /* onEvent must not break retry */ }
+      opts?.onReconnectAttempt?.(attempt + 1);
+      const backoff = SSE_BASE_BACKOFF_MS * Math.pow(2, attempt) + Math.floor(Math.random() * 120);
+      try {
+        await sleepMs(backoff, opts?.signal);
+      } catch (abortErr) {
+        throw abortErr;
+      }
+      continue;
+    } finally {
+      request.dispose();
     }
-    if (!final) throw new Error("no final response");
-    return final;
-  } finally {
-    request.dispose();
   }
+  // Should be unreachable — loop either returns or throws
+  if (lastAttemptFinal) return lastAttemptFinal;
+  throw new Error("no final response");
 }
 
 /* ---------- Vision ---------------------------------------------------- */
