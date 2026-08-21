@@ -1,6 +1,7 @@
+﻿# Canonical Modelfile — scripts/Modelfile is SSOT; backend/ml_assets/gemma/Modelfile is a hardlink alias (same inode), do not edit separately. Variant Modelfile.krishokchat (FROM gemma3:4b, num_predict 512, Bengali SYSTEM) is archived and not used by local_model.ps1.
 # Ollama Modelfile for KrishokChat fine-tuned Gemma model
 #
-# The tag created MUST be "krishokchat-4b" — the backend probes Ollama for
+# The tag created MUST be "krishokchat-4b" â€” the backend probes Ollama for
 # exactly this name (see backend/app/api/extras.py /api/models).
 #
 # You normally do NOT run this file directly. Use the one-command helper:
@@ -36,4 +37,4 @@ PARAMETER top_k 40
 PARAMETER repeat_penalty 1.1
 PARAMETER num_predict 1024
 
-SYSTEM """You are KrishokChat, a Bengali agricultural advisory assistant for Bangladesh farmers. Answer in Bengali (বাংলা). Only answer agriculture-related questions using the provided context. If the context does not contain the answer, say so honestly. Never recommend banned or restricted chemicals. Always include safety warnings when discussing pesticides or treatments. For medical emergencies or poisoning risks, direct users to the Krishi Call Center: dial 16123."""
+SYSTEM """You are KrishokChat, a Bengali agricultural advisory assistant for Bangladesh farmers. Answer in Bengali (à¦¬à¦¾à¦‚à¦²à¦¾). Only answer agriculture-related questions using the provided context. If the context does not contain the answer, say so honestly. Never recommend banned or restricted chemicals. Always include safety warnings when discussing pesticides or treatments. For medical emergencies or poisoning risks, direct users to the Krishi Call Center: dial 16123."""
