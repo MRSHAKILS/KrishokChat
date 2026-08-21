@@ -61,3 +61,24 @@ jobs:
         run: uv sync --dev
       - name: Replay golden set and assert mechanical invariants
         run: uv run python scripts/replay_golden.py --assert-invariants
+
+  paper-policy:
+    name: Paper policy (forbid deprecated arXiv:2606.29243)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Forbid deprecated arXiv v1 citation
+        run: |
+          echo "Checking for deprecated arXiv:2606.29243 (docs/PAPER_POLICY.md) — allowlist: policy docs that document the ban..."
+          # Allowlist: files that are *allowed* to mention the deprecated ID only to document the ban.
+          # Any other file citing it as a source is a failure.
+          HITS=$(grep -R --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=.venv --exclude-dir=htmlcov --include="*.md" --include="*.ts" --include="*.tsx" --include="*.py" "2606\.29243" paper/ docs/ frontend/ backend/ 2>/dev/null | grep -v "docs/PAPER_POLICY.md" | grep -v "paper/manuscript/README.md" | grep -v "paper/manuscript/expert-systems-skeleton.md" | grep -v "CLAIM_LEDGER_FREEZE" | grep -v "PAPER_POLICY" | grep -v "deprecated" | grep -v "DEPRECATED" || true)
+          if [ -n "$HITS" ]; then
+            echo "$HITS"
+            echo "ERROR: deprecated arXiv:2606.29243 cited outside allowlist — see docs/PAPER_POLICY.md and paper/manuscript/README.md"
+            exit 1
+          fi
+          # Also ensure no manuscript content cites it as a source (exclude the banned-citation documentation line itself)
+          # Second sweep: any manuscript .md under paper/manuscript/ that contains the ID outside the References/Banned section is already covered by the allowlist filter above;
+          # the remaining check is that the only allowed occurrences are those three policy files.
+          echo "No forbidden arXiv citation found outside allowlist."

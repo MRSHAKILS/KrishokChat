@@ -25,6 +25,16 @@ repos:
         args: [--skip=.git,*.pdf,*.png,*.jpg,*.jpeg,*.gif,*.webp,*.pt,*.onnx,*.gguf,*.faiss,*.pkl,*.npy]
         exclude: ^(frontend/pnpm-lock\.yaml|backend/uv\.lock)$
 
+  - repo: local
+    hooks:
+      - id: forbid-arxiv-v1
+        name: Forbid deprecated arXiv:2606.29243 (PAPER_POLICY.md)
+        # Allowlist: policy docs are allowed to mention the ID only to document the ban.
+        entry: bash -c 'HITS=$(grep -R --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=.venv --include="*.md" --include="*.ts" --include="*.tsx" --include="*.py" "2606\.29243" paper/ docs/ frontend/ backend/ 2>/dev/null | grep -v "docs/PAPER_POLICY.md" | grep -v "paper/manuscript/README.md" | grep -v "paper/manuscript/expert-systems-skeleton.md" | grep -v "CLAIM_LEDGER_FREEZE" | grep -v "PAPER_POLICY" | grep -v "deprecated" | grep -v "DEPRECATED" || true); if [ -n "$HITS" ]; then echo "$HITS"; echo "ERROR: deprecated arXiv:2606.29243 cited outside allowlist — see docs/PAPER_POLICY.md"; exit 1; fi; exit 0'
+        language: system
+        pass_filenames: false
+        always_run: true
+
 # Note: No Python formatter (ruff/black) or ESLint hook yet — those will land
 # in a follow-up after S6, once the repo is structure-clean and CI can run them.
 # This file is intentionally minimal to avoid breaking the demo.
