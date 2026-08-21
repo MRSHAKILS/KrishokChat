@@ -1,0 +1,30 @@
+# Pre-commit — advisory only (not enforced in CI yet, per S5).
+# Install locally with: pip install pre-commit && pre-commit install
+# Run on all files: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: debug-statements
+      - id: double-quote-string-fixer
+        exclude: \.md$
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        args: [--skip=.git,*.pdf,*.png,*.jpg,*.jpeg,*.gif,*.webp,*.pt,*.onnx,*.gguf,*.faiss,*.pkl,*.npy]
+        exclude: ^(frontend/pnpm-lock\.yaml|backend/uv\.lock)$
+
+# Note: No Python formatter (ruff/black) or ESLint hook yet — those will land
+# in a follow-up after S6, once the repo is structure-clean and CI can run them.
+# This file is intentionally minimal to avoid breaking the demo.
