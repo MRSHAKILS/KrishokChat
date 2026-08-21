@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "motion/react";
 import { MapPin, Users, FileText, ExternalLink } from "lucide-react";
@@ -7,7 +7,7 @@ import { enter, stagger } from "@/lib/motion";
 
 /* =========================================================================
    Team & Fieldwork Page — shows the real people and real fieldwork.
-   Uses the photos in /assets/researchers image/ and fieldwork photos.
+   Uses the photos in /assets/researchers/ and fieldwork photos.
 
    Sections:
    A. Team members (3 cards with photos)
@@ -21,19 +21,19 @@ const TEAM = [
     name: "Khan Raiyan Ibne Reza",
     role: "প্রধান গবেষক · Lead Researcher",
     affiliation: "North South University",
-    image: "/assets/researchers image/raiyan_khan.jpg",
+    image: "/assets/researchers/raiyan_khan.jpg",
   },
   {
     name: "Sanjana Maria",
     role: "গবেষক · Researcher",
     affiliation: "North South University",
-    image: "/assets/researchers image/sanjana_maria.jpg",
+    image: "/assets/researchers/sanjana_maria.jpg",
   },
   {
     name: "Shakil Ahmed",
     role: "গবেষক · Researcher",
     affiliation: "North South University",
-    image: "/assets/researchers image/shakil_ahmed.jpg",
+    image: "/assets/researchers/shakil_ahmed.jpg",
   },
 ];
 

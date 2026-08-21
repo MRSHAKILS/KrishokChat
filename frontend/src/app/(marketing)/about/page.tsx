@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRef } from "react";
@@ -25,19 +25,19 @@ const TEAM = [
     name: "Khan Raiyan Ibne Reza",
     role: "Lead Researcher",
     affiliation: "North South University",
-    image: "/assets/researchers image/raiyan_khan.jpg",
+    image: "/assets/researchers/raiyan_khan.jpg",
   },
   {
     name: "Sanjana Maria",
     role: "Researcher",
     affiliation: "North South University",
-    image: "/assets/researchers image/sanjana_maria.jpg",
+    image: "/assets/researchers/sanjana_maria.jpg",
   },
   {
     name: "Shakil Ahmed",
     role: "Researcher",
     affiliation: "North South University",
-    image: "/assets/researchers image/shakil_ahmed.jpg",
+    image: "/assets/researchers/shakil_ahmed.jpg",
   },
 ];
 
