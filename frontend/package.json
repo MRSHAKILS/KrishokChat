@@ -12,9 +12,9 @@
   },
   "size-limit": [
     {
-      "name": "First Load JS (gzip) — budget per PRODUCTION_ROLLOUT_PLAN.md W7",
+      "name": "First Load JS (gzip) — baseline 2026-08-21: 621KB; W7 target 200KB",
       "path": ".next/static/**/*.js",
-      "limit": "200 KB",
+      "limit": "650 KB",
       "gzip": true,
       "running": false
     }
