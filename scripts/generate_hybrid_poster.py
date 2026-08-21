@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Generate the calibrated, large-scale typography Master Hybrid A0 Poster HTML.
 Calibrated for standard A0 viewing distance (1.5 - 2.5 meters).
@@ -6,7 +6,7 @@ Calibrated for standard A0 viewing distance (1.5 - 2.5 meters).
 
 import pathlib
 
-POSTER_PATH = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster deisgn\poster.html")
+POSTER_PATH = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster-design\poster.html")
 
 HTML_CONTENT = """<!DOCTYPE html>
 <html lang="en">

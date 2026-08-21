@@ -1,4 +1,4 @@
-# Business Model — Honest Verdict + Real Unit Economics
+﻿# Business Model — Honest Verdict + Real Unit Economics
 
 Written for the KrishokChat capstone. Every cost figure here is from a live 2026 search
 (sources at bottom). This is the file the presentation script pulls its money numbers from.
@@ -131,7 +131,7 @@ on the social-impact criterion will reward it.
 
 ## 5. Doc updates made
 - This file created: `capstone/presentation/BUSINESS_MODEL_VERDICT.md`.
-- `poster deisgn/poster_stats.yaml` `business_model` block should be read *through* this
+- `poster-design/poster_stats.yaml` `business_model` block should be read *through* this
   verdict (institutional-first). The poster's C4 "Impact & Path to Scale" line already leads
   with B2G(16123)+CC-BY dataset, which is consistent — no poster change needed.
 

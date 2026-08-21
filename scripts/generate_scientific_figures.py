@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Generate publication-grade, ultra-sharp 300 DPI scientific figures
 for the KrishokChat Capstone Poster using real experimental data.
@@ -20,7 +20,7 @@ plt.rcParams['axes.edgecolor'] = '#CBD5E1'
 plt.rcParams['xtick.color'] = '#475569'
 plt.rcParams['ytick.color'] = '#475569'
 
-FIG_DIR = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster deisgn\figures")
+FIG_DIR = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster-design\figures")
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 

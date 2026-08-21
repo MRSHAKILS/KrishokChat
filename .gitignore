@@ -30,6 +30,25 @@ backend/app/logs/*
 !backend/app/logs/.gitkeep
 *.log
 
+# LaTeX build artifacts — never commit (keep .tex/.pdf/.sty/.bib only)
+*.aux
+*.dvi
+*.out
+*.nav
+*.snm
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.lof
+*.lot
+*.lol
+*.idx
+*.ilg
+*.ind
+
 # Local SQLite database (T0-01 shared storage foundation)
 backend/data/
 

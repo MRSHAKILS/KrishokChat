@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Generate publication-sharp 300 DPI diagram of the 14-Field Atomic Claim Verifier Schema
 using Nirmala UI / Segoe UI for native Bengali glyph rendering.
@@ -11,7 +11,7 @@ import matplotlib.patches as patches
 plt.rcParams['font.family'] = 'Nirmala UI'
 plt.rcParams['font.sans-serif'] = ['Nirmala UI', 'Segoe UI', 'Arial']
 
-FIG_DIR = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster deisgn\figures")
+FIG_DIR = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster-design\figures")
 
 def generate_verifier_schema():
     fig = plt.figure(figsize=(12, 16), dpi=300)

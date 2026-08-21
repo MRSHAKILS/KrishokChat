@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Write the full A0 KrishokChat capstone poster to poster.html"""
 import pathlib
 
-OUT = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster deisgn\poster.html")
+OUT = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster-design\poster.html")
 
 HTML = r"""<!DOCTYPE html>
 <html lang="en">

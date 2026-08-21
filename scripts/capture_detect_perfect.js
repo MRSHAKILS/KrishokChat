@@ -1,9 +1,9 @@
-const path = require('path');
+﻿const path = require('path');
 const fs = require('fs');
 const { chromium } = require(path.join(__dirname, '../frontend/node_modules/playwright'));
 
 const BASE_URL = 'http://localhost:3000';
-const OUT_DIR_POSTER = path.join(__dirname, '../capstone/poster deisgn/latex/img');
+const OUT_DIR_POSTER = path.join(__dirname, '../capstone/poster-design/latex/img');
 const OUT_DIR_DEMO = path.join(__dirname, '../demo-assets/screenshots');
 
 async function capturePerfectDetect() {

@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8")
 
-OUT_DIR = Path("d:/KrishokChat Advisory System/capstone/poster deisgn/screenshots")
+OUT_DIR = Path("d:/KrishokChat Advisory System/capstone/poster-design/screenshots")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 with sync_playwright() as p:

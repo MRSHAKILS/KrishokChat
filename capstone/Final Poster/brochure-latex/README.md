@@ -1,4 +1,4 @@
-# KrishokChat A3 Bi-fold Brochure
+﻿# KrishokChat A3 Bi-fold Brochure
 
 This directory contains the editable A3 bi-fold LaTeX source for the four-panel judge handout.
 
@@ -24,12 +24,12 @@ XeLaTeX executable exits with an internal error before processing the source.
 The content and layout are engine-neutral; re-run with XeLaTeX in a clean TeX
 installation if the print vendor requires it.
 
-The source uses fonts already present in `capstone/poster deisgn/latex/fonts/` when available. If a local font is unavailable, XeLaTeX will fall back to a system font.
+The source uses fonts already present in `capstone/poster-design/latex/fonts/` when available. If a local font is unavailable, XeLaTeX will fall back to a system font.
 
 ## Asset workflow
 
 1. Existing screenshots are loaded from `demo-assets/screenshots/` and can be replaced by final captures.
-2. Existing field/interview assets are loaded from `capstone/poster deisgn/latex/img/`.
+2. Existing field/interview assets are loaded from `capstone/poster-design/latex/img/`.
 3. Generated diagrams belong in `assets/generated/`.
 4. The source intentionally provides a labelled placeholder when a generated diagram is not yet present.
 5. Exact prompts and diagram specifications are in `../VISUAL_GENERATION_PROMPTS.md`.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Generate clean, 100% vector/data-driven A0 Poster HTML for KrishokChat.
 Zero blurry or AI-generated raster images.
@@ -6,7 +6,7 @@ Zero blurry or AI-generated raster images.
 
 import pathlib
 
-POSTER_PATH = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster deisgn\poster.html")
+POSTER_PATH = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster-design\poster.html")
 
 HTML_CONTENT = """<!DOCTYPE html>
 <html lang="en">

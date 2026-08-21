@@ -3,7 +3,7 @@ import time
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
-OUT_DIR = Path("d:/KrishokChat Advisory System/capstone/poster deisgn/screenshots")
+OUT_DIR = Path("d:/KrishokChat Advisory System/capstone/poster-design/screenshots")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def main():

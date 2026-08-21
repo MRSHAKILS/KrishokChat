@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Generate vector-sharp, publication-grade System Architecture Diagram
 for KrishokChat 4-Stage Safety Pipeline.
@@ -8,7 +8,7 @@ import pathlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-FIG_DIR = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster deisgn\figures")
+FIG_DIR = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster-design\figures")
 
 def generate_system_architecture():
     fig = plt.figure(figsize=(16, 8.5), dpi=300)

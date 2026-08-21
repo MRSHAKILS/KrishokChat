@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Generate the finalized, pixel-perfect A0 Poster HTML for KrishokChat.
 Calibrated for exact 841mm x 1189mm single-page print budget.
 """
 import pathlib
 
-POSTER_PATH = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster deisgn\poster.html")
+POSTER_PATH = pathlib.Path(r"d:\KrishokChat Advisory System\capstone\poster-design\poster.html")
 
 HTML_CONTENT = """<!DOCTYPE html>
 <html lang="en">
