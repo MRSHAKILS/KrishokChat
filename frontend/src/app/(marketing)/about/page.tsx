@@ -152,7 +152,7 @@ export default function AboutPage() {
         <motion.div variants={enter} className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="overflow-hidden rounded-xl border rule">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/researcher_interviewing_farmer.png" alt="গবেষক কর্তৃক কৃষকের সাক্ষাৎকার গ্রহণ" className="aspect-video w-full object-cover" />
+            <img src="/assets/researcher-interviewing-farmer.png" alt="গবেষক কর্তৃক কৃষকের সাক্ষাৎকার গ্রহণ" className="aspect-video w-full object-cover" />
           </div>
           <div className="overflow-hidden rounded-xl border rule">
             {/* eslint-disable-next-line @next/next/no-img-element */}

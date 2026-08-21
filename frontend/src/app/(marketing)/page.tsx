@@ -506,7 +506,7 @@ function TimelineSection() {
       <div className="grid overflow-hidden rounded-2xl border rule bg-paper shadow-[0_12px_36px_rgba(52,39,23,0.07)] lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div variants={enter} className="relative min-h-[350px] overflow-hidden bg-leaf">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/researcher_interviewing_farmer.png" alt="মাঠ পর্যায়ে কৃষকের সাক্ষাৎকার" className="absolute inset-0 h-full w-full object-cover" />
+          <img src="/assets/researcher-interviewing-farmer.png" alt="মাঠ পর্যায়ে কৃষকের সাক্ষাৎকার" className="absolute inset-0 h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
           <div className="absolute inset-x-5 bottom-5 text-paper sm:inset-x-7 sm:bottom-7">
             <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ochre-soft">Rajshahi + Natore field study</div>

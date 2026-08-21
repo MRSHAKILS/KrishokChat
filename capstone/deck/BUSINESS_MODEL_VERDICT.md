@@ -130,7 +130,7 @@ on the social-impact criterion will reward it.
 ---
 
 ## 5. Doc updates made
-- This file created: `capstone/presentation/BUSINESS_MODEL_VERDICT.md`.
+- This file created: `capstone/deck/BUSINESS_MODEL_VERDICT.md` (renamed from `capstone/presentation/` via `git mv`).
 - `poster-design/poster_stats.yaml` `business_model` block should be read *through* this
   verdict (institutional-first). The poster's C4 "Impact & Path to Scale" line already leads
   with B2G(16123)+CC-BY dataset, which is consistent — no poster change needed.

@@ -147,7 +147,7 @@ export default function TeamPage() {
           <div className="overflow-hidden rounded-xl border rule">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/researcher_interviewing_farmer.png"
+              src="/assets/researcher-interviewing-farmer.png"
               alt="গবেষক কৃষকের সাক্ষাৎকার নিচ্ছেন"
               className="aspect-video w-full object-cover"
             />
