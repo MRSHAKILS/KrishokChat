@@ -27,8 +27,8 @@ The UI is replaceable. Functional behavior must not be embedded in React compone
 | Public HTTP schemas | `backend/app/models/schemas.py` |
 | Vision model artifacts | `backend/ml_assets/vision/**` plus each artifact's `class_names.json`/`metadata.json` |
 | Local audit trail | `backend/app/logs/` (ignored by git) |
-| Active research execution plan | `paper/system_evolution_plan_2026/execution_planning_2026_08_12/` |
-| Local model integration evidence | `paper/system_evolution_plan_2026/execution_planning_2026_08_12/14_LOCAL_MODEL_RUNTIME_AMENDMENT_2026_08_12.md` |
+| Active research execution plan | `paper/archive/system_evolution_plan_2026/execution_planning_2026_08_12/` (moved to `archive/` 2026-08-21) |
+| Local model integration evidence | `paper/archive/system_evolution_plan_2026/execution_planning_2026_08_12/14_LOCAL_MODEL_RUNTIME_AMENDMENT_2026_08_12.md` |
 
 ## Invariants future agents must preserve
 

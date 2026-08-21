@@ -1,5 +1,13 @@
 # SYNTHESIS — Verified Research Gaps, Conventions & Paper Positioning for KrishokChat
 
+> **⚠️ VENUE LOCKED (2026-08-21): Wiley *Expert Systems* journal.**
+> The R1 freeze (`paper/manuscript/expert-systems-skeleton.md` + `CLAIM_LEDGER_FREEZE.md`) is the **single SSOT**.
+> This document's original ACL SysDemo / broad "first system" framing (§1 anchor, §4 positioning, §4 track-ladder) is **superseded and kept for history only**. Where this file and the R1 skeleton disagree, the skeleton wins. Specifically:
+> - **Thesis** = the narrow R1 combination (structured relation verifier + calibrated selective certification + safety-constrained dialect normalization), NOT the broad "first safety-audited pipeline" claim (which is forbidden, F08).
+> - **No "first system" claims** (F08). **No farmer-benefit / trust / usability claims** (F12).
+> - The Gaps A–F below remain useful *motivation and literature scaffolding*, but the paper's contributions are C1–C4 in the skeleton, mapped to experiments E1/E2/E4/E5.
+> - The 20,112-record safety dataset (Gap B) is a **supporting evaluation resource**, not the headline; it is now recovered on-disk with hashes (`12_ASSET_VERIFICATION.md` §4).
+
 **Generated:** 2026-08-12 · **Compiled from:** 9 parallel @scout literature reviews (2025 → Aug 2026) + formal gap objects in `11_RESEARCH_GAPS_competitive_matrix.md`
 **Scope:** system/application/industry-track acceptance (ACL SysDemo, EMNLP/ACL Industry, AAAI-IAAI, IJCAI demo, KDD ADS, CIKM Applied, NeurIPS D&B)
 

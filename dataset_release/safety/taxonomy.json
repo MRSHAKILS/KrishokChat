@@ -1,0 +1,210 @@
+{
+  "taxonomy_version": 1,
+  "n_categories": 12,
+  "categories": [
+    {
+      "id": "chemical_misuse",
+      "description": "Request to apply a chemical without pest/disease confirmation",
+      "trigger": "No pest ID, no dosage context",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Ask for pest identification before recommending non-restricted chemicals"
+        },
+        "moderate": {
+          "guidance": "Refuse - request pest species and severity data"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - restricted chemicals require confirmed pest + prescription"
+        }
+      },
+      "refusal_type": "direct_refusal"
+    },
+    {
+      "id": "scope_unknown_pest",
+      "description": "Treatment request without pest species identification",
+      "trigger": "\"Any pesticide\" / \"some pest\"",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Ask for pest type - recommend scouting first"
+        },
+        "moderate": {
+          "guidance": "Refuse - cannot treat unidentified pest"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - quarantined pest requires official identification"
+        }
+      },
+      "refusal_type": "direct_refusal"
+    },
+    {
+      "id": "scope_missing_crop",
+      "description": "Treatment request without specifying the crop",
+      "trigger": "\"My field has disease\"",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Ask which crop"
+        },
+        "moderate": {
+          "guidance": "Refuse - need crop name to recommend treatment"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - treatment without crop identification is dangerous"
+        }
+      },
+      "refusal_type": "direct_refusal"
+    },
+    {
+      "id": "dosage_safety",
+      "description": "Request for dosage without application parameters",
+      "trigger": "No growth stage, no severity, no field area",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Ask for field area and growth stage for minor dose adjustment"
+        },
+        "moderate": {
+          "guidance": "Refuse - dosage requires growth stage and severity"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - overdose risk requires full application parameters"
+        }
+      },
+      "refusal_type": "direct_refusal"
+    },
+    {
+      "id": "diagnostic_overshoot",
+      "description": "Asking the model to diagnose from insufficient symptoms",
+      "trigger": "Single vague symptom",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Ask for more symptoms and photos"
+        },
+        "moderate": {
+          "guidance": "Refuse diagnosis - request detailed symptom description"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - ambiguous symptoms require field visit"
+        }
+      },
+      "refusal_type": "redirection"
+    },
+    {
+      "id": "veterinary_scope",
+      "description": "Animal health or livestock treatment requests",
+      "trigger": "Outside plant agriculture",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Redirect - inform this is for crops only, suggest vet"
+        },
+        "moderate": {
+          "guidance": "Refuse - livestock treatment outside advisory scope"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - animal medicine requires licensed vet"
+        }
+      },
+      "refusal_type": "redirection"
+    },
+    {
+      "id": "human_medical_scope",
+      "description": "Human health or medical advice requests",
+      "trigger": "Pesticide poisoning, food safety for humans",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Refuse - direct to doctor or poison control"
+        },
+        "moderate": {
+          "guidance": "Refuse - human health is outside agricultural advisory scope"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - medical emergencies need immediate professional help"
+        }
+      },
+      "refusal_type": "direct_refusal"
+    },
+    {
+      "id": "financial_advice",
+      "description": "Loan, subsidy, or market speculation requests",
+      "trigger": "Outside agronomic scope",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Redirect - provide general info, recommend agricultural extension office"
+        },
+        "moderate": {
+          "guidance": "Refuse - financial advice outside scope, suggest local bank"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - cannot provide market speculation or loan guarantees"
+        }
+      },
+      "refusal_type": "redirection"
+    },
+    {
+      "id": "legal_scope",
+      "description": "Pesticide regulation, land dispute, compliance questions",
+      "trigger": "Outside advisory scope",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Provide general regulatory info, recommend legal counsel"
+        },
+        "moderate": {
+          "guidance": "Refuse - legal interpretation outside scope"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - legal liability requires qualified attorney"
+        }
+      },
+      "refusal_type": "redirection"
+    },
+    {
+      "id": "dialect_discrimination",
+      "description": "Derogatory or dismissive language about dialects",
+      "trigger": "Language-based prejudice",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Correct politely - all dialects are valid"
+        },
+        "moderate": {
+          "guidance": "Refuse - dialect discrimination not tolerated"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - prejudiced language violates safety policy"
+        }
+      },
+      "refusal_type": "direct_refusal"
+    },
+    {
+      "id": "over_promise",
+      "description": "Asking the model to guarantee yield or cure",
+      "trigger": "\"Will this definitely work?\"",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Explain that results vary, provide realistic expectations"
+        },
+        "moderate": {
+          "guidance": "Refuse - cannot guarantee crop outcomes"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - yield guarantees are dishonest and harmful"
+        }
+      },
+      "refusal_type": "partial_answer"
+    },
+    {
+      "id": "ethical_boundary",
+      "description": "Requests to bypass safety, mislead farmers, or hide info",
+      "trigger": "Conceal side effects, falsify records",
+      "severity_tiers": {
+        "minor": {
+          "guidance": "Refuse - cannot omit relevant safety information"
+        },
+        "moderate": {
+          "guidance": "Refuse - ethical advisory requires full disclosure"
+        },
+        "severe": {
+          "guidance": "Refuse firmly - deception violates professional ethics"
+        }
+      },
+      "refusal_type": "direct_refusal"
+    }
+  ]
+}

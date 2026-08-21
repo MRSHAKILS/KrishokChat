@@ -2,7 +2,7 @@
 
 **Status:** FROZEN SKELETON — NOT a submission. No empirical claim in this file is promoted.
 **Freeze date:** 2026-08-21
-**Authority:** `paper/system_evolution_plan_2026/execution_planning_2026_08_12/` (adjudication package) + `docs/PAPER_POLICY.md`
+**Authority:** `paper/archive/system_evolution_plan_2026/execution_planning_2026_08_12/` (adjudication package; moved to `archive/` 2026-08-21) + `docs/PAPER_POLICY.md`
 **Thesis (frozen, `03_THESIS_DECISION.md`):** Evidence-linked, relation-aware selective certification for Bengali agrochemical advice under a BM25-only runtime, with dialect/Banglish normalization evaluated as a safety-constrained robustness axis.
 **Supersedes (structure only):** `paper/manuscript/T25_paper_skeleton_v1.md` remains for history; this file is the single Wiley SSOT per R1.
 
@@ -178,7 +178,7 @@
 ### 4.7 Telemetry & Audit (Stage Latency, Tokens, Cost)
 
 - Audit schema is additive: `stage_timings_ms`, `tokens` (`token_usage` column in SQLite), `provider`, `cost_estimate` (always `null` — no price table), `request_id` (T0-04 contextvar), `cached`, `safety.category`, `retrieval.hit`, `verifier`.
-- OTel manual spans (P8) per stage: `qa.pipeline` parent → `qa.safety`/`qa.retrieval`/`qa.generation`/`qa.verifier`/`qa.cache.hit`; `SimpleSpanProcessor` (sync, no queue); optional OTLP to Phoenix.
+- OTel per-stage spans (P8) were **deferred 2026-08-21** — NOT shipped in the evaluated runtime (dependency absent; no spans wired). Stage-latency evidence comes solely from audit `stage_timings_ms` (T0-05). Any future OTel lane is production tooling only and adds no claim to this manuscript.
 
 ---
 
@@ -288,7 +288,7 @@
 **Every primary claim must cite a run/artifact ID and hash.**
 
 - **Code:** `backend/app/application/qa_pipeline.py`, `backend/app/application/container.py`, `backend/app/infrastructure/retrieval/`, `backend/app/infrastructure/verification/` (deterministic parser/matcher), vision runners — pinned code revision + dirty-tree flag.
-- **Data & indexes:** `backend/ml_assets/rag_index/` (BM25 pickle + corpus + tokenizer/config), `dataset_release/safety/` (20,112 safety set per `dataset_release/safety/README.md` — auto-citation `CORNELL_BENCH` only), `dataset_release/soil_moisture/` (722 images), provenance manifests `backend/ml_assets/rag_index/provenance/` (if added in R2).
+- **Data & indexes:** `backend/ml_assets/rag_index/` (BM25 pickle + corpus + tokenizer/config), `dataset_release/safety/` (**20,112 records recovered on-disk 2026-08-21: `t3_refusal.jsonl` 3,216 sha256 `27acdb64…`; `t4_requery.jsonl` 16,896 sha256 `a578023…`; + `slots.json`/`taxonomy.json`/`phase4_dialect_map.json`; HF canonical `RaiyanKhaan/krishokChat/safety_qa/`** — see `paper/literature review/12_ASSET_VERIFICATION.md` §4), `dataset_release/soil_moisture/` (722 raw images in `soil-moisture-detection/dataset/`, 13 thumbnails tracked), provenance manifests `backend/ml_assets/rag_index/provenance/` (if added in R2).
 - **Splits & manifests:** `research_artifacts/datasets/frozen/T09_*`, `research_artifacts/reports/data_audit/T05_*`, `research_artifacts/reports/T12_*` / `T15_*`, per-run manifests (`06_EVALUATION_BENCHMARK_PLAN.md:100-103`).
 - **Corpus versioning:** `CORPUS_VERSION` already in demo-cache keys (P0-7) + `indexes/index_sha256.txt` (R2).
 - **Golden replay:** `backend/scripts/replay_golden.py --assert-invariants` — **50/50** invariants (46 + 4 injection); CI job `golden` runs it offline.
@@ -316,7 +316,7 @@
 | Gate | Requirement | Status (2026-08-21) | Blocking |
 |---|---|---|---|
 | G0 | PDF and artifact claim ledger complete | Partial — T05 v1 ledger exists; 2,946/284/19,768/17,501 still NEEDS RECONCILIATION | Team-paper numerical claims |
-| G1 | Dataset locations/counts/hashes reconciled | ✅ T05 v1 (85,979; 7,437; 323; 6×4,275) — re-read at assembly | Dataset composition table |
+| G1 | Dataset locations/counts/hashes reconciled | ✅ T05 v1 (85,979; 7,437; 323; 6×4,275) — re-read at assembly; **safety 20,112 recovered + hashed on-disk 2026-08-21** (`12_ASSET_VERIFICATION.md` §4) | Dataset composition table |
 | G2 | Schema and primary endpoints frozen | ⚠️ T07 v1 frozen draft — pending expert sign-off | Annotation and model comparison |
 | G3 | Expert pilot and agreement reviewed | ❌ T08 scaffolded; labeling pending | Gold-label claims |
 | G4 | Baselines run from manifests | ⚠️ T12 lexical ✅, T15 candidate ✅ offline; no gold comparison | Improvement claims |

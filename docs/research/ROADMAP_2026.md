@@ -4,7 +4,7 @@ Date: 2026-08-14. Source of truth for decisions: `docs/research/CRITIC_GAPS_2026
 (adversarial review of 19 candidates from `docs/research/LITERATURE_SCOUT_2026.md`
 and `docs/competitive-landscape.md`). This lane is **product/engineering** —
 separate from the frozen research thesis in
-`paper/system_evolution_plan_2026/execution_planning_2026_08_12/` (which remains
+`paper/archive/system_evolution_plan_2026/execution_planning_2026_08_12/` (which remains
 the research execution authority and is untouched by this roadmap).
 
 Horizon: 3–4 minute investor demo first; marketplace readiness second. All five

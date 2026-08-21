@@ -52,14 +52,25 @@ All have `class_names.json`. `verification_report_live.md` in `vision/` is SSOT.
 
 ---
 
-## 4. Safety — MISSING (write honestly)
+## 4. Safety — RECOVERED & VERIFIED (2026-08-21, from HuggingFace `RaiyanKhaan/krishokChat`)
 
-| Asset | Expected | Verified | Path | Action |
+| Asset | Expected | Verified | Path | Hash / Count |
 |---|---|---|---|---|
-| 20,112 safety (3,216 T3 + 16,896 T4) 6 dialects | 20,112 | **MISSING** — `dataset_release/safety/` has only `phase4_dialect_map.json` (1,830 B) | `dataset_release/safety/` | **Do NOT claim on disk.** Write “20,112 design per `RaiyanKhaan/krishokChat` (HuggingFace), `phase4_dialect_map.json` verified locally; local audit is `backend/app/logs/safety_audit.jsonl` (1.7 MB)”. |
+| T3 refusal | 3,216 | **3,216** lines, 3.64 MB | `dataset_release/safety/t3_refusal.jsonl` | sha256 `27acdb644c9e3794…` |
+| T4 requery | 16,896 | **16,896** lines, 15.85 MB | `dataset_release/safety/t4_requery.jsonl` | sha256 `a578023429cf3cc4…` |
+| **Total** | 20,112 | **20,112** ✅ | — | 3,216 + 16,896 |
+| Slots | — | 1,870 B | `dataset_release/safety/slots.json` | sha256 `f00faa765059c11d…` |
+| Taxonomy | — | 7,136 B | `dataset_release/safety/taxonomy.json` | sha256 `a2b9040c7faa8450…` |
+| Dialect map | — | 1,830 B | `dataset_release/safety/phase4_dialect_map.json` | sha256 `f034ad136a6469dd…` |
 | Helpline 16123 | — | Verified | `backend/app/domain/safety_policy.py` | Correct. |
 
-**Action:** `TODO` for safety numbers until dataset is restored.
+**Composition (verified by field-count):**
+- **6 dialects**, evenly balanced: T3 = 536 each (standard/sylheti/chittagonian/noakhailli/rangpuri/barishal); T4 = 2,816 each.
+- **T3 = 12 categories** (chemical_misuse, dosage_safety, veterinary_scope, human_medical_scope, legal_scope, dialect_discrimination, over_promise, ethical_boundary, scope_missing_crop, scope_unknown_pest, diagnostic_overshoot, financial_advice); **9 patterns** (direct/urgent/vague/authority/bypass/escalate/scope_creep/adversarial + 144 over_refusal_test).
+- **T3 fields:** `safety_id, category, severity, pattern, dialect, persona, harmful_prompt, safe_response, refusal_type, over_refusal_test, adversarial_rewrite, safety_check, source`.
+- **T4 fields:** `safety_id, missing_slots, missing_slot_count, highest_dp_slot, dp_score, dialect, persona, incomplete_query, requery_response, safety_check, source, source_node_id, source_org, source_crop`.
+
+**Action:** Write **20,112 (3,216 T3 + 16,896 T4), 6 dialects** — now on disk with hashes. HF canonical path `RaiyanKhaan/krishokChat/safety_qa/{t3_refusal,t4_requery}.jsonl`. Local audit `backend/app/logs/safety_audit.jsonl` (1.7 MB) is separate runtime telemetry, not the dataset.
 
 ---
 
@@ -91,5 +102,5 @@ All have `class_names.json`. `verification_report_live.md` in `vision/` is SSOT.
 - [ ] Every number cites a path above or `TODO`.
 - [ ] No `arXiv:2606.29243` outside `docs/PAPER_POLICY.md` allowlist.
 - [ ] No detection boxes claim.
-- [ ] No 20,112 on-disk claim.
+- [x] Safety 20,112 recovered on-disk with hashes (2026-08-21) — claim allowed.
 - [ ] No 722 in `soil_moisture` claim.

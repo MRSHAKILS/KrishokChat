@@ -1,0 +1,53 @@
+{
+  "n_slots": 6,
+  "slots": [
+    {
+      "slot": "crop",
+      "dp_score": 0.91,
+      "dp_rank": 1,
+      "description": "Which crop is affected",
+      "type": "categorical",
+      "template_question_bn": "কোন ফসলের {issue}?"
+    },
+    {
+      "slot": "symptom",
+      "dp_score": 0.84,
+      "dp_rank": 2,
+      "description": "What symptoms are visible",
+      "type": "categorical",
+      "template_question_bn": "কী ধরনের লক্ষণ দেখা যাচ্ছে? পাতা কেমন দেখাচ্ছে?"
+    },
+    {
+      "slot": "onset",
+      "dp_score": 0.62,
+      "dp_rank": 3,
+      "description": "When did the problem start",
+      "type": "temporal",
+      "template_question_bn": "কখন থেকে এই সমস্যা দেখা দিয়েছে? হঠাৎ নাকি ধীরে ধীরে?"
+    },
+    {
+      "slot": "severity",
+      "dp_score": 0.45,
+      "dp_rank": 4,
+      "description": "How widespread is the problem",
+      "type": "ordinal",
+      "template_question_bn": "কতটা ছড়িয়েছে? কিছু গাছ নাকি পুরো জমি?"
+    },
+    {
+      "slot": "growth_stage",
+      "dp_score": 0.38,
+      "dp_rank": 5,
+      "description": "What growth stage is the crop in",
+      "type": "categorical",
+      "template_question_bn": "ফসল কোন পর্যায়ে আছে? চারা নাকি পূর্ণবয়স্ক?"
+    },
+    {
+      "slot": "chemical_history",
+      "dp_score": 0.31,
+      "dp_rank": 6,
+      "description": "What chemicals have been applied already",
+      "type": "set",
+      "template_question_bn": "ইতোমধ্যে কী কী ঔষধ বা সার প্রয়োগ করেছেন?"
+    }
+  ]
+}

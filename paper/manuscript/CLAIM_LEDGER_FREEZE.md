@@ -1,7 +1,7 @@
 # Claim Ledger — FROZEN (R1)
 
 **Freeze date:** 2026-08-21
-**Source:** `paper/system_evolution_plan_2026/execution_planning_2026_08_12/12_CLAIM_LEDGER.md` (verbatim copy at freeze time)
+**Source:** `paper/archive/system_evolution_plan_2026/execution_planning_2026_08_12/12_CLAIM_LEDGER.md` (verbatim copy at freeze time; folder moved to `archive/` 2026-08-21 — path updated, content unchanged)
 **Authority:** R1 of `plans/capstone-to-production-and-expert-systems-paper.md` — Expert Systems skeleton SSOT
 **Rule:** This file is the **frozen reference** for `paper/manuscript/expert-systems-skeleton.md`. No edit without a dated amendment and `MEMORY.md` entry. For live evolution see the source ledger (which may gain provenance after R1); for manuscript wording see the skeleton's §3–§5 which cite S-IDs below.
 
@@ -39,7 +39,7 @@
 |---|---|---|
 | F01 | Hybrid BM25+dense retrieval is active. **SUPERSEDED by S11 (2026-08-14, commit `9358def`)** — hybrid RRF is now the default; row kept for history. | Dense/FAISS files are absent and the container wires BM25 only: T02/T03 and T04. |
 | F02 | The current verifier is semantic, relation-aware, or calibrated. | T04 shows regex/substring logic and categorical labels without calibration. |
-| F03 | Safety data are present under root `dataset_release/`. | T02/T03 did not find that directory. |
+| F03 | Safety data are present under root `dataset_release/`. **Updated 2026-08-21:** the 20,112-record safety dataset was recovered from HuggingFace `RaiyanKhaan/krishokChat/safety_qa/` and hash-verified on-disk (`paper/literature review/12_ASSET_VERIFICATION.md` §4) — the existence claim is now ALLOWED with artifact IDs (T3 3,216 sha256 `27acdb64…`; T4 16,896 sha256 `a578023…`). Original inventory finding kept for history. | T02/T03 did not find that directory at inventory time. |
 | F04 | Vision fallback treatment is source verified. | T04 reproduces `verified` with empty sources. |
 | F05 | The benchmark endpoint serves computed or precomputed results. **SUPERSEDED by S12 (2026-08-14)** — it now serves precomputed stats. | T04 shows `not_implemented`. |
 | F06 | Local Gemma achieves any quality, safety, latency, or benchmark value. | Checkpoint presence is not an inference evaluation. |
@@ -79,4 +79,4 @@
 
 ---
 
-*Frozen 2026-08-21 — exact copy of `12_CLAIM_LEDGER.md` at R1. No amendment without dated record in `paper/system_evolution_plan_2026/execution_planning_2026_08_12/MEMORY.md` and update to `paper/manuscript/expert-systems-skeleton.md` Appendix C.*
+*Frozen 2026-08-21 — exact copy of `12_CLAIM_LEDGER.md` at R1 (now under `paper/archive/system_evolution_plan_2026/`). No amendment without dated record in `paper/archive/system_evolution_plan_2026/execution_planning_2026_08_12/MEMORY.md` and update to `paper/manuscript/expert-systems-skeleton.md` Appendix C. Dated inline updates so far: F03 (2026-08-21, dataset recovery).*

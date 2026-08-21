@@ -429,6 +429,8 @@ curl http://localhost:3000/detect -I
 
 ### P8 — Observability lane (no amendment)
 
+> **DEFERRED 2026-08-21** — partial scaffold (no-op `tracing.py` stub + 3 unused settings + 1 unused import) was **reverted**, not finished: `opentelemetry-python` is not installed, no spans were ever wired, and the paper's latency evidence already comes from audit `stage_timings_ms` (T0-05). Revisit only if a production deployment actually needs span export; it adds nothing to the Expert Systems manuscript.
+
 **Tasks:**
 - [ ] `opentelemetry-python` manual spans per stage (safety/retrieval/generation/verifier/cache), attributes: latency, tokens, cost, refusal rate.
 - [ ] Dashboard: Grafana or Phoenix single-process (chosen over Langfuse for 1-process constraint).
