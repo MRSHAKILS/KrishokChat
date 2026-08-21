@@ -88,7 +88,8 @@ htmlcov/
 # Kaggle workspace intermediates — raw/clean image copies + phase-1 experiment
 # arrays (single files >100MB, GitHub hard limit). Official release lives in
 # dataset_release/soil_moisture/ (small, committed).
-dataset_release/Soil Moisture Detection/dataset/raw/
-dataset_release/Soil Moisture Detection/dataset/clean/
-dataset_release/Soil Moisture Detection/dataset/updated_dataset/
-dataset_release/Soil Moisture Detection/dataset/experiments/
+# NOTE: historic spaced folder `Soil Moisture Detection` was renamed to `soil-moisture-detection` in H6 (kebab-case for shell safety).
+dataset_release/soil-moisture-detection/dataset/raw/
+dataset_release/soil-moisture-detection/dataset/clean/
+dataset_release/soil-moisture-detection/dataset/updated_dataset/
+dataset_release/soil-moisture-detection/dataset/experiments/
