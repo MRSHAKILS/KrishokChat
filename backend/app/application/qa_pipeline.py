@@ -440,6 +440,21 @@ class QAPipeline:
             if generation_lane is not None
             else None
         )
+        # T1-04: write-time PII redaction for stored audit query text.
+        # The user-visible answer and retrieval response are untouched — only
+        # the persisted audit record is scrubbed, and only when the switch is
+        # on (default off, 0 = keep verbatim). Best-effort regex.
+        query_for_audit = request.query
+        retrieval_for_audit = retrieval_query or request.query
+        if getattr(settings, "pii_redaction_enabled", False):
+            try:
+                from app.core.redaction import redact_pii
+
+                query_for_audit = redact_pii(request.query)
+                retrieval_for_audit = redact_pii(retrieval_query or request.query)
+            except Exception:
+                query_for_audit = request.query
+                retrieval_for_audit = retrieval_query or request.query
         self.audit.record(
             {
                 # v2 = per-step validity fields (router/retrieval/verifier).
@@ -450,7 +465,7 @@ class QAPipeline:
                 # not a new retrieval/verifier event).
                 "pipeline_version": 2,
                 "cached": cached,
-                "query": request.query,
+                "query": query_for_audit,
                 "category": result.category.value,
                 "action": "blocked-canned-response" if result.category is not SafetyCategory.SAFE_AGRI else "answered",
                 "flagged": result.confidence is VerificationConfidence.FLAGGED_UNVERIFIED,
@@ -481,7 +496,7 @@ class QAPipeline:
                 "crop": request.crop,
                 "disease": request.disease,
                 "model_choice": request.model,
-                "retrieval_query_used": retrieval_query or request.query,
+                "retrieval_query_used": retrieval_for_audit,
                 "retrieval_query_rewritten": rewritten,
                 # T0-05 telemetry — all optional; pre-T0-05 records/consumers
                 # tolerate absence. stage_timings_ms keys are exactly

@@ -70,10 +70,13 @@ class SqliteSessionStore:
         db_path: str | Path,
         max_turns: int = 10,
         ttl_seconds: int = 1800,
+        retention_days: int | None = None,
     ) -> None:
         self.db_path = db_path
         self.max_messages = max_turns * 2
         self.ttl_seconds = ttl_seconds
+        # T1-04: explicit retention override (tests); None = read global settings.
+        self._retention_days: int | None = retention_days
         self._lock = threading.Lock()
         self._indexed_dbs: set[str] = set()
         self._init_schema_and_purge()
@@ -86,6 +89,21 @@ class SqliteSessionStore:
             datetime.now(timezone.utc) - timedelta(seconds=self.ttl_seconds)
         ).isoformat()
 
+    def _retention_cutoff_iso(self) -> str | None:
+        # T1-04: optional days-based retention for sessions (0 = off).
+        try:
+            from app.core.config import settings
+
+            days = int(getattr(settings, "session_retention_days", 0))
+        except Exception:
+            days = 0
+        # Explicit constructor arg wins over global settings.
+        if hasattr(self, "_retention_days") and self._retention_days is not None:
+            days = int(self._retention_days)
+        if days <= 0:
+            return None
+        return (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+
     def _prepare(self, conn: Any) -> None:
         if str(self.db_path) not in self._indexed_dbs:
             conn.executescript(INDEXES_DDL)
@@ -96,6 +114,12 @@ class SqliteSessionStore:
             "DELETE FROM sessions WHERE last_active_at < ?", (self._cutoff_iso(),)
         )
         conn.commit()
+        # T1-04: days-based retention (bounded, idempotent). Runs on every
+        # get/append/init alongside the TTL purge — no background thread.
+        cutoff = self._retention_cutoff_iso()
+        if cutoff:
+            conn.execute("DELETE FROM sessions WHERE last_active_at < ?", (cutoff,))
+            conn.commit()
 
     def _init_schema_and_purge(self) -> None:
         """Adapter init: apply migration v3, create the index, purge expired rows."""

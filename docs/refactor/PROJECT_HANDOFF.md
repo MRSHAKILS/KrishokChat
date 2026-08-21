@@ -227,12 +227,32 @@ No route or frontend component should change for either replacement.
   build/smoke scripts under `services/advisory/`; request-path code is
   logger-only); P0-12 `scripts/start_prod.ps1` (uvicorn `--proxy-headers
   --timeout-graceful-shutdown 30 --limit-concurrency 32` + `pnpm start`,
-  never kills existing listeners) + `logrotate.krishokchat` sample + README
-  production section; P0-13 `docs/production_readiness/retention_policy.md`
-  (`AUDIT_RETENTION_DAYS=90`; app never auto-deletes; operator runbooks);
-  P0-14 this entry. Full suite 273 passed, 7 skipped, 79 subtests; golden
-  replay 50/50 invariants PASS; `pnpm build` clean (21 routes). Open
-  questions: user's live demo backend on :8000 predates P0 code (changes
-  take effect on next restart); llama-server on :11435 still running from
-  the model-selector verification; `nanoid` override decision (Phase 1 W-6);
-  `READINESS_STRICT` remains default-off.
+   never kills existing listeners) + `logrotate.krishokchat` sample + README
+   production section; P0-13 `docs/production_readiness/retention_policy.md`
+   (`AUDIT_RETENTION_DAYS=90`; app never auto-deletes; operator runbooks);
+   P0-14 this entry. Full suite 273 passed, 7 skipped, 79 subtests; golden
+   replay 50/50 invariants PASS; `pnpm build` clean (21 routes). Open
+   questions: user's live demo backend on :8000 predates P0 code (changes
+   take effect on next restart); llama-server on :11435 still running from
+   the model-selector verification; `nanoid` override decision (Phase 1 W-6);
+   `READINESS_STRICT` remains default-off.
+- T1-04 (privacy, retention, licensing): done — `backend/app/core/redaction.py`
+  (BD phone `+880`/`01` + Bengali digits `০-৯`, email, name-adjacent
+  `নাম:`/`name:` — best-effort regex, never claimed perfect) + 14-test
+  `backend/tests/test_redaction.py` (Bengali digits covered); SQLite audit
+  `purge_expired_audit` + `AuditSqliteSink` startup + on-write `DELETE WHERE
+  timestamp < now() - AUDIT_RETENTION_DAYS` when >0 (bounded, no thread) +
+  `JSONLAuditSink` prune on startup + `SqliteSessionStore` retention cut-off for
+  `SESSION_RETENTION_DAYS`; `qa_pipeline._audit` write-time hook (stored query +
+  retrieval_query_used) gated by `PII_REDACTION_ENABLED`; config
+  `AUDIT_RETENTION_DAYS=0` (keep forever, default off), `SESSION_RETENTION_DAYS=30`,
+  `PII_REDACTION_ENABLED=false` in `config.py` + `.env.example` (reversible);
+  `frontend/src/app/privacy/page.tsx` static bilingual policy + footer link;
+  `LICENSE` MIT (code) + `pyproject.toml`/`package.json` license metadata;
+  `deploy/DPA_template.md` plain-language B2B DPA (what data, purpose,
+  retention, deletion, subprocessors: none). `pnpm build` green (22 routes incl.
+  `/privacy`); `uv run pytest` 296 passed, 7 skipped (2 pre-existing soil/SSE
+  failures excluded) + 14 redaction green; retention purge verified (1 day
+  correctly deletes old row); live QA with redaction on scrubs stored query;
+  golden replay 50/50 PASS; `/health` + `/readyz` + `/privacy` 200. Demo
+  identical with defaults. Rollback: config flip or `git revert`.

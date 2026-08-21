@@ -3,6 +3,7 @@ name = "backend"
 version = "0.1.0"
 description = "KrishokChat Advisory System - Backend API"
 readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.11,<3.14"
 dependencies = [
     "bnunicodenormalizer>=0.1.7",

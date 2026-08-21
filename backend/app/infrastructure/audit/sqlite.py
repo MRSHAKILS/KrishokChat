@@ -29,6 +29,34 @@ from typing import Any
 
 from app.infrastructure.storage.sqlite import db_connect
 
+# T1-04: retention defaults — 0 = keep forever (today's behavior). The sink
+# reads the live Settings at call time so a config flip is effective on the
+# next write/startup without a code change. Tests may pass an explicit
+# retention_days to the sink to avoid mutating global state.
+
+
+def _retention_cutoff_iso(retention_days: int) -> str:
+    from datetime import timedelta
+
+    return (datetime.now(timezone.utc) - timedelta(days=retention_days)).isoformat()
+
+
+def purge_expired_audit(db_path: Path, retention_days: int) -> int:
+    """Delete audit_records older than retention_days. Returns rows deleted.
+
+    retention_days <=0 is a no-op (keep forever). Idempotent and bounded —
+    a single DELETE statement, no background thread.
+    """
+    if retention_days <= 0:
+        return 0
+    cutoff = _retention_cutoff_iso(retention_days)
+    with db_connect(db_path, migrations=AuditSqliteSink.MIGRATIONS) as conn:
+        ensure_schema(conn)
+        cur = conn.execute("DELETE FROM audit_records WHERE timestamp < ?", (cutoff,))
+        conn.commit()
+        return cur.rowcount
+
+
 AUDIT_RECORDS_DDL = """
 CREATE TABLE IF NOT EXISTS audit_records (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -187,14 +215,43 @@ class AuditSqliteSink:
 
     MIGRATIONS: list[tuple[int, str]] = [(2, AUDIT_RECORDS_DDL)]
 
-    def __init__(self, path: Path, db_path: Path) -> None:
+    def __init__(self, path: Path, db_path: Path, retention_days: int | None = None) -> None:
         self.path = path
         self.db_path = db_path
         self._lock = threading.Lock()
         self._indexed_dbs: set[str] = set()
+        # T1-04: optional explicit retention (tests may pass 1); None = read
+        # live Settings (0 = keep forever, no purge). Purge on startup when
+        # enabled — idempotent, bounded, no background thread.
+        self._retention_days = retention_days
+        if self._effective_retention() > 0:
+            try:
+                purge_expired_audit(self.db_path, self._effective_retention())
+            except Exception:
+                pass
+
+    def _effective_retention(self) -> int:
+        if self._retention_days is not None:
+            return int(self._retention_days)
+        try:
+            from app.core.config import settings
+
+            return int(settings.audit_retention_days)
+        except Exception:
+            return 0
+
+    def purge(self) -> int:
+        """Explicit purge using the effective retention. Returns rows deleted."""
+        return purge_expired_audit(self.db_path, self._effective_retention())
 
     def record(self, entry: dict[str, Any]) -> None:
         payload = {"timestamp": datetime.now(timezone.utc).isoformat(), **entry}
+        # T1-04: on-write purge when retention is enabled (bounded DELETE).
+        if self._effective_retention() > 0:
+            try:
+                purge_expired_audit(self.db_path, self._effective_retention())
+            except Exception:
+                pass
         # Mirror first: the metrics panel is the live demo surface and reads
         # this file; SQLite is the durable copy. A mirror failure must be
         # visible (raise) exactly like the JSONL adapter's write failure.

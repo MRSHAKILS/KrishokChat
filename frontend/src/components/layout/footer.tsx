@@ -64,10 +64,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-5 border-t rule pt-3">
-          <p className="text-center text-[10px] text-ink-faint">
-            © ২০২৬ {APP.nameEn} · v{APP.version} · North South University
-          </p>
+        <div className="mt-5 flex flex-col items-center justify-between gap-2 border-t rule pt-3 text-[10px] text-ink-faint sm:flex-row">
+          <p>© ২০২৬ {APP.nameEn} · v{APP.version} · North South University</p>
+          <Link href="/privacy" className="transition-colors hover:text-leaf">
+            গোপনীয়তা নীতি · Privacy
+          </Link>
         </div>
       </div>
     </footer>

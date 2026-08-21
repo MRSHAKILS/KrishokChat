@@ -105,7 +105,17 @@ class Settings(BaseSettings):
     # P0-13: audit retention window in days. The retention job documented in
     # docs/production_readiness/retention_policy.md purges entries older than
     # this (jsonl rotate + sqlite DELETE); the app itself never auto-deletes.
-    audit_retention_days: int = Field(default=90, ge=1)
+    # T1-04: 0 = keep forever (today's behavior, off by default). Set 90 to
+    # enforce the 90-day PDP-aligned window.
+    audit_retention_days: int = Field(default=0, ge=0)
+    # T1-04: session retention window (days) for the SQLite session store.
+    # 0 = keep forever; 30 aligns with SESSION_TTL_SECONDS and is the default
+    # when retention is enabled. The store purges lazily on startup/on-write.
+    session_retention_days: int = Field(default=30, ge=0)
+    # T1-04: write-time PII redaction for stored audit query text. false =
+    # verbatim (today); true = phone/email/name redacted before persist.
+    # The user-visible answer is never altered.
+    pii_redaction_enabled: bool = False
 
     # P0-1: readiness gate. /readyz always reports per-check status and always
     # answers 200 by default (a load balancer may still scrape it); when this
