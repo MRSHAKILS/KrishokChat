@@ -11,7 +11,7 @@
 | Claim in old docs | Verified on disk 2026-08-21 | File | Action for paper |
 |---|---|---|---|
 | 2,120 nodes | **2,135** `knowledge_nodes_clean.jsonl` | `backend/ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl:1` | Write **2,135** (or 2,135/2,135), not 2,120. |
-| 13 institutions, 2,946 MD | **2,946** MD in `source_md/` | `backend/ml_assets/rag_index/source_md/` | Correct. |
+| 13 institutions, 2,946 MD | **2,946** MD in `source_md/`, **11** institution dirs (R2 manifest) | `backend/ml_assets/rag_index/source_md/` + `provenance/corpus_manifest_v1.json` | Write **2,946 MD / 11 institutions**, not 13. |
 | BM25 `pkl` + FAISS `IndexFlatIP` 384-d mE5-small | **Yes** `bm25_index.pkl` 17 MB, `bm25_corpus_tok.pkl` 4.7 MB, `nodes.faiss` 8.7 MB, `embeddings.npy` 8.7 MB, `index_sha256.txt` 109 B | `backend/ml_assets/rag_index/indexes/` | Correct. Cite hashes. |
 | 6 vision classifiers (rice 8 / corn 4 / potato 3 / brassica 11 / wheat 11) | **Yes** 6 `model.pt` (3.0–12.0 MB each) + `class_names.json` each, `verification_report_live.md` | `backend/ml_assets/vision/*/` | Correct, all `task: classify`. Never claim boxes. |
 | Soil 722 imgs, 6 types, EfficientNet-B0 5-fold | **Partial** — `dataset_release/soil_moisture/` has **13** jpgs (1 preview + 12 thumbnails), **not 722**. **722 are in `dataset_release/soil-moisture-detection/dataset/{raw,clean}/` (722 each, 956 MB, gitignored)** + 5×16.9 MB `effnetb0_fold*.pt` in `backend/ml_assets/soil/` | `dataset_release/soil-moisture-detection/dataset/raw/P0001_8Kpa.jpg` etc | **Write "722 raw in `soil-moisture-detection` (ignored), 13 frozen thumbnails in `soil_moisture` (tracked)" — do not claim 722 in `soil_moisture`.** |

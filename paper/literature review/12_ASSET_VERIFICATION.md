@@ -19,7 +19,7 @@
 | Node IDs | — | 52 KB | `indexes/node_ids.json` | 51,952 B |
 | Term map | — | 23 KB | `indexes/term_map.json` | 23,291 B |
 | Index SHA256 | — | 109 B | `indexes/index_sha256.txt` | 109 B |
-| Institutions | 13 | 13 (BARC/BARI/DAE/CABI…) | `source_md/` | — |
+| Institutions | 13 | **11** top-level dirs — BARI 1,506 / DAE 340 / BARC 321 / DoF 241 / CABI 222 / DLS 92 / WorldFish 85 / MoA_NARS_SRDI 73 / BRRI_IRRI 43 / CDB 15 / BSRTI 8 | `backend/ml_assets/rag_index/provenance/corpus_manifest_v1.json` | Write **11**, not 13 (R2 manifest, 2026-08-22). |
 
 **Action:** Write **2,135** not 2,120. Cite `index_sha256.txt`.
 

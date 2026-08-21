@@ -1,0 +1,104 @@
+{
+  "manifest_version": "v1",
+  "created": "2026-08-22",
+  "purpose": "R2 provenance freeze: hash-pin the evaluated retrieval corpus and indexes so every paper number traces to an artifact.",
+  "corpus": {
+    "knowledge_nodes_clean.jsonl": {
+      "path": "backend/ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl",
+      "sha256": "0a5fc281384edd212395ea46c59aebad29c251899b3a8a035915577d73671bc2",
+      "bytes": 12571594,
+      "line_count_method": "utf-8 line iteration",
+      "lines": 2135
+    }
+  },
+  "indexes": {
+    ".gitkeep": {
+      "path": "backend/ml_assets/rag_index/indexes/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "bm25_corpus_tok.pkl": {
+      "path": "backend/ml_assets/rag_index/indexes/bm25_corpus_tok.pkl",
+      "sha256": "23c137071266c09532e6b6b73d3e8297cecf21cc465cf279cc8ccdd0dc45397e",
+      "bytes": 4685526
+    },
+    "bm25_index.pkl": {
+      "path": "backend/ml_assets/rag_index/indexes/bm25_index.pkl",
+      "sha256": "2ab484aca38b694937a92a4a27bb2779c9e2ffb89f397d3fa168f7ca19e836c5",
+      "bytes": 17013819
+    },
+    "embeddings.npy": {
+      "path": "backend/ml_assets/rag_index/indexes/embeddings.npy",
+      "sha256": "0a1b6cb3a75daa5ec0639d1c650b9d609a41b88282ffc17c68357c9fd8310381",
+      "bytes": 8745088
+    },
+    "index_sha256.txt": {
+      "path": "backend/ml_assets/rag_index/indexes/index_sha256.txt",
+      "sha256": "74c00dad735dbf28239173d70d3e988dda832ff9fe241cee7afdb0dc86e9f351",
+      "bytes": 109
+    },
+    "node_ids.json": {
+      "path": "backend/ml_assets/rag_index/indexes/node_ids.json",
+      "sha256": "09217791df9b9eeff9623b9ab24e203e41539e421092a4b0273a6f1c863b9902",
+      "bytes": 51952
+    },
+    "nodes.faiss": {
+      "path": "backend/ml_assets/rag_index/indexes/nodes.faiss",
+      "sha256": "0f6f711829db5bc7687046ee2483322cef877a2ced896cf624fd4eb6234cb524",
+      "bytes": 8745005
+    },
+    "term_map.json": {
+      "path": "backend/ml_assets/rag_index/indexes/term_map.json",
+      "sha256": "c42011036a849f0757b604e377eb6bfbaaa6a2c0de9d14231e37f35c8c97a86d",
+      "bytes": 23291
+    }
+  },
+  "source_documents": {
+    "total_md_count": 2946,
+    "count_method": "recursive *.md under source_md/",
+    "institutions": {
+      "BARI": 1506,
+      "DAE": 340,
+      "BARC": 321,
+      "DoF": 241,
+      "CABI": 222,
+      "DLS": 92,
+      "WorldFish": 85,
+      "MoA_NARS_SRDI": 73,
+      "BRRI_IRRI": 43,
+      "CDB": 15,
+      "BSRTI": 8
+    }
+  },
+  "related_datasets": {
+    "t3_refusal.jsonl": {
+      "path": "dataset_release/safety/t3_refusal.jsonl",
+      "sha256": "27acdb644c9e379436439b80be62c25bf0c942db2a7657e0df1035248f6c0bb9",
+      "bytes": 3636107,
+      "line_count": 3216
+    },
+    "t4_requery.jsonl": {
+      "path": "dataset_release/safety/t4_requery.jsonl",
+      "sha256": "a578023429cf3cc48a5954fc2a8438e8f3c48dad5a13631e40a384e07db0c2fa",
+      "bytes": 15854076,
+      "line_count": 16896
+    },
+    "slots.json": {
+      "path": "dataset_release/safety/slots.json",
+      "sha256": "f00faa765059c11d905d7bb763b868af345c58a7d114abde2d338107a12a6b53",
+      "bytes": 1870
+    },
+    "taxonomy.json": {
+      "path": "dataset_release/safety/taxonomy.json",
+      "sha256": "a2b9040c7faa84504582344ad6cbced29236ad6568fa3ec1437cf4a9d23194b8",
+      "bytes": 7136
+    },
+    "phase4_dialect_map.json": {
+      "path": "dataset_release/safety/phase4_dialect_map.json",
+      "sha256": "f034ad136a6469dda07bc1574f9ea9be8cd18fd64442d3da78803f1b97987732",
+      "bytes": 1830
+    }
+  },
+  "corpus_version_tag": "2026-08",
+  "corpus_version_note": "Matches backend config corpus_version used in demo-cache keys (P0-7); rebuilds must bump both."
+}
