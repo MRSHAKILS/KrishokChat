@@ -293,11 +293,19 @@ export interface SoilDatasetInfo {
 }
 
 export interface SoilAnalyzeResponse {
-  status: string; // locked | invalid_image | analyzed (future)
+  status: string; // locked | invalid_image | analyzed
   error?: string | null;
   dataset: SoilDatasetInfo | null;
   agent_trace: AgentStageEvent[];
+  soil_type?: string | null;
+  soil_type_bn?: string | null;
+  kpa?: number | null;
+  moisture_status?: string | null;
+  moisture_status_bn?: string | null;
+  advisory_bn?: string | null;
+  confidence?: number | null;
 }
+
 
 export async function getSoilDataset(): Promise<SoilDatasetInfo> {
   const res = await fetch(`${API_BASE}/api/soil/dataset`);

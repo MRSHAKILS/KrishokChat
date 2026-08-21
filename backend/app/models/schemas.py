@@ -132,10 +132,18 @@ class SoilDatasetResponse(BaseModel):
 
 
 class SoilAnalyzeResponse(BaseModel):
-    status: str = Field(..., description="locked | invalid_image | analyzed (future)")
+    status: str = Field(..., description="locked | invalid_image | analyzed")
     error: str | None = None
     dataset: SoilDatasetResponse | None = None
     agent_trace: list[AgentStageEvent] = Field(default_factory=list)
+    soil_type: str | None = None
+    soil_type_bn: str | None = None
+    kpa: float | None = None
+    moisture_status: str | None = None
+    moisture_status_bn: str | None = None
+    advisory_bn: str | None = None
+    confidence: float | None = None
+
 
 
 class BenchmarkResponse(BaseModel):

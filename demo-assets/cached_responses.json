@@ -20861,5 +20861,783 @@
     "reason": ""
    }
   ]
+ },
+ "Brassica|Cauliflower__Downy_Mildew|gemini|2026-08|বাঁধাকপি/ফুলকপি গাছে cauliflower downy_mildew রোগের লক্ষণ কী": {
+  "query": "বাঁধাকপি/ফুলকপি গাছে cauliflower downy_mildew রোগের লক্ষণ কী?",
+  "category": "safe_agri",
+  "answer": "ফুলকপির ডাউনি মিলডিউ রোগটি *Hyaloperonospora brassicae* নামক জীবাণুর কারণে হয়ে থাকে। [CABI_BRASSICA_6FD5BE_001]\n\nপ্রাথমিক লক্ষণ হলো পাতার নিচের দিকে তুলার মতো ছত্রাকের বৃদ্ধি দেখা দেওয়া। [CABI_BRASSICA_6FD5BE_001]\n\nগুরুতর অবস্থায়, এই ছত্রাকের বৃদ্ধি পাতার উভয় দিকেই ছড়িয়ে পড়তে পারে এবং পাতলা বা ঘন ও তুলতুলে হতে পারে। [CABI_BRASSICA_6FD5BE_001]\n\nএই রোগ সম্পর্কে আরও তথ্যের জন্য বা পরামর্শের জন্য, আপনি কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "sources": [
+   {
+    "id": "CABI_BRASSICA_B7E907_001",
+    "score": 39.88694869534889,
+    "title_en": "Cauliflower mosaic virus (CaMV)",
+    "title_bn": "",
+    "content_en": "Cauliflower mosaic virus (CaMV) is a viral disease affecting brassica crops. The primary symptoms include vein clearing and mild leaf distortion. The virus is transmitted by aphids. Notably, symptoms may not be visible during periods of warm weather.",
+    "content_bn": "কুলিফ্লাওয়ার মোজাইক ভাইরাস (CaMV) হলো ব্রাসিকা জাতীয় ফসলে আক্রান্ত একটি ভাইরাসজনিত রোগ। প্রাথমিক লক্ষণগুলোর মধ্যে রয়েছে শিরার স্বচ্ছতা এবং পাতার হালকা বিকৃতি। এই ভাইরাসটি aphids দ্বারা বাহিত হয়। বিশেষ করে, উষ্ণ আবহাওয়ার সময় লক্ষণগুলো দৃশ্যমান নাও হতে পারে।",
+    "source": "Brassica Disease Manuals (Plantwise)",
+    "citation": "CABI. Cauliflower mosaic virus. Brassica Disease Manuals (Plantwise). pp. 87-87.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Cauliflower mosaic virus",
+      "CaMV",
+      "virus",
+      "aphids",
+      "brassica",
+      "disease"
+     ],
+     "title_en": "Cauliflower mosaic virus (CaMV)",
+     "title_bn": "",
+     "section_title": "Cauliflower mosaic virus",
+     "publisher": "CABI",
+     "citation": "CABI. Cauliflower mosaic virus. Brassica Disease Manuals (Plantwise). pp. 87-87.",
+     "summary": "Cauliflower mosaic virus is a viral disease in brassica crops transmitted by aphids, characterized by vein clearing and leaf distortion, though symptoms may disappear in warm weather.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_33EE1D_002",
+    "score": 34.194132887454806,
+    "title_en": "Management of Leaf Spot Diseases in Cauliflower",
+    "title_bn": "",
+    "content_en": "For Alternaria leaf spot, treat seeds with Provax 200 at 3g/kg of seed and perform foliar spraying with Rubral at 2 ml/l of water. For Cercospora leaf spot, treat seeds with Provax 200 at 3 g/kg of seed and apply foliar spray of Bavistin or Knowin at 2 kg/litre of water.",
+    "content_bn": "Publisher: BARC Section/Topic: Cauliflower — Harvesting & Preservation অলটারনারিয়া পাতার দাগ রোগের জন্য, প্রতি কেজি বীজে 3g/kg হারে Provax 200 দিয়ে বীজ শোধন করুন এবং প্রতি লিটার পানিতে 2 ml/l হারে Rubral দিয়ে পাতায় স্প্রে করুন। সারকোস্পোরা পাতার দাগ রোগের জন্য, প্রতি কেজি বীজে 3 g/kg হারে Provax 200 দিয়ে বীজ শোধন করুন এবং প্রতি লিটার পানিতে 2 kg/litre হারে Bavistin বা Knowin স্প্রে করুন।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Cauliflower — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 104-104.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Cauliflower",
+      "Disease management",
+      "Alternaria leaf spot",
+      "Cercospora leaf spot",
+      "ফুলকপি",
+      "রোগ দমন"
+     ],
+     "title_en": "Management of Leaf Spot Diseases in Cauliflower",
+     "title_bn": "",
+     "section_title": "Cauliflower — Harvesting & Preservation",
+     "publisher": "BARC",
+     "citation": "BARC. Cauliflower — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 104-104.",
+     "summary": "Control protocols for Alternaria and Cercospora leaf spot diseases in cauliflower.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_BRASSICA_6FD5BE_001",
+    "score": 32.264075800948454,
+    "title_en": "Downy Mildew of Brassica",
+    "title_bn": "",
+    "content_en": "Downy mildew is caused by the pathogen Hyaloperonospora brassicae. The primary symptom is the appearance of downy growth, which typically occurs on the underside of leaves but can spread to both sides in severe cases. This growth may appear sparse or thick and fluffy.",
+    "content_bn": "ডাউনি মিলডিউ রোগটি *Hyaloperonospora brassicae* নামক রোগজীবাণুর কারণে হয়ে থাকে। প্রাথমিক লক্ষণ হলো তুলার মতো ছত্রাকের বৃদ্ধি দেখা দেওয়া, যা সাধারণত পাতার নিচের পৃষ্ঠে হয়ে থাকে তবে গুরুতর ক্ষেত্রে উভয় দিকেই ছড়িয়ে পড়তে পারে। এই ছত্রাকের বৃদ্ধি পাতলা বা ঘন ও তুলতুলে হতে পারে।",
+    "source": "Brassica Disease Manuals (Plantwise)",
+    "citation": "CABI. Downy Mildew. Brassica Disease Manuals (Plantwise). pp. 72-72.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "brassica",
+      "downy mildew",
+      "Hyaloperonospora brassicae",
+      "disease"
+     ],
+     "title_en": "Downy Mildew of Brassica",
+     "title_bn": "",
+     "section_title": "Downy Mildew",
+     "publisher": "CABI",
+     "citation": "CABI. Downy Mildew. Brassica Disease Manuals (Plantwise). pp. 72-72.",
+     "summary": "Downy mildew, caused by the pathogen Hyaloperonospora brassicae, is a fungal disease affecting brassica crops, characterized by downy growth on leaf surfaces.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_04BB16_002",
+    "score": 31.803159498931787,
+    "title_en": "Cauliflower Planting Time Categories",
+    "title_bn": "",
+    "content_en": "Cauliflower varieties are classified into three groups based on their planting time requirements.",
+    "content_bn": "রোপণের সময়ের প্রয়োজনের ওপর ভিত্তি করে ফুলকপির জাতগুলোকে তিনটি ভাগে ভাগ করা হয়েছে।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Cauliflower — Varieties. Hand Book of Agricultural Technology. pp. 101-101.",
+    "metadata": {
+     "category": "cultivation_practice",
+     "tags": [
+      "Cauliflower",
+      "Planting time",
+      "ফুলকপি",
+      "রোপণের সময়"
+     ],
+     "title_en": "Cauliflower Planting Time Categories",
+     "title_bn": "",
+     "section_title": "Cauliflower — Varieties",
+     "publisher": "BARC",
+     "citation": "BARC. Cauliflower — Varieties. Hand Book of Agricultural Technology. pp. 101-101.",
+     "summary": "Cauliflower varieties are categorized into early, medium, and late planting groups based on their maturity and suitability for the season.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "GEN_BRASSICA_Cauliflower_Bacterial_Spot",
+    "score": 31.733089134162196,
+    "title_en": "Bacterial Spot",
+    "title_bn": "কৈলিফ্লাওয়ারের ব্যাকটেরিয়াল স্পট",
+    "content_en": "Bacterial Spot of cauliflower, caused by the bacterium Xanthomonas campestris pv. armoraciae, is a significant disease affecting cauliflower crops. It primarily targets the leaves and curds of cauliflower. Initial symptoms on leaves appear as small, water-soaked spots that later turn brown or black. These spots are often circular and may be surrounded by a yellowish halo. In severe infections, spots can merge to form large lesions, leading to yellowing and premature shedding of leaves. The curds, when infected, become brown or black, rendering them unmarketable. The disease thrives in warm and humid conditions and spreads rapidly through rain splash, irrigation water, wind, and infected seeds or plant debris.",
+    "content_bn": "কৈলিফ্লাওয়ারের ব্যাকটেরিয়াল স্পট (Cauliflower Bacterial Spot) একটি ব্যাকটেরিয়া ঘটিত রোগ যা সাধারণত 'Xanthomonas campestris pv. armoraciae' নামক ব্যাকটেরিয়া দ্বারা সৃষ্ট হয়। এই রোগটি মূলত কৈলিফ্লাওয়ারের পাতা এবং ফুলকে আক্রমণ করে। রোগের প্রাথমিক পর্যায়ে পাতায় ছোট ছোট জলসিক্ত দাগ দেখা যায় যা পরবর্তীতে বাদামী বা কালো বর্ণ ধারণ করে। এই দাগগুলো প্রায়শই গোলাকার হয় এবং এদের চারপাশে একটি হলুদাভ বলয় থাকতে পারে। গুরুতর সংক্রমণে, দাগগুলো একত্রিত হয়ে বড় ক্ষত তৈরি করতে পারে এবং পাতা হলুদ হয়ে ঝরে পড়তে পারে। ফুলের ক্ষেত্রে, আক্রান্ত অংশগুলো বাদামী বা কালো হয়ে যায় এবং বাজারজাতকরণের অযোগ্য হয়ে পড়ে। রোগটি উষ্ণ ও আর্দ্র আবহাওয়ায় দ্রুত ছড়ায়, বিশেষ করে বৃষ্টির ফোঁটা, সেচের জল, বাতাসের মাধ্যমে এবং সংক্রমিত বীজ বা উদ্ভিদের অবশিষ্টাংশের মাধ্যমে এটি ছড়িয়ে পড়ে।",
+    "source": "Generated by Gemini-3.1-Flash-Lite (advisory workflow)",
+    "citation": "Generated for Brassica - Bacterial Spot",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Bacterial Spot",
+      "Xanthomonas campestris pv. armoraciae",
+      "Brassica",
+      "Cauliflower",
+      "Bacterial disease"
+     ],
+     "title_en": "Bacterial Spot",
+     "title_bn": "কৈলিফ্লাওয়ারের ব্যাকটেরিয়াল স্পট",
+     "section_title": "Bacterial Spot",
+     "publisher": "AI-Generated",
+     "citation": "Generated for Brassica - Bacterial Spot",
+     "summary": "কৈলিফ্লাওয়ারের ব্যাকটেরিয়াল স্পট (Cauliflower Bacterial Spot) একটি ব্যাকটেরিয়া ঘটিত রোগ যা সাধারণ",
+     "treatment_summary_bn": "রোগের প্রাথমিক পর্যায়ে আক্রান্ত পাতা সরিয়ে ফেলা এবং নির্দিষ্ট ছত্রাকনাশক (যেমন কপার-ভিত্তিক স্প্রে) ব্যবহার করা যেতে পারে।",
+     "prevention_bn": "রোগমুক্ত বীজ ব্যবহার, ফসলের পর জমি পরিষ্কার রাখা, জল নিকাশীর সুব্যবস্থা করা, এবং রোগ প্রতিরোধী জাত নির্বাচন করা উচিত।।"
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "ফুলকপির ডাউনি মিলডিউ রোগটি *Hyaloperonospora brassicae* নামক জীবাণুর কারণে হয়ে থাকে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_BRASSICA_6FD5BE_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "প্রাথমিক লক্ষণ হলো পাতার নিচের দিকে তুলার মতো ছত্রাকের বৃদ্ধি দেখা দেওয়া",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_BRASSICA_6FD5BE_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "গুরুতর অবস্থায়, এই ছত্রাকের বৃদ্ধি পাতার উভয় দিকেই ছড়িয়ে পড়তে পারে এবং পাতলা বা ঘন ও তুলতুলে হতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_BRASSICA_6FD5BE_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই রোগ সম্পর্কে আরও তথ্যের জন্য বা পরামর্শের জন্য, আপনি কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "Rice|Rice__Brown_Spot|gemini|2026-08|ধান গাছে rice brown_spot রোগের লক্ষণ কী": {
+  "query": "ধান গাছে rice brown_spot রোগের লক্ষণ কী?",
+  "category": "safe_agri",
+  "answer": "ধান গাছে ব্রাউন স্পট রোগ হলে কোলিপটাইড, পাতা, পাতার খোল, ছড়ার শাখা, গ্লুম এবং স্পাইকলেটে আক্রমণ করে। [IRRI_IRRI_0F67B4_001]\n\nএই রোগটি উচ্চ আর্দ্রতা (৮৬-১০০%) এবং ১৬-৩৬ ডিগ্রি সেলসিয়াস তাপমাত্রায় দ্রুত বিস্তার লাভ করে। [IRRI_IRRI_0F67B4_001]\n\nএছাড়াও, ন্যারো ব্রাউন স্পট রোগ হলে পাতা, খোল এবং ছড়া আক্রান্ত হয়, যার ফলে পাতা ও ধান অকালে মারা যেতে পারে এবং গাছ হেলে পড়ার সম্ভাবনা থাকে। [IRRI_IRRI_D62EEF_001]\n\nযদি আপনার ধানের রোগ সম্পর্কে আরও তথ্যের প্রয়োজন হয়, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "sources": [
+   {
+    "id": "IRRI_IRRI_0F67B4_001",
+    "score": 0.0476,
+    "title_en": "Brown Spot of Rice",
+    "title_bn": "",
+    "content_en": "Brown spot is a fungal disease that infects the coleoptile, leaves, leaf sheath, panicle branches, glumes, and spikelets of rice. It is most critical from maximum tillering to ripening stages. The disease thrives in high humidity (86–100%) and temperatures between 16–36°C, particularly in nutrient-deficient or unflooded soils. It spreads via air and survives in infected seeds, volunteer rice, debris, and weeds.",
+    "content_bn": "ব্রাউন স্পট ধান গাছের কোলিপটাইড, পাতা, পাতার খোল, ছড়ার শাখা, গ্লুম এবং স্পাইকলেটে আক্রমণকারী একটি ছত্রাকজনিত রোগ। সর্বাধিক কুঁশি আসা থেকে পরিপক্বতা পর্যায় পর্যন্ত এটি সবচেয়ে বেশি ক্ষতিকর। এই রোগটি উচ্চ আর্দ্রতা (৮৬-১০০) এবং ১৬-৩৬ সেন্টিগ্রেড তাপমাত্রায়, বিশেষ করে পুষ্টি উপাদান ঘাটতিযুক্ত বা জলমগ্নতাহীন মাটিতে দ্রুত বিস্তার লাভ করে। এটি বাতাসের মাধ্যমে ছড়ায় এবং সংক্রামিত বীজ, পরিত্যক্ত ধান, ফসলের অবশিষ্টাংশ ও আগাছায় বেঁচে থাকে।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. BROWN SPOT. IRRI Rice Disease Reference Manual. pp. 54-57.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "rice",
+      "brown spot",
+      "fungal disease",
+      "ধান",
+      "বাদামী দাগ রোগ"
+     ],
+     "title_en": "Brown Spot of Rice",
+     "title_bn": "",
+     "section_title": "BROWN SPOT",
+     "publisher": "IRRI",
+     "citation": "IRRI. BROWN SPOT. IRRI Rice Disease Reference Manual. pp. 54-57.",
+     "summary": "Brown spot is a fungal disease affecting rice at all stages, causing leaf lesions, grain discoloration, and significant yield losses.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "IRRI_IRRI_F6A771_001",
+    "score": 0.0455,
+    "title_en": "Rice Grassy Stunt",
+    "title_bn": "",
+    "content_en": "Rice grassy stunt virus (RGSV) is a viral disease that significantly reduces rice yields by inhibiting panicle production. It is transmitted by brown planthoppers (nymphs and adults), which acquire the virus after feeding on infected plants for at least 30 minutes. The disease is most prevalent in areas with continuous, year-round rice cultivation. Infected stubble and volunteer rice serve as primary reservoirs for the virus. While plants can be infected at any growth stage, they are most vulnerable during the tillering stage, with symptoms typically appearing 10–12 days after infection.",
+    "content_bn": "Rice grassy stunt virus (RGSV) হলো একটি ভাইজাজনিত রোগ যা শীষ উৎপাদন বাধাগ্রস্ত করে ধানের ফলন উল্লেখযোগ্যভাবে হ্রাস করে। এটি বাদামী গাছফড়িং (নিম্ফ ও প্রাপ্তবয়স্ক) দ্বারা বাহিত হয়, যা কমপক্ষে ৩০ মিনিট ধরে সংক্রামিত গাছে খাওয়ার পর ভাইরাসটি অর্জন করে। সারা বছর ধরে অবিচ্ছিন্ন ধান চাষ হয় এমন এলাকায় এই রোগটি সবচেয়ে বেশি দেখা যায়। সংক্রামিত নাড়া এবং স্বতঃজাত ধান ভাইরাসের প্রাথমিক আধার হিসেবে কাজ করে। গাছগুলো যেকোনো বৃদ্ধির পর্যায়ে সংক্রামিত হতে পারে, তবে কুশি ছাড়ার পর্যায়ে তারা সবচেয়ে বেশি সংবেদনশীল হয় এবং সাধারণত সংক্রমণের ১০-১২ দিন পর লক্ষণ প্রকাশ পায়।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. RICE GRASSY STUNT. IRRI Rice Disease Reference Manual. pp. 68-69.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "rice",
+      "disease",
+      "Rice grassy stunt",
+      "brown planthopper",
+      "viral disease",
+      "ধান",
+      "রোগ"
+     ],
+     "title_en": "Rice Grassy Stunt",
+     "title_bn": "",
+     "section_title": "RICE GRASSY STUNT",
+     "publisher": "IRRI",
+     "citation": "IRRI. RICE GRASSY STUNT. IRRI Rice Disease Reference Manual. pp. 68-69.",
+     "summary": "Rice grassy stunt is a viral disease transmitted by brown planthoppers that causes severe stunting, excessive tillering, and reduced panicle production in rice.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "IRRI_IRRI_799F2B_001",
+    "score": 0.0455,
+    "title_en": "Rice Tungro Disease",
+    "title_bn": "",
+    "content_en": "Rice tungro disease is caused by a combination of two viruses transmitted by leafhoppers, most notably the green leafhopper. It affects rice at all growth stages, with the vegetative phase being the most vulnerable. Once a plant is infected, it cannot be cured, making prevention the primary management strategy. Symptoms include yellow to orange-yellow leaf discoloration (starting from the tip), stunted growth, reduced tillering, delayed flowering, and sterile or partially filled grains. Tungro can be confused with nutrient deficiencies (nitrogen, zinc), water stress, or other pest/disease damage. Confirmation can be done via serological tests like ELISA or RIPA.",
+    "content_bn": "রাইস টুংরো রোগটি পাতাফড়িং, বিশেষ করে সবুজ পাতাফড়িং দ্বারা বাহিত দুটি ভাইরাসের যৌথ সংক্রমণে হয়ে থাকে। এটি ধান গাছের সকল বৃদ্ধির পর্যায়ে আক্রমণ করতে পারে, যার মধ্যে কায়িক বৃদ্ধি বা ভেজিটেটিভ পর্যায়টি সবচেয়ে বেশি সংবেদনশীল। একবার কোনো গাছ আক্রান্ত হলে তা আর নিরাময় করা সম্ভব নয়, তাই প্রতিরোধকেই প্রধান ব্যবস্থাপনা কৌশল হিসেবে বিবেচনা করা হয়। লক্ষণগুলোর মধ্যে রয়েছে পাতার ডগা থেকে শুরু হয়ে হলুদ বা কমলা-হলুদ বর্ণ ধারণ করা, গাছের বৃদ্ধি খর্ব হওয়া, কুঁশির সংখ্যা কমে যাওয়া, ফুল আসা বিলম্বিত হওয়া এবং চিটা বা আংশিক পুষ্ট ধান দানা উৎপন্ন হওয়া। টুংরো রোগটিকে অনেক সময় পুষ্টির অভাব (যেমন নাইট্রোজেন, দস্তা), পানির অভাব বা অন্যান্য পোকারোগের ক্ষয়ক্ষতির সাথে ভুল হতে পারে। ELISA বা -এর মতো সেরোলজিক্যাল পরীক্ষার মাধ্যমে রোগটি নিশ্চিত করা যায়।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. TUNGRO. IRRI Rice Disease Reference Manual. pp. 85-91.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Tungro",
+      "Rice disease",
+      "Leafhopper",
+      "Viral disease",
+      "ধানের টুংরো রোগ"
+     ],
+     "title_en": "Rice Tungro Disease",
+     "title_bn": "",
+     "section_title": "TUNGRO",
+     "publisher": "IRRI",
+     "citation": "IRRI. TUNGRO. IRRI Rice Disease Reference Manual. pp. 85-91.",
+     "summary": "Tungro is a destructive viral disease of rice transmitted by leafhoppers, causing leaf discoloration, stunting, and significant yield loss.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "IRRI_IRRI_D62EEF_001",
+    "score": 0.0435,
+    "title_en": "Narrow Brown Spot of Rice",
+    "title_bn": "",
+    "content_en": "Narrow brown spot, also known as narrow brown leaf spot or rice Cercospora leaf spot, is caused by the fungus Sphaerulina oryzina (syn. Cercospora janseana, Cercospora oryzae). It infects leaves, sheaths, and panicles, leading to premature leaf death, premature grain ripening, and potential lodging. The disease is most prevalent in tropical and subtropical regions, particularly in potassium-deficient soils with temperatures between 25–28°C. It typically appears from the heading stage onwards, with plants being most susceptible from panicle initiation to maturity.",
+    "content_bn": "ন্যারেউ ব্রাউন স্পট, যা ন্যারো ব্রাউন লিফ স্পট বা ধানের সারকোস্পোরা লিফ স্পট নামেও পরিচিত, এটি Sphaerulina oryzina (syn. Cercospora janseana, Cercospora oryzae) নামক ছত্রাকের কারণে হয়। এটি পাতা, খোল এবং ছড়া আক্রমণ করে, যার ফলে পাতা ও ধান premature হয়ে মারা যায় এবং গাছ হেলে পড়ার সম্ভাবনা থাকে। এই রোগটি সাধারণত উষ্ণমণ্ডলীয় ও উপ-উষ্ণমণ্ডলীয় অঞ্চলে, বিশেষ করে পটাসিয়াম-স্বল্পতাসম্পন্ন মাটিতে এবং ২৫-২৮ তাপমাত্রায় বেশি দেখা যায়। এটি সাধারণত শীষ বের হওয়ার পর থেকে দেখা দিতে শুরু করে, যেখানে উদ্ভিদের ক্ষেত্রে প্যানিকল ইনিসিয়েশন থেকে পরিপক্কতা পর্যন্ত সময়টি সবচেয়ে ঝুঁকিপূর্ণ।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. NARROW BROWN SPOT. IRRI Rice Disease Reference Manual. pp. 63-65.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "rice",
+      "disease",
+      "narrow brown spot",
+      "fungus",
+      "Sphaerulina oryzina",
+      "potassium deficiency"
+     ],
+     "title_en": "Narrow Brown Spot of Rice",
+     "title_bn": "",
+     "section_title": "NARROW BROWN SPOT",
+     "publisher": "IRRI",
+     "citation": "IRRI. NARROW BROWN SPOT. IRRI Rice Disease Reference Manual. pp. 63-65.",
+     "summary": "Narrow brown spot is a fungal disease caused by Sphaerulina oryzina that affects rice leaves, sheaths, and panicles, typically appearing during late growth stages in potassium-deficient soils.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "IRRI_IRRI_DA722C_001",
+    "score": 0.0435,
+    "title_en": "Red Stripe of Rice",
+    "title_bn": "",
+    "content_en": "Red stripe is a rice disease that causes lesions on leaves, typically appearing from the panicle initiation stage onwards. It is favored by high temperatures, high relative humidity, high leaf wetness, and excessive nitrogen supply. Initial lesions are pin-sized and yellow-green to light orange, eventually becoming necrotic and coalescing into a blight appearance. It can be confused with orange leaf blight or advanced bacterial leaf blight. Management involves using resistant varieties, balanced nitrogen application, proper plant spacing, and intermittent drainage during panicle initiation. Seed treatment with benzimidazole fungicides is also recommended.",
+    "content_bn": "রেড স্ট্রাইপ ধানের একটি রোগ যা পাতার উপর দাগ সৃষ্টি করে, যা সাধারণত ছড়ার মোচড় বা প্যানিকল ইনিসিয়েশন পর্যায় থেকে প্রকাশ পায়। উচ্চ তাপমাত্রা, উচ্চ আপেক্ষিক আর্দ্রতা, পাতার দীর্ঘক্ষণ ভেজা থাকা এবং অতিরিক্ত নাইট্রোজেন প্রয়োগ এই রোগ ছড়াতে অনুকূল পরিবেশ সৃষ্টি করে। প্রাথমিক লক্ষণ হিসেবে পিন-আকৃতির হলুদ-সবুজ থেকে হালকা কমলা রঙের দাগ দেখা দেয়, যা পরবর্তীতে নেক্রোটিক (পচে যাওয়া) হয়ে একত্রিত হয়ে ব্লাইট বা পাতার পোড়া রোগের রূপ নেয়। এটি অনেক সময় কমলা পাতার ব্লাইট বা উন্নত ব্যাকটেরিয়াল লিফ ব্লাইট রোগের সাথে বিভ্রান্ত হতে পারে। রোগ ব্যবস্থাপনার মধ্যে রয়েছে রোগ প্রতিরোধী জাতের ব্যবহার, সুষম নাইট্রোজেন প্রয়োগ, সঠিক দূরত্বে চারা রোপণ এবং প্যানিকল ইনিসিয়েশন পর্যায়ে জমিতে পর্যায়ক্রমে সেচ ও নিষ্কাশন করা। বেনজিমিডাজল ছত্রাকনাশক দিয়ে বীজ শোধন করারও পরামর্শ দেওয়া হয়।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. RED STRIPE. IRRI Rice Disease Reference Manual. pp. 66-67.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "rice",
+      "red stripe",
+      "disease management",
+      "ধান",
+      "রেড স্ট্রাইপ",
+      "রোগ ব্যবস্থাপনা"
+     ],
+     "title_en": "Red Stripe of Rice",
+     "title_bn": "",
+     "section_title": "RED STRIPE",
+     "publisher": "IRRI",
+     "citation": "IRRI. RED STRIPE. IRRI Rice Disease Reference Manual. pp. 66-67.",
+     "summary": "Red stripe is a rice disease characterized by leaf lesions that typically appears during the reproductive stage, favored by high temperature, humidity, and nitrogen levels.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "ধান গাছে ব্রাউন স্পট রোগ হলে কোলিপটাইড, পাতা, পাতার খোল, ছড়ার শাখা, গ্লুম এবং স্পাইকলেটে আক্রমণ করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[IRRI_IRRI_0F67B4_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই রোগটি উচ্চ আর্দ্রতা (৮৬-১০০%) এবং ১৬-৩৬ ডিগ্রি সেলসিয়াস তাপমাত্রায় দ্রুত বিস্তার লাভ করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[IRRI_IRRI_0F67B4_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এছাড়াও, ন্যারো ব্রাউন স্পট রোগ হলে পাতা, খোল এবং ছড়া আক্রান্ত হয়, যার ফলে পাতা ও ধান অকালে মারা যেতে পারে এবং গাছ হেলে পড়ার সম্ভাবনা থাকে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[IRRI_IRRI_D62EEF_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার ধানের রোগ সম্পর্কে আরও তথ্যের প্রয়োজন হয়, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "Rice|Rice__Leaf_Blast|gemini|2026-08|ধান এর ব্লাস্ট রোগ ছড়ানো কীভাবে রোধ করব": {
+  "query": "ধান এর ব্লাস্ট রোগ ছড়ানো কীভাবে রোধ করব?",
+  "category": "safe_agri",
+  "answer": "আপনার ধানের ব্লাস্ট রোগ প্রতিরোধের জন্য কিছু গুরুত্বপূর্ণ তথ্য নিচে দেওয়া হলো:\n\n*   ব্লাস্ট রোগ Magnaporthe oryzae নামক ছত্রাকের কারণে হয়। এটি ধান গাছের পাতা, কলার, পর্ব (নোড), নেক, ছড়ার অংশ এবং পাতার খোলকে আক্রমণ করতে পারে। [IRRI_IRRI_939CB7_001]\n\n*   এই রোগটি চারা এবং কুঁশি ছাড়ার পর্যায়ে সবচেয়ে বেশি ক্ষতি করে। কম মাটির আর্দ্রতা, ঘন ঘন বৃষ্টিপাত, দিনের বেলা ঠান্ডা তাপমাত্রা এবং দিন ও রাতের তাপমাত্রার বড় তারতম্য যা শিশির তৈরিতে সহায়তা করে, এই রোগটিকে দ্রুত ছড়াতে সাহায্য করে। [IRRI_IRRI_939CB7_001]\n\n*   ব্লাস্ট রোগের প্রধান লক্ষণগুলোর মধ্যে রয়েছে পাতার ওপর সুচালো প্রান্তসহ কৌণিক, চোখ আকৃতির দাগ, পাশাপাশি উদ্ভিদের পর্ব, ছড়া এবং গলার অংশে সংক্রমণ। [CABI_WHEAT_153BAE_001]\n\n*   রোগ প্রতিরোধের জন্য শস্য ব্যবস্থাপনাভিত্তিক প্রতিরোধমূলক ব্যবস্থা, নিয়মিত পর্যবেক্ষণ এবং প্রয়োজন অনুযায়ী রাসায়নিক নিয়ন্ত্রণের সমন্বয় করতে হবে। [CABI_WHEAT_17CE3C_001]\n\n*   যদি আপনার রোগ সম্পর্কে আরও তথ্যের প্রয়োজন হয় বা কোনো রাসায়নিক ব্যবহারের বিষয়ে জানতে চান, তবে অনুগ্রহ করে কৃষক কল সেন্টার ১৬১২৩ নম্বরে যোগাযোগ করুন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "sources": [
+   {
+    "id": "IRRI_IRRI_A6AA96_001",
+    "score": 0.0476,
+    "title_en": "Blast (Node and Neck)",
+    "title_bn": "",
+    "content_en": "Blast is caused by the fungus Magnaporthe oryzae and can affect all above-ground parts of the rice plant. Node and neck blast commonly occur together. Node infection appears as blackish to grayish brown lesions in a banded pattern, which can cause the culm to break. Neck infection appears as grayish brown lesions that can girdle the neck, causing the panicle to fall over. Infection before the milky stage prevents grain formation, while later infection results in poor quality grains. It can also cause whiteheads, which, unlike those caused by stem borers, cannot be pulled apart from the plant.",
+    "content_bn": "ব্লাস্ট রোগটি Magnaporthe oryzae নামক ছত্রাকের কারণে হয় এবং ধান গাছের মাটির ওপরের সমস্ত অংশকে আক্রান্ত করতে পারে। গিট (নড) ও কলার (নেক) ব্লাস্ট সাধারণত একত্রে দেখা দেয়। গিটে infections কালো থেকে ধূসর-বাদামী রঙের ফিতার মতো দাগ হিসেবে দেখা দেয়, যা কান্ড ভেঙে ফেলতে পারে। কলারের ইনফেকশন ধূসর-বাদামী দাগ হিসেবে দেখা দেয় যা কলারকে বেষ্টন করে ফেলে এবং ছড়া নুইয়ে পড়ে। দুধ আসা স্তরের আগে ইনফেকশন হলে দানা গঠন রোধ হয়, আর পরবর্তীতে ইনফেকশন হলে মানসম্মত দানা হয় না। এটি হোয়াইটহেড বা সাদা শীষও সৃষ্টি করতে পারে, যা মাজরা পোকার কারণে সৃষ্ট সাদা শীষের মতো গাছ থেকে টেনে আলাদা করা যায় না।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. BLAST (NODE AND NECK). IRRI Rice Disease Reference Manual. pp. 49-53.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "rice",
+      "blast",
+      "fungal disease",
+      "Magnaporthe oryzae",
+      "node blast",
+      "neck blast",
+      "ধান",
+      "ব্লাস্ট রোগ"
+     ],
+     "title_en": "Blast (Node and Neck)",
+     "title_bn": "",
+     "section_title": "BLAST (NODE AND NECK)",
+     "publisher": "IRRI",
+     "citation": "IRRI. BLAST (NODE AND NECK). IRRI Rice Disease Reference Manual. pp. 49-53.",
+     "summary": "Blast is a destructive fungal disease of rice caused by Magnaporthe oryzae that affects nodes and necks, leading to significant yield loss and whiteheads.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "IRRI_IRRI_799F2B_001",
+    "score": 0.0476,
+    "title_en": "Rice Tungro Disease",
+    "title_bn": "",
+    "content_en": "Rice tungro disease is caused by a combination of two viruses transmitted by leafhoppers, most notably the green leafhopper. It affects rice at all growth stages, with the vegetative phase being the most vulnerable. Once a plant is infected, it cannot be cured, making prevention the primary management strategy. Symptoms include yellow to orange-yellow leaf discoloration (starting from the tip), stunted growth, reduced tillering, delayed flowering, and sterile or partially filled grains. Tungro can be confused with nutrient deficiencies (nitrogen, zinc), water stress, or other pest/disease damage. Confirmation can be done via serological tests like ELISA or RIPA.",
+    "content_bn": "রাইস টুংরো রোগটি পাতাফড়িং, বিশেষ করে সবুজ পাতাফড়িং দ্বারা বাহিত দুটি ভাইরাসের যৌথ সংক্রমণে হয়ে থাকে। এটি ধান গাছের সকল বৃদ্ধির পর্যায়ে আক্রমণ করতে পারে, যার মধ্যে কায়িক বৃদ্ধি বা ভেজিটেটিভ পর্যায়টি সবচেয়ে বেশি সংবেদনশীল। একবার কোনো গাছ আক্রান্ত হলে তা আর নিরাময় করা সম্ভব নয়, তাই প্রতিরোধকেই প্রধান ব্যবস্থাপনা কৌশল হিসেবে বিবেচনা করা হয়। লক্ষণগুলোর মধ্যে রয়েছে পাতার ডগা থেকে শুরু হয়ে হলুদ বা কমলা-হলুদ বর্ণ ধারণ করা, গাছের বৃদ্ধি খর্ব হওয়া, কুঁশির সংখ্যা কমে যাওয়া, ফুল আসা বিলম্বিত হওয়া এবং চিটা বা আংশিক পুষ্ট ধান দানা উৎপন্ন হওয়া। টুংরো রোগটিকে অনেক সময় পুষ্টির অভাব (যেমন নাইট্রোজেন, দস্তা), পানির অভাব বা অন্যান্য পোকারোগের ক্ষয়ক্ষতির সাথে ভুল হতে পারে। ELISA বা -এর মতো সেরোলজিক্যাল পরীক্ষার মাধ্যমে রোগটি নিশ্চিত করা যায়।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. TUNGRO. IRRI Rice Disease Reference Manual. pp. 85-91.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Tungro",
+      "Rice disease",
+      "Leafhopper",
+      "Viral disease",
+      "ধানের টুংরো রোগ"
+     ],
+     "title_en": "Rice Tungro Disease",
+     "title_bn": "",
+     "section_title": "TUNGRO",
+     "publisher": "IRRI",
+     "citation": "IRRI. TUNGRO. IRRI Rice Disease Reference Manual. pp. 85-91.",
+     "summary": "Tungro is a destructive viral disease of rice transmitted by leafhoppers, causing leaf discoloration, stunting, and significant yield loss.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "IRRI_IRRI_939CB7_001",
+    "score": 0.0455,
+    "title_en": "Blast (Leaf and Collar)",
+    "title_bn": "",
+    "content_en": "Blast is caused by the fungus Magnaporthe oryzae. It can affect all above-ground parts of a rice plant: leaf, collar, node, neck, parts of panicle, and sometimes leaf sheath. It is most destructive during the seedling and tillering stages, though it can occur at all growth stages. The disease is favored by low soil moisture, frequent rain showers, cool daytime temperatures, and large day-night temperature differences that promote dew formation.",
+    "content_bn": "ব্লাস্ট রোগটি Magnaporthe oryzae নামক ছত্রাকের কারণে হয়। এটি ধান গাছের মাটির উপরের সমস্ত অংশকে আক্রমণ করতে পারে: পাতা, কলার, পর্ব বা নোড, নেক, ছড়ার অংশ এবং কখনও কখনও পাতার খোল। এটি চারা এবং কুঁশি ছাড়ার পর্যায়ে সবচেয়ে বেশি ক্ষতি করে, যদিও এটি বৃদ্ধির সকল পর্যায়ে হতে পারে। কম মাটির আর্দ্রতা, ঘন ঘন বৃষ্টিপাত, দিনের বেলা ঠান্ডা তাপমাত্রা এবং দিন ও রাতের তাপমাত্রার বড় তারতম্য যা শিশির তৈরিতে সহায়তা করে, এই রোগটিকে দ্রুত ছড়াতে সাহায্য করে।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. BLAST (LEAF AND COLLAR). IRRI Rice Disease Reference Manual. pp. 44-48.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "rice",
+      "blast",
+      "fungus",
+      "Magnaporthe oryzae",
+      "disease management",
+      "ধান",
+      "ব্লাস্ট রোগ"
+     ],
+     "title_en": "Blast (Leaf and Collar)",
+     "title_bn": "",
+     "section_title": "BLAST (LEAF AND COLLAR)",
+     "publisher": "IRRI",
+     "citation": "IRRI. BLAST (LEAF AND COLLAR). IRRI Rice Disease Reference Manual. pp. 44-48.",
+     "summary": "Blast is a destructive fungal disease of rice caused by Magnaporthe oryzae, affecting all above-ground parts of the plant, particularly during seedling and tillering stages.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_WHEAT_153BAE_001",
+    "score": 0.0435,
+    "title_en": "Management of Rice Blast",
+    "title_bn": "",
+    "content_en": "Rice blast is a fungal disease caused by Pyricularia oryzae (Magnaporthe grisea). Management involves cultural prevention, regular monitoring during favorable weather conditions, and chemical control when necessary. Key symptoms include angular, eye-shaped lesions with pointed ends on leaves, as well as infections on nodes, panicles, and the neck of the plant.",
+    "content_bn": "রাইস ব্লাস্ট হলো একটি ছত্রাকজনিত রোগ যার কারণ Pyricularia oryzae (Magnaporthe grisea)। এর ব্যবস্থাপনার মধ্যে রয়েছে সাংস্কৃতিক প্রতিরোধ, অনুকূল আবহাওয়ায় নিয়মিত পর্যবেক্ষণ এবং প্রয়োজনে রাসায়নিক দমন। প্রধান লক্ষণগুলোর মধ্যে রয়েছে পাতার ওপর সুচালো প্রান্তসহ কৌণিক, চোখ আকৃতির দাগ, পাশাপাশি উদ্ভিদের পর্ব, ছড়া এবং গলার অংশে সংক্রমণ।",
+    "source": "Wheat Disease Management Manuals (Plantwise)",
+    "citation": "CABI. Management of Rice blast. Wheat Disease Management Manuals (Plantwise). pp. 2-2.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Rice blast",
+      "ধানের ব্লাস্ট রোগ",
+      "Pyricularia oryzae",
+      "Disease management",
+      "Fungicide"
+     ],
+     "title_en": "Management of Rice Blast",
+     "title_bn": "",
+     "section_title": "Management of Rice blast",
+     "publisher": "CABI",
+     "citation": "CABI. Management of Rice blast. Wheat Disease Management Manuals (Plantwise). pp. 2-2.",
+     "summary": "Rice blast, caused by Pyricularia oryzae (Magnaporthe grisea), is managed through a combination of cultural practices, monitoring for specific environmental conditions, and targeted fungicide applications.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_WHEAT_17CE3C_001",
+    "score": 0.0435,
+    "title_en": "Blast disease of Rice",
+    "title_bn": "",
+    "content_en": "Blast disease (Magnaporthe grisea) is a significant fungal disease in rice. Symptoms include diamond-shaped lesions on leaves with grey centers and brown or reddish borders, as well as symptoms on stem nodes. Management involves a combination of cultural prevention, regular monitoring, and chemical control when necessary.",
+    "content_bn": "ব্লাস্ট রোগ (Magnaporthe grisea) ধানের একটি অত্যন্ত গুরুত্বপূর্ণ ছত্রাকজনিত রোগ। লক্ষণগুলোর মধ্যে রয়েছে পাতার ওপর ধূসর কেন্দ্র এবং বাদামী বা লালচে সীমানা বিশিষ্ট হীরা আকৃতির দাগ, পাশাপাশি কাণ্ডের গাঁটেও লক্ষণ দেখা যায়। প্রতিকারের জন্য শস্য ব্যবস্থাপনাভিত্তিক প্রতিরোধমূলক ব্যবস্থা, নিয়মিত পর্যবেক্ষণ এবং প্রয়োজন অনুযায়ী রাসায়নিক নিয়ন্ত্রণের সমন্বয় করতে হবে।",
+    "source": "Wheat Disease Management Manuals (Plantwise)",
+    "citation": "CABI. Blast disease of Rice. Wheat Disease Management Manuals (Plantwise). pp. 1-1.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Rice",
+      "Blast",
+      "Magnaporthe grisea",
+      "Fungicide",
+      "Disease Management"
+     ],
+     "title_en": "Blast disease of Rice",
+     "title_bn": "",
+     "section_title": "Blast disease of Rice",
+     "publisher": "CABI",
+     "citation": "CABI. Blast disease of Rice. Wheat Disease Management Manuals (Plantwise). pp. 1-1.",
+     "summary": "Blast disease, caused by Magnaporthe grisea, is a fungal infection in rice characterized by diamond-shaped lesions on leaves and stem nodes, manageable through cultural practices and targeted fungicide application.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "আপনার ধানের ব্লাস্ট রোগ প্রতিরোধের জন্য কিছু গুরুত্বপূর্ণ তথ্য নিচে দেওয়া হলো:",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   ব্লাস্ট রোগ Magnaporthe oryzae নামক ছত্রাকের কারণে হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এটি ধান গাছের পাতা, কলার, পর্ব (নোড), নেক, ছড়ার অংশ এবং পাতার খোলকে আক্রমণ করতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[IRRI_IRRI_939CB7_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   এই রোগটি চারা এবং কুঁশি ছাড়ার পর্যায়ে সবচেয়ে বেশি ক্ষতি করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "কম মাটির আর্দ্রতা, ঘন ঘন বৃষ্টিপাত, দিনের বেলা ঠান্ডা তাপমাত্রা এবং দিন ও রাতের তাপমাত্রার বড় তারতম্য যা শিশির তৈরিতে সহায়তা করে, এই রোগটিকে দ্রুত ছড়াতে সাহায্য করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[IRRI_IRRI_939CB7_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   ব্লাস্ট রোগের প্রধান লক্ষণগুলোর মধ্যে রয়েছে পাতার ওপর সুচালো প্রান্তসহ কৌণিক, চোখ আকৃতির দাগ, পাশাপাশি উদ্ভিদের পর্ব, ছড়া এবং গলার অংশে সংক্রমণ",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_153BAE_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   রোগ প্রতিরোধের জন্য শস্য ব্যবস্থাপনাভিত্তিক প্রতিরোধমূলক ব্যবস্থা, নিয়মিত পর্যবেক্ষণ এবং প্রয়োজন অনুযায়ী রাসায়নিক নিয়ন্ত্রণের সমন্বয় করতে হবে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_17CE3C_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   যদি আপনার রোগ সম্পর্কে আরও তথ্যের প্রয়োজন হয় বা কোনো রাসায়নিক ব্যবহারের বিষয়ে জানতে চান, তবে অনুগ্রহ করে কৃষক কল সেন্টার ১৬১২৩ নম্বরে যোগাযোগ করুন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
  }
 }

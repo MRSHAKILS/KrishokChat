@@ -285,7 +285,7 @@ export default function SoilPage() {
         <AnimatePresence mode="wait">
           {result && !loading && (
             <motion.div key="locked" initial="hidden" animate="visible" exit={{ opacity: 0, y: -8 }} variants={enter}>
-              <SoilLockedCard info={dataset} message={result.error} onAskChat={askInChat} />
+              <SoilLockedCard info={dataset} result={result} message={result.error} onAskChat={askInChat} />
             </motion.div>
           )}
         </AnimatePresence>

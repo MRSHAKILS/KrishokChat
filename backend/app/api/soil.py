@@ -57,10 +57,17 @@ async def soil_analyze(file: UploadFile = File(...), container: ContainerDep = N
     except (UnidentifiedImageError, OSError) as exc:
         raise HTTPException(status_code=400, detail="Image could not be decoded") from exc
 
-    result: SoilResult = container.soil.analyze(image)
+    result: SoilResult = container.soil.analyze(image, filename=file.filename)
     return SoilAnalyzeResponse(
         status=result.status.value,
         error=result.error,
+        soil_type=result.soil_type,
+        soil_type_bn=result.soil_type_bn,
+        kpa=result.kpa,
+        moisture_status=result.moisture_status,
+        moisture_status_bn=result.moisture_status_bn,
+        advisory_bn=result.advisory_bn,
+        confidence=result.confidence,
         agent_trace=[
             AgentStageEvent(stage=event.stage.value, status=event.status, detail=event.detail)
             for event in result.trace

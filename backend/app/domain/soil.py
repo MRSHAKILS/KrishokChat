@@ -88,3 +88,10 @@ class SoilResult:
     info: SoilDatasetInfo | None = None
     error: str | None = None
     trace: tuple[SoilTraceEvent, ...] = ()
+    soil_type: str | None = None
+    soil_type_bn: str | None = None
+    kpa: float | None = None
+    moisture_status: str | None = None
+    moisture_status_bn: str | None = None
+    advisory_bn: str | None = None
+    confidence: float | None = None
