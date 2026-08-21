@@ -143,7 +143,7 @@ bounding boxes today.
 | Styling        | Tailwind CSS 4 + shadcn/ui |
 | Animation      | Motion 13 (formerly Framer Motion) |
 | Chat UX        | Vercel AI SDK 7 (streaming) |
-| Backend        | FastAPI 0.141 (Python 3.11-3.12), single service |
+| Backend        | FastAPI 0.141 (Python 3.11-3.13, target 3.13.15 — python.org 2026-08-05), uvicorn 0.52.3 (uvicorn.dev 2026-08-13), single service |
 | LLM serving    | Ollama (local fine-tuned Gemma 4-bit); OpenRouter/Gemini adapters available |
 | Vision         | Ultralytics YOLO (classify), ONNX Runtime |
 | Retrieval      | rank-bm25 + FAISS (CPU), loaded in-process from disk |
@@ -191,9 +191,9 @@ Verified on Windows 11 (see `SETUP_REPORT.md`):
 
 | Tool         | Version          |
 |--------------|------------------|
-| Node.js      | v24 LTS          |
+| Node.js      | v24 LTS Krypton (24.19.0 LTS 2026-08-03 — nodejs.org, local 24.11.0) |
 | pnpm         | 11.x             |
-| Python       | 3.12             |
+| Python       | 3.13 (maintained 3.13.15 — python.org 2026-08-05; compatible 3.11-3.12) |
 | uv           | 0.11+            |
 | Ollama       | optional (only if using the `ollama` LLM provider) |
 

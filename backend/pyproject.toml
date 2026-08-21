@@ -3,7 +3,7 @@ name = "backend"
 version = "0.1.0"
 description = "KrishokChat Advisory System - Backend API"
 readme = "README.md"
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11,<3.14"
 dependencies = [
     "bnunicodenormalizer>=0.1.7",
     "edge-tts>=7.2.8",
@@ -20,6 +20,7 @@ dependencies = [
     "torch>=2.13.0",
     "torchvision>=0.28.0",
     "ultralytics>=8.4.116",
+    "uvicorn[standard]>=0.52.3",
 ]
 
 [dependency-groups]
