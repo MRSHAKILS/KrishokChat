@@ -20,7 +20,7 @@ export default function ChatPage() {
             { icon: Radio, label: "লাইভ উত্তর" },
             { icon: Languages, label: "বাংলা সহায়তা" },
           ].map(({ icon: Icon, label }) => (
-            <span key={label} className="inline-flex min-h-8 items-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 text-[11px] font-medium text-ink-faint">
+            <span key={label} className="inline-flex min-h-8 items-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 text-xs font-medium text-ink-faint">
               <Icon className="h-3.5 w-3.5 text-leaf" /> {label}
             </span>
           ))}
@@ -37,13 +37,13 @@ export default function ChatPage() {
           </div>
           <aside className="hidden flex-col justify-between rounded-xl border rule bg-paper-2/35 p-4 lg:flex">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ochre">WORKSPACE</p>
+              <p className="text-xs font-semibold text-ochre">নির্দেশিকা</p>
               <h2 className="mt-2 font-display text-lg text-ink">উত্তর কীভাবে তৈরি হয়</h2>
               <div className="mt-5 space-y-3">
                 {[{ icon: LockKeyhole, label: "নিরাপত্তা আগে", detail: "প্রশ্নের ঝুঁকি যাচাই" }, { icon: Database, label: "প্রাসঙ্গিক তথ্য", detail: "প্রি-কম্পিউটেড জ্ঞানভাণ্ডার" }, { icon: CheckCircle2, label: "উৎস মিলিয়ে", detail: "দাবি যাচাই করে দেখানো" }].map(({ icon: Icon, label, detail }, i) => (
                   <div key={label} className="relative flex gap-2.5">
                     <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-paper text-leaf shadow-sm"><Icon className="h-3.5 w-3.5" /></span>
-                    <div><div className="text-xs font-semibold text-ink">{label}</div><div className="mt-0.5 text-[10px] leading-relaxed text-ink-faint">{detail}</div></div>
+                    <div><div className="text-xs font-semibold text-ink">{label}</div><div className="mt-0.5 text-xs leading-relaxed text-ink-faint">{detail}</div></div>
                     {i < 2 && <span className="absolute left-3.5 top-8 h-3 border-l border-dashed border-bone" />}
                   </div>
                 ))}

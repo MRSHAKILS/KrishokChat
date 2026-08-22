@@ -88,7 +88,7 @@ export function Navbar() {
           <Mark />
           <div className="leading-none">
             <div className="font-display text-[17px] text-ink">{APP.name}</div>
-            <div className="mt-0.5 text-[10px] text-ink-faint">{APP.nameEn}</div>
+            <div className="mt-0.5 text-xs text-ink-faint">{APP.nameEn}</div>
           </div>
         </Link>
 
@@ -140,7 +140,7 @@ export function Navbar() {
                   transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute right-0 top-full mt-1.5 w-64 overflow-hidden rounded-xl border rule bg-paper p-1.5 shadow-lg shadow-ink/5 z-50"
                 >
-                  <div className="px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-faint">
+                  <div className="px-3 py-2 text-xs font-semibold text-ink-faint">
                     অন্যান্য পৃষ্ঠা ও গবেষণা
                   </div>
                   {MORE.map((m) => {

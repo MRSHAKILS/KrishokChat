@@ -438,7 +438,7 @@ export function QAPanel({
           one clear action; model selection is intentionally not presented as
           two competing primary buttons. */}
       <div className="mt-4 flex min-h-8 items-center justify-between gap-3 border-t rule pt-3">
-        <div className="flex min-w-0 items-center gap-1.5 text-[11px] text-ink-faint">
+        <div className="flex min-w-0 items-center gap-1.5 text-xs text-ink-faint">
           <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-leaf" />
           <span className="truncate">তথ্যসূত্র মিলিয়ে নিরাপদ উত্তর</span>
         </div>
@@ -448,7 +448,7 @@ export function QAPanel({
               the local option is disabled (and labeled offline) when the local
               llama-server is not reachable — the remote lane stays the default. */}
           <label
-            className="flex items-center gap-1.5 text-[11px] text-ink-faint"
+            className="flex items-center gap-1.5 text-xs text-ink-faint"
             title={
               localAvailable
                 ? "গবেষণা: লোকাল ফাইন-টিউনড মডেল"
@@ -459,7 +459,7 @@ export function QAPanel({
             <select
               value={model}
               onChange={(event) => setModel(event.target.value as "gemini" | "krishokchat-4b")}
-              className="rounded-md border rule bg-paper px-2 py-1 text-[11px] text-ink-soft focus:border-leaf focus:outline-none"
+              className="rounded-md border rule bg-paper px-2 py-1 text-xs text-ink-soft focus:border-leaf focus:outline-none"
               aria-label="উত্তরের ধরন নির্বাচন করুন"
             >
               <option value="gemini">সাধারণ</option>
@@ -473,7 +473,7 @@ export function QAPanel({
             <button
               onClick={clear}
               title="নতুন কথোপকথন শুরু করুন"
-              className="flex min-h-8 items-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-ink-faint transition-colors hover:text-clay"
+              className="flex min-h-8 items-center gap-1 rounded-md px-1.5 text-xs font-medium text-ink-faint transition-colors hover:text-clay"
             >
               <RotateCcw className="h-3 w-3" />
               <span className="hidden sm:inline">নতুন করে শুরু</span>
@@ -542,7 +542,7 @@ export function QAPanel({
         </button>
       </div>
       {voiceInputError && (
-        <p className="mt-1 text-right text-[11px] text-clay" role="status">
+        <p className="mt-1 text-right text-xs text-clay" role="status">
           {voiceInputError}
         </p>
       )}
@@ -593,7 +593,7 @@ function SaveAnswerButton({
         onClick={() => void handleSave()}
         disabled={state === "saving" || state === "saved"}
         className={cn(
-          "control-press flex min-h-7 items-center gap-1.5 rounded-full border px-2.5 text-[11px] font-medium transition-colors",
+          "control-press flex min-h-7 items-center gap-1.5 rounded-full border px-2.5 text-xs font-medium transition-colors",
           state === "saved"
             ? "border-leaf/30 bg-leaf/10 text-leaf"
             : "rule bg-paper text-ink-faint hover:border-leaf hover:text-leaf",
@@ -615,7 +615,7 @@ function SaveAnswerButton({
               ? "আবার চেষ্টা করুন"
               : "সংরক্ষণ করুন"}
       </button>
-      {state === "idle" && <span className="text-[10px] text-ink-faint">আমার হিসাবে রাখুন</span>}
+      {state === "idle" && <span className="text-xs text-ink-faint">আমার হিসাবে রাখুন</span>}
     </div>
   );
 }

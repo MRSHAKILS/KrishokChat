@@ -135,9 +135,9 @@ export default function LibraryPage() {
       <div className="mx-auto max-w-6xl space-y-8 py-14">
         {/* Hero */}
         <motion.section initial="hidden" animate="visible" variants={stagger} className="text-center">
-          <motion.div variants={enter} className="flex items-center justify-center gap-2 text-xs uppercase tracking-[0.22em] text-ochre">
+          <motion.div variants={enter} className="flex items-center justify-center gap-2 text-xs text-ochre">
             <BookMarked className="h-3.5 w-3.5" />
-            Library & Data
+            লাইব্রেরি ও ডেটা
           </motion.div>
           <motion.h1 variants={enter} className="mt-4 font-display text-3xl leading-tight text-ink md:text-4xl">
             কৃষি <span className="text-leaf">জ্ঞান ভান্ডার</span>
@@ -195,7 +195,7 @@ function TabButton({ active, onClick, icon: Icon, label, count }: { active: bool
         <Icon className="h-4 w-4" />
         {label}
         {count > 0 && (
-          <span className={cn("rounded-full px-1.5 py-0.5 text-[10px] tabular", active ? "bg-paper/20" : "bg-bone")}>
+          <span className={cn("rounded-full px-1.5 py-0.5 text-xs tabular", active ? "bg-paper/20" : "bg-bone")}>
             {toBn(count)}
           </span>
         )}
@@ -289,10 +289,10 @@ function BooksSection({ books, search, setSearch, category, setCategory }: { boo
       <AnimatePresence>
         {hasFilters && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] text-ink-faint">সক্রিয় ফিল্টার:</span>
+            <span className="text-xs text-ink-faint">সক্রিয় ফিল্টার:</span>
             {category !== "all" && <FilterChip onClear={() => setCategory("all")}>{CAT_LABELS[category] ?? category}</FilterChip>}
             {search && <FilterChip onClear={() => setSearch("")}>“{search}”</FilterChip>}
-            <button onClick={() => { setSearch(""); setCategory("all"); }} className="text-[11px] text-leaf transition-colors hover:text-leaf-2">সব মুছুন</button>
+            <button onClick={() => { setSearch(""); setCategory("all"); }} className="text-xs text-leaf transition-colors hover:text-leaf-2">সব মুছুন</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -387,27 +387,27 @@ function BookCard({ book, color }: { book: Book; color: string }) {
         {/* Meta row: category + language */}
         <div className="flex items-center justify-between gap-2">
           <span
-            className="rounded-full px-2 py-0.5 text-[10px] font-medium"
+            className="rounded-full px-2 py-0.5 text-xs font-medium"
             style={{ backgroundColor: `color-mix(in srgb, ${color} 12%, transparent)`, color }}
           >
             {CAT_LABELS[book.category] ?? book.category}
           </span>
-          <span className="text-[10px] text-ink-faint">{book.language}</span>
+          <span className="text-xs text-ink-faint">{book.language}</span>
         </div>
 
         {/* Titles */}
         <h3 className="mt-2.5 font-display text-sm leading-snug text-ink">{book.title_bn}</h3>
-        <p className="mt-0.5 text-[11px] text-ink-faint">{book.title_en}</p>
+        <p className="mt-0.5 text-xs text-ink-faint">{book.title_en}</p>
 
         {/* Excerpt */}
         <p className="mt-2 text-xs leading-relaxed text-ink-soft line-clamp-2">{book.excerpt}</p>
 
         {/* Footer meta + action — pinned to bottom for equal heights */}
         <div className="mt-auto pt-3">
-          <div className="flex flex-wrap items-center gap-2.5 text-[10px] text-ink-faint">
+          <div className="flex flex-wrap items-center gap-2.5 text-xs text-ink-faint">
             <span className="flex items-center gap-1"><FileText className="h-3 w-3" />{toBn(book.pages)} পৃঃ</span>
             <span className="tabular">{toBn(Number(book.year))}</span>
-            <span className="rounded bg-bone/50 px-1.5 py-0.5 font-mono text-[9px]">{book.id}</span>
+            <span className="rounded bg-bone/50 px-1.5 py-0.5 font-mono text-xs">{book.id}</span>
           </div>
           <div className="mt-3">
             {book.pdf ? (
@@ -420,7 +420,7 @@ function BookCard({ book, color }: { book: Book; color: string }) {
                 <FileText className="h-3.5 w-3.5" />পড়ুন<ExternalLink className="h-3 w-3" />
               </a>
             ) : (
-              <span className="inline-flex items-center rounded-lg border border-dashed border-bone px-3 py-1.5 text-[11px] text-ink-faint">শীঘ্রই</span>
+              <span className="inline-flex items-center rounded-lg border border-dashed border-bone px-3 py-1.5 text-xs text-ink-faint">শীঘ্রই</span>
             )}
           </div>
         </div>
@@ -526,14 +526,14 @@ function DatasetsSection({ datasets, search, setSearch, category, setCategory }:
       <AnimatePresence>
         {hasFilters && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] text-ink-faint">সক্রিয় ফিল্টার:</span>
+            <span className="text-xs text-ink-faint">সক্রিয় ফিল্টার:</span>
             {category !== "all" && (
               <FilterChip onClear={() => setCategory("all")}>
                 {DATASET_CATEGORIES.find((c) => c.id === category)?.label ?? category}
               </FilterChip>
             )}
             {search && <FilterChip onClear={() => setSearch("")}>“{search}”</FilterChip>}
-            <button onClick={() => { setSearch(""); setCategory("all"); }} className="text-[11px] text-leaf transition-colors hover:text-leaf-2">সব মুছুন</button>
+            <button onClick={() => { setSearch(""); setCategory("all"); }} className="text-xs text-leaf transition-colors hover:text-leaf-2">সব মুছুন</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -593,7 +593,7 @@ function DatasetCard({ ds }: { ds: Dataset }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={ds.image} alt={ds.image_caption ?? ds.name} className="h-40 w-full object-cover" loading="lazy" />
           {ds.badge && (
-            <span className="absolute left-3 top-3 rounded-full bg-paper/95 px-2.5 py-1 text-[10px] font-semibold shadow-sm" style={{ color }}>
+            <span className="absolute left-3 top-3 rounded-full bg-paper/95 px-2.5 py-1 text-xs font-semibold shadow-sm" style={{ color }}>
               {ds.badge}
             </span>
           )}
@@ -612,7 +612,7 @@ function DatasetCard({ ds }: { ds: Dataset }) {
               <p className="text-xs text-ink-faint">{ds.name}</p>
             </div>
           </div>
-          <span className="shrink-0 rounded-md bg-bone/50 px-2 py-0.5 font-mono text-[9px] text-ink-soft">{ds.format}</span>
+          <span className="shrink-0 rounded-md bg-bone/50 px-2 py-0.5 font-mono text-xs text-ink-soft">{ds.format}</span>
         </div>
 
         {/* Stats row */}
@@ -646,7 +646,7 @@ function DatasetCard({ ds }: { ds: Dataset }) {
         {/* Split chips */}
         <div className="mt-2.5 flex flex-wrap gap-1.5">
           {splitEntries.map(([split, count]) => (
-            <span key={split} className="inline-flex items-center gap-1.5 rounded-md border rule px-2 py-0.5 text-[10px] text-ink-soft">
+            <span key={split} className="inline-flex items-center gap-1.5 rounded-md border rule px-2 py-0.5 text-xs text-ink-soft">
               <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: SPLIT_COLORS[split] || "var(--color-leaf-3)" }} />
               <span className="font-mono text-ochre">{split}</span>: <span className="tabular">{toBn(count)}</span>
             </span>
@@ -656,12 +656,12 @@ function DatasetCard({ ds }: { ds: Dataset }) {
         {/* Use case */}
         <div className="mt-3 flex items-start gap-2">
           <Tag className="mt-0.5 h-3 w-3 shrink-0 text-ink-faint" />
-          <p className="text-[11px] text-ink-faint">{ds.use_case}</p>
+          <p className="text-xs text-ink-faint">{ds.use_case}</p>
         </div>
 
         {/* Vision dataset — honest locked-model disclosure */}
         {ds.id === "soil_moisture" && (
-          <p className="mt-3 text-[11px] text-ink-faint">
+          <p className="mt-3 text-xs text-ink-faint">
             লকড-মডেল নীতি: ডেটাসেট প্রকাশিত; স্বয়ংক্রিয় আর্দ্রতা নির্ণয় যাচাইয়ের পরে চালু হবে।
           </p>
         )}
@@ -669,12 +669,12 @@ function DatasetCard({ ds }: { ds: Dataset }) {
         {/* Schema preview — first 4 fields always visible, reveal the rest */}
         <div className="mt-3 flex flex-wrap gap-1">
           {(showAllFields ? ds.fields : ds.fields.slice(0, 4)).map((f) => (
-            <span key={f} className="rounded bg-bone/40 px-1.5 py-0.5 font-mono text-[9px] text-ink-soft">{f}</span>
+            <span key={f} className="rounded bg-bone/40 px-1.5 py-0.5 font-mono text-xs text-ink-soft">{f}</span>
           ))}
           {ds.fields.length > 4 && (
             <button
               onClick={() => setShowAllFields((v) => !v)}
-              className="rounded bg-bone/40 px-1.5 py-0.5 font-mono text-[9px] text-leaf transition-colors hover:bg-leaf/10"
+              className="rounded bg-bone/40 px-1.5 py-0.5 font-mono text-xs text-leaf transition-colors hover:bg-leaf/10"
             >
               {showAllFields ? "কম দেখান" : `সব ${toBn(ds.fields.length)}টি`}
             </button>
@@ -707,7 +707,7 @@ function CountStat({ value, label, tone, active }: { value: number; label: strin
   return (
     <div className="bg-paper px-4 py-3 text-center">
       <div className={cn("font-display text-xl tabular leading-none", color)}>{toBn(n)}</div>
-      <div className="mt-1.5 text-[10px] text-ink-faint">{label}</div>
+      <div className="mt-1.5 text-xs text-ink-faint">{label}</div>
     </div>
   );
 }
@@ -720,7 +720,7 @@ function MastheadStat({ value, label, tone, active, format, staticValue }: { val
   return (
     <div className="text-center">
       <div className={cn("font-display text-lg tabular leading-none", color)}>{display}</div>
-      <div className="mt-1 text-[9px] uppercase tracking-[0.14em] text-ink-faint">{label}</div>
+      <div className="mt-1 text-xs text-ink-faint">{label}</div>
     </div>
   );
 }
@@ -730,7 +730,7 @@ function MiniStat({ value, label, color }: { value: string; label: string; color
   return (
     <div className="rounded-md bg-paper-2/40 px-2 py-2 text-center">
       <div className="font-display text-sm tabular" style={{ color }}>{value}</div>
-      <div className="text-[9px] text-ink-faint">{label}</div>
+      <div className="text-xs text-ink-faint">{label}</div>
     </div>
   );
 }
@@ -834,7 +834,7 @@ function SortControl({ sort, setSort }: { sort: SortKey; setSort: (s: SortKey) =
 /* === Removable filter chip === */
 function FilterChip({ children, onClear }: { children: React.ReactNode; onClear: () => void }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-leaf/30 bg-leaf/10 px-3 py-1 text-[11px] font-medium text-leaf">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-leaf/30 bg-leaf/10 px-3 py-1 text-xs font-medium text-leaf">
       {children}
       <button onClick={onClear} aria-label="ফিল্টার মুছুন" className="transition-colors hover:text-leaf-2"><X className="h-3 w-3" /></button>
     </span>

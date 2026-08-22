@@ -32,7 +32,7 @@ export function InlineAdvisory({
   detectedCrop,
   detectedDisease,
   prefillQuestion,
-  eyebrow = "CONTEXTUAL ADVISORY",
+  eyebrow = "প্রশ্নোত্তর সহায়তা",
   heading = "কৃষি পরামর্শ",
   subheading,
   showContext = true,
@@ -82,7 +82,7 @@ export function InlineAdvisory({
             )}
           </span>
           <span className="min-w-0">
-            <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-ochre">
+            <span className="block text-xs font-semibold text-ochre">
               {eyebrow}
             </span>
             <span className="mt-0.5 block font-display text-base text-ink">{heading}</span>
@@ -92,7 +92,7 @@ export function InlineAdvisory({
         <span className="flex shrink-0 items-center gap-2">
           {/* Context pill — shown when collapsed + context exists */}
           {!open && hasContext && detectedCrop && detectedDisease && (
-            <span className="hidden items-center gap-1.5 rounded-full border border-leaf/20 bg-leaf/5 px-2.5 py-1 text-[10px] font-medium text-leaf sm:inline-flex">
+            <span className="hidden items-center gap-1.5 rounded-full border border-leaf/20 bg-leaf/5 px-2.5 py-1 text-xs font-medium text-leaf sm:inline-flex">
               <Leaf className="h-3 w-3" strokeWidth={1.5} />
               <span className="max-w-[120px] truncate">
                 {detectedCrop} — {humanizeLabel(detectedDisease)}
@@ -101,7 +101,7 @@ export function InlineAdvisory({
           )}
           {/* CTA hint — shown when collapsed, no context */}
           {!open && !hasContext && (
-            <span className="hidden text-[11px] font-medium text-ink-faint sm:inline">{ctaHint}</span>
+            <span className="hidden text-xs font-medium text-ink-faint sm:inline">{ctaHint}</span>
           )}
           <motion.span
             animate={{ rotate: open ? 180 : 0 }}

@@ -41,8 +41,8 @@ export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
       <div className="border-b rule p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ochre">
-              RELEASED DATASET · প্রথম বাংলাদেশি মাটি-আর্দ্রতা ডেটাসেট
+            <p className="text-xs font-semibold text-ochre">
+              প্রকাশিত ডেটাসেট · প্রথম বাংলাদেশি মাটি-আর্দ্রতা ডেটাসেট
             </p>
             <h2 className="mt-1 font-display text-xl text-ink">বাংলাদেশ মাটি-আর্দ্রতা ডেটাসেট</h2>
             <p className="mt-1 text-xs text-ink-faint">
@@ -63,7 +63,7 @@ export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
         </div>
 
         {/* Collection line */}
-        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-ink-faint">
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-ink-faint">
           <span className="flex items-center gap-1.5">
             <MapPin className="h-3.5 w-3.5 text-leaf" /> {info.collection.site}
           </span>
@@ -92,7 +92,7 @@ export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
           {info.samples.slice(0, 12).map((s) => (
             <span
               key={s.image_id}
-              className="rounded-md border rule bg-paper-2/40 px-2 py-1 text-[10px] text-ink-soft tabular"
+              className="rounded-md border rule bg-paper-2/40 px-2 py-1 text-xs text-ink-soft tabular"
             >
               {SOIL_TYPES[s.soil_type as keyof typeof SOIL_TYPES]?.bn ?? s.soil_type} · {bn(s.kpa)} kPa
             </span>
@@ -115,7 +115,7 @@ export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
               >
                 <div>
                   <div className="text-sm font-medium text-ink">{meta?.bn ?? t.key}</div>
-                  <div className="text-[10px] text-ink-faint">{t.usda}</div>
+                  <div className="text-xs text-ink-faint">{t.usda}</div>
                 </div>
                 <span className="font-display text-sm tabular text-leaf">{bn(t.count)}</span>
               </motion.div>
@@ -129,7 +129,7 @@ export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
           <div className="mt-2 space-y-2">
             {bins.map(([bin, count]) => (
               <div key={bin} className="flex items-center gap-3">
-                <span className="w-14 shrink-0 text-[11px] text-ink-soft tabular">{bin} kPa</span>
+                <span className="w-14 shrink-0 text-xs text-ink-soft tabular">{bin} kPa</span>
                 <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-bone">
                   <motion.div
                     initial={{ width: 0 }}
@@ -138,7 +138,7 @@ export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
                     className="h-full rounded-full bg-ochre"
                   />
                 </div>
-                <span className="w-8 shrink-0 text-right text-[11px] text-ink-faint tabular">{bn(count)}</span>
+                <span className="w-8 shrink-0 text-right text-xs text-ink-faint tabular">{bn(count)}</span>
               </div>
             ))}
           </div>
@@ -167,7 +167,7 @@ export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
                 </div>
               ))}
             </div>
-            <div className="mt-2 text-[10px] text-ink-faint">
+            <div className="mt-2 text-xs text-ink-faint">
               অডিট: {bn(info.corrections)}টি kPa সংশোধন · {bn(info.metadata_matched)}/৭২২ মিলেছে
             </div>
           </div>
@@ -180,7 +180,7 @@ export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
           <Lock className="h-3.5 w-3.5 text-ochre" />
           স্বয়ংক্রিয় নির্ণয় মডেল: <strong className="text-ink">উন্নয়নে</strong>
         </span>
-        <span className="text-[10px] text-ink-faint">ডেটাসেট মুক্ত · মডেল যাচাইয়ের পর চালু হবে</span>
+        <span className="text-xs text-ink-faint">ডেটাসেট মুক্ত · মডেল যাচাইয়ের পর চালু হবে</span>
       </div>
     </motion.div>
   );
@@ -190,13 +190,13 @@ function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="rounded-lg border rule bg-paper-2/30 px-3 py-2.5 text-center">
       <div className="font-display text-lg tabular text-leaf">{value}</div>
-      <div className="mt-0.5 text-[10px] text-ink-faint">{label}</div>
+      <div className="mt-0.5 text-xs text-ink-faint">{label}</div>
     </div>
   );
 }
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-faint">{children}</div>
+    <div className="text-xs font-semibold text-ink-faint">{children}</div>
   );
 }

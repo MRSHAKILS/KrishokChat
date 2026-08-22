@@ -250,7 +250,7 @@ export default function AnalyticsPage() {
                 return (
                   <div key={cat} className="flex items-center gap-3">
                     <div className="w-36 shrink-0 truncate">
-                      <span className={`inline-flex max-w-full items-center gap-1.5 truncate rounded-md px-2 py-1 text-[11px] font-medium ${TONE_BADGE[categoryLabel.tone]}`} title={categoryLabel.label}>
+                      <span className={`inline-flex max-w-full items-center gap-1.5 truncate rounded-md px-2 py-1 text-xs font-medium ${TONE_BADGE[categoryLabel.tone]}`} title={categoryLabel.label}>
                         <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${TONE_DOT[categoryLabel.tone]}`} />
                         <span className="truncate">{categoryLabel.label}</span>
                       </span>
@@ -286,7 +286,7 @@ export default function AnalyticsPage() {
       >
         <motion.div variants={enter} className="mb-1 flex items-center gap-2">
           <h2 className="font-display text-lg text-ink">পাইপলাইন পরিসংখ্যান</h2>
-          <span className="rounded-md bg-leaf/10 px-2 py-0.5 text-[10px] font-medium text-leaf">লাইভ স্টেপার ডেটা</span>
+          <span className="rounded-md bg-leaf/10 px-2 py-0.5 text-xs font-medium text-leaf">লাইভ স্টেপার ডেটা</span>
         </motion.div>
         <motion.p variants={enter} className="mb-5 text-xs text-ink-faint">
           চ্যাটে প্রতিটি ধাপের অ্যানিমেশন যে সিদ্ধান্ত দেখায়, এখানে তারই জমা পরিসংখ্যান।
@@ -327,11 +327,11 @@ export default function AnalyticsPage() {
           if (rules.length === 0) return null;
           return (
             <motion.div variants={enter} className="mt-4 flex flex-wrap items-center gap-1.5">
-              <span className="text-[11px] text-ink-faint">অস্বীকৃতির কারণ:</span>
+              <span className="text-xs text-ink-faint">অস্বীকৃতির কারণ:</span>
               {rules.map(([rule, count]) => (
                 <span
                   key={rule}
-                  className="inline-flex items-center gap-1 rounded-full bg-clay-soft/15 px-2.5 py-1 text-[10px] font-medium text-clay ring-1 ring-clay-soft/40"
+                  className="inline-flex items-center gap-1 rounded-full bg-clay-soft/15 px-2.5 py-1 text-xs font-medium text-clay ring-1 ring-clay-soft/40"
                 >
                   {refusalRuleLabel(rule)}
                   <span className="tabular text-clay-soft">{bn(count)}</span>
@@ -358,7 +358,7 @@ export default function AnalyticsPage() {
         ].map((stat) => (
           <motion.div key={stat.label} variants={enter} className="bg-paper-2/30 px-4 py-4 text-center">
             <div className="font-display text-lg tabular text-ochre">{stat.value}</div>
-            <div className="mt-1 text-[10px] font-medium text-ink-faint">
+            <div className="mt-1 text-xs font-medium text-ink-faint">
               {stat.label}
             </div>
           </motion.div>
@@ -438,11 +438,11 @@ export default function AnalyticsPage() {
                         title="উত্তর যাচাই"
                       />
                     </span>
-                    <span className="text-[10px] text-ink-faint tabular">
+                    <span className="text-xs text-ink-faint tabular">
                       {r.timestamp ? new Date(r.timestamp).toLocaleTimeString("bn-BD", { hour: "2-digit", minute: "2-digit" }) : ""}
                     </span>
                     <span
-                      className={`rounded-md px-2 py-0.5 text-[10px] font-medium ${
+                      className={`rounded-md px-2 py-0.5 text-xs font-medium ${
                         isBlocked ? "bg-clay-soft/40 text-clay" : "bg-leaf/10 text-leaf"
                       }`}
                     >
@@ -504,7 +504,7 @@ function StageStat({
           <Icon className={`h-4 w-4 ${color}`} />
           {name}
         </span>
-        <span className="shrink-0 text-[10px] text-ink-faint">{pctLabel}</span>
+        <span className="shrink-0 text-xs text-ink-faint">{pctLabel}</span>
       </div>
       <div className={`mt-3 font-display text-3xl tabular ${color}`}>
         {pct == null ? "—" : (

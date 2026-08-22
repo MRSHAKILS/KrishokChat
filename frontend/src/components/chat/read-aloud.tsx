@@ -374,13 +374,13 @@ export function ReadAloudButton({
         onClick={cycleSpeed}
         type="button"
         title="পড়ার গতি পরিবর্তন করুন (০.৭৫x / ১.০x / ১.২৫x)"
-        className="flex min-h-9 items-center gap-1 rounded-lg border border-bone bg-paper px-2 py-1 text-[11px] font-mono font-medium text-ink-soft hover:border-leaf/40 hover:text-leaf transition-colors cursor-pointer"
+        className="flex min-h-9 items-center gap-1 rounded-lg border border-bone bg-paper px-2 py-1 text-xs font-mono font-medium text-ink-soft hover:border-leaf/40 hover:text-leaf transition-colors cursor-pointer"
       >
         <span>{speedLabelBn}</span>
       </button>
 
       {error && (
-        <p className="text-[11px] text-clay" role="status">
+        <p className="text-xs text-clay" role="status">
           এই ডিভাইসে বাংলা ভয়েস পাওয়া যায়নি — উত্তরটি পড়ে নিন।
         </p>
       )}

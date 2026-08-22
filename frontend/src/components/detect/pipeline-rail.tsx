@@ -70,7 +70,7 @@ export function PipelineRail({
                <RailNode status={status} active={active} />
               <div
                 className={cn(
-                  "mt-2 max-w-[72px] text-center text-[10px] font-medium leading-tight transition-colors sm:max-w-[100px] sm:text-[11px]",
+                  "mt-2 max-w-[72px] text-center text-xs font-medium leading-tight transition-colors sm:max-w-[100px] sm:text-xs",
                   status === "pending" && "text-ink-faint",
                   status === "active" && "text-ochre",
                   status === "complete" && "text-ink",
@@ -81,7 +81,7 @@ export function PipelineRail({
                 {stage.label}
               </div>
               {ev?.detail && status === "complete" && (
-                <div className="mt-0.5 max-w-[100px] truncate text-[10px] text-ink-faint">
+                <div className="mt-0.5 max-w-[100px] truncate text-xs text-ink-faint">
                   {ev.detail}
                 </div>
               )}
@@ -140,7 +140,7 @@ function RailNode({ status, active }: { status: NodeStatus; active: boolean }) {
         transition={{ type: "spring", stiffness: 320, damping: 18 }}
         className={cn(base, "bg-clay text-paper")}
       >
-        <span className="text-[11px] font-bold">!</span>
+        <span className="text-xs font-bold">!</span>
       </motion.div>
     );
   }

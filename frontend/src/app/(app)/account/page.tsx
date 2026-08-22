@@ -179,7 +179,7 @@ export default function AccountPage() {
                       )}
                     </button>
                   </div>
-                  <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-ink-faint">
+                  <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-ink-faint">
                     <span className="rounded-full bg-paper-2/60 px-2 py-0.5">
                       {new Date(item.created_at).toLocaleDateString("bn-BD")}
                     </span>

@@ -38,17 +38,17 @@ export function AgentTrace({
             {active ? <Activity className="h-4 w-4" /> : <CheckCircle2 className="h-4 w-4" />}
           </span>
           <div className="min-w-0">
-            <div className="text-[11px] font-semibold text-ink">{title}</div>
-            <div className="mt-0.5 truncate text-[10px] text-ink-faint">
+            <div className="text-xs font-semibold text-ink">{title}</div>
+            <div className="mt-0.5 truncate text-xs text-ink-faint">
               {active ? (detail ?? "নিরাপদভাবে ধাপগুলো সম্পন্ন হচ্ছে") : completed ? "সব ধাপ সম্পন্ন" : "প্রস্তুত"}
             </div>
           </div>
         </div>
-        <span className={cn("shrink-0 rounded-full px-2 py-1 text-[10px] font-semibold", active ? "bg-ochre-soft/30 text-ochre" : completed ? "bg-leaf/10 text-leaf" : "bg-bone text-ink-faint")}>
+        <span className={cn("shrink-0 rounded-full px-2 py-1 text-xs font-semibold", active ? "bg-ochre-soft/30 text-ochre" : completed ? "bg-leaf/10 text-leaf" : "bg-bone text-ink-faint")}>
           {active ? "চলছে" : completed ? "সম্পন্ন" : "অপেক্ষায়"}
         </span>
       </div>
-      {current?.detail && active && <div className="mt-3 rounded-lg border border-ochre-soft/40 bg-ochre-soft/10 px-3 py-2 text-[11px] text-ink-soft">{current.detail}</div>}
+      {current?.detail && active && <div className="mt-3 rounded-lg border border-ochre-soft/40 bg-ochre-soft/10 px-3 py-2 text-xs text-ink-soft">{current.detail}</div>}
       <div className="mt-5 overflow-x-auto pb-1">
         <PipelineRail stages={stages} events={events} active={active} />
       </div>

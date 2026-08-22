@@ -136,7 +136,7 @@ export function SuggestedQuestions({
         variants={{ visible: { transition: { staggerChildren: 0.04 } } }}
         className="space-y-2 text-left"
       >
-        <div className="flex items-center gap-1.5 text-[11px] font-medium text-ink-faint">
+        <div className="flex items-center gap-1.5 text-xs font-medium text-ink-faint">
           <Sparkles className="h-3 w-3 text-leaf" />
           <span>{isContextual ? "সনাক্তকৃত ফসল সম্পর্কিত প্রশ্ন:" : "পরামর্শের জন্য প্রশ্ন নির্বাচন করুন:"}</span>
         </div>
@@ -174,7 +174,7 @@ export function SuggestedQuestions({
           <span>পরামর্শের নমুনা ও উপভাষা নির্বাচক</span>
         </div>
 
-        <div className="flex items-center rounded-lg border rule bg-paper p-0.5 text-[11px]">
+        <div className="flex items-center rounded-lg border rule bg-paper p-0.5 text-xs">
           <button
             onClick={() => setMode("standard")}
             className={cn(

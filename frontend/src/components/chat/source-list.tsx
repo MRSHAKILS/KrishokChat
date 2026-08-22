@@ -21,7 +21,7 @@ export function SourceList({ sources }: { sources: SourceNode[] }) {
     <div className="mt-3 border-t rule pt-2">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="control-press flex min-h-9 items-center gap-1.5 rounded-lg px-1.5 text-[11px] font-semibold text-ink-faint transition-colors hover:text-leaf"
+        className="control-press flex min-h-9 items-center gap-1.5 rounded-lg px-1.5 text-xs font-semibold text-ink-faint transition-colors hover:text-leaf"
       >
         <Building2 className="h-3.5 w-3.5 text-leaf" />
         তথ্যসূত্র দেখুন ({sources.length}টি)
@@ -50,7 +50,7 @@ export function SourceList({ sources }: { sources: SourceNode[] }) {
                   {/* Organization Header */}
                   <div className="flex flex-wrap items-center justify-between gap-1.5 border-b rule pb-2">
                     <div className="flex items-center gap-1.5">
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-leaf text-[10px] font-bold text-paper tabular">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-leaf text-xs font-bold text-paper tabular">
                         {i + 1}
                       </span>
                       <span className="font-semibold text-leaf flex items-center gap-1">
@@ -58,7 +58,7 @@ export function SourceList({ sources }: { sources: SourceNode[] }) {
                         {pubName}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 text-[10px]">
+                    <div className="flex items-center gap-2 text-xs">
                       {src.expert_verified && (
                         <span className="flex items-center gap-0.5 text-leaf font-medium">
                           <CheckCircle2 className="h-3 w-3" /> যাচাইকৃত
@@ -78,14 +78,14 @@ export function SourceList({ sources }: { sources: SourceNode[] }) {
 
                   {/* Citation / Section Note */}
                   {src.citation && (
-                    <p className="mt-1 ml-5 text-[11px] italic text-ink-soft bg-paper-2/60 p-2 rounded rule">
+                    <p className="mt-1 ml-5 text-xs italic text-ink-soft bg-paper-2/60 p-2 rounded rule">
                       &ldquo;{src.citation.trim()}&rdquo;
                     </p>
                   )}
 
                   {/* Grounded Excerpt */}
                   {src.answer && (
-                    <p className="mt-1.5 ml-5 text-[11px] leading-relaxed text-ink-soft line-clamp-2">
+                    <p className="mt-1.5 ml-5 text-xs leading-relaxed text-ink-soft line-clamp-2">
                       {src.answer}
                     </p>
                   )}

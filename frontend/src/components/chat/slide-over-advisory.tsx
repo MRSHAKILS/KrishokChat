@@ -99,7 +99,7 @@ export function SlideOverAdvisory({
               </span>
 
               <span className="flex flex-col text-left">
-                <span className="text-[11px] font-medium text-paper/80 leading-none">
+                <span className="text-xs font-medium text-paper/80 leading-none">
                   {hasContext ? "আক্রান্ত ফসল নিয়ে" : triggerEyebrow}
                 </span>
                 <span className="text-sm font-bold leading-tight mt-0.5">
@@ -109,7 +109,7 @@ export function SlideOverAdvisory({
                 </span>
               </span>
 
-              <span className="ml-1 rounded-full bg-paper/15 px-2 py-0.5 text-[11px] font-mono text-paper/90 group-hover:bg-paper/25">
+              <span className="ml-1 rounded-full bg-paper/15 px-2 py-0.5 text-xs font-mono text-paper/90 group-hover:bg-paper/25">
                 বার্তা ↵
               </span>
             </button>
@@ -153,7 +153,7 @@ export function SlideOverAdvisory({
                     <div>
                       <div className="flex items-center gap-2">
                         <h2 className="font-display text-base text-ink">{title}</h2>
-                        <span className="rounded-full bg-leaf/10 px-2 py-0.5 text-[10px] font-semibold text-leaf">
+                        <span className="rounded-full bg-leaf/10 px-2 py-0.5 text-xs font-semibold text-leaf">
                           সক্রিয়
                         </span>
                       </div>
@@ -192,7 +192,7 @@ export function SlideOverAdvisory({
                           <strong>প্রসঙ্গ:</strong> {detectedCrop} — {humanizeLabel(detectedDisease!)}
                         </span>
                       </div>
-                      <span className="text-[11px] text-ink-faint">শনাক্তকৃত ফসল ভিত্তিক উত্তর</span>
+                      <span className="text-xs text-ink-faint">শনাক্তকৃত ফসল ভিত্তিক উত্তর</span>
                     </div>
                   </div>
                 )}

@@ -167,19 +167,19 @@ export function PrescriptionModal({
             {/* Diagnosis Overview Grid */}
             <div className="grid grid-cols-2 gap-3 rounded-xl border border-leaf/20 bg-leaf/5 p-4 sm:grid-cols-3">
               <div>
-                <div className="text-[11px] font-semibold text-ink-faint">আক্রান্ত ফসল</div>
+                <div className="text-xs font-semibold text-ink-faint">আক্রান্ত ফসল</div>
                 <div className="mt-0.5 font-display text-base font-bold text-leaf">
                   {cropDisplay}
                 </div>
               </div>
               <div>
-                <div className="text-[11px] font-semibold text-ink-faint">শনাক্তকৃত রোগ</div>
+                <div className="text-xs font-semibold text-ink-faint">শনাক্তকৃত রোগ</div>
                 <div className="mt-0.5 font-display text-base font-bold text-clay">
                   {diseaseDisplay}
                 </div>
               </div>
               <div className="col-span-2 sm:col-span-1">
-                <div className="text-[11px] font-semibold text-ink-faint">নিশ্চয়তা / নির্ভরযোগ্যতা</div>
+                <div className="text-xs font-semibold text-ink-faint">নিশ্চয়তা / নির্ভরযোগ্যতা</div>
                 <div className="mt-0.5 text-xs font-semibold text-leaf flex items-center gap-1">
                   <CheckCircle2 className="h-3.5 w-3.5" />
                   {result.treatment_confidence === "verified" ? "সরকারি তথ্যে যাচাইকৃত" : "আংশিক যাচাইকৃত"}
@@ -226,7 +226,7 @@ export function PrescriptionModal({
 
             {/* Source Provenance Footer */}
             {result.treatment_sources.length > 0 && (
-              <div className="rounded-lg border rule bg-paper-2/30 p-3 text-[11px] text-ink-faint">
+              <div className="rounded-lg border rule bg-paper-2/30 p-3 text-xs text-ink-faint">
                 <span className="font-semibold text-ink">তথ্যের প্রাতিষ্ঠানিক উৎস:</span>{" "}
                 {result.treatment_sources.join(", ")} — কৃষি সম্প্রসারণ অধিদপ্তর (DAE) ও সংশ্লিষ্ট গবেষণা সংস্থা।
               </div>
@@ -240,7 +240,7 @@ export function PrescriptionModal({
                 </div>
                 <div>
                   <div className="text-xs font-bold text-leaf">কৃষি জরুরি পরামর্শ ও কল সেন্টার</div>
-                  <div className="text-[11px] text-ink-soft">যে কোনো প্রশ্নে সরকারি কৃষি কর্মকর্তার সাথে সরাসরি কথা বলুন</div>
+                  <div className="text-xs text-ink-soft">যে কোনো প্রশ্নে সরকারি কৃষি কর্মকর্তার সাথে সরাসরি কথা বলুন</div>
                 </div>
               </div>
               <div className="font-display text-xl font-bold tabular text-leaf">
@@ -249,7 +249,7 @@ export function PrescriptionModal({
             </div>
 
             {/* Disclaimer */}
-            <div className="text-center text-[10px] text-ink-faint border-t rule pt-3">
+            <div className="text-center text-xs text-ink-faint border-t rule pt-3">
               * এটি একটি গবেষণা ও সরকারি তথ্য-সংরক্ষিত ডিজিটাল পরামর্শ। কোনো বিভ্রান্তি হলে স্থানীয় উপসহকারী কৃষি কর্মকর্তা (SAAO)-এর সাথে যোগাযোগ করুন।
             </div>
           </div>

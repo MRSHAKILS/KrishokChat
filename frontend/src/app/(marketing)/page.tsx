@@ -93,7 +93,7 @@ function HeroSection() {
       <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
         <div className="flex flex-col justify-between px-7 py-9 sm:px-12 sm:py-12 lg:min-h-[510px]">
           <div>
-            <motion.div variants={enter} className="flex flex-wrap items-center gap-2 text-[11px] font-semibold text-leaf">
+            <motion.div variants={enter} className="flex flex-wrap items-center gap-2 text-xs font-semibold text-leaf">
               <span className="h-2 w-2 rounded-full bg-ochre" /> {APP.tagline}
             </motion.div>
             <motion.h1 variants={enter} className="mt-6 max-w-xl font-display text-4xl leading-[1.16] text-ink sm:text-6xl">
@@ -139,8 +139,8 @@ function HeroSection() {
           />
           <motion.div variants={enter} className="relative z-10 ml-auto w-[min(100%,22rem)] rounded-xl border rule bg-paper p-4 shadow-[0_10px_24px_rgba(52,39,23,0.12)]">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-faint">মাঠের এআই সেবা</span>
-              <span className="flex items-center gap-1.5 text-[10px] font-semibold text-leaf"><span className="h-1.5 w-1.5 rounded-full bg-leaf" /> সিস্টেম সক্রিয়</span>
+              <span className="text-xs font-semibold text-ink-faint">মাঠের এআই সেবা</span>
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-leaf"><span className="h-1.5 w-1.5 rounded-full bg-leaf" /> সিস্টেম সক্রিয়</span>
             </div>
             <p className="mt-3 font-display text-lg leading-snug text-ink">অফলাইন রোগ নির্ণয় ও পরামর্শ</p>
             <div className="mt-3 grid grid-cols-2 gap-2">
@@ -155,7 +155,7 @@ function HeroSection() {
 }
 
 function HeroMetric({ value, label }: { value: string; label: string }) {
-  return <div><div className="font-display text-xl tabular text-leaf">{value}</div><div className="mt-1 text-[10px] leading-tight text-ink-faint">{label}</div></div>;
+  return <div><div className="font-display text-xl tabular text-leaf">{value}</div><div className="mt-1 text-xs leading-tight text-ink-faint">{label}</div></div>;
 }
 
 function JudgeNav() {
@@ -168,7 +168,7 @@ function JudgeNav() {
 
   return (
     <nav aria-label="প্রকল্পের দ্রুত পর্যবেক্ষণ" className="sticky top-[64px] z-30 mx-auto flex max-w-5xl items-center justify-between gap-3 overflow-x-auto rounded-xl border rule bg-paper/90 px-2 py-2 shadow-sm backdrop-blur-md">
-      <span className="hidden shrink-0 px-2 text-[11px] font-semibold text-ink-faint sm:block">প্রকল্পটি দেখুন</span>
+      <span className="hidden shrink-0 px-2 text-xs font-semibold text-ink-faint sm:block">প্রকল্পটি দেখুন</span>
       <div className="flex min-w-max items-center gap-1">
         {items.map((item) => (
           <a key={item.href} href={item.href} className="control-press rounded-lg px-3 py-2 text-xs font-medium text-ink-soft hover:bg-paper-2 hover:text-leaf">
@@ -224,10 +224,10 @@ function CapabilityHub() {
     <motion.section id="experience" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="scroll-mt-32 mx-auto max-w-5xl">
       <motion.div variants={enter} className="mb-5 flex items-end justify-between gap-4">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ochre">One system, three entry points</p>
+          <p className="text-xs font-semibold text-ochre">এক সেবা, তিন পথ</p>
           <h2 className="mt-2 font-display text-2xl text-ink sm:text-3xl">এক নজরে পুরো প্রকল্প</h2>
         </div>
-        <span className="hidden items-center gap-1.5 text-xs text-ink-faint sm:flex"><BarChart3 className="h-4 w-4 text-leaf" /> user + research + evidence</span>
+        <span className="hidden items-center gap-1.5 text-xs text-ink-faint sm:flex"><BarChart3 className="h-4 w-4 text-leaf" /> ব্যবহারকারী + গবেষণা + প্রমাণ</span>
       </motion.div>
       <motion.div variants={enter} className="overflow-hidden rounded-2xl border rule bg-paper shadow-[0_12px_36px_rgba(52,39,23,0.07)]">
         <div className="grid md:grid-cols-[240px_1fr]">
@@ -247,15 +247,15 @@ function CapabilityHub() {
             <motion.div key={active} initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: dur.fast, ease: ease.smooth }} className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[1fr_220px]">
               <div>
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-leaf/10 text-leaf"><Icon className="h-5 w-5" /></div>
-                <p className="mt-5 text-[10px] font-semibold tracking-[0.16em] text-ochre">{panel.eyebrow}</p>
+                <p className="mt-5 text-xs font-semibold tracking-[0.16em] text-ochre">{panel.eyebrow}</p>
                 <h3 className="mt-2 max-w-xl font-display text-2xl leading-snug text-ink">{panel.title}</h3>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft">{panel.body}</p>
-                <div className="mt-5 flex flex-wrap gap-2">{panel.chips.map((chip) => <span key={chip} className="rounded-full border border-leaf/20 bg-leaf/5 px-2.5 py-1 text-[11px] font-medium text-leaf">{chip}</span>)}</div>
+                <div className="mt-5 flex flex-wrap gap-2">{panel.chips.map((chip) => <span key={chip} className="rounded-full border border-leaf/20 bg-leaf/5 px-2.5 py-1 text-xs font-medium text-leaf">{chip}</span>)}</div>
                 <Link href={panel.href} className="control-press mt-6 inline-flex min-h-11 items-center gap-2 rounded-xl bg-leaf px-4 py-2.5 text-sm font-semibold text-paper hover:bg-leaf-2">{panel.cta}<ArrowRight className="h-4 w-4" /></Link>
               </div>
               <div className="grid content-center gap-2 rounded-xl border rule bg-paper-2/30 p-4">
                 {["প্রশ্ন/ছবি গ্রহণ", "এজেন্ট সিদ্ধান্ত", "প্রমাণ ও ফলাফল"].map((label, i) => (
-                  <div key={label} className="flex items-center gap-3 rounded-lg bg-paper px-3 py-2.5 text-xs text-ink-soft shadow-sm"><span className="flex h-6 w-6 items-center justify-center rounded-full bg-leaf text-[10px] font-semibold text-paper">{i + 1}</span>{label}</div>
+                  <div key={label} className="flex items-center gap-3 rounded-lg bg-paper px-3 py-2.5 text-xs text-ink-soft shadow-sm"><span className="flex h-6 w-6 items-center justify-center rounded-full bg-leaf text-xs font-semibold text-paper">{i + 1}</span>{label}</div>
                 ))}
               </div>
             </motion.div>
@@ -296,7 +296,7 @@ function VisualStatsSection() {
         {/* Retrieval performance bar chart */}
         <motion.div variants={enter} className="rounded-xl border rule bg-paper p-6">
           <h3 className="mb-1 font-display text-sm text-ink">তথ্য সংগ্রহ নির্ভুলতা</h3>
-          <p className="mb-4 text-[11px] text-ink-faint">প্রতিটি প্রশ্নের সঠিক উৎস খুঁজে পাওয়ার হার</p>
+          <p className="mb-4 text-xs text-ink-faint">প্রতিটি প্রশ্নের সঠিক উৎস খুঁজে পাওয়ার হার</p>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={RETRIEVAL_DATA} layout="vertical" margin={{ left: 10, right: 20 }}>
               <XAxis type="number" domain={[0, 0.6]} hide />
@@ -309,7 +309,7 @@ function VisualStatsSection() {
               <Tooltip formatter={(v) => `${(Number(v) * 100).toFixed(1)}%`} />
             </BarChart>
           </ResponsiveContainer>
-          <div className="mt-2 flex items-center gap-2 rounded-md bg-leaf/10 px-2.5 py-1.5 text-[11px] text-leaf">
+          <div className="mt-2 flex items-center gap-2 rounded-md bg-leaf/10 px-2.5 py-1.5 text-xs text-leaf">
             <CheckCircle2 className="h-3 w-3" />
             <span className="font-medium">মিশ্র পদ্ধতি</span> সবচেয়ে নির্ভুল ফলাফল দিয়েছে
           </div>
@@ -326,7 +326,7 @@ function VisualStatsSection() {
         ].map((s) => (
           <div key={s.label} className="bg-paper px-4 py-5 text-center">
             <div className="font-display text-2xl tabular text-leaf">{s.value}</div>
-            <div className="mt-1 text-[11px] font-medium text-ink-soft">{s.label}</div>
+            <div className="mt-1 text-xs font-medium text-ink-soft">{s.label}</div>
           </div>
         ))}
       </motion.div>
@@ -371,7 +371,7 @@ function RagPipelineDemo() {
       <motion.div variants={enter} className="mt-6 rounded-xl border rule bg-paper-2/40 p-4">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
-            <div className="text-[10px] font-semibold text-ink-faint">কৃষকের প্রশ্ন</div>
+            <div className="text-xs font-semibold text-ink-faint">কৃষকের প্রশ্ন</div>
             <div className="mt-1 text-sm font-medium text-ink">{RAG_QUERY}</div>
           </div>
           <button onClick={run} disabled={running} className="flex items-center gap-2 rounded-lg bg-leaf px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:opacity-50">
@@ -409,10 +409,10 @@ function RagPipelineDemo() {
                 {RAG_SOURCES.slice(0, visibleSources).map((src, i) => (
                   <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="rounded-md border rule bg-paper px-3 py-2">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-[11px] font-medium text-ink">{src.title}</span>
-                      <span className="shrink-0 rounded bg-bone px-1.5 py-0.5 text-[9px] font-semibold text-ink-soft">{src.agency}</span>
+                      <span className="text-xs font-medium text-ink">{src.title}</span>
+                      <span className="shrink-0 rounded bg-bone px-1.5 py-0.5 text-xs font-semibold text-ink-soft">{src.agency}</span>
                     </div>
-                    <p className="mt-0.5 text-[11px] text-ink-soft">{src.snippet}</p>
+                    <p className="mt-0.5 text-xs text-ink-soft">{src.snippet}</p>
                   </motion.div>
                 ))}
               </div>
@@ -496,7 +496,7 @@ function TimelineSection() {
     <motion.section id="field" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="scroll-mt-32 mx-auto max-w-5xl">
       <motion.div variants={enter} className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ochre">From fieldwork to product</p>
+          <p className="text-xs font-semibold text-ochre">মাঠ থেকে পণ্য</p>
           <h2 className="mt-2 font-display text-2xl text-ink sm:text-3xl">গবেষণা যেভাবে ব্যবহারযোগ্য সিস্টেম হলো</h2>
         </div>
         <Link href="/team" className="control-press inline-flex min-h-10 items-center gap-1.5 self-start rounded-lg border rule px-3 text-xs font-medium text-ink-soft hover:border-leaf hover:text-leaf">
@@ -509,9 +509,9 @@ function TimelineSection() {
           <img src="/assets/researcher-interviewing-farmer.png" alt="মাঠ পর্যায়ে কৃষকের সাক্ষাৎকার" className="absolute inset-0 h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
           <div className="absolute inset-x-5 bottom-5 text-paper sm:inset-x-7 sm:bottom-7">
-            <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ochre-soft">Rajshahi + Natore field study</div>
+            <div className="text-xs font-semibold text-ochre-soft">রাজশাহী + নাটোর মাঠ-সমীক্ষা</div>
             <div className="mt-2 font-display text-2xl">৩০০ কৃষকের বাস্তব ভাষা ও সমস্যা</div>
-            <p className="mt-1 max-w-lg text-xs leading-relaxed text-paper/70">মাঠ সাক্ষাৎকারের প্রশ্ন থেকে farmer-query benchmark, dialect coverage এবং ব্যবহারযোগ্য Bengali interaction তৈরি হয়েছে।</p>
+            <p className="mt-1 max-w-lg text-xs leading-relaxed text-paper/70">মাঠ সাক্ষাৎকারের প্রশ্ন থেকে কৃষক-প্রশ্ন বেঞ্চমার্ক, উপভাষা কভারেজ এবং ব্যবহারযোগ্য বাংলা ইন্টারঅ্যাকশন তৈরি হয়েছে।</p>
           </div>
         </motion.div>
         <motion.div variants={enter} className="p-6 sm:p-8">
@@ -523,7 +523,7 @@ function TimelineSection() {
                   {i < milestones.length - 1 && <div className="my-1 h-10 w-px bg-bone" />}
                 </div>
                 <div className={`flex-1 ${i < milestones.length - 1 ? "pb-5" : "pb-0"}`}>
-                  <div className="flex flex-wrap items-baseline gap-2"><span className="text-[11px] font-semibold text-ochre tabular">{m.year}</span><span className="font-display text-base text-ink">{m.title}</span></div>
+                  <div className="flex flex-wrap items-baseline gap-2"><span className="text-xs font-semibold text-ochre tabular">{m.year}</span><span className="font-display text-base text-ink">{m.title}</span></div>
                   <p className="mt-1 text-xs leading-relaxed text-ink-soft">{m.desc}</p>
                 </div>
               </motion.div>
@@ -531,7 +531,7 @@ function TimelineSection() {
           </div>
           <div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-xl border rule bg-bone">
             {[{ value: RESEARCH_STATS.fieldInterviews, label: "সাক্ষাৎকার" }, { value: RESEARCH_STATS.publications, label: "প্রকাশনা" }, { value: RESEARCH_STATS.institutions, label: "প্রতিষ্ঠান" }].map((stat) => (
-              <div key={stat.label} className="bg-paper-2/50 px-2 py-3 text-center"><div className="font-display text-lg tabular text-leaf">{stat.value}</div><div className="text-[9px] text-ink-faint">{stat.label}</div></div>
+              <div key={stat.label} className="bg-paper-2/50 px-2 py-3 text-center"><div className="font-display text-lg tabular text-leaf">{stat.value}</div><div className="text-xs text-ink-faint">{stat.label}</div></div>
             ))}
           </div>
         </motion.div>
@@ -666,7 +666,7 @@ function WeatherAndHelplineSection() {
 
             <div className="mt-4 space-y-3">
               <div>
-                <label className="text-[11px] font-semibold text-ink-faint">আপনার নাম *</label>
+                <label className="text-xs font-semibold text-ink-faint">আপনার নাম *</label>
                 <input
                   type="text"
                   placeholder="যেমন: মোঃ রফিকুল ইসলাম"
@@ -677,7 +677,7 @@ function WeatherAndHelplineSection() {
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-[11px] font-semibold text-ink-faint">মোবাইল নম্বর *</label>
+                  <label className="text-xs font-semibold text-ink-faint">মোবাইল নম্বর *</label>
                   <input
                     type="tel"
                     placeholder="01712345678"
@@ -687,7 +687,7 @@ function WeatherAndHelplineSection() {
                   />
                 </div>
                 <div>
-                  <label className="text-[11px] font-semibold text-ink-faint">জেলা *</label>
+                  <label className="text-xs font-semibold text-ink-faint">জেলা *</label>
                   <input
                     type="text"
                     placeholder="যেমন: বগুড়া"
@@ -827,17 +827,17 @@ function AgriDosageCalculatorSection() {
             <div className="space-y-3">
               <div className="text-xs font-semibold text-leaf flex items-center justify-between">
                 <span>হিসাবকৃত স্প্রে ফর্মুলা:</span>
-                <span className="rounded bg-ochre-soft/25 px-2 py-0.5 text-[10px] text-ochre">ডেমো হিসাব</span>
+                <span className="rounded bg-ochre-soft/25 px-2 py-0.5 text-xs text-ochre">ডেমো হিসাব</span>
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-center">
                 <div className="rounded-lg bg-paper p-3 border rule">
                   <div className="text-xl font-bold text-leaf">{totalTanks} টি</div>
-                  <div className="text-[10px] text-ink-soft mt-0.5">১৬L স্প্রে ট্যাংক লাগবে</div>
+                  <div className="text-xs text-ink-soft mt-0.5">১৬L স্প্রে ট্যাংক লাগবে</div>
                 </div>
                 <div className="rounded-lg bg-paper p-3 border rule">
                   <div className="text-xl font-bold text-ochre">{totalChemical} {selectedPest.unit}</div>
-                  <div className="text-[10px] text-ink-soft mt-0.5">মোট বালাইনাশক প্রয়োজন</div>
+                  <div className="text-xs text-ink-soft mt-0.5">মোট বালাইনাশক প্রয়োজন</div>
                 </div>
               </div>
 
@@ -847,7 +847,7 @@ function AgriDosageCalculatorSection() {
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t rule flex items-center justify-between text-[11px] text-ink-faint">
+            <div className="mt-4 pt-3 border-t rule flex items-center justify-between text-xs text-ink-faint">
               <span className="flex items-center gap-1 text-clay font-medium">
                 ⚠️ মাস্ক ও গ্লাভস পরা বাধ্যতামূলক
               </span>
@@ -936,8 +936,8 @@ function InstitutionalTrustSection() {
           {INSTITUTES.map((inst) => (
             <div key={inst.code} className="rounded-xl border rule bg-paper-2/30 p-3 text-center transition-all hover:border-leaf/30">
               <div className="font-display text-sm font-bold text-leaf">{inst.code}</div>
-              <div className="mt-1 text-[11px] font-medium text-ink truncate">{inst.name}</div>
-              <div className="mt-0.5 text-[9px] text-ink-faint">{inst.role}</div>
+              <div className="mt-1 text-xs font-medium text-ink truncate">{inst.name}</div>
+              <div className="mt-0.5 text-xs text-ink-faint">{inst.role}</div>
             </div>
           ))}
         </div>

@@ -50,7 +50,7 @@ export function SoilLockedCard({
               <div>
                 <div className="flex items-center gap-2">
                   <h3 className="font-display text-lg font-bold text-ink">মাটির আর্দ্রতা ও সেচ বিশ্লেষণ</h3>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2 py-0.5 text-[11px] font-semibold text-leaf">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2 py-0.5 text-xs font-semibold text-leaf">
                     <Sparkles className="h-3 w-3" /> নির্ণীত
                   </span>
                 </div>
@@ -58,7 +58,7 @@ export function SoilLockedCard({
               </div>
             </div>
             <div className="text-right">
-              <span className="text-[11px] font-medium text-ink-faint">নির্ভরযোগ্যতা</span>
+              <span className="text-xs font-medium text-ink-faint">নির্ভরযোগ্যতা</span>
               <div className="font-display text-sm font-bold text-leaf">{bn(confidence)}%</div>
             </div>
           </div>
@@ -67,11 +67,11 @@ export function SoilLockedCard({
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {/* Metric 1: Tension in kPa */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-[11px] font-medium text-ink-faint">আর্দ্রতা টান (Tension)</span>
+              <span className="text-xs font-medium text-ink-faint">আর্দ্রতা টান (Tension)</span>
               <div className="mt-1 font-display text-2xl font-black text-ink">
                 {bn(kpa.toFixed(1))} <span className="text-xs font-normal text-ink-soft">kPa</span>
               </div>
-              <div className="mt-1 flex items-center justify-center gap-1 text-[10px] text-ink-soft">
+              <div className="mt-1 flex items-center justify-center gap-1 text-xs text-ink-soft">
                 {isDry ? (
                   <span className="font-medium text-clay">ঘাটতি এলাকা (&gt;১২ kPa)</span>
                 ) : isWet ? (
@@ -84,18 +84,18 @@ export function SoilLockedCard({
 
             {/* Metric 2: Soil Classification */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-[11px] font-medium text-ink-faint">শনাক্তকৃত মাটির ধরন</span>
+              <span className="text-xs font-medium text-ink-faint">শনাক্তকৃত মাটির ধরন</span>
               <div className="mt-1 font-display text-lg font-bold text-ink">{soilType}</div>
-              <span className="mt-1 inline-block text-[10px] text-ink-soft">{result.soil_type || "Loam Series"}</span>
+              <span className="mt-1 inline-block text-xs text-ink-soft">{result.soil_type || "Loam Series"}</span>
             </div>
 
             {/* Metric 3: Moisture Condition */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-[11px] font-medium text-ink-faint">আর্দ্রতার অবস্থা</span>
+              <span className="text-xs font-medium text-ink-faint">আর্দ্রতার অবস্থা</span>
               <div className={`mt-1 font-display text-base font-bold ${isDry ? "text-clay" : isWet ? "text-sky-700" : "text-leaf"}`}>
                 {statusBn}
               </div>
-              <div className="mt-1 flex items-center justify-center gap-1 text-[10px] text-ink-soft">
+              <div className="mt-1 flex items-center justify-center gap-1 text-xs text-ink-soft">
                 {isDry ? <AlertTriangle className="h-3 w-3 text-clay" /> : <CheckCircle2 className="h-3 w-3 text-leaf" />}
                 {isDry ? "সেচ প্রয়োজন" : isWet ? "সেচ স্থগিত রাখুন" : "সেচ প্রয়োজন নেই"}
               </div>
@@ -163,14 +163,14 @@ export function SoilLockedCard({
               </span>
               <button
                 onClick={() => setShowTable((v) => !v)}
-                className="flex items-center gap-1 text-[11px] font-medium text-leaf hover:text-leaf-2"
+                className="flex items-center gap-1 text-xs font-medium text-leaf hover:text-leaf-2"
                 aria-expanded={showTable}
               >
                 {showTable ? "লুকান" : `${bn(models.length)}টি মডেল দেখুন`}
                 <ChevronDown className={`h-3 w-3 transition-transform ${showTable ? "rotate-180" : ""}`} />
               </button>
             </div>
-            <p className="mt-1.5 text-[11px] leading-relaxed text-ink-faint">
+            <p className="mt-1.5 text-xs leading-relaxed text-ink-faint">
               ৭২২টি ডিজিটাল টেনশিওমিটার পরিমাপের সাথে ইমেজ ফিচারের তুলনামূলক আরএমএসই (RMSE) স্কোর।
             </p>
             <AnimatePresence initial={false}>
@@ -185,7 +185,7 @@ export function SoilLockedCard({
                   <div className="mt-3 overflow-x-auto">
                     <table className="w-full text-left text-xs">
                       <thead>
-                        <tr className="border-b rule text-[10px] uppercase tracking-wide text-ink-faint">
+                        <tr className="border-b rule text-xs text-ink-faint">
                           <th className="py-2 pr-3 font-medium">মডেল</th>
                           <th className="py-2 pr-3 text-right font-medium">RMSE (kPa)</th>
                           <th className="py-2 text-right font-medium">R²</th>

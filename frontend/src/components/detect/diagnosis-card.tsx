@@ -94,13 +94,13 @@ function DiagnosedCard({ result, onClear }: { result: DetectResponse; onClear?: 
                 {result.crop_source === "user" ? cropBn(result.crop) : (result.crop ?? "—")}
               </span>
               {result.crop_source === "user" && (
-                <span className="rounded-md bg-paper-2 px-1.5 py-0.5 text-[10px] font-medium text-ink-faint">
+                <span className="rounded-md bg-paper-2 px-1.5 py-0.5 text-xs font-medium text-ink-faint">
                   নির্বাচিত
                 </span>
               )}
             </div>
             {result.crop_source === "user" ? (
-              <div className="text-[11px] text-ink-faint">
+              <div className="text-xs text-ink-faint">
                 আপনার নির্বাচন অনুযায়ী {cropBn(result.crop) || ""} রোগ মডেল দিয়ে বিশ্লেষণ হয়েছে
               </div>
             ) : (
@@ -130,7 +130,7 @@ function DiagnosedCard({ result, onClear }: { result: DetectResponse; onClear?: 
         <div className="space-y-4 border-t rule p-5">
           {descClean && (
             <div>
-              <div className="mb-1.5 text-[11px] font-semibold text-ink-faint">
+              <div className="mb-1.5 text-xs font-semibold text-ink-faint">
                 বিবরণ
               </div>
               <p className="text-sm leading-relaxed text-ink-soft">{descClean}</p>
@@ -138,7 +138,7 @@ function DiagnosedCard({ result, onClear }: { result: DetectResponse; onClear?: 
           )}
           {causeClean && (
             <div>
-              <div className="mb-1.5 text-[11px] font-semibold text-ink-faint">
+              <div className="mb-1.5 text-xs font-semibold text-ink-faint">
                 কারণ
               </div>
               <p className="text-sm leading-relaxed text-ink-soft">{causeClean}</p>
@@ -146,7 +146,7 @@ function DiagnosedCard({ result, onClear }: { result: DetectResponse; onClear?: 
           )}
           {solClean && (
             <div className="rounded-lg border border-leaf/20 bg-leaf/5 p-4">
-              <div className="mb-1.5 text-[11px] font-semibold text-leaf">
+              <div className="mb-1.5 text-xs font-semibold text-leaf">
                 প্রাথমিক সতর্কতা ও ব্যবস্থা
               </div>
               <p className="text-sm leading-relaxed text-ink">{solClean}</p>
@@ -303,7 +303,7 @@ function InvalidImageCard({ result }: { result: DetectResponse }) {
       </ul>
 
       <div className="mt-4 border-t border-ochre-soft/40 pt-4">
-        <div className="mb-2 text-[11px] font-semibold text-ink-faint">
+        <div className="mb-2 text-xs font-semibold text-ink-faint">
           ভালো ছবির জন্য
         </div>
         <ul className="space-y-1.5 text-xs text-ink-soft">

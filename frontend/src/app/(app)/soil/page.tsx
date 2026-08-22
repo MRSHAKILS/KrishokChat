@@ -161,10 +161,10 @@ export default function SoilPage() {
       <div>
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ochre">SOIL MOISTURE FIELD CONSOLE</p>
+            <p className="mb-2 text-xs font-semibold text-ochre">মাঠের মাটি পরীক্ষা</p>
             <h1 className="font-display text-3xl text-ink">মাটির আর্দ্রতা</h1>
           </div>
-          <div className="flex flex-wrap items-center gap-2 text-[11px] text-ink-faint">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-ink-faint">
             <span className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 py-1.5"><span className={`h-1.5 w-1.5 rounded-full ${online ? "bg-leaf" : "bg-clay"}`} />{online ? "সিস্টেম অনলাইন" : "অফলাইন"}</span>
             <span className="rounded-full border rule bg-paper-2/40 px-2.5 py-1.5">ডেটাসেট প্রকাশিত · মডেল উন্নয়নে</span>
           </div>
@@ -429,7 +429,7 @@ function SoilDropzone({
               <div className="mt-1 flex items-center justify-center gap-1.5 text-xs text-ink-faint">
                 টানে দিন বা ক্লিক করুন
               </div>
-              <div className="mt-1 text-[11px] text-ink-faint/70">
+              <div className="mt-1 text-xs text-ink-faint/70">
                 JPEG · PNG · WebP · সর্বোচ্চ ১০MB
               </div>
             </motion.div>
@@ -467,7 +467,7 @@ function SoilDropzone({
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={s.path} alt={s.name} className="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
-                <div className="px-2 py-1.5 text-[10px] text-ink-soft">{s.name}</div>
+                <div className="px-2 py-1.5 text-xs text-ink-soft">{s.name}</div>
               </button>
             ))}
           </div>

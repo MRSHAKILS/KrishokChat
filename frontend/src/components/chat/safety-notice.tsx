@@ -53,7 +53,7 @@ export function SafetyNotice({
         />
         <span
           className={cn(
-            "text-[11px] font-semibold",
+            "text-xs font-semibold",
             isUrgent ? "text-clay" : "text-ochre",
           )}
         >
@@ -67,11 +67,11 @@ export function SafetyNotice({
       {rules.length > 0 && (
         <div className="mt-3 flex flex-wrap items-center gap-1.5">
           <Info className="h-3.5 w-3.5 shrink-0 text-ink-faint" />
-          <span className="text-[11px] text-ink-faint">কারণ:</span>
+          <span className="text-xs text-ink-faint">কারণ:</span>
           {rules.map((rule) => (
             <span
               key={rule}
-              className="rounded-full bg-ink/5 px-2.5 py-1 text-[10px] font-medium text-ink-soft ring-1 ring-ink/10"
+              className="rounded-full bg-ink/5 px-2.5 py-1 text-xs font-medium text-ink-soft ring-1 ring-ink/10"
             >
               {refusalRuleLabel(rule)}
             </span>

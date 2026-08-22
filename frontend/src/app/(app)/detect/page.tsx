@@ -218,10 +218,10 @@ export default function DetectPage() {
       <div>
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ochre">MULTIMODAL FIELD CONSOLE</p>
+            <p className="mb-2 text-xs font-semibold text-ochre">ছবি ভিত্তিক ফসল পরামর্শ</p>
             <h1 className="font-display text-3xl text-ink">ফসলের রোগ নির্ণয়</h1>
           </div>
-          <div className="flex flex-wrap items-center gap-2 text-[11px] text-ink-faint">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-ink-faint">
             <span className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 py-1.5"><span className={`h-1.5 w-1.5 rounded-full ${online ? "bg-leaf" : "bg-clay"}`} />{online ? "সিস্টেম অনলাইন" : "অফলাইন"}</span>
             <span className="rounded-full border rule bg-paper-2/40 px-2.5 py-1.5">শ্রেণিবিন্যাস মোড</span>
           </div>

@@ -83,7 +83,7 @@ export function IntakeZone({
           <option value="brassica">বাঁধাকপি / ফুলকপি</option>
         </select>
         {cropHint && (
-          <span className="w-full text-[11px] text-leaf sm:w-auto">
+          <span className="w-full text-xs text-leaf sm:w-auto">
             এই ফসলের রোগ মডেল দিয়ে বিশ্লেষণ হবে
           </span>
         )}
@@ -179,7 +179,7 @@ export function IntakeZone({
                 <Upload className="h-3 w-3" />
                 টানে দিন বা ক্লিক করুন
               </div>
-              <div className="mt-1 text-[11px] text-ink-faint/70">
+              <div className="mt-1 text-xs text-ink-faint/70">
                 JPEG · PNG · WebP · সর্বোচ্চ {VISION.maxFileSizeMB}MB
               </div>
             </motion.div>
@@ -264,12 +264,12 @@ function LeafFramingGuide() {
         className="flex w-full items-center justify-between font-medium text-ink transition-colors hover:text-leaf cursor-pointer"
       >
         <span className="flex items-center gap-1.5">
-          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-leaf/12 text-[10px] font-bold text-leaf">
+          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-leaf/12 text-xs font-bold text-leaf">
             ℹ
           </span>
           সঠিক ছবি তোলার সহায়িকা (ভিউফাইন্ডার গাইড)
         </span>
-        <span className="text-[11px] text-leaf">{open ? "সংক্ষিপ্ত করুন ▲" : "দেখুন ▼"}</span>
+        <span className="text-xs text-leaf">{open ? "সংক্ষিপ্ত করুন ▲" : "দেখুন ▼"}</span>
       </button>
 
       <AnimatePresence>
@@ -289,12 +289,12 @@ function LeafFramingGuide() {
                 <div className="absolute bottom-1 right-1 h-2.5 w-2.5 border-b-2 border-r-2 border-leaf" />
                 <div className="text-center">
                   <LeafLineSmall />
-                  <span className="block text-[9px] font-semibold text-leaf mt-0.5">আক্রান্ত অংশ কেন্দ্রে রাখুন</span>
+                  <span className="block text-xs font-semibold text-leaf mt-0.5">আক্রান্ত অংশ কেন্দ্রে রাখুন</span>
                 </div>
               </div>
             </div>
 
-            <ul className="space-y-1.5 text-[11px] text-ink-soft">
+            <ul className="space-y-1.5 text-xs text-ink-soft">
               <li className="flex items-start gap-1.5">
                 <span className="text-leaf font-bold">✓</span>
                 <span><strong>দিনের আলো:</strong> ছায়া বা অতিরিক্ত ফ্ল্যাশ এড়িয়ে সরাসরি স্বাভাবিক আলোতে ছবি তুলুন।</span>

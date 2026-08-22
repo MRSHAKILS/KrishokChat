@@ -198,7 +198,7 @@ export function DialectSelector({
     <div className="space-y-2.5">
       {/* Dialect Selector Chips Bar */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <div className="flex items-center gap-1 text-[11px] font-semibold text-ink-faint mr-1">
+        <div className="flex items-center gap-1 text-xs font-semibold text-ink-faint mr-1">
           <Languages className="h-3 w-3 text-leaf" />
           <span>আঞ্চলিক ভাষা:</span>
         </div>
@@ -231,15 +231,15 @@ export function DialectSelector({
             className="group flex flex-col items-start rounded-xl border border-bone bg-paper p-3 text-left transition-all hover:border-leaf/50 hover:bg-leaf/5 cursor-pointer shadow-2xs"
           >
             <div className="flex w-full items-center justify-between">
-              <span className="text-[10px] font-mono text-leaf font-semibold">{q.crop} · {q.region}</span>
-              <span className="text-[10px] text-ink-faint opacity-60 group-hover:opacity-100 transition-opacity">
+              <span className="text-xs font-mono text-leaf font-semibold">{q.crop} · {q.region}</span>
+              <span className="text-xs text-ink-faint opacity-60 group-hover:opacity-100 transition-opacity">
                 জিজ্ঞাসা করুন ↵
               </span>
             </div>
             <div className="mt-1 text-xs sm:text-[13px] font-medium text-ink leading-snug">
               "{q.colloquial}"
             </div>
-            <div className="mt-1.5 text-[11px] text-ink-faint flex items-center gap-1">
+            <div className="mt-1.5 text-xs text-ink-faint flex items-center gap-1">
               <ArrowRight className="h-2.5 w-2.5 text-ochre shrink-0" />
               <span className="line-clamp-1"><strong className="text-ink-soft font-normal">প্রমিত:</strong> {q.normalized}</span>
             </div>

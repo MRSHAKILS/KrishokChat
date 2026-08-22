@@ -138,7 +138,7 @@ export function DosageCalculator({
           <Calculator className="h-4 w-4" />
           <span>সঠিক মাত্রা ও স্প্রে গণক (Dosage Calculator)</span>
         </div>
-        <div className="flex rounded-lg border rule bg-paper p-0.5 text-[11px] font-medium text-ink-soft">
+        <div className="flex rounded-lg border rule bg-paper p-0.5 text-xs font-medium text-ink-soft">
           <button
             type="button"
             onClick={() => setCalcMode("tank")}
@@ -166,7 +166,7 @@ export function DosageCalculator({
         {/* Mode 1: Spray Tank Presets */}
         {calcMode === "tank" ? (
           <div>
-            <label className="text-[11px] font-semibold text-ink-faint">
+            <label className="text-xs font-semibold text-ink-faint">
               আপনার স্প্রেয়ার ট্যাংকের ধারণক্ষমতা নির্বাচন করুন:
             </label>
             <div className="mt-2 grid grid-cols-3 gap-2">
@@ -187,7 +187,7 @@ export function DosageCalculator({
                     <span className="font-display text-sm font-semibold sm:text-base">
                       {preset.label}
                     </span>
-                    <span className="mt-0.5 text-[10px] text-ink-faint">
+                    <span className="mt-0.5 text-xs text-ink-faint">
                       {preset.desc}
                     </span>
                   </button>
@@ -199,7 +199,7 @@ export function DosageCalculator({
           /* Mode 2: Land Area Input */
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="text-[11px] font-semibold text-ink-faint">
+              <label className="text-xs font-semibold text-ink-faint">
                 জমির পরিমাণ:
               </label>
               <div className="mt-1 flex items-center gap-2">
@@ -214,7 +214,7 @@ export function DosageCalculator({
               </div>
             </div>
             <div>
-              <label className="text-[11px] font-semibold text-ink-faint">
+              <label className="text-xs font-semibold text-ink-faint">
                 পরিমাপের একক:
               </label>
               <select
@@ -258,7 +258,7 @@ export function DosageCalculator({
               onChange={(e) => setDosePerLiter(parseFloat(e.target.value))}
               className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-bone accent-leaf"
             />
-            <div className="flex shrink-0 rounded-md border rule bg-paper text-[10px] font-semibold">
+            <div className="flex shrink-0 rounded-md border rule bg-paper text-xs font-semibold">
               <button
                 type="button"
                 onClick={() => setUnitType("g")}
@@ -281,7 +281,7 @@ export function DosageCalculator({
         <div className="rounded-xl border-2 border-leaf/30 bg-leaf/5 p-4">
           <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
             <div>
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-leaf">
+              <span className="text-xs font-semibold text-leaf">
                 মোট মিশ্রণ হিসাব
               </span>
               <div className="mt-1 flex items-baseline gap-2">
@@ -294,7 +294,7 @@ export function DosageCalculator({
               </div>
             </div>
             <div className="rounded-lg border border-leaf/20 bg-paper px-3 py-2 text-right">
-              <div className="text-[10px] text-ink-faint">প্রয়োজনীয় পানি</div>
+              <div className="text-xs text-ink-faint">প্রয়োজনীয় পানি</div>
               <div className="font-display text-lg font-bold tabular text-ink">
                 {toBn(totalWaterRequired)} <span className="text-xs font-normal">লিটার</span>
               </div>
@@ -321,7 +321,7 @@ export function DosageCalculator({
           </div>
           <a
             href={`tel:${HELPLINE.krishiCallCenter}`}
-            className="inline-flex shrink-0 items-center gap-1 rounded-md border border-leaf/30 bg-paper px-2 py-1 text-[11px] font-semibold text-leaf hover:bg-leaf/5"
+            className="inline-flex shrink-0 items-center gap-1 rounded-md border border-leaf/30 bg-paper px-2 py-1 text-xs font-semibold text-leaf hover:bg-leaf/5"
             title="কৃষি কল সেন্টারে যোগাযোগ করুন"
           >
             <Phone className="h-3 w-3" /> ১৬১২৩

@@ -100,7 +100,7 @@ export function TreatmentCard({
 
       {/* The first screenful is deliberately structured for a five-second scan. */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ochre-soft/50 bg-ochre-soft/15 px-5 py-3">
-        <div className="flex items-center gap-2 text-[11px] font-semibold text-ochre">
+        <div className="flex items-center gap-2 text-xs font-semibold text-ochre">
           <ClipboardCheck className="h-4 w-4" /> এখন কী করবেন
         </div>
         <div className="flex items-center gap-2">
@@ -117,20 +117,20 @@ export function TreatmentCard({
 
       {/* Immediate action */}
       <div className="border-b rule p-5">
-        <div className="mb-1 text-[11px] font-semibold text-ink-faint">তাৎক্ষণিক ব্যবস্থা</div>
+        <div className="mb-1 text-xs font-semibold text-ink-faint">তাৎক্ষণিক ব্যবস্থা</div>
         <p className="text-sm leading-relaxed text-ink whitespace-pre-wrap">{cleanAdvice}</p>
       </div>
 
       {/* Dosage and Weather Consideration */}
       <div className="grid gap-3 border-b rule p-5 sm:grid-cols-2">
         <div className="rounded-lg border border-ochre-soft/60 bg-ochre-soft/10 p-3">
-          <div className="text-[11px] font-semibold text-ochre">রাসায়নিক মাত্রা নির্দেশিকা</div>
+          <div className="text-xs font-semibold text-ochre">রাসায়নিক মাত্রা নির্দেশিকা</div>
           <p className="mt-1 text-xs leading-relaxed text-ink-soft">
             {dosage ?? "এই ফলাফলে আলাদা মাত্রা উল্লেখ নেই। লেবেল ছাড়া ডোজ ঠিক করবেন না।"}
           </p>
         </div>
         <div className="rounded-lg border border-leaf/20 bg-leaf/5 p-3">
-          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-leaf">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-leaf">
             <CloudRain className="h-3.5 w-3.5" /> আবহাওয়া বিবেচনা
           </div>
           <p className="mt-1 text-xs leading-relaxed text-ink-soft">
@@ -163,7 +163,7 @@ export function TreatmentCard({
       {/* Confidence badge */}
       {result.treatment_confidence && (
         <div className="border-t rule px-5 py-3">
-          <p className="text-[11px] leading-relaxed text-ink-faint">
+          <p className="text-xs leading-relaxed text-ink-faint">
             যাচাই অবস্থা পরামর্শের উৎসসমর্থন বোঝায়; এটি রোগ শনাক্তকরণের শতাংশ নয়।
           </p>
         </div>
@@ -205,7 +205,7 @@ export function TreatmentCard({
             type="button"
             onClick={() => setSourcesOpen((open) => !open)}
             aria-expanded={sourcesOpen}
-            className="control-press flex min-h-10 w-full items-center justify-between gap-3 rounded-lg text-left text-[11px] font-semibold text-leaf"
+            className="control-press flex min-h-10 w-full items-center justify-between gap-3 rounded-lg text-left text-xs font-semibold text-leaf"
           >
             <span className="flex items-center gap-1.5">
               <FileText className="h-3.5 w-3.5" />
@@ -226,7 +226,7 @@ export function TreatmentCard({
                   const orgName = getOrgNameForSource(src);
                   return (
                     <li key={i} className="surface-lift flex items-center gap-2 rounded-lg border rule bg-paper px-3 py-2 text-xs text-ink">
-                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-leaf text-[9px] font-bold text-paper">
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-leaf text-xs font-bold text-paper">
                         {i + 1}
                       </span>
                       <span className="font-semibold text-leaf">{orgName}</span>
@@ -241,7 +241,7 @@ export function TreatmentCard({
 
       {/* Follow-up actions keep the assistant task-oriented instead of ending at a label. */}
       <div className="border-t rule px-5 py-4">
-        <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-ink-faint">
+        <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-ink-faint">
           <MessageCircle className="h-3.5 w-3.5 text-leaf" /> পরের কাজ
         </div>
         <div className="flex flex-wrap gap-2">
@@ -310,7 +310,7 @@ function ConfidenceBadge({ confidence, compact = false }: { confidence: string; 
   const Icon = c.icon;
 
   return (
-    <div className={cn("flex items-center gap-2 rounded-lg border", compact ? "px-2 py-1 text-[11px]" : "px-3 py-2 text-sm", c.bg, c.border)}>
+    <div className={cn("flex items-center gap-2 rounded-lg border", compact ? "px-2 py-1 text-xs" : "px-3 py-2 text-sm", c.bg, c.border)}>
       <Icon className={cn("h-4 w-4 shrink-0", c.color)} strokeWidth={1.5} />
       <span className={cn("font-medium", c.color)}>{c.label}</span>
     </div>
