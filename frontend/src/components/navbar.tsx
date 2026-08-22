@@ -170,6 +170,15 @@ export function Navbar() {
 
         {/* Right: Sunlight mode + session area + mobile toggle */}
         <div className="flex shrink-0 items-center gap-2.5">
+          {/* Krishi Call Center — always reachable, desktop too (ui_audit §1) */}
+          <a
+            href={`tel:${HELPLINE.krishiCallCenter}`}
+            title="কৃষি কল সেন্টার — জাতীয় কৃষি হেল্পলাইন"
+            className="control-press hidden items-center gap-1.5 rounded-full bg-leaf px-3.5 py-1.5 text-xs font-bold tabular text-paper whitespace-nowrap transition-opacity hover:opacity-90 md:inline-flex"
+          >
+            <Phone className="h-3.5 w-3.5" aria-hidden />
+            <span>{HELPLINE.krishiCallCenter}</span>
+          </a>
           {/* Sunlight Mode Toggle */}
           <button
             type="button"

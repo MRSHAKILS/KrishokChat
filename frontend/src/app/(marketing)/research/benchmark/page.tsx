@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import dynamic from "next/dynamic";
 import { motion, useInView } from "motion/react";
 import { TrendingUp, AlertTriangle, Globe, ShieldCheck, Hourglass } from "lucide-react";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, LabelList } from "recharts";
@@ -8,7 +9,18 @@ import { RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 import { useCountUp, toBn } from "@/lib/use-count-up";
 import goldenStats from "@/lib/golden_stats.json";
-import { ModelComparisonInspector } from "@/components/model-comparison-inspector";
+
+/* The inspector is a 1,200+ line interactive component — lazy-loaded so it
+   stays out of this page's first-load bundle. */
+const ModelComparisonInspector = dynamic(
+  () => import("@/components/model-comparison-inspector").then((m) => m.ModelComparisonInspector),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="min-h-96 animate-pulse rounded-xl border rule bg-paper-2/30" aria-hidden />
+    ),
+  },
+);
 
 /* =========================================================================
    Benchmark Results Page — the credibility page with actual paper numbers.

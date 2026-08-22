@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, LogOut, Bookmark } from "lucide-react";
+import { ChevronDown, LogOut, Bookmark, UserRound } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { cn } from "@/lib/utils";
@@ -35,16 +35,18 @@ export function SessionArea() {
   }, []);
 
   if (loading) {
-    return <div className="hidden h-9 w-16 animate-pulse rounded-full bg-paper-2/60 sm:block" />;
+    return <div className="h-9 w-9 animate-pulse rounded-full bg-paper-2/60 sm:w-16" />;
   }
 
   if (!user) {
     return (
       <Link
         href="/auth"
-        className="hidden items-center rounded-full border rule bg-paper-2/40 px-4 py-2 text-sm font-medium text-ink-soft transition-colors hover:border-leaf hover:text-ink sm:flex"
+        aria-label="লগইন / নিবন্ধন"
+        className="flex items-center justify-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 py-2 text-sm font-medium text-ink-soft transition-colors hover:border-leaf hover:text-ink sm:px-4"
       >
-        লগইন
+        <UserRound className="h-4 w-4" aria-hidden />
+        <span className="hidden sm:inline">লগইন</span>
       </Link>
     );
   }
@@ -61,20 +63,21 @@ export function SessionArea() {
   }
 
   return (
-    <div ref={ref} className="relative hidden sm:block">
+    <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
+        aria-label="অ্যাকাউন্ট মেনু"
         className={cn(
-          "flex items-center gap-2 rounded-full border rule bg-paper-2/40 py-1.5 pl-1.5 pr-3 text-sm transition-colors hover:border-leaf",
+          "flex items-center gap-2 rounded-full border rule bg-paper-2/40 py-1.5 pl-1.5 pr-2 text-sm transition-colors hover:border-leaf sm:pr-3",
           open && "border-leaf",
         )}
       >
         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-leaf text-xs font-bold text-paper">
           {initial}
         </span>
-        <span className="max-w-28 truncate text-ink-soft">{email}</span>
+        <span className="hidden max-w-28 truncate text-ink-soft sm:inline">{email}</span>
         <ChevronDown className={cn("h-3.5 w-3.5 text-ink-faint transition-transform", open && "rotate-180")} />
       </button>
 

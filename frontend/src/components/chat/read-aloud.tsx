@@ -12,7 +12,7 @@
    ========================================================================= */
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { Volume2, VolumeX, Gauge, Sparkles } from "lucide-react";
+import { Volume2, VolumeX, Gauge, Sparkles, EarOff } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { synthesizeSpeech } from "@/lib/api";
@@ -119,7 +119,8 @@ export function ReadAloudButton({
   onSentenceChange?: (index: number | null) => void;
 }) {
   const [speaking, setSpeaking] = useState(false);
-  const [error, setError] = useState(false);
+  // null = no error; "voice" = no Bengali voice found; "offline" = backend unreachable while offline
+  const [error, setError] = useState<null | "voice" | "offline">(null);
   const [speed, setSpeed] = useState<0.75 | 1.0 | 1.25>(1.0);
   const requestRef = useRef(0);
   const playerRef = useRef<Player | null>(null);
@@ -162,7 +163,7 @@ export function ReadAloudButton({
     const synth = "speechSynthesis" in window ? window.speechSynthesis : null;
     if (!synth || sentences.length === 0) {
       if (requestRef.current === requestId) {
-        setError(true);
+        setError(typeof navigator !== "undefined" && !navigator.onLine ? "offline" : "voice");
         setSpeaking(false);
         onSentenceChange?.(null);
       }
@@ -180,7 +181,7 @@ export function ReadAloudButton({
       );
 
       if (!bnVoice) {
-        setError(true);
+        setError(typeof navigator !== "undefined" && !navigator.onLine ? "offline" : "voice");
         setSpeaking(false);
         onSentenceChange?.(null);
         return;
@@ -241,7 +242,7 @@ export function ReadAloudButton({
             event.error !== "interrupted" &&
             requestRef.current === requestId
           ) {
-            setError(true);
+            setError(typeof navigator !== "undefined" && !navigator.onLine ? "offline" : "voice");
           }
           setSpeaking(false);
           onSentenceChange?.(null);
@@ -331,7 +332,7 @@ export function ReadAloudButton({
 
     const sentences = splitBengaliSentences(text);
     const requestId = ++requestRef.current;
-    setError(false);
+    setError(null);
     setSpeaking(true);
 
     const ctx = ensureAudioContext();
@@ -380,9 +381,19 @@ export function ReadAloudButton({
       </button>
 
       {error && (
-        <p className="text-xs text-clay" role="status">
-          এই ডিভাইসে বাংলা ভয়েস পাওয়া যায়নি — উত্তরটি পড়ে নিন।
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          role="status"
+          className="flex min-h-10 items-center gap-2 rounded-lg border border-clay/30 bg-clay/10 px-3 py-2 text-xs font-medium leading-relaxed text-ink-soft"
+        >
+          <EarOff className="h-4 w-4 shrink-0 text-clay" aria-hidden />
+          <span>
+            {error === "offline"
+              ? "ইন্টারনেট সংযোগ ছাড়া এখন কণ্ঠস্বর দেওয়া যাচ্ছে না — লেখাটি পড়ে নিন।"
+              : "এই ফোনে বাংলা কণ্ঠস্বর পাওয়া যায়নি — লেখাটি পড়ে নিন।"}
+          </span>
+        </motion.div>
       )}
     </div>
   );

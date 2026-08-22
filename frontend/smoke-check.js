@@ -9,33 +9,42 @@ const { chromium } = require("./node_modules/playwright");
   const routes = [
     "/", "/chat", "/detect", "/analytics", "/library", "/data",
     "/research", "/research/benchmark", "/research/methodology", "/research/safety",
-    "/about", "/team", "/contact", "/auth"
+    "/about", "/team", "/contact", "/auth", "/account", "/privacy"
   ];
   for (const route of routes) {
     const response = await desktop.goto(base + route, { waitUntil: "domcontentloaded" });
     if (!response || response.status() >= 400) throw new Error(`${route} returned ${response && response.status()}`);
   }
 
-  // Navbar: analytics link present, helpline present, NO auth link
+  // Navbar: helpline present, OPTIONAL auth link present (additive, never blocking).
+  // Analytics lives in the "প্রকল্প" dropdown — open it and verify the link.
   await desktop.goto(base + "/");
-  if (await desktop.locator('header a[href="/analytics"]').count() !== 1) throw new Error("Analytics nav link missing");
   if (await desktop.locator('header a[href^="tel:"]').count() !== 1) throw new Error("Desktop helpline missing");
-  if (await desktop.locator('header a[href="/auth"]').count() !== 0) throw new Error("Auth link remains in navbar");
+  if (await desktop.locator('header a[href="/auth"]').count() < 1) throw new Error("Optional auth pill missing from navbar");
+  await desktop.getByRole("button", { name: /প্রকল্প/ }).click();
+  if (await desktop.locator('header a[href="/analytics"]').count() < 1) throw new Error("Analytics link missing from projects dropdown");
 
-  // /auth: no password field, has demo detect action
+  // /auth: login/register form present (optional auth), anonymous demo entries still present
   await desktop.goto(base + "/auth");
-  if (await desktop.locator('input[type="password"]').count() !== 0) throw new Error("Auth form still rendered");
+  await desktop.waitForSelector('input[type="password"]', { timeout: 8000 }).catch(() => {
+    throw new Error("Auth form missing");
+  });
   if (await desktop.locator('a[href="/detect"]').count() < 1) throw new Error("Auth demo detect action missing");
 
-  // Mobile detect: tabs + sample action
+  // Mobile detect: sample action + photo input + slide-over advisory (no tabs on mobile)
   await mobile.goto(base + "/detect");
-  if (await mobile.getByRole("tab").count() !== 2) throw new Error("Detect tab switcher missing, got " + (await mobile.getByRole("tab").count()));
+  await mobile.waitForTimeout(800);
   const sampleBtn = await mobile.getByRole("button", { name: /নমুনা/ }).count();
   if (sampleBtn < 1) throw new Error("Verified sample action missing");
-  await mobile.getByRole("tab").nth(1).click();
-  if (await mobile.locator("textarea").count() !== 1) throw new Error("Chat pane did not open on mobile");
-  await mobile.getByRole("tab").nth(0).click();
-  if (await mobile.locator('input[type="file"]').count() < 1) throw new Error("Detect pane did not reopen");
+  if (await mobile.locator('input[type="file"]').count() < 1) throw new Error("Detect photo input missing on mobile");
+  const advisory = mobile.locator("button", { hasText: "কৃষি বিশেষজ্ঞ" });
+  if (await advisory.count() < 1) throw new Error("Slide-over advisory trigger missing on mobile");
+  await advisory.first().click();
+  await mobile.waitForTimeout(600);
+  if (await mobile.locator("textarea").count() < 1) throw new Error("Advisory drawer did not open on mobile");
+
+  // Mobile: login entry reachable in the header without opening the hamburger menu
+  if (await mobile.locator('header a[href="/auth"]').count() < 1) throw new Error("Mobile header login entry missing");
 
   // Research subnav + agent explorer
   await desktop.goto(base + "/research/methodology");
