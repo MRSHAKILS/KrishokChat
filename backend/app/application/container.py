@@ -3,9 +3,11 @@
 from dataclasses import dataclass
 from pathlib import Path
 
+from app.application.admin import AdminService
 from app.application.auth import AuthService
 from app.application.generation import GroundedAnswerGenerator
 from app.application.history import HistoryService
+from app.application.notifications import NotificationService
 from app.application.qa_pipeline import QAPipeline
 from app.application.rewrite import ConversationalQueryRewriter
 from app.application.safety import SafetyClassifier
@@ -23,6 +25,8 @@ from app.infrastructure.retrieval.hybrid import HybridRetriever
 from app.infrastructure.sessions.memory import InMemorySessionStore
 from app.infrastructure.soil.dataset_loader import load_soil_dataset
 from app.infrastructure.storage.postgrest import PostgrestSavedHistoryStore
+from app.infrastructure.storage.postgrest_admin import PostgrestAdminStore
+from app.infrastructure.storage.postgrest_notifications import PostgrestNotificationStore
 from app.application.verifier import HardenedDosageVerifier
 from app.infrastructure.vision.registry import ArtifactVisionRegistry
 from app.infrastructure.vision.ultralytics_classifier import UltralyticsClassificationRunner
@@ -38,6 +42,8 @@ class AppContainer:
     soil: SoilService
     auth: AuthService
     history: HistoryService
+    admin: AdminService
+    notifications: NotificationService
     llm_name: str
 
 
@@ -211,11 +217,39 @@ def build_container(settings: Settings) -> AppContainer:
             else None
         ),
     )
+    # Amendment 02: admin console lane. Same lazy-construction rules as the
+    # history store — zero network I/O at startup, 503s when unconfigured,
+    # and the anonymous demo never calls it.
+    admin = AdminService(
+        store=(
+            PostgrestAdminStore(
+                settings.supabase_url,
+                settings.supabase_service_role_key,
+            )
+            if settings.supabase_url and settings.supabase_service_role_key
+            else None
+        ),
+    )
+    # Amendment 02: broadcast announcements. Same lazy rules — the public GET
+    # degrades to an honest empty list when unconfigured; admin writes 503.
+    supabase_configured = bool(settings.supabase_url and settings.supabase_service_role_key)
+    notifications = NotificationService(
+        store=(
+            PostgrestNotificationStore(
+                settings.supabase_url,
+                settings.supabase_service_role_key,
+            )
+            if supabase_configured
+            else None
+        ),
+    )
     return AppContainer(
         qa=pipeline,
         vision=vision,
         soil=soil,
         auth=auth,
         history=history,
+        admin=admin,
+        notifications=notifications,
         llm_name=generation_llm.name,
     )

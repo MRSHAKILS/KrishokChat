@@ -14,9 +14,11 @@ from app.api.benchmark import router as benchmark_router
 from app.api.vision import router as vision_router
 from app.api.soil import router as soil_router
 from app.api.extras import router as extras_router
-from app.api.auth import router as auth_router
+from app.api.auth import router as auth_router, account_router
 from app.api.history import router as history_router
 from app.api.speech import router as speech_router
+from app.api.admin import router as admin_router
+from app.api.notifications import router as notifications_router, admin_router as notifications_admin_router
 # T0-04: request-ID middleware (echo/generate X-Request-ID) + JSON app logging.
 from app.api.middleware.request_id import RequestIDMiddleware
 # T0-07: optional API-key auth + rate limiting, attached ONLY to the /api/v1
@@ -40,6 +42,9 @@ V1_ROUTERS = (
     auth_router,
     history_router,
     speech_router,
+    admin_router,
+    notifications_router,
+    notifications_admin_router,
 )
 
 
@@ -132,8 +137,12 @@ def create_app(config=None) -> FastAPI:
     application.include_router(benchmark_router)
     application.include_router(extras_router)
     application.include_router(auth_router)
+    application.include_router(account_router)
     application.include_router(history_router)
     application.include_router(speech_router)
+    application.include_router(admin_router)
+    application.include_router(notifications_router)
+    application.include_router(notifications_admin_router)
 
     # T0-07: /api/v1 is the stable versioned API contract; the legacy mounts
     # above stay as compatibility aliases. The optional API-key + rate-limit

@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { ShieldCheck, Radio, Languages, Camera, LockKeyhole, Database, CheckCircle2 } from "lucide-react";
 import { QAPanel } from "@/components/qa-panel";
+import { UrgentAlertBanner } from "@/components/notifications/urgent-alert-banner";
 
 export default function ChatPage() {
   return (
     <div className="space-y-6">
+      <UrgentAlertBanner />
       <header className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div className="max-w-2xl">
           <p className="mb-2 text-xs font-semibold text-leaf">কৃষকের সহায়তা</p>

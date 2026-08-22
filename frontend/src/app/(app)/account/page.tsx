@@ -3,10 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Bookmark, Trash2, Loader2, LogOut, Sprout, MessageSquare, ShieldCheck } from "lucide-react";
+import { Bookmark, Trash2, Loader2, LogOut, Sprout, MessageSquare, ShieldCheck, BadgeCheck } from "lucide-react";
 import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { createClient } from "@/lib/supabase/client";
-import { getSavedHistory, deleteSavedQuery, type SavedQuery } from "@/lib/api";
+import { getSavedHistory, deleteSavedQuery, getAccount, type SavedQuery, type AccountInfo } from "@/lib/api";
 import { enter, stagger } from "@/lib/motion";
 import { APP } from "@/lib/constants";
 
@@ -22,6 +22,7 @@ import { APP } from "@/lib/constants";
 export default function AccountPage() {
   const { user, session, loading } = useSupabaseSession();
   const [items, setItems] = useState<SavedQuery[] | null>(null);
+  const [account, setAccount] = useState<AccountInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [fetching, setFetching] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
@@ -40,6 +41,23 @@ export default function AccountPage() {
     } finally {
       setFetching(false);
     }
+  }, [token]);
+
+  // Plan/role badge (amendment 02). Failure is non-fatal — the badge simply
+  // doesn't render; nothing on this page depends on it.
+  useEffect(() => {
+    if (!token) return;
+    let cancelled = false;
+    getAccount(token)
+      .then((info) => {
+        if (!cancelled) setAccount(info);
+      })
+      .catch(() => {
+        /* plan unknown — honest omission */
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [token]);
 
   useEffect(() => {
@@ -119,7 +137,24 @@ export default function AccountPage() {
               </span>
               <div className="min-w-0">
                 <div className="truncate text-sm font-medium text-ink">{user.email}</div>
-                <div className="text-xs text-ink-faint">সাইন-ইন করা আছে</div>
+                <div className="mt-1 flex flex-wrap items-center gap-1.5">
+                  <span className="text-xs text-ink-faint">সাইন-ইন করা আছে</span>
+                  {account && (
+                    <span
+                      className={
+                        account.plan === "premium"
+                          ? "inline-flex items-center gap-1 rounded-full bg-ochre/15 px-2 py-0.5 text-xs font-semibold text-ochre"
+                          : "inline-flex items-center gap-1 rounded-full bg-leaf/10 px-2 py-0.5 text-xs font-medium text-leaf"
+                      }
+                    >
+                      {account.plan === "premium" && <BadgeCheck className="h-3 w-3" aria-hidden />}
+                      {account.plan === "premium" ? "প্রিমিয়াম" : "ফ্রি"}
+                    </span>
+                  )}
+                  {account?.role === "admin" && (
+                    <span className="rounded-full bg-ink/10 px-2 py-0.5 text-xs font-medium text-ink-soft">অ্যাডমিন</span>
+                  )}
+                </div>
               </div>
             </div>
             <button

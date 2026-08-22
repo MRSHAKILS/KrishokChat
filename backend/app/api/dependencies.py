@@ -4,9 +4,11 @@ from typing import Annotated, Any
 
 from fastapi import Depends, Header, HTTPException, Request, status
 
+from app.application.admin import AdminService, AdminUnavailableError, NotAdminError
 from app.application.auth import AuthService
 from app.application.container import AppContainer
 from app.application.history import HistoryService
+from app.application.notifications import NotificationService
 from app.core.config import Settings
 
 
@@ -67,8 +69,49 @@ OptionalUserDep = Annotated[dict[str, Any] | None, Depends(optional_user)]
 RequiredUserDep = Annotated[dict[str, Any], Depends(require_user)]
 
 
+def _get_admin_service(container: ContainerDep) -> AdminService:
+    return getattr(container, "admin", None) or AdminService(store=None)
+
+
+AdminServiceDep = Annotated[AdminService, Depends(_get_admin_service)]
+
+
+def require_admin(
+    authorization: Annotated[str | None, Header()] = None,
+    service: AuthServiceDep = None,  # type: ignore[assignment]
+    admin_service: AdminServiceDep = None,  # type: ignore[assignment]
+) -> dict[str, Any]:
+    """Claims of an ADMIN caller, or 401/403/503. Fail-closed on every path
+    (amendment 02): the role comes from a service-role profile lookup, never
+    from client-asserted claims."""
+    claims = service.claims_from_authorization(authorization)
+    if claims is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Missing or invalid access token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    try:
+        admin_service.require_admin(claims["sub"])
+    except AdminUnavailableError as exc:
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc)) from exc
+    except NotAdminError as exc:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc)) from exc
+    return claims
+
+
+RequiredAdminDep = Annotated[dict[str, Any], Depends(require_admin)]
+
+
 def _get_history_service(container: ContainerDep) -> HistoryService:
     return getattr(container, "history", None) or HistoryService(store=None)
 
 
 HistoryServiceDep = Annotated[HistoryService, Depends(_get_history_service)]
+
+
+def _get_notification_service(container: ContainerDep) -> NotificationService:
+    return getattr(container, "notifications", None) or NotificationService(store=None)
+
+
+NotificationServiceDep = Annotated[NotificationService, Depends(_get_notification_service)]

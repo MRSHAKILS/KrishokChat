@@ -10,6 +10,7 @@ import { VISION_STAGES, type RailEvent } from "@/components/detect/pipeline-rail
 import { AgentTrace } from "@/components/agent-trace";
 import { IntakeZone } from "@/components/detect/intake-zone";
 import { DiagnosisCard } from "@/components/detect/diagnosis-card";
+import { UrgentAlertBanner } from "@/components/notifications/urgent-alert-banner";
 import { TreatmentCard } from "@/components/detect/treatment-card";
 import { SlideOverAdvisory } from "@/components/chat/slide-over-advisory";
 import { stagger, enter, dur, ease } from "@/lib/motion";
@@ -209,6 +210,7 @@ export default function DetectPage() {
 
   return (
     <div className="mx-auto max-w-4xl space-y-7 pb-16">
+      <UrgentAlertBanner />
       {!online && (
         <div role="status" className="sticky top-2 z-20 rounded-lg border border-ochre-soft bg-paper px-4 py-3 text-sm font-medium text-ink shadow-sm">
           ইন্টারনেট সংযোগ নেই। ছবি ও লেখা এই পর্দায় থাকবে; সংযোগ এলে আবার চেষ্টা করুন।

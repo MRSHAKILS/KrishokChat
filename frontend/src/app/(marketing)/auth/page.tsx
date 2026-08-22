@@ -10,6 +10,32 @@ import { enter, stagger } from "@/lib/motion";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
+/* Dev-only test personas (amendment 02 §6): rendered ONLY when
+   NEXT_PUBLIC_DEV_USER_SWITCHER=true — never set in production. The
+   credentials come from NEXT_PUBLIC_TEST_* env vars and belong to throwaway
+   Supabase test accounts provisioned by tools/ops/supabase_test_user.ps1. */
+const DEV_SWITCHER = process.env.NEXT_PUBLIC_DEV_USER_SWITCHER === "true";
+const TEST_PERSONAS = [
+  {
+    key: "free",
+    label: "ফ্রি ব্যবহারকারী",
+    email: process.env.NEXT_PUBLIC_TEST_FREE_USER_EMAIL,
+    password: process.env.NEXT_PUBLIC_TEST_FREE_USER_PASSWORD,
+  },
+  {
+    key: "premium",
+    label: "প্রিমিয়াম ব্যবহারকারী",
+    email: process.env.NEXT_PUBLIC_TEST_PREMIUM_USER_EMAIL,
+    password: process.env.NEXT_PUBLIC_TEST_PREMIUM_USER_PASSWORD,
+  },
+  {
+    key: "admin",
+    label: "অ্যাডমিন",
+    email: process.env.NEXT_PUBLIC_TEST_ADMIN_USER_EMAIL,
+    password: process.env.NEXT_PUBLIC_TEST_ADMIN_USER_PASSWORD,
+  },
+] as const;
+
 /* =========================================================================
    /auth → Login / register (optional, additive).
 
@@ -99,6 +125,25 @@ function AuthForm() {
       options: { redirectTo: `${window.location.origin}/auth/callback` },
     });
     if (error) setError("Google লগইন শুরু হয়নি। আবার চেষ্টা করুন।");
+  }
+
+  async function handlePersona(email?: string, password?: string) {
+    if (!email || !password) {
+      setError("এই টেস্ট অ্যাকাউন্টের env ভেরিয়েবল সেট করা নেই (.env.local দেখুন)।");
+      return;
+    }
+    setError(null);
+    setInfo(null);
+    setBusy(true);
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setBusy(false);
+    if (error) {
+      setError("টেস্ট লগইন ব্যর্থ — tools/ops/supabase_test_user.ps1 চালিয়ে অ্যাকাউন্ট তৈরি করুন।");
+      return;
+    }
+    router.push("/");
+    router.refresh();
   }
 
   return (
@@ -219,6 +264,28 @@ function AuthForm() {
                 Google দিয়ে লগইন করুন
               </button>
             </>
+          )}
+
+          {/* Dev-only test persona switcher — never rendered in production */}
+          {DEV_SWITCHER && (
+            <div className="mt-5 rounded-lg border border-ochre/40 bg-ochre/5 p-4">
+              <div className="text-xs font-semibold text-ochre">
+                ডেভ টেস্ট অ্যাকাউন্ট (শুধু ডেভেলপমেন্ট)
+              </div>
+              <div className="mt-2 grid grid-cols-3 gap-2">
+                {TEST_PERSONAS.map((p) => (
+                  <button
+                    key={p.key}
+                    type="button"
+                    onClick={() => handlePersona(p.email, p.password)}
+                    disabled={busy}
+                    className="rounded-lg border border-ochre/30 bg-paper px-2 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-ochre hover:text-ink disabled:opacity-60"
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           )}
 
           {/* Demo entry — anonymous first */}

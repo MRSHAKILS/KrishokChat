@@ -8,6 +8,7 @@ import { Phone, ChevronDown, LogOut, Sun } from "lucide-react";
 import { APP, HELPLINE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { SessionArea } from "@/components/auth/session-area";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { createClient } from "@/lib/supabase/client";
 
@@ -195,6 +196,9 @@ export function Navbar() {
             <Sun className={cn("h-3.5 w-3.5", sunlight && "text-ochre animate-spin-slow")} />
             <span className="hidden sm:inline">{sunlight ? "মাঠের মোড অন" : "মাঠের মোড"}</span>
           </button>
+
+          {/* Notifications (admin broadcasts) — renders nothing when disabled */}
+          <NotificationBell />
 
           {/* User Session / Login Button */}
           <SessionArea />

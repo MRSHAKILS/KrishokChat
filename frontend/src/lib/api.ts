@@ -5,6 +5,8 @@
 
 const API_BASE = "";
 
+export { API_BASE };
+
 function createTimedSignal(parent: AbortSignal | undefined, timeoutMs: number) {
   const controller = new AbortController();
   const abort = () => controller.abort();
@@ -590,4 +592,23 @@ export async function deleteSavedQuery(accessToken: string, id: string): Promise
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   if (!res.ok && res.status !== 404) throw new Error(`history delete failed: ${res.status}`);
+}
+
+/* === Account / plan surface (amendment 02) ================================
+   The caller's plan/role for the account page and UI badges. additive lane:
+   callers handle failure with honest fallbacks, never a block. */
+
+export interface AccountInfo {
+  user: { id: string | null; email: string };
+  plan: "free" | "premium";
+  role: "user" | "admin";
+  profile_available: boolean;
+}
+
+export async function getAccount(accessToken: string): Promise<AccountInfo> {
+  const res = await fetch(`${API_BASE}/api/account`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!res.ok) throw new Error(`account failed: ${res.status}`);
+  return res.json();
 }

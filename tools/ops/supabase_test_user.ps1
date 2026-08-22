@@ -25,7 +25,10 @@ param(
     [string]$BaseUrl,
     [string]$ApiKey,
     [string]$AdminKey,
-    [switch]$DryRun
+    [switch]$DryRun,
+    # Amendment 02: provision the three test personas (free/premium/admin),
+    # verify each can log in, and set their profiles plan/role labels.
+    [switch]$Personas
 )
 
 $ErrorActionPreference = "Stop"
@@ -101,6 +104,64 @@ if ($DryRun) {
 $clientHeaders = @{ apikey = $ApiKey; Authorization = "Bearer $ApiKey"; "Content-Type" = "application/json" }
 $adminHeaders  = @{ apikey = $AdminKey; Authorization = "Bearer $AdminKey"; "Content-Type" = "application/json" }
 $userBody = @{ email = $Email; password = $Password } | ConvertTo-Json
+
+# ---- Personas mode (amendment 02): free / premium / admin -----------------
+if ($Personas) {
+    if (-not $AdminKey) {
+        Write-Host "[FAIL] -Personas needs the service role key (SUPABASE_SERVICE_ROLE_KEY / -AdminKey)." -ForegroundColor Red
+        exit 1
+    }
+    $personas = @(
+        @{ email = $envMap["TEST_FREE_USER_EMAIL"];     password = $envMap["TEST_FREE_USER_PASSWORD"];     plan = "free";     role = "user"  },
+        @{ email = $envMap["TEST_PREMIUM_USER_EMAIL"];  password = $envMap["TEST_PREMIUM_USER_PASSWORD"];  plan = "premium";  role = "user"  },
+        @{ email = $envMap["TEST_ADMIN_USER_EMAIL"];    password = $envMap["TEST_ADMIN_USER_PASSWORD"];    plan = "free";     role = "admin" }
+    )
+    foreach ($p in $personas) {
+        if (-not $p.email -or -not $p.password) {
+            Write-Host "[SKIP] $($p.role)/$($p.plan): TEST vars not set in .env(.example) files." -ForegroundColor Yellow
+            continue
+        }
+        Write-Host ""
+        Write-Host "== persona $($p.email) (plan=$($p.plan), role=$($p.role)) ==" -ForegroundColor Cyan
+        $body = @{ email = $p.email; password = $p.password; email_confirm = $true } | ConvertTo-Json
+        $uid = $null
+        try {
+            $created = Invoke-RestMethod -Method Post -Uri "$BaseUrl/auth/v1/admin/users" -Headers $adminHeaders -Body $body -TimeoutSec 20
+            $uid = $created.id
+            Write-Host "[1/3] created (id=$uid)."
+        } catch {
+            $err = Get-ErrorMessage $_
+            if ($err -match "already registered|email_exists|duplicate") {
+                $list = Invoke-RestMethod -Method Get -Uri "$BaseUrl/auth/v1/admin/users?email=$([uri]::EscapeDataString($p.email))" -Headers $adminHeaders -TimeoutSec 20
+                $uid = @($list.users)[0].id
+                $null = Invoke-RestMethod -Method Put -Uri "$BaseUrl/auth/v1/admin/users/$uid" -Headers $adminHeaders -Body $body -TimeoutSec 20
+                Write-Host "[1/3] existing user reset (id=$uid)."
+            } else {
+                Write-Host "[FAIL] ensure failed: $err" -ForegroundColor Red
+                continue
+            }
+        }
+        # profiles row with plan/role (PostgREST upsert on id; merge-duplicates
+        # merges plan/role into an existing row instead of failing)
+        $profileBody = @{ id = $uid; email = $p.email; plan = $p.plan; role = $p.role } | ConvertTo-Json
+        try {
+            $h = $adminHeaders.Clone(); $h["Prefer"] = "resolution=merge-duplicates"
+            $null = Invoke-RestMethod -Method Post -Uri "$BaseUrl/rest/v1/profiles?on_conflict=id" -Headers $h -Body $profileBody -TimeoutSec 20
+        } catch {
+            Write-Host "[WARN] profiles upsert failed: $(Get-ErrorMessage $_)" -ForegroundColor Yellow
+        }
+        Write-Host "[2/3] profiles row ensured (plan=$($p.plan), role=$($p.role))."
+        try {
+            $login = Invoke-RestMethod -Method Post -Uri "$BaseUrl/auth/v1/token?grant_type=password" -Headers $clientHeaders -Body (@{ email = $p.email; password = $p.password } | ConvertTo-Json) -TimeoutSec 15
+            Write-Host "[3/3] login OK." -ForegroundColor Green
+        } catch {
+            Write-Host "[3/3] LOGIN FAILED: $(Get-ErrorMessage $_)" -ForegroundColor Red
+        }
+    }
+    Write-Host ""
+    Write-Host "Personas done. Set NEXT_PUBLIC_DEV_USER_SWITCHER=true + NEXT_PUBLIC_TEST_* in frontend/.env.local for the /auth one-click switcher." -ForegroundColor Cyan
+    exit 0
+}
 
 # ---- 2. Ensure test user exists and is CONFIRMED ----
 if ($AdminKey) {
