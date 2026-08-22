@@ -260,3 +260,39 @@ No route or frontend component should change for either replacement.
   correctly deletes old row); live QA with redaction on scrubs stored query;
   golden replay 50/50 PASS; `/health` + `/readyz` + `/privacy` 200. Demo
   identical with defaults. Rollback: config flip or `git revert`.
+- G0–G9 (government-handoff lane, amendment
+  `docs/production_readiness/amendments/02_ADMIN_TIERS_BROADCAST_AMENDMENT_2026_08_22.md`):
+  done — farmer-UI refinement (de-English farmer surfaces incl. eyebrows,
+  tracking-* removed from Bengali nodes, 9/10/11px→12px floor across 26
+  farmer-facing files, offline-aware read-aloud error chip, mobile-visible
+  login pill + avatar chip, desktop 16123 navbar pill, reproducible PWA icons
+  `frontend/scripts/generate_pwa_icons.py` + manifest 192/512 maskable,
+  landing stats + ModelComparisonInspector lazy-loaded, smoke-check.js
+  un-staled to assert OPTIONAL auth); free/premium tiers with NO gating
+  (researcher decision 2026-08-22): migration `002_roles_plans.sql`
+  (profiles.role/plan + `is_admin()` SECURITY DEFINER + `admin_actions` +
+  updated_at trigger), `require_admin` dependency (fail-closed 401/403/503,
+  service-role profile lookup per request), `/api/account` + `/auth/me`
+  profile, admin users list/patch (audited); broadcast notifications:
+  migration `003_notifications.sql` (announcements + reads; published rows
+  readable by anon), `/api/notifications` audience-scoped (anon→all,
+  free→all|free, premium→all), read state (server for signed-in,
+  localStorage anon), admin announcements CRUD/publish (audited);
+  `/admin` console (server guard → Bengali 404-style page for non-admins —
+  HTTP 200 with not-found UI due to streamed-layout notFound(), real
+  enforcement is the 401/403 on every admin API): ওভারভিউ (live safety
+  metrics + user/plan counts + audit trail), ব্যবহারকারী (search/pagination/
+  confirm-changes), ঘোষণা ও সতর্কতা (composer + live farmer-view preview);
+  navbar bell + urgent banners on /detect+/chat (render nothing when lane
+  disabled); dev persona switcher on /auth behind
+  `NEXT_PUBLIC_DEV_USER_SWITCHER` (default false) + `-Personas` mode in
+  `tools/ops/supabase_test_user.ps1`. Tests: +36 (22 admin authz + 14
+  notifications) green; suite 272 passed (test_soil analyze-locked fails
+  identically on clean HEAD — pre-existing, already documented above);
+  golden replay 50/50 PASS; `pnpm build` green (24 routes); anonymous
+  smoke 1440px+390px PASSED; 3-server probe: backend/frontend up, llama
+  lane not running (optional). Researcher actions outstanding: apply
+  migrations 002+003 to the hosted project, run `-Personas` with the
+  service-role key, set backend `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY`
+  in `backend/.env.local` (auth lane inert without them), visually review
+  `/admin` as the admin persona.
