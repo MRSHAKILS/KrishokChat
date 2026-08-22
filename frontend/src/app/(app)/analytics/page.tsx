@@ -7,7 +7,7 @@ import { getSafetyMetrics, type SafetyMetrics } from "@/lib/api";
 import { RESEARCH_STATS } from "@/lib/constants";
 import { bn } from "@/lib/bn";
 import { toBn, useCountUp } from "@/lib/use-count-up";
-import { safetyLabel, TONE_BADGE, TONE_DOT, TONE_BAR, refusalRuleLabel } from "@/lib/safety-labels";
+import { safetyLabel, TONE_BADGE, TONE_DOT, TONE_BAR_SOFT, refusalRuleLabel } from "@/lib/safety-labels";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 
 /* =========================================================================
@@ -77,7 +77,9 @@ export default function AnalyticsPage() {
 
   const maxCat = categories.length > 0 ? Math.max(...categories.map(([, v]) => v)) : 1;
 
-  /* Two-segment donut: safe vs blocked, drawn from the top (SVG arc animation) */
+  /* Two-segment donut: safe vs blocked, drawn from the top (SVG arc animation).
+     Blocked uses the light terracotta tint (clay-soft) over a bone track ring so
+     the chart stays airy — the alarm color lives in badges, not in large fills. */
   const donutSegments = [
     { name: "safe", frac: safePct / 100, rot: -90, color: "var(--color-leaf)" },
     { name: "blocked", frac: total > 0 ? 1 - safePct / 100 : 1, rot: -90 + (safePct / 100) * 360, color: "var(--color-clay-soft)" },
@@ -182,9 +184,10 @@ export default function AnalyticsPage() {
             নিরাপদ vs অবরুদ্ধ
           </motion.h2>
           <motion.div variants={enter} className="flex items-center gap-6">
-            {/* Animated SVG donut — arcs draw from the top, re-drawn on refresh */}
-            <div key={`donut-${total}`} className="relative h-32 w-32 shrink-0">
+            {/* Animated SVG donut — light track ring, arcs draw from the top */}
+            <div key={`donut-${total}`} className="relative h-36 w-36 shrink-0">
               <svg viewBox="0 0 240 240" className="h-full w-full">
+                <circle cx={120} cy={120} r={92} fill="none" stroke="var(--color-bone)" strokeWidth={30} />
                 {donutSegments.map((s, i) => (
                   <motion.circle
                     key={s.name}
@@ -193,19 +196,19 @@ export default function AnalyticsPage() {
                     r={92}
                     fill="none"
                     stroke={s.color}
-                    strokeWidth={30}
+                    strokeWidth={26}
                     pathLength={1}
-                    strokeDasharray={`${s.frac} ${1 - s.frac}`}
+                    strokeDasharray={`${Math.max(s.frac - 0.006, 0)} ${1 - Math.max(s.frac - 0.006, 0)}`}
                     transform={`rotate(${s.rot} 120 120)`}
                     initial={{ opacity: 0, pathLength: 0 }}
-                    animate={{ opacity: 1, pathLength: s.frac }}
+                    animate={{ opacity: 1, pathLength: Math.max(s.frac - 0.006, 0) }}
                     transition={{ delay: 0.15 + i * 0.15, duration: dur.slow, ease: ease.smooth }}
                   />
                 ))}
-                <text x={120} y={116} textAnchor="middle" className="fill-ink font-display" fontSize={30}>
+                <text x={120} y={118} textAnchor="middle" className="fill-ink font-display" fontSize={34}>
                   {bn(safePct)}
                 </text>
-                <text x={120} y={138} textAnchor="middle" className="fill-ink-faint" fontSize={10}>
+                <text x={120} y={142} textAnchor="middle" className="fill-ink-soft" fontSize={12}>
                   % নিরাপদ
                 </text>
               </svg>
@@ -214,11 +217,11 @@ export default function AnalyticsPage() {
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <div className="h-3 w-3 rounded-full bg-leaf" />
-                <span className="text-sm text-ink">নিরাপদ: {bn(safe)}</span>
+                <span className="text-sm text-ink">নিরাপদ: <span className="font-semibold tabular">{bn(safe)}</span></span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-clay-soft" />
-                <span className="text-sm text-ink">অবরুদ্ধ: {bn(blocked)}</span>
+                <div className="h-3 w-3 rounded-full border border-clay/40 bg-clay-soft" />
+                <span className="text-sm text-ink">অবরুদ্ধ: <span className="font-semibold tabular">{bn(blocked)}</span></span>
               </div>
               <div className="pt-1 text-xs text-ink-faint">
                 মোট: {bn(total)} প্রশ্ন
@@ -227,7 +230,10 @@ export default function AnalyticsPage() {
           </motion.div>
         </motion.section>
 
-        {/* Category breakdown bars */}
+        {/* Category breakdown bars — label row + light track; the count sits
+            OUTSIDE the fill so it is never dark-on-dark. Fills use soft tones
+            per group: safe=leaf, uncertain=ochre, stopped=light terracotta,
+            off-topic=neutral — color signals the group, not alarm level. */}
         <motion.section
           initial="hidden"
           whileInView="visible"
@@ -243,29 +249,31 @@ export default function AnalyticsPage() {
               কোনো তথ্য নেই।
             </motion.p>
           ) : (
-            <motion.div variants={enter} key={`cats-${total}`} className="space-y-2.5">
+            <motion.div variants={enter} key={`cats-${total}`} className="space-y-3.5">
               {categories.map(([cat, count], i) => {
                 const categoryLabel = safetyLabel(cat);
                 const pct = Math.round((count / maxCat) * 100);
+                const share = total > 0 ? Math.round((count / total) * 100) : 0;
                 return (
-                  <div key={cat} className="flex items-center gap-3">
-                    <div className="w-36 shrink-0 truncate">
-                      <span className={`inline-flex max-w-full items-center gap-1.5 truncate rounded-md px-2 py-1 text-xs font-medium ${TONE_BADGE[categoryLabel.tone]}`} title={categoryLabel.label}>
+                  <div key={cat}>
+                    <div className="mb-1 flex items-center justify-between gap-2">
+                      <span className={`inline-flex min-w-0 items-center gap-1.5 rounded-md px-1.5 py-0.5 text-xs font-medium ${TONE_BADGE[categoryLabel.tone]}`} title={categoryLabel.label}>
                         <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${TONE_DOT[categoryLabel.tone]}`} />
                         <span className="truncate">{categoryLabel.label}</span>
                       </span>
-                    </div>
-                    <div className="relative h-6 flex-1 overflow-hidden rounded-md bg-bone">
-                      <motion.div
-                        className={`absolute inset-y-0 left-0 rounded-md ${TONE_BAR[categoryLabel.tone]}`}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${pct}%` }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.08, duration: dur.slow, ease: ease.smooth }}
-                      />
-                      <span className="relative flex items-center px-2 text-xs font-medium tabular text-ink">
-                        {bn(count)}
+                      <span className="shrink-0 text-xs tabular text-ink-soft">
+                        <span className="font-display text-sm font-semibold text-ink">{bn(count)}</span>
+                        <span className="ml-1 text-ink-faint">({bn(share)}%)</span>
                       </span>
+                    </div>
+                    <div className="h-2.5 overflow-hidden rounded-full bg-paper-2">
+                      <motion.div
+                        className={`h-full rounded-full ${TONE_BAR_SOFT[categoryLabel.tone]}`}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${Math.max(pct, 3)}%` }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.07, duration: dur.slow, ease: ease.smooth }}
+                      />
                     </div>
                   </div>
                 );
@@ -479,7 +487,8 @@ export default function AnalyticsPage() {
   );
 }
 
-/* === Pipeline stage stat (dual-view card) === */
+/* === Pipeline stage stat — progress-bar card. The numeral stays ink-on-paper
+   (always legible); the tone color lives only in the small icon + bar fill. === */
 function StageStat({
   icon: Icon,
   name,
@@ -496,9 +505,10 @@ function StageStat({
   tone: "leaf" | "ochre" | "clay";
 }) {
   const color = tone === "leaf" ? "text-leaf" : tone === "clay" ? "text-clay" : "text-ochre";
+  const barFill = tone === "leaf" ? "bg-leaf/80" : tone === "clay" ? "bg-clay-soft" : "bg-ochre/70";
   const n = useCountUp(pct ?? 0, true);
   return (
-    <div className="rounded-xl border rule bg-paper-2/30 p-5">
+    <div className="rounded-xl border rule bg-paper p-5">
       <div className="flex items-center justify-between gap-2">
         <span className="flex items-center gap-2 text-sm font-medium text-ink">
           <Icon className={`h-4 w-4 ${color}`} />
@@ -506,15 +516,26 @@ function StageStat({
         </span>
         <span className="shrink-0 text-xs text-ink-faint">{pctLabel}</span>
       </div>
-      <div className={`mt-3 font-display text-3xl tabular ${color}`}>
+      <div className="mt-2.5 font-display text-3xl tabular text-ink">
         {pct == null ? "—" : (
           <>
             {toBn(n)}
-            <span className="text-xl">%</span>
+            <span className="text-xl text-ink-soft">%</span>
           </>
         )}
       </div>
-      <div className="mt-1 text-xs text-ink-soft">{detail}</div>
+      <div className="mt-2 h-2 overflow-hidden rounded-full bg-paper-2">
+        {pct != null && (
+          <motion.div
+            className={`h-full rounded-full ${barFill}`}
+            initial={{ width: 0 }}
+            whileInView={{ width: `${Math.max(Math.min(pct, 100), 3)}%` }}
+            viewport={{ once: true }}
+            transition={{ duration: dur.slow, ease: ease.smooth }}
+          />
+        )}
+      </div>
+      <div className="mt-2 text-xs text-ink-soft">{detail}</div>
     </div>
   );
 }
@@ -539,9 +560,9 @@ function StatCard({  value,
   return (
     <motion.div variants={variants} className="bg-paper p-5">
       <Icon className={`h-5 w-5 ${color}`} />
-      <div className={`mt-3 font-display text-3xl tabular ${color}`}>
+      <div className="mt-3 font-display text-3xl tabular text-ink">
         {toBn(n)}
-        {suffix ? <span className="text-xl">{suffix}</span> : null}
+        {suffix ? <span className="text-xl text-ink-soft">{suffix}</span> : null}
       </div>
       <div className="mt-1 text-xs text-ink-soft">{label}</div>
     </motion.div>

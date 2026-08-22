@@ -128,6 +128,16 @@ export const TONE_BAR: Record<BadgeTone, string> = {
   ink: "bg-ink-faint",
 };
 
+/** Tone → SOFT bar fill for large analytics charts. Keeps color identity
+ *  (green=safe, amber=uncertain, terracotta=stopped) without dark alarm
+ *  fills dominating the dashboard. */
+export const TONE_BAR_SOFT: Record<BadgeTone, string> = {
+  leaf: "bg-leaf/80",
+  ochre: "bg-ochre/70",
+  clay: "bg-clay-soft",
+  ink: "bg-ink-faint/45",
+};
+
 /* ---- Verifier confidence display (matches backend enum) ---- */
 
 export interface ConfidenceLabel {
