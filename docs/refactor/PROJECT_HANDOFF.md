@@ -45,7 +45,11 @@ The UI is replaceable. Functional behavior must not be embedded in React compone
 - Disease-treatment advice must pass through the same grounded retrieval/generation/
   verifier path whenever an advisory answer is requested.
 - Every request outcome is locally auditable. Do not add external analytics or telemetry.
-- Do not add auth, accounts, admin panels, queues, microservices, or live web retrieval.
+- Auth/accounts and a single-platform admin console are permitted only under their
+  approved amendments (15 — Supabase Auth; 02 — Admin/Tiers/Broadcast,
+  `docs/production_readiness/amendments/`). Auth stays additive and never gates the
+  demo; no multi-tenancy, no per-tenant isolation, no billing. Do not add queues,
+  microservices, or live web retrieval.
 - The arXiv v1 paper (`2606.29243`) is deprecated and must never be cited or quoted.
   The only authoritative KrishokChat papers are the files in `paper/done papers/`
   (`KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf`,

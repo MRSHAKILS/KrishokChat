@@ -602,3 +602,32 @@ Direct mode (no GH) fallback: edit-in-place, still one commit per step, same gat
 3. **Kick paper lane `R1`** in parallel — freeze skeleton + claim ledger while hygiene runs (no file overlap).
 
 > Say **`go H1`** and I dispatch the first hygiene step with live 3-server checks. Say **`go R1`** to start the paper lane in parallel. Say **`tune`** to adjust step order or split a step further.
+
+---
+
+# G-Lane — Government-Handoff: UI Refinement + Tiers + Admin Console (added 2026-08-22)
+
+Researcher-approved plan for the government-handoff preparation. Governed by
+`docs/production_readiness/amendments/02_ADMIN_TIERS_BROADCAST_AMENDMENT_2026_08_22.md`
+(APPROVED 2026-08-22). Researcher decisions: **no tier gating now**, **in-app
+notifications first (Web Push deferred)**, **admin v1 = ops console**, **polish the
+existing Field Notebook design** (no DESIGN.md regeneration).
+
+Same execution protocol as §5 (snapshot → 3 servers → one bounded commit → gates →
+stop on failure). Every step keeps the anonymous/DEMO_MODE path byte-identical.
+
+| Step | Scope | Key gate |
+|------|-------|----------|
+| G0 | Amendment 02 + stale-doc fixes (PROJECT_HANDOFF line 48, AGENTS rule 1 path) + this lane | docs-only; `pytest -q` still green |
+| G1 | UI A1–A2: de-English farmer surfaces; legibility floor (≥12px captions, ≥13px body); contrast fixes from `docs/ui_audit/GLOBAL_DESIGN_SYSTEM_BUGS.md` §2 | `pnpm build` + 390px manual pass |
+| G2 | UI A3: voice round-trip — auto-fallback to backend edge-tts when browser lacks bn-BD voice; large calm Bengali notice | manual voice test + build |
+| G3 | UI A4–A5: mobile auth discoverability (no popups/redirects); PWA 192/512 maskable icons | Lighthouse manifest check |
+| G4 | UI A6–A7: lazy-load recharts/inspector on research routes + landing charts; fix stale `frontend/smoke-check.js` to assert optional auth | size-limit ≤ budget; smoke green |
+| G5 | B1–B2: migration `002_roles_plans.sql` (profiles.role/plan + admin_actions); backend `require_admin`, `/auth/me` role/plan, `/api/v1/admin/users` GET/PATCH | `test_admin_authz.py` green; 401/403/200 |
+| G6 | B3–B5: plan badge UI; test users (free/premium/admin) + `NEXT_PUBLIC_DEV_USER_SWITCHER` dev-only switcher; tests | live persona swap; full `pytest -q` green |
+| G7 | C1–C2: migration `003_notifications.sql`; `GET /api/notifications` (audience-filtered) + read state; admin announcements CRUD; `/api/safety/metrics` optional limit/window | `test_notifications.py` green |
+| G8 | C3: navbar bell + panel; urgent disease-alert banners on `/detect`+`/chat`; read-state sync (server for signed-in, localStorage anon) | anonymous sees `all`-audience alerts; offline tolerant |
+| G9 | C4–C6: `/admin` route group (overview/users/announcements, server-side role guard, live Bengali preview); final tests + full regression | non-admin → 404-style page; every admin API 403s independently |
+
+Deferred (design recorded in amendment 02 §5, no new approval needed): Web Push
+(pywebpush + VAPID), content-library management, artifact version viewer.
