@@ -93,3 +93,4 @@ dataset_release/soil-moisture-detection/dataset/raw/
 dataset_release/soil-moisture-detection/dataset/clean/
 dataset_release/soil-moisture-detection/dataset/updated_dataset/
 dataset_release/soil-moisture-detection/dataset/experiments/
+.zcode/
