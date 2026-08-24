@@ -333,3 +333,29 @@ No route or frontend component should change for either replacement.
   `tests/test_dose_reference.py` 20 green; suite 358 passed / 7 skipped /
   2 pre-existing env failures; golden replay 50/50 PASS with unchanged flag
   counts. This is the N1 verifier-side piece F1-01 deferred.
+- PR1 (weather-triggered potato late-blight risk alert, spine step 3): done —
+  `backend/app/domain/late_blight.py` (Smith-period approximation on daily
+  aggregates: tmin ≥10°C + RH ≥85% on ≥2 consecutive days = high, 1 = watch;
+  season window Nov 1–Mar 15 derived from the snapshot's own latest date),
+  `backend/app/infrastructure/weather/snapshot.py` (fail-open loader),
+  committed SAMPLE snapshot `ml_assets/weather/late_blight_snapshot.json`
+  (8 potato districts, is_sample: true, 5 high / 1 watch / 2 low),
+  `GET /api/admin/advisory/late-blight-risk` (require_admin; risk-ordered
+  payload + per-district composer prefill; missing snapshot → available:
+  false, never 500), `WEATHER_SNAPSHOT_PATH` in config + `.env.example`.
+  `/admin/announcements` gained an "আবহাওয়া ঝুঁকি" card with sample badge and
+  one-click composer prefill — human-in-the-loop publish via the audited
+  announcements lane unchanged. The drafted advisory cites CABI corpus nodes
+  and deliberately carries NO fungicide dose (dose advice stays in the F1-02
+  QA lane / 16123). Researcher outstanding: replace the sample snapshot with
+  real BMD/BAMIS rows before any real broadcast. Verified: 18 new tests;
+  suite 376 passed / 7 skipped / 2 pre-existing env failures; golden 50/50
+  PASS; pnpm build green; live anon 401 on both /api and /api/v1 mounts.
+- F4 (Bengali font optimization): done — dropped the Noto Serif Bengali
+  family (3 weight files) that sat behind Tiro Bangla in the display fallback
+  chain and never rendered; `adjustFontFallback: false` on the remaining two
+  families (the automatic Times/Arial metric adjustment is meaningless for
+  Bengali and adds swap-time layout shift); display chain now Tiro →
+  "Tiro Bangla" → Georgia. Visual output identical when fonts load (serif
+  never rendered), 3 fewer font downloads on rural 3G. `pnpm build` green,
+  no dangling references.

@@ -36,10 +36,9 @@
   --color-danger: #a8542b;
 
   /* Typography */
-  --font-display: var(--font-tiro-bangla), var(--font-bengali-serif), "Tiro Bangla", serif;
+  --font-display: var(--font-tiro-bangla), "Tiro Bangla", Georgia, serif;
   --font-body: var(--font-bengali-sans), "Noto Sans Bengali", sans-serif;
   --font-bengali-sans: var(--font-bengali-sans), "Noto Sans Bengali", sans-serif;
-  --font-bengali-serif: var(--font-bengali-serif), "Noto Serif Bengali", serif;
 
   /* Radius — mixed, not all-2xl */
   --radius-sm: 4px;
