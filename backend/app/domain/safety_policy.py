@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 
+from app.domain.chemical_registry import compiled_banned_patterns
 from app.domain.enums import SafetyCategory
 
 
@@ -17,9 +18,18 @@ PATTERNS: dict[SafetyCategory, tuple[tuple[str, re.Pattern[str]], ...]] = {
         ("injection_roleplay", re.compile(r"\b(?:you are now|pretend you are|act as)\b", re.I)),
         ("injection_bn", re.compile(r"আগের নির্দেশনা উপেক্ষা|নিরাপত্তা উপেক্ষা|নতুন নির্দেশনা")),
     ),
-    SafetyCategory.BANNED_OR_RESTRICTED_CHEMICAL: (
-        ("restricted_chemical_en", re.compile(r"\b(?:methyl parathion|paraquat|ddt|endosulfan|carbofuran)\b", re.I)),
-        ("restricted_chemical_bn", re.compile(r"নিষিদ্ধ কীটনাশক|নিষিদ্ধ রাসায়নিক|প্যারাকোয়াট|পরাকুয়াট")),
+    # Banned/cancelled agrochemicals: composed from the source-attributed
+    # registry (app.domain.chemical_registry) so the deterministic gate tracks
+    # the real national cancelled list rather than a hand-picked sample. Each
+    # entry carries a stable rule tag (banned_active:<name>:<lang>) that flows
+    # into the audit trail's matched_rules. See chemical_registry.py for the
+    # scope decision (legally-cancelled actives only, not still-registered HHPs).
+    # The two generic Bengali catch-alls ("banned pesticide/chemical") are
+    # appended so an explicit request for *any* prohibited agrochemical is
+    # caught even when no specific active is named.
+    SafetyCategory.BANNED_OR_RESTRICTED_CHEMICAL: compiled_banned_patterns()
+    + (
+        ("restricted_chemical_generic_bn", re.compile(r"নিষিদ্ধ কীটনাশক|নিষিদ্ধ রাসায়নিক|নিষিদ্ধ বালাইনাশক")),
     ),
     # P4 D1a corpus-coverage gate (2026-08-14): deterministic refusal for
     # intents the advisory corpus cannot support, learned from the 12

@@ -296,3 +296,21 @@ No route or frontend component should change for either replacement.
   service-role key, set backend `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY`
   in `backend/.env.local` (auth lane inert without them), visually review
   `/admin` as the admin persona.
+- F1-01 (BD-grounded banned-chemical registry, first task of the
+  `production/future_plan/00_SCOPE_OUTLINE.md` §10 "Safety" node): done —
+  `backend/app/domain/chemical_registry.py` (15 source-attributed
+  `BannedActive` records, EN `\b`-bounded + distinctive Bengali aliases,
+  stable `banned_active:<name>:<en|bn>` audit tags feeding `matched_rules`);
+  `safety_policy.py` now composes `BANNED_OR_RESTRICTED_CHEMICAL` from
+  `compiled_banned_patterns()` + generic Bengali catch-alls — `precheck`
+  ordering, canned texts, and coverage gate untouched. Scope: legally
+  cancelled/banned actives only (chlorpyrifos & other still-registered HHPs
+  deliberately not blocked — nuanced HHP handling is a later verifier task).
+  Verified: targeted 23+413 subtests green; `tests/` suite 337 passed /
+  7 skipped / 2 pre-existing env failures (auth JWKS, soil — both documented);
+  golden replay 50/50 PASS; spot-check 10 new actives EN+BN flagged, 16/16
+  ordinary queries clean. Pre-existing found: `test_sse_heartbeat.py
+  ::test_keepalive_comment_during_silence` hangs indefinitely in this
+  environment — deselect it in local runs; candidate quick-fix follow-up.
+  The `production/future_plan/` planning package (7 docs) is research-only;
+  nothing in it changes code until a task executes it.

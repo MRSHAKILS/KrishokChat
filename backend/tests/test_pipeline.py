@@ -93,8 +93,10 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(retriever.calls, 0)
         self.assertEqual(len(audit.entries), 1)
         self.assertEqual(audit.entries[0]["action"], "blocked-canned-response")
-        # P5: the refusal reason rides on the result for the UI.
-        self.assertIn("restricted_chemical_bn", result.matched_rules)
+        # P5: the refusal reason rides on the result for the UI. F1-01 replaced
+        # the inline banned literal with the source-attributed registry, so the
+        # matched rule is now the attributable tag banned_active:paraquat:bn.
+        self.assertIn("banned_active:paraquat:bn", result.matched_rules)
         self.assertEqual(result.safety_reason, "Deterministic safety rule matched")
 
     def test_classifier_failure_fails_closed(self) -> None:
