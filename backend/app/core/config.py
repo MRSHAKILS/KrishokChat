@@ -140,6 +140,13 @@ class Settings(BaseSettings):
     ml_assets_dir: str = str(PROJECT_ROOT / "ml_assets")
     soil_release_dir: str = str(PROJECT_ROOT.parent / "dataset_release" / "soil_moisture")
 
+    # F1-02: corpus-derived registered-dose reference for the verifier's
+    # gross-outlier check. Empty path = default derived artifact; missing file
+    # disables the check with a warning (never breaks the demo).
+    dose_reference_path: str = ""
+    # Flag a dosage claim only above band_max * factor (conservative default).
+    dose_outlier_factor: float = Field(default=3.0, gt=1.0)
+
     gemini_key_cooldown_seconds: float = 6.0
     env_file_path: str = str(PROJECT_ROOT.parent / ".env")
 
@@ -241,6 +248,16 @@ class Settings(BaseSettings):
         # Restored dataset_release/safety/phase4_dialect_map.json is merged
         # automatically when present; absence degrades nothing.
         return PROJECT_ROOT.parent / "dataset_release" / "safety" / "phase4_dialect_map.json"
+
+    @property
+    def dose_reference_resolved_path(self) -> Path:
+        # F1-02: precomputed dose-reference artifact (offline-built by
+        # scripts/build_dose_reference.py). Empty DOSE_REFERENCE_PATH uses the
+        # default; a missing file disables the verifier's outlier check.
+        if self.dose_reference_path:
+            path = Path(self.dose_reference_path)
+            return path if path.is_absolute() else PROJECT_ROOT.parent / path
+        return self.rag_index_path / "derived" / "dose_reference_v1.json"
 
     @property
     def resolved_llm_model(self) -> str:

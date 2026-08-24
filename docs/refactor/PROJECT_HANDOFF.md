@@ -314,3 +314,22 @@ No route or frontend component should change for either replacement.
   environment — deselect it in local runs; candidate quick-fix follow-up.
   The `production/future_plan/` planning package (7 docs) is research-only;
   nothing in it changes code until a task executes it.
+- F1-02 (corpus-derived registered-dose reference for the verifier): done —
+  `backend/app/infrastructure/verification/dose_reference.py` + thin CLI
+  `backend/scripts/build_dose_reference.py` + committed artifact
+  `ml_assets/rag_index/derived/dose_reference_v1.json` (71 cited entries,
+  15 actives, extracted offline from DAE registered-pesticide pages + BARC
+  hand book nodes; deterministic; no fabricated data). `HardenedDosageVerifier`
+  takes an optional `dose_reference`: a dosage claim that passes passage
+  entailment but exceeds the referenced band max by ≥ `DOSE_OUTLIER_FACTOR`
+  (default 3.0, same unit, explicit per-litre/per-hectare context; একর ≠ ha)
+  becomes unsupported → flag naming active+amount+referenced max, and the
+  sentence is annotate-and-dropped. Default-constructed verifier behavior is
+  byte-identical to pre-F1-02. `DOSE_REFERENCE_PATH` +
+  `dose_reference_resolved_path` in config + `.env.example`; missing file ⇒
+  warning + disabled (demo can never break). Known caveat: a few proximity
+  misbindings in table text inflate band maxima only (fail-safe direction),
+  every entry auditable via snippet+citation. Verified:
+  `tests/test_dose_reference.py` 20 green; suite 358 passed / 7 skipped /
+  2 pre-existing env failures; golden replay 50/50 PASS with unchanged flag
+  counts. This is the N1 verifier-side piece F1-01 deferred.

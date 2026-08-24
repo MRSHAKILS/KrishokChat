@@ -1,0 +1,647 @@
+{
+  "version": 1,
+  "generator": "backend/scripts/build_dose_reference.py",
+  "source_corpus": "processed/knowledge_nodes_clean.jsonl",
+  "notes": "Entries extracted offline from corpus nodes that pair a pesticide active with a numeric spray/field rate. Rates are crop- and product-specific recommendations from the cited source; the runtime check only flags gross outliers (>=3x the band max).",
+  "entries": [
+    {
+      "active": "carbendazim",
+      "surface": "carbendazim):",
+      "rate": 1.5,
+      "band": "g/l",
+      "node_id": "DAE_PEST_5E48F1_001",
+      "citation": "DAE. page_751. List of Registered Agricultural Pesticides (DAE). pp. 751-751.",
+      "snippet": "Carbendazim): 2 g/L of water. - Kasucar 54WP (Kasugamycin + Carbendazim): 1.5 g/L of water. - Haymancozeb 80WP (Mancozeb): 2 g/L o"
+    },
+    {
+      "active": "carbendazim",
+      "surface": "carbendazim)",
+      "rate": 2.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_E68538_002",
+      "citation": "BARC. Mungbean — Intercultural Operation. Hand Book of Agricultural Technology. pp. 78-81.",
+      "snippet": "BARI Mash-2), remove crop debris, and spray Bavistin 70 WP (Carbendazim) @ 2g/l. 3. Powdery mildew: Use resistant/tolerant cultiva"
+    },
+    {
+      "active": "carbendazim",
+      "surface": "carbendazim",
+      "rate": 2.0,
+      "band": "g/l",
+      "node_id": "CABI_CORN_99FD91_001",
+      "citation": "CABI. Gray Leaf Spot of Maize - Nepal. Maize (Corn) Disease Manuals (Plantwise). pp. 119-119.",
+      "snippet": "s early. Chemical control includes protective spraying with carbendazim 50% WP (2 g/L) at tassel initiation or curative spraying w"
+    },
+    {
+      "active": "carbendazim",
+      "surface": "carbendazim):",
+      "rate": 2.0,
+      "band": "g/l",
+      "node_id": "DAE_PEST_5E48F1_001",
+      "citation": "DAE. page_751. List of Registered Agricultural Pesticides (DAE). pp. 751-751.",
+      "snippet": "guidelines: 1. For Tomato Wilt: - Kaiser 6WP (Kasugamycin + Carbendazim): 2 g/L of water. - Kasucar 54WP (Kasugamycin + Carbendazi"
+    },
+    {
+      "active": "carbendazim",
+      "surface": "carbendazim",
+      "rate": 3.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_D929CD_001",
+      "citation": "BARC. Rice — Production Technology. Hand Book of Agricultural Technology. pp. 25-28.",
+      "snippet": "can be treated in 52-55°C hot water for 15 minutes or with Carbendazim fungicide (2-3 g/L water) for 12 hours. Seed soaking: 12-2"
+    },
+    {
+      "active": "carbendazim",
+      "surface": "carbendazim",
+      "rate": 3.0,
+      "band": "g/l",
+      "node_id": "DAE_PEST_77A00D_001",
+      "citation": "DAE. page_742. List of Registered Agricultural Pesticides (DAE). pp. 742-742.",
+      "snippet": "Asavax 40WP): Used for Wheat (Foot rot, Seedling blight) at 3 g/L per kg seed. - Carbendazim 17.5% + Iprodione 35% (e.g., Shelter 52.5WP, Hama 52.5WP):"
+    },
+    {
+      "active": "carbendazim",
+      "surface": "কার্বেন্ডাজিম",
+      "rate": 4.0,
+      "band": "g/l",
+      "node_id": "B2B_PEYAJ6_E1F6F3_001",
+      "citation": "BARI. চাষাবাদ পদ্ধতি: পেঁয়াজ কন্দ উৎপাদন. BARI Piaz-6 Production Technology Manual. pp. 138-138.",
+      "snippet": "জি বীজের প্রয়োজন হয়। বীজতলায় মাটি শোধনের জন্য ব্লু কপার (প্রতি লিটারে 4 গ্রাম) বা খড় পুড়িয়ে মাটি শোধন করা এবং বীজ শোধনের জন্য কার্বেন্ডাজিম (প্রতি কেজি বীজে 2 গ্রাম"
+    },
+    {
+      "active": "carbofuran",
+      "surface": "furadan",
+      "rate": 30.0,
+      "band": "kg/ha",
+      "node_id": "B5_BARCAG_965B0B_003",
+      "citation": "BARC. Banana — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 143-143.",
+      "snippet": "phytosanitary measures. Chemical control includes applying Furadan 5G, Bistaben 5G (45-60 kg/ha), or Ragby 10G (30 kg/ha) 3-4 times per year."
+    },
+    {
+      "active": "carbofuran",
+      "surface": "furadan",
+      "rate": 60.0,
+      "band": "kg/ha",
+      "node_id": "B5_BARCAG_965B0B_003",
+      "citation": "BARC. Banana — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 143-143.",
+      "snippet": "phytosanitary measures. Chemical control includes applying Furadan 5G, Bistaben 5G (45-60 kg/ha), or Ragby 10G (30 kg/ha) 3-4 times per"
+    },
+    {
+      "active": "carbofuran",
+      "surface": "carbofuran-5g",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B6_DOC_9AC2ED_002",
+      "citation": "DoF. Nutrition and Production Plan of Orange Sweet Potato. Household Based Pond Aquaculture 2011. pp. 77-78.",
+      "snippet": "ুন। - প্রতিকারমূলক: আক্রমণ দেখা দিলে 8 গ্রাম Diazone-14G বা Carbofuran-5G ছড়িয়ে দিয়ে বেডে সেচ দিন। 2. কালো দাগ রোগ: - প্রতি লিটার পানিতে 1 মিলি Diethane বা Rodomil MZ "
+    },
+    {
+      "active": "cartap",
+      "surface": "cartap",
+      "rate": 1.5,
+      "band": "ml/l",
+      "node_id": "DAE_PEST_E419E7_001",
+      "citation": "DAE. page_787. List of Registered Agricultural Pesticides (DAE). pp. 787-787.",
+      "snippet": "EC (AP-2874): Rice (BPH), 1.00 L/ha; Country Bean (Aphid), 1.50 ml/L of water. 2. Cartap (50SP/4G/4GR): - Various brands (e.g., Suntap 50SP, Katap 50SP,"
+    },
+    {
+      "active": "chlorpyrifos",
+      "surface": "dursban",
+      "rate": 2.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_F591B6_001",
+      "citation": "BARC. Maize — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 49-49.",
+      "snippet": "insecticides at 1.5 kg a.i/ha. - Soil-borne insects: Spray Dursban or Pyrifos 20 EC at 5 ml/litre of water. - Stem borers: Spray Marshall 20 EC or Diazinon 60 EC at 2 ml/"
+    },
+    {
+      "active": "chlorpyrifos",
+      "surface": "dursban",
+      "rate": 3.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_336DA6_002",
+      "citation": "BARC. Jute and Allied Fibres — Intercultural Operation. Hand Book of Agricultural Technology. pp. 176-183.",
+      "snippet": "seed rates in infested areas; perform 'hole treatment' with Dursban 20 EC (3ml/l) or Vitanon 60 EC (1.60 lit/ha); flood fields if"
+    },
+    {
+      "active": "chlorpyrifos",
+      "surface": "dursban/pyriphos",
+      "rate": 5.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_EFC54C_001",
+      "citation": "BARC. Brinjal — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 96-96.",
+      "snippet": "l/l) or apply irrigation with kerosene oil (5-7 litres/ha). Dursban/Pyriphos 20 EC (5.0 ml/l) can also be sprayed on the soil around"
+    },
+    {
+      "active": "chlorpyrifos",
+      "surface": "dursban",
+      "rate": 5.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_F591B6_001",
+      "citation": "BARC. Maize — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 49-49.",
+      "snippet": "insecticides at 1.5 kg a.i/ha. - Soil-borne insects: Spray Dursban or Pyrifos 20 EC at 5 ml/litre of water. - Stem borers: Spray Marshall"
+    },
+    {
+      "active": "cypermethrin",
+      "surface": "cypermethrin",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_8844FD_001",
+      "citation": "BARC. Chickpea — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 86-86.",
+      "snippet": "drosis Virus (500 LE/ha) at 100% podding stage, followed by Cypermethrin (1 ml/l of water) 7 days later."
+    },
+    {
+      "active": "cypermethrin",
+      "surface": "cypermethrin",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "DAE_PEST_383F05_001",
+      "citation": "DAE. page_778. List of Registered Agricultural Pesticides (DAE). pp. 778-778.",
+      "snippet": "896), dosage 2 ml/L of water. 2. Bifenthrin (11.25%) + Zeta Cypermethrin (1.75%): Brand name 'Sunbizz 15EC' (Reg: AP-6047), dosage 1 ml/L of water. 3. Carbaryl: Brand nam"
+    },
+    {
+      "active": "cypermethrin",
+      "surface": "cypermethrin",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "DAE_PEST_C9C8F5_001",
+      "citation": "DAE. page_807. List of Registered Agricultural Pesticides (DAE). pp. 807-807.",
+      "snippet": "C (AP-5534): 1 ml/L of water - Suncot Super 10EC (AP-5663): 1 ml/L of water - Blate Plus 10EC (AP-5892): 1 ml/L of water - Chi-Cord 10EC (AP-5894): 1 ml/L of water - Merg"
+    },
+    {
+      "active": "cypermethrin",
+      "surface": "cypermethrin",
+      "rate": 1.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_33EE1D_001",
+      "citation": "BARC. Cauliflower — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 104-104.",
+      "snippet": "opping period. Use sex pheromone traps. If necessary, spray Cypermethrin at 1.5 ml/l of water or Spinosad (Tracer 45 SC) at 0.5 ml"
+    },
+    {
+      "active": "cypermethrin",
+      "surface": "cypermethrin",
+      "rate": 1.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_ED5A3F_003",
+      "citation": "BARC. Cabbage — Intercultural Operation. Hand Book of Agricultural Technology. pp. 99-99.",
+      "snippet": "racon hebetor (1 bunker/800-1200) অবমুক্ত করুন। 15 দিন পরপর Cypermethrin (1.5 ml/l) অথবা Spinosad (0.5 ml/l) স্প্রে করুন। প্রজাপতি"
+    },
+    {
+      "active": "cypermethrin",
+      "surface": "cypermethrin",
+      "rate": 1.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_EFC54C_001",
+      "citation": "BARC. Brinjal — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 96-96.",
+      "snippet": "(1 bunker/800-1200) ছাড়তে হবে। বিকল্প হিসেবে, 15 দিন পরপর Cypermethrin (1.5 ml/l) অথবা Spinosad (0.5 ml/l) স্প্রে করুন। কাটওয়ার"
+    },
+    {
+      "active": "cypermethrin",
+      "surface": "cypermethrin",
+      "rate": 1.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_F16272_001",
+      "citation": "BARC. Cabbage — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 100-100.",
+      "snippet": "দ ব্যবহার করা যেতে পারে। রাসায়নিক দমনের মধ্যে 15 দিন অন্তর Cypermethrin (1.5 ml/l) অথবা Spinosad (0.5 ml/l) স্প্রে করা অন্তর্ভুক্"
+    },
+    {
+      "active": "cypermethrin",
+      "surface": "cypermethrin",
+      "rate": 2.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_F591B6_001",
+      "citation": "BARC. Maize — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 49-49.",
+      "snippet": "ct and kill larvae from infested cobs. Alternatively, spray Cypermethrin (Ripcord 10 EC, Cymbush 10 EC, or Fenom 10 EC) at 2 ml/litre of water."
+    },
+    {
+      "active": "cypermethrin",
+      "surface": "cypermethrin",
+      "rate": 2.0,
+      "band": "ml/l",
+      "node_id": "DAE_PEST_383F05_001",
+      "citation": "DAE. page_778. List of Registered Agricultural Pesticides (DAE). pp. 778-778.",
+      "snippet": "tin (6%): Brand name 'NovaStar 56EC' (Reg: AP-3896), dosage 2 ml/L of water. 2. Bifenthrin (11.25%) + Zeta Cypermethrin (1.75%): Brand name 'Sunbizz 15EC' (Reg: AP-6047),"
+    },
+    {
+      "active": "deltamethrin",
+      "surface": "deltamethrin)",
+      "rate": 0.5,
+      "band": "ml/l",
+      "node_id": "DAE_PEST_C9C8F5_001",
+      "citation": "DAE. page_807. List of Registered Agricultural Pesticides (DAE). pp. 807-807.",
+      "snippet": "(Deltamethrin) (AP-317): 1 ml/L of water - Nokthion 2.5EC (Deltamethrin) (AP-644): 0.5 ml/L of water - Wenkil 2.5EC (Deltamethrin)"
+    },
+    {
+      "active": "deltamethrin",
+      "surface": "deltamethrin)",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "DAE_PEST_C9C8F5_001",
+      "citation": "DAE. page_807. List of Registered Agricultural Pesticides (DAE). pp. 807-807.",
+      "snippet": "rin + Dimethoate) (AP-1279): 1 ml/L of water - Decis 2.5EC (Deltamethrin) (AP-317): 1 ml/L of water - Nokthion 2.5EC (Deltamethrin"
+    },
+    {
+      "active": "dimethoate",
+      "surface": "dimethoate",
+      "rate": 2.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_280BE4_001",
+      "citation": "BARC. Turmeric — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 169-169.",
+      "snippet": "pulation. Chemical control includes spraying with carbaryl (2 g/l of water) or dimethoate (2 ml/l of water)."
+    },
+    {
+      "active": "dimethoate",
+      "surface": "dimethoate",
+      "rate": 5.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_699806_001",
+      "citation": "BARC. Lentil — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 75-75.",
+      "snippet": "yrphid flies. For management, spray detergent (Jet powder @ 5 g/l) or neem seed extract (@ 50 g/l) every 5-7 days. In severe cases, spray Melathion 57 EC or Dimethoate 40"
+    },
+    {
+      "active": "dimethoate",
+      "surface": "dimethoate",
+      "rate": 50.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_699806_001",
+      "citation": "BARC. Lentil — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 75-75.",
+      "snippet": "pray detergent (Jet powder @ 5 g/l) or neem seed extract (@ 50 g/l) every 5-7 days. In severe cases, spray Melathion 57 EC or Dimethoate 40 EC @ 2 ml/l twice at 7-day int"
+    },
+    {
+      "active": "dimethoate",
+      "surface": "dimethoate",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_280BE4_002",
+      "citation": "BARC. Turmeric — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 169-169.",
+      "snippet": "detergent powder. Chemical control options include spraying dimethoate (1 ml/l of water), Lambda-cyhalothrin (1 ml/l of water), or"
+    },
+    {
+      "active": "dimethoate",
+      "surface": "dimethoate)",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "DAE_PEST_C9C8F5_001",
+      "citation": "DAE. page_807. List of Registered Agricultural Pesticides (DAE). pp. 807-807.",
+      "snippet": "EC (AP-5894): 1 ml/L of water - Merger 45EC (Cypermethrin + Dimethoate) (AP-1279): 1 ml/L of water - Decis 2.5EC (Deltamethrin) (A"
+    },
+    {
+      "active": "dimethoate",
+      "surface": "dimethoate",
+      "rate": 2.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_280BE4_001",
+      "citation": "BARC. Turmeric — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 169-169.",
+      "snippet": "control includes spraying with carbaryl (2 g/l of water) or dimethoate (2 ml/l of water)."
+    },
+    {
+      "active": "dimethoate",
+      "surface": "dimethoate",
+      "rate": 2.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_699806_001",
+      "citation": "BARC. Lentil — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 75-75.",
+      "snippet": ") every 5-7 days. In severe cases, spray Melathion 57 EC or Dimethoate 40 EC @ 2 ml/l twice at 7-day intervals."
+    },
+    {
+      "active": "dimethoate",
+      "surface": "dimethoate",
+      "rate": 2.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_E68538_003",
+      "citation": "BARC. Mungbean — Intercultural Operation. Hand Book of Agricultural Technology. pp. 78-81.",
+      "snippet": "l, groundnut), seed treatment with Furadan 5G (40g/kg), and Dimethoate (2 ml/l). - Flea beetles: Weed removal, spray Dimethoate or"
+    },
+    {
+      "active": "fipronil",
+      "surface": "fipronil",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_04E110_002",
+      "citation": "BARC. Garlic — Intercultural Operation. Hand Book of Agricultural Technology. pp. 162-162.",
+      "snippet": "October), burning infested leaves, or spraying Imidacloprid/Fipronil (1ml/l of water). Mites (Aceria tulipae) cause 'tangle top' w"
+    },
+    {
+      "active": "fipronil",
+      "surface": "fipronil",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_29A8D0_001",
+      "citation": "BARC. Garlic — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 162-162.",
+      "snippet": "ober, burning infested leaves, and spraying Imidacloprid or Fipronil at 1ml/l of water. Mites (Aceria tulipae) cause 'tangle top'"
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "admire",
+      "rate": 5.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_3AC519_002",
+      "citation": "BARC. Papaya — Intercultural Operation. Hand Book of Agricultural Technology. pp. 151-152.",
+      "snippet": "with a toothbrush. - Severe infestation: Spray soap water (5 g/l) or Admire 200SL (0.25 ml/l) 2-3 times at 10-15 day intervals."
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "admire",
+      "rate": 0.25,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_3AC519_002",
+      "citation": "BARC. Papaya — Intercultural Operation. Hand Book of Agricultural Technology. pp. 151-152.",
+      "snippet": "othbrush. - Severe infestation: Spray soap water (5 g/l) or Admire 200SL (0.25 ml/l) 2-3 times at 10-15 day intervals."
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "admire",
+      "rate": 0.25,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_3AC519_003",
+      "citation": "BARC. Papaya — Intercultural Operation. Hand Book of Agricultural Technology. pp. 151-152.",
+      "snippet": ". Control: Uproot/burn affected plants; control aphids with Admire 200SL (0.25 ml/l). - Papaya leaf curl virus: Causes curling and"
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "admire",
+      "rate": 0.25,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_965B0B_001",
+      "citation": "BARC. Banana — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 143-143.",
+      "snippet": "cted plants. For chemical control, spray with Imidacloprid (Admire 200 SL) at a rate of 0.25 ml/l of water or Ripcord at 1 ml/l of water"
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "imidachlorpid)",
+      "rate": 0.25,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_E68538_002",
+      "citation": "BARC. Mungbean — Intercultural Operation. Hand Book of Agricultural Technology. pp. 78-81.",
+      "snippet": "ected plants, and adjust sowing dates. Spray Admire 200 SL (Imidachlorpid) @ 0.25 ml/litre at first sign of disease. 2. Cercospora"
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "imitaf",
+      "rate": 0.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_1879A4_003",
+      "citation": "BARC. Tomato — Intercultural Operation. Hand Book of Agricultural Technology. pp. 90-90.",
+      "snippet": "h nets during the seedling stage and spray Admire 200 SL or Imitaf 20 SL (0.5 ml/litre) at 7-10 day intervals to control whitefly."
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "imidacloprid",
+      "rate": 0.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_57C59B_004",
+      "citation": "BARC. Turmeric — Intercultural Operation. Hand Book of Agricultural Technology. pp. 167-168.",
+      "snippet": "hion (2 ml/l) at 30-day intervals, or Carbosulfan (2 ml/l), Imidacloprid (0.5 ml/l), or Lambda-cyhalothrin (1 ml/l) at 21-day inte"
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "imitaf",
+      "rate": 0.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_E68538_003",
+      "citation": "BARC. Mungbean — Intercultural Operation. Hand Book of Agricultural Technology. pp. 78-81.",
+      "snippet": "ml/l). - Thrips: White sticky traps, spray Admire 200 SL or Imitaf 20 SL (0.5 ml/l)."
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "imidacloprid",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_57C59B_004",
+      "citation": "BARC. Turmeric — Intercultural Operation. Hand Book of Agricultural Technology. pp. 167-168.",
+      "snippet": "hion (2 ml/l) at 30-day intervals, or Carbosulfan (2 ml/l), Imidacloprid (0.5 ml/l), or Lambda-cyhalothrin (1 ml/l) at 21-day intervals from July to Octob"
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "admire",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_965B0B_001",
+      "citation": "BARC. Banana — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 143-143.",
+      "snippet": "cted plants. For chemical control, spray with Imidacloprid (Admire 200 SL) at a rate of 0.25 ml/l of water or Ripcord at 1 ml/l of water at 15-day intervals."
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "imidacloprid",
+      "rate": 2.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_57C59B_004",
+      "citation": "BARC. Turmeric — Intercultural Operation. Hand Book of Agricultural Technology. pp. 167-168.",
+      "snippet": "and rhizome fly, destroy affected shoots. Spray Melathion (2 ml/l) at 30-day intervals, or Carbosulfan (2 ml/l), Imidacloprid (0.5 ml/l), or Lambda-cyhalothrin (1 ml/l) a"
+    },
+    {
+      "active": "imidacloprid",
+      "surface": "admire/score",
+      "rate": 2.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_E8242F_004",
+      "citation": "BARC. Onion — Intercultural Operation. Hand Book of Agricultural Technology. pp. 157-158.",
+      "snippet": "dry weather. Control includes weed destruction and spraying Admire/Score (2 ml/l) every 15 days. Cutworms are nocturnal; control b"
+    },
+    {
+      "active": "lambda-cyhalothrin",
+      "surface": "karate",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_336DA6_002",
+      "citation": "BARC. Jute and Allied Fibres — Intercultural Operation. Hand Book of Agricultural Technology. pp. 176-183.",
+      "snippet": "llar: Hand-pick egg masses and larvae; use Hayzinon 60% EC, Karate 2.5 EC, or Riva 2.5 EC (1ml/L). - Semilooper: Provide perches for ins"
+    },
+    {
+      "active": "lambda-cyhalothrin",
+      "surface": "karate",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_699806_002",
+      "citation": "BARC. Lentil — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 75-75.",
+      "snippet": "tare, and spraying insecticides such as Lambda-Cyhalothrin (Karate 2.5 EC or Reeva 2.5 EC) @ 1 ml/l of water."
+    },
+    {
+      "active": "lambda-cyhalothrin",
+      "surface": "karate",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_E68538_003",
+      "citation": "BARC. Mungbean — Intercultural Operation. Hand Book of Agricultural Technology. pp. 78-81.",
+      "snippet": "methoate (2 ml/l). - Hairy caterpillar: Hand picking, spray Karate 2.5 EC or Reeva 2.5 EC (1 ml/l). - Leaf folder: Remove folded leaves,"
+    },
+    {
+      "active": "malathion",
+      "surface": "malathion-based",
+      "rate": 125.0,
+      "band": "g/ha",
+      "node_id": "DAE_PEST_D1436D_001",
+      "citation": "DAE. page_836. List of Registered Agricultural Pesticides (DAE). pp. 836-836.",
+      "snippet": "in) recommended for Brown Plant Hopper (BPH) at a dosage of 125 g/ha. Additionally, Malathion-based products (Fyfanon 57EC, Hilthion 57EC, Syfanon 57EC, M"
+    },
+    {
+      "active": "malathion",
+      "surface": "malathion",
+      "rate": 2.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_E89FD1_001",
+      "citation": "BARC. Potato — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 60-60.",
+      "snippet": "in 10 litres of water, soaked for 12 hours), or soap water (2g/L) every 3 days. Chemical control includes Malathion (Fyfanon 57EC, Malataf 57 EC @ 5 ml/1L) or Imidaclopri"
+    },
+    {
+      "active": "malathion",
+      "surface": "malathion",
+      "rate": 5.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_699806_001",
+      "citation": "BARC. Lentil — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 75-75.",
+      "snippet": "রা। দমনের জন্য, প্রতি 5-7 দিন পরপর ডিটারজেন্ট (Jet powder @ 5 g/l) অথবা নিম বীজের নির্যাস (@ 50 g/l) স্প্রে করুন। তীব্র আক্রমণের ক্ষেত্রে, 7 দিন পরপর দুইবার Malathion 57 "
+    },
+    {
+      "active": "malathion",
+      "surface": "malathion",
+      "rate": 5.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_E68538_003",
+      "citation": "BARC. Mungbean — Intercultural Operation. Hand Book of Agricultural Technology. pp. 78-81.",
+      "snippet": "ml/l). - Aphid: Conserve natural enemies, spray detergent (5g/l) or neem seed extract (50g/l); for severe cases, Malathion 57 EC or Dimethoate 40 EC (2 ml/l). - Thrips: W"
+    },
+    {
+      "active": "malathion",
+      "surface": "malathion",
+      "rate": 50.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_699806_001",
+      "citation": "BARC. Lentil — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 75-75.",
+      "snippet": "র ডিটারজেন্ট (Jet powder @ 5 g/l) অথবা নিম বীজের নির্যাস (@ 50 g/l) স্প্রে করুন। তীব্র আক্রমণের ক্ষেত্রে, 7 দিন পরপর দুইবার Malathion 57 EC অথবা Dimethoate 40 EC @ 2 ml/l"
+    },
+    {
+      "active": "malathion",
+      "surface": "malathion",
+      "rate": 50.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_E68538_003",
+      "citation": "BARC. Mungbean — Intercultural Operation. Hand Book of Agricultural Technology. pp. 78-81.",
+      "snippet": "tural enemies, spray detergent (5g/l) or neem seed extract (50g/l); for severe cases, Malathion 57 EC or Dimethoate 40 EC (2 ml/l). - Thrips: White sticky t"
+    },
+    {
+      "active": "malathion",
+      "surface": "malathion",
+      "rate": 1.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_E77367_002",
+      "citation": "BARC. Pumpkin — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 115-115.",
+      "snippet": "in 10 L water) every 7 days during the cool season, or use malathion group insecticides (1.5 ml/L) every 7 days."
+    },
+    {
+      "active": "malathion",
+      "surface": "malathion",
+      "rate": 2.0,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_57C59B_004",
+      "citation": "BARC. Turmeric — Intercultural Operation. Hand Book of Agricultural Technology. pp. 167-168.",
+      "snippet": "বংস করুন। জুলাই থেকে অক্টোবর মাস পর্যন্ত প্রতি 30 দিন অন্তর Malathion (2 ml/l) স্প্রে করুন অথবা প্রতি 21 দিন অন্তর Carbosulfan (2"
+    },
+    {
+      "active": "mancozeb",
+      "surface": "mancozeb",
+      "rate": 2.0,
+      "band": "g/l",
+      "node_id": "B5_BARCAG_1879A4_003",
+      "citation": "BARC. Tomato — Intercultural Operation. Hand Book of Agricultural Technology. pp. 90-90.",
+      "snippet": "to control whitefly. For Late Blight, spray Ridomil Gold or Mancozeb (2 g/litre) and remove infested plants. For Early Blight, use"
+    },
+    {
+      "active": "mancozeb",
+      "surface": "mancozeb):",
+      "rate": 2.0,
+      "band": "g/l",
+      "node_id": "DAE_PEST_5E48F1_001",
+      "citation": "DAE. page_751. List of Registered Agricultural Pesticides (DAE). pp. 751-751.",
+      "snippet": "mycin + Carbendazim): 1.5 g/L of water. - Haymancozeb 80WP (Mancozeb): 2 g/L of water. 2. For Tomato Early Blight: - Pencozeb 80WP"
+    },
+    {
+      "active": "mancozeb",
+      "surface": "mancozeb",
+      "rate": 2.0,
+      "band": "g/l",
+      "node_id": "DAE_PEST_725A22_001",
+      "citation": "DAE. page_754. List of Registered Agricultural Pesticides (DAE). pp. 754-754.",
+      "snippet": "This list provides information on DAE-registered Mancozeb 80WP pesticides. These products are generally applied at a dosage of 2 g/L of water for various fungal diseases,"
+    },
+    {
+      "active": "propiconazole",
+      "surface": "propiconazole",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "CABI_CORN_99FD91_001",
+      "citation": "CABI. Gray Leaf Spot of Maize - Nepal. Maize (Corn) Disease Manuals (Plantwise). pp. 119-119.",
+      "snippet": "% WP (2 g/L) at tassel initiation or curative spraying with propiconazole 25 EC (1 ml/L) upon symptom appearance."
+    },
+    {
+      "active": "spinosad",
+      "surface": "tracer",
+      "rate": 0.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_33EE1D_001",
+      "citation": "BARC. Cauliflower — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 104-104.",
+      "snippet": "ssary, spray Cypermethrin at 1.5 ml/l of water or Spinosad (Tracer 45 SC) at 0.5 ml/l of water at 15-day intervals. For Aphids, ha"
+    },
+    {
+      "active": "spinosad",
+      "surface": "spinosad",
+      "rate": 0.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_ED5A3F_003",
+      "citation": "BARC. Cabbage — Intercultural Operation. Hand Book of Agricultural Technology. pp. 99-99.",
+      "snippet": "betor (1 bunker/800-1200). Spray Cypermethrin (1.5 ml/l) or Spinosad (0.5 ml/l) at 15-day intervals. For Butterfly: Hand-pick and"
+    },
+    {
+      "active": "spinosad",
+      "surface": "spinosad",
+      "rate": 0.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_EFC54C_001",
+      "citation": "BARC. Brinjal — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 96-96.",
+      "snippet": "/800-1200). Alternatively, spray Cypermethrin (1.5 ml/l) or Spinosad (0.5 ml/l) at 15-day intervals. For cutworms, spray Tracer (0"
+    },
+    {
+      "active": "spinosad",
+      "surface": "spinosad",
+      "rate": 0.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_F16272_001",
+      "citation": "BARC. Cabbage — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 100-100.",
+      "snippet": "emical control includes spraying Cypermethrin (1.5 ml/l) or Spinosad (0.5 ml/l) at 15-day intervals. For aphids, hand-pick at the"
+    },
+    {
+      "active": "spinosad",
+      "surface": "spinosad",
+      "rate": 1.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_ED5A3F_003",
+      "citation": "BARC. Cabbage — Intercultural Operation. Hand Book of Agricultural Technology. pp. 99-99.",
+      "snippet": "and Bracon hebetor (1 bunker/800-1200). Spray Cypermethrin (1.5 ml/l) or Spinosad (0.5 ml/l) at 15-day intervals. For Butterfly: Hand-pick and"
+    },
+    {
+      "active": "spinosad",
+      "surface": "spinosad",
+      "rate": 1.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_EFC54C_001",
+      "citation": "BARC. Brinjal — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 96-96.",
+      "snippet": "tor (1 bunker/800-1200). Alternatively, spray Cypermethrin (1.5 ml/l) or Spinosad (0.5 ml/l) at 15-day intervals. For cutworms, spray Tracer (0"
+    },
+    {
+      "active": "spinosad",
+      "surface": "spinosad",
+      "rate": 1.5,
+      "band": "ml/l",
+      "node_id": "B5_BARCAG_F16272_001",
+      "citation": "BARC. Cabbage — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 100-100.",
+      "snippet": "n be used. Chemical control includes spraying Cypermethrin (1.5 ml/l) or Spinosad (0.5 ml/l) at 15-day intervals. For aphids, hand-pick at the"
+    },
+    {
+      "active": "tebuconazole",
+      "surface": "tebuconazole",
+      "rate": 1.0,
+      "band": "ml/l",
+      "node_id": "CABI_WHEAT_C82C60_001",
+      "citation": "CABI. Stripe rust of wheat. Wheat Disease Management Manuals (Plantwise). pp. 16-16.",
+      "snippet": "cal control includes foliar application of propiconazole or tebuconazole (1 ml/L of water) upon symptom appearance."
+    }
+  ]
+}

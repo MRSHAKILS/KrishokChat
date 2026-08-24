@@ -28,6 +28,7 @@ from app.infrastructure.storage.postgrest import PostgrestSavedHistoryStore
 from app.infrastructure.storage.postgrest_admin import PostgrestAdminStore
 from app.infrastructure.storage.postgrest_notifications import PostgrestNotificationStore
 from app.application.verifier import HardenedDosageVerifier
+from app.infrastructure.verification.dose_reference import load_dose_reference
 from app.infrastructure.vision.registry import ArtifactVisionRegistry
 from app.infrastructure.vision.ultralytics_classifier import UltralyticsClassificationRunner
 
@@ -155,7 +156,14 @@ def build_container(settings: Settings) -> AppContainer:
         safety=SafetyClassifier(intent_llm),
         retriever=retriever,
         generator=GroundedAnswerGenerator(generation_llm),
-        verifier=HardenedDosageVerifier(),
+        verifier=HardenedDosageVerifier(
+            # F1-02: gross-outlier check against the corpus-derived registered
+            # dose reference; inert (warning only) when the file is absent.
+            dose_reference=load_dose_reference(
+                settings.dose_reference_resolved_path,
+                outlier_factor=settings.dose_outlier_factor,
+            )
+        ),
         audit=audit,
         sessions=sessions,
         top_k=settings.retrieval_top_k,

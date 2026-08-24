@@ -23,9 +23,15 @@ from app.infrastructure.verification.dosage_claims import (
     per_source_normalized,
     sanitize_answer,
 )
+from app.infrastructure.verification.dose_reference import DoseReference
 
 
 class HardenedDosageVerifier:
+    def __init__(self, dose_reference: DoseReference | None = None) -> None:
+        # F1-02: optional corpus-derived dose reference. Default-constructed
+        # verifiers (research baseline, tests) behave exactly as before.
+        self._dose_reference = dose_reference if dose_reference is not None else DoseReference.disabled()
+
     def verify(self, answer: str, sources: list[RetrievedSource]) -> VerificationResult:
         claims = extract_claims(answer or "")
         source_texts = per_source_normalized(sources)
@@ -41,8 +47,27 @@ class HardenedDosageVerifier:
                 continue
             checked += 1
             if claim_grounded(claim, source_texts):
-                grounded += 1
-                verdicts.append(VerifierClaim(text=claim.sentence, verdict="grounded"))
+                # F1-02: entailment alone certifies a claim whose SOURCE may
+                # itself carry an excessive rate. A gross outlier vs the
+                # referenced registered band is treated as unsupported even
+                # when "grounded" — the sentence is annotate-and-dropped and
+                # the flag names the active, amount, and referenced max.
+                outliers = self._dose_reference.outlier_details(claim)
+                if outliers:
+                    unsupported_count += 1
+                    unsupported_starts.add(claim.start)
+                    for detail in outliers:
+                        unverified.append(detail)
+                    verdicts.append(
+                        VerifierClaim(
+                            text=claim.sentence,
+                            verdict="unsupported",
+                            reason="dose exceeds referenced registered rate: " + "; ".join(outliers),
+                        )
+                    )
+                else:
+                    grounded += 1
+                    verdicts.append(VerifierClaim(text=claim.sentence, verdict="grounded"))
             else:
                 unsupported_count += 1
                 unsupported_starts.add(claim.start)
