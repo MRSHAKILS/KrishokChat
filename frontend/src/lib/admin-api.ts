@@ -115,3 +115,42 @@ export function adminSetAnnouncementPublished(
 export function adminDeleteAnnouncement(token: string, id: string): Promise<void> {
   return adminFetch(token, `/api/admin/announcements/${id}`, { method: "DELETE" });
 }
+
+/* PR1: potato late-blight weather-risk (offline snapshot; admin-only). */
+export interface LateBlightDay {
+  date: string;
+  tmin_c: number;
+  rh_pct: number;
+  rain_mm: number;
+}
+
+export interface LateBlightDistrictRisk {
+  district: string;
+  risk: "high" | "watch" | "low";
+  risk_label_bn: string;
+  favourable_days: number;
+  latest_date: string;
+  in_season: boolean;
+  last_days: LateBlightDay[];
+  draft: {
+    kind: "disease_alert";
+    severity: "info" | "warning" | "urgent";
+    title_bn: string;
+    body_bn: string;
+    crop: string;
+  };
+}
+
+export interface LateBlightRiskResponse {
+  available: boolean;
+  reason?: string;
+  sample?: boolean;
+  source_note?: string;
+  latest_date?: string;
+  rule?: string;
+  districts: LateBlightDistrictRisk[];
+}
+
+export function adminLateBlightRisk(token: string): Promise<LateBlightRiskResponse> {
+  return adminFetch(token, "/api/admin/advisory/late-blight-risk");
+}

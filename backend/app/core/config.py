@@ -147,6 +147,11 @@ class Settings(BaseSettings):
     # Flag a dosage claim only above band_max * factor (conservative default).
     dose_outlier_factor: float = Field(default=3.0, gt=1.0)
 
+    # PR1: operator-maintained late-blight weather snapshot (offline JSON;
+    # never fetched at request time). Empty path = default artifact; missing
+    # file disables the risk endpoint's data (clear payload, never a 500).
+    weather_snapshot_path: str = ""
+
     gemini_key_cooldown_seconds: float = 6.0
     env_file_path: str = str(PROJECT_ROOT.parent / ".env")
 
@@ -258,6 +263,14 @@ class Settings(BaseSettings):
             path = Path(self.dose_reference_path)
             return path if path.is_absolute() else PROJECT_ROOT.parent / path
         return self.rag_index_path / "derived" / "dose_reference_v1.json"
+
+    @property
+    def weather_snapshot_resolved_path(self) -> Path:
+        # PR1: offline weather snapshot for the late-blight risk rule.
+        if self.weather_snapshot_path:
+            path = Path(self.weather_snapshot_path)
+            return path if path.is_absolute() else PROJECT_ROOT.parent / path
+        return Path(self.ml_assets_dir) / "weather" / "late_blight_snapshot.json"
 
     @property
     def resolved_llm_model(self) -> str:

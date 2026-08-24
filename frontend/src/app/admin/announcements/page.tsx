@@ -7,13 +7,15 @@
    ========================================================================= */
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Loader2, Send, Ban, Trash2, BadgeCheck, Siren, Megaphone, Wrench, Eye } from "lucide-react";
+import { Loader2, Send, Ban, Trash2, BadgeCheck, Siren, Megaphone, Wrench, Eye, CloudRain, ArrowDownToLine } from "lucide-react";
 import {
   adminCreateAnnouncement,
   adminDeleteAnnouncement,
+  adminLateBlightRisk,
   adminListAnnouncements,
   adminSetAnnouncementPublished,
   type AdminAnnouncement,
+  type LateBlightRiskResponse,
 } from "@/lib/admin-api";
 import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { cn } from "@/lib/utils";
@@ -62,6 +64,7 @@ export default function AdminAnnouncementsPage() {
 
   const [draft, setDraft] = useState<Draft>(EMPTY_DRAFT);
   const [items, setItems] = useState<AdminAnnouncement[] | null>(null);
+  const [risk, setRisk] = useState<LateBlightRiskResponse | null>(null);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -79,6 +82,27 @@ export default function AdminAnnouncementsPage() {
   useEffect(() => {
     void load();
   }, [load]);
+
+  useEffect(() => {
+    if (!token) return;
+    adminLateBlightRisk(token)
+      .then(setRisk)
+      .catch(() => setRisk(null)); // card simply hides; announcement flow unaffected
+  }, [token]);
+
+  function prefillFromRisk(severity: Draft["severity"], title_bn: string, body_bn: string, crop: string) {
+    setDraft({
+      kind: "disease_alert",
+      severity,
+      title_bn,
+      body_bn,
+      crop,
+      audience: "all",
+      cta_url: "/detect",
+    });
+    setNotice("আবহাওয়া ঝুঁকি থেকে খসড়া প্রস্তুত — নিচে সম্পাদনা করে প্রকাশ করুন।");
+    setError(null);
+  }
 
   const preview: AdminAnnouncement = useMemo(
     () => ({
@@ -166,6 +190,63 @@ export default function AdminAnnouncementsPage() {
         <div role="status" className="rounded-lg bg-leaf/10 px-4 py-3 text-sm text-leaf">
           {notice}
         </div>
+      )}
+
+      {risk && risk.available && risk.districts.length > 0 && (
+        <section className="rounded-xl border rule bg-paper p-5" aria-label="আবহাওয়া ঝুঁকি">
+          <div className="flex flex-wrap items-center gap-2">
+            <CloudRain className="h-4 w-4 text-leaf" aria-hidden />
+            <h2 className="font-display text-lg text-ink">আবহাওয়া ঝুঁকি — আলুর লেট ব্লাইট</h2>
+            {risk.sample && (
+              <span className="rounded-full bg-ochre/15 px-2 py-0.5 text-xs font-medium text-ochre">
+                নমুনা উপাত্ত
+              </span>
+            )}
+            {risk.latest_date && (
+              <span className="text-xs text-ink-faint">উপাত্ত: {risk.latest_date} পর্যন্ত</span>
+            )}
+          </div>
+          <p className="mt-1 text-xs leading-relaxed text-ink-faint">
+            স্ন্যাপশট উপাত্তে স্মিথ-পিরিয়ড নিয়ম (টানা ২ দিন সর্বনিম্ন তাপমাত্রা ≥১০°সে ও আর্দ্রতা ≥৮৫%)।
+            ঝুঁকি দেখে খসড়া তৈরি করে সম্পাদনা করুন — প্রকাশের আগে এলাকার কৃষি কর্মকর্তার সঙ্গে যাচাই করুন।
+          </p>
+          <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3">
+            {risk.districts.map((d) => {
+              const tone =
+                d.risk === "high"
+                  ? "border-clay/40 bg-clay/10 text-clay"
+                  : d.risk === "watch"
+                    ? "border-ochre/40 bg-ochre/10 text-ochre"
+                    : "border-leaf/25 bg-leaf/5 text-leaf";
+              return (
+                <li key={d.district} className="flex flex-col gap-2 rounded-lg border rule px-3 py-2.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-semibold text-ink">{d.district}</span>
+                    <span className={cn("rounded-full border px-2 py-0.5 text-xs font-semibold", tone)}>
+                      {d.risk_label_bn}
+                    </span>
+                  </div>
+                  <div className="text-xs text-ink-faint">
+                    টানা অনুকূল দিন: {d.favourable_days}
+                    {!d.in_season && " · মৌসুমের বাইরে"}
+                  </div>
+                  {d.risk !== "low" && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        prefillFromRisk(d.draft.severity, d.draft.title_bn, d.draft.body_bn, d.draft.crop)
+                      }
+                      className="flex items-center justify-center gap-1.5 rounded-lg border rule bg-paper-2/40 px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-ink"
+                    >
+                      <ArrowDownToLine className="h-3.5 w-3.5" aria-hidden />
+                      কম্পোজারে ব্যবহার করুন
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       )}
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_400px]">
