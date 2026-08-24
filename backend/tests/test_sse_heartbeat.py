@@ -21,14 +21,19 @@ from app.main import create_app
 
 
 class _SilentPipelineQA:
-    """Worst-case pipeline: produces no event for a long time (cold local
-    model, slow provider). An async generator like the real QAPipeline.stream
-    (the unreachable yield is what makes it one)."""
+    """Worst-case cold-start pipeline: silent for a bounded window (much
+    longer than the test heartbeat interval), then finishes.
+
+    The stub must NOT run forever: the route intentionally never cancels the
+    pipeline task (that is the P0-2 fix for ~75s local-model inference), so
+    an infinite stream would never EOF and reading it would hang the test.
+    A 2s silence with a 0.2s heartbeat forces several keepalives before the
+    sentinel arrives regardless of loop scheduling jitter."""
 
     async def stream(self, _input):  # noqa: N803
-        while True:
-            await asyncio.sleep(3600)
-            yield  # pragma: no cover - unreachable
+        await asyncio.sleep(2.0)
+        return
+        yield  # pragma: no cover - unreachable; makes this an async generator
 
 
 class _StubContainer:
