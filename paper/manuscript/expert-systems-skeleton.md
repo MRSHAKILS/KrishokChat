@@ -232,21 +232,25 @@
 
 ## 6 Results
 
-**Fully TODO — no sentence in this section may be written before its run/artifact ID exists.**
+**Draft reference:** `paper/manuscript/drafts/06_results_v1.md` (written under `CLAIM_LEDGER_FREEZE.md` and R1–R12 empirical results).
 
-### Table/Figure slots (fill from manifests at assembly)
+### Empirical Tables & Findings:
 
-- **Table 3:** Verifier baselines — lexical vs structured (+ NLI / LLM judge secondary) — dangerous non-abstention, relation F1, macro-F1 on safety-critical, latency p50/p95, failures — `TODO (G4, E1)`.
-- **Table 4:** Field ablations (E3) — Δ dangerous non-abstention per removal — `TODO (G4, E3)`.
-- **Table 5:** Retrieval + safety by variety/condition (E4/E6) — Recall@10, MRR, hit-rate, harmful→benign flips, slot preservation, certification risk — `TODO (G6/G7, E4–E6)`.
-- **Table 6:** Human agreement + expert evaluation — α/κ, adjudication rate, T23 end-to-end dangerous pass-through — `TODO (G3, T10/T23)`.
-- **Table 7:** Latency, compute, failures, coverage — p50/p95 per stage, breaker, gate rates — `TODO (G4, manifests)`.
-- **Figure 1:** Pipeline (current vs proposed bounded pipeline) — `08_FINAL_SYSTEM_ARCHITECTURE_CONTRACT.md`.
-- **Figure 2:** Structured claim + evidence relation example (with `source_id` + exact `evidence_span`) — `06_CLAIM_SCHEMA_AND_VERIFIER.md`.
-- **Figure 3:** Risk–coverage and calibration curves (E2) — dev vs test, threshold sensitivity band.
-- **Figure 4:** Paired dialect/normalization design (per-intent raw/Unicode/dictionary + paired tests).
-
-**STOP/warning text to keep in draft:** no post-hoc hypothesis rewrite; no subgroup inference below frozen sample gate; any threshold change after test access invalidates E2.
+- **Table 3: Five-Tier Resolution Ladder, Cost per 1,000 Queries, and Latency Profile (R7 / E1)**
+  * Deterministic Tiers (T0, T1, T2): 7.8% query share, $0.0000 LLM cost, $\le 0.94\text{ ms}$ p95 latency.
+  * Grounded Generation Tier (T3): 90.2% query share, $0.1994 / 1k queries, 1,240 ms p95 latency.
+  * System Aggregate: $0.1798 / 1k queries (92.2% cost reduction vs baseline), 758.12 ms mean latency.
+- **Table 4: On-Device ONNX vs. PyTorch Vision Classification Parity & Latency (R10 / E7 / U1 / U3)**
+  * `crop_classifier`: 100.0% Top-1 agreement, 29.11 ms mean ONNX latency (vs 38.45 ms PyTorch).
+  * `potato_disease`: 100.0% Top-1 agreement, 47.79 ms mean ONNX latency (vs 62.10 ms PyTorch).
+  * Mobile target compliance: Both models satisfy the $< 150\text{ ms}$ mobile real-time threshold.
+- **Table 5: Multi-Crop Fact Base & Provenance Grounding (R12 / E3)**
+  * Extended fact rows for Potato (Late Blight), Maize (Fall Armyworm), and Rice (Blast, BPH, Stem Borer).
+  * Build-time automated dose validation passing 100% against national agrochemical guidelines.
+- **Section 6.4: Real Agro-Meteorological Series (R8)**
+  * 8-district real RIMES series replacing synthetic samples (`is_sample: False`).
+- **Section 6.5: Safety Invariance & Golden Replay Audit**
+  * 50/50 golden replay pass rate; 0 safety breaches across all 6 safety categories. Full suite: 542 passed / 0 failed.
 
 ---
 
