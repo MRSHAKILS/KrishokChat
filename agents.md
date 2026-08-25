@@ -6,6 +6,16 @@ Read this file fully before doing any work. This is a **7-day capstone demo prot
 > then consult `docs/refactor/ARCHITECTURE.md` for contracts and
 > `docs/refactor/REFACTOR_PLAN.md` for staged work. These files are the persistent
 > implementation memory for future agents; do not replace them with a new ad-hoc plan.
+>
+> **Next-phase roadmap (post-refactor):** the architecture-refinement work (the
+> five-tier resolution ladder, fact base, structured resolver, real weather) is
+> planned in `docs/production_readiness/tasks/R_SERIES_EXECUTION_INDEX.md`. That
+> index is the single entry point: it gives the execution order, dependencies,
+> external inputs, and the fair-vs-paper track split. The "why" lives in
+> `production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md`. Execute one `R#`
+> task per branch; each must hold the standing baseline (full suite
+> **410 passed / 7 skipped / 0 failed**, golden replay **50/50**, `pnpm build`
+> green) before the next starts.
 
 ---
 
