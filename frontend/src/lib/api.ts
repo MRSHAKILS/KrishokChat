@@ -196,6 +196,8 @@ export async function streamQuestion(
     model?: string | null;
     signal?: AbortSignal;
     timeoutMs?: number;
+    /** P2: optional stage-aware farmer context; omitted when absent. */
+    farmerContext?: string | null;
     /** @internal — test hook to override retry count */
     maxRetries?: number;
     onReconnectAttempt?: (attempt: number) => void;
@@ -224,6 +226,7 @@ export async function streamQuestion(
           session_id: opts?.session_id,
           history: opts?.history,
           model: opts?.model,
+          farmer_context: opts?.farmerContext,
         }),
         signal: request.signal,
       });
@@ -396,6 +399,8 @@ export interface SoilAnalyzeResponse {
   error?: string | null;
   dataset: SoilDatasetInfo | null;
   agent_trace: AgentStageEvent[];
+  /** Released sample ID when this is a measured-record replay; absent otherwise. */
+  sample_id?: string | null;
   soil_type?: string | null;
   soil_type_bn?: string | null;
   kpa?: number | null;
@@ -610,5 +615,60 @@ export async function getAccount(accessToken: string): Promise<AccountInfo> {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   if (!res.ok) throw new Error(`account failed: ${res.status}`);
+  return res.json();
+}
+
+/* === P1+P2: farm profile + stage-aware advice (additive, non-gating) ======
+   A signed-in farmer can store a minimal profile; the backend computes the
+   crop's current growth stage. Anonymous/DEMO is unaffected — these calls are
+   only made when a token exists and failure degrades to an omitted card. */
+
+export interface FarmProfile {
+  primary_crop: string;
+  sowing_date: string | null;
+  upazila: string | null;
+  note: string | null;
+}
+
+export interface CropStage {
+  crop_key: string;
+  crop_name_bn: string;
+  stage_key: string;
+  stage_name_bn: string;
+  das: number;
+  start_das: number;
+  end_das: number;
+  advisory_bn: string;
+  grounding: string;
+  is_approximate: boolean;
+  source: string;
+  season_note_bn: string;
+  farmer_context_bn: string;
+}
+
+export interface FarmProfileResponse {
+  available: boolean;
+  profile: FarmProfile | null;
+  stage: CropStage | null;
+}
+
+export async function getFarmProfile(accessToken: string): Promise<FarmProfileResponse> {
+  const res = await fetch(`${API_BASE}/api/account/farm-profile`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!res.ok) throw new Error(`farm profile failed: ${res.status}`);
+  return res.json();
+}
+
+export async function saveFarmProfile(
+  accessToken: string,
+  data: { primary_crop: string; sowing_date?: string | null; upazila?: string | null; note?: string | null },
+): Promise<FarmProfileResponse> {
+  const res = await fetch(`${API_BASE}/api/account/farm-profile`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`farm profile save failed: ${res.status}`);
   return res.json();
 }

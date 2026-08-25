@@ -18,6 +18,10 @@ class QueryContext:
     crop: str | None = None
     disease: str | None = None
     history: tuple[dict[str, str], ...] = ()
+    # P2: optional one-line farmer/crop-stage context (e.g. "ফসল: আলু ·
+    # বর্তমান পর্যায়: কন্দ স্ফীতি ..."). Absent (None) → prompts/retrieval are
+    # byte-identical to the pre-P2 pipeline (locked by a regression test).
+    farmer_context: str | None = None
 
 
 @dataclass(frozen=True)

@@ -53,6 +53,7 @@ class QAInput:
         seed_sources: list[RetrievedSource] | None = None,
         channel: str = "chat",
         model: str | None = None,
+        farmer_context: str | None = None,
     ) -> None:
         self.query = query
         self.session_id = session_id
@@ -62,6 +63,8 @@ class QAInput:
         self.seed_sources = seed_sources or []
         self.channel = channel
         self.model = model
+        # P2: optional stage-aware context (None on anonymous/DEMO requests).
+        self.farmer_context = farmer_context
 
 
 class QAPipeline:
@@ -158,6 +161,7 @@ class QAPipeline:
             crop=request.crop,
             disease=request.disease,
             history=tuple(history),
+            farmer_context=request.farmer_context,
         )
         decision: SafetyDecision | None = None
         sources: list[RetrievedSource] = []

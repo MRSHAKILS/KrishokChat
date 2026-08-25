@@ -10,6 +10,7 @@ class QARequest(BaseModel):
     disease: str | None = Field(None, description="Detected disease from image (optional context)")
     history: list[dict[str, str]] = Field(default_factory=list, description="Conversation history [{role, content}]")
     model: str | None = Field(None, description="Generation model choice: 'gemini' (default) or 'krishokchat-4b' (local Ollama)")
+    farmer_context: str | None = Field(None, max_length=400, description="Optional stage-aware farmer context (P2); ignored when absent")
 
     @field_validator("query")
     @classmethod
@@ -136,6 +137,7 @@ class SoilAnalyzeResponse(BaseModel):
     error: str | None = None
     dataset: SoilDatasetResponse | None = None
     agent_trace: list[AgentStageEvent] = Field(default_factory=list)
+    sample_id: str | None = Field(None, description="Released sample ID when the result is a measured-record replay; never set for live diagnosis")
     soil_type: str | None = None
     soil_type_bn: str | None = None
     kpa: float | None = None

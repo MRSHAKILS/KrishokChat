@@ -152,6 +152,11 @@ class Settings(BaseSettings):
     # file disables the risk endpoint's data (clear payload, never a 500).
     weather_snapshot_path: str = ""
 
+    # P2: data-driven crop-stage calendars (offline-built by
+    # scripts/build_crop_calendars.py). Empty path = default artifact;
+    # missing file disables stage computation (honest unavailable).
+    crop_calendars_path: str = ""
+
     gemini_key_cooldown_seconds: float = 6.0
     env_file_path: str = str(PROJECT_ROOT.parent / ".env")
 
@@ -271,6 +276,14 @@ class Settings(BaseSettings):
             path = Path(self.weather_snapshot_path)
             return path if path.is_absolute() else PROJECT_ROOT.parent / path
         return Path(self.ml_assets_dir) / "weather" / "late_blight_snapshot.json"
+
+    @property
+    def crop_calendars_resolved_path(self) -> Path:
+        # P2: data-driven crop-stage calendars artifact.
+        if self.crop_calendars_path:
+            path = Path(self.crop_calendars_path)
+            return path if path.is_absolute() else PROJECT_ROOT.parent / path
+        return Path(self.ml_assets_dir) / "agronomy" / "crop_calendars_v1.json"
 
     @property
     def resolved_llm_model(self) -> str:

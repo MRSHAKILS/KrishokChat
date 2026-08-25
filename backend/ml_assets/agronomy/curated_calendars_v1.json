@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "notes": "মানুষের সম্পাদনাযোগ্য ক্লেন্ডার সিড (curated seed)। নতুন ফসল যোগ করতে এই ফাইলে এন্ট্রি যোগ করে scripts/build_crop_calendars.py পুনরায় চালান — কোনো কোড পরিবর্তন লাগে না। প্রতিটি স্টেজে source ও grounding দিতে হবে; grounding 'curated-approximation' হলে UI সেটিকে আনুমানিক হিসেবে দেখাবে। কর্পাস থেকে পাওয়া পরিপক্বতার প্রমাণ বিল্ডার নিজেই মিলিয়ে নেয় (grounding: corpus-extracted)।",
+  "crops": [
+    {
+      "key": "potato",
+      "name_bn": "আলু",
+      "aliases_bn": ["আলু"],
+      "aliases_en": ["potato"],
+      "season_note_bn": "মূল মৌসুম: নভেম্বর থেকে মার্চ",
+      "sowing_term_bn": "বপন",
+      "stages": [
+        {
+          "key": "establishment",
+          "name_bn": "অঙ্কুরোদ্গম ও চারা গঠন",
+          "start_das": 0,
+          "end_das": 20,
+          "advisory_bn": "মাটির আর্দ্রতা বজায় রাখুন; চারা গজানো পরীক্ষা করুন।",
+          "source": "curated approximation (standard potato phenology)",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "vegetative",
+          "name_bn": "ভেজেটেটিভ বৃদ্ধি",
+          "start_das": 20,
+          "end_das": 35,
+          "advisory_bn": "আগাছা পরিষ্কার রাখুন ও মাড়াই-হালা দিন; সেচ নিয়মিত রাখুন।",
+          "source": "curated approximation (standard potato phenology)",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "tuber_initiation",
+          "name_bn": "কন্দ গঠন শুরু",
+          "start_das": 35,
+          "end_das": 50,
+          "advisory_bn": "এ সময়ে পানির চাপ খুব ক্ষতিকর; সেচ বন্ধ রাখবেন না।",
+          "source": "curated approximation (standard potato phenology)",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "tuber_bulking",
+          "name_bn": "কন্দ স্ফীতি",
+          "start_das": 50,
+          "end_das": 75,
+          "advisory_bn": "লেট ব্লাইটের ঝুঁকি বেশি — ক্ষেত নিয়মিত পরীক্ষা করুন ও আবহাওয়া সতর্কতা দেখুন।",
+          "source": "curated approximation (standard potato phenology)",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "maturity",
+          "name_bn": "পরিপক্বতা ও সংগ্রহ",
+          "start_das": 75,
+          "end_das": 90,
+          "advisory_bn": "গাছের পাতা হলুদ হয়ে ঝরে গেলে সংগ্রহের উপযুক্ত সময়; কিউরিং করে সংরক্ষণ করুন।",
+          "source": "curated approximation (standard potato phenology)",
+          "grounding": "curated-approximation"
+        }
+      ]
+    },
+    {
+      "key": "rice",
+      "name_bn": "ধান",
+      "aliases_bn": ["ধান"],
+      "aliases_en": ["rice"],
+      "season_note_bn": "আউশ/আমন/বোরো — জাত ভেদে ভিন্ন",
+      "sowing_term_bn": "রোপণ",
+      "stages": [
+        {
+          "key": "recovery",
+          "name_bn": "চারা পুনর্প্রতিষ্ঠান",
+          "start_das": 0,
+          "end_das": 15,
+          "advisory_bn": "রোপণের পর চারা দুর্বল লাগলে অল্প সেচে ধরে রাখুন।",
+          "source": "curated approximation — TODO ground in BRRI/BAMIS calendar",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "tillering",
+          "name_bn": "গুল্মবৃদ্ধি (টিলারিং)",
+          "start_das": 15,
+          "end_das": 40,
+          "advisory_bn": "ঘাস দমন ও পর্যাপ্ত সেচ গুরুত্বপূর্ণ; সার ব্যবস্থাপনা মাড়াই-হালার সঙ্গে সমন্বয় করুন।",
+          "source": "curated approximation — TODO ground in BRRI/BAMIS calendar",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "panicle_initiation",
+          "name_bn": "কাই প্রকাশ",
+          "start_das": 40,
+          "end_das": 60,
+          "advisory_bn": "এ পর্যায়ে পানির ঘাটতি ফলন মারাত্মকভাবে কমায়; সেচ নিশ্চিত করুন।",
+          "source": "curated approximation — TODO ground in BRRI/BAMIS calendar",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "flowering",
+          "name_bn": "ফুল ফোটা",
+          "start_das": 60,
+          "end_das": 85,
+          "advisory_bn": "বালাই সতর্কতা বেশি — কীটপতঙ্গ পরীক্ষা চালিয়ে যান।",
+          "source": "curated approximation — TODO ground in BRRI/BAMIS calendar",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "ripening",
+          "name_bn": "পাকা ও সংগ্রহ",
+          "start_das": 85,
+          "end_das": 110,
+          "advisory_bn": "৮০% কাই সোনালি হলে সংগ্রহের সময়; ঝরে পড়া রোধে দেরি না করে কাটুন।",
+          "source": "curated approximation — TODO ground in BRRI/BAMIS calendar",
+          "grounding": "curated-approximation"
+        }
+      ]
+    }
+  ]
+}

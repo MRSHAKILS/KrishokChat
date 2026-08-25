@@ -17,6 +17,16 @@ def _isolated_app():
     return create_app(Settings(audit_log_path=str(Path(tempfile.mkdtemp()) / "audit.jsonl")))
 
 
+def _textured_image() -> Image.Image:
+    """Noise + gradient image that passes the quality gate."""
+    base = Image.new("RGB", (320, 320))
+    px = base.load()
+    for y in range(320):
+        for x in range(320):
+            px[x, y] = ((x * 37) % 256, (y * 29) % 256, ((x + y) * 17) % 256)
+    return base
+
+
 class SoilAPIContractTests(unittest.TestCase):
     def test_dataset_endpoint_returns_frozen_stats(self) -> None:
         with TestClient(_isolated_app()) as client:
@@ -58,6 +68,49 @@ class SoilAPIContractTests(unittest.TestCase):
             self.assertIsNotNone(body["error"])
             self.assertIsNotNone(body["dataset"])
             self.assertEqual(body["dataset"]["total_images"], 722)
+            # No diagnosis fields may be set for a locked (unknown) image.
+            self.assertIsNone(body["kpa"])
+            self.assertIsNone(body["soil_type"])
+            self.assertIsNone(body["sample_id"])
+
+    def test_analyze_replays_known_sample_record(self) -> None:
+        """A released sample ID replays its real measured record, verbatim."""
+        with TestClient(_isolated_app()) as client:
+            image_buffer = BytesIO()
+            _textured_image().save(image_buffer, format="JPEG")
+            response = client.post(
+                "/api/soil/analyze",
+                files={"file": ("P0406_Atel_16.5kpa.jpg", image_buffer.getvalue(), "image/jpeg")},
+            )
+            self.assertEqual(response.status_code, 200)
+            body = response.json()
+            self.assertEqual(body["status"], "analyzed")
+            # Values must match samples_manifest.json exactly (no invention).
+            self.assertEqual(body["sample_id"], "P0406")
+            self.assertEqual(body["kpa"], 16.5)
+            self.assertEqual(body["soil_type"], "Atel")
+            self.assertEqual(body["soil_type_bn"], "এঁটেল মাটি")
+            self.assertEqual(body["moisture_status"], "Dry")
+            # Replay has no model confidence — it is a measurement, not a guess.
+            self.assertIsNone(body["confidence"])
+            # Honesty note must be part of the advisory.
+            self.assertIn("পরিমাপিত", body["advisory_bn"])
+            self.assertIn("মডেল নির্ণয় নয়", body["advisory_bn"])
+
+    def test_analyze_unknown_id_stays_locked(self) -> None:
+        """A P-shaped but unreleased ID must NOT fall back to any values."""
+        with TestClient(_isolated_app()) as client:
+            image_buffer = BytesIO()
+            _textured_image().save(image_buffer, format="JPEG")
+            response = client.post(
+                "/api/soil/analyze",
+                files={"file": ("P9999_Bele_3.3kpa.jpg", image_buffer.getvalue(), "image/jpeg")},
+            )
+            self.assertEqual(response.status_code, 200)
+            body = response.json()
+            self.assertEqual(body["status"], "locked")
+            self.assertIsNone(body["sample_id"])
+            self.assertIsNone(body["kpa"])
 
     def test_analyze_rejects_black_image_with_invalid_image_status(self) -> None:
         with TestClient(_isolated_app()) as client:

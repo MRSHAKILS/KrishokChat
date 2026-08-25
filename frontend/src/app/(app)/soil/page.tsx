@@ -93,7 +93,10 @@ export default function SoilPage() {
         const response = await fetch(samplePath);
         if (!response.ok) throw new Error("sample image unavailable");
         const blob = await response.blob();
-        setFile(new File([blob], sampleName, { type: blob.type || "image/jpeg" }));
+        // Keep the released dataset filename (e.g. P0001_Doash_8.0kpa.jpg) —
+        // the backend replays the measured record by image ID in the name.
+        const datasetName = samplePath.split("/").pop() ?? sampleName;
+        setFile(new File([blob], datasetName, { type: blob.type || "image/jpeg" }));
         setPreview(samplePath);
         setResult(null);
       } catch {

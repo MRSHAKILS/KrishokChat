@@ -6,7 +6,16 @@ import { motion } from "motion/react";
 import { Bookmark, Trash2, Loader2, LogOut, Sprout, MessageSquare, ShieldCheck, BadgeCheck } from "lucide-react";
 import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { createClient } from "@/lib/supabase/client";
-import { getSavedHistory, deleteSavedQuery, getAccount, type SavedQuery, type AccountInfo } from "@/lib/api";
+import {
+  getSavedHistory,
+  deleteSavedQuery,
+  getAccount,
+  getFarmProfile,
+  saveFarmProfile,
+  type SavedQuery,
+  type AccountInfo,
+  type FarmProfileResponse,
+} from "@/lib/api";
 import { enter, stagger } from "@/lib/motion";
 import { APP } from "@/lib/constants";
 
@@ -26,6 +35,14 @@ export default function AccountPage() {
   const [error, setError] = useState<string | null>(null);
   const [fetching, setFetching] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
+
+  // P1+P2 farm profile + computed stage. All optional; failure = omitted card.
+  const [farm, setFarm] = useState<FarmProfileResponse | null>(null);
+  const [cropInput, setCropInput] = useState("");
+  const [sowingInput, setSowingInput] = useState("");
+  const [upazilaInput, setUpazilaInput] = useState("");
+  const [savingFarm, setSavingFarm] = useState(false);
+  const [farmMsg, setFarmMsg] = useState<string | null>(null);
 
   const token = session?.access_token;
 
@@ -64,6 +81,49 @@ export default function AccountPage() {
     if (token) void load();
     else setFetching(false);
   }, [token, load]);
+
+  // P1+P2: load the farm profile + stage. Non-fatal — if it fails or is
+  // unavailable, the section simply shows the empty form.
+  useEffect(() => {
+    if (!token) return;
+    let cancelled = false;
+    getFarmProfile(token)
+      .then((data) => {
+        if (cancelled) return;
+        setFarm(data);
+        if (data.profile) {
+          setCropInput(data.profile.primary_crop ?? "");
+          setSowingInput(data.profile.sowing_date ?? "");
+          setUpazilaInput(data.profile.upazila ?? "");
+        }
+      })
+      .catch(() => {
+        /* profile unavailable — honest omission */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [token]);
+
+  async function handleSaveFarm(e: React.FormEvent) {
+    e.preventDefault();
+    if (!token || !cropInput.trim()) return;
+    setSavingFarm(true);
+    setFarmMsg(null);
+    try {
+      const data = await saveFarmProfile(token, {
+        primary_crop: cropInput.trim(),
+        sowing_date: sowingInput || null,
+        upazila: upazilaInput || null,
+      });
+      setFarm(data);
+      setFarmMsg("সংরক্ষণ হয়েছে।");
+    } catch {
+      setFarmMsg("সংরক্ষণ করা যায়নি (স্টোরেজ কনফিগার করা নেই বা অফলাইন)।");
+    } finally {
+      setSavingFarm(false);
+    }
+  }
 
   async function handleDelete(id: string) {
     if (!token) return;
@@ -164,6 +224,86 @@ export default function AccountPage() {
               <LogOut className="h-3.5 w-3.5" />
               লগ আউট
             </button>
+          </motion.div>
+
+          {/* P1+P2: farm profile + current growth stage (additive) */}
+          <motion.div variants={enter} className="rounded-2xl border rule bg-paper p-5">
+            <div className="mb-3 flex items-center gap-2">
+              <Sprout className="h-4 w-4 text-leaf" />
+              <h2 className="font-display text-base text-ink">আমার খামার প্রোফাইল</h2>
+            </div>
+            <p className="mb-4 text-xs leading-relaxed text-ink-soft">
+              প্রধান ফসল ও বপন/রোপণের তারিখ দিলে বর্তমান ফসল-পর্যায় হিসাব করা হয় এবং চ্যাটে
+              পরামর্শ ফসল-পর্যায় অনুযায়ী দেওয়া হয়। ঐচ্ছিক — না দিলেও সব ফিচার আগের মতোই চলে।
+            </p>
+            <form onSubmit={handleSaveFarm} className="grid gap-3 sm:grid-cols-3">
+              <label className="flex flex-col gap-1 text-xs text-ink-soft">
+                প্রধান ফসল
+                <input
+                  value={cropInput}
+                  onChange={(e) => setCropInput(e.target.value)}
+                  placeholder="যেমন: আলু"
+                  maxLength={40}
+                  required
+                  className="rounded-lg border rule bg-paper-2/40 px-3 py-2 text-sm text-ink outline-none focus:border-leaf"
+                />
+              </label>
+              <label className="flex flex-col gap-1 text-xs text-ink-soft">
+                বপন/রোপণের তারিখ
+                <input
+                  type="date"
+                  value={sowingInput}
+                  onChange={(e) => setSowingInput(e.target.value)}
+                  className="rounded-lg border rule bg-paper-2/40 px-3 py-2 text-sm text-ink outline-none focus:border-leaf"
+                />
+              </label>
+              <label className="flex flex-col gap-1 text-xs text-ink-soft">
+                উপজেলা (ঐচ্ছিক)
+                <input
+                  value={upazilaInput}
+                  onChange={(e) => setUpazilaInput(e.target.value)}
+                  placeholder="যেমন: সদর"
+                  maxLength={80}
+                  className="rounded-lg border rule bg-paper-2/40 px-3 py-2 text-sm text-ink outline-none focus:border-leaf"
+                />
+              </label>
+              <div className="sm:col-span-3 flex items-center gap-3">
+                <button
+                  type="submit"
+                  disabled={savingFarm || !cropInput.trim()}
+                  className="rounded-full bg-leaf px-5 py-2 text-sm font-semibold text-paper transition-colors hover:bg-leaf-2 disabled:opacity-50"
+                >
+                  {savingFarm ? <Loader2 className="h-4 w-4 animate-spin" /> : "সংরক্ষণ করুন"}
+                </button>
+                {farmMsg && <span className="text-xs text-ink-soft">{farmMsg}</span>}
+              </div>
+            </form>
+
+            {/* Computed stage card */}
+            {farm?.stage && (
+              <div className="mt-4 rounded-xl border rule bg-leaf/5 p-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm font-semibold text-ink">
+                    {farm.stage.crop_name_bn} · {farm.stage.stage_name_bn}
+                  </span>
+                  <span className="rounded-full bg-leaf/10 px-2 py-0.5 text-xs text-leaf">
+                    বপন/রোপণের {farm.stage.das} তম দিন
+                  </span>
+                  {farm.stage.is_approximate && (
+                    <span
+                      className="rounded-full bg-ochre/15 px-2 py-0.5 text-xs font-medium text-ochre"
+                      title={farm.stage.source}
+                    >
+                      আনুমানিক
+                    </span>
+                  )}
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{farm.stage.advisory_bn}</p>
+                {farm.stage.season_note_bn && (
+                  <p className="mt-1 text-xs text-ink-faint">{farm.stage.season_note_bn}</p>
+                )}
+              </div>
+            )}
           </motion.div>
 
           {/* History list */}

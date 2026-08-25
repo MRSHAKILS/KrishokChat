@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
 import { motion } from "motion/react";
 import { Send, Mic, Square, RotateCcw, ShieldCheck, X, Bookmark, Check, Loader2 } from "lucide-react";
-import { streamQuestion, getModels, saveAnswer, type AgentStageEvent } from "@/lib/api";
+import { streamQuestion, getModels, saveAnswer, getFarmProfile, type AgentStageEvent } from "@/lib/api";
 import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { ChatMessage, type ChatMessageData } from "@/components/chat/chat-message";
 import { stopAllSpeech } from "@/components/chat/read-aloud";
@@ -59,6 +59,28 @@ export function QAPanel({
   const streamingRef = useRef(false);
   const storageKey = "krishokchat:conversation:v1";
   const { session } = useSupabaseSession();
+
+  // P2: signed-in farmer's stage-aware context (one line), auto-attached to
+  // outgoing questions. Anonymous users leave this null → prompts unchanged.
+  const [farmerContext, setFarmerContext] = useState<string | null>(null);
+  useEffect(() => {
+    const token = session?.access_token;
+    if (!token) {
+      setFarmerContext(null);
+      return;
+    }
+    let cancelled = false;
+    getFarmProfile(token)
+      .then((data) => {
+        if (!cancelled) setFarmerContext(data.stage?.farmer_context_bn ?? null);
+      })
+      .catch(() => {
+        /* profile unavailable — context stays null, prompts unchanged */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [session?.access_token]);
 
   /* ---- Smooth Token Stream Easing Buffer (requestAnimationFrame) ----
      Interpolates incoming SSE token chunks smoothly over ~16ms frames rather
@@ -310,6 +332,7 @@ export function QAPanel({
             session_id: sessionId,
             history: fullHistory,
             model,
+            farmerContext,
             // The local CPU model needs minutes, not seconds, for a grounded
             // answer; the remote lane keeps the default (backend timeouts rule).
             timeoutMs: model === "krishokchat-4b" ? 300_000 : undefined,

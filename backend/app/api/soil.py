@@ -61,6 +61,7 @@ async def soil_analyze(file: UploadFile = File(...), container: ContainerDep = N
     return SoilAnalyzeResponse(
         status=result.status.value,
         error=result.error,
+        sample_id=result.sample_id,
         soil_type=result.soil_type,
         soil_type_bn=result.soil_type_bn,
         kpa=result.kpa,

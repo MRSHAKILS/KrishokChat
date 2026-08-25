@@ -50,6 +50,10 @@ class GroundedAnswerGenerator:
             metadata.append(f"ফসল: {context.crop}")
         if context.disease:
             metadata.append(f"রোগ: {context.disease}")
+        # P2: stage-aware line only appears when a signed-in farmer supplied a
+        # profile. Absent → this block is empty and the prompt is byte-identical
+        # to the pre-P2 pipeline (locked by a regression test).
+        farmer_line = f"কৃষকের ফসল পর্যায়: {context.farmer_context}\n\n" if context.farmer_context else ""
         return f"""তুমি বাংলাদেশি কৃষকের জন্য একটি সংক্ষিপ্ত, সতর্ক কৃষি সহায়ক।
 শুধু নিচের জ্ঞানভান্ডারের তথ্য ব্যবহার করে বাংলায় উত্তর দাও। কোনো উৎসে নেই এমন
 রাসায়নিকের নাম, মাত্রা বা দাবি তৈরি করবে না। তথ্য অসম্পূর্ণ হলে স্পষ্টভাবে বলবে এবং
@@ -57,7 +61,7 @@ class GroundedAnswerGenerator:
 প্রাসঙ্গিক দাবির শেষে উৎসের আইডি [ID] লিখতে পারো; উৎসের বাইরে কিছু জানলে 'তথ্যটি
 জ্ঞানভান্ডারে নেই' বলবে।
 
-প্রাসঙ্গিক প্রসঙ্গ:
+{farmer_line}প্রাসঙ্গিক প্রসঙ্গ:
 {' '.join(metadata) or 'নেই'}
 
 পূর্ববর্তী কথোপকথন:

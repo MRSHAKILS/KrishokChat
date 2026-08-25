@@ -5,6 +5,7 @@ from pathlib import Path
 
 from app.application.admin import AdminService
 from app.application.auth import AuthService
+from app.application.farm_profile import FarmProfileService, PostgrestFarmProfileStore
 from app.application.generation import GroundedAnswerGenerator
 from app.application.history import HistoryService
 from app.application.notifications import NotificationService
@@ -14,8 +15,10 @@ from app.application.safety import SafetyClassifier
 from app.application.soil import SoilService
 from app.application.vision_pipeline import VisionPipeline
 from app.core.config import Settings
+from app.domain.crop_calendar import CropCalendarLibrary
 from app.infrastructure.audit.jsonl import JSONLAuditSink
 from app.infrastructure.auth.jwks import SupabaseJWKSVerifier
+from app.infrastructure.agronomy.calendar_store import load_crop_calendars
 from app.infrastructure.cache.demo import DemoAnswerCache
 from app.infrastructure.llm.factory import create_llm_client
 from app.infrastructure.retrieval.bm25 import BM25Retriever
@@ -45,6 +48,8 @@ class AppContainer:
     history: HistoryService
     admin: AdminService
     notifications: NotificationService
+    farm_profile: FarmProfileService
+    crop_calendars: CropCalendarLibrary | None
     llm_name: str
 
 
@@ -251,6 +256,19 @@ def build_container(settings: Settings) -> AppContainer:
             else None
         ),
     )
+    # P1 farm profile + P2 stage calendars: same lazy rules — zero network
+    # I/O at startup, honest unavailability when unconfigured, never a gate.
+    farm_profile = FarmProfileService(
+        store=(
+            PostgrestFarmProfileStore(
+                settings.supabase_url,
+                settings.supabase_service_role_key,
+            )
+            if supabase_configured
+            else None
+        ),
+    )
+    crop_calendars = load_crop_calendars(settings.crop_calendars_resolved_path)
     return AppContainer(
         qa=pipeline,
         vision=vision,
@@ -259,5 +277,7 @@ def build_container(settings: Settings) -> AppContainer:
         history=history,
         admin=admin,
         notifications=notifications,
+        farm_profile=farm_profile,
+        crop_calendars=crop_calendars,
         llm_name=generation_llm.name,
     )

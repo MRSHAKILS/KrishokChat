@@ -35,6 +35,7 @@ def _input(request: QARequest) -> QAInput:
         disease=request.disease,
         history=request.history,
         model=request.model,
+        farmer_context=request.farmer_context,
     )
 
 

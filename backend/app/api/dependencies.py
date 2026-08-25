@@ -7,6 +7,7 @@ from fastapi import Depends, Header, HTTPException, Request, status
 from app.application.admin import AdminService, AdminUnavailableError, NotAdminError
 from app.application.auth import AuthService
 from app.application.container import AppContainer
+from app.application.farm_profile import FarmProfileService
 from app.application.history import HistoryService
 from app.application.notifications import NotificationService
 from app.core.config import Settings
@@ -115,3 +116,17 @@ def _get_notification_service(container: ContainerDep) -> NotificationService:
 
 
 NotificationServiceDep = Annotated[NotificationService, Depends(_get_notification_service)]
+
+
+def _get_farm_profile_service(container: ContainerDep) -> FarmProfileService:
+    return getattr(container, "farm_profile", None) or FarmProfileService(store=None)
+
+
+FarmProfileServiceDep = Annotated[FarmProfileService, Depends(_get_farm_profile_service)]
+
+
+def _get_crop_calendars(container: ContainerDep):
+    return getattr(container, "crop_calendars", None)
+
+
+CropCalendarsDep = Annotated[object | None, Depends(_get_crop_calendars)]

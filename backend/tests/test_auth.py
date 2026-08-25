@@ -141,15 +141,24 @@ class AuthEndpointTests(unittest.TestCase):
     def _client_with_verifier(self, verifier: SupabaseJWKSVerifier) -> TestClient:
         from dataclasses import replace
 
+        from app.application.admin import AdminService
         from app.application.auth import AuthService
         from app.application.container import AppContainer
 
         app = create_app()
         client = TestClient(app)
         with client:
-            # Lifespan has now run; swap in the injected auth service.
+            # Lifespan has now run; swap in the injected auth service. The
+            # admin store is also swapped to an unconfigured stub so this
+            # contract test stays fully offline even when .env.local carries
+            # real Supabase credentials (a fabricated test sub must never
+            # reach the live profiles table).
             container: AppContainer = client.app.state.container
-            client.app.state.container = replace(container, auth=AuthService(verifier=verifier))
+            client.app.state.container = replace(
+                container,
+                auth=AuthService(verifier=verifier),
+                admin=AdminService(store=None),
+            )
             yield client
 
     def test_me_without_token_returns_401(self) -> None:

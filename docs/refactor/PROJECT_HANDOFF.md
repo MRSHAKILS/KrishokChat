@@ -359,3 +359,45 @@ No route or frontend component should change for either replacement.
   "Tiro Bangla" → Georgia. Visual output identical when fonts load (serif
   never rendered), 3 fewer font downloads on rural 3G. `pnpm build` green,
   no dangling references.
+- P1+P2 (farm profile + stage-aware advice, spine step 4; task doc
+  `docs/production_readiness/tasks/P1_P2_farm_profile_stage_advice.md`):
+  done — migration `004_farm_profiles.sql` (owner-only RLS, service-role
+  writes from the backend); data-driven crop-stage calendars
+  (`domain/crop_calendar.py` calculator + `infrastructure/agronomy/
+  calendar_store.py` fail-open loader + committed artifact
+  `ml_assets/agronomy/crop_calendars_v1.json`, built offline by
+  `scripts/build_crop_calendars.py` from `curated_calendars_v1.json`;
+  adding a crop = edit curated JSON + re-run builder, NO code changes —
+  test-locked); `application/farm_profile.py`
+  (PostgREST store, PII-redacted free text, honest `available: false` when
+  unconfigured); `GET/PUT /api/account/farm-profile`; optional
+  `farmer_context` threaded `schemas → QAInput → QueryContext → prompt`
+  (stage line appears ONLY when present — anonymous prompts byte-identical,
+  regression-locked); frontend `/account` profile form + stage card
+  ("আনুমানিক" badge on approximations) + chat auto-attach via
+  `streamQuestion({ farmerContext })`. `CROP_CALENDARS_PATH` in config +
+  `.env.example`. Researcher action: apply migration 004 (DONE 2026-08-25,
+  verified via PostgREST schema probe). Full suite 410 passed / 7 skipped /
+  0 failed.
+- Soil honesty fix + hermetic auth contract test (2026-08-25): commit
+  eb0d4eb had rewritten `SoilService.analyze()` into a filename-substring
+  fake that diagnosed ANY uploaded image with hardcoded kPa/soil-type values
+  (rule 5 violation), and its demo flow even sent Bengali button labels as
+  filenames so all three samples fell into one default branch. Fixed:
+  `analyze()` now REPLAYS known sample records only (image ID regex
+  `[Pp]\d{4}(?!\d)` matched against `info.samples` loaded from the frozen
+  `samples_manifest.json` — every value from the release package, nothing
+  hardcoded); unknown images get the honest locked response again;
+  replay results carry `sample_id` (new optional schema field) and
+  `confidence=None` (a measurement has no model confidence);
+  `soil/page.tsx` keeps the real dataset filename on sample upload;
+  `soil-locked-card.tsx` badges replays as "ডেটাসেট নমুনা <ID> · পরিমাপিত"
+  and drops fabricated fallbacks (`?? 8.0`, `?? 94%`). Separately,
+  `test_auth.py::test_me_with_valid_token_returns_claims` leaked its
+  fabricated sub into the live profiles table once `.env.local` gained real
+  credentials — `_client_with_verifier` now injects an unconfigured
+  `AdminService(store=None)` so the contract test is offline by design, and
+  `/auth/me` catches `httpx.HTTPError` around the profile lookup (identity
+  endpoint must never 500 on a store outage). Both failures were pre-existing
+  on clean HEAD before this session's P1+P2 work (verified by stash). Full
+  suite 410 passed / 7 skipped / 0 failed; `pnpm build` green.

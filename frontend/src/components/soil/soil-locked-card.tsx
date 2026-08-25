@@ -21,13 +21,17 @@ export function SoilLockedCard({
   const [showTable, setShowTable] = useState(false);
   const models = info?.model_results ?? [];
 
-  // If the result is analyzed, render the full diagnostic card!
+  // If the result is an analyzed (measured-sample replay), render the diagnostic card.
   if (result && result.status === "analyzed") {
-    const kpa = result.kpa ?? 8.0;
-    const soilType = result.soil_type_bn ?? "দোআঁশ মাটি";
-    const statusBn = result.moisture_status_bn ?? "পরিমিত আর্দ্রতা";
-    const advisory = result.advisory_bn ?? "মাটির বর্তমান অবস্থা ফসলের জন্য উপযোগী।";
-    const confidence = result.confidence ? Math.round(result.confidence * 100) : 94;
+    const isReplay = Boolean(result.sample_id);
+    const kpa = result.kpa;
+    const soilType = result.soil_type_bn ?? result.soil_type ?? "";
+    const statusBn = result.moisture_status_bn ?? "";
+    const advisory = result.advisory_bn ?? "";
+    if (kpa == null || !soilType || !advisory) {
+      // Defensive: a malformed analyzed payload must not invent values.
+      return null;
+    }
 
     // Determine color styling based on kPa
     const isDry = kpa >= 12.0;
@@ -48,18 +52,27 @@ export function SoilLockedCard({
                 <Droplets className="h-6 w-6" strokeWidth={1.75} />
               </div>
               <div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <h3 className="font-display text-lg font-bold text-ink">মাটির আর্দ্রতা ও সেচ বিশ্লেষণ</h3>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2 py-0.5 text-xs font-semibold text-leaf">
-                    <Sparkles className="h-3 w-3" /> নির্ণীত
-                  </span>
+                  {isReplay ? (
+                    <span
+                      className="inline-flex items-center gap-1 rounded-full bg-sky-600/10 px-2 py-0.5 text-xs font-semibold text-sky-700"
+                      title="ডেটাসেট নমুনার মাঠে পরিমাপিত রেকর্ড — লাইভ মডেল নির্ণয় নয়"
+                    >
+                      <FlaskConical className="h-3 w-3" /> ডেটাসেট নমুনা {result.sample_id}
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2 py-0.5 text-xs font-semibold text-leaf">
+                      <Sparkles className="h-3 w-3" /> নির্ণীত
+                    </span>
+                  )}
                 </div>
-                <p className="text-xs text-ink-soft">পাবনা টেনশিওমিটার ফিল্ড সেন্সর ও ইমেজ ভিশন গ্রাউন্ডেড</p>
+                <p className="text-xs text-ink-soft">পাবনা টেনশিওমিটার ফিল্ড সেন্সর গ্রাউন্ডেড · মাঠে পরিমাপিত মান</p>
               </div>
             </div>
             <div className="text-right">
-              <span className="text-xs font-medium text-ink-faint">নির্ভরযোগ্যতা</span>
-              <div className="font-display text-sm font-bold text-leaf">{bn(confidence)}%</div>
+              <span className="text-xs font-medium text-ink-faint">উৎস</span>
+              <div className="font-display text-sm font-bold text-sky-700">{isReplay ? "পরিমাপিত" : bn(Math.round((result.confidence ?? 0) * 100)) + "%"}</div>
             </div>
           </div>
 
@@ -84,9 +97,9 @@ export function SoilLockedCard({
 
             {/* Metric 2: Soil Classification */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-xs font-medium text-ink-faint">শনাক্তকৃত মাটির ধরন</span>
+              <span className="text-xs font-medium text-ink-faint">{isReplay ? "নমুনা রেকর্ডের মাটির ধরন" : "শনাক্তকৃত মাটির ধরন"}</span>
               <div className="mt-1 font-display text-lg font-bold text-ink">{soilType}</div>
-              <span className="mt-1 inline-block text-xs text-ink-soft">{result.soil_type || "Loam Series"}</span>
+              <span className="mt-1 inline-block text-xs text-ink-soft">{result.soil_type || ""}</span>
             </div>
 
             {/* Metric 3: Moisture Condition */}

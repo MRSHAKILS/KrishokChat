@@ -1,9 +1,10 @@
-"""Soil moisture domain — dataset showcase + locked analyzer.
+"""Soil moisture domain — dataset showcase + measured-sample replay.
 
 The regression model is in development (all artifacts negative R²), so the
-analyze path is a hard lock at the domain level: it can never produce a
-moisture estimate until a validated runner is wired in. The dataset, however,
-is a first-class released asset and ships today.
+analyze path can never produce a live moisture estimate. The only "analyzed"
+results are replays of known sample records from the frozen release package
+(matched by image ID); every other image gets the honest locked response.
+The dataset, however, is a first-class released asset and ships today.
 """
 
 from __future__ import annotations
@@ -15,8 +16,8 @@ from enum import StrEnum
 class SoilStatus(StrEnum):
     """Outcome states for soil endpoints."""
 
-    LOCKED = "locked"  # model not available (current, honest state)
-    ANALYZED = "analyzed"  # reserved for the validated regression path
+    LOCKED = "locked"  # no validated model; unknown images get this honest state
+    ANALYZED = "analyzed"  # measured-sample replay only (never a live diagnosis)
     INVALID_IMAGE = "invalid_image"
 
 
@@ -88,6 +89,7 @@ class SoilResult:
     info: SoilDatasetInfo | None = None
     error: str | None = None
     trace: tuple[SoilTraceEvent, ...] = ()
+    sample_id: str | None = None  # set only for measured-sample replays
     soil_type: str | None = None
     soil_type_bn: str | None = None
     kpa: float | None = None
