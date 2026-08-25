@@ -39,17 +39,33 @@ one number.
 | 3 | `R2_fact_base_v1.md` | potato late-blight fact rows with provenance + build-time dose validation | R1, R3 | spec ready |
 | 4 | `R4_structured_resolver.md` | T1/T2 answers, 0 LLM, behind a default-off flag | R2, R3 | spec ready |
 | ∥ | `R8_real_weather_snapshot.md` | real RIMES weather → drops PR1 `is_sample` | — (parallel) | spec ready |
-| 5 | R5 merge safety+intent *(spec TODO)* | one structured call instead of two; capability routing | R3 | not written |
-| 6 | R6 capability registry *(spec TODO)* | seam for irrigation/drone/market modules | R5 | not written |
-| 7 | R7 cost + tier-mix experiment *(spec TODO)* | measured cost/1000 queries + p95 latency | R4 | not written |
-| 8 | R9 offline fact pack + data-aware SW *(spec TODO)* | works with no signal | R4 | not written |
-| 9 | R10 on-device classifier export *(spec TODO)* | mobile diagnosis latency claim (U1) | R9 | not written |
-| 10 | R11 task-first home + provenance badges *(spec TODO)* | UI legibility | R3, R9 | not written |
-| 11 | R12 extend fact base to maize/rice *(spec TODO)* | proves "data op not rewrite" | R4 | not written |
+| 5 | `R5_merge_safety_intent.md` | one structured call instead of two; produces the routing `Intent` | R3 | spec ready |
+| 6 | `R6_capability_registry.md` | seam for irrigation/drone/market modules + honest capability map | R5 | spec ready |
+| 7 | `R7_cost_tier_mix_experiment.md` | price table + measured cost/1000 queries + p95 latency + zero-LLM rate | R4 | spec ready |
+| 8 | `R9_offline_fact_pack.md` | works with no signal; tier ≤ 2 cached, T3 never | R4 | spec ready |
+| 9 | `R10_ondevice_classifier_export.md` | mobile diagnosis latency claim (U1) + confidence-gated upload (U3) | R9 | spec ready |
+| 10 | `R11_task_first_home_provenance.md` | task-first home + system-wide provenance badges | R3, R9 | spec ready |
+| 11 | `R12_extend_fact_base_maize_rice.md` | proves "data op not rewrite" (maize FAW + rice pests) | R4 | spec ready |
+
+**All 12 R-series specs are now written** and live in this folder. Each is
+independently executable by a fresh agent: it names exact file/line anchors, a
+stop/go gate, invariants, and a rollback.
 
 **Suggested first sprint:** R3 → R1 → R2 → R4, with R8 in parallel (no deps).
 R3 first because it is pure instrumentation and lands with no behavior change,
 making everything after it measurable.
+
+**Dependency graph (for parallel dispatch):**
+```
+R3 ─┬─► R2 ─► R4 ─┬─► R7
+    │             ├─► R9 ─► R10
+    ├─► R5 ─► R6  └─► R12
+    └─────────────► R11 ◄── R9
+R1 ─► R2
+R8  (independent — start anytime)
+```
+Parallel-safe once R3+R1 land: R2 and R5 can run concurrently; after R4, then
+R7/R9/R12 are mutually independent. R8 has no dependency at all.
 
 **Rule between tasks:** one task, one coder agent, one branch. Each must pass its
 own stop/go gate AND the standing baseline (full suite **410 passed / 7 skipped /
