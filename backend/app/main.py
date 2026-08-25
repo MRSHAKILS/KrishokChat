@@ -20,6 +20,7 @@ from app.api.speech import router as speech_router
 from app.api.admin import router as admin_router
 from app.api.capabilities import router as capabilities_router
 from app.api.notifications import router as notifications_router, admin_router as notifications_admin_router
+from app.api.packs import router as packs_router
 # T0-04: request-ID middleware (echo/generate X-Request-ID) + JSON app logging.
 from app.api.middleware.request_id import RequestIDMiddleware
 # T0-07: optional API-key auth + rate limiting, attached ONLY to the /api/v1
@@ -47,6 +48,7 @@ V1_ROUTERS = (
     notifications_router,
     notifications_admin_router,
     capabilities_router,
+    packs_router,
 )
 
 
@@ -146,6 +148,7 @@ def create_app(config=None) -> FastAPI:
     application.include_router(notifications_router)
     application.include_router(notifications_admin_router)
     application.include_router(capabilities_router, prefix="/api")
+    application.include_router(packs_router, prefix="/api")
 
     # T0-07: /api/v1 is the stable versioned API contract; the legacy mounts
     # above stay as compatibility aliases. The optional API-key + rate-limit

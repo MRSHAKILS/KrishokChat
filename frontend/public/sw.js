@@ -19,7 +19,7 @@
 
 const CACHE_NAME = "krishokchat-cache-v1";
 
-// P6: bump this when shell assets change so `activate` cleans old caches.
+// P6 & R9: precache shell, library JSON, and static offline fact packs.
 const STATIC_PRECACHE = [
   "/",
   "/favicon.ico",
@@ -29,10 +29,14 @@ const STATIC_PRECACHE = [
   "/chat",
   "/soil",
   "/library/catalog.json",
-  "/library/datasets.json"
+  "/library/datasets.json",
+  "/packs/manifest.json",
+  "/packs/facts_potato_v1.json",
+  "/packs/facts_maize_v1.json",
+  "/packs/facts_rice_v1.json"
 ];
 
-// Install: precache core shell & library JSON
+// Install: precache core shell, library JSON, and offline fact packs
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -75,8 +79,11 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Strategy A: Library JSON datasets (Stale-While-Revalidate)
-  if (url.pathname.startsWith("/library/") && url.pathname.endsWith(".json")) {
+  // Strategy A: Library JSON datasets & R9 Offline Fact Packs (Stale-While-Revalidate)
+  if (
+    (url.pathname.startsWith("/library/") && url.pathname.endsWith(".json")) ||
+    (url.pathname.startsWith("/packs/") && url.pathname.endsWith(".json"))
+  ) {
     event.respondWith(
       caches.open(CACHE_NAME).then(async (cache) => {
         const cachedResponse = await cache.match(event.request);

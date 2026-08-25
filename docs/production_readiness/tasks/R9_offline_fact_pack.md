@@ -132,3 +132,25 @@ None — the pack derives from the in-repo R2 fact base.
 - Do not attempt offline T3. Generation offline is out of scope and dishonest to
   fake — the whole point of the ladder is that only deterministic tiers ship
   offline.
+
+## Verification record
+
+**Date:** 2026-08-25
+**Implemented by:** Antigravity agent
+
+**Gate results:**
+1. `uv run python scripts/build_fact_pack.py` → Emitted 3 crop packs (`facts_potato_v1.json`, `facts_maize_v1.json`, `facts_rice_v1.json`) and `manifest.json` into `frontend/public/packs/` ✅
+2. `uv run pytest tests/test_fact_pack.py -v` → **2 passed** ✅
+3. Full backend test suite → **539 passed, 7 skipped, 0 failed** ✅
+4. `pnpm build` → **✅ green** (22/22 routes clean)
+
+**Outputs generated:**
+- `backend/scripts/build_fact_pack.py` (Offline pack generator with SHA256 checksums)
+- `frontend/public/packs/manifest.json`
+- `frontend/public/packs/facts_potato_v1.json`
+- `frontend/public/packs/facts_maize_v1.json`
+- `frontend/public/packs/facts_rice_v1.json`
+- `frontend/lib/offline-facts.ts` (Client-side deterministic fact resolver)
+- `frontend/public/sw.js` (SWR caching for `/packs/` and `/library/`)
+- `backend/app/api/packs.py` (`GET /api/packs/manifest`)
+- `backend/tests/test_fact_pack.py`

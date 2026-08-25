@@ -1,0 +1,36 @@
+{
+  "packs": [
+    {
+      "built_at": "2026-08-25",
+      "crop": "maize",
+      "facts_count": 2,
+      "filename": "facts_maize_v1.json",
+      "path": "/packs/facts_maize_v1.json",
+      "sha256": "6ee229773ab54f0434dbd7347b344f5da65fcd889be270f13b1238b0de5ff549",
+      "size_bytes": 2524,
+      "version": 1
+    },
+    {
+      "built_at": "2026-08-25",
+      "crop": "potato",
+      "facts_count": 3,
+      "filename": "facts_potato_v1.json",
+      "path": "/packs/facts_potato_v1.json",
+      "sha256": "440a35197e7fc96308a59bbdb1744ba0fc1c046878a9820d130998c3a5f59d0b",
+      "size_bytes": 3177,
+      "version": 1
+    },
+    {
+      "built_at": "2026-08-25",
+      "crop": "rice",
+      "facts_count": 4,
+      "filename": "facts_rice_v1.json",
+      "path": "/packs/facts_rice_v1.json",
+      "sha256": "1c21c7f1105e9fdeca83e8298fe1a176a351429d080c35048dd245b65e36ff0f",
+      "size_bytes": 4610,
+      "version": 1
+    }
+  ],
+  "schema_version": 1,
+  "updated_at": "2026-08-25"
+}

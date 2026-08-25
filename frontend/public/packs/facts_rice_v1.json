@@ -1,0 +1,113 @@
+{
+  "built_at": "2026-08-25",
+  "calendar": {},
+  "crop": "rice",
+  "facts": [
+    {
+      "active_ingredient": "propiconazole",
+      "application_interval_days": 7,
+      "banned_flag": false,
+      "citation": "BRRI. Adhunik Dhaner Chas (23rd ed.). Bangladesh Rice Research Institute, Gazipur.",
+      "confidence": 0.9,
+      "crop": "rice",
+      "crop_bn": "ধান",
+      "dose_max": 1.0,
+      "dose_min": 1.0,
+      "dose_unit": "ml/l",
+      "grounding": "curated-approximation",
+      "ipm_alternatives_bn": [
+        "পটাশ সার উপরিপ্রয়োগ",
+        "সুষম সেচ নিশ্চিত করা",
+        "প্রতিরোধী জাতের চাষ"
+      ],
+      "pre_harvest_interval_days": 14,
+      "problem": "blast",
+      "problem_bn": "ব্লাস্ট রোগ (পাতা / শীষ ব্লাস্ট)",
+      "problem_type": "disease",
+      "severity": "high",
+      "source_doc": "BRRI. Adhunik Dhaner Chas (Modern Rice Cultivation, 23rd ed.).",
+      "source_node_id": "",
+      "stage": "panicle_initiation"
+    },
+    {
+      "active_ingredient": "propiconazole",
+      "application_interval_days": 7,
+      "banned_flag": false,
+      "citation": "BRRI. Adhunik Dhaner Chas (23rd ed.). Bangladesh Rice Research Institute, Gazipur.",
+      "confidence": 0.9,
+      "crop": "rice",
+      "crop_bn": "ধান",
+      "dose_max": 1.0,
+      "dose_min": 1.0,
+      "dose_unit": "ml/l",
+      "grounding": "curated-approximation",
+      "ipm_alternatives_bn": [
+        "অতিরিক্ত ইউরিয়া সার প্রয়োগ বন্ধ রাখা",
+        "ক্ষেতে পানির স্তর বজায় রাখা",
+        "আক্রান্ত জমি থেকে বীজ সংগ্রহ না করা"
+      ],
+      "pre_harvest_interval_days": 14,
+      "problem": "blast",
+      "problem_bn": "ব্লাস্ট রোগ (পাতা / শীষ ব্লাস্ট)",
+      "problem_type": "disease",
+      "severity": "high",
+      "source_doc": "BRRI. Adhunik Dhaner Chas (Modern Rice Cultivation, 23rd ed.).",
+      "source_node_id": "",
+      "stage": "tillering"
+    },
+    {
+      "active_ingredient": "imidacloprid",
+      "application_interval_days": 10,
+      "banned_flag": false,
+      "citation": "BRRI. Adhunik Dhaner Chas (23rd ed.). Bangladesh Rice Research Institute, Gazipur.",
+      "confidence": 0.85,
+      "crop": "rice",
+      "crop_bn": "ধান",
+      "dose_max": 0.5,
+      "dose_min": 0.5,
+      "dose_unit": "ml/l",
+      "grounding": "curated-approximation",
+      "ipm_alternatives_bn": [
+        "জমির পানি কয়েকদিনের জন্য শুকিয়ে ফেলা (AWD)",
+        "গাছের গোড়ায় আলো-বাতাস চলাচলের ব্যবস্থা (বিলি কাটা)",
+        "আলোক ফাঁদ ব্যবহার করা"
+      ],
+      "pre_harvest_interval_days": 14,
+      "problem": "brown_planthopper",
+      "problem_bn": "বাদামি গাছফড়িং / কারেন্ট পোকা",
+      "problem_type": "pest",
+      "severity": "high",
+      "source_doc": "BRRI. Adhunik Dhaner Chas (Modern Rice Cultivation, 23rd ed.).",
+      "source_node_id": "",
+      "stage": "tillering"
+    },
+    {
+      "active_ingredient": "cartap",
+      "application_interval_days": 14,
+      "banned_flag": false,
+      "citation": "BRRI. Adhunik Dhaner Chas (23rd ed.). Bangladesh Rice Research Institute, Gazipur.",
+      "confidence": 0.85,
+      "crop": "rice",
+      "crop_bn": "ধান",
+      "dose_max": 1.5,
+      "dose_min": 1.5,
+      "dose_unit": "g/l",
+      "grounding": "curated-approximation",
+      "ipm_alternatives_bn": [
+        "পার্চিং (টি-আকৃতির ডালপোতা পাখি বসার জন্য)",
+        "হাতজাল দিয়ে বা হাত দিয়ে ডিমের গাদা সংগ্রহ ও ধ্বংস",
+        "আলোক ফাঁদ স্থাপন"
+      ],
+      "pre_harvest_interval_days": 21,
+      "problem": "stem_borer",
+      "problem_bn": "মাজরা পোকা",
+      "problem_type": "pest",
+      "severity": "medium",
+      "source_doc": "BRRI. Adhunik Dhaner Chas (Modern Rice Cultivation, 23rd ed.).",
+      "source_node_id": "",
+      "stage": "tillering"
+    }
+  ],
+  "pack_version": 1,
+  "source": "BARI/BRRI/DAE curated fact base v1"
+}

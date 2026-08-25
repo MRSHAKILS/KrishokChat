@@ -1,0 +1,61 @@
+{
+  "built_at": "2026-08-25",
+  "calendar": {},
+  "crop": "maize",
+  "facts": [
+    {
+      "active_ingredient": "spinosad",
+      "application_interval_days": 10,
+      "banned_flag": false,
+      "citation": "DAE & BARI. National Fall Armyworm Management Guideline. Department of Agricultural Extension, Dhaka.",
+      "confidence": 0.85,
+      "crop": "maize",
+      "crop_bn": "ভুট্টা",
+      "dose_max": 0.4,
+      "dose_min": 0.4,
+      "dose_unit": "ml/l",
+      "grounding": "curated-approximation",
+      "ipm_alternatives_bn": [
+        "চারা গজানোর পরপরই চোঙা পর্যবেক্ষণ",
+        "পাখি বসার জন্য ডালপোতা (পার্চিং)",
+        "হাত দিয়ে পোকার ডিম ধ্বংস করা"
+      ],
+      "pre_harvest_interval_days": 14,
+      "problem": "fall_armyworm",
+      "problem_bn": "ফল আর্মিওয়ার্ম / মাজরা পোকা",
+      "problem_type": "pest",
+      "severity": "high",
+      "source_doc": "DAE. National Fall Armyworm Management Guideline (DAE/BARI 2021).",
+      "source_node_id": "",
+      "stage": "seedling"
+    },
+    {
+      "active_ingredient": "spinosad",
+      "application_interval_days": 10,
+      "banned_flag": false,
+      "citation": "DAE & BARI. National Fall Armyworm Management Guideline. Department of Agricultural Extension, Dhaka.",
+      "confidence": 0.9,
+      "crop": "maize",
+      "crop_bn": "ভুট্টা",
+      "dose_max": 0.4,
+      "dose_min": 0.4,
+      "dose_unit": "ml/l",
+      "grounding": "curated-approximation",
+      "ipm_alternatives_bn": [
+        "গাছের চোঙায় শুকনা বালি বা ছাই দেওয়া",
+        "ফেরোমোন ফাঁদ ও আলোক ফাঁদ স্থাপন",
+        "হাত দিয়ে ডিমের গাদা ও প্রাথমিক কীড়া সংগ্রহ করে ধ্বংস করা"
+      ],
+      "pre_harvest_interval_days": 14,
+      "problem": "fall_armyworm",
+      "problem_bn": "ফল আর্মিওয়ার্ম / মাজরা পোকা",
+      "problem_type": "pest",
+      "severity": "high",
+      "source_doc": "DAE. National Fall Armyworm Management Guideline (DAE/BARI 2021).",
+      "source_node_id": "",
+      "stage": "whorl"
+    }
+  ],
+  "pack_version": 1,
+  "source": "BARI/BRRI/DAE curated fact base v1"
+}
