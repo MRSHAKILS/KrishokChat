@@ -1,0 +1,90 @@
+{
+  "facts": [
+    {
+      "active_ingredient": "mancozeb",
+      "application_interval_days": 7,
+      "banned_flag": false,
+      "citation": "DAE. page_751. List of Registered Agricultural Pesticides (DAE). pp. 751-751.",
+      "confidence": 0.9,
+      "crop": "potato",
+      "crop_bn": "আলু",
+      "dose_max": 2.0,
+      "dose_min": 2.0,
+      "dose_unit": "g/l",
+      "grounding": "corpus-extracted",
+      "ipm_alternatives_bn": [
+        "আক্রান্ত পাতা সরানো",
+        "সুষম সেচ",
+        "রোগমুক্ত বীজআলু ব্যবহার"
+      ],
+      "pre_harvest_interval_days": 7,
+      "problem": "late_blight",
+      "problem_bn": "নাবি ধ্বসা / লেট ব্লাইট",
+      "problem_type": "disease",
+      "severity": "high",
+      "source_doc": "DAE. List of Registered Agricultural Pesticides (DAE). page_751.",
+      "source_node_id": "DAE_PEST_5E48F1_001",
+      "stage": "tuber_bulking"
+    },
+    {
+      "active_ingredient": "mancozeb",
+      "application_interval_days": 7,
+      "banned_flag": false,
+      "citation": "DAE. page_754. List of Registered Agricultural Pesticides (DAE). pp. 754-754.",
+      "confidence": 0.85,
+      "crop": "potato",
+      "crop_bn": "আলু",
+      "dose_max": 2.0,
+      "dose_min": 2.0,
+      "dose_unit": "g/l",
+      "grounding": "corpus-extracted",
+      "ipm_alternatives_bn": [
+        "আক্রান্ত পাতা সরানো",
+        "রোগমুক্ত বীজআলু ব্যবহার"
+      ],
+      "pre_harvest_interval_days": 7,
+      "problem": "late_blight",
+      "problem_bn": "নাবি ধ্বসা / লেট ব্লাইট",
+      "problem_type": "disease",
+      "severity": "high",
+      "source_doc": "DAE. List of Registered Agricultural Pesticides (DAE). page_754.",
+      "source_node_id": "DAE_PEST_725A22_001",
+      "stage": "tuber_initiation"
+    },
+    {
+      "active_ingredient": "mancozeb",
+      "application_interval_days": 7,
+      "banned_flag": false,
+      "citation": "BARC. Handbook of Agricultural Technology. Curated approximation.",
+      "confidence": 0.75,
+      "crop": "potato",
+      "crop_bn": "আলু",
+      "dose_max": 2.5,
+      "dose_min": 2.0,
+      "dose_unit": "g/l",
+      "grounding": "curated-approximation",
+      "ipm_alternatives_bn": [
+        "আক্রান্ত গাছ পুড়িয়ে ফেলা",
+        "রোগমুক্ত বীজআলু ব্যবহার",
+        "সুষম নিকাশু ব্যবস্থা"
+      ],
+      "pre_harvest_interval_days": 7,
+      "problem": "late_blight",
+      "problem_bn": "নাবি ধ্বসা / লেট ব্লাইট",
+      "problem_type": "disease",
+      "severity": "high",
+      "source_doc": "BARC Handbook of Agricultural Technology (curated approximation based on regional DAE guidance)",
+      "source_node_id": "",
+      "stage": "vegetative"
+    }
+  ],
+  "notes": "Structured fact rows for the T1/T2 resolver (R4). Scope v1: potato late blight only. Every corpus-extracted row carries a source_node_id; curated-approximation rows carry grounding='curated-approximation'. No row was invented.",
+  "provenance": {
+    "builder": "backend/scripts/build_fact_base.py",
+    "endpoint_or_file": "ml_assets\\rag_index\\derived\\curated_facts_v1.json",
+    "fetched_at": "2026-08-25T16:36:51+00:00",
+    "sha256": "073687c2203ac596702cf329469bc4d7a4c77ece8ac85da5caaccd9a23826e7a",
+    "source_id": "curated_facts_v1.json"
+  },
+  "version": 1
+}

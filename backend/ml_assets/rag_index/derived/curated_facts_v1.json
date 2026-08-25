@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "notes": "Curated seed for fact_base_v1.json. Rows marked curated-approximation are human-reviewed approximations where the corpus extraction did not yield a direct citation. Every row must trace to a real source or be marked curated-approximation. Do not invent citations.",
+  "facts": [
+    {
+      "crop": "potato",
+      "crop_bn": "\u0986\u09b2\u09c1",
+      "problem": "late_blight",
+      "problem_bn": "\u09a8\u09be\u09ac\u09bf \u09a7\u09cd\u09ac\u09b8\u09be / \u09b2\u09c7\u099f \u09ac\u09cd\u09b2\u09be\u0987\u099f",
+      "problem_type": "disease",
+      "stage": "tuber_bulking",
+      "active_ingredient": "mancozeb",
+      "dose_min": 2.0,
+      "dose_max": 2.0,
+      "dose_unit": "g/l",
+      "application_interval_days": 7,
+      "pre_harvest_interval_days": 7,
+      "ipm_alternatives_bn": [
+        "\u0986\u0995\u09cd\u09b0\u09be\u09a8\u09cd\u09a4 \u09aa\u09be\u09a4\u09be \u09b8\u09b0\u09be\u09a8\u09cb",
+        "\u09b8\u09c1\u09b7\u09ae \u09b8\u09c7\u099a",
+        "\u09b0\u09cb\u0997\u09ae\u09c1\u0995\u09cd\u09a4 \u09ac\u09c0\u099c\u0986\u09b2\u09c1 \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0"
+      ],
+      "banned_flag": false,
+      "severity": "high",
+      "source_node_id": "DAE_PEST_5E48F1_001",
+      "source_doc": "DAE. List of Registered Agricultural Pesticides (DAE). page_751.",
+      "citation": "DAE. page_751. List of Registered Agricultural Pesticides (DAE). pp. 751-751.",
+      "grounding": "corpus-extracted",
+      "confidence": 0.9
+    },
+    {
+      "crop": "potato",
+      "crop_bn": "\u0986\u09b2\u09c1",
+      "problem": "late_blight",
+      "problem_bn": "\u09a8\u09be\u09ac\u09bf \u09a7\u09cd\u09ac\u09b8\u09be / \u09b2\u09c7\u099f \u09ac\u09cd\u09b2\u09be\u0987\u099f",
+      "problem_type": "disease",
+      "stage": "tuber_initiation",
+      "active_ingredient": "mancozeb",
+      "dose_min": 2.0,
+      "dose_max": 2.0,
+      "dose_unit": "g/l",
+      "application_interval_days": 7,
+      "pre_harvest_interval_days": 7,
+      "ipm_alternatives_bn": [
+        "\u0986\u0995\u09cd\u09b0\u09be\u09a8\u09cd\u09a4 \u09aa\u09be\u09a4\u09be \u09b8\u09b0\u09be\u09a8\u09cb",
+        "\u09b0\u09cb\u0997\u09ae\u09c1\u0995\u09cd\u09a4 \u09ac\u09c0\u099c\u0986\u09b2\u09c1 \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0"
+      ],
+      "banned_flag": false,
+      "severity": "high",
+      "source_node_id": "DAE_PEST_725A22_001",
+      "source_doc": "DAE. List of Registered Agricultural Pesticides (DAE). page_754.",
+      "citation": "DAE. page_754. List of Registered Agricultural Pesticides (DAE). pp. 754-754.",
+      "grounding": "corpus-extracted",
+      "confidence": 0.85
+    },
+    {
+      "crop": "potato",
+      "crop_bn": "\u0986\u09b2\u09c1",
+      "problem": "late_blight",
+      "problem_bn": "\u09a8\u09be\u09ac\u09bf \u09a7\u09cd\u09ac\u09b8\u09be / \u09b2\u09c7\u099f \u09ac\u09cd\u09b2\u09be\u0987\u099f",
+      "problem_type": "disease",
+      "stage": "vegetative",
+      "active_ingredient": "mancozeb",
+      "dose_min": 2.0,
+      "dose_max": 2.5,
+      "dose_unit": "g/l",
+      "application_interval_days": 7,
+      "pre_harvest_interval_days": 7,
+      "ipm_alternatives_bn": [
+        "\u0986\u0995\u09cd\u09b0\u09be\u09a8\u09cd\u09a4 \u0997\u09be\u099b \u09aa\u09c1\u09dc\u09bf\u09df\u09c7 \u09ab\u09c7\u09b2\u09be",
+        "\u09b0\u09cb\u0997\u09ae\u09c1\u0995\u09cd\u09a4 \u09ac\u09c0\u099c\u0986\u09b2\u09c1 \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0",
+        "\u09b8\u09c1\u09b7\u09ae \u09a8\u09bf\u0995\u09be\u09b6\u09c1 \u09ac\u09cd\u09af\u09ac\u09b8\u09cd\u09a5\u09be"
+      ],
+      "banned_flag": false,
+      "severity": "high",
+      "source_node_id": "",
+      "source_doc": "BARC Handbook of Agricultural Technology (curated approximation based on regional DAE guidance)",
+      "citation": "BARC. Handbook of Agricultural Technology. Curated approximation.",
+      "grounding": "curated-approximation",
+      "confidence": 0.75
+    }
+  ]
+}

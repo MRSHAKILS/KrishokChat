@@ -1,0 +1,6 @@
+{
+  "built_at": "2026-08-25T16:36:51+00:00",
+  "notes": "Rows rejected from curated_facts_v1.json during build. Each carries _rejection_reason.",
+  "rejected": [],
+  "version": 1
+}

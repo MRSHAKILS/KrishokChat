@@ -147,6 +147,11 @@ class Settings(BaseSettings):
     # Flag a dosage claim only above band_max * factor (conservative default).
     dose_outlier_factor: float = Field(default=3.0, gt=1.0)
 
+    # R2: structured fact base (offline-built by scripts/build_fact_base.py).
+    # Empty path = default derived artifact; missing file returns empty FactBase
+    # (R4 structured resolver disabled gracefully, T3 still works).
+    fact_base_path: str = ""
+
     # PR1: operator-maintained late-blight weather snapshot (offline JSON;
     # never fetched at request time). Empty path = default artifact; missing
     # file disables the risk endpoint's data (clear payload, never a 500).
@@ -268,6 +273,15 @@ class Settings(BaseSettings):
             path = Path(self.dose_reference_path)
             return path if path.is_absolute() else PROJECT_ROOT.parent / path
         return self.rag_index_path / "derived" / "dose_reference_v1.json"
+
+    @property
+    def fact_base_resolved_path(self) -> Path:
+        # R2: structured fact-base artifact (offline-built by scripts/build_fact_base.py).
+        # Empty FACT_BASE_PATH uses the default; missing = empty FactBase, never a crash.
+        if self.fact_base_path:
+            path = Path(self.fact_base_path)
+            return path if path.is_absolute() else PROJECT_ROOT.parent / path
+        return self.rag_index_path / "derived" / "fact_base_v1.json"
 
     @property
     def weather_snapshot_resolved_path(self) -> Path:
