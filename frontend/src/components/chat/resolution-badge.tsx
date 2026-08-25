@@ -72,29 +72,9 @@ const TIER_CONFIG: Record<string, TierConfig> = {
 
 const FALLBACK: TierConfig = TIER_CONFIG["grounded_generation"];
 
-export function ResolutionBadge({ tier }: { tier?: string | null }) {
+import { ProvenanceBadge } from "@/components/provenance/provenance-badge";
+
+export function ResolutionBadge({ tier, className }: { tier?: string | null; className?: string }) {
   if (!tier) return null;
-  const c = TIER_CONFIG[tier] ?? FALLBACK;
-  const Icon = c.icon;
-  return (
-    <div
-      title={c.desc}
-      aria-label={c.desc}
-      className={cn(
-        "inline-flex items-center gap-1.5 rounded-md border border-current/15 px-2.5 py-1 text-xs font-medium",
-        c.bg,
-        c.color,
-        // Zero-LLM tiers get a slightly heavier border to read as "stronger"
-        c.isZeroLLM && "border-current/25 font-semibold",
-      )}
-    >
-      <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-      {c.label}
-      {c.isZeroLLM && (
-        <span className="ml-0.5 rounded bg-current/10 px-1 py-0.5 text-[10px] font-mono leading-none">
-          0 AI
-        </span>
-      )}
-    </div>
-  );
+  return <ProvenanceBadge tier={tier} className={className} />;
 }

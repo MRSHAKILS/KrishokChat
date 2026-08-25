@@ -123,3 +123,22 @@ None.
   not a menu of modules (plan G.2).
 - Keep the shared badge the single source of truth for provenance rendering so
   chat/soil/detect/home never drift into three different visual languages.
+
+## Verification record
+
+**Date:** 2026-08-26
+**Implemented by:** Antigravity agent
+
+**Gate results:**
+1. `pnpm build` → **✅ green** (22/22 routes clean)
+2. Full backend test suite → **542 passed, 7 skipped, 0 failed** ✅
+3. Shared provenance badge: `frontend/src/components/provenance/provenance-badge.tsx` supporting 5 resolution tiers + 8 honesty states (official table, measured, forecast-derived, on-device, offline pack, sample data, refusal).
+4. Task-first decision hub: `DecisionCards` + `FarmProfileBanner` delivering the 4 decision-oriented entry cards ("ফসলের বৃদ্ধি পর্যায় ও করণীয়", "রোগ ও পোকা নির্ণয়", "কৃষি প্রশ্নোত্তর ও সার সুপারিশ", "আবহাওয়া ও বালাই সতর্কতা") with TTS voice readback.
+5. Anon / Demo mode preservation: Unauthenticated visitors receive fully functioning decision cards without gating or degradation.
+
+**Outputs generated:**
+- `frontend/src/components/provenance/provenance-badge.tsx`
+- `frontend/src/components/home/decision-cards.tsx`
+- `frontend/src/components/home/farm-profile-banner.tsx`
+- `frontend/src/components/chat/resolution-badge.tsx` (Wrapped to use shared ProvenanceBadge)
+- `frontend/src/app/(marketing)/page.tsx` (Mounted TaskFirstDecisionSection)

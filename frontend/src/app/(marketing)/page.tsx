@@ -57,10 +57,14 @@ const RAG_SOURCES = [
   },
 ];
 
+import { DecisionCards } from "@/components/home/decision-cards";
+import { FarmProfileBanner } from "@/components/home/farm-profile-banner";
+
 export default function LandingPage() {
   return (
-    <div className="space-y-20 py-6 sm:py-10">
+    <div className="space-y-16 py-6 sm:py-10">
       <HeroSection />
+      <TaskFirstDecisionSection />
       <JudgeNav />
       <CapabilityHub />
       <RagPipelineDemo />
@@ -75,6 +79,44 @@ export default function LandingPage() {
       <AgriFAQSection />
       <DemoCTA />
     </div>
+  );
+}
+
+/* === Task-First Decision Hub (R11) === */
+function TaskFirstDecisionSection() {
+  return (
+    <section id="task-hub" className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
+        <div>
+          <span className="text-xs font-semibold uppercase tracking-wider text-leaf">
+            কৃষক সিদ্ধান্ত কেন্দ্র • Task-First Decisions
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-ink mt-1">
+            আমার ফসলের আজকের করণীয়
+          </h2>
+        </div>
+        <p className="text-xs sm:text-sm text-ink-soft max-w-md">
+          আপনার ফসলের বর্তমান বয়স ও স্থানীয় আবহাওয়া ঝুঁকির ভিত্তিতে নির্ধারিত সরাসরি পদক্ষেপ।
+        </p>
+      </div>
+
+      <FarmProfileBanner
+        crop="আলু (Potato — ডায়মন্ট)"
+        district="বগুড়া"
+        das={45}
+        offlinePackVersion={1}
+      />
+
+      <DecisionCards
+        farmCrop="আলু (Potato)"
+        farmDistrict="বগুড়া"
+        farmDas={45}
+        stageName="কন্দ বৃদ্ধি পর্যায় (Tuber Bulking)"
+        stageAction="কন্দ গঠনের এই সময়ে মাটিতে পর্যাপ্ত রস নিশ্চিত করতে হালকা সেচ দিন এবং নাবি ধসা রোগ নিয়মিত পর্যবেক্ষণ করুন।"
+        weatherRiskDistrict="বগুড়া"
+        weatherRiskLevel="watch"
+      />
+    </section>
   );
 }
 
