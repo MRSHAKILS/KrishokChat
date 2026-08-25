@@ -152,6 +152,11 @@ class Settings(BaseSettings):
     # (R4 structured resolver disabled gracefully, T3 still works).
     fact_base_path: str = ""
 
+    # R4: deterministic structured resolver for 0-LLM answers (potato late blight).
+    # Default off (dark launch); flip to true to enable T1/T2 resolution.
+    structured_resolver_enabled: bool = False
+    structured_resolver_min_confidence: float = Field(default=0.85, ge=0.0, le=1.0)
+
     # PR1: operator-maintained late-blight weather snapshot (offline JSON;
     # never fetched at request time). Empty path = default artifact; missing
     # file disables the risk endpoint's data (clear payload, never a 500).

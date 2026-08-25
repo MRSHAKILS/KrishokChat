@@ -157,6 +157,18 @@ def build_container(settings: Settings) -> AppContainer:
         if settings.demo_mode
         else None
     )
+    crop_calendars = load_crop_calendars(settings.crop_calendars_resolved_path)
+    resolver = None
+    if settings.structured_resolver_enabled:
+        from app.application.structured_resolver import StructuredResolver
+        from app.infrastructure.knowledge.fact_base_store import load_fact_base
+
+        fact_base = load_fact_base(settings.fact_base_resolved_path)
+        resolver = StructuredResolver(
+            fact_base=fact_base,
+            crop_calendars=crop_calendars,
+            min_confidence=settings.structured_resolver_min_confidence,
+        )
     pipeline = QAPipeline(
         safety=SafetyClassifier(intent_llm),
         retriever=retriever,
@@ -193,6 +205,7 @@ def build_container(settings: Settings) -> AppContainer:
         local_lane_concurrency=settings.local_llm_max_concurrency,
         # P0-7: corpus tag in demo-cache keys (invalidate on index rebuild).
         corpus_version=settings.corpus_version,
+        resolver=resolver,
     )
     vision = VisionPipeline(
         registry=ArtifactVisionRegistry(Path(settings.ml_assets_dir) / "vision"),
@@ -268,7 +281,6 @@ def build_container(settings: Settings) -> AppContainer:
             else None
         ),
     )
-    crop_calendars = load_crop_calendars(settings.crop_calendars_resolved_path)
     return AppContainer(
         qa=pipeline,
         vision=vision,

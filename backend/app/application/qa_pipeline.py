@@ -12,6 +12,7 @@ from app.application.generation import GroundedAnswerGenerator, REFERRAL
 from app.application.query_builder import build_retrieval_query
 from app.application.rewrite import ConversationalQueryRewriter
 from app.application.safety import SafetyClassifier
+from app.application.structured_resolver import StructuredResolver
 from app.application.telemetry import (
     STAGE_NAMES,
     capture_tokens,
@@ -86,6 +87,8 @@ class QAPipeline:
         local_lane_models: frozenset[str] | None = None,
         local_lane_concurrency: int | None = None,
         corpus_version: str | None = None,
+        # R4: optional T1/T2 resolver (None = off, T3 always, flag default).
+        resolver: StructuredResolver | None = None,
     ) -> None:
         self.safety = safety
         self.retriever = retriever
@@ -117,6 +120,8 @@ class QAPipeline:
         self.local_lane_concurrency = local_lane_concurrency
         self._local_semaphore: asyncio.Semaphore | None = None
         self._local_semaphore_lock = threading.Lock()
+        # R4: T1/T2 structured resolver (None = off, default).
+        self.resolver = resolver
         # P0-7: corpus-generation tag appended to demo-cache keys. None (old
         # pipelines/tests) keeps the exact previous key shape.
         self.corpus_version = corpus_version
@@ -285,6 +290,47 @@ class QAPipeline:
                     if on_event:
                         await on_event(event)
                 return result
+
+            # R4: T1/T2 structured resolver — runs only when
+            # STRUCTURED_RESOLVER_ENABLED=true (resolver is not None).
+            # Inserted after the cache-replay check, before retrieval.
+            # On any miss, falls through to T3 with zero observable difference.
+            if self.resolver is not None:
+                resolved = self.resolver.resolve(
+                    request.query,
+                    stage=getattr(context, "stage", None),
+                )
+                if resolved is not None:
+                    # Build the source from the fact row's provenance.
+                    fact_source = RetrievedSource(
+                        id=resolved.fact.source_node_id or f"{resolved.fact.crop}/{resolved.fact.problem}",
+                        score=resolved.fact.confidence,
+                        title_en=f"{resolved.fact.crop} {resolved.fact.problem}",
+                        title_bn=f"{resolved.fact.crop_bn} {resolved.fact.problem_bn}",
+                        content_en=resolved.answer,
+                        content_bn=resolved.answer,
+                        source=resolved.fact.source_doc or resolved.fact.citation,
+                        citation=resolved.fact.citation,
+                        metadata={"grounding": resolved.fact.grounding},
+                    )
+                    # Emit RETRIEVAL/GENERATION/VERIFIER as SKIP.
+                    for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
+                        await emit(stage, StageStatus.SKIP, "structured fact answer")
+                    # R3: LLM was called if the safety classifier had no precheck match.
+                    if not decision.matched_rules:
+                        llm_calls += 1
+                    result = QAResult(
+                        query=request.query,
+                        category=decision.category,
+                        answer=resolved.answer,
+                        sources=(fact_source,),
+                        confidence=VerificationConfidence.VERIFIED,
+                        trace=tuple(trace),
+                        matched_rules=decision.matched_rules,
+                        safety_reason=None,
+                        resolution_tier=resolved.tier,
+                    )
+                    return result
 
             await emit(PipelineStage.RETRIEVAL, StageStatus.START)
             with stage_timer("retrieval", timings):
