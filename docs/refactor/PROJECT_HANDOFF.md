@@ -401,3 +401,48 @@ No route or frontend component should change for either replacement.
   endpoint must never 500 on a store outage). Both failures were pre-existing
   on clean HEAD before this session's P1+P2 work (verified by stash). Full
   suite 410 passed / 7 skipped / 0 failed; `pnpm build` green.
+
+## Architecture direction (planning, 2026-08-25) — READ BEFORE NEW FEATURE WORK
+
+Two planning docs now define where this system is going. They change no code.
+
+- `production/future_plan/00_SCOPE_OUTLINE.md` — WHAT to build. Capability menu
+  (usability, disease coverage, personalization, proactive, admin, frontend,
+  paper novelty) + the recommended **potato late-blight spine** with a 6-step
+  build order. Spine progress: step 2 partial (F1-01, F1-02), step 3 done (PR1),
+  step 4 done (P1+P2); steps 1, 5, 6 not started.
+- `production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md` — HOW the system
+  must be shaped. Contains the measured baseline (2,135 knowledge nodes; 2,946
+  provenance sections; BM25 16.2 MB + FAISS 8.3 MB; 71-entry dose reference;
+  15-item banned registry; 110-word dialect map; **worst case 3 LLM calls per
+  query**, best case 0; 27 API routes; 21 pages; 49 components; shell-only
+  service worker; 37 test files / 410 passing / 50-item golden replay).
+- `production/future_plan/08_WEATHER_DATA_SOURCING.md` — how to replace PR1's
+  `is_sample` weather snapshot with real rows (RIMES upazila API first, BMD AIS
+  observations for validation with non-commercial licensing noted, BAMIS
+  bulletins for corpus ingestion, formal DAE/BMD data request in parallel).
+
+**The core direction (doc 07 Part B):** move from "always safety → retrieve →
+generate → verify" to a **five-tier resolution ladder** — T0 deterministic guard,
+T1 structured fact resolver, T2 templated advisory, T3 grounded generation
+(today's path, now the fallback), T4 honest refusal. Answers for doses/timing are
+**composed from a provenance-carrying fact base, never generated**; the LLM is
+confined to phrasing, disambiguation, and out-of-table questions. Consequences a
+future agent must respect:
+
+- Knowledge grows as a **data operation, not a code change** (the crop-calendar
+  pattern generalized: curated source → offline builder → versioned hash-pinned
+  artifact → fail-open loader → test locking "no code change to add data").
+- New features arrive as **capabilities** in a registry (`can_handle`, `resolve`,
+  `requires`, `available`) — that is the seam for future irrigation/drone/market
+  modules. Unbuilt capabilities stay `available: false` rather than faked.
+- Every response should carry `resolution_tier` + provenance into the API, the
+  audit record, and a UI badge (the soil card's "পরিমাপিত" badge is the pattern).
+- Cost becomes a contract: price-table artifact + per-request budget + a measured
+  tier-mix experiment on `farmer_benchmark_1000.jsonl`. **No published cost
+  number without the measured tier mix behind it.**
+- Roadmap R1–R12 is in doc 07 Part J, dependency-ordered. Suggested first sprint:
+  **R3 (tier plumbing, zero behavior change) → R1 (ingestion contract) → R2
+  (fact base v1) → R4 (T1/T2 resolver for potato late blight)**, with R8 (real
+  weather data) in parallel. Nothing in R1–R12 has been started.
+

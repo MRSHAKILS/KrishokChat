@@ -209,5 +209,12 @@ If the researcher wants a single, coherent, end-to-end capability to nail first 
 | `04_ADMIN_OPERATOR_ROLES.md` | Review queue, dashboards, broadcast, escalation, feedback, monetization reality |
 | `05_FRONTEND_REFINEMENT.md` | WCAG/low-literacy, PWA UX, voice affordances, personalized home |
 | `06_PAPER_NOVELTY.md` | Five defensible claims + evaluation designs + what to avoid claiming |
+| `07_ARCHITECTURE_REFINEMENT_PLAN.md` | **(2026-08-25)** Senior-engineer pass: measured current state, the five-tier resolution ladder (deterministic-first, LLM-last), knowledge architecture for growth, capability registry, cost/latency contracts, mobile + UI architecture, N6 claim, R1–R12 roadmap |
+| `08_WEATHER_DATA_SOURCING.md` | **(2026-08-25)** How to get real BMD/BAMIS/RIMES weather rows and drop PR1's `is_sample` flag |
+
+**Spine progress (§10 build order):** step 2 partially done (F1-01 banned
+registry, F1-02 dose reference), step 3 done (PR1, sample data pending doc 08),
+step 4 done (P1+P2 farm profile + stage advice). Steps 1, 5, 6 not started.
+The architectural shaping needed before scaling any of this is doc 07.
 
 **Next action for the researcher:** confirm the §10 spine (or pick a different crop/spine), then we open the first bounded task. Nothing here has changed any code.
