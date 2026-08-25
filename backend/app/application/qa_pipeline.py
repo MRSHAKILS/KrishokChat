@@ -546,6 +546,9 @@ class QAPipeline:
                 # power R7's tier-mix / zero-LLM-rate experiment.
                 "resolution_tier": result.resolution_tier.value,
                 "llm_calls": llm_calls,
+                # R5: advisory routing hint (kind only; slot fields not audited
+                # to avoid PII if upazila/crop come from the query text).
+                "intent_kind": decision.intent.kind if decision and decision.intent else None,
             }
         )
 

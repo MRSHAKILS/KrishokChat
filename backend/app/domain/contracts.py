@@ -12,6 +12,7 @@ from app.domain.enums import (
     StageStatus,
     VerificationConfidence,
 )
+from app.domain.intent import Intent
 
 
 @dataclass(frozen=True)
@@ -38,6 +39,10 @@ class SafetyDecision:
     # The pipeline may then replay a curated safe_agri demo-cache answer;
     # real terminal decisions never replay.
     classifier_outage: bool = False
+    # R5: advisory routing hint produced alongside the safety decision.
+    # None on terminal decisions (no routing needed) and classifier outages.
+    # Never influences safety category — additive and advisory only.
+    intent: Intent | None = None
 
     @property
     def terminal(self) -> bool:

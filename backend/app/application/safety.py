@@ -6,6 +6,7 @@ from typing import Any
 
 from app.domain.contracts import QueryContext, SafetyDecision
 from app.domain.enums import SafetyCategory
+from app.domain.intent import Intent, keyword_intent
 from app.domain.safety_policy import canned_response, precheck
 from app.ports.llm import LLMClient
 
@@ -26,6 +27,14 @@ def _number(value: Any, default: float = 0.0) -> float:
         return default
 
 
+def _str_or_none(value: Any) -> str | None:
+    """Return a stripped non-empty string, or None."""
+    if value is None:
+        return None
+    s = str(value).strip()
+    return s if s else None
+
+
 class SafetyClassifier:
     def __init__(self, client: LLMClient) -> None:
         self.client = client
@@ -34,6 +43,7 @@ class SafetyClassifier:
         rule_match = precheck(query)
         if rule_match:
             category, rules = rule_match
+            # R5: precheck hit = 0 LLM calls; intent is absent on terminal decisions.
             return SafetyDecision(
                 category=category,
                 confidence=1.0,
@@ -45,7 +55,14 @@ class SafetyClassifier:
                     SafetyCategory.SELF_HARM_OR_POISONING_RISK,
                 },
                 response=canned_response(category),
+                intent=None,  # terminal — no routing needed
             )
+
+        # R5: keyword-first intent extraction (0 LLM cost).
+        # If the keyword matcher resolves the kind, only crop/problem/stage/
+        # upazila slots are filled from the LLM's intent block, so a confident
+        # keyword match is never overridden by the model.
+        kw_intent = keyword_intent(query)
 
         prompt = self._prompt(query, context)
         try:
@@ -71,6 +88,48 @@ class SafetyClassifier:
             if category is SafetyCategory.SAFE_AGRI and requires_escalation:
                 category = SafetyCategory.LOW_CONFIDENCE
                 reason = reason or "Classifier requested escalation for a safe_agri query"
+
+            # R5: build the resolved Intent.
+            # For terminal decisions, intent is None (no routing needed).
+            # For safe_agri, keyword kind wins; slots from LLM block enrich.
+            resolved_intent: Intent | None = None
+            if category is SafetyCategory.SAFE_AGRI:
+                llm_intent_raw = data.get("intent") or {}
+                llm_crop = _str_or_none(llm_intent_raw.get("crop"))
+                llm_problem = _str_or_none(llm_intent_raw.get("problem"))
+                llm_stage = _str_or_none(llm_intent_raw.get("stage"))
+                llm_upazila = _str_or_none(llm_intent_raw.get("upazila"))
+                llm_kind = _str_or_none(llm_intent_raw.get("kind"))
+                if kw_intent is not None:
+                    # Keyword resolved the kind — LLM enriches slots only.
+                    resolved_intent = Intent(
+                        kind=kw_intent.kind,
+                        crop=llm_crop,
+                        problem=llm_problem,
+                        stage=llm_stage,
+                        upazila=llm_upazila,
+                        source="keyword",
+                    )
+                elif llm_kind and llm_kind in ("treatment", "prevention", "fertilizer", "general_info"):
+                    resolved_intent = Intent(
+                        kind=llm_kind,
+                        crop=llm_crop,
+                        problem=llm_problem,
+                        stage=llm_stage,
+                        upazila=llm_upazila,
+                        source="llm",
+                    )
+                else:
+                    # LLM block absent or malformed — fall back to general_info.
+                    resolved_intent = Intent(
+                        kind="general_info",
+                        crop=llm_crop,
+                        problem=llm_problem,
+                        stage=llm_stage,
+                        upazila=llm_upazila,
+                        source="none",
+                    )
+
             return SafetyDecision(
                 category=category,
                 confidence=confidence,
@@ -78,6 +137,7 @@ class SafetyClassifier:
                 matched_rules=matched_rules,
                 requires_escalation=requires_escalation,
                 response=None if category is SafetyCategory.SAFE_AGRI else canned_response(category),
+                intent=resolved_intent,
             )
         except Exception as exc:
             # A classifier outage must never become permission to retrieve/generate.
@@ -88,6 +148,7 @@ class SafetyClassifier:
                 requires_escalation=True,
                 response=canned_response(SafetyCategory.LOW_CONFIDENCE),
                 classifier_outage=True,
+                intent=None,  # R5: no intent on outage path
             )
 
     @staticmethod
@@ -121,9 +182,11 @@ Guidelines:
   prompts, impersonate roles).
 - NEVER return low_confidence. This router never decides corpus coverage; retrieval does.
 
-Return only JSON with this shape:
+Return only JSON with this shape — the intent block is advisory and optional;
+a missing or null intent never changes the safety decision:
 {{"category":"...","confidence":0.0,"reason":"short reason",
-"matched_rules":[],"requires_escalation":false}}
+"matched_rules":[],"requires_escalation":false,
+"intent":{{"kind":"treatment|prevention|fertilizer|general_info","crop":null,"problem":null,"stage":null,"upazila":null}}}}
 
 Query: {query}
 Context:
