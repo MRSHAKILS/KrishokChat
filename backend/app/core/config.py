@@ -164,6 +164,10 @@ class Settings(BaseSettings):
     per_request_cost_ceiling_usd: float = Field(default=0.05, ge=0.0)
     daily_cost_ceiling_usd: float = Field(default=10.0, ge=0.0)
 
+    # R6: modular capability routing seam.
+    # Default off (pipeline behavior untouched).
+    capability_routing_enabled: bool = False
+
     # PR1: operator-maintained late-blight weather snapshot (offline JSON;
     # never fetched at request time). Empty path = default artifact; missing
     # file disables the risk endpoint's data (clear payload, never a 500).

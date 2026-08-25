@@ -40,7 +40,7 @@ one number.
 | 4 | `R4_structured_resolver.md` | T1/T2 answers, 0 LLM, behind a default-off flag | R2, R3 | ✅ DONE — 2026-08-25 |
 | ∥ | `R8_real_weather_snapshot.md` | real RIMES weather → drops PR1 `is_sample` | — (parallel) | spec ready |
 | 5 | `R5_merge_safety_intent.md` | one structured call instead of two; produces the routing `Intent` | R3 | ✅ DONE — 2026-08-25 |
-| 6 | `R6_capability_registry.md` | seam for irrigation/drone/market modules + honest capability map | R5 | spec ready |
+| 6 | `R6_capability_registry.md` | seam for irrigation/drone/market modules + honest capability map | R5 | ✅ DONE — 2026-08-25 |
 | 7 | `R7_cost_tier_mix_experiment.md` | price table + measured cost/1000 queries + p95 latency + zero-LLM rate | R4 | ✅ DONE — 2026-08-25 |
 | 8 | `R9_offline_fact_pack.md` | works with no signal; tier ≤ 2 cached, T3 never | R4 | spec ready |
 | 9 | `R10_ondevice_classifier_export.md` | mobile diagnosis latency claim (U1) + confidence-gated upload (U3) | R9 | spec ready |

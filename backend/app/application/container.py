@@ -7,6 +7,17 @@ from app.application.admin import AdminService
 from app.application.auth import AuthService
 from app.application.farm_profile import FarmProfileService, PostgrestFarmProfileStore
 from app.application.generation import GroundedAnswerGenerator
+from app.application.capabilities import (
+    CapabilityRegistry,
+    CapabilityRouter,
+    DiseaseAdvisoryCapability,
+    QACapability,
+    SafetyEscalationCapability,
+    SoilAdvisoryCapability,
+    StageAdviceCapability,
+    StubCapability,
+    WeatherRiskCapability,
+)
 from app.application.history import HistoryService
 from app.application.notifications import NotificationService
 from app.application.qa_pipeline import QAPipeline
@@ -51,6 +62,8 @@ class AppContainer:
     farm_profile: FarmProfileService
     crop_calendars: CropCalendarLibrary | None
     llm_name: str
+    capabilities: CapabilityRegistry | None = None
+    capability_router: CapabilityRouter | None = None
 
 
 def build_container(settings: Settings) -> AppContainer:
@@ -281,6 +294,71 @@ def build_container(settings: Settings) -> AppContainer:
             else None
         ),
     )
+    # R6: modular capability registry and routing seam.
+    capabilities = CapabilityRegistry()
+    capabilities.register(QACapability(pipeline))
+    capabilities.register(
+        DiseaseAdvisoryCapability(
+            vision_classifier_available=bool(vision.registry.disease_models),
+            fact_base_available=bool(resolver is not None),
+        )
+    )
+    capabilities.register(SoilAdvisoryCapability(soil_engine_available=bool(soil.info)))
+    capabilities.register(
+        WeatherRiskCapability(
+            weather_snapshot_available=settings.weather_snapshot_resolved_path.exists()
+        )
+    )
+    capabilities.register(StageAdviceCapability(calendars_available=bool(crop_calendars)))
+    capabilities.register(SafetyEscalationCapability())
+    # Reserved stubs
+    capabilities.register(
+        StubCapability(
+            id="irrigation",
+            name_bn="সেচ ব্যবস্থাপনা ও পরামর্শ",
+            name_en="Smart Irrigation Advisory",
+            description_bn="মাটির আর্দ্রতা সেন্সর ও আবহাওয়া পূর্বাভাসের ভিত্তিতে স্বয়ংক্রিয় সেচ শিডিউল।",
+            requires=frozenset({"sensor", "weather"}),
+        )
+    )
+    capabilities.register(
+        StubCapability(
+            id="market_price",
+            name_bn="বাজার দর ও ফসল বিপণন",
+            name_en="Market Price & Trading Advisory",
+            description_bn="নিকটস্থ পাইকারি বাজারের দৈনিক বাজারদর ও লাভজনক বিক্রয়ের সময় পূর্বাভাস।",
+            requires=frozenset({"timeseries"}),
+        )
+    )
+    capabilities.register(
+        StubCapability(
+            id="drone_survey",
+            name_bn="ড্রোন নজরদারি ও ফলন ম্যাপিং",
+            name_en="Drone Survey & Yield Mapping",
+            description_bn="ড্রোন মাল্টিস্পেকট্রাল ইমেজ বিশ্লেষণ করে জমির স্বাস্থ্য ও ফলন পূর্বাভাস।",
+            requires=frozenset({"vision"}),
+        )
+    )
+    capabilities.register(
+        StubCapability(
+            id="livestock",
+            name_bn="গবাদিপশু পালন ও চিকিৎসা",
+            name_en="Livestock Health Advisory",
+            description_bn="গবাদিপশু ও হাঁস-মুরগির রোগ লক্ষণ বিশ্লেষণ ও প্রাথমিক চিকিৎসা পরামর্শ।",
+            requires=frozenset(),
+        )
+    )
+    capabilities.register(
+        StubCapability(
+            id="credit",
+            name_bn="কৃষি ঋণ ও আর্থিক সেবা",
+            name_en="Agri-Credit & Insurance",
+            description_bn="শস্য বীমা ও ক্ষুদ্র কৃষি ঋণ প্রাপ্তির যোগ্যতা যাচাই ও সহায়তা।",
+            requires=frozenset(),
+        )
+    )
+    capability_router = CapabilityRouter(capabilities, enabled=settings.capability_routing_enabled)
+
     return AppContainer(
         qa=pipeline,
         vision=vision,
@@ -292,4 +370,6 @@ def build_container(settings: Settings) -> AppContainer:
         farm_profile=farm_profile,
         crop_calendars=crop_calendars,
         llm_name=generation_llm.name,
+        capabilities=capabilities,
+        capability_router=capability_router,
     )
