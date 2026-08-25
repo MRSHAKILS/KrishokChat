@@ -111,6 +111,61 @@
           "grounding": "curated-approximation"
         }
       ]
+    },
+    {
+      "key": "maize",
+      "name_bn": "ভুট্টা",
+      "aliases_bn": ["ভুট্টা", "ভুট্টায়"],
+      "aliases_en": ["maize", "corn"],
+      "season_note_bn": "রবি ও খরিফ উভয় মৌসুমেই চাষযোগ্য",
+      "sowing_term_bn": "বপন",
+      "stages": [
+        {
+          "key": "seedling",
+          "name_bn": "চারা গজানো ও বৃদ্ধি",
+          "start_das": 0,
+          "end_das": 20,
+          "advisory_bn": "মাটির আর্দ্রতা বজায় রাখুন; আগাম ফল আর্মিওয়ার্ম ডিম ও পাতার ক্ষতির লক্ষণ পরীক্ষা করুন।",
+          "source": "BARI. Maize Production Technology Manual. pp. 110-112.",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "whorl",
+          "name_bn": "পাতা গঠন ও বৃদ্ধি",
+          "start_das": 20,
+          "end_das": 45,
+          "advisory_bn": "ফল আর্মিওয়ার্ম (FAW) আক্রমণের প্রধান ঝুঁকি সময় — গাছের চোঙা নিয়মিত পর্যবেক্ষণ করুন।",
+          "source": "BARI. Maize Production Technology Manual. pp. 110-112.",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "tasseling_silking",
+          "name_bn": "ফুল ও মোচা আসা",
+          "start_das": 45,
+          "end_das": 70,
+          "advisory_bn": "পরাগায়ণ ও মোচা গঠনের জন্য আর্দ্রতা অপরিহার্য; খরা থাকলে সেচ দিন।",
+          "source": "BARI. Maize Production Technology Manual. pp. 110-112.",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "grain_filling",
+          "name_bn": "দানা গঠন ও পুষ্ট হওয়া",
+          "start_das": 70,
+          "end_das": 95,
+          "advisory_bn": "মোচার ভেতরের পোকা আক্রমণ থেকে রক্ষা করতে নিয়মিত পর্যবেক্ষণ অব্যাহত রাখুন।",
+          "source": "BARI. Maize Production Technology Manual. pp. 110-112.",
+          "grounding": "curated-approximation"
+        },
+        {
+          "key": "maturity",
+          "name_bn": "পরিপক্বতা ও মোচা সংগ্রহ",
+          "start_das": 95,
+          "end_das": 120,
+          "advisory_bn": "মোচার খোসা শুকিয়ে খয়েরি হলে মোচা সংগ্রহ করুন ও ভালোভাবে শুকিয়ে সংরক্ষণ করুন।",
+          "source": "BARI. Maize Production Technology Manual. pp. 110-112.",
+          "grounding": "curated-approximation"
+        }
+      ]
     }
   ]
 }

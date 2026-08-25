@@ -45,7 +45,7 @@ one number.
 | 8 | `R9_offline_fact_pack.md` | works with no signal; tier ≤ 2 cached, T3 never | R4 | spec ready |
 | 9 | `R10_ondevice_classifier_export.md` | mobile diagnosis latency claim (U1) + confidence-gated upload (U3) | R9 | spec ready |
 | 10 | `R11_task_first_home_provenance.md` | task-first home + system-wide provenance badges | R3, R9 | spec ready |
-| 11 | `R12_extend_fact_base_maize_rice.md` | proves "data op not rewrite" (maize FAW + rice pests) | R4 | spec ready |
+| 11 | `R12_extend_fact_base_maize_rice.md` | proves "data op not rewrite" (maize FAW + rice pests) | R4 | ✅ DONE — 2026-08-25 |
 
 **All 12 R-series specs are now written** and live in this folder. Each is
 independently executable by a fresh agent: it names exact file/line anchors, a

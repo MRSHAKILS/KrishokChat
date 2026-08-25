@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "notes": "Data-driven canonical crop and problem alias dictionary for deterministic resolution (R4 / R12).",
+  "crops": {
+    "potato": ["potato", "আলু", "aloo", "alu"],
+    "maize": ["maize", "corn", "ভুট্টা", "ভুট্টায়", "ভুট্টার", "bhutta", "makai"],
+    "rice": ["rice", "ধান", "ধানের", "ধানক্ষেত", "dhan", "paddy"]
+  },
+  "problems": {
+    "late_blight": [
+      "late blight", "late_blight",
+      "নাবি ধ্বসা", "নাবি ব্লাইট", "লেট ব্লাইট",
+      "মড়ক"
+    ],
+    "fall_armyworm": [
+      "fall armyworm", "fall_armyworm", "faw",
+      "ফল আর্মিওয়ার্ম", "আর্মিওয়ার্ম", "আর্মি ওয়ার্ম",
+      "লেদা পোকা", "চোঙা পোকা"
+    ],
+    "blast": [
+      "blast", "ব্লাস্ট", "ব্লাস্ট রোগ",
+      "পাতা ব্লাস্ট", "শীষ ব্লাস্ট", "গ্রীবা ব্লাস্ট"
+    ],
+    "brown_planthopper": [
+      "brown planthopper", "brown_planthopper", "bph",
+      "বাদামি গাছফড়িং", "গাছফড়িং", "কারেন্ট পোকা", "কারেন্ট পোকার"
+    ],
+    "stem_borer": [
+      "stem borer", "stem_borer",
+      "মাজরা পোকা", "মাজরা", "হলুদ মাজরা"
+    ]
+  }
+}

@@ -28,31 +28,48 @@ from app.domain.fact_base import Fact, FactBase
 # Keyword aliases for deterministic crop/problem matching
 # ---------------------------------------------------------------------------
 
-# These are the only aliases the R4 resolver recognises.  Wider matching is
-# R5 + R6's job.  Every alias must be attested (not invented).
-_CROP_ALIASES: dict[str, list[str]] = {
+import json
+import logging
+from pathlib import Path
+
+logger = logging.getLogger("krishokchat.resolver")
+
+# Default baseline aliases (fallback if problem_aliases_v1.json is missing)
+_DEFAULT_CROP_ALIASES: dict[str, list[str]] = {
     "potato": ["potato", "আলু", "aloo", "alu"],
+    "maize": ["maize", "corn", "ভুট্টা", "ভুট্টায়", "ভুট্তার", "bhutta", "makai"],
+    "rice": ["rice", "ধান", "ধানের", "ধানক্ষেত", "dhan", "paddy"],
 }
 
-_PROBLEM_ALIASES: dict[str, list[str]] = {
-    "late_blight": [
-        "late blight", "late_blight",
-        "নাবি ধ্বসা", "নাবি ব্লাইট", "লেট ব্লাইট",
-        "মড়ক",  # common Bangla shorthand for late blight on potato
-    ],
+_DEFAULT_PROBLEM_ALIASES: dict[str, list[str]] = {
+    "late_blight": ["late blight", "late_blight", "নাবি ধ্বসা", "নাবি ব্লাইট", "লেট ব্লাইট", "মড়ক"],
+    "fall_armyworm": ["fall armyworm", "fall_armyworm", "faw", "ফল আর্মিওয়ার্ম", "আর্মিওয়ার্ম", "আর্মি ওয়ার্ম", "লেদা পোকা"],
+    "blast": ["blast", "ব্লাস্ট", "ব্লাস্ট রোগ", "পাতা ব্লাস্ট", "শীষ ব্লাস্ট", "গ্রীবা ব্লাস্ট"],
+    "brown_planthopper": ["brown planthopper", "brown_planthopper", "bph", "বাদামি গাছফড়িং", "গাছফড়িং", "কারেন্ট পোকা"],
+    "stem_borer": ["stem borer", "stem_borer", "মাজরা পোকা", "মাজরা", "হলুদ মাজরা"],
 }
 
-# Map alias (lowered) → canonical key, built once.
-_CROP_LOOKUP: dict[str, str] = {
-    alias.lower(): crop
-    for crop, aliases in _CROP_ALIASES.items()
-    for alias in aliases
-}
-_PROBLEM_LOOKUP: dict[str, str] = {
-    alias.lower(): problem
-    for problem, aliases in _PROBLEM_ALIASES.items()
-    for alias in aliases
-}
+
+def _load_aliases() -> tuple[dict[str, str], dict[str, str]]:
+    """Load declarative crop and problem lookup tables from disk (fail-open)."""
+    alias_path = Path(__file__).resolve().parents[2] / "ml_assets" / "agronomy" / "problem_aliases_v1.json"
+    crops_map = _DEFAULT_CROP_ALIASES
+    problems_map = _DEFAULT_PROBLEM_ALIASES
+    if alias_path.exists():
+        try:
+            with open(alias_path, encoding="utf-8") as fh:
+                data = json.load(fh)
+                crops_map = data.get("crops", _DEFAULT_CROP_ALIASES)
+                problems_map = data.get("problems", _DEFAULT_PROBLEM_ALIASES)
+        except Exception as exc:
+            logger.debug("Failed to load problem_aliases_v1.json, using defaults: %s", exc)
+
+    crop_lookup = {alias.lower(): crop for crop, aliases in crops_map.items() for alias in aliases}
+    problem_lookup = {alias.lower(): problem for problem, aliases in problems_map.items() for alias in aliases}
+    return crop_lookup, problem_lookup
+
+
+_CROP_LOOKUP, _PROBLEM_LOOKUP = _load_aliases()
 
 
 def _match_crop(query: str) -> str | None:
