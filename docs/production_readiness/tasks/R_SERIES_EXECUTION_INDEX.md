@@ -1,6 +1,6 @@
 # R-Series Execution Index — Architecture Refinement Roadmap
 
-**Status:** R1, R2, R3, R4, R5 DONE (2026-08-25). Remaining tasks (R6–R12): unblocked & ready.
+**Status:** R1, R2, R3, R4, R5, R7 DONE (2026-08-25). Remaining tasks (R6, R8–R12): unblocked & ready.
 **Date:** 2026-08-25
 **Owner:** researcher (sole engineer); implementation by coder agents, one task at a time.
 
@@ -41,7 +41,7 @@ one number.
 | ∥ | `R8_real_weather_snapshot.md` | real RIMES weather → drops PR1 `is_sample` | — (parallel) | spec ready |
 | 5 | `R5_merge_safety_intent.md` | one structured call instead of two; produces the routing `Intent` | R3 | ✅ DONE — 2026-08-25 |
 | 6 | `R6_capability_registry.md` | seam for irrigation/drone/market modules + honest capability map | R5 | spec ready |
-| 7 | `R7_cost_tier_mix_experiment.md` | price table + measured cost/1000 queries + p95 latency + zero-LLM rate | R4 | spec ready |
+| 7 | `R7_cost_tier_mix_experiment.md` | price table + measured cost/1000 queries + p95 latency + zero-LLM rate | R4 | ✅ DONE — 2026-08-25 |
 | 8 | `R9_offline_fact_pack.md` | works with no signal; tier ≤ 2 cached, T3 never | R4 | spec ready |
 | 9 | `R10_ondevice_classifier_export.md` | mobile diagnosis latency claim (U1) + confidence-gated upload (U3) | R9 | spec ready |
 | 10 | `R11_task_first_home_provenance.md` | task-first home + system-wide provenance badges | R3, R9 | spec ready |

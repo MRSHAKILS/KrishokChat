@@ -157,6 +157,13 @@ class Settings(BaseSettings):
     structured_resolver_enabled: bool = False
     structured_resolver_min_confidence: float = Field(default=0.85, ge=0.0, le=1.0)
 
+    # R7: model pricing table path and budget guard settings.
+    # Default off (budget guard disabled; demo mode unaffected).
+    model_prices_path: str = ""
+    budget_guard_enabled: bool = False
+    per_request_cost_ceiling_usd: float = Field(default=0.05, ge=0.0)
+    daily_cost_ceiling_usd: float = Field(default=10.0, ge=0.0)
+
     # PR1: operator-maintained late-blight weather snapshot (offline JSON;
     # never fetched at request time). Empty path = default artifact; missing
     # file disables the risk endpoint's data (clear payload, never a 500).
@@ -303,6 +310,14 @@ class Settings(BaseSettings):
             path = Path(self.crop_calendars_path)
             return path if path.is_absolute() else PROJECT_ROOT.parent / path
         return Path(self.ml_assets_dir) / "agronomy" / "crop_calendars_v1.json"
+
+    @property
+    def model_prices_resolved_path(self) -> Path:
+        # R7: verified model pricing table.
+        if self.model_prices_path:
+            path = Path(self.model_prices_path)
+            return path if path.is_absolute() else PROJECT_ROOT.parent / path
+        return PROJECT_ROOT / "config" / "model_prices.json"
 
     @property
     def resolved_llm_model(self) -> str:

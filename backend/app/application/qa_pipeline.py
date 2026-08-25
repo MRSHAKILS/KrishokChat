@@ -586,7 +586,7 @@ class QAPipeline:
                 "stage_timings_ms": timings if timings is not None else None,
                 "tokens": tokens,
                 "provider": provider,
-                "cost_estimate": estimate_cost(tokens, provider),
+                "cost_estimate": estimate_cost(tokens, provider, model=result.model or request.model),
                 "request_id": current_request_id(),
                 # R3: resolution tier + LLM call count — the two keys that
                 # power R7's tier-mix / zero-LLM-rate experiment.
