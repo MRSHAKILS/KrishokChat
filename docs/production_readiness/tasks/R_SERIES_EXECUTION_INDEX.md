@@ -1,6 +1,6 @@
 # R-Series Execution Index — Architecture Refinement Roadmap
 
-**Status:** R3 DONE (2026-08-25). All other tasks: spec ready, not started.
+**Status:** R1, R2, R3, R4, R5 DONE (2026-08-25). Remaining tasks (R6–R12): unblocked & ready.
 **Date:** 2026-08-25
 **Owner:** researcher (sole engineer); implementation by coder agents, one task at a time.
 
