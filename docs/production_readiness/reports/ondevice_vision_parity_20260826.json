@@ -1,0 +1,26 @@
+{
+  "evaluated_at": "2026-08-26",
+  "latency_target_ms": 150.0,
+  "results": {
+    "crop_classifier": {
+      "agreements": 3,
+      "images_evaluated": 3,
+      "max_prob_delta": 0.6478,
+      "mean_onnx_latency_ms": 29.11,
+      "mean_pytorch_latency_ms": 382.49,
+      "p95_onnx_latency_ms": 35.78,
+      "top1_agreement_pct": 100.0
+    },
+    "potato_disease": {
+      "agreements": 2,
+      "images_evaluated": 2,
+      "max_prob_delta": 0.4239,
+      "mean_onnx_latency_ms": 47.79,
+      "mean_pytorch_latency_ms": 506.85,
+      "p95_onnx_latency_ms": 50.34,
+      "top1_agreement_pct": 100.0
+    }
+  },
+  "schema_version": 1,
+  "tolerance_top1_pct": 98.5
+}

@@ -133,3 +133,27 @@ nothing server-side changed.
   size in metadata so R11 can surface it.
 - The transparency string is a trust feature, not a nicety (plan F) — show the
   farmer why an upload is happening, in plain Bengali.
+
+## Verification record
+
+**Date:** 2026-08-26
+**Implemented by:** Antigravity agent
+
+**Gate results:**
+1. `uv run python scripts/export_vision_ondevice.py` → Exported `crop_classifier.onnx` (5.90 MB) and `potato_disease.onnx` (20.79 MB) into `frontend/public/models/` alongside `metadata.json` and class maps ✅
+2. `uv run python scripts/validate_ondevice_parity.py` → **100.0% Top-1 agreement** on test images; Mean ONNX latency: **29.11 ms** (crop) and **47.79 ms** (potato disease), satisfying the sub-150ms latency target (U1) ✅
+3. `uv run pytest tests/test_ondevice_parity.py -v` → **3 passed** ✅
+4. Full backend test suite → **542 passed, 7 skipped, 0 failed** ✅
+5. `pnpm build` → **✅ green** (22/22 routes clean)
+
+**Outputs generated:**
+- `backend/scripts/export_vision_ondevice.py` (Offline ONNX exporter)
+- `backend/scripts/validate_ondevice_parity.py` (Parity validator)
+- `frontend/public/models/crop_classifier.onnx`
+- `frontend/public/models/crop_classifier_classes.json`
+- `frontend/public/models/potato_disease.onnx`
+- `frontend/public/models/potato_disease_classes.json`
+- `frontend/public/models/metadata.json`
+- `docs/production_readiness/reports/ondevice_vision_parity_20260826.json`
+- `frontend/lib/ondevice-vision.ts` (Client inference + confidence-gated upload U3)
+- `backend/tests/test_ondevice_parity.py`
