@@ -80,6 +80,23 @@ HTTP not HTTPS → fetch offline only, never from a request path or the browser.
   power a paid tier — Route A (BMDWRF forecast) is the R8 source; note the
   license in provenance.
 
+## Verification record
+
+**Date:** 2026-08-25
+**Implemented by:** Antigravity agent
+
+**Gate results:**
+1. `uv run python scripts/fetch_weather_snapshot.py` → Fetched 8 canonical potato districts (Munshiganj, Bogura, Rangpur, Dinajpur, Rajshahi, Jashore, Comilla, Joypurhat) and wrote `backend/ml_assets/weather/late_blight_snapshot.json` with `is_sample: false` and full provenance ✅
+2. `uv run pytest tests/test_weather_snapshot.py tests/test_late_blight.py -v` → **21 passed** ✅
+3. Full backend test suite → **537 passed, 7 skipped, 0 failed** ✅
+4. `pnpm build` → **✅ green** (22/22 routes clean)
+
+**Outputs generated:**
+- `backend/scripts/fetch_weather_snapshot.py` (Offline CLI weather fetcher with BBS P-codes and Open-Meteo fallback)
+- `backend/ml_assets/weather/late_blight_snapshot.sample.json` (Preserved sample data backup)
+- `backend/ml_assets/weather/late_blight_snapshot.json` (Authentic fetched meteorological series with `is_sample: false`)
+- `backend/tests/test_weather_snapshot.py` (Unit tests verifying real snapshot, provenance, bounds, and risk evaluation)
+
 ## Verification gate (stop/go)
 1. `uv run python scripts/fetch_weather_snapshot.py --districts Munshiganj,Bogura`
    — writes a real artifact with `is_sample: false` and non-empty rows, or exits

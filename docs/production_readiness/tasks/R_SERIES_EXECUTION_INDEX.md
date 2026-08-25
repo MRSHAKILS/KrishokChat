@@ -38,7 +38,7 @@ one number.
 | 2 | `R1_knowledge_ingestion_contract.md` | "adding data = data op, not code" — tested + enforced | — | ✅ DONE — 2026-08-25 |
 | 3 | `R2_fact_base_v1.md` | potato late-blight fact rows with provenance + build-time dose validation | R1, R3 | ✅ DONE — 2026-08-25 |
 | 4 | `R4_structured_resolver.md` | T1/T2 answers, 0 LLM, behind a default-off flag | R2, R3 | ✅ DONE — 2026-08-25 |
-| ∥ | `R8_real_weather_snapshot.md` | real RIMES weather → drops PR1 `is_sample` | — (parallel) | spec ready |
+| ∥ | `R8_real_weather_snapshot.md` | real RIMES weather → drops PR1 `is_sample` | — (parallel) | ✅ DONE — 2026-08-25 |
 | 5 | `R5_merge_safety_intent.md` | one structured call instead of two; produces the routing `Intent` | R3 | ✅ DONE — 2026-08-25 |
 | 6 | `R6_capability_registry.md` | seam for irrigation/drone/market modules + honest capability map | R5 | ✅ DONE — 2026-08-25 |
 | 7 | `R7_cost_tier_mix_experiment.md` | price table + measured cost/1000 queries + p95 latency + zero-LLM rate | R4 | ✅ DONE — 2026-08-25 |

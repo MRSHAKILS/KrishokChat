@@ -311,10 +311,10 @@ def test_builder_is_deterministic(tmp_path: Path) -> None:
         assert r.returncode == 0, f"builder failed: {r.stderr}"
 
     # Compare payload bodies excluding provenance fields that legitimately
-    # vary between runs (built_at, sha256, endpoint_or_file with absolute path).
+    # vary between runs (built_at, fetched_at, sha256, endpoint_or_file with absolute path).
     for path in (out_a, out_b):
         data = json.loads(path.read_text(encoding="utf-8"))
-        for key in ("built_at", "sha256", "endpoint_or_file"):
+        for key in ("built_at", "fetched_at", "sha256", "endpoint_or_file"):
             data.get("provenance", {}).pop(key, None)
         path.write_text(json.dumps(data, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
 

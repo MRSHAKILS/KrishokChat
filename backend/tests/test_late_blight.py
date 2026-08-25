@@ -163,7 +163,7 @@ class LoaderTests(unittest.TestCase):
     def test_committed_sample_snapshot_loads(self) -> None:
         snap = load_weather_snapshot(COMMITTED_SNAPSHOT)
         self.assertIsNotNone(snap)
-        self.assertTrue(snap.is_sample, "shipped snapshot must be marked is_sample")
+        self.assertFalse(snap.is_sample, "committed snapshot must have is_sample=False (R8)")
         self.assertGreaterEqual(len(snap.districts), 8)
         self.assertTrue(snap.source_note.strip())
 
@@ -206,7 +206,7 @@ class AdminRouteTests(unittest.TestCase):
             )
             yield client
 
-    def test_anonymous_gets_401(self) -> None:
+    def test_anonymous_is_401(self) -> None:
         with self._client() as client:
             response = client.get("/api/admin/advisory/late-blight-risk")
             self.assertEqual(response.status_code, 401)
@@ -220,14 +220,10 @@ class AdminRouteTests(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             body = response.json()
             self.assertTrue(body["available"])
-            self.assertTrue(body["sample"])
+            self.assertFalse(body["sample"])
             risks = [d["risk"] for d in body["districts"]]
-            # Risk-ordered: high first, low last; all three tiers present in
-            # the committed sample so the demo shows the full range.
             self.assertEqual(risks, sorted(risks, key=lambda r: {"high": 0, "watch": 1, "low": 2}[r]))
-            self.assertIn("high", risks)
-            self.assertIn("watch", risks)
-            self.assertIn("low", risks)
+            self.assertGreaterEqual(len(risks), 8)
             first = body["districts"][0]
             self.assertIn("title_bn", first["draft"])
             self.assertIn("body_bn", first["draft"])

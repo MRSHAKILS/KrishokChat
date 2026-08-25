@@ -38,10 +38,12 @@ class WeatherSnapshot:
         *,
         is_sample: bool,
         source_note: str,
+        provenance: dict[str, Any] | None = None,
     ) -> None:
         self.districts = districts
         self.is_sample = is_sample
         self.source_note = source_note
+        self.provenance = provenance
 
     @property
     def latest_date(self) -> str:
@@ -87,4 +89,5 @@ def load_weather_snapshot(path: str | Path) -> WeatherSnapshot | None:
         districts,
         is_sample=bool(payload.get("is_sample", False)),
         source_note=str(payload.get("source_note", ""))[:200],
+        provenance=payload.get("provenance"),
     )
