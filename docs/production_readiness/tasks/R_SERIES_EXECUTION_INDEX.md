@@ -1,6 +1,6 @@
 # R-Series Execution Index — Architecture Refinement Roadmap
 
-**Status:** planning index. No code changed by this file.
+**Status:** R3 DONE (2026-08-25). All other tasks: spec ready, not started.
 **Date:** 2026-08-25
 **Owner:** researcher (sole engineer); implementation by coder agents, one task at a time.
 
@@ -34,7 +34,7 @@ one number.
 
 | # | Task spec | Delivers | Depends on | Status |
 |---|---|---|---|---|
-| 1 | `R3_resolution_tier_plumbing.md` | records how each answer was produced; **zero behavior change** | — | spec ready |
+| 1 | `R3_resolution_tier_plumbing.md` | records how each answer was produced; **zero behavior change** | — | ✅ DONE — 2026-08-25 |
 | 2 | `R1_knowledge_ingestion_contract.md` | "adding data = data op, not code" — tested + enforced | — | spec ready |
 | 3 | `R2_fact_base_v1.md` | potato late-blight fact rows with provenance + build-time dose validation | R1, R3 | spec ready |
 | 4 | `R4_structured_resolver.md` | T1/T2 answers, 0 LLM, behind a default-off flag | R2, R3 | spec ready |

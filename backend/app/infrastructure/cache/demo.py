@@ -37,7 +37,7 @@ from app.domain.contracts import (
     RetrievedSource,
     VerifierClaim,
 )
-from app.domain.enums import PipelineStage, SafetyCategory, StageStatus, VerificationConfidence
+from app.domain.enums import PipelineStage, ResolutionTier, SafetyCategory, StageStatus, VerificationConfidence
 
 
 # --------------------------------------------------------------------------
@@ -55,6 +55,8 @@ def qa_result_to_dict(result: QAResult) -> dict[str, Any]:
         "error": result.error,
         "matched_rules": list(result.matched_rules),
         "safety_reason": result.safety_reason,
+        # R3: tier stored so replays report the original tier, not the default.
+        "resolution_tier": result.resolution_tier.value,
         "sources": [
             {
                 "id": source.id,
@@ -88,6 +90,14 @@ def qa_result_to_dict(result: QAResult) -> dict[str, Any]:
 
 
 def qa_result_from_dict(payload: dict[str, Any]) -> QAResult:
+    # R3: legacy cache entries have no resolution_tier; they were all verified
+    # safe_agri T3 answers (the only kind ever stored), so grounded_generation
+    # is the factually correct default, not a guess.
+    raw_tier = payload.get("resolution_tier", "grounded_generation")
+    try:
+        tier = ResolutionTier(raw_tier)
+    except ValueError:
+        tier = ResolutionTier.GROUNDED_GENERATION
     return QAResult(
         query=payload["query"],
         category=SafetyCategory(payload["category"]),
@@ -97,6 +107,7 @@ def qa_result_from_dict(payload: dict[str, Any]) -> QAResult:
         error=payload.get("error"),
         matched_rules=tuple(payload.get("matched_rules") or ()),
         safety_reason=payload.get("safety_reason"),
+        resolution_tier=tier,
         sources=tuple(
             RetrievedSource(
                 id=source["id"],

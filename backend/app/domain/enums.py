@@ -29,3 +29,20 @@ class StageStatus(StrEnum):
     COMPLETE = "complete"
     SKIP = "skip"
     ERROR = "error"
+
+
+class ResolutionTier(StrEnum):
+    """How the answer was produced — the five-tier resolution ladder.
+
+    T0  deterministic_guard   — precheck rule matched; 0 LLM calls
+    T1  structured_fact       — provenance-carrying fact row; 0 LLM calls  (R4)
+    T2  templated_advisory    — template filled from fact rows; 0 LLM calls (R4)
+    T3  grounded_generation   — retrieval → LLM → verifier; 1-2 LLM calls
+    T4  honest_refusal        — classifier/coverage-gate refusal; 0-1 LLM calls
+    """
+
+    DETERMINISTIC_GUARD = "deterministic_guard"
+    STRUCTURED_FACT = "structured_fact"
+    TEMPLATED_ADVISORY = "templated_advisory"
+    GROUNDED_GENERATION = "grounded_generation"
+    HONEST_REFUSAL = "honest_refusal"

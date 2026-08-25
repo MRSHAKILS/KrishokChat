@@ -115,6 +115,7 @@ def _response(result: QAResult) -> QAResponse:
         model=result.model or None,
         matched_rules=list(result.matched_rules),
         safety_reason=result.safety_reason,
+        resolution_tier=result.resolution_tier.value,
     )
 
 
@@ -208,6 +209,7 @@ async def safety_metrics(container: ContainerDep):
                 except json.JSONDecodeError:
                     continue
     by_category: dict[str, int] = {}
+    by_tier: dict[str, int] = {}  # R3: tier mix
     flagged = 0
     verifier_checked = verifier_grounded = verifier_unsupported = 0
     answered_without_sources = 0
@@ -230,6 +232,9 @@ async def safety_metrics(container: ContainerDep):
         category = entry.get("category", "unknown")
         by_category[category] = by_category.get(category, 0) + 1
         flagged += int(bool(entry.get("flagged")))
+        # R3: accumulate tier mix (rows predating R3 land in "unknown").
+        tier = entry.get("resolution_tier") or "unknown"
+        by_tier[tier] = by_tier.get(tier, 0) + 1
     for entry in stage_entries:
         # P1: verifier aggregates come from the actual logged verdicts.
         verifier_checked += int(entry.get("verifier_checked", 0))
@@ -251,10 +256,22 @@ async def safety_metrics(container: ContainerDep):
             if isinstance(entry.get("retrieved_count"), int):
                 source_counts.append(int(entry["retrieved_count"]))
     total = len(v2_entries) or 1
+    # R3: zero_llm_rate = share of v2 entries whose tier cost 0 LLM calls.
+    # Rows predating R3 have no resolution_tier and land in "unknown" —
+    # they are excluded from the zero-LLM count (cannot infer retroactively).
+    _ZERO_LLM_TIER_VALUES = {"deterministic_guard", "structured_fact", "templated_advisory"}
+    zero_llm_entries = sum(
+        1 for e in v2_entries
+        if e.get("resolution_tier") in _ZERO_LLM_TIER_VALUES
+    )
+    zero_llm_rate = zero_llm_entries / len(v2_entries) if v2_entries else None
     return {
         "total_queries": len(entries),
         "pipeline_queries": len(v2_entries),
         "by_category": by_category,
+        # R3: resolution-tier mix and zero-LLM rate.
+        "by_tier": by_tier,
+        "zero_llm_rate": zero_llm_rate,
         "flagged_count": flagged,
         "cached": {
             "replays": len(cached_entries),

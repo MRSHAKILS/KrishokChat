@@ -58,6 +58,8 @@ export interface QAResponse {
   model?: string | null;
   matched_rules?: string[];
   safety_reason?: string | null;
+  /** R3: how the answer was produced — resolution tier value from the backend. */
+  resolution_tier?: string | null;
 }
 
 export interface ClassifyResponse {

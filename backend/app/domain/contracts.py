@@ -7,6 +7,7 @@ from typing import Any
 
 from app.domain.enums import (
     PipelineStage,
+    ResolutionTier,
     SafetyCategory,
     StageStatus,
     VerificationConfidence,
@@ -116,3 +117,7 @@ class QAResult:
     # coverage_training) and the safety decision reason, surfaced to the UI.
     matched_rules: tuple[str, ...] = ()
     safety_reason: str | None = None
+    # R3: how the answer was produced (resolution tier, five-tier ladder).
+    # Default is grounded_generation — the only tier that can have been cached
+    # before R3 landed (only verified safe_agri T3 answers were ever cached).
+    resolution_tier: ResolutionTier = ResolutionTier.GROUNDED_GENERATION

@@ -64,6 +64,19 @@ class QAResponse(BaseModel):
     # P5: refusal transparency (present when a deterministic rule refused).
     matched_rules: list[str] = Field(default_factory=list)
     safety_reason: str | None = None
+    # R3: how the answer was produced (five-tier resolution ladder).
+    # Values: deterministic_guard | structured_fact | templated_advisory
+    #         | grounded_generation | honest_refusal
+    resolution_tier: str = Field(
+        default="grounded_generation",
+        description=(
+            "How the answer was produced. "
+            "deterministic_guard: precheck rule matched, 0 LLM calls. "
+            "structured_fact / templated_advisory: answered from fact rows, 0 LLM calls (R4). "
+            "grounded_generation: retrieval → LLM → verifier, 1-2 LLM calls. "
+            "honest_refusal: classifier or coverage-gate refused."
+        ),
+    )
 
 
 class ClassifyRequest(BaseModel):

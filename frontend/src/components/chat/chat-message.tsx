@@ -8,6 +8,7 @@ import { dur, ease } from "@/lib/motion";
 import { QA_STAGES, PipelineRail, type RailEvent } from "@/components/detect/pipeline-rail";
 import { AgentTrace } from "@/components/agent-trace";
 import { ConfidenceBadge } from "./confidence-badge";
+import { ResolutionBadge } from "./resolution-badge";
 import { SourceList } from "./source-list";
 import { SafetyNotice } from "./safety-notice";
 import { ReadAloudButton, splitBengaliSentences } from "./read-aloud";
@@ -277,6 +278,8 @@ function CompletedContent({ response }: { response: QAResponse }) {
           detail link. The verification badge is informational, not a button. */}
       <div className="flex flex-wrap items-center gap-2 border-t rule pt-3">
         <ConfidenceBadge confidence={response.confidence} />
+        {/* R3: how the answer was produced — tier badge (absent on stale backend) */}
+        <ResolutionBadge tier={response.resolution_tier} />
 
         <ReadAloudButton text={response.answer} onSentenceChange={setActiveSentenceIndex} />
 

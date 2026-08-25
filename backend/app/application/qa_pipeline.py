@@ -29,7 +29,8 @@ from app.domain.contracts import (
     SafetyDecision,
     VerificationResult,
 )
-from app.domain.enums import PipelineStage, SafetyCategory, StageStatus, VerificationConfidence
+from app.domain.enums import PipelineStage, ResolutionTier, SafetyCategory, StageStatus, VerificationConfidence
+from app.domain.resolution import tier_for
 from app.domain.safety_policy import canned_response
 from app.infrastructure.cache.demo import DemoAnswerCache, qa_result_from_dict, qa_result_to_dict
 from app.ports.audit import AuditSink
@@ -180,6 +181,12 @@ class QAPipeline:
         # metrics panel and paper can see exactly what was searched.
         retrieval_query = request.query
         rewritten = False
+        # R3: LLM call counter for this request.  Count what actually ran:
+        # +1 if the safety classifier reached its LLM branch (no matched_rules)
+        # +1 if the query was rewritten (ConversationalQueryRewriter called LLM)
+        # +1 when the generation stage executed.
+        # A deterministic precheck refusal records 0; rewritten normal = 3.
+        llm_calls: int = 0
         cache_key = (
             self.answer_cache.key_for(
                 request.query,
@@ -248,6 +255,9 @@ class QAPipeline:
                         return result
                 for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
                     await emit(stage, StageStatus.SKIP, "terminal safety decision")
+                # R3: LLM was called if the classifier had no precheck match.
+                if not decision.matched_rules:
+                    llm_calls += 1
                 result = QAResult(
                     query=request.query,
                     category=decision.category,
@@ -256,6 +266,10 @@ class QAPipeline:
                     trace=tuple(trace),
                     matched_rules=decision.matched_rules,
                     safety_reason=decision.reason or None,
+                    resolution_tier=tier_for(
+                        category=decision.category,
+                        matched_rules=decision.matched_rules,
+                    ),
                 )
                 return result
 
@@ -278,6 +292,8 @@ class QAPipeline:
                     retrieval_query, rewritten = await self.rewriter.maybe_rewrite(
                         request.query, context.history
                     )
+                    if rewritten:
+                        llm_calls += 1  # R3: rewriter consumed one LLM call
                 retrieval_query = build_retrieval_query(retrieval_query, context, decision.category.value)
                 retrieved = await asyncio.to_thread(self.retriever.retrieve, retrieval_query, top_k=self.top_k)
                 seen_ids: set[str] = set()
@@ -346,6 +362,10 @@ class QAPipeline:
                     final_answer = verification.sanitized_answer or REFERRAL
                 await emit(PipelineStage.VERIFIER, StageStatus.COMPLETE, verification.confidence.value)
 
+            # R3: LLM was called if the safety classifier had no precheck match.
+            if not decision.matched_rules:
+                llm_calls += 1  # safety LLM branch
+            llm_calls += 1  # generation stage
             result = QAResult(
                 query=request.query,
                 category=decision.category,
@@ -357,6 +377,11 @@ class QAPipeline:
                 verifier_claims=verification.claims,
                 model=generated.model,
                 error=generated.error,
+                resolution_tier=tier_for(
+                    category=decision.category,
+                    matched_rules=decision.matched_rules,
+                    generated=True,
+                ),
             )
             # B1: store verified safe answers for exact replay. Terminal
             # refusals are never cached (they must re-run safety every time),
@@ -382,6 +407,11 @@ class QAPipeline:
                 trace=tuple(trace),
                 verifier_flags=(str(exc),),
                 error=str(exc),
+                resolution_tier=tier_for(
+                    category=category,
+                    matched_rules=decision.matched_rules if decision else (),
+                    generated=False,
+                ),
             )
             return result
         finally:
@@ -397,6 +427,7 @@ class QAPipeline:
                     rewritten=rewritten,
                     timings=timings,
                     generation_lane=generation_lane,
+                    llm_calls=llm_calls,
                 )
                 if request.session_id and result.category is SafetyCategory.SAFE_AGRI:
                     self.sessions.append(request.session_id, "user", request.query)
@@ -414,6 +445,7 @@ class QAPipeline:
         rewritten: bool = False,
         timings: dict[str, float] | None = None,
         generation_lane: object | None = None,
+        llm_calls: int = 0,
     ) -> None:
         # P1 refusal counters (TRUST-SCORE style, honest subset):
         # - answered_without_sources: a safe-agri query that produced a real
@@ -510,6 +542,10 @@ class QAPipeline:
                 "provider": provider,
                 "cost_estimate": estimate_cost(tokens, provider),
                 "request_id": current_request_id(),
+                # R3: resolution tier + LLM call count — the two keys that
+                # power R7's tier-mix / zero-LLM-rate experiment.
+                "resolution_tier": result.resolution_tier.value,
+                "llm_calls": llm_calls,
             }
         )
 
