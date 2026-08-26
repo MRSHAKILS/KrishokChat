@@ -81,12 +81,16 @@ planned_layers:
   E14_network_degradation:
     question: Advisory delivery success rate of offline-first cache vs cloud-only RAG under simulated 2G/Edge (latency 800ms+, 15% packet loss)?
     spec: specs/E14_network_degradation.spec.yaml
-    status: planned
+    script: experiments/scripts/E14_network_degradation/run_e14.py
+    results: experiments/results/E14_network_degradation/e14_results.yaml
+    status: done
     feasibility: high   # no hardware needed; toxiproxy/clumsy or tc on loopback
   E15_sms_compressor:
     question: Does a deterministic 11-slot→160-char SMS template preserve 100% of dosage/PHI bounds where LLM-compressed SMS truncates them?
     spec: specs/E15_sms_compressor.spec.yaml
-    status: planned
+    script: experiments/scripts/E15_sms_compressor/run_e15.py
+    results: experiments/results/E15_sms_compressor/e15_results.yaml
+    status: done
     feasibility: high   # pure software; uses certified tuples from E02 suite
   E16_hardware_profiling:
     question: Battery drain and thermal profile of on-device INT8 ONNX + cached Tier 1/2 vs cloud-only on a sub-$120 Android device?
@@ -96,59 +100,85 @@ planned_layers:
   E17_detection_gated_routing:
     question: Does detection metadata (crop+disease) collapse the retrieval search space and grant dialect immunity (vs text-first R@k)?
     spec: specs/E17_detection_gated_routing.spec.yaml
-    status: planned
+    script: experiments/scripts/E17_detection_gated_routing/run_e17.py
+    results: experiments/results/E17_detection_gated_routing/e17_results.yaml
+    status: done
     feasibility: high   # all assets on disk: ONNX models, knowledge_nodes, farmer_benchmark
   E18_llm_dependency_reduction:
     question: What fraction of queries resolve with ZERO LLM calls when detection+fact-base routing is enabled (vs current tier mix)?
     spec: specs/E18_llm_dependency_reduction.spec.yaml
-    status: planned
+    script: experiments/scripts/E18_llm_dependency_reduction/run_e18.py
+    results: experiments/results/E18_llm_dependency_reduction/e18_results.yaml
+    status: done
     feasibility: high   # extends R7 tier_mix harness with image-path queries
   E19_knowledge_graph_traversal:
     question: Can a 3-hop traversal over the fact base yield complete 11-slot tuples with provenance and no LLM?
     spec: specs/E19_knowledge_graph_traversal.spec.yaml
-    status: planned
+    script: experiments/scripts/E19_knowledge_graph_traversal/run_e19.py
+    results: experiments/results/E19_knowledge_graph_traversal/e19_results.yaml
+    status: done
     feasibility: high   # deterministic; builds on R2/R12 fact base + ingestion contract
   E20_telecom_economics:
     question: Updated C_safe with real BD bulk-SMS (~0.20 BDT/SMS) and local VPS hosting vs commercial LLM APIs?
     spec: specs/E20_telecom_economics.spec.yaml
-    status: planned
+    script: experiments/scripts/E20_telecom_economics/run_e20.py
+    results: experiments/results/E20_telecom_economics/e20_results.yaml
+    status: done
     feasibility: medium # needs verified 2026 price sheets from operators (desk research, no fabrication)
   E21_dialect_hazard_routing:
     question: Does routing path (text-first vs detection-gated) change safety hazard rate per linguistic register?
     spec: specs/E21_dialect_hazard_routing.spec.yaml
-    status: planned
+    script: experiments/scripts/E21_dialect_hazard_routing/run_e21.py
+    results: experiments/results/E21_dialect_hazard_routing/e21_results.yaml
+    status: done
     feasibility: high   # unique idea §5.2; reuses E06 sets + E17/E19 paths
     depends_on: [E17, E19]
   E22_sms_injection_immunity:
     question: Can prompt-injection payloads survive into outbound SMS (deterministic template vs LLM-composed)?
     spec: specs/E22_sms_injection_immunity.spec.yaml
-    status: planned
+    script: experiments/scripts/E22_sms_injection_immunity/run_e22.py
+    results: experiments/results/E22_sms_injection_immunity/e22_results.yaml
+    status: done
     feasibility: high   # unique idea §5.4; reuses E15 compressor + E07 suite
     depends_on: [E15]
   E23_cache_invalidation_provenance:
     question: Tamper-evident hash-chained invalidation of the offline fact pack, with provenance per cached advisory?
     spec: specs/E23_cache_invalidation_provenance.spec.yaml
-    status: planned
+    script: experiments/scripts/E23_cache_invalidation_provenance/run_e23.py
+    results: experiments/results/E23_cache_invalidation_provenance/e23_results.yaml
+    status: done
     feasibility: high   # unique idea §5.1; builds on R9 pack
   E24_coverage_gap_growth_loop:
     question: How much coverage does one targeted fact-base extension close, at what authoring cost?
     spec: specs/E24_coverage_gap_growth_loop.spec.yaml
-    status: planned
+    script: experiments/scripts/E24_coverage_gap_growth_loop/run_e24.py
+    results: experiments/results/E24_coverage_gap_growth_loop/e24_results.yaml
+    status: done
     feasibility: medium # unique idea §5.3; needs one real authoring session (one crop×pest cluster)
     depends_on: [E19]
   E25_intent_classifier_training:
     question: Can a tiny trained classifier match LLM intent parsing at negligible latency/cost (optional Tier-2 assist)?
     spec: specs/E25_intent_classifier_training.spec.yaml
-    status: planned
-    feasibility: high   # the "training one"; frozen T09 train split archived; offline research artifact only,
-                        # NOT app runtime — any runtime integration needs a stack amendment per AGENTS.md §2.6
+    script: experiments/scripts/E25_intent_classifier_training/run_e25.py
+    results: experiments/results/E25_intent_classifier_training/e25_results.yaml
+    status: done
+    feasibility: high   # the "training one"; frozen T09 train split archived; offline research artifact only
   E26_chunk_fallback_coverage_safety:
     question: How many refused zero-source queries become verifiably grounded answers via MD-chunk fallback, at what safety cost?
     spec: specs/E26_chunk_fallback_coverage_safety.spec.yaml
-    status: planned
-    feasibility: high   # substrate READY: R13 implemented 2026-08-27 (Amendment 03 §7) —
-                        # 4,815-chunk index built, node->md map 1,713/2,120, flag default-off;
-                        # this experiment gates flipping CHUNK_FALLBACK_ENABLED default to ON
+    script: experiments/scripts/E26_chunk_fallback_coverage_safety/run_e26.py
+    results: results/E26_chunk_fallback_coverage_safety/e26_results.yaml
+    status: done_unverified   # frozen 2026-08-27; awaiting author sign-off (accepted_by)
+    feasibility: high   # R13 substrate (Amendment 03 §7): 4,815-chunk index, node->md map 1,713/2,120
+    key_findings:
+      - production zero-source condition is rare: 3/1000 farmer-benchmark queries; only 3/1745
+        body sentences from uncovered MDs pass the hybrid gate (node index lexically near-complete)
+      - all measured refusals (n=3, small) became verifier-passing T3 answers through the real
+        pipeline wiring on the offline lane; LLM-side hazard needs a live-lane follow-up
+      - golden replay 50/50 invariants PASS with CHUNK_FALLBACK_ENABLED=true; node path delta 0
+      - promotion queue top item = BARI krishiprojukti_hatboi section 0564 with 94 benchmark-wide
+        demand hits (feeds E24 growth loop)
+    note: gates flipping CHUNK_FALLBACK_ENABLED default to ON once the author accepts this result
 
 cross_cutting:
   aggregation_plan: IMPLEMENTATION_AND_AGGREGATION_PLAN.md

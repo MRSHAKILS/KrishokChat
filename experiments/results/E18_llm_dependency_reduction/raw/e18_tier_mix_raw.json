@@ -1,0 +1,40 @@
+{
+  "arm_a_text_only": {
+    "total_queries": 5000,
+    "zero_llm_count": 524,
+    "zero_llm_percentage": 10.48,
+    "zero_llm_ci95": [
+      9.66,
+      11.36
+    ],
+    "tier_distribution_pct": {
+      "T0_safety": 6.4,
+      "T1_detection_kb": 0.0,
+      "T2_glossary_kb": 0.0,
+      "T3_llm": 89.52,
+      "T4_refusal": 4.08
+    },
+    "weighted_mean_latency_ms": 1247.93,
+    "weighted_cost_per_1k_usd": 0.1785,
+    "cost_reduction_vs_all_llm_pct": 10.48
+  },
+  "arm_b_detection_gated": {
+    "total_queries": 5000,
+    "zero_llm_count": 3076,
+    "zero_llm_percentage": 61.52,
+    "zero_llm_ci95": [
+      60.16,
+      62.86
+    ],
+    "tier_distribution_pct": {
+      "T0_safety": 6.4,
+      "T1_detection_kb": 32.22,
+      "T2_glossary_kb": 18.82,
+      "T3_llm": 38.48,
+      "T4_refusal": 4.08
+    },
+    "weighted_mean_latency_ms": 546.15,
+    "weighted_cost_per_1k_usd": 0.0767,
+    "cost_reduction_vs_all_llm_pct": 61.52
+  }
+}

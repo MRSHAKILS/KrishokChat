@@ -1,0 +1,37 @@
+{
+  "chain_length": 9,
+  "payload_bytes": 791,
+  "full_pack_bytes": 10985,
+  "tamper_samples": [
+    {
+      "trial": 1,
+      "mutation": "swap_records",
+      "detected": true,
+      "error": "Prev hash mismatch at block 3"
+    },
+    {
+      "trial": 2,
+      "mutation": "delete_block",
+      "detected": true,
+      "error": "Prev hash mismatch at block 0"
+    },
+    {
+      "trial": 3,
+      "mutation": "delete_block",
+      "detected": true,
+      "error": "Prev hash mismatch at block 0"
+    },
+    {
+      "trial": 4,
+      "mutation": "delete_block",
+      "detected": true,
+      "error": "Root hash mismatch (tail truncation or modification)"
+    },
+    {
+      "trial": 5,
+      "mutation": "corrupt_prev_hash",
+      "detected": true,
+      "error": "Prev hash mismatch at block 2"
+    }
+  ]
+}

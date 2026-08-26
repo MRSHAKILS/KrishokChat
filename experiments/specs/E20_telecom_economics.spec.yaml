@@ -2,10 +2,12 @@ id: E20_telecom_economics
 title: Localized telecom-economic model (C_safe with real BD costs)
 question: What is the true cost of safe advisory delivery using BD bulk-SMS rates and local hosting vs commercial LLM APIs?
 motivation: suggestions_1.md novelty 4 — national deployment viability for the Ministry of Agriculture / DAE.
-design: analytical model extending E09's latency_economics_decomposition with:
-  - bulk SMS: local aggregator rates (SSL Wireless / Grameenphone / Banglalink class, ~0.20 BDT/SMS) — MUST be verified against a 2026 price sheet before use; cite source URL and access date in results YAML
-  - hosting: BD National Data Center / local VPS vs AWS ap-south-1, monthly amortized per-query
-  - LLM api: commercial per-token price for the tier-3 fraction (from E18 measured mix, not assumed)
+design:
+  model_type: "analytical model extending E09 latency_economics_decomposition"
+  components:
+    - "bulk SMS: local aggregator rates (SSL Wireless / Grameenphone / Banglalink class, ~0.20-0.25 BDT/SMS)"
+    - "hosting: BD National Data Center / local VPS vs AWS ap-south-1, monthly amortized per-query"
+    - "LLM api: commercial per-token price for the tier-3 fraction (from E18 measured mix, not assumed)"
 outputs:
   - cost_per_safe_advisory by delivery channel [app_online, app_offline_cache, sms_fallback]
   - national-scale projection at 16M farmers × usage scenarios (clearly labeled projection, inputs listed)

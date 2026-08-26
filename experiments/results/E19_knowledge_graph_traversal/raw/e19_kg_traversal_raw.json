@@ -1,0 +1,38 @@
+{
+  "graph_summary": {
+    "nodes": 23,
+    "edges": 36
+  },
+  "hop_metrics": {
+    "hop_1": {
+      "hop_depth": 1,
+      "mean_slots_filled_out_of_11": 4.0,
+      "completeness_pct": 36.36,
+      "mean_traversal_latency_ms": 0.005,
+      "provenance_traceability_pct": 100.0
+    },
+    "hop_2": {
+      "hop_depth": 2,
+      "mean_slots_filled_out_of_11": 5.0,
+      "completeness_pct": 45.45,
+      "mean_traversal_latency_ms": 0.0063,
+      "provenance_traceability_pct": 100.0
+    },
+    "hop_3": {
+      "hop_depth": 3,
+      "mean_slots_filled_out_of_11": 11.0,
+      "completeness_pct": 100.0,
+      "mean_traversal_latency_ms": 0.0128,
+      "provenance_traceability_pct": 100.0
+    },
+    "hop_4": {
+      "hop_depth": 4,
+      "mean_slots_filled_out_of_11": 11.0,
+      "completeness_pct": 100.0,
+      "mean_traversal_latency_ms": 0.005,
+      "provenance_traceability_pct": 100.0
+    }
+  },
+  "coverage_gaps_count": 0,
+  "coverage_gaps_sample": []
+}

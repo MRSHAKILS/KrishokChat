@@ -10,13 +10,14 @@ data:
   split: train/dev/test = 90/5/5, seed 20260827, split by question to prevent leakage; test split frozen before any training run
   labels: crop, pest, intent_type derived from tuple metadata (no manual annotation needed)
 models:
-  - fasttext_supervised (dim sweep 50–200, epoch sweep 5–25; pick dev-optimal, freeze)
-  - linear_svm_charngram (sklearn, tfidf char_wb 2–5) as sanity baseline
-  comparison_arm: LLM intent parsing via existing generator harness (latency + accuracy, no retraining)
+  trained_arms:
+    - "fasttext_supervised (dim sweep 50–200, epoch sweep 5–25; pick dev-optimal, freeze)"
+    - "linear_svm_charngram (sklearn, tfidf char_wb 2–5) as sanity baseline"
+  comparison_arm: "LLM intent parsing via existing generator harness (latency + accuracy, no retraining)"
 metrics: [intent_accuracy, crop_exact_match, pest_exact_match, latency_ms_per_query, model_size_mb, marginal_cost]
 reporting_rules: results include the frozen split hash; any test-set peeking invalidates the run (log all attempts).
 artifact_storage: trained binary + tokenizer + metrics under results/E25_intent_classifier_training/artifacts/
   with the config used (dims/epochs/seed); artifacts are inputs to E18's optional arm only.
-script: scripts/E25_intent_classifier_training/train_e25.py
+script: scripts/E25_intent_classifier_training/run_e25.py  # actual runner (train_e25 placeholder never materialized)
 results: results/E25_intent_classifier_training/e25_results.yaml
 status: planned

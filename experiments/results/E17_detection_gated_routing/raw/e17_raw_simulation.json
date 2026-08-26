@@ -1,0 +1,624 @@
+{
+  "results": {
+    "thresh_70": {
+      "confidence_threshold": 0.7,
+      "mean_search_space_nodes": 320.2,
+      "search_space_reduction_pct": 84.9,
+      "gated_invocations_pct": 97.02,
+      "fallback_invocations_pct": 2.97,
+      "misrouting_rate_pct": 3.33,
+      "misrouting_ci95": [
+        2.81,
+        3.93
+      ],
+      "per_register": {
+        "Standard_Bengali_Formal": {
+          "text_first_hit1_pct": 72.1,
+          "text_first_hit1_ci95": [
+            69.24,
+            74.79
+          ],
+          "text_first_hit5_pct": 96.9,
+          "text_first_hit5_ci95": [
+            95.63,
+            97.81
+          ],
+          "detection_gated_hit1_pct": 84.6,
+          "detection_gated_hit1_ci95": [
+            82.23,
+            86.7
+          ],
+          "detection_gated_hit5_pct": 96.6,
+          "detection_gated_hit5_ci95": [
+            95.29,
+            97.56
+          ],
+          "hit1_absolute_gain_pp": 12.5
+        },
+        "Authentic_Farmer_Benchmark": {
+          "text_first_hit1_pct": 58.7,
+          "text_first_hit1_ci95": [
+            55.62,
+            61.71
+          ],
+          "text_first_hit5_pct": 88.6,
+          "text_first_hit5_ci95": [
+            86.48,
+            90.42
+          ],
+          "detection_gated_hit1_pct": 85.6,
+          "detection_gated_hit1_ci95": [
+            83.29,
+            87.64
+          ],
+          "detection_gated_hit5_pct": 95.8,
+          "detection_gated_hit5_ci95": [
+            94.37,
+            96.88
+          ],
+          "hit1_absolute_gain_pp": 26.9
+        },
+        "Regional_Dialects": {
+          "text_first_hit1_pct": 45.7,
+          "text_first_hit1_ci95": [
+            42.63,
+            48.8
+          ],
+          "text_first_hit5_pct": 78.7,
+          "text_first_hit5_ci95": [
+            76.06,
+            81.13
+          ],
+          "detection_gated_hit1_pct": 83.9,
+          "detection_gated_hit1_ci95": [
+            81.49,
+            86.05
+          ],
+          "detection_gated_hit5_pct": 95.2,
+          "detection_gated_hit5_ci95": [
+            93.69,
+            96.36
+          ],
+          "hit1_absolute_gain_pp": 38.2
+        },
+        "Romanized_Banglish": {
+          "text_first_hit1_pct": 41.5,
+          "text_first_hit1_ci95": [
+            38.48,
+            44.58
+          ],
+          "text_first_hit5_pct": 75.1,
+          "text_first_hit5_ci95": [
+            72.33,
+            77.68
+          ],
+          "detection_gated_hit1_pct": 84.8,
+          "detection_gated_hit1_ci95": [
+            82.44,
+            86.89
+          ],
+          "detection_gated_hit5_pct": 96.1,
+          "detection_gated_hit5_ci95": [
+            94.71,
+            97.13
+          ],
+          "hit1_absolute_gain_pp": 43.3
+        }
+      }
+    },
+    "thresh_80": {
+      "confidence_threshold": 0.8,
+      "mean_search_space_nodes": 516.4,
+      "search_space_reduction_pct": 75.64,
+      "gated_invocations_pct": 86.45,
+      "fallback_invocations_pct": 13.55,
+      "misrouting_rate_pct": 3.15,
+      "misrouting_ci95": [
+        2.65,
+        3.74
+      ],
+      "per_register": {
+        "Standard_Bengali_Formal": {
+          "text_first_hit1_pct": 73.4,
+          "text_first_hit1_ci95": [
+            70.58,
+            76.05
+          ],
+          "text_first_hit5_pct": 96.5,
+          "text_first_hit5_ci95": [
+            95.17,
+            97.47
+          ],
+          "detection_gated_hit1_pct": 84.1,
+          "detection_gated_hit1_ci95": [
+            81.7,
+            86.24
+          ],
+          "detection_gated_hit5_pct": 96.2,
+          "detection_gated_hit5_ci95": [
+            94.83,
+            97.22
+          ],
+          "hit1_absolute_gain_pp": 10.7
+        },
+        "Authentic_Farmer_Benchmark": {
+          "text_first_hit1_pct": 60.1,
+          "text_first_hit1_ci95": [
+            57.03,
+            63.09
+          ],
+          "text_first_hit5_pct": 91.3,
+          "text_first_hit5_ci95": [
+            89.39,
+            92.89
+          ],
+          "detection_gated_hit1_pct": 80.6,
+          "detection_gated_hit1_ci95": [
+            78.03,
+            82.93
+          ],
+          "detection_gated_hit5_pct": 95.2,
+          "detection_gated_hit5_ci95": [
+            93.69,
+            96.36
+          ],
+          "hit1_absolute_gain_pp": 20.5
+        },
+        "Regional_Dialects": {
+          "text_first_hit1_pct": 44.7,
+          "text_first_hit1_ci95": [
+            41.64,
+            47.8
+          ],
+          "text_first_hit5_pct": 80.2,
+          "text_first_hit5_ci95": [
+            77.62,
+            82.55
+          ],
+          "detection_gated_hit1_pct": 81.3,
+          "detection_gated_hit1_ci95": [
+            78.77,
+            83.6
+          ],
+          "detection_gated_hit5_pct": 93.3,
+          "detection_gated_hit5_ci95": [
+            91.58,
+            94.69
+          ],
+          "hit1_absolute_gain_pp": 36.6
+        },
+        "Romanized_Banglish": {
+          "text_first_hit1_pct": 41.6,
+          "text_first_hit1_ci95": [
+            38.58,
+            44.68
+          ],
+          "text_first_hit5_pct": 75.6,
+          "text_first_hit5_ci95": [
+            72.84,
+            78.16
+          ],
+          "detection_gated_hit1_pct": 81.3,
+          "detection_gated_hit1_ci95": [
+            78.77,
+            83.6
+          ],
+          "detection_gated_hit5_pct": 93.5,
+          "detection_gated_hit5_ci95": [
+            91.8,
+            94.87
+          ],
+          "hit1_absolute_gain_pp": 39.7
+        }
+      }
+    },
+    "thresh_90": {
+      "confidence_threshold": 0.9,
+      "mean_search_space_nodes": 1139.2,
+      "search_space_reduction_pct": 46.27,
+      "gated_invocations_pct": 52.88,
+      "fallback_invocations_pct": 47.12,
+      "misrouting_rate_pct": 1.9,
+      "misrouting_ci95": [
+        1.52,
+        2.37
+      ],
+      "per_register": {
+        "Standard_Bengali_Formal": {
+          "text_first_hit1_pct": 72.0,
+          "text_first_hit1_ci95": [
+            69.14,
+            74.69
+          ],
+          "text_first_hit5_pct": 97.2,
+          "text_first_hit5_ci95": [
+            95.98,
+            98.06
+          ],
+          "detection_gated_hit1_pct": 82.7,
+          "detection_gated_hit1_ci95": [
+            80.23,
+            84.92
+          ],
+          "detection_gated_hit5_pct": 96.7,
+          "detection_gated_hit5_ci95": [
+            95.4,
+            97.64
+          ],
+          "hit1_absolute_gain_pp": 10.7
+        },
+        "Authentic_Farmer_Benchmark": {
+          "text_first_hit1_pct": 56.9,
+          "text_first_hit1_ci95": [
+            53.81,
+            59.94
+          ],
+          "text_first_hit5_pct": 90.8,
+          "text_first_hit5_ci95": [
+            88.85,
+            92.44
+          ],
+          "detection_gated_hit1_pct": 75.9,
+          "detection_gated_hit1_ci95": [
+            73.15,
+            78.45
+          ],
+          "detection_gated_hit5_pct": 94.4,
+          "detection_gated_hit5_ci95": [
+            92.8,
+            95.66
+          ],
+          "hit1_absolute_gain_pp": 19.0
+        },
+        "Regional_Dialects": {
+          "text_first_hit1_pct": 42.7,
+          "text_first_hit1_ci95": [
+            39.67,
+            45.79
+          ],
+          "text_first_hit5_pct": 77.2,
+          "text_first_hit5_ci95": [
+            74.5,
+            79.69
+          ],
+          "detection_gated_hit1_pct": 65.9,
+          "detection_gated_hit1_ci95": [
+            62.91,
+            68.77
+          ],
+          "detection_gated_hit5_pct": 88.8,
+          "detection_gated_hit5_ci95": [
+            86.7,
+            90.61
+          ],
+          "hit1_absolute_gain_pp": 23.2
+        },
+        "Romanized_Banglish": {
+          "text_first_hit1_pct": 40.8,
+          "text_first_hit1_ci95": [
+            37.79,
+            43.88
+          ],
+          "text_first_hit5_pct": 74.8,
+          "text_first_hit5_ci95": [
+            72.02,
+            77.39
+          ],
+          "detection_gated_hit1_pct": 64.8,
+          "detection_gated_hit1_ci95": [
+            61.79,
+            67.7
+          ],
+          "detection_gated_hit5_pct": 86.3,
+          "detection_gated_hit5_ci95": [
+            84.03,
+            88.29
+          ],
+          "hit1_absolute_gain_pp": 24.0
+        }
+      }
+    }
+  },
+  "query_sample": [
+    {
+      "query_id": "Q-E17-00001",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "maize",
+      "gold_pest": "leaf_blight"
+    },
+    {
+      "query_id": "Q-E17-00002",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "wheat",
+      "gold_pest": "rust"
+    },
+    {
+      "query_id": "Q-E17-00003",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "rice",
+      "gold_pest": "sheath_blight"
+    },
+    {
+      "query_id": "Q-E17-00004",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "rice",
+      "gold_pest": "sheath_blight"
+    },
+    {
+      "query_id": "Q-E17-00005",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "brinjal",
+      "gold_pest": "shoot_and_fruit_borer"
+    },
+    {
+      "query_id": "Q-E17-00006",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "wheat",
+      "gold_pest": "blast"
+    },
+    {
+      "query_id": "Q-E17-00007",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "rice",
+      "gold_pest": "brown_planthopper"
+    },
+    {
+      "query_id": "Q-E17-00008",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "rice",
+      "gold_pest": "blast"
+    },
+    {
+      "query_id": "Q-E17-00009",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "lentil",
+      "gold_pest": "stemphylium_blight"
+    },
+    {
+      "query_id": "Q-E17-00010",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "mustard",
+      "gold_pest": "white_rust"
+    },
+    {
+      "query_id": "Q-E17-00011",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "mustard",
+      "gold_pest": "aphids"
+    },
+    {
+      "query_id": "Q-E17-00012",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "brinjal",
+      "gold_pest": "phomopsis_blight"
+    },
+    {
+      "query_id": "Q-E17-00013",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "mustard",
+      "gold_pest": "alternaria_blight"
+    },
+    {
+      "query_id": "Q-E17-00014",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "maize",
+      "gold_pest": "fall_armyworm"
+    },
+    {
+      "query_id": "Q-E17-00015",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "jute",
+      "gold_pest": "stem_rot"
+    },
+    {
+      "query_id": "Q-E17-00016",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "mustard",
+      "gold_pest": "white_rust"
+    },
+    {
+      "query_id": "Q-E17-00017",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "maize",
+      "gold_pest": "stem_borer"
+    },
+    {
+      "query_id": "Q-E17-00018",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "potato",
+      "gold_pest": "aphids"
+    },
+    {
+      "query_id": "Q-E17-00019",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "mustard",
+      "gold_pest": "aphids"
+    },
+    {
+      "query_id": "Q-E17-00020",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "rice",
+      "gold_pest": "sheath_blight"
+    },
+    {
+      "query_id": "Q-E17-00021",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "mustard",
+      "gold_pest": "aphids"
+    },
+    {
+      "query_id": "Q-E17-00022",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "lentil",
+      "gold_pest": "foot_rot"
+    },
+    {
+      "query_id": "Q-E17-00023",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "lentil",
+      "gold_pest": "foot_rot"
+    },
+    {
+      "query_id": "Q-E17-00024",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "maize",
+      "gold_pest": "leaf_blight"
+    },
+    {
+      "query_id": "Q-E17-00025",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "wheat",
+      "gold_pest": "blast"
+    },
+    {
+      "query_id": "Q-E17-00026",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "jute",
+      "gold_pest": "stem_rot"
+    },
+    {
+      "query_id": "Q-E17-00027",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "brinjal",
+      "gold_pest": "phomopsis_blight"
+    },
+    {
+      "query_id": "Q-E17-00028",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "lentil",
+      "gold_pest": "rust"
+    },
+    {
+      "query_id": "Q-E17-00029",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "brinjal",
+      "gold_pest": "phomopsis_blight"
+    },
+    {
+      "query_id": "Q-E17-00030",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "wheat",
+      "gold_pest": "powdery_mildew"
+    },
+    {
+      "query_id": "Q-E17-00031",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "lentil",
+      "gold_pest": "rust"
+    },
+    {
+      "query_id": "Q-E17-00032",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "wheat",
+      "gold_pest": "rust"
+    },
+    {
+      "query_id": "Q-E17-00033",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "potato",
+      "gold_pest": "aphids"
+    },
+    {
+      "query_id": "Q-E17-00034",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "lentil",
+      "gold_pest": "rust"
+    },
+    {
+      "query_id": "Q-E17-00035",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "lentil",
+      "gold_pest": "rust"
+    },
+    {
+      "query_id": "Q-E17-00036",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "wheat",
+      "gold_pest": "rust"
+    },
+    {
+      "query_id": "Q-E17-00037",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "potato",
+      "gold_pest": "aphids"
+    },
+    {
+      "query_id": "Q-E17-00038",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "lentil",
+      "gold_pest": "foot_rot"
+    },
+    {
+      "query_id": "Q-E17-00039",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "rice",
+      "gold_pest": "blast"
+    },
+    {
+      "query_id": "Q-E17-00040",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "rice",
+      "gold_pest": "stem_borer"
+    },
+    {
+      "query_id": "Q-E17-00041",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "maize",
+      "gold_pest": "fall_armyworm"
+    },
+    {
+      "query_id": "Q-E17-00042",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "wheat",
+      "gold_pest": "rust"
+    },
+    {
+      "query_id": "Q-E17-00043",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "potato",
+      "gold_pest": "early_blight"
+    },
+    {
+      "query_id": "Q-E17-00044",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "brinjal",
+      "gold_pest": "phomopsis_blight"
+    },
+    {
+      "query_id": "Q-E17-00045",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "mustard",
+      "gold_pest": "aphids"
+    },
+    {
+      "query_id": "Q-E17-00046",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "lentil",
+      "gold_pest": "rust"
+    },
+    {
+      "query_id": "Q-E17-00047",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "mustard",
+      "gold_pest": "white_rust"
+    },
+    {
+      "query_id": "Q-E17-00048",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "jute",
+      "gold_pest": "stem_rot"
+    },
+    {
+      "query_id": "Q-E17-00049",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "rice",
+      "gold_pest": "stem_borer"
+    },
+    {
+      "query_id": "Q-E17-00050",
+      "register": "Standard_Bengali_Formal",
+      "gold_crop": "potato",
+      "gold_pest": "late_blight"
+    }
+  ]
+}

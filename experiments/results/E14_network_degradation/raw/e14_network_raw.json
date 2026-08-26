@@ -1,0 +1,126 @@
+{
+  "perfect_4g": {
+    "network_profile": {
+      "name": "perfect_4g",
+      "latency_ms": 60,
+      "packet_loss": 0.0,
+      "jitter_ms": 10
+    },
+    "cloud_only_rag": {
+      "delivery_success_rate_pct": 100.0,
+      "delivery_success_ci95": [
+        99.62,
+        100.0
+      ],
+      "timeout_drop_rate_pct": 0.0,
+      "latency_p50_ms": 1541.6,
+      "latency_p95_ms": 1718.1
+    },
+    "offline_first_cache": {
+      "delivery_success_rate_pct": 100.0,
+      "delivery_success_ci95": [
+        99.62,
+        100.0
+      ],
+      "cache_hit_ratio_pct": 52.3,
+      "timeout_drop_rate_pct": 0.0,
+      "latency_p50_ms": 1.5,
+      "latency_p95_ms": 1688.7,
+      "stale_advisory_safety_violations": 0
+    },
+    "delivery_retention_advantage_pp": 0.0
+  },
+  "urban_3g": {
+    "network_profile": {
+      "name": "urban_3g",
+      "latency_ms": 300,
+      "packet_loss": 0.05,
+      "jitter_ms": 60
+    },
+    "cloud_only_rag": {
+      "delivery_success_rate_pct": 99.6,
+      "delivery_success_ci95": [
+        98.98,
+        99.84
+      ],
+      "timeout_drop_rate_pct": 0.4,
+      "latency_p50_ms": 2894.8,
+      "latency_p95_ms": 4952.4
+    },
+    "offline_first_cache": {
+      "delivery_success_rate_pct": 99.8,
+      "delivery_success_ci95": [
+        99.27,
+        99.95
+      ],
+      "cache_hit_ratio_pct": 52.3,
+      "timeout_drop_rate_pct": 0.2,
+      "latency_p50_ms": 1.5,
+      "latency_p95_ms": 4616.3,
+      "stale_advisory_safety_violations": 0
+    },
+    "delivery_retention_advantage_pp": 0.2
+  },
+  "rural_edge": {
+    "network_profile": {
+      "name": "rural_edge",
+      "latency_ms": 800,
+      "packet_loss": 0.15,
+      "jitter_ms": 150
+    },
+    "cloud_only_rag": {
+      "delivery_success_rate_pct": 82.0,
+      "delivery_success_ci95": [
+        79.5,
+        84.26
+      ],
+      "timeout_drop_rate_pct": 18.0,
+      "latency_p50_ms": 8171.8,
+      "latency_p95_ms": 13487.2
+    },
+    "offline_first_cache": {
+      "delivery_success_rate_pct": 91.4,
+      "delivery_success_ci95": [
+        89.5,
+        92.98
+      ],
+      "cache_hit_ratio_pct": 52.3,
+      "timeout_drop_rate_pct": 8.6,
+      "latency_p50_ms": 1.4,
+      "latency_p95_ms": 13010.2,
+      "stale_advisory_safety_violations": 0
+    },
+    "delivery_retention_advantage_pp": 9.4
+  },
+  "severe_2g": {
+    "network_profile": {
+      "name": "severe_2g",
+      "latency_ms": 1200,
+      "packet_loss": 0.3,
+      "jitter_ms": 250
+    },
+    "cloud_only_rag": {
+      "delivery_success_rate_pct": 12.8,
+      "delivery_success_ci95": [
+        10.87,
+        15.01
+      ],
+      "timeout_drop_rate_pct": 87.2,
+      "latency_p50_ms": 11312.6,
+      "latency_p95_ms": 14863.2
+    },
+    "offline_first_cache": {
+      "delivery_success_rate_pct": 58.1,
+      "delivery_success_ci95": [
+        55.02,
+        61.12
+      ],
+      "cache_hit_ratio_pct": 52.3,
+      "timeout_drop_rate_pct": 41.9,
+      "latency_p50_ms": 1.2,
+      "latency_p95_ms": 11187.4,
+      "stale_advisory_safety_violations": 0
+    },
+    "delivery_retention_advantage_pp": 45.3
+  }
+}

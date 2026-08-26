@@ -1,0 +1,66 @@
+{
+  "targeted_cluster": {
+    "crop": "chili (\u09ae\u09b0\u09bf\u099a)",
+    "pathogen": "anthracnose / die-back (\u09ab\u09b2 \u09aa\u099a\u09be \u0993 \u09a1\u09be\u0987-\u09ac\u09cd\u09af\u09be\u0995)",
+    "cluster_query_traffic": 55,
+    "source_manual": "BARI Krishi Projukti Hatboi 2021, Page 148",
+    "entries_authored": [
+      {
+        "fact_id": "FACT-CHILI-001",
+        "crop": "chili",
+        "problem": "anthracnose",
+        "active_ingredient": "azoxystrobin + difenoconazole",
+        "formulation": "325 SC",
+        "dose_min": 0.5,
+        "dose_max": 1.0,
+        "dose_unit": "ml/l",
+        "pre_harvest_interval_days": 14,
+        "application_interval_days": 10,
+        "institution": "BARI"
+      },
+      {
+        "fact_id": "FACT-CHILI-002",
+        "crop": "chili",
+        "problem": "anthracnose",
+        "active_ingredient": "copper oxychloride",
+        "formulation": "50 WP",
+        "dose_min": 2.0,
+        "dose_max": 2.0,
+        "dose_unit": "g/l",
+        "pre_harvest_interval_days": 14,
+        "application_interval_days": 7,
+        "institution": "BARI"
+      }
+    ]
+  },
+  "authoring_investment": {
+    "time_spent_minutes": 18.0,
+    "entries_added_count": 2,
+    "provenance_verified": true
+  },
+  "coverage_metrics": {
+    "benchmark_sample_size": 1000,
+    "baseline_resolvable_queries": 587,
+    "baseline_coverage_pct": 58.7,
+    "baseline_coverage_ci95": [
+      55.62,
+      61.71
+    ],
+    "post_extension_resolvable_queries": 642,
+    "post_extension_coverage_pct": 64.2,
+    "post_extension_coverage_ci95": [
+      61.18,
+      67.11
+    ],
+    "absolute_coverage_gain_pp": 5.5,
+    "cluster_gap_closure_rate_pct": 100.0,
+    "cluster_gap_closure_ci95": [
+      93.47,
+      100.0
+    ]
+  },
+  "return_on_authoring_investment": {
+    "newly_resolvable_queries_per_fact_entry": 27.5,
+    "newly_resolvable_queries_per_authoring_minute": 3.06
+  }
+}
