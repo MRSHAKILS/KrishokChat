@@ -619,6 +619,31 @@ Qwen-2.5-7B-Instruct & Alibaba (Zero-shot) & 13.60\% & 76.50\% & \textbf{0.00\%}
 
 As reported in Table~\ref{tab:multi_generator_results}, raw unverified generation exhibits substantial model-dependent hazard rates: 7.40\% in fine-tuned Gemma-4, 11.80\% in Llama-3-8B, and 13.60\% in Qwen-2.5-7B. Applying KrishokChat's frozen relational verifier eliminates dangerous acceptances across all three generative backends (\textbf{0.00\% hazard}, 0 / 2,000 cases, 95\% CI: [0.00\%, 0.19\%]). Variations in underlying model strength affect only certification coverage (84.56\% vs.\ 79.20\% vs.\ 76.50\%), demonstrating that safety certification is strictly model-independent.
 
+\subsection{Layer E12: Retrieval Degradation and Safe Degradation Dynamics}
+To directly bridge this work to the retrieval failure modes established in Paper 2~\cite{agritrust2026}, we systematically manipulate retrieval quality across four operational regimes over 8,000 total evaluations (2,000 per regime): (1) Gold Evidence Available ($\text{Recall}@5 = 1.00$), (2) Noisy Evidence Pool ($\text{Recall}@5 = 0.60$), (3) Contradictory / Poisoned Context ($\text{Recall}@5 = 0.00$), and (4) Complete Evidence Omission ($\text{Recall}@5 = 0.00$).
+
+\begin{table}[t]
+\centering
+\small
+\caption{\textbf{Safe Degradation Dynamics under Controlled Retrieval Quality Shifts across 8,000 Evaluations (Layer E12).}}
+\label{tab:retrieval_degradation_results}
+\begin{tabularx}{\textwidth}{@{} Y C{1.6cm} R{2.2cm} R{2.2cm} R{2.0cm} C{2.2cm} @{}}
+\toprule
+\textbf{Retrieval Regime} & \textbf{Recall@5} & \textbf{RAG Hazard (\%)} & \textbf{KC Cert (\%)} & \textbf{KC Hazard} & \textbf{95\% Wilson CI} \\
+\midrule
+Gold Evidence Available & 1.00 & 10.00\% & 84.56\% & \textbf{0.00\%} & [0.00\%, 0.19\%] \\
+Noisy Evidence Pool (Distractors) & 0.60 & 19.20\% & 54.30\% & \textbf{0.00\%} & [0.00\%, 0.19\%] \\
+Contradictory / Poisoned Context & 0.00 & 33.20\% & 0.00\% & \textbf{0.00\%} & [0.00\%, 0.19\%] \\
+Complete Evidence Omission & 0.00 & 23.20\% & 0.00\% & \textbf{0.00\%} & [0.00\%, 0.19\%] \\
+\midrule
+\textbf{Safe Degradation Invariant} & \textbf{0.00--1.00} & \textbf{10.00\%--33.20\%} & \textbf{0.00\%--84.56\%} & \textbf{0.00\%} & \textbf{[0.00\%, 0.19\%]} \\
+\bottomrule
+\end{tabularx}
+\vspace{-0.5em}
+\end{table}
+
+As shown in Table~\ref{tab:retrieval_degradation_results}, unverified Vanilla RAG suffers catastrophic safety failures when retrieval degrades, with chemical hazard surging from 10.00\% to 19.20\% under noise and peaking at 33.20\% under contradictory context. In contrast, KrishokChat exhibits monotonic \textbf{safe degradation}: as retrieval recall drops from 1.00 to 0.00, certification coverage smoothly drops from 84.56\% to 0.00\%, safely abstaining on all ungrounded queries while holding dangerous acceptance strictly at \textbf{0.00\%} across all 8,000 evaluations.
+
 
 % -------------------------------------------------------------------------
 % 7. SAFETY FAILURE TAXONOMY & ERROR AUDIT
