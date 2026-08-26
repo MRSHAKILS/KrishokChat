@@ -16,6 +16,32 @@ Read this file fully before doing any work. This is a **7-day capstone demo prot
 > task per branch; each must hold the standing baseline (full suite
 > **410 passed / 7 skipped / 0 failed**, golden replay **50/50**, `pnpm build`
 > green) before the next starts.
+>
+> **Research/paper trace (added 2026-08-27):** `experiments/registry.yaml` is the
+> canonical experiment-layer trace (completed battery E02–E13 + planned CEA-pivot
+> layers E14–E26; it resolves all conflicting E-numbering used by older review
+> docs). `paper/manifest.yaml` traces every file in the paper folder. New
+> experiments follow `experiments/specs/*.spec.yaml` → runner in
+> `experiments/scripts/<layer>/` → frozen YAML in `experiments/results/<layer>/`
+> → registry status update, under `experiments/ACCEPTANCE_PROTOCOL.md` (run →
+> verify → real-application check → freeze → author signs acceptance). Targets
+> written in specs are hypotheses, never results (rule 5 applies).
+>
+> **Two-track map (production vs paper — keep them separated):**
+> - **Production track** = `backend/` + `frontend/` + `supabase/` + `deploy/`, governed by the
+>   R-series index (`docs/production_readiness/tasks/R_SERIES_EXECUTION_INDEX.md`; R1–R13 done —
+>   R13 grounded chunk fallback dark-launched 2026-08-27 under Amendment 03, flag
+>   `CHUNK_FALLBACK_ENABLED` default-off until experiment E26 is accepted) with standing gates:
+>   full suite green (no new failures vs. baseline; the 5 `scripts/test_live_e2e.py` failures are
+>   environmental, they need a live server), golden replay 50/50, `pnpm build` green.
+>   App code must never read `paper/`, `research_artifacts/`, or `experiments/` at runtime.
+> - **Paper track** = `paper/` + `experiments/` + `research_artifacts/`, governed by
+>   `paper/manifest.yaml`, `experiments/registry.yaml`, and the frozen claim ledger
+>   (`paper/manuscript/CLAIM_LEDGER_FREEZE.md`). Research harnesses may import `backend/app`
+>   offline (documented scripts only), never the reverse.
+> - **External research data root** `E:\CSE498R\Agri-LLM\KrishokChat` is the read-only origin of
+>   datasets/chunks/processed MDs. The application must depend only on mirrored copies under
+>   `backend/ml_assets/` (e.g. the 2,946 institutional MDs in `backend/ml_assets/rag_index/source_md/`).
 
 ---
 
