@@ -195,7 +195,7 @@ export function KnowledgeGraphExplorer() {
           <div>
             <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-ochre">
               <Network className="h-3.5 w-3.5" />
-              <span>PROVENANCE KNOWLEDGE GRAPH EXPLORER</span>
+              <span>প্রমাণ-জ্ঞানগ্রাফ এক্সপ্লোরার</span>
             </div>
             <h2 className="mt-1 font-display text-xl font-bold text-ink sm:text-2xl">
               ২,৮৮২-নোড জ্ঞান গ্রাফ ও প্রমাণ এক্সপ্লোরার

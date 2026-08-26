@@ -30,6 +30,14 @@
   --color-clay: #a8542b;
   --color-clay-soft: #e8b8a3;
 
+  /* Motion tokens */
+  --animate-spin-slow: spin-slow 9s linear infinite;
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
   /* Functional */
   --color-success: #2f5d3a;
   --color-warning: #c8893c;

@@ -178,7 +178,7 @@ function HeroSection() {
             </div>
             <p className="mt-3 font-display text-lg leading-snug text-ink">অফলাইন রোগ নির্ণয় ও পরামর্শ</p>
             <div className="mt-3 grid grid-cols-2 gap-2">
-              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><Camera className="mb-1 h-4 w-4 text-leaf" />রোগ নির্ণয় (&lt;30ms)</div>
+              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><Camera className="mb-1 h-4 w-4 text-leaf" />রোগ নির্ণয় — ডিভাইসেই দ্রুত</div>
               <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><MessageSquare className="mb-1 h-4 w-4 text-leaf" />যাচাইকৃত উত্তর</div>
             </div>
           </motion.div>
@@ -233,7 +233,7 @@ const CAPABILITIES = {
     icon: ScanLine,
     eyebrow: "MULTIMODAL WORKFLOW",
     title: "পাতার ছবি থেকে রোগের পরামর্শ",
-    body: "ফসলের ছবি দিন, মডেল রোগের শ্রেণিবিন্যাস করে, তারপর একই grounded advisory path থেকে চিকিৎসা-তথ্য আনে।",
+    body: "ফসলের ছবি দিন, মডেল রোগের শ্রেণিবিন্যাস করে, এরপর একই সূত্রভিত্তিক পরামর্শ-পথ থেকে চিকিৎসা-তথ্য আনে।",
     cta: "রোগ নির্ণয় করুন",
     href: "/detect",
     chips: ["ছবি আপলোড", "Confidence", "Follow-up"],
@@ -524,7 +524,7 @@ function WeatherAndHelplineSection() {
       const r = await getWeather(district.trim());
       setWeather({ summary_bn: r.summary_bn, advice_bn: r.advice_bn });
     } catch {
-      setWeather({ summary_bn: "তথ্য পাওয়া যায়নি।", advice_bn: "কৃষক কল সেন্টার: ১৬১২৩।" });
+      setWeather({ summary_bn: "তথ্য পাওয়া যায়নি।", advice_bn: "কৃষি কল সেন্টার: ১৬১২৩।" });
     }
     setWeatherLoading(false);
   };
@@ -537,7 +537,7 @@ function WeatherAndHelplineSection() {
       setHelplineResult({ status: r.status, message: r.message });
       if (r.status === "ok") setForm({ name: "", phone: "", district: "" });
     } catch {
-      setHelplineResult({ status: "error", message: "সমস্যা। কৃষক কল সেন্টার: ১৬১২৩।" });
+      setHelplineResult({ status: "error", message: "সমস্যা। কৃষি কল সেন্টার: ১৬১২৩।" });
     }
     setHelplineLoading(false);
   };
@@ -696,7 +696,7 @@ function DemoCTA() {
       <motion.div variants={enter} className="flex flex-col items-center gap-4 rounded-xl border rule bg-paper px-8 py-10 text-center">
         <h2 className="font-display text-2xl text-ink">এখনই চেষ্টা করুন</h2>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Link href="/detect" className="group flex items-center gap-2 rounded-lg bg-leaf px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2">ছবি দিন নির্ণয় করুন<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></Link>
+          <Link href="/detect" className="group flex items-center gap-2 rounded-lg bg-leaf px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2">ছবি দিয়ে নির্ণয় করুন<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></Link>
           <Link href="/chat" className="rounded-lg border rule px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-leaf hover:text-leaf">বাংলায় প্রশ্ন করুন</Link>
         </div>
       </motion.div>
@@ -931,7 +931,7 @@ function AgriFAQSection() {
     },
     {
       q: "ইন্টারনেট বা প্রযুক্তি না জানা কৃষক কিভাবে সাহায্য পাবেন?",
-      a: "যেকোনো জরুরি প্রয়োজনে সরাসরি বিনামূল্যে কৃষক কল সেন্টার ১৬১২৩ নম্বরে ডায়াল করে বিশেষজ্ঞ কৃষি কর্মকর্তার সাথে কথা বলা যাবে।",
+      a: "যেকোনো জরুরি প্রয়োজনে সরাসরি বিনামূল্যে কৃষি কল সেন্টার ১৬১২৩ নম্বরে ডায়াল করে বিশেষজ্ঞ কৃষি কর্মকর্তার সাথে কথা বলা যাবে।",
     },
   ];
 

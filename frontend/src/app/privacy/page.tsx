@@ -28,7 +28,7 @@ export default function PrivacyPage() {
             Local-only · কোনো বাহ্যিক ট্র্যাকিং নেই
           </span>
           <span className="rounded-full border rule bg-paper-2/60 px-2.5 py-1 text-ink-soft">
-            PDP Ordinance 2025 (No. 61) সচেতন
+            PDP Ordinance 2025 (No. 61) অনুসারে
           </span>
         </div>
       </div>

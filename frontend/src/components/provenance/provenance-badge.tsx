@@ -50,8 +50,8 @@ const BADGE_CONFIGS: Record<ProvenanceKind, BadgeConfig> = {
   },
   structured_fact: {
     icon: BookOpen,
-    label: "অনুমোদিত তথ্যসারণি",
-    desc: "BARI/BRRI অনুমোদিত তথ্যসারণি থেকে সরাসরি উত্তর (এআই ব্যবহার হয়নি)",
+    label: "সরাসরি তথ্যসারণি উত্তর",
+    desc: "যাচাইকৃত BARI/BRRI তথ্যসারণি থেকে সরাসরি প্রদত্ত উত্তর — এআই ব্যবহার হয়নি",
     color: "text-leaf",
     bg: "bg-leaf/10",
     pill: "0 AI",
@@ -59,8 +59,8 @@ const BADGE_CONFIGS: Record<ProvenanceKind, BadgeConfig> = {
   },
   templated_advisory: {
     icon: FileText,
-    label: "অনুমোদিত তথ্যসারণি",
-    desc: "অনুমোদিত আইপিএম গাইডলাইন ও ক্রপ ক্যালেন্ডার ভিত্তিক উত্তর (এআই ব্যবহার হয়নি)",
+    label: "অনুমোদিত টেমপ্লেট পরামর্শ",
+    desc: "অনুমোদিত আইপিএম গাইডলাইন ও ক্রপ ক্যালেন্ডার অনুসারে নির্মিত উত্তর — এআই ব্যবহার হয়নি",
     color: "text-leaf",
     bg: "bg-leaf/10",
     pill: "0 AI",

@@ -157,7 +157,7 @@ export default function BenchmarkPage() {
         className="text-center"
       >
         <motion.p variants={enter} className="text-xs uppercase tracking-[0.22em] text-ochre">
-          Benchmark Results
+          BENCHMARK RESULTS
         </motion.p>
         <motion.h1 variants={enter} className="mt-4 font-display text-3xl leading-tight text-ink md:text-4xl">
           মূল্যায়ন <span className="text-leaf">ফলাফল</span>
@@ -605,7 +605,7 @@ export default function BenchmarkPage() {
                   <th className="px-3 py-2.5 text-left font-display text-ink">ক্যাটাগরি</th>
                   <th className="px-3 py-2.5 text-right font-display text-ink">n</th>
                   <th className="px-3 py-2.5 text-right font-display text-ink">অস্বীকৃত (রেফারাল)</th>
-                  <th className="px-3 py-2.5 text-right font-display text-ink">ভেরিফায়ার ✓</th>
+                  <th className="px-3 py-2.5 text-right font-display text-ink">ভেরিফায়ার উত্তীর্ণ</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-bone">

@@ -220,7 +220,7 @@ export default function DetectPage() {
       <div>
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-2 text-xs font-semibold text-ochre">ছবি ভিত্তিক ফসল পরামর্শ</p>
+            <p className="mb-2 text-xs font-semibold text-ochre">ছবির মাধ্যমে ফসল পরামর্শ</p>
             <h1 className="font-display text-3xl text-ink">ফসলের রোগ নির্ণয়</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 text-xs text-ink-faint">
@@ -229,7 +229,7 @@ export default function DetectPage() {
           </div>
         </div>
         <p className="mt-1 text-sm text-ink-soft">
-          পাতার ছবি দিন — ফসল শনাক্ত করে নির্দিষ্ট রোগ মডেল দিয়ে নিখুঁত বিশ্লেষণ ও পরামর্শ দেওয়া হবে।
+          পাতার ছবি দিন — ফসল ও রোগ ডিভাইসেই শনাক্ত হবে — এরপর অনুমোদিত উৎস থেকে চিকিৎসা-পরামর্শ দেখানো হবে।
         </p>
       </div>
 

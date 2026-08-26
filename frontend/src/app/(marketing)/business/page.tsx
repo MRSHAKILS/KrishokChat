@@ -545,8 +545,8 @@ function MoatSection() {
       className="mx-auto max-w-5xl"
     >
       <motion.div variants={enter} className="mb-6 text-center">
-        <h2 className="font-display text-2xl text-ink sm:text-3xl">আমাদের মোট — অডিট ইঞ্জিন</h2>
-        <p className="mt-2 text-sm text-ink-faint">The moat — the safety/audit engine is the least-commoditized asset</p>
+        <h2 className="font-display text-2xl text-ink sm:text-3xl">প্রতিযোগিতার প্রাচীর — নিরাপত্তা ও অডিট ইঞ্জিন</h2>
+        <p className="mt-2 text-sm text-ink-faint">The moat: the safety & audit engine is the least-commoditized asset.</p>
       </motion.div>
 
       <motion.div

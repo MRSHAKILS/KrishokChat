@@ -169,7 +169,7 @@ export default function DataPage() {
           </motion.h1>
           <motion.p variants={enter} className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
             {RESEARCH_STATS.publications}টি সরকারি প্রকাশনা থেকে নির্মিত {RESEARCH_STATS.knowledgeNodes}টি জ্ঞান নোড —
-            প্রমাণ-ভিত্তিক, উৎস-লকড, প্রতিটি ট্রেসযোগ্য।
+            প্রমাণ-ভিত্তিক, উৎস-সংযুক্ত, প্রতিটি ট্রেসযোগ্য।
           </motion.p>
           <motion.p variants={enter} className="mt-5">
             <a href="/library" className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper px-4 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf">
