@@ -1,0 +1,20 @@
+dataset_name: KrishokChat Relational Misbinding Attack Suite v2
+timestamp_utc: '2026-08-26T07:11:04.897935+00:00'
+random_seed: 20260813
+total_attack_cases: 10000
+attack_families_count: 10
+cases_per_family:
+  wrong_dose: 1000
+  wrong_unit: 1000
+  wrong_denominator: 1000
+  wrong_crop: 1000
+  wrong_pathogen: 1000
+  wrong_formulation: 1000
+  wrong_phi: 1000
+  wrong_interval: 1000
+  polarity_flip: 1000
+  cross_row_binding: 1000
+schema_version: v2.0
+description: Programmatically generated adversarial corruption suite evaluating relational
+  slot binding vs substring co-occurrence.
+sha256_dataset_hash: c608b2ff7596db9304b4bc2649e085964393691c1a59c08d3f9f2bee3c1b76fd
