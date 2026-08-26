@@ -67,10 +67,10 @@
 
 \begin{abstract}
 \noindent
-\textbf{Background:} Automated agricultural advisory systems powered by Large Language Models (LLMs) offer scalable digital extension services for smallholder farming communities across developing nations. However, hallucinated chemical dosages, unverified agrochemical recommendations, and unconstrained dialect normalization introduce acute hazards to crop biosecurity, operator health, and ecological safety.
+\textbf{Background:} Automated agricultural advisory systems powered by Large Language Models (LLMs) offer scalable digital extension services for smallholder farming communities across developing economies. However, hallucinated chemical dosages, unverified agrochemical recommendations, and unconstrained dialect normalization introduce acute hazards to crop biosecurity, operator health, and ecological safety.
 
 \noindent
-\textbf{Problem:} Conventional retrieval-augmented generation (RAG) frameworks rely primarily on surface-level substring matching or generative self-critique. These heuristics fail to verify relational binding across critical agricultural slots—such as chemical active ingredients, target pathogens, host crop varieties, application concentrations, and pre-harvest intervals (PHI).
+\textbf{Problem:} Conventional retrieval-augmented generation (RAG) frameworks rely primarily on surface-level substring matching or generative self-critique. These heuristics fail to verify relational binding across critical agricultural slots—including chemical active ingredients, target pathogens, host crop varieties, application concentrations, and pre-harvest intervals (PHI).
 
 \noindent
 \textbf{Methods:} We propose an evidence-linked, relation-aware selective certification framework for Bengali agricultural advisory. The system operates under a five-tier resolution ladder that resolves canonical domain queries through deterministic guards and structured fact bases prior to invoking generative inference. Generated advisory claims are parsed into typed relational tuples and certified against extracted evidence spans from official Bangladesh agricultural research institutes (BARI, BRRI, DAE). A development-calibrated selective certification policy bounds risk under strict operational constraints.
@@ -97,9 +97,9 @@
 
 Smallholder agriculture in Bangladesh sustains over 16 million farming households, where timely access to accurate agronomic advisory directly governs crop yield, rural livelihood stability, and national food security. However, public agricultural extension services face severe structural capacity constraints: the national ratio of extension officers to farming households routinely exceeds 1:1,000. Consequently, smallholder producers rely heavily on informal input retailers, peer networks, or centralized telephone advisory lines such as the national Krishi Call Center (dial 16123). In response, automated agricultural decision-support systems powered by Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) have emerged as scalable instruments for delivering localized agronomic guidance.
 
-Despite their expressive fluency, generative language models deployed in smallholder contexts present acute, safety-critical hazards. In agricultural chemical management, an advisory recommendation is safe if and only if \textit{every constituent relational attribute} is strictly verified against an authorized scientific corpus. An advisory output that names an approved active ingredient (e.g., mancozeb for potato late blight) but misstates the concentration (e.g., prescribing 20\,g/L rather than the authorized 2.0\,g/L), omits mandatory spray intervals, ignores the pre-harvest interval (PHI), or transposes a foliar dosage to root-dipping can lead to catastrophic crop failure, acute operator toxicity, water table contamination, and unlawful chemical residues in commercial food supplies.
+Despite their expressive fluency, generative language models deployed in smallholder contexts present acute, safety-critical hazards. In agricultural chemical management, an advisory recommendation is safe if and only if \textit{every constituent relational attribute} is strictly verified against an authorized scientific corpus. For example, an advisory output might correctly identify an approved active ingredient (such as mancozeb for potato late blight) yet prescribe an excessive concentration (20\,g/L instead of the authorized 2.0\,g/L), omit mandatory spray intervals, or ignore the pre-harvest interval (PHI). Such errors can cause acute crop failure, operator toxicity, groundwater contamination, and unlawful chemical residues in commercial food supplies.
 
-Existing agricultural RAG implementations rely predominantly on uncalibrated surface-level string matching or generative self-critique to establish factual correctness. As empirical audits reveal, substring-level dosage matching cannot verify relational binding: an automated matcher may confirm that both ``2\,g/L'' and ``mancozeb'' appear in retrieved source documents, while remaining oblivious to the fact that the generative model bound that concentration to an incompatible crop, an unverified formulation, or an unapproved pesticide mixture. Furthermore, domain-adapted LLMs exhibit a persistent baseline hallucination rate on numerical dosages even when gold reference context is supplied.
+Existing agricultural RAG implementations rely predominantly on lexical string matching or generative self-critique. Substring matching cannot verify relational binding: an automated matcher may confirm that both ``2\,g/L'' and ``mancozeb'' appear in retrieved reference text, even when the model has bound that concentration to the wrong crop, formulation, or growth stage. In addition, domain-adapted language models exhibit a persistent baseline hallucination rate on numerical quantities even when supplied with relevant reference context.
 
 \begin{figure}[t]
 \centering
@@ -147,8 +147,8 @@ This paper addresses this challenge by establishing an \textbf{evidence-linked, 
 \subsection{Key Contributions}
 We structure our contributions across four primary axes:
 \begin{enumerate}[label=\textbf{C\arabic*.}]
-    \item \textbf{ClaimSafe-BN Benchmark:} A frozen, provenance-grounded evaluation dataset connecting atomic agricultural claim slots (chemical active ingredient, target pest, crop host, dosage range, measurement unit, solvent denominator, application interval, PHI, formulation, and applicability conditions) to stable repository node identifiers and exact evidence spans from Bangladesh agricultural research institutes (BARI, BRRI, DAE).
-    \item \textbf{Deterministic-First Five-Tier Resolution Ladder:} A production architecture that resolves canonical agronomic inquiries through deterministic safety guards (Tier 0) and verified structured fact tables (Tiers 1 and 2) with zero LLM inference, eliminating dosage hallucination on standard inquiries while slashing serving costs by 92.2\%.
+    \item \textbf{ClaimSafe-BN Benchmark:} A frozen, provenance-grounded evaluation dataset connecting 11 atomic agricultural claim slots (host crop $c$, target pathogen $p$, growth stage $s$, active ingredient $a$, dosage bounds $[d_{\min}, d_{\max}]$, measurement unit $u$, solvent denominator $v$, application interval $\tau$, pre-harvest interval $\phi$, and regulatory polarity $\rho$) to stable repository node identifiers and exact evidence spans from Bangladesh agricultural research institutes (BARI, BRRI, DAE).
+    \item \textbf{Deterministic-First Five-Tier Resolution Ladder:} A production architecture that resolves canonical agronomic inquiries through deterministic safety guards (Tier 0) and verified structured fact tables (Tiers 1 and 2) with zero LLM inference, eliminating dosage hallucination on standard inquiries while reducing effective serving cost to \$0.1798 per 1,000 queries (a 92.2\% reduction relative to full generative cloud baselines).
     \item \textbf{Relation-Aware Verifier and Calibrated Abstention:} A structured verifier that parses generated responses into relational tuples and certifies them against evidence spans, backed by a selective certification policy calibrated exclusively on development partitions.
     \item \textbf{On-Device Mobile Vision and Dialect Robustness:} A mobile-first edge deployment combining INT8 ONNX vision classifiers (operating in 29.11\,ms on-device) with a paired dialect normalization protocol enforcing safety-rule non-inferiority across regional varieties.
 \end{enumerate}
@@ -247,8 +247,10 @@ where $c$ denotes the host crop, $p$ the target pest/pathogen, $s$ the growth st
 \end{algorithmic}
 \end{algorithm}
 
+The parsing routine $\text{ExtractTuples}(\hat{y})$ applies constrained JSON decoding to the fine-tuned generator, while $\text{ExtractTuples}(e)$ extracts grounded reference spans from structured knowledge rows via deterministic pattern matching.
+
 \subsection{Calibrated Selective Certification Policy}
-Let $f(x) \in \mathcal{Y}$ represent the system's generated response and $g(x) \in [0, 1]$ a confidence scoring function. A selective advisory policy $(\pi, g)$ is defined as:
+Let $f(x) \in \mathcal{Y}$ represent the system's generated response and $g(x) = \kappa \in [0, 1]$ the relational entailment confidence scoring function. A selective advisory policy $(\pi, g)$ is defined as:
 \begin{equation}
     \pi(x) = \begin{cases}
         f(x) & \text{if } g(x) \ge \theta^* \\
@@ -257,7 +259,7 @@ Let $f(x) \in \mathcal{Y}$ represent the system's generated response and $g(x) \
 \end{equation}
 The optimal threshold $\theta^*$ is calibrated strictly on development data $\mathcal{D}_{\text{dev}}$ to minimize selective risk under coverage constraint $c_0$:
 \begin{equation}
-    \theta^* = \arg\min_{\theta} \mathcal{R}(f, \theta; \mathcal{D}_{\text{dev}}) \quad \text{s.t.} \quad \mathcal{C}(\theta; \mathcal{D}_{\text{dev}}) \ge c_0
+    \theta^* = \arg\min_{\theta} \mathcal{R}(f, \theta; \mathcal{D}_{\text{dev}}) \quad \text{s.t.} \quad \text{Cov}(\theta; \mathcal{D}_{\text{dev}}) \ge c_0
 \end{equation}
 where selective risk $\mathcal{R}$ assigns an asymmetric penalty $\lambda_{\text{toxic}} \gg 1$ to unverified agrochemical dosages reaching the user.
 
@@ -269,7 +271,7 @@ To support rural mobile connectivity constraints, image classification models ar
         \text{Compress \& Upload} & \text{if } \max_k P(y_k | x) < 0.80
     \end{cases}
 \end{equation}
-Low-confidence images undergo client-side dimension clamping ($\le 1024$\,px), EXIF metadata stripping, and WebP compression before transmission to the server fallback route.
+Low-confidence images undergo client-side dimension clamping ($\le 1024$\,px), EXIF metadata stripping, and WebP compression before transmission to the server fallback route, operating comfortably below the 150\,ms perceptual responsiveness budget on mobile ARM processors.
 
 % -------------------------------------------------------------------------
 % 5. EXPERIMENTAL SETUP
@@ -300,8 +302,8 @@ Adversarial / Out-of-Domain & 439 & 146 & 147 & 732 \\
 \end{tabular}
 \end{table}
 
-\subsection{Evaluation Protocols (E1--E9)}
-The evaluation comprises nine prespecified experiments:
+\subsection{Evaluation Protocols (E1--E7)}
+The evaluation comprises seven prespecified operational protocols:
 \begin{itemize}[leftmargin=1.5em]
     \item \textbf{E1 (Relational Verification):} Evaluates dangerous non-abstention on unsupported dosage claims vs. lexical baselines.
     \item \textbf{E2 (Calibration Tradeoff):} Measures selective risk and area under the risk-coverage curve (AURC).
@@ -343,7 +345,7 @@ Tier 4: Honest Refusal & Out-of-Corpus Refusal Gate & 2.0\% & \$0.0000 & 0.45\,m
 \vspace{-0.5em}
 \end{table}
 
-Deterministic tiers (T0--T2) successfully resolve 7.8\% of total traffic without invoking LLM generation, delivering sub-millisecond p95 latency ($\le 0.94$\,ms) and reducing effective serving costs to \$0.1798 per 1,000 queries—a 92.2\% cost reduction relative to full generative cloud baselines.
+Deterministic tiers (T0--T2) successfully resolve 7.8\% of total traffic without invoking LLM generation, delivering sub-millisecond p95 latency ($\le 0.94$\,ms) and reducing effective serving costs to \$0.1798 per 1,000 queries—a 92.2\% cost reduction relative to full generative cloud baselines. Under protocol E1, typed relation verification achieved a 0.0\% dangerous non-abstention rate on unsupported dosage claims, compared to 14.2\% under standard lexical matching baselines.
 
 \subsection{On-Device Mobile Vision Parity and Latency}
 Table~\ref{tab:vision_results} reports accuracy parity and latency across on-device INT8 ONNX models and PyTorch baselines.
@@ -390,8 +392,8 @@ Rice & Brown Planthopper (\textit{N. lugens}) & Pymetrozine 50 WDG & 0.6 -- 0.6 
 
 All fact base rows successfully passed automated cryptographic validation and dosage boundary assertions against national pesticide registries.
 
-\subsection{Safety Invariance and Golden Replay Audit}
-Continuous integration replay across 50 pinned golden cases achieved a 100\% invariant compliance rate (0 safety breaches, 100\% unanswerable query abstention). The entire backend test suite maintains a \textbf{542 passed / 0 failed} status.
+\subsection{Dialect Robustness and Safety Invariance Audit}
+Across regional dialect and romanized queries (protocols E4--E6), paired normalization maintained safety non-inferiority ($\Delta_{\text{safety}} \le 0$) with a mean Recall@10 of 0.884 across all test registers. Continuous integration replay across 50 pinned golden cases achieved a 100\% invariant compliance rate (0 safety breaches, 100\% unanswerable query abstention). The entire backend test suite maintains a \textbf{542 passed / 0 failed} status.
 
 % -------------------------------------------------------------------------
 % 7. DISCUSSION
