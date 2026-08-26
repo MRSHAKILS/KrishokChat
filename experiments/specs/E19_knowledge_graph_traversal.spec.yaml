@@ -1,0 +1,19 @@
+id: E19_knowledge_graph_traversal
+title: Deterministic knowledge-graph traversal for complete 11-slot tuples
+question: Can a ≤3-hop traversal over the fact base yield complete, provenance-carrying 11-slot tuples with no LLM inference?
+motivation: transforms the LLM from reasoning engine to optional natural-language assembler; grounds the fail-closed guarantee in structure, not generation.
+design:
+  graph_construction: from R2/R12 fact base + knowledge_nodes.json
+    node_types: [crop, pest, chemical, dose, phi, unit]
+    edge_types: [affected_by, treated_by, has_dose, has_phi, applied_to]
+  traversal: detection metadata (crop, disease) → treated_by → chemical → has_dose/has_phi → tuple assembly
+  deterministic assembly: template rendering of the 11-slot tuple + provenance chain (ingestion contract ids)
+metrics:
+  - tuple_completeness (slots filled / 11) by hop depth [1,2,3,4]
+  - provenance_coverage (fraction of slots with traceable source id — must be 1.0 by construction)
+  - traversal_latency_ms, graph_size_nodes_edges
+  - coverage_gap_report: which crop×pest pairs lack complete tuples (feeds next fact-base extension, honest limitation table)
+no_fabrication_rule: missing hops are reported as gaps, never default-filled; traversal failure → tier3/tier4 path.
+script: scripts/E19_knowledge_graph_traversal/run_e19.py
+results: results/E19_knowledge_graph_traversal/e19_results.yaml
+status: planned

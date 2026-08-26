@@ -1,0 +1,25 @@
+id: E23_cache_invalidation_provenance
+title: Hash-chained cache invalidation with provenance audit trail
+question: Can the offline fact pack be invalidated/updated with tamper-evident, provenance-carrying records — and does every cached advisory stay traceable to the circular/source that certified it?
+motivation: >
+  Unique idea from IMPLEMENTATION_AND_AGGREGATION_PLAN.md §5.1. Turns E14's "stale cache" from a
+  liability into a provenance claim — our established differentiator — using the existing R9 pack format.
+design:
+  chain: each pack record carries sha256(content) linked to the previous record's hash (git-style);
+    invalidation messages reference deprecated record hashes only (lightweight update, no full re-download)
+  operations:
+    - build_chain over the current fact pack (R9 output)
+    - issue_invalidation for a simulated 2026-style ban circular (deprecate one chemical's records)
+    - apply_invalidation on a client-side copy; verify purge completeness
+    - tamper_test: flip one bit in a cached record / chain link → chain verification MUST fail
+metrics:
+  - invalidation_propagation_completeness (purged/deprecated, target 1.000)
+  - tamper_detection_rate (target 1.000 across all single-bit and record-swap mutations)
+  - bytes_transferred_per_invalidation vs full pack size (update economy)
+  - verify_chain_latency_ms
+safety_gate: any cached advisory surviving invalidation that references a deprecated record = critical
+  failure (must be 0).
+assets: backend/scripts/build_fact_pack.py output; ingestion-contract record ids.
+script: scripts/E23_cache_invalidation_provenance/run_e23.py
+results: results/E23_cache_invalidation_provenance/e23_results.yaml
+status: planned

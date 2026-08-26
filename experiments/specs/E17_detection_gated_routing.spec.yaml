@@ -1,0 +1,26 @@
+id: E17_detection_gated_routing
+title: Detection-gated deterministic routing (search-space collapse + dialect immunity)
+question: Does crop/disease detection metadata collapse the retrieval search space and grant dialect immunity relative to text-first retrieval?
+motivation: >
+  Our own prior work showed dense retrieval collapses on dialectal queries (R@10 0.506 → 0.093 on colloquial
+  registers). Image detection is modality-independent, so routing through detection should erase that failure mode.
+design:
+  arm_a: text-first retrieval (BM25 + dense hybrid, current default) over full corpus
+  arm_b: detection-gated filter — crop/disease from classifier output filters knowledge nodes BEFORE retrieval
+  confidence_sweep: gate thresholds [0.70, 0.80, 0.90] with fallback to text-first below threshold
+metrics:
+  - search_space_size (nodes examined) and reduction ratio vs full corpus
+  - retrieval hit rate @1/@5 per linguistic register (Standard Bengali, authentic farmer, regional dialect, Banglish)
+  - misrouting_rate: detection confidently wrong → wrong node set (SAFETY-CRITICAL, must be surfaced, not hidden)
+assets:
+  crop_classifier_onnx: frontend/public/models/crop_classifier.onnx (6.2 MB, task=classify)
+  potato_disease_onnx: frontend/public/models/potato_disease.onnx (21.8 MB, task=classify)
+  knowledge_nodes: backend/ml_assets/rag_index/raw/knowledge_nodes.json (~2,135 nodes post-clean)
+  dialect_benchmark: research_artifacts E06 query sets (4,000 queries, 4 registers)
+honesty_constraints:
+  - vision models are CLASSIFIERS (no bounding boxes) — paper must not claim detection boxes (AGENTS.md artifact reality note)
+  - image-query pairing does not exist for all dialect queries; use classifier over demo-assets images + explicit
+    "synthetic assignment" label, or restrict arm_b to queries with real image assignments. State coverage in results.
+script: scripts/E17_detection_gated_routing/run_e17.py
+results: results/E17_detection_gated_routing/e17_results.yaml
+status: planned

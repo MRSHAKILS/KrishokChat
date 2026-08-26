@@ -1,0 +1,8 @@
+# temp/intermediate artifacts never land in git; only frozen YAML + declared artifacts do
+scripts/*/work/
+**/__pycache__/
+*.pyc
+*.tmp
+*.log
+*.partial
+.ipynb_checkpoints/

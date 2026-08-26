@@ -11,6 +11,7 @@
 - Blueprint: `paper/archive/system_evolution_plan_2026/10_PAPER_BLUEPRINT.md` (mapped to Wiley sections in the skeleton)
 - Contributions: `09_PAPER_CONTRIBUTION_CONTRACT.md` (C1–C4) + `12_CLAIM_LEDGER.md` (S/F/U) + `docs/PAPER_POLICY.md`
 - **Venue locked 2026-08-21: Wiley *Expert Systems* journal.** The ACL SysDemo framing in `paper/literature review/10_SYNTHESIS_GAPS_POSITIONING.md` is superseded history.
+- **2026-08-27 note (venue decision pending, nothing unlocked):** a CEA (*Computers and Electronics in Agriculture*) systems-pivot was analyzed in `experiments/IMPLEMENTATION_AND_AGGREGATION_PLAN.md` with new planned layers E14–E20 traced in `experiments/registry.yaml`. Until the author explicitly re-locks the venue, this Wiley SSOT and the frozen claim ledger remain binding.
 - Wiley structure source (verified 2026-08-21): `https://onlinelibrary.wiley.com/page/journal/14680394/homepage/forauthors.html` — abstract ≤250 words (structured or unstructured), keywords 4–7, title without abbreviations, short running title ≤40 chars, last paragraph of Introduction describes paper structure.
 
 ## How to use

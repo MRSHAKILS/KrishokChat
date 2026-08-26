@@ -1,0 +1,22 @@
+id: E25_intent_classifier_training
+title: Lightweight trained intent classifier (optional Tier-2 assist) — the training experiment
+question: Can a tiny supervised classifier (FastText-class / linear over char-n-grams) match LLM intent parsing for {crop, pest, intent_type} extraction at negligible latency and zero marginal cost?
+motivation: >
+  The "training one" from suggestions_1.md. Explicitly an OPTIONAL assist arm — never part of the
+  deterministic-core claims (E18's tier1/tier2 correctness must not depend on it). If it wins, it can
+  later be proposed for app runtime as a stack amendment; until then it is an offline research artifact only.
+data:
+  train: paper/archive/system_evolution_plan_2026/execution_planning_2026_08_12/research_artifacts/datasets/frozen/T09_treatment_qa_train_v1.jsonl
+  split: train/dev/test = 90/5/5, seed 20260827, split by question to prevent leakage; test split frozen before any training run
+  labels: crop, pest, intent_type derived from tuple metadata (no manual annotation needed)
+models:
+  - fasttext_supervised (dim sweep 50–200, epoch sweep 5–25; pick dev-optimal, freeze)
+  - linear_svm_charngram (sklearn, tfidf char_wb 2–5) as sanity baseline
+  comparison_arm: LLM intent parsing via existing generator harness (latency + accuracy, no retraining)
+metrics: [intent_accuracy, crop_exact_match, pest_exact_match, latency_ms_per_query, model_size_mb, marginal_cost]
+reporting_rules: results include the frozen split hash; any test-set peeking invalidates the run (log all attempts).
+artifact_storage: trained binary + tokenizer + metrics under results/E25_intent_classifier_training/artifacts/
+  with the config used (dims/epochs/seed); artifacts are inputs to E18's optional arm only.
+script: scripts/E25_intent_classifier_training/train_e25.py
+results: results/E25_intent_classifier_training/e25_results.yaml
+status: planned

@@ -1,0 +1,16 @@
+id: E18_llm_dependency_reduction
+title: Zero-LLM resolution fraction with detection + glossary + fact-base routing
+question: What fraction of queries fully resolve with ZERO LLM calls when detection metadata and the fact base are enabled?
+motivation: R-series KPI ("% queries served with zero LLM calls") made rigorous as a paper experiment; LLM demoted from primary engine to fallback assembler.
+design:
+  extend backend/scripts/tier_mix_experiment.py (R7 harness) with an image-bearing query slice
+  resolution_paths: [tier0_safety_guard, tier1_detection_to_kb, tier2_glossary_to_kb, tier3_llm, tier4_refusal]
+  glossary asset: term map from tools/rag/05_build_term_map.py (deterministic intent matching, NOT an LLM)
+metrics:
+  - zero_llm_resolution_fraction (primary; current deterministic baseline from R7 for comparison)
+  - per-tier latency, per-tier cost, incorrect_resolution_rate per tier (verified against certified tuples)
+optional_extension: tiny FastText intent head trained on frozen T09 train split (archived research_artifacts) as a Tier-2 assist — only if time permits; report as separate arm, never merged into the deterministic core claims.
+safety_gate: tier1/tier2 resolutions must pass 11-slot verification against certified tuples; any unverified deterministic answer routes to tier3/tier4 instead.
+script: scripts/E18_llm_dependency_reduction/run_e18.py
+results: results/E18_llm_dependency_reduction/e18_results.yaml
+status: planned

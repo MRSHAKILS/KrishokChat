@@ -1,0 +1,46 @@
+# RESULT_SCHEMA_TEMPLATE.yaml — copy per layer as results/<ELAYER>/e<NN>_results.yaml
+# Fields marked REQUIRED must be present at freeze time. PENDING values block acceptance.
+meta:
+  layer: E##                    # REQUIRED
+  question: <from spec>         # REQUIRED
+  script: experiments/scripts/<ELAYER>/run_e##.py   # REQUIRED
+  spec: experiments/specs/<ELAYER>.spec.yaml        # REQUIRED
+  git_commit: <sha at run time> # REQUIRED
+  date: <YYYY-MM-DD>            # REQUIRED
+  seed: 20260827                # REQUIRED
+  duration_seconds: <int>
+environment:
+  os: <string>
+  cpu: <string>
+  python: <version>
+  key_packages: {<name>: <version>}   # only packages the metrics depend on
+parameters_echo:              # verbatim values the runner read from the spec
+  <spec keys used>: <values>
+metrics:
+  <metric_name>:
+    value: <number>
+    n: <sample size>
+    ci_95: [low, high]         # when estimable
+    raw_output: <relative path to stored raw evidence>
+verification:
+  self_checks:                 # REQUIRED, each with pass/fail
+    - {name: <check>, status: pass|fail, detail: <one line>}
+  determinism_check:
+    rerun_sample_fraction: 0.10
+    max_metric_delta: <number or "0">
+    status: pass|fail
+  real_application_check:      # REQUIRED — the live-system gate
+    backend_suite: "410 passed / 7 skipped / 0 failed"   # actual numbers
+    golden_replay: "50/50"
+    pnpm_build: green
+    layer_probe:
+      command: <exact command>
+      outcome: <one-line observed behavior>
+    golden_replay_drift: 0
+  trace_check:
+    reproducible_from: [raw output paths]
+    status: pass|fail
+acceptance:
+  accepted_by: PENDING         # author name + date; PENDING blocks acceptance
+  ledger_entry: <S/F/U id or PENDING>
+  notes: <caveats, deviations from spec, anything a reviewer must know>

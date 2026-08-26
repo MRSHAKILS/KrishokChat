@@ -1,0 +1,27 @@
+id: E14_network_degradation
+title: Rural network degradation stress test (offline-first cache vs cloud-only RAG)
+question: What is the advisory delivery success rate under simulated Bangladeshi rural 2G/Edge conditions?
+motivation: suggestions_1.md novelty 1 — cloud-only advisory is useless where connectivity is intermittent.
+hypothesis:
+  target: offline-first cache keeps delivery success >= 90% at 15% packet loss where cloud-only drops to ~40%
+  note: TARGET ONLY — must be measured before any manuscript claim (AGENTS.md rule 5).
+conditions:
+  - {name: perfect_4g, latency_ms: 60,  packet_loss: 0.0,  jitter_ms: 10}
+  - {name: urban_3g,   latency_ms: 300, packet_loss: 0.05, jitter_ms: 60}
+  - {name: rural_edge, latency_ms: 800, packet_loss: 0.15, jitter_ms: 150}
+  - {name: severe_2g,  latency_ms: 1200, packet_loss: 0.30, jitter_ms: 250}
+system_variants:
+  - cloud_only_rag        # every query hits FastAPI + retrieval + LLM
+  - offline_first_cache   # Tier 1/2 fact pack (R9) + cached certified tuples served locally
+injection_method: toxiproxy (preferred, cross-platform) on loopback between a client harness and the FastAPI backend; Linux tc/netem acceptable alternative. No mitmproxy scripting needed.
+workload:
+  queries: 1000 (sampled deterministically, seed 20260827, from backend/ml_assets/rag_index/eval/farmer_benchmark_1000.jsonl)
+  timeout_per_query_s: 15
+metrics: [delivery_success_rate, mean_latency_p50_p95, cache_hit_ratio, timeout_rate, stale_cache_served_rate]
+safety_gate: any stale-cache advisory must still pass 11-slot verification locally; count violations (must be 0).
+assets:
+  fact_pack: backend/ml_assets/ (R9 offline fact pack)
+  benchmark: backend/ml_assets/rag_index/eval/farmer_benchmark_1000.jsonl
+script: scripts/E14_network_degradation/run_e14.py
+results: results/E14_network_degradation/e14_results.yaml
+status: planned

@@ -1,0 +1,15 @@
+id: E16_hardware_profiling
+title: Battery and thermal profiling on sub-$120 Android hardware
+question: What is the energy cost of on-device INT8 ONNX + cached Tier 1/2 vs a cloud-only client?
+motivation: suggestions_1.md novelty 3 — CEA expects hardware reality on the actual devices farmers own.
+blocked_on: physical device acquisition (Xiaomi Redmi A2 / Samsung A04e / Symphony / Walton, 2GB RAM class). Do NOT simulate battery numbers.
+protocol:
+  device: TBD (record model, Android version, battery health %, screen brightness pinned 50%, airplane-mode-with-wifi for cloud arm)
+  workload: 100 image classifications via frontend ONNX runtime + 100 text queries via cached Tier 1/2
+  measurement: Android Studio Profiler battery historian + on-device battery API deltas + thermal API / CPU temperature logging every 10s
+  arms: [ondevice_pwa_cache, cloud_only_upload]
+metrics: [battery_pct_per_100_queries, cpu_temp_peak_c, thermal_throttle_events, ram_peak_mb, per_query_latency_ms]
+feasibility_note: if no device is obtainable before the deadline, report this layer as infeasible_without_external_input and fall back to a latency/RAM-only desktop proxy clearly labeled as such (AGENTS.md rule 5).
+script: scripts/E16_hardware_profiling/run_e16.py   # orchestrator + parsing of profiler exports
+results: results/E16_hardware_profiling/e16_results.yaml
+status: planned (blocked on hardware)

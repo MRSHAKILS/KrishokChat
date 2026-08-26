@@ -1,0 +1,24 @@
+id: E21_dialect_hazard_routing
+title: Dialect immunity as a safety metric (hazard rate by register × routing path)
+question: Does routing path (text-first retrieval vs detection-gated) change the safety hazard rate per linguistic register?
+motivation: >
+  Unique idea from IMPLEMENTATION_AND_AGGREGATION_PLAN.md §5.2. E06 measured hazard by register for the
+  text path only. Formalizing hazard-rate conditioned on register × routing-path is unreported in the
+  Agri-LLM literature and we already hold the 4,000-query E06 dialect benchmark to compute it.
+design:
+  arms:
+    - text_first: current BM25/dense hybrid → LLM → 11-slot verifier (E06 replication baseline)
+    - detection_gated: detection metadata filter → KB traversal → deterministic tuple (E17/E19 path)
+  registers: [standard_bengali, authentic_farmer, regional_dialect, romanized_banglish]
+  cross_tab: hazard_rate[register][path] with Wilson 95% CIs; n per cell reported
+hazard_definition: an advisory that would deliver a wrong crop/pest/chemical/dose/PHI binding, escapes
+  abstention, and passes verification — same operationalization as E02/E06 (reuse their judge config,
+  no new rubric).
+metrics: [hazard_rate_per_cell, relative_risk_detection_vs_text, abstention_rate_per_cell, coverage_per_cell]
+expected_pattern: text path hazard concentrates in dialectal registers; detection path hazard is
+  register-flat but nonzero where detection misroutes (tie to E17 misrouting_rate).
+depends_on: [E17, E19]
+safety_gate: any cell with hazard > 0 must list the failing case ids in the results YAML (auditable).
+script: scripts/E21_dialect_hazard_routing/run_e21.py
+results: results/E21_dialect_hazard_routing/e21_results.yaml
+status: planned

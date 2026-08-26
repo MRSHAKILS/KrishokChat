@@ -1,0 +1,31 @@
+id: E26_chunk_fallback_coverage_safety
+title: Grounded chunk fallback — coverage lift vs safety cost (nodes first, chunks as gated evidence)
+question: How many currently-refused zero-source queries become verifiably grounded answers via the MD-chunk fallback, and does any fail-closed guarantee weaken?
+motivation: >
+  R13/Amendment 03 validation. Today zero-source safe-agri queries refuse after one node-retrieval
+  attempt. The 2,946 institutional MDs (source_md/) hold content absent from the 2,135 nodes; GCF
+  exposes it as verifier-gated evidence. This experiment measures the trade before the flag may
+  default on.
+depends_on: [R13 implementation (DONE 2026-08-27), Amendment 03 approval (APPROVED 2026-08-27)]
+design:
+  query_set: zero-source slice = queries currently refused with mode="no_sources" from
+    (a) backend/ml_assets/rag_index/eval/coverage_gaps_v1.json (C1 report over 1,000 farmer queries)
+    plus (b) any golden/benchmark queries with the same signature; n reported in results.
+  arms:
+    - node_only: current pipeline (expected: refusal on all of the slice by construction)
+    - node_plus_chunk: CHUNK_FALLBACK_ENABLED=true (R13)
+  procedure: replay both arms through the real backend (ACCEPTANCE_PROTOCOL real-application check);
+    every GCF answer passes the standard verifier; chemical claims not grounded in the chunk text
+    must be stripped or refused.
+metrics:
+  - coverage_lift: fraction of slice now returning verifier-passing grounded answers (primary)
+  - grounded_answer_quality: verifier pass rate + citation validity (answer cites the chunk provenance)
+  - hazard_rate: fail-closed violations must be exactly 0 (any nonzero = reject the rollout)
+  - node_first_non_regression: golden replay 50/50 with flag on; node-hit queries never touch chunk index (assert via logs)
+  - latency_overhead_ms: added p95 latency on the fallback branch only (node path delta must be 0)
+  - promotion_queue_yield: top uncovered chunks by hit frequency (hand-off to E24 / R1 authoring)
+reporting_rules: per-query outcomes stored (refused/grounded/stripped→refused) with chunk ids and
+  node-coverage status; no aggregate-only reporting.
+script: scripts/E26_chunk_fallback_coverage_safety/run_e26.py
+results: results/E26_chunk_fallback_coverage_safety/e26_results.yaml
+status: planned (substrate ready: R13 dark-launched, index built 2026-08-27)

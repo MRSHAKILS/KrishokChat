@@ -1,0 +1,19 @@
+id: E15_sms_compressor
+title: Deterministic 11-slot → 160-character SMS compressor fidelity test
+question: Does a fixed template preserve 100% of safety-critical slots (dose_min, dose_max, unit, phi, tau) under GSM 03.38 160-char limit, where LLM-compressed SMS truncates them?
+motivation: suggestions_1.md novelty 2 — feature-phone farmers cannot receive app/LLM verbosity; PHI truncation is a poisoning hazard.
+design:
+  arm_a: deterministic template compressor (pure function over certified tuple C)
+  arm_b: LLM asked to "summarize advisory for SMS" (same generator as Tier 3)
+  arm_c: naive truncation of full advisory (lower bound)
+template: "DAE ADV: {crop}: {pest}. Use {active} {formulation} @{dose_min}-{dose_max}{unit}/{vol}. Spray every {tau}d. PHI {phi}d. Helpline 16123."
+dataset: 1000 certified tuples sampled (seed 20260827) from misbinding_attack_suite_v2.jsonl certified/answerable subset + fact-base tuples (R2/R12).
+metrics:
+  - slot_survival_rate per slot (primary: dose bounds + phi must be 1.000 in arm_a)
+  - char_length_distribution, gsm0338_codec_compliance
+  - unicode_fallback: Bengali characters force UCS-2 (70-char limit) — test ASCII-transliterated variant too
+pass_criteria: arm_a slot_survival == 1.000 for dose_min/dose_max/unit/phi/tau AND arm_b shows >= 1 observed critical-slot loss (documents the hazard).
+implementation_notes: single pure-python module; no LLM dependency in arm_a; arm_b reuses existing generator harness from E11.
+script: scripts/E15_sms_compressor/run_e15.py
+results: results/E15_sms_compressor/e15_results.yaml
+status: planned

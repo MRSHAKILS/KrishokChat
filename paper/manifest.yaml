@@ -1,0 +1,56 @@
+# paper/manifest.yaml — single source of truth for the paper folder.
+# Every entry is traceable; nothing outside this manifest should live in paper/.
+# Last audited: 2026-08-27
+
+meta:
+  project: KrishokChat Advisory System
+  active_venue: Wiley Expert Systems (frozen 2026-08-21, see manuscript/README.md)
+  target_venue_under_pivot: Computers and Electronics in Agriculture (CEA)
+  paper_policy: docs/PAPER_POLICY.md
+  deprecated_arxiv_ban: arXiv:2606.29243 must never be cited, linked, or summarized
+
+manuscript:
+  path: manuscript/
+  compile_target: manuscript/krishokchat_wiley_expert_systems.tex
+  compiled_pdf: manuscript/krishokchat_wiley_expert_systems.pdf
+  claim_ledger: manuscript/CLAIM_LEDGER_FREEZE.md   # frozen 2026-08-21; S/F/U claim IDs
+  ssot_outline: manuscript/expert-systems-skeleton.md
+  planning:
+    - manuscript/README.md
+    - manuscript/T25_paper_skeleton_v1.md
+  drafts: manuscript/drafts/                        # per-section v1 markdown drafts
+  figures: manuscript/figures/                      # fig_1.png (architecture)
+  build_artifacts: ignored via paper/.gitignore (aux/log/out/etc.)
+
+literature_review:
+  path: literature review/
+  scope: literature review/00_SCOPE_AND_ANGLES.md
+  synthesis: literature review/10_SYNTHESIS_GAPS_POSITIONING.md
+  gaps_matrix: literature review/11_RESEARCH_GAPS_competitive_matrix.md
+  asset_verification: literature review/12_ASSET_VERIFICATION.md  # HF dataset recovery evidence
+  topics: [01_agentic_rag_verifier_systems, 02_llm_safety_low_resource, 03_low_resource_nlp_bengali,
+           04_agri_ai_advisory_systems, 05_vision_crop_disease, 06_system_industry_track_conventions,
+           07_retrieval_low_resource_rag_eval, 08_edge_slm_streaming_systems, 09_ict4d_global_south]
+
+reviews:
+  path: reviews/
+  active: reviews/suggestions_1.md   # CEA systems-engineering pivot review (network/SMS/hardware/DGDR)
+  # suggestions_2..5.md removed 2026-08-27 (superseded); recoverable from git history.
+
+published:
+  path: done papers/   # authoritative prior papers; reference by filename only
+  papers:
+    - done papers/KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf
+    - done papers/AgriTrust.pdf
+
+archive:
+  path: archive/
+  contents:
+    - archive/LITERATURE_REVIEW_legacy_2026_08_11.md
+    - archive/system_evolution_plan_2026/   # historical planning incl. frozen datasets/reports snapshots
+  policy: read-only history; never cite as current state
+
+experiment_trace:
+  canonical_registry: ../experiments/registry.yaml   # E-series master trace lives outside paper/
+  results_home: ../research_artifacts/evaluations/   # YAML results per experiment layer
+  plan: ../experiments/IMPLEMENTATION_AND_AGGREGATION_PLAN.md

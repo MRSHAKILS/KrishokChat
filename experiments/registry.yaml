@@ -1,0 +1,162 @@
+# experiments/registry.yaml — master trace of every experiment layer in the project.
+# Status values: done | planned | infeasible_without_external_input
+# IMPORTANT: "target" fields are HYPOTHESES for power analysis / acceptance gates,
+# never measured results. Publishing a target as a result violates AGENTS.md rule 5.
+# Last audited: 2026-08-27
+
+schema:
+  id: E## canonical layer number (this file resolves all conflicting older numbering)
+  question: one-line research question
+  script: path to runner that produces the result
+  results: path to frozen YAML/JSON results
+  claims: claim IDs in paper/manuscript/CLAIM_LEDGER_FREEZE.md
+  status: done | done_unverified | planned | blocked
+
+completed_layers:   # executed battery — results frozen in research_artifacts/evaluations/
+  E02_relational_misbinding:
+    question: Does the 11-slot relational verifier prevent crop/pest/chemical misbinding vs lexical RAG?
+    script: research_artifacts/scripts/runners/run_relational_attack_eval.py
+    results: research_artifacts/evaluations/baselines/misbinding_benchmark_results.yaml
+    dataset: research_artifacts/datasets/attacks/relational_misbinding/misbinding_attack_suite_v2.jsonl
+    status: done
+  E03_slot_ablation:
+    question: Which of the 11 safety slots carry the hazard-prevention load?
+    script: research_artifacts/scripts/runners/run_slot_ablation_eval.py
+    results: research_artifacts/evaluations/ablations/slot_ablation_benchmark_results.yaml
+    status: done
+  E04_risk_coverage_calibration:
+    question: Does the abstention score yield a risk-coverage operating point on 20,112 safety QA rows?
+    script: research_artifacts/scripts/runners/run_calibration_evaluation.py
+    results: research_artifacts/evaluations/calibration/risk_coverage_calibration_results.yaml
+    status: done
+  E05_counterfactual_binding:
+    question: Do counterfactual evidence edits flip the bound answer (evidence sensitivity)?
+    script: research_artifacts/scripts/runners/run_counterfactual_eval.py
+    results: research_artifacts/evaluations/robustness/counterfactual_binding_results.yaml
+    status: done
+  E06_farmer_dialect_benchmark:
+    question: Hazard rate across Standard Bengali / authentic-farmer / regional dialect / Banglish registers?
+    script: research_artifacts/scripts/runners/run_farmer_benchmark_eval.py
+    results: research_artifacts/evaluations/robustness/farmer_dialect_benchmark_results.yaml
+    status: done
+  E07_E08_prompt_injection:
+    question: Does the pipeline resist direct/indirect prompt injection over retrieved evidence?
+    script: research_artifacts/scripts/runners/run_security_injection_eval.py
+    results: research_artifacts/evaluations/security/prompt_injection_benchmark_results.yaml
+    status: done
+  E09_latency_economics:
+    question: Latency decomposition and per-query cost of the tiered pipeline?
+    script: research_artifacts/scripts/runners/run_latency_economic_eval.py
+    results: research_artifacts/evaluations/deployment/latency_economics_decomposition_results.yaml
+    status: done
+  E10_failure_taxonomy:
+    question: Root-cause taxonomy of residual safety failures (100-case audit)?
+    script: research_artifacts/scripts/runners/run_failure_taxonomy_eval.py
+    results: research_artifacts/evaluations/failure_analysis/safety_failure_taxonomy_results.yaml
+    status: done
+  E11_multi_generator_invariance:
+    question: Is verifier behavior stable across generator models?
+    script: research_artifacts/scripts/runners/run_multi_generator_eval.py
+    results: research_artifacts/evaluations/baselines/multi_generator_invariance_results.yaml
+    status: done
+  E12_retrieval_degradation:
+    question: Does the system degrade safely as retrieval quality is poisoned/dropped?
+    script: research_artifacts/scripts/runners/run_retrieval_degradation_eval.py
+    results: research_artifacts/evaluations/robustness/retrieval_degradation_results.yaml
+    status: done
+  E13_human_expert_validation:
+    question: Do Bengali-speaking agronomists rate system advisories at/above baseline human answers?
+    script: research_artifacts/scripts/runners/run_human_expert_eval.py
+    results: research_artifacts/evaluations/human_eval/expert_human_evaluation_results.yaml
+    status: done
+  R7_tier_mix:
+    question: Cost/tier-mix of the five-tier ladder (production-side complement to E09)?
+    script: backend/scripts/tier_mix_experiment.py
+    results: docs/production_readiness/reports/ (R7 task outputs)
+    status: done
+
+# ---- NEW CEA-pivot layers (planned). Numbering note: suggestions_1.md used two
+# conflicting E14–E20 lists; this registry is the canonical resolution. ----
+planned_layers:
+  E14_network_degradation:
+    question: Advisory delivery success rate of offline-first cache vs cloud-only RAG under simulated 2G/Edge (latency 800ms+, 15% packet loss)?
+    spec: specs/E14_network_degradation.spec.yaml
+    status: planned
+    feasibility: high   # no hardware needed; toxiproxy/clumsy or tc on loopback
+  E15_sms_compressor:
+    question: Does a deterministic 11-slot→160-char SMS template preserve 100% of dosage/PHI bounds where LLM-compressed SMS truncates them?
+    spec: specs/E15_sms_compressor.spec.yaml
+    status: planned
+    feasibility: high   # pure software; uses certified tuples from E02 suite
+  E16_hardware_profiling:
+    question: Battery drain and thermal profile of on-device INT8 ONNX + cached Tier 1/2 vs cloud-only on a sub-$120 Android device?
+    spec: specs/E16_hardware_profiling.spec.yaml
+    status: planned
+    feasibility: medium # REQUIRES physical device (Redmi A2 / Symphony / Walton); blocked until purchased
+  E17_detection_gated_routing:
+    question: Does detection metadata (crop+disease) collapse the retrieval search space and grant dialect immunity (vs text-first R@k)?
+    spec: specs/E17_detection_gated_routing.spec.yaml
+    status: planned
+    feasibility: high   # all assets on disk: ONNX models, knowledge_nodes, farmer_benchmark
+  E18_llm_dependency_reduction:
+    question: What fraction of queries resolve with ZERO LLM calls when detection+fact-base routing is enabled (vs current tier mix)?
+    spec: specs/E18_llm_dependency_reduction.spec.yaml
+    status: planned
+    feasibility: high   # extends R7 tier_mix harness with image-path queries
+  E19_knowledge_graph_traversal:
+    question: Can a 3-hop traversal over the fact base yield complete 11-slot tuples with provenance and no LLM?
+    spec: specs/E19_knowledge_graph_traversal.spec.yaml
+    status: planned
+    feasibility: high   # deterministic; builds on R2/R12 fact base + ingestion contract
+  E20_telecom_economics:
+    question: Updated C_safe with real BD bulk-SMS (~0.20 BDT/SMS) and local VPS hosting vs commercial LLM APIs?
+    spec: specs/E20_telecom_economics.spec.yaml
+    status: planned
+    feasibility: medium # needs verified 2026 price sheets from operators (desk research, no fabrication)
+  E21_dialect_hazard_routing:
+    question: Does routing path (text-first vs detection-gated) change safety hazard rate per linguistic register?
+    spec: specs/E21_dialect_hazard_routing.spec.yaml
+    status: planned
+    feasibility: high   # unique idea §5.2; reuses E06 sets + E17/E19 paths
+    depends_on: [E17, E19]
+  E22_sms_injection_immunity:
+    question: Can prompt-injection payloads survive into outbound SMS (deterministic template vs LLM-composed)?
+    spec: specs/E22_sms_injection_immunity.spec.yaml
+    status: planned
+    feasibility: high   # unique idea §5.4; reuses E15 compressor + E07 suite
+    depends_on: [E15]
+  E23_cache_invalidation_provenance:
+    question: Tamper-evident hash-chained invalidation of the offline fact pack, with provenance per cached advisory?
+    spec: specs/E23_cache_invalidation_provenance.spec.yaml
+    status: planned
+    feasibility: high   # unique idea §5.1; builds on R9 pack
+  E24_coverage_gap_growth_loop:
+    question: How much coverage does one targeted fact-base extension close, at what authoring cost?
+    spec: specs/E24_coverage_gap_growth_loop.spec.yaml
+    status: planned
+    feasibility: medium # unique idea §5.3; needs one real authoring session (one crop×pest cluster)
+    depends_on: [E19]
+  E25_intent_classifier_training:
+    question: Can a tiny trained classifier match LLM intent parsing at negligible latency/cost (optional Tier-2 assist)?
+    spec: specs/E25_intent_classifier_training.spec.yaml
+    status: planned
+    feasibility: high   # the "training one"; frozen T09 train split archived; offline research artifact only,
+                        # NOT app runtime — any runtime integration needs a stack amendment per AGENTS.md §2.6
+  E26_chunk_fallback_coverage_safety:
+    question: How many refused zero-source queries become verifiably grounded answers via MD-chunk fallback, at what safety cost?
+    spec: specs/E26_chunk_fallback_coverage_safety.spec.yaml
+    status: planned
+    feasibility: high   # substrate READY: R13 implemented 2026-08-27 (Amendment 03 §7) —
+                        # 4,815-chunk index built, node->md map 1,713/2,120, flag default-off;
+                        # this experiment gates flipping CHUNK_FALLBACK_ENABLED default to ON
+
+cross_cutting:
+  aggregation_plan: IMPLEMENTATION_AND_AGGREGATION_PLAN.md
+  acceptance_protocol: ACCEPTANCE_PROTOCOL.md          # run → verify → real-app check → freeze → accept
+  result_schema: results/RESULT_SCHEMA_TEMPLATE.yaml
+  config_convention: the spec YAML IS the config; runners read specs/<layer>.spec.yaml directly (no duplicate configs)
+  runner_convention_completed: research_artifacts/scripts/runners/run_<layer>_eval.py
+  results_convention_completed: research_artifacts/evaluations/<category>/<layer>_results.yaml
+  new_scripts_home: scripts/          # one folder per layer: scripts/E14_network_degradation/ (+ work/ for temps, gitignored)
+  new_results_home: results/          # mirrors script folder names; frozen YAML only, per RESULT_SCHEMA_TEMPLATE.yaml
+  acceptance_states: done_unverified until the author signs acceptance.accepted_by in the result YAML

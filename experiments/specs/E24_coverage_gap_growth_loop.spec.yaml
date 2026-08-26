@@ -1,0 +1,23 @@
+id: E24_coverage_gap_growth_loop
+title: Coverage-gap-driven fact-base growth loop (measure → extend → re-measure)
+question: How much query coverage does one targeted fact-base extension close, at what authoring cost?
+motivation: >
+  Unique idea from IMPLEMENTATION_AND_AGGREGATION_PLAN.md §5.3. Combines E19's tuple-coverage gaps with
+  the C1 coverage-gap analysis into an operational deployment methodology, demonstrated on one real extension.
+design:
+  step_1_measure: coverage gap report = E19 gap table ∪ tools/rag/13_coverage_gap_analysis.py output
+    (1,000 farmer queries vs corpus)
+  step_2_extend: author fact-base entries for the single highest-traffic gap (one crop×pest cluster,
+    following docs/refactor/KNOWLEDGE_INGESTION_CONTRACT.md — no fabricated dosage/PHI; sources required)
+  step_3_remeasure: re-run E19 traversal + coverage analysis on the extended base
+metrics:
+  - queries_newly_resolvable (zero-LLM) per authored entry
+  - gap_closure_rate for the targeted cluster (target ≥ 1.0 for that cluster, honestly reported overall)
+  - authoring_cost_minutes and entries_added (reported, not claimed as scalable without more data)
+honesty_constraints: extension entries must cite a real source per the ingestion contract; unsourced
+  slots stay empty and count as coverage failure.
+depends_on: [E19]
+feasibility_note: medium — requires one real authoring session; scope is strictly one cluster.
+script: scripts/E24_coverage_gap_growth_loop/run_e24.py
+results: results/E24_coverage_gap_growth_loop/e24_results.yaml
+status: planned
