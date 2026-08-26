@@ -182,6 +182,21 @@ def build_container(settings: Settings) -> AppContainer:
             crop_calendars=crop_calendars,
             min_confidence=settings.structured_resolver_min_confidence,
         )
+    # R13: grounded chunk fallback (Amendment 03). None unless the flag is on,
+    # and the resolver itself degrades to unavailable when index files are
+    # missing or fail their sha256 pins — in every off path the pipeline keeps
+    # today's byte-identical REFERRAL behavior.
+    chunk_fallback = None
+    if settings.chunk_fallback_enabled:
+        from app.application.chunk_fallback import ChunkFallbackResolver
+
+        chunk_fallback = ChunkFallbackResolver(
+            index_dir=settings.rag_chunk_index_dir,
+            source_dir=settings.rag_source_md_dir,
+            top_k=settings.chunk_fallback_top_k,
+        )
+        if not chunk_fallback.available:
+            chunk_fallback = None
     pipeline = QAPipeline(
         safety=SafetyClassifier(intent_llm),
         retriever=retriever,
@@ -219,6 +234,7 @@ def build_container(settings: Settings) -> AppContainer:
         # P0-7: corpus tag in demo-cache keys (invalidate on index rebuild).
         corpus_version=settings.corpus_version,
         resolver=resolver,
+        chunk_fallback=chunk_fallback,
     )
     vision = VisionPipeline(
         registry=ArtifactVisionRegistry(Path(settings.ml_assets_dir) / "vision"),

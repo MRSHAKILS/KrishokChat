@@ -11,8 +11,7 @@ This folder contains the retrieval-augmented generation (RAG) database for the K
 ```
 rag_index/
 ├── raw/                          # Original unmodified data
-│   ├── knowledge_nodes.json      # 2,120 nodes from AgriTrust
-│   └── provenance/               # Node→QA and MD→QA mapping manifests
+│   └── knowledge_nodes.json      # 2,120 nodes from AgriTrust
 │
 ├── source_md/                    # 2,946 source markdown files
 │   ├── BARC/                     # 321 files
@@ -30,7 +29,13 @@ rag_index/
 │   ├── bm25_corpus_tok.pkl       # Tokenized corpus
 │   ├── embeddings.npy            # Dense vectors (mE5-small, 384d)
 │   ├── nodes.faiss               # FAISS IndexFlatIP
-│   └── node_ids.json             # Row index → node_id mapping
+│   ├── node_ids.json             # Row index → node_id mapping
+│   ├── chunks_bm25.pkl           # R13: BM25 over 4,815 source_md chunks (fallback evidence)
+│   ├── chunks_corpus.jsonl       # R13: chunk records (path+offsets+sha256, no text copy)
+│   └── chunks_sha256.txt         # R13: pin of the chunk artifacts
+│
+├── provenance/                   # Node→QA and MD→QA manifests (top level, not raw/)
+│   └── node_to_md_map.json       # R13: precision-first node→MD coverage map (1,713/2,120)
 │
 ├── scripts/
 │   ├── 01_clean_and_normalize.py # Bengali Unicode normalization + cleaning

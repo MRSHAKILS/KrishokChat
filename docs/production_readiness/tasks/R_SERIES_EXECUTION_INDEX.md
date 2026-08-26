@@ -1,7 +1,7 @@
 # R-Series Execution Index — Architecture Refinement Roadmap
 
-**Status:** R1, R2, R3, R4, R5, R7 DONE (2026-08-25). Remaining tasks (R6, R8–R12): unblocked & ready.
-**Date:** 2026-08-25
+**Status:** R1–R12 DONE (2026-08-25/26). R13 DONE (2026-08-27, Amendment 03 — grounded chunk fallback, dark-launched flag default-off pending E26).
+**Date:** 2026-08-25 (updated 2026-08-27)
 **Owner:** researcher (sole engineer); implementation by coder agents, one task at a time.
 
 This is the **single entry point** for the architecture-refinement work. It says
@@ -46,10 +46,14 @@ one number.
 | 9 | `R10_ondevice_classifier_export.md` | mobile diagnosis latency claim (U1) + confidence-gated upload (U3) | R9 | ✅ DONE — 2026-08-26 |
 | 10 | `R11_task_first_home_provenance.md` | task-first home + system-wide provenance badges | R3, R9 | ✅ DONE — 2026-08-26 |
 | 11 | `R12_extend_fact_base_maize_rice.md` | proves "data op not rewrite" (maize FAW + rice pests) | R4 | ✅ DONE — 2026-08-25 |
+| 12 | `R13_grounded_chunk_fallback.md` | nodes-first MD-chunk evidence fallback before T4 refusal; feeds E26 + the node-authoring queue | R1, R3, R4; **Amendment 03** | ✅ DONE — 2026-08-27 (dark launch, flag default-off; 4,815 chunks, 1,713/2,120 node map, golden replay 50/50 with flag on) |
 
-**All 12 R-series specs are now written** and live in this folder. Each is
-independently executable by a fresh agent: it names exact file/line anchors, a
-stop/go gate, invariants, and a rollback.
+**All 13 R-series tasks are DONE** (R13 under Amendment 03, APPROVED 2026-08-27;
+implementation record in the amendment §7). Each spec is independently
+executable by a fresh agent: it names exact file/line anchors, a stop/go gate,
+invariants, and a rollback. **Next step for R13:** run experiment E26
+(`experiments/specs/E26_chunk_fallback_coverage_safety.spec.yaml`) before the
+flag may default ON.
 
 **Suggested first sprint:** R3 → R1 → R2 → R4, with R8 in parallel (no deps).
 R3 first because it is pure instrumentation and lands with no behavior change,

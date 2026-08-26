@@ -1,0 +1,3989 @@
+{
+  "meta": {
+    "method": "institution(citation prefix) + section-title slug token-overlap >= 0.7 (precision-first)",
+    "nodes_total": 2120,
+    "nodes_mapped": 1713,
+    "md_files_matched": 1042,
+    "sample_top20": [
+      {
+        "md_path": "DAE/dae_pesticide_whitelist/sections/171_list_of_registered_public_health_pesticides_php_in_banglades.md",
+        "n_nodes": 19,
+        "node_ids": [
+          "DAE_PEST_A8D48E_001",
+          "DAE_PEST_033C19_001",
+          "DAE_PEST_C45786_001"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_frg_2024/sections/116_fertilizer_management.md",
+        "n_nodes": 9,
+        "node_ids": [
+          "B4_FRG2024_D249CD_001",
+          "B4_FRG2024_D249CD_002",
+          "B5_BARCAG_706F27_002"
+        ]
+      },
+      {
+        "md_path": "CABI/cabi_brassica_disease_manuals/sections/46_downy_mildew.md",
+        "n_nodes": 9,
+        "node_ids": [
+          "CABI_BRASSICA_77C2B2_001",
+          "CABI_BRASSICA_6FD5BE_001",
+          "CABI_BRASSICA_5F79AA_001"
+        ]
+      },
+      {
+        "md_path": "DoF/worldfish_household_pond_aquaculture_2011/sections/07_facilitator_group_session_planning_1.md",
+        "n_nodes": 9,
+        "node_ids": [
+          "B6_DOC_470806_001",
+          "B6_DOC_064372_001",
+          "B6_DOC_DCFEC0_001"
+        ]
+      },
+      {
+        "md_path": "CABI/cabi_brassica_disease_manuals/sections/42_black_rot.md",
+        "n_nodes": 7,
+        "node_ids": [
+          "CABI_BRASSICA_7A0C58_001",
+          "CABI_BRASSICA_843B60_001",
+          "CABI_BRASSICA_C7579B_001"
+        ]
+      },
+      {
+        "md_path": "DLS/dls_good_livestock_practices/sections/019_4_1_2_dairy_cattle_breeds.md",
+        "n_nodes": 7,
+        "node_ids": [
+          "B5_DLSLIVE_E10C1B_001",
+          "B5_DLSLIVE_589407_001",
+          "B5_DLSLIVE_589407_002"
+        ]
+      },
+      {
+        "md_path": "DoF/worldfish_carp_polyculture_manual_2011/sections/119_common_fish_disease.md",
+        "n_nodes": 7,
+        "node_ids": [
+          "B6_DOC_1BEDB7_001",
+          "B6_DOC_72C26F_001",
+          "B6_DOC_830DE7_001"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_frg_2024/sections/027_aez_30_akhaura_terrace.md",
+        "n_nodes": 6,
+        "node_ids": [
+          "B4_FRG2024_DAB7C1_001",
+          "B4_FRG2024_DAB7C1_002",
+          "B4_FRG2024_DAB7C1_003"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_frg_2024/sections/039_t_aman_rice.md",
+        "n_nodes": 6,
+        "node_ids": [
+          "B4_FRG2024_E35BB1_001",
+          "B4_FRG2024_E35BB1_002",
+          "B4_FRG2024_E35BB1_003"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_frg_2024/sections/052_chinese_cabbage_brassica_chinensis.md",
+        "n_nodes": 6,
+        "node_ids": [
+          "B4_FRG2024_F0B5BA_001",
+          "B4_FRG2024_F0B5BA_002",
+          "B4_FRG2024_F0B5BA_003"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_handbook_agri_tech/sections/019_mustard_intercultural_operation.md",
+        "n_nodes": 6,
+        "node_ids": [
+          "B5_BARCAG_61C0B0_001",
+          "B5_BARCAG_61C0B0_002",
+          "B5_BARCAG_61C0B0_003"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_handbook_agri_tech/sections/073_cucumber_harvesting_preservation.md",
+        "n_nodes": 6,
+        "node_ids": [
+          "B5_BARCAG_15552F_001",
+          "B5_BARCAG_15552F_002",
+          "B5_BARCAG_15552F_003"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_handbook_agri_tech/sections/088_banana_intercultural_operation.md",
+        "n_nodes": 6,
+        "node_ids": [
+          "B5_BARCAG_B4A4AA_001",
+          "B5_BARCAG_B4A4AA_002",
+          "B5_BARCAG_B4A4AA_003"
+        ]
+      },
+      {
+        "md_path": "DLS/dls_good_livestock_practices/sections/014_3_2_2_housing_facilities.md",
+        "n_nodes": 6,
+        "node_ids": [
+          "B5_DLSLIVE_AD4B62_001",
+          "B5_DLSLIVE_AD4B62_002",
+          "B5_DLSLIVE_FDE07F_001"
+        ]
+      },
+      {
+        "md_path": "DoF/worldfish_carp_polyculture_manual_2011/sections/042_fish_fry.md",
+        "n_nodes": 6,
+        "node_ids": [
+          "B6_DOC_2C148A_001",
+          "B6_DOC_2C148A_002",
+          "B6_DOC_36FEB4_001"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_frg_2024/sections/010_aez_7_active_brahmaputra_jamuna_floodplain.md",
+        "n_nodes": 5,
+        "node_ids": [
+          "B4_FRG2024_7CACF6_001",
+          "B4_FRG2024_5529C6_001",
+          "B4_FRG2024_6D8150_001"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_frg_2024/sections/142_wheat_chickpea_mixedcropping.md",
+        "n_nodes": 5,
+        "node_ids": [
+          "B4_FRG2024_6FCB69_001",
+          "B4_FRG2024_6FCB69_002",
+          "B4_FRG2024_6FCB69_003"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_handbook_agri_tech/sections/015_potato_intercultural_operation.md",
+        "n_nodes": 5,
+        "node_ids": [
+          "B5_BARCAG_AF08BA_001",
+          "B5_BARCAG_AF08BA_002",
+          "B5_BARCAG_AF08BA_003"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_handbook_agri_tech/sections/024_groundnut_harvesting_preservation.md",
+        "n_nodes": 5,
+        "node_ids": [
+          "B5_BARCAG_D4BA83_001",
+          "B5_BARCAG_D4BA83_002",
+          "B5_BARCAG_D4BA83_003"
+        ]
+      },
+      {
+        "md_path": "BARC/barc_handbook_agri_tech/sections/068_carrot_intercultural_operation.md",
+        "n_nodes": 5,
+        "node_ids": [
+          "B5_BARCAG_83F539_001",
+          "B5_BARCAG_83F539_002",
+          "B5_BARCAG_83F539_003"
+        ]
+      }
+    ]
+  },
+  "md_paths": {
+    "BARC/barc_frg_2024/sections/002_aez_30_akhaura_terrace_11324_ha.md": [
+      "B4_FRG2024_E52B41_001"
+    ],
+    "BARC/barc_frg_2024/sections/003_3_4_soil_fertility_status_in_different_fragile_ecosystems.md": [
+      "B4_FRG2024_1708AC_001"
+    ],
+    "BARC/barc_frg_2024/sections/004_e_hill_ecosystem.md": [
+      "B4_FRG2024_7DEDEC_001",
+      "B4_FRG2024_7DEDEC_002"
+    ],
+    "BARC/barc_frg_2024/sections/005_aez_2_active_tista_floodplain.md": [
+      "B4_FRG2024_C5C91E_001",
+      "B4_FRG2024_B1DB7E_001",
+      "B4_FRG2024_842240_001"
+    ],
+    "BARC/barc_frg_2024/sections/006_aez_3_tista_meander_floodplain.md": [
+      "B4_FRG2024_A7FFE9_001",
+      "B4_FRG2024_1568A0_001",
+      "BARC_SHATA_422461_001"
+    ],
+    "BARC/barc_frg_2024/sections/007_aez_4_karatoya_bangali_floodplain.md": [
+      "B4_FRG2024_DFEEA7_001",
+      "B4_FRG2024_8A0335_001",
+      "BARC_SHATA_C3BD5B_001"
+    ],
+    "BARC/barc_frg_2024/sections/008_aez_5_lower_atrai_basin.md": [
+      "B4_FRG2024_3BD3DF_001",
+      "B4_FRG2024_847CF3_001",
+      "BARC_SHATA_CD0EE0_001"
+    ],
+    "BARC/barc_frg_2024/sections/009_aez_6_lower_punarbhaba_floodplain.md": [
+      "B4_FRG2024_C7121C_001",
+      "B4_FRG2024_9A40D2_001",
+      "BARC_SHATA_D1B94B_001"
+    ],
+    "BARC/barc_frg_2024/sections/010_aez_7_active_brahmaputra_jamuna_floodplain.md": [
+      "B4_FRG2024_7CACF6_001",
+      "B4_FRG2024_5529C6_001",
+      "B4_FRG2024_6D8150_001",
+      "BARC_SHATA_EB9632_001",
+      "BARC_SHATA_995ECD_001"
+    ],
+    "BARC/barc_frg_2024/sections/011_aez_8_young_brahmaputra_and_jamuna_floodplain.md": [
+      "B4_FRG2024_4696F1_001",
+      "B4_FRG2024_BAD7E7_001"
+    ],
+    "BARC/barc_frg_2024/sections/012_aez_9_old_brahmaputra_floodplain.md": [
+      "B4_FRG2024_097F8E_001",
+      "B4_FRG2024_DD7B99_001",
+      "BARC_SHATA_972405_001"
+    ],
+    "BARC/barc_frg_2024/sections/013_aez13_ganges_tidal_floodplain.md": [
+      "B4_FRG2024_6A8EBE_001"
+    ],
+    "BARC/barc_frg_2024/sections/014_aez_14_gopalganj_khulna_bils.md": [
+      "B4_FRG2024_771BD5_001",
+      "B4_FRG2024_771BD5_002",
+      "B4_FRG2024_4D5E84_001"
+    ],
+    "BARC/barc_frg_2024/sections/015_aez_15_arial_bil.md": [
+      "B4_FRG2024_506847_001",
+      "B4_FRG2024_506847_002"
+    ],
+    "BARC/barc_frg_2024/sections/016_aez_16_middle_mehgna_river_floodplain.md": [
+      "B4_FRG2024_A04827_001"
+    ],
+    "BARC/barc_frg_2024/sections/017_aez_20_eastern_surma_kushiyara_floodplain.md": [
+      "B4_FRG2024_F7857D_001",
+      "B8_FERT2018_FF72A4_001",
+      "BARC_SHATA_3B1FA6_001"
+    ],
+    "BARC/barc_frg_2024/sections/018_aez_21_sylhet_basin.md": [
+      "B4_FRG2024_3F5D81_001",
+      "B4_FRG2024_3F5D81_002",
+      "B4_FRG2024_E1DD57_001",
+      "BARC_SHATA_CD37C2_001"
+    ],
+    "BARC/barc_frg_2024/sections/019_aez_22_northern_and_eastern_piedmont_plains.md": [
+      "B4_FRG2024_973F4A_001"
+    ],
+    "BARC/barc_frg_2024/sections/020_aez_23_chittagong_coastal_plain.md": [
+      "B4_FRG2024_4B8BB6_001",
+      "B4_FRG2024_4B8BB6_002",
+      "BARC_SHATA_826686_001"
+    ],
+    "BARC/barc_frg_2024/sections/021_aez_24_st_martin_s_coral_island.md": [
+      "B4_FRG2024_CAF8B3_001",
+      "BARC_SHATA_C9D25B_001"
+    ],
+    "BARC/barc_frg_2024/sections/022_aez_25_level_barind_tract.md": [
+      "B4_FRG2024_A0ACBC_001",
+      "B4_FRG2024_A0ACBC_002",
+      "B4_FRG2024_696A36_001"
+    ],
+    "BARC/barc_frg_2024/sections/023_aez_26_high_barind_tract.md": [
+      "B4_FRG2024_047544_001",
+      "BARC_SHATA_3EE7D8_001"
+    ],
+    "BARC/barc_frg_2024/sections/024_aez_27_north_eastern_barind_tract.md": [
+      "B4_FRG2024_DCDCFA_001",
+      "B4_FRG2024_DCDCFA_002"
+    ],
+    "BARC/barc_frg_2024/sections/025_aez_28_madhupur_tract.md": [
+      "B4_FRG2024_246F77_001",
+      "B4_FRG2024_246F77_002",
+      "BARC_SHATA_76ED23_001"
+    ],
+    "BARC/barc_frg_2024/sections/026_aez_29_northern_and_eastern_hills.md": [
+      "B4_FRG2024_308A26_001",
+      "B4_FRG2024_308A26_002",
+      "B4_FRG2024_D6455B_001"
+    ],
+    "BARC/barc_frg_2024/sections/027_aez_30_akhaura_terrace.md": [
+      "B4_FRG2024_DAB7C1_001",
+      "B4_FRG2024_DAB7C1_002",
+      "B4_FRG2024_DAB7C1_003",
+      "B4_FRG2024_0BF51B_001",
+      "B4_FRG2024_0BF51B_002",
+      "BARC_SHATA_0FD7E8_001"
+    ],
+    "BARC/barc_frg_2024/sections/028_rhizobial_biofertilizer.md": [
+      "B4_FRG2024_550418_001",
+      "B4_FRG2024_550418_002",
+      "B4_FRG2024_461CA6_001"
+    ],
+    "BARC/barc_frg_2024/sections/030_azolla_biofertilizer.md": [
+      "B4_FRG2024_8FDDB4_001"
+    ],
+    "BARC/barc_frg_2024/sections/031_identification_of_adulterated_chelated_zinc.md": [
+      "B4_FRG2024_22AB00_001",
+      "B4_FRG2024_22AB00_002"
+    ],
+    "BARC/barc_frg_2024/sections/032_identification_of_adulterated_boron_fertilizers.md": [
+      "B4_FRG2024_BFB951_001"
+    ],
+    "BARC/barc_frg_2024/sections/033_identification_of_adulterated_organic_fertilizer.md": [
+      "B4_FRG2024_BA78B6_001",
+      "B4_FRG2024_BA78B6_002"
+    ],
+    "BARC/barc_frg_2024/sections/034_5_climate_smart_soil_management_practices.md": [
+      "B4_FRG2024_00A694_001",
+      "B4_FRG2024_00A694_002"
+    ],
+    "BARC/barc_frg_2024/sections/035_5_1_soil_organic_matter_management.md": [
+      "B4_FRG2024_C56C80_001"
+    ],
+    "BARC/barc_frg_2024/sections/036_organic_matter_status.md": [
+      "B4_FRG2024_0903D8_001"
+    ],
+    "BARC/barc_frg_2024/sections/037_organic_matter_mineralization.md": [
+      "B4_FRG2024_CDB99D_001"
+    ],
+    "BARC/barc_frg_2024/sections/038_turmeric_and_some_vegetable_crops_on_floating_bed.md": [
+      "B4_FRG2024_DD93AB_001",
+      "B4_FRG2024_DD93AB_002"
+    ],
+    "BARC/barc_frg_2024/sections/039_t_aman_rice.md": [
+      "B4_FRG2024_E35BB1_001",
+      "B4_FRG2024_E35BB1_002",
+      "B4_FRG2024_E35BB1_003",
+      "B4_FRG2024_E35BB1_004",
+      "B4_FRG2024_E35BB1_005",
+      "B4_FRG2024_E35BB1_006"
+    ],
+    "BARC/barc_frg_2024/sections/040_maize_zea_mays.md": [
+      "B4_FRG2024_5FADF2_001",
+      "B4_FRG2024_5FADF2_002"
+    ],
+    "BARC/barc_frg_2024/sections/041_cotton_gossypium_harbaceum.md": [
+      "B4_FRG2024_C81AD1_001",
+      "B4_FRG2024_C81AD1_002"
+    ],
+    "BARC/barc_frg_2024/sections/042_chickpea_cicer_arietinum.md": [
+      "B4_FRG2024_29A856_001",
+      "B4_FRG2024_29A856_002"
+    ],
+    "BARC/barc_frg_2024/sections/043_mungbean_vigna_radiata.md": [
+      "B4_FRG2024_DAA9AF_001",
+      "B4_FRG2024_DAA9AF_002",
+      "B4_FRG2024_DAA9AF_003",
+      "B4_FRG2024_DAA9AF_004"
+    ],
+    "BARC/barc_frg_2024/sections/044_mustard_brassica_campestris.md": [
+      "B4_FRG2024_EF7B1F_001",
+      "B4_FRG2024_EF7B1F_002"
+    ],
+    "BARC/barc_frg_2024/sections/045_sesame_sesamum_indicum.md": [
+      "B4_FRG2024_EB28C4_001",
+      "B4_FRG2024_EB28C4_002"
+    ],
+    "BARC/barc_frg_2024/sections/046_groundnut_arachis_hypogaea.md": [
+      "B4_FRG2024_DD4AD1_001",
+      "B4_FRG2024_DD4AD1_002"
+    ],
+    "BARC/barc_frg_2024/sections/047_soybean_glycine_max.md": [
+      "B4_FRG2024_69C4A9_001",
+      "B4_FRG2024_69C4A9_002",
+      "B4_FRG2024_69C4A9_003",
+      "B4_FRG2024_69C4A9_004"
+    ],
+    "BARC/barc_frg_2024/sections/049_mukhi_kachu_colocasia_esculenta.md": [
+      "B4_FRG2024_AB2AF3_001",
+      "B4_FRG2024_AB2AF3_002"
+    ],
+    "BARC/barc_frg_2024/sections/050_pani_kachu_colocasia_esculenta.md": [
+      "B4_FRG2024_4B002B_001",
+      "B4_FRG2024_4B002B_002"
+    ],
+    "BARC/barc_frg_2024/sections/051_cabbage_brassica_oleracea_var_capitata.md": [
+      "B4_FRG2024_7AECEA_001",
+      "B4_FRG2024_7AECEA_002"
+    ],
+    "BARC/barc_frg_2024/sections/052_chinese_cabbage_brassica_chinensis.md": [
+      "B4_FRG2024_F0B5BA_001",
+      "B4_FRG2024_F0B5BA_002",
+      "B4_FRG2024_F0B5BA_003",
+      "B4_FRG2024_F0B5BA_004",
+      "B4_FRG2024_F0B5BA_005",
+      "B4_FRG2024_F0B5BA_006"
+    ],
+    "BARC/barc_frg_2024/sections/053_tomato_solanum_lycopersicum_summer.md": [
+      "B4_FRG2024_5B19E2_001",
+      "B4_FRG2024_5B19E2_002"
+    ],
+    "BARC/barc_frg_2024/sections/054_brinjal_solanum_melongena.md": [
+      "B4_FRG2024_3A484A_001",
+      "B4_FRG2024_3A484A_002"
+    ],
+    "BARC/barc_frg_2024/sections/055_okra_abelmoschus_esculentus.md": [
+      "B4_FRG2024_A9C94F_001",
+      "B4_FRG2024_A9C94F_002"
+    ],
+    "BARC/barc_frg_2024/sections/056_radish_raphnus_sativus.md": [
+      "B4_FRG2024_DB4A65_001",
+      "B4_FRG2024_DB4A65_002"
+    ],
+    "BARC/barc_frg_2024/sections/057_carrot_daucus_carota.md": [
+      "B4_FRG2024_4B70B5_001",
+      "B4_FRG2024_4B70B5_002"
+    ],
+    "BARC/barc_frg_2024/sections/058_country_bean_dolichos_lablab.md": [
+      "B4_FRG2024_8FB5AC_001",
+      "B4_FRG2024_8FB5AC_002"
+    ],
+    "BARC/barc_frg_2024/sections/059_garden_pea_pisum_sativum.md": [
+      "B4_FRG2024_015D76_001",
+      "B4_FRG2024_015D76_002"
+    ],
+    "BARC/barc_frg_2024/sections/060_sweet_gourd_cucurbita_moschata.md": [
+      "B4_FRG2024_61A6A8_001",
+      "B4_FRG2024_61A6A8_002"
+    ],
+    "BARC/barc_frg_2024/sections/061_bottle_gourd_lagenaria_siceraria.md": [
+      "B4_FRG2024_D8D02B_001",
+      "B4_FRG2024_D8D02B_002"
+    ],
+    "BARC/barc_frg_2024/sections/062_ash_gourd_benincasa_hispida.md": [
+      "B4_FRG2024_495158_001",
+      "B4_FRG2024_495158_002"
+    ],
+    "BARC/barc_frg_2024/sections/063_teasle_gourd_momordica_cochinchinensis.md": [
+      "B4_FRG2024_77DEAA_001",
+      "B4_FRG2024_77DEAA_002"
+    ],
+    "BARC/barc_frg_2024/sections/116_fertilizer_management.md": [
+      "B4_FRG2024_D249CD_001",
+      "B4_FRG2024_D249CD_002",
+      "B5_BARCAG_706F27_002",
+      "B5_BARCAG_8BF347_001",
+      "B5_BARCAG_7BC96D_001",
+      "B5_BARCAG_8A4E04_002",
+      "B5_BARCAG_EBB02D_003",
+      "B8_FERT2018_E85D4E_001",
+      "BARC_SHATA_10D364_001"
+    ],
+    "BARC/barc_frg_2024/sections/065_summer_onion_allium_cepa.md": [
+      "B4_FRG2024_40175B_001",
+      "B4_FRG2024_40175B_002"
+    ],
+    "BARC/barc_frg_2024/sections/066_garlic_allium_sativum.md": [
+      "B4_FRG2024_451F0D_001",
+      "B4_FRG2024_451F0D_002"
+    ],
+    "BARC/barc_frg_2024/sections/067_ginger_zingiber_officinale.md": [
+      "B4_FRG2024_BAE069_001"
+    ],
+    "BARC/barc_frg_2024/sections/068_turmeric_curcuma_longa.md": [
+      "B4_FRG2024_6832A6_001"
+    ],
+    "BARC/barc_frg_2024/sections/069_chilli_capsicum_annuum.md": [
+      "B4_FRG2024_26BDCF_001",
+      "B4_FRG2024_26BDCF_002"
+    ],
+    "BARC/barc_frg_2024/sections/070_sweet_pepper_capsicum_capsicum_annuum_l.md": [
+      "B4_FRG2024_D64FCF_001",
+      "B4_FRG2024_D64FCF_002"
+    ],
+    "BARC/barc_frg_2024/sections/071_coriander_coriandrum_sativum.md": [
+      "B4_FRG2024_91284B_001",
+      "B4_FRG2024_91284B_002"
+    ],
+    "BARC/barc_frg_2024/sections/072_black_cumin_nigella_sativa.md": [
+      "B4_FRG2024_4A55A7_001"
+    ],
+    "BARC/barc_frg_2024/sections/073_fenugreek_trigonella_foenum_graecum.md": [
+      "B4_FRG2024_D2A034_001",
+      "B4_FRG2024_D2A034_002"
+    ],
+    "BARC/barc_frg_2024/sections/074_black_pepper_piper_nigrum.md": [
+      "B4_FRG2024_73C781_001"
+    ],
+    "BARC/barc_frg_2024/sections/075_mango_mangifera_indica.md": [
+      "B4_FRG2024_19C092_001",
+      "B4_FRG2024_19C092_002"
+    ],
+    "BARC/barc_frg_2024/sections/076_jackfruit_artocarpus_heterophyllus.md": [
+      "B4_FRG2024_F95D04_001",
+      "B4_FRG2024_F95D04_002"
+    ],
+    "BARC/barc_frg_2024/sections/077_banana_musa_paradisiaca.md": [
+      "B4_FRG2024_CAF3D6_001",
+      "B4_FRG2024_CAF3D6_002"
+    ],
+    "BARC/barc_frg_2024/sections/078_papaya_carica_papaya.md": [
+      "B4_FRG2024_095E14_001",
+      "B4_FRG2024_095E14_002"
+    ],
+    "BARC/barc_frg_2024/sections/079_coconut_cocos_nucifera.md": [
+      "B4_FRG2024_CBBCF1_001",
+      "B4_FRG2024_CBBCF1_002"
+    ],
+    "BARC/barc_frg_2024/sections/080_pineapple_ananas_sativus.md": [
+      "B4_FRG2024_DA56D6_001",
+      "B4_FRG2024_DA56D6_002"
+    ],
+    "BARC/barc_frg_2024/sections/081_litchi_litchi_chinensis.md": [
+      "B4_FRG2024_6E0D89_001",
+      "B4_FRG2024_6E0D89_002"
+    ],
+    "BARC/barc_frg_2024/sections/083_mandarin_citrus_reticulata.md": [
+      "B4_FRG2024_F69785_001",
+      "B4_FRG2024_F69785_002"
+    ],
+    "BARC/barc_frg_2024/sections/084_sweet_orange_citrus_sinensis.md": [
+      "B4_FRG2024_86F078_001",
+      "B4_FRG2024_86F078_002"
+    ],
+    "BARC/barc_frg_2024/sections/085_lemon_citrus_limon.md": [
+      "B4_FRG2024_B30D0C_001",
+      "B4_FRG2024_B30D0C_002"
+    ],
+    "BARC/barc_frg_2024/sections/086_satkara_citrus_macroptera.md": [
+      "B4_FRG2024_BF2CDE_001",
+      "B4_FRG2024_BF2CDE_002"
+    ],
+    "BARC/barc_frg_2024/sections/087_ber_zizyphus_mauritiana.md": [
+      "B4_FRG2024_D30091_001",
+      "B4_FRG2024_D30091_002"
+    ],
+    "BARC/barc_frg_2024/sections/088_golden_apple_spondias_pinnata.md": [
+      "B4_FRG2024_4B9720_001",
+      "B4_FRG2024_4B9720_002",
+      "B4_FRG2024_B5113E_001",
+      "B4_FRG2024_B5113E_002"
+    ],
+    "BARC/barc_frg_2024/sections/090_sapota_achras_sapota.md": [
+      "B4_FRG2024_2B4635_001",
+      "B4_FRG2024_2B4635_002"
+    ],
+    "BARC/barc_frg_2024/sections/091_carambola_averrhoa_carambola.md": [
+      "B4_FRG2024_F027EC_001",
+      "B4_FRG2024_F027EC_002"
+    ],
+    "BARC/barc_frg_2024/sections/092_jamun_syzygium_cumini.md": [
+      "B4_FRG2024_18BC55_001",
+      "B4_FRG2024_18BC55_002"
+    ],
+    "BARC/barc_frg_2024/sections/093_burmese_grape_baccaurea_ramiflora.md": [
+      "B4_FRG2024_8E8D8C_001",
+      "B4_FRG2024_8E8D8C_002"
+    ],
+    "BARC/barc_frg_2024/sections/094_aonla_emblica_officinalis.md": [
+      "B4_FRG2024_ED6573_001",
+      "B4_FRG2024_ED6573_002"
+    ],
+    "BARC/barc_frg_2024/sections/095_wax_apple_syzygium_samrangense.md": [
+      "B4_FRG2024_39D5DC_001",
+      "B4_FRG2024_39D5DC_002",
+      "B4_FRG2024_39D5DC_003"
+    ],
+    "BARC/barc_frg_2024/sections/096_bael_aegle_marmelos.md": [
+      "B4_FRG2024_42470C_001",
+      "B4_FRG2024_42470C_002",
+      "B4_FRG2024_42470C_003"
+    ],
+    "BARC/barc_frg_2024/sections/097_wood_apple_feronia_limonia.md": [
+      "B4_FRG2024_A7E178_001"
+    ],
+    "BARC/barc_frg_2024/sections/098_bullock_s_heart_anona_squamosa_ata_phal.md": [
+      "B4_FRG2024_EEE405_001",
+      "B4_FRG2024_EEE405_002"
+    ],
+    "BARC/barc_frg_2024/sections/099_custard_apple_annona_squamosa_sharifa.md": [
+      "B4_FRG2024_051703_001"
+    ],
+    "BARC/barc_frg_2024/sections/100_velvet_apple_diospyros_discolor.md": [
+      "B4_FRG2024_448956_001",
+      "B4_FRG2024_448956_002"
+    ],
+    "BARC/barc_frg_2024/sections/101_tamarind_tamarindus_indicus.md": [
+      "B4_FRG2024_4595D1_001",
+      "B4_FRG2024_4595D1_002",
+      "B4_FRG2024_829C5A_001",
+      "B4_FRG2024_829C5A_002"
+    ],
+    "BARC/barc_frg_2024/sections/103_indian_dillenia_dillenia_indica_chalta.md": [
+      "B4_FRG2024_B5037F_001",
+      "B4_FRG2024_B5037F_002"
+    ],
+    "BARC/barc_frg_2024/sections/104_dragon_fruit_hylocereus_undatus.md": [
+      "B4_FRG2024_F7C40A_001",
+      "B4_FRG2024_F7C40A_002"
+    ],
+    "BARC/barc_frg_2024/sections/105_strawberry_fragaria_ananassa.md": [
+      "B4_FRG2024_C0632E_001",
+      "B4_FRG2024_C0632E_002"
+    ],
+    "BARC/barc_frg_2024/sections/106_longan_nephelium_longana.md": [
+      "B4_FRG2024_18F63F_001",
+      "B4_FRG2024_18F63F_002"
+    ],
+    "BARC/barc_frg_2024/sections/107_cashewnut_anacardium_occidentale.md": [
+      "B4_FRG2024_02F2AE_001",
+      "B4_FRG2024_02F2AE_002"
+    ],
+    "BARC/barc_frg_2024/sections/108_star_goose_berry_phylanthus_acidus.md": [
+      "B4_FRG2024_7461A5_001"
+    ],
+    "BARC/barc_frg_2024/sections/109_fig_ficus_carica.md": [
+      "B4_FRG2024_C02EA2_001",
+      "B4_FRG2024_C02EA2_002"
+    ],
+    "BARC/barc_frg_2024/sections/110_indian_olive_elaeocarpus_floribundus.md": [
+      "B4_FRG2024_2EFBE5_001",
+      "B4_FRG2024_2EFBE5_002"
+    ],
+    "BARC/barc_frg_2024/sections/111_watermelon_citrullus_colocynthis.md": [
+      "B4_FRG2024_DAB63A_001",
+      "B4_FRG2024_DAB63A_002"
+    ],
+    "BARC/barc_frg_2024/sections/112_netted_melon.md": [
+      "B4_FRG2024_5C01B6_001",
+      "B4_FRG2024_5C01B6_002"
+    ],
+    "BARC/barc_frg_2024/sections/113_7_9_hydroponic_culture.md": [
+      "B4_FRG2024_61991C_001"
+    ],
+    "BARC/barc_frg_2024/sections/114_golden_apple.md": [
+      "B4_FRG2024_F07650_001"
+    ],
+    "BARC/barc_frg_2024/sections/115_7_11_floating_agriculture.md": [
+      "B4_FRG2024_6E74B5_001"
+    ],
+    "BARC/barc_frg_2024/sections/118_palmyra_palm_borassus_flabellifer_tal.md": [
+      "B4_FRG2024_BE6BF8_001"
+    ],
+    "BARC/barc_frg_2024/sections/120_zinnia_zinnia_elegans.md": [
+      "B4_FRG2024_45092F_001"
+    ],
+    "BARC/barc_frg_2024/sections/124_german_grass_echinocloa_crusgalli.md": [
+      "B4_FRG2024_0AA84D_001"
+    ],
+    "BARC/barc_frg_2024/sections/125_dhal_grass_hymenachne_amplexicaulis.md": [
+      "B4_FRG2024_8477F8_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_10.md": [
+      "B4_FRG2024_15F57E_001",
+      "BARC_SHATA_1C1B3C_001"
+    ],
+    "BARC/barc_frg_2024/sections/128_var_hybrid_sorghum.md": [
+      "B4_FRG2024_FF718B_001"
+    ],
+    "BARC/barc_frg_2024/sections/133_aez_11_high_ganges_river_floodplain.md": [
+      "B4_FRG2024_35EE00_001"
+    ],
+    "BARC/barc_frg_2024/sections/135_aez_20_eastern_surma_kushyara_floodplain.md": [
+      "B4_FRG2024_602413_001"
+    ],
+    "BARC/barc_frg_2024/sections/140_chickpea_linseed_mixedcropping.md": [
+      "B4_FRG2024_BE42AD_001",
+      "B4_FRG2024_BE42AD_002",
+      "B4_FRG2024_BE42AD_003"
+    ],
+    "BARC/barc_frg_2024/sections/141_chickpea_mustard_mixedcropping.md": [
+      "B4_FRG2024_AE6C41_001",
+      "B4_FRG2024_AE6C41_002"
+    ],
+    "BARC/barc_frg_2024/sections/142_wheat_chickpea_mixedcropping.md": [
+      "B4_FRG2024_6FCB69_001",
+      "B4_FRG2024_6FCB69_002",
+      "B4_FRG2024_6FCB69_003",
+      "B4_FRG2024_6FCB69_004",
+      "B4_FRG2024_6FCB69_005"
+    ],
+    "BARC/barc_frg_2024/sections/144_location_specific_and_yield_goal_basis_fertilizer_recommendation_for_c.md": [
+      "B4_FRG2024_CC7FD0_001"
+    ],
+    "BARC/barc_frg_2024/sections/145_appendix_18.md": [
+      "B4_FRG2024_E4E380_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/001_rice_varieties.md": [
+      "B5_BARCAG_3705AA_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/002_rice_production_technology.md": [
+      "B5_BARCAG_D929CD_001",
+      "B5_BARCAG_D929CD_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/003_rice_intercultural_operation.md": [
+      "B5_BARCAG_467CF2_001",
+      "B5_BARCAG_467CF2_002",
+      "B5_BARCAG_467CF2_003",
+      "B5_BARCAG_467CF2_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/004_rice_harvesting_preservation.md": [
+      "B5_BARCAG_105A6B_001",
+      "B5_BARCAG_105A6B_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/005_wheat_varieties.md": [
+      "B5_BARCAG_EEC7DC_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/006_wheat_production_technology.md": [
+      "B5_BARCAG_DF7B1C_001",
+      "B5_BARCAG_DF7B1C_002",
+      "B5_BARCAG_DF7B1C_003",
+      "B5_BARCAG_DF7B1C_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/007_wheat_intercultural_operation.md": [
+      "B5_BARCAG_9331ED_001",
+      "B5_BARCAG_9331ED_002",
+      "B5_BARCAG_9331ED_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/008_wheat_harvesting_preservation.md": [
+      "B5_BARCAG_4AD140_001",
+      "B5_BARCAG_4AD140_002",
+      "B5_BARCAG_4AD140_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/009_maize_varieties.md": [
+      "B5_BARCAG_D65B05_001",
+      "B5_BARCAG_A99EF2_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/010_maize_production_technology.md": [
+      "B5_BARCAG_A99EF2_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/011_maize_intercultural_operation.md": [
+      "B5_BARCAG_A899BC_001",
+      "B5_BARCAG_A899BC_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/012_maize_harvesting_preservation.md": [
+      "B5_BARCAG_F591B6_001",
+      "B5_BARCAG_F591B6_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/013_potato_varieties.md": [
+      "B5_BARCAG_025AFD_001",
+      "B5_BARCAG_07F4A7_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/014_potato_production_technology.md": [
+      "B5_BARCAG_07F4A7_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/015_potato_intercultural_operation.md": [
+      "B5_BARCAG_AF08BA_001",
+      "B5_BARCAG_AF08BA_002",
+      "B5_BARCAG_AF08BA_003",
+      "B5_BARCAG_AF08BA_004",
+      "B5_BARCAG_AF08BA_005"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/016_potato_harvesting_preservation.md": [
+      "B5_BARCAG_E89FD1_001",
+      "B5_BARCAG_E89FD1_002",
+      "B5_BARCAG_E89FD1_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/017_mustard_varieties.md": [
+      "B5_BARCAG_AD4A06_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/018_mustard_production_technology.md": [
+      "B5_BARCAG_5911F2_001",
+      "B5_BARCAG_5911F2_002",
+      "B5_BARCAG_5911F2_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/019_mustard_intercultural_operation.md": [
+      "B5_BARCAG_61C0B0_001",
+      "B5_BARCAG_61C0B0_002",
+      "B5_BARCAG_61C0B0_003",
+      "B5_BARCAG_61C0B0_004",
+      "B5_BARCAG_61C0B0_005",
+      "B5_BARCAG_F2DCC4_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/020_mustard_harvesting_preservation.md": [
+      "B5_BARCAG_F2DCC4_001",
+      "B5_BARCAG_F2DCC4_002",
+      "B5_BARCAG_F2DCC4_004",
+      "B5_BARCAG_F2DCC4_005"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/021_groundnut_varieties.md": [
+      "B5_BARCAG_354E98_001",
+      "B5_BARCAG_C1BA9B_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/022_groundnut_production_technology.md": [
+      "B5_BARCAG_C1BA9B_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/023_groundnut_intercultural_operation.md": [
+      "B5_BARCAG_6FCAB1_001",
+      "B5_BARCAG_6FCAB1_002",
+      "B5_BARCAG_6FCAB1_003",
+      "B5_BARCAG_6FCAB1_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/024_groundnut_harvesting_preservation.md": [
+      "B5_BARCAG_D4BA83_001",
+      "B5_BARCAG_D4BA83_002",
+      "B5_BARCAG_D4BA83_003",
+      "B5_BARCAG_D4BA83_004",
+      "B5_BARCAG_D4BA83_005"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/025_sesame_varieties.md": [
+      "B5_BARCAG_CC9831_001",
+      "B5_BARCAG_64E35E_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/026_sesame_production_technology.md": [
+      "B5_BARCAG_64E35E_002",
+      "B5_BARCAG_64E35E_003",
+      "B5_BARCAG_64E35E_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/027_sesame_intercultural_operation.md": [
+      "B5_BARCAG_361E9D_001",
+      "B5_BARCAG_361E9D_002",
+      "B5_BARCAG_361E9D_003",
+      "B5_BARCAG_1130C5_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/028_sesame_harvesting_preservation.md": [
+      "B5_BARCAG_1130C5_002",
+      "B5_BARCAG_1130C5_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/029_lentil_varieties.md": [
+      "B5_BARCAG_DF1557_001",
+      "B5_BARCAG_DF1557_002",
+      "B5_BARCAG_5022C3_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/030_lentil_production_technology.md": [
+      "B5_BARCAG_5022C3_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/031_lentil_intercultural_operation.md": [
+      "B5_BARCAG_DD1523_001",
+      "B5_BARCAG_DD1523_002",
+      "B5_BARCAG_DD1523_003",
+      "B5_BARCAG_DD1523_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/032_lentil_harvesting_preservation.md": [
+      "B5_BARCAG_699806_001",
+      "B5_BARCAG_699806_002",
+      "B5_BARCAG_699806_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/033_mungbean_varieties.md": [
+      "B5_BARCAG_2446D3_001",
+      "B5_BARCAG_F152E6_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/034_mungbean_production_technology.md": [
+      "B5_BARCAG_F152E6_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/035_mungbean_intercultural_operation.md": [
+      "B5_BARCAG_E68538_001",
+      "B5_BARCAG_E68538_002",
+      "B5_BARCAG_E68538_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/036_mungbean_harvesting_preservation.md": [
+      "B5_BARCAG_84A95A_001",
+      "B5_BARCAG_84A95A_002",
+      "B5_BARCAG_84A95A_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/037_chickpea_varieties.md": [
+      "B5_BARCAG_AFDAC7_001",
+      "B5_BARCAG_AFDAC7_002",
+      "B5_BARCAG_28AF2A_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/038_chickpea_production_technology.md": [
+      "B5_BARCAG_28AF2A_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/039_chickpea_intercultural_operation.md": [
+      "B5_BARCAG_A5153A_001",
+      "B5_BARCAG_A5153A_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/040_chickpea_harvesting_preservation.md": [
+      "B5_BARCAG_8844FD_001",
+      "B5_BARCAG_8844FD_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/041_tomato_varieties.md": [
+      "B5_BARCAG_5B90FC_001",
+      "B5_BARCAG_5B90FC_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/042_tomato_production_technology.md": [
+      "B5_BARCAG_5B9D78_001",
+      "B5_BARCAG_5B9D78_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/043_tomato_intercultural_operation.md": [
+      "B5_BARCAG_1879A4_001",
+      "B5_BARCAG_1879A4_002",
+      "B5_BARCAG_1879A4_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/044_tomato_harvesting_preservation.md": [
+      "B5_BARCAG_B4C0D8_001",
+      "B5_BARCAG_B4C0D8_002",
+      "B5_BARCAG_B4C0D8_003",
+      "B5_BARCAG_B4C0D8_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/045_brinjal_varieties.md": [
+      "B5_BARCAG_E6109D_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/046_brinjal_production_technology.md": [
+      "B5_BARCAG_D64FE6_001",
+      "B5_BARCAG_D64FE6_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/047_brinjal_intercultural_operation.md": [
+      "B5_BARCAG_706F27_001",
+      "B5_BARCAG_706F27_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/048_brinjal_harvesting_preservation.md": [
+      "B5_BARCAG_EFC54C_001",
+      "B5_BARCAG_EFC54C_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/049_cabbage_varieties.md": [
+      "B5_BARCAG_EE8B48_001",
+      "B5_BARCAG_13709D_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/050_cabbage_production_technology.md": [
+      "B5_BARCAG_13709D_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/051_cabbage_intercultural_operation.md": [
+      "B5_BARCAG_ED5A3F_001",
+      "B5_BARCAG_ED5A3F_002",
+      "B5_BARCAG_ED5A3F_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/052_cabbage_harvesting_preservation.md": [
+      "B5_BARCAG_F16272_001",
+      "B5_BARCAG_F16272_002",
+      "B5_BARCAG_F16272_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/053_cauliflower_varieties.md": [
+      "B5_BARCAG_04BB16_001",
+      "B5_BARCAG_04BB16_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/054_cauliflower_production_technology.md": [
+      "B5_BARCAG_3FA236_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/055_cauliflower_intercultural_operation.md": [
+      "B5_BARCAG_8BF347_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/056_cauliflower_harvesting_preservation.md": [
+      "B5_BARCAG_33EE1D_001",
+      "B5_BARCAG_33EE1D_002",
+      "B5_BARCAG_33EE1D_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/057_okra_varieties.md": [
+      "B5_BARCAG_7E8574_001",
+      "B5_BARCAG_7E8574_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/058_okra_production_technology.md": [
+      "B5_BARCAG_497BF0_001",
+      "B5_BARCAG_497BF0_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/059_okra_intercultural_operation.md": [
+      "B5_BARCAG_995D84_001",
+      "B5_BARCAG_995D84_002",
+      "B5_BARCAG_995D84_003",
+      "B5_BARCAG_995D84_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/060_okra_harvesting_preservation.md": [
+      "B5_BARCAG_997E18_001",
+      "B5_BARCAG_997E18_002",
+      "B5_BARCAG_997E18_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/061_bitter_gourd_technology.md": [
+      "B5_BARCAG_7F363A_001",
+      "B5_BARCAG_7F363A_002",
+      "B5_BARCAG_7F363A_003",
+      "B5_BARCAG_7F363A_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/062_pumpkin_varieties.md": [
+      "B5_BARCAG_21C1EF_001",
+      "B5_BARCAG_597B72_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/063_pumpkin_production_technology.md": [
+      "B5_BARCAG_597B72_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/064_pumpkin_intercultural_operation.md": [
+      "B5_BARCAG_9709F5_001",
+      "B5_BARCAG_9709F5_002",
+      "B5_BARCAG_9709F5_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/065_pumpkin_harvesting_preservation.md": [
+      "B5_BARCAG_E77367_001",
+      "B5_BARCAG_E77367_002",
+      "B5_BARCAG_E77367_003",
+      "B5_BARCAG_E77367_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/066_carrot_varieties.md": [
+      "B5_BARCAG_5C98C7_001",
+      "B5_BARCAG_5C98C7_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/067_carrot_production_technology.md": [
+      "B5_BARCAG_C5AD52_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/068_carrot_intercultural_operation.md": [
+      "B5_BARCAG_83F539_001",
+      "B5_BARCAG_83F539_002",
+      "B5_BARCAG_83F539_003",
+      "B5_BARCAG_83F539_004",
+      "B5_BARCAG_83F539_005"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/069_carrot_harvesting_preservation.md": [
+      "B5_BARCAG_ED9261_001",
+      "B5_BARCAG_ED9261_003",
+      "B5_BARCAG_ED9261_004",
+      "B5_BARCAG_ED9261_005"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/070_cucumber_varieties.md": [
+      "B5_BARCAG_87BFA6_001",
+      "B5_BARCAG_87BFA6_002",
+      "B5_BARCAG_A4C4BC_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/071_cucumber_production_technology.md": [
+      "B5_BARCAG_A4C4BC_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/072_cucumber_intercultural_operation.md": [
+      "B5_BARCAG_330DB9_001",
+      "B5_BARCAG_330DB9_002",
+      "B5_BARCAG_330DB9_003",
+      "B5_BARCAG_330DB9_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/073_cucumber_harvesting_preservation.md": [
+      "B5_BARCAG_15552F_001",
+      "B5_BARCAG_15552F_002",
+      "B5_BARCAG_15552F_003",
+      "B5_BARCAG_15552F_004",
+      "B5_BARCAG_15552F_005",
+      "B5_BARCAG_15552F_006"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/074_mango_varieties.md": [
+      "B5_BARCAG_EF6A85_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/075_mango_production_technology.md": [
+      "B5_BARCAG_5A930E_001",
+      "B5_BARCAG_5A930E_002",
+      "B5_BARCAG_5A930E_003",
+      "B5_BARCAG_5A930E_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/076_mango_intercultural_operation.md": [
+      "B5_BARCAG_C3AEEE_001",
+      "B5_BARCAG_C3AEEE_002",
+      "B5_BARCAG_C3AEEE_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/077_mango_harvesting_preservation.md": [
+      "B5_BARCAG_20C0DB_001",
+      "B5_BARCAG_20C0DB_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/078_guava_varieties.md": [
+      "B5_BARCAG_34E4E8_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/079_guava_production_technology.md": [
+      "B5_BARCAG_BDABC2_001",
+      "B5_BARCAG_BDABC2_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/080_guava_intercultural_operation.md": [
+      "B5_BARCAG_7BC96D_002",
+      "B5_BARCAG_7BC96D_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/081_guava_harvesting_preservation.md": [
+      "B5_BARCAG_8AD614_001",
+      "B5_BARCAG_8AD614_002",
+      "B5_BARCAG_8AD614_003",
+      "B5_BARCAG_8AD614_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/082_litchi_varieties.md": [
+      "B5_BARCAG_F6C1B4_001",
+      "B5_BARCAG_E3DCE0_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/083_litchi_production_technology.md": [
+      "B5_BARCAG_E3DCE0_002",
+      "B5_BARCAG_E3DCE0_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/084_litchi_intercultural_operation.md": [
+      "B5_BARCAG_CFAA8B_001",
+      "B5_BARCAG_CFAA8B_002",
+      "B5_BARCAG_CFAA8B_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/085_litchi_harvesting_preservation.md": [
+      "B5_BARCAG_45C38E_001",
+      "B5_BARCAG_45C38E_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/086_banana_varieties.md": [
+      "B5_BARCAG_EE205A_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/087_banana_production_technology.md": [
+      "B5_BARCAG_E4FCD8_001",
+      "B5_BARCAG_E4FCD8_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/088_banana_intercultural_operation.md": [
+      "B5_BARCAG_B4A4AA_001",
+      "B5_BARCAG_B4A4AA_002",
+      "B5_BARCAG_B4A4AA_003",
+      "B5_BARCAG_B4A4AA_004",
+      "B5_BARCAG_B4A4AA_005",
+      "B5_BARCAG_B4A4AA_006"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/089_banana_harvesting_preservation.md": [
+      "B5_BARCAG_965B0B_001",
+      "B5_BARCAG_965B0B_002",
+      "B5_BARCAG_965B0B_003",
+      "B5_BARCAG_965B0B_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/090_jujube_ber_technology.md": [
+      "B5_BARCAG_7F182D_001",
+      "B5_BARCAG_7F182D_002",
+      "B5_BARCAG_7F182D_003",
+      "B5_BARCAG_7F182D_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/091_papaya_varieties.md": [
+      "B5_BARCAG_2BF8F3_001",
+      "B5_BARCAG_2BF8F3_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/092_papaya_production_technology.md": [
+      "B5_BARCAG_5D6C92_001",
+      "B5_BARCAG_5D6C92_002",
+      "B5_BARCAG_5D6C92_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/093_papaya_intercultural_operation.md": [
+      "B5_BARCAG_3AC519_001",
+      "B5_BARCAG_3AC519_002",
+      "B5_BARCAG_3AC519_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/094_papaya_harvesting_preservation.md": [
+      "B5_BARCAG_9A9601_001",
+      "B5_BARCAG_9A9601_002",
+      "B5_BARCAG_9A9601_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/095_onion_varieties.md": [
+      "B5_BARCAG_7436E1_001",
+      "B5_BARCAG_D42B53_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/096_onion_production_technology.md": [
+      "B5_BARCAG_D42B53_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/097_onion_intercultural_operation.md": [
+      "B5_BARCAG_E8242F_001",
+      "B5_BARCAG_E8242F_002",
+      "B5_BARCAG_E8242F_003",
+      "B5_BARCAG_E8242F_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/098_onion_harvesting_preservation.md": [
+      "B5_BARCAG_D70E56_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/099_garlic_varieties.md": [
+      "B5_BARCAG_77C3B6_001",
+      "B5_BARCAG_77C3B6_002",
+      "B5_BARCAG_C74633_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/100_garlic_production_technology.md": [
+      "B5_BARCAG_C74633_002",
+      "B5_BARCAG_C74633_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/101_garlic_intercultural_operation.md": [
+      "B5_BARCAG_04E110_001",
+      "B5_BARCAG_04E110_002",
+      "B5_BARCAG_04E110_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/102_garlic_harvesting_preservation.md": [
+      "B5_BARCAG_29A8D0_001",
+      "B5_BARCAG_29A8D0_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/103_chilli_varieties.md": [
+      "B5_BARCAG_01DA35_001",
+      "B5_BARCAG_01DA35_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/104_chilli_production_technology.md": [
+      "B5_BARCAG_CABA1A_001",
+      "B5_BARCAG_CABA1A_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/105_chilli_intercultural_operation.md": [
+      "B5_BARCAG_C351C0_001",
+      "B5_BARCAG_C351C0_002",
+      "B5_BARCAG_C351C0_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/106_chilli_harvesting_preservation.md": [
+      "B5_BARCAG_785DFE_001",
+      "B5_BARCAG_785DFE_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/107_turmeric_varieties.md": [
+      "B5_BARCAG_BCAAA2_001",
+      "B5_BARCAG_BCAAA2_002",
+      "B5_BARCAG_3A16AA_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/108_turmeric_production_technology.md": [
+      "B5_BARCAG_3A16AA_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/109_turmeric_intercultural_operation.md": [
+      "B5_BARCAG_57C59B_001",
+      "B5_BARCAG_57C59B_002",
+      "B5_BARCAG_57C59B_003",
+      "B5_BARCAG_57C59B_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/110_turmeric_harvesting_preservation.md": [
+      "B5_BARCAG_280BE4_001",
+      "B5_BARCAG_280BE4_002",
+      "B5_BARCAG_280BE4_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/111_jute_and_allied_fibres_varieties.md": [
+      "B5_BARCAG_702EC3_001",
+      "B5_BARCAG_702EC3_002",
+      "B5_BARCAG_702EC3_003",
+      "B5_BARCAG_D310B6_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/112_jute_and_allied_fibres_production_technology.md": [
+      "B5_BARCAG_D310B6_002",
+      "B5_BARCAG_D310B6_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/113_jute_and_allied_fibres_intercultural_operation.md": [
+      "B5_BARCAG_336DA6_001",
+      "B5_BARCAG_336DA6_002",
+      "B5_BARCAG_336DA6_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/114_jute_and_allied_fibres_harvesting_preservation.md": [
+      "B5_BARCAG_1A71C1_001",
+      "B5_BARCAG_1A71C1_002",
+      "B5_BARCAG_1A71C1_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/115_sugarcane_varieties.md": [
+      "B5_BARCAG_797646_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/116_sugarcane_production_technology.md": [
+      "B5_BARCAG_8A4E04_001",
+      "B5_BARCAG_8A4E04_003",
+      "B5_BARCAG_8A4E04_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/117_sugarcane_intercultural_operation.md": [
+      "B5_BARCAG_CF88A3_001",
+      "B5_BARCAG_CF88A3_002",
+      "B5_BARCAG_CF88A3_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/118_sugarcane_harvesting_preservation.md": [
+      "B5_BARCAG_AF62D1_001",
+      "B5_BARCAG_AF62D1_002",
+      "B5_BARCAG_AF62D1_003",
+      "B5_BARCAG_AF62D1_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/119_monosex_tilapia_technology.md": [
+      "B5_BARCAG_E87FCD_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/120_climbing_perch_koi_culture_technology.md": [
+      "B5_BARCAG_BBBBE5_001",
+      "B5_BARCAG_BBBBE5_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/121_stinging_catfish_shing_technology.md": [
+      "B5_BARCAG_96651F_001"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/122_carp_polyculture_technology.md": [
+      "B5_BARCAG_EBB02D_001",
+      "B5_BARCAG_EBB02D_002",
+      "B5_BARCAG_EBB02D_004"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/123_riverine_catfish_pangus_technology.md": [
+      "B5_BARCAG_4F98D8_001",
+      "B5_BARCAG_4F98D8_002",
+      "B5_BARCAG_4F98D8_003"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/124_native_chicken_technology.md": [
+      "B5_BARCAG_D41BF7_001",
+      "B5_BARCAG_D41BF7_002"
+    ],
+    "BARC/barc_handbook_agri_tech/sections/125_cattle_calf_and_goat_technology.md": [
+      "B5_BARCAG_42C21A_001",
+      "B5_BARCAG_42C21A_002",
+      "B5_BARCAG_42C21A_003"
+    ],
+    "BARI/barc_krishiprojukti_hatboi/sections/0933_leaf_curl.md": [
+      "B2B_MORICH2_D3E1A8_001",
+      "B2B_MORICH2_D3E1A8_002",
+      "B2B_MORICH2_D3E1A8_003",
+      "B2B_MORICH2_D3E1A8_004"
+    ],
+    "BSRTI/tut_jat_o_chash/sections/bsrti_variety_summary_table.md": [
+      "BSRTI_TUT_673D38_001"
+    ],
+    "BSRTI/tut_jat_o_chash/sections/cultivation_methods.md": [
+      "BSRTI_TUT_B56563_001",
+      "BSRTI_TUT_B56563_002"
+    ],
+    "BSRTI/tut_jat_o_chash/sections/local_varieties_ghagra_lal_bomby.md": [
+      "BSRTI_TUT_0569E5_001",
+      "BSRTI_TUT_0569E5_002"
+    ],
+    "BSRTI/tut_jat_o_chash/sections/local_varieties_sada_bomby.md": [
+      "BSRTI_TUT_0F3926_001"
+    ],
+    "BSRTI/tut_jat_o_chash/sections/local_varieties_telia_dudia.md": [
+      "BSRTI_TUT_9A4EB1_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/01_cabbage_bacterial_leaf_spot.md": [
+      "CABI_BRASSICA_0E322A_001",
+      "CABI_BRASSICA_339170_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/03_common_pests_and_diseases_on_cabbage_in_ghana.md": [
+      "CABI_BRASSICA_997AAE_001",
+      "CABI_BRASSICA_997AAE_002",
+      "CABI_BRASSICA_997AAE_003",
+      "CABI_BRASSICA_997AAE_004"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/04_common_pests_and_diseases_on_cocoyam_in_ghana.md": [
+      "CABI_BRASSICA_FA8EFD_001",
+      "CABI_BRASSICA_FA8EFD_002",
+      "CABI_BRASSICA_FA8EFD_003",
+      "CABI_BRASSICA_FA8EFD_004"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/05_cabbage_disorders.md": [
+      "CABI_BRASSICA_67EAA6_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/06_turnip_moth.md": [
+      "CABI_BRASSICA_9C794B_001",
+      "CABI_BRASSICA_C3D237_001",
+      "CABI_CORN_9C980C_001",
+      "CABI_CORN_940D0C_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/07_cabbage_leaf_sawfly.md": [
+      "CABI_BRASSICA_AAEF60_001",
+      "CABI_BRASSICA_FA6CF7_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/08_cabbage_looper.md": [
+      "CABI_BRASSICA_EB738B_001",
+      "CABI_BRASSICA_189672_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/09_black_cutworm.md": [
+      "CABI_BRASSICA_15B839_001",
+      "CABI_BRASSICA_EB679F_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/10_cabbage_webworm.md": [
+      "CABI_BRASSICA_D85146_001",
+      "CABI_BRASSICA_60FB7D_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/11_egyptian_cottonworm.md": [
+      "CABI_BRASSICA_C0668B_001",
+      "CABI_BRASSICA_7DFEEC_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/12_cotton_leafworm_tobacco_cutworm.md": [
+      "CABI_BRASSICA_A3D0E7_001",
+      "CABI_BRASSICA_F0AE76_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/13_diamondback_moth.md": [
+      "CABI_BRASSICA_2F808D_001",
+      "CABI_BRASSICA_A14396_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/14_cabbage_cluster_caterpillar.md": [
+      "CABI_BRASSICA_1CC5C3_001",
+      "CABI_BRASSICA_E7523F_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/15_large_cabbage_white_butterfly.md": [
+      "CABI_BRASSICA_9381A4_001",
+      "CABI_BRASSICA_1F019D_001",
+      "CABI_BRASSICA_657B82_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/16_small_cabbage_white_butterfly.md": [
+      "CABI_BRASSICA_E78313_001",
+      "CABI_BRASSICA_ACA411_001",
+      "CABI_BRASSICA_24284B_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/17_cabbage_root_fly.md": [
+      "CABI_BRASSICA_9B5247_001",
+      "CABI_BRASSICA_038C86_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/30_swede_midge.md": [
+      "CABI_BRASSICA_976CED_001",
+      "CABI_BRASSICA_E0986D_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/32_vegetable_leaf_miner.md": [
+      "CABI_BRASSICA_8A4F2D_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/33_cabbage_whitefly.md": [
+      "CABI_BRASSICA_EEFF85_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/34_harlequin_bug.md": [
+      "CABI_BRASSICA_BCBB42_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/35_mealy_cabbage_aphid.md": [
+      "CABI_BRASSICA_3C145B_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/36_onion_thrips.md": [
+      "CABI_BRASSICA_5C6FEA_001",
+      "CABI_BRASSICA_F9B5B6_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/37_green_peach_aphid_peach_potato_aphid.md": [
+      "CABI_BRASSICA_9B283D_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/38_mustard_aphid.md": [
+      "CABI_BRASSICA_3F5850_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/39_crucifer_flea_beetle.md": [
+      "CABI_BRASSICA_43D91C_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/40_black_spot_grey_leaf_spot_target_spot.md": [
+      "CABI_BRASSICA_59B05D_001",
+      "CABI_BRASSICA_4683AC_001",
+      "CABI_CORN_A12EDA_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/42_black_rot.md": [
+      "CABI_BRASSICA_7A0C58_001",
+      "CABI_BRASSICA_843B60_001",
+      "CABI_BRASSICA_C7579B_001",
+      "CABI_BRASSICA_0C0BE1_001",
+      "CABI_BRASSICA_F7F28F_001",
+      "CABI_BRASSICA_F8D1EA_001",
+      "CABI_BRASSICA_A1C6A2_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/43_calcium_deficiency.md": [
+      "CABI_BRASSICA_E7033D_001",
+      "CABI_BRASSICA_E13699_001",
+      "CABI_CORN_06D2F5_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/44_leaf_miner.md": [
+      "CABI_BRASSICA_589B6E_001",
+      "CABI_BRASSICA_6CBC7E_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/46_downy_mildew.md": [
+      "CABI_BRASSICA_77C2B2_001",
+      "CABI_BRASSICA_6FD5BE_001",
+      "CABI_BRASSICA_5F79AA_001",
+      "CABI_BRASSICA_A21050_001",
+      "CABI_BRASSICA_F02F59_001",
+      "CABI_BRASSICA_3C63C1_001",
+      "CABI_CORN_6FD5BE_001",
+      "CABI_CORN_8C2227_001",
+      "CABI_CORN_33A774_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/47_ring_spot.md": [
+      "CABI_BRASSICA_CF0683_001",
+      "CABI_BRASSICA_C240BA_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/49_white_leaf_spot.md": [
+      "CABI_BRASSICA_D3EF5E_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/50_powdery_mildew.md": [
+      "CABI_BRASSICA_DFC29C_001",
+      "CABI_WHEAT_89E592_001",
+      "CABI_WHEAT_F1C5FA_001",
+      "CABI_WHEAT_58578E_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/51_white_rust.md": [
+      "CABI_BRASSICA_078D35_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/55_whiptail_of_crucifers.md": [
+      "CABI_BRASSICA_E302AA_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/56_root_rot_damping_off.md": [
+      "CABI_BRASSICA_FD4220_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/57_white_mould.md": [
+      "CABI_BRASSICA_E4E924_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/60_boron_deficiency.md": [
+      "CABI_BRASSICA_9B0A3A_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/48_soft_rot_of_cabbage_bacterial_black_stalk.md": [
+      "CABI_BRASSICA_E79CAF_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/63_phytophthora_root_and_stem_rot.md": [
+      "CABI_BRASSICA_2D6076_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/65_club_root.md": [
+      "CABI_BRASSICA_975929_001",
+      "CABI_BRASSICA_8CA2DB_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/66_fusarium_wilt.md": [
+      "CABI_BRASSICA_0F9F87_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/67_turnip_mosaic_virus.md": [
+      "CABI_BRASSICA_895D53_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/68_cabbage_leaf_curl_virus.md": [
+      "CABI_BRASSICA_160EA1_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/69_cauliflower_mosaic_virus.md": [
+      "CABI_BRASSICA_B7E907_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/70_sugar_beet_cyst_nematode.md": [
+      "CABI_BRASSICA_C67997_001",
+      "CABI_BRASSICA_B56DC4_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/71_herbicide_damage.md": [
+      "CABI_BRASSICA_B5C390_001",
+      "CABI_BRASSICA_36C696_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/73_bird_damage.md": [
+      "CABI_BRASSICA_975C61_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/81_alternaria_leaf_spot_on_lettuce.md": [
+      "CABI_BRASSICA_A4B2F3_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/82_alternaria_on_brassica.md": [
+      "CABI_BRASSICA_F97DB9_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/83_bacterial_soft_rot_on_cabbage.md": [
+      "CABI_BRASSICA_2DA7D1_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/84_bacterial_soft_rot_on_carrot_kenya.md": [
+      "CABI_BRASSICA_D42830_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/85_soft_rot_on_vegetables.md": [
+      "CABI_BRASSICA_8F7FD4_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/86_bacterial_leaf_spot_of_crucifers.md": [
+      "CABI_BRASSICA_8A5B46_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/87_bacterial_leaf_spot_on_brassica.md": [
+      "CABI_BRASSICA_8F6D93_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/01_common_rust.md": [
+      "CABI_CORN_4690FD_001",
+      "CABI_CORN_E1A4EA_001",
+      "CABI_CORN_42F800_001",
+      "CABI_CORN_B323CC_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/05_gray_leaf_spot_of_maize_nepal.md": [
+      "CABI_CORN_99FD91_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/06_gray_leaf_spot_on_eggplant_ghana.md": [
+      "CABI_CORN_E59109_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/07_leaf_blight_on_sorghum.md": [
+      "CABI_CORN_78017E_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/08_sorghum_disorders.md": [
+      "CABI_CORN_036916_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/102_sting_nematode.md": [
+      "CABI_CORN_B00446_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/103_stubby_root_nematode.md": [
+      "CABI_CORN_164544_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/104_lesion_nematode.md": [
+      "CABI_CORN_AFB4BA_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/105_root_knot_nematode.md": [
+      "CABI_CORN_A56DBC_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/106_stunt_nematode.md": [
+      "CABI_CORN_616132_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/11_beet_armyworm.md": [
+      "CABI_CORN_83DA08_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/12_american_cotton_bollworm_corn_earworm.md": [
+      "CABI_CORN_8D963F_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/13_oriental_armyworm.md": [
+      "CABI_CORN_AE4E6B_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/14_sorghum_webworm.md": [
+      "CABI_CORN_545BA4_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/15_cotton_bollworm.md": [
+      "CABI_CORN_201D88_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/16_african_armyworm.md": [
+      "CABI_CORN_ED4CA7_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/17_fall_armyworm.md": [
+      "CABI_CORN_08B53D_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/19_sorghum_chafer_and_other_chafer_grubs.md": [
+      "CABI_CORN_BED053_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/20_wireworms_and_false_wireworm.md": [
+      "CABI_CORN_E3A75B_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/21_african_sugarcane_borer.md": [
+      "CABI_CORN_7D2B60_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/22_sugarcane_stalk_borer.md": [
+      "CABI_CORN_DC2491_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/23_african_maize_stalk_borer.md": [
+      "CABI_CORN_1EFAAE_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/24_spotted_stalk_borer.md": [
+      "CABI_CORN_B16A96_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/25_european_corn_borer.md": [
+      "CABI_CORN_D846FA_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/26_african_pink_stem_borer.md": [
+      "CABI_CORN_2CEB1E_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/27_purple_stem_borer.md": [
+      "CABI_CORN_DCA16E_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/28_earhead_bug.md": [
+      "CABI_CORN_FBC69B_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/29_southern_green_stink_bug.md": [
+      "CABI_CORN_191D33_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/30_chinch_bug.md": [
+      "CABI_CORN_B4A962_001",
+      "CABI_CORN_7FD780_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/31_corn_planthopper.md": [
+      "CABI_CORN_45E0E2_001",
+      "CABI_CORN_929299_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/32_stalk_eyed_fly.md": [
+      "CABI_CORN_E99B46_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/33_sorghum_midge.md": [
+      "CABI_CORN_9F6F3F_001",
+      "CABI_CORN_601DD7_001",
+      "CABI_CORN_7B8AE3_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/34_sorghum_stem_fly.md": [
+      "CABI_CORN_E1FD9C_001",
+      "CABI_CORN_F231D0_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/35_desert_locust.md": [
+      "CABI_CORN_12CE16_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/36_migratory_locust.md": [
+      "CABI_CORN_680541_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/37_lesser_grain_weevil.md": [
+      "CABI_CORN_D1A288_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/38_greater_grain_weevil.md": [
+      "CABI_CORN_3BA663_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/39_grain_moth.md": [
+      "CABI_CORN_A3E444_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/41_grey_sugarcane_mealy_bug.md": [
+      "CABI_CORN_37A0F6_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/42_spring_green_aphid.md": [
+      "CABI_CORN_AC3E2A_001",
+      "CABI_CORN_4581C0_001",
+      "CABI_CORN_52DB1D_001",
+      "CABI_CORN_396948_001",
+      "CABI_CORN_267F3B_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/43_sugarcane_aphid.md": [
+      "CABI_CORN_161B4D_001",
+      "CABI_CORN_F4F887_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/44_green_corn_aphid.md": [
+      "CABI_CORN_219F77_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/45_zonate_leaf_spot.md": [
+      "CABI_CORN_E441C2_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/46_anthracnose_foliar_blight.md": [
+      "CABI_CORN_F09AFA_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/47_sooty_stripe_not_sooty_mould.md": [
+      "CABI_CORN_73612C_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/48_northern_leaf_blight.md": [
+      "CABI_CORN_63C69F_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/50_southern_leaf_spot.md": [
+      "CABI_CORN_94DDF1_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/52_rough_leaf_spot.md": [
+      "CABI_CORN_F1DE53_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/55_mite_damage.md": [
+      "CABI_CORN_FDCD9D_001",
+      "CABI_CORN_DA0CBD_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/59_shortage_of_phosphate.md": [
+      "CABI_CORN_35276A_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/60_shortage_of_nitrogen.md": [
+      "CABI_CORN_3AF6EA_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/61_shortage_of_potassium.md": [
+      "CABI_CORN_7DB9EF_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/63_shortage_of_sulphur.md": [
+      "CABI_CORN_03F6CC_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/64_maize_streak_virus.md": [
+      "CABI_CORN_51F4DD_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/65_maize_dwarf_mosaic_virus.md": [
+      "CABI_CORN_F9D364_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/67_shortage_of_iron.md": [
+      "CABI_CORN_0216DD_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/68_ergot_sugary_disease.md": [
+      "CABI_CORN_14E117_001",
+      "CABI_CORN_A7DCA4_001",
+      "CABI_CORN_65E68E_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/70_crazy_top.md": [
+      "CABI_CORN_89A9F8_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/71_grain_mould.md": [
+      "CABI_CORN_93F4C7_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/74_covered_kernel_smut.md": [
+      "CABI_CORN_2D435E_001",
+      "CABI_CORN_95ABF1_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/75_head_smut.md": [
+      "CABI_CORN_BF84BF_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/77_loose_kernel_smut.md": [
+      "CABI_CORN_3CA8DF_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/81_stemborer_damage.md": [
+      "CABI_CORN_BB7B92_001",
+      "CABI_CORN_DE61D7_001",
+      "CABI_CORN_7F2D6D_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/85_anthracnose_head_rot_and_stalk_red_rot.md": [
+      "CABI_CORN_4A0AAE_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/86_fusarium_root_and_stalk_rot.md": [
+      "CABI_CORN_98CFE1_001"
+    ],
+    "CABI/cabi_brassica_disease_manuals/sections/61_bacterial_black_stalk.md": [
+      "CABI_CORN_58A2E6_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/89_charcoal_root_and_stalk_rot.md": [
+      "CABI_CORN_B9DBE7_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/90_pythium_seedling_and_root_rot.md": [
+      "CABI_CORN_01F130_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/91_bacterial_top_and_stalk_rot.md": [
+      "CABI_CORN_098C10_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/94_maize_stripe_virus.md": [
+      "CABI_CORN_44FD89_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/95_maize_mosaic_virus.md": [
+      "CABI_CORN_679775_001"
+    ],
+    "CABI/cabi_cimmyt_corn_disease_manuals/sections/96_locust_and_grasshopper.md": [
+      "CABI_CORN_1C8E9D_001"
+    ],
+    "CABI/cabi_potato_disease_manuals/sections/01_early_blight.md": [
+      "CABI_POTATO_F248A8_001",
+      "CABI_POTATO_ED1267_001",
+      "CABI_POTATO_A2BB22_001"
+    ],
+    "CABI/cabi_potato_disease_manuals/sections/04_late_blight_on_tomato.md": [
+      "CABI_POTATO_344E9F_001"
+    ],
+    "CABI/cabi_potato_disease_manuals/sections/05_potato_late_blight.md": [
+      "CABI_POTATO_42D248_001",
+      "CABI_POTATO_834B4F_001"
+    ],
+    "CABI/cabi_wheat_disease_manuals/sections/01_blast_disease_of_rice.md": [
+      "CABI_WHEAT_17CE3C_001"
+    ],
+    "CABI/cabi_wheat_disease_manuals/sections/02_management_of_rice_blast.md": [
+      "CABI_WHEAT_153BAE_001"
+    ],
+    "CABI/cabi_wheat_disease_manuals/sections/03_rice_blast_kenya.md": [
+      "CABI_WHEAT_D3A722_001"
+    ],
+    "CABI/cabi_wheat_disease_manuals/sections/04_coffee_leaf_rust.md": [
+      "CABI_WHEAT_4D3BF3_001",
+      "CABI_WHEAT_C64BF5_001"
+    ],
+    "CABI/cabi_wheat_disease_manuals/sections/06_leaf_rust.md": [
+      "CABI_WHEAT_6645EE_001"
+    ],
+    "CABI/cabi_wheat_disease_manuals/sections/11_stem_rust_of_wheat.md": [
+      "CABI_WHEAT_BA3075_001"
+    ],
+    "CABI/cabi_wheat_disease_manuals/sections/12_stem_rust_on_wheat.md": [
+      "CABI_WHEAT_071FA8_001"
+    ],
+    "CABI/cabi_wheat_disease_manuals/sections/13_wheat_stem_rust.md": [
+      "CABI_WHEAT_F76EFA_001"
+    ],
+    "CABI/cabi_wheat_disease_manuals/sections/14_stripe_rust.md": [
+      "CABI_WHEAT_49F8AB_001",
+      "CABI_WHEAT_D35AA4_001",
+      "CABI_WHEAT_C82C60_001"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/146_price_study_front_matter_bengali_summary.md": [
+      "B4_DAEEXT_974B39_001"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/147_availability_and_price_volatility_of_rice_in_bangladesh_an_i.md": [
+      "B4_DAEEXT_916C0C_001"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/148_1_1_importance_of_rice_in_bangladesh.md": [
+      "B4_DAEEXT_401026_001",
+      "B4_DAEEXT_114A0C_001",
+      "B4_DAEEXT_908E80_001"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/152_3_results_and_discussion.md": [
+      "B4_DAEEXT_2D0899_001",
+      "B4_DAEEXT_7843E5_001",
+      "B4_DAEEXT_7843E5_002"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/153_3_5_price_variation_of_paddy_and_rice.md": [
+      "B4_DAEEXT_0DE54B_001"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/156_availability_and_price_volatility_of_potato_in_bangladesh_an.md": [
+      "B4_DAEEXT_5F3D89_001"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/149_1_2_justification_of_the_study.md": [
+      "B4_DAEEXT_E39647_001",
+      "B4_DAEEXT_64071A_001"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/159_materials_and_methods.md": [
+      "B4_DAEEXT_146461_001",
+      "B4_DAEEXT_0D21B6_001",
+      "B4_DAEEXT_0D21B6_002"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/163_availability_and_price_volatility_of_onion_in_bangladesh_an_.md": [
+      "B4_DAEEXT_CAAA99_001"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/164_1_1_background_of_the_study.md": [
+      "B4_DAEEXT_26D288_001"
+    ],
+    "MoA_NARS_SRDI/crop_production_price_study/sections/166_1_3_objectives_of_the_study.md": [
+      "B4_DAEEXT_3A07D0_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/001_chapter_1_intro_agricultural_extension_approach.md": [
+      "B4_DAEEXT_E63D60_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/002_1_1_introduction_to_agricultural_extension_approach.md": [
+      "B4_DAEEXT_0138B9_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/003_1_2_revised_extension_approach.md": [
+      "B4_DAEEXT_D78EC2_001",
+      "B4_DAEEXT_34A05F_001",
+      "B4_DAEEXT_076223_001",
+      "B4_DAEEXT_6E2AE3_001",
+      "B4_DAEEXT_6E2AE3_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/006_1_5_conditions_of_effective_and_fruitful_extension_approach.md": [
+      "B4_DAEEXT_C63B90_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/008_chapter_2_intro_management_of_agricultural_extension.md": [
+      "B4_DAEEXT_E66C6A_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/009_2_1_extension_as_an_integrated_management.md": [
+      "B4_DAEEXT_7B21B3_001",
+      "B4_DAEEXT_7B21B3_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/010_2_2_reformed_organizational_structure_of_the_department_of_a.md": [
+      "B4_DAEEXT_655042_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/011_2_11_extension_services_responsive_to_crop_zoning_or_environ.md": [
+      "B4_DAEEXT_C7AE9B_001",
+      "B4_DAEEXT_C7AE9B_002",
+      "B4_DAEEXT_C7AE9B_003"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/012_2_15_agricultural_input_assistance_card.md": [
+      "B4_DAEEXT_2A5862_001",
+      "B4_DAEEXT_2A5862_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/013_2_17_complaint_centres_for_addressing_problems_and_complaint.md": [
+      "B4_DAEEXT_FF0AE0_001",
+      "B4_DAEEXT_FF0AE0_002",
+      "B4_DAEEXT_FF0AE0_003"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/014_2_18_linkage_between_extension_and_other_institutions.md": [
+      "B4_DAEEXT_418B6E_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/015_2_22_skill_development.md": [
+      "B4_DAEEXT_6F9917_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/016_2_23_fortnightly_visit_schedule_of_sub_assistant_agriculture.md": [
+      "B4_DAEEXT_B8142B_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/017_chapter_5_intro_partnership.md": [
+      "B4_DAEEXT_AA2468_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/018_5_1_partnership_and_its_importance_to_the_agricultural_exten.md": [
+      "B4_DAEEXT_E4BA27_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/019_5_2_purpose_of_working_in_partnership.md": [
+      "B4_DAEEXT_E2074A_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/020_5_3_types_of_partnership.md": [
+      "B4_DAEEXT_441A64_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/021_5_5_strategies_of_extension_partnership.md": [
+      "B4_DAEEXT_99CD74_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/022_5_6_coordination_meeting_of_organisations_under_ministry_of_.md": [
+      "B4_DAEEXT_5D5C8D_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/023_5_7_dae_s_role_in_the_development_and_maintainance_of_partne.md": [
+      "B4_DAEEXT_FC7E3C_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/024_5_8_benefits_of_partnership.md": [
+      "B4_DAEEXT_FC7E3C_002",
+      "B4_DAEEXT_BC693D_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/026_6_2_benefits_of_working_with_farmer_groups.md": [
+      "B4_DAEEXT_0ADDAC_001",
+      "B4_DAEEXT_6DD2F1_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/027_6_3_limitations_of_working_with_farmer_groups.md": [
+      "B4_DAEEXT_617081_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/029_6_5_description_of_farmer_groups_formed_by_dae.md": [
+      "B4_DAEEXT_4DDF7A_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/030_6_6_allocation_of_groups_in_block.md": [
+      "B4_DAEEXT_402D9D_001",
+      "B4_DAEEXT_402D9D_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/031_6_7_formation_or_reformation_of_farmer_groups.md": [
+      "B4_DAEEXT_A2F6F8_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/032_6_8_block_wise_farmer_group_number_and_number_of_members_gro.md": [
+      "B4_DAEEXT_4B4E8E_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/033_6_9_possible_ways_to_make_the_group_effective_and_sustainabl.md": [
+      "B4_DAEEXT_322495_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/034_6_10_skill_of_extension_worker_to_work_with_farmer_groups.md": [
+      "B4_DAEEXT_8A2C0C_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/035_chapter_7_intro_farmer_s_information.md": [
+      "B4_DAEEXT_E35338_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/037_7_2_methods_of_farmer_s_information_need_assessment.md": [
+      "B4_DAEEXT_09D840_001",
+      "B4_DAEEXT_09D840_002",
+      "B4_DAEEXT_E7A29A_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/038_7_3_inter_personal_communication_to_manage_extension_work.md": [
+      "B4_DAEEXT_E7A29A_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/039_7_4_participatory_rural_appraisal_pra.md": [
+      "B4_DAEEXT_02C693_001",
+      "B4_DAEEXT_02C693_002",
+      "B4_DAEEXT_7E4E1D_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/040_7_5_problem_census.md": [
+      "B4_DAEEXT_DD4D81_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/042_7_6_reviewing_saao_s_diary.md": [
+      "B4_DAEEXT_02272A_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/043_7_7_meeting_and_view_exchange_with_organizations_related_to_.md": [
+      "B4_DAEEXT_4D2A06_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/044_7_9_remote_sensing.md": [
+      "B4_DAEEXT_7692B8_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/045_8_1_definition_and_objectives_of_planning.md": [
+      "B4_DAEEXT_CC62BE_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/046_8_2_importance_of_dae_s_agricultural_extension_planning.md": [
+      "B4_DAEEXT_10813D_001",
+      "B4_DAEEXT_10813D_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/047_8_4_planning_of_annual_performance_agreement_apa.md": [
+      "B4_DAEEXT_5801C7_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/048_8_5_planning_for_the_development_of_human_resources_connecte.md": [
+      "B4_DAEEXT_2C26F7_001",
+      "B4_DAEEXT_2C26F7_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/051_8_8_risk_management_planning.md": [
+      "B4_DAEEXT_2C26F7_003",
+      "B4_DAEEXT_C593A7_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/049_8_6_input_management_plans.md": [
+      "B4_DAEEXT_8F7551_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/050_8_7_making_the_project_plans_of_the_department_of_extension.md": [
+      "B4_DAEEXT_DC36A9_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/053_9_2_importance_of_training_in_agricultural_extension.md": [
+      "B4_DAEEXT_08D50B_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/054_9_3_training_methods.md": [
+      "B4_DAEEXT_E69367_001",
+      "B4_DAEEXT_E69367_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/055_9_4_assessing_the_competence_of_extension_workers.md": [
+      "B4_DAEEXT_0D3C10_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/056_9_5_increasing_the_competence_of_extension_workers.md": [
+      "B4_DAEEXT_6F2B52_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/057_9_6_role_of_dae_headquarter_in_developing_human_resources.md": [
+      "B4_DAEEXT_803FBF_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/058_9_7_training_management_at_district_levels.md": [
+      "B4_DAEEXT_CD766B_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/059_9_8_training_management_at_the_upazila_level.md": [
+      "B4_DAEEXT_D29B4A_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/060_9_9_learning_resource_centres_at_the_district_and_upazila_le.md": [
+      "B4_DAEEXT_8E08F8_001",
+      "B4_DAEEXT_8E08F8_002",
+      "B4_DAEEXT_8E08F8_003"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/061_chapter_10_intro_selecting.md": [
+      "B4_DAEEXT_E13556_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/062_10_1_introduction.md": [
+      "B4_DAEEXT_E2A54C_001",
+      "B4_DAEEXT_E2A54C_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/063_10_2_individual_extension_methods.md": [
+      "B4_DAEEXT_0AA3D9_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/064_10_3_adopting_new_technologies.md": [
+      "B4_DAEEXT_E752DB_001",
+      "B4_DAEEXT_E752DB_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/065_chapter_11_intro_extension_methods.md": [
+      "B4_DAEEXT_E4DB27_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/066_11_1_demonstration.md": [
+      "B4_DAEEXT_C812FF_001",
+      "B4_DAEEXT_C812FF_002",
+      "B4_DAEEXT_C812FF_003",
+      "B4_DAEEXT_C812FF_004",
+      "B4_DAEEXT_C812FF_005"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/067_11_4_farm_walks.md": [
+      "B4_DAEEXT_40DD5F_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/068_11_5_farmer_rallies.md": [
+      "B4_DAEEXT_3B9F08_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/069_11_6_folk_media.md": [
+      "B4_DAEEXT_3CA5D4_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/070_11_7_meetings_with_members_of_farmers_groups_or_organization.md": [
+      "B4_DAEEXT_D00E78_001",
+      "B4_DAEEXT_D00E78_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/071_11_8_yard_meetings.md": [
+      "B4_DAEEXT_CC019D_001",
+      "B4_DAEEXT_CC019D_002",
+      "B4_DAEEXT_CC019D_003",
+      "B4_DAEEXT_CC019D_004",
+      "B4_DAEEXT_5C70B6_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/072_11_9_farmers_clubs.md": [
+      "B4_DAEEXT_A98AEB_001",
+      "B4_DAEEXT_5C70B6_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/073_11_10_inquiring_about_agriculture_or_krishi_ziggasha.md": [
+      "B4_DAEEXT_5C70B6_003",
+      "B4_DAEEXT_5C70B6_004"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/074_11_11_motivational_tours.md": [
+      "B4_DAEEXT_279095_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/075_11_12_participatory_technology_development.md": [
+      "B4_DAEEXT_76772E_001",
+      "B4_DAEEXT_76772E_002",
+      "B4_DAEEXT_76772E_003"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/076_chapter_12_intro_mass_media_and_audio_visual_aids.md": [
+      "B4_DAEEXT_42A63A_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/077_12_1_electronic_media.md": [
+      "B4_DAEEXT_115BB7_001",
+      "B4_DAEEXT_115BB7_002",
+      "B4_DAEEXT_115BB7_003"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/078_12_2_print_media_and_audio_visual_aids.md": [
+      "B4_DAEEXT_58D431_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/079_13_1_introduction.md": [
+      "B4_DAEEXT_A9C67D_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/080_13_2_role_of_monitoring_and_evaluation_in_planning_processes.md": [
+      "B4_DAEEXT_61BBAF_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/081_13_3_rules_of_monitoring.md": [
+      "B4_DAEEXT_BD4594_001",
+      "B4_DAEEXT_BD4594_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/082_13_6_monitoring_field_work_through_telephone_or_mobile_phone.md": [
+      "B4_DAEEXT_19E598_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/083_13_7_technology_extension_monitoring_system_tems.md": [
+      "B4_DAEEXT_0CF7F7_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/084_13_8_knowledge_attitude_and_practices_survey_kap.md": [
+      "B4_DAEEXT_F3CA02_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/085_13_12_interviewing_the_farmers.md": [
+      "B4_DAEEXT_B920A5_001",
+      "B4_DAEEXT_B920A5_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/086_chapter_14_intro_agricultural_extension_strategies_in_haor_h.md": [
+      "B4_DAEEXT_F122F3_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/087_14_1_the_haor_region.md": [
+      "B4_DAEEXT_853A68_001",
+      "B4_DAEEXT_853A68_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/088_14_2_hill_region.md": [
+      "B4_DAEEXT_679D3F_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/089_14_3_high_barind_regions.md": [
+      "B4_DAEEXT_657C5A_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/090_14_4_char_areas.md": [
+      "B4_DAEEXT_A54E3E_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/091_14_5_south_and_south_western_regions.md": [
+      "B4_DAEEXT_62F476_001",
+      "B4_DAEEXT_62F476_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/092_15_1_causes_of_climate_change.md": [
+      "B4_DAEEXT_2C4142_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/093_15_2_effects_of_climate_change_in_bangladesh.md": [
+      "B4_DAEEXT_F4FDB1_001",
+      "B4_DAEEXT_F4FDB1_002"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/094_15_3_emergency_disaster_management_actions_for_extension_wor.md": [
+      "B4_DAEEXT_4889DA_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/095_15_4_keeping_emergency_support_functional_during_disasters.md": [
+      "B4_DAEEXT_D255BD_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/096_15_8_actions_necessary_in_the_event_of_flood_and_flash_flood.md": [
+      "B4_DAEEXT_FE83A0_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/097_15_9_measures_to_be_taken_for_agriculture_in_saline_prone_re.md": [
+      "B4_DAEEXT_A833DD_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/098_15_10_effects_of_flood_drought_salinity_and_other_calamities.md": [
+      "B4_DAEEXT_690959_001",
+      "B4_DAEEXT_690959_002",
+      "B4_DAEEXT_690959_003"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/099_chapter_16_intro_participation_of_women_in_agricultural_exte.md": [
+      "B4_DAEEXT_9FE8F5_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/100_16_1_introduction.md": [
+      "B4_DAEEXT_64F36D_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/101_16_2_gender_discrimination_global_and_bangladesh_perspective.md": [
+      "B4_DAEEXT_F51092_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/102_16_3_national_agriculture_policy_and_female_farmers.md": [
+      "B4_DAEEXT_2BC81A_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/103_16_4_policy_for_advancement_of_women_in_the_agriculture_sect.md": [
+      "B4_DAEEXT_0EA5FC_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/104_16_5_extension_approaches_for_strengthening_women_s_particip.md": [
+      "B4_DAEEXT_95FE5B_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/105_16_6_extending_services_to_female_farmers.md": [
+      "B4_DAEEXT_9326FC_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/106_chapter_17_intro_e_extension_services.md": [
+      "B4_DAEEXT_F14851_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/107_17_1_introduction.md": [
+      "B4_DAEEXT_352161_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/108_17_2_necessity_of_e_extension.md": [
+      "B4_DAEEXT_AC74E1_001",
+      "B4_DAEEXT_4E9784_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/110_17_4_dae_s_considerations_for_e_extension.md": [
+      "B4_DAEEXT_546077_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/111_17_5_the_existing_e_extension_eervices.md": [
+      "B4_DAEEXT_EC842C_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/112_17_6_website_of_department_of_agricultural_extension_dae_www.md": [
+      "B4_DAEEXT_BD0079_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/113_17_7_increase_of_farmers_and_saao_s_ability_for_successful_e.md": [
+      "B4_DAEEXT_15BAF9_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/114_18_1_dae_s_measures_in_addressing_challenges_and_the_present.md": [
+      "B4_DAEEXT_2E4BD4_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/115_18_2_future_challenges_in_the_development_of_agriculture.md": [
+      "B4_DAEEXT_9BD8EF_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/116_18_2_16_urban_agricultural_development.md": [
+      "B4_DAEEXT_F99E87_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/118_2_2_the_national_agricultural_extension_system.md": [
+      "B4_DAEEXT_EF8B5F_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/119_2_3_the_goal_and_components_of_the_new_agricultural_extensio.md": [
+      "B4_DAEEXT_B82D6C_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/124_vision_mission_strategic_objective_functions.md": [
+      "B4_DAEEXT_F85C54_001",
+      "B4_DAEEXT_E381C0_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/125_outcome_impact.md": [
+      "B4_DAEEXT_9D08EB_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/138_2_0_other_activities.md": [
+      "B4_DAEEXT_BDEE76_001",
+      "B4_DAEEXT_D2B51B_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/139_3_0_area_and_production_under_crop_cultivated.md": [
+      "B4_DAEEXT_176AC3_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/140_1_0_annual_performance_agreement_activities_apa.md": [
+      "B4_DAEEXT_731AC3_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/141_1_2_e_extension_service_on_agriculture.md": [
+      "B4_DAEEXT_7847F3_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/142_1_3_awareness_building_about_food_value_and_nutrition.md": [
+      "B4_DAEEXT_FF9FAF_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/143_1_4_seed_production_preservation_and_distribution.md": [
+      "B4_DAEEXT_06D516_001"
+    ],
+    "DAE/dae_agricultural_extension_manual/sections/144_1_5_promotion_of_organic_fertilizer_green_manuring_and_micro.md": [
+      "B4_DAEEXT_878778_001"
+    ],
+    "DAE/dae_hort_vegetables/sections/001_dae_horticulture_vegetable_guide_1_bengali_p231_244.md": [
+      "B5_DAEHORT_85E01A_001"
+    ],
+    "DAE/dae_hort_vegetables/sections/002_dae_horticulture_vegetable_guide_2_bengali_p245_260.md": [
+      "B5_DAEHORT_19787F_001"
+    ],
+    "DAE/dae_hort_vegetables/sections/003_dae_horticulture_vegetable_guide_3_bengali_p261_276.md": [
+      "B5_DAEHORT_623B2E_001"
+    ],
+    "DAE/dae_hort_vegetables/sections/004_dae_horticulture_vegetable_guide_4_bengali_p277_292.md": [
+      "B5_DAEHORT_3B7CAA_001"
+    ],
+    "DAE/dae_hort_vegetables/sections/005_dae_horticulture_vegetable_guide_5_bengali_p293_308.md": [
+      "B5_DAEHORT_D2578A_001"
+    ],
+    "DAE/dae_hort_vegetables/sections/006_dae_horticulture_vegetable_guide_6_bengali_p309_326.md": [
+      "B5_DAEHORT_C2E327_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/169_bio_pesticides.md": [
+      "DAE_PEST_B829AB_001",
+      "DAE_PEST_F55FC2_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/02_page_727.md": [
+      "DAE_PEST_C8CAB2_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/03_page_728.md": [
+      "DAE_PEST_26974A_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/04_page_729.md": [
+      "DAE_PEST_1BD2B0_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/05_page_730.md": [
+      "DAE_PEST_4FDBA3_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/06_page_731.md": [
+      "DAE_PEST_5985EB_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/07_page_732.md": [
+      "DAE_PEST_C25C79_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/09_page_734.md": [
+      "DAE_PEST_FEC939_001",
+      "DAE_PEST_FEC939_002"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/100_page_825.md": [
+      "DAE_PEST_040F57_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/101_page_826.md": [
+      "DAE_PEST_9CDC70_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/102_page_827.md": [
+      "DAE_PEST_3AF36B_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/103_page_828.md": [
+      "DAE_PEST_78E905_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/104_page_829.md": [
+      "DAE_PEST_5C4441_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/105_page_830.md": [
+      "DAE_PEST_E5366C_001",
+      "DAE_PEST_E5366C_002",
+      "DAE_PEST_E5366C_003",
+      "DAE_PEST_E5366C_004"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/106_page_831.md": [
+      "DAE_PEST_49F7D5_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/107_page_832.md": [
+      "DAE_PEST_3E6184_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/108_page_833.md": [
+      "DAE_PEST_98BE33_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/109_page_834.md": [
+      "DAE_PEST_94E539_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/10_page_735.md": [
+      "DAE_PEST_F59CE0_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/110_page_835.md": [
+      "DAE_PEST_0AFDCE_001",
+      "DAE_PEST_0AFDCE_002"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/111_page_836.md": [
+      "DAE_PEST_D1436D_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/112_page_837.md": [
+      "DAE_PEST_458D1E_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/113_page_838.md": [
+      "DAE_PEST_F5F421_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/114_page_839.md": [
+      "DAE_PEST_3ED31A_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/115_page_840.md": [
+      "DAE_PEST_2BFBD2_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/116_page_841.md": [
+      "DAE_PEST_1AFE5E_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/117_page_842.md": [
+      "DAE_PEST_19111A_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/118_page_843.md": [
+      "DAE_PEST_B9D9AF_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/119_page_844.md": [
+      "DAE_PEST_E2BC36_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/11_page_736.md": [
+      "DAE_PEST_4D00AE_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/120_page_845.md": [
+      "DAE_PEST_9E12CA_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/121_page_846.md": [
+      "DAE_PEST_EF2BF8_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/122_page_847.md": [
+      "DAE_PEST_4E7350_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/123_page_848.md": [
+      "DAE_PEST_54EEC5_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/124_page_849.md": [
+      "DAE_PEST_F73E41_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/126_page_851.md": [
+      "DAE_PEST_4FF075_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/127_page_852.md": [
+      "DAE_PEST_06EF1B_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/128_page_853.md": [
+      "DAE_PEST_C028DB_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/129_page_854.md": [
+      "DAE_PEST_D6DF27_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/12_page_737.md": [
+      "DAE_PEST_7D75F6_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/130_page_855.md": [
+      "DAE_PEST_4CD0DC_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/131_page_856.md": [
+      "DAE_PEST_C86473_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/132_page_857.md": [
+      "DAE_PEST_107F75_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/133_page_858.md": [
+      "DAE_PEST_9A270B_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/134_page_859.md": [
+      "DAE_PEST_7A32D0_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/135_page_860.md": [
+      "DAE_PEST_57A8AC_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/136_page_861.md": [
+      "DAE_PEST_EB7393_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/137_page_862.md": [
+      "DAE_PEST_E43651_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/138_page_863.md": [
+      "DAE_PEST_B90245_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/139_page_864.md": [
+      "DAE_PEST_7AB806_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/13_page_738.md": [
+      "DAE_PEST_6DE5C3_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/140_page_865.md": [
+      "DAE_PEST_AA8EF2_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/141_page_866.md": [
+      "DAE_PEST_376835_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/142_page_867.md": [
+      "DAE_PEST_D5D3A4_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/143_page_868.md": [
+      "DAE_PEST_95223A_001",
+      "DAE_PEST_95223A_002"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/144_page_869.md": [
+      "DAE_PEST_2ADE29_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/145_page_870.md": [
+      "DAE_PEST_0689D6_001",
+      "DAE_PEST_0689D6_002"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/146_page_871.md": [
+      "DAE_PEST_EC3CC8_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/147_page_872.md": [
+      "DAE_PEST_B73AD1_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/148_page_873.md": [
+      "DAE_PEST_BD7010_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/149_page_874.md": [
+      "DAE_PEST_F6D9E2_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/14_page_739.md": [
+      "DAE_PEST_D122DE_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/150_page_875.md": [
+      "DAE_PEST_0FF8B0_001",
+      "DAE_PEST_0FF8B0_002"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/151_page_876.md": [
+      "DAE_PEST_73768F_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/152_page_877.md": [
+      "DAE_PEST_A496E2_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/153_page_878.md": [
+      "DAE_PEST_13EA59_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/154_page_879.md": [
+      "DAE_PEST_D6C9E4_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/155_page_880.md": [
+      "DAE_PEST_7AE671_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/156_page_881.md": [
+      "DAE_PEST_7055CC_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/157_page_882.md": [
+      "DAE_PEST_DE0603_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/158_page_883.md": [
+      "DAE_PEST_9EACCD_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/159_page_884.md": [
+      "DAE_PEST_E65DD5_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/15_page_740.md": [
+      "DAE_PEST_42329D_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/160_page_885.md": [
+      "DAE_PEST_F145AC_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/161_page_886.md": [
+      "DAE_PEST_23E6C2_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/162_page_887.md": [
+      "DAE_PEST_54AC11_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/163_page_888.md": [
+      "DAE_PEST_7227F8_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/164_page_889.md": [
+      "DAE_PEST_0A3874_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/165_page_890.md": [
+      "DAE_PEST_8B1CA8_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/166_page_891.md": [
+      "DAE_PEST_25FD4F_001",
+      "DAE_PEST_25FD4F_002"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/167_page_892.md": [
+      "DAE_PEST_86B239_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/16_page_741.md": [
+      "DAE_PEST_91C378_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/170_page_895.md": [
+      "DAE_PEST_0195DE_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/171_list_of_registered_public_health_pesticides_php_in_banglades.md": [
+      "DAE_PEST_A8D48E_001",
+      "DAE_PEST_033C19_001",
+      "DAE_PEST_C45786_001",
+      "DAE_PEST_D4F254_001",
+      "DAE_PEST_0B8C39_001",
+      "DAE_PEST_236946_001",
+      "DAE_PEST_C562AF_001",
+      "DAE_PEST_F8A429_001",
+      "DAE_PEST_0E015E_001",
+      "DAE_PEST_4D2880_001",
+      "DAE_PEST_18204F_001",
+      "DAE_PEST_154F1A_001",
+      "DAE_PEST_D849F1_001",
+      "DAE_PEST_ED89CF_001",
+      "DAE_PEST_B7AA2E_001",
+      "DAE_PEST_FFFD1D_001",
+      "DAE_PEST_12A728_001",
+      "DAE_PEST_4C6258_001",
+      "DAE_PEST_AAE571_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/17_page_742.md": [
+      "DAE_PEST_77A00D_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/18_page_743.md": [
+      "DAE_PEST_EEA6E1_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/19_page_744.md": [
+      "DAE_PEST_B940E8_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/20_page_745.md": [
+      "DAE_PEST_017C3C_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/21_page_746.md": [
+      "DAE_PEST_8D003F_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/22_page_747.md": [
+      "DAE_PEST_954158_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/23_page_748.md": [
+      "DAE_PEST_F6B5F9_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/24_page_749.md": [
+      "DAE_PEST_8AA318_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/25_page_750.md": [
+      "DAE_PEST_38BBC9_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/26_page_751.md": [
+      "DAE_PEST_5E48F1_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/27_page_752.md": [
+      "DAE_PEST_726BB6_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/28_page_753.md": [
+      "DAE_PEST_B3531E_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/29_page_754.md": [
+      "DAE_PEST_725A22_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/30_page_755.md": [
+      "DAE_PEST_771B22_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/31_page_756.md": [
+      "DAE_PEST_89FC8E_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/32_page_757.md": [
+      "DAE_PEST_86230E_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/33_page_758.md": [
+      "DAE_PEST_FA463D_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/34_page_759.md": [
+      "DAE_PEST_135B8A_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/35_page_760.md": [
+      "DAE_PEST_1206A0_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/36_page_761.md": [
+      "DAE_PEST_A6F151_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/37_page_762.md": [
+      "DAE_PEST_E401E0_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/38_page_763.md": [
+      "DAE_PEST_970966_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/39_page_764.md": [
+      "DAE_PEST_732CE9_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/40_page_765.md": [
+      "DAE_PEST_1ADDDB_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/41_page_766.md": [
+      "DAE_PEST_8A9F01_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/42_page_767.md": [
+      "DAE_PEST_962421_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/43_page_768.md": [
+      "DAE_PEST_94027B_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/44_page_769.md": [
+      "DAE_PEST_4B44CC_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/45_page_770.md": [
+      "DAE_PEST_A57642_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/46_page_771.md": [
+      "DAE_PEST_916B79_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/47_page_772.md": [
+      "DAE_PEST_6FF138_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/48_page_773.md": [
+      "DAE_PEST_A8B835_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/49_page_774.md": [
+      "DAE_PEST_EBCF3E_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/50_page_775.md": [
+      "DAE_PEST_03593C_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/51_page_776.md": [
+      "DAE_PEST_4C7DC3_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/52_page_777.md": [
+      "DAE_PEST_95383A_001",
+      "DAE_PEST_95383A_002"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/53_page_778.md": [
+      "DAE_PEST_383F05_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/54_page_779.md": [
+      "DAE_PEST_927B5C_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/55_page_780.md": [
+      "DAE_PEST_BBF43B_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/56_page_781.md": [
+      "DAE_PEST_55BD2F_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/57_page_782.md": [
+      "DAE_PEST_34E5D8_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/58_page_783.md": [
+      "DAE_PEST_E8A981_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/59_page_784.md": [
+      "DAE_PEST_9B5A6C_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/60_page_785.md": [
+      "DAE_PEST_F1ADC1_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/61_page_786.md": [
+      "DAE_PEST_D5F96E_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/62_page_787.md": [
+      "DAE_PEST_E419E7_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/63_page_788.md": [
+      "DAE_PEST_13CDBB_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/64_page_789.md": [
+      "DAE_PEST_2E92ED_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/65_page_790.md": [
+      "DAE_PEST_FC4D18_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/66_page_791.md": [
+      "DAE_PEST_5A07C3_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/67_page_792.md": [
+      "DAE_PEST_37642E_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/68_page_793.md": [
+      "DAE_PEST_BC9BF4_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/69_page_794.md": [
+      "DAE_PEST_DD8FA8_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/70_page_795.md": [
+      "DAE_PEST_B68D6C_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/71_page_796.md": [
+      "DAE_PEST_9CDCEA_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/72_page_797.md": [
+      "DAE_PEST_D3C5CC_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/73_page_798.md": [
+      "DAE_PEST_604A40_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/74_page_799.md": [
+      "DAE_PEST_51E654_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/75_page_800.md": [
+      "DAE_PEST_6A18F9_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/76_page_801.md": [
+      "DAE_PEST_4C3A5F_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/77_page_802.md": [
+      "DAE_PEST_F785B1_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/78_page_803.md": [
+      "DAE_PEST_C44CF8_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/79_page_804.md": [
+      "DAE_PEST_63376C_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/80_page_805.md": [
+      "DAE_PEST_C5862F_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/81_page_806.md": [
+      "DAE_PEST_D97FD1_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/82_page_807.md": [
+      "DAE_PEST_C9C8F5_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/83_page_808.md": [
+      "DAE_PEST_536441_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/84_page_809.md": [
+      "DAE_PEST_79C926_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/85_page_810.md": [
+      "DAE_PEST_64FEE1_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/86_page_811.md": [
+      "DAE_PEST_A4975B_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/87_page_812.md": [
+      "DAE_PEST_FF30C4_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/88_page_813.md": [
+      "DAE_PEST_82EB36_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/89_page_814.md": [
+      "DAE_PEST_1183CB_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/90_page_815.md": [
+      "DAE_PEST_0B6819_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/91_page_816.md": [
+      "DAE_PEST_DE02A2_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/92_page_817.md": [
+      "DAE_PEST_9D2CD7_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/93_page_818.md": [
+      "DAE_PEST_EA33D5_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/94_page_819.md": [
+      "DAE_PEST_B8F156_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/95_page_820.md": [
+      "DAE_PEST_7FF5B8_001",
+      "DAE_PEST_7FF5B8_002"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/96_page_821.md": [
+      "DAE_PEST_EE5D8B_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/97_page_822.md": [
+      "DAE_PEST_87E6F7_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/98_page_823.md": [
+      "DAE_PEST_C80495_001"
+    ],
+    "DAE/dae_pesticide_whitelist/sections/99_page_824.md": [
+      "DAE_PEST_F37CDA_001"
+    ],
+    "DLS/dls_ai_guideline_2019/sections/001_national_ai_guideline_2019.md": [
+      "B6_DOC_E82F4A_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/003_1_2_scope_of_the_guidelines.md": [
+      "B5_DLSLIVE_019E35_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/004_1_3_purpose_of_the_guidelines.md": [
+      "B5_DLSLIVE_10D7CD_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/005_1_4_definition_of_terms.md": [
+      "B5_DLSLIVE_771E04_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/006_2_1_production_practices_in_bangladesh.md": [
+      "B5_DLSLIVE_49DE4C_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/007_2_1_1_farm_classification_land_use_concentration.md": [
+      "B5_DLSLIVE_FB118E_001",
+      "B5_DLSLIVE_FB118E_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/008_2_1_2_farm_classification_nature_purpose.md": [
+      "B5_DLSLIVE_BF5C72_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/009_2_1_3_farm_classification_dls_definition.md": [
+      "B5_DLSLIVE_9C5190_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/010_2_2_production_practices_in_the_world.md": [
+      "B5_DLSLIVE_5BA831_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/011_3_1_skills_competencies_required.md": [
+      "B5_DLSLIVE_D9554E_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/012_3_2_components_of_animal_farm.md": [
+      "B5_DLSLIVE_CDA553_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/013_3_2_1_location_of_farm.md": [
+      "B5_DLSLIVE_DB429D_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/014_3_2_2_housing_facilities.md": [
+      "B5_DLSLIVE_AD4B62_001",
+      "B5_DLSLIVE_AD4B62_002",
+      "B5_DLSLIVE_FDE07F_001",
+      "B5_DLSLIVE_FDE07F_002",
+      "B5_DLSLIVE_132F3E_001",
+      "B5_DLSLIVE_132F3E_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/017_4_1_selection_of_breeds.md": [
+      "B5_DLSLIVE_E7671F_001",
+      "B5_DLSLIVE_E7671F_002",
+      "B5_DLSLIVE_E7671F_003",
+      "B5_DLSLIVE_E7671F_004"
+    ],
+    "DLS/dls_good_livestock_practices/sections/018_4_1_1_poultry_breeds_chicken.md": [
+      "B5_DLSLIVE_6D8097_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/019_4_1_2_dairy_cattle_breeds.md": [
+      "B5_DLSLIVE_E10C1B_001",
+      "B5_DLSLIVE_589407_001",
+      "B5_DLSLIVE_589407_002",
+      "B5_DLSLIVE_2F47AF_001",
+      "B5_DLSLIVE_2F47AF_002",
+      "B5_DLSLIVE_ABAB97_001",
+      "B5_DLSLIVE_ABAB97_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/023_4_2_sourcing_of_animals.md": [
+      "B5_DLSLIVE_C2DFE2_001",
+      "B5_DLSLIVE_C2DFE2_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/024_5_1_ggp_gp_stock_registration.md": [
+      "B5_DLSLIVE_A793F3_001",
+      "B5_DLSLIVE_82DB56_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/025_5_2_parent_stock_registration.md": [
+      "B5_DLSLIVE_82DB56_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/026_5_3_commercial_farm_registration.md": [
+      "B5_DLSLIVE_16AC19_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/027_6_1_animal_identification_traceability.md": [
+      "B5_DLSLIVE_A42E8B_001",
+      "B5_DLSLIVE_A42E8B_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/028_6_2_feed_nutrition_management.md": [
+      "B5_DLSLIVE_3F69B4_001",
+      "B5_DLSLIVE_3F69B4_002",
+      "B5_DLSLIVE_3F69B4_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/029_6_3_animal_health_management.md": [
+      "B5_DLSLIVE_19912E_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/030_6_4_bio_security_measures.md": [
+      "B5_DLSLIVE_C8CE79_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/031_6_5_hygiene_sanitation_management.md": [
+      "B5_DLSLIVE_570C81_001",
+      "B5_DLSLIVE_570C81_002",
+      "B5_DLSLIVE_570C81_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/032_6_6_waste_disposal_environment_management.md": [
+      "B5_DLSLIVE_72DCFF_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/033_6_7_environment_management.md": [
+      "B5_DLSLIVE_05EAD2_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/034_7_1_breeding_of_animals.md": [
+      "B5_DLSLIVE_E52373_001",
+      "B5_DLSLIVE_E52373_002",
+      "B5_DLSLIVE_E52373_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/035_7_1_1_poultry_breeding.md": [
+      "B5_DLSLIVE_95C8B5_001",
+      "B5_DLSLIVE_D8C5A2_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/036_7_1_2_livestock_breeding.md": [
+      "B5_DLSLIVE_263AB3_001",
+      "B5_DLSLIVE_263AB3_002",
+      "B5_DLSLIVE_263AB3_003",
+      "B5_DLSLIVE_263AB3_004"
+    ],
+    "DLS/dls_good_livestock_practices/sections/037_7_2_breeding_practices.md": [
+      "B5_DLSLIVE_D8C5A2_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/038_7_3_assisted_reproductive_technologies_art.md": [
+      "B5_DLSLIVE_631AD8_001",
+      "B5_DLSLIVE_631AD8_002",
+      "B5_DLSLIVE_631AD8_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/039_8_1_breeder_poultry_flock_management.md": [
+      "B5_DLSLIVE_B69A86_001",
+      "B5_DLSLIVE_B69A86_002",
+      "B5_DLSLIVE_B69A86_003",
+      "B5_DLSLIVE_B126FB_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/040_8_2_hatchery_management.md": [
+      "B5_DLSLIVE_81FD6E_001",
+      "B5_DLSLIVE_81FD6E_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/041_9_1_commercial_poultry_flock_management.md": [
+      "B5_DLSLIVE_B126FB_002",
+      "B5_DLSLIVE_B126FB_003",
+      "B5_DLSLIVE_B126FB_004",
+      "B5_DLSLIVE_B126FB_005"
+    ],
+    "DLS/dls_good_livestock_practices/sections/042_10_1_pregnancy_parturition_management.md": [
+      "B5_DLSLIVE_987B79_001",
+      "B5_DLSLIVE_987B79_002",
+      "B5_DLSLIVE_987B79_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/043_10_2_periparturient_lactation_dry_off_management.md": [
+      "B5_DLSLIVE_0B29A0_001",
+      "B5_DLSLIVE_0B29A0_002",
+      "B5_DLSLIVE_0B29A0_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/044_10_3_lactation_management.md": [
+      "B5_DLSLIVE_FF79CE_001",
+      "B5_DLSLIVE_FF79CE_002",
+      "B5_DLSLIVE_FF79CE_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/045_11_1_care_of_newborn.md": [
+      "B5_DLSLIVE_FA4D6D_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/046_11_2_colostrum_feeding.md": [
+      "B5_DLSLIVE_448903_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/047_11_3_milk_feeding.md": [
+      "B5_DLSLIVE_C88CC0_001",
+      "B5_DLSLIVE_C88CC0_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/048_11_4_newborn_rearing.md": [
+      "B5_DLSLIVE_10586C_001",
+      "B5_DLSLIVE_10586C_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/049_11_5_health_management_of_newborn.md": [
+      "B5_DLSLIVE_777A39_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/050_11_6_weaning_management.md": [
+      "B5_DLSLIVE_933731_001",
+      "B5_DLSLIVE_933731_002",
+      "B5_DLSLIVE_933731_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/051_12_1_cattle_buffalo_young_stock.md": [
+      "B5_DLSLIVE_E925D8_001",
+      "B5_DLSLIVE_E925D8_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/052_12_2_goat_sheep_young_stock.md": [
+      "B5_DLSLIVE_65B4CB_001",
+      "B5_DLSLIVE_65B4CB_002",
+      "B5_DLSLIVE_65B4CB_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/053_12_3_pig_young_stock.md": [
+      "B5_DLSLIVE_5FD49D_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/054_13_1_prevention_control_of_animal_diseases.md": [
+      "B5_DLSLIVE_40DE15_001",
+      "B5_DLSLIVE_40DE15_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/055_14_1_castration_of_males.md": [
+      "B5_DLSLIVE_079014_001",
+      "B5_DLSLIVE_079014_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/056_14_2_hoof_trimming.md": [
+      "B5_DLSLIVE_409053_001",
+      "B5_DLSLIVE_11A60C_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/057_14_3_shoeing_of_cattle.md": [
+      "B5_DLSLIVE_11A60C_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/058_14_4_bathing_showering.md": [
+      "B5_DLSLIVE_2EEF84_001",
+      "B5_DLSLIVE_2EEF84_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/059_14_5_grooming.md": [
+      "B5_DLSLIVE_21F57B_001",
+      "B5_DLSLIVE_21F57B_002",
+      "B5_DLSLIVE_A4F94B_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/060_14_6_exercising_of_livestock.md": [
+      "B5_DLSLIVE_A4F94B_001",
+      "B5_DLSLIVE_A4F94B_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/061_15_1_egg_management.md": [
+      "B5_DLSLIVE_64DE0C_001",
+      "B5_DLSLIVE_64DE0C_002",
+      "B5_DLSLIVE_64DE0C_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/062_15_2_processing_marketing_of_animal_products.md": [
+      "B5_DLSLIVE_841458_001",
+      "B5_DLSLIVE_841458_002",
+      "B5_DLSLIVE_841458_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/063_15_3_food_safety_of_animal_products.md": [
+      "B5_DLSLIVE_57F461_001",
+      "B5_DLSLIVE_57F461_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/064_16_1_animal_welfare_guidelines.md": [
+      "B5_DLSLIVE_42E9DB_001",
+      "B5_DLSLIVE_42E9DB_002",
+      "B5_DLSLIVE_42E9DB_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/065_16_2_responsibilities_of_animal_enterprises.md": [
+      "B5_DLSLIVE_F4226F_001",
+      "B5_DLSLIVE_F4226F_002",
+      "B5_DLSLIVE_F4226F_003"
+    ],
+    "DLS/dls_good_livestock_practices/sections/066_appendix_12_feeder_waterer_space_chicken.md": [
+      "B5_DLSLIVE_1242C3_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/067_appendix_13_nutrient_requirements_layer_breeder.md": [
+      "B5_DLSLIVE_58ACE9_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/068_appendix_14_recommended_lighting_program.md": [
+      "B5_DLSLIVE_1C9CCD_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/069_appendix_15_layer_breeder_performance_traits.md": [
+      "B5_DLSLIVE_0618FD_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/070_appendix_16_nutrient_requirements_commercial_chicks.md": [
+      "B5_DLSLIVE_FB8936_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/071_appendix_17_nutrient_requirements_commercial_pullets.md": [
+      "B5_DLSLIVE_11BFB8_001",
+      "B5_DLSLIVE_11BFB8_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/072_appendix_18_nutrient_requirements_commercial_layers.md": [
+      "B5_DLSLIVE_54879C_001",
+      "B5_DLSLIVE_54879C_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/073_appendix_19_nutrient_requirements_old_layers.md": [
+      "B5_DLSLIVE_02771F_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/074_appendix_20a_nutrient_requirements_broiler_starter.md": [
+      "B5_DLSLIVE_6AA566_001",
+      "B5_DLSLIVE_6AA566_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/075_appendix_20b_nutrient_requirements_broiler_grower.md": [
+      "B5_DLSLIVE_D3AFFB_001",
+      "B5_DLSLIVE_D3AFFB_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/076_appendix_20c_nutrient_requirements_broiler_finisher.md": [
+      "B5_DLSLIVE_9AD578_001",
+      "B5_DLSLIVE_9AD578_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/077_appendix_21_nutrient_requirements_ducks.md": [
+      "B5_DLSLIVE_228DDB_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/078_appendix_22_target_weights_feeding_ducks.md": [
+      "B5_DLSLIVE_79A03F_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/079_appendix_23_drinking_water_quality_guidelines.md": [
+      "B5_DLSLIVE_291639_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/080_appendix_24_water_suitability_tds.md": [
+      "B5_DLSLIVE_069971_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/081_appendix_25_3_week_heat_calendar.md": [
+      "B5_DLSLIVE_458257_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/082_appendix_26_reproductive_details_cattle_buffalo.md": [
+      "B5_DLSLIVE_A5B2D5_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/083_appendix_27_28_nutrient_guidelines_dairy_cows.md": [
+      "B5_DLSLIVE_A46238_001",
+      "B5_DLSLIVE_A46238_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/084_appendix_29_nutrient_requirements_dairy_heifers.md": [
+      "B5_DLSLIVE_6FC84A_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/085_appendix_30_calf_milk_replacer.md": [
+      "B5_DLSLIVE_F277DD_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/086_appendix_31_vaccination_schedule_poultry.md": [
+      "B5_DLSLIVE_7B50BF_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/087_appendix_32_vaccination_schedule_cattle_buffalo.md": [
+      "B5_DLSLIVE_03E91C_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/088_appendix_33_vaccination_schedule_sheep_goat.md": [
+      "B5_DLSLIVE_4F08B3_001",
+      "B5_DLSLIVE_4F08B3_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/089_appendix_34_de_worming_schedule_poultry.md": [
+      "B5_DLSLIVE_E6731A_001",
+      "B5_DLSLIVE_E6731A_002",
+      "B5_DLSLIVE_E6731A_003",
+      "B5_DLSLIVE_E6731A_004"
+    ],
+    "DLS/dls_good_livestock_practices/sections/090_appendix_35_de_worming_schedule_livestock.md": [
+      "B5_DLSLIVE_D5A255_001"
+    ],
+    "DLS/dls_good_livestock_practices/sections/091_appendix_36_hoof_trimming_techniques.md": [
+      "B5_DLSLIVE_7CCC80_001",
+      "B5_DLSLIVE_7CCC80_002"
+    ],
+    "DLS/dls_good_livestock_practices/sections/092_appendix_41_cooling_cattle.md": [
+      "B5_DLSLIVE_88B4ED_001"
+    ],
+    "DoF/worldfish_carps_mola_polyculture_2014/sections/01_overview_summary.md": [
+      "B6_DOC_EEE0EF_001"
+    ],
+    "DoF/worldfish_carps_mola_polyculture_2014/sections/02_culturing_mola_carps_ponds.md": [
+      "B6_DOC_F7863B_001",
+      "B6_DOC_F7863B_002",
+      "B6_DOC_F7863B_003",
+      "B6_DOC_D6B05D_001",
+      "B6_DOC_D6B05D_002"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/131_fish_marketing.md": [
+      "B6_DOC_3F8FF9_001",
+      "B6_DOC_CB6D77_001",
+      "B6_DOC_086E69_001",
+      "B6_DOC_086E69_002",
+      "B6_DOC_086E69_003"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/043_pre_stocking_management.md": [
+      "B6_DOC_22C856_001",
+      "B6_DOC_22C856_002",
+      "B6_DOC_ABCC5F_001",
+      "B6_DOC_6B6497_001",
+      "B6_DOC_6B6497_002"
+    ],
+    "DoF/worldfish_carps_mola_polyculture_2014/sections/06_bengali_stocking_density.md": [
+      "B6_DOC_E69F7A_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/26_post_stocking_supplementary_feeding.md": [
+      "B6_DOC_2DD9A6_001",
+      "B6_DOC_B3B94D_001",
+      "B6_DOC_B3B94D_002",
+      "B6_DOC_953EF6_001",
+      "B6_DOC_953EF6_002"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/119_common_fish_disease.md": [
+      "B6_DOC_1BEDB7_001",
+      "B6_DOC_72C26F_001",
+      "B6_DOC_830DE7_001",
+      "B6_DOC_830DE7_002",
+      "B6_DOC_830DE7_003",
+      "B6_DOC_830DE7_004",
+      "B6_DOC_830DE7_005"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/001_title_page_and_publication_information.md": [
+      "B6_DOC_B2C197_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/003_subject_contents.md": [
+      "B6_DOC_4054CC_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/004_improved_carp_carp_shing_polyculture_in_pond_dyke_cropping.md": [
+      "B6_DOC_517623_001",
+      "B6_DOC_091E33_001",
+      "B6_DOC_D2BA00_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/005_training_manual_on_improved_carp_carp_shing_poly_culture_in_.md": [
+      "B6_DOC_0626AA_001",
+      "B6_DOC_711736_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/008_editorial_committee.md": [
+      "B6_DOC_E3A72F_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/009_overall_assistance.md": [
+      "B6_DOC_E84BC9_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/010_published_by.md": [
+      "B6_DOC_F5E918_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/011_written_by.md": [
+      "B6_DOC_F095AB_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/012_design_printing.md": [
+      "B6_DOC_52FF50_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/014_introduction_to_the_manual_and_its_application.md": [
+      "B6_DOC_0D5B8E_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/015_duration_of_the_training.md": [
+      "B6_DOC_4055DE_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/016_training_methodology.md": [
+      "B6_DOC_939886_001",
+      "B6_DOC_FC4837_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/017_number_of_trainees.md": [
+      "B6_DOC_FDF964_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/018_role_of_trainers_in_training.md": [
+      "B6_DOC_12566C_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/020_using_the_training_manual.md": [
+      "B6_DOC_1F1826_001",
+      "B6_DOC_75AD51_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/021_learning_environment.md": [
+      "B6_DOC_07BD31_001",
+      "B6_DOC_75AD51_002"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/023_fish_culture_culture_types_and_methods.md": [
+      "B6_DOC_114D2C_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/024_fish_culture_methods.md": [
+      "B6_DOC_54A1CE_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/025_comparative_illustration_of_different_culture_systems.md": [
+      "B6_DOC_04DF1C_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/026_a_classification_of_ponds_based_on_use.md": [
+      "B6_DOC_53D149_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/027_b_classification_of_ponds_based_on_water_retention_capacity.md": [
+      "B6_DOC_656E41_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/028_standard_fish_pond.md": [
+      "B6_DOC_341AD5_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/029_pond_slope_based_on_soil_type.md": [
+      "B6_DOC_3DE9E7_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/030_pond_selection_technique_in_fish_culture.md": [
+      "B6_DOC_4845AB_001",
+      "B6_DOC_4845AB_002"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/031_the_physical_chemical_and_biological_parameters_of_water.md": [
+      "B6_DOC_32459E_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/032_the_physical_parameters_of_water.md": [
+      "B6_DOC_91A483_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/033_presence_of_natural_food_in_water_of_various_colours_and_the.md": [
+      "B6_DOC_D7A20B_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/034_chemical_properties_of_pond_water.md": [
+      "B6_DOC_2887A3_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/035_the_causes_behind_low_dissolved_oxygen_content_in_pond_water.md": [
+      "B6_DOC_5614A5_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/036_biological_features.md": [
+      "B6_DOC_3D8216_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/31_appropriate_fish_for_culture.md": [
+      "B6_DOC_34DD8D_001",
+      "B6_DOC_1F3266_001",
+      "B6_DOC_B55D07_001",
+      "B6_DOC_B55D07_002",
+      "B6_DOC_B55D07_003"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/038_other_aspects.md": [
+      "B6_DOC_5D6048_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/039_earth_calculation_of_50_dec_pond.md": [
+      "B6_DOC_618FC3_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/040_earth_measurement.md": [
+      "B6_DOC_2FA541_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/041_identification_of_good_quality_fry.md": [
+      "B6_DOC_3C9BF2_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/042_fish_fry.md": [
+      "B6_DOC_2C148A_001",
+      "B6_DOC_2C148A_002",
+      "B6_DOC_36FEB4_001",
+      "B6_DOC_5AEA2B_001",
+      "B6_DOC_9B48CC_001",
+      "B6_DOC_645142_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/044_a_repair_of_bottom_and_dyke_of_the_pond.md": [
+      "B6_DOC_E089FB_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/045_b_filter_setting_and_repair.md": [
+      "B6_DOC_0F14B1_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/046_what_is_meant_by_pond_measurement.md": [
+      "B6_DOC_4A00DB_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/047_importance_of_measuring_pond_and_water_area.md": [
+      "B6_DOC_D6CF84_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/048_aquatic_weed_and_control.md": [
+      "B6_DOC_6EB19D_001",
+      "B6_DOC_EF2FE8_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/050_control_of_predatory_and_unwanted_fishes.md": [
+      "B6_DOC_810A1A_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/051_what_are_the_predatory_and_unwanted_fishes.md": [
+      "B6_DOC_AEA408_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/052_predatory_and_unwanted_fish_control_methods.md": [
+      "B6_DOC_E8FAE6_001",
+      "B6_DOC_E8FAE6_002",
+      "B6_DOC_E8FAE6_003"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/053_what_is_ph.md": [
+      "B6_DOC_387D56_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/054_the_effects_of_acidic_water.md": [
+      "B6_DOC_2DCBE1_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/055_the_source_of_alkalinity.md": [
+      "B6_DOC_022F64_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/056_the_effects_of_alkaline_water_if_water_ph_reaches_11_fish_di.md": [
+      "B6_DOC_1D7C88_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/057_the_relationship_among_lime_ph_hardness_and_alkalinity.md": [
+      "B6_DOC_8EA497_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/058_the_significance_of_lime_application.md": [
+      "B6_DOC_62EA15_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/059_water_acidity_and_alkalinity_measurement_methods.md": [
+      "B6_DOC_5449B3_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/060_the_dose_of_lime.md": [
+      "B6_DOC_59C73B_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/061_lime_application_techniques.md": [
+      "B6_DOC_1E72A6_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/062_cautions_in_lime_application.md": [
+      "B6_DOC_605F16_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/063_fertilizer_application_during_pond_preparation.md": [
+      "B6_DOC_B0D836_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/064_the_importance_of_organic_fertilizers.md": [
+      "B6_DOC_AA9F9F_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/065_negative_impact_of_organic_fertilizers.md": [
+      "B6_DOC_131654_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/066_b_inorganic_fertilizers.md": [
+      "B6_DOC_8A0A71_001",
+      "B6_DOC_3821B5_001",
+      "B6_DOC_FD0060_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/068_the_dose_of_fertilizer_depend_on_the_following_aspects.md": [
+      "B6_DOC_286BD1_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/070_testing_of_natural_food.md": [
+      "B6_DOC_10E6F5_001",
+      "B6_DOC_10E6F5_002"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/071_fry_agreement.md": [
+      "B6_DOC_FB135E_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/072_basic_features_biology_of_cultivable_species_in_carp_poly_cu.md": [
+      "B6_DOC_ECA323_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/075_silver_carp.md": [
+      "B6_DOC_363E89_001",
+      "B6_DOC_363E89_002"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/078_tilapia_nilotica.md": [
+      "B6_DOC_F6B99E_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/081_species_selection_and_determination_of_stocking_density_in_c.md": [
+      "B6_DOC_2699FB_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/082_seasonal_ponds.md": [
+      "B6_DOC_2AFD82_001",
+      "B6_DOC_2AFD82_002",
+      "B6_DOC_2AFD82_003"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/083_perennial_ponds.md": [
+      "B6_DOC_A4FDCC_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/084_carp_shing_stocking_density.md": [
+      "B6_DOC_E2EB7A_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/087_transport_density_of_carp_fry.md": [
+      "B6_DOC_A0167E_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/088_transport_density_of_shing_fry.md": [
+      "B6_DOC_802DE1_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/089_techniques_of_traditional_transport.md": [
+      "B6_DOC_EADF41_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/090_techniques_of_transport_in_polythene_bag.md": [
+      "B6_DOC_E09DF3_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/091_cautions_during_fry_transport.md": [
+      "B6_DOC_B1383D_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/094_post_stocking_activities_and_their_importance.md": [
+      "B6_DOC_0FE183_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/095_evaluating_the_necessity_of_post_stocking_fertilization.md": [
+      "B6_DOC_B4C0E2_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/096_the_doses_of_fertilizer.md": [
+      "B6_DOC_8CA765_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/097_fertilizer_application_methods.md": [
+      "B6_DOC_8DA399_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/098_application_of_supplementary_feed.md": [
+      "B6_DOC_3394FA_001",
+      "B6_DOC_8A320A_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/099_importance_of_supplementary_feeds.md": [
+      "B6_DOC_58EC48_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/100_aspects_need_to_be_considered_in_selecting_feeds.md": [
+      "B6_DOC_6E4E31_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/101_nutritional_requirement_of_fish.md": [
+      "B6_DOC_AC8916_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/102_calculating_nutritional_composition_of_feeds.md": [
+      "B6_DOC_1D560D_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/103_selection_of_ingredients.md": [
+      "B6_DOC_E710D3_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/105_feed_for_shing_and_application.md": [
+      "B6_DOC_EF676E_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/106_common_problems_in_fish_culture_and_the_preventive_measures.md": [
+      "B6_DOC_4619F6_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/107_entrance_of_predatory_and_unwanted_fishes.md": [
+      "B6_DOC_C801A0_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/108_deep_green_layer_on_water_surface.md": [
+      "B6_DOC_15FE95_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/109_red_layer_on_water_surface.md": [
+      "B6_DOC_A60DD5_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/110_excess_ammonia.md": [
+      "B6_DOC_49D702_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/111_grasping_of_fish.md": [
+      "B6_DOC_BFBF4C_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/112_disturbance_from_predatory_animals.md": [
+      "B6_DOC_4CEAC3_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/113_excess_feed_application.md": [
+      "B6_DOC_02A41B_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/115_black_mud_at_the_bottom.md": [
+      "B6_DOC_F19AD7_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/116_floating_of_fish_after_rain.md": [
+      "B6_DOC_F1B5FA_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/117_the_reasons_behind_fish_disease_infection_are_described_in_d.md": [
+      "B6_DOC_408874_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/118_common_symptoms_of_disease.md": [
+      "B6_DOC_3B09CC_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/120_fish_diseases.md": [
+      "B6_DOC_AC8068_001",
+      "B6_DOC_AC8068_002",
+      "B6_DOC_98C753_001",
+      "B6_DOC_6382D8_001",
+      "B6_DOC_F38D88_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/122_4_argulosis_fish_lice.md": [
+      "B6_DOC_8EFAD0_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/125_sampling_of_cultured_fishes.md": [
+      "B6_DOC_12A0A1_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/126_importance_of_sampling.md": [
+      "B6_DOC_BA8AA9_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/127_sampling_method.md": [
+      "B6_DOC_4A2219_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/128_aspects_need_to_be_considered_in_sampling.md": [
+      "B6_DOC_C1ADBE_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/129_fish_harvesting_and_restocking.md": [
+      "B6_DOC_208835_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/132_seasonal_risks_in_fish_culture.md": [
+      "B6_DOC_BF99C5_001",
+      "B6_DOC_7F49E7_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/133_risk_in_monsoon.md": [
+      "B6_DOC_39B0C3_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/134_risk_in_dry_season.md": [
+      "B6_DOC_9F2C2F_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/135_winter_risks.md": [
+      "B6_DOC_4A1C45_001",
+      "B6_DOC_4A1C45_002"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/136_vegetable_culture_in_the_dyke_of_ponds_ghers.md": [
+      "B6_DOC_EC8C24_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/137_importance_of_vegetable_culture_on_pond_dyke_with_fish.md": [
+      "B6_DOC_DF3BB4_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/138_points_to_be_considered_for_crop_selection_for_vegetable_cul.md": [
+      "B6_DOC_E5BB07_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/139_the_following_matters_should_also_be_taken_into_account.md": [
+      "B6_DOC_4FD2AF_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/140_preparation_of_dyke_of_pond_gher.md": [
+      "B6_DOC_080177_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/141_pit_formation_on_dyke.md": [
+      "B6_DOC_2CE164_001",
+      "B6_DOC_2CE164_002"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/142_size_of_pit_hole.md": [
+      "B6_DOC_567243_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/143_fertilizer_application_in_dyke_pits.md": [
+      "B6_DOC_6F49C5_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/144_vegetable_model_in_dyke_and_slope_of_pond.md": [
+      "B6_DOC_90B5E9_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/145_management_of_vegetable_culture_on_the_dyke_of_pond_gher.md": [
+      "B6_DOC_4B642C_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/146_culture_methods_of_various_vegetables_on_the_dyke_of_ponds_g.md": [
+      "B6_DOC_B684B2_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/39_vegetable_diseases_pests_management.md": [
+      "B6_DOC_3E58A4_001",
+      "B6_DOC_3E58A4_002",
+      "B6_DOC_5E1724_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/148_seed_processing_and_preservation.md": [
+      "B6_DOC_DFDC93_001",
+      "B6_DOC_DFDC93_002"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/149_economic_analyses_of_carp_poly_culture.md": [
+      "B6_DOC_48E841_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/150_cost_benefit_analyses_of_carp_poly_culture_per_decimal.md": [
+      "B6_DOC_3E4D38_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/151_cost_per_decimal.md": [
+      "B6_DOC_713BA2_001"
+    ],
+    "DoF/worldfish_carp_polyculture_manual_2011/sections/153_calculation_of_cost_benefit_of_vegetable_culture.md": [
+      "B6_DOC_3890FA_001",
+      "B6_DOC_3890FA_002"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/01_title_publication_credits.md": [
+      "B6_DOC_3A3A29_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/03_table_of_contents.md": [
+      "B6_DOC_A61A33_001",
+      "B6_DOC_BF31DA_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/04_introduction_to_training_manual.md": [
+      "B6_DOC_8FAC46_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/06_training_course_and_schedule.md": [
+      "B6_DOC_C95911_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/07_facilitator_group_session_planning_1.md": [
+      "B6_DOC_470806_001",
+      "B6_DOC_064372_001",
+      "B6_DOC_DCFEC0_001",
+      "B6_DOC_65F808_001",
+      "B6_DOC_ACCA33_001",
+      "B6_DOC_F209E3_001",
+      "B6_DOC_8946CB_001",
+      "B6_DOC_A19CE2_001",
+      "B6_DOC_9693AF_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/08_csisa_bangladesh_background.md": [
+      "B6_DOC_5CD2CA_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/09_training_course_aim_objectives.md": [
+      "B6_DOC_812CF2_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/11_facilitator_flip_chart_overall_understanding.md": [
+      "B6_DOC_5ADFAD_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/12_current_status_rural_households_benefits.md": [
+      "B6_DOC_732A3C_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/14_facilitator_flip_chart_current_status.md": [
+      "B6_DOC_410CC9_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/15_overview_fish_culture_household_ponds.md": [
+      "B6_DOC_E77D25_001",
+      "B6_DOC_6FBC94_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/17_facilitator_flip_chart_fish_management.md": [
+      "B6_DOC_CADDE2_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/19_application_of_lime.md": [
+      "B6_DOC_475874_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/20_fertilizer_application_pond_preparation.md": [
+      "B6_DOC_E13385_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/21_natural_food_pond_water.md": [
+      "B6_DOC_9A8DA9_001",
+      "B6_DOC_9A8DA9_002"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/22_testing_water_toxicity.md": [
+      "B6_DOC_07B24C_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/23_fish_seed_selection_density.md": [
+      "B6_DOC_93B5C7_001",
+      "B6_DOC_93B5C7_002"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/24_fingerling_sources_and_quality.md": [
+      "B6_DOC_63D4C4_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/25_transport_cleaning_acclimatization_stocking.md": [
+      "B6_DOC_CFB4B6_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/28_common_problems_fish_culture_solutions.md": [
+      "B6_DOC_7F49E7_002",
+      "B6_DOC_7F49E7_003"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/34_facilitator_flip_chart_vegetable_gardening.md": [
+      "B6_DOC_A45783_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/35_cultivating_vegetables_household_area.md": [
+      "B6_DOC_C06CB2_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/36_bed_preparation_vegetables.md": [
+      "B6_DOC_A77899_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/37_management_practices_vegetable_cultivation.md": [
+      "B6_DOC_D630AF_001",
+      "B6_DOC_D630AF_002",
+      "B6_DOC_D630AF_003"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/38_various_methods_vegetable_cultivation.md": [
+      "B6_DOC_C5237B_001",
+      "B6_DOC_C5237B_002"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/40_orange_sweet_potato_production_plan.md": [
+      "B6_DOC_9AC2ED_001",
+      "B6_DOC_9AC2ED_002"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/43_fish_vegetable_cost_benefit_data_preservation.md": [
+      "B6_DOC_BF5A67_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/45_family_nutrition_introduction_causes.md": [
+      "B6_DOC_6DF3B1_001",
+      "B6_DOC_6DF3B1_002"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/46_food_sources_nutritional_status_assessment.md": [
+      "B6_DOC_6932AE_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/47_malnutrition_types_solutions.md": [
+      "B6_DOC_F8572F_001",
+      "B6_DOC_F8572F_002",
+      "B6_DOC_F8572F_003"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/48_nutrition_pregnant_postpartum_mothers.md": [
+      "B6_DOC_24DE9C_001",
+      "B6_DOC_24DE9C_002"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/49_nutrition_adolescent_girls.md": [
+      "B6_DOC_C0BD23_001"
+    ],
+    "DoF/worldfish_household_pond_aquaculture_2011/sections/51_training_course_evaluation_measurements.md": [
+      "B6_DOC_E71C0E_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/002_authorship_credits.md": [
+      "B6_DOC_2A10C9_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/005_importance_of_pond_fish_culture.md": [
+      "B6_DOC_3277B4_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/006_management_overview.md": [
+      "B6_DOC_7E58D9_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/008_predator_fish_removal.md": [
+      "B6_DOC_232F68_001",
+      "B6_DOC_A76B7E_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/012_natural_food_test.md": [
+      "B6_DOC_22EEE7_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/013_water_toxicity_test.md": [
+      "B6_DOC_95AD0D_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/014_species_selection_and_stocking_density.md": [
+      "B6_DOC_C507CA_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/015_selecting_good_fingerlings.md": [
+      "B6_DOC_71A833_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/016_fingerling_transport.md": [
+      "B6_DOC_E7C97B_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/019_common_problems_and_solutions.md": [
+      "B6_DOC_ACC1D5_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/021_partial_harvest_and_restocking.md": [
+      "B6_DOC_FDB37E_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/022_complete_harvest.md": [
+      "B6_DOC_1F6062_001"
+    ],
+    "DoF/worldfish_pond_fish_culture_2017/sections/025_contact_information.md": [
+      "B6_DOC_8327ED_001"
+    ],
+    "MoA_NARS_SRDI/fertilizer_control_order_1999/sections/01_definitions_registration.md": [
+      "MOA_FERT_EC552C_001"
+    ],
+    "MoA_NARS_SRDI/fertilizer_control_order_1999/sections/02_import_regulations.md": [
+      "MOA_FERT_3F33EF_001"
+    ],
+    "MoA_NARS_SRDI/fertilizer_control_order_1999/sections/03_inspection_enforcement_penalties.md": [
+      "MOA_FERT_E77C23_001"
+    ],
+    "MoA_NARS_SRDI/fertilizer_control_order_1999/sections/04_schedule_nutrient_allowances.md": [
+      "MOA_FERT_828C3E_001"
+    ],
+    "MoA_NARS_SRDI/fertilizer_control_order_1999/sections/05_form_penalty_rates.md": [
+      "MOA_FERT_916599_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/01_bacterial_blight.md": [
+      "IRRI_IRRI_B55E71_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/02_bacterial_leaf_streak.md": [
+      "IRRI_IRRI_AE9C42_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/03_bacterial_sheath_brown_rot.md": [
+      "IRRI_IRRI_08EFDA_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/05_blast_leaf_and_collar.md": [
+      "IRRI_IRRI_939CB7_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/06_blast_node_and_neck.md": [
+      "IRRI_IRRI_A6AA96_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/07_brown_spot.md": [
+      "IRRI_IRRI_0F67B4_001",
+      "IRRI_IRRI_D62EEF_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/08_false_smut.md": [
+      "IRRI_IRRI_5FEEFB_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/09_leaf_scald.md": [
+      "IRRI_IRRI_1AD539_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/11_red_stripe.md": [
+      "IRRI_IRRI_DA722C_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/12_rice_grassy_stunt.md": [
+      "IRRI_IRRI_F6A771_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/13_rice_ragged_stunt.md": [
+      "IRRI_IRRI_FFAFD3_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/14_rice_stripe_virus_disease.md": [
+      "IRRI_IRRI_C6C1B8_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/15_rice_yellow_mottle_virus.md": [
+      "IRRI_IRRI_4DB7F0_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/16_sheath_blight.md": [
+      "IRRI_IRRI_D8CFC9_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/17_sheath_rot.md": [
+      "IRRI_IRRI_AFFA73_001"
+    ],
+    "BRRI_IRRI/irri_rice_disease_reference_manual/sections/18_stem_rot.md": [
+      "IRRI_IRRI_979DBE_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/01_2_1_insect_mite_pests_of_cereal_crops.md": [
+      "NARS_PESTINFO_AB564A_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/02_2_2_insect_mite_pests_of_pulse_crops.md": [
+      "NARS_PESTINFO_036B9A_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/03_2_3_insect_mite_pests_of_oilseed_crops.md": [
+      "NARS_PESTINFO_77A68F_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/04_2_4_insect_mite_pests_of_fibre_crops.md": [
+      "NARS_PESTINFO_7C5EB5_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/05_2_5_insect_mite_pests_of_sugar_crops.md": [
+      "NARS_PESTINFO_31103D_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/06_2_6_insect_mite_pests_of_tuber_crops.md": [
+      "NARS_PESTINFO_A73C8F_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/07_2_7_insect_mite_pests_of_vegetable_crops.md": [
+      "NARS_PESTINFO_3C9B5E_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/08_2_8_insect_mite_pests_of_fruit_crops.md": [
+      "NARS_PESTINFO_0F0CEF_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/09_2_9_insect_mite_pests_of_spices_crops.md": [
+      "NARS_PESTINFO_907482_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/10_2_10_insect_mite_pests_of_flower_ornamental_plants.md": [
+      "NARS_PESTINFO_465EE2_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/11_2_11_insect_mite_pests_of_forest_trees.md": [
+      "NARS_PESTINFO_91F7D1_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/12_2_12_insect_mite_pests_of_narcotics_beverage_crops.md": [
+      "NARS_PESTINFO_F7B151_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/13_2_13_insect_mite_pests_of_medicinal_plants.md": [
+      "NARS_PESTINFO_46E349_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/14_3_1_diseases_of_cereal_crops.md": [
+      "NARS_PESTINFO_6380F1_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/15_3_2_diseases_of_pulse_crops.md": [
+      "NARS_PESTINFO_304B1A_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/16_3_3_diseases_of_oilseed_crops.md": [
+      "NARS_PESTINFO_78AF17_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/17_3_4_diseases_of_fibre_crops.md": [
+      "NARS_PESTINFO_65BF95_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/18_3_5_diseases_of_sugar_crops.md": [
+      "NARS_PESTINFO_565841_001",
+      "NARS_PESTINFO_565841_002"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/19_3_6_diseases_of_tuber_crops.md": [
+      "NARS_PESTINFO_987C32_001",
+      "NARS_PESTINFO_987C32_002"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/20_3_7_diseases_of_vegetable_crops.md": [
+      "NARS_PESTINFO_9A0F40_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/21_3_8_diseases_of_fruit_crops.md": [
+      "NARS_PESTINFO_22EF30_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/22_3_9_diseases_of_spices_crops.md": [
+      "NARS_PESTINFO_FB13A4_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/23_3_10_diseases_of_flower_plants.md": [
+      "NARS_PESTINFO_22EE13_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/24_3_11_diseases_of_forest_trees.md": [
+      "NARS_PESTINFO_B987FF_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/25_3_12_diseases_of_narcotics_beverage_crops.md": [
+      "NARS_PESTINFO_4DCA26_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/26_3_13_diseases_of_medicinal_plants.md": [
+      "NARS_PESTINFO_21832E_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/27_4_1_weeds_of_cereal_crops.md": [
+      "NARS_PESTINFO_140B77_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/28_4_2_weeds_of_pulse_crops.md": [
+      "NARS_PESTINFO_6F5E44_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/29_4_3_weeds_of_oilseed_crops.md": [
+      "NARS_PESTINFO_EF529A_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/30_4_4_weeds_of_fibre_crops.md": [
+      "NARS_PESTINFO_B03C63_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/31_4_5_weeds_of_sugar_crops.md": [
+      "NARS_PESTINFO_DF26FB_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/32_4_6_weeds_of_tuber_crops.md": [
+      "NARS_PESTINFO_605206_001",
+      "NARS_PESTINFO_605206_002"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/33_4_7_weeds_of_vegetable_crops.md": [
+      "NARS_PESTINFO_C4DC61_001",
+      "NARS_PESTINFO_C4DC61_002"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/34_4_8_weeds_of_fruit_crops.md": [
+      "NARS_PESTINFO_89428F_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/35_4_9_weeds_of_spices_crops.md": [
+      "NARS_PESTINFO_5EDA43_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/36_4_10_weeds_of_flower_ornamental_plants.md": [
+      "NARS_PESTINFO_DC3B8F_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/37_4_11_weeds_of_forest_trees.md": [
+      "NARS_PESTINFO_19EB21_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/38_4_12_weeds_of_narcotics_beverage_crops.md": [
+      "NARS_PESTINFO_BE257B_001"
+    ],
+    "MoA_NARS_SRDI/nars_all_pest_information_books/sections/39_4_13_weeds_of_medicinal_plants.md": [
+      "NARS_PESTINFO_F32244_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_11.md": [
+      "BARC_SHATA_BA25BB_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_12.md": [
+      "BARC_SHATA_D4A0A0_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_13.md": [
+      "BARC_SHATA_494ACF_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_14.md": [
+      "BARC_SHATA_A4C9F9_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_15.md": [
+      "BARC_SHATA_E6A33F_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_16.md": [
+      "BARC_SHATA_2BBB0E_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_17.md": [
+      "BARC_SHATA_6B1A07_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_18.md": [
+      "BARC_SHATA_E73F55_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_19.md": [
+      "BARC_SHATA_2ABC3B_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_22.md": [
+      "BARC_SHATA_BC04FD_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_25.md": [
+      "BARC_SHATA_BF2155_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_27.md": [
+      "BARC_SHATA_B77E5F_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/aez_29.md": [
+      "BARC_SHATA_95100B_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/appendix_3_organic_fertilizer_spec.md": [
+      "BARC_SHATA_A7330D_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/appendix_5_fertilizer_info.md": [
+      "BARC_SHATA_5A3C16_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/appendix_6_vermicompost_worm_sources.md": [
+      "BARC_SHATA_52B520_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/deficiency_symptoms.md": [
+      "BARC_SHATA_C104EB_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/front_matter.md": [
+      "BARC_SHATA_7CAC6C_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/single_crop_grass.md": [
+      "BARC_SHATA_BE6A82_001"
+    ],
+    "BARC/shata_shuparish_mala/sections/single_crop_misc_flower.md": [
+      "BARC_SHATA_AA5BBB_001",
+      "BARC_SHATA_AA5BBB_002"
+    ],
+    "BARC/shata_shuparish_mala/sections/soil_fertility_organic_manures.md": [
+      "BARC_SHATA_732B68_001"
+    ],
+    "MoA_NARS_SRDI/srdi_soil_sample_collection/sections/01_soil_sample_collection_method.md": [
+      "SRDI_SOIL_AF3A43_001"
+    ],
+    "MoA_NARS_SRDI/srdi_soil_sample_collection/sections/02_srdi_contact_lab_addresses.md": [
+      "SRDI_SOIL_341C41_001"
+    ],
+    "MoA_NARS_SRDI/srdi_soil_sample_collection/sections/03_citizens_charter_services.md": [
+      "SRDI_SOIL_DF02BB_001"
+    ],
+    "MoA_NARS_SRDI/srdi_soil_sample_collection/sections/04_innovation_team_formation.md": [
+      "SRDI_SOIL_3BB965_001"
+    ]
+  }
+}

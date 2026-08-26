@@ -8,6 +8,7 @@ from collections.abc import AsyncIterator, Awaitable, Callable
 from contextlib import asynccontextmanager
 from dataclasses import replace
 
+from app.application.chunk_fallback import ChunkFallbackResolver
 from app.application.generation import GroundedAnswerGenerator, REFERRAL
 from app.application.query_builder import build_retrieval_query
 from app.application.rewrite import ConversationalQueryRewriter
@@ -89,6 +90,9 @@ class QAPipeline:
         corpus_version: str | None = None,
         # R4: optional T1/T2 resolver (None = off, T3 always, flag default).
         resolver: StructuredResolver | None = None,
+        # R13: optional grounded chunk fallback (None = off). Only consulted on
+        # the zero-node-source branch that today refuses (Amendment 03).
+        chunk_fallback: ChunkFallbackResolver | None = None,
     ) -> None:
         self.safety = safety
         self.retriever = retriever
@@ -122,6 +126,7 @@ class QAPipeline:
         self._local_semaphore_lock = threading.Lock()
         # R4: T1/T2 structured resolver (None = off, default).
         self.resolver = resolver
+        self.chunk_fallback = chunk_fallback
         # P0-7: corpus-generation tag appended to demo-cache keys. None (old
         # pipelines/tests) keeps the exact previous key shape.
         self.corpus_version = corpus_version
@@ -348,6 +353,19 @@ class QAPipeline:
                     if source.id not in seen_ids:
                         seen_ids.add(source.id)
                         sources.append(source)
+                # R13: grounded chunk fallback — nodes first, always. This runs
+                # ONLY when node retrieval produced zero sources, i.e. the branch
+                # that today returns REFERRAL ("no_sources"). Chunk sections
+                # become ordinary evidence for the same generation + verifier
+                # path; if retrieval and fallback both come up empty, behavior
+                # is byte-identical to today.
+                if not sources and self.chunk_fallback is not None:
+                    chunk_sources = await asyncio.to_thread(
+                        self.chunk_fallback.retrieve, retrieval_query
+                    )
+                    if chunk_sources:
+                        sources = chunk_sources
+                        retrieved = chunk_sources
                 # P3: surface the dialect expansion in the agent trace (honest
                 # evidence the mapping ran; nothing shown when no terms matched).
                 detail = f"{len(sources)} sources"

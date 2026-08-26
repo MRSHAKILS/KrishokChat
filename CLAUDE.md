@@ -1,43 +1,20 @@
+# CLAUDE.md — pointer file
 
-## Session Anchored Summary (2026-08-09)
+This project is governed by `AGENTS.md`. Read it fully before doing any work — it wins on conflict.
 
-### Advisory Workflow � 5 Phases Complete
+Trace roots (added 2026-08-27):
 
-| Phase | What | Status |
-|---|---|---|
-| Phase 1 | Fix disease_knowledge_map nested structure | Category A=17, B=15, C=2 |
-| Phase 2 | Generate 13 knowledge nodes via free Gemini keys | 13 nodes (Bengali+English) |
-| Phase 3 | Merge nodes into RAG index, rebuild BM25 | 2133 nodes total |
-| Phase 4 | Intent classifier (OpenRouter gemini-2.5-flash-lite) | 8 intents + safety |
-| Phase 5 | Generator (free Gemini gemini-3.1-flash-lite) | Grounded Bengali responses |
+- `AGENTS.md` — hard rules, locked stack, folder structure, definition of done, two-track map (production vs paper).
+- `docs/refactor/PROJECT_HANDOFF.md` → `docs/refactor/ARCHITECTURE.md` → `docs/refactor/REFACTOR_PLAN.md` — implementation memory.
+- `docs/production_readiness/tasks/R_SERIES_EXECUTION_INDEX.md` — production roadmap (R1–R13 done; R13 grounded chunk fallback dark-launched 2026-08-27 under Amendment 03, flag `CHUNK_FALLBACK_ENABLED` default-off until experiment E26 is accepted).
+- `experiments/registry.yaml` — canonical experiment trace (E02–E13 done; E14–E26 planned incl. CEA-pivot, unique-idea, training, and chunk-fallback layers).
+- `experiments/ACCEPTANCE_PROTOCOL.md` + `experiments/IMPLEMENTATION_AND_AGGREGATION_PLAN.md` — run→verify→real-app-check→accept lifecycle; CEA-pivot plan.
+- `paper/manifest.yaml` — paper folder trace; `docs/PAPER_POLICY.md` — citation/ban policy (arXiv:2606.29243 forbidden); `paper/manuscript/CLAIM_LEDGER_FREEZE.md` — S/F/U claim gates.
+- Two-track rule: production code (`backend/`, `frontend/`) never reads `paper/`, `research_artifacts/`, `experiments/` at runtime; research harnesses may import backend offline only.
+- External data origin (read-only): `E:\CSE498R\Agri-LLM\KrishokChat` — app depends only on mirrors under `backend/ml_assets/`.
 
-### Key Files
-- ackend/app/services/advisory/intent_classifier.py � OpenRouter classifier
-- ackend/app/services/advisory/generator.py � Gemini free-key generator
-- ackend/app/services/advisory/_extractors.py � shared utilities
-- ackend/ml_assets/advisory/disease_knowledge_map.json � 34 diseases mapped
-- ackend/ml_assets/advisory/generated_knowledge_nodes.jsonl � 13 generated nodes
-- ackend/.env.local � OPENROUTOR_API_KEY + OPENROUTER_MODEL
-
-### Resource Rules
-- Free Gemini keys: ONLY gemini-3.1-flash-lite or gemini-3.5-flash-lite
-- OpenRouter key: low-token tasks (intent classifier)
-- Backend: localhost:8000 | Frontend: localhost:3000
-
-### What's Left
-- Phase 6: Frontend wiring (detection ? show info ? chat-more button)
-- Frontend: tabs for disease detection + QA, agent trace animation
-
-### Phase 6: Frontend Integration (2026-08-09)
-- QA chat: same page (tab 2), RAG-powered via stream endpoint
-- Detection: tab 1, upload image -> show crop + disease + info
-- CORS fix: API_BASE = "" + Next.js rewrites proxy to backend
-- Backend CORS: multiple localhost origins allowed
-- QA flow: safety check -> BM25 retrieval -> Gemini-3.1-Flash-Lite generation
-- Bengali keyword augmentation for BM25 (bn->en mapping)
-- Both servers running: backend :8000, frontend :3100
-
-### Session End (2026-08-09) � Handoff Notes
-- Servers stopped: backend :8000, frontend :3100
-- Everything committed to git
-- To restart: backend 'uv run uvicorn app.main:app --port 8000', frontend 'npx next dev -p 3100'
+Historical note: this file previously held a 2026-08-09 session summary describing a five-phase
+advisory-workflow sprint (Gemini-key generation, `backend/app/services/advisory/` as live code).
+That architecture was superseded by the `application/domain/ports/infrastructure` refactor — the old
+paths are compatibility shims only (AGENTS.md §5.1). Do not restore the old summary; it was stale
+and mojibake-corrupted (non-UTF-8 encoding).

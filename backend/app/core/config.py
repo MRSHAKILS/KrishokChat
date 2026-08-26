@@ -157,6 +157,13 @@ class Settings(BaseSettings):
     structured_resolver_enabled: bool = False
     structured_resolver_min_confidence: float = Field(default=0.85, ge=0.0, le=1.0)
 
+    # R13: grounded chunk fallback — nodes first, always. Only the zero-node-
+    # source branch that today refuses (REFERRAL) may consult offline-chunked
+    # source_md evidence (Amendment 03). Default off: refusal behavior stays
+    # byte-identical; a missing/rotated chunk index also disables it gracefully.
+    chunk_fallback_enabled: bool = False
+    chunk_fallback_top_k: int = Field(default=4, ge=1, le=10)
+
     # R7: model pricing table path and budget guard settings.
     # Default off (budget guard disabled; demo mode unaffected).
     model_prices_path: str = ""
@@ -273,6 +280,15 @@ class Settings(BaseSettings):
     @property
     def rag_term_map_path(self) -> Path:
         return self.rag_index_path / "indexes" / "term_map.json"
+
+    # R13: offline-built chunk index (tools/rag/15_build_chunk_index.py).
+    @property
+    def rag_chunk_index_dir(self) -> Path:
+        return self.rag_index_path / "indexes"
+
+    @property
+    def rag_source_md_dir(self) -> Path:
+        return self.rag_index_path / "source_md"
 
     @property
     def rag_dialect_map_path(self) -> Path:
