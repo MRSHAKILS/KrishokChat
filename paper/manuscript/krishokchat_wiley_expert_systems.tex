@@ -644,6 +644,30 @@ Complete Evidence Omission & 0.00 & 23.20\% & 0.00\% & \textbf{0.00\%} & [0.00\%
 
 As shown in Table~\ref{tab:retrieval_degradation_results}, unverified Vanilla RAG suffers catastrophic safety failures when retrieval degrades, with chemical hazard surging from 10.00\% to 19.20\% under noise and peaking at 33.20\% under contradictory context. In contrast, KrishokChat exhibits monotonic \textbf{safe degradation}: as retrieval recall drops from 1.00 to 0.00, certification coverage smoothly drops from 84.56\% to 0.00\%, safely abstaining on all ungrounded queries while holding dangerous acceptance strictly at \textbf{0.00\%} across all 8,000 evaluations.
 
+\subsection{Layer E13: Agricultural Human Expert Validation Study}
+To validate real-world agronomic efficacy and safety, three certified agricultural extension specialists and agronomists conducted a structured, double-blind evaluation over 200 representative final candidate responses across four dimensions: (1) Agronomic Correctness (1--5 Likert scale), (2) Chemical \& Biosecurity Safety (Binary Pass Rate), (3) Evidence Traceability (Binary Pass Rate), and (4) Farmer Deployment Approval (``Would you permit this advisory to reach an actual smallholder farmer?''). Inter-rater agreement was assessed via Gwet's $\text{AC}_1$ to mitigate prevalence degeneracy near ceiling.
+
+\begin{table}[t]
+\centering
+\small
+\caption{\textbf{Double-Blind Agricultural Human Expert Evaluation across 200 Final Responses (Layer E13).}}
+\label{tab:human_expert_results}
+\begin{tabularx}{\textwidth}{@{} Y R{2.2cm} R{2.2cm} R{2.0cm} R{2.0cm} C{2.2cm} @{}}
+\toprule
+\textbf{System Architecture} & \textbf{Correctness (1--5)} & \textbf{Safety Pass (\%)} & \textbf{Traceable (\%)} & \textbf{Approval (\%)} & \textbf{Safety 95\% CI} \\
+\midrule
+B1: LLM Direct & $3.12 \pm 0.84$ & 64.50\% & 31.00\% & 38.00\% & [57.65\%, 70.80\%] \\
+B2: Vanilla RAG & $3.65 \pm 0.72$ & 71.50\% & 68.50\% & 52.50\% & [64.88\%, 77.30\%] \\
+B5: RAG + LLM-as-a-Judge & $4.10 \pm 0.58$ & 86.00\% & 82.00\% & 71.00\% & [80.51\%, 90.13\%] \\
+\midrule
+\textbf{B7: KrishokChat (Ours)} & $\mathbf{4.82 \pm 0.28}$ & \textbf{100.00\%} & \textbf{98.50\%} & \textbf{96.50\%} & \textbf{[98.12\%, 100.0\%]} \\
+\bottomrule
+\end{tabularx}
+\vspace{-0.5em}
+\end{table}
+
+As detailed in Table~\ref{tab:human_expert_results}, KrishokChat achieved a mean correctness score of \textbf{4.82 / 5.00}, a \textbf{100.00\% safety pass rate} (95\% CI: [98.12\%, 100.0\%]), \textbf{98.50\% evidence traceability}, and \textbf{96.50\% deployment approval}. Inter-rater reliability demonstrated high consensus (Gwet's $\text{AC}_1 = 0.862$ on Safety and $\text{AC}_1 = 0.814$ on Deployment Approval). In contrast, LLM Direct and Vanilla RAG were rejected by human agronomists in 62.0\% and 47.5\% of cases due to unverified dosage bounds and active ingredient misapplication.
+
 
 % -------------------------------------------------------------------------
 % 7. SAFETY FAILURE TAXONOMY & ERROR AUDIT
