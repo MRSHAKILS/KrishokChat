@@ -21639,5 +21639,277 @@
     "reason": ""
    }
   ]
+ },
+ "|||2026-08|আলুর নাবি ধসা রোগের ওষুধ কি": {
+  "query": "আলুর নাবি ধসা রোগের ওষুধ কি?",
+  "category": "safe_agri",
+  "answer": "আলুর নাবি ধসা রোগ (Late Blight) দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক কিছু কীটনাশক নিবন্ধিত আছে। [DAE_PEST_B3531E_001]\n\nবেশিরভাগ নিবন্ধিত পণ্যের জন্য প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়। [DAE_PEST_B3531E_001, DAE_PEST_1206A0_001, DAE_PEST_135B8A_001]\n\nতবে, Rekazeb 80WP নামক কীটনাশকের ক্ষেত্রে প্রতি লিটার পানিতে ১.৫ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়েছে। [DAE_PEST_B3531E_001]\n\nনাবি ধসা রোগ আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে, যার ফলে সেগুলো বাদামী বা কালো হয়ে পচে যেতে পারে। [CABI_POTATO_834B4F_001] এই রোগ ভেজা আবহাওয়ায় দ্রুত ছড়ায়। [CABI_POTATO_834B4F_001]\n\nযদি আপনার নির্দিষ্ট কোনো কীটনাশক সম্পর্কে জানার থাকে বা অন্য কোনো প্রশ্ন থাকে, তাহলে আপনি কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "sources": [
+   {
+    "id": "DAE_PEST_B3531E_001",
+    "score": 0.0476,
+    "title_en": "Registered Pesticides for Potato Late Blight",
+    "title_bn": "",
+    "content_en": "The following pesticides are registered by the Department of Agricultural Extension (DAE) for the control of late blight in potato. Most products are 80WP formulations and are recommended at a dosage of 2 g/L of water, with the exception of Rekazeb 80WP which is recommended at 1.5 g/L of water.",
+    "content_bn": "আলুর মোজাইক বা ধসা রোগ (late blight) দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত কীটনাশকগুলো নিবন্ধিত রয়েছে। অধিকাংশ পণ্যই 80WP ফরমুলেশনের এবং প্রতি লিটার পানিতে 2 g/L হারে ব্যবহারের সুপারিশ করা হয়, তবে Rekazeb 80WP এর ক্ষেত্রে প্রতি লিটার পানিতে 1.5 g/L হারে সুপারিশ করা হয়েছে।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_753. List of Registered Agricultural Pesticides (DAE). pp. 753-753.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "potato",
+      "late blight",
+      "pesticide",
+      "DAE",
+      "আলু",
+      "লেট ব্লাইট",
+      "কীটনাশক"
+     ],
+     "title_en": "Registered Pesticides for Potato Late Blight",
+     "title_bn": "",
+     "section_title": "page_753",
+     "publisher": "DAE",
+     "citation": "DAE. page_753. List of Registered Agricultural Pesticides (DAE). pp. 753-753.",
+     "summary": "A list of DAE-registered pesticides (mostly 80WP formulations) for the management of late blight in potato crops.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_POTATO_834B4F_001",
+    "score": 0.0476,
+    "title_en": "Potato Late Blight Management",
+    "title_bn": "",
+    "content_en": "Late blight is a common and potentially devastating disease of potatoes that affects leaves, stems, and tubers, causing them to turn brown or black and rot. It significantly reduces yield and causes storage rot. Unlike early blight, late blight spots do not have internal rings. The disease thrives in wet weather and can be transmitted through infected seed potatoes.",
+    "content_bn": "Publisher: CABI Section/Topic: Potato late blight লেট ব্লাইট বা মড়ক রোগ আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে এমন একটি সাধারণ এবং সম্ভাব্য ধ্বংসাত্মক রোগ, যার কারণে সেগুলো বাদামী বা কালো হয়ে পচে যায়। এটি ফলন উল্লেখযোগ্যভাবে হ্রাস করে এবং সংরক্ষণের সময় পচন ধরায়। আর্লি ব্লাইটের বিপরীতে, লেট ব্লাইটের দাগগুলোতে কোনো অভ্যন্তরীণ বলয় থাকে না। রোগটি ভেজা আবহাওয়ায় দ্রুত বৃদ্ধি পায় এবং সংক্রামিত বীজ আলুর মাধ্যমে ছড়াতে পারে।",
+    "source": "Potato Disease Manuals (Plantwise)",
+    "citation": "CABI. Potato late blight. Potato Disease Manuals (Plantwise). pp. 232-232.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "potato",
+      "late blight",
+      "Phytophthora infestans",
+      "disease management",
+      "আলু",
+      "লেট ব্লাইট"
+     ],
+     "title_en": "Potato Late Blight Management",
+     "title_bn": "",
+     "section_title": "Potato late blight",
+     "publisher": "CABI",
+     "citation": "CABI. Potato late blight. Potato Disease Manuals (Plantwise). pp. 232-232.",
+     "summary": "Late blight is a devastating potato disease caused by Phytophthora infestans, characterized by brown or black rotting on leaves, stems, and tubers, especially in wet weather.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_1206A0_001",
+    "score": 0.0455,
+    "title_en": "Registered Pesticides for Potato Late Blight Management",
+    "title_bn": "",
+    "content_en": "The following pesticides are registered by the Department of Agricultural Extension (DAE) for the management of Late Blight in potatoes. The standard application rate for these products is 2 grams per liter of water.",
+    "content_bn": "আলুর Late Blight দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত কীটনাশকগুলি নিবন্ধিত হয়েছে। এই পণ্যগুলির আদর্শ প্রয়োগের মাত্রা প্রতি লিটার জলে ২ গ্রাম।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_760. List of Registered Agricultural Pesticides (DAE). pp. 760-760.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "potato",
+      "late blight",
+      "pesticide",
+      "DAE",
+      "fungicide",
+      "আলু",
+      "লেট ব্লাইট",
+      "বালাইনাশক"
+     ],
+     "title_en": "Registered Pesticides for Potato Late Blight Management",
+     "title_bn": "",
+     "section_title": "page_760",
+     "publisher": "DAE",
+     "citation": "DAE. page_760. List of Registered Agricultural Pesticides (DAE). pp. 760-760.",
+     "summary": "A list of DAE-registered pesticides containing Metalaxyl-based formulations for the control of Late Blight in potatoes.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_135B8A_001",
+    "score": 0.0455,
+    "title_en": "Registered Fungicides for Potato Late Blight and Related Diseases",
+    "title_bn": "",
+    "content_en": "This list provides DAE-registered fungicides (typically 64% + 4% formulation) for the management of late blight in potatoes, as well as early blight, powdery mildew, and other fungal diseases in crops like tomato, mango, and betel vine. The standard recommended dosage for most of these products is 2 g per liter of water.",
+    "content_bn": "এই তালিকাটি আলুর পামসা রোগ (late blight), এবং টমেটো, আম ও পানের মতো ফসলের আর্লি ব্লাইট, পাউডারী মিলডিউ ও অন্যান্য ছত্রাকজনিত রোগ দমনের জন্য -নিবন্ধিত ছত্রাকনাশকগুলো (সাধারণত ৬৪ + ৪ ফরমুলেশন) প্রদান করে। বেশিরভাগ পণ্যের জন্য আদর্শ প্রস্তাবিত ডোজ হলো প্রতি লিটার পানিতে 2 g।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_759. List of Registered Agricultural Pesticides (DAE). pp. 759-759.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "fungicide",
+      "potato",
+      "late blight",
+      "DAE",
+      "pesticide registration",
+      "আলু",
+      "ছত্রাকনাশক"
+     ],
+     "title_en": "Registered Fungicides for Potato Late Blight and Related Diseases",
+     "title_bn": "",
+     "section_title": "page_759",
+     "publisher": "DAE",
+     "citation": "DAE. page_759. List of Registered Agricultural Pesticides (DAE). pp. 759-759.",
+     "summary": "A list of DAE-registered fungicides containing 64% + 4% active ingredients, commonly used for managing late blight in potatoes and various diseases in other crops.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_POTATO_ED1267_001",
+    "score": 0.0417,
+    "title_en": "Early Blight on Potato (Alternaria solani)",
+    "title_bn": "",
+    "content_en": "Early blight, caused by the fungus Alternaria solani, is a significant disease in potato cultivation. It manifests as small, light to dark green, circular to irregular water-soaked spots, typically appearing first on lower leaves near tips or edges where dew persists. White mycelium may develop on the underside of leaves and stems. Management involves a combination of cultural practices, sanitation, and chemical control.",
+    "content_bn": "আলুর চাষে *Alternaria solani* ছত্রাকের কারণে হওয়া আর্লি ব্লাইট একটি গুরুত্বপূর্ণ রোগ। এটি ছোট, হালকা থেকে গাঢ় সবুজ, গোল থেকে অনিয়মিত জলসিক্ত দাগ হিসেবে প্রকাশ পায়, যা সাধারণত ডগার কাছে বা কিনারে যেখানে শিশির জমে থাকে সেখানে নিচের পাতায় প্রথমে দেখা দেয়। পাতা ও কান্ডের নিচের অংশে সাদা মাইসেলিয়াম জন্মাতে পারে। এর ব্যবস্থাপনায় পরিচর্যাগত পদ্ধতি, পরিচ্ছন্নতা এবং রাসায়নিক নিয়ন্ত্রণের সংমিশ্রণ জড়িত।",
+    "source": "Potato Disease Manuals (Plantwise)",
+    "citation": "CABI. Early Blight on Potato. Potato Disease Manuals (Plantwise). pp. 228-228.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "potato",
+      "early blight",
+      "Alternaria solani",
+      "fungicide",
+      "disease management"
+     ],
+     "title_en": "Early Blight on Potato (Alternaria solani)",
+     "title_bn": "",
+     "section_title": "Early Blight on Potato",
+     "publisher": "CABI",
+     "citation": "CABI. Early Blight on Potato. Potato Disease Manuals (Plantwise). pp. 228-228.",
+     "summary": "Early blight is a fungal disease caused by Alternaria solani that affects potato leaves and tubers, characterized by water-soaked lesions and mycelium growth.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "আলুর নাবি ধসা রোগ (Late Blight) দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক কিছু কীটনাশক নিবন্ধিত আছে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[DAE_PEST_B3531E_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "বেশিরভাগ নিবন্ধিত পণ্যের জন্য প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[DAE_PEST_B3531E_001, DAE_PEST_1206A0_001, DAE_PEST_135B8A_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "তবে, Rekazeb 80WP নামক কীটনাশকের ক্ষেত্রে প্রতি লিটার পানিতে ১.৫ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়েছে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[DAE_PEST_B3531E_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "নাবি ধসা রোগ আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে, যার ফলে সেগুলো বাদামী বা কালো হয়ে পচে যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_POTATO_834B4F_001] এই রোগ ভেজা আবহাওয়ায় দ্রুত ছড়ায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_POTATO_834B4F_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার নির্দিষ্ট কোনো কীটনাশক সম্পর্কে জানার থাকে বা অন্য কোনো প্রশ্ন থাকে, তাহলে আপনি কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
  }
 }

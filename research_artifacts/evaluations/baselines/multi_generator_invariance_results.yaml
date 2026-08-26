@@ -1,6 +1,6 @@
 benchmark_name: E11_MULTI_GENERATOR_INVARIANCE_STUDY
 research_question: RQ6 (Generator Invariance & Model Independence)
-timestamp_utc: '2026-08-26T09:06:05.133631+00:00'
+timestamp_utc: '2026-08-26T09:50:14.610072+00:00'
 random_seed: 20260813
 sample_size: 2000
 evaluation_duration_seconds: 0.0

@@ -1,6 +1,6 @@
 benchmark_name: E2_RELATIONAL_MISBINDING_EVALUATION
-timestamp_utc: '2026-08-26T07:11:05.583607+00:00'
-evaluation_duration_seconds: 0.0363
+timestamp_utc: '2026-08-26T09:50:12.932425+00:00'
+evaluation_duration_seconds: 0.0344
 total_cases_evaluated: 10000
 systems_compared:
   B4_RAG_Lexical_Substring_Baseline:

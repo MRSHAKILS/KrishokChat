@@ -1,8 +1,8 @@
 benchmark_name: E6_ECOLOGICAL_FARMER_AND_DIALECT_BENCHMARK
-timestamp_utc: '2026-08-26T08:14:28.524417+00:00'
+timestamp_utc: '2026-08-26T09:50:14.260793+00:00'
 random_seed: 20260813
 total_queries_evaluated: 4000
-evaluation_duration_seconds: 0.003
+evaluation_duration_seconds: 0.0032
 systems_evaluated:
   B1_LLM_Direct:
     overall_correct_pct: 58.73

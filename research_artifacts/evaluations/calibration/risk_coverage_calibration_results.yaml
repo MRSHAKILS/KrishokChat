@@ -1,5 +1,5 @@
 benchmark_name: E4_SELECTIVE_RISK_COVERAGE_CALIBRATION
-timestamp_utc: '2026-08-26T07:38:18.495461+00:00'
+timestamp_utc: '2026-08-26T09:50:14.053357+00:00'
 random_seed: 20260813
 total_samples: 20112
 split_counts:
@@ -7,7 +7,7 @@ split_counts:
   dev: 4022
   test: 4022
 target_dev_risk_bound_epsilon: 0.01
-evaluation_duration_seconds: 0.7436
+evaluation_duration_seconds: 0.7698
 calibration_comparison:
   Raw_Generator_Confidence:
     dev_aurc: 0.0667

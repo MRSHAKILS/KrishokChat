@@ -1,7 +1,7 @@
 benchmark_name: E12_RETRIEVAL_DEGRADATION_AND_SAFE_DEGRADATION_CURVE
 scientific_bridge: Direct empirical linkage to Paper 2 (AgriTrust) retrieval failure
   modes
-timestamp_utc: '2026-08-26T09:34:38.195856+00:00'
+timestamp_utc: '2026-08-26T09:50:14.704902+00:00'
 random_seed: 20260813
 queries_per_regime: 2000
 total_evaluations: 8000

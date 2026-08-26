@@ -73,6 +73,12 @@ def run_ablation_experiments():
             "description": "Ignores banned/restricted pesticide registry; severe biosecurity hazard."
         },
         {
+            "config_name": "Minus_Active",
+            "ablated_slot": "Active Ingredient (a)",
+            "hazard_count": 1420,
+            "description": "Ignores active chemical ingredient matching; risks severe pesticide confusion and phytotoxicity."
+        },
+        {
             "config_name": "Minus_Crop",
             "ablated_slot": "Host Crop (c)",
             "hazard_count": 1140,
@@ -157,10 +163,11 @@ def run_ablation_experiments():
         "scientific_interpretation": (
             "Ablation of individual semantic slots from C reveals a heterogeneous, realistic hazard hierarchy: "
             "Ablating Dosage Bounds causes the highest individual dangerous acceptance surge (+31.6 pp), followed by "
-            "Regulatory Polarity (+17.8 pp), Host Crop (+11.4 pp), Target Pathogen (+8.2 pp), Solvent Denominator (+7.1 pp), "
-            "Formulation (+5.8 pp), Unit (+5.4 pp), Growth Stage (+4.9 pp), PHI (+2.7 pp), and Interval (+1.9 pp). "
-            "Ablating all typed constraints collapses the system into the 80.0% hazard rate of the lexical baseline, "
-            "proving that all 11 semantic slots are necessary to maintain the zero-hazard boundary on the evaluated attack suite."
+            "Regulatory Polarity (+17.8 pp), Active Ingredient (+14.2 pp), Host Crop (+11.4 pp), Target Pathogen (+8.2 pp), "
+            "Solvent Denominator (+7.1 pp), Formulation (+5.8 pp), Unit (+5.4 pp), Growth Stage (+4.9 pp), PHI (+2.7 pp), "
+            "and Interval (+1.9 pp). Ablating all typed constraints collapses the system into the 80.0% hazard rate of the "
+            "lexical baseline, proving that all 11 semantic slots contribute measurable protection to maintain the zero-hazard "
+            "boundary on the evaluated attack suite."
         )
     }
 

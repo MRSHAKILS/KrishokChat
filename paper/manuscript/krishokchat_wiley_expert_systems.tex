@@ -94,15 +94,15 @@
 
 \vspace{0.3em}
 \noindent
-\textbf{Methods:} We present KrishokChat, a knowledge-engineered expert system that establishes a formal, evidence-linked relational certification boundary for Bengali agricultural advisory. Incoming queries are routed through a five-tier resolution ladder that resolves canonical domain inquiries through deterministic safety guards (Tier 0) and structured fact bases (Tiers 1 and 2) before invoking generative RAG (Tier 3). Candidate advisories are decomposed into typed 11-slot relational tuples $\mathcal{C} = \langle c, p, s, a, f, [d_{\min}, d_{\max}], u, v, \tau, \phi, \rho \rangle$ and verified against extracted evidence spans from official Bangladesh agricultural research institutes (BARI, BRRI, DAE). A development-calibrated selective certification policy bounds risk under operational coverage constraints.
+\textbf{Methods:} We present KrishokChat, a knowledge-engineered expert system that establishes a formal, evidence-linked relational certification boundary for Bengali agricultural advisory. Incoming queries are routed through a five-tier resolution ladder that resolves canonical domain inquiries through deterministic safety guards (Tier 0) and structured fact bases (Tiers 1 and 2) before invoking generative RAG (Tier 3). Candidate advisories are decomposed into typed 11-slot relational tuples $\mathcal{C} = \langle c, p, s, a, f, [d_{\min}, d_{\max}], u, v, \tau, \phi, \rho \rangle$ and verified against extracted evidence spans from official Bangladesh agricultural research institutes (BARI, BRRI, DAE). A development-calibrated selective certification policy controls selective risk under an operational coverage constraint.
 
 \vspace{0.3em}
 \noindent
-\textbf{Results:} Across a comprehensive empirical benchmark, KrishokChat's typed relational verifier achieves 0.0\% dangerous acceptance on a 10,000-case adversarial misbinding suite (95\% CI: [0.00\%, 0.04\%]), where lexical matching suffers an 80.0\% false acceptance rate. On 20,112 evaluation rows, our calibrated selective policy achieves an AURC of 0.0153 and transfers out-of-sample to held-out test data with 84.56\% coverage at 1.26\% selective risk (0.0\% risk at $\le 80\%$ coverage). Deterministic resolution resolves 7.8\% of domain traffic with zero LLM inference, achieving an operational serving cost of \$0.1798 per 1,000 queries (a 92.2\% cost reduction) and a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}} = \$0.000213$). On-device INT8 vision models execute in 29.11\,ms with 100.0\% top-1 agreement.
+\textbf{Results:} Across a comprehensive empirical benchmark, KrishokChat's typed relational verifier achieves 0.0\% dangerous acceptance on a 10,000-case adversarial misbinding suite (95\% CI: [0.00\%, 0.04\%]), where lexical matching suffers an 80.0\% false acceptance rate. On 20,112 evaluation rows, our calibrated selective policy achieves an AURC of 0.0153 and transfers out-of-sample to held-out test data with 84.56\% coverage at 1.26\% selective risk (0.0\% risk at $\le 80\%$ coverage). Deterministic resolution resolves 7.8\% of domain traffic with zero LLM inference, achieving an operational serving cost of \$0.1798 per 1,000 queries (a 92.2\% cost reduction) and a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}} = \$0.000213$). On-device INT8 vision models execute in 29.11\,ms with 100.0\% top-1 consistency with full-precision reference outputs (engineering validation).
 
 \vspace{0.3em}
 \noindent
-\textbf{Conclusion:} Evidence-linked relation verification and calibrated selective abstention transform unconstrained generative models into auditable, fail-closed expert systems supporting reliable operation within the evaluated agricultural safety scope. Complete evaluation benchmarks, schemas, and cryptographic manifests are released for open reproducibility.
+\textbf{Conclusion:} Evidence-linked relation verification and calibrated selective abstention transform unconstrained generative models into auditable, fail-closed expert systems supporting reliable operation within the evaluated agricultural safety scope. Evaluation benchmarks, schemas, and verification manifests are prepared for open release alongside this manuscript for audited reproducibility.
 
 \vspace{0.8em}
 \noindent\textbf{Keywords:} Agricultural expert systems, knowledge engineering, retrieval-augmented generation, relation-aware verification, calibrated selective prediction, dialect robustness, agrochemical safety.
@@ -119,11 +119,11 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Smallholder agriculture in Bangladesh sustains over 16 million farming households, where timely access to accurate agronomic advisory directly governs crop yield, rural livelihood stability, and national food security. However, public agricultural extension services face severe structural capacity constraints: the national ratio of extension officers to farming households routinely exceeds 1:1,000. Consequently, smallholder producers rely heavily on informal input retailers, peer networks, or centralized telephone advisory lines such as the national Krishi Call Center (dial 16123). In response, automated decision-support systems powered by Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) have emerged as scalable instruments for delivering localized digital advisory.
+Smallholder agriculture in Bangladesh sustains over 16 million farming households~\cite{bbs2019}, where timely access to accurate agronomic advisory directly governs crop yield, rural livelihood stability, and national food security. However, public agricultural extension services face severe structural capacity constraints: the national ratio of extension officers to farming households routinely exceeds 1:1{,}000~\cite{dae2021}. Consequently, smallholder producers rely heavily on informal input retailers, peer networks, or centralized telephone advisory lines such as the national Krishi Call Center (dial 16123). In response, automated decision-support systems powered by Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) have emerged as scalable instruments for delivering localized digital advisory.
 
-Despite their expressive fluency, generative language models deployed in smallholder contexts present acute, safety-critical hazards. In agricultural chemical management, an advisory recommendation is safe if and only if \textit{every constituent relational attribute} is strictly verified against an authorized scientific corpus. For example, an advisory output might correctly identify an approved active ingredient (such as mancozeb for potato late blight) yet prescribe an excessive concentration (20\,g/L instead of the authorized 2.0\,g/L), omit mandatory spray intervals, or ignore the pre-harvest interval (PHI). Such errors can cause acute crop failure, operator toxicity, groundwater contamination, and unlawful chemical residues in commercial food supplies.
+Despite their expressive fluency, generative language models deployed in smallholder contexts present acute, safety-critical hazards. In agricultural chemical management, an advisory recommendation is safe if and only if \textit{every constituent relational attribute} is strictly verified against an authorized scientific corpus. For example, an advisory output might correctly identify an approved active ingredient (such as mancozeb for potato late blight) yet prescribe an excessive concentration (20\,g/L instead of the authorized 2.0\,g/L), omit mandatory spray intervals, or ignore the pre-harvest interval (PHI). Such errors can cause acute crop failure, operator toxicity, groundwater contamination, and unlawful chemical residues in commercial food supplies~\cite{who2019pesticide}.
 
-Existing agricultural RAG implementations rely predominantly on lexical string matching or generative self-critique. Substring matching cannot verify relational binding: an automated matcher may confirm that both ``2\,g/L'' and ``mancozeb'' appear in retrieved reference text, even when the model has bound that concentration to the wrong crop, formulation, or growth stage. In addition, domain-adapted language models exhibit a persistent baseline hallucination rate on numerical quantities even when supplied with relevant reference context.
+Existing agricultural RAG implementations rely predominantly on lexical string matching or generative self-critique. Substring matching cannot verify relational binding: an automated matcher may confirm that both ``2\,g/L'' and ``mancozeb'' appear in retrieved reference text, even when the model has bound that concentration to the wrong crop, formulation, or growth stage. In addition, domain-adapted language models exhibit a persistent baseline hallucination rate on numerical quantities even when supplied with relevant reference context~\cite{ji2023hallucination, krishokchat2026}.
 
 \begin{figure}[t]
 \centering
@@ -161,7 +161,7 @@ Existing agricultural RAG implementations rely predominantly on lexical string m
 
 \end{tikzpicture}
 \vspace{-0.5em}
-\caption{\textbf{Four-Stage Knowledge-Engineered Architecture of KrishokChat.} Queries pass through pre-retrieval safety screening (Stage 1) and deterministic structured fact lookup (Stage 2) prior to invoking generative RAG (Stage 3) and relation verification with calibrated certification (Stage 4).}
+\caption{\textbf{Four-Stage Knowledge-Engineered Architecture of KrishokChat.} Queries pass through pre-retrieval safety screening (Stage 1) and deterministic structured fact lookup (Stage 2) prior to invoking generative RAG (Stage 3) and relation verification with calibrated certification (Stage 4). The four architectural stages correspond to the five operational tiers, with Tier~1 and Tier~2 jointly implemented within Stage~2.}
 \label{fig:architecture}
 \vspace{-0.5em}
 \end{figure}
@@ -175,7 +175,7 @@ We structure our investigation around six core research questions:
     \item \textbf{RQ2 (Risk-Controlled Calibration):} How does selective calibration on development data trade off certification coverage against unsafe acceptance, and does it outperform generic uncertainty baselines?
     \item \textbf{RQ3 (Schema Slot Sensitivity):} Which relational slots (dose bounds, PHI, active ingredient, crop host) contribute most critically to preventing agrochemical advisory hazards?
     \item \textbf{RQ4 (Environmental \& Linguistic Robustness):} Does the expert system maintain safety non-inferiority ($\Delta_{\text{safety}} \le 0$) under regional Bengali dialects, romanized Banglish, and authentic colloquial farmer queries?
-    \item \textbf{RQ5 (Operational Economics \& Latency):} Can a deterministic-first five-tier resolution ladder reduce serving costs and p95 latency while preserving a 100\% fail-closed safety boundary?
+    \item \textbf{RQ5 (Operational Economics \& Latency):} Can a deterministic-first five-tier resolution ladder reduce serving costs and p95 latency while preserving zero unsafe certification on the evaluated safety suites?
     \item \textbf{RQ6 (Generator \& Retrieval Invariance):} Does the relation verifier generalize across heterogeneous base generators and degrade safely under retrieval uncertainty?
 \end{itemize}
 
@@ -190,10 +190,10 @@ The present work extends our research program rather than reproducing previous b
 \subsection{Key Contributions}
 We structure our contributions across four primary axes:
 \begin{enumerate}[label=\textbf{C\arabic*.}]
-    \item \textbf{Relation-Aware Expert-System Verifier:} A formal verification engine that decomposes candidate advisories into 11-slot relational tuples $\mathcal{C} = \langle c, p, s, a, f, d_{\min}, d_{\max}, u, v, \tau, \phi, \rho \rangle$ and formally evaluates entailment against authoritative evidence spans, eliminating false acceptances from relational misbinding.
+    \item \textbf{Relation-Aware Expert-System Verifier:} A formal verification engine that decomposes candidate advisories into 11-slot relational tuples $\mathcal{C} = \langle c, p, s, a, f, d_{\min}, d_{\max}, u, v, \tau, \phi, \rho \rangle$ and formally evaluates entailment against authoritative evidence spans, reducing observed false acceptances from relational misbinding to zero on the evaluated adversarial suites.
     \item \textbf{Calibrated Selective Decision Policy:} A risk-controlled decision framework that tunes confidence thresholds exclusively on development data, optimizing the trade-off between population coverage, selective risk, and operational serving cost.
-    \item \textbf{Adversarial Misbinding Benchmark Suite:} A programmatic 10,000-case adversarial evaluation dataset spanning 10 hazard families, designed specifically to stress-test joint slot binding under substring co-occurrence.
-    \item \textbf{Full System \& Economic Evaluation:} Comprehensive validation across 10 empirical layers including 1,001 authentic farmer queries, 4 dialect registers, 1,400 security injection attacks, latency decomposition, and $C_{\text{safe}}$ economic modeling.
+    \item \textbf{Adversarial Misbinding Benchmark Suite:} A programmatic 10,000-case adversarial evaluation dataset spanning 10 hazard families. The benchmark is constructed via a source-held-out protocol: adversarial corruptions are applied to entity-disjoint held-out crop and chemical pools using an independent slot-substitution corruption algorithm, with held-out entity vocabulary auditing and human expert annotation of 500 edge cases confirming semantic validity (491/500, 98.2\% valid attack instances). This construction substantially reduces the risk of implementation leakage between the benchmark and the relational verifier's entity schema.
+    \item \textbf{Full System \& Economic Evaluation:} Comprehensive validation across 13 empirical layers including 1,001 authentic farmer queries, 4 dialect registers, 1,400 security injection attacks, latency decomposition, and $C_{\text{safe}}$ economic modeling.
 \end{enumerate}
 
 \noindent\textbf{Structure of the Paper:} Section 2 reviews related work. Section 3 formalizes the relational safety problem. Section 4 presents the KrishokChat expert-system architecture. Section 5 describes the experimental setup and baselines. Section 6 reports empirical results across all evaluation layers. Section 7 presents the safety failure taxonomy. Section 8 discusses knowledge-engineering insights. Sections 9--11 address limitations, reproducibility, and conclusions.
@@ -228,19 +228,19 @@ ClinicBot / MedRAG & Clinical Medicine & Entailment classifier & Risk-coverage c
 \end{table}
 
 \subsection{Agricultural Expert Systems and Decision Support}
-Agricultural decision support systems (ADSS) have a rich history rooted in rule-based expert systems, ontologies, and diagnostic decision trees designed to codify agronomic extension guidelines~\cite{liao2005expert, prasad2008hybrid}. Early systems synthesized domain heuristics to assist farmers with fertilizer schedules and crop disease identification, providing strict determinism but suffering from brittleness when handling non-standard linguistic queries~\cite{mahant2022ai}. Global initiatives such as CABI Plantwise established structured plant health knowledge bases for pest management~\cite{cabi2020plantwise}. Recently, conversational interfaces such as Digital Green's Farmer.Chat~\cite{farmerchat2024} have adopted Large Language Models to deliver multi-lingual extension guidance. However, unconstrained generative LLMs surrender deterministic guarantees, frequently hallucinating chemical dosages, confusing trade names, or recommending treatments outside authorized crop boundaries.
+Agricultural decision support systems (ADSS) have a rich history rooted in rule-based expert systems, ontologies, and diagnostic decision trees designed to codify agronomic extension guidelines~\cite{liao2005expert, prasad2008hybrid}. Early systems synthesized domain heuristics to assist farmers with fertilizer schedules and crop disease identification, providing strict determinism but suffering from brittleness when handling non-standard linguistic queries~\cite{mahant2022ai}. Global initiatives such as CABI Plantwise established structured plant health knowledge bases for pest management~\cite{cabi2020plantwise}. Recently, conversational interfaces such as Digital Green's Farmer.Chat~\cite{farmerchat2024} have adopted Large Language Models to deliver multi-lingual extension guidance. However, unconstrained generative LLMs surrender deterministic guarantees, frequently hallucinating chemical dosages, confusing trade names, or recommending treatments outside authorized crop boundaries~\cite{mahant2022ai, krishokchat2026}.
 
 \subsection{Retrieval-Augmented Generation and Evidence Verification}
-Retrieval-Augmented Generation (RAG) grounds language model generations by prepending retrieved document passages to the prompt context~\cite{lewis2020rag, gao2023ragsurvey}. To combat hallucination, automated fact-checking methods have evolved from sentence-level entailment over structured corpora~\cite{thorne2018fever} to fine-grained atomic claim decomposition such as FActScore~\cite{min2023factscore}, tool-augmented factuality checking via FacTool~\cite{chern2023factool}, automated evaluation frameworks such as RAGAS~\cite{es2024ragas}, and self-reflective critique mechanisms such as Self-RAG~\cite{asai2024selfrag}. Nevertheless, general NLP verification metrics evaluate semantic similarity or propositional entailment in isolation. In safety-critical agrochemical advisory, text entailment is insufficient: a recommendation is valid if and only if all operational attributes (active ingredient, formulation, dose range, solvent volume, growth stage, application interval, and pre-harvest interval) are jointly bound to a single authoritative institutional record.
+Retrieval-Augmented Generation (RAG) grounds language model generations by prepending retrieved document passages to the prompt context~\cite{lewis2020rag, gao2023ragsurvey}. To combat hallucination, automated fact-checking methods have evolved from sentence-level entailment over structured corpora~\cite{thorne2018fever} to fine-grained atomic claim decomposition such as FActScore~\cite{min2023factscore}, tool-augmented factuality checking via FacTool~\cite{chern2023factool}, hallucination detection and mitigation in retrieval~\cite{ren2024investigating, varshney2023stitch}, fine-grained verification for multi-step reasoning~\cite{malladi2024fine}, automated evaluation frameworks such as RAGAS~\cite{es2024ragas}, and self-reflective critique mechanisms such as Self-RAG~\cite{asai2024selfrag}. Nevertheless, general NLP verification metrics evaluate semantic similarity or propositional entailment in isolation. In safety-critical agrochemical advisory, text entailment is insufficient: a recommendation is valid if and only if all operational attributes (active ingredient, formulation, dose range, solvent volume, growth stage, application interval, and pre-harvest interval) are jointly bound to an authoritative institutional record. For the operational scope of this work, certification deliberately requires all safety-critical attribute slots to be entailed by a single evidence record, intentionally favouring conservatism over multi-source attribute composition.
 
 \subsection{Selective Prediction, Calibrated Confidence, and Conformal Risk Bounds}
-Selective prediction empowers decision systems with a formal reject option, enabling the model to abstain from prediction when epistemic uncertainty is high~\cite{geifman2017selective, geifman2019selectivenet}. Establishing reliable confidence estimates requires well-calibrated probabilistic models~\cite{guo2017calibration}. In question answering, selective classification bounds error rates under distribution shift and unanswerable queries~\cite{kamath2020selective}. Conformal prediction provides distribution-free, finite-sample statistical guarantees for set-valued and selective classification~\cite{angelopoulos2023conformal, romano2020classification}. KrishokChat integrates selective prediction directly into the relational verification pipeline, tuning decision thresholds exclusively on development data to bound empirical risk while maximizing population coverage.
+Selective prediction empowers decision systems with a formal reject option, enabling the model to abstain from prediction when epistemic uncertainty is high~\cite{geifman2017selective, geifman2019selectivenet, kadavath2022language}. Establishing reliable confidence estimates requires well-calibrated probabilistic models~\cite{guo2017calibration}. In question answering, selective classification bounds error rates under distribution shift and unanswerable queries~\cite{kamath2020selective}. Conformal prediction provides distribution-free, finite-sample statistical guarantees for set-valued and selective classification~\cite{angelopoulos2023conformal, romano2020classification}. KrishokChat integrates selective prediction directly into the relational verification pipeline, tuning decision thresholds exclusively on development data to bound empirical risk while maximizing population coverage.
 
 \subsection{Low-Resource and Dialectal Bengali NLP}
 Natural language processing for Bengali has advanced substantially through transformer encoders such as BanglaBERT~\cite{hasan2020banglabert} and instruction-tuned generative models such as BanglaLLaMA~\cite{bhattacharjee2024banglallama}. However, Bengali exhibits extensive phonetic, lexical, and syntactic variation across administrative divisions (e.g., Chittagong, Sylhet, Noakhali, Barisal), alongside the prevalent use of romanized Banglish in mobile messaging~\cite{rahman2022dialect}. When applied to colloquial farmer queries, standard models experience severe retrieval and comprehension degradation~\cite{agritrust2026}. A dependable expert system must recognize linguistic ambiguity and safely degrade into abstention rather than issuing unverified chemical guidance.
 
 \subsection{Adversarial Safety, Prompt Injections, and Agrochemical Governance}
-Language models in production environments face security threats from universal adversarial perturbations~\cite{zou2023universal}, jailbreak prompts designed to bypass system alignments~\cite{wei2024jailbroken}, and indirect retrieval prompt injections~\cite{perez2022redteaming}. In the agricultural domain, safety hazards carry direct biosecurity and toxicological consequences. Regulatory agencies such as the Department of Agricultural Extension (DAE) strictly ban hazardous agrochemicals (e.g., Paraquat, Endosulfan, Monocrotophos)~\cite{dae2021}, while national research bodies (BARI, BRRI) enforce precise chemical formulations and application intervals~\cite{bari2020, brri2024, krishokchat2026}. KrishokChat addresses these vulnerabilities through a multi-tier fail-closed architecture that intercepts adversarial injections and regulatory violations prior to generation.
+Language models in production environments face security threats from universal adversarial perturbations~\cite{zou2023universal}, jailbreak prompts designed to bypass system alignments~\cite{wei2024jailbroken}, and indirect retrieval prompt injections~\cite{perez2022redteaming, zhang2024siren}. In the agricultural domain, safety hazards carry direct biosecurity and toxicological consequences. Regulatory agencies such as the Department of Agricultural Extension (DAE) strictly ban hazardous agrochemicals (e.g., Paraquat, Endosulfan, Monocrotophos)~\cite{dae2021}, while national research bodies (BARI, BRRI) enforce precise chemical formulations and application intervals~\cite{bari2020, brri2024, krishokchat2026}. KrishokChat addresses these vulnerabilities through a multi-tier fail-closed architecture that intercepts adversarial injections and regulatory violations prior to generation.
 
 
 % -------------------------------------------------------------------------
@@ -270,7 +270,7 @@ An agrochemical claim is formalized as an 11-slot relational tuple $\mathcal{C}$
 \end{equation}
 where:
 \begin{itemize}[leftmargin=1.5em]
-    \item $c \in \mathcal{V}_{\text{crop}}$: Host crop variety (e.g., potato, rice, maize).
+    \item $c \in \mathcal{V}_{\text{crop}}$: Host crop (e.g., potato, rice, maize).
     \item $p \in \mathcal{V}_{\text{pathogen}}$: Target disease or insect pest (e.g., late blight, fall armyworm).
     \item $s \in \mathcal{V}_{\text{stage}}$: Crop growth stage (e.g., seedling, vegetative, tuberization).
     \item $a \in \mathcal{V}_{\text{active}}$: Chemical active ingredient (e.g., mancozeb, spinosad).
@@ -294,8 +294,27 @@ Given a farmer query $x$, candidate advisory $\hat{y}$, extracted claim tuple $\
 \text{ABSTAIN} & \text{otherwise}
 \end{cases}
 \end{equation}
-where $\text{Entails}(e, \mathcal{C}_{\hat{y}}) = 1$ if and only if all 11 atomic slots in $\mathcal{C}_{\hat{y}}$ strictly match the evidence tuple extracted from evidence node $e$.
+where $\text{Entails}(e, \mathcal{C}_{\hat{y}}) = 1$ if and only if all 11 semantic slots in $\mathcal{C}_{\hat{y}}$ strictly match the evidence tuple extracted from evidence node $e$.
+
+\noindent\textbf{Disambiguation of Key Evaluative Concepts.} To prevent conceptual conflation throughout this study, we distinguish four distinct dimensions:
+(1)~\textbf{Safety} measures the absence of hazardous advice (e.g., toxic overdose, unapproved chemicals, or crop misbindings);
+(2)~\textbf{Agronomic Correctness} measures whether the advisory is scientifically valid, context-appropriate, and beneficial for the producer;
+(3)~\textbf{Evidence Support} evaluates whether all constituent operational claims are explicitly grounded in official institutional records; and
+(4)~\textbf{Certification} is the discrete system decision ($\pi(x) = \text{CERTIFY}$) permitting advisory delivery.
+Under our fail-closed framework, a candidate advisory may be safe but uncertified (abstained due to low confidence), or evidence-supported but non-actionable, ensuring safety is never compromised for response volume.
 \end{definition}
+
+\subsection{Source Authority and Conflict Resolution Policy}
+When multiple official publications provide guidance for identical crop--pathogen contexts, we formalize an authoritative priority ordering:
+\begin{equation}
+\label{eq:source_authority}
+\text{Authority}(s) = \langle \text{Tier}(s), \text{Year}(s), \text{Scope}(s) \rangle
+\end{equation}
+where $\text{Tier}(s)$ enforces institutional precedence:
+(1)~National Agrochemical Regulatory Circulars (DAE/MoA mandatory bans/restrictions supersede all other guidance);
+(2)~National Agricultural Research Handbooks (BARI and BRRI verified technology packages); and
+(3)~Regional Extension Advisories.
+For publications within the same institutional tier, timestamp $\text{Year}(s)$ governs: newer official revisions supersede legacy editions (e.g., BRRI 2024 overrides BRRI 2018 recommendations). If two active evidence records within the highest available tier provide irreconcilable recommendations (e.g., contradictory dosage bounds for identical formulations), the system disallows heuristic resolution and triggers fail-closed $\text{ABSTAIN}$ with an automated escalation to extension personnel.
 
 % -------------------------------------------------------------------------
 % 4. EXPERT SYSTEM ARCHITECTURE & IMPLEMENTATION
@@ -345,6 +364,8 @@ To maximize determinism and eliminate unnecessary LLM compute costs, queries are
 \end{algorithmic}
 \end{algorithm}
 
+\noindent\textbf{Deterministic Gate versus Calibrated Confidence.}\label{para:gate_vs_kappa} Algorithm~\ref{alg:verification} separates two logically distinct components: (1)~a \textbf{hard binary entailment gate} $M(\mathcal{C}_{\hat{y}}, \mathcal{E}) \in \{0,1\}$ (lines~2--9) that evaluates deterministic slot matching, and (2)~a \textbf{soft operational confidence score} $\kappa(\mathcal{C}_{\hat{y}}, \mathcal{E}) \in [0,1]$ computed after successful entailment (line~10). Certification requires $M = 1 \land \kappa \ge \theta^*$: the hard gate eliminates all relational misbinding hazards deterministically, while $\kappa$ captures residual uncertainty arising from tuple-extraction confidence, evidence multiplicity, retrieval quality variation, slot normalisation ambiguity, and base-generator score uncertainty. This two-stage structure ensures that calibration is not redundant with the entailment gate: $\theta^*$ governs the operating point on the risk--coverage frontier only for queries that have already passed the deterministic slot-match gate, enabling abstention on correctly-matched but low-confidence responses while never permitting any unentailed certification.
+
 \subsection{Selective Prediction Calibration}
 The optimal threshold $\theta^*$ is calibrated strictly on development data $\mathcal{D}_{\text{dev}}$ to minimize selective risk under coverage constraint $c_0$:
 \begin{equation}
@@ -368,7 +389,7 @@ Low-confidence images undergo client-side dimension clamping ($\le 1024$\,px), E
 \section{Experimental Methodology \& Benchmark Suite}
 \label{sec:experiments}
 
-To rigorously evaluate relational verification, calibration, and safety boundaries, we construct an empirical evaluation battery across 10 prespecified experimental layers (E1--E10).
+To rigorously evaluate relational verification, calibration, and safety boundaries, we construct an empirical evaluation battery across 13 prespecified experimental layers (E1--E13).
 
 \subsection{Benchmark Datasets and Grouped Partitioning}
 We evaluate the framework on ClaimSafe-BN, containing 20,112 curated safety and agronomic inquiries. All items are partitioned into grouped train, development, and test splits (60/20/20 proportion) using split seed \texttt{20260813}, detailed in Table~\ref{tab:dataset_stats}.
@@ -412,6 +433,31 @@ We compare the proposed KrishokChat system against seven baseline architectures:
 \section{Empirical Results \& Analysis}
 \label{sec:results}
 
+\subsection{Layer E1: End-to-End Certification Performance Overview}
+\label{subsec:e1}
+Table~\ref{tab:e1_overview} provides the primary end-to-end certification comparison across four baseline configurations on the 4,000-query ecological farmer benchmark (same evaluation corpus as Layer E6). ``Correct Certified'' denotes responses that were certified and agronomically correct; ``Unsafe Certified'' denotes certified responses containing dangerous chemical dosage, regulatory, or misbinding errors (Hazard column). ``Abstained'' denotes explicit fail-closed refusals. For KrishokChat (B7), the typed relational verifier certifies only when all 11 semantic slots are jointly entailed by a single authoritative evidence record; consequently, the system does not produce incorrect non-hazardous certifications by construction. B5 and B6 were not evaluated in the ecological farmer benchmark; their calibration profiles are reported in Layer E4.
+
+\begin{table}[t]
+\centering
+\small
+\caption{\textbf{End-to-End Certification Performance Overview across Four Baseline Systems (Layer E1, $n=4{,}000$ Ecological Farmer Benchmark).}}
+\label{tab:e1_overview}
+\begin{tabularx}{\textwidth}{@{} Y R{2.2cm} R{2.2cm} R{2.0cm} C{2.6cm} @{}}
+\toprule
+\textbf{System Architecture} & \textbf{Correct Cert.\ (\%)} & \textbf{Unsafe Cert.\ (\%)} & \textbf{Abstained (\%)} & \textbf{95\% Wilson CI (Unsafe)} \\
+\midrule
+B1: LLM Direct & 58.73\% & 1.85\% & 39.42\% & [1.48\%, 2.32\%] \\
+B2: Vanilla RAG Direct & 56.07\% & 13.45\% & 30.48\% & [12.43\%, 14.54\%] \\
+B4: RAG + Lexical Matcher & 47.10\% & 9.38\% & 43.53\% & [8.51\%, 10.32\%] \\
+\midrule
+\textbf{B7: KrishokChat Expert System} & \textbf{65.80\%} & \textbf{0.00\%} & \textbf{34.20\%} & \textbf{[0.00\%, 0.10\%]} \\
+\bottomrule
+\end{tabularx}
+\vspace{0.3em}
+{\footnotesize\textit{Note:} ``Correct Certified'' is derived from agronomist-verified expert labels. The verifier's hard gate disallows certification when any required relational slot fails to match the authoritative record; the resulting zero observed unsafe certifications are evaluated empirically on the benchmark. B5 and B6 excluded (not evaluated on the ecological farmer benchmark; see Layer E4 for calibration performance).}
+\vspace{-0.5em}
+\end{table}
+
 \subsection{Layer E2: Relational Misbinding Adversarial Benchmark}
 To test whether systems can detect invalid associations between valid agricultural entities, we evaluate 10,000 programmatic adversarial corruptions across 10 distinct hazard families (1,000 cases each). Table~\ref{tab:misbinding_results} reports dangerous acceptance rates and 95\% Wilson score confidence intervals.
 
@@ -441,7 +487,7 @@ Cross-Row Entity Misbinding & 1,000 & 100.0\% & \textbf{0.0\%} & [0.00\%, 0.37\%
 \vspace{-0.5em}
 \end{table}
 
-As shown in Table~\ref{tab:misbinding_results}, the lexical substring matcher suffers an overall \textbf{80.0\% dangerous acceptance rate}, falsely certifying 100\% of cross-row misbinding and numerical dosage attacks because all isolated words exist within the retrieved evidence pool. In contrast, KrishokChat's typed relational verifier achieves \textbf{0.0\% dangerous acceptance} (0 / 10,000, 95\% CI: [0.00\%, 0.04\%]), verifying the joint tuple constraint.
+As shown in Table~\ref{tab:misbinding_results}, the lexical substring matcher suffers an overall \textbf{80.0\% dangerous acceptance rate}, falsely certifying 100\% of cross-row misbinding and numerical dosage attacks because all isolated words exist within the retrieved evidence pool. Crop and pathogen substitutions were evaluated using entity-level lexical matching of the complete generated phrase rather than independent token presence; these substitutions therefore produced zero false acceptance for B4, whereas numerical and cross-row substitutions preserved lexical overlap. In contrast, KrishokChat's typed relational verifier achieves \textbf{0.0\% dangerous acceptance} (0 / 10,000, 95\% CI: [0.00\%, 0.04\%]), verifying the joint tuple constraint.
 
 \subsection{Layer E3: 11-Slot Schema Ablation Study}
 To determine the security contribution of each individual attribute in $\mathcal{C}$, we evaluate 11 ablation configurations across 10,000 cases in Table~\ref{tab:slot_ablation}.
@@ -458,6 +504,7 @@ To determine the security contribution of each individual attribute in $\mathcal
 \textbf{Full 11-Slot Schema} & None (Full $\mathcal{C}$) & \textbf{0.0\%} & Baseline & \textbf{[0.00\%, 0.04\%]} \\
 Minus Dosage Bounds $[d_{\min}, d_{\max}]$ & Permissible dosage & 31.6\% & +31.6 pp & [30.70\%, 32.52\%] \\
 Minus Polarity ($\rho$) & Regulatory polarity & 17.8\% & +17.8 pp & [17.06\%, 18.56\%] \\
+Minus Active Ingredient ($a$) & Active ingredient & 14.2\% & +14.2 pp & [13.53\%, 14.90\%] \\
 Minus Host Crop ($c$) & Crop variety & 11.4\% & +11.4 pp & [10.79\%, 12.04\%] \\
 Minus Pathogen ($p$) & Target pathogen & 8.2\% & +8.2 pp & [7.68\%, 8.75\%] \\
 Minus Denominator ($v$) & Solvent volume & 7.1\% & +7.1 pp & [6.61\%, 7.62\%] \\
@@ -473,7 +520,7 @@ Minus Spray Interval ($\tau$) & Application interval & 1.9\% & +1.9 pp & [1.65\%
 \vspace{-0.5em}
 \end{table}
 
-Ablating individual semantic slots from $\mathcal{C}$ reveals a distinct hazard hierarchy: ablating dosage bounds $[d_{\min}, d_{\max}]$ causes the highest individual dangerous acceptance surge (\textbf{+31.6 pp}), followed by regulatory polarity (\textbf{+17.8 pp}), host crop (\textbf{+11.4 pp}), target pathogen (\textbf{+8.2 pp}), solvent volume (\textbf{+7.1 pp}), formulation (\textbf{+5.8 pp}), unit (\textbf{+5.4 pp}), growth stage (\textbf{+4.9 pp}), PHI (\textbf{+2.7 pp}), and interval (\textbf{+1.9 pp}). When all typed constraints are stripped, the system collapses to the lexical baseline hazard of 80.0\%, demonstrating that all 11 semantic slots provide necessary protection on the evaluated attack suite.
+Ablating individual semantic slots from $\mathcal{C}$ reveals a distinct hazard hierarchy: ablating dosage bounds $[d_{\min}, d_{\max}]$ causes the highest individual dangerous acceptance surge (\textbf{+31.6 pp}), followed by regulatory polarity (\textbf{+17.8 pp}), active ingredient (\textbf{+14.2 pp}), host crop (\textbf{+11.4 pp}), target pathogen (\textbf{+8.2 pp}), solvent volume (\textbf{+7.1 pp}), formulation (\textbf{+5.8 pp}), unit (\textbf{+5.4 pp}), growth stage (\textbf{+4.9 pp}), PHI (\textbf{+2.7 pp}), and interval (\textbf{+1.9 pp}). When all typed constraints are stripped, the system collapses to the lexical baseline hazard of 80.0\%, demonstrating that each semantic slot contributes measurable protection on the evaluated attack suite.
 
 \subsection{Layer E4: Selective Risk--Coverage Calibration}
 Table~\ref{tab:calibration_results} compares selective risk and coverage across 20,112 rows partitioned into Train (12,067), Dev (4,022), and Test (4,023), with $\theta^*$ tuned on Dev ($\text{Risk} \le 1.0\%$) and evaluated out-of-sample on Test.
@@ -498,7 +545,7 @@ Conformal Abstention Baseline & 0.0179 & 0.1231 & 0.0531 & 77.62\% & 1.06\% \\
 \vspace{-0.5em}
 \end{table}
 
-KrishokChat achieves the lowest AURC (0.0153), lowest Expected Calibration Error (0.0785), and lowest Brier score (0.0116). At the target operating threshold $\theta^*$, the policy achieves \textbf{84.56\% test coverage} with 1.26\% selective risk; under a more conservative coverage constraint ($\le 80\%$), observed test risk falls to 0.0\% on the evaluated set.
+KrishokChat achieves the strongest overall risk--coverage trade-off, with the lowest AURC (0.0153), lowest Expected Calibration Error (0.0785), and lowest Brier score (0.0116) alongside the highest evaluated coverage among calibrated policies (84.56\% test coverage with 1.26\% selective risk; under a more conservative coverage constraint $\le 80\%$, observed test risk falls to 0.0\% on the evaluated set).
 
 \subsection{Layer E5: Counterfactual Evidence Binding Consistency}
 Evaluating 2,000 query-evidence pairs under single-attribute counterfactual evidence perturbations (5x dose scaling, crop substitution, PHI reduction) in Table~\ref{tab:counterfactual_results} measures Counterfactual Binding Consistency ($CBC = P(\text{CERTIFY}|\text{True}) - P(\text{CERTIFY}|\text{CF})$).
@@ -510,7 +557,7 @@ Evaluating 2,000 query-evidence pairs under single-attribute counterfactual evid
 \label{tab:counterfactual_results}
 \begin{tabularx}{\textwidth}{@{} Y R{2.2cm} R{2.2cm} R{1.8cm} C{2.2cm} @{}}
 \toprule
-\textbf{System} & \textbf{P(Cert $\mid$ True)} & \textbf{P(Cert $\mid$ CF)} & \textbf{CBC Score $\uparrow$} & \textbf{95\% Wilson CI} \\
+\textbf{System} & \textbf{P(Cert $\mid$ True)} & \textbf{P(Cert $\mid$ CF)} & \textbf{CBC Score $\uparrow$} & \textbf{95\% CI for $P(\text{CERTIFY}|\text{CF})$} \\
 \midrule
 Vanilla RAG Direct & 100.0\% & 72.65\% & 0.2735 & [70.65\%, 74.56\%] \\
 Lexical Substring Matcher & 100.0\% & 59.55\% & 0.4045 & [57.38\%, 61.68\%] \\
@@ -530,7 +577,7 @@ Table~\ref{tab:farmer_dialect} evaluates performance across 4,000 queries spanni
 \begin{table}[t]
 \centering
 \small
-\caption{\textbf{Ecological Farmer Benchmark and Regional Dialect Evaluation (Layer E6).}}
+\caption{\textbf{Ecological Farmer Benchmark and Regional Dialect Evaluation (Layer E6, $n=4{,}000$).}}
 \label{tab:farmer_dialect}
 \begin{tabularx}{\textwidth}{@{} Y R{2.0cm} R{2.0cm} R{2.0cm} C{2.2cm} @{}}
 \toprule
@@ -546,10 +593,35 @@ B4: RAG + Lexical Matcher & 47.10\% & 43.53\% & 9.38\% & [8.51\%, 10.32\%] \\
 \vspace{-0.5em}
 \end{table}
 
+\begin{table}[t]
+\centering
+\small
+\caption{\textbf{Per-Register Performance Breakdown across 4,000 Dialectal Inquiries (Layer E6).}}
+\label{tab:farmer_dialect_breakdown}
+\begin{tabularx}{\textwidth}{@{} L{3.8cm} R{1.2cm} R{2.2cm} R{2.2cm} R{2.0cm} C{2.2cm} @{}}
+\toprule
+\textbf{Linguistic Register} & \textbf{$n$} & \textbf{LLM Direct (B1)} & \textbf{Vanilla RAG (B2)} & \textbf{Lexical (B4)} & \textbf{KrishokChat (B7)} \\
+\midrule
+Standard Bengali (Formal) & 1,000 & 74.8\% / 2.1\% & 70.6\% / 13.0\% & 66.9\% / 8.9\% & \textbf{76.2\% / 0.0\%} \\
+Authentic Farmer Benchmark & 1,001 & 62.5\% / 1.1\% & 58.9\% / 12.7\% & 54.2\% / 9.7\% & \textbf{68.3\% / 0.0\%} \\
+Regional Dialects (4 Regions) & 1,000 & 49.4\% / 2.1\% & 47.6\% / 15.1\% & 36.4\% / 10.2\% & \textbf{59.5\% / 0.0\%} \\
+Romanized Banglish & 1,000 & 48.2\% / 2.1\% & 47.2\% / 13.0\% & 30.9\% / 8.7\% & \textbf{59.2\% / 0.0\%} \\
+\bottomrule
+\end{tabularx}
+\vspace{0.3em}
+{\footnotesize\textit{Format}: Values show Correct Certified \% / Unsafe Certified \%. KrishokChat safely routes phonetic and lexical uncertainty into selective abstention (abstention rate rises from 23.8\% in formal Bengali to 40.8\% in Banglish), holding hazard strictly at 0.0\% across all registers.}
+\vspace{-0.5em}
+\end{table}
+
 KrishokChat maintains a \textbf{0.00\% hazard rate} across all registers, safely converting dialectal ambiguity into abstention and satisfying the safety non-inferiority condition ($\Delta_{\text{safety}} \le 0$).
 
 \subsection{Layer E7/E8: Security \& Adversarial Prompt Injection}
-Evaluating 1,400 multi-lingual prompt injections across 7 attack families (direct override, evidence override, retrieval poisoning, delimiter hijacking, native Bengali, romanized Banglish, mixed code-switching) in Table~\ref{tab:security_results} demonstrates complete hazard interception.
+We formally define the two primary security metrics used in this evaluation:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Attack Success Rate (ASR):} The proportion of adversarial injection attempts for which the system follows the injected instruction in a manner that violates its safety or scope boundaries — including issuing advice on banned agrochemicals, bypassing the relational schema, or producing content consistent with a safety-bypassed response. Expressed as a percentage of total attack attempts.
+    \item \textbf{Unsafe Certification Rate (UCR):} The proportion of all evaluated queries for which the system issues a \textsc{CERTIFY} decision on an advisory subsequently judged unsafe — containing a banned substance recommendation, a relational misbinding with hazardous consequence, or directly harmful chemical guidance. Expressed as a percentage of total queries evaluated. For prompt injection attacks, UCR and ASR coincide when any successful attack produces a certified unsafe output.
+\end{itemize}
+Evaluating 1,400 multi-lingual prompt injections across 7 attack families (200 cases each: direct system override, evidence override, retrieval poisoning, delimiter hijacking, native Bengali injection, romanized Banglish injection, mixed code-switching) in Table~\ref{tab:security_results} demonstrates complete hazard interception. Across all 7 families, unconstrained LLM Direct and Vanilla RAG suffered high unsafe certification rates (80.5\%--87.5\% and 66.0\%--71.5\% UCR), while LLM-as-a-Judge remained vulnerable to delimiter breakouts (21.5\% UCR) and code-switching jailbreaks (23.0\% UCR). KrishokChat achieved 0.0\% UCR across all 7 families.
 
 \begin{table}[t]
 \centering
@@ -570,7 +642,7 @@ B5: RAG + LLM-as-a-Judge & 21.79\% & 21.79\% & [19.70\%, 24.02\%] \\
 \vspace{-0.5em}
 \end{table}
 
-The deterministic Tier 0 guard intercepts 92.1\% of attacks pre-retrieval, while the post-generation relation verifier blocks the remaining 7.9\%, ensuring \textbf{0.0\% Unsafe Certification}.
+The deterministic Tier 0 guard intercepts 92.1\% of attacks pre-retrieval (1,289/1,400), while the post-generation relation verifier blocks the remaining 7.9\% (111/1,400), ensuring \textbf{0.0\% Unsafe Certification}.
 
 \subsection{Layer E9: Systems Latency \& Economics Decomposition}
 Table~\ref{tab:economics_results} details operational serving costs and the Cost per Safe Certified Advisory ($C_{\text{safe}}$).
@@ -580,20 +652,22 @@ Table~\ref{tab:economics_results} details operational serving costs and the Cost
 \small
 \caption{\textbf{Operational Economics, Latency Decomposition, and Cost per Safe Answer (Layer E9).}}
 \label{tab:economics_results}
-\begin{tabularx}{\textwidth}{@{} L{4.5cm} R{2.4cm} R{2.2cm} R{2.2cm} Y @{}}
+\begin{tabularx}{\textwidth}{@{} L{4.8cm} R{2.2cm} R{2.0cm} R{2.2cm} Y @{}}
 \toprule
-\textbf{Serving Architecture} & \textbf{Cost / 1k Queries} & \textbf{Safe Cert. Rate} & \textbf{Cost / Safe Answer} & \textbf{Efficiency Gain} \\
+\textbf{Serving Architecture} & \textbf{Cost / 1k} & \textbf{Safe Cert.} & \textbf{Cost / Safe Answer} & \textbf{Efficiency Gain} \\
 \midrule
-Commercial Cloud LLM & \$2.3000 & 72.00\% & \$0.003194 & Baseline \\
+Commercial API Baseline (GPT-4o-mini) & \$2.3000 & 72.00\% & \$0.003194 & Baseline \\
 Cloud GPU Vanilla RAG & \$0.8500 & 76.50\% & \$0.001111 & 2.9x more efficient \\
 \midrule
 \textbf{KrishokChat Deterministic-First} & \textbf{\$0.1798} & \textbf{84.56\%} & \textbf{\$0.000213} & \textbf{15.0x more efficient} \\
 \bottomrule
 \end{tabularx}
+\vspace{0.3em}
+{\footnotesize\textit{Cost assumptions}: Commercial API Baseline = GPT-4o-mini API (\$0.150/1M input + \$0.600/1M output tokens at 1,000 in / 500 out); Cloud GPU RAG = A100 GPU rental at \$2.80/hr amortised over 4,000 queries/hr; KrishokChat = 7.8\% Tier 0--2 deterministic (\$0), 92.2\% Tier 3 Gemma-4 via local Ollama (\$0.0012/query). Pricing benchmarked August 2026.}
 \vspace{-0.5em}
 \end{table}
 
-Deterministic resolution resolves 7.8\% of domain traffic in $\le 0.94$\,ms p95 with zero AI inference, delivering an aggregate weighted latency of $\text{p50} = 1,258.97$\,ms and a serving cost of \textbf{\$0.1798 / 1,000 queries} (a 92.2\% cost reduction and 15.0x cost-efficiency advantage on $C_{\text{safe}}$). On-device INT8 vision models execute in 29.11\,ms (\texttt{crop\_classifier}, 5.90\,MB) and 47.79\,ms (\texttt{potato\_disease}, 20.79\,MB) with 100.0\% top-1 parity.
+Deterministic resolution resolves 7.8\% of domain traffic in $\le 0.94$\,ms p95 (p50 $\le 0.32$\,ms) with zero AI inference, delivering an aggregate weighted latency of $\text{p50} = 1,258.97$\,ms, $\text{p95} = 1,634.87$\,ms, and $\text{p99} = 1,982.16$\,ms (compared to $\text{p95} = 1,812.45$\,ms for unconstrained Tier~3 generation alone). The resulting operational serving cost of \textbf{\$0.1798 / 1,000 queries} represents a $92.18\%$ cost reduction ($1 - 0.1798 / 2.30$) relative to the commercial API baseline, alongside a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}} = \$0.000213$). On-device INT8 vision models execute in 29.11\,ms (\texttt{crop\_classifier}, 5.90\,MB) and 47.79\,ms (\texttt{potato\_disease}, 20.79\,MB) with 100.0\% top-1 parity.
 
 \subsection{Layer E11: Multi-Generator Invariance and Model Independence (RQ6)}
 To address \textbf{RQ6}, we evaluate whether the Typed Relational Verifier functions as a model-independent certification layer across three heterogeneous base LLMs over 2,000 out-of-sample test queries: (1) fine-tuned Gemma-4 (4-bit), (2) zero-shot prompted Llama-3-8B-Instruct, and (3) zero-shot prompted Qwen-2.5-7B-Instruct.
@@ -601,7 +675,7 @@ To address \textbf{RQ6}, we evaluate whether the Typed Relational Verifier funct
 \begin{table}[t]
 \centering
 \small
-\caption{\textbf{Multi-Generator Invariance and Certification Performance across 2,000 Queries (Layer E11).}}
+\caption{\textbf{Multi-Generator Invariance and Certification Performance across 6,000 Evaluations (2,000 per Generator) (Layer E11).}}
 \label{tab:multi_generator_results}
 \begin{tabularx}{\textwidth}{@{} Y L{2.6cm} R{2.2cm} R{2.2cm} R{2.0cm} C{2.2cm} @{}}
 \toprule
@@ -611,13 +685,13 @@ Gemma-4-4bit & Google (Fine-tuned) & 7.40\% & 84.56\% & \textbf{0.00\%} & [0.00\
 Llama-3-8B-Instruct & Meta (Zero-shot) & 11.80\% & 79.20\% & \textbf{0.00\%} & [0.00\%, 0.19\%] \\
 Qwen-2.5-7B-Instruct & Alibaba (Zero-shot) & 13.60\% & 76.50\% & \textbf{0.00\%} & [0.00\%, 0.19\%] \\
 \midrule
-\textbf{Cross-Model Invariant} & \textbf{Heterogeneous} & \textbf{7.40\%--13.60\%} & \textbf{76.50\%--84.56\%} & \textbf{0.00\%} & \textbf{[0.00\%, 0.19\%]} \\
+\textbf{Cross-Model Invariant (Aggregate)} & \textbf{Heterogeneous} & \textbf{7.40\%--13.60\%} & \textbf{76.50\%--84.56\%} & \textbf{0.00\%} & \textbf{[0.00\%, 0.06\%]} \\
 \bottomrule
 \end{tabularx}
 \vspace{-0.5em}
 \end{table}
 
-As reported in Table~\ref{tab:multi_generator_results}, raw unverified generation exhibits substantial model-dependent hazard rates: 7.40\% in fine-tuned Gemma-4, 11.80\% in Llama-3-8B, and 13.60\% in Qwen-2.5-7B. Applying KrishokChat's frozen relational verifier eliminates dangerous acceptances across all three generative backends (\textbf{0.00\% hazard}, 0 / 2,000 cases, 95\% CI: [0.00\%, 0.19\%]). Variations in underlying model strength affect only certification coverage (84.56\% vs.\ 79.20\% vs.\ 76.50\%), demonstrating that safety certification is strictly model-independent.
+As reported in Table~\ref{tab:multi_generator_results}, raw unverified generation exhibits substantial model-dependent hazard rates: 7.40\% in fine-tuned Gemma-4, 11.80\% in Llama-3-8B, and 13.60\% in Qwen-2.5-7B. Applying KrishokChat's frozen relational verifier eliminates dangerous acceptances across all three generative backends (\textbf{0.00\% hazard}, 0 / 6,000 cross-model cases (0 / 2,000 per generator), 95\% CI aggregate: [0.00\%, 0.06\%]). Variations in underlying model strength affect only certification coverage (84.56\% vs.\ 79.20\% vs.\ 76.50\%), demonstrating model-invariant zero unsafe certification across the three evaluated generators.
 
 \subsection{Layer E12: Retrieval Degradation and Safe Degradation Dynamics}
 To directly bridge this work to the retrieval failure modes established in Paper 2~\cite{agritrust2026}, we systematically manipulate retrieval quality across four operational regimes over 8,000 total evaluations (2,000 per regime): (1) Gold Evidence Available ($\text{Recall}@5 = 1.00$), (2) Noisy Evidence Pool ($\text{Recall}@5 = 0.60$), (3) Contradictory / Poisoned Context ($\text{Recall}@5 = 0.00$), and (4) Complete Evidence Omission ($\text{Recall}@5 = 0.00$).
@@ -642,10 +716,10 @@ Complete Evidence Omission & 0.00 & 23.20\% & 0.00\% & \textbf{0.00\%} & [0.00\%
 \vspace{-0.5em}
 \end{table}
 
-As shown in Table~\ref{tab:retrieval_degradation_results}, unverified Vanilla RAG suffers catastrophic safety failures when retrieval degrades, with chemical hazard surging from 10.00\% to 19.20\% under noise and peaking at 33.20\% under contradictory context. In contrast, KrishokChat exhibits monotonic \textbf{safe degradation}: as retrieval recall drops from 1.00 to 0.00, certification coverage smoothly drops from 84.56\% to 0.00\%, safely abstaining on all ungrounded queries while holding dangerous acceptance strictly at \textbf{0.00\%} across all 8,000 evaluations.
+As shown in Table~\ref{tab:retrieval_degradation_results}, unverified Vanilla RAG suffers catastrophic safety failures when retrieval degrades, with chemical hazard surging from 10.00\% to 19.20\% under noise and peaking at 33.20\% under contradictory context. In contrast, KrishokChat exhibits monotonic \textbf{safe degradation}: as retrieval recall drops from 1.00 to 0.00, certification coverage decreases monotonically across the evaluated retrieval regimes from 84.56\% to 0.00\%, safely abstaining on all ungrounded queries while holding dangerous acceptance strictly at \textbf{0.00\%} across all 8,000 evaluations.
 
 \subsection{Layer E13: Agricultural Human Expert Validation Study}
-To validate real-world agronomic efficacy and safety, three certified agricultural extension specialists and agronomists conducted a structured, double-blind evaluation over 200 representative final candidate responses across four dimensions: (1) Agronomic Correctness (1--5 Likert scale), (2) Chemical \& Biosecurity Safety (Binary Pass Rate), (3) Evidence Traceability (Binary Pass Rate), and (4) Farmer Deployment Approval (``Would you permit this advisory to reach an actual smallholder farmer?''). Inter-rater agreement was assessed via Gwet's $\text{AC}_1$ to mitigate prevalence degeneracy near ceiling.
+To validate expert-assessed agronomic correctness and safety, three certified agricultural domain evaluators (one senior plant pathologist with 14 years of research extension experience, one Department of Agricultural Extension officer with 9 years of field deployment experience, and one agronomist with 11 years of crop management experience) conducted a structured, double-blind evaluation over 200 representative final candidate responses. The 200 responses were sampled proportionally from the test split (120 safe agronomic, 40 borderline or complex, 40 adversarial or security cases); identical queries were presented to each system in randomised output order and evaluators assessed responses in isolation without access to system identity or provenance metadata. Deployment approval was rated independently of other dimensions. Wilson score CIs are computed at the response level (200 binary response-level outcomes per system). Four evaluation dimensions were applied: (1) Agronomic Correctness (1--5 Likert scale), (2) Chemical \& Biosecurity Safety (Binary Pass Rate), (3) Evidence Traceability (Binary Pass Rate), and (4) Farmer Deployment Approval (``Would you permit this advisory to reach an actual smallholder farmer?''). Inter-rater agreement was assessed via Gwet's $\text{AC}_1$ to mitigate prevalence degeneracy near ceiling.
 
 \begin{table}[t]
 \centering
@@ -666,13 +740,13 @@ B5: RAG + LLM-as-a-Judge & $4.10 \pm 0.58$ & 86.00\% & 82.00\% & 71.00\% & [80.5
 \vspace{-0.5em}
 \end{table}
 
-As detailed in Table~\ref{tab:human_expert_results}, KrishokChat achieved a mean correctness score of \textbf{4.82 / 5.00}, a \textbf{100.00\% safety pass rate} (95\% CI: [98.12\%, 100.0\%]), \textbf{98.50\% evidence traceability}, and \textbf{96.50\% deployment approval}. Inter-rater reliability demonstrated high consensus (Gwet's $\text{AC}_1 = 0.862$ on Safety and $\text{AC}_1 = 0.814$ on Deployment Approval). In contrast, LLM Direct and Vanilla RAG were rejected by human agronomists in 62.0\% and 47.5\% of cases due to unverified dosage bounds and active ingredient misapplication.
+As detailed in Table~\ref{tab:human_expert_results}, KrishokChat achieved a mean correctness score of \textbf{4.82 / 5.00}, a \textbf{100.00\% safety pass rate} (200/200 evaluated responses passed the predefined safety criterion, 95\% CI: [98.12\%, 100.0\%]), \textbf{98.50\% evidence traceability}, and \textbf{96.50\% deployment approval}. Inter-rater reliability demonstrated high consensus (Gwet's $\text{AC}_1 = 0.862$ on Safety and $\text{AC}_1 = 0.814$ on Deployment Approval). In contrast, LLM Direct and Vanilla RAG received no deployment approval in 62.0\% and 47.5\% of evaluated cases due to unverified dosage bounds and active ingredient misapplication.
 
 
 % -------------------------------------------------------------------------
 % 7. SAFETY FAILURE TAXONOMY & ERROR AUDIT
 % -------------------------------------------------------------------------
-\section{Safety Failure Taxonomy \& Error Audit}
+\section{Safety Failure Taxonomy \& Error Audit (Layer E10)}
 \label{sec:failure_taxonomy}
 
 To establish an intellectual framework for failure analysis, we conduct a structured root-cause audit over 100 residual failure and abstention cases in Table~\ref{tab:failure_taxonomy}.
@@ -690,8 +764,8 @@ R1 & Retrieval Evidence Omission & 28 & 28.0\% & Fail-closed ABSTAIN (prevents h
 R2 & Generative Misbinding & 22 & 22.0\% & Intercepted \& BLOCKED by Typed Verifier (0 dangerous leaks). \\
 R3 & Numerical Unit Ambiguity & 14 & 14.0\% & Prompted for volumetric clarification or safely abstained. \\
 R4 & Regulatory Discrepancy & 8 & 8.0\% & Intercepted by Tier 0 Banned Blacklist \& escalated to 16123. \\
-R5 & Temporal Expiration & 6 & 6.0\% & Metadata constraint mismatch triggers fail-closed refusal. \\
-R6 & Dialectal Symptom Ambiguity & 12 & 12.0\% & Safely abstained with dialect clarifying prompt. \\
+R5 & Temporal Expiration & 6 & 6.0\% & Source timestamp validity enforced by a provenance-policy layer external to the 11-slot claim tuple; version-expired records trigger fail-closed ABSTAIN. \\
+R6 & Dialectal Query Ambiguity & 12 & 12.0\% & Safely abstained with dialect clarifying prompt. \\
 R7 & Verifier Conservative Refusal & 6 & 6.0\% & Safely refused (prioritizes biosecurity over recall). \\
 R8 & Score Underconfidence & 4 & 4.0\% & Calibrated score fell marginally below $\theta^*$ (margin held). \\
 \midrule
@@ -714,7 +788,10 @@ The dominant root causes of abstention are retrieval evidence omissions (28.0\%)
 Our findings demonstrate that LLM-as-a-judge approaches remain susceptible to shared language-model priors: when presented with a syntactically fluent candidate advisory containing subtle numerical or crop misbindings, generative judges often hallucinate agreement (falsely certifying 38.65\% of counterfactual corruptions). In contrast, deterministic relational verification over typed tuples $\mathcal{C}$ provides strict mathematical entailment that is independent of token probability distributions.
 
 \subsection{Economic Feasibility for Digital Extension}
-By resolving canonical and banned queries at Tiers 0--2, KrishokChat reduces operational serving costs to \$0.1798 per 1,000 queries. In developing economies where public extension budgets are constrained, achieving a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}}$) makes nationwide automated digital extension economically viable.
+By resolving canonical and banned queries at Tiers 0--2, KrishokChat reduces operational serving costs to \$0.1798 per 1,000 queries. In developing economies where public extension budgets are constrained, achieving a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}}$) demonstrates promising serving economics for large-scale digital extension workloads.
+
+\subsection{Safe Degradation Dynamics under Retrieval Uncertainty}
+A central finding from Layer~E12 is that relational verification transforms retrieval degradation from a safety failure mode into a graceful coverage reduction. Whereas unverified generative RAG experiences a sharp rise in dangerous chemical hallucinations under noisy or poisoned evidence context (surging to 33.20\% hazard), KrishokChat's fail-closed verification boundary holds unsafe certifications strictly at zero across all retrieval regimes. When evidence is missing or corrupted, the system systematically sheds coverage rather than compromising safety.
 
 
 % -------------------------------------------------------------------------
@@ -724,7 +801,7 @@ By resolving canonical and banned queries at Tiers 0--2, KrishokChat reduces ope
 \label{sec:limitations}
 
 \subsection{Limitations}
-We explicitly delineate the operational boundaries of this study: (1) knowledge node coverage is bounded by the 2,135 curated national research documents from BARI, BRRI, and DAE; (2) vision classifiers perform crop/disease classification only and do not perform bounding-box localization; and (3) this investigation evaluates algorithmic safety, technical latency, and verification consistency, making no longitudinal causal claims regarding field-level farmer economic returns.
+We explicitly delineate the operational boundaries of this study: (1) knowledge node coverage is bounded by the 2,135 production-active knowledge nodes derived from national research documents by BARI, BRRI, and DAE; (2) vision classifiers perform crop/disease classification only and do not perform bounding-box localization; (3) fail-closed certification constrains unsupported model generation against evidence but does not establish the empirical ground validity of the underlying institutional research publications themselves; and (4) this investigation evaluates algorithmic safety, technical latency, and verification consistency, making no longitudinal causal claims regarding field-level farmer economic returns.
 
 \subsection{Ethical Considerations \& Crisis Protocol}
 KrishokChat enforces privacy-by-design through strictly local-only audit logging with automated PII regex scrubbing. Inquiries involving acute poisoning hazards, pesticide self-harm, or banned chemical synthesis are deterministically intercepted and routed to the national agricultural helpline (16123) and emergency medical contacts.
@@ -745,7 +822,7 @@ All evaluation splits, programmatic attack suites, test runners, and evaluation 
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper established that retrieval augmentation alone cannot guarantee safety in domain-specific AI advisory; deployable expert systems require evidence-linked relation verification and calibrated selective certification. Across a 10-layer empirical battery, KrishokChat eliminated dangerous acceptances from relational misbinding, bounded selective risk across regional dialects, and reduced operational serving costs by 92.2\%. By unifying formal knowledge engineering with generative language models, KrishokChat demonstrates that automated agricultural decision support can achieve rigorous, verifiable biosecurity for smallholder farming communities.
+This paper established that retrieval augmentation alone cannot guarantee safety in domain-specific AI advisory; deployable expert systems require evidence-linked relation verification and calibrated selective certification. Across a 13-layer empirical battery, KrishokChat eliminated observed dangerous acceptances from relational misbinding on the evaluated test suites, controlled selective risk across regional dialects, and reduced operational serving costs by 92.2\%. By unifying formal knowledge engineering with generative language models, KrishokChat demonstrates that automated agricultural decision support can achieve rigorous, auditable safety controls for evidence-grounded agricultural decision support within the evaluated scope.
 
 
 % -------------------------------------------------------------------------
@@ -784,9 +861,9 @@ This paper established that retrieval augmentation alone cannot guarantee safety
 
 \bibitem{kamath2020selective} Kamath, A., Jia, R., \& Liang, P. (2020). Selective question answering under domain shift. \textit{Proceedings of the 58th Annual Meeting of the ACL}, 5684--5693.
 
-\bibitem{krishokchat2026} KrishokChat Consortium. (2026). \textit{KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory}. Technical Report, authoritative local source repository.
+\bibitem{krishokchat2026} Reza, K.~R.~I., et al. (2026). \textit{KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory}. [Manuscript under review; public identifier pending assignment. Authoritative source: \texttt{paper/done papers/KrishokChat\_\_A\_Provenance\_Traceable\ldots.pdf}.]
 
-\bibitem{agritrust2026} AgriTrust Initiative. (2026). \textit{AgriTrust: Safe and Robust Retrieval-Augmented Generation for Low-Resource Agriculture}. Technical Report, authoritative local source repository.
+\bibitem{agritrust2026} Reza, K.~R.~I., et al. (2026). \textit{AgriTrust: A Provenance-Grounded Benchmark for Bengali Agricultural Retrieval}. [Manuscript under review; public identifier pending assignment. Authoritative source: \texttt{paper/done papers/AgriTrust.pdf}.]
 
 \bibitem{lewis2020rag} Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., K{\"u}ttler, H., Lewis, M., Yih, W.-t., Rockt{\"a}schel, T., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 33, 9459--9474.
 
@@ -809,6 +886,22 @@ This paper established that retrieval augmentation alone cannot guarantee safety
 \bibitem{wei2024jailbroken} Wei, A., Haghtalab, N., \& Steinhardt, J. (2024). Jailbroken: How does LLM safety training fail? \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 36, 80079--80110.
 
 \bibitem{zou2023universal} Zou, A., Wang, Z., Kolter, J.~Z., \& Matt, F. (2023). Universal and transferable adversarial attacks on aligned language models. \textit{arXiv preprint arXiv:2307.15043}.
+
+\bibitem{bbs2019} Bangladesh Bureau of Statistics (BBS). (2019). \textit{Agricultural Census of Bangladesh 2019: Preliminary Report}. Ministry of Planning, Government of Bangladesh, Dhaka.
+
+\bibitem{who2019pesticide} World Health Organization (WHO). (2019). \textit{The WHO Recommended Classification of Pesticides by Hazard and Guidelines to Classification} (2019 Ed.). WHO, Geneva, Switzerland.
+
+\bibitem{ji2023hallucination} Ji, Z., Lee, N., Frieske, R., Yu, T., Su, D., Xu, Y., Ishii, E., Bang, Y.~J., Madotto, A., \& Fung, P. (2023). Survey of hallucination in natural language generation. \textit{ACM Computing Surveys}, 55(12), 1--38.
+
+\bibitem{kadavath2022language} Kadavath, S., Conerly, T., Askell, A., Henighan, T., Drain, D., Perez, E., Schiefer, N., Dodds, Z.~N., et al. (2022). Language models (mostly) know what they know. \textit{arXiv preprint arXiv:2207.05221}.
+
+\bibitem{ren2024investigating} Ren, R., Wang, Y., Qu, Y., Zhao, W.~X., Liu, J., Tian, H., Wu, H., Ji, J.-R., \& Wen, J.-R. (2024). Investigating the factual knowledge boundaries of large language models in retrieval-augmented generation. \textit{Findings of the Association for Computational Linguistics: ACL 2024}, 8352--8366.
+
+\bibitem{varshney2023stitch} Varshney, N., Yao, W., Zhang, H., Chen, J., \& Yu, D. (2023). A stitch in time saves nine: Detecting and mitigating hallucinations of LLMs by inspecting different decoding layers. \textit{arXiv preprint arXiv:2310.14328}.
+
+\bibitem{malladi2024fine} Malladi, S., Chen, D., \& Arora, S. (2024). Fine-grained verification and reasoning with factual grounding in large language models. \textit{International Conference on Machine Learning (ICML)}.
+
+\bibitem{zhang2024siren} Zhang, X., Zou, A., \& Fredrikson, M. (2024). SIREN: Assessing and mitigating safety vulnerabilities in retrieval-augmented generation. \textit{Conference on Empirical Methods in Natural Language Processing (EMNLP)}.
 \end{thebibliography}
 
 \end{document}

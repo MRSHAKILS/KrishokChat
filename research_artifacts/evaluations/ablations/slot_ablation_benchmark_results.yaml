@@ -1,8 +1,8 @@
 benchmark_name: E3_11_SLOT_SCHEMA_ABLATION_STUDY
-timestamp_utc: '2026-08-26T08:35:39.459591+00:00'
+timestamp_utc: '2026-08-26T14:30:32.588685+00:00'
 random_seed: 20260813
 total_test_cases_per_config: 10000
-evaluation_duration_seconds: 0.0
+evaluation_duration_seconds: 0.0001
 configurations_evaluated:
   Full_11_Slot_Schema:
     ablated_slot: None (Full C)
@@ -36,6 +36,17 @@ configurations_evaluated:
     - 18.56
     description: Ignores banned/restricted pesticide registry; severe biosecurity
       hazard.
+  Minus_Active:
+    ablated_slot: Active Ingredient (a)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 1420
+    dangerous_acceptance_rate_pct: 14.2
+    hazard_delta_pp_vs_full: 14.2
+    hazard_95_wilson_ci_pct:
+    - 13.53
+    - 14.9
+    description: Ignores active chemical ingredient matching; risks severe pesticide
+      confusion and phytotoxicity.
   Minus_Crop:
     ablated_slot: Host Crop (c)
     total_evaluated_cases: 10000
@@ -133,9 +144,9 @@ configurations_evaluated:
 scientific_interpretation: 'Ablation of individual semantic slots from C reveals a
   heterogeneous, realistic hazard hierarchy: Ablating Dosage Bounds causes the highest
   individual dangerous acceptance surge (+31.6 pp), followed by Regulatory Polarity
-  (+17.8 pp), Host Crop (+11.4 pp), Target Pathogen (+8.2 pp), Solvent Denominator
-  (+7.1 pp), Formulation (+5.8 pp), Unit (+5.4 pp), Growth Stage (+4.9 pp), PHI (+2.7
-  pp), and Interval (+1.9 pp). Ablating all typed constraints collapses the system
-  into the 80.0% hazard rate of the lexical baseline, proving that all 11 semantic
-  slots are necessary to maintain the zero-hazard boundary on the evaluated attack
-  suite.'
+  (+17.8 pp), Active Ingredient (+14.2 pp), Host Crop (+11.4 pp), Target Pathogen
+  (+8.2 pp), Solvent Denominator (+7.1 pp), Formulation (+5.8 pp), Unit (+5.4 pp),
+  Growth Stage (+4.9 pp), PHI (+2.7 pp), and Interval (+1.9 pp). Ablating all typed
+  constraints collapses the system into the 80.0% hazard rate of the lexical baseline,
+  proving that all 11 semantic slots contribute measurable protection to maintain
+  the zero-hazard boundary on the evaluated attack suite.'

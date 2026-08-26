@@ -1,5 +1,5 @@
 benchmark_name: E9_LATENCY_AND_SYSTEMS_ECONOMICS_DECOMPOSITION
-timestamp_utc: '2026-08-26T07:41:35.236711+00:00'
+timestamp_utc: '2026-08-26T09:50:14.441928+00:00'
 evaluation_duration_seconds: 0.0
 traffic_distribution:
   T0_safety_guard_redirect: 0.052
