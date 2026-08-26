@@ -40,6 +40,26 @@
     pdfauthor={Raiyaan Reza}
 }
 
+\usepackage{fancyhdr}
+\usepackage{authblk}
+\usepackage{titlesec}
+
+% --- Typography & Section Styling ---
+\titleformat{\section}{\large\bfseries\color{agriDark}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{agriDark}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\small\bfseries\color{agriDark}}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.2em}{0.4em}
+\titlespacing*{\subsection}{0pt}{0.9em}{0.3em}
+
+% --- Running Headers & Footers (Wiley Standard) ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{KrishokChat: Evidence-Linked Relation Verification for Agri-AI}}
+\fancyhead[R]{\small\textit{Reza}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
 % --- Custom Column Types for Clean Alignments ---
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
@@ -47,47 +67,50 @@
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 % --- Title & Author Metadata ---
-\title{\vspace{-1.5em}\textbf{\Large KrishokChat: Evidence-Linked Relation Verification and Calibrated Selective Certification for Bengali Agricultural Advisory Systems}\vspace{0.5em}}
+\title{\vspace{-1.5em}\LARGE\bfseries\color{agriDark} KrishokChat: Evidence-Linked Relation Verification and Calibrated Selective Certification for Bengali Agricultural Advisory Systems\vspace{0.3em}}
 
-\author{
-  \textbf{Raiyaan Reza}\textsuperscript{1,*} \\
-  \small \textsuperscript{1}Independent Agricultural AI Researcher \& Systems Engineer, Dhaka, Bangladesh \\
-  \small \textsuperscript{*}Corresponding author: \texttt{raiyanreza.contact@gmail.com}
-}
+\author{\textbf{Raiyaan Reza}\thanks{Corresponding author. Email: \texttt{raiyanreza.contact@gmail.com}}}
+\affil{\small Independent Agricultural AI Researcher \& Systems Engineer, Dhaka, Bangladesh}
 
-\date{\small \today}
+\date{}
 
 \begin{document}
 
 \maketitle
+\thispagestyle{plain}
 
-\vspace{-0.5em}
-\noindent\textbf{Short Running Title ($\le$ 40 characters):} Relation Verification for Agri-AI \\
-\vspace{-0.5em}
+\vspace{-1.0em}
+\begin{quote}
+\small
+\noindent\textbf{\color{agriDark}\large Abstract}\vspace{0.4em}
 
-\begin{abstract}
 \noindent
 \textbf{Background:} Automated agricultural advisory systems powered by Large Language Models (LLMs) offer scalable digital extension services for smallholder farming communities across developing economies. However, hallucinated chemical dosages, unverified agrochemical recommendations, and unconstrained dialect normalization introduce acute hazards to crop biosecurity, operator health, and ecological safety.
 
+\vspace{0.3em}
 \noindent
 \textbf{Problem:} Conventional retrieval-augmented generation (RAG) frameworks rely primarily on surface-level substring matching or generative self-critique. These heuristics fail to verify relational binding across critical agricultural slots—including chemical active ingredients, target pathogens, host crop varieties, application concentrations, and pre-harvest intervals (PHI).
 
+\vspace{0.3em}
 \noindent
 \textbf{Methods:} We propose an evidence-linked, relation-aware selective certification framework for Bengali agricultural advisory. The system operates under a five-tier resolution ladder that resolves canonical domain queries through deterministic guards and structured fact bases prior to invoking generative inference. Generated advisory claims are parsed into typed relational tuples and certified against extracted evidence spans from official Bangladesh agricultural research institutes (BARI, BRRI, DAE). A development-calibrated selective certification policy bounds risk under strict operational constraints.
 
+\vspace{0.3em}
 \noindent
-\textbf{Results:} Empirical evaluations demonstrate that structured relation verification eliminates safety-critical false acceptances caused by relational misbinding in lexical baselines. Deterministic resolution handles 7.8\% of domain traffic with zero LLM invocations, achieving an effective serving cost of \$0.1798 per 1,000 queries (a 92.2\% cost reduction) and sub-millisecond p95 latency. On-device vision classifiers achieve 100.0\% top-1 parity with a mean inference latency of 29.11\,ms.
+\textbf{Results:} Empirical evaluations demonstrate that structured relation verification eliminates safety-critical false acceptances caused by relational misbinding in lexical baselines. Deterministic resolution handles 7.8\% of domain traffic with zero LLM invocations, achieving an effective serving cost of \$0.1798 per 1,000 queries (a 92.2\% cost reduction relative to commercial cloud baselines) and sub-millisecond p95 latency. On-device vision classifiers achieve 100.0\% top-1 parity with a mean inference latency of 29.11\,ms.
 
+\vspace{0.3em}
 \noindent
 \textbf{Conclusion:} Evidence-linked relation verification and calibrated abstention provide verifiable safety boundaries for low-resource agricultural AI. Benchmark splits, schemas, and cryptographic manifests are released for scientific reproducibility.
-\end{abstract}
 
-\vspace{0.5em}
-\noindent\textbf{Keywords:} Bengali agricultural advisory; retrieval-augmented generation; relation-aware verification; selective certification; calibrated abstention; dialect robustness; agrochemical safety.
+\vspace{0.8em}
+\noindent\textbf{Keywords:} Bengali agricultural advisory, retrieval-augmented generation, relation-aware verification, selective certification, calibrated abstention, dialect robustness, agrochemical safety.
+\end{quote}
 
-\vspace{1em}
+\vspace{0.8em}
 \hrule
-\vspace{1em}
+\vspace{1.2em}
+
 
 % -------------------------------------------------------------------------
 % 1. INTRODUCTION
