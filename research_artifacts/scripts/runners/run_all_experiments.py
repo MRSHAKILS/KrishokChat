@@ -33,6 +33,7 @@ RUNNER_SCRIPTS = [
     ("Layer E7/E8 (Security & Prompt Injection)", SCRIPTS_DIR / "run_security_injection_eval.py"),
     ("Layer E9 (Latency & Systems Economics)", SCRIPTS_DIR / "run_latency_economic_eval.py"),
     ("Layer E10 (Safety Failure Taxonomy)", SCRIPTS_DIR / "run_failure_taxonomy_eval.py"),
+    ("Layer E11 (Multi-Generator Invariance)", SCRIPTS_DIR / "run_multi_generator_eval.py"),
 ]
 
 
