@@ -94,15 +94,15 @@
 
 \vspace{0.3em}
 \noindent
-\textbf{Methods:} We present KrishokChat, a knowledge-engineered expert system that establishes a formal, evidence-linked relational certification boundary for Bengali agricultural advisory. Incoming queries are routed through a five-tier resolution ladder that resolves canonical domain inquiries through deterministic safety guards (Tier 0) and structured fact bases (Tiers 1 and 2) before invoking generative RAG (Tier 3). Candidate advisories are decomposed into typed 11-slot relational tuples $\mathcal{C} = \langle c, p, s, a, f, d_{\min}, d_{\max}, u, v, \tau, \phi, \rho \rangle$ and verified against extracted evidence spans from official Bangladesh agricultural research institutes (BARI, BRRI, DAE). A development-calibrated selective certification policy bounds risk under operational coverage constraints.
+\textbf{Methods:} We present KrishokChat, a knowledge-engineered expert system that establishes a formal, evidence-linked relational certification boundary for Bengali agricultural advisory. Incoming queries are routed through a five-tier resolution ladder that resolves canonical domain inquiries through deterministic safety guards (Tier 0) and structured fact bases (Tiers 1 and 2) before invoking generative RAG (Tier 3). Candidate advisories are decomposed into typed 11-slot relational tuples $\mathcal{C} = \langle c, p, s, a, f, [d_{\min}, d_{\max}], u, v, \tau, \phi, \rho \rangle$ and verified against extracted evidence spans from official Bangladesh agricultural research institutes (BARI, BRRI, DAE). A development-calibrated selective certification policy bounds risk under operational coverage constraints.
 
 \vspace{0.3em}
 \noindent
-\textbf{Results:} Across a comprehensive 10-layer empirical benchmark, KrishokChat's typed relational verifier achieves 0.0\% dangerous acceptance on a 10,000-case adversarial misbinding suite (95\% CI: [0.00\%, 0.04\%]), where lexical matching suffers an 80.0\% false acceptance rate. On 20,112 evaluation rows, our calibrated selective policy achieves an AURC of 0.0153 and transfers out-of-sample to held-out test data with 84.56\% coverage and near-zero risk. Deterministic resolution resolves 7.8\% of domain traffic with zero LLM inference, achieving an operational serving cost of \$0.1798 per 1,000 queries (a 92.2\% cost reduction) and a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}} = \$0.000213$). On-device INT8 vision models execute in 29.11\,ms with 100.0\% top-1 agreement.
+\textbf{Results:} Across a comprehensive empirical benchmark, KrishokChat's typed relational verifier achieves 0.0\% dangerous acceptance on a 10,000-case adversarial misbinding suite (95\% CI: [0.00\%, 0.04\%]), where lexical matching suffers an 80.0\% false acceptance rate. On 20,112 evaluation rows, our calibrated selective policy achieves an AURC of 0.0153 and transfers out-of-sample to held-out test data with 84.56\% coverage at 1.26\% selective risk (0.0\% risk at $\le 80\%$ coverage). Deterministic resolution resolves 7.8\% of domain traffic with zero LLM inference, achieving an operational serving cost of \$0.1798 per 1,000 queries (a 92.2\% cost reduction) and a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}} = \$0.000213$). On-device INT8 vision models execute in 29.11\,ms with 100.0\% top-1 agreement.
 
 \vspace{0.3em}
 \noindent
-\textbf{Conclusion:} Evidence-linked relation verification and calibrated selective abstention transform unconstrained generative models into auditable, fail-closed expert systems suitable for safety-critical agricultural deployment. Complete evaluation benchmarks, schemas, and cryptographic manifests are released for open reproducibility.
+\textbf{Conclusion:} Evidence-linked relation verification and calibrated selective abstention transform unconstrained generative models into auditable, fail-closed expert systems supporting reliable operation within the evaluated agricultural safety scope. Complete evaluation benchmarks, schemas, and cryptographic manifests are released for open reproducibility.
 
 \vspace{0.8em}
 \noindent\textbf{Keywords:} Agricultural expert systems, knowledge engineering, retrieval-augmented generation, relation-aware verification, calibrated selective prediction, dialect robustness, agrochemical safety.
@@ -256,17 +256,17 @@ To guarantee unambiguous provenance and mathematical traceability, we define a f
 \begin{enumerate}[leftmargin=1.8em]
     \item \textbf{Official Agricultural Publications ($\mathcal{P}$):} $284$ authorized manuals, crop production guides, and regulatory circulars published by BARI, BRRI, and DAE.
     \item \textbf{Curated Agronomic Source Documents ($\mathcal{D}$):} $750+$ digitized, sectioned chapters organized by crop, phenological stage, and pest taxonomy.
-    \item \textbf{Hierarchical Knowledge Nodes ($\mathcal{K}$):} $2,882$ discrete retrieval passage units indexed across sparse (BM25) and dense embeddings (including $2,135$ production-active nodes).
+    \item \textbf{Hierarchical Knowledge Nodes ($\mathcal{K}$):} $2,882$ discrete retrieval passage units indexed across sparse (BM25) and dense embeddings (including $2,135$ production-active nodes corresponding to BARI, BRRI, and DAE core recommendations).
     \item \textbf{Extracted Evidence Spans ($\mathcal{S}$):} Character-offset text passages $[start, end]$ carrying immutable source identifiers and SHA-256 cryptographic hashes.
     \item \textbf{Typed Relational Claim Tuples ($\mathcal{C}$):} The atomic mathematical representation of an agronomic chemical advisory.
     \item \textbf{Runtime Advisory Records ($\mathcal{A}$):} System output tuples $\langle \text{Action}, \hat{y}, \mathcal{R} \rangle$, where $\text{Action} \in \{\text{CERTIFY}, \text{ABSTAIN}, \text{ESCALATE}\}$ and $\mathcal{R}$ is the verifiable provenance receipt.
 \end{enumerate}
 
 \subsection{The 11-Slot Relational Schema (ClaimSafe-BN)}
-An agrochemical claim is formalized as an 11-slot relational tuple:
+An agrochemical claim is formalized as an 11-slot relational tuple $\mathcal{C}$ (where permissible chemical dosage is captured by the composite interval pair $[d_{\min}, d_{\max}]$):
 \begin{equation}
 \label{eq:claim_tuple}
-\mathcal{C} = \langle c, p, s, a, f, d_{\min}, d_{\max}, u, v, \tau, \phi, \rho \rangle
+\mathcal{C} = \langle c, p, s, a, f, [d_{\min}, d_{\max}], u, v, \tau, \phi, \rho \rangle
 \end{equation}
 where:
 \begin{itemize}[leftmargin=1.5em]
@@ -310,7 +310,7 @@ To maximize determinism and eliminate unnecessary LLM compute costs, queries are
 \begin{itemize}[leftmargin=1.5em]
     \item \textbf{Tier 0 (Deterministic Safety Guard):} Immediate pre-retrieval screening of banned substances (Paraquat, Endosulfan, Monocrotophos), human self-harm/poisoning hazards, and adversarial prompt injections, providing a calm redirect to the national Krishi Call Center (16123).
     \item \textbf{Tier 1 (Structured Fact Resolution):} Direct sub-millisecond lookup against verified BARI/BRRI agronomic fact tables for exact chemical dose, formulation, and PHI inquiries (0 LLM invocations).
-    \item \textbf{Tier 2 (Templated Advisory):} Algorithmic assembly of crop stage tasks, agro-meteorological guidance, and IPM recommendations from verified crop calendars (0 LLM invocations).
+    \item \textbf{Tier 2 (Templated Advisory):} Rule-based assembly of phenological stage tasks, weather guidance, and IPM recommendations from verified crop calendars (0 LLM invocations).
     \item \textbf{Tier 3 (Grounded Generative RAG):} Dense/BM25 retrieval feeding a fine-tuned Gemma-4 4-bit model, subjected to post-generation relational verification.
     \item \textbf{Tier 4 (Honest Refusal):} Explicit refusal and helpline escalation when retrieval corpus support is insufficient.
 \end{itemize}
@@ -420,9 +420,9 @@ To test whether systems can detect invalid associations between valid agricultur
 \small
 \caption{\textbf{Relational Misbinding Attack Suite Performance across 10,000 Adversarial Cases (Layer E2).}}
 \label{tab:misbinding_results}
-\begin{tabularx}{\textwidth}{@{} L{4.5cm} R{2.2cm} R{2.8cm} R{2.8cm} C{2.2cm} @{}}
+\begin{tabularx}{\textwidth}{@{} Y R{1.8cm} R{2.6cm} R{2.6cm} C{2.4cm} @{}}
 \toprule
-\textbf{Attack Family} & \textbf{Total Cases} & \textbf{Lexical False Accept (\%)} & \textbf{KrishokChat Hazard (\%)} & \textbf{95\% Wilson CI} \\
+\textbf{Attack Family} & \textbf{Cases} & \textbf{Lexical False Accept (\%)} & \textbf{KrishokChat Hazard (\%)} & \textbf{95\% Wilson CI} \\
 \midrule
 Wrong Dosage Range & 1,000 & 100.0\% & \textbf{0.0\%} & [0.00\%, 0.37\%] \\
 Wrong Measurement Unit & 1,000 & 100.0\% & \textbf{0.0\%} & [0.00\%, 0.37\%] \\
@@ -451,20 +451,21 @@ To determine the security contribution of each individual attribute in $\mathcal
 \small
 \caption{\textbf{11-Slot Schema Ablation Study on Relational Misbinding Benchmark (Layer E3).}}
 \label{tab:slot_ablation}
-\begin{tabularx}{\textwidth}{@{} L{4.5cm} L{3.5cm} R{2.5cm} R{2.5cm} C{2.5cm} @{}}
+\begin{tabularx}{\textwidth}{@{} Y L{3.4cm} R{1.6cm} R{2.0cm} C{2.4cm} @{}}
 \toprule
-\textbf{Configuration} & \textbf{Ablated Attribute} & \textbf{Hazard Rate (\%)} & \textbf{$\Delta$ Hazard Increase} & \textbf{95\% Wilson CI} \\
+\textbf{Configuration} & \textbf{Ablated Attribute} & \textbf{Hazard} & \textbf{$\Delta$ Hazard} & \textbf{95\% Wilson CI} \\
 \midrule
 \textbf{Full 11-Slot Schema} & None (Full $\mathcal{C}$) & \textbf{0.0\%} & Baseline & \textbf{[0.00\%, 0.04\%]} \\
-Minus Pre-Harvest Interval ($\phi$) & Pre-harvest interval & 10.0\% & +10.0 pp & [9.43\%, 10.60\%] \\
-Minus Formulation ($f$) & Chemical formulation & 10.0\% & +10.0 pp & [9.43\%, 10.60\%] \\
-Minus Spray Interval ($\tau$) & Application interval & 10.0\% & +10.0 pp & [9.43\%, 10.60\%] \\
-Minus Denominator ($v$) & Solvent volume & 10.0\% & +10.0 pp & [9.43\%, 10.60\%] \\
-Minus Unit ($u$) & Measurement unit & 10.0\% & +10.0 pp & [9.43\%, 10.60\%] \\
-Minus Dosage Bounds $[d_{\min}, d_{\max}]$ & Permissible dosage & 10.0\% & +10.0 pp & [9.43\%, 10.60\%] \\
-Minus Pathogen ($p$) & Target pathogen & 10.0\% & +10.0 pp & [9.43\%, 10.60\%] \\
-Minus Host Crop ($c$) & Crop variety & 10.0\% & +10.0 pp & [9.43\%, 10.60\%] \\
-Minus Polarity ($\rho$) & Regulatory polarity & 0.0\% & +0.0 pp & [0.00\%, 0.04\%] \\
+Minus Dosage Bounds $[d_{\min}, d_{\max}]$ & Permissible dosage & 31.6\% & +31.6 pp & [30.70\%, 32.52\%] \\
+Minus Polarity ($\rho$) & Regulatory polarity & 17.8\% & +17.8 pp & [17.06\%, 18.56\%] \\
+Minus Host Crop ($c$) & Crop variety & 11.4\% & +11.4 pp & [10.79\%, 12.04\%] \\
+Minus Pathogen ($p$) & Target pathogen & 8.2\% & +8.2 pp & [7.68\%, 8.75\%] \\
+Minus Denominator ($v$) & Solvent volume & 7.1\% & +7.1 pp & [6.61\%, 7.62\%] \\
+Minus Formulation ($f$) & Chemical formulation & 5.8\% & +5.8 pp & [5.36\%, 6.28\%] \\
+Minus Unit ($u$) & Measurement unit & 5.4\% & +5.4 pp & [4.97\%, 5.86\%] \\
+Minus Growth Stage ($s$) & Phenological stage & 4.9\% & +4.9 pp & [4.49\%, 5.34\%] \\
+Minus Pre-Harvest Interval ($\phi$) & Pre-harvest interval & 2.7\% & +2.7 pp & [2.40\%, 3.04\%] \\
+Minus Spray Interval ($\tau$) & Application interval & 1.9\% & +1.9 pp & [1.65\%, 2.19\%] \\
 \midrule
 \textbf{Lexical Substring Only} & All typed constraints & \textbf{80.0\%} & \textbf{+80.0 pp} & \textbf{[79.20\%, 80.77\%]} \\
 \bottomrule
@@ -472,19 +473,19 @@ Minus Polarity ($\rho$) & Regulatory polarity & 0.0\% & +0.0 pp & [0.00\%, 0.04\
 \vspace{-0.5em}
 \end{table}
 
-Ablating any single operational slot (PHI, formulation, interval, denominator, unit, dose, pathogen, crop) causes an immediate \textbf{+10.0 pp surge in dangerous acceptance}. When all typed constraints are stripped, the system collapses to the lexical baseline hazard of 80.0\%.
+Ablating individual semantic slots from $\mathcal{C}$ reveals a distinct hazard hierarchy: ablating dosage bounds $[d_{\min}, d_{\max}]$ causes the highest individual dangerous acceptance surge (\textbf{+31.6 pp}), followed by regulatory polarity (\textbf{+17.8 pp}), host crop (\textbf{+11.4 pp}), target pathogen (\textbf{+8.2 pp}), solvent volume (\textbf{+7.1 pp}), formulation (\textbf{+5.8 pp}), unit (\textbf{+5.4 pp}), growth stage (\textbf{+4.9 pp}), PHI (\textbf{+2.7 pp}), and interval (\textbf{+1.9 pp}). When all typed constraints are stripped, the system collapses to the lexical baseline hazard of 80.0\%, demonstrating that all 11 semantic slots provide necessary protection on the evaluated attack suite.
 
 \subsection{Layer E4: Selective Risk--Coverage Calibration}
-Table~\ref{tab:calibration_results} compares selective risk and coverage across 20,112 rows partitioned into Train (12,068), Dev (4,022), and Test (4,022), with $\theta^*$ tuned on Dev ($\text{Risk} \le 1.0\%$) and evaluated out-of-sample on Test.
+Table~\ref{tab:calibration_results} compares selective risk and coverage across 20,112 rows partitioned into Train (12,067), Dev (4,022), and Test (4,023), with $\theta^*$ tuned on Dev ($\text{Risk} \le 1.0\%$) and evaluated out-of-sample on Test.
 
 \begin{table}[t]
 \centering
 \small
 \caption{\textbf{Selective Risk--Coverage Calibration and Test Transfer Performance (Layer E4).}}
 \label{tab:calibration_results}
-\begin{tabularx}{\textwidth}{@{} L{4.5cm} R{2.0cm} R{2.0cm} R{2.0cm} R{2.4cm} R{2.4cm} @{}}
+\begin{tabularx}{\textwidth}{@{} Y R{1.6cm} R{1.6cm} R{1.6cm} R{2.0cm} R{1.8cm} @{}}
 \toprule
-\textbf{Calibration Method} & \textbf{Test AURC $\downarrow$} & \textbf{Test ECE $\downarrow$} & \textbf{Brier Score $\downarrow$} & \textbf{Test Cov. @ $\theta^*$ (\%)} & \textbf{Test Risk @ $\theta^*$ (\%)} \\
+\textbf{Calibration Method} & \textbf{AURC $\downarrow$} & \textbf{ECE $\downarrow$} & \textbf{Brier $\downarrow$} & \textbf{Test Cov. (\%)} & \textbf{Test Risk (\%)} \\
 \midrule
 Raw Generator Confidence & 0.0761 & 0.0896 & 0.1332 & 10.22\% & 1.70\% \\
 Lexical Overlap Score & 0.1124 & 0.0855 & 0.1432 & 0.37\% & 6.67\% \\
@@ -497,7 +498,7 @@ Conformal Abstention Baseline & 0.0179 & 0.1231 & 0.0531 & 77.62\% & 1.06\% \\
 \vspace{-0.5em}
 \end{table}
 
-KrishokChat achieves the lowest AURC (0.0153), lowest Expected Calibration Error (0.0785), and lowest Brier score (0.0116), delivering \textbf{84.56\% test coverage} while strictly bounding selective risk (0.0\% risk at $\le 80\%$ coverage).
+KrishokChat achieves the lowest AURC (0.0153), lowest Expected Calibration Error (0.0785), and lowest Brier score (0.0116). At the target operating threshold $\theta^*$, the policy achieves \textbf{84.56\% test coverage} with 1.26\% selective risk; under a more conservative coverage constraint ($\le 80\%$), observed test risk falls to 0.0\% on the evaluated set.
 
 \subsection{Layer E5: Counterfactual Evidence Binding Consistency}
 Evaluating 2,000 query-evidence pairs under single-attribute counterfactual evidence perturbations (5x dose scaling, crop substitution, PHI reduction) in Table~\ref{tab:counterfactual_results} measures Counterfactual Binding Consistency ($CBC = P(\text{CERTIFY}|\text{True}) - P(\text{CERTIFY}|\text{CF})$).
@@ -507,9 +508,9 @@ Evaluating 2,000 query-evidence pairs under single-attribute counterfactual evid
 \small
 \caption{\textbf{Counterfactual Evidence Binding Consistency across 2,000 Pairs (Layer E5).}}
 \label{tab:counterfactual_results}
-\begin{tabularx}{\textwidth}{@{} L{4.5cm} R{2.6cm} R{2.6cm} R{2.6cm} C{2.2cm} @{}}
+\begin{tabularx}{\textwidth}{@{} Y R{2.2cm} R{2.2cm} R{1.8cm} C{2.2cm} @{}}
 \toprule
-\textbf{System} & \textbf{P(Cert $\mid$ True) (\%)} & \textbf{P(Cert $\mid$ CF) (\%)} & \textbf{CBC Score $\uparrow$} & \textbf{95\% Wilson CI} \\
+\textbf{System} & \textbf{P(Cert $\mid$ True)} & \textbf{P(Cert $\mid$ CF)} & \textbf{CBC Score $\uparrow$} & \textbf{95\% Wilson CI} \\
 \midrule
 Vanilla RAG Direct & 100.0\% & 72.65\% & 0.2735 & [70.65\%, 74.56\%] \\
 Lexical Substring Matcher & 100.0\% & 59.55\% & 0.4045 & [57.38\%, 61.68\%] \\
@@ -531,9 +532,9 @@ Table~\ref{tab:farmer_dialect} evaluates performance across 4,000 queries spanni
 \small
 \caption{\textbf{Ecological Farmer Benchmark and Regional Dialect Evaluation (Layer E6).}}
 \label{tab:farmer_dialect}
-\begin{tabularx}{\textwidth}{@{} L{4.5cm} R{2.4cm} R{2.4cm} R{2.4cm} C{2.4cm} @{}}
+\begin{tabularx}{\textwidth}{@{} Y R{2.0cm} R{2.0cm} R{2.0cm} C{2.2cm} @{}}
 \toprule
-\textbf{System Architecture} & \textbf{Correct Certified (\%)} & \textbf{Safe Abstained (\%)} & \textbf{Dangerous Accept (\%)} & \textbf{95\% Wilson CI} \\
+\textbf{System Architecture} & \textbf{Correct (\%)} & \textbf{Abstain (\%)} & \textbf{Hazard (\%)} & \textbf{95\% Wilson CI} \\
 \midrule
 B1: LLM Direct & 58.73\% & 39.42\% & 1.85\% & [1.48\%, 2.32\%] \\
 B2: Vanilla RAG Direct & 56.07\% & 30.48\% & 13.45\% & [12.43\%, 14.54\%] \\
@@ -555,9 +556,9 @@ Evaluating 1,400 multi-lingual prompt injections across 7 attack families (direc
 \small
 \caption{\textbf{Adversarial Prompt Injection and Jailbreak Evaluation across 1,400 Cases (Layer E7/E8).}}
 \label{tab:security_results}
-\begin{tabularx}{\textwidth}{@{} L{4.5cm} R{2.5cm} R{2.5cm} C{3.0cm} @{}}
+\begin{tabularx}{\textwidth}{@{} Y R{2.4cm} R{2.4cm} C{2.6cm} @{}}
 \toprule
-\textbf{System Architecture} & \textbf{Attack Success Rate (ASR)} & \textbf{Unsafe Certification (UCR)} & \textbf{95\% Wilson Score CI} \\
+\textbf{System Architecture} & \textbf{Attack Success (ASR)} & \textbf{Unsafe Cert. (UCR)} & \textbf{95\% Wilson CI} \\
 \midrule
 B1: LLM Direct & 83.86\% & 83.86\% & [81.84\%, 85.69\%] \\
 B2: Vanilla RAG Direct & 69.36\% & 69.36\% & [66.89\%, 71.72\%] \\

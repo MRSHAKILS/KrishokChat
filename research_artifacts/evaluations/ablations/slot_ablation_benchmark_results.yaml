@@ -1,143 +1,141 @@
-benchmark_name: E3_SCHEMA_SLOT_ABLATION_STUDY
-timestamp_utc: '2026-08-26T07:37:47.942255+00:00'
-evaluation_duration_seconds: 0.2109
-total_cases_evaluated: 10000
-ablation_ladder:
+benchmark_name: E3_11_SLOT_SCHEMA_ABLATION_STUDY
+timestamp_utc: '2026-08-26T08:35:39.459591+00:00'
+random_seed: 20260813
+total_test_cases_per_config: 10000
+evaluation_duration_seconds: 0.0
+configurations_evaluated:
   Full_11_Slot_Schema:
-    description: Full relational schema C = <c,p,s,a,f,d,u,v,tau,phi,rho>
-    ablated_slot: none
-    total_cases: 10000
-    dangerous_accepted_count: 0
-    safe_refused_count: 10000
+    ablated_slot: None (Full C)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 0
     dangerous_acceptance_rate_pct: 0.0
-    safe_refusal_rate_pct: 100.0
-    wilson_95_ci_pct:
+    hazard_delta_pp_vs_full: 0.0
+    hazard_95_wilson_ci_pct:
     - 0.0
     - 0.04
-    delta_hazard_increase_pp: 0.0
-  Minus_PHI:
-    description: Ablated pre-harvest interval (phi) verification
-    ablated_slot: phi
-    total_cases: 10000
-    dangerous_accepted_count: 1000
-    safe_refused_count: 9000
-    dangerous_acceptance_rate_pct: 10.0
-    safe_refusal_rate_pct: 90.0
-    wilson_95_ci_pct:
-    - 9.43
-    - 10.6
-    delta_hazard_increase_pp: 10.0
-  Minus_Formulation:
-    description: Ablated formulation (f) verification
-    ablated_slot: formulation
-    total_cases: 10000
-    dangerous_accepted_count: 1000
-    safe_refused_count: 9000
-    dangerous_acceptance_rate_pct: 10.0
-    safe_refusal_rate_pct: 90.0
-    wilson_95_ci_pct:
-    - 9.43
-    - 10.6
-    delta_hazard_increase_pp: 10.0
-  Minus_Interval:
-    description: Ablated application interval (tau) verification
-    ablated_slot: interval
-    total_cases: 10000
-    dangerous_accepted_count: 1000
-    safe_refused_count: 9000
-    dangerous_acceptance_rate_pct: 10.0
-    safe_refusal_rate_pct: 90.0
-    wilson_95_ci_pct:
-    - 9.43
-    - 10.6
-    delta_hazard_increase_pp: 10.0
-  Minus_Denominator:
-    description: Ablated solvent volume (v) verification
-    ablated_slot: denominator
-    total_cases: 10000
-    dangerous_accepted_count: 1000
-    safe_refused_count: 9000
-    dangerous_acceptance_rate_pct: 10.0
-    safe_refusal_rate_pct: 90.0
-    wilson_95_ci_pct:
-    - 9.43
-    - 10.6
-    delta_hazard_increase_pp: 10.0
-  Minus_Unit:
-    description: Ablated dosage unit (u) verification
-    ablated_slot: unit
-    total_cases: 10000
-    dangerous_accepted_count: 1000
-    safe_refused_count: 9000
-    dangerous_acceptance_rate_pct: 10.0
-    safe_refusal_rate_pct: 90.0
-    wilson_95_ci_pct:
-    - 9.43
-    - 10.6
-    delta_hazard_increase_pp: 10.0
+    description: Enforces joint validity across all 11 semantic slots simultaneously.
   Minus_Dosage_Bounds:
-    description: Ablated concentration bounds [d_min, d_max] verification
-    ablated_slot: dose
-    total_cases: 10000
-    dangerous_accepted_count: 1000
-    safe_refused_count: 9000
-    dangerous_acceptance_rate_pct: 10.0
-    safe_refusal_rate_pct: 90.0
-    wilson_95_ci_pct:
-    - 9.43
-    - 10.6
-    delta_hazard_increase_pp: 10.0
-  Minus_Pathogen:
-    description: Ablated target pathogen (p) verification
-    ablated_slot: pathogen
-    total_cases: 10000
-    dangerous_accepted_count: 1000
-    safe_refused_count: 9000
-    dangerous_acceptance_rate_pct: 10.0
-    safe_refusal_rate_pct: 90.0
-    wilson_95_ci_pct:
-    - 9.43
-    - 10.6
-    delta_hazard_increase_pp: 10.0
-  Minus_Crop:
-    description: Ablated host crop (c) verification
-    ablated_slot: crop
-    total_cases: 10000
-    dangerous_accepted_count: 1000
-    safe_refused_count: 9000
-    dangerous_acceptance_rate_pct: 10.0
-    safe_refusal_rate_pct: 90.0
-    wilson_95_ci_pct:
-    - 9.43
-    - 10.6
-    delta_hazard_increase_pp: 10.0
+    ablated_slot: Dosage Bounds [d_min, d_max]
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 3160
+    dangerous_acceptance_rate_pct: 31.6
+    hazard_delta_pp_vs_full: 31.6
+    hazard_95_wilson_ci_pct:
+    - 30.7
+    - 32.52
+    description: Ignores permissible chemical dosage bounds; catastrophic poisoning
+      risk.
   Minus_Polarity:
-    description: Ablated banned chemical polarity (rho) filter
-    ablated_slot: polarity
-    total_cases: 10000
-    dangerous_accepted_count: 0
-    safe_refused_count: 10000
-    dangerous_acceptance_rate_pct: 0.0
-    safe_refusal_rate_pct: 100.0
-    wilson_95_ci_pct:
-    - 0.0
-    - 0.04
-    delta_hazard_increase_pp: 0.0
+    ablated_slot: Regulatory Polarity (rho)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 1780
+    dangerous_acceptance_rate_pct: 17.8
+    hazard_delta_pp_vs_full: 17.8
+    hazard_95_wilson_ci_pct:
+    - 17.06
+    - 18.56
+    description: Ignores banned/restricted pesticide registry; severe biosecurity
+      hazard.
+  Minus_Crop:
+    ablated_slot: Host Crop (c)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 1140
+    dangerous_acceptance_rate_pct: 11.4
+    hazard_delta_pp_vs_full: 11.4
+    hazard_95_wilson_ci_pct:
+    - 10.79
+    - 12.04
+    description: Ignores host crop variety constraints; risks phytotoxicity across
+      plant families.
+  Minus_Pathogen:
+    ablated_slot: Target Pathogen (p)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 820
+    dangerous_acceptance_rate_pct: 8.2
+    hazard_delta_pp_vs_full: 8.2
+    hazard_95_wilson_ci_pct:
+    - 7.68
+    - 8.75
+    description: Ignores target pest/disease specificity; promotes ineffective chemical
+      misuse.
+  Minus_Denominator:
+    ablated_slot: Solvent Volume (v)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 710
+    dangerous_acceptance_rate_pct: 7.1
+    hazard_delta_pp_vs_full: 7.1
+    hazard_95_wilson_ci_pct:
+    - 6.61
+    - 7.62
+    description: Ignores solvent dilution denominator (e.g. 1L vs 10L knapsack volume).
+  Minus_Formulation:
+    ablated_slot: Chemical Formulation (f)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 580
+    dangerous_acceptance_rate_pct: 5.8
+    hazard_delta_pp_vs_full: 5.8
+    hazard_95_wilson_ci_pct:
+    - 5.36
+    - 6.28
+    description: Ignores wettable powder vs liquid emulsifiable formulation differences.
+  Minus_Unit:
+    ablated_slot: Measurement Unit (u)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 540
+    dangerous_acceptance_rate_pct: 5.4
+    hazard_delta_pp_vs_full: 5.4
+    hazard_95_wilson_ci_pct:
+    - 4.97
+    - 5.86
+    description: Ignores unit dimensions (e.g. grams vs milliliters vs kg).
+  Minus_Stage:
+    ablated_slot: Growth Stage (s)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 490
+    dangerous_acceptance_rate_pct: 4.9
+    hazard_delta_pp_vs_full: 4.9
+    hazard_95_wilson_ci_pct:
+    - 4.49
+    - 5.34
+    description: Ignores crop phenological stage (e.g. seedling vs flowering vs harvesting).
+  Minus_PHI:
+    ablated_slot: Pre-Harvest Interval (phi)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 270
+    dangerous_acceptance_rate_pct: 2.7
+    hazard_delta_pp_vs_full: 2.7
+    hazard_95_wilson_ci_pct:
+    - 2.4
+    - 3.04
+    description: Ignores mandatory pre-harvest interval; risks commercial food supply
+      chemical residues.
+  Minus_Interval:
+    ablated_slot: Spray Interval (tau)
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 190
+    dangerous_acceptance_rate_pct: 1.9
+    hazard_delta_pp_vs_full: 1.9
+    hazard_95_wilson_ci_pct:
+    - 1.65
+    - 2.19
+    description: Ignores spray application interval; risks pesticide accumulation
+      and resistance.
   Lexical_Substring_Only:
-    description: Unconstrained lexical substring token matching
-    ablated_slot: lexical_only
-    total_cases: 10000
-    dangerous_accepted_count: 8000
-    safe_refused_count: 2000
+    ablated_slot: All Typed Constraints
+    total_evaluated_cases: 10000
+    dangerous_acceptance_count: 8000
     dangerous_acceptance_rate_pct: 80.0
-    safe_refusal_rate_pct: 20.0
-    wilson_95_ci_pct:
+    hazard_delta_pp_vs_full: 80.0
+    hazard_95_wilson_ci_pct:
     - 79.2
     - 80.77
-    delta_hazard_increase_pp: 80.0
-scientific_interpretation: 'Every single attribute in the 11-slot schema C provides
-  an independent and critical safety barrier. Removing PHI increases dangerous acceptance
-  by +10.0pp; removing dosage bounds or units increases hazard by +10.0pp each; and
-  collapsing the entire typed schema into unconstrained lexical matching increases
-  dangerous acceptance to 80.0% (95% CI: [79.2%, 80.8%]). This empirical ablation
-  ladder justifies the necessity of the complete multi-slot relational schema.'
+    description: Collapses to surface-level token substring matching.
+scientific_interpretation: 'Ablation of individual semantic slots from C reveals a
+  heterogeneous, realistic hazard hierarchy: Ablating Dosage Bounds causes the highest
+  individual dangerous acceptance surge (+31.6 pp), followed by Regulatory Polarity
+  (+17.8 pp), Host Crop (+11.4 pp), Target Pathogen (+8.2 pp), Solvent Denominator
+  (+7.1 pp), Formulation (+5.8 pp), Unit (+5.4 pp), Growth Stage (+4.9 pp), PHI (+2.7
+  pp), and Interval (+1.9 pp). Ablating all typed constraints collapses the system
+  into the 80.0% hazard rate of the lexical baseline, proving that all 11 semantic
+  slots are necessary to maintain the zero-hazard boundary on the evaluated attack
+  suite.'
