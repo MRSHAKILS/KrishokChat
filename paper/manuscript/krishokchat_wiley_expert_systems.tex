@@ -127,39 +127,7 @@ Existing agricultural RAG implementations rely predominantly on lexical string m
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[
-    node distance=1.0cm and 1.2cm,
-    every node/.style={font=\footnotesize, align=center},
-    queryNode/.style={rectangle, rounded corners=4pt, draw=agriDark, fill=lightGray, line width=1pt, minimum width=2.4cm, minimum height=0.85cm},
-    routerNode/.style={rectangle, rounded corners=4pt, draw=safetyRed, fill=safetyRed!8, line width=1pt, minimum width=2.5cm, minimum height=0.85cm},
-    factNode/.style={rectangle, rounded corners=4pt, draw=factBlue, fill=factBlue!8, line width=1pt, minimum width=2.5cm, minimum height=0.85cm},
-    ragNode/.style={rectangle, rounded corners=4pt, draw=agriTeal, fill=agriTeal!8, line width=1pt, minimum width=2.5cm, minimum height=0.85cm},
-    verNode/.style={rectangle, rounded corners=4pt, draw=agriTeal!80!black, fill=agriTeal!12, line width=1pt, minimum width=2.5cm, minimum height=0.85cm},
-    outSafe/.style={rectangle, rounded corners=4pt, draw=agriTeal, fill=agriTeal!20, line width=1.2pt, minimum width=2.6cm, minimum height=0.85cm},
-    outEsc/.style={rectangle, rounded corners=4pt, draw=safetyRed, fill=safetyRed!15, line width=1.2pt, minimum width=2.6cm, minimum height=0.85cm},
-    connArrow/.style={-{Stealth[scale=1.0]}, line width=0.9pt, draw=agriDark!80}
-]
-
-% Nodes
-\node (query) [queryNode] {\textbf{Farmer Query}\\(Voice / Text / Dialect)};
-\node (router) [routerNode, right=of query] {\textbf{[Stage 1] Pre-Routing}\\Safety Guard + Intent};
-\node (resolver) [factNode, right=of router] {\textbf{[Stage 2] Deterministic}\\\textbf{Fact Resolver (T1/T2)}};
-\node (rag) [ragNode, below=1.2cm of router] {\textbf{[Stage 3] Grounded RAG}\\BM25/Dense + Gemma-4};
-\node (verifier) [verNode, right=of rag] {\textbf{[Stage 4] Relation}\\Verifier + Calibrator};
-\node (out_safe) [outSafe, below=1.2cm of resolver] {\textbf{Verified Advisory}\\+ Provenance Badge};
-\node (out_esc) [outEsc, above=0.9cm of router] {\textbf{Immediate Escalation}\\(Krishi Helpline 16123)};
-
-% Connectors
-\draw [connArrow] (query) -- (router);
-\draw [connArrow] (router) -- node[left, font=\scriptsize, color=safetyRed] {Banned / Crisis} (out_esc);
-\draw [connArrow] (router) -- node[above, font=\scriptsize] {Canonical} (resolver);
-\draw [connArrow] (router) -- node[left, font=\scriptsize] {Complex} (rag);
-\draw [connArrow] (resolver) -- node[right, font=\scriptsize] {Direct Match (0 AI)} (out_safe);
-\draw [connArrow] (rag) -- (verifier);
-\draw [connArrow] (verifier) -- node[below, font=\scriptsize] {Certified (T3)} (out_safe);
-\draw [connArrow] (verifier.north) -- ++(0,0.35) -| node[pos=0.25, above, font=\scriptsize, color=safetyRed] {Unverified} (out_esc);
-
-\end{tikzpicture}
+\includegraphics[width=\textwidth]{figures/fig_1.png}
 \vspace{-0.5em}
 \caption{\textbf{Four-Stage Knowledge-Engineered Architecture of KrishokChat.} Queries pass through pre-retrieval safety screening (Stage 1) and deterministic structured fact lookup (Stage 2) prior to invoking generative RAG (Stage 3) and relation verification with calibrated certification (Stage 4). The four architectural stages correspond to the five operational tiers, with Tier~1 and Tier~2 jointly implemented within Stage~2.}
 \label{fig:architecture}
