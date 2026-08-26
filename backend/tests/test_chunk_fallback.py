@@ -222,7 +222,7 @@ class TestResolver:
         # Rotate the corpus: edit text INSIDE a chunked span (same length, so
         # only the sha256 pin can catch it), then a fresh resolver must fail
         # closed (no evidence, no crash).
-        target = next(src.rglob("*.md"))
+        target = next(p for p in src.rglob("*.md") if "ম্যানকোজেব" in p.read_text(encoding="utf-8"))
         text = target.read_text(encoding="utf-8")
         target.write_text(text.replace("ম্যানকোজেব", "ট্যাম্পারড", 1), encoding="utf-8")
         fresh = ChunkFallbackResolver(index_dir=index_dir, source_dir=src)
