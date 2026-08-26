@@ -9,6 +9,7 @@
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{booktabs}
+\usepackage{graphicx}
 \usepackage{array}
 \usepackage{enumitem}
 \usepackage{xcolor}
@@ -59,6 +60,13 @@ KrishokChat was built around that exact moment. It began from field conversation
 
 The system is already working software, not a mockup. It runs today on a real retrieval corpus, a locally served language model, a safety layer that blocks unsafe chemical advice before it is ever generated, and an image pipeline that identifies the crop and then routes it to a crop-specific disease model. What follows is how it works, why it holds up for farmers, and why it is ready to grow into a product.
 
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.96\textwidth]{teaser_diagram.png}
+  \caption{KrishokChat at a glance: a farmer's chat, crop photo, soil and irrigation sensors, and field drone feed a single on-device assistant whose safety, retrieval, generation, and verification steps draw on a grounded Bangladesh knowledge base, with the online server optional.}
+  \label{fig:teaser}
+\end{figure*}
+
 \section{How the System Answers}
 
 KrishokChat is a modular platform that joins language, retrieval, computer vision, and field intelligence behind one simple chat surface. The farmer-facing web app is built with Next.js, Tailwind, and shadcn/ui; the backend is a single Python FastAPI service. Nothing exotic runs in production, which is deliberate: the intelligence lives in the knowledge and the safety design, not in a fragile stack.
@@ -94,6 +102,16 @@ Banned-chemical registry & Bangladesh-specific \\
 \arrayrulecolor{brandgreen}\bottomrule
 \end{tabular}
 \end{center}
+
+\section{Prototype and Maturity Level}
+
+KrishokChat is a functional working prototype today, not a concept on paper. The end-to-end path a farmer would use is already running: a photo goes in, the crop and its disease come back, and trusted guidance follows in the same screen.
+
+The disease diagnosis works the way a farmer needs it to. For the crops that matter most in Bangladesh, the image pipeline first recognizes which crop is in the photo and then routes it to a crop-specific disease model, which reaches high accuracy because each model only has to be expert in one crop instead of guessing across all of them. The moment a disease is identified, the system does not stop at a label. It pulls the matching treatment guidance straight from the grounded knowledge base built from government documents and agricultural manuals, so the farmer sees what the problem is and what to do about it, tied to a real source, in one step.
+
+The chatbot works the same practical way. Farmers do not type clean textbook Bengali; they type in dialect, in Banglish, and often ask something vague. The system reads the messy question, classifies what the farmer actually intends behind the wording, and converts that intent into a structured request it can act on, so instead of a loose guess the farmer gets an answer aimed at exactly what they asked, whether that is a disease, a dose, a timing question, or why a crop is failing. The safety layer runs first on every question, catching unsafe or banned-chemical requests before any answer is formed, and every dose is checked against its source before the farmer sees it.
+
+Around this core, the working pieces already include soil and irrigation image analysis, the field-intelligence module for insect monitoring and prediction from low-cost sensors, and the drone-assisted field view, each feeding the same single assistant. The whole system sits on a tested baseline of 410 automated tests passing with a 50-scenario replay set that must reproduce identical behavior on every change, which is what separates a maintainable pilot from a fragile demo. A small number of refinements, the fully offline on-device path and wider crop coverage, are in active development and land within days, before the fair. The committee will see a system that already answers real farmer questions correctly, safely, and with its sources shown, not a slideshow.
 
 \section{How We Compare}
 
