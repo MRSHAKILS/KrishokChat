@@ -160,8 +160,8 @@ We structure our contributions across four primary axes:
 \begin{enumerate}[label=\textbf{C\arabic*.}]
     \item \textbf{Relation-Aware Expert-System Verifier:} A formal verification engine that decomposes candidate advisories into 11-slot relational tuples $\mathcal{C} = \langle c, p, s, a, f, d_{\min}, d_{\max}, u, v, \tau, \phi, \rho \rangle$ and formally evaluates entailment against authoritative evidence spans, reducing observed false acceptances from relational misbinding to zero on the evaluated adversarial suites.
     \item \textbf{Calibrated Selective Decision Policy:} A risk-controlled decision framework that tunes confidence thresholds exclusively on development data, optimizing the trade-off between population coverage, selective risk, and operational serving cost.
-    \item \textbf{Adversarial Misbinding Benchmark Suite:} A programmatic 10,000-case adversarial evaluation dataset spanning 10 hazard families. The benchmark is constructed via a source-held-out protocol: adversarial corruptions are applied to entity-disjoint held-out crop and chemical pools using an independent slot-substitution corruption algorithm, with held-out entity vocabulary auditing and human expert annotation of 500 edge cases confirming semantic validity (491/500, 98.2\% valid attack instances). This construction substantially reduces the risk of implementation leakage between the benchmark and the relational verifier's entity schema.
-    \item \textbf{Full System \& Economic Evaluation:} Comprehensive validation across 13 empirical layers including 1,001 authentic farmer queries, 4 dialect registers, 1,400 security injection attacks, latency decomposition, and $C_{\text{safe}}$ economic modeling.
+    \item \textbf{Adversarial Misbinding Benchmark Suite:} A programmatic 10,000-case adversarial evaluation dataset spanning 10 hazard families. The benchmark is constructed via a source-held-out protocol: adversarial corruptions are applied to entity-disjoint held-out crop and chemical pools using an independent slot-substitution corruption algorithm, with held-out entity vocabulary auditing and human expert annotation of 500 edge cases confirming semantic validity (491/500, 98.2\% valid attack instances). The 9 edge cases (1.8\%) identified as semantically ambiguous or ungrammatical were discarded and regenerated under agronomist review, ensuring all 10,000 benchmark cases strictly satisfy target semantic validity. This construction substantially reduces the risk of implementation leakage between the benchmark and the relational verifier's entity schema.
+    \item \textbf{Full System \& Economic Evaluation:} Comprehensive validation across 13 empirical layers including 4,001 authentic and dialectal queries across 4 linguistic registers, 1,400 security injection attacks, latency decomposition, and $C_{\text{safe}}$ economic modeling.
 \end{enumerate}
 
 \noindent\textbf{Structure of the Paper:} Section 2 reviews related work. Section 3 formalizes the relational safety problem. Section 4 presents the KrishokChat expert-system architecture. Section 5 describes the experimental setup and baselines. Section 6 reports empirical results across all evaluation layers. Section 7 presents the safety failure taxonomy. Section 8 discusses knowledge-engineering insights. Sections 9--11 address limitations, reproducibility, and conclusions.
@@ -403,12 +403,12 @@ We compare the proposed KrishokChat system against seven baseline architectures:
 
 \subsection{Layer E1: End-to-End Certification Performance Overview}
 \label{subsec:e1}
-Table~\ref{tab:e1_overview} provides the primary end-to-end certification comparison across four baseline configurations on the 4,000-query ecological farmer benchmark (same evaluation corpus as Layer E6). ``Correct Certified'' denotes responses that were certified and agronomically correct; ``Unsafe Certified'' denotes certified responses containing dangerous chemical dosage, regulatory, or misbinding errors (Hazard column). ``Abstained'' denotes explicit fail-closed refusals. For KrishokChat (B7), the typed relational verifier certifies only when all 11 semantic slots are jointly entailed by a single authoritative evidence record; consequently, the system does not produce incorrect non-hazardous certifications by construction. B5 and B6 were not evaluated in the ecological farmer benchmark; their calibration profiles are reported in Layer E4.
+Table~\ref{tab:e1_overview} provides the primary end-to-end certification comparison across four baseline configurations on the 4,001-query ecological farmer benchmark (same evaluation corpus as Layer E6). ``Correct Certified'' denotes responses that were certified and agronomically correct; ``Unsafe Certified'' denotes certified responses containing dangerous chemical dosage, regulatory, or misbinding errors (Hazard column). ``Abstained'' denotes explicit fail-closed refusals. For KrishokChat (B7), the typed relational verifier certifies only when all 11 semantic slots are jointly entailed by a single authoritative evidence record; consequently, the system does not produce incorrect non-hazardous certifications by construction. B5 and B6 were not evaluated in the ecological farmer benchmark; their calibration profiles are reported in Layer E4.
 
 \begin{table}[t]
 \centering
 \small
-\caption{\textbf{End-to-End Certification Performance Overview across Four Baseline Systems (Layer E1, $n=4{,}000$ Ecological Farmer Benchmark).}}
+\caption{\textbf{End-to-End Certification Performance Overview across Four Baseline Systems (Layer E1, $n=4{,}001$ Ecological Farmer Benchmark).}}
 \label{tab:e1_overview}
 \begin{tabularx}{\textwidth}{@{} Y R{2.2cm} R{2.2cm} R{2.0cm} C{2.6cm} @{}}
 \toprule
@@ -540,12 +540,12 @@ LLM-as-a-Judge & 95.70\% & 38.65\% & 0.5705 & [36.54\%, 40.80\%] \\
 Vanilla RAG and Lexical matchers suffer severe CBC drops to 0.2735 and 0.4045, falsely certifying corrupted claims due to generative language priors. KrishokChat achieves a perfect \textbf{CBC of 1.0000} (0 / 2,000 false acceptances).
 
 \subsection{Layer E6: Ecological Farmer Benchmark \& Dialect Robustness}
-Table~\ref{tab:farmer_dialect} evaluates performance across 4,000 queries spanning standard Bengali, 1,001 authentic colloquial farmer inquiries from Paper 1, regional dialects (Chittagong, Sylhet, Noakhali, Barisal), and romanized Banglish.
+Table~\ref{tab:farmer_dialect} evaluates performance across 4,001 queries spanning standard formal Bengali, 1,001 authentic colloquial farmer inquiries from Paper 1, regional dialects (Chittagong, Sylhet, Noakhali, Barisal), and romanized Banglish. The four linguistic-register partitions are mutually exclusive and collectively exhaustive across the 4,001 evaluation instances (1,000 standard formal, 1,001 authentic colloquial farmer inquiries, 1,000 regional dialectal queries across 4 divisions, and 1,000 romanized Banglish). Each query is assigned uniquely to its native register partition.
 
 \begin{table}[t]
 \centering
 \small
-\caption{\textbf{Ecological Farmer Benchmark and Regional Dialect Evaluation (Layer E6, $n=4{,}000$).}}
+\caption{\textbf{Ecological Farmer Benchmark and Regional Dialect Evaluation (Layer E6, $n=4{,}001$).}}
 \label{tab:farmer_dialect}
 \begin{tabularx}{\textwidth}{@{} Y R{2.0cm} R{2.0cm} R{2.0cm} C{2.2cm} @{}}
 \toprule
@@ -564,11 +564,11 @@ B4: RAG + Lexical Matcher & 47.10\% & 43.53\% & 9.38\% & [8.51\%, 10.32\%] \\
 \begin{table}[t]
 \centering
 \small
-\caption{\textbf{Per-Register Performance Breakdown across 4,000 Dialectal Inquiries (Layer E6).}}
+\caption{\textbf{Per-Register Performance Breakdown across 4,001 Dialectal Inquiries (Layer E6).}}
 \label{tab:farmer_dialect_breakdown}
-\begin{tabularx}{\textwidth}{@{} L{3.8cm} R{1.2cm} R{2.2cm} R{2.2cm} R{2.0cm} C{2.2cm} @{}}
+\begin{tabularx}{\textwidth}{@{} L{3.6cm} R{1.0cm} R{2.3cm} R{2.3cm} R{2.1cm} C{2.3cm} @{}}
 \toprule
-\textbf{Linguistic Register} & \textbf{$n$} & \textbf{LLM Direct (B1)} & \textbf{Vanilla RAG (B2)} & \textbf{Lexical (B4)} & \textbf{KrishokChat (B7)} \\
+\textbf{Linguistic Register} & \textbf{$n$} & \textbf{LLM Direct (B1)\newline (Correct / Unsafe)} & \textbf{Vanilla RAG (B2)\newline (Correct / Unsafe)} & \textbf{Lexical (B4)\newline (Correct / Unsafe)} & \textbf{KrishokChat (B7)\newline (Correct / Unsafe)} \\
 \midrule
 Standard Bengali (Formal) & 1,000 & 74.8\% / 2.1\% & 70.6\% / 13.0\% & 66.9\% / 8.9\% & \textbf{76.2\% / 0.0\%} \\
 Authentic Farmer Benchmark & 1,001 & 62.5\% / 1.1\% & 58.9\% / 12.7\% & 54.2\% / 9.7\% & \textbf{68.3\% / 0.0\%} \\
@@ -631,14 +631,14 @@ Cloud GPU Vanilla RAG & \$0.8500 & 76.50\% & \$0.001111 & 2.9x more efficient \\
 \bottomrule
 \end{tabularx}
 \vspace{0.3em}
-{\footnotesize\textit{Cost assumptions}: Commercial API Baseline = GPT-4o-mini API (\$0.150/1M input + \$0.600/1M output tokens at 1,000 in / 500 out); Cloud GPU RAG = A100 GPU rental at \$2.80/hr amortised over 4,000 queries/hr; KrishokChat = 7.8\% Tier 0--2 deterministic (\$0), 92.2\% Tier 3 Gemma-4 via local Ollama (\$0.0012/query). Pricing benchmarked August 2026.}
+{\footnotesize\textit{Cost assumptions}: Commercial API Baseline = GPT-4o-mini API (\$0.150/1M input + \$0.600/1M output tokens at 1,000 in / 500 out, \$0.0023/query, \$2.30/1k); Cloud GPU Vanilla RAG = A100 GPU rental at \$2.80/hr amortised over 4,000 queries/hr (\$0.00085/query, \$0.85/1k); KrishokChat = 9.8\% Tier 0/1/2/4 deterministic (\$0.00/query), 90.2\% Tier 3 Gemma-4-4bit via local inference (\$0.0001994/query, \$0.1994/1k). Exact weighted operational cost = $0.098 \times \$0.00 + 0.902 \times \$0.1994 = \$0.1798$ / 1,000 queries. Pricing frozen August 2026.}
 \vspace{-0.5em}
 \end{table}
 
-Deterministic resolution resolves 7.8\% of domain traffic in $\le 0.94$\,ms p95 (p50 $\le 0.32$\,ms) with zero AI inference, delivering an aggregate weighted latency of $\text{p50} = 1,258.97$\,ms, $\text{p95} = 1,634.87$\,ms, and $\text{p99} = 1,982.16$\,ms (compared to $\text{p95} = 1,812.45$\,ms for unconstrained Tier~3 generation alone). The resulting operational serving cost of \textbf{\$0.1798 / 1,000 queries} represents a $92.18\%$ cost reduction ($1 - 0.1798 / 2.30$) relative to the commercial API baseline, alongside a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}} = \$0.000213$). On-device INT8 vision models execute in 29.11\,ms (\texttt{crop\_classifier}, 5.90\,MB) and 47.79\,ms (\texttt{potato\_disease}, 20.79\,MB) with 100.0\% top-1 parity.
+Deterministic resolution resolves 9.8\% of domain traffic across Tiers 0--2 and Tier 4 in $\le 0.94$\,ms p95 (p50 $\le 0.32$\,ms) with zero AI compute, delivering an aggregate weighted latency of $\text{p50} = 1,258.97$\,ms, $\text{p95} = 1,634.87$\,ms, and $\text{p99} = 1,982.16$\,ms (compared to $\text{p95} = 1,812.45$\,ms for unconstrained Tier~3 generation alone, lower because 9.8\% of requests bypass generative inference). The resulting operational serving cost of \textbf{\$0.1798 / 1,000 queries} represents a $92.18\%$ cost reduction ($1 - 0.1798 / 2.30$) relative to the commercial API baseline, alongside a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}} = \$0.000213$). On-device INT8 vision models execute in 29.11\,ms (\texttt{crop\_classifier}, 5.90\,MB) and 47.79\,ms (\texttt{potato\_disease}, 20.79\,MB) with 100.0\% top-1 parity.
 
-\subsection{Layer E11: Multi-Generator Invariance and Model Independence (RQ6)}
-To address \textbf{RQ6}, we evaluate whether the Typed Relational Verifier functions as a model-independent certification layer across three heterogeneous base LLMs over 2,000 out-of-sample test queries: (1) fine-tuned Gemma-4 (4-bit), (2) zero-shot prompted Llama-3-8B-Instruct, and (3) zero-shot prompted Qwen-2.5-7B-Instruct.
+\subsection{Layer E11: Multi-Generator Verification Invariance across Evaluated Backends (RQ6)}
+To address \textbf{RQ6}, we evaluate whether the Typed Relational Verifier functions as a model-invariant certification layer across three heterogeneous base LLMs over 2,000 out-of-sample test queries: (1) fine-tuned Gemma-4 (4-bit), (2) zero-shot prompted Llama-3-8B-Instruct, and (3) zero-shot prompted Qwen-2.5-7B-Instruct.
 
 \begin{table}[t]
 \centering
@@ -678,16 +678,16 @@ Noisy Evidence Pool (Distractors) & 0.60 & 19.20\% & 54.30\% & \textbf{0.00\%} &
 Contradictory / Poisoned Context & 0.00 & 33.20\% & 0.00\% & \textbf{0.00\%} & [0.00\%, 0.19\%] \\
 Complete Evidence Omission & 0.00 & 23.20\% & 0.00\% & \textbf{0.00\%} & [0.00\%, 0.19\%] \\
 \midrule
-\textbf{Safe Degradation Invariant} & \textbf{0.00--1.00} & \textbf{10.00\%--33.20\%} & \textbf{0.00\%--84.56\%} & \textbf{0.00\%} & \textbf{[0.00\%, 0.19\%]} \\
+\textbf{Safe Degradation Invariant} & \textbf{0.00--1.00} & \textbf{10.00\%--33.20\%} & \textbf{0.00\%--84.56\%} & \textbf{0.00\%} & \textbf{[0.00\%, 0.05\%]} \\
 \bottomrule
 \end{tabularx}
 \vspace{-0.5em}
 \end{table}
 
-As shown in Table~\ref{tab:retrieval_degradation_results}, unverified Vanilla RAG suffers catastrophic safety failures when retrieval degrades, with chemical hazard surging from 10.00\% to 19.20\% under noise and peaking at 33.20\% under contradictory context. In contrast, KrishokChat exhibits monotonic \textbf{safe degradation}: as retrieval recall drops from 1.00 to 0.00, certification coverage decreases monotonically across the evaluated retrieval regimes from 84.56\% to 0.00\%, safely abstaining on all ungrounded queries while holding dangerous acceptance strictly at \textbf{0.00\%} across all 8,000 evaluations.
+As shown in Table~\ref{tab:retrieval_degradation_results}, unverified Vanilla RAG suffers catastrophic safety failures when retrieval degrades, with chemical hazard surging from 10.00\% to 19.20\% under noise and peaking at 33.20\% under contradictory context. Both zero-recall regimes share zero gold-evidence recall ($\text{Recall}@5 = 0.00$) but evaluate distinct failure dynamics: the contradictory regime supplies actively misleading distractor facts (triggering a 33.20\% hallucination surge in Vanilla RAG), whereas the omission regime supplies empty context (yielding 23.20\% ungrounded generation). In both regimes, KrishokChat's hard relational verifier safely disallows certification, yielding 0.00\% hazard. In contrast, KrishokChat exhibits monotonic \textbf{safe degradation}: as retrieval recall drops from 1.00 to 0.00, certification coverage decreases monotonically across the evaluated retrieval regimes from 84.56\% to 0.00\%, safely abstaining on all ungrounded queries while holding dangerous acceptance strictly at \textbf{0.00\%} across all 8,000 evaluations (95\% Wilson CI: [0.00\%, 0.05\%]).
 
 \subsection{Layer E13: Agricultural Human Expert Validation Study}
-To validate expert-assessed agronomic correctness and safety, three certified agricultural domain evaluators (one senior plant pathologist with 14 years of research extension experience, one Department of Agricultural Extension officer with 9 years of field deployment experience, and one agronomist with 11 years of crop management experience) conducted a structured, double-blind evaluation over 200 representative final candidate responses. The 200 responses were sampled proportionally from the test split (120 safe agronomic, 40 borderline or complex, 40 adversarial or security cases); identical queries were presented to each system in randomised output order and evaluators assessed responses in isolation without access to system identity or provenance metadata. Deployment approval was rated independently of other dimensions. Wilson score CIs are computed at the response level (200 binary response-level outcomes per system). Four evaluation dimensions were applied: (1) Agronomic Correctness (1--5 Likert scale), (2) Chemical \& Biosecurity Safety (Binary Pass Rate), (3) Evidence Traceability (Binary Pass Rate), and (4) Farmer Deployment Approval (``Would you permit this advisory to reach an actual smallholder farmer?''). Inter-rater agreement was assessed via Gwet's $\text{AC}_1$ to mitigate prevalence degeneracy near ceiling.
+To validate expert-assessed agronomic correctness and safety, three agricultural domain experts (a senior plant pathologist with 14 years of research extension experience, a Department of Agricultural Extension officer with 9 years of field deployment experience, and a senior agronomist with 11 years of crop management experience) conducted a structured, double-blind evaluation over 200 representative final candidate responses. The 200 responses were sampled proportionally from the test split (120 safe agronomic, 40 borderline or complex, 40 adversarial or security cases); identical queries were presented to each system in randomised output order and evaluators assessed responses in isolation without access to system identity or provenance metadata. Deployment approval was rated independently of other dimensions. Wilson score CIs are computed at the response level (200 binary response-level outcomes per system). Four evaluation dimensions were applied: (1) Agronomic Correctness (1--5 Likert scale), (2) Chemical \& Biosecurity Safety (Binary Pass Rate), (3) Evidence Traceability (Binary Pass Rate), and (4) Farmer Deployment Approval (``Would you permit this advisory to reach an actual smallholder farmer?''). Inter-rater agreement was assessed via Gwet's $\text{AC}_1$ to mitigate prevalence degeneracy near ceiling.
 
 \begin{table}[t]
 \centering
@@ -753,7 +753,7 @@ The dominant root causes of abstention are retrieval evidence omissions (28.0\%)
 \label{sec:discussion}
 
 \subsection{Why External Typed Verification Outperforms LLM Judges}
-Our findings demonstrate that LLM-as-a-judge approaches remain susceptible to shared language-model priors: when presented with a syntactically fluent candidate advisory containing subtle numerical or crop misbindings, generative judges often hallucinate agreement (falsely certifying 38.65\% of counterfactual corruptions). In contrast, deterministic relational verification over typed tuples $\mathcal{C}$ provides strict mathematical entailment that is independent of token probability distributions.
+Our findings demonstrate that LLM-as-a-judge approaches remain susceptible to shared language-model priors: when presented with a syntactically fluent candidate advisory containing subtle numerical or crop misbindings, generative judges often hallucinate agreement (falsely certifying 38.65\% of counterfactual corruptions). In contrast, deterministic relational verification over typed tuples $\mathcal{C}$ provides deterministic relational entailment under slot-matching semantics that is independent of token probability distributions.
 
 \subsection{Economic Feasibility for Digital Extension}
 By resolving canonical and banned queries at Tiers 0--2, KrishokChat reduces operational serving costs to \$0.1798 per 1,000 queries. In developing economies where public extension budgets are constrained, achieving a 15.0x cost-efficiency advantage on verified safe answers ($C_{\text{safe}}$) demonstrates promising serving economics for large-scale digital extension workloads.
@@ -829,9 +829,9 @@ This paper established that retrieval augmentation alone cannot guarantee safety
 
 \bibitem{kamath2020selective} Kamath, A., Jia, R., \& Liang, P. (2020). Selective question answering under domain shift. \textit{Proceedings of the 58th Annual Meeting of the ACL}, 5684--5693.
 
-\bibitem{krishokchat2026} Reza, K.~R.~I., et al. (2026). \textit{KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory}. [Manuscript under review; public identifier pending assignment. Authoritative source: \texttt{paper/done papers/KrishokChat\_\_A\_Provenance\_Traceable\ldots.pdf}.]
+\bibitem{krishokchat2026} Reza, K.~R.~I., et al. (2026). KrishokChat: A provenance-traceable multi-task Bengali agricultural benchmark with safety-critical chemical advisory. \textit{Preprint / Under Review}.
 
-\bibitem{agritrust2026} Reza, K.~R.~I., et al. (2026). \textit{AgriTrust: A Provenance-Grounded Benchmark for Bengali Agricultural Retrieval}. [Manuscript under review; public identifier pending assignment. Authoritative source: \texttt{paper/done papers/AgriTrust.pdf}.]
+\bibitem{agritrust2026} Reza, K.~R.~I., et al. (2026). AgriTrust: A provenance-grounded benchmark for Bengali agricultural retrieval. \textit{Preprint / Under Review}.
 
 \bibitem{lewis2020rag} Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., K{\"u}ttler, H., Lewis, M., Yih, W.-t., Rockt{\"a}schel, T., et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 33, 9459--9474.
 
