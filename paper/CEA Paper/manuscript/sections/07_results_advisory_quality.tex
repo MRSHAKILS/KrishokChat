@@ -2,14 +2,54 @@
 \label{sec:results_advisory_quality}
 
 \subsection{Overall Correctness and Certified Advisory Precision}
-Table~\ref{tab:end_to_end_advisory} presents the primary empirical results across 4,000 multi-register test queries evaluated triple-blind by practicing agronomists.
+Table~\ref{tab:end_to_end_advisory} presents the primary empirical results across 100 stratified
+multi-register test cases (70 naturalistic, 30 adversarial) evaluated using live model API calls
+from GPT-4o-Mini, Llama-3.1-8B-Instruct, and Gemini-2.5-Flash-Lite alongside the KrishokChat
+5-Tier Bounded-Authority Advisory (BAA) architecture (Layer~E27, $N=100$ per baseline).
 
 \input{tables/tab5_end_to_end_advisory.tex}
 
-The proposed Bounded-Authority Advisory (BAA) system achieves a \textbf{Certified Advisory Correctness (CAC) of 97.2\%} ($95\%\text{ CI: }[96.6\%, 97.7\%]$), significantly outperforming unconstrained LLM generation (54.2\%, $p < 0.001$, McNemar's test), Vanilla RAG (68.6\%, $p < 0.001$), and Guarded RAG (71.4\%, $p < 0.001$). While the pure deterministic resolver (B4) achieves a slightly higher nominal correctness on resolved queries (98.4\%), it suffers from low advisory coverage (51.4\%) due to its inability to interpret colloquial linguistic variations. BAA successfully bridges this gap, achieving 65.8\% advisory coverage while maintaining an uncompromised safety profile.
+The proposed BAA system achieves a \textbf{Certified Advisory Correctness (CAC) of 97.0\%}
+($95\%\text{ Wilson CI: }[91.55\%,\,98.97\%]$), significantly outperforming all generative baselines.
+The unconstrained GPT-4o-Mini baseline (B0) achieved 74.0\% CAC ($95\%\text{ CI: }[64.63\%,\,81.60\%]$),
+the Lexical BM25-RAG variant using Llama-3.1-8B (B1) achieved 73.0\% CAC
+($95\%\text{ CI: }[63.57\%,\,80.73\%]$), and the prompted Gemini-2.5-Flash-Lite judge (B4)
+achieved 58.0\% CAC ($95\%\text{ CI: }[48.21\%,\,67.20\%]$).
+All pairwise differences versus BAA are statistically significant ($p < 0.001$, two-sided
+McNemar's test with Holm-Bonferroni correction).
+The surprising underperformance of the prompted judge (B4) is consistent with known fluency-safety
+trade-offs: safety-instruction prompting induces over-refusal on naturalistic Bengali queries,
+collapsing advisory coverage and certified correctness simultaneously.
 
 \subsection{Critical Unsafe Acceptance Rate (CUAR)}
-On the primary safety endpoint, BAA recorded \textbf{zero dangerous acceptance events} ($\text{CUAR} = 0.0\%$, $95\%\text{ Wilson CI: }[0.00\%, 0.09\%]$) across all 4,000 naturalistic and dialectal queries. In stark contrast, unconstrained LLM generation accepted hazardous recommendations in 28.4\% of cases, Vanilla RAG accepted 18.2\%, and Guarded RAG accepted 11.6\%. Even the sophisticated RAG + LLM Judge baseline (B3) permitted a 6.8\% CUAR, demonstrating that probabilistic LLM judges consistently fail to detect subtle numerical dosage mutations and regulatory prohibitions.
+On the primary safety endpoint, the BAA architecture recorded
+\textbf{zero critical unsafe acceptance events} ($\text{CUAR} = 0.0\%$,
+$95\%\text{ Wilson CI: }[0.00\%,\,3.70\%]$) across all 100 evaluated queries—
+spanning four Bengali linguistic registers and four adversarial hazard categories.
+In stark contrast, unconstrained GPT-4o-Mini accepted hazardous agrochemical recommendations in
+\textbf{8.0\%} of cases ($95\%\text{ CI: }[4.11\%,\,15.00\%]$), Llama-3.1-8B RAG in
+\textbf{6.0\%} ($95\%\text{ CI: }[2.78\%,\,12.48\%]$), and the Gemini judge in
+\textbf{15.0\%} ($95\%\text{ CI: }[9.31\%,\,23.28\%]$).
+These results demonstrate that neither instruction-tuned models nor prompt-based safety judges
+reliably prevent critical pesticide and agrochemical hazards from reaching farmers.
 
-\subsection{Appropriate Abstention and Coverage Trade-Offs}
-A critical property of BAA is that abstention is treated as a valid, first-class system output rather than an operational failure. BAA safely abstained from answering in 34.2\% of evaluated cases—primarily queries with missing crop context, out-of-domain symptoms, or unresolvable multi-document conflicts. When evaluated against human expert consensus, BAA achieved a 98.6\% appropriate abstention rate, directing unresolvable queries to human extension officers via the national Krishi Call Center (16123).
+\subsection{Safe Abstention and Coverage Trade-Offs}
+A critical property of the BAA design is that abstention—declining to provide a certified
+answer—is treated as a first-class, fail-safe system output rather than an operational failure.
+BAA safely abstained from providing a certified advisory in 33.0\% of evaluated cases
+($95\%\text{ CI: }[24.56\%,\,42.69\%]$), primarily for queries whose crop-chemical-dosage
+triplets either had no matching record in the 2,135-node SQLite fact graph or were flagged by
+the regulatory polarity slot as containing a nationally prohibited active ingredient.
+In such cases, the system redirects the farmer to the national Krishi Call Center (dial 16123)
+or to a certified agronomist, ensuring no dangerous advice is delivered in exchange for coverage.
+
+\subsection{Latency and Deployment Economics}
+The BAA architecture achieved a median verification latency of \textbf{3.8~ms} for both
+naturalistic and adversarial queries, compared to 2,726~ms (B0 GPT-4o-Mini), 6,011~ms
+(B1 Llama-3.1-8B RAG), and 3,465~ms (B4 Gemini-2.5-Flash-Lite).
+This 708$\times$ median latency advantage over the fastest cloud baseline is attributable to the
+SQLite Fact Base resolving 51\% of queries deterministically in-process ($\bar{t} = 4.2$~ms),
+with the remaining 49\% incurring an LLM synthesis pass (Layer~E34).
+At an estimated cost of \$0.08 per 1,000 queries, BAA represents a 4$\times$ cost reduction
+versus the cheapest prompted cloud baseline (\$0.35/1k), making deployment viable for Bangladesh's
+low-resource rural extension network.
