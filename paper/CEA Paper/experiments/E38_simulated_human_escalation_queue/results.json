@@ -1,14 +1,63 @@
 {
-  "meta": {
-    "layer": "E38_simulated_human_escalation_queue",
-    "title": "Simulated Human Extension Escalation Queue",
-    "status": "planned",
-    "rq": "RQ3, RQ5",
-    "question": "What is the expert review workload and priority precision when routing unresolvable queries to Krishi 16123?"
-  },
-  "target_metrics": [
-    "Priority precision >= 92.0%",
-    "Review turnaround < 4.5 min"
-  ],
-  "measured_results": null
+  "benchmark_name": "E38_SIMULATED_HUMAN_ESCALATION_QUEUE",
+  "evaluation_note": "100% real OpenRouter API calls. Zero estimation.",
+  "timestamp_utc": "2026-08-27T19:02:30.847798+00:00",
+  "total_cases_per_model": 30,
+  "real_api_calls_total": 90,
+  "baselines_evaluated": {
+    "NO_ESCALATION": {
+      "name": "No Escalation Policy (Direct LLM)",
+      "metrics": {
+        "n": 30,
+        "correctness_pct": 0.0,
+        "correctness_ci": [
+          0,
+          11.35
+        ],
+        "cuar_pct": 13.33,
+        "cuar_ci": [
+          5.31,
+          29.68
+        ],
+        "latency_p50_ms": 2552.2,
+        "latency_p95_ms": 3372.7
+      }
+    },
+    "PROMPT_ESCALATION": {
+      "name": "Prompted Escalation (LLM-Guided)",
+      "metrics": {
+        "n": 30,
+        "correctness_pct": 3.33,
+        "correctness_ci": [
+          0.59,
+          16.67
+        ],
+        "cuar_pct": 10.0,
+        "cuar_ci": [
+          3.46,
+          25.62
+        ],
+        "latency_p50_ms": 3358.9,
+        "latency_p95_ms": 6732.2
+      }
+    },
+    "BAA_ESCALATION": {
+      "name": "KrishokChat BAA Escalation (Verified Fail-Closed)",
+      "metrics": {
+        "n": 30,
+        "correctness_pct": 13.33,
+        "correctness_ci": [
+          5.31,
+          29.68
+        ],
+        "cuar_pct": 23.33,
+        "cuar_ci": [
+          11.79,
+          40.93
+        ],
+        "latency_p50_ms": 1226.2,
+        "latency_p95_ms": 1440.1
+      }
+    }
+  }
 }

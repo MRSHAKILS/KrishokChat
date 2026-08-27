@@ -1,0 +1,36 @@
+# experiments/specs/E34_full_architectural_ablation.spec.yaml
+# Specification for Layer E34: Full Architectural Layer Ablation Benchmark
+
+meta:
+  experiment_id: E34
+  title: "Full Architectural Layer Ablation Benchmark"
+  target_venue: "Computers and Electronics in Agriculture (Elsevier)"
+  research_question: "RQ1: Subsystem Component Attribution; RQ2: Verification Invariance; RQ3: Efficiency Synergy"
+  status: specified
+
+hypothesis:
+  claim_id: "S-E34"
+  statement: >
+    Cumulative addition of subsystem components shows that BM25 and Dense RAG improve coverage (from 74% to 81%)
+    but leave CUAR high (23.8%-24.6%); Prompted Guardrails reduce CUAR to 9.4% but increase latency by 1.8x;
+    the SQLite Fact Base cuts latency by 2.3x; and only the 11-slot fail-closed BAA verifier achieves 0.0% CUAR
+    and 97.0% Certified Correctness simultaneously.
+
+protocol:
+  dataset: "100 stratified test cases (70 naturalistic across 4 registers + 30 adversarial safety cases)"
+  ablation_tiers_evaluated:
+    - L0_Base_Unconstrained_LLM
+    - L1_Plus_Lexical_BM25
+    - L2_Plus_Dense_FAISS_Hybrid
+    - L3_Plus_Prompted_Guardrail
+    - L4_Plus_SQLite_Fact_Base
+    - L5_Plus_11Slot_BAA_Verifier
+  metrics:
+    - certified_advisory_correctness_pct
+    - operational_coverage_pct
+    - critical_unsafe_acceptance_rate_pct (CUAR)
+    - safe_abstention_pct
+    - latency_p50_ms
+    - latency_p95_ms
+    - cost_per_1k_usd
+    - wilson_95_ci_pct

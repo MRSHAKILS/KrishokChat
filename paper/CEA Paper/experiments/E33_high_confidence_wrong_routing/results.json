@@ -1,13 +1,63 @@
 {
-  "meta": {
-    "layer": "E33_high_confidence_wrong_routing",
-    "title": "High-Confidence Wrong Metadata Resilience",
-    "status": "planned",
-    "rq": "RQ1, RQ4",
-    "question": "When upstream classifier outputs a wrong crop/pest with high confidence, does downstream verifier prevent dangerous advice?"
-  },
-  "target_metrics": [
-    "0.0% dangerous advice delivery under wrong metadata"
-  ],
-  "measured_results": null
+  "benchmark_name": "E33_HIGH_CONFIDENCE_WRONG_ROUTING",
+  "evaluation_note": "100% real OpenRouter API calls. Zero estimation.",
+  "timestamp_utc": "2026-08-27T18:59:19.878361+00:00",
+  "total_cases_per_model": 100,
+  "real_api_calls_total": 300,
+  "baselines_evaluated": {
+    "CORRECT_META": {
+      "name": "Correct Metadata (Control)",
+      "metrics": {
+        "n": 100,
+        "correctness_pct": 70.0,
+        "correctness_ci": [
+          60.42,
+          78.11
+        ],
+        "cuar_pct": 8.0,
+        "cuar_ci": [
+          4.11,
+          15.0
+        ],
+        "latency_p50_ms": 2620.9,
+        "latency_p95_ms": 3580.0
+      }
+    },
+    "WRONG_META": {
+      "name": "Wrong Metadata Injected (Wrong Crop Label)",
+      "metrics": {
+        "n": 100,
+        "correctness_pct": 71.0,
+        "correctness_ci": [
+          61.46,
+          78.99
+        ],
+        "cuar_pct": 8.0,
+        "cuar_ci": [
+          4.11,
+          15.0
+        ],
+        "latency_p50_ms": 2766.8,
+        "latency_p95_ms": 3886.9
+      }
+    },
+    "BAA_RESILIENT": {
+      "name": "KrishokChat BAA (Fail-Closed Under Wrong Meta)",
+      "metrics": {
+        "n": 100,
+        "correctness_pct": 69.0,
+        "correctness_ci": [
+          59.37,
+          77.22
+        ],
+        "cuar_pct": 10.0,
+        "cuar_ci": [
+          5.52,
+          17.44
+        ],
+        "latency_p50_ms": 1237.0,
+        "latency_p95_ms": 2795.8
+      }
+    }
+  }
 }

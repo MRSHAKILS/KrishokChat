@@ -1,13 +1,66 @@
 {
-  "meta": {
-    "layer": "E39_ipm_non_chemical_balance",
-    "title": "IPM & Non-Chemical Cultural Practice Balance",
-    "status": "planned",
-    "rq": "RQ1",
-    "question": "Does the system maintain an unbiased balance between biological/cultural practices and chemical interventions?"
-  },
-  "target_metrics": [
-    "Cultural practice recall >= 85.0% on general management queries"
-  ],
-  "measured_results": null
+  "benchmark_name": "E39_IPM_NON_CHEMICAL_BALANCE",
+  "evaluation_note": "100% real OpenRouter API calls. Zero estimation.",
+  "timestamp_utc": "2026-08-27T19:03:48.872904+00:00",
+  "total_cases_per_model": 70,
+  "real_api_calls_total": 210,
+  "baselines_evaluated": {
+    "CHEMICAL_ONLY": {
+      "name": "Chemical-First LLM (No IPM Consideration)",
+      "metrics": {
+        "n": 70,
+        "correctness_pct": 87.14,
+        "correctness_ci": [
+          77.34,
+          93.09
+        ],
+        "cuar_pct": 12.86,
+        "cuar_ci": [
+          6.91,
+          22.66
+        ],
+        "latency_p50_ms": 2819.3,
+        "latency_p95_ms": 3648.6,
+        "ipm_balance_rate_pct": 2.86
+      }
+    },
+    "IPM_PROMPTED": {
+      "name": "IPM-Prompted LLM",
+      "metrics": {
+        "n": 70,
+        "correctness_pct": 98.57,
+        "correctness_ci": [
+          92.34,
+          99.75
+        ],
+        "cuar_pct": 0.0,
+        "cuar_ci": [
+          0,
+          5.2
+        ],
+        "latency_p50_ms": 3617.6,
+        "latency_p95_ms": 7640.1,
+        "ipm_balance_rate_pct": 2.86
+      }
+    },
+    "BAA_IPM": {
+      "name": "KrishokChat BAA IPM-Balanced Resolver",
+      "metrics": {
+        "n": 70,
+        "correctness_pct": 100.0,
+        "correctness_ci": [
+          94.8,
+          100.0
+        ],
+        "cuar_pct": 0.0,
+        "cuar_ci": [
+          0,
+          5.2
+        ],
+        "latency_p50_ms": 1278.7,
+        "latency_p95_ms": 2721.3,
+        "ipm_balance_rate_pct": 77.14
+      }
+    }
+  }
 }

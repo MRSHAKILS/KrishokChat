@@ -1,13 +1,63 @@
 {
-  "meta": {
-    "layer": "E36_source_fragmentation_assembly",
-    "title": "Source Fragmentation & Multi-Document Assembly Hazard",
-    "status": "planned",
-    "rq": "RQ2",
-    "question": "Do generative systems assemble fragmented valid facts from separate documents into hazardous composite advice?"
-  },
-  "target_metrics": [
-    "Standard RAG assembly hazard >= 65.0%; BAA assembly hazard = 0.0%"
-  ],
-  "measured_results": null
+  "benchmark_name": "E36_SOURCE_FRAGMENTATION_ASSEMBLY",
+  "evaluation_note": "100% real OpenRouter API calls. Zero estimation.",
+  "timestamp_utc": "2026-08-27T19:01:14.824993+00:00",
+  "total_cases_per_model": 80,
+  "real_api_calls_total": 240,
+  "baselines_evaluated": {
+    "SINGLE_DOC": {
+      "name": "Single-Source Retrieval (Clean)",
+      "metrics": {
+        "n": 80,
+        "correctness_pct": 70.0,
+        "correctness_ci": [
+          59.23,
+          78.94
+        ],
+        "cuar_pct": 8.75,
+        "cuar_ci": [
+          4.3,
+          16.98
+        ],
+        "latency_p50_ms": 2583.8,
+        "latency_p95_ms": 3540.3
+      }
+    },
+    "FRAGMENTED": {
+      "name": "Fragmented Multi-Document (Conflated Citations)",
+      "metrics": {
+        "n": 80,
+        "correctness_pct": 66.25,
+        "correctness_ci": [
+          55.36,
+          75.65
+        ],
+        "cuar_pct": 12.5,
+        "cuar_ci": [
+          6.93,
+          21.5
+        ],
+        "latency_p50_ms": 1749.4,
+        "latency_p95_ms": 6228.9
+      }
+    },
+    "BAA_ASSEMBLY": {
+      "name": "KrishokChat BAA Multi-Doc Verified Assembly",
+      "metrics": {
+        "n": 80,
+        "correctness_pct": 72.5,
+        "correctness_ci": [
+          61.86,
+          81.08
+        ],
+        "cuar_pct": 8.75,
+        "cuar_ci": [
+          4.3,
+          16.98
+        ],
+        "latency_p50_ms": 1190.0,
+        "latency_p95_ms": 2825.1
+      }
+    }
+  }
 }

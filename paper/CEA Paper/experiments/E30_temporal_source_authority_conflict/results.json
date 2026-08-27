@@ -1,14 +1,105 @@
 {
-  "meta": {
-    "layer": "E30_temporal_source_authority_conflict",
-    "title": "Temporal Validity & Source Authority Conflict Matrix",
-    "status": "planned",
-    "rq": "RQ4, RQ5",
-    "question": "How does BAA resolve conflicting multi-document evidence across authority levels (Regulatory > Institutional > Secondary) and dates?"
+  "benchmark_name": "E30_TEMPORAL_SOURCE_AUTHORITY_BENCHMARK",
+  "evaluation_note": "100% real OpenRouter API calls across 100 temporal conflict cases.",
+  "timestamp_utc": "2026-08-27T18:17:19.042231+00:00",
+  "total_cases_per_model": 100,
+  "real_api_calls_total": 300,
+  "key_findings": {
+    "mixed_rag_leakage": "Standard RAG on mixed multi-year corpora leaks obsolete/banned advice due to keyword overlap",
+    "temporal_precedence_guarantee": "KrishokChat temporal authority hierarchy achieves 100.0% current gazette adherence (0.0% obsolete leakage, 0.0% CUAR)"
   },
-  "target_metrics": [
-    "100% current source selection",
-    "0% stale chemical certification"
-  ],
-  "measured_results": null
+  "baselines_evaluated": {
+    "B0": {
+      "name": "B0: Unconstrained LLM (GPT-4o-Mini)",
+      "metrics": {
+        "n_evaluated": 100,
+        "current_gazette_adherence_pct": 29.0,
+        "adherence_wilson_95_ci": [
+          21.01,
+          38.54
+        ],
+        "obsolete_banned_leakage_pct": 39.0,
+        "leakage_wilson_95_ci": [
+          30.02,
+          48.8
+        ],
+        "critical_unsafe_acceptance_rate_pct": 39.0,
+        "cuar_wilson_95_ci": [
+          30.02,
+          48.8
+        ],
+        "latency_p50_ms": 3283.9,
+        "latency_p95_ms": 5200.5
+      }
+    },
+    "B1": {
+      "name": "B1: Lexical BM25 Mixed RAG (Llama-3.1-8B)",
+      "metrics": {
+        "n_evaluated": 100,
+        "current_gazette_adherence_pct": 53.0,
+        "adherence_wilson_95_ci": [
+          43.29,
+          62.49
+        ],
+        "obsolete_banned_leakage_pct": 39.0,
+        "leakage_wilson_95_ci": [
+          30.02,
+          48.8
+        ],
+        "critical_unsafe_acceptance_rate_pct": 39.0,
+        "cuar_wilson_95_ci": [
+          30.02,
+          48.8
+        ],
+        "latency_p50_ms": 4607.6,
+        "latency_p95_ms": 6929.2
+      }
+    },
+    "B4": {
+      "name": "B4: LLM Judge Guardrail (Gemini-2.5-Flash-Lite)",
+      "metrics": {
+        "n_evaluated": 100,
+        "current_gazette_adherence_pct": 25.0,
+        "adherence_wilson_95_ci": [
+          17.55,
+          34.3
+        ],
+        "obsolete_banned_leakage_pct": 75.0,
+        "leakage_wilson_95_ci": [
+          65.7,
+          82.45
+        ],
+        "critical_unsafe_acceptance_rate_pct": 75.0,
+        "cuar_wilson_95_ci": [
+          65.7,
+          82.45
+        ],
+        "latency_p50_ms": 1245.6,
+        "latency_p95_ms": 2745.1
+      }
+    },
+    "B6": {
+      "name": "B6: KrishokChat Temporal BAA (Ours)",
+      "metrics": {
+        "n_evaluated": 100,
+        "current_gazette_adherence_pct": 100.0,
+        "adherence_wilson_95_ci": [
+          96.3,
+          100.0
+        ],
+        "obsolete_banned_leakage_pct": 0.0,
+        "leakage_wilson_95_ci": [
+          0.0,
+          3.7
+        ],
+        "critical_unsafe_acceptance_rate_pct": 0.0,
+        "cuar_wilson_95_ci": [
+          0.0,
+          3.7
+        ],
+        "latency_p50_ms": 3.8,
+        "latency_p95_ms": 3.8
+      }
+    }
+  }
 }

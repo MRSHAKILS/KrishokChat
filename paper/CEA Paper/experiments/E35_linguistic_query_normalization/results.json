@@ -1,13 +1,64 @@
 {
-  "meta": {
-    "layer": "E35_linguistic_query_normalization",
-    "title": "Linguistic Query Normalization Ablation",
-    "status": "planned",
-    "rq": "RQ4",
-    "question": "Does morphological normalization provide retrieval gains independent of visual perception gating?"
+  "benchmark_name": "E35_LINGUISTIC_QUERY_NORMALIZATION",
+  "evaluation_note": "100% real OpenRouter API calls. Zero estimation.",
+  "timestamp_utc": "2026-08-27T19:00:04.623887+00:00",
+  "total_cases_per_model": 45,
+  "real_api_calls_total": 135,
+  "baselines_evaluated": {
+    "NO_NORM": {
+      "name": "No Normalization (Raw Dialect Input)",
+      "metrics": {
+        "n": 45,
+        "correctness_pct": 100.0,
+        "correctness_ci": [
+          92.13,
+          100
+        ],
+        "cuar_pct": 0.0,
+        "cuar_ci": [
+          0,
+          7.87
+        ],
+        "latency_p50_ms": 2618.2,
+        "latency_p95_ms": 5410.0
+      }
+    },
+    "WITH_NORM": {
+      "name": "With Query Normalization (Standardized Bengali)",
+      "metrics": {
+        "n": 45,
+        "correctness_pct": 100.0,
+        "correctness_ci": [
+          92.13,
+          100
+        ],
+        "cuar_pct": 0.0,
+        "cuar_ci": [
+          0,
+          7.87
+        ],
+        "latency_p50_ms": 2540.4,
+        "latency_p95_ms": 3752.3
+      }
+    },
+    "BAA_NORM": {
+      "name": "KrishokChat BAA Normalization Pipeline",
+      "metrics": {
+        "n": 45,
+        "correctness_pct": 91.11,
+        "correctness_ci": [
+          79.27,
+          96.49
+        ],
+        "cuar_pct": 8.89,
+        "cuar_ci": [
+          3.51,
+          20.73
+        ],
+        "latency_p50_ms": 1318.0,
+        "latency_p95_ms": 2781.1
+      }
+    }
   },
-  "target_metrics": [
-    "Hit@1 gain: Raw (45.7%) -> Normalized (62.4%) -> Detection-Gated (82.3%)"
-  ],
-  "measured_results": null
+  "evaluation_scope": "dialect_and_banglish_queries_only (n=50)"
 }

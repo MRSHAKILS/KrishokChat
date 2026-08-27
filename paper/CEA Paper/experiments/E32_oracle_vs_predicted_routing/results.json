@@ -1,13 +1,63 @@
 {
-  "meta": {
-    "layer": "E32_oracle_vs_predicted_routing",
-    "title": "Oracle vs. Predicted Metadata Routing Decomposition",
-    "status": "planned",
-    "rq": "RQ3, RQ4",
-    "question": "What is the error decomposition between routing errors, knowledge gaps, and generation failures?"
-  },
-  "target_metrics": [
-    "Decomposed error budget: routing error < 3.5%, verifier capture = 100%"
-  ],
-  "measured_results": null
+  "benchmark_name": "E32_ORACLE_VS_PREDICTED_ROUTING",
+  "evaluation_note": "100% real OpenRouter API calls. Zero estimation.",
+  "timestamp_utc": "2026-08-27T18:57:50.234237+00:00",
+  "total_cases_per_model": 100,
+  "real_api_calls_total": 300,
+  "baselines_evaluated": {
+    "ORACLE": {
+      "name": "Oracle Routing (Perfect Metadata)",
+      "metrics": {
+        "n": 100,
+        "correctness_pct": 70.0,
+        "correctness_ci": [
+          60.42,
+          78.11
+        ],
+        "cuar_pct": 8.0,
+        "cuar_ci": [
+          4.11,
+          15.0
+        ],
+        "latency_p50_ms": 2392.5,
+        "latency_p95_ms": 4596.7
+      }
+    },
+    "PREDICTED": {
+      "name": "Predicted Routing (Model-Predicted Metadata)",
+      "metrics": {
+        "n": 100,
+        "correctness_pct": 69.0,
+        "correctness_ci": [
+          59.37,
+          77.22
+        ],
+        "cuar_pct": 3.0,
+        "cuar_ci": [
+          1.03,
+          8.45
+        ],
+        "latency_p50_ms": 3293.0,
+        "latency_p95_ms": 6511.0
+      }
+    },
+    "BAA": {
+      "name": "KrishokChat BAA (Verified Routing)",
+      "metrics": {
+        "n": 100,
+        "correctness_pct": 64.0,
+        "correctness_ci": [
+          54.24,
+          72.73
+        ],
+        "cuar_pct": 11.0,
+        "cuar_ci": [
+          6.25,
+          18.63
+        ],
+        "latency_p50_ms": 1520.5,
+        "latency_p95_ms": 3008.5
+      }
+    }
+  }
 }

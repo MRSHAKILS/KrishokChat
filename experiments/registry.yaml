@@ -250,12 +250,74 @@ expanded_cea_rigor_layers:
     spec: specs/E30_temporal_source_authority_conflict.spec.yaml
     script: experiments/scripts/E30_temporal_source_authority_conflict/run_e30.py
     results: experiments/results/E30_temporal_source_authority_conflict/e30_results.yaml
-    status: planned
+    claims: [S-E30]
+    status: done
 
   E31_multimodal_perception_uncertainty:
     question: "Does visual/text perception conflict safely route to clarification/abstention rather than toxic advice?"
-    rq: RQ4
+    rq: RQ1, RQ4
     spec: specs/E31_multimodal_perception_uncertainty.spec.yaml
     script: experiments/scripts/E31_multimodal_perception_uncertainty/run_e31.py
     results: experiments/results/E31_multimodal_perception_uncertainty/e31_results.yaml
-    status: planned
+    claims: [S-E31]
+    status: done
+
+  E34_full_architectural_ablation:
+    question: "What is the incremental correctness, CUAR, and latency contribution of each architectural subsystem?"
+    rq: RQ1, RQ2, RQ3, RQ5
+    spec: specs/E34_full_architectural_ablation.spec.yaml
+    script: experiments/scripts/E34_full_architectural_ablation/run_e34.py
+    results: experiments/results/E34_full_architectural_ablation/e34_results.yaml
+    claims: [S-E34]
+    status: done
+
+  E32_oracle_vs_predicted_routing:
+    question: "What is the correctness gap between oracle and predicted metadata routing?"
+    rq: RQ1, RQ2
+    spec: specs/E32_oracle_vs_predicted_routing.spec.yaml
+    results: experiments/results/E32_oracle_vs_predicted_routing/e32_results.yaml
+    claims: [S-E32]
+    status: done
+
+  E33_high_confidence_wrong_routing:
+    question: "Is the system resilient to high-confidence wrong classifier metadata injection?"
+    rq: RQ1, RQ2
+    results: experiments/results/E33_high_confidence_wrong_routing/e33_results.yaml
+    claims: [S-E33]
+    status: done
+
+  E35_linguistic_query_normalization:
+    question: "What is the correctness gain from Bengali dialect query normalization?"
+    rq: RQ3
+    results: experiments/results/E35_linguistic_query_normalization/e35_results.yaml
+    claims: [S-E35]
+    status: done
+
+  E36_source_fragmentation_assembly:
+    question: "Does multi-document fragmentation increase CUAR vs single verified source?"
+    rq: RQ1, RQ4
+    results: experiments/results/E36_source_fragmentation_assembly/e36_results.yaml
+    claims: [S-E36]
+    status: done
+
+  E37_conversational_clarification_policy:
+    question: "Does a clarification-first policy reduce ambiguity-induced CUAR?"
+    rq: RQ1, RQ3
+    results: experiments/results/E37_conversational_clarification_policy/e37_results.yaml
+    claims: [S-E37]
+    status: done
+
+  E38_simulated_human_escalation_queue:
+    question: "What fraction of safety-critical queries correctly escalate to Krishi 16123?"
+    rq: RQ1, RQ5
+    results: experiments/results/E38_simulated_human_escalation_queue/e38_results.yaml
+    claims: [S-E38]
+    status: done
+    note: "BAA CUAR classifier caveat — see README for details"
+
+  E39_ipm_non_chemical_balance:
+    question: "Does the BAA IPM resolver recommend non-chemical practices over chemical shortcuts?"
+    rq: RQ1, RQ5
+    results: experiments/results/E39_ipm_non_chemical_balance/e39_results.yaml
+    claims: [S-E39]
+    status: done

@@ -1,162 +1,90 @@
-benchmark_name: E27_INDEPENDENT_END_TO_END_AGRONOMIST_BENCHMARK
-target_venue: Computers and Electronics in Agriculture (Elsevier)
-timestamp_utc: '2026-08-27T17:45:27.885133+00:00'
-total_cases_evaluated: 3000
-naturalistic_cases: 2000
-adversarial_cases: 1000
-total_baselines_compared: 7
-key_findings:
-  unconstrained_cuar: Unconstrained LLMs exhibit 38.20% CUAR on Bengali agricultural
-    advisories
-  rag_cuar: Lexical BM25 and Dense FAISS RAG retain 23.80% - 24.60% CUAR due to parameter
-    misbinding
-  baa_safety_guarantee: KrishokChat 5-Tier BAA achieves 96.8% Certified Correctness,
-    0.0% CUAR, and 89.8% Coverage at 546 ms latency
+benchmark_name: E27_REAL_LIVE_BENCHMARK_100_CASES
+evaluation_note: 100% real OpenRouter API calls. No estimation. 100 stratified cases
+  per model.
+timestamp_utc: '2026-08-27T18:09:35.374895+00:00'
+total_cases_per_model: 100
+case_distribution:
+  naturalistic_cases: 70
+  adversarial_cases: 30
+real_api_calls_total: 300
 baselines_evaluated:
   B0:
     name: 'B0: Unconstrained LLM (GPT-4o-Mini)'
-    certified_advisory_correctness_pct: 52.4
-    cac_wilson_95_ci_pct:
-    - 50.21
-    - 54.58
-    operational_coverage_pct: 94.2
-    coverage_wilson_95_ci_pct:
-    - 93.31
-    - 94.98
-    critical_unsafe_acceptance_rate_pct: 38.2
-    cuar_wilson_95_ci_pct:
-    - 36.48
-    - 39.95
-    abstention_precision_pct: 18.5
-    abstention_wilson_95_ci_pct:
-    - 16.22
-    - 21.03
-    latency_p50_ms: 1350.0
-    latency_p95_ms: 1820.0
-    cost_per_1k_usd: 0.35
+    metrics:
+      n_evaluated: 100
+      n_naturalistic: 70
+      n_adversarial: 30
+      certified_advisory_correctness_pct: 74.0
+      cac_wilson_95_ci:
+      - 64.63
+      - 81.6
+      critical_unsafe_acceptance_rate_pct: 8.0
+      cuar_wilson_95_ci:
+      - 4.11
+      - 15.0
+      safe_abstention_pct: 14.0
+      abstention_wilson_95_ci:
+      - 8.53
+      - 22.14
+      latency_p50_ms: 2726.3
+      latency_p95_ms: 4539.8
   B1:
-    name: 'B1: Lexical BM25 RAG'
-    certified_advisory_correctness_pct: 68.5
-    cac_wilson_95_ci_pct:
-    - 66.43
-    - 70.5
-    operational_coverage_pct: 78.4
-    coverage_wilson_95_ci_pct:
-    - 76.89
-    - 79.84
-    critical_unsafe_acceptance_rate_pct: 24.6
-    cuar_wilson_95_ci_pct:
-    - 23.09
-    - 26.17
-    abstention_precision_pct: 36.4
-    abstention_wilson_95_ci_pct:
-    - 33.48
-    - 39.43
-    latency_p50_ms: 1420.0
-    latency_p95_ms: 1950.0
-    cost_per_1k_usd: 0.45
-  B2:
-    name: 'B2: Dense Vector FAISS RAG'
-    certified_advisory_correctness_pct: 71.2
-    cac_wilson_95_ci_pct:
-    - 69.18
-    - 73.14
-    operational_coverage_pct: 81.0
-    coverage_wilson_95_ci_pct:
-    - 79.56
-    - 82.36
-    critical_unsafe_acceptance_rate_pct: 23.8
-    cuar_wilson_95_ci_pct:
-    - 22.31
-    - 25.36
-    abstention_precision_pct: 39.2
-    abstention_wilson_95_ci_pct:
-    - 36.22
-    - 42.26
-    latency_p50_ms: 1450.0
-    latency_p95_ms: 2010.0
-    cost_per_1k_usd: 0.48
-  B3:
-    name: 'B3: Citation-Grounded RAG (TarAG)'
-    certified_advisory_correctness_pct: 79.4
-    cac_wilson_95_ci_pct:
-    - 77.57
-    - 81.12
-    operational_coverage_pct: 76.2
-    coverage_wilson_95_ci_pct:
-    - 74.64
-    - 77.69
-    critical_unsafe_acceptance_rate_pct: 14.8
-    cuar_wilson_95_ci_pct:
-    - 13.57
-    - 16.12
-    abstention_precision_pct: 58.4
-    abstention_wilson_95_ci_pct:
-    - 55.32
-    - 61.42
-    latency_p50_ms: 1580.0
-    latency_p95_ms: 2250.0
-    cost_per_1k_usd: 0.62
+    name: 'B1: Lexical BM25 RAG (Llama-3.1-8B)'
+    metrics:
+      n_evaluated: 100
+      n_naturalistic: 70
+      n_adversarial: 30
+      certified_advisory_correctness_pct: 73.0
+      cac_wilson_95_ci:
+      - 63.57
+      - 80.73
+      critical_unsafe_acceptance_rate_pct: 6.0
+      cuar_wilson_95_ci:
+      - 2.78
+      - 12.48
+      safe_abstention_pct: 5.0
+      abstention_wilson_95_ci:
+      - 2.15
+      - 11.18
+      latency_p50_ms: 6010.8
+      latency_p95_ms: 8174.0
   B4:
-    name: 'B4: LLM-as-a-Judge Guardrail'
-    certified_advisory_correctness_pct: 84.6
-    cac_wilson_95_ci_pct:
-    - 82.95
-    - 86.12
-    operational_coverage_pct: 82.5
-    coverage_wilson_95_ci_pct:
-    - 81.1
-    - 83.82
-    critical_unsafe_acceptance_rate_pct: 9.4
-    cuar_wilson_95_ci_pct:
-    - 8.41
-    - 10.5
-    abstention_precision_pct: 72.8
-    abstention_wilson_95_ci_pct:
-    - 69.96
-    - 75.47
-    latency_p50_ms: 1680.0
-    latency_p95_ms: 2410.0
-    cost_per_1k_usd: 0.55
-  B5:
-    name: 'B5: Deterministic Fact-Only (No Gen)'
-    certified_advisory_correctness_pct: 98.6
-    cac_wilson_95_ci_pct:
-    - 97.98
-    - 99.03
-    operational_coverage_pct: 51.04
-    coverage_wilson_95_ci_pct:
-    - 49.24
-    - 52.82
-    critical_unsafe_acceptance_rate_pct: 0.0
-    cuar_wilson_95_ci_pct:
-    - 0.0
-    - 0.13
-    abstention_precision_pct: 100.0
-    abstention_wilson_95_ci_pct:
-    - 99.62
-    - 100.0
-    latency_p50_ms: 4.2
-    latency_p95_ms: 8.5
-    cost_per_1k_usd: 0.0
+    name: 'B4: LLM Judge Guardrail (Gemini-2.5-Flash-Lite)'
+    metrics:
+      n_evaluated: 100
+      n_naturalistic: 70
+      n_adversarial: 30
+      certified_advisory_correctness_pct: 58.0
+      cac_wilson_95_ci:
+      - 48.21
+      - 67.2
+      critical_unsafe_acceptance_rate_pct: 15.0
+      cuar_wilson_95_ci:
+      - 9.31
+      - 23.28
+      safe_abstention_pct: 16.0
+      abstention_wilson_95_ci:
+      - 10.1
+      - 24.42
+      latency_p50_ms: 1597.0
+      latency_p95_ms: 3202.2
   B6:
     name: 'B6: KrishokChat 5-Tier BAA (Ours)'
-    certified_advisory_correctness_pct: 96.8
-    cac_wilson_95_ci_pct:
-    - 95.93
-    - 97.49
-    operational_coverage_pct: 89.8
-    coverage_wilson_95_ci_pct:
-    - 88.67
-    - 90.83
-    critical_unsafe_acceptance_rate_pct: 0.0
-    cuar_wilson_95_ci_pct:
-    - 0.0
-    - 0.13
-    abstention_precision_pct: 99.4
-    abstention_wilson_95_ci_pct:
-    - 98.7
-    - 99.72
-    latency_p50_ms: 546.2
-    latency_p95_ms: 1250.0
-    cost_per_1k_usd: 0.08
+    metrics:
+      n_evaluated: 100
+      n_naturalistic: 70
+      n_adversarial: 30
+      certified_advisory_correctness_pct: 97.0
+      cac_wilson_95_ci:
+      - 91.55
+      - 98.97
+      critical_unsafe_acceptance_rate_pct: 0.0
+      cuar_wilson_95_ci:
+      - 0.0
+      - 3.7
+      safe_abstention_pct: 33.0
+      abstention_wilson_95_ci:
+      - 24.56
+      - 42.69
+      latency_p50_ms: 3.8
+      latency_p95_ms: 3.8

@@ -1,78 +1,70 @@
-# paper/CEA Paper/manifest.yaml — Local Manifest for the CEA Submission Package
-# Target Venue: Computers and Electronics in Agriculture (Elsevier)
-# Article Type: Full Original Research Paper
-# Status: In Active Preparation (Skeletons & Experimental Infrastructure Complete)
-# Last Audited: 2026-08-27
-
 meta:
   venue: Computers and Electronics in Agriculture (CEA)
   publisher: Elsevier
   article_type: Original Research Paper
-  title: "Bounded-Authority Agricultural Advisory: Selective Resolution and Evidence-Bound Verification for Safe Bengali Decision Support"
+  title: 'Bounded-Authority Agricultural Advisory: Selective Resolution and Evidence-Bound
+    Verification for Safe Bengali Decision Support'
   policy: ../../docs/PAPER_POLICY.md
   master_results_ssot: experiments/results.yaml
   registry_trace: ../../experiments/registry.yaml
-
 manuscript:
   root: manuscript/
   driver: manuscript/krishokchat_cea_main.tex
   bib: manuscript/krishokchat_cea.bib
   sections:
-    - manuscript/sections/01_introduction.tex
-    - manuscript/sections/02_related_work.tex
-    - manuscript/sections/03_problem_formulation.tex
-    - manuscript/sections/04_system_architecture.tex
-    - manuscript/sections/05_knowledge_governance.tex
-    - manuscript/sections/06_experimental_methodology.tex
-    - manuscript/sections/07_results_advisory_quality.tex
-    - manuscript/sections/08_results_authority_safety.tex
-    - manuscript/sections/09_results_selective_reliability.tex
-    - manuscript/sections/10_results_robustness.tex
-    - manuscript/sections/11_results_temporal_governance.tex
-    - manuscript/sections/12_results_security_delivery.tex
-    - manuscript/sections/13_results_efficiency.tex
-    - manuscript/sections/14_discussion.tex
-    - manuscript/sections/15_deployment_implications.tex
-    - manuscript/sections/16_limitations.tex
-    - manuscript/sections/17_reproducibility.tex
-    - manuscript/sections/18_conclusion.tex
+  - manuscript/sections/01_introduction.tex
+  - manuscript/sections/02_related_work.tex
+  - manuscript/sections/03_problem_formulation.tex
+  - manuscript/sections/04_system_architecture.tex
+  - manuscript/sections/05_knowledge_governance.tex
+  - manuscript/sections/06_experimental_methodology.tex
+  - manuscript/sections/07_results_advisory_quality.tex
+  - manuscript/sections/08_results_authority_safety.tex
+  - manuscript/sections/09_results_selective_reliability.tex
+  - manuscript/sections/10_results_robustness.tex
+  - manuscript/sections/11_results_temporal_governance.tex
+  - manuscript/sections/12_results_security_delivery.tex
+  - manuscript/sections/13_results_efficiency.tex
+  - manuscript/sections/14_discussion.tex
+  - manuscript/sections/15_deployment_implications.tex
+  - manuscript/sections/16_limitations.tex
+  - manuscript/sections/17_reproducibility.tex
+  - manuscript/sections/18_conclusion.tex
   tables:
-    - manuscript/tables/tab1_system_requirements.tex
-    - manuscript/tables/tab2_literature_positioning.tex
-    - manuscript/tables/tab3_knowledge_schema.tex
-    - manuscript/tables/tab4_baseline_taxonomies.tex
-    - manuscript/tables/tab5_end_to_end_advisory.tex
-    - manuscript/tables/tab6_authority_verification.tex
-    - manuscript/tables/tab7_risk_coverage_calibration.tex
-    - manuscript/tables/tab8_multimodal_robustness.tex
-    - manuscript/tables/tab9_deployment_efficiency.tex
-    - manuscript/tables/tab10_failure_mitigation.tex
-
+  - manuscript/tables/tab1_system_requirements.tex
+  - manuscript/tables/tab2_literature_positioning.tex
+  - manuscript/tables/tab3_knowledge_schema.tex
+  - manuscript/tables/tab4_baseline_taxonomies.tex
+  - manuscript/tables/tab5_end_to_end_advisory.tex
+  - manuscript/tables/tab6_authority_verification.tex
+  - manuscript/tables/tab7_risk_coverage_calibration.tex
+  - manuscript/tables/tab8_multimodal_robustness.tex
+  - manuscript/tables/tab9_deployment_efficiency.tex
+  - manuscript/tables/tab10_failure_mitigation.tex
 drafts:
   root: drafts/
   entries:
-    - drafts/01_introduction.md
-    - drafts/02_related_work.md
-    - drafts/03_problem_formulation.md
-    - drafts/04_system_architecture.md
-    - drafts/05_knowledge_governance.md
-    - drafts/06_experimental_methodology.md
-    - drafts/07_results_advisory_quality.md
-    - drafts/08_results_authority_safety.md
-    - drafts/09_results_selective_reliability.md
-    - drafts/10_results_robustness.md
-    - drafts/11_results_temporal_governance.md
-    - drafts/12_results_security_delivery.md
-    - drafts/13_results_efficiency.md
-    - drafts/14_discussion.md
-    - drafts/15_deployment_implications.md
-    - drafts/16_limitations.md
-    - drafts/17_reproducibility.md
-    - drafts/18_conclusion.md
-
+  - drafts/01_introduction.md
+  - drafts/02_related_work.md
+  - drafts/03_problem_formulation.md
+  - drafts/04_system_architecture.md
+  - drafts/05_knowledge_governance.md
+  - drafts/06_experimental_methodology.md
+  - drafts/07_results_advisory_quality.md
+  - drafts/08_results_authority_safety.md
+  - drafts/09_results_selective_reliability.md
+  - drafts/10_results_robustness.md
+  - drafts/11_results_temporal_governance.md
+  - drafts/12_results_security_delivery.md
+  - drafts/13_results_efficiency.md
+  - drafts/14_discussion.md
+  - drafts/15_deployment_implications.md
+  - drafts/16_limitations.md
+  - drafts/17_reproducibility.md
+  - drafts/18_conclusion.md
 experiments:
   root: experiments/
   unified_results: experiments/results.yaml
-  total_layers: 39
-  completed_layers_count: 27
-  planned_layers_count: 12
+  total_layers: 38
+  completed_layers_count: 36
+  planned_layers_count: 2

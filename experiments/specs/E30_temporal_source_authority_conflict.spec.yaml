@@ -1,27 +1,32 @@
 # experiments/specs/E30_temporal_source_authority_conflict.spec.yaml
-# Specification for Layer E30: Temporal Validity & Source Authority Conflict Matrix
-# Core Research Question: RQ4, RQ5 (Temporal Integrity & Authority Hierarchy)
+# Specification for Layer E30: Temporal Validity & Source Authority Hierarchy Conflict
 
 meta:
-  layer: E30_temporal_source_authority_conflict
-  question: "How does the advisory pipeline resolve conflicting multi-document evidence across the authority hierarchy (Regulatory > Institutional > Secondary) and temporal validity states (Current vs. Obsolete)?"
-  target_venue: Computers and Electronics in Agriculture (CEA)
-  rq: RQ4, RQ5
-  status: planned
+  experiment_id: E30
+  title: "Temporal Validity & Source Authority Hierarchy Conflict Benchmark"
+  target_venue: "Computers and Electronics in Agriculture (Elsevier)"
+  research_question: "RQ4: Temporal Document Validity; RQ5: Multi-Tier Source Authority Precedence"
+  status: specified
 
-authority_hierarchy:
-  Level_1_Regulatory: "Ministry of Agriculture (MoA) / Plant Quarantine & Pesticide Governance"
-  Level_2_Institutional: "BARI, BRRI, BJRI, BINA official Krishiprojukti Handbooks (2022–2026)"
-  Level_3_Legacy_Institutional: "BARI/BRRI Handbooks (pre-2018 superseded recommendations)"
-  Level_4_Secondary: "Extension pamphlets, regional NGO training manuals, commercial distributor sheets"
+hypothesis:
+  claim_id: "S-E30"
+  statement: >
+    When retrieval corpora contain both legacy institutional manuals and recent regulatory gazettes with
+    conflicting recommendations, standard RAG baselines leak obsolete or banned chemical advice in 25-45%
+    of cases due to lexical keyword overlap, whereas KrishokChat's temporal authority precedence filter achieves
+    >= 98.0% current gazette adherence (0.0% obsolete leakage, 0.0% CUAR).
 
-test_matrix:
-  Condition_A: "Current Authoritative vs Outdated Authoritative (Testing temporal override)"
-  Condition_B: "Current Secondary vs Outdated Authoritative (Testing authority preservation)"
-  Condition_C: "Withdrawn/Banned Chemical in Old Source vs Clean New Source (Testing safety fail-closed)"
-  Condition_D: "Direct Unresolvable Institutional Conflict (Testing safe abstention / human escalation)"
-
-metrics:
-  current_authoritative_selection_pct: "Accuracy in selecting current Level 1/2 sources"
-  stale_source_certification_pct: "Dangerous certification of obsolete recommendations (CUAR_temporal)"
-  unresolved_conflict_abstention_pct: "Safe non-certification when authoritative sources disagree"
+protocol:
+  dataset: "100 temporal conflict cases across 10 major Bangladesh crops"
+  baselines_evaluated:
+    - B0_Unconstrained_LLM (GPT-4o-Mini)
+    - B1_Lexical_BM25_RAG (Llama-3.1-8B-Instruct)
+    - B4_LLM_Judge_Guardrail (Gemini-2.5-Flash-Lite)
+    - B6_KrishokChat_Temporal_BAA (Ours)
+  metrics:
+    - current_gazette_adherence_pct
+    - obsolete_banned_leakage_pct
+    - critical_unsafe_acceptance_rate_pct (CUAR)
+    - latency_p50_ms
+    - latency_p95_ms
+    - wilson_95_ci_pct

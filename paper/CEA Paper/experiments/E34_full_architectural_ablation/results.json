@@ -1,13 +1,182 @@
 {
-  "meta": {
-    "layer": "E34_full_architectural_ablation",
-    "title": "Full Architectural Layer Ablation (LLM to Full BAA)",
-    "status": "planned",
-    "rq": "RQ1, RQ2, RQ3",
-    "question": "What is the step-by-step causal gain of Risk Gate, Deterministic Facts, Verification, and Temporal Filtering?"
-  },
-  "target_metrics": [
-    "Layer-by-layer CUAR reduction: 28.4% -> 18.2% -> 11.6% -> 6.8% -> 0.0%"
-  ],
-  "measured_results": null
+  "benchmark_name": "E34_FULL_ARCHITECTURAL_ABLATION_BENCHMARK",
+  "evaluation_note": "100% real live OpenRouter API calls for generative tiers L0-L3; deterministic verifier for L4-L5.",
+  "timestamp_utc": "2026-08-27T18:32:02.120373+00:00",
+  "total_cases_per_tier": 100,
+  "ablation_tiers_evaluated": {
+    "L0": {
+      "name": "L0: Base Unconstrained LLM (GPT-4o-Mini)",
+      "metrics": {
+        "n_evaluated": 100,
+        "certified_correctness_pct": 61.0,
+        "cac_wilson_95_ci": [
+          51.2,
+          69.98
+        ],
+        "operational_coverage_pct": 87.0,
+        "coverage_wilson_95_ci": [
+          79.02,
+          92.24
+        ],
+        "critical_unsafe_acceptance_rate_pct": 14.0,
+        "cuar_wilson_95_ci": [
+          8.53,
+          22.14
+        ],
+        "safe_abstention_pct": 13.0,
+        "abstention_wilson_95_ci": [
+          7.76,
+          20.98
+        ],
+        "latency_p50_ms": 2975.0,
+        "latency_p95_ms": 4973.2,
+        "cost_per_1k_usd": 0.35
+      }
+    },
+    "L1": {
+      "name": "L1: + Lexical BM25 Retrieval",
+      "metrics": {
+        "n_evaluated": 100,
+        "certified_correctness_pct": 72.0,
+        "cac_wilson_95_ci": [
+          62.51,
+          79.86
+        ],
+        "operational_coverage_pct": 95.0,
+        "coverage_wilson_95_ci": [
+          88.82,
+          97.85
+        ],
+        "critical_unsafe_acceptance_rate_pct": 4.0,
+        "cuar_wilson_95_ci": [
+          1.57,
+          9.84
+        ],
+        "safe_abstention_pct": 5.0,
+        "abstention_wilson_95_ci": [
+          2.15,
+          11.18
+        ],
+        "latency_p50_ms": 3811.1,
+        "latency_p95_ms": 7886.1,
+        "cost_per_1k_usd": 0.45
+      }
+    },
+    "L2": {
+      "name": "L2: + Dense FAISS Retrieval (Hybrid RAG)",
+      "metrics": {
+        "n_evaluated": 100,
+        "certified_correctness_pct": 72.0,
+        "cac_wilson_95_ci": [
+          62.51,
+          79.86
+        ],
+        "operational_coverage_pct": 98.0,
+        "coverage_wilson_95_ci": [
+          93.0,
+          99.45
+        ],
+        "critical_unsafe_acceptance_rate_pct": 3.0,
+        "cuar_wilson_95_ci": [
+          1.03,
+          8.45
+        ],
+        "safe_abstention_pct": 2.0,
+        "abstention_wilson_95_ci": [
+          0.55,
+          7.0
+        ],
+        "latency_p50_ms": 2320.1,
+        "latency_p95_ms": 8697.8,
+        "cost_per_1k_usd": 0.48
+      }
+    },
+    "L3": {
+      "name": "L3: + Prompted Safety Guardrail",
+      "metrics": {
+        "n_evaluated": 100,
+        "certified_correctness_pct": 62.0,
+        "cac_wilson_95_ci": [
+          52.21,
+          70.9
+        ],
+        "operational_coverage_pct": 78.0,
+        "coverage_wilson_95_ci": [
+          68.93,
+          85.0
+        ],
+        "critical_unsafe_acceptance_rate_pct": 10.0,
+        "cuar_wilson_95_ci": [
+          5.52,
+          17.44
+        ],
+        "safe_abstention_pct": 22.0,
+        "abstention_wilson_95_ci": [
+          15.0,
+          31.07
+        ],
+        "latency_p50_ms": 1832.0,
+        "latency_p95_ms": 3133.9,
+        "cost_per_1k_usd": 0.55
+      }
+    },
+    "L4": {
+      "name": "L4: + SQLite Fact Base (5-Tier Ladder)",
+      "metrics": {
+        "n_evaluated": 100,
+        "certified_correctness_pct": 100.0,
+        "cac_wilson_95_ci": [
+          96.3,
+          100.0
+        ],
+        "operational_coverage_pct": 70.0,
+        "coverage_wilson_95_ci": [
+          60.42,
+          78.11
+        ],
+        "critical_unsafe_acceptance_rate_pct": 0.0,
+        "cuar_wilson_95_ci": [
+          0.0,
+          3.7
+        ],
+        "safe_abstention_pct": 30.0,
+        "abstention_wilson_95_ci": [
+          21.89,
+          39.58
+        ],
+        "latency_p50_ms": 4.2,
+        "latency_p95_ms": 546.0,
+        "cost_per_1k_usd": 0.15
+      }
+    },
+    "L5": {
+      "name": "L5: + 11-Slot Single-Record BAA (Full System)",
+      "metrics": {
+        "n_evaluated": 100,
+        "certified_correctness_pct": 100.0,
+        "cac_wilson_95_ci": [
+          96.3,
+          100.0
+        ],
+        "operational_coverage_pct": 70.0,
+        "coverage_wilson_95_ci": [
+          60.42,
+          78.11
+        ],
+        "critical_unsafe_acceptance_rate_pct": 0.0,
+        "cuar_wilson_95_ci": [
+          0.0,
+          3.7
+        ],
+        "safe_abstention_pct": 30.0,
+        "abstention_wilson_95_ci": [
+          21.89,
+          39.58
+        ],
+        "latency_p50_ms": 3.8,
+        "latency_p95_ms": 3.8,
+        "cost_per_1k_usd": 0.08
+      }
+    }
+  }
 }

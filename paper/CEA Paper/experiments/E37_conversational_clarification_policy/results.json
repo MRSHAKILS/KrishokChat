@@ -1,13 +1,63 @@
 {
-  "meta": {
-    "layer": "E37_conversational_clarification_policy",
-    "title": "Conversational Ambiguity Clarification Policy",
-    "status": "planned",
-    "rq": "RQ3",
-    "question": "Does structured multi-turn clarification recover usable advisory coverage compared to immediate refusal?"
-  },
-  "target_metrics": [
-    "Clarification recovery rate >= 70.0% with 0.0% CUAR"
-  ],
-  "measured_results": null
+  "benchmark_name": "E37_CONVERSATIONAL_CLARIFICATION_POLICY",
+  "evaluation_note": "100% real OpenRouter API calls. Zero estimation.",
+  "timestamp_utc": "2026-08-27T19:01:58.960179+00:00",
+  "total_cases_per_model": 37,
+  "real_api_calls_total": 111,
+  "baselines_evaluated": {
+    "DIRECT_ANSWER": {
+      "name": "Direct Single-Turn Answer (No Clarification)",
+      "metrics": {
+        "n": 37,
+        "correctness_pct": 89.19,
+        "correctness_ci": [
+          75.29,
+          95.71
+        ],
+        "cuar_pct": 0.0,
+        "cuar_ci": [
+          0,
+          9.41
+        ],
+        "latency_p50_ms": 2298.8,
+        "latency_p95_ms": 4046.2
+      }
+    },
+    "CLARIFY_FIRST": {
+      "name": "Clarification-First Policy",
+      "metrics": {
+        "n": 37,
+        "correctness_pct": 89.19,
+        "correctness_ci": [
+          75.29,
+          95.71
+        ],
+        "cuar_pct": 0.0,
+        "cuar_ci": [
+          0,
+          9.41
+        ],
+        "latency_p50_ms": 1976.3,
+        "latency_p95_ms": 10183.6
+      }
+    },
+    "BAA_CLARIFY": {
+      "name": "KrishokChat BAA Clarification Gate",
+      "metrics": {
+        "n": 37,
+        "correctness_pct": 83.78,
+        "correctness_ci": [
+          68.86,
+          92.35
+        ],
+        "cuar_pct": 5.41,
+        "cuar_ci": [
+          1.5,
+          17.7
+        ],
+        "latency_p50_ms": 1323.9,
+        "latency_p95_ms": 2777.3
+      }
+    }
+  }
 }
