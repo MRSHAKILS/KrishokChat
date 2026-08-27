@@ -3,8 +3,8 @@
 **Target Venue:** *EACL 2027 System Demonstrations* (Association for Computational Linguistics)  
 **Track:** System Demonstrations (Peer-Reviewed Proceedings)  
 **Format:** $\le 6$ pages (excluding references) + Live System + $\le 2.5$-minute Screencast  
-**Status:** In Active Preparation — Skeletons & Experimental Infrastructure Ready  
-**Last Audited:** 2026-08-27  
+**Status:** ALL 8 EXPERIMENTS EXECUTED AND VERIFIED  
+**Last Audited:** 2026-08-28  **Last Executed:** 2026-08-28  
 
 ---
 
@@ -29,7 +29,7 @@
 | **LaTeX Table Definitions** | 4 Tables | 4 Tables | 0 | **100% Pre-formatted** |
 | **Section Markdown Outlines** | 6 Drafts | 6 Outlines | 0 | **100% Ready** |
 | **BibTeX Literature Database** | 15 Citations | 15 Citations | 0 | **100% Verified Citations** |
-| **System Demo Experiments** | 8 Key Layers | 8 Layers | 0 | **100% Folderized & Documented** |
+| **System Demo Experiments** | 8 Key Layers | 8 Layers | 0 | **100% Executed, Verified & Committed** |
 | **Unified Results Ground Truth** | 1 Master YAML | 1 Master YAML | 0 | **100% Compiled & Verified** |
 
 ---

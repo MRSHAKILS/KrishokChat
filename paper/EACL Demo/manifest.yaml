@@ -1,8 +1,8 @@
 # paper/EACL Demo/manifest.yaml — Local Manifest for the EACL 2027 System Demonstration Package
 # Target Venue: EACL 2027 System Demonstrations (ACL)
 # Article Type: System Demonstration Paper (<= 6 pages)
-# Status: In Active Preparation (Skeletons & Experimental Infrastructure Complete)
-# Last Audited: 2026-08-27
+# Status: All 8 Experiments Executed, Verified, and Synced
+# Last Audited: 2026-08-28
 
 meta:
   venue: EACL 2027 System Demonstrations

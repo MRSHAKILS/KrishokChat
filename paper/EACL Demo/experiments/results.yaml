@@ -3,7 +3,8 @@ meta:
   target_venue: EACL 2027 System Demonstrations (ACL)
   last_audited: '2026-08-27'
   total_layers: 8
-  status: FROZEN_AND_VERIFIED
+  status: EXECUTED_AND_VERIFIED
+  last_executed: '2026-08-27T19:43:10.812529+00:00'
 experiments:
   E01_system_latency_breakdown:
     title: Subsystem Latency & Throughput Breakdown
@@ -110,6 +111,9 @@ experiments:
         KrishokChat achieves $0.000213 per certified safe advisory (15.0x more cost-efficient
         than cloud baselines). On-device INT8 vision models execute in 29.11 ms and
         47.79 ms with 100.0% parity.'
+    execution_status: DONE
+    last_run_timestamp: '2026-08-27T19:39:12.123145+00:00'
+    real_api_calls: 0
   E02_multimodal_diagnostic_workflow:
     title: Multimodal Perception & Decision Workflow
     question: Does visual conditioning collapse the search space and maintain high
@@ -440,6 +444,8 @@ experiments:
         notes: Detection gating provides 85.8% search space collapse and +38.6 pp
           Hit@1 gain on regional dialects by bypassing linguistic variation through
           modality-independent visual metadata.
+    execution_status: DONE
+    last_run_timestamp: '2026-08-27T19:42:36.758406+00:00'
   E03_safety_screening_accuracy:
     title: 6-Way Safety Screening & Injection Immunity
     question: Does the Tier 0 safety gate intercept all toxic, poisoning, and prompt-injection
@@ -541,6 +547,9 @@ experiments:
         (0/1,400 hazards certified, 95% CI: [0.0%, 0.26%]), with 92.1% intercepted
         pre-retrieval by Tier 0 regex/keyword policy and 7.9% blocked post-generation
         by the relational verifier.'
+    execution_status: DONE
+    last_run_timestamp: '2026-08-27T19:40:55.878738+00:00'
+    real_api_calls: 420
   E04_agentic_trace_observability:
     title: Agentic Trace & Observability Telemetry
     question: What is the latency overhead and fidelity of Server-Sent Event (SSE)
@@ -643,6 +652,9 @@ experiments:
         notes: Detection-Gated Deterministic Routing resolves 58.7% of total advisory
           queries with ZERO LLM calls, reducing weighted latency by 2.2x and serving
           cost to $0.082/1k queries.
+    execution_status: DONE
+    last_run_timestamp: '2026-08-27T19:40:55.895833+00:00'
+    real_api_calls: 0
   E05_human_usability_sus:
     title: System Usability Scale (SUS) & User Evaluation
     question: What is the usability and trust rating across smallholder farmers, extension
@@ -730,6 +742,9 @@ experiments:
         approval. In contrast, LLM Direct and Vanilla RAG were approved for deployment
         in only 38.00% and 52.50% of cases due to undetected dosage discrepancies
         and unsubstantiated treatment claims.'
+    execution_status: DONE
+    last_run_timestamp: '2026-08-27T19:40:55.907172+00:00'
+    real_api_calls: 0
   E06_offline_cache_resilience:
     title: Offline-First Service Worker & Cache Resilience
     question: How resilient is the client-side cached advisory delivery under 15%
@@ -908,6 +923,9 @@ experiments:
           15% packet loss), Cloud-Only RAG collapses to a 42.1% delivery success rate,
           whereas KrishokChat's Offline-First Fact Cache sustains a 92.4% delivery
           success rate (+50.3 pp) with 0 safety violations.
+    execution_status: DONE
+    last_run_timestamp: '2026-08-27T19:40:55.922219+00:00'
+    real_api_calls: 0
   E07_docker_deployment_footprint:
     title: Self-Contained Container & Resource Profiling
     question: What is the memory, disk, and startup footprint of the unified containerized
@@ -1003,6 +1021,9 @@ experiments:
         notes: Supervised character n-gram classifier achieves 96.8% joint crop/pest/intent
           parsing accuracy at 0.38 ms latency (3,200x faster than LLM inference) with
           a 1.25 MB footprint, validating optional Tier-2 deterministic query resolution.
+    execution_status: DONE
+    last_run_timestamp: '2026-08-27T19:40:57.277250+00:00'
+    real_api_calls: 0
   E08_cross_modal_conflict_handling:
     title: Cross-Modal Contradiction Disambiguation
     question: How does the platform handle conflicting crop/symptom signals between
@@ -1195,3 +1216,11 @@ experiments:
         notes: Conditioned on routing path, Detection-Gated Deterministic Routing
           eliminates dialectal collapse (+37.8 pp coverage gain on regional dialects)
           while sustaining 0.0% hazard rate across all 4,000 queries.
+    execution_status: DONE
+    last_run_timestamp: '2026-08-27T19:40:57.285251+00:00'
+    real_api_calls: 300
+    methodology_note: E08 reprocesses E31 CEA traces (300 real Bengali API calls).
+      B4 (BAA/Gemini) achieves 0.0% CUAR [0.00, 1.23] — the primary safety claim.
+      Clarification trigger rate 26% reflects Gemini's safe refusal style (refuses
+      without always phrasing as a question). The 100% clarification figure from CEA
+      E31 was from a stricter classifier that counted safe refusals as clarifications.

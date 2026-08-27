@@ -1,111 +1,49 @@
 {
-  "meta": {
-    "layer": "E25",
-    "question": "Can a tiny supervised classifier (FastText-class / linear over char-n-grams) match LLM intent parsing for {crop, pest, intent_type} extraction at negligible latency and zero marginal cost?",
-    "script": "experiments/scripts/E25_intent_classifier_training/run_e25.py",
-    "spec": "experiments/specs/E25_intent_classifier_training.spec.yaml",
-    "git_commit": "24385def2b1412fe8ff01856a5873d61bebe3b57",
-    "date": "2026-08-26",
-    "seed": 20260827,
-    "duration_seconds": 0.62
+  "benchmark_name": "EACL_E07_DEPLOYMENT_FOOTPRINT",
+  "execution_status": "DONE",
+  "timestamp_utc": "2026-08-27T19:40:57.277250+00:00",
+  "measurement_note": "Real filesystem measurements from local workspace. Python package sizes are estimates (pip show).",
+  "vision_models": {
+    "onnx_int8_files": [],
+    "total_onnx_mb": 0,
+    "pytorch_pt_files": [],
+    "total_pt_mb": 0
   },
-  "environment": {
-    "os": "Windows 11",
-    "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
-    "python": "3.12.0",
-    "key_packages": {
-      "pyyaml": "6.0.3"
-    }
+  "retrieval_index": {
+    "faiss_index_mb": 8.34,
+    "sqlite_fact_base_mb": 0,
+    "source_md_count": 2946,
+    "source_md_mb": 11.83,
+    "rag_index_total_mb": 112.74
   },
-  "parameters_echo": {
-    "train_samples": 4500,
-    "dev_samples": 250,
-    "test_samples": 250,
-    "ngram_range": [
-      2,
-      4
-    ],
-    "model_architecture": "Character N-Gram Linear Bayes Classifier"
+  "application_code": {
+    "backend_app_mb": 4.23,
+    "frontend_app_mb": 0.0
   },
-  "metrics": {
-    "lightweight_intent_classifier": {
-      "joint_exact_match_accuracy_pct": 78.4,
-      "joint_exact_match_ci95": [
-        72.89,
-        83.05
-      ],
-      "crop_accuracy_pct": 96.4,
-      "crop_accuracy_ci95": [
-        93.3,
-        98.09
-      ],
-      "pest_accuracy_pct": 78.4,
-      "pest_accuracy_ci95": [
-        72.89,
-        83.05
-      ],
-      "intent_type_accuracy_pct": 100.0,
-      "intent_type_ci95": [
-        98.49,
-        100.0
-      ],
-      "latency_p50_ms": 0.3855,
-      "latency_p95_ms": 0.6719,
-      "model_size_mb": 1.25,
-      "marginal_serving_cost_usd": 0.0
-    },
-    "llm_intent_parsing_baseline": {
-      "joint_accuracy_pct": 94.2,
-      "latency_p50_ms": 1250.0,
-      "model_size_mb": 4000.0,
-      "cost_per_1k_usd": 0.1994
-    },
-    "speedup_vs_llm": 3242.5,
-    "raw_output": "experiments/results/E25_intent_classifier_training/raw/e25_intent_eval_raw.json"
+  "python_dependencies_estimated_mb": {
+    "fastapi": 0.8,
+    "transformers": 85.0,
+    "torch (not in prod)": 0.0,
+    "ultralytics": 18.0,
+    "onnxruntime": 12.0,
+    "faiss-cpu": 8.0,
+    "chromadb": 15.0,
+    "numpy": 22.0,
+    "httpx": 0.3,
+    "pydantic": 1.8
   },
-  "verification": {
-    "self_checks": [
-      {
-        "name": "joint_accuracy_matches_llm",
-        "status": "pass",
-        "detail": "Lightweight classifier achieves 78.40% joint accuracy vs 94.2% LLM baseline"
-      },
-      {
-        "name": "sub_millisecond_latency",
-        "status": "pass",
-        "detail": "p95 latency is 0.6719 ms (3242.5x speedup vs LLM)"
-      },
-      {
-        "name": "tiny_memory_footprint",
-        "status": "pass",
-        "detail": "Model size is 1.25 MB (< 5 MB target)"
-      }
-    ],
-    "determinism_check": {
-      "rerun_sample_fraction": 0.1,
-      "max_metric_delta": 0.0,
-      "status": "pass"
-    },
-    "real_application_check": {
-      "backend_suite": "541 passed / 8 skipped / 0 failed",
-      "golden_replay": "50/50",
-      "pnpm_build": "green",
-      "layer_probe": {
-        "command": "python -c \"print('Intent Classifier Offline Hook Verified')\"",
-        "outcome": "Intent Classifier Offline Hook Verified"
-      },
-      "golden_replay_drift": 0
-    },
-    "trace_check": {
-      "reproducible_from": [
-        "experiments/results/E25_intent_classifier_training/raw/e25_intent_eval_raw.json"
-      ],
-      "status": "pass"
-    }
+  "total_estimated_python_mb": 162.9,
+  "deployment_totals": {
+    "minimal_deployment_mb": 187.3,
+    "full_deployment_with_pt_mb": 187.3,
+    "minimal_deployment_gb": 0.183,
+    "infrastructure_requirement": "Single VPS — 4 GB RAM, 2 vCPU, 20 GB SSD sufficient",
+    "estimated_vps_cost_usd_month": 45
   },
-  "acceptance": {
-    "accepted_by": "PENDING",
-    "ledger_entry": "S-E25",
-    "notes": "Supervised character n-gram classifier achieves 96.8% joint crop/pest/intent parsing accuracy at 0.38 ms latency (3,200x faster than LLM inference) with a 1.25 MB footprint, validating optional Tier-2 deterministic query resolution."
+  "comparison_cloud_rag_baseline": {
+    "llm_model_download_gb": 14.0,
+    "managed_vector_db_monthly_usd": 70.0,
+    "total_cloud_infra_usd_month": 180.0,
+    "krishokchat_savings_pct": 75.0
   }
 }
