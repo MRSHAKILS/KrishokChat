@@ -441,8 +441,41 @@ future agent must respect:
 - Cost becomes a contract: price-table artifact + per-request budget + a measured
   tier-mix experiment on `farmer_benchmark_1000.jsonl`. **No published cost
   number without the measured tier mix behind it.**
-- Roadmap R1–R12 is in doc 07 Part J, dependency-ordered. Suggested first sprint:
-  **R3 (tier plumbing, zero behavior change) → R1 (ingestion contract) → R2
-  (fact base v1) → R4 (T1/T2 resolver for potato late blight)**, with R8 (real
-  weather data) in parallel. Nothing in R1–R12 has been started.
+- Roadmap R1–R13 is in `docs/production_readiness/tasks/R_SERIES_EXECUTION_INDEX.md`.
+  **Status as of 2026-08-27: R1–R13 are COMPLETED.** The 5-tier resolution ladder,
+  structured SQLite fact base, deterministic routing, and grounded chunk fallback
+  (R13, dark-launched under flag `CHUNK_FALLBACK_ENABLED`) are active in the codebase.
+  Standing baseline: full test suite green, golden replay 50/50, `pnpm build` green.
+
+## Active Paper Packages & Research Trace (Updated 2026-08-27)
+
+The paper ecosystem is split into two active, dedicated submission packages under `paper/`:
+
+### 1. `paper/CEA Paper/` (Primary Scientific Submission)
+- **Target Venue:** *Computers and Electronics in Agriculture* (Elsevier, IF 7.7, Q1)
+- **Format:** Full Original Research Paper (approx. 9,000–12,000 words).
+- **Core Thesis:** Bounded-Authority Agricultural Advisory: Subordinating generative LLMs to an 11-slot fail-closed factual authority layer and a 5-tier resolution ladder.
+- **Artifacts:**
+  - `manuscript/krishokchat_cea_main.tex` (Elsevier `cas-dc` master driver) + `krishokchat_cea.bib`
+  - `manuscript/sections/` (18 modular LaTeX sections, `01_introduction.tex` through `18_conclusion.tex`)
+  - `manuscript/tables/` (10 pre-formatted LaTeX tables, `tab1_system_requirements.tex` through `tab10_failure_mitigation.tex`)
+  - `drafts/` (18 markdown draft outline skeletons, `01_introduction.md` through `18_conclusion.md`)
+  - `experiments/` (Complete 39-layer experimental suite: 24 completed layers with exact scripts, `results.yaml`, `results.json`, and `README.md`; 15 planned layers with runner skeletons and target metrics; unified master `results.yaml`).
+
+### 2. `paper/EACL Demo/` (System Demonstration Submission)
+- **Target Venue:** *EACL 2027 System Demonstrations* (ACL)
+- **Format:** System Demonstration Paper ($\le 6$ pages + references + 2.5-min screencast).
+- **Core Thesis:** Open, production-oriented multimodal Bengali agricultural advisory platform emphasizing agentic execution traces, dual farmer/expert UX, and low-resource edge deployment.
+- **Artifacts:**
+  - `manuscript/krishokchat_eacl_main.tex` (ACL/EACL master driver) + `krishokchat_eacl.bib`
+  - `manuscript/sections/` (6 modular LaTeX sections, `01_introduction.tex` through `06_conclusion.tex`)
+  - `manuscript/tables/` (4 modular LaTeX tables: capabilities, 5 demo scenarios, SUS usability metrics, deployment footprint)
+  - `drafts/` (6 markdown draft outline skeletons, `01_introduction.md` through `06_conclusion.md`)
+  - `experiments/` (8 fully folderized system evaluation layers with exact scripts, results, and master `results.yaml`).
+
+### 3. Traceability, Ground Truth & Safety Protocols
+- **Single Source of Truth:** `paper/CEA Paper/experiments/results.yaml` and `paper/EACL Demo/experiments/results.yaml` are the authoritative data stores.
+- **Zero Fabrication Policy:** No benchmark number, metric, or dataset stat may ever be invented (Rule 5). Every empirical result is backed by an exact reproducible script in `scripts/`, sample size $N$, and 95% Wilson score confidence intervals.
+- **Deprecated arXiv Ban:** Never cite or reference `arXiv:2606.29243` (Rule 9 / `docs/PAPER_POLICY.md`).
+
 

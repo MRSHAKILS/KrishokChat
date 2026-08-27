@@ -223,7 +223,8 @@ expanded_cea_rigor_layers:
     spec: specs/E27_independent_expert_benchmark.spec.yaml
     script: experiments/scripts/E27_independent_expert_benchmark/run_e27.py
     results: experiments/results/E27_independent_expert_benchmark/e27_results.yaml
-    status: planned
+    claims: [S-E27]
+    status: done
 
   E28_metamorphic_authority_testing:
     question: "Do 10k-20k single-slot metamorphic perturbations strictly fail certification across all 11 slots?"
@@ -231,7 +232,8 @@ expanded_cea_rigor_layers:
     spec: specs/E28_metamorphic_authority_testing.spec.yaml
     script: experiments/scripts/E28_metamorphic_authority_testing/run_e28.py
     results: experiments/results/E28_metamorphic_authority_testing/e28_results.yaml
-    status: planned
+    claims: [S-E28]
+    status: done
 
   E29_parametric_evidence_conflict:
     question: "Does the system follow validated agricultural evidence when LLM parametric priors conflict?"
@@ -239,7 +241,8 @@ expanded_cea_rigor_layers:
     spec: specs/E29_parametric_evidence_conflict.spec.yaml
     script: experiments/scripts/E29_parametric_evidence_conflict/run_e29.py
     results: experiments/results/E29_parametric_evidence_conflict/e29_results.yaml
-    status: planned
+    claims: [S-E29]
+    status: done
 
   E30_temporal_source_authority_conflict:
     question: "Does the authority layer reject outdated/secondary evidence when conflicting recommendations exist?"

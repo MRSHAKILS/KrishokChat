@@ -74,5 +74,5 @@ experiments:
   root: experiments/
   unified_results: experiments/results.yaml
   total_layers: 39
-  completed_layers_count: 24
-  planned_layers_count: 15
+  completed_layers_count: 27
+  planned_layers_count: 12

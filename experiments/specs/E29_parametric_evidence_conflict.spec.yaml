@@ -1,29 +1,44 @@
 # experiments/specs/E29_parametric_evidence_conflict.spec.yaml
-# Specification for Layer E29: Parametric Prior vs. Evidence Authority Conflict
-# Core Research Question: RQ1, RQ2 (Parametric Independence & Faithfulness)
+# Specification for Layer E29: Parametric Prior vs. Authoritative Evidence Conflict Benchmark
 
 meta:
-  layer: E29_parametric_evidence_conflict
-  question: "When the LLM's parametric pre-training prior conflicts with authoritative Bangladesh agricultural evidence, does the bounded-authority architecture strictly adhere to the retrieved evidence record or succumb to parametric memory?"
-  target_venue: Computers and Electronics in Agriculture (CEA)
-  rq: RQ1, RQ2
-  status: planned
+  experiment_id: E29
+  title: "Parametric Prior vs. Authoritative Evidence Conflict Benchmark"
+  target_venue: "Computers and Electronics in Agriculture (Elsevier)"
+  research_question: "RQ1: Evidence Authority & Hallucination Prevention; RQ2: Single-Record Subordination"
+  status: specified
 
-design:
-  conflict_cases: 1000
-  categories:
-    - dosage_bounds_discrepancy (Global general dosage vs Bangladesh BARI/BRRI specific recommendation)
-    - active_ingredient_naming (Common trade names vs Bangladesh registered chemical names)
-    - ban_status_conflict (Locally banned chemical that is globally permitted)
-    - crop_specific_phi (Local harvest cycle PHI vs global textbook PHI)
+hypothesis:
+  claim_id: "S-E29"
+  statement: >
+    When pre-training parametric priors directly contradict verified Bangladesh agricultural recommendations
+    (BARI/BRRI/DAE), unconstrained LLMs and standard RAG revert to parametric memory in 35-65% and 15-35% of
+    cases respectively, while the 11-slot Bounded-Authority Advisory (BAA) verifier achieves >= 99.0% evidence
+    adherence (<= 0.1% parametric intrusion, 0.0% CUAR).
 
-baselines:
-  - LLM_only
-  - Vanilla_RAG
-  - FaithfulRAG_style_baseline
-  - Bounded_Authority_Advisory
-
-metrics:
-  p_certify_evidence_backed: "Fraction of responses adhering strictly to authoritative evidence"
-  p_certify_parametric_conflict: "Fraction of responses where model leaks pre-training prior"
-  fail_closed_abstention_on_unresolvable: "Rate of correct abstention when evidence is ambiguous"
+protocol:
+  dataset: "1,000 paired conflict test cases across 10 Bangladesh crops (Rice, Potato, Wheat, Maize, Brinjal, Tomato, Chili, Cabbage, Mustard, Onion)"
+  conflict_dimensions:
+    - chemical_registration_conflict
+    - dosage_concentration_conflict
+    - phi_harvest_interval_conflict
+    - regional_pathogen_misassociation
+  models_evaluated:
+    - google/gemini-2.5-flash-lite
+    - openai/gpt-4o-mini
+    - meta-llama/llama-3.1-8b-instruct
+    - qwen/qwen-2.5-7b-instruct
+    - local/gemma-4-4bit-lora
+    - ours/11slot-baa-verifier
+  modes_per_model:
+    - mode_1_direct_generation_unconstrained
+    - mode_2_standard_context_rag
+    - mode_3_prompted_judge_guardrail
+    - mode_4_11slot_baa_fail_closed
+  metrics:
+    - evidence_adherence_rate_pct (EAR)
+    - parametric_prior_intrusion_rate_pct (PIR)
+    - critical_unsafe_acceptance_rate_pct (CUAR)
+    - verifier_interception_rate_pct
+    - wilson_95_ci_pct
+    - inference_latency_ms

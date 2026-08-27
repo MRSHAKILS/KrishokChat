@@ -1,15 +1,1173 @@
 {
-  "meta": {
-    "layer": "E28_metamorphic_authority_testing",
-    "title": "Metamorphic Authority & Single-Record Integrity Testing",
-    "status": "planned",
-    "rq": "RQ2",
-    "question": "Do 10k-20k single-slot metamorphic perturbations strictly fail certification across all 11 slots?"
+  "benchmark_name": "E28_METAMORPHIC_AUTHORITY_EVALUATION",
+  "target_venue": "Computers and Electronics in Agriculture (Elsevier)",
+  "timestamp_utc": "2026-08-27T16:52:40.313616+00:00",
+  "total_cases_evaluated": 11000,
+  "total_mutation_operators": 11,
+  "cases_per_operator": 1000,
+  "random_seed": 42,
+  "key_findings": {
+    "b6_baa_rejection_rate": "100.0% [99.96%, 100.0%]",
+    "b6_baa_false_certification": "0.0% [0.0%, 0.04%]",
+    "b6_baa_observed_cuar": "0.0% [0.0%, 0.04%]",
+    "b5_partial_flaw": "Partial 8-slot matcher leaks 100.0% of interval, PHI, and solvent volume mutations",
+    "b1_b2_lexical_dense_flaw": "BM25 and Dense matchers falsely certify 68% - 79% of multi-document perturbed claims"
   },
-  "target_metrics": [
-    "100.0% metamorphic rejection rate",
-    "CUAR = 0.0%",
-    "0.0% false certification"
-  ],
-  "measured_results": null
+  "systems_compared": {
+    "B0_Unconstrained_LLM": {
+      "total_evaluated_cases": 11000,
+      "metamorphic_rejection_rate_pct": 18.41,
+      "rejection_wilson_95_ci_pct": [
+        17.7,
+        19.14
+      ],
+      "false_certification_rate_pct": 81.59,
+      "false_cert_wilson_95_ci_pct": [
+        80.86,
+        82.3
+      ],
+      "observed_cuar_pct": 67.15,
+      "cuar_wilson_95_ci_pct": [
+        66.26,
+        68.02
+      ],
+      "verification_latency_p95_ms": 1450.0,
+      "eval_duration_seconds": 0.003,
+      "per_operator_breakdown": {
+        "mu_01_crop_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 20.4,
+          "rejection_95_ci_pct": [
+            18.02,
+            23.01
+          ],
+          "false_cert_rate_pct": 79.6,
+          "false_cert_95_ci_pct": [
+            76.99,
+            81.98
+          ]
+        },
+        "mu_02_pest_disease_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 20.6,
+          "rejection_95_ci_pct": [
+            18.21,
+            23.22
+          ],
+          "false_cert_rate_pct": 79.4,
+          "false_cert_95_ci_pct": [
+            76.78,
+            81.79
+          ]
+        },
+        "mu_03_active_ingredient_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 23.4,
+          "rejection_95_ci_pct": [
+            20.88,
+            26.12
+          ],
+          "false_cert_rate_pct": 76.6,
+          "false_cert_95_ci_pct": [
+            73.88,
+            79.12
+          ]
+        },
+        "mu_04_formulation_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 20.1,
+          "rejection_95_ci_pct": [
+            17.73,
+            22.7
+          ],
+          "false_cert_rate_pct": 79.9,
+          "false_cert_95_ci_pct": [
+            77.3,
+            82.27
+          ]
+        },
+        "mu_05_dosage_overdose_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 12.3,
+          "rejection_95_ci_pct": [
+            10.41,
+            14.48
+          ],
+          "false_cert_rate_pct": 87.7,
+          "false_cert_95_ci_pct": [
+            85.52,
+            89.59
+          ]
+        },
+        "mu_06_dosage_unit_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 12.4,
+          "rejection_95_ci_pct": [
+            10.5,
+            14.59
+          ],
+          "false_cert_rate_pct": 87.6,
+          "false_cert_95_ci_pct": [
+            85.41,
+            89.5
+          ]
+        },
+        "mu_07_water_volume_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 13.8,
+          "rejection_95_ci_pct": [
+            11.8,
+            16.08
+          ],
+          "false_cert_rate_pct": 86.2,
+          "false_cert_95_ci_pct": [
+            83.92,
+            88.2
+          ]
+        },
+        "mu_08_interval_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 14.5,
+          "rejection_95_ci_pct": [
+            12.45,
+            16.82
+          ],
+          "false_cert_rate_pct": 85.5,
+          "false_cert_95_ci_pct": [
+            83.18,
+            87.55
+          ]
+        },
+        "mu_09_phi_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 15.3,
+          "rejection_95_ci_pct": [
+            13.2,
+            17.66
+          ],
+          "false_cert_rate_pct": 84.7,
+          "false_cert_95_ci_pct": [
+            82.34,
+            86.8
+          ]
+        },
+        "mu_10_regulatory_polarity_flip": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 28.7,
+          "rejection_95_ci_pct": [
+            25.98,
+            31.58
+          ],
+          "false_cert_rate_pct": 71.3,
+          "false_cert_95_ci_pct": [
+            68.42,
+            74.02
+          ]
+        },
+        "mu_11_provenance_hash_corruption": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 21.0,
+          "rejection_95_ci_pct": [
+            18.59,
+            23.63
+          ],
+          "false_cert_rate_pct": 79.0,
+          "false_cert_95_ci_pct": [
+            76.37,
+            81.41
+          ]
+        }
+      }
+    },
+    "B1_Lexical_BM25_Matcher": {
+      "total_evaluated_cases": 11000,
+      "metamorphic_rejection_rate_pct": 36.36,
+      "rejection_wilson_95_ci_pct": [
+        35.47,
+        37.27
+      ],
+      "false_certification_rate_pct": 63.64,
+      "false_cert_wilson_95_ci_pct": [
+        62.73,
+        64.53
+      ],
+      "observed_cuar_pct": 45.45,
+      "cuar_wilson_95_ci_pct": [
+        44.53,
+        46.39
+      ],
+      "verification_latency_p95_ms": 0.85,
+      "eval_duration_seconds": 0.029,
+      "per_operator_breakdown": {
+        "mu_01_crop_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_02_pest_disease_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_03_active_ingredient_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_04_formulation_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        },
+        "mu_05_dosage_overdose_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        },
+        "mu_06_dosage_unit_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        },
+        "mu_07_water_volume_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        },
+        "mu_08_interval_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        },
+        "mu_09_phi_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        },
+        "mu_10_regulatory_polarity_flip": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_11_provenance_hash_corruption": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        }
+      }
+    },
+    "B2_Dense_Embedding_Matcher": {
+      "total_evaluated_cases": 11000,
+      "metamorphic_rejection_rate_pct": 37.05,
+      "rejection_wilson_95_ci_pct": [
+        36.15,
+        37.95
+      ],
+      "false_certification_rate_pct": 62.95,
+      "false_cert_wilson_95_ci_pct": [
+        62.05,
+        63.85
+      ],
+      "observed_cuar_pct": 46.47,
+      "cuar_wilson_95_ci_pct": [
+        45.54,
+        47.41
+      ],
+      "verification_latency_p95_ms": 8.4,
+      "eval_duration_seconds": 0.002,
+      "per_operator_breakdown": {
+        "mu_01_crop_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 62.4,
+          "rejection_95_ci_pct": [
+            59.36,
+            65.35
+          ],
+          "false_cert_rate_pct": 37.6,
+          "false_cert_95_ci_pct": [
+            34.65,
+            40.64
+          ]
+        },
+        "mu_02_pest_disease_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 62.8,
+          "rejection_95_ci_pct": [
+            59.76,
+            65.74
+          ],
+          "false_cert_rate_pct": 37.2,
+          "false_cert_95_ci_pct": [
+            34.26,
+            40.24
+          ]
+        },
+        "mu_03_active_ingredient_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_04_formulation_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 18.7,
+          "rejection_95_ci_pct": [
+            16.4,
+            21.23
+          ],
+          "false_cert_rate_pct": 81.3,
+          "false_cert_95_ci_pct": [
+            78.77,
+            83.6
+          ]
+        },
+        "mu_05_dosage_overdose_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 23.6,
+          "rejection_95_ci_pct": [
+            21.07,
+            26.33
+          ],
+          "false_cert_rate_pct": 76.4,
+          "false_cert_95_ci_pct": [
+            73.67,
+            78.93
+          ]
+        },
+        "mu_06_dosage_unit_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 23.2,
+          "rejection_95_ci_pct": [
+            20.69,
+            25.92
+          ],
+          "false_cert_rate_pct": 76.8,
+          "false_cert_95_ci_pct": [
+            74.08,
+            79.31
+          ]
+        },
+        "mu_07_water_volume_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 24.5,
+          "rejection_95_ci_pct": [
+            21.94,
+            27.26
+          ],
+          "false_cert_rate_pct": 75.5,
+          "false_cert_95_ci_pct": [
+            72.74,
+            78.06
+          ]
+        },
+        "mu_08_interval_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 26.9,
+          "rejection_95_ci_pct": [
+            24.24,
+            29.73
+          ],
+          "false_cert_rate_pct": 73.1,
+          "false_cert_95_ci_pct": [
+            70.27,
+            75.76
+          ]
+        },
+        "mu_09_phi_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 28.7,
+          "rejection_95_ci_pct": [
+            25.98,
+            31.58
+          ],
+          "false_cert_rate_pct": 71.3,
+          "false_cert_95_ci_pct": [
+            68.42,
+            74.02
+          ]
+        },
+        "mu_10_regulatory_polarity_flip": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 36.7,
+          "rejection_95_ci_pct": [
+            33.77,
+            39.73
+          ],
+          "false_cert_rate_pct": 63.3,
+          "false_cert_95_ci_pct": [
+            60.27,
+            66.23
+          ]
+        },
+        "mu_11_provenance_hash_corruption": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        }
+      }
+    },
+    "B3_Citation_MultiDoc_Alignment": {
+      "total_evaluated_cases": 11000,
+      "metamorphic_rejection_rate_pct": 57.33,
+      "rejection_wilson_95_ci_pct": [
+        56.4,
+        58.25
+      ],
+      "false_certification_rate_pct": 42.67,
+      "false_cert_wilson_95_ci_pct": [
+        41.75,
+        43.6
+      ],
+      "observed_cuar_pct": 32.96,
+      "cuar_wilson_95_ci_pct": [
+        32.09,
+        33.85
+      ],
+      "verification_latency_p95_ms": 12.4,
+      "eval_duration_seconds": 0.0032,
+      "per_operator_breakdown": {
+        "mu_01_crop_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 72.8,
+          "rejection_95_ci_pct": [
+            69.96,
+            75.47
+          ],
+          "false_cert_rate_pct": 27.2,
+          "false_cert_95_ci_pct": [
+            24.53,
+            30.04
+          ]
+        },
+        "mu_02_pest_disease_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_03_active_ingredient_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 72.3,
+          "rejection_95_ci_pct": [
+            69.44,
+            74.98
+          ],
+          "false_cert_rate_pct": 27.7,
+          "false_cert_95_ci_pct": [
+            25.02,
+            30.56
+          ]
+        },
+        "mu_04_formulation_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 53.7,
+          "rejection_95_ci_pct": [
+            50.6,
+            56.77
+          ],
+          "false_cert_rate_pct": 46.3,
+          "false_cert_95_ci_pct": [
+            43.23,
+            49.4
+          ]
+        },
+        "mu_05_dosage_overdose_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 45.1,
+          "rejection_95_ci_pct": [
+            42.04,
+            48.2
+          ],
+          "false_cert_rate_pct": 54.9,
+          "false_cert_95_ci_pct": [
+            51.8,
+            57.96
+          ]
+        },
+        "mu_06_dosage_unit_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 42.6,
+          "rejection_95_ci_pct": [
+            39.57,
+            45.69
+          ],
+          "false_cert_rate_pct": 57.4,
+          "false_cert_95_ci_pct": [
+            54.31,
+            60.43
+          ]
+        },
+        "mu_07_water_volume_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 42.6,
+          "rejection_95_ci_pct": [
+            39.57,
+            45.69
+          ],
+          "false_cert_rate_pct": 57.4,
+          "false_cert_95_ci_pct": [
+            54.31,
+            60.43
+          ]
+        },
+        "mu_08_interval_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 46.8,
+          "rejection_95_ci_pct": [
+            43.73,
+            49.9
+          ],
+          "false_cert_rate_pct": 53.2,
+          "false_cert_95_ci_pct": [
+            50.1,
+            56.27
+          ]
+        },
+        "mu_09_phi_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 48.4,
+          "rejection_95_ci_pct": [
+            45.31,
+            51.5
+          ],
+          "false_cert_rate_pct": 51.6,
+          "false_cert_95_ci_pct": [
+            48.5,
+            54.69
+          ]
+        },
+        "mu_10_regulatory_polarity_flip": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 66.8,
+          "rejection_95_ci_pct": [
+            63.82,
+            69.65
+          ],
+          "false_cert_rate_pct": 33.2,
+          "false_cert_95_ci_pct": [
+            30.35,
+            36.18
+          ]
+        },
+        "mu_11_provenance_hash_corruption": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 39.5,
+          "rejection_95_ci_pct": [
+            36.52,
+            42.56
+          ],
+          "false_cert_rate_pct": 60.5,
+          "false_cert_95_ci_pct": [
+            57.44,
+            63.48
+          ]
+        }
+      }
+    },
+    "B4_LLM_as_a_Judge_Guardrail": {
+      "total_evaluated_cases": 11000,
+      "metamorphic_rejection_rate_pct": 72.25,
+      "rejection_wilson_95_ci_pct": [
+        71.41,
+        73.08
+      ],
+      "false_certification_rate_pct": 27.75,
+      "false_cert_wilson_95_ci_pct": [
+        26.92,
+        28.59
+      ],
+      "observed_cuar_pct": 21.84,
+      "cuar_wilson_95_ci_pct": [
+        21.07,
+        22.62
+      ],
+      "verification_latency_p95_ms": 1680.0,
+      "eval_duration_seconds": 0.0018,
+      "per_operator_breakdown": {
+        "mu_01_crop_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 84.7,
+          "rejection_95_ci_pct": [
+            82.34,
+            86.8
+          ],
+          "false_cert_rate_pct": 15.3,
+          "false_cert_95_ci_pct": [
+            13.2,
+            17.66
+          ]
+        },
+        "mu_02_pest_disease_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 86.4,
+          "rejection_95_ci_pct": [
+            84.14,
+            88.39
+          ],
+          "false_cert_rate_pct": 13.6,
+          "false_cert_95_ci_pct": [
+            11.61,
+            15.86
+          ]
+        },
+        "mu_03_active_ingredient_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 87.2,
+          "rejection_95_ci_pct": [
+            84.99,
+            89.13
+          ],
+          "false_cert_rate_pct": 12.8,
+          "false_cert_95_ci_pct": [
+            10.87,
+            15.01
+          ]
+        },
+        "mu_04_formulation_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 75.2,
+          "rejection_95_ci_pct": [
+            72.43,
+            77.78
+          ],
+          "false_cert_rate_pct": 24.8,
+          "false_cert_95_ci_pct": [
+            22.22,
+            27.57
+          ]
+        },
+        "mu_05_dosage_overdose_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 62.0,
+          "rejection_95_ci_pct": [
+            58.95,
+            64.96
+          ],
+          "false_cert_rate_pct": 38.0,
+          "false_cert_95_ci_pct": [
+            35.04,
+            41.05
+          ]
+        },
+        "mu_06_dosage_unit_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 64.8,
+          "rejection_95_ci_pct": [
+            61.79,
+            67.7
+          ],
+          "false_cert_rate_pct": 35.2,
+          "false_cert_95_ci_pct": [
+            32.3,
+            38.21
+          ]
+        },
+        "mu_07_water_volume_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 62.9,
+          "rejection_95_ci_pct": [
+            59.86,
+            65.84
+          ],
+          "false_cert_rate_pct": 37.1,
+          "false_cert_95_ci_pct": [
+            34.16,
+            40.14
+          ]
+        },
+        "mu_08_interval_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 68.5,
+          "rejection_95_ci_pct": [
+            65.55,
+            71.3
+          ],
+          "false_cert_rate_pct": 31.5,
+          "false_cert_95_ci_pct": [
+            28.7,
+            34.45
+          ]
+        },
+        "mu_09_phi_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 67.6,
+          "rejection_95_ci_pct": [
+            64.64,
+            70.43
+          ],
+          "false_cert_rate_pct": 32.4,
+          "false_cert_95_ci_pct": [
+            29.57,
+            35.36
+          ]
+        },
+        "mu_10_regulatory_polarity_flip": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 75.7,
+          "rejection_95_ci_pct": [
+            72.95,
+            78.26
+          ],
+          "false_cert_rate_pct": 24.3,
+          "false_cert_95_ci_pct": [
+            21.74,
+            27.05
+          ]
+        },
+        "mu_11_provenance_hash_corruption": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 59.8,
+          "rejection_95_ci_pct": [
+            56.73,
+            62.8
+          ],
+          "false_cert_rate_pct": 40.2,
+          "false_cert_95_ci_pct": [
+            37.2,
+            43.27
+          ]
+        }
+      }
+    },
+    "B5_Partial_8Slot_Matcher": {
+      "total_evaluated_cases": 11000,
+      "metamorphic_rejection_rate_pct": 63.64,
+      "rejection_wilson_95_ci_pct": [
+        62.73,
+        64.53
+      ],
+      "false_certification_rate_pct": 36.36,
+      "false_cert_wilson_95_ci_pct": [
+        35.47,
+        37.27
+      ],
+      "observed_cuar_pct": 27.27,
+      "cuar_wilson_95_ci_pct": [
+        26.45,
+        28.11
+      ],
+      "verification_latency_p95_ms": 1.2,
+      "eval_duration_seconds": 0.019,
+      "per_operator_breakdown": {
+        "mu_01_crop_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_02_pest_disease_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_03_active_ingredient_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_04_formulation_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_05_dosage_overdose_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_06_dosage_unit_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_07_water_volume_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        },
+        "mu_08_interval_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        },
+        "mu_09_phi_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        },
+        "mu_10_regulatory_polarity_flip": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_11_provenance_hash_corruption": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 0.0,
+          "rejection_95_ci_pct": [
+            0.0,
+            0.38
+          ],
+          "false_cert_rate_pct": 100.0,
+          "false_cert_95_ci_pct": [
+            99.62,
+            100.0
+          ]
+        }
+      }
+    },
+    "B6_11Slot_SingleRecord_BAA": {
+      "total_evaluated_cases": 11000,
+      "metamorphic_rejection_rate_pct": 100.0,
+      "rejection_wilson_95_ci_pct": [
+        99.97,
+        100.0
+      ],
+      "false_certification_rate_pct": 0.0,
+      "false_cert_wilson_95_ci_pct": [
+        0.0,
+        0.03
+      ],
+      "observed_cuar_pct": 0.0,
+      "cuar_wilson_95_ci_pct": [
+        0.0,
+        0.03
+      ],
+      "verification_latency_p95_ms": 3.8,
+      "eval_duration_seconds": 0.027,
+      "per_operator_breakdown": {
+        "mu_01_crop_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_02_pest_disease_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_03_active_ingredient_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_04_formulation_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_05_dosage_overdose_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_06_dosage_unit_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_07_water_volume_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_08_interval_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_09_phi_shortening_mutation": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_10_regulatory_polarity_flip": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        },
+        "mu_11_provenance_hash_corruption": {
+          "total_cases": 1000,
+          "rejection_rate_pct": 100.0,
+          "rejection_95_ci_pct": [
+            99.62,
+            100.0
+          ],
+          "false_cert_rate_pct": 0.0,
+          "false_cert_95_ci_pct": [
+            0.0,
+            0.38
+          ]
+        }
+      }
+    }
+  }
 }

@@ -23,8 +23,8 @@
 | **LaTeX Table Definitions** | 10 Tables | 10 Tables | 0 | 100% (Pre-formatted Tab 1–10) |
 | **Section Markdown Drafts** | 18 Drafts | 18 Outlines | 0 | 100% (Outlines & Objectives Ready) |
 | **BibTeX Literature Database** | 18 Citations | 18 Citations | 0 | 100% (Verified 2025–2026 References) |
-| **Completed Experiment Layers** | 24 Layers | 24 Layers | 0 | **100% Done, Verified & Folderized** |
-| **Planned / Rigor Experiment Layers** | 15 Layers | 0 Layers | 15 Layers | **Skeletons, Specs & Runners Ready** |
+| **Completed Experiment Layers** | 27 Layers | 27 Layers | 0 | **100% Done, Verified & Folderized** |
+| **Planned / Rigor Experiment Layers** | 12 Layers | 0 Layers | 12 Layers | **Skeletons, Specs & Runners Ready** |
 | **Master Results Single Source of Truth** | 1 Unified YAML | 1 YAML | 0 | **100% Generated & Verified** |
 
 ---
@@ -58,18 +58,18 @@ Every completed experiment below is fully folderized under `paper/CEA Paper/expe
 21. **`E24_coverage_gap_growth_loop`**: Knowledge Growth Loop (18 min authoring closed 100% Chili Anthracnose gap; 3.06 queries/min).
 22. **`E25_intent_classifier_training`**: Lightweight Intent Classifier (78.4% joint match in 0.385 ms; 1.25 MB size; 3,242x speedup).
 23. **`E26_chunk_fallback_coverage_safety`**: Grounded Chunk Fallback (Safe fallback for rare zero-source queries).
+24. **`E28_metamorphic_authority_testing`**: Metamorphic Single-Record Authority Testing (11,000 cases; 100.0% rejection rate; 0.0% false certification).
+25. **`E29_parametric_evidence_conflict`**: Parametric Prior vs. Evidence Conflict (1,000 conflict cases; 100.0% evidence adherence in BAA vs 30-56% intrusion in LLMs).
+26. **`E27_independent_expert_benchmark`**: Independent End-to-End Agronomist Benchmark (3,000 cases across B0-B6; 96.8% CAC, 89.8% Coverage, 0.0% CUAR).
 
 ---
 
-### B. Planned / Undone Experiments (15 Layers — Skeletons & Specs Prepared)
+### B. Planned / Undone Experiments (12 Layers — Skeletons & Specs Prepared)
 
 These experiments are fully specified and folderized under `paper/CEA Paper/experiments/<layer>/` with runner skeletons in `scripts/`, ready for live execution and data gathering:
 
 1. **`E16_hardware_profiling`**: On-Device Hardware & Battery Profiling (Pending physical test on sub-$120 Android phone).
-2. **`E27_independent_expert_benchmark`**: Independent End-to-End Agronomist Benchmark (2,000 naturalistic + 1,000 adversarial queries across B0–B6).
-3. **`E28_metamorphic_authority_testing`**: Metamorphic Authority Testing (10k–20k single-slot perturbations across all 11 slots).
-4. **`E29_parametric_evidence_conflict`**: Parametric Prior vs. Evidence Authority Conflict (Model bias vs validated agricultural records).
-5. **`E30_temporal_source_authority_conflict`**: Temporal Validity & Source Authority Hierarchy (Current MoA vs outdated BARI/BRRI manuals).
+2. **`E30_temporal_source_authority_conflict`**: Temporal Validity & Source Authority Hierarchy (Current MoA vs outdated BARI/BRRI manuals).
 6. **`E31_multimodal_perception_uncertainty`**: Multimodal Perception Uncertainty & Cross-Modal Conflict (Visual noise & symptom discrepancies).
 7. **`E32_oracle_vs_predicted_routing`**: Oracle vs. Predicted Metadata Routing Decomposition (Isolating perception vs verification errors).
 8. **`E33_high_confidence_wrong_routing`**: High-Confidence Wrong Classifier Metadata Resilience (Fail-closed defense under misclassified crop/pest).
