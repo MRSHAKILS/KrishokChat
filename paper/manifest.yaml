@@ -55,6 +55,7 @@ notes:
   policy: dated working notes preserving paper-mentionable findings before they enter the manuscript
   entries:
     - notes/2026_08_27_R13_E26_findings.md   # grounded chunk fallback (R13) + E26 coverage/safety run
+    - notes/2026_08_27_CEA_EXPERIMENT_BATTERY_SUMMARY.md   # Master SSOT summary of E02–E25 results, CIs, claim IDs, and manuscript text
 
 experiment_trace:
   canonical_registry: ../experiments/registry.yaml   # E-series master trace lives outside paper/
