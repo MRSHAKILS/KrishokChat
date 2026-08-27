@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "layer": "E30_temporal_source_authority_conflict",
+    "title": "Temporal Validity & Source Authority Conflict Matrix",
+    "status": "planned",
+    "rq": "RQ4, RQ5",
+    "question": "How does BAA resolve conflicting multi-document evidence across authority levels (Regulatory > Institutional > Secondary) and dates?"
+  },
+  "target_metrics": [
+    "100% current source selection",
+    "0% stale chemical certification"
+  ],
+  "measured_results": null
+}

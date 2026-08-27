@@ -1,0 +1,13 @@
+\section{Deployment, Portability, and Ethics}
+\label{sec:deployment_ethics}
+
+\subsection{Deployment Footprint and Hardware Accessibility}
+As shown in Table~\ref{tab:deployment_footprint}, the entire KrishokChat stack—including INT8 vision weights, fine-tuned Gemma-4 LoRA weights, FAISS index, and SQLite fact store—packages into a self-contained 2.63\,GB container requiring under 3.7\,GB of RAM. The system deploys seamlessly on low-cost single-board edge servers or local VPS instances (\$45/month), eliminating recurring commercial cloud API expenses.
+
+\subsection{Ethical Considerations and Fail-Closed Safeguards}
+In high-stakes agricultural decision support, an erroneous AI recommendation can ruin smallholder harvests or cause acute chemical poisoning. KrishokChat adheres to strict ethical and safety guidelines:
+\begin{itemize}
+    \item \textbf{No Autonomous Hallucination:} Generative LLMs are never permitted to invent dosages, active ingredients, or Pre-Harvest Intervals.
+    \item \textbf{National Helpline Integration:} All critical poisoning, self-harm, and unresolvable queries fail closed, directly surfacing the verified national Krishi Call Center (16123).
+    \item \textbf{Data Privacy:} Farmer image uploads and voice queries are processed ephemerally on-premises without retention for third-party commercial profiling.
+\end{itemize}

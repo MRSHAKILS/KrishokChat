@@ -1,0 +1,37 @@
+# experiments/specs/E28_metamorphic_authority_testing.spec.yaml
+# Specification for Layer E28: Metamorphic Authority & Single-Record Integrity Testing
+# Core Research Question: RQ2 (Relational Evidence Integrity)
+
+meta:
+  layer: E28_metamorphic_authority_testing
+  question: "Do single-slot metamorphic perturbations across all 11 critical agricultural slots strictly fail certification under the single-record authority model, compared to lexical and citation-based verifiers?"
+  target_venue: Computers and Electronics in Agriculture (CEA)
+  rq: RQ2
+  status: planned
+
+parameters:
+  sample_size: 20000
+  perturbation_types:
+    Type_A_Cross_Record_Binding: "Dose from record X bound to crop/disease from record Y"
+    Type_B_Numerical_Mutation: "Dose x2, Dose /2, Dose x5, PHI -3, Interval +7"
+    Type_C_Semantic_Mismatch: "Wrong crop, wrong disease, wrong chemical formulation (EC vs WP)"
+    Type_D_Temporal_Regulatory: "Obsolete recommendation, withdrawn chemical, banned pesticide"
+
+slots_ablated:
+  - crop
+  - pathogen
+  - growth_stage
+  - active_ingredient
+  - formulation
+  - dose_min
+  - dose_max
+  - dose_unit
+  - solvent_volume
+  - application_interval
+  - pre_harvest_interval
+  - regulatory_polarity
+
+metamorphic_invariant:
+  statement: "For any valid advisory tuple C and single-slot perturbation M_i(C), Verify(M_i(C)) == 0 unless M_i(C) is independently entailed by a valid authoritative record in the fact base."
+  target_rejection_rate_baa: 100.0
+  expected_wilson_ci95_baa: [99.98, 100.0]

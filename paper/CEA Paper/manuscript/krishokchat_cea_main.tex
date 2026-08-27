@@ -1,0 +1,94 @@
+\documentclass[a4paper,fleqn]{cas-dc}
+
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage{array}
+
+% Custom macros for exact empirical constants from SSOT (master_results.yaml)
+\newcommand{\Nmisbind}{10{,}000}
+\newcommand{\Nslots}{11}
+\newcommand{\MisbindDetRate}{100.0\%}
+\newcommand{\ZeroLLMRate}{61.52\%}
+\newcommand{\LatencySpeedup}{2.28\times}
+\newcommand{\SearchSpaceRedPct}{75.64\%}
+\newcommand{\DialectHitAdvantage}{+36.6\,\text{pp}}
+\newcommand{\SMSFidelity}{100.0\%}
+\newcommand{\SMSHazardLLM}{64.4\%}
+\newcommand{\TamperDetRate}{100.0\%}
+\newcommand{\NetworkLossAdvantage}{+21.6\,\text{pp}}
+\newcommand{\HumanGwetAC}{0.862}
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+% Short title and author running heads
+\shorttitle{Bounded-Authority Agricultural Advisory}
+\shortauthors{R. Reza et al.}
+
+\title [mode = title]{Bounded-Authority Agricultural Advisory: Selective Resolution and Evidence-Bound Verification for Safe Bengali Decision Support}
+
+\author[1]{Raiyaan Reza}[type=editor,auid=000,bioid=1,orcid=0009-0002-8610-8673]
+\cormark[1]
+\ead{raiyaan.reza@northsouth.edu}
+\credit{Conceptualization, Methodology, Software, Formal Analysis, Writing - Original Draft, Project Administration}
+
+\author[1]{Research Collaborator}[orcid=0000-0000-0000-0000]
+\ead{collaborator@northsouth.edu}
+\credit{Investigation, Data Curation, Validation, Writing - Review \& Editing}
+
+\address[1]{Department of Electrical and Computer Engineering, North South University, Dhaka 1229, Bangladesh}
+
+\cortext[cor1]{Corresponding author}
+
+\begin{abstract}
+Large Language Models (LLMs) and standard Retrieval-Augmented Generation (RAG) pipelines demonstrate significant fluency in multilingual agricultural extension; however, generative models lack inherent bounds on factual authority. In safety-critical agricultural domains, fluent text generation can silently misbind pesticides to unauthorized pests, hallucinate chemical dosages, or truncate vital Pre-Harvest Intervals (PHI), posing direct ecological, economic, and human health hazards. This paper presents the \textbf{Bounded-Authority Advisory Architecture (BAA)}, a domain-specialized agricultural decision-support system that separates factual authority from linguistic realization. BAA enforces a fail-closed mathematical certification contract over structured, provenance-carrying evidence records and selectively routes farmer queries among deterministic fact resolution, grounded generation, conversational clarification, and expert escalation. 
+
+Across an empirical battery comprising \Nmisbind{} adversarial relational misbinding attacks, 4,000 multi-register Bengali queries, and triple-blind evaluations by practicing agronomists, BAA achieves a \MisbindDetRate{} rejection rate on corrupted chemical claims, compared to an 80.0\% dangerous acceptance rate in standard lexical RAG and 38.65\% in LLM-as-a-judge verifiers. The five-tier selective resolution ladder resolves \ZeroLLMRate{} of advisory traffic deterministically without invoking generative LLMs, achieving a \LatencySpeedup{} latency reduction and lowering per-query serving costs to \$0.0768/1k queries. In low-resource field deployments, deterministic 11-slot semantic compression eliminates the \SMSHazardLLM{} parameter-omission hazard observed in LLM-generated SMS, while offline-first cryptographic caching sustains 80.3\% advisory delivery under severe 30\% cellular packet loss. These findings demonstrate that subordinating language generation to explicit, bounded factual authority provides a scalable and dependable foundation for agricultural decision support in low-resource environments.
+\end{abstract}
+
+\begin{keywords}
+Agricultural decision support \sep Large language models \sep Retrieval-augmented generation \sep Safety-critical verification \sep Bounded factual authority \sep Low-resource NLP \sep Edge computing \sep Smart agriculture
+\end{keywords}
+
+\maketitle
+
+% Include modular section files
+\input{sections/01_introduction.tex}
+\input{sections/02_related_work.tex}
+\input{sections/03_problem_formulation.tex}
+\input{sections/04_system_architecture.tex}
+\input{sections/05_knowledge_governance.tex}
+\input{sections/06_experimental_methodology.tex}
+\input{sections/07_results_advisory_quality.tex}
+\input{sections/08_results_authority_safety.tex}
+\input{sections/09_results_selective_reliability.tex}
+\input{sections/10_results_robustness.tex}
+\input{sections/11_results_temporal_governance.tex}
+\input{sections/12_results_security_delivery.tex}
+\input{sections/13_results_efficiency.tex}
+\input{sections/14_discussion.tex}
+\input{sections/15_deployment_implications.tex}
+\input{sections/16_limitations.tex}
+\input{sections/17_reproducibility.tex}
+\input{sections/18_conclusion.tex}
+
+\section*{Declaration of Competing Interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Acknowledgments}
+The authors thank the Department of Agricultural Extension (DAE), the Bangladesh Agricultural Research Institute (BARI), and the Bangladesh Rice Research Institute (BRRI) for public access to institutional Krishi handbooks and agronomic guidance.
+
+\bibliographystyle{cas-model2-names}
+\bibliography{krishokchat_cea}
+
+\end{document}

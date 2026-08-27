@@ -1,0 +1,11 @@
+meta:
+  layer: E31_multimodal_perception_uncertainty
+  title: Multimodal Perception Uncertainty & Cross-Modal Conflict
+  status: planned
+  rq: RQ4
+  question: How does visual perception noise and text-image discrepancy propagate,
+    and does it safely trigger clarification/abstention?
+target_metrics:
+- 100% conflict detection rate
+- CUAR under conflict = 0.0%
+measured_results: null

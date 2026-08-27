@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "layer": "E37_conversational_clarification_policy",
+    "title": "Conversational Ambiguity Clarification Policy",
+    "status": "planned",
+    "rq": "RQ3",
+    "question": "Does structured multi-turn clarification recover usable advisory coverage compared to immediate refusal?"
+  },
+  "target_metrics": [
+    "Clarification recovery rate >= 70.0% with 0.0% CUAR"
+  ],
+  "measured_results": null
+}

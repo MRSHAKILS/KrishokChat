@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{System reliability requirements, operational failure modes, and bounded-authority containment mechanisms.}
+\label{tab:system_requirements}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{Reliability Requirement} & \textbf{Potential Failure Mode} & \textbf{Advisory Risk} & \textbf{System Response / Containment} \\
+\midrule
+Evidence Completeness & Missing PHI / Dosage bounds & Chemical residue / Toxic crop harvest & Fail-closed abstention (\texttt{ABSTAIN}) \\
+Relational Integrity & Cross-record pesticide misbinding & Ineffective or phytotoxic application & Single-record joint binding certification \\
+Visual Semantic Alignment & Crop/Disease classification error & Misdirected agronomic advice & Metadata routing fallback \& clarification \\
+Perception Uncertainty & Low confidence visual input ($\tau < 0.80$) & Erroneous disease identification & Fallback to conversational clarification \\
+Temporal Validity & Obsolete chemical recommendation & Application of withdrawn/banned agrochemicals & Temporal invalidation \& policy override \\
+Adversarial Robustness & Prompt injection / Delimiter hijack & System instruction override & Deterministic structured extraction filter \\
+Channel Bandwidth Limit & SMS truncation / Buffer overflow & Silent loss of vital safety warnings & Deterministic 160-char GSM template \\
+Network Degradation & High packet loss / Cloud disconnect & Service unavailability in rural edge & Offline SQLite cryptographic cache \\
+\bottomrule
+\end{tabular}
+\end{table*}

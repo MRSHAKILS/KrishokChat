@@ -1,192 +1,258 @@
-# experiments/registry.yaml — master trace of every experiment layer in the project.
-# Status values: done | planned | infeasible_without_external_input
+# experiments/registry.yaml — Canonical Master Trace for all KrishokChat Experiments (E02–E31)
+# Status values: done | done_unverified | planned | blocked
 # IMPORTANT: "target" fields are HYPOTHESES for power analysis / acceptance gates,
 # never measured results. Publishing a target as a result violates AGENTS.md rule 5.
 # Last audited: 2026-08-27
 
-schema:
-  id: E## canonical layer number (this file resolves all conflicting older numbering)
-  question: one-line research question
-  script: path to runner that produces the result
-  results: path to frozen YAML/JSON results
-  claims: claim IDs in paper/manuscript/CLAIM_LEDGER_FREEZE.md
-  status: done | done_unverified | planned | blocked
+meta:
+  project: KrishokChat Experimental Suite
+  target_venue: Computers and Electronics in Agriculture (Elsevier)
+  acceptance_protocol: ACCEPTANCE_PROTOCOL.md
+  master_results_ssot: results/master_results.yaml
 
-completed_layers:   # executed battery — results frozen in research_artifacts/evaluations/
+completed_layers:
   E02_relational_misbinding:
-    question: Does the 11-slot relational verifier prevent crop/pest/chemical misbinding vs lexical RAG?
+    question: "Does the 11-slot relational verifier prevent crop/pest/chemical misbinding vs lexical RAG?"
+    rq: RQ1, RQ2
     script: research_artifacts/scripts/runners/run_relational_attack_eval.py
     results: research_artifacts/evaluations/baselines/misbinding_benchmark_results.yaml
     dataset: research_artifacts/datasets/attacks/relational_misbinding/misbinding_attack_suite_v2.jsonl
-    status: done
-  E03_slot_ablation:
-    question: Which of the 11 safety slots carry the hazard-prevention load?
-    script: research_artifacts/scripts/runners/run_slot_ablation_eval.py
-    results: research_artifacts/evaluations/ablations/slot_ablation_benchmark_results.yaml
-    status: done
-  E04_risk_coverage_calibration:
-    question: Does the abstention score yield a risk-coverage operating point on 20,112 safety QA rows?
-    script: research_artifacts/scripts/runners/run_calibration_evaluation.py
-    results: research_artifacts/evaluations/calibration/risk_coverage_calibration_results.yaml
-    status: done
-  E05_counterfactual_binding:
-    question: Do counterfactual evidence edits flip the bound answer (evidence sensitivity)?
-    script: research_artifacts/scripts/runners/run_counterfactual_eval.py
-    results: research_artifacts/evaluations/robustness/counterfactual_binding_results.yaml
-    status: done
-  E06_farmer_dialect_benchmark:
-    question: Hazard rate across Standard Bengali / authentic-farmer / regional dialect / Banglish registers?
-    script: research_artifacts/scripts/runners/run_farmer_benchmark_eval.py
-    results: research_artifacts/evaluations/robustness/farmer_dialect_benchmark_results.yaml
-    status: done
-  E07_E08_prompt_injection:
-    question: Does the pipeline resist direct/indirect prompt injection over retrieved evidence?
-    script: research_artifacts/scripts/runners/run_security_injection_eval.py
-    results: research_artifacts/evaluations/security/prompt_injection_benchmark_results.yaml
-    status: done
-  E09_latency_economics:
-    question: Latency decomposition and per-query cost of the tiered pipeline?
-    script: research_artifacts/scripts/runners/run_latency_economic_eval.py
-    results: research_artifacts/evaluations/deployment/latency_economics_decomposition_results.yaml
-    status: done
-  E10_failure_taxonomy:
-    question: Root-cause taxonomy of residual safety failures (100-case audit)?
-    script: research_artifacts/scripts/runners/run_failure_taxonomy_eval.py
-    results: research_artifacts/evaluations/failure_analysis/safety_failure_taxonomy_results.yaml
-    status: done
-  E11_multi_generator_invariance:
-    question: Is verifier behavior stable across generator models?
-    script: research_artifacts/scripts/runners/run_multi_generator_eval.py
-    results: research_artifacts/evaluations/baselines/multi_generator_invariance_results.yaml
-    status: done
-  E12_retrieval_degradation:
-    question: Does the system degrade safely as retrieval quality is poisoned/dropped?
-    script: research_artifacts/scripts/runners/run_retrieval_degradation_eval.py
-    results: research_artifacts/evaluations/robustness/retrieval_degradation_results.yaml
-    status: done
-  E13_human_expert_validation:
-    question: Do Bengali-speaking agronomists rate system advisories at/above baseline human answers?
-    script: research_artifacts/scripts/runners/run_human_expert_eval.py
-    results: research_artifacts/evaluations/human_eval/expert_human_evaluation_results.yaml
-    status: done
-  R7_tier_mix:
-    question: Cost/tier-mix of the five-tier ladder (production-side complement to E09)?
-    script: backend/scripts/tier_mix_experiment.py
-    results: docs/production_readiness/reports/ (R7 task outputs)
+    claims: [S-E02]
     status: done
 
-# ---- NEW CEA-pivot layers (planned). Numbering note: suggestions_1.md used two
-# conflicting E14–E20 lists; this registry is the canonical resolution. ----
-planned_layers:
+  E03_slot_ablation:
+    question: "Which of the 11 safety slots carry the hazard-prevention load?"
+    rq: RQ2
+    script: research_artifacts/scripts/runners/run_slot_ablation_eval.py
+    results: research_artifacts/evaluations/ablations/slot_ablation_benchmark_results.yaml
+    claims: [S-E03]
+    status: done
+
+  E04_risk_coverage_calibration:
+    question: "Does the abstention score yield a calibrated risk-coverage operating point on safety QA?"
+    rq: RQ3
+    script: research_artifacts/scripts/runners/run_calibration_evaluation.py
+    results: research_artifacts/evaluations/calibration/risk_coverage_calibration_results.yaml
+    claims: [S-E04]
+    status: done
+
+  E05_counterfactual_binding:
+    question: "Do counterfactual evidence edits flip the bound answer (evidence sensitivity)?"
+    rq: RQ2
+    script: research_artifacts/scripts/runners/run_counterfactual_eval.py
+    results: research_artifacts/evaluations/robustness/counterfactual_binding_results.yaml
+    claims: [S-E05]
+    status: done
+
+  E06_farmer_dialect_benchmark:
+    question: "Hazard rate across Standard Bengali / authentic-farmer / regional dialect / Banglish registers?"
+    rq: RQ4
+    script: research_artifacts/scripts/runners/run_farmer_benchmark_eval.py
+    results: research_artifacts/evaluations/robustness/farmer_dialect_benchmark_results.yaml
+    claims: [S-E06]
+    status: done
+
+  E07_E08_prompt_injection:
+    question: "Does the pipeline resist direct/indirect prompt injection over retrieved evidence?"
+    rq: RQ1, RQ5
+    script: research_artifacts/scripts/runners/run_security_injection_eval.py
+    results: research_artifacts/evaluations/security/prompt_injection_benchmark_results.yaml
+    claims: [S-E07]
+    status: done
+
+  E09_latency_economics:
+    question: "Latency decomposition and per-query cost of the tiered pipeline?"
+    rq: RQ5
+    script: research_artifacts/scripts/runners/run_latency_economic_eval.py
+    results: research_artifacts/evaluations/deployment/latency_economics_decomposition_results.yaml
+    claims: [S-E09]
+    status: done
+
+  E10_failure_taxonomy:
+    question: "Root-cause taxonomy of residual safety failures (100-case failure containment audit)?"
+    rq: RQ3
+    script: research_artifacts/scripts/runners/run_failure_taxonomy_eval.py
+    results: research_artifacts/evaluations/failure_analysis/safety_failure_taxonomy_results.yaml
+    claims: [S-E10]
+    status: done
+
+  E11_multi_generator_invariance:
+    question: "Is verifier behavior stable across generator models?"
+    rq: RQ1
+    script: research_artifacts/scripts/runners/run_multi_generator_eval.py
+    results: research_artifacts/evaluations/baselines/multi_generator_invariance_results.yaml
+    claims: [S-E11]
+    status: done
+
+  E12_retrieval_degradation:
+    question: "Does the system degrade safely as retrieval quality is poisoned/dropped?"
+    rq: RQ1, RQ4
+    script: research_artifacts/scripts/runners/run_retrieval_degradation_eval.py
+    results: research_artifacts/evaluations/robustness/retrieval_degradation_results.yaml
+    claims: [S-E12]
+    status: done
+
+  E13_human_expert_validation:
+    question: "Do Bengali-speaking agronomists rate system advisories at/above baseline human answers?"
+    rq: RQ1
+    script: research_artifacts/scripts/runners/run_human_expert_eval.py
+    results: research_artifacts/evaluations/human_eval/expert_human_evaluation_results.yaml
+    claims: [S-E13]
+    status: done
+
+systems_deployment_layers:
   E14_network_degradation:
-    question: Advisory delivery success rate of offline-first cache vs cloud-only RAG under simulated 2G/Edge (latency 800ms+, 15% packet loss)?
+    question: "Advisory delivery success rate of offline-first cache vs cloud-only RAG under simulated 2G/Edge?"
+    rq: RQ5
     spec: specs/E14_network_degradation.spec.yaml
     script: experiments/scripts/E14_network_degradation/run_e14.py
     results: experiments/results/E14_network_degradation/e14_results.yaml
+    claims: [S23]
     status: done
-    feasibility: high   # no hardware needed; toxiproxy/clumsy or tc on loopback
+
   E15_sms_compressor:
-    question: Does a deterministic 11-slot→160-char SMS template preserve 100% of dosage/PHI bounds where LLM-compressed SMS truncates them?
+    question: "Does a deterministic 11-slot SMS template preserve 100% of dosage/PHI bounds vs LLM compression?"
+    rq: RQ5
     spec: specs/E15_sms_compressor.spec.yaml
     script: experiments/scripts/E15_sms_compressor/run_e15.py
     results: experiments/results/E15_sms_compressor/e15_results.yaml
+    claims: [S21]
     status: done
-    feasibility: high   # pure software; uses certified tuples from E02 suite
+
   E16_hardware_profiling:
-    question: Battery drain and thermal profile of on-device INT8 ONNX + cached Tier 1/2 vs cloud-only on a sub-$120 Android device?
+    question: "Battery drain and thermal profile of on-device INT8 ONNX + cached Tier 1/2 on low-cost hardware?"
+    rq: RQ5
     spec: specs/E16_hardware_profiling.spec.yaml
+    script: experiments/scripts/E16_hardware_profiling/run_e16.py
+    results: experiments/results/E16_hardware_profiling/e16_results.yaml
     status: planned
-    feasibility: medium # REQUIRES physical device (Redmi A2 / Symphony / Walton); blocked until purchased
+
   E17_detection_gated_routing:
-    question: Does detection metadata (crop+disease) collapse the retrieval search space and grant dialect immunity (vs text-first R@k)?
+    question: "Does detection metadata collapse the retrieval search space and grant register robustness?"
+    rq: RQ4, RQ5
     spec: specs/E17_detection_gated_routing.spec.yaml
     script: experiments/scripts/E17_detection_gated_routing/run_e17.py
     results: experiments/results/E17_detection_gated_routing/e17_results.yaml
+    claims: [S18]
     status: done
-    feasibility: high   # all assets on disk: ONNX models, knowledge_nodes, farmer_benchmark
+
   E18_llm_dependency_reduction:
-    question: What fraction of queries resolve with ZERO LLM calls when detection+fact-base routing is enabled (vs current tier mix)?
+    question: "What fraction of queries resolve with ZERO LLM calls under detection + fact-base routing?"
+    rq: RQ5
     spec: specs/E18_llm_dependency_reduction.spec.yaml
     script: experiments/scripts/E18_llm_dependency_reduction/run_e18.py
     results: experiments/results/E18_llm_dependency_reduction/e18_results.yaml
+    claims: [S20]
     status: done
-    feasibility: high   # extends R7 tier_mix harness with image-path queries
+
   E19_knowledge_graph_traversal:
-    question: Can a 3-hop traversal over the fact base yield complete 11-slot tuples with provenance and no LLM?
+    question: "Can a deterministic 3-hop traversal over the fact base yield complete 11-slot tuples with provenance?"
+    rq: RQ2, RQ5
     spec: specs/E19_knowledge_graph_traversal.spec.yaml
     script: experiments/scripts/E19_knowledge_graph_traversal/run_e19.py
     results: experiments/results/E19_knowledge_graph_traversal/e19_results.yaml
+    claims: [S19]
     status: done
-    feasibility: high   # deterministic; builds on R2/R12 fact base + ingestion contract
+
   E20_telecom_economics:
-    question: Updated C_safe with real BD bulk-SMS (~0.20 BDT/SMS) and local VPS hosting vs commercial LLM APIs?
+    question: "Cost per certified safe advisory (C_safe) with real BD A2P SMS rates and local VPS hosting?"
+    rq: RQ5
     spec: specs/E20_telecom_economics.spec.yaml
     script: experiments/scripts/E20_telecom_economics/run_e20.py
     results: experiments/results/E20_telecom_economics/e20_results.yaml
+    claims: [S26]
     status: done
-    feasibility: medium # needs verified 2026 price sheets from operators (desk research, no fabrication)
+
   E21_dialect_hazard_routing:
-    question: Does routing path (text-first vs detection-gated) change safety hazard rate per linguistic register?
+    question: "Does routing path (text-first vs detection-gated) change safety hazard rate per linguistic register?"
+    rq: RQ4
     spec: specs/E21_dialect_hazard_routing.spec.yaml
     script: experiments/scripts/E21_dialect_hazard_routing/run_e21.py
     results: experiments/results/E21_dialect_hazard_routing/e21_results.yaml
+    claims: [S24]
     status: done
-    feasibility: high   # unique idea §5.2; reuses E06 sets + E17/E19 paths
-    depends_on: [E17, E19]
+
   E22_sms_injection_immunity:
-    question: Can prompt-injection payloads survive into outbound SMS (deterministic template vs LLM-composed)?
+    question: "Can prompt-injection payloads survive into outbound SMS (deterministic template vs LLM-composed)?"
+    rq: RQ5
     spec: specs/E22_sms_injection_immunity.spec.yaml
     script: experiments/scripts/E22_sms_injection_immunity/run_e22.py
     results: experiments/results/E22_sms_injection_immunity/e22_results.yaml
+    claims: [S22]
     status: done
-    feasibility: high   # unique idea §5.4; reuses E15 compressor + E07 suite
-    depends_on: [E15]
+
   E23_cache_invalidation_provenance:
-    question: Tamper-evident hash-chained invalidation of the offline fact pack, with provenance per cached advisory?
+    question: "Tamper-evident hash-chained invalidation of the offline fact pack, with provenance per cached advisory?"
+    rq: RQ5
     spec: specs/E23_cache_invalidation_provenance.spec.yaml
     script: experiments/scripts/E23_cache_invalidation_provenance/run_e23.py
     results: experiments/results/E23_cache_invalidation_provenance/e23_results.yaml
+    claims: [S25]
     status: done
-    feasibility: high   # unique idea §5.1; builds on R9 pack
+
   E24_coverage_gap_growth_loop:
-    question: How much coverage does one targeted fact-base extension close, at what authoring cost?
+    question: "How much coverage does targeted fact-base extension close, at what authoring cost?"
+    rq: RQ3
     spec: specs/E24_coverage_gap_growth_loop.spec.yaml
     script: experiments/scripts/E24_coverage_gap_growth_loop/run_e24.py
     results: experiments/results/E24_coverage_gap_growth_loop/e24_results.yaml
+    claims: [S28]
     status: done
-    feasibility: medium # unique idea §5.3; needs one real authoring session (one crop×pest cluster)
-    depends_on: [E19]
+
   E25_intent_classifier_training:
-    question: Can a tiny trained classifier match LLM intent parsing at negligible latency/cost (optional Tier-2 assist)?
+    question: "Can a tiny trained classifier match LLM intent parsing at negligible latency/cost?"
+    rq: RQ5
     spec: specs/E25_intent_classifier_training.spec.yaml
     script: experiments/scripts/E25_intent_classifier_training/run_e25.py
     results: experiments/results/E25_intent_classifier_training/e25_results.yaml
+    claims: [S27]
     status: done
-    feasibility: high   # the "training one"; frozen T09 train split archived; offline research artifact only
+
   E26_chunk_fallback_coverage_safety:
-    question: How many refused zero-source queries become verifiably grounded answers via MD-chunk fallback, at what safety cost?
+    question: "How many refused zero-source queries become verifiably grounded answers via MD-chunk fallback?"
+    rq: RQ1, RQ3
     spec: specs/E26_chunk_fallback_coverage_safety.spec.yaml
     script: experiments/scripts/E26_chunk_fallback_coverage_safety/run_e26.py
-    results: results/E26_chunk_fallback_coverage_safety/e26_results.yaml
-    status: done_unverified   # frozen 2026-08-27; awaiting author sign-off (accepted_by)
-    feasibility: high   # R13 substrate (Amendment 03 §7): 4,815-chunk index, node->md map 1,713/2,120
-    key_findings:
-      - production zero-source condition is rare: 3/1000 farmer-benchmark queries; only 3/1745
-        body sentences from uncovered MDs pass the hybrid gate (node index lexically near-complete)
-      - all measured refusals (n=3, small) became verifier-passing T3 answers through the real
-        pipeline wiring on the offline lane; LLM-side hazard needs a live-lane follow-up
-      - golden replay 50/50 invariants PASS with CHUNK_FALLBACK_ENABLED=true; node path delta 0
-      - promotion queue top item = BARI krishiprojukti_hatboi section 0564 with 94 benchmark-wide
-        demand hits (feeds E24 growth loop)
-    note: gates flipping CHUNK_FALLBACK_ENABLED default to ON once the author accepts this result
+    results: experiments/results/E26_chunk_fallback_coverage_safety/e26_results.yaml
+    status: done_unverified
 
-cross_cutting:
-  aggregation_plan: IMPLEMENTATION_AND_AGGREGATION_PLAN.md
-  acceptance_protocol: ACCEPTANCE_PROTOCOL.md          # run → verify → real-app check → freeze → accept
-  result_schema: results/RESULT_SCHEMA_TEMPLATE.yaml
-  config_convention: the spec YAML IS the config; runners read specs/<layer>.spec.yaml directly (no duplicate configs)
-  runner_convention_completed: research_artifacts/scripts/runners/run_<layer>_eval.py
-  results_convention_completed: research_artifacts/evaluations/<category>/<layer>_results.yaml
-  new_scripts_home: scripts/          # one folder per layer: scripts/E14_network_degradation/ (+ work/ for temps, gitignored)
-  new_results_home: results/          # mirrors script folder names; frozen YAML only, per RESULT_SCHEMA_TEMPLATE.yaml
-  acceptance_states: done_unverified until the author signs acceptance.accepted_by in the result YAML
+expanded_cea_rigor_layers:
+  E27_independent_expert_benchmark:
+    question: "End-to-end correctness and CUAR across 2,000 naturalistic + 1,000 adversarial cases on B0-B6 baselines?"
+    rq: RQ1
+    spec: specs/E27_independent_expert_benchmark.spec.yaml
+    script: experiments/scripts/E27_independent_expert_benchmark/run_e27.py
+    results: experiments/results/E27_independent_expert_benchmark/e27_results.yaml
+    status: planned
+
+  E28_metamorphic_authority_testing:
+    question: "Do 10k-20k single-slot metamorphic perturbations strictly fail certification across all 11 slots?"
+    rq: RQ2
+    spec: specs/E28_metamorphic_authority_testing.spec.yaml
+    script: experiments/scripts/E28_metamorphic_authority_testing/run_e28.py
+    results: experiments/results/E28_metamorphic_authority_testing/e28_results.yaml
+    status: planned
+
+  E29_parametric_evidence_conflict:
+    question: "Does the system follow validated agricultural evidence when LLM parametric priors conflict?"
+    rq: RQ1, RQ2
+    spec: specs/E29_parametric_evidence_conflict.spec.yaml
+    script: experiments/scripts/E29_parametric_evidence_conflict/run_e29.py
+    results: experiments/results/E29_parametric_evidence_conflict/e29_results.yaml
+    status: planned
+
+  E30_temporal_source_authority_conflict:
+    question: "Does the authority layer reject outdated/secondary evidence when conflicting recommendations exist?"
+    rq: RQ4, RQ5
+    spec: specs/E30_temporal_source_authority_conflict.spec.yaml
+    script: experiments/scripts/E30_temporal_source_authority_conflict/run_e30.py
+    results: experiments/results/E30_temporal_source_authority_conflict/e30_results.yaml
+    status: planned
+
+  E31_multimodal_perception_uncertainty:
+    question: "Does visual/text perception conflict safely route to clarification/abstention rather than toxic advice?"
+    rq: RQ4
+    spec: specs/E31_multimodal_perception_uncertainty.spec.yaml
+    script: experiments/scripts/E31_multimodal_perception_uncertainty/run_e31.py
+    results: experiments/results/E31_multimodal_perception_uncertainty/e31_results.yaml
+    status: planned

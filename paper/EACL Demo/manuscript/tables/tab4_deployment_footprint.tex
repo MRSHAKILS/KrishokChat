@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{Production Deployment Footprint, Artifact Sizes, Memory Consumption, and Hardware Requirements.}
+\label{tab:deployment_footprint}
+\small
+\begin{tabular}{llccc}
+\toprule
+\textbf{Component / Service} & \textbf{Artifact Type / Format} & \textbf{Disk Size (MB)} & \textbf{RAM Allocation (MB)} & \textbf{Execution Target} \\
+\midrule
+Backend API Service & FastAPI + Uvicorn Async & 45.2 MB & 120.0 MB & Cloud VPS / Edge Server \\
+Frontend Web Application & Next.js 14 App Router + Tailwind & 18.5 MB & 85.0 MB & Edge CDN / Browser PWA \\
+Crop Classifier & INT8 ONNX (EfficientNet-B0) & 5.9 MB & 42.5 MB & Client Mobile CPU / VPS \\
+Potato Disease Classifier & INT8 ONNX (MobileNetV3) & 20.8 MB & 68.2 MB & Client Mobile CPU / VPS \\
+Structured Fact Pack & Compressed SQLite Database & 11.2 MB & 24.0 MB & On-Device Storage \\
+Hybrid RAG Index & Precomputed FAISS + BM25 Chunks & 84.5 MB & 165.0 MB & Backend In-Process \\
+Gemma-4 4-bit Base + LoRA & GGUF Q4\_K\_M Llama-Server & 2,450.0 MB & 3,200.0 MB & Backend GPU / CPU \\
+\textbf{Total System Footprint} & \textbf{Self-Contained Container} & \textbf{2.63 GB} & \textbf{3.70 GB} & \textbf{Single Linux VPS / Edge} \\
+\bottomrule
+\end{tabular}
+\end{table*}

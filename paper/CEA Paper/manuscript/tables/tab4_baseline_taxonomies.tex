@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{Taxonomy of evaluated baseline architectures and experimental configurations (B0--B6).}
+\label{tab:baseline_taxonomies}
+\small
+\begin{tabular}{lllc}
+\toprule
+\textbf{Baseline ID} & \textbf{Architecture Designation} & \textbf{Operational Workflow \& Mechanism} & \textbf{Factual Authority} \\
+\midrule
+\textbf{B0} & LLM-Only (Direct Generation) & Zero-shot generation via fine-tuned Gemma-4 4-bit; no retrieval & Parametric Weights \\
+\textbf{B1} & Vanilla RAG & BM25 + dense hybrid retrieval $\rightarrow$ unconstrained LLM generation & Parametric + Text \\
+\textbf{B2} & Guarded RAG & Input risk classifier $\rightarrow$ RAG retrieval $\rightarrow$ generation & Parametric + Text \\
+\textbf{B3} & RAG + Post-hoc LLM Judge & RAG generation $\rightarrow$ secondary LLM evaluates textual faithfulness & Secondary LLM \\
+\textbf{B4} & Deterministic Resolver & Direct multi-hop graph traversal over fact base; no generation & Structured Fact Store \\
+\textbf{B5} & \textbf{Bounded-Authority Advisory (BAA)} & \textbf{Selective resolution ladder $\rightarrow$ fail-closed 11-slot certification} & \textbf{Single Valid Record} \\
+\textbf{B6} & Evidence-Constrained Multi-Doc RAG & Multi-document citation requirement without single-record binding & Multi-chunk Lexical \\
+\bottomrule
+\end{tabular}
+\end{table*}

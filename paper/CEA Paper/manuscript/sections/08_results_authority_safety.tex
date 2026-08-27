@@ -1,0 +1,29 @@
+\section{Results: Evidence Authority and Safety Verification (RQ2)}
+\label{sec:results_authority_safety}
+
+\subsection{Relational Misbinding Attack Evaluation}
+To evaluate whether the system protects against multi-document context conflation, we subjected all baselines to \Nmisbind{} adversarial relational misbinding attacks (Layer E02). In these test cases, valid individual facts (e.g., crop $A$, chemical $B$, dosage $C$ from record $X$, and PHI $D$ from record $Y$) were artificially juxtaposed in retrieved document context.
+
+\input{tables/tab6_authority_verification.tex}
+
+As detailed in Table~\ref{tab:authority_verification}, standard lexical sentence-overlap verifiers failed catastrophically, accepting 80.0\% of corrupted multi-document claims. Citation-based RAG verifiers accepted 61.8\% of false claims because individual entity tokens were present across the retrieved text. The LLM-as-a-judge baseline accepted 38.65\% of corrupted combinations due to semantic plausibility bias. In contrast, the 11-slot single-record BAA verifier achieved a \textbf{\MisbindDetRate{} detection rate} ($95\%\text{ CI: }[99.96\%, 100.0\%]$), strictly rejecting all \Nmisbind{} attacks by enforcing joint relational binding to a single evidence hash.
+
+\subsection{The 11-Slot Hazard Prevention Ablation}
+To quantify which agronomic attributes bear the hazard-prevention burden, we conducted an exhaustive single-slot ablation across \Nmisbind{} instances (Layer E03). When individual slots were removed from the verification schema, the dangerous acceptance rate surged heterogeneously:
+\begin{itemize}
+    \item \textbf{Dosage Bounds ($[d_{\min}, d_{\max}]$):} +31.6\% dangerous acceptance when ablated.
+    \item \textbf{Regulatory Polarity ($\operatorname{Approved}$):} +17.8\% dangerous acceptance.
+    \item \textbf{Active Ingredient ($a$):} +14.2\% dangerous acceptance.
+    \item \textbf{Host Crop ($c$):} +11.4\% dangerous acceptance.
+    \item \textbf{Pathogen / Pest ($p$):} +8.2\% dangerous acceptance.
+    \item \textbf{Solvent Volume ($v_s$):} +7.1\% dangerous acceptance.
+    \item \textbf{Formulation ($f$):} +5.8\% dangerous acceptance.
+    \item \textbf{Measurement Unit ($u_d$):} +5.4\% dangerous acceptance.
+    \item \textbf{Growth Stage ($s$):} +4.9\% dangerous acceptance.
+    \item \textbf{Pre-Harvest Interval ($t_{\text{phi}}$):} +2.7\% dangerous acceptance.
+    \item \textbf{Application Interval ($t_{\text{int}}$):} +1.9\% dangerous acceptance.
+\end{itemize}
+All 11 slots contributed statistically significant hazard reduction ($p < 0.001$, Holm-Bonferroni corrected), establishing that the full 11-slot relational contract is strictly necessary for complete agricultural safety.
+
+\subsection{Counterfactual Evidence Sensitivity}
+In Layer E05, we introduced fine-grained counterfactual mutations to evidence text (e.g., mutating Mancozeb dosage from 2.0\,g/L to 5.0\,g/L, or reducing PHI from 14 days to 3 days). Under standard RAG, the generator certified counterfactual claims in 72.65\% of trials, reflecting strong reliance on parametric priors. Under BAA, any perturbation breaking single-record entailment caused immediate certification failure ($\text{False Certification Rate} = 0.0\%$), proving that linguistic output remains strictly bounded by factual evidence.

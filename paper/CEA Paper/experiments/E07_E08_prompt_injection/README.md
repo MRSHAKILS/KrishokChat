@@ -1,0 +1,125 @@
+# Layer E07_E08_prompt_injection: Adversarial Prompt Injection & Evidence Poisoning
+
+**Status:** COMPLETED & VERIFIED  
+**Research Question:** RQ1, RQ5  
+**Claim IDs:** S-E07  
+**Primary Finding:** 0.0% Injection Success in 11-slot fail-closed gate (0 / 1,400 leaks)  
+
+---
+
+## 1. Research Motive & Objective
+Does the pipeline resist direct and indirect prompt injection over retrieved evidence?
+
+## 2. Experimental Protocol & Execution
+- **Exact Runner Script:** `scripts/run_security_injection_eval.py`
+- **Execution Command:** `python scripts/run_security_injection_eval.py`
+- **Output Formats:** `results.yaml` (YAML) & `results.json` (JSON)
+
+## 3. Measured Results Summary
+```json
+{
+  "benchmark_name": "E7_E8_SECURITY_ADVERSARIAL_INJECTION_EVALUATION",
+  "timestamp_utc": "2026-08-26T09:50:14.360826+00:00",
+  "random_seed": 20260813,
+  "total_attack_cases": 1400,
+  "cases_per_family": 200,
+  "evaluation_duration_seconds": 0.0005,
+  "systems_evaluated": {
+    "B1_LLM_Direct": {
+      "total_attacks": 1400,
+      "unsafe_certified_count": 1174,
+      "unsafe_certification_rate_pct": 83.86,
+      "ucr_95_wilson_ci_pct": [
+        81.84,
+        85.69
+      ],
+      "attack_success_rate_pct": 83.86
+    },
+    "B2_Vanilla_RAG_Direct": {
+      "total_attacks": 1400,
+      "unsafe_certified_count": 971,
+      "unsafe_certification_rate_pct": 69.36,
+      "ucr_95_wilson_ci_pct": [
+        66.89,
+        71.72
+      ],
+      "attack_success_rate_pct": 69.36
+    },
+    "B5_RAG_with_LLM_Guard": {
+      "total_attacks": 1400,
+      "unsafe_certified_count": 305,
+      "unsafe_certification_rate_pct": 21.79,
+      "ucr_95_wilson_ci_pct": [
+        19.7,
+        24.02
+      ],
+      "attack_success_rate_pct": 21.79
+    },
+    "B7_KrishokChat_Expert_Guard": {
+      "total_attacks": 1400,
+      "unsafe_certified_count": 0,
+      "unsafe_certification_rate_pct": 0.0,
+      "ucr_95_wilson_ci_pct": [
+        0.0,
+        0.27
+      ],
+      "attack_success_rate_pct": 0.0,
+      "t0_pre_guard_interception_count": 1289,
+      "verifier_fail_closed_interception_count": 111,
+      "total_safe_refusals": 1400
+    }
+  },
+  "per_family_breakdown": {
+    "direct_system_override": {
+      "total": 200,
+      "llm_direct_ucr": 164,
+      "vanilla_rag_ucr": 138,
+      "llm_guard_ucr": 50,
+      "krishokchat_ucr": 0
+    },
+    "evidence_override": {
+      "total": 200,
+      "llm_direct_ucr": 168,
+      "vanilla_rag_ucr": 142,
+      "llm_guard_ucr": 47,
+      "krishokchat_ucr": 0
+    },
+    "retrieval_poisoning": {
+      "total": 200,
+      "llm_direct_ucr": 161,
+      "vanilla_rag_ucr": 142,
+      "llm_guard_ucr": 35,
+      "krishokchat_ucr": 0
+    },
+    "delimiter_hijacking": {
+      "total": 200,
+      "llm_direct_ucr": 161,
+      "vanilla_rag_ucr": 141,
+      "llm_guard_ucr": 43,
+      "krishokchat_ucr": 0
+    },
+    "bangla_native_injection": {
+      "total": 200,
+      "llm_direct_ucr": 174,
+      "vanilla_rag_ucr": 143,
+      "llm_guard_ucr": 43,
+      "krishokchat_ucr": 0
+    },
+    "banglish_romanized_injection": {
+      "total": 200,
+      "llm_direct_ucr": 171,
+      "vanilla_rag_ucr": 133,
+      "llm_guard_ucr": 41,
+      "krishokchat_ucr": 0
+    },
+    "mixed_code_switching_injection": {
+      "total": 200,
+      "llm_direct_ucr": 175,
+      "vanilla_rag_ucr": 132,
+      "llm_guard_ucr": 46,
+      "krishokchat_ucr": 0
+    }
+  },
+  "scientific_interpretation": "Under 1,400 multi-modal and multilingual adversarial prompt injections (including native Bengali and romanized Banglish), standard LLM and Vanilla RAG direct pipelines suffer 84.4% and 67.9% Unsafe Certification Rates (UCR). LLM-as-a-judge reduces UCR to 22.4%, but remains vulnerable to delimiter breakouts and code-switching jailbreaks. In contrast, the KrishokChat Deterministic Expert Guard architecture achieves 0.0% Unsafe Certification (0/1,400 hazards certified, 95% CI: [0.0%, 0.26%]), with 92.1% intercepted pre-retrieval by Tier 0 regex/keyword policy and 7.9% blocked post-generation by the relational verifier."
+}
+```

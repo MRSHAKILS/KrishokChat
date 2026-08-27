@@ -1,0 +1,19 @@
+\section{Results: Selective Resolution and Uncertainty Calibration (RQ3)}
+\label{sec:results_selective_reliability}
+
+\subsection{Risk-Coverage Calibration Analysis}
+To evaluate how effectively BAA manages uncertain or out-of-domain queries, we conducted risk-coverage calibration across 20,112 safety-critical test cases (Layer E04).
+
+\input{tables/tab7_risk_coverage_calibration.tex}
+
+As shown in Table~\ref{tab:risk_coverage_calibration}, BAA achieves an Area Under the Risk-Coverage curve ($\text{AURC}$) of \textbf{0.0153} and an Expected Calibration Error ($\text{ECE}$) of \textbf{0.0785}, substantially outperforming uncalibrated softmax ($\text{AURC} = 0.0842$) and standard temperature scaling ($\text{AURC} = 0.0512$). Under a predefined strict risk budget of $\text{Risk} \le 1.0\%$, BAA sustains \textbf{84.56\% advisory coverage} at the frozen threshold $\theta^* = 0.2375$, confirming that the system provides high operational utility while bounding critical risk.
+
+\subsection{Lightweight Intent Classification and Entity Routing}
+In Layer E25, we evaluated the lightweight character $n$-gram supervised intent router. The router achieved a 78.4\% joint exact match (93.6\% crop, 95.2\% intent) with an average inference latency of \textbf{0.3855\,ms} (p50) and a memory footprint of 1.25\,MB, running 3,242$\times$ faster than fine-tuned Gemma-4 (1,250\,ms). By utilizing the router to absorb morphological noise and narrow the candidate search space, BAA isolates the heavy generative pipeline from low-complexity queries.
+
+\subsection{Root-Cause Failure Taxonomy (100-Case Audit)}
+To diagnose residual failure mechanisms, we conducted an exhaustive root-cause audit of 100 failed or rejected interactions (Layer E10), summarized in Table~\ref{tab:failure_mitigation}.
+
+\input{tables/tab10_failure_mitigation.tex}
+
+The audit revealed that 28\% of failures stemmed from retrieval omission (where standard BM25 missed obscure phrasing), 22\% from multi-document misbinding attempts (all caught by the verifier), 14\% from colloquial numerical/volume ambiguity, and 12\% from under-specified symptoms. Importantly, all critical safety-threatening failures were successfully intercepted by the fail-closed verifier, resulting in safe abstention rather than toxic delivery.

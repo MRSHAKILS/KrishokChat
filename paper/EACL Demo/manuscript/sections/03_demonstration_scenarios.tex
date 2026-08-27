@@ -1,0 +1,21 @@
+\section{Demonstration Scenarios}
+\label{sec:demonstration_scenarios}
+
+The interactive demonstration at \url{https://krishokchat.org} and accompanying video screencast walk users through five representative real-world scenarios (Table~\ref{tab:demo_scenarios}).
+
+\input{tables/tab2_demo_scenarios.tex}
+
+\subsection{Scenario 1: Resolving Underspecified Symptoms}
+A farmer enters an ambiguous colloquial query: \textit{``পাতায় দাগ পড়ছে, কী দিমু?''} (``Spots on leaves, what to apply?''). Instead of hallucinating a speculative pesticide, KrishokChat's intent detector identifies missing host crop and symptom details, initiating an interactive clarification dialogue asking the user to select the crop or upload a photograph.
+
+\subsection{Scenario 2: Multimodal Photo Diagnosis \& Safe Dosage Envelope}
+The user uploads a smartphone photograph of a diseased potato leaf. The vision subsystem predicts Potato Late Blight (confidence: 0.94). The system collapses the search space, retrieves BARI handbook guidelines, and renders a structured \textbf{Safe Action Card} detailing approved fungicides (Mancozeb 80 WP @ 2.0\,g/L water, 7-day interval, 14-day PHI) accompanied by an expandable ``Why this advice?'' audit panel.
+
+\subsection{Scenario 3: Cross-Modal Contradiction Disambiguation}
+A user uploads a potato late blight image but types: \textit{``আমার বেগুন গাছে পোকা লাগছে''} (``My brinjal plant has insects''). The cross-modal contradiction detector catches the crop mismatch ($c_{\text{image}} \ne c_{\text{text}}$), displaying an explicit warning badge and prompting the user to confirm whether they are inquiring about Potato or Brinjal before generating treatment recommendations.
+
+\subsection{Scenario 4: High-Risk Agrochemical Intervention & 16123 Redirect}
+When a user asks about banned organophosphate pesticides or frames queries suggesting personal poisoning risk, the Tier 0 safety gate immediately suppresses retrieval, rendering a prominent warning card and providing a direct one-touch dial button to the Bangladesh Krishi Call Center (16123).
+
+\subsection{Scenario 5: Constrained SMS \& Offline Caching}
+To support farmers without smartphones, the platform demonstrates deterministic 160-character SMS compression, preserving 100\% of critical dosage and PHI parameters in 108 GSM characters. Under simulated 30\% cellular packet loss, the client service worker seamlessly falls back to the on-device SQLite cache, delivering verified advice instantly.

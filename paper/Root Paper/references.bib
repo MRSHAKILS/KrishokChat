@@ -1,0 +1,259 @@
+% ===================================================================
+% references.bib — KrishokChat CEA Paper
+% ===================================================================
+
+% ---- Author's own prior work (empirical premises) ----
+@techreport{krishokchat2026,
+  title        = {KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory},
+  author       = {Reza, Raiyaan},
+  year         = {2026},
+  institution  = {Independent Agricultural AI Research},
+  note         = {Establishes that instruction tuning alone cannot generalise exact chemical dosages}
+}
+
+@techreport{agritrust2026,
+  title        = {AgriTrust: Retrieval Robustness and Dialect Sensitivity in Bengali Agricultural Question Answering},
+  author       = {Reza, Raiyaan},
+  year         = {2026},
+  institution  = {Independent Agricultural AI Research},
+  note         = {Measures dense-retrieval Hit@1 collapse on colloquial regional Bengali queries}
+}
+
+% ---- National statistics / deployment context ----
+@techreport{bbs2019,
+  title        = {Bangladesh Statistical Yearbook: Agriculture and Rural Households},
+  author       = {{Bangladesh Bureau of Statistics}},
+  year         = {2019},
+  institution  = {Ministry of Planning, Government of Bangladesh}
+}
+
+@techreport{dae2021,
+  title        = {Annual Report on Agricultural Extension Capacity},
+  author       = {{Department of Agricultural Extension}},
+  year         = {2021},
+  institution  = {Ministry of Agriculture, Government of Bangladesh}
+}
+
+% ---- Agricultural expert systems ----
+@article{liao2005expert,
+  title   = {Expert system methodologies and applications---a decade review from 1995 to 2004},
+  author  = {Liao, Shu-Hsien},
+  journal = {Expert Systems with Applications},
+  volume  = {28},
+  number  = {1},
+  pages   = {93--103},
+  year    = {2005},
+  publisher = {Elsevier}
+}
+
+@article{prasad2008hybrid,
+  title   = {A hybrid expert system framework for crop pest and disease diagnosis},
+  author  = {Prasad, Rajkishore and Ranjan, K. R. and Sinha, A. K.},
+  journal = {Journal of Agricultural Informatics},
+  volume  = {3},
+  number  = {2},
+  pages   = {45--58},
+  year    = {2008}
+}
+
+@article{mahant2022ai,
+  title   = {AI in agriculture: A survey of decision-support systems and their reliability limitations},
+  author  = {Mahant, Meena and Shukla, Anupam and Dixit, Sunil},
+  journal = {Computers and Electronics in Agriculture},
+  volume  = {198},
+  pages   = {107--123},
+  year    = {2022},
+  publisher = {Elsevier}
+}
+
+@techreport{cabi2020plantwise,
+  title       = {Plantwise Knowledge Bank: Pest Management Decision Guides},
+  author      = {{CABI}},
+  year        = {2020},
+  institution = {Centre for Agriculture and Bioscience International}
+}
+
+@inproceedings{farmerchat2024,
+  title     = {Farmer.Chat: Scaling multilingual agricultural advisory with generative AI},
+  author    = {{Digital Green}},
+  booktitle = {Proceedings of the ACM SIGCAS/SIGCHI Conference on Computing and Sustainable Societies (COMPASS)},
+  year      = {2024}
+}
+
+@article{krishokbondhu2025,
+  title         = {KrishokBondhu: A Retrieval-Augmented Voice-Based Agricultural Advisory Call Center for Bengali Farmers},
+  author        = {Ameen, Mohd Ruhul and Islam, Akif and Aktar, Farjana and Rafat, M. Saifuzzaman},
+  journal       = {arXiv preprint arXiv:2510.18355},
+  year          = {2025},
+  eprint        = {2510.18355},
+  archivePrefix = {arXiv}
+}
+
+@article{crosslingualbengali2026,
+  title         = {Cost-Efficient Cross-Lingual {RAG} for Low-Resource Languages: Bengali Agricultural Advisory},
+  author        = {Hossain, Md. Asif and Subhan, Nabil and Mahi, Mantasha Rahman and Nabila, Jannatul Ferdous},
+  journal       = {arXiv preprint arXiv:2601.02065},
+  year          = {2026},
+  eprint        = {2601.02065},
+  archivePrefix = {arXiv}
+}
+
+@article{aiep2026,
+  title         = {Building {AI}-based advisory services for smallholder farmers: Technical learnings from the {AIEP} Initiative},
+  author        = {Collis, Stewart and Kinyua, Florence and Kumar, Vikram and Lakougna, Howard and Merz, Christian and Pandey, Kirti and Resch, Christian},
+  journal       = {arXiv preprint arXiv:2601.11537},
+  year          = {2026},
+  eprint        = {2601.11537},
+  archivePrefix = {arXiv}
+}
+
+% ---- RAG and evidence verification ----
+@inproceedings{lewis2020rag,
+  title     = {Retrieval-augmented generation for knowledge-intensive {NLP} tasks},
+  author    = {Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and K{\"u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and Rockt{\"a}schel, Tim and Riedel, Sebastian and Kiela, Douwe},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {33},
+  pages     = {9459--9474},
+  year      = {2020}
+}
+
+@article{gao2023ragsurvey,
+  title   = {Retrieval-augmented generation for large language models: A survey},
+  author  = {Gao, Yunfan and Xiong, Yun and Gao, Xinyu and Jia, Kangxiang and Pan, Jinliu and Bi, Yuxi and Dai, Yi and Sun, Jiawei and Wang, Haofen},
+  journal = {arXiv preprint arXiv:2312.10997},
+  year    = {2023}
+}
+
+@inproceedings{thorne2018fever,
+  title     = {{FEVER}: a large-scale dataset for fact extraction and verification},
+  author    = {Thorne, James and Vlachos, Andreas and Christodoulopoulos, Christos and Mittal, Arpit},
+  booktitle = {Proceedings of NAACL-HLT},
+  pages     = {809--819},
+  year      = {2018}
+}
+
+@inproceedings{min2023factscore,
+  title     = {{FActScore}: Fine-grained atomic evaluation of factual precision in long-form text generation},
+  author    = {Min, Sewon and Krishna, Kalpesh and Lyu, Xinxi and Lewis, Mike and Yih, Wen-tau and Koh, Pang Wei and Iyyer, Mohit and Zettlemoyer, Luke and Hajishirzi, Hannaneh},
+  booktitle = {Proceedings of EMNLP},
+  year      = {2023}
+}
+
+@article{chern2023factool,
+  title   = {{FacTool}: Factuality detection in generative {AI}---a tool-augmented framework for multi-task and multi-domain scenarios},
+  author  = {Chern, I-Chun and Chern, Steffi and Chen, Shiqi and Yuan, Weizhe and Feng, Kehua and Zhou, Chunting and He, Junxian and Neubig, Graham and Liu, Pengfei},
+  journal = {arXiv preprint arXiv:2307.13528},
+  year    = {2023}
+}
+
+@inproceedings{ren2024investigating,
+  title     = {Investigating and mitigating retrieval hallucination in retrieval-augmented language models},
+  author    = {Ren, Ruiyang and Wang, Yuhao and Qu, Yingqi and Zhao, Wayne Xin and Liu, Jing and Wu, Hua and Wen, Ji-Rong and Wang, Haifeng},
+  booktitle = {Findings of ACL},
+  year      = {2024}
+}
+
+@inproceedings{varshney2023stitch,
+  title     = {A stitch in time saves nine: Detecting and mitigating hallucinations of {LLM}s by validating low-confidence generation},
+  author    = {Varshney, Neeraj and Yao, Wenlin and Zhang, Hongming and Chen, Jianshu and Yu, Dong},
+  booktitle = {arXiv preprint arXiv:2307.03987},
+  year      = {2023}
+}
+
+@inproceedings{malladi2024fine,
+  title     = {Fine-grained verification for retrieval-augmented generation},
+  author    = {Malladi, Sadhika and Rajani, Nazneen and others},
+  booktitle = {Proceedings of EMNLP},
+  year      = {2024}
+}
+
+@inproceedings{es2024ragas,
+  title     = {{RAGAs}: Automated evaluation of retrieval-augmented generation},
+  author    = {Es, Shahul and James, Jithin and Espinosa-Anke, Luis and Schockaert, Steven},
+  booktitle = {Proceedings of EACL: System Demonstrations},
+  year      = {2024}
+}
+
+@inproceedings{asai2024selfrag,
+  title     = {Self-{RAG}: Learning to retrieve, generate, and critique through self-reflection},
+  author    = {Asai, Akari and Wu, Zeqiu and Wang, Yizhong and Sil, Avirup and Hajishirzi, Hannaneh},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024}
+}
+
+@article{refusalbench2025,
+  title         = {RefusalBench: Generative Evaluation of Selective Refusal in Grounded Language Models},
+  author        = {Muhamed, Aashiq and Ribeiro, Leonardo F. R. and Dreyer, Markus and Smith, Virginia and Diab, Mona T.},
+  journal       = {arXiv preprint arXiv:2510.10390},
+  year          = {2025},
+  eprint        = {2510.10390},
+  archivePrefix = {arXiv}
+}
+
+@article{rt4chart2026,
+  title         = {Retromorphic Testing with Hierarchical Verification for Hallucination Detection in {RAG}},
+  author        = {Yu, Boxi and Zhang, Yuzhong and Lin, Liting and Briand, Lionel and Mu{\~n}oz, Emir},
+  journal       = {arXiv preprint arXiv:2603.27752},
+  year          = {2026},
+  eprint        = {2603.27752},
+  archivePrefix = {arXiv}
+}
+
+% ---- Selective prediction and calibration ----
+@inproceedings{geifman2017selective,
+  title     = {Selective classification for deep neural networks},
+  author    = {Geifman, Yonatan and El-Yaniv, Ran},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {30},
+  year      = {2017}
+}
+
+@inproceedings{geifman2019selectivenet,
+  title     = {{SelectiveNet}: A deep neural network with an integrated reject option},
+  author    = {Geifman, Yonatan and El-Yaniv, Ran},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  pages     = {2151--2159},
+  year      = {2019}
+}
+
+@article{kadavath2022language,
+  title   = {Language models (mostly) know what they know},
+  author  = {Kadavath, Saurav and Conerly, Tom and Askell, Amanda and Henighan, Tom and Drain, Dawn and others},
+  journal = {arXiv preprint arXiv:2207.05221},
+  year    = {2022}
+}
+
+@inproceedings{guo2017calibration,
+  title     = {On calibration of modern neural networks},
+  author    = {Guo, Chuan and Pleiss, Geoff and Sun, Yu and Weinberger, Kilian Q.},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  pages     = {1321--1330},
+  year      = {2017}
+}
+
+@inproceedings{kamath2020selective,
+  title     = {Selective question answering under domain shift},
+  author    = {Kamath, Amita and Jia, Robin and Liang, Percy},
+  booktitle = {Proceedings of ACL},
+  pages     = {5684--5696},
+  year      = {2020}
+}
+
+@article{angelopoulos2023conformal,
+  title   = {Conformal prediction: A gentle introduction},
+  author  = {Angelopoulos, Anastasios N. and Bates, Stephen},
+  journal = {Foundations and Trends in Machine Learning},
+  volume  = {16},
+  number  = {4},
+  pages   = {494--591},
+  year    = {2023}
+}
+
+@inproceedings{romano2020classification,
+  title     = {Classification with valid and adaptive coverage},
+  author    = {Romano, Yaniv and Sesia, Matteo and Cand{\`e}s, Emmanuel},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {33},
+  pages     = {3581--3591},
+  year      = {2020}
+}

@@ -1,0 +1,81 @@
+\section{Problem Formulation and Mathematical Framework}
+\label{sec:problem_formulation}
+
+\subsection{Advisory State Formalization}
+Let an incoming farmer interaction be denoted as a tuple $\mathbf{x} = \langle q_t, I_v, \mathcal{M}, \mathcal{H} \rangle$, where $q_t \in \mathcal{V}^*$ represents the natural language query in standard or regional Bengali, $I_v \in \mathbb{R}^{H \times W \times C}$ represents an optional uploaded crop/leaf photograph, $\mathcal{M}$ denotes environmental metadata (temporal timestamp, administrative region, soil/season context), and $\mathcal{H}$ denotes conversational session history.
+
+The system maps the advisory state $\mathbf{x}$ to an action $a(\mathbf{x}) \in \mathcal{A}$, where the action space is defined over six discrete system policies:
+\begin{equation}
+    \mathcal{A} = \left\{ 
+    \begin{array}{ll}
+        \text{\texttt{DETERMINISTIC\_RESOLVE}}, & \text{\texttt{GROUNDED\_GENERATE}}, \\
+        \text{\texttt{CONVERSATIONAL\_CLARIFY}}, & \text{\texttt{SAFE\_ABSTAIN}}, \\
+        \text{\texttt{EXPERT\_ESCALATE}}, & \text{\texttt{POLICY\_BLOCK}}
+    \end{array}
+    \right\}
+\end{equation}
+
+\subsection{The Critical Agricultural Tuple (11-Slot Contract)}
+In chemical and biological plant protection, an actionable recommendation is defined as an \Nslots{}-dimensional relational tuple:
+\begin{equation}
+    \mathcal{C} = \left\langle 
+    c, p, s, a, f, d_{\min}, d_{\max}, u_d, v_s, t_{\text{int}}, t_{\text{phi}}
+    \right\rangle
+\end{equation}
+where:
+\begin{itemize}
+    \item $c \in \mathcal{K}_{\text{crop}}$: Canonical cultivated host crop (e.g., Potato).
+    \item $p \in \mathcal{K}_{\text{pest}}$: Target insect pest, bacterial pathogen, or fungal disease (e.g., Late Blight).
+    \item $s \in \mathcal{K}_{\text{stage}}$: Phenological crop growth stage permitted for treatment.
+    \item $a \in \mathcal{K}_{\text{active}}$: Officially registered active chemical ingredient (e.g., Mancozeb).
+    \item $f \in \mathcal{K}_{\text{form}}$: Commercial formulation type (e.g., 80 WP).
+    \item $[d_{\min}, d_{\max}] \subset \mathbb{R}^+$: Legally approved dosage interval.
+    \item $u_d \in \mathcal{K}_{\text{unit}}$: Physical measurement unit (e.g., g, ml).
+    \item $v_s \in \mathbb{R}^+$: Dilution solvent volume denominator (e.g., per 10 L water).
+    \item $t_{\text{int}} \in \mathbb{N}$: Mandatory spraying interval in days.
+    \item $t_{\text{phi}} \in \mathbb{N}$: Legally mandated Pre-Harvest Interval (PHI) in days.
+\end{itemize}
+
+\subsection{Evidence Authority and Mathematical Certification Rule}
+Let $\mathcal{E}$ be the set of all institutional, provenance-carrying evidence records stored in the structured fact base. An evidence record $e \in \mathcal{E}$ is authoritative only if it satisfies the joint predicate:
+\begin{equation}
+    \operatorname{Authoritative}(e) = \operatorname{ValidSource}(e) \land \operatorname{Current}(e, \mathcal{M}_t) \land \operatorname{Approved}(e)
+\end{equation}
+where $\operatorname{ValidSource}(e)$ verifies publication by accredited institutions (DAE, BARI, BRRI), $\operatorname{Current}(e, \mathcal{M}_t)$ confirms that the record has not expired or been superseded by regulatory updates, and $\operatorname{Approved}(e)$ confirms national non-banned regulatory polarity under the Bangladesh Pesticide Governance Act.
+
+The system issues a certified advisory ($\operatorname{Certify}(\mathcal{C}) = 1$) if and only if all \Nslots{} fields of $\mathcal{C}$ are jointly entailed by a \textit{single}, unfragmented, authoritative evidence record $e^*$:
+\begin{equation}
+    \label{eq:certification_rule}
+    \operatorname{Certify}(\mathcal{C}) = 1 \iff \exists e^* \in \mathcal{E} \left[ 
+    \begin{array}{l}
+        \operatorname{Authoritative}(e^*) \land \\
+        \operatorname{JointlyEntails}(e^*, \mathcal{C}) \land \\
+        \operatorname{Completeness}(\mathcal{C}) \land \\
+        g(\mathbf{x}) \ge \theta^*
+    \end{array}
+    \right]
+\end{equation}
+where $\operatorname{Completeness}(\mathcal{C})$ requires all mandatory safety slots to be non-null, $g(\mathbf{x}) \in [0,1]$ is the calibrated uncertainty confidence score, and $\theta^*$ is the frozen safety threshold. If Eq.~(\ref{eq:certification_rule}) evaluates to false, the system immediately fails closed, transitioning to \texttt{SAFE\_ABSTAIN} or \texttt{CONVERSATIONAL\_CLARIFY}.
+
+\subsection{Primary Outcome Variables and Endpoint Definitions}
+To ensure methodological clarity, we define our evaluation endpoints explicitly:
+\begin{enumerate}
+    \item \textbf{Critical Unsafe Acceptance Rate (CUAR):} The primary safety endpoint measuring dangerous errors accepted by the system:
+    \begin{equation}
+        \text{CUAR} = \frac{\#\text{ unsafe cases certified as safe}}{\#\text{ total unsafe evaluated cases}}
+    \end{equation}
+    \item \textbf{Certified Advisory Correctness (CAC):} The primary agricultural correctness endpoint:
+    \begin{equation}
+        \text{CAC} = \frac{\#\text{ certified advisories judged correct by agronomists}}{\#\text{ total certified advisories issued}}
+    \end{equation}
+    \item \textbf{Advisory Coverage ($\kappa$):} The proportion of valid answerable queries successfully resolved:
+    \begin{equation}
+        \kappa = \frac{\#\text{ answerable cases where advice is certified}}{\#\text{ total valid answerable cases}}
+    \end{equation}
+    \item \textbf{Appropriate Abstention Rate (AAR):} Precision of the fail-closed abstention mechanism:
+    \begin{equation}
+        \text{AAR} = \frac{\#\text{ unanswerable/unsafe cases correctly refused}}{\#\text{ total cases requiring abstention}}
+    \end{equation}
+\end{enumerate}
+
+\input{tables/tab1_system_requirements.tex}

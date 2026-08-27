@@ -1,0 +1,38 @@
+\section{Experimental Methodology}
+\label{sec:experimental_methodology}
+
+\subsection{Experimental Principles and Reproducibility Protocol}
+To maintain the highest standards of scientific rigor, all evaluations follow strict methodological controls:
+\begin{itemize}
+    \item \textbf{Frozen Test Partitions:} All evaluation datasets are frozen on disk and hashed via SHA-256 prior to benchmarking. No hyperparameter tuning or prompt optimization is performed post-evaluation.
+    \item \textbf{Identical Baseline Inputs:} All comparative baselines (B0--B6) receive identical raw input queries, image tensors, and environmental contexts.
+    \item \textbf{Deterministic Execution:} Random seeds are fixed across all stochastic components (seed = 20260827).
+    \item \textbf{Confidence Intervals:} All binary proportions and rate metrics report 95\% Wilson score confidence intervals.
+\end{itemize}
+
+\subsection{Benchmark Dataset Suites}
+The experimental battery spans five distinct evaluation corpora:
+\begin{enumerate}
+    \item \textbf{Adversarial Relational Misbinding Suite (\Nmisbind{} cases):} Programmatically generated cross-record and counterfactual perturbations designed to test joint-slot binding under multi-document conflict (Layers E02, E05).
+    \item \textbf{11-Slot Hazard Prevention Suite (\Nmisbind{} cases):} Comprehensive single-slot ablation dataset isolating the safety contribution of each agronomic attribute (Layer E03).
+    \item \textbf{Multi-Register Bengali Benchmark (4,000 cases):} Stratified corpus spanning Standard Bengali, Chittagonian/Sylheti regional dialects, Romanized Banglish, and authentic uncurated farmer voice queries (Layers E06, E17, E21).
+    \item \textbf{Adversarial Security \& Injection Suite (1,400 cases):} Jailbreaks, delimiter hijacking, native Bengali prompt injections, and poisoned retrieval contexts (Layers E07, E22).
+    \item \textbf{Simulated Rural Network Suite (1,000 queries $\times$ 4 profiles):} Emulated cellular latency, jitter, and packet loss profiles (Layer E14).
+\end{enumerate}
+
+\subsection{Comparative Baselines (B0--B6)}
+We compare BAA against six representative systems (Table~\ref{tab:baseline_taxonomies}):
+\begin{itemize}
+    \item \textbf{B0 (LLM-Only):} Fine-tuned Gemma-4 4-bit generating answers without retrieval.
+    \item \textbf{B1 (Vanilla RAG):} Standard hybrid BM25 + dense retrieval feeding the generator.
+    \item \textbf{B2 (Guarded RAG):} Standard RAG coupled with a 6-way input classification filter.
+    \item \textbf{B3 (RAG + LLM Judge):} State-of-the-art post-generation verification where a secondary LLM evaluates factual entailment \citep{generateverify2024}.
+    \item \textbf{B4 (Deterministic Resolver):} Pure graph traversal over structured facts without natural language generation.
+    \item \textbf{B5 (Bounded-Authority Advisory - BAA):} The proposed full multi-tier architecture with fail-closed relational certification.
+    \item \textbf{B6 (Evidence-Constrained RAG):} Multi-citation RAG requiring passage citations but lacking single-record joint binding.
+\end{itemize}
+
+\subsection{Expert Annotation Protocol and Inter-Rater Reliability}
+For qualitative validation, five practicing agronomists and Upazila Agricultural Officers from the Department of Agricultural Extension (DAE) evaluated system responses triple-blind. Raters assessed technical correctness, completeness, chemical safety, and abstention appropriateness on a 5-point Likert scale. Inter-rater reliability was measured using Gwet's AC1 statistic to account for high-agreement imbalances \citep{geerlings2020gwet}, achieving a strong consensus score of $\text{AC1} = \HumanGwetAC$ ($95\%\text{ CI: }[0.814, 0.910]$).
+
+\input{tables/tab4_baseline_taxonomies.tex}

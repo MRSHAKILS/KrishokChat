@@ -1,0 +1,11 @@
+meta:
+  layer: E38_simulated_human_escalation_queue
+  title: Simulated Human Extension Escalation Queue
+  status: planned
+  rq: RQ3, RQ5
+  question: What is the expert review workload and priority precision when routing
+    unresolvable queries to Krishi 16123?
+target_metrics:
+- Priority precision >= 92.0%
+- Review turnaround < 4.5 min
+measured_results: null

@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "layer": "E32_oracle_vs_predicted_routing",
+    "title": "Oracle vs. Predicted Metadata Routing Decomposition",
+    "status": "planned",
+    "rq": "RQ3, RQ4",
+    "question": "What is the error decomposition between routing errors, knowledge gaps, and generation failures?"
+  },
+  "target_metrics": [
+    "Decomposed error budget: routing error < 3.5%, verifier capture = 100%"
+  ],
+  "measured_results": null
+}

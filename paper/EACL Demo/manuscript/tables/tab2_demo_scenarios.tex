@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{Demonstration Scenarios Exhibited in the Live KrishokChat Platform and Screencast.}
+\label{tab:demo_scenarios}
+\small
+\begin{tabular}{clll}
+\toprule
+\textbf{Scenario} & \textbf{User Input / Modality} & \textbf{Internal Pipeline Transition} & \textbf{User-Facing Decision Outcome} \\
+\midrule
+\textbf{S1} & Underspecified symptom query (Text) & Intent classification $\rightarrow$ Ambiguity detector & Structured 2-turn clarification prompt \\
+\textbf{S2} & Potato leaf photo upload (Image) & Vision ONNX ($c=\text{Potato}, p=\text{Late Blight}$) $\rightarrow$ Tier 1 & Verified diagnostic card + dosage envelope \\
+\textbf{S3} & Conflicting image \& text query & Cross-modal semantic discrepancy detector & Discrepancy badge with user confirmation toggle \\
+\textbf{S4} & Banned chemical / Poisoning query & Tier 0 Safety Rule $\rightarrow$ Fail-closed interrupt & Static safety banner + Krishi 16123 helpline call button \\
+\textbf{S5} & Low-connectivity / 2G environment & Service worker $\rightarrow$ Offline SQLite Cache & Instant cached advisory with freshness timestamp \\
+\bottomrule
+\end{tabular}
+\end{table*}

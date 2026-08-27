@@ -1,0 +1,13 @@
+meta:
+  layer: E16_hardware_profiling
+  title: On-Device Hardware & Battery Profiling
+  status: planned
+  rq: RQ5
+  question: Battery drain, memory footprint, and thermal profile of on-device INT8
+    ONNX + cached Tier 1/2 on sub-$120 Android hardware?
+target_metrics:
+- Cold start latency < 150 ms
+- Warm inference < 35 ms
+- RAM < 75 MB
+- Battery drain < 0.15% per 100 queries
+measured_results: null

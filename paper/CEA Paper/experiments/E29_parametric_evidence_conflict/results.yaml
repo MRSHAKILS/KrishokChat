@@ -1,0 +1,11 @@
+meta:
+  layer: E29_parametric_evidence_conflict
+  title: Parametric Prior vs. Evidence Authority Conflict
+  status: planned
+  rq: RQ1, RQ2
+  question: When LLM pre-training prior conflicts with authoritative Bangladesh evidence,
+    does BAA adhere strictly to evidence?
+target_metrics:
+- P(evidence-backed) >= 99.0%
+- P(parametric leakage) <= 0.1%
+measured_results: null

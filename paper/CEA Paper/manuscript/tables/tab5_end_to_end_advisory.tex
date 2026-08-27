@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{End-to-end advisory performance across 4,000 multi-register queries evaluated triple-blind by 5 practicing agronomists.}
+\label{tab:end_to_end_advisory}
+\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{System Configuration} & \textbf{Certified Correctness (CAC)} & \textbf{Critical Unsafe (CUAR)} & \textbf{Safe Abstention} & \textbf{Advisory Coverage} & \textbf{Latency p95 (ms)} \\
+\midrule
+B0: LLM-Only & 54.2\% [52.6, 55.8] & 28.4\% [27.0, 29.8] & 0.0\% [0.0, 0.1] & 100.0\% [99.9, 100.0] & 1820.4 \\
+B1: Vanilla RAG & 68.6\% [67.1, 70.1] & 18.2\% [17.0, 19.4] & 4.2\% [3.6, 4.9] & 95.8\% [95.1, 96.4] & 1785.2 \\
+B2: Guarded RAG & 71.4\% [70.0, 72.8] & 11.6\% [10.6, 12.6] & 14.8\% [13.7, 15.9] & 85.2\% [84.1, 86.3] & 1792.0 \\
+B3: RAG + LLM Judge & 74.8\% [73.4, 76.2] & 6.8\% [6.0, 7.6] & 21.2\% [20.0, 22.5] & 78.8\% [77.5, 80.0] & 3450.6 \\
+B4: Deterministic Resolver & 98.4\% [97.8, 98.9] & 0.0\% [0.0, 0.1] & 48.6\% [47.0, 50.2] & 51.4\% [49.8, 53.0] & \textbf{0.42} \\
+\textbf{B5: Bounded-Authority (Proposed)} & \textbf{97.2\% [96.6, 97.7]} & \textbf{0.0\% [0.0, 0.09]} & \textbf{34.2\% [32.7, 35.7]} & \textbf{65.8\% [64.3, 67.3]} & \textbf{546.2} \\
+B6: Evidence-Constrained RAG & 82.4\% [81.2, 83.6] & 4.2\% [3.6, 4.9] & 22.6\% [21.3, 23.9] & 77.4\% [76.1, 78.7] & 1810.5 \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -1,0 +1,15 @@
+\section{Results: End-to-End Advisory Quality (RQ1)}
+\label{sec:results_advisory_quality}
+
+\subsection{Overall Correctness and Certified Advisory Precision}
+Table~\ref{tab:end_to_end_advisory} presents the primary empirical results across 4,000 multi-register test queries evaluated triple-blind by practicing agronomists.
+
+\input{tables/tab5_end_to_end_advisory.tex}
+
+The proposed Bounded-Authority Advisory (BAA) system achieves a \textbf{Certified Advisory Correctness (CAC) of 97.2\%} ($95\%\text{ CI: }[96.6\%, 97.7\%]$), significantly outperforming unconstrained LLM generation (54.2\%, $p < 0.001$, McNemar's test), Vanilla RAG (68.6\%, $p < 0.001$), and Guarded RAG (71.4\%, $p < 0.001$). While the pure deterministic resolver (B4) achieves a slightly higher nominal correctness on resolved queries (98.4\%), it suffers from low advisory coverage (51.4\%) due to its inability to interpret colloquial linguistic variations. BAA successfully bridges this gap, achieving 65.8\% advisory coverage while maintaining an uncompromised safety profile.
+
+\subsection{Critical Unsafe Acceptance Rate (CUAR)}
+On the primary safety endpoint, BAA recorded \textbf{zero dangerous acceptance events} ($\text{CUAR} = 0.0\%$, $95\%\text{ Wilson CI: }[0.00\%, 0.09\%]$) across all 4,000 naturalistic and dialectal queries. In stark contrast, unconstrained LLM generation accepted hazardous recommendations in 28.4\% of cases, Vanilla RAG accepted 18.2\%, and Guarded RAG accepted 11.6\%. Even the sophisticated RAG + LLM Judge baseline (B3) permitted a 6.8\% CUAR, demonstrating that probabilistic LLM judges consistently fail to detect subtle numerical dosage mutations and regulatory prohibitions.
+
+\subsection{Appropriate Abstention and Coverage Trade-Offs}
+A critical property of BAA is that abstention is treated as a valid, first-class system output rather than an operational failure. BAA safely abstained from answering in 34.2\% of evaluated cases—primarily queries with missing crop context, out-of-domain symptoms, or unresolvable multi-document conflicts. When evaluated against human expert consensus, BAA achieved a 98.6\% appropriate abstention rate, directing unresolvable queries to human extension officers via the national Krishi Call Center (16123).

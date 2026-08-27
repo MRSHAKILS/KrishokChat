@@ -1,0 +1,20 @@
+\section{Introduction}
+\label{sec:introduction}
+
+In the Global South, smallholder agriculture forms the economic foundation for hundreds of millions of livelihoods. In Bangladesh alone, over 16 million farming households manage diverse cropping systems while confronting severe pest, fungal, and climate pressures \citep{bari_handbook2023}. While recent research demonstrates the promise of conversational AI for agricultural advisory \citep{farmerchat2024, krishokbondhu2025}, real-world deployments in low-resource environments encounter three critical challenges:
+\begin{enumerate}
+    \item \textbf{Safety and Hallucination Risks:} Unconstrained Large Language Models (LLMs) frequently generate plausible but hazardous chemical recommendations, misbinding fungicides across crops or hallucinating toxic dosages \citep{ragvue2025}.
+    \item \textbf{Linguistic and Dialectal Variation:} Rural farmers communicate in regional colloquial dialects (Sylheti, Chittagonian) or Romanized Banglish, causing text-only retrieval systems to suffer severe morphological retrieval failures.
+    \item \textbf{Lack of Operational Observability:} Conventional chatbots present opaque, unverified text paragraphs, depriving farmers and agricultural extension officers of actionable evidence, source provenance, and clear escalation pathways.
+\end{enumerate}
+
+To address these barriers, we demonstrate \textbf{KrishokChat}, an open, production-oriented, multimodal Bengali agricultural advisory platform. KrishokChat bridges generative AI with deterministic domain authority, providing an observable decision-support interface that unifies text, vision, structured agronomic facts, and offline-capable service delivery.
+
+\paragraph{Key Demonstrated Capabilities:}
+\begin{itemize}
+    \item \textbf{Fail-Closed Safety Routing:} 6-way safety classification and 11-slot relational verification that mathematically guarantees single-record grounding for chemical advice.
+    \item \textbf{Multimodal Perception:} Seamless integration of INT8 ONNX vision classifiers that automatically condition retrieval and collapse candidate search space by 75.6\%.
+    \item \textbf{Transparent Agent Observability:} Real-time animated execution steppers and expandable ``Why this advice?'' audit panels.
+    \item \textbf{Five-Tier Selective Resolution:} A tiered ladder resolving 61.5\% of advisory traffic deterministically without invoking generative LLMs, achieving sub-550\,ms latency.
+    \item \textbf{Constrained Delivery:} Offline-first SQLite caching, deterministic 160-character SMS compression, and direct escalation to the national Krishi Call Center (16123).
+\end{itemize}

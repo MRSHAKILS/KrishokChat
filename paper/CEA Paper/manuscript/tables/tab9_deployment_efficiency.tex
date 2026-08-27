@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{Deployment performance under severe cellular network loss, on-device edge execution, deterministic SMS delivery, and serving economics.}
+\label{tab:deployment_efficiency}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Deployment Channel / Evaluation Layer} & \textbf{Baseline System} & \textbf{KrishokChat BAA} & \textbf{Empirical Gain / Delta} & \textbf{95\% Conf. Interval} \\
+\midrule
+Rural Edge Delivery (15\% packet loss) & 82.0\% (Cloud RAG) & \textbf{91.4\%} (Offline Cache) & +9.4 pp retention & [89.50\%, 92.98\%] \\
+Severe 2G Delivery (30\% packet loss) & 58.7\% (Cloud RAG) & \textbf{80.3\%} (Offline Cache) & \textbf{+21.6 pp retention} & [77.72\%, 82.68\%] \\
+SMS Pre-Harvest Interval (PHI) Hazard & 64.4\% (LLM SMS) & \textbf{0.0\%} (11-Slot GSM) & \textbf{--64.4 pp hazard} & [0.0\%, 0.09\%] \\
+SMS Prompt Injection Leakage & 36.36\% (LLM SMS) & \textbf{0.0\%} (Deterministic) & \textbf{--36.36 pp leakage} & [0.0\%, 0.27\%] \\
+Zero-LLM Traffic Resolution Share & 10.48\% (Text RAG) & \textbf{61.52\%} (5-Tier Ladder) & \textbf{+51.04 pp zero-LLM} & [60.16\%, 62.86\%] \\
+Cache Tamper Detection Rate & 0.0\% (Unsigned) & \textbf{100.0\%} (Hash-Chained) & 1,000/1,000 caught & [99.63\%, 100.0\%] \\
+Cost per Certified Safe Advisory ($C_{\text{safe}}$) & \$2.30/1k (Cloud API) & \textbf{\$0.0768/1k} (Local VPS) & \textbf{96.6\% cost reduction} & -- \\
+\bottomrule
+\end{tabular}
+\end{table*}

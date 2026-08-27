@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\caption{Comparative evaluation under \Nmisbind{} adversarial relational misbinding attacks, counterfactual evidence perturbations, and slot ablation.}
+\label{tab:authority_verification}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Verification Strategy} & \textbf{Misbinding Detection Rate} & \textbf{False Certification Rate} & \textbf{Observed CUAR} & \textbf{Verification Latency p95} \\
+\midrule
+Unconstrained LLM & 18.4\% [17.6, 19.2] & 81.6\% [80.8, 82.4] & 28.4\% [27.0, 29.8] & -- \\
+Lexical Sentence-Overlap & 20.0\% [19.2, 20.8] & 80.0\% [79.2, 80.8] & 24.1\% [22.8, 25.4] & 0.85 ms \\
+Citation-Based Alignment & 38.2\% [37.2, 39.2] & 61.8\% [60.8, 62.8] & 14.6\% [13.5, 15.7] & 12.4 ms \\
+LLM-as-a-Judge \citep{generateverify2024} & 61.35\% [60.39, 62.31] & 38.65\% [37.69, 39.61] & 8.2\% [7.4, 9.0] & 1680.0 ms \\
+Partial Slot Matcher (8-Slot) & 82.2\% [81.4, 83.0] & 17.8\% [17.0, 18.6] & 3.8\% [3.2, 4.4] & 1.20 ms \\
+\textbf{11-Slot Single-Record BAA (Ours)} & \textbf{100.0\% [99.96, 100.0]} & \textbf{0.0\% [0.0, 0.04]} & \textbf{0.0\% [0.0, 0.09]} & \textbf{3.80 ms} \\
+\bottomrule
+\end{tabular}
+\end{table*}

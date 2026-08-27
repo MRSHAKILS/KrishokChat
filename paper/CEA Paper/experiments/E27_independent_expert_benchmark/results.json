@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "layer": "E27_independent_expert_benchmark",
+    "title": "Independent End-to-End Agronomist Benchmark",
+    "status": "planned",
+    "rq": "RQ1",
+    "question": "What is the end-to-end correctness, CUAR, and abstention precision across 2,000 naturalistic + 1,000 adversarial queries evaluated triple-blind by agronomists?"
+  },
+  "target_metrics": [
+    "CAC >= 95.0%",
+    "CUAR <= 0.1%",
+    "Coverage >= 65.0%",
+    "Gwet AC1 >= 0.85"
+  ],
+  "measured_results": null
+}

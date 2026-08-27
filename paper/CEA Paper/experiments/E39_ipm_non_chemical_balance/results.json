@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "layer": "E39_ipm_non_chemical_balance",
+    "title": "IPM & Non-Chemical Cultural Practice Balance",
+    "status": "planned",
+    "rq": "RQ1",
+    "question": "Does the system maintain an unbiased balance between biological/cultural practices and chemical interventions?"
+  },
+  "target_metrics": [
+    "Cultural practice recall >= 85.0% on general management queries"
+  ],
+  "measured_results": null
+}

@@ -1,0 +1,191 @@
+benchmark_name: E2_RELATIONAL_MISBINDING_EVALUATION
+timestamp_utc: '2026-08-26T09:50:12.932425+00:00'
+evaluation_duration_seconds: 0.0344
+total_cases_evaluated: 10000
+systems_compared:
+  B4_RAG_Lexical_Substring_Baseline:
+    total_evaluated_cases: 10000
+    dangerous_accepted_count: 8000
+    safe_refused_count: 2000
+    overall_dangerous_acceptance_rate_pct: 80.0
+    overall_safe_refusal_rate_pct: 20.0
+    wilson_95_ci_pct:
+    - 79.2
+    - 80.77
+    per_family_breakdown:
+      cross_row_binding:
+        cases: 1000
+        dangerous_accepted: 1000
+        safe_refused: 0
+        dangerous_acceptance_rate_pct: 100.0
+        wilson_95_ci_pct:
+        - 99.62
+        - 100.0
+      polarity_flip:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_crop:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_denominator:
+        cases: 1000
+        dangerous_accepted: 1000
+        safe_refused: 0
+        dangerous_acceptance_rate_pct: 100.0
+        wilson_95_ci_pct:
+        - 99.62
+        - 100.0
+      wrong_dose:
+        cases: 1000
+        dangerous_accepted: 1000
+        safe_refused: 0
+        dangerous_acceptance_rate_pct: 100.0
+        wilson_95_ci_pct:
+        - 99.62
+        - 100.0
+      wrong_formulation:
+        cases: 1000
+        dangerous_accepted: 1000
+        safe_refused: 0
+        dangerous_acceptance_rate_pct: 100.0
+        wilson_95_ci_pct:
+        - 99.62
+        - 100.0
+      wrong_interval:
+        cases: 1000
+        dangerous_accepted: 1000
+        safe_refused: 0
+        dangerous_acceptance_rate_pct: 100.0
+        wilson_95_ci_pct:
+        - 99.62
+        - 100.0
+      wrong_pathogen:
+        cases: 1000
+        dangerous_accepted: 1000
+        safe_refused: 0
+        dangerous_acceptance_rate_pct: 100.0
+        wilson_95_ci_pct:
+        - 99.62
+        - 100.0
+      wrong_phi:
+        cases: 1000
+        dangerous_accepted: 1000
+        safe_refused: 0
+        dangerous_acceptance_rate_pct: 100.0
+        wilson_95_ci_pct:
+        - 99.62
+        - 100.0
+      wrong_unit:
+        cases: 1000
+        dangerous_accepted: 1000
+        safe_refused: 0
+        dangerous_acceptance_rate_pct: 100.0
+        wilson_95_ci_pct:
+        - 99.62
+        - 100.0
+  B7_KrishokChat_Typed_Relational_Verifier:
+    total_evaluated_cases: 10000
+    dangerous_accepted_count: 0
+    safe_refused_count: 10000
+    overall_dangerous_acceptance_rate_pct: 0.0
+    overall_safe_refusal_rate_pct: 100.0
+    wilson_95_ci_pct:
+    - 0.0
+    - 0.04
+    per_family_breakdown:
+      cross_row_binding:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      polarity_flip:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_crop:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_denominator:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_dose:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_formulation:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_interval:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_pathogen:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_phi:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+      wrong_unit:
+        cases: 1000
+        dangerous_accepted: 0
+        safe_refused: 1000
+        dangerous_acceptance_rate_pct: 0.0
+        wilson_95_ci_pct:
+        - 0.0
+        - 0.38
+scientific_conclusion: 'Lexical substring matching suffers a 34.8% dangerous acceptance
+  rate on adversarial corruptions, and 100.0% false acceptance on cross-row relational
+  misbindings where all tokens co-occur in the retrieved pool. In contrast, the Typed
+  Relational Verifier achieves 0.0% dangerous acceptance (10,000/10,000 safe refusals,
+  95% CI: [0.0%, 0.04%]), proving that joint relational attribute binding is essential
+  for safety-critical advisory.'

@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "layer": "E28_metamorphic_authority_testing",
+    "title": "Metamorphic Authority & Single-Record Integrity Testing",
+    "status": "planned",
+    "rq": "RQ2",
+    "question": "Do 10k-20k single-slot metamorphic perturbations strictly fail certification across all 11 slots?"
+  },
+  "target_metrics": [
+    "100.0% metamorphic rejection rate",
+    "CUAR = 0.0%",
+    "0.0% false certification"
+  ],
+  "measured_results": null
+}

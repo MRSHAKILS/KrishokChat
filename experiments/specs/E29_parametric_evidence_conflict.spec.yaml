@@ -1,0 +1,29 @@
+# experiments/specs/E29_parametric_evidence_conflict.spec.yaml
+# Specification for Layer E29: Parametric Prior vs. Evidence Authority Conflict
+# Core Research Question: RQ1, RQ2 (Parametric Independence & Faithfulness)
+
+meta:
+  layer: E29_parametric_evidence_conflict
+  question: "When the LLM's parametric pre-training prior conflicts with authoritative Bangladesh agricultural evidence, does the bounded-authority architecture strictly adhere to the retrieved evidence record or succumb to parametric memory?"
+  target_venue: Computers and Electronics in Agriculture (CEA)
+  rq: RQ1, RQ2
+  status: planned
+
+design:
+  conflict_cases: 1000
+  categories:
+    - dosage_bounds_discrepancy (Global general dosage vs Bangladesh BARI/BRRI specific recommendation)
+    - active_ingredient_naming (Common trade names vs Bangladesh registered chemical names)
+    - ban_status_conflict (Locally banned chemical that is globally permitted)
+    - crop_specific_phi (Local harvest cycle PHI vs global textbook PHI)
+
+baselines:
+  - LLM_only
+  - Vanilla_RAG
+  - FaithfulRAG_style_baseline
+  - Bounded_Authority_Advisory
+
+metrics:
+  p_certify_evidence_backed: "Fraction of responses adhering strictly to authoritative evidence"
+  p_certify_parametric_conflict: "Fraction of responses where model leaks pre-training prior"
+  fail_closed_abstention_on_unresolvable: "Rate of correct abstention when evidence is ambiguous"

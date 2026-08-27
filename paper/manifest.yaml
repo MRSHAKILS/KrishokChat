@@ -1,63 +1,64 @@
-# paper/manifest.yaml — single source of truth for the paper folder.
-# Every entry is traceable; nothing outside this manifest should live in paper/.
+# paper/manifest.yaml — Single Source of Truth for the KrishokChat Paper Ecosystem.
 # Last audited: 2026-08-27
 
 meta:
-  project: KrishokChat Advisory System
-  active_venue: Wiley Expert Systems (frozen 2026-08-21, see manuscript/README.md)
-  target_venue_under_pivot: Computers and Electronics in Agriculture (CEA)
+  project: KrishokChat Agricultural Advisory System
+  active_venues:
+    cea_journal:
+      venue: Computers and Electronics in Agriculture (CEA), Elsevier
+      type: Full Original Research Paper (approx. 10,000 words)
+      workspace: CEA Paper/
+      status: in_active_preparation
+    eacl_demo:
+      venue: EACL 2027 System Demonstrations, ACL
+      type: System Demonstration Paper (<= 6 pages)
+      workspace: EACL Demo/
+      status: in_active_preparation
   paper_policy: docs/PAPER_POLICY.md
-  deprecated_arxiv_ban: arXiv:2606.29243 must never be cited, linked, or summarized
+  deprecated_arxiv_ban: "arXiv:2606.29243 must never be cited, linked, or summarized"
 
-manuscript:
-  path: manuscript/
-  compile_target: manuscript/krishokchat_wiley_expert_systems.tex
-  compiled_pdf: manuscript/krishokchat_wiley_expert_systems.pdf
-  claim_ledger: manuscript/CLAIM_LEDGER_FREEZE.md   # frozen 2026-08-21; S/F/U claim IDs
-  ssot_outline: manuscript/expert-systems-skeleton.md
-  planning:
-    - manuscript/README.md
-    - manuscript/T25_paper_skeleton_v1.md
-  drafts: manuscript/drafts/                        # per-section v1 markdown drafts
-  figures: manuscript/figures/                      # fig_1.png (architecture)
-  build_artifacts: ignored via paper/.gitignore (aux/log/out/etc.)
+packages:
+  cea_paper:
+    manifest: CEA Paper/manifest.yaml
+    readme: CEA Paper/README.md
+    manuscript_dir: CEA Paper/manuscript/
+    drafts_dir: CEA Paper/drafts/
+    experiments_dir: CEA Paper/experiments/
+    master_results: CEA Paper/experiments/results.yaml
+  eacl_demo:
+    manifest: EACL Demo/manifest.yaml
+    readme: EACL Demo/README.md
+    manuscript_dir: EACL Demo/manuscript/
+    drafts_dir: EACL Demo/drafts/
+    experiments_dir: EACL Demo/experiments/
+    master_results: EACL Demo/experiments/results.yaml
+  legacy_expert_systems:
+    path: manuscript/
+    status: frozen_archive
+    compile_target: manuscript/krishokchat_wiley_expert_systems.tex
+    compiled_pdf: manuscript/krishokchat_wiley_expert_systems.pdf
+    claim_ledger: manuscript/CLAIM_LEDGER_FREEZE.md
 
 literature_review:
   path: literature review/
   scope: literature review/00_SCOPE_AND_ANGLES.md
   synthesis: literature review/10_SYNTHESIS_GAPS_POSITIONING.md
   gaps_matrix: literature review/11_RESEARCH_GAPS_competitive_matrix.md
-  asset_verification: literature review/12_ASSET_VERIFICATION.md  # HF dataset recovery evidence
-  topics: [01_agentic_rag_verifier_systems, 02_llm_safety_low_resource, 03_low_resource_nlp_bengali,
-           04_agri_ai_advisory_systems, 05_vision_crop_disease, 06_system_industry_track_conventions,
-           07_retrieval_low_resource_rag_eval, 08_edge_slm_streaming_systems, 09_ict4d_global_south]
+  asset_verification: literature review/12_ASSET_VERIFICATION.md
 
-reviews:
-  path: reviews/
-  active: reviews/suggestions_1.md   # CEA systems-engineering pivot review (network/SMS/hardware/DGDR)
-  # suggestions_2..5.md removed 2026-08-27 (superseded); recoverable from git history.
-
-published:
-  path: done papers/   # authoritative prior papers; reference by filename only
+published_prior_art:
+  path: done papers/
   papers:
     - done papers/KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf
     - done papers/AgriTrust.pdf
 
-archive:
-  path: archive/
-  contents:
-    - archive/LITERATURE_REVIEW_legacy_2026_08_11.md
-    - archive/system_evolution_plan_2026/   # historical planning incl. frozen datasets/reports snapshots
-  policy: read-only history; never cite as current state
-
 notes:
   path: notes/
-  policy: dated working notes preserving paper-mentionable findings before they enter the manuscript
   entries:
-    - notes/2026_08_27_R13_E26_findings.md   # grounded chunk fallback (R13) + E26 coverage/safety run
-    - notes/2026_08_27_CEA_EXPERIMENT_BATTERY_SUMMARY.md   # Master SSOT summary of E02–E25 results, CIs, claim IDs, and manuscript text
+    - notes/2026_08_27_R13_E26_findings.md
+    - notes/2026_08_27_CEA_EXPERIMENT_BATTERY_SUMMARY.md
 
 experiment_trace:
-  canonical_registry: ../experiments/registry.yaml   # E-series master trace lives outside paper/
-  results_home: ../research_artifacts/evaluations/   # YAML results per experiment layer
-  plan: ../experiments/IMPLEMENTATION_AND_AGGREGATION_PLAN.md
+  canonical_registry: experiments/registry.yaml
+  acceptance_protocol: experiments/ACCEPTANCE_PROTOCOL.md
+  aggregation_plan: experiments/IMPLEMENTATION_AND_AGGREGATION_PLAN.md

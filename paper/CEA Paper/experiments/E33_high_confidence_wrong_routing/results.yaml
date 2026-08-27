@@ -1,0 +1,10 @@
+meta:
+  layer: E33_high_confidence_wrong_routing
+  title: High-Confidence Wrong Metadata Resilience
+  status: planned
+  rq: RQ1, RQ4
+  question: When upstream classifier outputs a wrong crop/pest with high confidence,
+    does downstream verifier prevent dangerous advice?
+target_metrics:
+- 0.0% dangerous advice delivery under wrong metadata
+measured_results: null

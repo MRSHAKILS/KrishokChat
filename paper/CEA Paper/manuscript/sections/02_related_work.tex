@@ -1,0 +1,19 @@
+\section{Related Work}
+\label{sec:related_work}
+
+\subsection{Agricultural Conversational AI and Low-Resource RAG}
+The deployment of large language models for agricultural extension has expanded rapidly. \citet{farmerchat2024} demonstrated the viability of scalable, multilingual conversational AI in the Global South with Farmer.Chat, deploying RAG pipelines across Kenya, Ethiopia, and India to support over 15,000 farmers. In the Bengali linguistic domain, \citet{krishokbondhu2025} developed KrishokBondhu, combining speech recognition with retrieval to answer farmer queries. While these systems demonstrate the usability of conversational interfaces, they treat generative LLMs as end-to-end reasoning engines, exposing farmers to latent hallucination and unverified chemical advice under dialectal variation.
+
+\subsection{Structured Knowledge Integration in Agricultural Computing}
+Recent literature in \textit{Computers and Electronics in Agriculture} increasingly recognizes the limitations of purely unstructured text retrieval. \citet{goatrag2026} established that domain-first structured knowledge representations—utilizing tabular facts and decision trees—substantially improve answer consistency for livestock health management. In crop pathology, \citet{smart2026} proposed SMART, integrating structured multimodal embeddings with human-in-the-loop diagnostic verification. Similarly, \citet{dssatlm2026} demonstrated that coupling LLMs with mechanistic crop growth models (DSSAT) requires formal semantic parsing into structured parameters rather than unconstrained free-text generation. Our work extends this trajectory by establishing a mathematical authority boundary over structured agricultural facts.
+
+\subsection{RAG Faithfulness, Parametric Conflicts, and Claim Verification}
+Evaluating and enforcing faithfulness in RAG systems is an active area of NLP research. \citet{ragchecker2024} introduced RAGChecker, demonstrating that retrieval recall and generation faithfulness must be diagnosed separately due to pervasive factual compression and hallucination errors. \citet{faithfulrag2025} investigated parametric-retrieval knowledge conflicts in FaithfulRAG, showing that fine-tuned models frequently override retrieved context in favor of erroneous pre-training priors. \citet{generateverify2024} formalized the ``Generate-but-Verify'' paradigm, using secondary models to detect unfaithful claims. However, in safety-critical domains, secondary LLM judges remain prone to false positives and cannot guarantee single-record relational integrity \citep{scitrue2025}.
+
+\subsection{Temporal Validity, Security, and Offline Edge Resilience}
+Agricultural recommendations are inherently dynamic and regionally bounded. \citet{tarag2026} introduced TARAG, emphasizing time-aware reranking to prevent the retrieval of obsolete disease management protocols. In RAG security, \citet{saferag2025} demonstrated that adversarial context injection and indirect prompt manipulation can completely override safety filters. Furthermore, in rural LMIC contexts, intermittent cellular connectivity requires offline-capable computing paradigms \citep{agrotutor2020, edgeagri2025}.
+
+\subsection{Research Gap and Positioning}
+As summarized in Table~\ref{tab:literature_positioning}, existing systems either rely on unconstrained generative RAG without fail-closed safety bounds, or implement isolated components (temporal filtering, edge inference, multimodal vision) without an integrated authority architecture. KrishokChat bridges this gap by unifying bounded factual authority, selective routing, fail-closed verification, and constrained-delivery channels into a coherent, verifiable decision-support framework.
+
+\input{tables/tab2_literature_positioning.tex}

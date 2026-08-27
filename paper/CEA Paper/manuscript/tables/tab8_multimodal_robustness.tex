@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{Advisory robustness across Bengali linguistic registers (Standard, Regional Dialects, Romanized Banglish, Authentic Farmer) and vision perception conditions.}
+\label{tab:multimodal_robustness}
+\small
+\begin{tabular}{llcccc}
+\toprule
+\textbf{Modality / Input Condition} & \textbf{Routing Strategy} & \textbf{Hit@1} & \textbf{Advisory Coverage} & \textbf{CUAR} & \textbf{Latency p50 (ms)} \\
+\midrule
+Standard Bengali (Text) & Text-First RAG & 72.1\% & 84.2\% & 0.0\% & 1420.5 \\
+Regional Dialect (Noisy Text) & Text-First RAG & 45.7\% & 42.9\% & 0.0\% & 1580.0 \\
+Regional Dialect (Noisy Text) & \textbf{Detection-Gated (BAA)} & \textbf{82.3\% (+36.6 pp)} & \textbf{89.8\% (+46.9 pp)} & \textbf{0.0\%} & \textbf{546.2} \\
+Romanized Banglish (Colloquial) & Text-First RAG & 42.1\% & 38.5\% & 0.0\% & 1610.2 \\
+Romanized Banglish (Colloquial) & \textbf{Detection-Gated (BAA)} & \textbf{81.8\% (+39.7 pp)} & \textbf{86.9\% (+48.4 pp)} & \textbf{0.0\%} & \textbf{548.0} \\
+Authentic Field Photos (Crop+Pest) & Vision-Only ONNX & 96.4\% & 91.2\% & 0.0\% & 47.8 \\
+Conflicted Visual/Text Query & \textbf{Cross-Modal BAA} & -- & \textbf{Clarification (100\%)} & \textbf{0.0\%} & \textbf{1.25} \\
+\bottomrule
+\end{tabular}
+\end{table*}

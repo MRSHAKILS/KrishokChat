@@ -1,0 +1,23 @@
+\section{System Architecture and Decision Pipeline}
+\label{sec:system_architecture}
+
+\subsection{Architectural Blueprint and Port Separation}
+KrishokChat is engineered as a clean, decoupled full-stack platform following port-and-adapter architectural principles \citep{flexrag2025}. The system comprises a high-performance FastAPI asynchronous backend and a responsive Next.js 14 frontend optimized for mobile web and progressive web app (PWA) execution.
+
+\input{tables/tab1_system_capabilities.tex}
+
+As outlined in Table~\ref{tab:system_capabilities}, the pipeline operates across five coordinated functional stages:
+\begin{enumerate}
+    \item \textbf{Safety Screening Gate:} Incoming text is classified against six intent categories: \texttt{safe\_agri}, \texttt{banned\_chemical}, \texttt{self\_harm}, \texttt{off\_topic}, \texttt{prompt\_injection}, and \texttt{low\_confidence}. Unsafe queries trigger immediate, static fail-closed redirects.
+    \item \textbf{Multimodal Perception Router:} If a field photograph is attached, INT8 ONNX classifiers identify the crop and disease, narrowing candidate retrieval to the relevant agronomic family.
+    \item \textbf{Deterministic Knowledge Resolver:} Structured factual queries are resolved directly via a 3-hop graph traversal over 2,135 institutional nodes without LLM intervention (0.42\,ms latency).
+    \item \textbf{Hybrid Grounded Generation:} Unstructured or exploratory queries invoke hybrid BM25 + dense retrieval over 2,946 institutional manuals, feeding a fine-tuned Gemma-4 4-bit LoRA generator streamed via Server-Sent Events (SSE).
+    \item \textbf{Relational Verifier:} Generated Bengali text is parsed by an 11-slot relational verifier that validates dosage, formulation, and Pre-Harvest Intervals against single-record evidence hashes before display.
+\end{enumerate}
+
+\subsection{Dual-Audience User Experience (Farmer vs. Expert)}
+To support both smallholder farmers and agricultural extension officers, KrishokChat features a dynamic UX toggle:
+\begin{itemize}
+    \item \textbf{Farmer Mode:} Minimalist, conversational Bengali interface with large voice/photo input buttons, audio playback, and clear, structured action cards.
+    \item \textbf{Extension / Expert Mode:} Comprehensive diagnostic interface displaying raw model confidence scores, retrieved source snippets, 11-slot verification matrices, and complete audit trail telemetry \citep{smartmatch2025}.
+\end{itemize}

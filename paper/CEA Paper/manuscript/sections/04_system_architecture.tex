@@ -1,0 +1,30 @@
+\section{Bounded-Authority Advisory Architecture (BAA)}
+\label{sec:system_architecture}
+
+\subsection{Architectural Overview}
+The BAA architecture is organized into five tightly coupled functional tiers, establishing an end-to-end fail-closed pipeline:
+\begin{enumerate}
+    \item \textbf{Risk \& Context Screening Gate (Tier 0):} Lightweight screening against toxic, self-harm, banned chemical, and prompt-injection payloads.
+    \item \textbf{Capability \& Perception Router (Tier 1):} Multimodal perception conditioning and entity normalization across Bengali registers.
+    \item \textbf{Structured Fact Authority \& Graph Traversal (Tier 2):} Deterministic multi-hop resolution over 2,135 typed knowledge nodes.
+    \item \textbf{Hybrid Grounded Generation (Tier 3):} Fine-tuned Gemma-4 4-bit generation constrained by single-record evidence context.
+    \item \textbf{Relational Certification \& Fail-Closed Abstention (Tier 4):} Mathematical verification of all \Nslots{} fields with automated escalation to the national Krishi Call Center (16123).
+\end{enumerate}
+
+\subsection{Multimodal Perception and Search-Space Reduction}
+When an uploaded image $I_v$ is present, an INT8 ONNX vision classifier first identifies the host crop $c \in \mathcal{K}_{\text{crop}}$ ($N=10$ classes). If confidence $\tau_{\text{crop}} \ge 0.80$, the downstream disease classifier narrows its diagnostic space exclusively to crop-specific pathology models (e.g., Potato late blight vs.\ early blight vs.\ healthy). 
+
+Conditioning retrieval on visual perception metadata collapses the candidate knowledge graph search space from 2,135 total nodes to an average of 516.4 nodes (\SearchSpaceRedPct{} reduction), isolating the retrieval index from morphological noise in colloquial regional queries.
+
+\subsection{The Five-Tier Selective Resolution Ladder}
+Rather than routing all traffic through compute-intensive generative models, BAA implements a five-tier resolution ladder:
+\begin{itemize}
+    \item \textbf{Tier 0 (Deterministic Safety Handling):} Queries flagged as self-harm, poisoning risk, or banned chemicals immediately receive canned, static safety redirects to national helplines (0\,ms LLM latency).
+    \item \textbf{Tier 1 (Structured Entity Resolver):} High-confidence queries with exact crop and pathogen entity matches resolve directly via deterministic graph traversal.
+    \item \textbf{Tier 2 (Deterministic Advisory Rendering):} Output is synthesized using pre-verified, localized language templates with 100\% slot preservation.
+    \item \textbf{Tier 3 (Grounded Generative Fallback):} Complex or ambiguous multi-symptom queries invoke the fine-tuned Gemma-4 4-bit model, which verbalizes retrieved evidence under strict single-record constraints.
+    \item \textbf{Tier 4 (Fail-Closed Abstention / Escalation):} If Tier 3 fails 11-slot relational certification, the system refuses generation, returning an explanation and helpline redirect.
+\end{itemize}
+
+\subsection{Relational Verifier and Mathematical Fail-Closed Execution}
+The relational verifier operates downstream of generation. It parses the generated Bengali response, extracts the candidate tuple $\mathcal{C}$, and matches it against the retrieved evidence record $e^*$. If any slot exhibits a discrepancy (e.g., chemical formulation mismatch from 80 WP to 250 EC, or dosage inflation $> d_{\max}$), the verifier revokes certification ($\operatorname{Certify}(\mathcal{C}) = 0$), suppressing the LLM output entirely.

@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[hyperref]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{array}
+
+\title{KrishokChat: A Safety-Aware Multimodal Bengali Agricultural Advisory Platform}
+
+\author{
+  Raiyaan Reza \quad Research Collaborator \\
+  Department of Electrical and Computer Engineering \\
+  North South University, Dhaka 1229, Bangladesh \\
+  \texttt{raiyaan.reza@northsouth.edu}
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Conversational AI systems in agricultural extension face severe reliability barriers in low-resource environments: unconstrained language models hallucinate chemical treatments, ignore critical safety bounds, and fail under regional linguistic drift. This paper demonstrates \textbf{KrishokChat}, an open, production-oriented multimodal agricultural advisory platform for Bengali farmers. KrishokChat integrates lightweight safety screening, hybrid BM25+dense retrieval over 2,946 institutional manuals, fine-tuned Gemma-4 4-bit generation, INT8 ONNX crop-disease vision models, and a five-tier deterministic resolution ladder into a unified, observable workflow. The platform features real-time agent execution traces, transparent ``Why this advice?'' evidence panels, structured fail-closed safety cards, and automated escalation to the national Krishi Call Center (16123). Across empirical usability evaluations with practicing agronomists and rural extension workers, KrishokChat achieves an average System Usability Scale (SUS) score of 84.6/100, eliminates 100\% of dangerous pesticide misbinding errors, and resolves 61.5\% of queries in under 550\,ms without invoking heavy generative LLMs. A live system and screencast are available at \url{https://krishokchat.org}.
+\end{abstract}
+
+% Include modular section files
+\input{sections/01_introduction.tex}
+\input{sections/02_system_architecture.tex}
+\input{sections/03_demonstration_scenarios.tex}
+\input{sections/04_empirical_usability.tex}
+\input{sections/05_deployment_ethics.tex}
+\input{sections/06_conclusion.tex}
+
+\bibliographystyle{acl_natbib}
+\bibliography{krishokchat_eacl}
+
+\end{document}

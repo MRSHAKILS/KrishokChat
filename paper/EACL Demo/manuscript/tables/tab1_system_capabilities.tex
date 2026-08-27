@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{KrishokChat Subsystems, Architectural Ports, Primary Models, and Target Execution Latencies.}
+\label{tab:system_capabilities}
+\small
+\begin{tabular}{llllc}
+\toprule
+\textbf{Subsystem / Layer} & \textbf{Architectural Role} & \textbf{Underlying Engine / Model} & \textbf{Observable UX Artifact} & \textbf{Latency p50} \\
+\midrule
+Safety Screening Gate & Query hazard classification & 6-Way Rule + Gemma-4 Guard & Animated Safety Badge / Warning & 0.35 ms \\
+Perception Router & Visual crop \& disease ID & INT8 ONNX (Crop + Potato models) & Interactive Diagnostic Card & 47.8 ms \\
+Structured Fact Resolver & Deterministic 3-hop lookup & SQLite Typed Graph (2,135 nodes) & Verified Fact Pill (\checkmark Fact) & 0.42 ms \\
+Hybrid RAG Engine & Document evidence retrieval & BM25 (RankBM25) + BGE Dense & Expandable Source Drawer & 28.5 ms \\
+Language Generator & Grounded Bengali realization & Fine-Tuned Gemma-4 4-bit LoRA & Token-by-Token SSE Stream & 546.2 ms \\
+Relational Verifier & 11-Slot Fail-Closed Check & Single-Record Constraint Engine & ``Why this advice?'' Audit Panel & 3.80 ms \\
+Escalation Gateway & Human handoff \& telephony & National Krishi 16123 Redirect & Downloadable Case Summary ID & 0.15 ms \\
+\bottomrule
+\end{tabular}
+\end{table*}

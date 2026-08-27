@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "layer": "E36_source_fragmentation_assembly",
+    "title": "Source Fragmentation & Multi-Document Assembly Hazard",
+    "status": "planned",
+    "rq": "RQ2",
+    "question": "Do generative systems assemble fragmented valid facts from separate documents into hazardous composite advice?"
+  },
+  "target_metrics": [
+    "Standard RAG assembly hazard >= 65.0%; BAA assembly hazard = 0.0%"
+  ],
+  "measured_results": null
+}

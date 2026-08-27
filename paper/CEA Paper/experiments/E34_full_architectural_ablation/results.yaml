@@ -1,0 +1,10 @@
+meta:
+  layer: E34_full_architectural_ablation
+  title: Full Architectural Layer Ablation (LLM to Full BAA)
+  status: planned
+  rq: RQ1, RQ2, RQ3
+  question: What is the step-by-step causal gain of Risk Gate, Deterministic Facts,
+    Verification, and Temporal Filtering?
+target_metrics:
+- 'Layer-by-layer CUAR reduction: 28.4% -> 18.2% -> 11.6% -> 6.8% -> 0.0%'
+measured_results: null

@@ -1,0 +1,10 @@
+meta:
+  layer: E35_linguistic_query_normalization
+  title: Linguistic Query Normalization Ablation
+  status: planned
+  rq: RQ4
+  question: Does morphological normalization provide retrieval gains independent of
+    visual perception gating?
+target_metrics:
+- 'Hit@1 gain: Raw (45.7%) -> Normalized (62.4%) -> Detection-Gated (82.3%)'
+measured_results: null

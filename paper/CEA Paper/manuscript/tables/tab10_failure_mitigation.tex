@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{Taxonomy of residual failure modes from 100-case root-cause audit (Layer E10), architectural detectors, and mitigation policies.}
+\label{tab:failure_mitigation}
+\small
+\begin{tabular}{lclll}
+\toprule
+\textbf{Failure Root Cause} & \textbf{Share (\%)} & \textbf{Observed Mechanism} & \textbf{Architectural Detector} & \textbf{Mitigation Strategy} \\
+\midrule
+Retrieval Omission & 28\% & Lexical/dense search misses relevant node & Coverage threshold $\theta_{\text{cov}}$ & Fallback to MD-chunk search (R13) \\
+Relational Misbinding & 22\% & Multi-document context conflation & 11-slot relational verifier & Single-record joint binding certification \\
+Numerical/Volume Ambiguity & 14\% & Missing water volume or concentration unit & Unit/volume slot extractor & Automated structured clarification \\
+Linguistic Ambiguity & 12\% & Colloquial slang or under-specified symptom & Register normalizer / Intent gate & Multi-turn disambiguation prompt \\
+Regulatory Discrepancy & 8\% & Conflicting state vs trade advice & Regulatory authority ranker & Enforcement of MoA banned-pesticide list \\
+Temporal Obsolescence & 6\% & Superseded BARI manual cited & Metadata publication date filter & Cache invalidation \& version pinning \\
+Verifier Conservatism & 6\% & Valid advice rejected due to strict bounds & Threshold calibration ($\theta^*$) & Continuous human-in-the-loop review \\
+Calibration Underconfidence & 4\% & High-quality generation scored below $\theta$ & Conformal risk regularizer & Risk-coverage curve optimization \\
+\bottomrule
+\end{tabular}
+\end{table*}

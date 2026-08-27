@@ -1,0 +1,11 @@
+meta:
+  layer: E40_physical_edge_battery_profiling
+  title: Physical On-Device Edge Battery & Thermal Profiling
+  status: planned
+  rq: RQ5
+  question: What is the physical energy consumption (Joules/query) and thermal throttling
+    on mobile ARM CPUs?
+target_metrics:
+- Energy < 0.45 J / query
+- Thermal rise < 2.5 deg C under 100 sustained queries
+measured_results: null
