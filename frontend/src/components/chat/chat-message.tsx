@@ -281,6 +281,23 @@ function CompletedContent({ response }: { response: QAResponse }) {
         {/* R3: how the answer was produced — tier badge (absent on stale backend) */}
         <ResolutionBadge tier={response.resolution_tier} />
 
+        {/* Institutional Evidence Grounding Badge */}
+        {response.sources && response.sources.length > 0 && response.confidence === "verified" && (
+          <span
+            title="জাতীয় কৃষি গবেষণা প্রতিষ্ঠানের সত্যায়িত তথ্যভিত্তিক"
+            className="inline-flex items-center gap-1.5 rounded-full border border-leaf/30 bg-leaf/10 px-2.5 py-0.5 text-xs font-semibold text-leaf shadow-2xs"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-leaf" />
+            {response.sources[0]?.publisher || response.sources[0]?.publisher_bn || (
+              response.sources.some((s) => s.citation?.includes("BARI") || s.id?.includes("BARI")) ? "BARI" :
+              response.sources.some((s) => s.citation?.includes("BRRI") || s.id?.includes("BRRI")) ? "BRRI" :
+              response.sources.some((s) => s.citation?.includes("DAE") || s.id?.includes("DAE")) ? "DAE" :
+              response.sources.some((s) => s.citation?.includes("BARC") || s.id?.includes("BARC")) ? "BARC" :
+              "জাতীয় কৃষি উৎস"
+            )}
+          </span>
+        )}
+
         <ReadAloudButton text={response.answer} onSentenceChange={setActiveSentenceIndex} />
 
         <button

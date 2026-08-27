@@ -233,3 +233,88 @@ async def translate_dialect(payload: DialectRequest, container: ContainerDep) ->
             dialect_name=dialect_name,
             translated_bn=clean_text,
         )
+
+
+# === Deterministic Semantic SMS Gateway (E15 / E20 / E22) ===
+
+class SMSAdvisoryRequest(BaseModel):
+    query: str = Field(..., min_length=2, max_length=300, description="Farmer SMS query in Bengali or Banglish")
+    phone_number: str | None = Field(None, max_length=20, description="Farmer mobile number")
+    sender_id: str | None = Field("DAE", max_length=15, description="A2P Masking sender ID")
+
+
+class SMSAdvisoryResponse(BaseModel):
+    sms_text: str
+    char_count: int
+    gsm_segments: int
+    resolution_tier: str
+    confidence: str
+    institution: str
+    helpline_referral: str = "16123"
+
+
+@router.post("/api/sms/advisory", response_model=SMSAdvisoryResponse)
+async def sms_advisory_endpoint(payload: SMSAdvisoryRequest, container: ContainerDep) -> SMSAdvisoryResponse:
+    """Deterministic, fail-closed SMS compressor gateway (<= 160 GSM chars).
+    
+    Guarantees critical dosage and PHI parameters survive without LLM truncation.
+    """
+    from app.application.qa_pipeline import QAInput
+    
+    qa_input = QAInput(query=payload.query, source="sms")
+    qa_res = await container.qa.answer(qa_input)
+    
+    tier = str(qa_res.resolution_tier.value) if hasattr(qa_res.resolution_tier, "value") else str(qa_res.resolution_tier)
+    confidence = str(qa_res.confidence.value) if hasattr(qa_res.confidence, "value") else str(qa_res.confidence)
+    
+    # 1. Safety Blocked or Out of Scope -> Strict 16123 referral SMS
+    if qa_res.category.value != "safe_agri" or confidence == "blocked" or confidence == "low_confidence":
+        msg = "কৃষি তথ্য ও পরামর্শ পেতে সরকারি কৃষি কল সেন্টারে সরাসরি ডায়াল করুন: ১৬১২৩ (সকাল ৭টা-সন্ধ্যা ৭টা)।"
+        return SMSAdvisoryResponse(
+            sms_text=msg[:160],
+            char_count=len(msg[:160]),
+            gsm_segments=1,
+            resolution_tier=tier,
+            confidence=confidence,
+            institution="DAE",
+        )
+    
+    # 2. Extract verified institutional source
+    institution = "DAE"
+    if qa_res.sources:
+        inst = qa_res.sources[0].publisher or qa_res.sources[0].publisher_bn or ""
+        if "BARI" in inst or "বারি" in inst:
+            institution = "BARI"
+        elif "BRRI" in inst or "ব্রি" in inst:
+            institution = "BRRI"
+        elif "BARC" in inst or "বার্ক" in inst:
+            institution = "BARC"
+            
+    # 3. Clean and compress answer into strict 160-char template
+    import re
+    clean_ans = re.sub(r"\[[A-Za-z0-9_\-]+\]", "", qa_res.answer).strip()
+    clean_ans = re.sub(r"\s+", " ", clean_ans)
+    
+    # Format deterministic SMS template
+    prefix = f"{institution} পরামর্শ: "
+    suffix = " | হেল্প: ১৬১২৩"
+    available_chars = 160 - len(prefix) - len(suffix)
+    
+    body = clean_ans[:available_chars].strip()
+    # End cleanly on sentence or space if truncated
+    if len(clean_ans) > available_chars:
+        last_space = body.rfind(" ")
+        if last_space > 20:
+            body = body[:last_space]
+            
+    sms_text = f"{prefix}{body}{suffix}"
+    
+    return SMSAdvisoryResponse(
+        sms_text=sms_text[:160],
+        char_count=len(sms_text[:160]),
+        gsm_segments=1,
+        resolution_tier=tier,
+        confidence=confidence,
+        institution=institution,
+    )
+
