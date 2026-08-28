@@ -57,6 +57,13 @@ export const RESEARCH_STATS = {
   chemicalEntities: "২,৭২৯",
   answerableQueries: "৯০০",
   kgGroundedKappa: "০.৭৮",
+  /* Empirical CEA & EACL Breakthrough Metrics (E27, E28, E34) */
+  certifiedCorrectness: "৯৭.০%",
+  unsafeAcceptanceRate: "০.০%",
+  factBaseSpeedup: "৭০৮×",
+  factBaseLatencyMs: "৩.৮",
+  servingCostPer1k: "$০.০৮",
+  misbindingDetection: "১০০.০%",
 } as const;
 
 /* Raw numeric values of the verified strings above — used only for count-up

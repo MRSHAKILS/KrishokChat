@@ -31,7 +31,7 @@ const PAPERS = [
     bibtex: `@misc{krishokchat2026,
   title = {KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory},
   year = {2026},
-  note = {Authoritative copy: paper/done papers/KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf (TODO: add arXiv URL when available)}
+  note = {Preprint in review; manuscript artifact: paper/done papers/KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf}
 }`,
   },
   {
