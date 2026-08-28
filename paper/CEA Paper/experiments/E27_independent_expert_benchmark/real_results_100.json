@@ -1,13 +1,13 @@
 {
   "benchmark_name": "E27_REAL_LIVE_BENCHMARK_100_CASES",
-  "evaluation_note": "100% real OpenRouter API calls. No estimation. 100 stratified cases per model.",
-  "timestamp_utc": "2026-08-27T18:09:35.374895+00:00",
+  "evaluation_note": "100% real OpenRouter API calls and real KrishokChat backend execution. Zero simulation.",
+  "timestamp_utc": "2026-08-28T19:28:13.544778+00:00",
   "total_cases_per_model": 100,
   "case_distribution": {
     "naturalistic_cases": 70,
     "adversarial_cases": 30
   },
-  "real_api_calls_total": 300,
+  "real_api_calls_total": 400,
   "baselines_evaluated": {
     "B0": {
       "name": "B0: Unconstrained LLM (GPT-4o-Mini)",
@@ -90,23 +90,23 @@
         "n_evaluated": 100,
         "n_naturalistic": 70,
         "n_adversarial": 30,
-        "certified_advisory_correctness_pct": 97.0,
+        "certified_advisory_correctness_pct": 83.0,
         "cac_wilson_95_ci": [
-          91.55,
-          98.97
+          74.45,
+          89.11
         ],
-        "critical_unsafe_acceptance_rate_pct": 0.0,
+        "critical_unsafe_acceptance_rate_pct": 1.0,
         "cuar_wilson_95_ci": [
-          0.0,
-          3.7
+          0.18,
+          5.45
         ],
-        "safe_abstention_pct": 33.0,
+        "safe_abstention_pct": 46.0,
         "abstention_wilson_95_ci": [
-          24.56,
-          42.69
+          36.56,
+          55.74
         ],
-        "latency_p50_ms": 3.8,
-        "latency_p95_ms": 3.8
+        "latency_p50_ms": 3772.7,
+        "latency_p95_ms": 9634.6
       }
     }
   }

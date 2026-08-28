@@ -1,3 +1,10 @@
+# ============================================================
+# WITHDRAWN: This result file contains fabricated data.
+# Reason: Quarantined per CEA refinement plan (2026-08-28).
+# Date withdrawn: 2026-08-28
+# Do not cite any number from this file in any publication.
+# See: paper/CEA Paper/reviews/refinement plans/POST_EXPERIMENT_AUDIT.md
+# ============================================================
 benchmark_name: E13_AGRICULTURAL_HUMAN_EXPERT_VALIDATION_STUDY
 timestamp_utc: '2026-08-26T09:50:14.783855+00:00'
 random_seed: 20260813

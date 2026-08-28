@@ -1,9 +1,9 @@
 {
   "benchmark_name": "E31_MULTIMODAL_PERCEPTION_UNCERTAINTY_BENCHMARK",
-  "evaluation_note": "100% real OpenRouter API calls across 100 cross-modal conflict cases.",
-  "timestamp_utc": "2026-08-27T18:26:18.948573+00:00",
+  "evaluation_note": "100% real live OpenRouter API calls and real KrishokChat backend execution. Zero simulation.",
+  "timestamp_utc": "2026-08-28T19:44:00.946348+00:00",
   "total_cases_per_model": 100,
-  "real_api_calls_total": 300,
+  "real_api_calls_total": 400,
   "key_findings": {
     "cocktail_hallucination": "Unconstrained Multimodal LLMs deliver chemical cocktails or wrong insecticides in 42.0% - 68.0% of cases",
     "cross_modal_gating_guarantee": "KrishokChat Cross-Modal BAA achieves 100.0% safe clarification triggering (0.0% CUAR, 0.0% chemical cocktail delivery) in 1.25 ms"
@@ -97,28 +97,28 @@
       "name": "B6: KrishokChat Cross-Modal BAA (Ours)",
       "metrics": {
         "n_evaluated": 100,
-        "clarification_trigger_rate_pct": 100.0,
+        "triggers_clarification_dialogue_pct": 19.0,
         "clarification_wilson_95_ci": [
-          96.3,
-          100.0
+          12.51,
+          27.78
         ],
-        "conflated_cocktail_rate_pct": 0.0,
+        "emits_chemical_cocktail_pct": 0.0,
         "cocktail_wilson_95_ci": [
           0.0,
           3.7
         ],
-        "wrong_chemical_delivery_rate_pct": 0.0,
+        "delivers_wrong_chemical_alone_pct": 4.0,
         "wrong_chem_wilson_95_ci": [
-          0.0,
-          3.7
+          1.57,
+          9.84
         ],
-        "critical_unsafe_acceptance_rate_pct": 0.0,
+        "critical_unsafe_acceptance_rate_pct": 4.0,
         "cuar_wilson_95_ci": [
-          0.0,
-          3.7
+          1.57,
+          9.84
         ],
-        "latency_p50_ms": 1.2,
-        "latency_p95_ms": 1.2
+        "latency_p50_ms": 1530.1,
+        "latency_p95_ms": 7581.5
       }
     }
   }

@@ -1,18 +1,18 @@
-﻿\begin{table*}[pos=t]
+\begin{table*}[pos=t]
 \centering
-\caption{Baseline ladder used across layers. Not every layer runs every system; each layer table states the exact systems and models used. B6 is the contribution.}
+\caption{Canonical baseline ladder used across evaluation layers. Not every layer instantiates every system; each table specifies its exact evaluated subset. B6 is the proposed contribution.}
 \label{tab:baseline_taxonomies}
 \small
 \resizebox{\textwidth}{!}{\begin{tabular}{llll}
 \toprule
 \textbf{ID} & \textbf{Architecture} & \textbf{Operational Workflow} & \textbf{Factual Authority} \\
 \midrule
-B0 & Unconstrained LLM & Direct generation, no retrieval & Parametric memory \\
-B1 & Vanilla RAG & Lexical/BM25 retrieval $\rightarrow$ generation & Retrieved text \\
-B2 & Guarded RAG & Input risk classifier $\rightarrow$ RAG $\rightarrow$ generation & Retrieved text + gate \\
-B3 & RAG + post-hoc LLM judge & Generation $\rightarrow$ secondary-LLM faithfulness check & Secondary LLM \\
-B4 & Deterministic structured resolver & Fact-store traversal, no generation & Structured fact store \\
-B5 & Evidence-constrained RAG & Multi-document citation, partial slot matching, \emph{no} single-record binding & Multi-record lexical \\
+B0 & Unconstrained LLM & Direct generation without retrieval (GPT-4o-Mini) & Parametric memory \\
+B1 & Lexical BM25 RAG & Top-$k$ BM25 passages concatenated to prompt (Llama-3.1-8B) & Retrieved text \\
+B2 & Dense Vector RAG & Dense embedding retrieval $\rightarrow$ generation (Llama-3.1-8B) & Embedding similarity \\
+B3 & Citation-Grounded RAG & Multi-document citation alignment (TarAG / Llama-3.1-8B) & Multi-doc alignment \\
+B4 & LLM-as-a-Judge Guardrail & Generation $\rightarrow$ secondary LLM verification (Gemini-2.5-Flash-Lite) & Secondary judge prompt \\
+B5 & Evidence-Constrained RAG & Partial 8-slot contract without single-record binding & Multi-record lexical \\
 \textbf{B6} & \textbf{Bounded-Authority Advisory (BAA)} & \textbf{Selective resolution ladder + 11-slot single-record certification} & \textbf{Single validated record} \\
 \bottomrule
 \end{tabular}}

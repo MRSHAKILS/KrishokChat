@@ -55,11 +55,36 @@ The five conjuncts enforce explicit guarantees:
 \begin{enumerate}
     \item[\textbf{(i)}] $\operatorname{Authoritative}(e^*)$ requires the evidence to originate from a nationally accredited source (BARI, BRRI, DAE/MoA).
     \item[\textbf{(ii)}] $\operatorname{Current}(e^*)$ requires the record's effective/expiry dates and regulatory polarity to be valid at query time.
-    \item[\textbf{(iii)}] $\operatorname{JointlyEntails}(e^*, \mathcal{C})$ requires all 11 contract slots to be satisfied simultaneously by the \emph{same} accredited record hash---records may never be assembled across disparate sources.
+    \item[\textbf{(iii)}] $\operatorname{JointlyEntails}(e^*, \mathcal{C})$ requires all 11 contract slots to be satisfied simultaneously by the \emph{same} accredited record hash---records may never be assembled across disparate sources at runtime.
     \item[\textbf{(iv)}] $\operatorname{Complete}(\mathcal{C})$ requires every safety-critical slot to be non-null and within valid physical bounds.
     \item[\textbf{(v)}] $g(\mathbf{x}) \ge \theta^*$ requires the calibrated selective confidence score to exceed the frozen risk threshold.
 \end{enumerate}
 If any conjunct fails, the system fails closed: it suppresses the generative completion and deterministically clarifies, abstains, or escalates. This directly operationalizes the rule that an unsatisfied evidence condition is never repaired by generating ungrounded text.
+
+\begin{proposition}[Conditional Soundness of Bounded Verification]
+\label{prop:soundness}
+Let $\mathcal{E}$ be a verified evidence base whose records $e \in \mathcal{E}$ accurately reflect accredited institutional gazettes, and let $\Phi(\hat{y}) \rightarrow \mathcal{C}$ be the contract slot extractor over generated realization $\hat{y}$. If $\operatorname{Certify}(\mathcal{C}) = 1$, then:
+\begin{enumerate}
+    \item $\mathcal{C}$ specifies an active ingredient $a$ whose regulatory polarity is strictly positive ($\operatorname{polarity}(a) = +1$);
+    \item Every quantitative parameter (dosage $[d_{\min}, d_{\max}]$, volume $v_s$, interval $t_{\text{int}}$, and PHI $t_{\text{phi}}$) is identical to or within the authorized bounds of the single accredited record $e^*$;
+    \item The claim is backed by a valid cryptographic hash $\mathcal{H}(e^*)$ matching an immutable authority entry.
+\end{enumerate}
+Conversely, if no single accredited record $e^* \in \mathcal{E}$ simultaneously entails all 11 slots of $\mathcal{C}$, then $\operatorname{Certify}(\mathcal{C}) = 0$ deterministically, resulting in fail-closed abstention or escalation.
+\end{proposition}
+
+\paragraph{Epistemic Multi-Source Guidance vs. Runtime Single-Record Binding.}
+A key architectural question is whether enforcing single-record joint binding ($\exists e^*$) unnecessarily rejects legitimate multi-source agricultural guidance---for instance, when BARI provides the agronomic dosage, DAE provides the current gazette status, and a regional extension bulletin provides crop-stage timing. BAA resolves this via \emph{offline knowledge compilation}: during knowledge ingestion, multi-institutional sources are reconciled, validated by agronomic rules, and compiled into canonical, immutable composite records $e^*$ with cryptographic provenance traces. Thus, runtime single-record verification eliminates dynamic cross-document misbinding without reducing the epistemic breadth of multi-source institutional knowledge.
+
+\subsection{Threat Model and Operational Failure Vectors}
+\label{sec:threat_model}
+To evaluate reliability systematically, we define five distinct operational threat vectors:
+\begin{itemize}
+    \item $\mathcal{T}_1$ \textbf{(Adversarial Prompt Injection \& Register Mutation):} User inputs designed to bypass safety filters through dialectal obfuscation, roleplay framing, or explicit instructions to ignore regulatory bans.
+    \item $\mathcal{T}_2$ \textbf{(Parametric Prior Intrusion):} Hallucinated active ingredients or dosages emitted by the generative LLM derived from pretraining priors rather than retrieved evidence.
+    \item $\mathcal{T}_3$ \textbf{(Cross-Document Relational Misbinding):} The generator correctly retrieves authentic passages from multiple documents but incorrectly binds a dosage from one chemical to the active ingredient of another.
+    \item $\mathcal{T}_4$ \textbf{(Temporal Drift \& Gazette Obsoletion):} Queries where historical, superseded recommendations exist in the corpus alongside newly gazetted chemical restrictions.
+    \item $\mathcal{T}_5$ \textbf{(Perceptual Diagnostic Conflict):} Multimodal scenarios where farmer textual assertions contradict vision-derived crop disease evidence.
+\end{itemize}
 
 \subsection{Primary Endpoints}
 We use the following primary endpoints throughout, reported with 95\% Wilson confidence intervals where sample sizes permit. All endpoints were pre-registered before test-set evaluation.

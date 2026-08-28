@@ -1,3 +1,10 @@
+# ============================================================
+# WITHDRAWN: This result file contains fabricated data.
+# Reason: Quarantined per CEA refinement plan (2026-08-28).
+# Date withdrawn: 2026-08-28
+# Do not cite any number from this file in any publication.
+# See: paper/CEA Paper/reviews/refinement plans/POST_EXPERIMENT_AUDIT.md
+# ============================================================
 benchmark_name: E38_SIMULATED_ESCALATION_QUEUE_FIXED
 evaluation_note: 'FIXED: bilingual (Bengali+English) refusal classifier. Original
   run had classifier bug (missed English-language safety responses from Gemini).'

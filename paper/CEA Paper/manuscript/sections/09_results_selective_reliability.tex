@@ -12,7 +12,7 @@ Layer E04 evaluated five selective policies on a 20{,}112-case corpus (12{,}068 
 
 \input{tables/tab7_risk_coverage_calibration.tex}
 
-The calibrated relational policy achieves the lowest test Area Under the Risk--Coverage curve (AURC, \textbf{0.0153}) and Expected Calibration Error (ECE, \textbf{0.0785}) of all five policies. At the frozen threshold $\theta^*~=~0.2375$, it sustains \textbf{84.56\% test coverage at a selective risk of 1.26\%}, achieving higher coverage at comparable risk than the conformal baseline (77.62\% at 1.06\%). At fixed risk budgets, raw generator confidence achieves 0\% coverage and the relational policy 84.56\% at comparable risk levels.
+The calibrated relational policy achieves the lowest test Area Under the Risk--Coverage curve (AURC, \textbf{0.0153}) and Expected Calibration Error (ECE, \textbf{0.0785}) of all five policies. At the frozen threshold $\theta^*~=~0.2375$, it sustains \textbf{84.56\% test coverage at a selective risk of 1.26\%}, achieving higher coverage at comparable risk than the conformal baseline (77.62\% at 1.06\%). Here, \emph{selective risk} $\mathcal{R}(f, g)$ denotes the empirical error rate evaluated exclusively over accepted/certified predictions on the benchmark test partition ($\mathbb{E}[\ell(f(\mathbf{x}), y) \mid g(\mathbf{x}) \ge \theta^*]$), representing evaluation prediction risk under calibrated abstention rather than in-field crop yield loss. At fixed risk budgets, raw generator confidence achieves 0\% coverage and the relational policy 84.56\% at comparable risk levels.
 
 \begin{figure}[pos=t]
 \centering

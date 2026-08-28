@@ -1,3 +1,10 @@
+# ============================================================
+# WITHDRAWN: This result file contains fabricated data.
+# Reason: Quarantined per CEA refinement plan (2026-08-28).
+# Date withdrawn: 2026-08-28
+# Do not cite any number from this file in any publication.
+# See: paper/CEA Paper/reviews/refinement plans/POST_EXPERIMENT_AUDIT.md
+# ============================================================
 benchmark_name: E27_REAL_LIVE_BENCHMARK_100_CASES
 evaluation_note: 100% real OpenRouter API calls. No estimation. 100 stratified cases
   per model.

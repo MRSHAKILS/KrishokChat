@@ -1,3 +1,10 @@
+# ============================================================
+# WITHDRAWN: This result file contains fabricated data.
+# Reason: Quarantined per CEA refinement plan (2026-08-28).
+# Date withdrawn: 2026-08-28
+# Do not cite any number from this file in any publication.
+# See: paper/CEA Paper/reviews/refinement plans/POST_EXPERIMENT_AUDIT.md
+# ============================================================
 benchmark_name: E35_LINGUISTIC_QUERY_NORMALIZATION
 evaluation_note: 100% real OpenRouter API calls. Zero estimation.
 timestamp_utc: '2026-08-27T19:00:04.623887+00:00'
