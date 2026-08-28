@@ -1,10 +1,11 @@
 % Section 9: Selective Resolution, Calibration & Robustness (RQ3 + RQ4)
-% MERGED from former Â§9 (selective reliability) + Â§10 (robustness) + Â§11 (temporal governance)
 % Revised per supervisor review (2026-08-28).
-% Lead with KEY NUMBER. Bridge sentence â†’ Â\section{Results: Selective Resolution, Calibration, and Robustness (RQ3, RQ4)}
+% Lead with KEY NUMBER. Bridge sentence → §10.
+
+\section{Results: Selective Resolution, Calibration, and Robustness (RQ3, RQ4)}
 \label{sec:results_selective_reliability}
 
-Calibrated abstention sustains \textbf{84.56\% advisory coverage at a 1.26\% selective-risk level} across 20,112 held-out cases, achieving a better coverage-risk trade-off than all four alternatives. Across linguistic registers, temporal conflicts, and retrieval degradation, the safety boundary (0.0\% CUAR, 95\% CI [0.0, 3.7]) holds in every evaluated cell.
+Calibrated abstention sustains \textbf{84.56\% advisory coverage at a 1.26\% selective-risk level} across 20,112 held-out cases, achieving a better coverage-risk trade-off than all four alternatives. Across linguistic registers and retrieval degradation regimes, the safety boundary holds in every evaluated cell.
 
 \subsection{Risk--Coverage Calibration (E04)}
 Layer E04 evaluated five selective policies on a 20{,}112-case corpus (12{,}068 train / 4{,}022 dev / 4{,}022 test). The threshold $\theta^*$ was frozen on the development split and transferred to the held-out test split. Table~\ref{tab:risk_coverage_calibration} reports test-split results.
@@ -28,9 +29,6 @@ A manual audit of 100 residual failure/abstention cases assigned each to one of 
 
 \input{tables/tab10_failure_mitigation.tex}
 
-\subsection{Architectural Ablation: Where the Safety Comes From (E34)}
-Layer E34 isolates each architectural layer with a cumulative ablation (100 cases per tier). The base LLM (L0) certifies 61.0\% correctly with 14.0\% CUAR. Adding lexical retrieval (L1) raises correctness to 72.0\% and cuts CUAR to 4.0\%; hybrid dense retrieval (L2) reaches 72.0\% at 98.0\% operational coverage but still 3.0\% CUAR. The prompted safety guardrail (L3) worsens three of four metrics (62.0\% correctness, 10.0\% CUAR, 78.0\% coverage), consistent with E27 and E30 findings. Adding the SQLite fact base with the five-tier ladder (L4) drives correctness to 100.0\% and CUAR to 0.0\% at 70.0\% certified coverage; the full BAA (L5) matches L4 on every accuracy metric. We state the honest reading: L4-to-L5 does not itself demonstrate the verifier's safety contribution (that evidence lives in the E28 B5-vs-B6 contrast), and the coverage drop from 98\% to 70\% is larger than the correctness gain from 72\% to 100\%, so the ablation is a coverage-for-certainty trade, not a monotonic improvement.
-
 \subsection{Input Robustness: Bengali Register Coverage (E17, E21)}
 Bengali input spans at least four registers: standard formal, authentic farmer language, regional dialects (Sylheti/Chittagonian), and romanized Banglish. Text-first retrieval degrades sharply on the last three: Hit@1 falls from 72.1--73.4\% (standard) to 44.7--45.7\% (dialects) and 41.5--41.6\% (Banglish) at thresholds 0.7--0.8 (E17). Detection-gated routing reduces the candidate search space by 75.64\% (2{,}135~$\rightarrow$~516.4 nodes) and lifts Hit@1 on dialects by $+$36.6~pp and on Banglish by $+$39.7~pp. Layer E21 then asks what the routing choice does to end-to-end advisory outcomes per register: coverage rises from 42.9\% to 89.8\% on dialects ($+$46.9~pp), and from 41.6\% to 90.0\% on Banglish ($+$48.4~pp), while holding hazard at \textbf{0.0\% in all eight register~$\times$~routing cells} (0/4{,}000; 95\% CI [0.0, 0.09]). Table~\ref{tab:multimodal_robustness} summarizes the register-level outcomes.
 
@@ -39,8 +37,8 @@ Bengali input spans at least four registers: standard formal, authentic farmer l
 \subsection{Retrieval-Degradation Safe Degradation (E12)}
 Under four retrieval regimes (gold, noisy, poisoned-contradictory, omitted evidence; 2{,}000 queries each), vanilla RAG's chemical hazard escalates from 10.0\% (gold) to 33.2\% (poisoned). BAA holds \textbf{0.0\% hazard in all four regimes} (each CI [0.0, 0.19]) and degrades monotonically in coverage: 84.56\%~$\rightarrow$~54.3\%~$\rightarrow$~0\%~$\rightarrow$~0\%, converting ungrounded context into abstention. This is the cleanest demonstration of safe degradation under evidence-quality uncertainty.
 
-\subsection{Temporal Validity and Knowledge Integrity (E30, E23, E24)}
-BAA achieved \textbf{100.0\% current-gazette adherence} (95\% CI [96.30, 100.0]) with 0.0\% obsolete leakage in the temporal conflict benchmark (100 cases per system). The LLM-judge guardrail cited the obsolete record in \textbf{75.0\%} of cases, performing worse than the unguarded LLM (39.0\%). The mechanism is structural: the $\operatorname{Current}(e)$ predicate is evaluated against the authority manifest at resolution time. On tamper detection (E23), 1{,}000 SHA-256 chain mutations were all detected (100.0\%; CI [99.62, 100.0]) at p95 0.1919~ms verification latency. Knowledge maintenance remains a data operation, not a code operation: 18~minutes closed a real cluster gap (E24, single-cluster case study).
+\subsection{Knowledge Integrity and Tamper Detection (E23, E24)}
+On tamper detection (E23), 1{,}000 SHA-256 chain mutations were all detected (100.0\%; 95\% CI [99.62, 100.0]) at p95 0.1919~ms verification latency. Knowledge maintenance remains a data operation, not a code operation: 18~minutes closed a real cluster gap (E24, single-cluster case study).
 
 \medskip
 \noindent\textit{The architecture is safe and calibrated in controlled evaluation. Section~\ref{sec:results_deployment} evaluates whether it sustains this efficiency under rural connectivity, SMS constraints, and low-cost device deployments.}

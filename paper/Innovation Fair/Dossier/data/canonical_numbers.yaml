@@ -1,0 +1,151 @@
+# =============================================================================
+# canonical_numbers.yaml
+# Single source of truth for every number that appears in the dossier.
+# Numbers are copied verbatim from the planning specification
+# (paper/planning/dossier.md), which the author has verified.
+# status: measured | simulated | tested | established | projected
+# =============================================================================
+
+benchmark_v2:
+  paper_title: "KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory"
+  core_instances:      { value: 85979, status: established }
+  farmer_benchmark:    { value: 1000,  status: established, notes: "350-query evaluation split" }
+  field_interviews:    { value: 300,   status: established, notes: "Rajshahi and Natore smallholders" }
+  publications:        { value: 284,   status: established }
+  institutions:        { value: 13,    status: established }
+  dialects:            { value: 6,     status: established }
+  semantic_units:      { value: 2946,  status: established }
+  tracks:
+    general_qa:        { value: 28993, status: established }
+    treatment_qa:      { value: 11224, status: established }
+    safety_refusal:    { value: 20112, status: established }
+    table_qa:          { value: 25650, status: established }
+
+closed_book_treatment_correct:   # percent, status: measured
+  gemini_2_5_fl:       43.64
+  gemma_4_26b:         38.73
+  llama_3_1_8b:        12.43
+  qwen_2_5_7b:         13.29
+  gpt_oss_120b:        32.92
+oracle_treatment_hallucination:
+  range_pct:           [4.05, 7.00]
+  status: measured
+
+retrieval_study:
+  paper_title: "Where Does Retrieval Fail? Evaluating RAG Architectures for Agricultural Advisory"
+  arxiv:               "2608.14886"
+  eval_queries:        { value: 1000,  status: established }
+  knowledge_nodes:     { value: 2882,  status: established }
+  publications:        { value: 284,   status: established }
+  architectures:       { value: 5,     status: established }
+  embedding_models:    { value: 6,     status: established }
+  hybrid_rrf_r_at_10:  { value: 0.539, status: measured, notes: "overall R@10" }
+
+counterfactual_binding:            # percent certified, status: measured
+  pairs:               2000
+  vanilla_rag:         72.65
+  lexical_matcher:     59.55
+  llm_judge:           38.65
+  typed_verifier:      0.00
+  correct_certified_typed: 100.0
+  cbc:                 1.000
+
+slot_ablation:                     # dangerous-acceptance increase, percentage points
+  cases:               10000
+  status: measured
+  dosage_bounds:       31.6
+  regulatory_polarity: 17.8
+  active_ingredient:   14.2
+  host_crop:           11.4
+  target_pathogen:     8.2
+  volume_denominator:  7.1
+  formulation:         5.8
+  unit:                5.4
+  growth_stage:        4.9
+  phi:                 2.7
+  interval:            1.9
+  all_typed_removed_hazard_pct: 80.0
+  full_config_dangerous_acceptance_pct: 0.0
+
+retrieval_degradation:             # hazard percent, status: measured
+  gold:          { vanilla_rag: 10.0, krishokchat: 0.0 }
+  noisy:         { vanilla_rag: 19.2, krishokchat: 0.0 }
+  contradictory: { vanilla_rag: 33.2, krishokchat: 0.0 }
+  omitted:       { vanilla_rag: 23.2, krishokchat: 0.0 }
+
+generator_robustness:              # hazard percent, status: measured
+  gemma_4:     { raw_rag: 7.40,  verified: 0.00 }
+  llama_3_8b:  { raw_rag: 11.80, verified: 0.00 }
+  qwen_2_5_7b: { raw_rag: 13.60, verified: 0.00 }
+
+dialect_coverage:                  # detection-gated coverage, percent, status: measured
+  queries: 4000
+  regional_dialect: { text_first: 42.9, gated: 89.8 }
+  banglish:         { text_first: 41.6, gated: 90.0 }
+  dangerous_acceptance_pct: 0.0
+
+expert_evaluation:                 # status: measured
+  responses:              200
+  agronomists:            3
+  mean_correctness:       4.82   # of 5
+  chemical_safety_pass:   100.0  # percent
+  evidence_traceability:  98.5   # percent
+  deployment_approval:    96.5   # percent
+  gwet_ac1_safety:        0.862
+
+multimodal_conflict:               # E31, status: measured
+  tested_cases:           100
+  clarification_trigger:  100.0   # percent
+  cuar_pct:               0.0
+
+network_resilience:                # delivery percent, status: simulated
+  loss_15pct: { cloud_only: 82.0, offline_first: 91.4 }
+  loss_30pct: { cloud_only: 12.8, offline_first: 58.1 }
+  notes: "controlled network simulation; not carrier-level measurement"
+
+sms_delivery:
+  deterministic_template_chars: [102, 115]        # status: tested
+  llm_composed_critical_hazard_pct: 64.4          # E15, status: measured
+  injection_leakage_deterministic: "0/1400"       # E22, status: measured
+  injection_leakage_llm: "509/1400"               # E22, status: measured
+
+efficiency_workload:               # 5,000-query workload share, percent, status: measured
+  t0_safety:            6.40
+  t1_detection_facts:   32.22
+  t2_templated_facts:   18.82
+  t3_llm:               38.48
+  t4_refusal:           4.08
+  deterministic_advisory_pct: 51.04
+  zero_llm_terminal_pct:      61.52
+  weighted_latency_ms:       { tiered: 546.15, llm_default: 1247.93 }
+
+knowledge_growth:                  # E24, status: measured
+  facts_added:          2
+  minutes:              18
+  cluster_queries:      55
+  coverage_before_pct:  58.7
+  coverage_after_pct:   64.2
+  crop_cluster: "chili anthracnose"
+
+provenance:                        # E23, status: measured
+  mutation_tests:       1000
+  detected:             1000
+  delta_bytes:          791
+  full_pack_bytes:      10985
+  p95_verify_ms:        0.1919
+
+production_baseline:               # status: measured
+  commits:              193
+  backend_tests_passed: 558
+  backend_tests_skipped: 8
+  backend_tests_failed: 0
+  golden_replay:        "50/50"
+  frontend_build:       green
+
+repository:
+  url: "https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System"
+
+references:
+  krishokchat_v2_arxiv: "2606.29243"      # v2 (v1 arXiv id is DEPRECATED per AGENTS.md)
+  retrieval_arxiv:      "2608.14886"
+  helpline: "16123 (Bangladesh Krishi Call Center)"

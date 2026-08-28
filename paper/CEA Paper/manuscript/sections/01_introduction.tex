@@ -37,7 +37,7 @@ Table~\ref{tab:rq_overview} summarizes the five governing research questions, pr
 \toprule
 \textbf{RQ} & \textbf{Question} & \textbf{Key Metric} & \textbf{Section} \\
 \midrule
-RQ1 & Does BAA certify correct, safe advice on naturalistic and adversarial queries, as judged by expert agronomists? & CAC, Gwet's AC1 & \S\ref{sec:results_advisory_quality} \\
+RQ1 & Does BAA certify correct, safe advice on naturalistic and adversarial queries? & CAC, CUAR & \S\ref{sec:results_advisory_quality} \\
 RQ2 & Does single-record joint binding protect against misbinding, counterfactual corruption, and evidence conflict? & CUAR, Rejection Rate & \S\ref{sec:results_authority_safety} \\
 RQ3 & Can calibrated abstention trade coverage for a user-specified risk bound? & AURC, Coverage@Risk & \S\ref{sec:results_selective_reliability} \\
 RQ4 & Does the architecture preserve safety under linguistic register, temporal, and multimodal uncertainty? & Dialect Coverage, Gazette Adherence & \S\ref{sec:results_selective_reliability} \\
@@ -50,7 +50,7 @@ The contributions of this work are threefold:
 \begin{enumerate}
     \item \textbf{Bounded-authority advisory architecture.} A decision-support architecture that separates factual authority from generative language through an 11-slot, fail-closed, single-record certification contract (Sections~\ref{sec:problem_formulation} and~\ref{sec:system_architecture}).
     \item \textbf{Risk- and evidence-aware selective resolution policy.} A five-tier resolution ladder that routes each query among deterministic resolution, grounded generation, clarification, abstention, and escalation, with a frozen threshold validated on held-out data (Sections~\ref{sec:problem_formulation} and~\ref{sec:results_selective_reliability}).
-    \item \textbf{Multi-axis empirical evaluation.} An extensive evaluation covering adversarial safety, agronomist-validated correctness, risk--coverage calibration, linguistic and temporal robustness, prompt injection security, and constrained-deployment economics, spanning 36 experimental layers and $\approx$60,000 evaluation cases (Sections~\ref{sec:experimental_methodology}--\ref{sec:results_deployment}).
+    \item \textbf{Multi-axis empirical evaluation.} An extensive evaluation covering adversarial safety, empirical advisory correctness, risk--coverage calibration, linguistic and temporal robustness, prompt injection security, and constrained-deployment economics, spanning 27 experimental layers and over 60,000 evaluation cases (Sections~\ref{sec:experimental_methodology}--\ref{sec:results_deployment}).
 \end{enumerate}
 
 The remainder of this paper is organized as follows. Section~\ref{sec:related_work} positions the work against the literature. Section~\ref{sec:problem_formulation} formalizes the problem and the certification contract. Section~\ref{sec:system_architecture} describes the architecture, and Section~\ref{sec:knowledge_governance} details knowledge governance. Section~\ref{sec:experimental_methodology} presents the methodology. Sections~\ref{sec:results_advisory_quality}--\ref{sec:results_deployment} report results organized by research question. Sections~\ref{sec:discussion}--\ref{sec:conclusion} present the discussion, limitations, reproducibility, and conclusion.

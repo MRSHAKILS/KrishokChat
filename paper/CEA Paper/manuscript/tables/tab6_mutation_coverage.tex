@@ -1,0 +1,24 @@
+\begin{table}[pos=t]
+\centering
+\small
+\caption{B5 vs.\ B6 mutation coverage per operator class (Layer E28). \checkmark\ = rejects all cases in class. \texttimes\ = fails to reject (false-certifies).}
+\label{tab:mutation_coverage}
+\resizebox{\columnwidth}{!}{\begin{tabular}{llcc}
+\toprule
+\textbf{ID} & \textbf{Mutation Operator} & \textbf{B5 (8-slot)} & \textbf{B6 (11-slot)} \\
+\midrule
+mu\_01 & Crop substitution            & \checkmark & \checkmark \\
+mu\_02 & Pest/disease substitution    & \checkmark & \checkmark \\
+mu\_03 & Active ingredient swap       & \checkmark & \checkmark \\
+mu\_04 & Formulation swap             & \checkmark & \checkmark \\
+mu\_05 & Dosage overdose              & \checkmark & \checkmark \\
+mu\_06 & Dosage unit corruption       & \checkmark & \checkmark \\
+mu\_07 & Water volume mutation        & \texttimes & \checkmark \\
+mu\_08 & Spray interval shortening    & \texttimes & \checkmark \\
+mu\_09 & PHI shortening               & \texttimes & \checkmark \\
+mu\_10 & Regulatory polarity flip     & \checkmark & \checkmark \\
+mu\_11 & Provenance hash corruption   & \texttimes & \checkmark \\
+\bottomrule
+\multicolumn{4}{l}{\small\texttimes\ = B5 false-certifies because the governing slot is absent from its contract.}
+\end{tabular}}
+\end{table}

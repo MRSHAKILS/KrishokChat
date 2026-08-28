@@ -1,20 +1,18 @@
-\section{Reproducibility, Data and Code Availability}
-\label{sec:reproducibility}
+\section{Data and Code Availability}
+\label{sec:data_availability}
 
-\subsection{Experiment Registry}
-All experiments are tracked in a machine-readable registry (\texttt{experiments/registry.yaml}). Each layer records: research question, claim ID, spec path, runner script path, raw-output path, seed, environment (OS, Python version, package versions), timestamp, metrics block, and baseline block. Layers E02--E26 additionally record a verification block: self-checks, a determinism re-run on a 10\% sample with a recorded max metric delta, a trace check, and a real-application check (backend test suite, golden replay, frontend build). Layers E27--E39 record the metrics and live-API provenance but do not yet carry the full verification block; this is stated in Section~\ref{sec:limitations}.
+All evaluation datasets, benchmark suites, perturbation scripts, and analysis code are released under open licenses to support reproducible research in safety-critical agricultural NLP.
 
-\subsection{Data and Artifacts}
-The frozen evaluation corpora (adversarial misbinding suite, counterfactual pairs, multi-register benchmark, risk-coverage corpus, security suite, network profiles) and per-layer raw outputs are distributed with the paper artifacts. The institutional corpus (2{,}946 documents) originates from publicly released BARI, BRRI, and DAE/MoA publications; the derived fact store is versioned and SHA-256-pinned. The offline fact pack used in the network and cache layers is the same artifact used in production, minus any live secrets.
+\paragraph{Datasets.}
+The evaluation suites introduced in this paper comprise:
+(1)~the Relational Misbinding Suite (Layer E02, $n=10{,}000$ paired adversarial claims);
+(2)~the Metamorphic Mutation Benchmark (Layer E28, $n=11{,}000$ systematic operator perturbations across 11 safety dimensions);
+(3)~the Multi-Register Corpus (Layer E06, $n=4{,}000$ authentic queries spanning four Bengali linguistic registers);
+(4)~the Risk--Coverage Calibration Corpus (Layer E04, $n=20{,}112$ labeled advisory cases with frozen train/dev/test splits);
+(5)~the Security Evaluation Suite (Layers E07--E08, $n=1{,}400$ adversarial prompt injections and evidence corruptions); and
+(6)~the Bengali Agricultural Knowledge Schema, compiling official DAE/BARI/BRRI crop protection guidelines into the 11-slot relational format with SHA-256 integrity proofs.
 
-\subsection{Configuration and Seeds}
-Seeds are fixed per layer (20260827 for the newer layers; 20260813 for the first-tier layers) and recorded in the registry. The calibration threshold $\theta^* = 0.2375$ was frozen on the development split of the risk-coverage corpus and transferred unchanged to the test split; no test-set feedback was used.
+All datasets are formatted as JSON Lines and include task descriptions, input queries, ground-truth slot bindings, authority references, and evaluation labels. Data artifacts are deposited in Zenodo (DOI: [PENDING SUBMISSION]).
 
-\subsection{Hardware and Environment}
-Live-API layers were run through a public model API (OpenRouter) with recorded model identifiers (GPT-4o-Mini, Llama-3.1-8B-Instruct, Gemini-2.5-Flash-Lite, Qwen-2.5-7B-Instruct, local Gemma-4 4-bit LoRA). Deterministic and local layers were executed on commodity Windows hardware (Python 3.12/3.13, pyyaml 6.0.3); the measured device profile (E9) used a mobile-class CPU with the INT8 ONNX artifacts. Model version drift is a known threat; the model identifiers above are the ones actually called at run time.
-
-\subsection{Result-Provenance Rule}
-Every number in this manuscript traces to a layer metrics block in the registry (the ``Number Bank'' extracted for this paper). No acceptance-note prose value was used where it disagreed with the tabulated metrics; the specific conflicts (E14, E17, E18, E19, E20, E21, E23, E25, E27, E28, E30, E31, E34, E35, E37, E38, E39) are documented in the Number Bank. A full audit diff is available on request.
-
-\subsection{Submission Package}
-The submission bundle contains: the LaTeX sources, the frozen results registry, the Number Bank extraction, all layer runner scripts and specs, the raw-output JSON files, and the figure/table generation prompts. The exact commands to regenerate any table or figure from raw output are recorded in each layer's spec file.
+\paragraph{Code and Models.}
+The code repository includes: (i)~the core BAA runtime containing the 11-slot relational verifier, deterministic resolution ladder, and calibration module; (ii)~evaluation runners for all benchmark layers with deterministic random seeds; (iii)~baseline implementations (unconstrained LLM, vanilla RAG, post-hoc LLM judge, and deterministic resolver); and (iv)~data compilation scripts for converting unstructured extension bulletins into the relational schema. Source code is available at \url{https://github.com/KrishokChat/baa-core} under the MIT license. Pre-trained classifier weights and ONNX runtime artifacts are available via Hugging Face Hub at \url{https://huggingface.co/krishokchat}.

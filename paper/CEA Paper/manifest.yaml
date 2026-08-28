@@ -1,3 +1,9 @@
+# CLEANUP AUDIT (Phase 0, 2026-08-28):
+# - E13 removed (agronomist study did not take place)
+# - E32-E39 removed (prompted LLM mislabelled as BAA)
+# - E27, E29, E30, E31: BAA arms removed pending controlled re-measurement
+# - Baseline arms retained across all layers
+
 meta:
   venue: Computers and Electronics in Agriculture (CEA)
   publisher: Elsevier
@@ -33,6 +39,7 @@ manuscript:
   - manuscript/tables/tab4_baseline_taxonomies.tex
   - manuscript/tables/tab5_end_to_end_advisory.tex
   - manuscript/tables/tab6_authority_verification.tex
+  - manuscript/tables/tab6_mutation_coverage.tex
   - manuscript/tables/tab7_risk_coverage_calibration.tex
   - manuscript/tables/tab8_multimodal_robustness.tex
   - manuscript/tables/tab9_deployment_efficiency.tex
@@ -61,6 +68,7 @@ drafts:
 experiments:
   root: experiments/
   unified_results: experiments/results.yaml
-  total_layers: 38
-  completed_layers_count: 36
+  total_layers: 29
+  completed_layers_count: 27
   planned_layers_count: 2
+  # E32-E39 removed: prompted LLM mislabelled as BAA. See POST_EXPERIMENT_AUDIT.md

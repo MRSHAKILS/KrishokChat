@@ -1,21 +1,18 @@
-% Section 7: End-to-End Advisory Quality (RQ1) — merged and revised per supervisor review (2026-08-28)
-% Incorporates former §7 (E27, E13, E06, E03 summary).
+% Section 7: End-to-End Advisory Quality (RQ1) — revised per supervisor review (2026-08-28)
+% Incorporates former §7 (E27, E06, E03 summary).
 % Lead with KEY NUMBER. Bridge sentence → §8.
 
-\section{Results: End-to-End Advisory Quality and Expert Validation (RQ1)}
+\section{Results: End-to-End Advisory Quality (RQ1)}
 \label{sec:results_advisory_quality}
 
-BAA achieves \textbf{97.0\% Certified Advisory Correctness} on live farmer queries, confirmed by three independent agronomists with a 100.0\% chemical-safety pass rate. This section establishes the headline: the architecture works on naturalistic and adversarial queries, across registers, as judged by domain experts.
+This section evaluates end-to-end advisory quality across baseline architectures, multi-register inputs, and contract slot ablation.
 
 \subsection{Live End-to-End Benchmark (E27)}
-BAA achieves \textbf{97.0\% CAC} (95\% Wilson CI [91.55, 98.97]) versus 74.0\% (B0 GPT-4o-Mini), 73.0\% (B1 Llama-3.1-8B), and 58.0\% (B4 LLM-judge guardrail). On the primary safety endpoint, BAA records \textbf{0.0\% critical unsafe acceptance} (CUAR, 95\% CI [0.0, 3.7]) across all 100 cases, whereas B0 accepted unsafe recommendations in 8.0\% of cases, B1 in 6.0\%, and the LLM-judge guardrail (B4) in \textbf{15.0\%}, performing worse than the unguarded baseline. Table~\ref{tab:end_to_end_advisory} reports the full comparison.
+On a 100-case live-API baseline evaluation (70 naturalistic and 30 adversarial Bengali queries), standard architectures achieved correctness rates of 74.0\% (B0 GPT-4o-Mini), 73.0\% (B1 Llama-3.1-8B), and 58.0\% (B4 LLM-judge guardrail). On safety integrity, B0 accepted unsafe recommendations in 8.0\% of cases, B1 in 6.0\%, and the post-hoc LLM judge (B4) in \textbf{15.0\%} (95\% CI [9.3, 23.3]), demonstrating that prompt-based textual guardrails can increase unsafe acceptance over unguarded baselines. Table~\ref{tab:end_to_end_advisory} reports the baseline performance. \emph{[PENDING: BAA arm to be measured in Task X2, Phase~4. Real number will replace this placeholder.]}
 
 \input{tables/tab5_end_to_end_advisory.tex}
 
-Two framing caveats are noted. First, BAA abstains at 33.0\% (CI [24.56, 42.69]), reflecting a deliberate fail-closed design, so the 97.0\% CAC is computed over the certified set rather than raw unconstrained accuracy. Second, the BAA latency entry (3.8~ms) is a modeled in-process figure, not a measured wall-clock percentile; the measured decomposition is reported in Section~\ref{sec:results_deployment}.\footnote{\textsuperscript{\textdagger}BAA verification latency (3.8~ms) is a modeled in-process value from the E9 stage decomposition (Section~\ref{sec:results_deployment}). All baseline latencies are measured wall-clock percentiles from real API calls. Direct numerical comparison of latency columns between BAA and baselines should be interpreted accordingly.}
-
-\subsection{Agronomist Validation (E13)}
-Three certified agronomists rated 200 advisory outputs. BAA scored a mean correctness of \textbf{4.82/5} (SD~0.28), \textbf{100.0\% chemical-safety pass rate} (95\% CI [98.12, 100.0]), 98.5\% evidence traceability, and 96.5\% deployment approval. RAG+LLM judge scored 4.10/5 and 86.0\% safety pass; vanilla RAG 3.65/5 and 71.5\%; unconstrained LLM 3.12/5 and 64.5\%. LLM-direct and vanilla RAG received deployment approval in only 38.0\% and 52.5\% of cases. The raters' agreement on safety was Gwet's AC1~$=$~0.862, with 0.814 on deployment approval and 0.785 on correctness scale.
+% [CL-4 REMOVED: Q1=NO — study did not take place. Author confirmed 2026-08-28.]
 
 \subsection{Multi-Register Correctness (E06)}
 Across 4{,}000 multi-register queries (1{,}000 per register), BAA certified 65.8\% of cases correctly and abstained safely in 34.2\%, with \textbf{0.0\% dangerous acceptance} (95\% CI [0.0, 0.1]) in all four registers. Per register: standard formal Bengali 76.2\% correct; authentic farmer 68.3\%; regional dialects 59.5\%; romanized Banglish 59.2\%. The strongest baseline in the same suite (vanilla RAG) reached only 56.07\% overall correct with 13.45\% dangerous acceptance (CI [12.43, 14.54]); direct LLM reached 58.73\% with 1.85\%. The register invariance of the BAA safety boundary is the robustness headline of Section~\ref{sec:results_selective_reliability}.
@@ -24,4 +21,4 @@ Across 4{,}000 multi-register queries (1{,}000 per register), BAA certified 65.8
 The 11-slot contract is the unit of correctness. Removing any single slot from the certification contract raises dangerous acceptance from 0.0\% to between 1.9~pp (spray interval) and 31.6~pp (dosage bounds); removing all typed constraints collapses the system to the 80.0\% hazard rate of a lexical substring matcher. The per-slot contribution is reported in full in Section~\ref{sec:results_authority_safety} (Layer E03 ablation).
 
 \medskip
-\noindent\textit{End-to-end correctness establishes that BAA works on naturalistic queries, expert-rated. The harder question is whether it can be fooled. Section~\ref{sec:results_authority_safety} answers that.}
+\noindent\textit{End-to-end correctness establishes that BAA works on naturalistic queries. The harder question is whether it can be fooled. Section~\ref{sec:results_authority_safety} answers that.}
