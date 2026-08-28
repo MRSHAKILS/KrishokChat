@@ -1,38 +1,40 @@
 \section{Experimental Methodology}
 \label{sec:experimental_methodology}
 
-\subsection{Experimental Principles and Reproducibility Protocol}
-To maintain the highest standards of scientific rigor, all evaluations follow strict methodological controls:
-\begin{itemize}
-    \item \textbf{Frozen Test Partitions:} All evaluation datasets are frozen on disk and hashed via SHA-256 prior to benchmarking. No hyperparameter tuning or prompt optimization is performed post-evaluation.
-    \item \textbf{Identical Baseline Inputs:} All comparative baselines (B0--B6) receive identical raw input queries, image tensors, and environmental contexts.
-    \item \textbf{Deterministic Execution:} Random seeds are fixed across all stochastic components (seed = 20260827).
-    \item \textbf{Confidence Intervals:} All binary proportions and rate metrics report 95\% Wilson score confidence intervals.
-\end{itemize}
+\subsection{Experimental Principles}
+All evaluations follow five fixed controls. (1) \textbf{Frozen partitions:} each test set is frozen on disk before any tuning; thresholds and prompt strategies are selected on development splits only and never on test. (2) \textbf{Identical inputs across systems:} every baseline receives the same raw query, image, and context. (3) \textbf{Deterministic seeds:} seeded runs use seed 20260827 (or 20260813 in the first-tier layers); the exact seed per layer is recorded in the experiment registry. (4) \textbf{Pre-registered metrics:} endpoints are the CUAR, CAC, coverage, and appropriate-abstention definitions of Section~\ref{sec:problem_formulation}, plus per-layer auxiliary metrics. (5) \textbf{Statistical protocol:} binary proportions use 95\% Wilson intervals; paired comparisons use McNemar's test with Holm--Bonferroni correction across the baseline ladder; latency is reported as p50/p95/p99 when a distribution exists; risk--coverage uses AURC and fixed-risk coverage.
 
-\subsection{Benchmark Dataset Suites}
-The experimental battery spans five distinct evaluation corpora:
+\subsection{Benchmark Suites}
+The battery spans five evaluation corpora plus targeted layer-specific sets:
 \begin{enumerate}
-    \item \textbf{Adversarial Relational Misbinding Suite (\Nmisbind{} cases):} Programmatically generated cross-record and counterfactual perturbations designed to test joint-slot binding under multi-document conflict (Layers E02, E05).
-    \item \textbf{11-Slot Hazard Prevention Suite (\Nmisbind{} cases):} Comprehensive single-slot ablation dataset isolating the safety contribution of each agronomic attribute (Layer E03).
-    \item \textbf{Multi-Register Bengali Benchmark (4,000 cases):} Stratified corpus spanning Standard Bengali, Chittagonian/Sylheti regional dialects, Romanized Banglish, and authentic uncurated farmer voice queries (Layers E06, E17, E21).
-    \item \textbf{Adversarial Security \& Injection Suite (1,400 cases):} Jailbreaks, delimiter hijacking, native Bengali prompt injections, and poisoned retrieval contexts (Layers E07, E22).
-    \item \textbf{Simulated Rural Network Suite (1,000 queries $\times$ 4 profiles):} Emulated cellular latency, jitter, and packet loss profiles (Layer E14).
+    \item \textbf{Adversarial relational misbinding suite (10,000 cases):} 10 corruption families $\times$ 1{,}000 cases each, juxtaposing valid facts across records (Layer E02).
+    \item \textbf{11-slot hazard-prevention suite (13 configurations $\times$ 10{,}000 cases):} single-slot ablation isolating the safety contribution of each contract field (Layer E03).
+    \item \textbf{Counterfactual evidence-binding suite (2,000 pairs):} true-evidence vs.\ mutated-evidence certification (Layer E05).
+    \item \textbf{Multi-register Bengali benchmark (4,000 cases):} Standard Bengali, authentic farmer queries, regional dialects, and romanized Banglish, 1{,}000 each (Layers E06, E17, E21).
+    \item \textbf{Risk--coverage calibration corpus (20{,}112 cases):} 12{,}068 train / 4{,}022 dev / 4{,}022 test; threshold frozen on dev (Layer E04).
+    \item \textbf{Adversarial security suite (1{,}400 cases):} seven attack families including Bengali-native and Banglish injections (Layers E07/E08, E22).
+    \item \textbf{Temporal and authority conflict suite (100 cases/system):} obsolete-vs-current gazette and source-conflict constructions (Layers E30, and the temporal sub-block).
+    \item \textbf{Cross-modal conflict suite (100 cases/system):} text crop identity in conflict with visual classification (Layer E31).
+    \item \textbf{Simulated rural network suite (1{,}000 queries $\times$ 4 profiles):} 4G/3G/Edge/2G with latency, loss, and jitter profiles (Layer E14).
 \end{enumerate}
 
-\subsection{Comparative Baselines (B0--B6)}
-We compare BAA against six representative systems (Table~\ref{tab:baseline_taxonomies}):
+\subsection{Baseline Ladder}
+Because the underlying failure modes differ per layer, we define a canonical baseline ladder and instantiate the relevant subset in each layer. All systems share the same frozen inputs within a layer.
 \begin{itemize}
-    \item \textbf{B0 (LLM-Only):} Fine-tuned Gemma-4 4-bit generating answers without retrieval.
-    \item \textbf{B1 (Vanilla RAG):} Standard hybrid BM25 + dense retrieval feeding the generator.
-    \item \textbf{B2 (Guarded RAG):} Standard RAG coupled with a 6-way input classification filter.
-    \item \textbf{B3 (RAG + LLM Judge):} State-of-the-art post-generation verification where a secondary LLM evaluates factual entailment \citep{generateverify2024}.
-    \item \textbf{B4 (Deterministic Resolver):} Pure graph traversal over structured facts without natural language generation.
-    \item \textbf{B5 (Bounded-Authority Advisory - BAA):} The proposed full multi-tier architecture with fail-closed relational certification.
-    \item \textbf{B6 (Evidence-Constrained RAG):} Multi-citation RAG requiring passage citations but lacking single-record joint binding.
+    \item \textbf{B0 --- Unconstrained LLM.} Direct generation (GPT-4o-Mini in live-API layers).
+    \item \textbf{B1 --- Vanilla RAG.} BM25/lexical retrieval feeding the generator without authority constraints (Llama-3.1-8B in live layers).
+    \item \textbf{B2 --- Guarded RAG.} Input risk-classifier before retrieval.
+    \item \textbf{B3 --- RAG + post-hoc LLM judge.} A secondary LLM evaluates textual faithfulness of the generated answer.
+    \item \textbf{B4 --- Deterministic structured resolver.} Fact traversal with no generation.
+    \item \textbf{B5 --- Evidence-constrained RAG.} Multi-document citation with a partial slot matcher but \emph{without} single-record joint binding (the isolation baseline for the contribution).
+    \item \textbf{B6 --- BAA (this work).} The full bounded-authority architecture.
 \end{itemize}
+Table~\ref{tab:baseline_taxonomies} records the mapping per layer and the exact models used.
 
-\subsection{Expert Annotation Protocol and Inter-Rater Reliability}
-For qualitative validation, five practicing agronomists and Upazila Agricultural Officers from the Department of Agricultural Extension (DAE) evaluated system responses triple-blind. Raters assessed technical correctness, completeness, chemical safety, and abstention appropriateness on a 5-point Likert scale. Inter-rater reliability was measured using Gwet's AC1 statistic to account for high-agreement imbalances \citep{geerlings2020gwet}, achieving a strong consensus score of $\text{AC1} = \HumanGwetAC$ ($95\%\text{ CI: }[0.814, 0.910]$).
+\subsection{Expert Evaluation Protocol}
+For the agronomist study (Layer E13), three certified agricultural extension specialists and agronomists rated 200 advisory outputs (50 per system) on correctness (1--5 Likert), chemical safety pass, evidence traceability, and deployment approval, in a blinded presentation order. Agreement is reported with Gwet's AC1 first-order agreement coefficient \citep{gwet2021}; the primary coefficient on the safety dimension is 0.862, with 0.814 on deployment approval and 0.785 on the correctness scale.
+
+\subsection{Reproducibility Protocol}
+Every layer records: script path, spec path, frozen seed, environment (OS, Python, packages), raw-output path, and where applicable the git commit of the code at run time. Layers E02--E26 carry a full verification block (self-checks, determinism re-run on 10\% of cases, trace check, real-application check); the newer live-API layers (E27--E39) do not yet carry that block, and we state this explicitly in the reproducibility section rather than implying a uniform audit trail.
 
 \input{tables/tab4_baseline_taxonomies.tex}

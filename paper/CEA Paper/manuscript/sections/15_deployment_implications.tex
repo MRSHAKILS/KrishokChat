@@ -1,11 +1,20 @@
 \section{Deployment Implications}
 \label{sec:deployment_implications}
 
-\subsection{Operationalization in Low-Bandwidth Rural Environments}
-% Skeleton: Edge deployment, low-end mobile devices, offline SQLite caches.
+\subsection{Rural Connectivity and Offline Evidence}
+The E14 network results translate directly to deployment reality in Bangladesh's rural grid: at 15\% packet loss, an offline-first cache sustains 91.4\% delivery versus 82.0\% for cloud-only RAG, and at 30\% loss the gap widens to 58.1\% versus 12.8\%. The offline fact pack (SHA-256-chained, 92.8\% bandwidth-reduced differential updates, E23) means deterministic resolution and verification require no network at all; the network is needed only for the generative tier.
 
-\subsection{Integration with National Extension Services}
-% Skeleton: Human-in-the-loop escalation workflows and integration with Bangladesh Krishi Call Center (16123).
+\subsection{Low-End Devices}
+The on-device profile (E9, classification artifacts) shows INT8 ONNX models at 5.9--20.79 MB with 29--48 ms inference on mobile CPU and 100.0\% parity with the FP32 reference. Together with the 1.25 MB intent router (E25) and the deterministic resolver ($\le$0.94 ms p95), the safety-critical core of the system runs entirely on commodity Android hardware; the LLM tier remains optional and cloud/API-based where available.
 
-\subsection{Knowledge Base Lifecycle and Governance}
-% Skeleton: Institutional update protocols, regulatory alignment, and audit logging.
+\subsection{Extension-Service Escalation}
+Abstention is not abandonment: every fail-closed refusal redirects to the national Krishi Call Center (16123) or a certified agronomist, and the E38 escalation-gate evaluation shows the routing decision itself can be made deterministic (100.0\% correct escalation on the corrected run, with the confounds noted in Section~\ref{sec:results_authority_safety}). For a national extension service, the practical implication is a division of labor: the machine handles the certifiable majority, and the human network absorbs the abstained minority at a bounded, measurable rate.
+
+\subsection{Knowledge Maintenance and Regulatory Updates}
+The E24 loop shows knowledge maintenance is a data operation, not a code operation: 18 minutes closed a real coverage gap. Regulatory changes (e.g., a newly banned active ingredient) are handled by the polarity registry and temporal validity fields; the E30 result shows obsolete records cannot be certified once the manifest is updated. An operator can therefore keep the system current without touching the model.
+
+\subsection{Auditability and Monitoring}
+Every certified answer carries a provenance chain (record hash, source, version, date) and every interaction writes an audit event (query, risk class, route, resolution tier, evidence version, model, verification, final action, latency). This makes the system auditable per-answer --- a requirement for public-sector deployment and a differentiator from chatbot-only advisory tools.
+
+\subsection{What Is Not Claimed}
+We have not deployed at national scale, we report simulated network profiles rather than field connectivity, and the vision modality is classification-based (task: classify) rather than detection-based. The deployment implications above are architectural and model-based, not deployment measurements.

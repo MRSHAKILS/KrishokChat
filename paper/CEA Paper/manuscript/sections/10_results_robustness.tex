@@ -1,13 +1,18 @@
 \section{Results: Linguistic and Multimodal Robustness (RQ4)}
 \label{sec:results_robustness}
 
-\subsection{Performance Across Bengali Linguistic Registers}
-% Skeleton: Analysis across Standard Bengali, Regional Dialects (Sylheti/Chittagonian), Banglish, Authentic Farmer queries (E06, E21)
+\subsection{Input-Robustness: Retrieval Across Bengali Registers (E17, E21)}
+Bengali input spans at least four registers: standard formal, authentic farmer language, regional dialects (Sylheti/Chittagonian), and romanized Banglish. Text-first retrieval degrades sharply on the last three: Hit@1 falls from 72.1--73.4\% (standard) to 44.7--45.7\% (dialects) and 41.5--41.6\% (Banglish) at the 0.7--0.8 thresholds (E17). We frame this as \emph{retrieval-space reduction and register-robust routing}, not ``dialect immunity'': detection-gated routing collapses the candidate search space by 75.64\% (2{,}135 $\rightarrow$ 516.4 nodes) and lifts Hit@1 on dialects by +36.6 pp and on Banglish by +39.7 pp at threshold 0.8, while keeping the misrouting rate bounded at 3.15\% (95\% CI [2.65, 3.74]).
+
+Layer E21 then asks what the routing choice does to \emph{end-to-end} advisory outcomes per register. Detection-gated routing raises advisory coverage from 42.9\% to 89.8\% on regional dialects (+46.9 pp), 41.6\% to 90.0\% on Banglish (+48.4 pp), 58.2\% to 92.6\% on authentic farmer language (+34.4 pp), and 70.3\% to 93.0\% on standard Bengali (+22.7 pp), while holding the hazard rate at \textbf{0.0\% in all eight register $\times$ routing cells} (0/4{,}000; 95\% CI [0.0, 0.09]). Table~\ref{tab:multimodal_robustness} summarizes the register-level outcome.
+
+\subsection{Query-Normalization Evidence (E35, honestly scoped)}
+Layer E35 tested a linguistic-normalization pipeline on 45 dialect/Banglish queries per arm. Both non-BAA arms saturate at 100.0\% correctness, so the benchmark has no headroom and cannot demonstrate a normalization benefit; the BAA pipeline arm recorded 91.11\% (CI [79.27, 96.49]) and 8.89\% CUAR (CI [3.51, 20.73]), which is a negative directional reading of that layer. We report this transparently: the layer is underpowered ($n=45$), internally inconsistent about $n$, and its control arms saturate, so it supports neither a normalization claim nor a definitive negative; the register-level gains above come from routing and fact coverage, not from text normalization. This layer is not used as evidence for normalization in this paper.
+
+\subsection{Retrieval-Degradation Safe Degradation (E12)}
+Under four retrieval regimes (gold, noisy, poisoned-contradictory, omitted evidence; 2{,}000 queries each), vanilla RAG's chemical hazard escalates from 10.0\% (gold) to 19.2\% (noisy), 33.2\% (poisoned), and 23.2\% (omission). BAA holds \textbf{0.0\% hazard in all four regimes} (each CI [0.0, 0.19]) and degrades monotonically and safely in coverage: 84.56\% $\rightarrow$ 54.3\% $\rightarrow$ 0\% $\rightarrow$ 0\%, converting ungrounded context into abstention. This is the cleanest demonstration of safe degradation under evidence-quality uncertainty.
+
+\subsection{Cross-Modal Conflict Resolution (E31)}
+As detailed in Section~\ref{sec:results_authority_safety}, when text and visual crop identity conflict, BAA requests clarification in 100.0\% of cases (CI [98.77, 100.0]) versus 20--26\% for baselines, with 0.0\% wrong-chemical delivery. The visual modality enters the system as classification metadata (search-space reduction and a modal-conflict gate), not as a separate answer authority.
 
 \input{tables/tab8_multimodal_robustness.tex}
-
-\subsection{Multimodal Perception and Vision Uncertainty}
-% Skeleton: Impact of visual conditioning on search space reduction and uncertainty propagation (E17, E31)
-
-\subsection{Cross-Modal Conflict Resolution}
-% Skeleton: Handling discrepancies between uploaded imagery and textual query symptoms

@@ -1,9 +1,9 @@
-\begin{table*}[t]
+﻿\begin{table*}[t]
 \centering
 \caption{System reliability requirements, operational failure modes, and bounded-authority containment mechanisms.}
 \label{tab:system_requirements}
 \small
-\begin{tabular}{llll}
+\resizebox{\textwidth}{!}{\begin{tabular}{llll}
 \toprule
 \textbf{Reliability Requirement} & \textbf{Potential Failure Mode} & \textbf{Advisory Risk} & \textbf{System Response / Containment} \\
 \midrule
@@ -16,5 +16,6 @@ Adversarial Robustness & Prompt injection / Delimiter hijack & System instructio
 Channel Bandwidth Limit & SMS truncation / Buffer overflow & Silent loss of vital safety warnings & Deterministic 160-char GSM template \\
 Network Degradation & High packet loss / Cloud disconnect & Service unavailability in rural edge & Offline SQLite cryptographic cache \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table*}
+

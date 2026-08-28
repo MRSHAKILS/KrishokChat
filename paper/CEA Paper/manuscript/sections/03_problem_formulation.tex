@@ -1,81 +1,62 @@
-\section{Problem Formulation and Mathematical Framework}
+\section{Problem Formulation and Design Requirements}
 \label{sec:problem_formulation}
 
-\subsection{Advisory State Formalization}
-Let an incoming farmer interaction be denoted as a tuple $\mathbf{x} = \langle q_t, I_v, \mathcal{M}, \mathcal{H} \rangle$, where $q_t \in \mathcal{V}^*$ represents the natural language query in standard or regional Bengali, $I_v \in \mathbb{R}^{H \times W \times C}$ represents an optional uploaded crop/leaf photograph, $\mathcal{M}$ denotes environmental metadata (temporal timestamp, administrative region, soil/season context), and $\mathcal{H}$ denotes conversational session history.
+\subsection{Advisory State and Decision Space}
+Let an incoming farmer interaction be denoted $\mathbf{x} = \langle q_t, I_v, \mathcal{M}, \mathcal{H} \rangle$, where $q_t$ is the natural-language query (standard Bengali, a regional dialect, or romanized Banglish), $I_v$ is an optional uploaded crop/leaf photograph, $\mathcal{M}$ is environmental metadata (timestamp, administrative region, season), and $\mathcal{H}$ is the conversation history.
 
-The system maps the advisory state $\mathbf{x}$ to an action $a(\mathbf{x}) \in \mathcal{A}$, where the action space is defined over six discrete system policies:
+The system maps $\mathbf{x}$ to an action $a(\mathbf{x}) \in \mathcal{A}$:
 \begin{equation}
     \mathcal{A} = \left\{ 
     \begin{array}{ll}
-        \text{\texttt{DETERMINISTIC\_RESOLVE}}, & \text{\texttt{GROUNDED\_GENERATE}}, \\
-        \text{\texttt{CONVERSATIONAL\_CLARIFY}}, & \text{\texttt{SAFE\_ABSTAIN}}, \\
-        \text{\texttt{EXPERT\_ESCALATE}}, & \text{\texttt{POLICY\_BLOCK}}
+        \text{\texttt{CERTIFY}}, & \text{deterministic single-record resolution},\\
+        \text{\texttt{GENERATE\_THEN\_VERIFY}}, & \text{grounded generation subject to verification},\\
+        \text{\texttt{CLARIFY}}, & \text{conversational disambiguation},\\
+        \text{\texttt{ABSTAIN}}, & \text{fail-closed refusal with escalation pointer},\\
+        \text{\texttt{ESCALATE}}, & \text{policy block / human (Krishi 16123) handoff}
     \end{array}
     \right\}
 \end{equation}
 
 \subsection{The Critical Agricultural Tuple (11-Slot Contract)}
-In chemical and biological plant protection, an actionable recommendation is defined as an \Nslots{}-dimensional relational tuple:
+In chemical and biological plant protection, an actionable recommendation is a tuple over an agronomic decision contract $\mathcal{C}$:
 \begin{equation}
     \mathcal{C} = \left\langle 
     c, p, s, a, f, d_{\min}, d_{\max}, u_d, v_s, t_{\text{int}}, t_{\text{phi}}
     \right\rangle
 \end{equation}
-where:
-\begin{itemize}
-    \item $c \in \mathcal{K}_{\text{crop}}$: Canonical cultivated host crop (e.g., Potato).
-    \item $p \in \mathcal{K}_{\text{pest}}$: Target insect pest, bacterial pathogen, or fungal disease (e.g., Late Blight).
-    \item $s \in \mathcal{K}_{\text{stage}}$: Phenological crop growth stage permitted for treatment.
-    \item $a \in \mathcal{K}_{\text{active}}$: Officially registered active chemical ingredient (e.g., Mancozeb).
-    \item $f \in \mathcal{K}_{\text{form}}$: Commercial formulation type (e.g., 80 WP).
-    \item $[d_{\min}, d_{\max}] \subset \mathbb{R}^+$: Legally approved dosage interval.
-    \item $u_d \in \mathcal{K}_{\text{unit}}$: Physical measurement unit (e.g., g, ml).
-    \item $v_s \in \mathbb{R}^+$: Dilution solvent volume denominator (e.g., per 10 L water).
-    \item $t_{\text{int}} \in \mathbb{N}$: Mandatory spraying interval in days.
-    \item $t_{\text{phi}} \in \mathbb{N}$: Legally mandated Pre-Harvest Interval (PHI) in days.
-\end{itemize}
+where $c$ is the host crop, $p$ the target pest/pathogen, $s$ the growth stage, $a$ the registered active ingredient, $f$ the formulation, $[d_{\min}, d_{\max}]$ the approved dosage interval, $u$ the dosage unit, $v_s$ the solvent volume denominator (e.g.\ per 10 L water), $t_{\text{int}}$ the spray interval in days, and $t_{\text{phi}}$ the mandatory pre-harvest interval in days. A record may also carry a regulatory polarity flag $\rho \in \{\text{APPROVED}, \text{BANNED/RESTRICTED}\}$; in the certification predicate below we fold $\rho$ into the authority check rather than the tuple, so the tuple remains an 11-slot agronomic contract while the evidence layer governs its authority.
 
-\subsection{Evidence Authority and Mathematical Certification Rule}
-Let $\mathcal{E}$ be the set of all institutional, provenance-carrying evidence records stored in the structured fact base. An evidence record $e \in \mathcal{E}$ is authoritative only if it satisfies the joint predicate:
-\begin{equation}
-    \operatorname{Authoritative}(e) = \operatorname{ValidSource}(e) \land \operatorname{Current}(e, \mathcal{M}_t) \land \operatorname{Approved}(e)
-\end{equation}
-where $\operatorname{ValidSource}(e)$ verifies publication by accredited institutions (DAE, BARI, BRRI), $\operatorname{Current}(e, \mathcal{M}_t)$ confirms that the record has not expired or been superseded by regulatory updates, and $\operatorname{Approved}(e)$ confirms national non-banned regulatory polarity under the Bangladesh Pesticide Governance Act.
+\subsection{Evidence Authority Model}
+Let $\mathcal{E}$ be the set of typed evidence records in the fact store. Each record $e \in \mathcal{E}$ carries two logically distinct attributes:
+\begin{align}
+    \operatorname{Authority}(e) &= g(\text{source},\, \text{jurisdiction}) \nonumber \\
+    \operatorname{Validity}(e) &= g(\text{date},\, \text{version},\, \text{regulatory state}) \nonumber
+\end{align}
+A record is \emph{authoritative} if it originates from an accredited institution (MoA regulatory registry, BARI, BRRI, DAE) with the correct jurisdiction (Bangladesh). A record is \emph{current} if its effective date is not superseded and its regulatory state has not been revoked. Both must hold simultaneously. An old authoritative record can be obsolete; a recent secondary record is not authoritative.
 
-The system issues a certified advisory ($\operatorname{Certify}(\mathcal{C}) = 1$) if and only if all \Nslots{} fields of $\mathcal{C}$ are jointly entailed by a \textit{single}, unfragmented, authoritative evidence record $e^*$:
+The system certifies the advisory $\mathcal{C}$ only if a single evidence record jointly entails every slot:
 \begin{equation}
     \label{eq:certification_rule}
-    \operatorname{Certify}(\mathcal{C}) = 1 \iff \exists e^* \in \mathcal{E} \left[ 
+    \operatorname{Certify}(\mathcal{C}) = 1 \iff \exists\, e^* \in \mathcal{E}:\;
     \begin{array}{l}
-        \operatorname{Authoritative}(e^*) \land \\
-        \operatorname{JointlyEntails}(e^*, \mathcal{C}) \land \\
-        \operatorname{Completeness}(\mathcal{C}) \land \\
-        g(\mathbf{x}) \ge \theta^*
+        \operatorname{Authoritative}(e^*) \;\land\; \operatorname{Current}(e^*)\; \land \\
+        \operatorname{JointlyEntails}(e^*, \mathcal{C}) \;\land\; \operatorname{Complete}(\mathcal{C}) \;\land\\
+        g(\mathbf{x}) \;\geq\; \theta^*
     \end{array}
-    \right]
 \end{equation}
-where $\operatorname{Completeness}(\mathcal{C})$ requires all mandatory safety slots to be non-null, $g(\mathbf{x}) \in [0,1]$ is the calibrated uncertainty confidence score, and $\theta^*$ is the frozen safety threshold. If Eq.~(\ref{eq:certification_rule}) evaluates to false, the system immediately fails closed, transitioning to \texttt{SAFE\_ABSTAIN} or \texttt{CONVERSATIONAL\_CLARIFY}.
+where $\operatorname{JointlyEntails}$ requires all 11 slots to be satisfied by the \emph{same} record (never assembled across records), $\operatorname{Complete}$ requires every safety-critical slot to be non-null, $g(\mathbf{x})$ is the calibrated selective score, and $\theta^*$ is the frozen threshold selected on a development split. If Eq.~\eqref{eq:certification_rule} fails, the system fails closed: it must not complete the recommendation; it clarifies, abstains, or escalates. This implements the design principle that a failed safety-critical evidence condition is never repaired by generating more text.
 
-\subsection{Primary Outcome Variables and Endpoint Definitions}
-To ensure methodological clarity, we define our evaluation endpoints explicitly:
+\subsection{Primary Endpoints}
+We use the following primary endpoints throughout, reported with 95\% Wilson confidence intervals where sample sizes permit.
 \begin{enumerate}
-    \item \textbf{Critical Unsafe Acceptance Rate (CUAR):} The primary safety endpoint measuring dangerous errors accepted by the system:
-    \begin{equation}
-        \text{CUAR} = \frac{\#\text{ unsafe cases certified as safe}}{\#\text{ total unsafe evaluated cases}}
-    \end{equation}
-    \item \textbf{Certified Advisory Correctness (CAC):} The primary agricultural correctness endpoint:
-    \begin{equation}
-        \text{CAC} = \frac{\#\text{ certified advisories judged correct by agronomists}}{\#\text{ total certified advisories issued}}
-    \end{equation}
-    \item \textbf{Advisory Coverage ($\kappa$):} The proportion of valid answerable queries successfully resolved:
-    \begin{equation}
-        \kappa = \frac{\#\text{ answerable cases where advice is certified}}{\#\text{ total valid answerable cases}}
-    \end{equation}
-    \item \textbf{Appropriate Abstention Rate (AAR):} Precision of the fail-closed abstention mechanism:
-    \begin{equation}
-        \text{AAR} = \frac{\#\text{ unanswerable/unsafe cases correctly refused}}{\#\text{ total cases requiring abstention}}
-    \end{equation}
+    \item \textbf{CUAR} --- Critical Unsafe Acceptance Rate: \emph{unsafe cases certified as safe} $/$ \emph{total unsafe evaluated cases}. Primary safety endpoint.
+    \item \textbf{CAC} --- Certified Advisory Correctness: \emph{correct certified advisories} $/$ \emph{certified advisories issued}. Primary advisory endpoint.
+    \item \textbf{Resolution coverage / advisory coverage / safe certified coverage}: respectively the fraction of queries receiving some output, the fraction of answerable queries receiving useful advice, and the fraction of answerable queries receiving a \emph{correct certified} advisory.
+    \item \textbf{AA} --- Appropriate Abstention: \emph{correct abstentions} $/$ \emph{cases requiring abstention}.
+    \item Per-slot accuracy for each of the 11 contract fields, reported individually.
 \end{enumerate}
+
+\subsection{Reliability Requirements}
+Table~\ref{tab:system_requirements} maps each reliability requirement to its failure mode and the fail-closed response required of the architecture. This table is the design contract used in Sections~\ref{sec:system_architecture}--\ref{sec:knowledge_governance} and the evaluation in Section~\ref{sec:experimental_methodology}.
 
 \input{tables/tab1_system_requirements.tex}

@@ -1,32 +1,32 @@
-\begin{table*}[t]
+﻿\begin{table*}[t]
 \centering
-\caption{Two-layer evidence schema: Agronomic Decision Contract (11 Semantic Slots) and Evidence Governance Layer.}
+\caption{Two-layer evidence schema: the agronomic decision contract (Layer A, 11 semantic slots) and the evidence governance layer (Layer B).}
 \label{tab:knowledge_schema}
 \small
-\begin{tabular}{llll}
+\resizebox{\textwidth}{!}{\begin{tabular}{llll}
 \toprule
 \textbf{Schema Layer} & \textbf{Field Name} & \textbf{Data Type / Format} & \textbf{Agronomic / Governance Purpose} \\
 \midrule
-\multirow{11}{*}{\textbf{Layer A: Semantic Contract}} 
- & \texttt{crop} & String (Canonical Bengali) & Target cultivated host crop (e.g., আলু / Potato) \\
- & \texttt{pathogen} & String (Canonical Bengali) & Target fungal, bacterial, or insect pest (e.g., নাবি ধসা / Late Blight) \\
- & \texttt{growth\_stage} & String (Categorical) & Permitted vegetative / reproductive phenological stage \\
- & \texttt{active\_ingredient} & String (Standard ISO) & Authorized active chemical compound (e.g., Mancozeb) \\
- & \texttt{formulation} & String (Standard Code) & Commercial formulation type (e.g., 80 WP, 250 EC) \\
- & \texttt{dose\_min} & Numeric (Float) & Minimum effective application rate per unit area/volume \\
- & \texttt{dose\_max} & Numeric (Float) & Maximum legally safe application rate without phytotoxicity \\
- & \texttt{dose\_unit} & String (SI Unit) & Measurement unit (e.g., g, ml, kg) \\
- & \texttt{solvent\_volume} & Numeric (SI Unit) & Dilution denominator (e.g., per 10 L water, per Decimal) \\
- & \texttt{interval\_days} & Integer (Days) & Minimum required interval between successive sprayings \\
- & \texttt{phi\_days} & Integer (Days) & Pre-Harvest Interval before crop consumption \\
+\multirow{11}{*}{\textbf{Layer A: Decision Contract}}
+ & \texttt{crop} & String (canonical Bengali) & Host crop identity (e.g., potato) \\
+ & \texttt{problem} & String (canonical Bengali) & Target pest/pathogen identity (e.g., late blight) \\
+ & \texttt{stage} & Categorical & Permitted phenological growth stage \\
+ & \texttt{active} & ISO-standard string & Authorized active ingredient (e.g., mancozeb) \\
+ & \texttt{formulation} & Standard code & Commercial formulation (e.g., 80 WP, 250 EC) \\
+ & \texttt{dose\_min} & Float & Minimum effective dose \\
+ & \texttt{dose\_max} & Float & Maximum safe dose \\
+ & \texttt{unit} & SI unit string & Dose unit (g, ml, kg) \\
+ & \texttt{volume} & Float + unit & Solvent volume denominator (per 10 L) \\
+ & \texttt{interval} & Integer (days) & Minimum spray interval \\
+ & \texttt{phi} & Integer (days) & Pre-harvest interval \\
 \midrule
 \multirow{6}{*}{\textbf{Layer B: Evidence Governance}}
- & \texttt{source\_authority} & Categorical (Level 1--4) & Regulatory (MoA) vs Institutional (BARI/BRRI) vs Secondary \\
- & \texttt{publication\_date} & ISO-8601 Date & Release date of the underlying institutional manual \\
- & \texttt{effective\_date} & ISO-8601 Date & Effective administrative enforcement date \\
- & \texttt{regulatory\_polarity} & Enum (\texttt{APPROVED}/\texttt{BANNED}) & National regulatory status under Bangladesh Pesticide Act \\
- & \texttt{provenance\_hash} & SHA-256 Hex & Cryptographic digest of source text and node metadata \\
- & \texttt{verifier\_signature} & Ed25519 Signature & Digital signature from institutional release authority \\
+ & \texttt{source\_authority} & Categorical & MoA / BARI / BRRI / secondary (rank) \\
+ & \texttt{publication\_date} & ISO-8601 & Release date of the institutional manual \\
+ & \texttt{effective\_date} & ISO-8601 & Administrative effective date \\
+ & \texttt{regulatory\_polarity} & Enum (APPROVED / BANNED) & National regulatory status \\
+ & \texttt{provenance\_hash} & SHA-256 hex & Digest of source text and node metadata \\
+ & \texttt{verifier\_signature} & Ed25519 & Institutional release signature \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table*}

@@ -1,19 +1,23 @@
-\begin{table*}[t]
+﻿\begin{table*}[t]
 \centering
-\caption{Deployment performance under severe cellular network loss, on-device edge execution, deterministic SMS delivery, and serving economics.}
+\caption{Deployment performance under constrained channels (Layers E14, E15, E18, E20, E22, E23; values from layer metric tables). Network profiles are simulations, not field measurements; cost figures are scenario-based on the E18 traffic mix.}
 \label{tab:deployment_efficiency}
 \small
-\begin{tabular}{lcccc}
+\resizebox{\textwidth}{!}{\begin{tabular}{lcccc}
 \toprule
-\textbf{Deployment Channel / Evaluation Layer} & \textbf{Baseline System} & \textbf{KrishokChat BAA} & \textbf{Empirical Gain / Delta} & \textbf{95\% Conf. Interval} \\
+\textbf{Deployment Channel / Layer} & \textbf{Baseline} & \textbf{KrishokChat BAA} & \textbf{Delta} & \textbf{95\% CI (BAA)} \\
 \midrule
-Rural Edge Delivery (15\% packet loss) & 82.0\% (Cloud RAG) & \textbf{91.4\%} (Offline Cache) & +9.4 pp retention & [89.50\%, 92.98\%] \\
-Severe 2G Delivery (30\% packet loss) & 58.7\% (Cloud RAG) & \textbf{80.3\%} (Offline Cache) & \textbf{+21.6 pp retention} & [77.72\%, 82.68\%] \\
-SMS Pre-Harvest Interval (PHI) Hazard & 64.4\% (LLM SMS) & \textbf{0.0\%} (11-Slot GSM) & \textbf{--64.4 pp hazard} & [0.0\%, 0.09\%] \\
-SMS Prompt Injection Leakage & 36.36\% (LLM SMS) & \textbf{0.0\%} (Deterministic) & \textbf{--36.36 pp leakage} & [0.0\%, 0.27\%] \\
-Zero-LLM Traffic Resolution Share & 10.48\% (Text RAG) & \textbf{61.52\%} (5-Tier Ladder) & \textbf{+51.04 pp zero-LLM} & [60.16\%, 62.86\%] \\
-Cache Tamper Detection Rate & 0.0\% (Unsigned) & \textbf{100.0\%} (Hash-Chained) & 1,000/1,000 caught & [99.63\%, 100.0\%] \\
-Cost per Certified Safe Advisory ($C_{\text{safe}}$) & \$2.30/1k (Cloud API) & \textbf{\$0.0768/1k} (Local VPS) & \textbf{96.6\% cost reduction} & -- \\
+Rural-Edge delivery @15\% loss (E14) & 82.0\% (cloud RAG) & \textbf{91.4\%} (offline cache) & +9.4 pp & [89.50, 92.98] \\
+Severe-2G delivery @30\% loss (E14) & 12.8\% (cloud RAG) & \textbf{58.1\%} (offline cache) & +45.3 pp & [55.02, 61.12] \\
+SMS critical-slot hazard (E15) & 64.4\% (LLM SMS) & \textbf{0.0\%} (11-slot template) & $-$64.4 pp & [0.0, 0.38] \\
+SMS injection survivability (E22) & 36.36\% (LLM SMS) & \textbf{0.0\%} (template) & $-$36.4 pp & [0.0, 0.27] \\
+Tamper detection (E23) & 0\% (unsigned) & \textbf{100.0\%} (hash-chained) & 1{,}000/1{,}000 & [99.62, 100.0] \\
+Zero-LLM workload share (E18) & 10.48\% (text-only) & 61.52\% (ladder) & +51.0 pp & [60.16, 62.86] \\
+\quad of which deterministic advisory (T1+T2) & --- & 51.04\% & --- & --- \\
+\quad of which safety/refusal handling (T0+T4) & --- & 10.48\% & --- & --- \\
+\quad of which LLM-dependent traffic (T3) & 89.52\% & 38.48\% & $-$51.0 pp & --- \\
+Weighted mean latency (E18) & 1{,}247.93 ms & 546.15 ms & 2.28$\times$ & --- \\
+Cost, app-online (E20) & \$2.48 / 1k (cloud) & \$0.2567 / 1k & $-$89.7\% & --- \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table*}

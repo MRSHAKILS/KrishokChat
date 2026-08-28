@@ -1,19 +1,20 @@
-\begin{table*}[t]
+﻿\begin{table*}[t]
 \centering
-\caption{Advisory robustness across Bengali linguistic registers (Standard, Regional Dialects, Romanized Banglish, Authentic Farmer) and vision perception conditions.}
+\caption{Register-robust routing outcomes (Layer E21, $n=1{,}000$ per register $\times$ 2 routing paths; 95\% Wilson CIs). Detection-gated routing (BAA) restores advisory coverage on low-resource registers while holding hazard at 0.0\% in all cells. Hit@1 gains are from Layer E17 at threshold 0.8.}
 \label{tab:multimodal_robustness}
 \small
-\begin{tabular}{llcccc}
+\resizebox{\textwidth}{!}{\begin{tabular}{llcccc}
 \toprule
-\textbf{Modality / Input Condition} & \textbf{Routing Strategy} & \textbf{Hit@1} & \textbf{Advisory Coverage} & \textbf{CUAR} & \textbf{Latency p50 (ms)} \\
+\textbf{Register} & \textbf{Routing Path} & \textbf{Advisory Coverage (\%)} & \textbf{Abstention (\%)} & \textbf{Hazard (\%)} & \textbf{Hit@1 Gain (pp)} \\
 \midrule
-Standard Bengali (Text) & Text-First RAG & 72.1\% & 84.2\% & 0.0\% & 1420.5 \\
-Regional Dialect (Noisy Text) & Text-First RAG & 45.7\% & 42.9\% & 0.0\% & 1580.0 \\
-Regional Dialect (Noisy Text) & \textbf{Detection-Gated (BAA)} & \textbf{82.3\% (+36.6 pp)} & \textbf{89.8\% (+46.9 pp)} & \textbf{0.0\%} & \textbf{546.2} \\
-Romanized Banglish (Colloquial) & Text-First RAG & 42.1\% & 38.5\% & 0.0\% & 1610.2 \\
-Romanized Banglish (Colloquial) & \textbf{Detection-Gated (BAA)} & \textbf{81.8\% (+39.7 pp)} & \textbf{86.9\% (+48.4 pp)} & \textbf{0.0\%} & \textbf{548.0} \\
-Authentic Field Photos (Crop+Pest) & Vision-Only ONNX & 96.4\% & 91.2\% & 0.0\% & 47.8 \\
-Conflicted Visual/Text Query & \textbf{Cross-Modal BAA} & -- & \textbf{Clarification (100\%)} & \textbf{0.0\%} & \textbf{1.25} \\
+Standard Bengali & Text-first & 70.3 [67.39, 73.05] & 29.7 & 0.0 [0.0, 0.38] & --- \\
+Standard Bengali & Detection-gated & 93.0 [91.25, 94.42] & 7.0 & 0.0 [0.0, 0.38] & +10.7 \\
+Authentic Farmer & Text-first & 58.2 [55.12, 61.22] & 41.8 & 0.0 [0.0, 0.38] & --- \\
+Authentic Farmer & Detection-gated & 92.6 [90.81, 94.06] & 7.4 & 0.0 [0.0, 0.38] & +20.5 \\
+Regional Dialects & Text-first & 42.9 [39.87, 45.99] & 57.1 & 0.0 [0.0, 0.38] & --- \\
+Regional Dialects & Detection-gated & 89.8 [87.77, 91.53] & 10.2 & 0.0 [0.0, 0.38] & +36.6 \\
+Romanized Banglish & Text-first & 41.6 [38.58, 44.68] & 58.4 & 0.0 [0.0, 0.38] & --- \\
+Romanized Banglish & Detection-gated & 90.0 [87.98, 91.71] & 10.0 & 0.0 [0.0, 0.38] & +39.7 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table*}

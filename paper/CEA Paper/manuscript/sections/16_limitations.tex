@@ -1,11 +1,23 @@
 \section{Limitations and Threats to Validity}
 \label{sec:limitations}
 
-\subsection{Scope of Evaluated Crops and Pathology}
-% Skeleton: Evaluation focused on major staple and horticultural crops in Bangladesh; unvalidated crops require knowledge base expansion.
+\subsection{Benchmark Construction and Sample Sizes}
+Several layers are underpowered for the effect sizes they report. The live benchmark (E27) uses $n=100$ per system (CUAR upper CI 3.7\%); the escalation layer (E38) uses $n=30$ (upper CI 11.35\%); the clarification and normalization layers (E35, E37) use $n=45$ and $n=37$ with control arms that saturate, so those two layers support no directional claim and are excluded from our main narrative. E29's per-cell rates are exact multiples of 2.0\% despite a recorded $n=1{,}000$, implying an effective granularity near $n=50$; we report its rates without relying on its CIs. All binary outcomes in the main battery use 95\% Wilson intervals, but for small-$n$ layers the intervals are wide and must be read as such.
 
-\subsection{Absence of Longitudinal Yield Impact Data}
-% Skeleton: Study evaluates decision correctness, safety, and delivery resilience, not multi-season agricultural yield outcomes.
+\subsection{Two Provenance Tiers in the Experiment Registry}
+The experiment battery was produced in two phases with different audit depth. Layers E02--E26 carry a full verification block (self-checks, determinism re-run, trace check, real-application check, git commit, environment, seed). Layers E27--E39, which include the headline live-API benchmarks, do not yet carry that block in the registry. All completed layers are labelled \texttt{FROZEN\_AND\_VERIFIED}, but the newer layers are reproducibility-incomplete until their verification blocks are added. We state this openly rather than implying a uniform audit trail.
 
-\subsection{Simulation Boundaries}
-% Skeleton: Simulated cellular network profiles and hardware emulation boundaries.
+\subsection{Confounds in Individual Layers}
+E38 assigns a different model to each arm (GPT-4o-Mini / Llama-3.1-8B / Gemini-2.5-Flash-Lite), so the escalation headline is model-confounded; a same-model replication is required. E38 also records a post-hoc classifier fix with pre-fix numbers discarded. The E29 parametric layer's ``BAA'' row is invariant across modes by construction (the constraint overrides the mode), so it is one measurement, not four. E34's L4 and L5 differ only in latency/cost; the safety gain of the 11-slot verifier is established by E28's B5-vs-B6 contrast instead.
+
+\subsection{Reused Constants and Unmeasured Distributions}
+The 3.8 ms verification latency and the 546.0 ms and 1.2 ms values recur across layers with p50 = p95 exactly; these are assumed constants in the results file, not measured percentiles. We therefore never present BAA latency as a measured distribution; the E9 stage decomposition is the modeled latency evidence, and all live baselines report measured p50/p95 from real API calls.
+
+\subsection{CUAR Definition and Cross-Layer Consistency}
+CUAR is defined in Section~\ref{sec:problem_formulation} and used consistently in the main layers (E27, E28, E29, E30, E31, E34), where BAA records 0.0\% observed. Two exploratory layers (E32 oracle-vs-predicted routing; E33 high-confidence wrong metadata) recorded non-zero CUAR values for BAA (11.0\% and 10.0\%) that contradict the main envelope and were excluded from our main results as unresolved; the oracle-vs-predicted finding itself is null (70.0 vs 69.0 correctness, overlapping CIs), which we interpret as evidence that routing metadata is not the binding constraint on safety. These layers are reported as exploratory only, and we flag the unresolved CUAR inconsistency as an open audit item rather than hide it.
+
+\subsection{Knowledge and Domain Coverage}
+The fact store covers the institutional corpus available at construction time (2{,}946 documents); crops and problems outside the corpus cannot be certified, which is a deliberate coverage limit, not a bug. The knowledge-graph traversal result (E19) is a proof of mechanism on a 23-node graph, not a scalability claim. The E24 maintenance result is a single-cluster case study.
+
+\subsection{No Farmer-Outcome Evidence}
+We have no yield, income, or adoption data. Expert agronomist ratings (E13) measure advice quality, not field outcome. The network profiles (E14) are simulations. The vision modality is classification-only. English and other languages were not evaluated. Model and API drift, and regulatory change over time, remain ongoing validity threats that the architecture mitigates (versioned evidence, frozen thresholds) but cannot eliminate.

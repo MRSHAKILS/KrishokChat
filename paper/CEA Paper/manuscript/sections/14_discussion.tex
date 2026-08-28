@@ -2,13 +2,19 @@
 \label{sec:discussion}
 
 \subsection{What Bounded Factual Authority Buys}
-% Skeleton: Decoupling factual authority from language fluency; deterministic reproducibility; failure containment.
+The results decompose into a single causal chain. Agricultural evidence is relational: a recommendation is only as valid as its \emph{jointly bound} slots. Simple retrieval or citation can misbind those slots (E02: 80.0\% dangerous acceptance for a lexical baseline; E05: 72.65\% for vanilla RAG under counterfactual mutation). Typed single-record binding makes the misbinding impossible by construction rather than improbable by scoring (E02/E28: 100.0\% rejection). Because certification is deterministic, it buys four properties beyond safety: \emph{predictable critical fields} (the verifier checks every contract slot, and the slot ablation shows each contributes measurably, E03), \emph{traceability} (every certified answer carries a record hash and provenance chain), \emph{reproducibility} (deterministic resolution is invariant by construction, E18/E19), and \emph{controllable failure} (the E10 taxonomy shows residual failures convert to abstention, not to dangerous advice).
 
-\subsection{Trade-Offs and Costs of Bounded Authority}
-% Skeleton: Trade-off between advisory coverage and fail-closed safety; knowledge engineering overhead.
+\subsection{The Cost of Bounded Authority}
+The price is real and quantified. BAA abstains at 33.0\% in the live benchmark (versus 5--16\% for baselines) and at 34.2\% on the 4{,}000-case register corpus. Coverage falls from 98\% (hybrid RAG, at 72\% correctness) to 70\% certified coverage (at 100\% correctness) in the E34 layer ablation --- a larger movement than the correctness gain. The E10 audit attributes 6\% of residual failures to conservative verifier over-refusal and 4\% to calibration underconfidence; these are recoverable via the frozen-threshold tuning of E04 but represent a standing coverage cost. Knowledge engineering is a second cost: the fact store must be maintained, validated, and versioned, though E24 shows the marginal cost is small and measurable (18 minutes to close a cluster gap).
 
 \subsection{The Role of LLMs in High-Consequence Domains}
-% Skeleton: LLMs as phrasing and linguistic realization components rather than factual authorities.
+This paper is not an anti-LLM argument. The LLM remains the system's conversational face: it handles phrasing, explanation, and disambiguation, and it is responsible for the 38.48\% of traffic that the deterministic ladder cannot resolve (E18). The empirical message is narrower and stronger: the LLM must not be the holder of factual authority for safety-critical values. The E29 parametric-conflict results show that even when a model holds the correct prior, standard RAG still leaks 8--30\% of conflicting priors into output, and that a prompted judge does not eliminate the leak. Structure does; prompting alone does not.
+
+\subsection{Where the Architecture Still Fails}
+The E10 audit is the honest failure ledger. Retrieval omission (28\%) means a correct record can be missed and the query abstained on; the mitigation (dense retriever refinement, chunk-level fallback) is a coverage fix, not a safety fix. Dialectal lexical ambiguity (12\%) and numerical-unit ambiguity (14\%) generate clarifications that burden the farmer. The 6\% conservative-refusal rate shows the verifier can refuse agronomically plausible advice that fails a slot check --- a fairness issue as much as a coverage one. These are the boundaries of the current design.
 
 \subsection{Generalization Beyond Crop Protection}
-% Skeleton: Potential applicability to veterinary medicine, human health triage, and environmental compliance.
+The agricultural domain provides a well-defined risk model, but the architecture itself is risk-adaptive factual authority rather than pesticide-specific logic: risk-tiered evidence requirements (informational $\rightarrow$ management suggestion $\rightarrow$ chemical recommendation $\rightarrow$ high-risk intervention), an explicit certification contract, and a fail-closed action space. The pattern plausibly transfers to veterinary dosing, human-health triage, and industrial safety, where the same ``fluent but unauthorized'' failure mode exists. We explicitly do not claim any of those domains have been evaluated here; this is a design-generalization argument, not an empirical one.
+
+\subsection{Relationship to the Research Program}
+This work is the reliability-science layer of a larger research program: prior work established the knowledge and retrieval foundations (the 1{,}001-query farmer benchmark and retrieval-failure analysis), and a companion systems paper describes the integrated deployment artifact. The CEA contribution is the generalizable architecture and its evidence chain, not the individual components, each of which exists in the literature.

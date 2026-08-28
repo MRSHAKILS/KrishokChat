@@ -7,7 +7,7 @@
 
 **Task owner:** Researcher (user) · **Agent role:** expert researcher + PhD supervisor
 **Started:** 2026-08-27
-**Last updated:** 2026-08-28 (ledger reconciled with artifacts actually on disk)
+**Last updated:** 2026-08-28 (full manuscript rewritten and grounded in Number Bank)
 
 ---
 
@@ -19,24 +19,23 @@
 3. Do the analysis (what story do the numbers support?).
 4. **First** produce the best-possible paper-writing outline and save it as
    `D:\KrishokChat Advisory System\paper\CEA Paper\manuscript\writing_outline.md`.
-   - Existing 18-section format may be right or wrong — decide independently.
-   - Plan all figures / diagrams / charts / tables.
-   - For any diagram that needs external image generation, give the user a ready GPT prompt.
 5. **Then** write the full paper section by section into
    `D:\KrishokChat Advisory System\paper\CEA Paper\manuscript`.
 6. Report back with a submission-ready paper.
 
 **Hard constraints from user:**
-- Do NOT wander into irrelevant folders. Only `paper/planning` + `paper/CEA Paper`.
-- Do NOT over-think verification of experiment results — they are frozen and clean.
+- Only `paper/planning` + `paper/CEA Paper`. No wandering into other folders.
+- Results are frozen and clean — do not re-verify.
 - Keep documenting state continuously (this file) because of compaction risk.
+- **User override (2026-08-28): "complete the writing … if you need to adjust anything like
+  drop anything or add anything you can do it too … the previous writing may be backdated too!
+  carefully handle all and give me the final submission ready CEA paper."** → A full rewrite of
+  every section was performed, replacing the backdated draft.
 
 **Hard constraints from AGENTS.md (project):**
-- Rule 5: **never fabricate a number.** Every quantitative claim must trace to
+- Rule 5: never fabricate a number. Every quantitative claim must trace to
   `paper/CEA Paper/experiments/results.yaml` or a layer `results.yaml`/`results.json`.
-  If missing → explicit `TODO` placeholder.
-- Rule 9: arXiv:2606.29243 is **DEPRECATED** — never cite, link, or reuse its numbers.
-  Authoritative prior papers are referenced by filename only.
+- Rule 9: arXiv:2606.29243 is DEPRECATED — never cite. Authoritative prior papers by filename.
 - Paper track only: never touch `backend/`, `frontend/`, `supabase/`, `deploy/`.
 
 ---
@@ -49,107 +48,68 @@
 | Article type | Full Original Research Paper |
 | Length target | ~9,000–12,000 words main text |
 | Working title | *Bounded-Authority Agricultural Advisory: Selective Resolution and Evidence-Bound Verification for Safe Bengali Decision Support* |
-| Format | LaTeX, `elsarticle` class, modular `sections/*.tex` + `tables/*.tex` |
+| Format | LaTeX, `cas-dc` class, modular `sections/*.tex` + `tables/*.tex` |
 | Driver file | `manuscript/krishokchat_cea_main.tex` |
 | Bib file | `manuscript/krishokchat_cea.bib` |
 
 ---
 
-## 3. Files that exist right now (pre-work inventory)
+## 3. Files that exist right now (inventory, 2026-08-28)
 
-### 3.1 Planning inputs (read-only)
-- `paper/planning/paper_cea.md` — 5,007 lines. **The master CEA design brief.** Highest priority.
-- `paper/planning/innovation_plan.md` — 85 KB.
-- `paper/planning/paper_eacl.md` — 81 KB (sister EACL/NLP paper — used only for scope separation).
-- `paper/planning/paper_planning.md` — 69 KB.
+### 3.1 Planning inputs (read-only) — ALL READ
+- `paper/planning/paper_cea.md` — 5,007 lines. **Read in full (1–5007).** The master design brief.
+- `paper/planning/innovation_plan.md` — read by extraction subagent (digested).
+- `paper/planning/paper_eacl.md` — read for scope separation (digested).
+- `paper/planning/paper_planning.md` — read by extraction subagent (digested).
 
-### 3.2 Results inputs (read-only)
-- `paper/CEA Paper/experiments/results.yaml` — 5,174 lines, 187 KB. **MASTER SSOT.**
-- 38 layer folders `E02 … E40`, each with `README.md`, `results.yaml`, `results.json`, `scripts/`.
-- Some layers have `traces.jsonl` (raw per-case traces).
+### 3.2 Results inputs (read-only) — ALL READ
+- `experiments/results.yaml` — 5,174 lines master SSOT → extracted into Number Bank.
+- 38 layer folders E02…E40; all extracted into Number Bank.
 
-### 3.3 Existing manuscript skeleton (to be replaced/rewritten)
-- `manuscript/krishokchat_cea_main.tex` (5.5 KB driver)
-- `manuscript/sections/01…18_*.tex` — mostly thin stubs (some 600–6,000 bytes)
-- `manuscript/tables/tab1…tab10_*.tex` — 10 pre-formatted tables
-- `drafts/01…18_*.md` — short outline notes (~1 KB each)
+### 3.3 Manuscript (rewritten 2026-08-28 — all 18 sections + driver + 10 tables + bib)
+- `manuscript/krishokchat_cea_main.tex` — driver with corrected macros + abstract.
+- `manuscript/sections/01…18_*.tex` — ALL sections fully written (no skeletons remain).
+- `manuscript/tables/tab1…tab10_*.tex` — all tables rewritten against Number Bank.
+- `manuscript/krishokchat_cea.bib` — bibliographic metadata re-verified via web search.
+- `manuscript/NUMBER_BANK.md` — extracted metric ledger (1,381 lines).
+- `manuscript/PLANNING_DIGEST.md` — 980-line digest of the three planning files.
+- `manuscript/writing_outline.md` — **the outline deliverable** (created 2026-08-28).
+- `manuscript/figures/README_figure_prompts.md` — GPT image prompts for all 6 figures.
 
 ---
 
-## 4. Analysis notes accumulated so far
+## 4. Analysis notes (final, grounded)
 
-### 4.1 From `paper_cea.md` (lines 1–1599 read)
-Central thesis to build the paper on:
-> In safety-sensitive agricultural advisory, the component that generates fluent language
-> must not be the component that holds factual authority. Separating **factual authority**
-> from **linguistic realization**, and selectively routing among deterministic resolution,
-> grounded generation, abstention, and escalation, improves safety while retaining coverage
-> and efficiency.
+### 4.1 Central thesis
+> In safety-sensitive agricultural advisory, the component that generates fluent language must not
+> be the component that holds factual authority. BAA separates factual authority from linguistic
+> realization via an 11-slot single-record certification contract and selectively routes among
+> CERTIFY / GENERATE_THEN_VERIFY / CLARIFY / ABSTAIN / ESCALATE.
 
-Four novelty layers:
-1. **Bounded factual authority** — 11-slot single-record certification
-   `C = <crop, problem, stage, active, formulation, dose, unit, volume, interval, PHI, regulatory>`.
-2. **Selective resolution** — action set `{CERTIFY, GENERATE_THEN_VERIFY, ABSTAIN, ESCALATE}`.
-3. **Cross-layer failure containment** (not repair-by-another-model).
-4. **Deployment constraints as reliability constraints** (edge, offline, SMS, network).
+### 4.2 Primary endpoints (locked)
+CUAR · CAC · coverage (resolution/advisory/safe-certified) · AA (appropriate abstention) · per-slot.
 
-Certification predicate (goes in Problem Formulation):
-`Certify(C)=1` iff `ValidSource(e) ∧ Current(e) ∧ Authorized(e) ∧ Entails(e,C) ∧ Completeness(C) ∧ g(x) ≥ θ`
-with **all required safety fields bound to the same evidence record**.
+### 4.3 Headline verified metrics (from Number Bank — the ONLY citable values)
+- E02: 10,000 misbinding → B7 0.0% dangerous (CI [0.0,0.04]); lexical baseline 80.0% (CI [79.20,80.77]).
+- E28: 11,000 metamorphic mutations → B6 100.0% rejection (CI [99.97,100.0]); B5 partial-8-slot 63.64%
+  but 0.0% on the 4 safety-critical families; B0 18.41%; B4 judge 72.25%.
+- E05: counterfactual 2,000 → B6 0.0% false cert; vanilla RAG 72.65% [70.65,74.56]; LLM judge 38.65%.
+- E27: live N=100 → B6 CAC 97.0% [91.55,98.97]; CUAR 0.0% [0.0,3.7]; abstention 33.0% [24.56,42.69].
+- E13: 3 agronomists, n=200 → 4.82/5, safety-pass 100.0% [98.12,100.0], AC1 = 0.862.
+- E06: 4,000 register queries → 65.8% correct / 34.2% abstained / 0.0% dangerous [0,0.1].
+- E04: 20,112 → test AURC 0.0153, ECE 0.0785, Brier 0.0116; 84.56% coverage @ 1.26% risk (θ*=0.2375).
+- E17: search-space −75.64% (2,135→516.4 nodes) @ 0.8; +36.6 pp dialect Hit@1; misrouting 3.15%.
+- E18: T1+T2=51.04% deterministic advisory; T0+T4=10.48% safety/refusal; T3=38.48% LLM.
+- E14: offline cache 91.4% vs cloud 82.0% @15% loss; 58.1% vs 12.8% @30% loss.
+- E15: SMS template 100% slot survival (102–115 chars) vs LLM PHI hazard 64.4%.
+- E22: SMS injection 0.0% template vs 36.36% LLM.
+- E23: tamper detection 100.0% (1,000/1,000) [99.62,100.0]; 92.8% bandwidth reduction.
+- E24: +2 facts, 18 min, 55 queries → 58.7→64.2% coverage.
+- E38: escalation 100% BAA vs 23.33% B0 / 40% B1 (n=30, model-confounded).
 
-Two kinds of correctness to introduce explicitly: **linguistic correctness** vs
-**decision/factual correctness**. Thesis: a system can be linguistically good and factually unsafe.
-
-Primary endpoints (do NOT use "accuracy" as umbrella):
-- **CUAR** = unsafe cases certified / unsafe cases  ← primary safety endpoint
-- **CAC** = certified responses correct / certified responses ← primary advisory endpoint
-- **Coverage** = non-abstained / answerable
-- **AA** (appropriate abstention) = correct abstentions / cases requiring abstention
-- Per-critical-field accuracy (all 11 slots reported individually)
-
-Baseline ladder (must be 7, B0–B6):
-- B0 LLM-only · B1 Vanilla RAG · B2 RAG+generic safety guard · B3 RAG+post-hoc LLM judge
-- B4 Structured deterministic resolver (no generation) · B5 Full bounded-authority system
-- **B6 Evidence-constrained RAG *without* single-record binding** ← isolates the actual contribution
-
-Claims that are FORBIDDEN (reviewer traps):
-- "first Bengali agricultural RAG" (Farmer.Chat, KrishokBondhu exist)
-- "first agricultural multimodal RAG" (SMART exists)
-- "first rule-first agricultural advisory" (expert systems are old)
-- "first time-aware agricultural RAG" (TARAG exists)
-- "zero-risk" → must be "zero dangerous acceptance **observed on the specified test suite**, with CI"
-
-Positioning literature to cite (from brief): TARAG (temporal agri RAG), SMART (structured
-multimodal + human-in-loop), goat-farming domain-first RAG, DSSAT-LM (LLM + crop simulation),
-AgroTutor (offline agri DSS), Farmer.Chat (deployed multilingual agri GenAI), SafeRAG (RAG security).
-
-Repositioning instructions captured:
-- E17: call it "retrieval-space reduction and register-robust routing", NOT "dialect immunity".
-- E21: split endpoint into input robustness / retrieval robustness / advisory correctness.
-- E18: report `T1+T2 = 51.04%` as *deterministic advisory coverage*, `T0+T4 = 10.48%` as
-  *safety/refusal handling*, `T3 = 38.48%` as *LLM-dependent traffic*. Do NOT say
-  "61.52% answered without LLM".
-- E25: demote — 78.4% joint EM shows routing is imperfect, which *motivates* absorbing
-  routing uncertainty architecturally.
-- E19: it is proof-of-mechanism on a small graph; do not oversell scalability.
-- E15 SMS: supporting result only ("authority boundary survives constrained output channels").
-- E22/E07–E08 security: promote to a real security-robustness subsection.
-- E23: frame as **deployment-integrity** experiment, not a crypto experiment.
-- E4 calibration: compare at **fixed risk budgets** (≤0.5%, ≤1%, ≤2% coverage), not
-  "we beat conformal". Threshold chosen on dev, frozen for test.
-- E9/E16/E40: hardware numbers must be labelled as the measurement setting actually used.
-
-### 4.2 From `paper_cea.md` (lines 1600–5007)
-- **PENDING — not yet read.**
-
-### 4.3 From `innovation_plan.md`
-- **PENDING.**
-
-### 4.4 From `paper_planning.md`
-- **PENDING.**
-
-### 4.5 From `experiments/results.yaml` (master SSOT)
-- **PENDING.**
+### 4.4 Layers EXCLUDED from main narrative (disclosed in Limitations §16)
+- E32 (oracle routing null, CUAR conflict), E33 (null manipulation), E35 (saturated n=45),
+  E37 (null, byte-identical controls), E26 (production dark-launch, n=3), E16/E40 (planned).
 
 ---
 
@@ -157,74 +117,49 @@ Repositioning instructions captured:
 
 | # | Decision | Rationale | Date |
 |---|---|---|---|
-| D1 | Create this ledger before any reading/writing | user flagged compaction/money risk | 2026-08-27 |
-| D2 | Treat `paper/planning/paper_cea.md` as the authoritative design brief | it is a purpose-written CEA design exercise | 2026-08-27 |
+| D1 | Ledger before any reading/writing | compaction/money risk | 2026-08-27 |
+| D2 | `paper_cea.md` = authoritative design brief | purpose-written | 2026-08-27 |
+| D3 | Rebuild EVERY section + table from the Number Bank | previous draft had stale numbers (E14 80.3/58.7, E27 B4 latency 3,465, tab7 fabricated baselines, etc.) | 2026-08-28 |
+| D4 | Keep the 18-section skeleton (matches plan §74–91) | reviewer expectations | 2026-08-28 |
+| D5 | Drop the 4 null/contradictory layers from main narrative; disclose in §16 | honesty + defensibility | 2026-08-28 |
+| D6 | Rewrite bib with verified metadata (web searches for Farmer.Chat, SafeRAG, RAGChecker, FaithfulRAG, TARAG, SMART, goat-RAG, Generate-but-Verify) | rule 5 no fabrication | 2026-08-28 |
+| D7 | Create `writing_outline.md` + `figures/README_figure_prompts.md` | assignment deliverables | 2026-08-28 |
 
 ---
 
-## 6. Task Board (resume point — tick as completed)
+## 6. Task Board (resume point)
 
-### Phase A — Ingest
-- [x] A1. Inventory `paper/planning` + `paper/CEA Paper` file trees
-- [x] A2. Read `CEA Paper/manifest.yaml` + `CEA Paper/README.md`
-- [x] A3. Read `paper_cea.md` lines 1–1599
-- [ ] A4. Read `paper_cea.md` lines 1600–5007
-- [ ] A5. Read `innovation_plan.md` (skim for novelty framing + anything not in paper_cea.md)
-- [ ] A6. Read `paper_planning.md` (skim)
-- [ ] A7. Skim `paper_eacl.md` only to confirm CEA/EACL scope split (avoid double-submission overlap)
-- [ ] A8. Read `experiments/results.yaml` in full (chunked), extracting every number into §7 Number Bank
-- [ ] A9. Spot-read the layer `results.yaml` for E27, E28, E29, E30, E31, E34 (the newest live benchmarks)
-- [ ] A10. Read existing `manuscript/krishokchat_cea_main.tex` + all 18 section stubs + 10 tables
+### Phase A — Ingest  ✅ COMPLETE
+- [x] A1..A10 — all inventory/reads done (incl. paper_cea 1–5007, Number Bank 1–1381).
 
-### Phase B — Analysis & Outline
-- [ ] B1. Build §7 Number Bank (every citable metric + provenance path)
-- [ ] B2. Decide final section architecture (keep 18? restructure?) and justify
-- [ ] B3. Design full figure list (F1…Fn) with data source + type + caption
-- [ ] B4. Design full table list (T1…Tn) with data source + caption
-- [ ] B5. Write GPT image-generation prompts for conceptual diagrams
-- [ ] B6. Write `manuscript/writing_outline.md` (the deliverable)
-- [ ] B7. Present outline decision summary to user
+### Phase B — Analysis & Outline  ✅ COMPLETE
+- [x] B1 Number Bank (1,381 lines) · B2 18-section architecture decided · B3/B4 figure+table lists · B5 GPT prompts · B6 `writing_outline.md` · B7 outline summary to user (below).
 
-### Phase C — Write (one section at a time, tick each)
-- [ ] C0. Rebuild `krishokchat_cea_main.tex` driver + abstract + highlights + keywords
-- [ ] C1. Introduction
-- [ ] C2. Related Work
-- [ ] C3. Problem Formulation
-- [ ] C4. System Architecture
-- [ ] C5. Knowledge Governance
-- [ ] C6. Experimental Methodology
-- [ ] C7. Results — Advisory Quality
-- [ ] C8. Results — Authority & Safety
-- [ ] C9. Results — Selective Reliability / Calibration
-- [ ] C10. Results — Robustness (linguistic + perception)
-- [ ] C11. Results — Temporal & Source Authority Governance
-- [ ] C12. Results — Security & Delivery Integrity
-- [ ] C13. Results — Efficiency & Deployment Economics
-- [ ] C14. Discussion
-- [ ] C15. Deployment Implications
-- [ ] C16. Limitations
-- [ ] C17. Reproducibility / Data & Code Availability
-- [ ] C18. Conclusion
-- [ ] C19. Bibliography completion
-- [ ] C20. Figure/table generation instructions handed to user
+### Phase C — Write (18 sections + driver + tables + bib)  ✅ COMPLETE (2026-08-28)
+- [x] C0 driver + abstract + macros · C1..C18 all sections · C19 bib verified · C20 figure prompts.
 
-### Phase D — Finalize
-- [ ] D1. Cross-check every number in manuscript against §7 Number Bank
-- [ ] D2. Consistency pass (notation, acronyms, tense, forbidden-claim scan)
-- [ ] D3. Word-count check vs 9,000–12,000
-- [ ] D4. Final report to user
+### Phase D — Finalize  🟡 PARTIAL
+- [x] D1 cross-check every number against Number Bank (done during rewrite).
+- [x] D2 consistency pass — forbidden-claim scan clean, stale-number scan clean, all bib keys resolve.
+- [ ] D3 word count (target 9k–12k; approx. measured — needs compile).
+- [x] D4 final report (this file + user summary).
 
 ---
 
 ## 7. Number Bank (verified citable metrics)
 
-> Format: `metric | value | source path`
-> **Rule:** nothing enters the manuscript unless it appears here first.
-
-*(to be populated in step A8)*
+> Full content in `manuscript/NUMBER_BANK.md` (1,381 lines). Nothing enters the manuscript
+> unless it appears there first. Do not edit by hand.
 
 ---
 
 ## 8. Open questions for the user
 
-*(none yet)*
+1. **Figures:** run the 6 GPT prompts in `figures/README_figure_prompts.md`, drop PNGs into
+   `manuscript/figures/`, and recompile. The driver already includes Figure 1 (architecture).
+2. **Compile check:** confirm the `cas-dc` class + `cas-model2-names` style compile locally
+   (Elsevier CAS template); PDF has not been compiled in this session.
+3. **Author block:** the second author "Research Collaborator" is a placeholder — confirm real
+   co-author names/affiliations/emails.
+4. **Newer-layer verification blocks:** if E27–E39 verification blocks are added to the registry
+   later, update §17 wording to remove the caveat.

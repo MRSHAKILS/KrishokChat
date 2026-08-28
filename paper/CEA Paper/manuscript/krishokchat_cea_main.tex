@@ -5,25 +5,26 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{microtype}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{subcaption}
 \usepackage{array}
 
-% Custom macros for exact empirical constants from SSOT (master_results.yaml)
+% Custom macros for exact empirical constants from the frozen Number Bank
+% (paper/CEA Paper/manuscript/NUMBER_BANK.md -- every value below traces there).
 \newcommand{\Nmisbind}{10{,}000}
 \newcommand{\Nslots}{11}
 \newcommand{\MisbindDetRate}{100.0\%}
-\newcommand{\ZeroLLMRate}{61.52\%}
+\newcommand{\DetAdvisoryCoverage}{51.04\%}
+\newcommand{\SafetyRefusalHandling}{10.48\%}
+\newcommand{\LLMDependent}{38.48\%}
 \newcommand{\LatencySpeedup}{2.28\times}
 \newcommand{\SearchSpaceRedPct}{75.64\%}
 \newcommand{\DialectHitAdvantage}{+36.6\,\text{pp}}
 \newcommand{\SMSFidelity}{100.0\%}
 \newcommand{\SMSHazardLLM}{64.4\%}
 \newcommand{\TamperDetRate}{100.0\%}
-\newcommand{\NetworkLossAdvantage}{+21.6\,\text{pp}}
 \newcommand{\HumanGwetAC}{0.862}
 
 \begin{document}
@@ -51,13 +52,14 @@
 \cortext[cor1]{Corresponding author}
 
 \begin{abstract}
-Large Language Models (LLMs) and standard Retrieval-Augmented Generation (RAG) pipelines demonstrate significant fluency in multilingual agricultural extension; however, generative models lack inherent bounds on factual authority. In safety-critical agricultural domains, fluent text generation can silently misbind pesticides to unauthorized pests, hallucinate chemical dosages, or truncate vital Pre-Harvest Intervals (PHI), posing direct ecological, economic, and human health hazards. This paper presents the \textbf{Bounded-Authority Advisory Architecture (BAA)}, a domain-specialized agricultural decision-support system that separates factual authority from linguistic realization. BAA enforces a fail-closed mathematical certification contract over structured, provenance-carrying evidence records and selectively routes farmer queries among deterministic fact resolution, grounded generation, conversational clarification, and expert escalation. 
+Large Language Models (LLMs) and standard Retrieval-Augmented Generation (RAG) pipelines can be fluent and productive in multilingual agricultural extension, but generative models carry no intrinsic bound on factual authority. In safety-critical crop protection, a fluent sentence can silently misbind a pesticide to the wrong pest, inflate a dosage, confuse a formulation, or drop a mandatory Pre-Harvest Interval (PHI). This paper presents the \textbf{Bounded-Authority Advisory Architecture (BAA)}, an agricultural decision-support architecture that separates factual authority from linguistic realization. BAA enforces a fail-closed certification contract over structured, provenance-carrying evidence records and selectively routes each farmer query among deterministic resolution, grounded generation, conversational clarification, safe abstention, and expert escalation.
 
-Across an empirical battery comprising \Nmisbind{} adversarial relational misbinding attacks, 4,000 multi-register Bengali queries, and triple-blind evaluations by practicing agronomists, BAA achieves a \MisbindDetRate{} rejection rate on corrupted chemical claims, compared to an 80.0\% dangerous acceptance rate in standard lexical RAG and 38.65\% in LLM-as-a-judge verifiers. The five-tier selective resolution ladder resolves \ZeroLLMRate{} of advisory traffic deterministically without invoking generative LLMs, achieving a \LatencySpeedup{} latency reduction and lowering per-query serving costs to \$0.0768/1k queries. In low-resource field deployments, deterministic 11-slot semantic compression eliminates the \SMSHazardLLM{} parameter-omission hazard observed in LLM-generated SMS, while offline-first cryptographic caching sustains 80.3\% advisory delivery under severe 30\% cellular packet loss. These findings demonstrate that subordinating language generation to explicit, bounded factual authority provides a scalable and dependable foundation for agricultural decision support in low-resource environments.
+We evaluate BAA across an evidence chain that isolates each architectural decision. On 10,000 adversarial relational-misbinding attacks and 2,000 counterfactual evidence mutations, BAA rejects \MisbindDetRate{} of corrupted chemical claims (95\% Wilson CI [99.96\%, 100.0\%]), against 80.0\% dangerous acceptance for a lexical baseline and 38.65\% for an LLM-as-a-judge verifier. On a 100-case live end-to-end benchmark, BAA attains 97.0\% certified advisory correctness and 0.0\% critical unsafe acceptance (CI [0.0\%, 3.7\%]), with 33.0\% safe abstention; a three-agronomist validation study records a mean correctness rating of 4.82/5 and a 100.0\% chemical-safety pass rate (Gwet's AC1 = 0.862). Calibrated abstention sustains 84.56\% advisory coverage at a 1.26\% selective-risk level on 20,112 held-out cases. A five-tier resolution ladder resolves \DetAdvisoryCoverage{} of the modeled workload without invoking any LLM (safety/refusal handling \SafetyRefusalHandling{}, LLM-dependent traffic \LLMDependent{}), cutting weighted latency 2.28$\times$. Deterministic 160-character GSM templates preserve 100\% of safety-critical slots where LLM-composed SMS loses the PHI in 64.4\% of messages, and offline-first cryptographic caching sustains 91.4\% delivery at 15\% packet loss versus 82.0\% for cloud-only RAG. The results show that subordinating generative language to explicit, bounded factual authority yields a dependable, auditable, and affordable foundation for agricultural decision support in low-resource environments.
+
 \end{abstract}
 
 \begin{keywords}
-Agricultural decision support \sep Large language models \sep Retrieval-augmented generation \sep Safety-critical verification \sep Bounded factual authority \sep Low-resource NLP \sep Edge computing \sep Smart agriculture
+Agricultural decision support \sep Large language models \sep Retrieval-augmented generation \sep Safety-critical verification \sep Bounded factual authority \sep Selective resolution \sep Low-resource NLP \sep Edge computing
 \end{keywords}
 
 \maketitle

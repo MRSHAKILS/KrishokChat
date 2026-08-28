@@ -1,19 +1,19 @@
-\begin{table*}[t]
+﻿\begin{table*}[t]
 \centering
-\caption{Comparative authority evaluation under 11,000 single-slot metamorphic perturbations across 11 mutation operators ($\mu_1..\mu_{11}$). BAA enforces strict fail-closed single-record joint binding, eliminating 100\% of dangerous bypasses.}
+\caption{Comparative authority evaluation under metamorphic mutation (Layer E28, 11 operators $\times$ 1{,}000 cases = 11{,}000 mutations per system). BAA (B6) is the only system reaching 100.0\% rejection; the partial 8-slot matcher (B5) drops to 0.0\% on exactly the four safety-critical slot families it lacks (volume, interval, PHI, provenance hash). B0/B4 latencies are modeled values, not measured wall-clock.}
 \label{tab:authority_verification}
 \small
-\begin{tabular}{lcccc}
+\resizebox{\textwidth}{!}{\begin{tabular}{lcccc}
 \toprule
-\textbf{Verification Strategy} & \textbf{Metamorphic Rejection Rate} & \textbf{False Certification Rate} & \textbf{Observed CUAR} & \textbf{Verification Latency p95} \\
+\textbf{Verification Strategy} & \textbf{Rejection Rate (\%)} & \textbf{False Certification (\%)} & \textbf{Observed CUAR (\%)} & \textbf{Latency p95 (ms)} \\
 \midrule
-B0: Unconstrained LLM & 18.41\% [17.70, 19.14] & 81.59\% [80.86, 82.30] & 67.15\% [66.26, 68.02] & 1,450.0 ms \\
-B1: Lexical BM25 Matcher & 36.36\% [35.47, 37.27] & 63.64\% [62.73, 64.53] & 45.45\% [44.53, 46.39] & 0.85 ms \\
-B2: Dense Embedding Matcher & 37.05\% [36.15, 37.95] & 62.95\% [62.05, 63.85] & 46.47\% [45.54, 47.41] & 8.40 ms \\
-B3: Citation-Based Alignment \citep{generateverify2024} & 57.33\% [56.40, 58.25] & 42.67\% [41.75, 43.60] & 32.96\% [32.09, 33.85] & 12.40 ms \\
-B4: LLM-as-a-Judge Guardrail & 72.25\% [71.41, 73.08] & 27.75\% [26.92, 28.59] & 21.84\% [21.07, 22.62] & 1,680.0 ms \\
-B5: Partial 8-Slot Matcher & 63.64\% [62.73, 64.53] & 36.36\% [35.47, 37.27] & 27.27\% [26.45, 28.11] & 1.20 ms \\
-\textbf{B6: 11-Slot Single-Record BAA (Ours)} & \textbf{100.0\% [99.97, 100.0]} & \textbf{0.0\% [0.0, 0.03]} & \textbf{0.0\% [0.0, 0.03]} & \textbf{3.80 ms} \\
+B0: Unconstrained LLM & 18.41 [17.70, 19.14] & 81.59 [80.86, 82.30] & 67.15 [66.26, 68.02] & 1{,}450.0 \\
+B1: Lexical BM25 Matcher & 36.36 [35.47, 37.27] & 63.64 [62.73, 64.53] & 45.45 [44.53, 46.39] & 0.85 \\
+B2: Dense Embedding Matcher & 37.05 [36.15, 37.95] & 62.95 [62.05, 63.85] & 46.47 [45.54, 47.41] & 8.40 \\
+B3: Citation Multi-Doc Alignment & 57.33 [56.40, 58.25] & 42.67 [41.75, 43.60] & 32.96 [32.09, 33.85] & 12.40 \\
+B4: LLM-as-a-Judge Guardrail & 72.25 [71.41, 73.08] & 27.75 [26.92, 28.59] & 21.84 [21.07, 22.62] & 1{,}680.0 \\
+B5: Partial 8-Slot Matcher & 63.64 [62.73, 64.53] & 36.36 [35.47, 37.27] & 27.27 [26.45, 28.11] & 1.20 \\
+\textbf{B6: 11-Slot Single-Record BAA (Ours)} & \textbf{100.0 [99.97, 100.0]} & \textbf{0.0 [0.0, 0.03]} & \textbf{0.0 [0.0, 0.03]} & \textbf{3.8} \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table*}

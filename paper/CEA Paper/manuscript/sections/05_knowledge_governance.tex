@@ -2,24 +2,25 @@
 \label{sec:knowledge_governance}
 
 \subsection{Institutional Corpus and Source Provenance}
-The factual foundation of KrishokChat is constructed from 2,946 verified institutional source documents published by accredited Bangladeshi agricultural research institutions:
+The factual foundation of KrishokChat is a curated corpus of 2{,}946 institutional source documents published by accredited Bangladeshi agricultural institutions, including:
 \begin{itemize}
-    \item \textbf{BARI Krishi Projukti Hatboi (9th Edition, 2023):} Comprehensive crop technology manuals covering field crops, tubers, and horticultural varieties \citep{bari_handbook2023}.
-    \item \textbf{BRRI Adhunik Dhaner Chas (22nd Edition, 2024):} Canonical rice production and pathology guidelines \citep{brri_handbook2024}.
-    \item \textbf{DAE Agrochemical Governance Registers (2024--2026):} Official lists of approved, restricted, and banned pesticides in Bangladesh.
+    \item \textbf{BARI Krishi Projukti Hatboi (9th Edition, 2023):} crop technology manuals covering field crops, tubers, and horticultural varieties \citep{bari_handbook2023}.
+    \item \textbf{BRRI Adhunik Dhaner Chas (22nd Edition, 2024):} canonical rice production and pathology guidelines \citep{brri_handbook2024}.
+    \item \textbf{DAE/MoA agrochemical governance registries:} current lists of approved, restricted, and banned pesticides in Bangladesh (regulatory polarity source).
 \end{itemize}
+Every node in the fact store carries provenance: source document, source version, effective date, expiry date, verifier identity, and a cryptographic evidence hash.
 
 \subsection{The 11-Slot Evidence Schema and Authority Stratification}
-As detailed in Table~\ref{tab:knowledge_schema}, the knowledge base decouples semantic agronomic attributes (Layer A) from governance metadata (Layer B). To prevent conflicting recommendations, sources are stratified into a strict authority hierarchy:
+As detailed in Table~\ref{tab:knowledge_schema}, the knowledge base decouples the agronomic decision contract (Layer A: the 11 semantic slots) from the evidence governance layer (Layer B: source authority, publication/effective dates, regulatory polarity, provenance hash, verifier signature). Sources are stratified into a strict authority hierarchy:
 \begin{equation}
     \text{MoA Regulatory} \succ \text{Current Institutional (BARI/BRRI)} \succ \text{Legacy Institutional} \succ \text{Secondary}
 \end{equation}
-When multiple sources contain overlapping entries, the resolution engine enforces precedence strictly by authority rank and publication timestamp, automatically invalidating superseded records.
+When multiple sources overlap, the resolver enforces precedence by authority rank then by publication timestamp, and records that have been superseded or revoked are invalidated. A record must be both authoritative (by source/jurisdiction) and current (by date/version/regulatory state) to satisfy Eq.~\eqref{eq:certification_rule}.
 
 \subsection{Cryptographic Hash-Chaining and Tamper-Evident Packs}
-For offline and edge deployments, structured facts are compiled into an optimized SQLite database (the Offline Fact Pack). To guarantee data integrity, each record is hashed via SHA-256 and incorporated into a cryptographically signed Merkle manifest. During dynamic differential updates, client devices verify the cryptographic chain, ensuring \TamperDetRate{} detection of accidental corruption or adversarial tampering before committing updates.
+Structured facts are compiled into an offline SQLite fact pack for edge and offline deployment. Each record is hashed with SHA-256 and incorporated into a Merkle-style chain; updates are distributed as differential delta packs rather than full downloads. In Layer E23, 1,000 single-bit and swap mutations were injected into the chain; the client detected 100.0\% of them (95\% CI [99.62, 100.0]), with a delta payload of 791 bytes versus a 10{,}985-byte full pack (92.8\% bandwidth reduction) and sub-millisecond chain verification (p95 0.1919 ms). We frame this experiment as a deployment-integrity result, not a cryptography contribution: it ensures the offline evidence base cannot be silently altered or replayed.
 
-\subsection{Knowledge Maintenance and Coverage Growth Loop}
-To support continuous extension, KrishokChat implements a closed-loop knowledge maintenance workflow (Layer E24). When recurring queries trigger Tier 4 abstentions due to knowledge gaps, they are aggregated into an automated prioritization queue. Institutional agronomists author targeted tuples to bridge the gap. In empirical trials, an 18-minute targeted authoring session for Chili Anthracnose added 2 verified nodes, completely resolving 55 unanswerable queries (3.06 queries resolved per authoring minute) without requiring LLM re-training or full index rebuilding.
+\subsection{Knowledge Ingestion and Maintenance Loop}
+No model output is ever written directly into the fact store. The ingestion pipeline is a controlled chain: authoritative source $\rightarrow$ document staging $\rightarrow$ fact extraction $\rightarrow$ schema validation $\rightarrow$ conflict detection $\rightarrow$ expert review $\rightarrow$ versioning/hash/signature $\rightarrow$ release to the fact store. When recurring queries fail at Tier 4 because a knowledge gap exists, the failures are aggregated into a prioritized authoring queue. Layer E24 evaluated the marginal cost of closing one gap: a targeted authoring session for chili anthracnose (BARI Krishi Projukti Hatboi 2021, p.~148) added two validated facts (azoxystrobin+difenoconazole 325 SC; copper oxychloride 50 WP) in 18 minutes, closing the cluster gap completely (55/55 queries, 100.0\%), lifting system coverage from 58.7\% to 64.2\% (95\% CI [61.18, 67.11]) --- a 5.5 pp absolute gain at 3.06 newly resolvable queries per authoring minute. We report this as a single-cluster case study, not a productivity distribution.
 
 \input{tables/tab3_knowledge_schema.tex}
