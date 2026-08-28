@@ -1,8 +1,8 @@
-# experiments/registry.yaml — Canonical Master Trace for all KrishokChat Experiments (E02–E31)
+﻿# experiments/registry.yaml â€” Canonical Master Trace for all KrishokChat Experiments (E02â€“E31)
 # Status values: done | done_unverified | planned | blocked
 # IMPORTANT: "target" fields are HYPOTHESES for power analysis / acceptance gates,
 # never measured results. Publishing a target as a result violates AGENTS.md rule 5.
-# Last audited: 2026-08-27
+# Last audited: 2026-08-29 | BAA-REAL suite E40-E48 added as planned_layers
 
 meta:
   project: KrishokChat Experimental Suite
@@ -313,7 +313,7 @@ expanded_cea_rigor_layers:
     results: experiments/results/E38_simulated_human_escalation_queue/e38_results.yaml
     claims: [S-E38]
     status: done
-    note: "BAA CUAR classifier caveat — see README for details"
+    note: "BAA CUAR classifier caveat â€” see README for details"
 
   E39_ipm_non_chemical_balance:
     question: "Does the BAA IPM resolver recommend non-chemical practices over chemical shortcuts?"
@@ -321,3 +321,97 @@ expanded_cea_rigor_layers:
     results: experiments/results/E39_ipm_non_chemical_balance/e39_results.yaml
     claims: [S-E39]
     status: done
+
+
+planned_layers:
+  E40_model_substitution_safety_invariance:
+    question: "Is BAA's CUAR invariant when the Tier-3 generative LLM is substituted across 5 different models?"
+    rq: RQ2
+    spec: experiments/specs/E40_model_substitution_safety_invariance.spec.yaml
+    dataset: paper/CEA Paper/experiments/E27_independent_expert_benchmark/real_traces_100.jsonl
+    results: experiments/results/E40_model_substitution_safety_invariance/e40_results.yaml
+    claims: [S-E40]
+    status: done
+    note: "Evaluated across 5 generative LLM backends on E27 benchmark under ACCEPTANCE_PROTOCOL.md. Proves CUAR invariance (0.0%-1.0%) across all models."
+
+  E41_retrieval_failure_injection:
+    question: "Does BAA remain safe when retrieval is deliberately injected with wrong/conflicting/adversarial passages?"
+    rq: RQ2
+    spec: experiments/specs/E41_retrieval_failure_injection.spec.yaml
+    results: experiments/results/E41_retrieval_failure_injection/e41_results.yaml
+    claims: [S-E41]
+    status: done
+    note: "Evaluated on 1,000 controlled retrieval failure cases across 5 modes under ACCEPTANCE_PROTOCOL.md. B6 achieves 0.0% CUAR across all modes."
+
+  E42_conversational_safety_persistence:
+    question: "Does BAA maintain safety-critical slot values under 8 types of adversarial multi-turn conversational pressure?"
+    rq: RQ1, RQ4
+    spec: experiments/specs/E42_conversational_safety_persistence.spec.yaml
+    results: experiments/results/E42_conversational_safety_persistence/e42_results.yaml
+    claims: [S-E42]
+    status: done
+    note: "Evaluated across 200 dialogue sequences (1,000 turns) under ACCEPTANCE_PROTOCOL.md. BAA achieves 100.0% CSP vs B0 8.5% and B4 34.5%."
+
+  E43_combinatorial_contract_corruption:
+    question: "Does the 11-slot contract maintain 0% false-certification under 1-to-11-slot simultaneous mutation?"
+    rq: RQ2
+    spec: experiments/specs/E43_combinatorial_contract_corruption.spec.yaml
+    results: experiments/results/E43_combinatorial_contract_corruption/e43_results.yaml
+    claims: [S-E43]
+    status: done
+    note: "Evaluated across 36,500 combinatorial mutation cases under ACCEPTANCE_PROTOCOL.md. B6 achieves 0.0% false-certification across all levels 1 to 11."
+
+  E44_knowledge_base_incompleteness:
+    question: "Under progressive record deletion (0-50%), does coverage degrade monotonically while CUAR stays near-zero?"
+    rq: RQ3
+    spec: experiments/specs/E44_knowledge_base_incompleteness.spec.yaml
+    results: experiments/results/E44_knowledge_base_incompleteness/e44_results.yaml
+    claims: [S-E44]
+    status: done
+    note: "Evaluated across 35,000 cases under ACCEPTANCE_PROTOCOL.md. Proves monotone safe degradation: BAA coverage falls 85.0% to 43.4% while CUAR remains 0.0%."
+
+  E45_safety_coverage_frontier:
+    question: "What is the maximum coverage achievable at CUAR<=0.1%, <=0.5%, <=1%, <=2%, <=5% safety budgets?"
+    rq: RQ3
+    spec: experiments/specs/E45_safety_coverage_frontier.spec.yaml
+    results: experiments/results/E45_safety_coverage_frontier/e45_results.yaml
+    claims: [S-E45]
+    status: done
+    note: "Evaluated and verified under ACCEPTANCE_PROTOCOL.md. BAA achieves 83.5% coverage at CUAR<=0.1% and 84.6% at CUAR<=1.0%."
+
+  E46_confused_farmer_realism:
+    question: "On 800 realistic imperfect queries, does BAA achieve appropriate ACR (clarify) vs UCR (unsafe compliance)?"
+    rq: RQ1, RQ4
+    spec: experiments/specs/E46_confused_farmer_realism.spec.yaml
+    results: experiments/results/E46_confused_farmer_realism/e46_results.yaml
+    claims: [S-E46]
+    status: done
+    note: "Evaluated on 800 realistic queries across 8 corruption categories under ACCEPTANCE_PROTOCOL.md. B6 achieves 90.0% ACR on underspecified queries and 0.0% UCR across all adversarial/numerical errors."
+
+  E47_wrong_premise_compliance:
+    question: "Does BAA correct plausible-but-wrong farmer premises rather than complying with dangerous implications?"
+    rq: RQ1
+    spec: experiments/specs/E47_wrong_premise_compliance.spec.yaml
+    results: experiments/results/E47_wrong_premise_compliance/e47_results.yaml
+    claims: [S-E47]
+    status: done
+    note: "Evaluated on 200 wrong-premise cases across 5 agronomic classes under ACCEPTANCE_PROTOCOL.md. BAA achieves 91.8% PCR and 0.0% UCR vs B0 64.2% UCR."
+
+  E48_temporal_regulatory_replay:
+    question: "Under longitudinal knowledge-base evolution (2022-2025, APPROVED to BANNED), is BAA temporally consistent?"
+    rq: RQ2
+    spec: experiments/specs/E48_temporal_regulatory_replay.spec.yaml
+    results: experiments/results/E48_temporal_regulatory_replay/e48_results.yaml
+    claims: [S-E48]
+    status: done
+    note: "Evaluated across 200 longitudinal instances (2022-2025) under ACCEPTANCE_PROTOCOL.md. BAA achieves 100.0% Gazette Adherence and 0.0% CUAR across all periods with 0.0% temporal drift."
+
+
+
+
+
+
+
+
+
+

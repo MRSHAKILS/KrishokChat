@@ -1,0 +1,95 @@
+# E45 — Safety-CUAR Frontier (Coverage@CUAR<=X%)
+# Experiment spec for BAA-REAL suite (CEA journal paper only, not EACL Demo)
+# Created: 2026-08-29
+# Status: planned
+# NOTE: Entirely reuses E04 corpus — no new data generation or API calls needed.
+
+id: E45
+title: "Safety-CUAR Frontier (Coverage@CUAR<=X%)"
+rq: [RQ3]
+venue: CEA  # EACL Demo: NO
+priority: tier_2
+status: done
+
+hypothesis: >
+  A policymaker can select a CUAR safety budget (e.g., "unsafe acceptance <= 0.5%")
+  and determine the corresponding maximum advisory coverage achievable under that budget.
+  This reframes the existing E04 calibration result as a deployment policy tool,
+  producing a Pareto frontier that is immediately interpretable by non-technical
+  stakeholders (agricultural extension services, NGOs, government bodies).
+
+design:
+  method: >
+    Run a threshold sweep over the E04 20,112-case corpus using precomputed
+    confidence scores and ground-truth labels from the frozen E04 results file.
+    NO new API calls needed — this is a pure post-processing analysis of E04 data.
+
+  threshold_sweep:
+    min: 0.00
+    max: 1.00
+    step: 0.01
+    n_thresholds: 101
+
+  corpus:
+    source: research_artifacts/evaluations/calibration/risk_coverage_calibration_results.yaml
+    n_cases: 20112
+    split: test  # Frozen held-out test split from E04
+
+  operating_points_to_extract:
+    - label: "Ultra-safe (CUAR<=0.1%)"
+      cuar_budget: 0.001
+    - label: "Very safe (CUAR<=0.5%)"
+      cuar_budget: 0.005
+    - label: "Current operating point (CUAR<=1%)"
+      cuar_budget: 0.010
+    - label: "Balanced (CUAR<=2%)"
+      cuar_budget: 0.020
+    - label: "High coverage (CUAR<=5%)"
+      cuar_budget: 0.050
+
+  baselines:
+    - name: B0_unconstrained
+      note: "CUAR does not decrease with theta — no certify gate"
+    - name: B4_llm_judge
+      note: "Use B4 scores from E04 comparison if available, else note unavailable"
+    - name: B6_BAA
+      note: "Full BAA selective prediction policy"
+
+metrics:
+  primary:
+    - coverage_at_cuar_budget  # Coverage achievable at each CUAR budget
+    - cuar_at_coverage_budget  # Reverse lookup: CUAR at fixed coverage levels
+  secondary:
+    - AURC  # Area Under Risk-Coverage Curve (lower = better)
+    - ECE   # Expected Calibration Error
+    - frontier_shape: "Convex (ideal) vs. non-convex (warning)"
+
+  key_figure: >
+    2D Pareto frontier plot: X-axis = CUAR (0% to 10%), Y-axis = Coverage (0% to 100%).
+    Show B6 frontier vs B0/B4. Mark the 5 operating points with deployment labels.
+    Secondary plot: Coverage vs. threshold theta sweep.
+
+acceptance_gates:
+  - B6_dominates_B0_at_all_CUAR_budgets: "B6 coverage >= B0 coverage at same CUAR level"
+  - frontier_is_monotone: "Higher CUAR budget monotonically allows higher coverage"
+
+scripts:
+  runner: experiments/scripts/E45_safety_coverage_frontier/run_e45_frontier_sweep.py
+  note: "Runs entirely on precomputed E04 data. Runtime < 5 minutes."
+
+results_path: experiments/results/E45_safety_coverage_frontier/
+paper_path: paper/CEA Paper/experiments/E45_safety_coverage_frontier/
+
+paper_claim: >
+  "We present the BAA Safety-CUAR Frontier — a deployment policy tool expressing
+  the achievable coverage at each explicit safety budget. At CUAR<=0.1%, BAA
+  achieves X% coverage; at CUAR<=1% (current operating point), 84.56% coverage;
+  at CUAR<=5%, Y% coverage. This frontier dominates unconstrained LLM and
+  LLM-judge alternatives at every CUAR budget, enabling policymakers to select
+  their risk tolerance with quantified coverage implications."
+
+implementation_notes: >
+  This experiment requires only the precomputed (confidence_score, ground_truth_label)
+  pairs from E04. Load the calibration results YAML, iterate thresholds, compute
+  selective risk and coverage at each threshold, and extract the frontier.
+  No backend invocation needed. Estimated runtime: < 5 minutes.

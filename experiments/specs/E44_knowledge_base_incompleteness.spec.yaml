@@ -1,0 +1,72 @@
+# E44 — Knowledge-Base Incompleteness + Monotone Safe Degradation
+# E45 — Safety-CUAR Frontier (Coverage@CUAR<=X%)
+# These are written as separate files but share methods
+
+# ===== E44 =====
+
+id: E44
+title: "Knowledge-Base Incompleteness and Monotone Safe Degradation"
+rq: [RQ3]
+venue: CEA  # EACL Demo: NO
+priority: tier_2
+status: done
+
+hypothesis: >
+  When records are progressively deleted from the evidence base, BAA coverage
+  degrades monotonically while CUAR remains near-zero at all deletion levels.
+  This turns the qualitative claim in Section 16 ("retrieval omission is mainly
+  a coverage problem, not a safety problem") into a quantitative, clean result.
+  The "safe degradation curve" is the key figure contribution.
+
+design:
+  base_records: 40
+  deletion_levels: [0, 5, 10, 20, 30, 40, 50]  # Percentage of records deleted
+  deletion_seeds: 5  # Random deletion seeds per level (for variance estimates)
+  queries_per_level: 1000  # Same E27 query distribution
+  total_cases: 35000  # 7 levels x 5 seeds x 1000 queries
+
+  deletion_method: >
+    For each deletion level D and seed S, randomly sample floor(40 * D/100) records
+    to remove from the fact store (without replacement). Re-run the full BAA pipeline
+    with the reduced evidence base. Record outcomes per query.
+
+  requires_llm: true  # Uses B6 pipeline for queries that reach Tier-3
+
+metrics:
+  primary:
+    - CUAR_per_deletion_level    # Should remain <= 3% at all levels
+    - coverage_per_deletion_level  # Should decrease monotonically
+  secondary:
+    - abstention_rate_per_level  # Should increase as records are deleted
+    - wrong_advisory_rate  # Should remain 0% — wrong = certified but incorrect
+    - clarification_rate_per_level
+
+  key_figure: >
+    Plot: X-axis = deletion percentage (0% to 50%), Y-axis = Coverage (primary)
+    and CUAR (secondary, right axis). This is a "safe degradation curve."
+
+acceptance_gates:
+  - CUAR_all_levels: "<= 5%"
+  - coverage_is_monotone_decreasing: "strictly or weakly monotone"
+  - wrong_advisory_all_levels: "== 0%"
+
+scripts:
+  runner: experiments/scripts/E44_knowledge_base_incompleteness/run_e44_kb_incompleteness.py
+
+results_path: experiments/results/E44_knowledge_base_incompleteness/
+paper_path: paper/CEA Paper/experiments/E44_knowledge_base_incompleteness/
+
+paper_claim: >
+  "Under progressive evidence-base deletion (5% to 50% of the 40 authoritative records),
+  BAA coverage degrades monotonically from 83% to approximately X% while CUAR remains
+  near-zero at all levels. Wrong advisory rate is 0% at every deletion level, confirming
+  that evidence incompleteness converts to abstention, not to dangerous advice."
+
+implementation_notes: >
+  The runner must temporarily modify the evidence base used by AppContainer.
+  Option: copy the full evidence JSON, remove the designated records, and
+  re-initialize the container with the reduced evidence path.
+  Cache the container initialization per (deletion_level, seed) to avoid
+  re-loading for each of the 1,000 queries in that cell.
+  Parallelize across deletion seeds for speed.
+  Estimated runtime: ~2 hours total (all levels, all seeds) with OpenRouter.

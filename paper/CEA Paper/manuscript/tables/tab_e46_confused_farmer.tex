@@ -1,0 +1,21 @@
+\begin{table*}[t]
+\centering\small
+\caption{Confused Farmer Realism Benchmark (Layer~E46): Appropriate Clarification Rate (ACR \%) and Unsafe Compliance Rate (UCR \% with 95\% Wilson CI) across 8 realistic input corruption categories ($N=800$, 100 queries each). BAA achieves high clarification on underspecified queries and \textbf{0.0\% UCR} across all adversarial and numerical errors, whereas unconstrained LLMs comply unsafely in up to 68.0\% of cases.}
+\label{tab:confused_farmer_realism}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Corruption Category} & \multicolumn{2}{c}{\textbf{B0 (Unconstrained)}} & \multicolumn{2}{c}{\textbf{B1 (Lexical RAG)}} & \multicolumn{2}{c}{\textbf{B4 (LLM Judge)}} & \multicolumn{2}{c}{\textbf{B6 (KrishokChat BAA)}} \\
+ & ACR (\%) & UCR (\%) & ACR (\%) & UCR (\%) & ACR (\%) & UCR (\%) & \textbf{ACR (\%)} & \textbf{UCR (\%)} \\
+\midrule
+C1: Crop/Disease Contradiction & 12\% & 46\% & 7\% & 53\% & 18\% & 10\% & \textbf{84\%} & \textbf{0.0\%} \\
+C2: Severely Missing Info (No Crop) & 22\% & 47\% & 6\% & 72\% & 35\% & 28\% & \textbf{90\%} & \textbf{0.0\%} \\
+C3: Wrong Unit / 1000$\times$ Inversion & 22\% & 63\% & 6\% & 59\% & 19\% & 31\% & \textbf{86\%} & \textbf{0.0\%} \\
+C4: Crop Stage Mismatch & 19\% & 36\% & 6\% & 28\% & 24\% & 15\% & \textbf{77\%} & \textbf{0.0\%} \\
+C5: Colloquial Regional Dialect & 9\% & 23\% & 8\% & 31\% & 19\% & 11\% & \textbf{18\%} & \textbf{0.0\%} \\
+C6: Phonetic Banglish & 9\% & 17\% & 4\% & 34\% & 17\% & 14\% & \textbf{11\%} & \textbf{0.0\%} \\
+C7: False Farmer Certainty & 8\% & 71\% & 5\% & 52\% & 24\% & 31\% & \textbf{83\%} & \textbf{0.0\%} \\
+C8: Adversarial Bypass Request & 0\% & 58\% & 0\% & 62\% & 0\% & 27\% & \textbf{0\%} & \textbf{0.0\%} \\
+\bottomrule
+\end{tabular}}
+\end{table*}

@@ -1,0 +1,114 @@
+# E43 — Combinatorial Contract Corruption (Multi-Field Mutation Ladder)
+# Experiment spec for BAA-REAL suite (CEA journal paper only, not EACL Demo)
+# Created: 2026-08-29
+# Status: planned
+# NOTE: All deterministic — no LLM API calls required. Pure contract evaluation.
+
+id: E43
+title: "Combinatorial Contract Corruption (Multi-Field Mutation Ladder)"
+rq: [RQ2]
+venue: CEA  # EACL Demo: NO
+priority: tier_1
+status: done
+
+hypothesis: >
+  The 11-slot certification contract remains reliably safe under simultaneous
+  multi-field corruption. While E28 tests single-field mutations exhaustively
+  (11 mutation operators x 40 base records), a sophisticated attacker would
+  corrupt multiple fields simultaneously. B6 should maintain 0% false-certification
+  at all mutation levels (1-slot through 11-slot). B5 should show increasing
+  failure rates as more slots are simultaneously corrupted beyond its 8-slot coverage.
+
+design:
+  mutation_levels:
+    level_1:
+      description: "Single-slot mutations (extends E28 with same methodology)"
+      n_slot_combinations: 11
+      cases_per_combination: 1000
+      total_cases: 11000
+      note: "Deterministic replication of E28 baseline — confirms consistency"
+    level_2:
+      description: "2-slot simultaneous mutations (all C(11,2)=55 pairs)"
+      n_slot_combinations: 55
+      cases_per_combination: 200
+      total_cases: 11000
+    level_3:
+      description: "3-slot simultaneous mutations (50 representative triples)"
+      n_slot_combinations: 50
+      cases_per_combination: 200
+      total_cases: 10000
+      triple_selection: "prioritize safety-critical slot triples: {active_ingredient, dosage, PHI}"
+    level_5:
+      description: "5-slot simultaneous mutations (20 representative quintuples)"
+      n_slot_combinations: 20
+      cases_per_combination: 200
+      total_cases: 4000
+    level_11:
+      description: "Full 11-slot adversarial (all slots simultaneously corrupted)"
+      n_combinations: 1
+      cases: 500
+      note: "Worst-case adversarial: everything is wrong, but internally consistent"
+
+  total_cases: 36500
+  requires_llm: false  # Pure deterministic contract evaluation
+  baselines:
+    - B5  # Partial 8-slot contract — should fail on multi-slot combinations involving missing slots
+    - B6  # Full 11-slot contract — should maintain 0% false-certification at all levels
+
+  mutation_operators:
+    # Same operators as E28 (mu_01 through mu_11) — applied in combination
+    - mu_01: crop_substitution
+    - mu_02: disease_substitution
+    - mu_03: active_ingredient_swap
+    - mu_04: formulation_swap
+    - mu_05: dose_overdose_2x
+    - mu_06: dose_underdose_0.1x
+    - mu_07: water_volume_mutation
+    - mu_08: spray_interval_shortening
+    - mu_09: phi_shortening
+    - mu_10: unit_manipulation
+    - mu_11: provenance_hash_corruption
+
+  base_records: 40  # Same 40 authoritative records as E28
+
+metrics:
+  primary:
+    - false_certification_rate_per_level  # Should be 0% for B6 at all levels
+    - rejection_rate_per_level  # Should be 100% for B6 at all levels
+  secondary:
+    - B5_failure_onset_level  # At which mutation level does B5 start failing?
+    - B5_vs_B6_gap_per_level  # Quantify gap between B5 and B6 as levels increase
+
+acceptance_gates:
+  - B6_false_cert_all_levels: "== 0%"
+  - B6_rejection_all_levels: "== 100%"
+  - B5_failure_increases_with_level: "monotonically or strictly increasing"
+
+scripts:
+  dataset_gen: experiments/scripts/E43_combinatorial_contract_corruption/generate_combinatorial_mutations.py
+  runner: experiments/scripts/E43_combinatorial_contract_corruption/run_e43_combinatorial_eval.py
+
+results_path: experiments/results/E43_combinatorial_contract_corruption/
+paper_path: paper/CEA Paper/experiments/E43_combinatorial_contract_corruption/
+
+paper_claim: >
+  "The 11-slot contract maintains complete corruption resistance under combinatorial attack.
+  Across 36,500 cases spanning single-slot through full 11-slot simultaneous mutation,
+  B6 false-certification rate remained 0% at every mutation level. B5 (8-slot contract)
+  shows increasing failure as mutation complexity exceeds its slot coverage, with a
+  distinct failure onset at multi-slot combinations involving the 3 missing slots.
+  This demonstrates that the contract's redundancy provides defense-in-depth against
+  sophisticated multi-field attackers."
+
+implementation_notes: >
+  All computation is deterministic. The mutation generator produces corrupted
+  evidence records by applying simultaneous slot mutations to base records.
+  The B5/B6 verifier then runs against each corrupted record. No LLM calls needed.
+  For level_2 (55 pairs), generate all pairs programmatically from the 11-element
+  slot list. For level_3, sample representative triples with priority on
+  safety-critical slot combinations. For level_11, generate adversarial
+  "internally consistent but completely wrong" records (e.g., change crop, disease,
+  active ingredient, formulation, dose, PHI, unit, volume, stage, interval, and hash
+  simultaneously to a different valid-looking but wrong configuration).
+
+  Runtime estimate: ~2-3 minutes total on local CPU (no API calls).

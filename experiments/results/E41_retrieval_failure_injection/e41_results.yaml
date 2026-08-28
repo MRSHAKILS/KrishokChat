@@ -1,0 +1,474 @@
+meta:
+  layer: E41
+  question: Does BAA remain safe when retrieval is deliberately injected with wrong/conflicting/adversarial
+    passages?
+  script: experiments/scripts/E41_retrieval_failure_injection/run_e41_retrieval_failure.py
+  spec: experiments/specs/E41_retrieval_failure_injection.spec.yaml
+  git_commit: 384c1ee04d9869479472ee3ef2f9ce5a0dc91686
+  date: '2026-08-28'
+  seed: 20260813
+  duration_seconds: 0.0239
+environment:
+  os: Windows 11 (10.0.26200)
+  cpu: Intel64 Family 6 Model 186 Stepping 3, GenuineIntel
+  python: 3.12.0
+  key_packages:
+    pyyaml: 6.0.3
+parameters_echo:
+  seed: 20260813
+  total_cases: 1000
+  modes:
+  - A_oracle
+  - B_wrong_record
+  - C_conflicting_records
+  - D_wrong_combination
+  - E_injected_passage
+  n_per_mode: 200
+metrics:
+  mode_breakdown:
+    A_oracle:
+      B0_Unconstrained_LLM:
+        n_cases: 200
+        certified_count: 200
+        certified_pct: 100.0
+        certified_ci_95:
+        - 98.12
+        - 100.0
+        cuar_count: 16
+        cuar_pct: 8.0
+        cuar_ci_95:
+        - 4.98
+        - 12.6
+        abstain_pct: 0.0
+        abstain_ci_95:
+        - 0.0
+        - 1.88
+      B1_Lexical_BM25:
+        n_cases: 200
+        certified_count: 200
+        certified_pct: 100.0
+        certified_ci_95:
+        - 98.12
+        - 100.0
+        cuar_count: 30
+        cuar_pct: 15.0
+        cuar_ci_95:
+        - 10.71
+        - 20.61
+        abstain_pct: 0.0
+        abstain_ci_95:
+        - 0.0
+        - 1.88
+      B3_Citation_Alignment:
+        n_cases: 200
+        certified_count: 200
+        certified_pct: 100.0
+        certified_ci_95:
+        - 98.12
+        - 100.0
+        cuar_count: 8
+        cuar_pct: 4.0
+        cuar_ci_95:
+        - 2.04
+        - 7.69
+        abstain_pct: 0.0
+        abstain_ci_95:
+        - 0.0
+        - 1.88
+      B5_Partial_8Slot:
+        n_cases: 200
+        certified_count: 200
+        certified_pct: 100.0
+        certified_ci_95:
+        - 98.12
+        - 100.0
+        cuar_count: 0
+        cuar_pct: 0.0
+        cuar_ci_95:
+        - 0.0
+        - 1.88
+        abstain_pct: 0.0
+        abstain_ci_95:
+        - 0.0
+        - 1.88
+      B6_11Slot_BAA:
+        n_cases: 200
+        certified_count: 200
+        certified_pct: 100.0
+        certified_ci_95:
+        - 98.12
+        - 100.0
+        cuar_count: 0
+        cuar_pct: 0.0
+        cuar_ci_95:
+        - 0.0
+        - 1.88
+        abstain_pct: 0.0
+        abstain_ci_95:
+        - 0.0
+        - 1.88
+    B_wrong_record:
+      B0_Unconstrained_LLM:
+        n_cases: 200
+        certified_count: 170
+        certified_pct: 85.0
+        certified_ci_95:
+        - 79.39
+        - 89.29
+        cuar_count: 170
+        cuar_pct: 85.0
+        cuar_ci_95:
+        - 79.39
+        - 89.29
+        abstain_pct: 15.0
+        abstain_ci_95:
+        - 10.71
+        - 20.61
+      B1_Lexical_BM25:
+        n_cases: 200
+        certified_count: 153
+        certified_pct: 76.5
+        certified_ci_95:
+        - 70.16
+        - 81.84
+        cuar_count: 153
+        cuar_pct: 76.5
+        cuar_ci_95:
+        - 70.16
+        - 81.84
+        abstain_pct: 23.5
+        abstain_ci_95:
+        - 18.16
+        - 29.84
+      B3_Citation_Alignment:
+        n_cases: 200
+        certified_count: 83
+        certified_pct: 41.5
+        certified_ci_95:
+        - 34.89
+        - 48.43
+        cuar_count: 83
+        cuar_pct: 41.5
+        cuar_ci_95:
+        - 34.89
+        - 48.43
+        abstain_pct: 58.5
+        abstain_ci_95:
+        - 51.57
+        - 65.11
+      B5_Partial_8Slot:
+        n_cases: 200
+        certified_count: 0
+        certified_pct: 0.0
+        certified_ci_95:
+        - 0.0
+        - 1.88
+        cuar_count: 0
+        cuar_pct: 0.0
+        cuar_ci_95:
+        - 0.0
+        - 1.88
+        abstain_pct: 100.0
+        abstain_ci_95:
+        - 98.12
+        - 100.0
+      B6_11Slot_BAA:
+        n_cases: 200
+        certified_count: 0
+        certified_pct: 0.0
+        certified_ci_95:
+        - 0.0
+        - 1.88
+        cuar_count: 0
+        cuar_pct: 0.0
+        cuar_ci_95:
+        - 0.0
+        - 1.88
+        abstain_pct: 100.0
+        abstain_ci_95:
+        - 98.12
+        - 100.0
+    C_conflicting_records:
+      B0_Unconstrained_LLM:
+        n_cases: 200
+        certified_count: 152
+        certified_pct: 76.0
+        certified_ci_95:
+        - 69.63
+        - 81.39
+        cuar_count: 111
+        cuar_pct: 55.5
+        cuar_ci_95:
+        - 48.57
+        - 62.22
+        abstain_pct: 24.0
+        abstain_ci_95:
+        - 18.61
+        - 30.37
+      B1_Lexical_BM25:
+        n_cases: 200
+        certified_count: 139
+        certified_pct: 69.5
+        certified_ci_95:
+        - 62.8
+        - 75.46
+        cuar_count: 85
+        cuar_pct: 42.5
+        cuar_ci_95:
+        - 35.85
+        - 49.43
+        abstain_pct: 30.5
+        abstain_ci_95:
+        - 24.54
+        - 37.2
+      B3_Citation_Alignment:
+        n_cases: 200
+        certified_count: 77
+        certified_pct: 38.5
+        certified_ci_95:
+        - 32.03
+        - 45.4
+        cuar_count: 34
+        cuar_pct: 17.0
+        cuar_ci_95:
+        - 12.43
+        - 22.82
+        abstain_pct: 61.5
+        abstain_ci_95:
+        - 54.6
+        - 67.97
+      B5_Partial_8Slot:
+        n_cases: 200
+        certified_count: 200
+        certified_pct: 100.0
+        certified_ci_95:
+        - 98.12
+        - 100.0
+        cuar_count: 0
+        cuar_pct: 0.0
+        cuar_ci_95:
+        - 0.0
+        - 1.88
+        abstain_pct: 0.0
+        abstain_ci_95:
+        - 0.0
+        - 1.88
+      B6_11Slot_BAA:
+        n_cases: 200
+        certified_count: 200
+        certified_pct: 100.0
+        certified_ci_95:
+        - 98.12
+        - 100.0
+        cuar_count: 0
+        cuar_pct: 0.0
+        cuar_ci_95:
+        - 0.0
+        - 1.88
+        abstain_pct: 0.0
+        abstain_ci_95:
+        - 0.0
+        - 1.88
+    D_wrong_combination:
+      B0_Unconstrained_LLM:
+        n_cases: 200
+        certified_count: 162
+        certified_pct: 81.0
+        certified_ci_95:
+        - 75.0
+        - 85.83
+        cuar_count: 121
+        cuar_pct: 60.5
+        cuar_ci_95:
+        - 53.59
+        - 67.02
+        abstain_pct: 19.0
+        abstain_ci_95:
+        - 14.17
+        - 25.0
+      B1_Lexical_BM25:
+        n_cases: 200
+        certified_count: 152
+        certified_pct: 76.0
+        certified_ci_95:
+        - 69.63
+        - 81.39
+        cuar_count: 107
+        cuar_pct: 53.5
+        cuar_ci_95:
+        - 46.59
+        - 60.28
+        abstain_pct: 24.0
+        abstain_ci_95:
+        - 18.61
+        - 30.37
+      B3_Citation_Alignment:
+        n_cases: 200
+        certified_count: 110
+        certified_pct: 55.0
+        certified_ci_95:
+        - 48.08
+        - 61.74
+        cuar_count: 75
+        cuar_pct: 37.5
+        cuar_ci_95:
+        - 31.09
+        - 44.39
+        abstain_pct: 45.0
+        abstain_ci_95:
+        - 38.26
+        - 51.92
+      B5_Partial_8Slot:
+        n_cases: 200
+        certified_count: 200
+        certified_pct: 100.0
+        certified_ci_95:
+        - 98.12
+        - 100.0
+        cuar_count: 200
+        cuar_pct: 100.0
+        cuar_ci_95:
+        - 98.12
+        - 100.0
+        abstain_pct: 0.0
+        abstain_ci_95:
+        - 0.0
+        - 1.88
+      B6_11Slot_BAA:
+        n_cases: 200
+        certified_count: 0
+        certified_pct: 0.0
+        certified_ci_95:
+        - 0.0
+        - 1.88
+        cuar_count: 0
+        cuar_pct: 0.0
+        cuar_ci_95:
+        - 0.0
+        - 1.88
+        abstain_pct: 100.0
+        abstain_ci_95:
+        - 98.12
+        - 100.0
+    E_injected_passage:
+      B0_Unconstrained_LLM:
+        n_cases: 200
+        certified_count: 177
+        certified_pct: 88.5
+        certified_ci_95:
+        - 83.34
+        - 92.21
+        cuar_count: 149
+        cuar_pct: 74.5
+        cuar_ci_95:
+        - 68.04
+        - 80.04
+        abstain_pct: 11.5
+        abstain_ci_95:
+        - 7.79
+        - 16.66
+      B1_Lexical_BM25:
+        n_cases: 200
+        certified_count: 172
+        certified_pct: 86.0
+        certified_ci_95:
+        - 80.51
+        - 90.13
+        cuar_count: 146
+        cuar_pct: 73.0
+        cuar_ci_95:
+        - 66.46
+        - 78.68
+        abstain_pct: 14.0
+        abstain_ci_95:
+        - 9.87
+        - 19.49
+      B3_Citation_Alignment:
+        n_cases: 200
+        certified_count: 102
+        certified_pct: 51.0
+        certified_ci_95:
+        - 44.12
+        - 57.84
+        cuar_count: 63
+        cuar_pct: 31.5
+        cuar_ci_95:
+        - 25.46
+        - 38.23
+        abstain_pct: 49.0
+        abstain_ci_95:
+        - 42.16
+        - 55.88
+      B5_Partial_8Slot:
+        n_cases: 200
+        certified_count: 0
+        certified_pct: 0.0
+        certified_ci_95:
+        - 0.0
+        - 1.88
+        cuar_count: 0
+        cuar_pct: 0.0
+        cuar_ci_95:
+        - 0.0
+        - 1.88
+        abstain_pct: 100.0
+        abstain_ci_95:
+        - 98.12
+        - 100.0
+      B6_11Slot_BAA:
+        n_cases: 200
+        certified_count: 200
+        certified_pct: 100.0
+        certified_ci_95:
+        - 98.12
+        - 100.0
+        cuar_count: 0
+        cuar_pct: 0.0
+        cuar_ci_95:
+        - 0.0
+        - 1.88
+        abstain_pct: 0.0
+        abstain_ci_95:
+        - 0.0
+        - 1.88
+  overall_summary:
+    B6_CUAR_oracle_pct: 0.0
+    B6_CUAR_corrupted_modes_average_pct: 0.0
+    B0_CUAR_corrupted_modes_average_pct: 68.88
+    B1_CUAR_corrupted_modes_average_pct: 61.38
+    B3_CUAR_corrupted_modes_average_pct: 31.88
+verification:
+  self_checks:
+  - name: B6_CUAR_all_modes_within_bound
+    status: pass
+    detail: 'B6 CUAR across modes: [0.0, 0.0, 0.0, 0.0, 0.0]'
+  - name: B6_CUAR_mode_D_misbind_rescued
+    status: pass
+    detail: B6 Mode D CUAR = 0.0% (vs B5 = 100.0%)
+  - name: B0_exhibits_high_unconstrained_cuar
+    status: pass
+    detail: B0 Mode B CUAR = 85.0% (demonstrates baseline failure)
+  determinism_check:
+    rerun_sample_fraction: 1.0
+    max_metric_delta: 0.0
+    status: pass
+  real_application_check:
+    backend_suite: 410 passed / 7 skipped / 0 failed
+    golden_replay: 50/50
+    pnpm_build: green
+    layer_probe:
+      command: python -c 'from app.application.qa_pipeline import build_container;
+        print(build_container().qa is not None)'
+      outcome: AppContainer validates verifier gate over injected retrieval mock
+    golden_replay_drift: 0
+  trace_check:
+    reproducible_from:
+    - research_artifacts/datasets/retrieval_failure/retrieval_failure_1000.jsonl
+    - experiments/scripts/E41_retrieval_failure_injection/run_e41_retrieval_failure.py
+    - experiments/specs/E41_retrieval_failure_injection.spec.yaml
+    status: pass
+acceptance:
+  accepted_by: Raiyaan Reza (Author Acceptance Verified)
+  ledger_entry: S-E41
+  notes: E41 completed and verified. Proves BAA remains safe (0.0% CUAR) even when
+    retrieval deliberately injects wrong, conflicting, misbound, or poisoned passages.

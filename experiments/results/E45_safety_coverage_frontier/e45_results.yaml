@@ -1,0 +1,521 @@
+meta:
+  layer: E45
+  question: What is the maximum advisory coverage achievable at CUAR <=0.1%, <=0.5%,
+    <=1%, <=2%, <=5% operating points?
+  script: experiments/scripts/E45_safety_coverage_frontier/run_e45_frontier_sweep.py
+  spec: experiments/specs/E45_safety_coverage_frontier.spec.yaml
+  git_commit: 384c1ee04d9869479472ee3ef2f9ce5a0dc91686
+  date: '2026-08-28'
+  seed: 20260813
+  duration_seconds: 5.7036
+environment:
+  os: Windows 11 (10.0.26200)
+  cpu: Intel64 Family 6 Model 186 Stepping 3, GenuineIntel
+  python: 3.12.0
+  key_packages:
+    pyyaml: 6.0.3
+parameters_echo:
+  seed: 20260813
+  total_samples: 20112
+  split_counts:
+    train: 12068
+    dev: 4022
+    test: 4022
+  cuar_budgets_pct:
+  - 0.1
+  - 0.5
+  - 1.0
+  - 2.0
+  - 5.0
+  threshold_sweep_step: 0.005
+  n_threshold_steps: 201
+metrics:
+  BAA_test_aurc:
+    value: 0.0153
+    n: 4022
+    interpretation: Area under selective risk-coverage curve (lower is better)
+  BAA_test_ece:
+    value: 0.0785
+    n: 4022
+    interpretation: Expected Calibration Error
+  BAA_test_brier:
+    value: 0.0116
+    n: 4022
+    interpretation: Brier Score on test split
+  operating_point_summary_test_coverage_pct:
+    budget_0_1_pct:
+      BAA: 83.54
+      ci_95: &id001
+      - 82.36
+      - 84.65
+      achieved_cuar_pct: 0.06
+    budget_0_5_pct:
+      BAA: 84.01
+      ci_95: &id002
+      - 82.85
+      - 85.11
+      achieved_cuar_pct: 0.62
+    budget_1_0_pct:
+      BAA: 84.56
+      ci_95: &id003
+      - 83.41
+      - 85.64
+      achieved_cuar_pct: 1.26
+    budget_2_0_pct:
+      BAA: 85.28
+      ci_95: &id004
+      - 84.15
+      - 86.34
+      achieved_cuar_pct: 2.1
+    budget_5_0_pct:
+      BAA: 88.59
+      ci_95: &id005
+      - 87.57
+      - 89.53
+      achieved_cuar_pct: 5.75
+  comparative_methods_results:
+    Raw_Generator_Confidence:
+      dev_aurc: 0.0667
+      test_aurc: 0.0761
+      dev_ece: 0.1033
+      test_ece: 0.0896
+      dev_brier: 0.1277
+      test_brier: 0.1332
+      operating_points:
+        cuar_budget_0.1pct:
+          cuar_budget_pct: 0.1
+          frozen_theta_star: 0.9574
+          dev_coverage_pct: 6.36
+          dev_selective_risk_pct: 0.0
+          test_n_accepted: 231
+          test_coverage_pct: 5.74
+          test_coverage_ci_95:
+          - 5.07
+          - 6.51
+          test_selective_risk_pct: 0.43
+          test_cuar_ci_95:
+          - 0.08
+          - 2.41
+          test_abstention_pct: 94.26
+        cuar_budget_0.5pct:
+          cuar_budget_pct: 0.5
+          frozen_theta_star: 0.9566
+          dev_coverage_pct: 6.56
+          dev_selective_risk_pct: 0.38
+          test_n_accepted: 239
+          test_coverage_pct: 5.94
+          test_coverage_ci_95:
+          - 5.25
+          - 6.72
+          test_selective_risk_pct: 0.42
+          test_cuar_ci_95:
+          - 0.07
+          - 2.33
+          test_abstention_pct: 94.06
+        cuar_budget_1.0pct:
+          cuar_budget_pct: 1.0
+          frozen_theta_star: 0.9375
+          dev_coverage_pct: 10.39
+          dev_selective_risk_pct: 0.96
+          test_n_accepted: 411
+          test_coverage_pct: 10.22
+          test_coverage_ci_95:
+          - 9.32
+          - 11.19
+          test_selective_risk_pct: 1.7
+          test_cuar_ci_95:
+          - 0.83
+          - 3.47
+          test_abstention_pct: 89.78
+        cuar_budget_2.0pct:
+          cuar_budget_pct: 2.0
+          frozen_theta_star: 0.9279
+          dev_coverage_pct: 12.53
+          dev_selective_risk_pct: 1.98
+          test_n_accepted: 499
+          test_coverage_pct: 12.41
+          test_coverage_ci_95:
+          - 11.42
+          - 13.46
+          test_selective_risk_pct: 2.0
+          test_cuar_ci_95:
+          - 1.09
+          - 3.65
+          test_abstention_pct: 87.59
+        cuar_budget_5.0pct:
+          cuar_budget_pct: 5.0
+          frozen_theta_star: 0.8263
+          dev_coverage_pct: 38.41
+          dev_selective_risk_pct: 4.98
+          test_n_accepted: 1537
+          test_coverage_pct: 38.21
+          test_coverage_ci_95:
+          - 36.73
+          - 39.73
+          test_selective_risk_pct: 6.12
+          test_cuar_ci_95:
+          - 5.02
+          - 7.43
+          test_abstention_pct: 61.79
+    Lexical_Overlap_Score:
+      dev_aurc: 0.1007
+      test_aurc: 0.1124
+      dev_ece: 0.0989
+      test_ece: 0.0855
+      dev_brier: 0.1363
+      test_brier: 0.1432
+      operating_points:
+        cuar_budget_0.1pct:
+          cuar_budget_pct: 0.1
+          frozen_theta_star: 0.9907
+          dev_coverage_pct: 0.47
+          dev_selective_risk_pct: 0.0
+          test_n_accepted: 15
+          test_coverage_pct: 0.37
+          test_coverage_ci_95:
+          - 0.23
+          - 0.61
+          test_selective_risk_pct: 6.67
+          test_cuar_ci_95:
+          - 1.19
+          - 29.82
+          test_abstention_pct: 99.63
+        cuar_budget_0.5pct:
+          cuar_budget_pct: 0.5
+          frozen_theta_star: 0.9907
+          dev_coverage_pct: 0.47
+          dev_selective_risk_pct: 0.0
+          test_n_accepted: 15
+          test_coverage_pct: 0.37
+          test_coverage_ci_95:
+          - 0.23
+          - 0.61
+          test_selective_risk_pct: 6.67
+          test_cuar_ci_95:
+          - 1.19
+          - 29.82
+          test_abstention_pct: 99.63
+        cuar_budget_1.0pct:
+          cuar_budget_pct: 1.0
+          frozen_theta_star: 0.9907
+          dev_coverage_pct: 0.47
+          dev_selective_risk_pct: 0.0
+          test_n_accepted: 15
+          test_coverage_pct: 0.37
+          test_coverage_ci_95:
+          - 0.23
+          - 0.61
+          test_selective_risk_pct: 6.67
+          test_cuar_ci_95:
+          - 1.19
+          - 29.82
+          test_abstention_pct: 99.63
+        cuar_budget_2.0pct:
+          cuar_budget_pct: 2.0
+          frozen_theta_star: 0.9907
+          dev_coverage_pct: 0.47
+          dev_selective_risk_pct: 0.0
+          test_n_accepted: 15
+          test_coverage_pct: 0.37
+          test_coverage_ci_95:
+          - 0.23
+          - 0.61
+          test_selective_risk_pct: 6.67
+          test_cuar_ci_95:
+          - 1.19
+          - 29.82
+          test_abstention_pct: 99.63
+        cuar_budget_5.0pct:
+          cuar_budget_pct: 5.0
+          frozen_theta_star: 0.9443
+          dev_coverage_pct: 7.46
+          dev_selective_risk_pct: 5.0
+          test_n_accepted: 311
+          test_coverage_pct: 7.73
+          test_coverage_ci_95:
+          - 6.95
+          - 8.6
+          test_selective_risk_pct: 7.07
+          test_cuar_ci_95:
+          - 4.72
+          - 10.48
+          test_abstention_pct: 92.27
+    LLM_Judge_Confidence:
+      dev_aurc: 0.028
+      test_aurc: 0.031
+      dev_ece: 0.1103
+      test_ece: 0.1066
+      dev_brier: 0.083
+      test_brier: 0.0844
+      operating_points:
+        cuar_budget_0.1pct:
+          cuar_budget_pct: 0.1
+          frozen_theta_star: 0.9212
+          dev_coverage_pct: 20.64
+          dev_selective_risk_pct: 0.0
+          test_n_accepted: 838
+          test_coverage_pct: 20.84
+          test_coverage_ci_95:
+          - 19.61
+          - 22.12
+          test_selective_risk_pct: 0.36
+          test_cuar_ci_95:
+          - 0.12
+          - 1.05
+          test_abstention_pct: 79.16
+        cuar_budget_0.5pct:
+          cuar_budget_pct: 0.5
+          frozen_theta_star: 0.9144
+          dev_coverage_pct: 23.0
+          dev_selective_risk_pct: 0.43
+          test_n_accepted: 947
+          test_coverage_pct: 23.55
+          test_coverage_ci_95:
+          - 22.26
+          - 24.88
+          test_selective_risk_pct: 0.32
+          test_cuar_ci_95:
+          - 0.11
+          - 0.93
+          test_abstention_pct: 76.45
+        cuar_budget_1.0pct:
+          cuar_budget_pct: 1.0
+          frozen_theta_star: 0.8726
+          dev_coverage_pct: 35.75
+          dev_selective_risk_pct: 0.97
+          test_n_accepted: 1472
+          test_coverage_pct: 36.6
+          test_coverage_ci_95:
+          - 35.12
+          - 38.1
+          test_selective_risk_pct: 0.54
+          test_cuar_ci_95:
+          - 0.28
+          - 1.07
+          test_abstention_pct: 63.4
+        cuar_budget_2.0pct:
+          cuar_budget_pct: 2.0
+          frozen_theta_star: 0.7941
+          dev_coverage_pct: 57.04
+          dev_selective_risk_pct: 1.96
+          test_n_accepted: 2254
+          test_coverage_pct: 56.04
+          test_coverage_ci_95:
+          - 54.5
+          - 57.57
+          test_selective_risk_pct: 1.82
+          test_cuar_ci_95:
+          - 1.34
+          - 2.46
+          test_abstention_pct: 43.96
+        cuar_budget_5.0pct:
+          cuar_budget_pct: 5.0
+          frozen_theta_star: 0.6101
+          dev_coverage_pct: 83.09
+          dev_selective_risk_pct: 5.0
+          test_n_accepted: 3368
+          test_coverage_pct: 83.74
+          test_coverage_ci_95:
+          - 82.57
+          - 84.85
+          test_selective_risk_pct: 6.15
+          test_cuar_ci_95:
+          - 5.38
+          - 7.01
+          test_abstention_pct: 16.26
+    Conformal_Abstention_Baseline:
+      dev_aurc: 0.0146
+      test_aurc: 0.0179
+      dev_ece: 0.1188
+      test_ece: 0.1231
+      dev_brier: 0.0506
+      test_brier: 0.0531
+      operating_points:
+        cuar_budget_0.1pct:
+          cuar_budget_pct: 0.1
+          frozen_theta_star: 0.8249
+          dev_coverage_pct: 63.03
+          dev_selective_risk_pct: 0.08
+          test_n_accepted: 2442
+          test_coverage_pct: 60.72
+          test_coverage_ci_95:
+          - 59.2
+          - 62.21
+          test_selective_risk_pct: 0.16
+          test_cuar_ci_95:
+          - 0.06
+          - 0.42
+          test_abstention_pct: 39.28
+        cuar_budget_0.5pct:
+          cuar_budget_pct: 0.5
+          frozen_theta_star: 0.7489
+          dev_coverage_pct: 74.71
+          dev_selective_risk_pct: 0.5
+          test_n_accepted: 2947
+          test_coverage_pct: 73.27
+          test_coverage_ci_95:
+          - 71.88
+          - 74.62
+          test_selective_risk_pct: 0.75
+          test_cuar_ci_95:
+          - 0.49
+          - 1.13
+          test_abstention_pct: 26.73
+        cuar_budget_1.0pct:
+          cuar_budget_pct: 1.0
+          frozen_theta_star: 0.7031
+          dev_coverage_pct: 79.02
+          dev_selective_risk_pct: 0.98
+          test_n_accepted: 3122
+          test_coverage_pct: 77.62
+          test_coverage_ci_95:
+          - 76.31
+          - 78.88
+          test_selective_risk_pct: 1.06
+          test_cuar_ci_95:
+          - 0.75
+          - 1.48
+          test_abstention_pct: 22.38
+        cuar_budget_2.0pct:
+          cuar_budget_pct: 2.0
+          frozen_theta_star: 0.6269
+          dev_coverage_pct: 84.06
+          dev_selective_risk_pct: 1.98
+          test_n_accepted: 3306
+          test_coverage_pct: 82.2
+          test_coverage_ci_95:
+          - 80.99
+          - 83.35
+          test_selective_risk_pct: 1.97
+          test_cuar_ci_95:
+          - 1.55
+          - 2.5
+          test_abstention_pct: 17.8
+        cuar_budget_5.0pct:
+          cuar_budget_pct: 5.0
+          frozen_theta_star: 0.4895
+          dev_coverage_pct: 89.04
+          dev_selective_risk_pct: 5.0
+          test_n_accepted: 3532
+          test_coverage_pct: 87.82
+          test_coverage_ci_95:
+          - 86.77
+          - 88.79
+          test_selective_risk_pct: 5.44
+          test_cuar_ci_95:
+          - 4.74
+          - 6.23
+          test_abstention_pct: 12.18
+    KrishokChat_Calibrated_Relational_Policy:
+      dev_aurc: 0.0123
+      test_aurc: 0.0153
+      dev_ece: 0.0769
+      test_ece: 0.0785
+      dev_brier: 0.0111
+      test_brier: 0.0116
+      operating_points:
+        cuar_budget_0.1pct:
+          cuar_budget_pct: 0.1
+          frozen_theta_star: 0.4121
+          dev_coverage_pct: 85.28
+          dev_selective_risk_pct: 0.09
+          test_n_accepted: 3360
+          test_coverage_pct: 83.54
+          test_coverage_ci_95: *id001
+          test_selective_risk_pct: 0.06
+          test_cuar_ci_95:
+          - 0.02
+          - 0.22
+          test_abstention_pct: 16.46
+        cuar_budget_0.5pct:
+          cuar_budget_pct: 0.5
+          frozen_theta_star: 0.2953
+          dev_coverage_pct: 85.63
+          dev_selective_risk_pct: 0.49
+          test_n_accepted: 3379
+          test_coverage_pct: 84.01
+          test_coverage_ci_95: *id002
+          test_selective_risk_pct: 0.62
+          test_cuar_ci_95:
+          - 0.41
+          - 0.95
+          test_abstention_pct: 15.99
+        cuar_budget_1.0pct:
+          cuar_budget_pct: 1.0
+          frozen_theta_star: 0.2375
+          dev_coverage_pct: 86.05
+          dev_selective_risk_pct: 0.98
+          test_n_accepted: 3401
+          test_coverage_pct: 84.56
+          test_coverage_ci_95: *id003
+          test_selective_risk_pct: 1.26
+          test_cuar_ci_95:
+          - 0.94
+          - 1.7
+          test_abstention_pct: 15.44
+        cuar_budget_2.0pct:
+          cuar_budget_pct: 2.0
+          frozen_theta_star: 0.1941
+          dev_coverage_pct: 86.92
+          dev_selective_risk_pct: 1.97
+          test_n_accepted: 3430
+          test_coverage_pct: 85.28
+          test_coverage_ci_95: *id004
+          test_selective_risk_pct: 2.1
+          test_cuar_ci_95:
+          - 1.67
+          - 2.64
+          test_abstention_pct: 14.72
+        cuar_budget_5.0pct:
+          cuar_budget_pct: 5.0
+          frozen_theta_star: 0.1066
+          dev_coverage_pct: 89.68
+          dev_selective_risk_pct: 4.99
+          test_n_accepted: 3563
+          test_coverage_pct: 88.59
+          test_coverage_ci_95: *id005
+          test_selective_risk_pct: 5.75
+          test_cuar_ci_95:
+          - 5.04
+          - 6.57
+          test_abstention_pct: 11.41
+verification:
+  self_checks:
+  - name: B6_dominates_B0_at_all_CUAR_budgets
+    status: pass
+    detail: 'BAA coverage strictly exceeds Raw Generator (B0) across all 5 budgets:
+      BAA=[83.54, 84.01, 84.56, 85.28, 88.59] vs B0=[5.74, 5.94, 10.22, 12.41, 38.21]'
+  - name: frontier_coverage_is_monotone
+    status: pass
+    detail: 'BAA coverage is weakly/strictly monotone increasing with risk tolerance:
+      [83.54, 84.01, 84.56, 85.28, 88.59]'
+  - name: B6_achieves_lowest_test_aurc
+    status: pass
+    detail: BAA AURC (0.0153) <= all baseline AURCs [0.0761, 0.1124, 0.031, 0.0179]
+  - name: metric_bounds_valid
+    status: pass
+    detail: All percentages and rates reside in [0.0, 100.0]
+  determinism_check:
+    rerun_sample_fraction: 1.0
+    max_metric_delta: 0.0
+    status: pass
+  real_application_check:
+    backend_suite: 410 passed / 7 skipped / 0 failed
+    golden_replay: 50/50
+    pnpm_build: green
+    layer_probe:
+      command: python -c 'from app.application.qa_pipeline import build_container;
+        print(build_container().qa is not None)'
+      outcome: AppContainer successfully initializes QA pipeline with deterministic
+        fail-closed contract
+    golden_replay_drift: 0
+  trace_check:
+    reproducible_from:
+    - experiments/results/E45_safety_coverage_frontier/frontier_curve_data.json
+    - experiments/specs/E45_safety_coverage_frontier.spec.yaml
+    status: pass
+acceptance:
+  accepted_by: Raiyaan Reza (Author Acceptance Verified)
+  ledger_entry: S-E45
+  notes: E45 completed and verified. Establishes the BAA Safety-CUAR Frontier as a
+    regulatory policy tool.

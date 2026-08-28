@@ -1,0 +1,112 @@
+# E48 — Temporal Regulatory Replay (Longitudinal Timeline Simulation)
+# Experiment spec for BAA-REAL suite (CEA journal paper only, not EACL Demo)
+# Created: 2026-08-29
+# Status: planned
+# NOTE: Different from E30 (which tests current vs. obsolete simultaneously).
+# E48 replays an evolving knowledge base across 4 temporal snapshots sequentially.
+
+id: E48
+title: "Temporal Regulatory Replay (Longitudinal Timeline Simulation)"
+rq: [RQ2]
+venue: CEA  # EACL Demo: NO
+priority: tier_3
+status: done
+
+hypothesis: >
+  When the identical query is replayed against 4 different temporal snapshots of the
+  knowledge base (2022 APPROVED, 2023 REVISED, 2024 RESTRICTED, 2025 BANNED),
+  BAA should produce the correct answer for each historical period — approving in 2022,
+  approving with constraints in 2023, refusing without licensed operator in 2024,
+  and refusing entirely in 2025.
+  
+  This is fundamentally different from E30 (which tests simultaneous conflict).
+  E48 tests temporal consistency — does the system correctly navigate a
+  longitudinally evolving regulatory landscape?
+
+design:
+  synthetic_regulatory_timeline:
+    description: >
+      Create 10 synthetic chemicals with a realistic 4-period regulatory evolution.
+      Each chemical transitions through distinct regulatory states across 4 time periods.
+
+    period_structure:
+      2022:
+        status: APPROVED
+        polarity: 1
+        constraints: "Standard dosage range, standard PHI"
+      2023:
+        status: APPROVED_WITH_CONSTRAINT
+        polarity: 1
+        constraints: "Tightened dosage bounds, extended PHI"
+      2024:
+        status: RESTRICTED
+        polarity: 1  # Still positive but restricted
+        constraints: "Requires licensed operator, reduced dose ceiling"
+      2025:
+        status: BANNED
+        polarity: -1
+        constraints: "No permitted use — regulatory ban complete"
+
+    n_chemicals: 10
+    n_periods: 4
+    n_query_types_per_chemical: 5  # e.g., "What dose?", "Can I use X?", "Is X safe?", "How often?", "When to stop?"
+
+  knowledge_base_construction:
+    method: >
+      For each (chemical, period) pair, construct a synthetic evidence record
+      with the appropriate regulatory_polarity, effective_date, expiry_date,
+      dosage_min, dosage_max, phi_days, and operator_constraints.
+      Store as 40 synthetic records (10 chemicals x 4 periods).
+
+  evaluation:
+    n_queries: 200  # 10 chemicals x 5 query types x 4 periods
+    for_each_period:
+      - Load the knowledge base snapshot for that period
+      - Run all 50 queries (10 chemicals x 5 types) for that period
+      - Record: gazette_adherence, CUAR, wrong_recommendation_rate
+
+  ordering_test:
+    description: >
+      Temporal drift test: replay periods in randomized order (not chronological).
+      Does the system correctly resolve to the version matching the evidence base it
+      was given, or does it drift toward older/newer states?
+    n_orderings: 4  # All 4 permutations of period order for a subset of cases
+
+metrics_per_period:
+  gazette_adherence: "Does response match the current period's rules?"
+  CUAR: "Does response certify something banned in this period?"
+  wrong_recommendation: "Does response give advice correct for a different period?"
+  temporal_drift_delta: "CUAR difference between chronological vs. reversed period replay"
+
+acceptance_gates:
+  - gazette_adherence_per_period: ">= 80% for each period"
+  - CUAR_2025_banned_period: "== 0%"  # BANNED chemicals must never be certified
+  - CUAR_2022_approved_period: "<= 5%"  # Normal approved period — low CUAR
+  - no_drift_under_period_reversal: "CUAR difference < 5pp between orderings"
+
+scripts:
+  dataset_gen: experiments/scripts/E48_temporal_regulatory_replay/generate_regulatory_timeline.py
+  runner: experiments/scripts/E48_temporal_regulatory_replay/run_e48_temporal_replay.py
+
+results_path: experiments/results/E48_temporal_regulatory_replay/
+paper_path: paper/CEA Paper/experiments/E48_temporal_regulatory_replay/
+
+paper_claim: >
+  "Under longitudinal regulatory evolution across 4 time periods (2022 APPROVED to
+  2025 BANNED) for 10 synthetic chemicals, BAA correctly adapts to each period's
+  regulatory state. CUAR remains <= 5% for approved periods and 0% for banned periods.
+  Reversing the period replay order does not induce temporal drift (CUAR difference
+  < 5pp), demonstrating that the authority framework is temporally consistent by
+  construction rather than by recency bias."
+
+implementation_notes: >
+  Dataset is entirely synthetic — generate 40 evidence records (10 chemicals x 4 periods)
+  programmatically with realistic agronomic parameters.
+  Use Gemini free tier (from .env) to generate naturalistic Bengali query variations
+  for each (chemical, query_type) template.
+  The runner must swap the evidence base to the appropriate period snapshot before
+  running each set of queries. Implement as a clean context switch:
+  save original evidence, load period snapshot, run queries, restore.
+  No live API calls for the regulatory data itself — all synthetic and pre-generated.
+
+  Estimated runtime: ~3 hours total (200 queries x 4 periods x baselines via OpenRouter).

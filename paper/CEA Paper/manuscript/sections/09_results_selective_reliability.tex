@@ -1,28 +1,34 @@
 % Section 9: Selective Resolution, Calibration & Robustness (RQ3 + RQ4)
-% Revised per supervisor review (2026-08-28).
-% Lead with KEY NUMBER. Bridge sentence → §10.
+% Updated with BAA-REAL suite (E45, E44)
 
 \section{Results: Selective Resolution, Calibration, and Robustness (RQ3, RQ4)}
 \label{sec:results_selective_reliability}
 
-Calibrated abstention sustains \textbf{84.56\% advisory coverage at a 1.26\% selective-risk level} across 20,112 held-out cases, achieving a better coverage-risk trade-off than all four alternatives. Across linguistic registers and retrieval degradation regimes, the safety boundary holds in every evaluated cell.
+Calibrated abstention sustains \textbf{84.56\% advisory coverage at a 1.26\% selective-risk level} across 20,112 held-out cases, achieving a better coverage-risk trade-off than all four alternatives. Across linguistic registers, progressive knowledge-base deletion, and varying regulatory risk budgets, the safety boundary holds monotonically.
 
 \subsection{Risk--Coverage Calibration (E04)}
 Layer E04 evaluated five selective policies on a 20{,}112-case corpus (12{,}068 train / 4{,}022 dev / 4{,}022 test). The threshold $\theta^*$ was frozen on the development split and transferred to the held-out test split. Table~\ref{tab:risk_coverage_calibration} reports test-split results.
 
 \input{tables/tab7_risk_coverage_calibration.tex}
 
-The calibrated relational policy achieves the lowest test Area Under the Risk--Coverage curve (AURC, \textbf{0.0153}) and Expected Calibration Error (ECE, \textbf{0.0785}) of all five policies. At the frozen threshold $\theta^*~=~0.2375$, it sustains \textbf{84.56\% test coverage at a selective risk of 1.26\%}, achieving higher coverage at comparable risk than the conformal baseline (77.62\% at 1.06\%). Here, \emph{selective risk} $\mathcal{R}(f, g)$ denotes the empirical error rate evaluated exclusively over accepted/certified predictions on the benchmark test partition ($\mathbb{E}[\ell(f(\mathbf{x}), y) \mid g(\mathbf{x}) \ge \theta^*]$), representing evaluation prediction risk under calibrated abstention rather than in-field crop yield loss. At fixed risk budgets, raw generator confidence achieves 0\% coverage and the relational policy 84.56\% at comparable risk levels.
+The calibrated relational policy achieves the lowest test Area Under the Risk--Coverage curve (AURC, \textbf{0.0153}) and Expected Calibration Error (ECE, \textbf{0.0785}) of all five policies. At the frozen threshold $\theta^* = 0.2375$, it sustains \textbf{84.56\% test coverage at a selective risk of 1.26\%}, achieving higher coverage at comparable risk than the conformal baseline (77.62\% at 1.06\%).
 
-\begin{figure}[pos=t]
-\centering
-\includegraphics[width=\columnwidth,keepaspectratio]{figures/fig_3.png}
-\caption{Risk--Coverage Curves on Held-Out Test Split (Layer E04). At the frozen threshold $\theta^*~=~0.2375$, calibrated relational BAA achieves 84.56\% coverage at 0.0\% selective chemical risk on development criteria, with an overall test AURC of 0.0153.}
-\label{fig:risk_coverage}
-\end{figure}
+\subsection{Safety--Coverage Frontier for Regulatory Policy (E45)}
+To evaluate deployment flexibility for policymakers and agricultural extension services with varying risk tolerances, Layer~E45 computes the Pareto frontier of achievable advisory coverage across five regulatory CUAR budgets ($N=20{,}112$, held-out test $n=4{,}022$, Table~\ref{tab:safety_coverage_frontier}).
+
+\input{tables/tab_e45_safety_frontier.tex}
+
+Under an ultra-strict safety budget ($\text{CUAR} \le 0.1\%$), unconstrained LLM coverage collapses to 5.7\% and the LLM-as-a-judge guardrail to 20.8\%. In contrast, BAA sustains \textbf{83.5\% coverage} (95\% CI [82.4, 84.7]) at $\text{CUAR} \le 0.1\%$ and \textbf{84.6\% coverage} at $\text{CUAR} \le 1.0\%$, strictly dominating all heuristic and judge baselines across all five operating points.
+
+\subsection{Knowledge-Base Incompleteness and Monotone Safe Degradation (E44)}
+In practice, agricultural knowledge bases are rarely complete. Layer~E44 evaluates system behavior under progressive evidence deletion across 35{,}000 cases (0\% to 50\% of authoritative facts deleted across 5 random seeds $\times$ 1{,}000 queries, Table~\ref{tab:kb_incompleteness_degradation}).
+
+\input{tables/tab_e44_kb_degradation.tex}
+
+As official records are progressively deleted, BAA coverage degrades strictly monotonically from \textbf{85.0\% down to 43.4\%}, while Critical Unsafe Acceptance Rate remains bounded at \textbf{0.00\% across all deletion levels} (95\% CI [0.0, 0.07]). In contrast, unconstrained LLMs escalate in CUAR from 16.1\% up to 36.8\% as missing evidence induces parametric hallucination. This quantitatively confirms Section~\ref{sec:limitations}'s theoretical principle: \textbf{knowledge incompleteness converts strictly into safe abstentions, never dangerous hallucinations.}
 
 \subsection{The Lightweight Intent Router (E25)}
-The character $n$-gram router achieves a joint exact match of 78.4\% (95\% CI [72.89, 83.05]) with per-field crop accuracy 96.4\% and intent-type accuracy 100.0\%, at p50 latency 0.3855~ms and a memory footprint of 1.25~MB. We present this as a routing-efficiency result: the 78.4\% joint-EM figure motivates the design, where the architecture absorbs routing uncertainty in the certification predicate rather than trusting metadata.
+The character $n$-gram router achieves a joint exact match of 78.4\% (95\% CI [72.89, 83.05]) with per-field crop accuracy 96.4\% and intent-type accuracy 100.0\%, at p50 latency 0.3855~ms and a memory footprint of 1.25~MB. The 78.4\% joint-EM figure motivates the design, where the architecture absorbs routing uncertainty in the certification predicate rather than trusting metadata.
 
 \subsection{Root-Cause Failure Taxonomy (E10)}
 A manual audit of 100 residual failure/abstention cases assigned each to one of eight categories (Table~\ref{tab:failure_mitigation}): retrieval evidence omission 28\%, generative relational misbinding 22\%, numerical/volumetric parsing ambiguity 14\%, dialectal lexical ambiguity 12\%, regulatory status discrepancy 8\%, temporal/source expiry 6\%, conservative verifier over-refusal 6\%, and calibration underconfidence 4\%. Critically, both dominant failure families were converted into fail-closed abstention rather than dangerous advice: the verifier caught all 22 misbinding attempts (0.0\% dangerous leak) and the coverage threshold converted the 28 omissions into abstentions.
@@ -30,15 +36,12 @@ A manual audit of 100 residual failure/abstention cases assigned each to one of 
 \input{tables/tab10_failure_mitigation.tex}
 
 \subsection{Input Robustness: Bengali Register Coverage (E17, E21)}
-Bengali input spans at least four registers: standard formal, authentic farmer language, regional dialects (Sylheti/Chittagonian), and romanized Banglish. Text-first retrieval degrades sharply on the last three: Hit@1 falls from 72.1--73.4\% (standard) to 44.7--45.7\% (dialects) and 41.5--41.6\% (Banglish) at thresholds 0.7--0.8 (E17). Detection-gated routing reduces the candidate search space by 75.64\% (2{,}135~$\rightarrow$~516.4 nodes) and lifts Hit@1 on dialects by $+$36.6~pp and on Banglish by $+$39.7~pp. Layer E21 then asks what the routing choice does to end-to-end advisory outcomes per register: coverage rises from 42.9\% to 89.8\% on dialects ($+$46.9~pp), and from 41.6\% to 90.0\% on Banglish ($+$48.4~pp), while holding hazard at \textbf{0.0\% in all eight register~$\times$~routing cells} (0/4{,}000; 95\% CI [0.0, 0.09]). Table~\ref{tab:multimodal_robustness} summarizes the register-level outcomes.
+Bengali input spans at least four registers: standard formal, authentic farmer language, regional dialects (Sylheti/Chittagonian), and romanized Banglish. Detection-gated routing reduces the candidate search space by 75.64\% (2{,}135~$\rightarrow$~516.4 nodes) and lifts Hit@1 on dialects by $+$36.6~pp and on Banglish by $+$39.7~pp. Layer E21 confirms that end-to-end coverage rises from 42.9\% to 89.8\% on dialects, and from 41.6\% to 90.0\% on Banglish, while holding hazard at \textbf{0.0\% in all eight register~$\times$~routing cells} (0/4{,}000; 95\% CI [0.0, 0.09], Table~\ref{tab:multimodal_robustness}).
 
 \input{tables/tab8_multimodal_robustness.tex}
-
-\subsection{Retrieval-Degradation Safe Degradation (E12)}
-Under four retrieval regimes (gold, noisy, poisoned-contradictory, omitted evidence; 2{,}000 queries each), vanilla RAG's chemical hazard escalates from 10.0\% (gold) to 33.2\% (poisoned). BAA holds \textbf{0.0\% hazard in all four regimes} (each CI [0.0, 0.19]) and degrades monotonically in coverage: 84.56\%~$\rightarrow$~54.3\%~$\rightarrow$~0\%~$\rightarrow$~0\%, converting ungrounded context into abstention. This is the cleanest demonstration of safe degradation under evidence-quality uncertainty.
 
 \subsection{Knowledge Integrity and Tamper Detection (E23, E24)}
 On tamper detection (E23), 1{,}000 SHA-256 chain mutations were all detected (100.0\%; 95\% CI [99.62, 100.0]) at p95 0.1919~ms verification latency. Knowledge maintenance remains a data operation, not a code operation: 18~minutes closed a real cluster gap (E24, single-cluster case study).
 
 \medskip
-\noindent\textit{The architecture is safe and calibrated in controlled evaluation. Section~\ref{sec:results_deployment} evaluates whether it sustains this efficiency under rural connectivity, SMS constraints, and low-cost device deployments.}
+\noindent\textit{The architecture is safe, calibrated, and robust to incomplete knowledge. Section~\ref{sec:results_deployment} evaluates whether it sustains this efficiency under rural connectivity, SMS constraints, and low-cost edge device deployments.}

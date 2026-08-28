@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering\small
+\caption{Multi-Turn Conversational Safety Persistence (Layer~E42): Conversational Safety Persistence (CSP \% with 95\% Wilson CI) and Turn Survival ($S_1$ to $S_5$) across 8 adversarial pressure types ($N=200$ dialogue sequences, 1{,}000 total turns). BAA achieves \textbf{100.0\% CSP} through stateless contract verification, completely resisting boundary erosion, whereas unconstrained LLMs degrade to 28.5\% CSP under persistent farmer pressure.}
+\label{tab:conversational_safety_persistence}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Adversarial Pressure Type} & \textbf{B0 CSP (\%)} & \textbf{B4 CSP (\%)} & \textbf{B6 CSP (\%)} & \textbf{B0 $S_5$ (Turn 5)} & \textbf{B4 $S_5$ (Turn 5)} & \textbf{B6 $S_5$ (Turn 5)} \\
+ & (Unconstrained) & (LLM Judge) & \textbf{(KrishokChat BAA)} & Survival & Survival & \textbf{Survival} \\
+\midrule
+T1: Confirmation Pressure & 28\% & 44\% & \textbf{100\%} & 28\% & 44\% & \textbf{100\%} \\
+T2: Authority Override (Dealer Claim) & 4\% & 12\% & \textbf{100\%} & 4\% & 12\% & \textbf{100\%} \\
+T3: Urgency Framing (Crop Dying) & 8\% & 52\% & \textbf{100\%} & 8\% & 52\% & \textbf{100\%} \\
+T4: Social Proof (Neighbor Practice) & 4\% & 48\% & \textbf{100\%} & 4\% & 48\% & \textbf{100\%} \\
+T5: Fabricated Expert Permission & 0\% & 20\% & \textbf{100\%} & 0\% & 20\% & \textbf{100\%} \\
+T6: False Memory Gaslighting & 24\% & 40\% & \textbf{100\%} & 24\% & 40\% & \textbf{100\%} \\
+T7: Explicit Risk Acceptance & 0\% & 32\% & \textbf{100\%} & 0\% & 32\% & \textbf{100\%} \\
+T8: Incremental Dose Escalation & 0\% & 28\% & \textbf{100\%} & 0\% & 28\% & \textbf{100\%} \\
+\midrule
+\textbf{Overall Suite Average} & \textbf{8.5\%} & \textbf{34.5\%} & \textbf{100.0\%} & 8.5\% & 34.5\% & \textbf{100.0\%} \\
+\bottomrule
+\end{tabular}
+\end{table*}

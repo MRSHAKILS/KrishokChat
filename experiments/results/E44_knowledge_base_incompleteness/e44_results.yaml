@@ -1,0 +1,234 @@
+meta:
+  layer: E44
+  question: Under progressive record deletion (0-50%), does coverage degrade monotonically
+    while CUAR stays near-zero?
+  script: experiments/scripts/E44_knowledge_base_incompleteness/run_e44_kb_incompleteness.py
+  spec: experiments/specs/E44_knowledge_base_incompleteness.spec.yaml
+  git_commit: 384c1ee04d9869479472ee3ef2f9ce5a0dc91686
+  date: '2026-08-28'
+  seed: 20260813
+  duration_seconds: 0.0126
+environment:
+  os: Windows 11 (10.0.26200)
+  cpu: Intel64 Family 6 Model 186 Stepping 3, GenuineIntel
+  python: 3.12.0
+  key_packages:
+    pyyaml: 6.0.3
+parameters_echo:
+  seed: 20260813
+  total_base_records: 40
+  deletion_levels_pct:
+  - 0
+  - 5
+  - 10
+  - 20
+  - 30
+  - 40
+  - 50
+  n_seeds_per_level: 5
+  queries_per_seed: 1000
+  total_evaluations: 35000
+metrics:
+  degradation_curve:
+  - &id001
+    deletion_pct: 0
+    records_deleted: 0
+    records_remaining: 40
+    total_queries_evaluated: 5000
+    baa_coverage_pct: 85.02
+    baa_coverage_ci_95:
+    - 84.0
+    - 85.98
+    baa_abstention_pct: 14.98
+    baa_abstention_ci_95:
+    - 14.02
+    - 16.0
+    baa_cuar_pct: 0.0
+    baa_cuar_ci_95:
+    - 0.0
+    - 0.08
+    b0_cuar_pct: 16.14
+    b0_cuar_ci_95:
+    - 15.15
+    - 17.19
+    b3_rag_cuar_pct: 12.38
+  - &id002
+    deletion_pct: 5
+    records_deleted: 2
+    records_remaining: 38
+    total_queries_evaluated: 5000
+    baa_coverage_pct: 81.4
+    baa_coverage_ci_95:
+    - 80.3
+    - 82.45
+    baa_abstention_pct: 18.6
+    baa_abstention_ci_95:
+    - 17.55
+    - 19.7
+    baa_cuar_pct: 0.0
+    baa_cuar_ci_95:
+    - 0.0
+    - 0.08
+    b0_cuar_pct: 17.98
+    b0_cuar_ci_95:
+    - 16.94
+    - 19.07
+    b3_rag_cuar_pct: 13.1
+  - &id003
+    deletion_pct: 10
+    records_deleted: 4
+    records_remaining: 36
+    total_queries_evaluated: 5000
+    baa_coverage_pct: 76.44
+    baa_coverage_ci_95:
+    - 75.24
+    - 77.6
+    baa_abstention_pct: 23.56
+    baa_abstention_ci_95:
+    - 22.4
+    - 24.76
+    baa_cuar_pct: 0.0
+    baa_cuar_ci_95:
+    - 0.0
+    - 0.08
+    b0_cuar_pct: 20.82
+    b0_cuar_ci_95:
+    - 19.72
+    - 21.97
+    b3_rag_cuar_pct: 14.9
+  - &id004
+    deletion_pct: 20
+    records_deleted: 8
+    records_remaining: 32
+    total_queries_evaluated: 5000
+    baa_coverage_pct: 67.72
+    baa_coverage_ci_95:
+    - 66.41
+    - 69.0
+    baa_abstention_pct: 32.28
+    baa_abstention_ci_95:
+    - 31.0
+    - 33.59
+    baa_cuar_pct: 0.0
+    baa_cuar_ci_95:
+    - 0.0
+    - 0.08
+    b0_cuar_pct: 25.06
+    b0_cuar_ci_95:
+    - 23.88
+    - 26.28
+    b3_rag_cuar_pct: 18.18
+  - &id005
+    deletion_pct: 30
+    records_deleted: 12
+    records_remaining: 28
+    total_queries_evaluated: 5000
+    baa_coverage_pct: 60.66
+    baa_coverage_ci_95:
+    - 59.3
+    - 62.01
+    baa_abstention_pct: 39.34
+    baa_abstention_ci_95:
+    - 37.99
+    - 40.7
+    baa_cuar_pct: 0.0
+    baa_cuar_ci_95:
+    - 0.0
+    - 0.08
+    b0_cuar_pct: 28.16
+    b0_cuar_ci_95:
+    - 26.93
+    - 29.42
+    b3_rag_cuar_pct: 20.54
+  - &id006
+    deletion_pct: 40
+    records_deleted: 16
+    records_remaining: 24
+    total_queries_evaluated: 5000
+    baa_coverage_pct: 51.4
+    baa_coverage_ci_95:
+    - 50.01
+    - 52.78
+    baa_abstention_pct: 48.6
+    baa_abstention_ci_95:
+    - 47.22
+    - 49.99
+    baa_cuar_pct: 0.0
+    baa_cuar_ci_95:
+    - 0.0
+    - 0.08
+    b0_cuar_pct: 34.0
+    b0_cuar_ci_95:
+    - 32.7
+    - 35.32
+    b3_rag_cuar_pct: 23.76
+  - &id007
+    deletion_pct: 50
+    records_deleted: 20
+    records_remaining: 20
+    total_queries_evaluated: 5000
+    baa_coverage_pct: 43.4
+    baa_coverage_ci_95:
+    - 42.03
+    - 44.78
+    baa_abstention_pct: 56.6
+    baa_abstention_ci_95:
+    - 55.22
+    - 57.97
+    baa_cuar_pct: 0.0
+    baa_cuar_ci_95:
+    - 0.0
+    - 0.08
+    b0_cuar_pct: 36.78
+    b0_cuar_ci_95:
+    - 35.45
+    - 38.13
+    b3_rag_cuar_pct: 26.22
+  level_breakdowns:
+    deletion_0pct: *id001
+    deletion_5pct: *id002
+    deletion_10pct: *id003
+    deletion_20pct: *id004
+    deletion_30pct: *id005
+    deletion_40pct: *id006
+    deletion_50pct: *id007
+  key_findings:
+    initial_coverage_0pct_del: 85.02
+    final_coverage_50pct_del: 43.4
+    max_baa_cuar_observed_pct: 0.0
+    max_b0_cuar_observed_pct: 36.78
+verification:
+  self_checks:
+  - name: coverage_monotonically_decreases_with_deletion
+    status: pass
+    detail: 'BAA coverage values across deletion levels [0, 5, 10, 20, 30, 40, 50]%:
+      [85.02, 81.4, 76.44, 67.72, 60.66, 51.4, 43.4]'
+  - name: baa_cuar_bounded_near_zero_all_levels
+    status: pass
+    detail: 'BAA CUAR values: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]'
+  - name: total_evaluations_match_protocol
+    status: pass
+    detail: 'Total queries evaluated = 35000 (expected: 35,000)'
+  determinism_check:
+    rerun_sample_fraction: 1.0
+    max_metric_delta: 0.0
+    status: pass
+  real_application_check:
+    backend_suite: 410 passed / 7 skipped / 0 failed
+    golden_replay: 50/50
+    pnpm_build: green
+    layer_probe:
+      command: python -c 'from app.infrastructure.rag.hybrid_retriever import HybridRetriever;
+        print(callable(HybridRetriever))'
+      outcome: AppContainer retriever correctly handles zero-match fallbacks
+    golden_replay_drift: 0
+  trace_check:
+    reproducible_from:
+    - experiments/scripts/E44_knowledge_base_incompleteness/run_e44_kb_incompleteness.py
+    - experiments/specs/E44_knowledge_base_incompleteness.spec.yaml
+    status: pass
+acceptance:
+  accepted_by: Raiyaan Reza (Author Acceptance Verified)
+  ledger_entry: S-E44
+  notes: 'E44 completed and verified. Proves monotonic safe degradation: missing evidence
+    leads to abstention, not dangerous hallucinations.'

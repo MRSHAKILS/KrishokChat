@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering\small
+\caption{Safety--Coverage Frontier (Layer~E45): Achievable advisory coverage (\% with 95\% Wilson CI) across 5 regulatory CUAR safety budgets on held-out test data ($n=4{,}023$). The BAA Relational Policy strictly dominates all heuristic and judge baselines at every safety budget.}
+\label{tab:safety_coverage_frontier}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Calibration / Policy Architecture} & \textbf{CUAR $\le 0.1\%$} & \textbf{CUAR $\le 0.5\%$} & \textbf{CUAR $\le 1.0\%$} & \textbf{CUAR $\le 2.0\%$} & \textbf{CUAR $\le 5.0\%$} \\
+\midrule
+Raw Generator Confidence (B0) & 5.7\% [5.1, 6.5] & 5.9\% [5.2, 6.7] & 10.2\% [9.3, 11.2] & 12.4\% [11.4, 13.5] & 38.2\% [36.7, 39.7] \\
+Lexical Overlap Score (B3) & 0.4\% [0.2, 0.6] & 0.4\% [0.2, 0.6] & 0.4\% [0.2, 0.6] & 0.4\% [0.2, 0.6] & 7.7\% [7.0, 8.6] \\
+LLM Judge Guardrail (B4) & 20.8\% [19.6, 22.1] & 23.6\% [22.3, 24.9] & 36.6\% [35.1, 38.1] & 56.0\% [54.5, 57.6] & 83.7\% [82.6, 84.8] \\
+Conformal Abstention Baseline & 60.7\% [59.2, 62.2] & 73.3\% [71.9, 74.6] & 77.6\% [76.3, 78.9] & 82.2\% [81.0, 83.3] & 87.8\% [86.8, 88.8] \\
+\textbf{KrishokChat BAA (B6 Relational)} & \textbf{83.5\%} [82.4, 84.7] & \textbf{84.0\%} [82.8, 85.1] & \textbf{84.6\%} [83.4, 85.6] & \textbf{85.3\%} [84.2, 86.3] & \textbf{88.6\%} [87.6, 89.5] \\
+\bottomrule
+\end{tabular}}
+\end{table*}
