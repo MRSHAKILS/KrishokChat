@@ -18,8 +18,29 @@ The battery spans five evaluation corpora plus targeted layer-specific sets:
     \item \textbf{Simulated rural network suite (1{,}000 queries $\times$ 4 profiles):} 4G/3G/Edge/2G with latency, loss, and jitter profiles (Layer E14).
 \end{enumerate}
 
-\subsection{Baseline Ladder}
-Because the underlying failure modes differ per layer, we define a canonical baseline ladder and instantiate the relevant subset in each layer. All systems share the same frozen inputs within a layer.
+\subsection{Research Question Mapping and Layer Nomenclature}
+To help navigate the experimental battery across the 36 completed evaluation layers, Table~\ref{tab:rq_mapping} maps each experiment tag to its governing Research Question and primary evaluation target.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Taxonomy of Experimental Layers Mapped to Research Questions (RQ1--RQ5).}
+\label{tab:rq_mapping}
+\begin{tabular}{p{3.8cm} p{5.0cm} p{3.4cm} p{4.2cm}}
+\toprule
+\textbf{Research Question} & \textbf{Core Investigation Target} & \textbf{Evaluation Layers} & \textbf{Key Empirical Metric(s)} \\
+\midrule
+\textbf{RQ1: Advisory Quality} & End-to-end correctness, expert review, dialects & E06, E13, E17, E21, E27 & CAC (\%), Gwet's AC1, Dialect Recall \\
+\textbf{RQ2: Safety \& Authority} & Adversarial misbinding, metamorphic, conflicts & E02, E03, E05, E07, E08, E11, E28--E31, E38, E39 & CUAR (\%), Mutation Rejection (\%), CBC \\
+\textbf{RQ3: Selective Reliability} & Risk--coverage calibration, failure taxonomy & E04, E10, E25, E34, E37 & AURC, ECE, Coverage at Fixed Risk \\
+\textbf{RQ4: Temporal Governance} & Gazette currency, provenance, edge packs & E12, E22, E23, E24, E26, E32, E33, E35, E36 & Gazette Adherence (\%), Delta Size (bytes) \\
+\textbf{RQ5: Systems Efficiency} & Low-connectivity, latency, zero-LLM economics & E09, E14, E15, E18, E19, E20 & Latency (ms), Zero-LLM (\%), Cost/1k (\$) \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Baseline Ladder and Fairness Controls}
+Because the underlying failure modes differ per layer, we define a canonical baseline ladder and instantiate the relevant subset in each layer. All systems share the same frozen inputs within a layer. Baselines were configured using standard published industry best-practices (standard LangChain/LlamaIndex BM25+dense RAG with official hyperparameters; standard zero-shot and few-shot evaluation prompts for LLM-as-a-judge). We note that the LLM judge baseline was evaluated under standard off-the-shelf single-turn verification prompts and was not specifically prompt-engineered with multi-step temporal scratchpads; we state this transparently as reflecting standard production guardrail deployments.
 \begin{itemize}
     \item \textbf{B0 --- Unconstrained LLM.} Direct generation (GPT-4o-Mini in live-API layers).
     \item \textbf{B1 --- Vanilla RAG.} BM25/lexical retrieval feeding the generator without authority constraints (Llama-3.1-8B in live layers).

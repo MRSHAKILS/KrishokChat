@@ -10,6 +10,14 @@ The price is real and quantified. BAA abstains at 33.0\% in the live benchmark (
 \subsection{The Role of LLMs in High-Consequence Domains}
 This paper is not an anti-LLM argument. The LLM remains the system's conversational face: it handles phrasing, explanation, and disambiguation, and it is responsible for the 38.48\% of traffic that the deterministic ladder cannot resolve (E18). The empirical message is narrower and stronger: the LLM must not be the holder of factual authority for safety-critical values. The E29 parametric-conflict results show that even when a model holds the correct prior, standard RAG still leaks 8--30\% of conflicting priors into output, and that a prompted judge does not eliminate the leak. Structure does; prompting alone does not.
 
+\subsection{Statistical Uncertainty and Field Safety Mitigation}
+In the live end-to-end evaluation benchmark (Layer E27, $n=100$), BAA recorded 0.0\% observed CUAR with a 95\% Wilson confidence interval of [0.0, 3.7]\%. In high-stakes agricultural deployment, an upper-bound failure rate of 3.7\% must be interpreted carefully: across a hypothetical national scale of 1,000,000 annual farmer queries, an unmitigated 3.7\% error rate could theoretically permit up to 37,000 hazardous recommendations. In KrishokChat, this statistical envelope is actively mitigated by three orthogonal structural defenses:
+\begin{enumerate}
+    \item \textbf{Tier 0 Pre-retrieval Screening:} Banned chemicals, restricted active ingredients, and acute toxicities are blocked fail-closed in $<0.1$\,ms before any retrieval or generative model is invoked, eliminating catastrophic chemical release regardless of downstream sample size.
+    \item \textbf{Calibrated Selective Abstention:} Ambiguous or low-margin queries falling below the calibrated threshold ($\theta^* = 0.2375$) trigger clarifying questions or safe non-chemical management suggestions rather than speculative completions.
+    \item \textbf{Human-in-the-Loop Escalation:} When safety-critical uncertainty cannot be deterministically resolved, the system seamlessly issues a structured escalation handoff to the national government agricultural hotline (\textbf{Krishi Call Center --- dial 16123}), routing the farmer to certified human agronomists.
+\end{enumerate}
+
 \subsection{Where the Architecture Still Fails}
 The E10 audit is the honest failure ledger. Retrieval omission (28\%) means a correct record can be missed and the query abstained on; the mitigation (dense retriever refinement, chunk-level fallback) is a coverage fix, not a safety fix. Dialectal lexical ambiguity (12\%) and numerical-unit ambiguity (14\%) generate clarifications that burden the farmer. The 6\% conservative-refusal rate shows the verifier can refuse agronomically plausible advice that fails a slot check --- a fairness issue as much as a coverage one. These are the boundaries of the current design.
 
