@@ -54,16 +54,14 @@
 \ead{raiyaan.reza@northsouth.edu}
 \credit{Conceptualization, Methodology, Software, Formal Analysis, Writing - Original Draft, Project Administration}
 
-\author[2]{Md. Golam Rabiul Alam}[orcid=0000-0002-8610-8673]
-\cormark[2]
-\ead{rabiul.alam@northsouth.edu}
+\author[2]{Md. Golam Rabiul Alam}[orcid=0000-0002-4148-5226]
+\ead{rabiul.alam@bracu.ac.bd}
 \credit{Supervision, Methodology, Writing - Review \& Editing}
 
 \address[1]{Department of Computer Science and Engineering, North South University, Dhaka 1229, Bangladesh}
 \address[2]{Department of Computer Science and Engineering, BRAC University, Dhaka 1212, Bangladesh}
 
 \cortext[1]{Corresponding author}
-\cortext[2]{Co-corresponding supervisor}
 
 \begin{abstract}
 Large Language Models and standard Retrieval-Augmented Generation (RAG) pipelines are fluent in agricultural extension but carry no intrinsic bound on factual authority. In crop protection, a fluent sentence can silently misbind a pesticide to the wrong crop, inflate a dosage, or drop a mandatory Pre-Harvest Interval (PHI) --- failures that remain confident-sounding and are therefore dangerous. We present the \textbf{Bounded-Authority Advisory Architecture (BAA)}, which separates factual authority from linguistic realization: the generative model may phrase and explain, but it may not invent or mutate safety-critical agronomic values. BAA enforces an 11-slot, single-record, fail-closed certification contract and selectively routes queries among deterministic resolution, grounded generation, clarification, abstention, and escalation.

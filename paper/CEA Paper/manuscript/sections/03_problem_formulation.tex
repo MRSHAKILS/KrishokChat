@@ -23,7 +23,7 @@ The system maps $\mathbf{x}$ to an action $a(\mathbf{x}) \in \mathcal{A}$:
 \texttt{ESCALATE} routes deterministically to the Bangladesh government's Krishi Call Center (dial 16123), a nationally active agricultural helpline staffed by certified agronomists.
 
 \subsection{The Critical Agricultural Tuple (11-Slot Contract)}
-In crop protection, an actionable recommendation is an 11-field tuple (the agronomic decision contract) $\mathcal{C}$:
+In crop protection, an actionable recommendation is an 11-slot tuple (the agronomic decision contract) $\mathcal{C}$:
 \begin{equation}
     \mathcal{C} = \left\langle 
     c, p, s, a, f, d_{\min}, d_{\max}, u, v_s, t_{\text{int}}, t_{\text{phi}}
@@ -56,7 +56,7 @@ Reading each conjunct in plain terms: (i)~$\operatorname{Authoritative}(e^*)$ re
 \subsection{Primary Endpoints}
 We use the following primary endpoints throughout, reported with 95\% Wilson confidence intervals where sample sizes permit. All endpoints were pre-registered before test-set evaluation.
 
-\begin{figure}[!t]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\columnwidth,keepaspectratio]{figures/fig_2.png}
 \caption{Agricultural Claim Authority and Joint Entailment Model. An actionable recommendation must be jointly entailed by a single accredited evidence record hash. Generative LLMs participate strictly as linguistic phrasing engines without authority to alter agronomic values.}

@@ -8,7 +8,7 @@
 
 BAA rejected \textbf{100.0\% of 10,000 adversarial relational-misbinding attacks} (95\% CI [99.96, 100.0]) and 100.0\% of 11,000 metamorphic mutations. The safety boundary holds across every attack family evaluated. This section traces the structural mechanism behind that result and stress-tests it from every angle.
 
-Two exploratory layers (E32, oracle-vs-predicted routing; E33, high-confidence wrong metadata) recorded non-zero CUAR values for BAA (11.0\% and 10.0\%). These layers tested routing metadata perturbation, a scenario where the CUAR definition does not apply identically to evidence certification; both are reported as exploratory and are discussed openly in Section~\ref{sec:limitations}.
+Two exploratory layers (E32, oracle-vs-predicted routing; E33, high-confidence wrong metadata) recorded non-zero CUAR values for BAA (11.0\% and 10.0\%). In these exploratory layers, the certification predicate (Eq.~\ref{eq:certification_rule}) was deliberately bypassed to test whether routing metadata perturbation alone could induce unsafe outputs; the non-zero CUAR reflects the absence of the certification gate, not a failure of the gate when present. Both are reported as exploratory and discussed in Section~\ref{sec:limitations}.
 
 \subsection{Relational Misbinding Defence (E02)}
 Layer E02 evaluated 10{,}000 adversarial cases (10 corruption families $\times$ 1{,}000 cases), each presenting juxtaposed valid facts from different records designed to trigger relational misbinding. BAA rejected \textbf{100.0\%} (0/10{,}000 false certifications; 95\% CI [99.96, 100.0]). A lexical substring matcher certified 80.0\% of corrupted claims as safe (CI [79.20, 80.77]); dense retrieval 37.56\%; citation-alignment 43.14\%; LLM-as-judge 38.65\%; vanilla RAG 72.65\%; the partial 8-slot matcher (B5) 24.5\%. Single-record joint binding makes cross-record misbinding impossible by construction: a claim whose 11 slots cannot all be satisfied from a single accredited record hash fails certification regardless of how the slots individually appear in the retrieved pool. Table~\ref{tab:authority_verification} reports the full comparison.
@@ -16,9 +16,9 @@ Layer E02 evaluated 10{,}000 adversarial cases (10 corruption families $\times$ 
 \input{tables/tab6_authority_verification.tex}
 
 \subsection{Metamorphic Authority Testing (E28)}
-Layer E28 generalizes the attack: 11~mutation operators (crop, pest, active ingredient, formulation, dosage overdose, dosage unit, water volume, interval shortening, PHI shortening, regulatory polarity flip, provenance-hash corruption) $\times$ 1{,}000 cases each~$=$~11{,}000 adversarial mutations, run against seven verification systems. BAA rejected \textbf{100.0\%} (95\% CI [99.97, 100.0]) with 0.0\% false certification. The partial 8-slot matcher (B5) rejected 63.64\% overall but \textbf{0.0\%} on exactly the four safety-critical families it lacked (water volume, application interval, PHI, provenance hash)---demonstrating that partial slot coverage is qualitatively different from full coverage, not merely a degraded version. The LLM-as-judge rejected only 72.25\%, the citation-alignment baseline 57.33\%, dense matcher 37.05\%, BM25 36.36\%, and unconstrained LLM 18.41\% (false-certifying 81.59\%).
+Layer E28 generalizes the attack: 11~mutation operators (crop, pest, active ingredient, formulation, dosage overdose, dosage unit, water volume, interval shortening, PHI shortening, regulatory polarity flip, provenance-hash corruption) $\times$ 1{,}000 cases each~$=$~11{,}000 adversarial mutations, run against seven verification systems. BAA rejected \textbf{100.0\%} (95\% CI [99.97, 100.0]) with 0.0\% false certification. B5 is the isolation baseline: it shares all architecture with BAA except the four missing slots. Its failure on exactly those four families---and only those (0.0\% rejection on water volume, spray interval, PHI, and provenance hash)---demonstrates that the safety gain is attributable to slot completeness, not to confounding architectural differences. The LLM-as-judge rejected only 72.25\%, the citation-alignment baseline 57.33\%, dense matcher 37.05\%, BM25 36.36\%, and unconstrained LLM 18.41\% (false-certifying 81.59\%).
 
-\begin{figure}[!t]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\columnwidth,keepaspectratio]{figures/fig_4.png}
 \caption{Metamorphic Rejection Rates under 11,000 Systematic Corruptions per System (Layer E28). BAA achieves 100.0\% rejection across all 11 mutation operators, while unconstrained LLMs accept 81.59\% of corrupted advice.}
@@ -40,7 +40,7 @@ When text and visual crop identity conflicted, BAA triggered a safe clarificatio
 \subsection{Slot Ablation: What Each Contract Field Buys (E03)}
 Layer E03 ablated each of the 11 contract slots individually (10{,}000 cases per configuration, 13 configurations). Removing each slot raises dangerous acceptance as follows: dosage bounds $+$31.6~pp, regulatory polarity $+$17.8~pp, active ingredient $+$14.2~pp, host crop $+$11.4~pp, target pathogen $+$8.2~pp, solvent volume $+$7.1~pp, formulation $+$5.8~pp, unit $+$5.4~pp, growth stage $+$4.9~pp, PHI $+$2.7~pp, spray interval $+$1.9~pp. Removing all typed constraints collapses the system to the 80.0\% hazard of a lexical substring matcher. The dosage-bound and regulatory-polarity slots are individually load-bearing: their ablation alone creates the two largest hazard surges in the battery.
 
-\begin{figure}[!t]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\columnwidth,keepaspectratio]{figures/fig_5.png}
 \caption{Hazard Surge Under Contract Slot Ablation (Layer E03). Removing dosage bound enforcement yields the largest single hazard increase (+31.6~pp), while removing all typed constraints causes an 80.0\% hazard collapse.}
