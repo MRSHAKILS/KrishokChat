@@ -2,56 +2,57 @@
 \label{sec:problem_formulation}
 
 \subsection{Advisory State and Decision Space}
-Let an incoming farmer interaction be denoted $\mathbf{x} = \langle q_t, I_v, \mathcal{M}, \mathcal{H} \rangle$, where $q_t$ is the natural-language query (standard Bengali, a regional dialect, or romanized Banglish), $I_v$ is an optional uploaded crop/leaf photograph, $\mathcal{M}$ is environmental metadata (timestamp, administrative region, season), and $\mathcal{H}$ is the conversation history.
+Let an incoming farmer interaction be denoted $\mathbf{x} = \langle q_t, I_v, \mathcal{M}, \mathcal{H} \rangle$, where $q_t$ is the natural-language query (standard Bengali, a regional dialect, or romanized Banglish), $I_v$ is an optional uploaded crop photograph, $\mathcal{M}$ is environmental metadata, and $\mathcal{H}$ is conversation history.
 
 The system maps $\mathbf{x}$ to an action $a(\mathbf{x}) \in \mathcal{A}$:
 \begin{equation}
     \mathcal{A} = \left\{ 
     \begin{array}{ll}
-        \text{\texttt{CERTIFY}}, & \text{deterministic single-record resolution},\\
-        \text{\texttt{GENERATE\_THEN\_VERIFY}}, & \text{grounded generation subject to verification},\\
-        \text{\texttt{CLARIFY}}, & \text{conversational disambiguation},\\
-        \text{\texttt{ABSTAIN}}, & \text{fail-closed refusal with escalation pointer},\\
-        \text{\texttt{ESCALATE}}, & \text{policy block / human (Krishi 16123) handoff}
+        \text{\texttt{CERTIFY}}, & \text{deterministic resolution},\\
+        \text{\texttt{GEN\_VERIFY}}, & \text{grounded verification},\\
+        \text{\texttt{CLARIFY}}, & \text{disambiguation},\\
+        \text{\texttt{ABSTAIN}}, & \text{fail-closed refusal},\\
+        \text{\texttt{ESCALATE}}, & \text{human handoff (16123)}
     \end{array}
     \right\}
 \end{equation}
 
 \subsection{The Critical Agricultural Tuple (11-Slot Contract)}
-In chemical and biological plant protection, an actionable recommendation is a tuple over an agronomic decision contract $\mathcal{C}$:
+In plant protection, an actionable recommendation is a tuple over an agronomic decision contract $\mathcal{C}$:
 \begin{equation}
     \mathcal{C} = \left\langle 
-    c, p, s, a, f, d_{\min}, d_{\max}, u_d, v_s, t_{\text{int}}, t_{\text{phi}}
+    c, p, s, a, f, d_{\min}, d_{\max}, u, v_s, t_{\text{int}}, t_{\text{phi}}
     \right\rangle
 \end{equation}
-where $c$ is the host crop, $p$ the target pest/pathogen, $s$ the growth stage, $a$ the registered active ingredient, $f$ the formulation, $[d_{\min}, d_{\max}]$ the approved dosage interval, $u$ the dosage unit, $v_s$ the solvent volume denominator (e.g.\ per 10 L water), $t_{\text{int}}$ the spray interval in days, and $t_{\text{phi}}$ the mandatory pre-harvest interval in days. A record may also carry a regulatory polarity flag $\rho \in \{\text{APPROVED}, \text{BANNED/RESTRICTED}\}$; in the certification predicate below we fold $\rho$ into the authority check rather than the tuple, so the tuple remains an 11-slot agronomic contract while the evidence layer governs its authority.
+where $c$ is host crop, $p$ pest/pathogen, $s$ growth stage, $a$ active ingredient, $f$ formulation, $[d_{\min}, d_{\max}]$ dosage interval, $u$ unit, $v_s$ water volume denominator, $t_{\text{int}}$ spray interval, and $t_{\text{phi}}$ pre-harvest interval (PHI).
 
 \subsection{Evidence Authority Model}
-Let $\mathcal{E}$ be the set of typed evidence records in the fact store. Each record $e \in \mathcal{E}$ carries two logically distinct attributes:
+Let $\mathcal{E}$ be the set of typed evidence records in the fact store. Each record $e \in \mathcal{E}$ carries two distinct attributes:
 \begin{align}
     \operatorname{Authority}(e) &= g(\text{source},\, \text{jurisdiction}) \nonumber \\
     \operatorname{Validity}(e) &= g(\text{date},\, \text{version},\, \text{regulatory state}) \nonumber
 \end{align}
-A record is \emph{authoritative} if it originates from an accredited institution (MoA regulatory registry, BARI, BRRI, DAE) with the correct jurisdiction (Bangladesh). A record is \emph{current} if its effective date is not superseded and its regulatory state has not been revoked. Both must hold simultaneously. An old authoritative record can be obsolete; a recent secondary record is not authoritative.
+A record is \emph{authoritative} if it originates from an accredited institution (MoA, BARI, BRRI, DAE) for Bangladesh. A record is \emph{current} if its effective date is unexpired and regulatory status is active. Both must hold simultaneously.
 
 The system certifies the advisory $\mathcal{C}$ only if a single evidence record jointly entails every slot:
 \begin{equation}
     \label{eq:certification_rule}
-    \operatorname{Certify}(\mathcal{C}) = 1 \iff \exists\, e^* \in \mathcal{E}:\;
-    \begin{array}{l}
-        \operatorname{Authoritative}(e^*) \;\land\; \operatorname{Current}(e^*)\; \land \\
-        \operatorname{JointlyEntails}(e^*, \mathcal{C}) \;\land\; \operatorname{Complete}(\mathcal{C}) \;\land\\
-        g(\mathbf{x}) \;\geq\; \theta^*
-    \end{array}
+    \begin{aligned}
+        \operatorname{Certify}(\mathcal{C}) = 1 \iff \exists\, e^* \in \mathcal{E}:\; \Big[ & \operatorname{Authoritative}(e^*) \;\land \\
+        & \operatorname{Current}(e^*) \;\land \\
+        & \operatorname{JointlyEntails}(e^*, \mathcal{C}) \;\land \\
+        & \operatorname{Complete}(\mathcal{C}) \;\land \\
+        & g(\mathbf{x}) \ge \theta^* \Big]
+    \end{aligned}
 \end{equation}
 where $\operatorname{JointlyEntails}$ requires all 11 slots to be satisfied by the \emph{same} record (never assembled across records), $\operatorname{Complete}$ requires every safety-critical slot to be non-null, $g(\mathbf{x})$ is the calibrated selective score, and $\theta^*$ is the frozen threshold selected on a development split. If Eq.~\eqref{eq:certification_rule} fails, the system fails closed: it must not complete the recommendation; it clarifies, abstains, or escalates. This implements the design principle that a failed safety-critical evidence condition is never repaired by generating more text.
 
 \subsection{Primary Endpoints}
 We use the following primary endpoints throughout, reported with 95\% Wilson confidence intervals where sample sizes permit.
 
-\begin{figure}[htbp]
+\begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig_2.png}
+\includegraphics[width=\columnwidth,keepaspectratio]{figures/fig_2.png}
 \caption{Agricultural Claim Authority and Joint Entailment Model. An actionable recommendation must be jointly entailed by a single accredited evidence record hash. Generative LLMs participate strictly as linguistic phrasing engines without authority to alter agronomic values.}
 \label{fig:claim_authority}
 \end{figure}

@@ -11,6 +11,19 @@
 \usepackage{subcaption}
 \usepackage{array}
 \usepackage{tabularx}
+\usepackage{placeins}
+
+% Relax LaTeX float placement restrictions so figures stay in their sections
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.85}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{8}
+\setcounter{dbltopnumber}{4}
+\renewcommand{\dbltopfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.65}
+\renewcommand{\dblfloatpagefraction}{0.65}
 
 % Custom macros for exact empirical constants from the frozen Number Bank
 % (paper/CEA Paper/manuscript/NUMBER_BANK.md -- every value below traces there).
@@ -30,8 +43,6 @@
 
 \begin{document}
 \let\WriteBookmarks\relax
-\def\floatpagepagefraction{1}
-\def\textpagefraction{.001}
 
 % Short title and author running heads
 \shorttitle{Bounded-Authority Agricultural Advisory}
@@ -69,21 +80,28 @@ Agricultural decision support \sep Large language models \sep Retrieval-augmente
 \input{sections/01_introduction.tex}
 \input{sections/02_related_work.tex}
 \input{sections/03_problem_formulation.tex}
+\FloatBarrier
 \input{sections/04_system_architecture.tex}
+\FloatBarrier
 \input{sections/05_knowledge_governance.tex}
 \input{sections/06_experimental_methodology.tex}
+\FloatBarrier
 \input{sections/07_results_advisory_quality.tex}
 \input{sections/08_results_authority_safety.tex}
+\FloatBarrier
 \input{sections/09_results_selective_reliability.tex}
+\FloatBarrier
 \input{sections/10_results_robustness.tex}
 \input{sections/11_results_temporal_governance.tex}
 \input{sections/12_results_security_delivery.tex}
 \input{sections/13_results_efficiency.tex}
+\FloatBarrier
 \input{sections/14_discussion.tex}
 \input{sections/15_deployment_implications.tex}
 \input{sections/16_limitations.tex}
 \input{sections/17_reproducibility.tex}
 \input{sections/18_conclusion.tex}
+\FloatBarrier
 
 \section*{Declaration of Competing Interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.

@@ -12,9 +12,10 @@ Every node in the fact store carries provenance: source document, source version
 
 \subsection{The 11-Slot Evidence Schema and Authority Stratification}
 As detailed in Table~\ref{tab:knowledge_schema}, the knowledge base decouples the agronomic decision contract (Layer A: the 11 semantic slots) from the evidence governance layer (Layer B: source authority, publication/effective dates, regulatory polarity, provenance hash, verifier signature). Sources are stratified into a strict authority hierarchy:
-\begin{equation}
-    \text{MoA Regulatory} \succ \text{Current Institutional (BARI/BRRI)} \succ \text{Legacy Institutional} \succ \text{Secondary}
-\end{equation}
+\begin{align}
+    \text{MoA Regulatory} &\succ \text{Institutional (BARI/BRRI)} \nonumber \\
+    &\succ \text{Legacy Institutional} \succ \text{Secondary}
+\end{align}
 When multiple sources overlap, the resolver enforces precedence by authority rank then by publication timestamp, and records that have been superseded or revoked are invalidated. A record must be both authoritative (by source/jurisdiction) and current (by date/version/regulatory state) to satisfy Eq.~\eqref{eq:certification_rule}.
 
 \subsection{Cryptographic Hash-Chaining and Tamper-Evident Packs}
