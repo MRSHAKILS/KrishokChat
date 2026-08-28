@@ -48,6 +48,8 @@ backend/app/logs/*
 *.idx
 *.ilg
 *.ind
+*.abs
+page_screenshots/
 
 # Local SQLite database (T0-01 shared storage foundation)
 backend/data/
