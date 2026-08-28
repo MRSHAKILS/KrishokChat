@@ -1,0 +1,40 @@
+{
+  "experiment": "M6_BENIGN_MUTATION_CONTROL",
+  "description": "Benign surface-neutral transformation control testing discrimination of B6 verifier",
+  "timestamp_utc": "2026-08-28T17:26:39.875740+00:00",
+  "operators_tested": [
+    "benign_01_paraphrase_dosage_units",
+    "benign_02_formatting_normalization",
+    "benign_03_citation_paraphrase"
+  ],
+  "results": {
+    "false_rejection_count": 11,
+    "total_benign_cases": 300,
+    "false_rejection_rate_pct": 3.67,
+    "false_rejection_wilson_95_ci_pct": [
+      2.06,
+      6.45
+    ],
+    "per_operator_breakdown": {
+      "benign_01_paraphrase_dosage_units": {
+        "total": 100,
+        "false_rejections": 4,
+        "accepted": 96,
+        "frr_pct": 4.0
+      },
+      "benign_02_formatting_normalization": {
+        "total": 100,
+        "false_rejections": 4,
+        "accepted": 96,
+        "frr_pct": 4.0
+      },
+      "benign_03_citation_paraphrase": {
+        "total": 100,
+        "false_rejections": 3,
+        "accepted": 97,
+        "frr_pct": 3.0
+      }
+    },
+    "interpretation": "Rule discriminates correctly (accepts valid surface paraphrases)"
+  }
+}

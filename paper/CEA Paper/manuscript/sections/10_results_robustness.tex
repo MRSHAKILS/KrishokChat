@@ -6,16 +6,18 @@
 \section{Results: Deployment Efficiency and Constrained Delivery (RQ5)}
 \label{sec:results_deployment}
 
-The deterministic resolution ladder eliminates LLM invocation for \textbf{61.5\% of queries}, cutting weighted latency 2.28$\times$ and per-query cost by 89.7\%. Deterministic SMS templates preserve 100\% of safety-critical slots where LLM-composed SMS loses them in 64.4\% of messages. This section reports the full systems-efficiency and constrained-channel evidence. Network profiles are simulations, not field measurements; cost figures are scenario-based on the E18 traffic mix.
+An analytical model of the five-tier resolution ladder projects that \textbf{61.5\% of queries resolve deterministically}, yielding a projected 2.28$\times$ weighted latency reduction and an 89.7\% per-query cost reduction under stated traffic parameters. Deterministic SMS templates preserve 100\% of safety-critical slots where LLM-composed SMS loses them in 64.4\% of messages. This section reports the systems-efficiency and constrained-channel evaluation. Network profiles are simulations, not field measurements; cost figures are scenario-based on the E18 traffic mix.
+
+\paragraph{Analytical model note.} The efficiency figures reported in this section are outputs of an analytical model parameterised by: a 61.5\% deterministic resolution rate, measured per-stage latencies (E9 decomposition), and stated API cost rates. They represent projected behaviour under those parameters, not measured end-to-end throughput.
 
 \subsection{LLM-Dependency Reduction Across the Resolution Ladder (E18)}
-Layer E18 measured the five-tier ladder's traffic mix on 5{,}000 modeled queries per arm. Detection-gated routing raised the zero-LLM share from 10.48\% to 61.52\% (95\% CI [60.16, 62.86]). The decomposition: \textbf{deterministic advisory coverage} (\texttt{T1}+\texttt{T2}) is \DetAdvisoryCoverage{}, \textbf{safety/refusal handling} (\texttt{T0}+\texttt{T4}) is \SafetyRefusalHandling{}, and \textbf{LLM-dependent traffic} (\texttt{T3}) is \LLMDependent{}. Weighted mean latency falls from 1{,}247.93~ms to 546.15~ms (2.28$\times$), and serving cost from \$0.1785 to \$0.0767 per 1{,}000 queries. The 10.48\% terminal-handling share is not ``answered without LLM''; it is refused or redirected.
+Layer E18 evaluated an analytical model of the five-tier ladder's traffic mix on 5{,}000 modeled queries per arm. Detection-gated routing raised the projected zero-LLM share from 10.48\% to 61.52\% (95\% CI [60.16, 62.86]). The decomposition: \textbf{deterministic advisory coverage} (\texttt{T1}+\texttt{T2}) is \DetAdvisoryCoverage{}, \textbf{safety/refusal handling} (\texttt{T0}+\texttt{T4}) is \SafetyRefusalHandling{}, and \textbf{LLM-dependent traffic} (\texttt{T3}) is \LLMDependent{}. Projected weighted mean latency falls from 1{,}247.93~ms to 546.15~ms (a 2.28$\times$ reduction), and serving cost from \$0.1785 to \$0.0767 per 1{,}000 queries. The 10.48\% terminal-handling share is not ``answered without LLM''; it is refused or redirected.
 
 \subsection{Stage-Level Latency Decomposition (E9)}
 The E9 stage decomposition (analytical, modeled) localizes the latency story: deterministic routing 0.35~ms p95, deterministic lookup 0.42~ms, hybrid retrieval 28.5~ms, verification 3.8~ms, render 0.15~ms, and generation 1{,}780~ms p95. Generation dominates by two orders of magnitude; verification does not. Selective routing therefore attacks the right bottleneck: every query kept out of Tier~3 avoids the generation term entirely.
 
 \subsection{Serving Cost and Economics (E20)}
-Per-query economics: app-online \$0.000257, SMS fallback \$0.00234, commercial cloud LLM baseline \$0.00248 (i.e., \$0.26~/~\$2.34~/~\$2.48 per~1{,}000). The app-online path is 89.65\% cheaper than the commercial baseline. Assumptions: 6~queries per farmer per year, 50/30/20 app/offline/SMS mix, 120~BDT/USD; population-scale projections are deliberately excluded.
+Per-query economics under the analytical cost model: app-online \$0.000257, SMS fallback \$0.00234, commercial cloud LLM baseline \$0.00248 (i.e., \$0.26~/~\$2.34~/~\$2.48 per~1{,}000). The app-online path is 89.65\% cheaper than the commercial baseline. Assumptions: 6~queries per farmer per year, 50/30/20 app/offline/SMS mix, 120~BDT/USD; population-scale projections are deliberately excluded.
 
 \subsection{Prompt Injection and Evidence Poisoning (E07/E08)}
 Seven adversarial families (1{,}400 attacks total, 200 per family) targeted direct system override, evidence override, retrieval poisoning, delimiter hijacking, Bengali-native injection, romanized Banglish injection, and mixed code-switching. The unconstrained LLM certified unsafe output in 83.86\% of attacks (95\% CI [81.84, 85.69]); vanilla RAG in 69.36\%; RAG with an LLM guard in 21.79\% (CI [19.70, 24.02]), remaining vulnerable to delimiter breakouts and code-switching jailbreaks; and BAA in \textbf{0.0\%} (0/1{,}400; CI [0.0, 0.27]), with 1{,}289 attacks intercepted at the deterministic Tier-0 gate and the remaining 111 blocked by the relational verifier.
@@ -29,7 +31,7 @@ Under rural-edge loss (15\%), offline-first caching sustains \textbf{91.4\%} del
 \input{tables/tab9_deployment_efficiency.tex}
 
 \subsection{Safety--Coverage--Latency Trade-off}
-The Pareto narrative across the paper is: BAA trades coverage (84.56\% coverage at 1.26\% risk) for safety (0.0\% CUAR observed across all main evaluation layers) and wins latency on the deterministic share of traffic (2.28$\times$ weighted speedup). The trade-off is explicit and tunable through $\theta^*$; Figure~\ref{fig:deployment_tradeoffs} illustrates the four-panel efficiency portrait.
+The Pareto narrative across the paper is: BAA trades coverage (84.56\% coverage at 1.26\% risk) for safety (0.0\% CUAR observed across all main evaluation layers) and yields a projected 2.28$\times$ weighted latency reduction on the deterministic share of modeled traffic. The trade-off is explicit and tunable through $\theta^*$; Figure~\ref{fig:deployment_tradeoffs} illustrates the four-panel efficiency portrait.
 
 \begin{figure}[pos=t]
 \centering

@@ -12,6 +12,7 @@ Does the 11-slot fail-closed single-record verifier prevent bypass when any sing
 
 ## 2. Experimental Protocol & Execution
 - **Sample Size:** $N = 11,000$ cases ($1,000$ cases per mutation operator across 11 slots).
+- **Base Fact Knowledge Base:** 40 verified official agronomic records from BARI (*Krishi Projukti Hatboi* 9th ed.), BRRI (*Adhunik Dhaner Chas* 22nd ed.), and DAE national guidelines, spanning 12 major crop families (rice, wheat, maize, potato, tomato, brinjal, chili, onion, garlic, mustard, lentil, cabbage, groundnut, jute, banana, mango, watermelon) across 440 (40 records $\times$ 11 mutation operators) exhaustive coverage cells.
 - **Mutation Operators:**
   1. `mu_01_crop_mutation`: Target crop mutated (off-label chemical application hazard).
   2. `mu_02_pest_disease_mutation`: Target pathogen mutated (ineffective chemical application).

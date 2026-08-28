@@ -1,0 +1,119 @@
+{
+  "experiment": "M1_SLOT_ABLATION_EMPIRICAL",
+  "description": "Empirical single-slot ablation across all 11 contract slots on 11,000 cases",
+  "timestamp_utc": "2026-08-28T17:26:39.865247+00:00",
+  "total_cases_per_slot": 11000,
+  "total_base_records": 40,
+  "slot_results": {
+    "crop": {
+      "false_certification_rate_pct": 8.94,
+      "false_cert_wilson_95_ci_pct": [
+        8.42,
+        9.48
+      ],
+      "false_cert_count": 983,
+      "total_cases": 11000,
+      "delta_pp": 8.94
+    },
+    "problem": {
+      "false_certification_rate_pct": 8.84,
+      "false_cert_wilson_95_ci_pct": [
+        8.32,
+        9.38
+      ],
+      "false_cert_count": 972,
+      "total_cases": 11000,
+      "delta_pp": 8.84
+    },
+    "active_ingredient": {
+      "false_certification_rate_pct": 8.88,
+      "false_cert_wilson_95_ci_pct": [
+        8.36,
+        9.43
+      ],
+      "false_cert_count": 977,
+      "total_cases": 11000,
+      "delta_pp": 8.88
+    },
+    "formulation": {
+      "false_certification_rate_pct": 8.81,
+      "false_cert_wilson_95_ci_pct": [
+        8.29,
+        9.35
+      ],
+      "false_cert_count": 969,
+      "total_cases": 11000,
+      "delta_pp": 8.81
+    },
+    "dose_bounds": {
+      "false_certification_rate_pct": 8.81,
+      "false_cert_wilson_95_ci_pct": [
+        8.29,
+        9.35
+      ],
+      "false_cert_count": 969,
+      "total_cases": 11000,
+      "delta_pp": 8.81
+    },
+    "dose_unit": {
+      "false_certification_rate_pct": 8.86,
+      "false_cert_wilson_95_ci_pct": [
+        8.35,
+        9.41
+      ],
+      "false_cert_count": 975,
+      "total_cases": 11000,
+      "delta_pp": 8.86
+    },
+    "water_volume": {
+      "false_certification_rate_pct": 8.79,
+      "false_cert_wilson_95_ci_pct": [
+        8.28,
+        9.33
+      ],
+      "false_cert_count": 967,
+      "total_cases": 11000,
+      "delta_pp": 8.79
+    },
+    "interval": {
+      "false_certification_rate_pct": 8.81,
+      "false_cert_wilson_95_ci_pct": [
+        8.29,
+        9.35
+      ],
+      "false_cert_count": 969,
+      "total_cases": 11000,
+      "delta_pp": 8.81
+    },
+    "phi": {
+      "false_certification_rate_pct": 8.85,
+      "false_cert_wilson_95_ci_pct": [
+        8.34,
+        9.4
+      ],
+      "false_cert_count": 974,
+      "total_cases": 11000,
+      "delta_pp": 8.85
+    },
+    "polarity": {
+      "false_certification_rate_pct": 0.08,
+      "false_cert_wilson_95_ci_pct": [
+        0.04,
+        0.16
+      ],
+      "false_cert_count": 9,
+      "total_cases": 11000,
+      "delta_pp": 0.08
+    },
+    "provenance_hash": {
+      "false_certification_rate_pct": 8.92,
+      "false_cert_wilson_95_ci_pct": [
+        8.4,
+        9.47
+      ],
+      "false_cert_count": 981,
+      "total_cases": 11000,
+      "delta_pp": 8.92
+    }
+  }
+}

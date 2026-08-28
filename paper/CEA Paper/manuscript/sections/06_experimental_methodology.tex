@@ -26,6 +26,8 @@ The battery spans nine evaluation corpora, comprising over 60,000 evaluation cas
     \item \textbf{Rural network suite} (1{,}000 queries $\times$ 4 profiles): 4G/3G/Edge/2G latency, loss, and jitter profiles (Layer E14).
 \end{enumerate}
 
+\paragraph{Evaluation units and granularity.} To avoid ambiguity across layers, we distinguish four evaluation units throughout the paper: (1)~\emph{Case}: a single query--context tuple evaluated by one or more systems (e.g., 20,112 held-out advisory cases in RQ3); (2)~\emph{Mutation class}: a semantic corruption operator applied to valid records (11 operators in E28); (3)~\emph{Coverage cell}: a specific (mutation class $\times$ base record) combination evaluated exhaustively (440 cells in E28); and (4)~\emph{System-case}: one case evaluated by one system (e.g., in E28, 11{,}000 mutations $\times$ 7 systems = 77{,}000 system-cases). The ``over 60{,}000 cases'' cited throughout this paper refers to the sum of unique evaluation cases across all 27 completed experimental layers.
+
 \subsection{Research Question Mapping and Layer Nomenclature}
 To help navigate the experimental battery, Table~\ref{tab:rq_mapping} maps each experiment tag to its governing Research Question and primary evaluation target. Readers may use this table as a roadmap before diving into individual result sections.
 
