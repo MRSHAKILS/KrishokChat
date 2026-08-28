@@ -7,17 +7,15 @@
 \label{sec:system_architecture}
 
 \subsection{Architectural Overview}
-BAA is organized as a five-tier selective resolution ladder with a downstream relational verifier (Figure~\ref{fig:architecture}). The design principle is that resolution and verification are deterministic and typed, while generation is a bounded realization step.
+BAA is organized as a five-tier selective resolution ladder with a downstream relational verifier (Figure~\ref{fig:architecture}). The core architectural principle is that resolution and verification are deterministic and typed, while generation is strictly a bounded realization step.
 
-\textbf{Tier~0 --- Risk and context gate.} Lightweight deterministic screening for banned/restricted chemicals, poisoning and self-harm framings, and prompt-injection payloads. Matches carry a regulatory polarity check before any retrieval or generation occurs.
-
-\textbf{Tier~1 --- Capability and perception router.} Entity normalization across Bengali registers (standard, dialectal, Banglish) plus optional crop classification from an uploaded image. Detection metadata narrows the retrieval and resolution search space.
-
-\textbf{Tier~2 --- Structured fact authority and deterministic resolver.} Typed, versioned, provenance-carrying records in a SQLite fact store. A resolver maps \texttt{(crop, problem, stage, intent)} to a fact record and renders a certified answer from a validated template. No LLM is invoked on this path.
-
-\textbf{Tier~3 --- Grounded generative realization.} For queries with evidence but no deterministic path, an LLM phrases an answer under a single-record constraint contract: it may explain the retrieved facts in Bengali but may not alter numerical or regulatory fields.
-
-\textbf{Tier~4 --- Verification and fail-closed output.} The relational verifier re-derives the candidate tuple from the (possibly generated) response and checks it against the single evidence record. Any slot discrepancy revokes certification, suppressing the response and routing to \texttt{CLARIFY}, \texttt{ABSTAIN}, or \texttt{ESCALATE}.
+\begin{enumerate}
+    \item[\textbf{Tier~0}] \textbf{Risk and context gate.} Lightweight deterministic screening for banned/restricted chemicals, poisoning and self-harm framings, and prompt-injection payloads before any retrieval or generation occurs.
+    \item[\textbf{Tier~1}] \textbf{Capability and perception router.} Entity normalization across Bengali registers (standard formal, authentic farmer, regional dialects, Banglish) plus optional crop classification from an uploaded image to narrow candidate search spaces.
+    \item[\textbf{Tier~2}] \textbf{Structured fact authority and deterministic resolver.} Typed, versioned, provenance-carrying records in a local fact store. A resolver maps $\langle\text{crop}, \text{problem}, \text{stage}, \text{intent}\rangle$ to a fact record and renders a certified answer from a validated template with zero LLM invocation.
+    \item[\textbf{Tier~3}] \textbf{Grounded generative realization.} For queries with valid retrieved evidence but no deterministic template match, an instruction-tuned LLM phrases an answer under a single-record constraint contract.
+    \item[\textbf{Tier~4}] \textbf{Verification and fail-closed output.} The relational verifier re-derives the candidate tuple from the response and validates it against the single accredited evidence record hash, failing closed to clarify, abstain, or escalate on any discrepancy.
+\end{enumerate}
 
 \subsection{Risk/Context Gate}
 The gate applies a deterministic, six-way policy classification before any retrieval: \emph{safe\_agri}, \emph{banned\_or\_restricted\_chemical}, \emph{self\_harm\_or\_poisoning\_risk}, \emph{off\_topic}, \emph{prompt\_injection}, and \emph{low\_confidence}. Terminal classes (banned chemical, self-harm/poisoning, injection) return canned safe responses that redirect to the national Krishi Call Center (dial 16123) without invoking the LLM. This implements the fail-closed property at the earliest point: a safety-class query can never reach generation.

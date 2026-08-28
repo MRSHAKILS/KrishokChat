@@ -51,7 +51,15 @@ The certification predicate (Figure~\ref{fig:claim_authority}) is the central co
     \end{aligned}
 \end{equation}
 
-Reading each conjunct in plain terms: (i)~$\operatorname{Authoritative}(e^*)$ requires the evidence to originate from a nationally accredited source; (ii)~$\operatorname{Current}(e^*)$ requires the record's effective/expiry dates and regulatory polarity to be valid at query time; (iii)~$\operatorname{JointlyEntails}(e^*, \mathcal{C})$ requires all 11 slots to be satisfied by the \emph{same} record---records may never be assembled across sources; (iv)~$\operatorname{Complete}(\mathcal{C})$ requires every safety-critical slot to be non-null; and (v)~$g(\mathbf{x}) \ge \theta^*$ is the calibrated selective score exceeding the frozen abstention threshold. If any conjunct fails, the system fails closed: it must not complete the recommendation; it clarifies, abstains, or escalates. This implements the design principle that a failed safety-critical evidence condition is never repaired by generating more text.
+The five conjuncts enforce explicit guarantees:
+\begin{enumerate}
+    \item[\textbf{(i)}] $\operatorname{Authoritative}(e^*)$ requires the evidence to originate from a nationally accredited source (BARI, BRRI, DAE/MoA).
+    \item[\textbf{(ii)}] $\operatorname{Current}(e^*)$ requires the record's effective/expiry dates and regulatory polarity to be valid at query time.
+    \item[\textbf{(iii)}] $\operatorname{JointlyEntails}(e^*, \mathcal{C})$ requires all 11 contract slots to be satisfied simultaneously by the \emph{same} accredited record hash---records may never be assembled across disparate sources.
+    \item[\textbf{(iv)}] $\operatorname{Complete}(\mathcal{C})$ requires every safety-critical slot to be non-null and within valid physical bounds.
+    \item[\textbf{(v)}] $g(\mathbf{x}) \ge \theta^*$ requires the calibrated selective confidence score to exceed the frozen risk threshold.
+\end{enumerate}
+If any conjunct fails, the system fails closed: it suppresses the generative completion and deterministically clarifies, abstains, or escalates. This directly operationalizes the rule that an unsatisfied evidence condition is never repaired by generating ungrounded text.
 
 \subsection{Primary Endpoints}
 We use the following primary endpoints throughout, reported with 95\% Wilson confidence intervals where sample sizes permit. All endpoints were pre-registered before test-set evaluation.
