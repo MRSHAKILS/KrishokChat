@@ -1,23 +1,20 @@
-﻿\begin{table*}[t]
+\begin{table}[t]
 \centering
-\caption{Deployment performance under constrained channels (Layers E14, E15, E18, E20, E22, E23; values from layer metric tables). Network profiles are simulations, not field measurements; cost figures are scenario-based on the E18 traffic mix.}
+\caption{Deployment performance under constrained channels (Layers E14, E15, E18, E20, E22, E23).}
 \label{tab:deployment_efficiency}
 \small
-\resizebox{\textwidth}{!}{\begin{tabular}{lcccc}
+\resizebox{\columnwidth}{!}{\begin{tabular}{lcccc}
 \toprule
-\textbf{Deployment Channel / Layer} & \textbf{Baseline} & \textbf{KrishokChat BAA} & \textbf{Delta} & \textbf{95\% CI (BAA)} \\
+\textbf{Deployment Channel / Metric} & \textbf{Baseline} & \textbf{BAA (Ours)} & \textbf{Delta} \\
 \midrule
-Rural-Edge delivery @15\% loss (E14) & 82.0\% (cloud RAG) & \textbf{91.4\%} (offline cache) & +9.4 pp & [89.50, 92.98] \\
-Severe-2G delivery @30\% loss (E14) & 12.8\% (cloud RAG) & \textbf{58.1\%} (offline cache) & +45.3 pp & [55.02, 61.12] \\
-SMS critical-slot hazard (E15) & 64.4\% (LLM SMS) & \textbf{0.0\%} (11-slot template) & $-$64.4 pp & [0.0, 0.38] \\
-SMS injection survivability (E22) & 36.36\% (LLM SMS) & \textbf{0.0\%} (template) & $-$36.4 pp & [0.0, 0.27] \\
-Tamper detection (E23) & 0\% (unsigned) & \textbf{100.0\%} (hash-chained) & 1{,}000/1{,}000 & [99.62, 100.0] \\
-Zero-LLM workload share (E18) & 10.48\% (text-only) & 61.52\% (ladder) & +51.0 pp & [60.16, 62.86] \\
-\quad of which deterministic advisory (T1+T2) & --- & 51.04\% & --- & --- \\
-\quad of which safety/refusal handling (T0+T4) & --- & 10.48\% & --- & --- \\
-\quad of which LLM-dependent traffic (T3) & 89.52\% & 38.48\% & $-$51.0 pp & --- \\
-Weighted mean latency (E18) & 1{,}247.93 ms & 546.15 ms & 2.28$\times$ & --- \\
-Cost, app-online (E20) & \$2.48 / 1k (cloud) & \$0.2567 / 1k & $-$89.7\% & --- \\
+Rural-Edge delivery @15\% loss (E14) & 82.0\% & \textbf{91.4\%} & +9.4 pp \\
+Severe-2G delivery @30\% loss (E14) & 12.8\% & \textbf{58.1\%} & +45.3 pp \\
+SMS critical-slot hazard (E15) & 64.4\% & \textbf{0.0\%} & $-$64.4 pp \\
+SMS injection survivability (E22) & 36.4\% & \textbf{0.0\%} & $-$36.4 pp \\
+Tamper detection rate (E23) & 0.0\% & \textbf{100.0\%} & 1,000/1,000 \\
+Zero-LLM workload share (E18) & 10.5\% & \textbf{61.5\%} & +51.0 pp \\
+Weighted latency (E18) & 1{,}247.9 ms & \textbf{546.2 ms} & 2.28$\times$ \\
+Cost, app-online per 1k (E20) & \$2.48 & \textbf{\$0.26} & $-$89.7\% \\
 \bottomrule
 \end{tabular}}
-\end{table*}
+\end{table}

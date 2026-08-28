@@ -11,7 +11,6 @@
 \usepackage{subcaption}
 \usepackage{array}
 \usepackage{tabularx}
-\usepackage{placeins}
 
 % Relax LaTeX float placement restrictions so figures stay in their sections
 \renewcommand{\topfraction}{0.95}
@@ -55,13 +54,16 @@
 \ead{raiyaan.reza@northsouth.edu}
 \credit{Conceptualization, Methodology, Software, Formal Analysis, Writing - Original Draft, Project Administration}
 
-\author[1]{Research Collaborator}[orcid=0000-0000-0000-0000]
-\ead{collaborator@northsouth.edu}
-\credit{Investigation, Data Curation, Validation, Writing - Review \& Editing}
+\author[2]{Md. Golam Rabiul Alam}[orcid=0000-0002-8610-8673]
+\cormark[2]
+\ead{rabiul.alam@northsouth.edu}
+\credit{Supervision, Methodology, Writing - Review \& Editing}
 
-\address[1]{Department of Electrical and Computer Engineering, North South University, Dhaka 1229, Bangladesh}
+\address[1]{Department of Computer Science and Engineering, North South University, Dhaka 1229, Bangladesh}
+\address[2]{Department of Computer Science and Engineering, BRAC University, Dhaka 1212, Bangladesh}
 
-\cortext[cor1]{Corresponding author}
+\cortext[1]{Corresponding author}
+\cortext[2]{Co-corresponding supervisor}
 
 \begin{abstract}
 Large Language Models (LLMs) and standard Retrieval-Augmented Generation (RAG) pipelines can be fluent and productive in multilingual agricultural extension, but generative models carry no intrinsic bound on factual authority. In safety-critical crop protection, a fluent sentence can silently misbind a pesticide to the wrong pest, inflate a dosage, confuse a formulation, or drop a mandatory Pre-Harvest Interval (PHI). This paper presents the \textbf{Bounded-Authority Advisory Architecture (BAA)}, an agricultural decision-support architecture that separates factual authority from linguistic realization. BAA enforces a fail-closed certification contract over structured, provenance-carrying evidence records and selectively routes each farmer query among deterministic resolution, grounded generation, conversational clarification, safe abstention, and expert escalation.
@@ -80,28 +82,21 @@ Agricultural decision support \sep Large language models \sep Retrieval-augmente
 \input{sections/01_introduction.tex}
 \input{sections/02_related_work.tex}
 \input{sections/03_problem_formulation.tex}
-\FloatBarrier
 \input{sections/04_system_architecture.tex}
-\FloatBarrier
 \input{sections/05_knowledge_governance.tex}
 \input{sections/06_experimental_methodology.tex}
-\FloatBarrier
 \input{sections/07_results_advisory_quality.tex}
 \input{sections/08_results_authority_safety.tex}
-\FloatBarrier
 \input{sections/09_results_selective_reliability.tex}
-\FloatBarrier
 \input{sections/10_results_robustness.tex}
 \input{sections/11_results_temporal_governance.tex}
 \input{sections/12_results_security_delivery.tex}
 \input{sections/13_results_efficiency.tex}
-\FloatBarrier
 \input{sections/14_discussion.tex}
 \input{sections/15_deployment_implications.tex}
 \input{sections/16_limitations.tex}
 \input{sections/17_reproducibility.tex}
 \input{sections/18_conclusion.tex}
-\FloatBarrier
 
 \section*{Declaration of Competing Interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.

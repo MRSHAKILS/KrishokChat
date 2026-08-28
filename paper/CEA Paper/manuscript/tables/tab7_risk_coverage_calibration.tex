@@ -1,17 +1,17 @@
-﻿\begin{table*}[t]
+\begin{table}[t]
 \centering
-\caption{Risk--coverage calibration on the held-out test split (Layer E04, 20{,}112 total cases; 12{,}068 train / 4{,}022 dev / 4{,}022 test; threshold frozen on dev). Values from the layer metric table; test selective risk at the frozen $\theta^*$ is reported per policy.}
+\caption{Risk--coverage calibration on held-out test split (Layer E04, 20{,}112 cases; 12{,}068 train / 4{,}022 dev / 4{,}022 test).}
 \label{tab:risk_coverage_calibration}
 \small
-\resizebox{\textwidth}{!}{\begin{tabular}{lccccc}
+\resizebox{\columnwidth}{!}{\begin{tabular}{lcccc}
 \toprule
-\textbf{Selective Policy} & \textbf{Test AURC ($\downarrow$)} & \textbf{Test ECE ($\downarrow$)} & \textbf{Test Brier ($\downarrow$)} & \textbf{Coverage @ $\theta^*$ (\%)} & \textbf{Selective Risk @ $\theta^*$ (\%)} \\
+\textbf{Selective Policy} & \textbf{AURC ($\downarrow$)} & \textbf{ECE ($\downarrow$)} & \textbf{Coverage (\%)} & \textbf{Risk (\%)} \\
 \midrule
-Raw Generator Confidence & 0.0761 & 0.0896 & 0.1332 & 10.22 & 1.70 \\
-Lexical Overlap Score & 0.1124 & 0.0855 & 0.1432 & 0.37 & 6.67 \\
-LLM-Judge Confidence & 0.0310 & 0.1066 & 0.0844 & 36.60 & 0.54 \\
-Conformal Abstention Baseline & 0.0179 & 0.1231 & 0.0531 & 77.62 & 1.06 \\
-\textbf{Calibrated Relational BAA (Ours)} & \textbf{0.0153} & \textbf{0.0785} & \textbf{0.0116} & \textbf{84.56} & \textbf{1.26} \\
+Raw Generator Conf. & 0.0761 & 0.0896 & 10.22 & 1.70 \\
+Lexical Overlap Score & 0.1124 & 0.0855 & 0.37 & 6.67 \\
+LLM-Judge Conf. & 0.0310 & 0.1066 & 36.60 & 0.54 \\
+Conformal Baseline & 0.0179 & 0.1231 & 77.62 & 1.06 \\
+\textbf{Calibrated BAA (Ours)} & \textbf{0.0153} & \textbf{0.0785} & \textbf{84.56} & \textbf{1.26} \\
 \bottomrule
 \end{tabular}}
-\end{table*}
+\end{table}
