@@ -2,8 +2,7 @@ meta:
   venue: Computers and Electronics in Agriculture (CEA)
   publisher: Elsevier
   article_type: Original Research Paper
-  title: 'Bounded-Authority Agricultural Advisory: Selective Resolution and Evidence-Bound
-    Verification for Safe Bengali Decision Support'
+  title: 'Bounded-Authority Verification for Safety-Critical Pesticide Advisory in Low-Resource Bengali Agriculture'
   policy: ../../docs/PAPER_POLICY.md
   master_results_ssot: experiments/results.yaml
   registry_trace: ../../experiments/registry.yaml
@@ -22,9 +21,6 @@ manuscript:
   - manuscript/sections/08_results_authority_safety.tex
   - manuscript/sections/09_results_selective_reliability.tex
   - manuscript/sections/10_results_robustness.tex
-  - manuscript/sections/11_results_temporal_governance.tex
-  - manuscript/sections/12_results_security_delivery.tex
-  - manuscript/sections/13_results_efficiency.tex
   - manuscript/sections/14_discussion.tex
   - manuscript/sections/15_deployment_implications.tex
   - manuscript/sections/16_limitations.tex
