@@ -38,7 +38,7 @@ Each record carries effective/expiry dates and an authority manifest (Section~\r
 \subsection{Offline, Edge, and Channel Support}
 A signed offline fact pack (SQLite) supports deterministic resolution and verification with zero network access. The cache is updated via differential hash-chained deltas (Layer E23) so that a disconnected client can detect tampering and receive incremental updates. This has a direct practical implication for deployment in Bangladesh: a farmer on a \emph{char} (river island) with no mobile connectivity can still receive a certified pesticide advisory, resolved entirely on-device from the offline fact pack. Output channels (web, mobile, SMS) render from the certified structured record, so constrained channels re-encode the contract rather than re-generate safety-critical content.
 
-\begin{figure*}[tb]
+\begin{figure*}[pos=t]
 \centering
 \includegraphics[width=0.92\textwidth,height=7.2cm,keepaspectratio]{figures/fig_1.png}
 \caption{The Bounded-Authority Advisory Architecture (BAA). Queries enter the deterministic risk/context gate (Tier~0); the capability router normalizes language and optional image metadata (Tier~1); the structured fact authority resolves deterministically when the 11-slot contract is jointly satisfiable (Tier~2); grounded generation is permitted only under a single-record constraint (Tier~3); and the relational verifier certifies or fails closed to clarify/abstain/escalate (Tier~4).}

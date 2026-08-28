@@ -31,7 +31,7 @@ Under rural-edge loss (15\%), offline-first caching sustains \textbf{91.4\%} del
 \subsection{Safety--Coverage--Latency Trade-off}
 The Pareto narrative across the paper is: BAA trades coverage (97\% CAC at 33\% abstention; 84.56\% coverage at 1.26\% risk) for safety (0.0\% CUAR observed across all main evaluation layers) and wins latency on the deterministic share of traffic (2.28$\times$ weighted speedup). The trade-off is explicit and tunable through $\theta^*$; Figure~\ref{fig:deployment_tradeoffs} illustrates the four-panel efficiency portrait.
 
-\begin{figure}[tb]
+\begin{figure}[pos=t]
 \centering
 \resizebox{\columnwidth}{!}{\includegraphics[keepaspectratio]{figures/fig_6.png}}
 \caption{Deployment Trade-offs: Systems Efficiency, Connectivity Resilience, and Channel Economics. (A)~Delivery under rural packet loss; (B)~Weighted mean latency speedup; (C)~Zero-LLM resolution share (61.5\%); (D)~160-character Bengali SMS slot survival rate.}

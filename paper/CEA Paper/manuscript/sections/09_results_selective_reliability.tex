@@ -13,7 +13,7 @@ Layer E04 evaluated five selective policies on a 20{,}112-case corpus (12{,}068 
 
 The calibrated relational policy achieves the lowest test Area Under the Risk--Coverage curve (AURC, \textbf{0.0153}) and Expected Calibration Error (ECE, \textbf{0.0785}) of all five policies. At the frozen threshold $\theta^*~=~0.2375$, it sustains \textbf{84.56\% test coverage at a selective risk of 1.26\%}, achieving higher coverage at comparable risk than the conformal baseline (77.62\% at 1.06\%). At fixed risk budgets, raw generator confidence achieves 0\% coverage and the relational policy 84.56\% at comparable risk levels.
 
-\begin{figure}[tb]
+\begin{figure}[pos=t]
 \centering
 \includegraphics[width=\columnwidth,keepaspectratio]{figures/fig_3.png}
 \caption{Risk--Coverage Curves on Held-Out Test Split (Layer E04). At the frozen threshold $\theta^*~=~0.2375$, calibrated relational BAA achieves 84.56\% coverage at 0.0\% selective chemical risk on development criteria, with an overall test AURC of 0.0153.}

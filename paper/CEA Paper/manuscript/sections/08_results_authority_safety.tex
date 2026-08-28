@@ -18,7 +18,7 @@ Layer E02 evaluated 10{,}000 adversarial cases (10 corruption families $\times$ 
 \subsection{Metamorphic Authority Testing (E28)}
 Layer E28 generalizes the attack: 11~mutation operators (crop, pest, active ingredient, formulation, dosage overdose, dosage unit, water volume, interval shortening, PHI shortening, regulatory polarity flip, provenance-hash corruption) $\times$ 1{,}000 cases each~$=$~11{,}000 adversarial mutations, run against seven verification systems. BAA rejected \textbf{100.0\%} (95\% CI [99.97, 100.0]) with 0.0\% false certification. B5 is the isolation baseline: it shares all architecture with BAA except the four missing slots. Its failure on exactly those four families (and only those: 0.0\% rejection on water volume, spray interval, PHI, and provenance hash) demonstrates that the safety gain is attributable to slot completeness, not to confounding architectural differences. The LLM-as-judge rejected only 72.25\%, the citation-alignment baseline 57.33\%, dense matcher 37.05\%, BM25 36.36\%, and unconstrained LLM 18.41\% (false-certifying 81.59\%).
 
-\begin{figure}[tb]
+\begin{figure}[pos=t]
 \centering
 \includegraphics[width=\columnwidth,keepaspectratio]{figures/fig_4.png}
 \caption{Metamorphic Rejection Rates under 11,000 Systematic Corruptions per System (Layer E28). BAA achieves 100.0\% rejection across all 11 mutation operators, while unconstrained LLMs accept 81.59\% of corrupted advice.}
@@ -40,7 +40,7 @@ When text and visual crop identity conflicted, BAA triggered a safe clarificatio
 \subsection{Slot Ablation: What Each Contract Field Buys (E03)}
 Layer E03 ablated each of the 11 contract slots individually (10{,}000 cases per configuration, 13 configurations). Removing each slot raises dangerous acceptance as follows: dosage bounds $+$31.6~pp, regulatory polarity $+$17.8~pp, active ingredient $+$14.2~pp, host crop $+$11.4~pp, target pathogen $+$8.2~pp, solvent volume $+$7.1~pp, formulation $+$5.8~pp, unit $+$5.4~pp, growth stage $+$4.9~pp, PHI $+$2.7~pp, spray interval $+$1.9~pp. Removing all typed constraints collapses the system to the 80.0\% hazard of a lexical substring matcher. The dosage-bound and regulatory-polarity slots are individually load-bearing: their ablation alone creates the two largest hazard surges in the battery.
 
-\begin{figure}[tb]
+\begin{figure}[pos=t]
 \centering
 \includegraphics[width=\columnwidth,keepaspectratio]{figures/fig_5.png}
 \caption{Hazard Surge Under Contract Slot Ablation (Layer E03). Removing dosage bound enforcement yields the largest single hazard increase (+31.6~pp), while removing all typed constraints causes an 80.0\% hazard collapse.}
