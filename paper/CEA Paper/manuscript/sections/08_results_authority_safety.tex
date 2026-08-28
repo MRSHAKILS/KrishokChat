@@ -11,6 +11,13 @@ The lexical substring baseline (B4) accepted 80.0\% of corrupted claims as safe 
 \subsection{Metamorphic Authority Testing (E28)}
 Layer E28 generalizes the attack: 11 mutation operators (crop, pest, active ingredient, formulation, dosage overdose, dosage unit, water volume, interval shortening, PHI shortening, regulatory polarity flip, provenance-hash corruption) $\times$ 1{,}000 cases each = 11{,}000 adversarial mutations, run against seven verification systems. BAA (B6) rejected \textbf{100.0\%} (95\% CI [99.97, 100.0]) with 0.0\% false certification. The partial 8-slot matcher (B5) rejected 63.64\% overall but \textbf{0.0\%} on exactly the four safety-critical families it lacked --- water volume, application interval, PHI, and provenance hash --- demonstrating that partial slot coverage is not a degraded version of the full contract but a qualitatively different (and unsafe) verification target. The LLM-as-judge (B4) rejected only 72.25\%, the citation-alignment baseline (B3) 57.33\%, dense matcher 37.05\%, BM25 36.36\%, and unconstrained LLM 18.41\% (false-certifying 81.59\%, with 67.15\% observed CUAR). Table~\ref{tab:authority_verification} reports the full comparison.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_4.png}
+\caption{Metamorphic Rejection Rates under 11,000 Systematic Corruptions per System (Layer E28). BAA achieves 100.0\% rejection across all 11 mutation operators, while unconstrained LLMs accept 81.59\% of corrupted advice.}
+\label{fig:metamorphic_rejection}
+\end{figure}
+
 \subsection{Counterfactual Evidence Binding (E05)}
 Layer E05 tested certification under counterfactual mutations (e.g.\ dose scaled 5$\times$ or PHI shortened to 3 days): 2,000 evidence pairs per system. BAA certified 0.0\% of mutated claims (95\% CI [0.0, 0.19]) while certifying 100.0\% of true evidence, giving a Counterfactual Binding Consistency (CBC) of 1.0000. Vanilla RAG certified 72.65\% of mutated claims (CI [70.65, 74.56]; CBC 0.2735), a lexical matcher 59.55\% (CBC 0.4045), and an LLM-as-judge 38.65\% (CBC 0.5705). The falsified-margin is the exact complement of the true-evidence margin: the typed verifier is evidence-bound rather than prior-bound.
 
@@ -25,6 +32,13 @@ Layer E31 (100 cases per system) placed a text crop identity in conflict with a 
 
 \subsection{Slot Ablation: What Each Contract Field Buys (E03)}
 Layer E03 ablated each of the 11 contract slots individually (10{,}000 cases per configuration, 13 configurations). Removing a slot from the certification contract raises dangerous acceptance as follows: dosage bounds $+31.6$ pp, regulatory polarity $+17.8$ pp, active ingredient $+14.2$ pp, host crop $+11.4$ pp, target pathogen $+8.2$ pp, solvent volume $+7.1$ pp, formulation $+5.8$ pp, unit $+5.4$ pp, growth stage $+4.9$ pp, PHI $+2.7$ pp, and spray interval $+1.9$ pp. Removing all typed constraints collapses the system to the 80.0\% hazard of a lexical substring matcher (CI [79.20, 80.77]). The dosage-bound and regulatory-polarity slots are individually load-bearing: their ablation alone creates the two largest hazard surges in the battery.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_5.png}
+\caption{Hazard Surge Under Contract Slot Ablation (Layer E03). Removing dosage bound enforcement yields the largest single hazard increase (+31.6 pp), while removing all typed constraints causes an 80.0\% hazard collapse.}
+\label{fig:slot_ablation}
+\end{figure}
 
 \subsection{Generator-Independent Verification (E11)}
 Because BAA delegates phrasing to an LLM, we verified that the safety boundary does not depend on which generator is used. Three heterogeneous generators (fine-tuned Gemma-4 4-bit, Llama-3-8B, Qwen-2.5-7B) were run with and without the frozen verifier (2,000 cases each). Raw unverified generation produced chemical hazards of 7.4\%, 11.8\%, and 13.6\% respectively. With the verifier applied, all three reached \textbf{0.0\% dangerous acceptance} (each CI [0.0, 0.19]), with generator quality reflected only in certified coverage (84.56\% / 79.2\% / 76.5\%). The fail-closed boundary is model-invariant; the coverage is model-dependent.

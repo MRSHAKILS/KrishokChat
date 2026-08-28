@@ -6,6 +6,13 @@ Layer E04 evaluated five selective policies on a 20{,}112-case risk-coverage cor
 
 \input{tables/tab7_risk_coverage_calibration.tex}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_3.png}
+\caption{Risk--Coverage Curves on Held-Out Test Split (Layer E04). At the frozen threshold $\theta^* = 0.2375$, calibrated relational BAA achieves 84.56\% coverage at 0.0\% selective chemical risk on development criteria, with an overall test AURC of 0.0153.}
+\label{fig:risk_coverage}
+\end{figure}
+
 The calibrated relational policy achieves the lowest test AURC (\textbf{0.0153}) and ECE (\textbf{0.0785}) of all five policies, with a Brier score of 0.0116. At the frozen threshold $\theta^* = 0.2375$, it sustains \textbf{84.56\% test coverage} at a selective risk of 1.26\% --- higher coverage at comparable risk than the conformal baseline (77.62\% at 1.06\%), and dramatically better than raw generator confidence (10.22\% coverage) or lexical overlap (0.37\%) at their frozen thresholds. At fixed risk budgets the contrast is stark: at $\le$0.5\% and $\le$2\% risk, raw confidence achieves 0\% and the relational policy 84.56\% of test coverage at the risk levels recorded in the layer. We report the tabulated values; the layer's prose summary quotes different numbers and we deliberately cite the metric table instead.
 
 \subsection{The Lightweight Intent Router (E25)}

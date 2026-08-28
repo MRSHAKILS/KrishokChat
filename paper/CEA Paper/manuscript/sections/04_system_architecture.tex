@@ -33,11 +33,9 @@ Each record carries effective/expiry dates and an authority manifest (Section~\r
 \subsection{Offline, Edge, and Channel Support}
 A signed offline fact pack (SQLite) supports deterministic resolution and verification with zero network access. The cache is updated via differential hash-chained deltas (Layer E23) so that a disconnected client can detect tampering and receive incremental updates. Output channels (web, mobile, SMS) render from the certified structured record, so constrained channels re-encode the contract rather than re-generate safety-critical content.
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-% FIGURE 1 -- Architecture. Generated externally from the GPT prompt in
-% manuscript/figures/fig1_architecture_prompt.txt
-\includegraphics[width=\textwidth]{figures/fig_1.png}
-\caption{The Bounded-Authority Advisory Architecture. Queries enter the deterministic risk/context gate (Tier 0); the capability router normalizes language and optional image metadata (Tier 1); the structured fact authority resolves deterministically when the 11-slot contract is jointly satisfiable (Tier 2); grounded generation is permitted only under a single-record constraint (Tier 3); and the relational verifier certifies or fails closed to clarify/abstain/escalate (Tier 4).}
+\includegraphics[width=0.92\textwidth]{figures/fig_1.png}
+\caption{The Bounded-Authority Advisory Architecture (BAA). Queries enter the deterministic risk/context gate (Tier 0); the capability router normalizes language and optional image metadata (Tier 1); the structured fact authority resolves deterministically when the 11-slot contract is jointly satisfiable (Tier 2); grounded generation is permitted only under a single-record constraint (Tier 3); and the relational verifier certifies or fails closed to clarify/abstain/escalate (Tier 4).}
 \label{fig:architecture}
-\end{figure}
+\end{figure*}
