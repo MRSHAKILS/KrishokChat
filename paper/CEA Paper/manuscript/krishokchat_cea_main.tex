@@ -66,9 +66,9 @@
 \cortext[2]{Co-corresponding supervisor}
 
 \begin{abstract}
-Large Language Models (LLMs) and standard Retrieval-Augmented Generation (RAG) pipelines can be fluent and productive in multilingual agricultural extension, but generative models carry no intrinsic bound on factual authority. In safety-critical crop protection, a fluent sentence can silently misbind a pesticide to the wrong pest, inflate a dosage, confuse a formulation, or drop a mandatory Pre-Harvest Interval (PHI). This paper presents the \textbf{Bounded-Authority Advisory Architecture (BAA)}, an agricultural decision-support architecture that separates factual authority from linguistic realization. BAA enforces a fail-closed certification contract over structured, provenance-carrying evidence records and selectively routes each farmer query among deterministic resolution, grounded generation, conversational clarification, safe abstention, and expert escalation.
+Large Language Models and standard Retrieval-Augmented Generation (RAG) pipelines are fluent in agricultural extension but carry no intrinsic bound on factual authority. In crop protection, a fluent sentence can silently misbind a pesticide to the wrong crop, inflate a dosage, or drop a mandatory Pre-Harvest Interval (PHI) --- failures that remain confident-sounding and are therefore dangerous. We present the \textbf{Bounded-Authority Advisory Architecture (BAA)}, which separates factual authority from linguistic realization: the generative model may phrase and explain, but it may not invent or mutate safety-critical agronomic values. BAA enforces an 11-slot, single-record, fail-closed certification contract and selectively routes queries among deterministic resolution, grounded generation, clarification, abstention, and escalation.
 
-We evaluate BAA across an evidence chain that isolates each architectural decision. On 10,000 adversarial relational-misbinding attacks and 2,000 counterfactual evidence mutations, BAA rejects \MisbindDetRate{} of corrupted chemical claims (95\% Wilson CI [99.96\%, 100.0\%]), against 80.0\% dangerous acceptance for a lexical baseline and 38.65\% for an LLM-as-a-judge verifier. On a 100-case live end-to-end benchmark, BAA attains 97.0\% certified advisory correctness and 0.0\% critical unsafe acceptance (CI [0.0\%, 3.7\%]), with 33.0\% safe abstention; a three-agronomist validation study records a mean correctness rating of 4.82/5 and a 100.0\% chemical-safety pass rate (Gwet's AC1 = 0.862). Calibrated abstention sustains 84.56\% advisory coverage at a 1.26\% selective-risk level on 20,112 held-out cases. A five-tier resolution ladder resolves \DetAdvisoryCoverage{} of the modeled workload without invoking any LLM (safety/refusal handling \SafetyRefusalHandling{}, LLM-dependent traffic \LLMDependent{}), cutting weighted latency 2.28$\times$. Deterministic 160-character GSM templates preserve 100\% of safety-critical slots where LLM-composed SMS loses the PHI in 64.4\% of messages, and offline-first cryptographic caching sustains 91.4\% delivery at 15\% packet loss versus 82.0\% for cloud-only RAG. The results show that subordinating generative language to explicit, bounded factual authority yields a dependable, auditable, and affordable foundation for agricultural decision support in low-resource environments.
+On 10,000 adversarial relational-misbinding attacks, BAA rejects \MisbindDetRate{} of corrupted chemical claims (95\% Wilson CI [99.96, 100.0]), against 80.0\% dangerous acceptance for a lexical baseline and 38.65\% for an LLM-as-a-judge verifier. On a 100-case live end-to-end benchmark, BAA attains 97.0\% certified advisory correctness and 0.0\% critical unsafe acceptance (CI [0.0, 3.7]), confirmed by a three-agronomist validation study (4.82/5 mean correctness; 100.0\% chemical-safety pass; Gwet's AC1 = 0.862). Calibrated abstention sustains 84.56\% advisory coverage at a 1.26\% selective-risk level across 20,112 held-out cases. The deterministic resolution ladder eliminates LLM invocation for 61.5\% of queries, cutting weighted latency 2.28$\times$ and per-query cost by 89.7\%. The results demonstrate that subordinating generative language to bounded factual authority yields a dependable, auditable, and affordable foundation for safety-critical agricultural decision support.
 
 \end{abstract}
 
@@ -85,13 +85,12 @@ Agricultural decision support \sep Large language models \sep Retrieval-augmente
 \input{sections/04_system_architecture.tex}
 \input{sections/05_knowledge_governance.tex}
 \input{sections/06_experimental_methodology.tex}
+% Results: 4 consolidated sections (§7–§10)
 \input{sections/07_results_advisory_quality.tex}
 \input{sections/08_results_authority_safety.tex}
 \input{sections/09_results_selective_reliability.tex}
-\input{sections/10_results_robustness.tex}
-\input{sections/11_results_temporal_governance.tex}
-\input{sections/12_results_security_delivery.tex}
-\input{sections/13_results_efficiency.tex}
+\input{sections/10_results_robustness.tex}  % now = Deployment Efficiency (merged §12+§13)
+% Discussion and closing sections
 \input{sections/14_discussion.tex}
 \input{sections/15_deployment_implications.tex}
 \input{sections/16_limitations.tex}
@@ -102,7 +101,10 @@ Agricultural decision support \sep Large language models \sep Retrieval-augmente
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 \section*{Acknowledgments}
-The authors thank the Department of Agricultural Extension (DAE), the Bangladesh Agricultural Research Institute (BARI), and the Bangladesh Rice Research Institute (BRRI) for public access to institutional Krishi handbooks and agronomic guidance.
+The authors thank the Department of Agricultural Extension (DAE), the Bangladesh Agricultural Research Institute (BARI), and the Bangladesh Rice Research Institute (BRRI) for public access to institutional Krishi handbooks and agronomic guidance. This work is the reliability-science layer of a larger research program: prior work established the knowledge and retrieval foundations (the 1{,}001-query farmer benchmark and retrieval-failure analysis), and a companion systems paper describes the integrated deployment artifact. The CEA contribution is the generalizable bounded-authority architecture and its evidence chain, not the individual components, each of which exists in the literature.
+
+\section*{Data Availability}
+All frozen experiment results, evaluation scripts, and the fact-store schema are available in the project repository. Layers E02--E26 carry full verification blocks; E27--E39 are reproducibility-incomplete pending verification block additions (see Section~\ref{sec:limitations}).
 
 \bibliographystyle{cas-model2-names}
 \bibliography{krishokchat_cea}

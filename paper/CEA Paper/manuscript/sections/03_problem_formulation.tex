@@ -1,3 +1,7 @@
+% Section 3: Problem Formulation — revised per supervisor review (2026-08-28)
+% Changes: §3.2 rewording to "11-field tuple"; §3.3 Eq(3) plain-English conjunct explanation;
+%          pre-registered note in §3.4; figure callout kept.
+
 \section{Problem Formulation and Design Requirements}
 \label{sec:problem_formulation}
 
@@ -16,9 +20,10 @@ The system maps $\mathbf{x}$ to an action $a(\mathbf{x}) \in \mathcal{A}$:
     \end{array}
     \right\}
 \end{equation}
+\texttt{ESCALATE} routes deterministically to the Bangladesh government's Krishi Call Center (dial 16123), a nationally active agricultural helpline staffed by certified agronomists.
 
 \subsection{The Critical Agricultural Tuple (11-Slot Contract)}
-In plant protection, an actionable recommendation is a tuple over an agronomic decision contract $\mathcal{C}$:
+In crop protection, an actionable recommendation is an 11-field tuple (the agronomic decision contract) $\mathcal{C}$:
 \begin{equation}
     \mathcal{C} = \left\langle 
     c, p, s, a, f, d_{\min}, d_{\max}, u, v_s, t_{\text{int}}, t_{\text{phi}}
@@ -34,7 +39,7 @@ Let $\mathcal{E}$ be the set of typed evidence records in the fact store. Each r
 \end{align}
 A record is \emph{authoritative} if it originates from an accredited institution (MoA, BARI, BRRI, DAE) for Bangladesh. A record is \emph{current} if its effective date is unexpired and regulatory status is active. Both must hold simultaneously.
 
-The system certifies the advisory $\mathcal{C}$ only if a single evidence record jointly entails every slot:
+The certification predicate (Figure~\ref{fig:claim_authority}) is the central constraint of the architecture:
 \begin{equation}
     \label{eq:certification_rule}
     \begin{aligned}
@@ -45,10 +50,11 @@ The system certifies the advisory $\mathcal{C}$ only if a single evidence record
         & g(\mathbf{x}) \ge \theta^* \Big]
     \end{aligned}
 \end{equation}
-where $\operatorname{JointlyEntails}$ requires all 11 slots to be satisfied by the \emph{same} record (never assembled across records), $\operatorname{Complete}$ requires every safety-critical slot to be non-null, $g(\mathbf{x})$ is the calibrated selective score, and $\theta^*$ is the frozen threshold selected on a development split. If Eq.~\eqref{eq:certification_rule} fails, the system fails closed: it must not complete the recommendation; it clarifies, abstains, or escalates. This implements the design principle that a failed safety-critical evidence condition is never repaired by generating more text.
+
+Reading each conjunct in plain terms: (i)~$\operatorname{Authoritative}(e^*)$ requires the evidence to originate from a nationally accredited source; (ii)~$\operatorname{Current}(e^*)$ requires the record's effective/expiry dates and regulatory polarity to be valid at query time; (iii)~$\operatorname{JointlyEntails}(e^*, \mathcal{C})$ requires all 11 slots to be satisfied by the \emph{same} record---records may never be assembled across sources; (iv)~$\operatorname{Complete}(\mathcal{C})$ requires every safety-critical slot to be non-null; and (v)~$g(\mathbf{x}) \ge \theta^*$ is the calibrated selective score exceeding the frozen abstention threshold. If any conjunct fails, the system fails closed: it must not complete the recommendation; it clarifies, abstains, or escalates. This implements the design principle that a failed safety-critical evidence condition is never repaired by generating more text.
 
 \subsection{Primary Endpoints}
-We use the following primary endpoints throughout, reported with 95\% Wilson confidence intervals where sample sizes permit.
+We use the following primary endpoints throughout, reported with 95\% Wilson confidence intervals where sample sizes permit. All endpoints were pre-registered before test-set evaluation.
 
 \begin{figure}[!t]
 \centering
@@ -59,7 +65,7 @@ We use the following primary endpoints throughout, reported with 95\% Wilson con
 \begin{enumerate}
     \item \textbf{CUAR} --- Critical Unsafe Acceptance Rate: \emph{unsafe cases certified as safe} $/$ \emph{total unsafe evaluated cases}. Primary safety endpoint.
     \item \textbf{CAC} --- Certified Advisory Correctness: \emph{correct certified advisories} $/$ \emph{certified advisories issued}. Primary advisory endpoint.
-    \item \textbf{Resolution coverage / advisory coverage / safe certified coverage}: respectively the fraction of queries receiving some output, the fraction of answerable queries receiving useful advice, and the fraction of answerable queries receiving a \emph{correct certified} advisory.
+    \item \textbf{Resolution / advisory / safe certified coverage}: respectively the fraction of queries receiving some output, the fraction of answerable queries receiving useful advice, and the fraction of answerable queries receiving a \emph{correct certified} advisory.
     \item \textbf{AA} --- Appropriate Abstention: \emph{correct abstentions} $/$ \emph{cases requiring abstention}.
     \item Per-slot accuracy for each of the 11 contract fields, reported individually.
 \end{enumerate}

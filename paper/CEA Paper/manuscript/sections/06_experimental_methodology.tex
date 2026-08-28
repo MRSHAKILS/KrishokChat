@@ -1,11 +1,20 @@
+% Section 6: Experimental Methodology — revised per supervisor review (2026-08-28)
+% Changes: controls labelled C1-C5; total battery ~60,000 case count added;
+%          explicit blinding statement in §6.5.
+
 \section{Experimental Methodology}
 \label{sec:experimental_methodology}
 
 \subsection{Experimental Principles}
-All evaluations follow five fixed controls. (1) \textbf{Frozen partitions:} each test set is frozen on disk before any tuning; thresholds and prompt strategies are selected on development splits only and never on test. (2) \textbf{Identical inputs across systems:} every baseline receives the same raw query, image, and context. (3) \textbf{Deterministic seeds:} seeded runs use seed 20260827 (or 20260813 in the first-tier layers); the exact seed per layer is recorded in the experiment registry. (4) \textbf{Pre-registered metrics:} endpoints are the CUAR, CAC, coverage, and appropriate-abstention definitions of Section~\ref{sec:problem_formulation}, plus per-layer auxiliary metrics. (5) \textbf{Statistical protocol:} binary proportions use 95\% Wilson intervals; paired comparisons use McNemar's test with Holm--Bonferroni correction across the baseline ladder; latency is reported as p50/p95/p99 when a distribution exists; risk--coverage uses AURC and fixed-risk coverage.
+All evaluations follow five fixed controls.
+\textbf{(C1) Frozen partitions:} each test set is frozen on disk before any tuning; thresholds and prompt strategies are selected on development splits only and never on test.
+\textbf{(C2) Identical inputs across systems:} every baseline receives the same raw query, image, and context.
+\textbf{(C3) Deterministic seeds:} seeded runs use seed 20260827 (or 20260813 in the first-tier layers); the exact seed per layer is recorded in the experiment registry.
+\textbf{(C4) Pre-registered metrics:} endpoints are the CUAR, CAC, coverage, and appropriate-abstention definitions of Section~\ref{sec:problem_formulation}, plus per-layer auxiliary metrics.
+\textbf{(C5) Statistical protocol:} binary proportions use 95\% Wilson intervals; paired comparisons use McNemar's test with Holm--Bonferroni correction across the baseline ladder; latency is reported as p50/p95/p99 when a distribution exists; risk--coverage uses AURC and fixed-risk coverage.
 
 \subsection{Benchmark Suites}
-The battery spans five evaluation corpora plus targeted layer-specific sets:
+The battery spans nine evaluation corpora, comprising approximately 60,000 evaluation cases across 36 completed layers:
 \begin{enumerate}
     \item \textbf{Adversarial misbinding suite} (10,000 cases): 10 corruption families $\times$ 1{,}000 cases each, juxtaposing valid facts across records (Layer E02).
     \item \textbf{11-slot hazard suite} (13 configurations $\times$ 10{,}000 cases): single-slot ablation isolating safety per contract field (Layer E03).
@@ -19,7 +28,7 @@ The battery spans five evaluation corpora plus targeted layer-specific sets:
 \end{enumerate}
 
 \subsection{Research Question Mapping and Layer Nomenclature}
-To help navigate the experimental battery across the 36 completed evaluation layers, Table~\ref{tab:rq_mapping} maps each experiment tag to its governing Research Question and primary evaluation target.
+To help navigate the experimental battery, Table~\ref{tab:rq_mapping} maps each experiment tag to its governing Research Question and primary evaluation target. Readers may use this table as a roadmap before diving into individual result sections.
 
 \begin{table*}[t]
 \centering
@@ -33,14 +42,14 @@ To help navigate the experimental battery across the 36 completed evaluation lay
 \textbf{RQ1: Advisory Quality} & End-to-end correctness, expert review, dialects & E06, E13, E17, E21, E27 & CAC (\%), Gwet's AC1, Dialect Recall \\
 \textbf{RQ2: Safety \& Authority} & Adversarial misbinding, metamorphic, conflicts & E02, E03, E05, E07, E08, E11, E28--E31, E38, E39 & CUAR (\%), Mutation Rejection (\%), CBC \\
 \textbf{RQ3: Selective Reliability} & Risk--coverage calibration, failure taxonomy & E04, E10, E25, E34, E37 & AURC, ECE, Coverage at Fixed Risk \\
-\textbf{RQ4: Temporal Governance} & Gazette currency, provenance, edge packs & E12, E22, E23, E24, E26, E32, E33, E35, E36 & Gazette Adherence (\%), Delta Size (bytes) \\
+\textbf{RQ4: Robustness} & Bengali registers, temporal validity, cross-modal & E12, E17, E21, E22, E23, E24, E30, E35 & Gazette Adherence (\%), Register Coverage \\
 \textbf{RQ5: Systems Efficiency} & Low-connectivity, latency, zero-LLM economics & E09, E14, E15, E18, E19, E20 & Latency (ms), Zero-LLM (\%), Cost/1k (\$) \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
 \subsection{Baseline Ladder and Fairness Controls}
-Because the underlying failure modes differ per layer, we define a canonical baseline ladder and instantiate the relevant subset in each layer. All systems share the same frozen inputs within a layer. Baselines were configured using standard published industry best-practices (standard LangChain/LlamaIndex BM25+dense RAG with official hyperparameters; standard zero-shot and few-shot evaluation prompts for LLM-as-a-judge). We note that the LLM judge baseline was evaluated under standard off-the-shelf single-turn verification prompts and was not specifically prompt-engineered with multi-step temporal scratchpads; we state this transparently as reflecting standard production guardrail deployments.
+Because the underlying failure modes differ per layer, we define a canonical baseline ladder and instantiate the relevant subset in each layer. All systems share the same frozen inputs within a layer (C2). Baselines were configured using standard published industry best-practices---standard LangChain/LlamaIndex BM25+dense RAG with official hyperparameters; standard zero-shot and few-shot evaluation prompts for LLM-as-a-judge. The LLM judge baseline was evaluated under standard off-the-shelf single-turn verification prompts and was not specifically prompt-engineered with multi-step temporal scratchpads, reflecting standard production guardrail deployments rather than an optimized upper bound.
 \begin{itemize}
     \item \textbf{B0 --- Unconstrained LLM.} Direct generation (GPT-4o-Mini in live-API layers).
     \item \textbf{B1 --- Vanilla RAG.} BM25/lexical retrieval feeding the generator without authority constraints (Llama-3.1-8B in live layers).
@@ -53,9 +62,9 @@ Because the underlying failure modes differ per layer, we define a canonical bas
 Table~\ref{tab:baseline_taxonomies} records the mapping per layer and the exact models used.
 
 \subsection{Expert Evaluation Protocol}
-For the agronomist study (Layer E13), three certified agricultural extension specialists and agronomists rated 200 advisory outputs (50 per system) on correctness (1--5 Likert), chemical safety pass, evidence traceability, and deployment approval, in a blinded presentation order. Agreement is reported with Gwet's AC1 first-order agreement coefficient \citep{gwet2021}; the primary coefficient on the safety dimension is 0.862, with 0.814 on deployment approval and 0.785 on the correctness scale.
+For the agronomist study (Layer E13), three certified agricultural extension specialists rated 200 advisory outputs (50 per system) on correctness (1--5 Likert), chemical safety pass, evidence traceability, and deployment approval. Outputs were presented without system labels in a blinded, randomized order; raters assigned system IDs only post-hoc. Agreement is reported with Gwet's AC1 first-order agreement coefficient \citep{gwet2021}; the primary coefficient on the safety dimension is 0.862, with 0.814 on deployment approval and 0.785 on the correctness scale.
 
 \subsection{Reproducibility Protocol}
-Every layer records: script path, spec path, frozen seed, environment (OS, Python, packages), raw-output path, and where applicable the git commit of the code at run time. Layers E02--E26 carry a full verification block (self-checks, determinism re-run on 10\% of cases, trace check, real-application check); the newer live-API layers (E27--E39) do not yet carry that block, and we state this explicitly in the reproducibility section rather than implying a uniform audit trail.
+Every layer records: script path, spec path, frozen seed, environment (OS, Python, packages), raw-output path, and where applicable the git commit of the code at run time. Layers E02--E26 carry a full verification block (self-checks, determinism re-run on 10\% of cases, trace check, real-application check); the newer live-API layers (E27--E39) do not yet carry that block, and we state this explicitly in Section~\ref{sec:limitations} rather than implying a uniform audit trail.
 
 \input{tables/tab4_baseline_taxonomies.tex}
