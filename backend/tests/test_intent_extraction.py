@@ -404,3 +404,101 @@ async def test_pipeline_clarification_intercept_skips_retrieval() -> None:
     assert PipelineStage.RETRIEVAL in stages_skipped
     assert PipelineStage.GENERATION in stages_skipped
 
+
+def test_cross_modal_conflict_detection_unit() -> None:
+    from app.domain.intent import detect_cross_modal_conflict
+
+    # Case 1: Image = Potato, Text = Begun (Conflict)
+    conflict, img_c, txt_c, prompt = detect_cross_modal_conflict("potato", "আমার বেগুন গাছে পোকা লেগেছে")
+    assert conflict is True
+    assert img_c == "potato"
+    assert txt_c == "brinjal"
+    assert "আলু" in prompt
+    assert "বেগুন" in prompt
+
+    # Case 2: Image = Rice, Text = Dhan (Agreement - No conflict)
+    conflict, img_c, txt_c, prompt = detect_cross_modal_conflict("rice", "ধানের ব্লাস্ট রোগের সমাধান কী?")
+    assert conflict is False
+    assert prompt is None
+
+    # Case 3: No image provided (No conflict)
+    conflict, img_c, txt_c, prompt = detect_cross_modal_conflict(None, "টমেটো পচা রোধ করব কীভাবে?")
+    assert conflict is False
+
+
+@pytest.mark.asyncio
+async def test_pipeline_intercepts_cross_modal_contradiction() -> None:
+    from app.application.generation import GroundedAnswerGenerator
+    from app.application.safety import SafetyClassifier
+    from app.application.verifier import HardenedDosageVerifier
+    from app.application.qa_pipeline import QAInput, QAPipeline
+    from app.domain.contracts import QueryContext
+    from app.domain.enums import PipelineStage, ResolutionTier, StageStatus
+
+    llm = MagicMock()
+    llm.classify_json = AsyncMock(return_value={
+        "category": "safe_agri",
+        "confidence": 0.95,
+        "reason": "safe question",
+        "matched_rules": [],
+        "requires_escalation": False,
+        "intent": {
+            "kind": "treatment",
+            "crop": "brinjal",
+            "problem": "pest",
+            "is_ambiguous": False,
+        },
+    })
+    llm.generate = AsyncMock(side_effect=AssertionError("Generation must not run on cross-modal contradiction"))
+
+    retriever = MagicMock()
+    retriever.retrieve = MagicMock(side_effect=AssertionError("Retrieval must not run on cross-modal contradiction"))
+
+    pipeline = QAPipeline(
+        safety=SafetyClassifier(llm),
+        retriever=retriever,
+        generator=GroundedAnswerGenerator(llm),
+        verifier=HardenedDosageVerifier(),
+        audit=MagicMock(),
+        sessions=MagicMock(),
+    )
+
+    # User uploaded Potato image, but typed "বেগুন"
+    result = await pipeline.run(QAInput(query="আমার বেগুন গাছে কী স্প্রে করব?", crop="potato"))
+    assert result.resolution_tier is ResolutionTier.INTERACTIVE_CLARIFICATION
+    assert "আলু" in result.answer
+    assert "বেগুন" in result.answer
+    assert result.sources == ()
+    retriever.retrieve.assert_not_called()
+    llm.generate.assert_not_called()
+
+
+def test_regional_dialect_and_banglish_intent_extraction() -> None:
+    # Sylheti dialect treatment query
+    i_syl = keyword_intent("পাতা পুইড়া যাইতাছে কী করমু?")
+    assert i_syl is not None
+    assert i_syl.kind == "treatment"
+    assert i_syl.plant_part == "leaf"
+    assert i_syl.is_ambiguous is True  # missing crop slot
+
+    # Chittagonian dialect crop + pest
+    i_ctg = keyword_intent("বাইঙ্গন গাছে পোঁকা দমন করমু কেমনে?")
+    assert i_ctg is not None
+    assert i_ctg.kind == "treatment"
+    assert i_ctg.crop == "brinjal"
+    assert i_ctg.is_ambiguous is False
+
+    # Banglish query
+    i_banglish = keyword_intent("begun e poka lagse ki spray korbo?")
+    assert i_banglish is not None
+    assert i_banglish.kind == "treatment"
+    assert i_banglish.crop == "brinjal"
+    assert i_banglish.is_ambiguous is False
+
+    # Northern / Rajshahi dialect
+    i_north = keyword_intent("হামার আলুর পাতাত পোকা ধরছে কি করমু?")
+    assert i_north is not None
+    assert i_north.kind == "treatment"
+    assert i_north.crop == "potato"
+    assert i_north.plant_part == "leaf"
+

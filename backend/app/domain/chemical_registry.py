@@ -118,6 +118,13 @@ BANNED_ACTIVES: tuple[BannedActive, ...] = (
     ),
     # --- Organophosphates / carbamates on the cancelled list ---
     BannedActive(
+        rule="banned_active:phosphamidon",
+        canonical_en="Phosphamidon",
+        en_aliases=("phosphamidon", "dimecron"),
+        bn_aliases=("ফসফামিডন", "ডাইমেক্রন"),
+        source="DAE cancelled list (Dimecron cancelled)",
+    ),
+    BannedActive(
         rule="banned_active:methyl_parathion",
         canonical_en="Methyl parathion",
         en_aliases=("methyl parathion", "parathion"),
@@ -128,7 +135,7 @@ BANNED_ACTIVES: tuple[BannedActive, ...] = (
         rule="banned_active:carbofuran",
         canonical_en="Carbofuran",
         en_aliases=("carbofuran", "furadan", "curaterr"),
-        bn_aliases=("কার্বোফুরান",),
+        bn_aliases=("কার্বোফুরান", "ফুরাডান", "কুরাটার"),
         source="DAE cancelled list (Furadan/Curaterr cancelled)",
     ),
     BannedActive(
@@ -142,15 +149,15 @@ BANNED_ACTIVES: tuple[BannedActive, ...] = (
         rule="banned_active:monocrotophos",
         canonical_en="Monocrotophos",
         en_aliases=("monocrotophos", "azodrin", "nuvacron", "monodrin"),
-        bn_aliases=("মনোক্রোটোফস",),
+        bn_aliases=("মনোক্রোটোফস", "নুভাক্রন", "এজোড্রিন"),
         source="DAE cancelled list (Azodrin/Nuvacron/Monodrin cancelled)",
     ),
     # --- Herbicides under national policy action (retained flagship HHPs) ---
     BannedActive(
         rule="banned_active:paraquat",
         canonical_en="Paraquat",
-        en_aliases=("paraquat",),
-        bn_aliases=("প্যারাকোয়াট", "পরাকুয়াট"),
+        en_aliases=("paraquat", "gramoxone", "gramoxon"),
+        bn_aliases=("প্যারাকোয়াট", "পরাকুয়াট", "গ্রামোক্সোন"),
         source="DAE Dec-2024 no-new-registration decision (The Daily Star 2025-11-25)",
     ),
     BannedActive(

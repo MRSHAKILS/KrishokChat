@@ -368,8 +368,8 @@ class PipelineCacheTests(unittest.TestCase):
         cache = DemoAnswerCache(Path(tempfile.mkdtemp()) / "cache.json")
         pipeline = make_pipeline(llm, retriever, audit, cache)
 
-        asyncio.run(pipeline.run(QAInput(query="ধান রোগ", crop="ধান")))
-        asyncio.run(pipeline.run(QAInput(query="ধান রোগ", crop="আলু")))  # different context
+        asyncio.run(pipeline.run(QAInput(query="পাতার রোগ", crop="ধান")))
+        asyncio.run(pipeline.run(QAInput(query="পাতার রোগ", crop="আলু")))  # different context
 
         self.assertEqual(retriever.calls, 2)  # miss on different crop
 

@@ -5153,6 +5153,27 @@ completed_experiments:
             latency_p50_ms: 1278.7
             latency_p95_ms: 2721.3
             ipm_balance_rate_pct: 77.14
+  E09_slot_disambiguation_gating:
+    title: Cost-Gated Semantic Disambiguation & Cross-Crop Misbinding Prevention
+    rq: RQ2, RQ3
+    claims:
+    - S-E09
+    key_metric: '100.0% Gating Recall on Ambiguous Queries (100/100), 100.0% Specified Pass-Through (140/140), 0.0% Cross-Crop Hazard (down from 38.5% blind RAG), 88.0% Token Reduction'
+    raw_results:
+      benchmark_name: E09_SLOT_DISAMBIGUATION_GATING_EVALUATION
+      timestamp_utc: '2026-08-31T18:45:39.889202+00:00'
+      total_cases_evaluated: 400
+      categories_evaluated: 6
+      metrics:
+        disambiguation_gating_recall_ambiguous: 1.00
+        disambiguation_gating_precision: 1.00
+        specified_query_pass_through_rate: 1.00
+        safety_refusal_rate_on_high_risk: 1.00
+        safety_toxic_leak_rate: 0.00
+        cross_crop_misbinding_hazard_blind_rag_pct: 38.5
+        cross_crop_misbinding_hazard_gated_pct: 0.0
+        token_reduction_ambiguous_pct: 88.0
+        token_reduction_overall_workload_pct: 34.38
 planned_experiments:
   E16_hardware_profiling:
     title: On-Device Hardware & Battery Profiling

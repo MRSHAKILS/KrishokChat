@@ -16,6 +16,9 @@ from app.application.qa_pipeline import QAInput, QAPipeline
 from app.domain.contracts import RetrievedSource
 from app.domain.vision import (
     ImageQuality,
+    VisionGateConfig,
+    VisionModelSpec,
+    VisionPrediction,
     VisionResult,
     VisionStage,
     VisionStatus,
@@ -61,16 +64,26 @@ class VisionPipeline:
         runner: VisionRunner,
         qa: QAPipeline,
         audit: AuditSink,
-        crop_threshold: float = 0.60,
-        disease_threshold: float = 0.55,
         max_image_bytes: int = 10_000_000,
+        gate_config: VisionGateConfig | None = None,
+        crop_threshold: float | None = None,
+        disease_threshold: float | None = None,
     ) -> None:
         self.registry = registry
         self.runner = runner
         self.qa = qa
         self.audit = audit
-        self.crop_threshold = crop_threshold
-        self.disease_threshold = disease_threshold
+        if gate_config is not None:
+            self.gate_config = gate_config
+        else:
+            kwargs = {}
+            if crop_threshold is not None:
+                kwargs["crop_confidence_threshold"] = crop_threshold
+            if disease_threshold is not None:
+                kwargs["disease_confidence_threshold"] = disease_threshold
+            self.gate_config = VisionGateConfig(**kwargs)
+        self.crop_threshold = self.gate_config.crop_confidence_threshold
+        self.disease_threshold = self.gate_config.disease_confidence_threshold
         self.max_image_bytes = max_image_bytes
 
     async def classify(self, image: Image.Image) -> VisionResult:
@@ -140,17 +153,65 @@ class VisionPipeline:
                 self._audit(result)
                 return result
             trace.append(VisionTraceEvent(VisionStage.CROP_CLASSIFICATION, "complete", crop_prediction.label))
-            if crop_prediction.confidence < self.crop_threshold:
+            
+            # Calibrated Tri-State Crop Gate
+            p1 = crop_prediction.confidence
+            p2 = float(crop_prediction.top3[1].get("confidence", 0.0)) if len(crop_prediction.top3) > 1 else 0.0
+            margin = p1 - p2
+            top_crops = tuple(str(item.get("crop", "")) for item in crop_prediction.top3[:3] if item.get("crop"))
+
+            # State C: Out of distribution / Unknown crop
+            if p1 < self.gate_config.crop_ood_threshold:
                 result = VisionResult(
-                    status=VisionStatus.NOT_RECOGNIZED,
+                    status=VisionStatus.OUT_OF_DISTRIBUTION,
                     crop=crop_prediction.label,
                     crop_confidence=crop_prediction.confidence,
                     top3_crops=crop_prediction.top3,
                     quality=quality,
                     trace=tuple(trace),
+                    clarification_prompt_bn="ছবিটি আমাদের সমর্থিত ফসলের সাথে পর্যাপ্ত মিলছে না। অনুগ্রহ করে আক্রান্ত ফসলের পরিষ্কার ছবি দিন।",
+                    suggested_crops=top_crops,
                 )
                 self._audit(result)
                 return result
+
+            # Module 1B: Known botanical confusion pair risk check
+            is_confusion_risk = False
+            if self.gate_config.enable_confusion_risk_gating and len(crop_prediction.top3) > 1:
+                c1 = str(crop_prediction.top3[0].get("crop") or crop_prediction.top3[0].get("class") or "").lower()
+                c2 = str(crop_prediction.top3[1].get("crop") or crop_prediction.top3[1].get("class") or "").lower()
+                solanaceae = {"potato", "solanacea", "tomato", "eggplant", "chili"}
+                poaceae = {"rice", "wheat", "corn"}
+                if (c1 in solanaceae and c2 in solanaceae) or (c1 in poaceae and c2 in poaceae):
+                    is_confusion_risk = True
+
+            # State B: Uncertain crop prediction (margin too small, below confidence threshold, or known confusion risk)
+            if p1 < self.gate_config.crop_confidence_threshold or margin < self.gate_config.crop_margin_threshold or is_confusion_risk:
+                label_lower = crop_prediction.label.lower()
+                if label_lower in ("potato", "solanacea"):
+                    prompt_bn = "ছবিটি দেখে আলু বা টমেটো/বেগুন গোত্রের গাছ মনে হচ্ছে। নিচে আপনার সঠিক ফসলটি নির্বাচন করুন।"
+                    suggested = ("Potato", "Tomato", "Eggplant", "Chili")
+                elif label_lower in ("wheat", "corn"):
+                    prompt_bn = "ছবিটি দেখে ধান বা গম/ভুট্টা গোত্রের গাছ মনে হচ্ছে। নিচে আপনার সঠিক ফসলটি নির্বাচন করুন।"
+                    suggested = ("Rice", "Wheat", "Corn")
+                else:
+                    prompt_bn = f"ছবিটি দেখে নিশ্চিত হওয়া যায়নি। এটি কি {crop_prediction.label} গাছ? নিচে সঠিক ফসল নির্বাচন করুন।"
+                    suggested = top_crops
+
+                result = VisionResult(
+                    status=VisionStatus.UNCERTAIN,
+                    crop=crop_prediction.label,
+                    crop_confidence=crop_prediction.confidence,
+                    top3_crops=crop_prediction.top3,
+                    quality=quality,
+                    trace=tuple(trace),
+                    clarification_prompt_bn=prompt_bn,
+                    suggested_crops=suggested,
+                )
+                self._audit(result)
+                return result
+
+            # State A: Confident standalone prediction
             crop_label = crop_prediction.label
             crop_confidence = crop_prediction.confidence
             top3_crops = crop_prediction.top3
@@ -206,9 +267,16 @@ class VisionPipeline:
         disease_spec, disease_prediction = max(predictions, key=lambda item: item[1].confidence)
         trace.append(VisionTraceEvent(VisionStage.DISEASE_CLASSIFICATION, "complete", disease_prediction.label))
         info = self.registry.disease_info(disease_spec.key, disease_prediction.label)
-        if disease_prediction.confidence < self.disease_threshold:
+        
+        # Check disease confidence margin
+        d_p1 = disease_prediction.confidence
+        d_p2 = float(disease_prediction.top3[1].get("confidence", 0.0)) if len(disease_prediction.top3) > 1 else 0.0
+        d_margin = d_p1 - d_p2
+        requires_second = d_margin < self.gate_config.disease_margin_threshold and d_p1 < 0.80
+
+        if disease_prediction.confidence < self.gate_config.disease_confidence_threshold:
             result = VisionResult(
-                status=VisionStatus.NOT_RECOGNIZED,
+                status=VisionStatus.REQUIRES_SECOND_IMAGE if requires_second else VisionStatus.NOT_RECOGNIZED,
                 crop=crop_label,
                 crop_confidence=crop_confidence,
                 crop_source=crop_source,
@@ -219,6 +287,8 @@ class VisionPipeline:
                 disease_info=info,
                 quality=quality,
                 trace=tuple(trace),
+                requires_second_image=requires_second,
+                clarification_prompt_bn="ছবিতে রোগটি নিশ্চিতভাবে আলাদা করা যায়নি। অনুগ্রহ করে আক্রান্ত পাতার আরও স্পষ্ট ও কাছ থেকে ছবি দিন।" if requires_second else None,
             )
             self._audit(result)
             return result

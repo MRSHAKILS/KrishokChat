@@ -128,7 +128,13 @@ class StructuredResolver:
         self.crop_calendars = crop_calendars
         self.min_confidence = min_confidence
 
-    def resolve(self, query: str, stage: str | None = None) -> ResolvedAnswer | None:
+    def resolve(
+        self,
+        query: str,
+        stage: str | None = None,
+        crop_hint: str | None = None,
+        problem_hint: str | None = None,
+    ) -> ResolvedAnswer | None:
         """Try to resolve *query* to a T1/T2 answer.
 
         Returns ``None`` on any miss — the pipeline then falls through to T3
@@ -136,12 +142,23 @@ class StructuredResolver:
         is safe, not an error.
 
         *stage* is an optional growth-stage hint from ``farmer_context``.
+        *crop_hint* and *problem_hint* are optional explicit entities (e.g. from vision).
         """
-        crop = _match_crop(query)
+        crop = None
+        if crop_hint:
+            c_lowered = crop_hint.strip().lower()
+            crop = _CROP_LOOKUP.get(c_lowered) or _match_crop(c_lowered) or c_lowered
+        if crop is None:
+            crop = _match_crop(query)
         if crop is None:
             return None
 
-        problem = _match_problem(query)
+        problem = None
+        if problem_hint:
+            p_clean = problem_hint.split("__")[-1].lower()
+            problem = _PROBLEM_LOOKUP.get(p_clean) or _match_problem(p_clean) or p_clean
+        if problem is None:
+            problem = _match_problem(query)
         if problem is None:
             return None
 

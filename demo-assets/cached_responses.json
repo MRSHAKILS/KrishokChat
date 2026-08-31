@@ -1,1341 +1,4 @@
 {
- "|||2026-08|বাঁধাকপির head rot রোগের লক্ষণ ও সুষম বালাইনাশক স্প্রে করার পদ্ধতি কী": {
-  "query": "বাঁধাকপির head rot রোগের লক্ষণ ও সুষম বালাইনাশক স্প্রে করার পদ্ধতি কী?",
-  "category": "safe_agri",
-  "answer": "বাঁধাকপির \"হেড রট\" রোগটি আসলে ব্ল্যাক রট (Black Rot) বা ব্যাকটেরিয়াল সফট রট (Bacterial Soft Rot) হতে পারে।\n\n*   **ব্ল্যাক রট:** এটি *Xanthomonas campestris pv. campestris* নামক ব্যাকটেরিয়ার কারণে হয়। এর প্রধান লক্ষণ হলো পাতার কিনারা থেকে শুরু হওয়া হলুদ, বাদামী বা কালো রঙের V আকৃতির ছোপ। আলোর বিপরীতে ধরলে পাতার শিরাগুলো কালো দেখা যায়। রোগের তীব্রতায় বাঁধাকপির মাথা দুর্গন্ধযুক্ত হয়ে কালো হয়ে যেতে পারে। [CABI_BRASSICA_F8D1EA_001, CABI_BRASSICA_997AAE_001]\n\n*   **ব্যাকটেরিয়াল সফট রট:** এটি *Erwinia carotovora subsp. carotovora* নামক রোগজীবাণুর কারণে হয়। এই রোগে জলযুক্ত ক্ষত দেখা দেয় যা দ্রুত ছড়িয়ে পড়ে এবং উদ্ভিদের টিস্যুকে নরম, পিচ্ছিল ও কালচে করে তোলে, সাথে দুর্গন্ধ ছড়ায়। [CABI_BRASSICA_2DA7D1_001]\n\n*   **প্রতিকার:** ব্ল্যাক রট রোগের জন্য কোনো অত্যন্ত কার্যকর নিরাময়মূলক কীটনাশক নেই, তাই প্রতিরোধই প্রধান। [CABI_BRASSICA_F8D1EA_001] ব্যাকটেরিয়াল সফট রট ব্যবস্থাপনার জন্য শস্য পরিচর্যা এবং সংক্রমণ কমানোর রাসায়নিক পদক্ষেপের ওপর জোর দেওয়া হয়। [CABI_BRASSICA_2DA7D1_001]\n\n*   **সুষম বালাইনাশক স্প্রে করার পদ্ধতি:** জ্ঞানভান্ডারে নির্দিষ্ট কোনো \"সুষম বালাইনাশক স্প্রে করার পদ্ধতি\" উল্লেখ করা নেই। তবে, রোগ প্রতিরোধের জন্য শস্য পরিচর্যা গুরুত্বপূর্ণ। [CABI_BRASSICA_2DA7D1_001]\n\n*   **আরও তথ্যের জন্য:** সুনির্দিষ্ট বালাইনাশক এবং স্প্রে করার পদ্ধতি সম্পর্কে জানতে অনুগ্রহ করে কৃষক কল সেন্টার **১৬১২৩** নম্বরে যোগাযোগ করুন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "sources": [
-   {
-    "id": "CABI_BRASSICA_F8D1EA_001",
-    "score": 0.0476,
-    "title_en": "Xanthomonas bacterial black rot on cabbage",
-    "title_bn": "",
-    "content_en": "Black rot (Xanthomonas campestris pv. campestris) is a bacterial disease common in wet and warm conditions. It spreads primarily through water. Symptoms include yellow, brown, or black V-shaped patches at leaf edges with visible black veins when held against light. A cross-section of the stem reveals a black ring, and in advanced stages, the cabbage head turns black with a foul smell. Management focuses on prevention, as there are no highly effective curative pesticides.",
-    "content_bn": "ব্লাক রট (Xanthomonas campestris pv. campestris) একটি ব্যাকটেরিয়া জনিত রোগ যা আর্দ্র ও উষ্ণ আবহাওয়ায় সচরাচর দেখা যায়। এটি প্রধানত পানির মাধ্যমে ছড়িয়ে পড়ে। লক্ষণগুলোর মধ্যে রয়েছে পাতার কিনারে হলুদ, বাদামী বা কালো রঙের V আকৃতির ছোপ, যা আলোর বিপরীতে ধরলে দৃশ্যমান কালো শিরা দেখা যায়। কাণ্ডের প্রস্থচ্ছেদ করলে একটি কালো বলয় প্রকাশ পায়, এবং রোগের তীব্র অবস্থায় বাঁধাকপির মাথাটি দুর্গন্ধযুক্ত হয়ে কালো হয়ে যায়। এর প্রতিকারে অত্যন্ত কার্যকর কোনো নিরাময়মূলক কীটনাশক না থাকায় ব্যবস্থাপনা মূলত প্রতিরোধের ওপর জোর দেয়।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Xanthomonas bacterial black rot on cabbage. Brassica Disease Manuals (Plantwise). pp. 100-100.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "cabbage",
-      "black rot",
-      "Xanthomonas",
-      "bacterial disease",
-      "disease management"
-     ],
-     "title_en": "Xanthomonas bacterial black rot on cabbage",
-     "title_bn": "",
-     "section_title": "Xanthomonas bacterial black rot on cabbage",
-     "publisher": "CABI",
-     "citation": "CABI. Xanthomonas bacterial black rot on cabbage. Brassica Disease Manuals (Plantwise). pp. 100-100.",
-     "summary": "Black rot caused by Xanthomonas campestris pv. campestris is a bacterial disease in cabbage that thrives in wet, warm conditions and is primarily spread by water.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "CABI_BRASSICA_C7579B_001",
-    "score": 0.0455,
-    "title_en": "Black rot of cabbage",
-    "title_bn": "",
-    "content_en": "Black rot of cabbage is caused by the bacterium Xanthomonas campestris. Severe rotting of the stem typically occurs only after significant damage has been sustained by the upper leaves of the plant.",
-    "content_bn": "বাঁধাকপির ব্ল্যাক রট রোগটি *Xanhomonas campestris* ব্যাকটেরিয়ার কারণে হয়ে থাকে। উদ্ভিদের ওপরের পাতাগুলোতে মারাত্মক ক্ষতি হওয়ার পরেই সাধারণত কাণ্ডের তীব্র পচন ধরে।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Black rot of cabbage. Brassica Disease Manuals (Plantwise). pp. 82-82.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "cabbage",
-      "Black rot",
-      "Xanthomonas campestris",
-      "bacterial disease"
-     ],
-     "title_en": "Black rot of cabbage",
-     "title_bn": "",
-     "section_title": "Black rot of cabbage",
-     "publisher": "CABI",
-     "citation": "CABI. Black rot of cabbage. Brassica Disease Manuals (Plantwise). pp. 82-82.",
-     "summary": "Black rot is a bacterial disease of cabbage caused by Xanthomonas campestris, which can lead to severe stem rotting under specific conditions.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "CABI_BRASSICA_F7F28F_001",
-    "score": 0.0455,
-    "title_en": "Control of Black Rot in Cabbage",
-    "title_bn": "",
-    "content_en": "Black rot is a bacterial disease that causes significant yield loss in cabbage. It is identified by V-shaped yellow lesions starting at the leaf edge and moving inward toward the stem. As the disease progresses, the yellow tissue turns brown and dies, and leaf veins turn black. The bacteria can survive in soil, water, and wild hosts, and spread through splashing water or infected seeds.",
-    "content_bn": "Publisher: CABI Section/Topic: Control of Black Rot in Cabbage ব্লাক রট হলো একটি ব্যাকটেরিয়াজনিত রোগ যা বাঁধাকপির উল্লেখযোগ্য ফলন হ্রাস ঘটায়। এটি পাতার কিনারা থেকে শুরু হয়ে ভেতরের দিকে কাণ্ডের দিকে অগ্রসর হওয়া V আকৃতির হলুদ দাগ দ্বারা চিহ্নিত করা হয়। রোগের অগ্রগতি সাথে সাথে, হলুদ টিস্যু বাদামী হয়ে মারা যায় এবং পাতার শিরাগুলো কালো হয়ে যায়। ব্যাকটেরিয়া মাটি, পানি এবং বন্য পোষকে বেঁচে থাকতে পারে এবং জলের ছিটা বা সংক্রামিত বীজের মাধ্যমে ছড়িয়ে পড়ে।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Control of Black Rot in Cabbage. Brassica Disease Manuals (Plantwise). pp. 99-99.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "cabbage",
-      "black rot",
-      "bacterial disease",
-      "Brassica",
-      "disease management",
-      "কপি",
-      "ব্ল্যাক রট",
-      "ব্যাকটেরিয়াজনিত রোগ"
-     ],
-     "title_en": "Control of Black Rot in Cabbage",
-     "title_bn": "",
-     "section_title": "Control of Black Rot in Cabbage",
-     "publisher": "CABI",
-     "citation": "CABI. Control of Black Rot in Cabbage. Brassica Disease Manuals (Plantwise). pp. 99-99.",
-     "summary": "Black rot is a serious bacterial disease in cabbage characterized by V-shaped yellow lesions on leaves and blackening of veins, which can be managed through cultural practices and copper-based fungicides.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "CABI_BRASSICA_2DA7D1_001",
-    "score": 0.0435,
-    "title_en": "Bacterial soft rot on cabbage",
-    "title_bn": "",
-    "content_en": "Bacterial soft rot, caused by the pathogen Erwinia carotovora subsp. carotovora, affects cabbage and related crops like turnip, rutabaga, broccoli, and cauliflower. The disease manifests as water-soaked lesions that expand rapidly, turning the plant tissue soft, mushy, and dark, while emitting an offensive odor. Management focuses on cultural practices to prevent spread and chemical interventions to minimize infection.",
-    "content_bn": "Publisher: CABI Section/Topic: Bacterial soft rot on cabbage ব্যাকটেরিয়াল সফট রট, যা Erwinia carotovora subsp. carotovora নামক রোগজীবাণুর কারণে হয়, বাঁধাকপি এবং এর সমগোত্রীয় ফসল যেমন শালগম, রুটাবাগা, ব্রোকলি ও ফুলকপিকে আক্রমণ করে। এই রোগটি জলযুক্ত ক্ষতের আকারে প্রকাশ পায় যা দ্রুত প্রসারিত হয় এবং উদ্ভিদের টিস্যুকে নরম, পিচ্ছিল ও কালচে করে তোলে, সেইসাথে একটি দুর্গন্ধ ছড়ায়। রোগ ব্যবস্থাপনা মূলত বিস্তার রোধের জন্য শস্য পরিচর্যা পদ্ধতি এবং সংক্রমণ কমানোর জন্য রাসায়নিক পদক্ষেপের ওপর জোর দেয়।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Bacterial soft rot on cabbage. Brassica Disease Manuals (Plantwise). pp. 105-105.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "Bacterial soft rot",
-      "Cabbage",
-      "Erwinia carotovora",
-      "Disease management",
-      "বাঁধাকপি",
-      "ব্যাকটেরিয়াজনিত পচন রোগ"
-     ],
-     "title_en": "Bacterial soft rot on cabbage",
-     "title_bn": "",
-     "section_title": "Bacterial soft rot on cabbage",
-     "publisher": "CABI",
-     "citation": "CABI. Bacterial soft rot on cabbage. Brassica Disease Manuals (Plantwise). pp. 105-105.",
-     "summary": "Bacterial soft rot, caused by Erwinia carotovora subsp. carotovora, is a destructive disease of cabbage characterized by mushy, foul-smelling lesions that spread rapidly through the plant head.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "CABI_BRASSICA_997AAE_001",
-    "score": 0.0417,
-    "title_en": "Black rot in Cabbage",
-    "title_bn": "",
-    "content_en": "Black rot is caused by the bacterium Xanthomonas campestris pv. Campestris. Symptoms include yellow areas along leaf edges that expand to the midrib, forming distinctive 'V' shaped lesions with yellow margins and brown necrotic centers. Leaf veins may turn brown or black, leading to stunted plants, smaller heads, and the death of outer leaves.",
-    "content_bn": "ব্লাক রট রোগটি *Xanthomonas campestris pv. campestris* ব্যাকটেরিয়ার কারণে হয়ে থাকে। লক্ষণগুলোর মধ্যে রয়েছে পাতার কিনার বরাবর হলুদ অংশ যা মধ্যশিরা পর্যন্ত প্রসারিত হয়, এবং হলুদ কিনারা ও বাদামি মৃত কোষযুক্ত কেন্দ্রসহ বিশিষ্ট 'V' আকৃতির দাগ তৈরি করে। পাতার শিরাগুলো বাদামি বা কালো হয়ে যেতে পারে, যার ফলে গাছ খর্বাকৃতি হয়, বাঁধাকপির মাথা ছোট হয় এবং বাইরের পাতাগুলো মারা যায়।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "cabbage",
-      "black rot",
-      "disease",
-      "Xanthomonas campestris"
-     ],
-     "title_en": "Black rot in Cabbage",
-     "title_bn": "",
-     "section_title": "Common pests and diseases on cabbage in Ghana",
-     "publisher": "CABI",
-     "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
-     "summary": "Black rot is a bacterial disease caused by Xanthomonas campestris pv. Campestris, characterized by V-shaped yellow lesions on leaf edges.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources · লাই→জন্য",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "বাঁধাকপির \"হেড রট\" রোগটি আসলে ব্ল্যাক রট (Black Rot) বা ব্যাকটেরিয়াল সফট রট (Bacterial Soft Rot) হতে পারে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **ব্ল্যাক রট:** এটি *Xanthomonas campestris pv. campestris* নামক ব্যাকটেরিয়ার কারণে হয়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "এর প্রধান লক্ষণ হলো পাতার কিনারা থেকে শুরু হওয়া হলুদ, বাদামী বা কালো রঙের V আকৃতির ছোপ",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "আলোর বিপরীতে ধরলে পাতার শিরাগুলো কালো দেখা যায়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "রোগের তীব্রতায় বাঁধাকপির মাথা দুর্গন্ধযুক্ত হয়ে কালো হয়ে যেতে পারে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[CABI_BRASSICA_F8D1EA_001, CABI_BRASSICA_997AAE_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **ব্যাকটেরিয়াল সফট রট:** এটি *Erwinia carotovora subsp. carotovora* নামক রোগজীবাণুর কারণে হয়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "এই রোগে জলযুক্ত ক্ষত দেখা দেয় যা দ্রুত ছড়িয়ে পড়ে এবং উদ্ভিদের টিস্যুকে নরম, পিচ্ছিল ও কালচে করে তোলে, সাথে দুর্গন্ধ ছড়ায়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[CABI_BRASSICA_2DA7D1_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **প্রতিকার:** ব্ল্যাক রট রোগের জন্য কোনো অত্যন্ত কার্যকর নিরাময়মূলক কীটনাশক নেই, তাই প্রতিরোধই প্রধান",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[CABI_BRASSICA_F8D1EA_001] ব্যাকটেরিয়াল সফট রট ব্যবস্থাপনার জন্য শস্য পরিচর্যা এবং সংক্রমণ কমানোর রাসায়নিক পদক্ষেপের ওপর জোর দেওয়া হয়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[CABI_BRASSICA_2DA7D1_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **সুষম বালাইনাশক স্প্রে করার পদ্ধতি:** জ্ঞানভান্ডারে নির্দিষ্ট কোনো \"সুষম বালাইনাশক স্প্রে করার পদ্ধতি\" উল্লেখ করা নেই",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "তবে, রোগ প্রতিরোধের জন্য শস্য পরিচর্যা গুরুত্বপূর্ণ",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[CABI_BRASSICA_2DA7D1_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **আরও তথ্যের জন্য:** সুনির্দিষ্ট বালাইনাশক এবং স্প্রে করার পদ্ধতি সম্পর্কে জানতে অনুগ্রহ করে কৃষক কল সেন্টার **১৬১২৩** নম্বরে যোগাযোগ করুন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
- "|||2026-08|ধান গাছের পাতা লাল হইয়া শুকায়া যায়, কোনো পোকা বা বিষ দিলে ভালো ফলন পামু": {
-  "query": "ধান গাছের পাতা লাল হইয়া শুকায়া যায়, কোনো পোকা বা বিষ দিলে ভালো ফলন পামু?",
-  "category": "safe_agri",
-  "answer": "আপনার ধান গাছের পাতা লাল হয়ে শুকিয়ে যাওয়ার সমস্যাটি রেড স্ট্রাইপ রোগের লক্ষণ হতে পারে। এই রোগটি ধানের পাতায় দাগ সৃষ্টি করে এবং ছড়ার মোচড় বা প্যানিকল ইনিসিয়েশন পর্যায় থেকে প্রকাশ পেতে পারে। [IRRI_IRRI_DA722C_001]\n\nএই রোগ ছড়াতে উচ্চ তাপমাত্রা, উচ্চ আর্দ্রতা এবং পাতার দীর্ঘক্ষণ ভেজা থাকা অনুকূল পরিবেশ তৈরি করে। অতিরিক্ত নাইট্রোজেন প্রয়োগও এর কারণ হতে পারে। [IRRI_IRRI_DA722C_001]\n\nরোগ ব্যবস্থাপনার জন্য রোগ প্রতিরোধী জাত ব্যবহার, সুষম নাইট্রোজেন প্রয়োগ এবং সঠিক দূরত্বে চারা রোপণ করা উচিত। প্যানিকল ইনিসিয়েশন পর্যায়ে জমিতে পর্যায়ক্রমে সেচ ও নিষ্কাশন করার পরামর্শ দেওয়া হয়। [IRRI_IRRI_DA722C_001]\n\nবেনজিমিডাজল ছত্রাকনাশক দিয়ে বীজ শোধন করারও পরামর্শ দেওয়া হয়। [IRRI_IRRI_DA722C_001]\n\nকোনো নির্দিষ্ট পোকা বা বিষের বিষয়ে জ্ঞানভান্ডারে তথ্য নেই। তবে, যদি আপনি আরও বিস্তারিত জানতে চান বা অন্য কোনো সমস্যা থাকে, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "sources": [
-   {
-    "id": "B2B_COTTON_729B80_002",
-    "score": 0.0476,
-    "title_en": "",
-    "title_bn": "তুলা গাছের অঙ্গ ছাঁটাই ও ডগা কর্তন",
-    "content_en": "",
-    "content_bn": "তুলা গাছের গোড়ার দিকের ১-২টি অঙ্গজ শাখা কেটে দিলে গাছের উপরের অংশে ফলধারী শাখা-প্রশাখার বৃদ্ধি ভালো হয়, আলো-বাতাস চলাচল বাড়ে এবং রোগ ও পোকামাকড়ের আক্রমণ কমে। গাছের বয়স ৩৫-৪০ দিন হলে নিচের দিকের অঙ্গজ শাখাগুলো মূল কাণ্ড থেকে ১ সেমি ব্যবধানে কেটে দিতে হবে। এছাড়া গাছের বয়স ৮০-৮৫ দিন হলে মূল ডগা উপরের পাতাসহ কেটে দিতে হবে।",
-    "source": "Modern Cotton Production Technology",
-    "citation": "CDB. সেচ ও নিষ্কাশন. Modern Cotton Production Technology. pp. 180-180.",
-    "metadata": {
-     "category": "cultivation_practice",
-     "tags": [
-      "তুলা",
-      "অঙ্গ ছাঁটাই",
-      "ডগা কর্তন",
-      "Cotton",
-      "Pruning"
-     ],
-     "title_en": "",
-     "title_bn": "তুলা গাছের অঙ্গ ছাঁটাই ও ডগা কর্তন",
-     "section_title": "সেচ ও নিষ্কাশন",
-     "publisher": "CDB",
-     "citation": "CDB. সেচ ও নিষ্কাশন. Modern Cotton Production Technology. pp. 180-180.",
-     "summary": "তুলা গাছের ফলন বাড়াতে অঙ্গ ছাঁটাই ও ডগা কর্তনের সঠিক সময় ও পদ্ধতি।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B5_BARCAG_105A6B_001",
-    "score": 0.0476,
-    "title_en": "Rice Harvesting and Seed Preservation",
-    "title_bn": "",
-    "content_en": "Rice should be harvested when 80% of the grains in a panicle turn yellow. Threshing should be done immediately on a concrete floor, or using thin jute/bamboo mats or polyethylene if a concrete floor is unavailable. The grain should be sun-dried for 4-5 days, followed by winnowing. For seed preservation, select fields free from weeds, diseases, and insect pests. Ensure seeds are dried to below 12% moisture content, sort out fully filled grains, and store in air-tight containers kept above ground. Neem leaves (Azadiracta indica) can be used at 3.25 kg/ton of seed to prevent insect attacks.",
-    "content_bn": "যখন ছড়ার ৮০ ধান হলুদ হয়ে যায়, তখন ধান কাটা উচিত। পাকা মেঝেতে অথবা পাকা মেঝে না থাকলে পাতলা পাট বা বাঁশের চাটাই বা পলিথিন ব্যবহার করে অবিলম্বে মাড়াই করতে হবে। ধান ৪-৫ দিন রোদে শুকাতে হবে, এরপর ঝাড়াই করতে হবে। বীজ সংরক্ষণের জন্য আগাছা, রোগ এবং পোকামাকড়মুক্ত জমি নির্বাচন করুন। নিশ্চিত করুন যে বীজ শুকিয়ে আর্দ্রতার পরিমাণ ১২-এর নিচে নামানো হয়েছে, পুরোপুরি পুষ্ট বীজ আলাদা করুন এবং মাটির উপরে রাখা বায়ুরোধী পাত্রে সংরক্ষণ করুন। পোকার আক্রমণ রোধ করতে প্রতি টন বীজে ৩.২৫ কেজি হারে নিম পাতা (Azadiracta indica) ব্যবহার করা যেতে পারে।",
-    "source": "Hand Book of Agricultural Technology",
-    "citation": "BARC. Rice — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 35-35.",
-    "metadata": {
-     "category": "post_harvest",
-     "tags": [
-      "Rice",
-      "Harvesting",
-      "Seed Preservation",
-      "ধান",
-      "বীজ সংরক্ষণ"
-     ],
-     "title_en": "Rice Harvesting and Seed Preservation",
-     "title_bn": "",
-     "section_title": "Rice — Harvesting & Preservation",
-     "publisher": "BARC",
-     "citation": "BARC. Rice — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 35-35.",
-     "summary": "Guidelines for determining the optimal rice harvest time and best practices for preserving high-quality seeds.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B2B_MORICH2_D3E1A8_001",
-    "score": 0.0455,
-    "title_en": "",
-    "title_bn": "মরিচের পাতা কুঁকড়ানো রোগ (Leaf Curl)",
-    "content_en": "",
-    "content_bn": "মরিচের পাতা কুঁকড়ানো রোগ Nicotiana virus-10 নামক ভাইরাসের কারণে হয়। এটি সাদা মাছি পোকার মাধ্যমে ছড়ায়। আক্রান্ত গাছের পাতা কুঁকড়ে পুরু ও ছোট গুচ্ছাকৃতির হয়ে যায়, পর্বের দৈর্ঘ্য কমে গাছ খর্বাকৃতি হয় এবং অতিরিক্ত ডালপালা জন্মে ঝোপের মতো দেখায়। ফলন কমে যায় এবং ফল ছোট ও কুঁকড়ানো হয়। প্রতিকারের জন্য সুস্থ গাছ থেকে বীজ সংগ্রহ, রোগাক্রান্ত চারা বর্জন, বীজতলায় নেট ব্যবহার এবং আক্রান্ত গাছ ধ্বংস করতে হবে। নিয়মিত ৭-১০ দিন অন্তর কীটনাশক ও মাকড়নাশক (যেমন: থিওভিট, ভার্টিমেক, ওমাইট) স্প্রে করা প্রয়োজন।",
-    "source": "BARI Morich-2 Production Technology Manual",
-    "citation": "BARI. পাতা কুঁকড়ানো (Leaf curl). BARI Morich-2 Production Technology Manual. pp. 287-287.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "মরিচ",
-      "পাতা কুঁকড়ানো",
-      "ভাইরাস",
-      "Chilli",
-      "Leaf curl",
-      "Virus"
-     ],
-     "title_en": "",
-     "title_bn": "মরিচের পাতা কুঁকড়ানো রোগ (Leaf Curl)",
-     "section_title": "পাতা কুঁকড়ানো (Leaf curl)",
-     "publisher": "BARI",
-     "citation": "BARI. পাতা কুঁকড়ানো (Leaf curl). BARI Morich-2 Production Technology Manual. pp. 287-287.",
-     "summary": "মরিচের পাতা কুঁকড়ানো রোগ একটি ভাইরাসজনিত সমস্যা যা সাদা মাছি পোকার মাধ্যমে ছড়ায় এবং গাছের বৃদ্ধি ও ফলন ব্যাহত করে।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "IRRI_IRRI_DA722C_001",
-    "score": 0.0455,
-    "title_en": "Red Stripe of Rice",
-    "title_bn": "",
-    "content_en": "Red stripe is a rice disease that causes lesions on leaves, typically appearing from the panicle initiation stage onwards. It is favored by high temperatures, high relative humidity, high leaf wetness, and excessive nitrogen supply. Initial lesions are pin-sized and yellow-green to light orange, eventually becoming necrotic and coalescing into a blight appearance. It can be confused with orange leaf blight or advanced bacterial leaf blight. Management involves using resistant varieties, balanced nitrogen application, proper plant spacing, and intermittent drainage during panicle initiation. Seed treatment with benzimidazole fungicides is also recommended.",
-    "content_bn": "রেড স্ট্রাইপ ধানের একটি রোগ যা পাতার উপর দাগ সৃষ্টি করে, যা সাধারণত ছড়ার মোচড় বা প্যানিকল ইনিসিয়েশন পর্যায় থেকে প্রকাশ পায়। উচ্চ তাপমাত্রা, উচ্চ আপেক্ষিক আর্দ্রতা, পাতার দীর্ঘক্ষণ ভেজা থাকা এবং অতিরিক্ত নাইট্রোজেন প্রয়োগ এই রোগ ছড়াতে অনুকূল পরিবেশ সৃষ্টি করে। প্রাথমিক লক্ষণ হিসেবে পিন-আকৃতির হলুদ-সবুজ থেকে হালকা কমলা রঙের দাগ দেখা দেয়, যা পরবর্তীতে নেক্রোটিক (পচে যাওয়া) হয়ে একত্রিত হয়ে ব্লাইট বা পাতার পোড়া রোগের রূপ নেয়। এটি অনেক সময় কমলা পাতার ব্লাইট বা উন্নত ব্যাকটেরিয়াল লিফ ব্লাইট রোগের সাথে বিভ্রান্ত হতে পারে। রোগ ব্যবস্থাপনার মধ্যে রয়েছে রোগ প্রতিরোধী জাতের ব্যবহার, সুষম নাইট্রোজেন প্রয়োগ, সঠিক দূরত্বে চারা রোপণ এবং প্যানিকল ইনিসিয়েশন পর্যায়ে জমিতে পর্যায়ক্রমে সেচ ও নিষ্কাশন করা। বেনজিমিডাজল ছত্রাকনাশক দিয়ে বীজ শোধন করারও পরামর্শ দেওয়া হয়।",
-    "source": "IRRI Rice Disease Reference Manual",
-    "citation": "IRRI. RED STRIPE. IRRI Rice Disease Reference Manual. pp. 66-67.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "rice",
-      "red stripe",
-      "disease management",
-      "ধান",
-      "রেড স্ট্রাইপ",
-      "রোগ ব্যবস্থাপনা"
-     ],
-     "title_en": "Red Stripe of Rice",
-     "title_bn": "",
-     "section_title": "RED STRIPE",
-     "publisher": "IRRI",
-     "citation": "IRRI. RED STRIPE. IRRI Rice Disease Reference Manual. pp. 66-67.",
-     "summary": "Red stripe is a rice disease characterized by leaf lesions that typically appears during the reproductive stage, favored by high temperature, humidity, and nitrogen levels.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "IRRI_IRRI_D8CFC9_001",
-    "score": 0.0435,
-    "title_en": "Sheath Blight of Rice",
-    "title_bn": "",
-    "content_en": "Sheath blight is a fungal disease caused by the pathogen *Rhizoctonia solani*. It primarily affects rice by causing leaves to dry out and die prematurely, and it can destroy young tillers. The disease reduces the leaf area of the canopy, which is a primary cause of yield loss. It is considered one of the most important rice diseases, second only to rice blast, and is an increasing concern in intensified production systems.",
-    "content_bn": "Sheath blight হলো *Rhizoctonia solani* নামক রোগজীবাণু দ্বারা সৃষ্ট একটি ছত্রাকজনিত রোগ। এটি প্রধানত ধানের পাতা শুকিয়ে যাওয়া এবং অকালে মারা যাওয়ার কারণ হয়ে দাঁড়ায় এবং নতুন কুশি নষ্ট করতে পারে। এই রোগ ক্যানোপির পাতার ক্ষেত্রফল কমিয়ে দেয়, যা ফলন হ্রাসের একটি প্রধান কারণ। এটিকে ধান ব্লাস্টের পরেই ধানের অন্যতম গুরুত্বপূর্ণ রোগ হিসেবে বিবেচনা করা হয় এবং তীব্র উৎপাদন ব্যবস্থায় এটি একটি ক্রমবর্ধমান উদ্বেগের বিষয়।",
-    "source": "IRRI Rice Disease Reference Manual",
-    "citation": "IRRI. SHEATH BLIGHT. IRRI Rice Disease Reference Manual. pp. 76-78.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "rice",
-      "sheath blight",
-      "fungal disease",
-      "Rhizoctonia solani",
-      "ধান",
-      "শীথ ব্লাইট"
-     ],
-     "title_en": "Sheath Blight of Rice",
-     "title_bn": "",
-     "section_title": "SHEATH BLIGHT",
-     "publisher": "IRRI",
-     "citation": "IRRI. SHEATH BLIGHT. IRRI Rice Disease Reference Manual. pp. 76-78.",
-     "summary": "Sheath blight is a fungal disease caused by Rhizoctonia solani that reduces rice yield by causing leaf senescence and tiller death, particularly in dense, high-nitrogen environments.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "আপনার ধান গাছের পাতা লাল হয়ে শুকিয়ে যাওয়ার সমস্যাটি রেড স্ট্রাইপ রোগের লক্ষণ হতে পারে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "এই রোগটি ধানের পাতায় দাগ সৃষ্টি করে এবং ছড়ার মোচড় বা প্যানিকল ইনিসিয়েশন পর্যায় থেকে প্রকাশ পেতে পারে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[IRRI_IRRI_DA722C_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "এই রোগ ছড়াতে উচ্চ তাপমাত্রা, উচ্চ আর্দ্রতা এবং পাতার দীর্ঘক্ষণ ভেজা থাকা অনুকূল পরিবেশ তৈরি করে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "অতিরিক্ত নাইট্রোজেন প্রয়োগও এর কারণ হতে পারে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[IRRI_IRRI_DA722C_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "রোগ ব্যবস্থাপনার জন্য রোগ প্রতিরোধী জাত ব্যবহার, সুষম নাইট্রোজেন প্রয়োগ এবং সঠিক দূরত্বে চারা রোপণ করা উচিত",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "প্যানিকল ইনিসিয়েশন পর্যায়ে জমিতে পর্যায়ক্রমে সেচ ও নিষ্কাশন করার পরামর্শ দেওয়া হয়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[IRRI_IRRI_DA722C_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "বেনজিমিডাজল ছত্রাকনাশক দিয়ে বীজ শোধন করারও পরামর্শ দেওয়া হয়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[IRRI_IRRI_DA722C_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "কোনো নির্দিষ্ট পোকা বা বিষের বিষয়ে জ্ঞানভান্ডারে তথ্য নেই",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "তবে, যদি আপনি আরও বিস্তারিত জানতে চান বা অন্য কোনো সমস্যা থাকে, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
- "|||2026-08|কৃষি গবেষণা ইনস্টিটিউট অনুমোদিত সরিষার alternaria blight দমনের নিয়মাবলি ও PHI কতদিন": {
-  "query": "কৃষি গবেষণা ইনস্টিটিউট অনুমোদিত সরিষার alternaria blight দমনের নিয়মাবলি ও PHI কতদিন?",
-  "category": "safe_agri",
-  "answer": "কৃষি গবেষণা ইনস্টিটিউট অনুমোদিত সরিষার অলটারনারিয়া ব্লাইট (Alternaria blight) রোগ দমনের জন্য, বপনের পূর্বে প্রতি কেজি সরিষার বীজে ২ গ্রাম হারে Captan বা Vitavex-200 দিয়ে বীজ শোধন করার পরামর্শ দেওয়া হচ্ছে [B5_BARCAG_5911F2_002]।\n\nPHI (Pre-Harvest Interval) বা ফসল কাটার পূর্ববর্তী সময়সীমা সম্পর্কে জ্ঞানভান্ডারে কোনো তথ্য নেই।\n\nবারি সরিষা-১৮ জাতের পরিপক্বতার সময় সাধারণত ৯৫-১০০ দিন [B2B_SHORISHA18_C085EA_001]।\n\nযদি আপনার আরও তথ্যের প্রয়োজন হয়, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "sources": [
-   {
-    "id": "B2B_SHORISHA18_5A0FC9_001",
-    "score": 0.0476,
-    "title_en": "",
-    "title_bn": "বারি সরিষা-১৮ এর পরিচিতি",
-    "content_en": "",
-    "content_bn": "বারি সরিষা-১৮ জাতটির পরিচিতি এবং এর উৎপাদন কলাকৌশল সম্পর্কে এই ম্যানুয়ালে বিস্তারিত আলোচনা করা হয়েছে। এটি বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (বারি) কর্তৃক উদ্ভাবিত একটি সরিষার জাত।",
-    "source": "BARI Sarisha-18 Production Technology Manual",
-    "citation": "BARI. **বারি সরিষা-১৮ এর জাত পরিচিতি ও উৎপাদন কলাকৌশল ম্যানুয়াল**. BARI Sarisha-18 Production Technology Manual. pp. 235-235.",
-    "metadata": {
-     "category": "variety",
-     "tags": [
-      "সরিষা",
-      "বারি সরিষা-১৮",
-      "Mustard",
-      "BARI Sarisha-18"
-     ],
-     "title_en": "",
-     "title_bn": "বারি সরিষা-১৮ এর পরিচিতি",
-     "section_title": "বারি সরিষা-১৮ এর জাত পরিচিতি ও উৎপাদন কলাকৌশল ম্যানুয়াল",
-     "publisher": "BARI",
-     "citation": "BARI. **বারি সরিষা-১৮ এর জাত পরিচিতি ও উৎপাদন কলাকৌশল ম্যানুয়াল**. BARI Sarisha-18 Production Technology Manual. pp. 235-235.",
-     "summary": "বারি সরিষা-১৮ একটি উন্নত সরিষার জাত যার উৎপাদন কলাকৌশল ও পরিচিতি এই ম্যানুয়ালে বর্ণিত হয়েছে।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B2B_SHORISHA18_C085EA_001",
-    "score": 0.0476,
-    "title_en": "",
-    "title_bn": "সরিষা ফসল কর্তন, মাড়াই ও সংরক্ষণ",
-    "content_en": "",
-    "content_bn": "সরিষার পরিপক্বতার সময় ৯৫-১০০ দিন। গাছের ৭০-৭৫ ভাগ শুটি খড়ের রঙ ধারণ করলে ফসল কাটতে হবে। দেরিতে কাটলে বীজ ঝরে যাওয়ার সম্ভাবনা থাকে। সকালে গাছ কেটে বা উপড়িয়ে ২-৩ দিন গাদা দিয়ে রাখতে হবে। এরপর ২ দিন রোদে শুকিয়ে গরু দিয়ে মাড়াই বা বাঁশের লাঠি দিয়ে পিটিয়ে মাড়াই করা যায়। মাড়াইয়ের সময় বীজে ২০ এর বেশি পানি থাকা উচিত নয়। বীজ কুলা দিয়ে ঝেড়ে ৩-৪ দিন রোদে শুকিয়ে ঠাণ্ডা করে শুষ্ক পাত্রে সংরক্ষণ করতে হবে। ৮-১০ আর্দ্রতা বজায় রেখে শীতল স্থানে রাখলে ২-৩ বছর পর্যন্ত বীজ সংরক্ষণ করা সম্ভব। সংরক্ষিত বীজ মাঝে মাঝে পুনরায় শুকিয়ে নিতে হয়।",
-    "source": "BARI Sarisha-18 Production Technology Manual",
-    "citation": "BARI. ফসল কর্তন, বীজ শুকানো ও সংরক্ষণ. BARI Sarisha-18 Production Technology Manual. pp. 253-253.",
-    "metadata": {
-     "category": "post_harvest",
-     "tags": [
-      "সরিষা",
-      "ফসল কর্তন",
-      "বীজ সংরক্ষণ",
-      "Mustard",
-      "Harvesting",
-      "Seed storage"
-     ],
-     "title_en": "",
-     "title_bn": "সরিষা ফসল কর্তন, মাড়াই ও সংরক্ষণ",
-     "section_title": "ফসল কর্তন, বীজ শুকানো ও সংরক্ষণ",
-     "publisher": "BARI",
-     "citation": "BARI. ফসল কর্তন, বীজ শুকানো ও সংরক্ষণ. BARI Sarisha-18 Production Technology Manual. pp. 253-253.",
-     "summary": "সরিষা গাছের ৭০-৭৫ ভাগ শুটি খড়ের রঙ ধারণ করলে ফসল কাটতে হবে এবং বীজের আর্দ্রতা ৮-১০ এ নামিয়ে এনে সংরক্ষণ করতে হবে।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B5_BARCAG_5911F2_002",
-    "score": 0.0455,
-    "title_en": "Mustard Seed Treatment",
-    "title_bn": "",
-    "content_en": "To reduce the incidence of Alternaria blight, treat mustard seeds with Captan or Vitavex-200 at a rate of 2 g per kg of seeds before sowing.",
-    "content_bn": "অলটারনারিয়া ব্লাইট (Alternaria blight) রোগের আক্রমণ কমাতে, বপনের পূর্বে প্রতি কেজি সরিষার বীজ ২ গ্রাম হারে Captan বা Vitavex-200 দ্বারা বীজ শোধন করুন।",
-    "source": "Hand Book of Agricultural Technology",
-    "citation": "BARC. Mustard — Production Technology. Hand Book of Agricultural Technology. pp. 63-63.",
-    "metadata": {
-     "category": "seed_tech",
-     "tags": [
-      "Mustard",
-      "Seed treatment",
-      "Alternaria blight",
-      "বীজ শোধন"
-     ],
-     "title_en": "Mustard Seed Treatment",
-     "title_bn": "",
-     "section_title": "Mustard — Production Technology",
-     "publisher": "BARC",
-     "citation": "BARC. Mustard — Production Technology. Hand Book of Agricultural Technology. pp. 63-63.",
-     "summary": "Seed treatment protocol for mustard to prevent Alternaria blight.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B5_BARCAG_C351C0_002",
-    "score": 0.0455,
-    "title_en": "Chilli Fertilizer Schedule",
-    "title_bn": "",
-    "content_en": "Chilli requires a balanced application of organic and inorganic fertilizers. Apply all well-decomposed cowdung, TSP, Gypsum, and Borax, along with 100 kg of MP during the last ploughing. Urea and the remaining MP should be applied in three equal installments at 60, 90, and 110 days after planting (DAP).",
-    "content_bn": "Publisher: BARC Section/Topic: Chilli — Intercultural Operation মরিচ চাষে জৈব ও রাসায়নিক সারের সুষম প্রয়োগ প্রয়োজন। শেষ চাষের সময় সমস্ত ভালোভাবে পচে যাওয়া গোবর সার, TSP, Gypsum, Borax এবং ১০০ কেজি MP একত্রে প্রয়োগ করতে হবে। ইউরিয়া এবং অবশিষ্ট MP চারা রোপণের ৬০, ৯০ এবং ১১০ দিন পর (DAP) সমান তিন কিস্তিতে প্রয়োগ করতে হবে।",
-    "source": "Hand Book of Agricultural Technology",
-    "citation": "BARC. Chilli — Intercultural Operation. Hand Book of Agricultural Technology. pp. 164-164.",
-    "metadata": {
-     "category": "fertilizer",
-     "tags": [
-      "Chilli",
-      "Fertilizer",
-      "মরিচ",
-      "সার"
-     ],
-     "title_en": "Chilli Fertilizer Schedule",
-     "title_bn": "",
-     "section_title": "Chilli — Intercultural Operation",
-     "publisher": "BARC",
-     "citation": "BARC. Chilli — Intercultural Operation. Hand Book of Agricultural Technology. pp. 164-164.",
-     "summary": "Recommended fertilizer application schedule for chilli per hectare.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B2B_MORICH2_358DC1_001",
-    "score": 0.0435,
-    "title_en": "",
-    "title_bn": "বাংলাদেশে মরিচ চাষের গুরুত্ব ও সম্ভাবনা",
-    "content_en": "",
-    "content_bn": "বাংলাদেশে মরিচ (Capsicum spp.) একটি অত্যন্ত গুরুত্বপূর্ণ মসলা জাতীয় ফসল। এর অর্থনৈতিক গুরুত্ব অপরিসীম, কারণ এটি স্থানীয় ও আন্তর্জাতিক বাজারে ব্যাপক চাহিদাসম্পন্ন। মরিচ চাষ ক্ষুদ্র কৃষকদের জন্য লাভজনক এবং গ্রামীণ অর্থনীতিতে গুরুত্বপূর্ণ ভূমিকা রাখে। মরিচে ভিটামিন E এবং ক্যাপসাইসিন থাকে যা স্বাস্থ্যের জন্য উপকারী। বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (BARI) মরিচের উচ্চ ফলনশীল জাত উদ্ভাবন, রোগ ও কীটপতঙ্গ নিয়ন্ত্রণ, এবং পোস্ট-হারভেস্ট প্রযুক্তি নিয়ে কাজ করছে। তবে রোগবালাই, বাজারজাতকরণে মধ্যস্বত্বভোগীদের দৌরাত্ম্য এবং জলবায়ু পরিবর্তন মরিচ চাষের প্রধান চ্যালেঞ্জ হিসেবে চিহ্নিত।",
-    "source": "BARI Morich-2 Production Technology Manual",
-    "citation": "BARI. বাংলাদেশে মরিচ চাষের গুরুত্ব. BARI Morich-2 Production Technology Manual. pp. 273-273.",
-    "metadata": {
-     "category": "general",
-     "tags": [
-      "মরিচ",
-      "মরিচ চাষ",
-      "BARI",
-      "Chilli",
-      "Agriculture"
-     ],
-     "title_en": "",
-     "title_bn": "বাংলাদেশে মরিচ চাষের গুরুত্ব ও সম্ভাবনা",
-     "section_title": "বাংলাদেশে মরিচ চাষের গুরুত্ব",
-     "publisher": "BARI",
-     "citation": "BARI. বাংলাদেশে মরিচ চাষের গুরুত্ব. BARI Morich-2 Production Technology Manual. pp. 273-273.",
-     "summary": "বাংলাদেশে মরিচ চাষের অর্থনৈতিক গুরুত্ব, পুষ্টিগুণ এবং মরিচ উৎপাদন সংক্রান্ত গবেষণা ও চ্যালেঞ্জসমূহ সম্পর্কে একটি সংক্ষিপ্ত পরিচিতি।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "কৃষি গবেষণা ইনস্টিটিউট অনুমোদিত সরিষার অলটারনারিয়া ব্লাইট (Alternaria blight) রোগ দমনের জন্য, বপনের পূর্বে প্রতি কেজি সরিষার বীজে ২ গ্রাম হারে Captan বা Vitavex-200 দিয়ে বীজ শোধন করার পরামর্শ দেওয়া হচ্ছে [B5_BARCAG_5911F2_002]",
-    "verdict": "grounded",
-    "reason": ""
-   },
-   {
-    "text": "PHI (Pre-Harvest Interval) বা ফসল কাটার পূর্ববর্তী সময়সীমা সম্পর্কে জ্ঞানভান্ডারে কোনো তথ্য নেই",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "বারি সরিষা-১৮ জাতের পরিপক্বতার সময় সাধারণত ৯৫-১০০ দিন [B2B_SHORISHA18_C085EA_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয়, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
- "|||2026-08|আমার সরিষা ফসলে powdery mildew দেখা দিয়েছে। এর অনুমোদিত কীটনাশক ও সঠিক প্রয়োগ মাত্রা কী": {
-  "query": "আমার সরিষা ফসলে powdery mildew দেখা দিয়েছে। এর অনুমোদিত কীটনাশক ও সঠিক প্রয়োগ মাত্রা কী?",
-  "category": "safe_agri",
-  "answer": "আপনার সরিষা ফসলে powdery mildew দেখা দিয়েছে জেনে আমরা দুঃখিত।\n\nজ্ঞানভান্ডারে সরিষা ফসলে powdery mildew দমনের জন্য অনুমোদিত কীটনাশক সম্পর্কে সরাসরি তথ্য নেই। তবে, কুমড়ো জাতীয় ফসলে powdery mildew দমনের জন্য সালফার-ভিত্তিক কীটনাশক ব্যবহারের তথ্য রয়েছে। [DAE_PEST_4FDBA3_001], [DAE_PEST_26974A_001], [DAE_PEST_5985EB_001]\n\nএই কীটনাশকগুলো সাধারণত প্রতি লিটার জলে ২ গ্রাম হারে ব্যবহার করা হয়। [DAE_PEST_4FDBA3_001], [DAE_PEST_26974A_001]\n\nতবে, সরিষা ফসলের জন্য নির্দিষ্ট মাত্রা এবং অনুমোদিত কীটনাশক সম্পর্কে নিশ্চিত তথ্যের জন্য, অনুগ্রহ করে **কৃষক কল সেন্টার ১৬১২৩** এ যোগাযোগ করুন। তারা আপনাকে সঠিক পরামর্শ দিতে পারবেন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "sources": [
-   {
-    "id": "DAE_PEST_4FDBA3_001",
-    "score": 0.0476,
-    "title_en": "Registered Sulfur-based Pesticides for Crop Protection",
-    "title_bn": "",
-    "content_en": "This node provides information on registered sulfur-based pesticides (80WG/WDG/WP/DF formulations) approved by the Department of Agricultural Extension (DAE) for specific crop-pest combinations. Key applications include: - Tea: Management of red spider mites (typically 2.25 kg/ha). - Jute: Management of yellow mites (dosage varies by product, ranging from 1.00 kg/ha to 3.30 kg/ha). - Cucurbits/Sweet Gourd: Management of powdery mildew (typically 2 g/L of water). - Mango: Management of powdery mildew (typically 2 g/L of water). Always verify the specific registration number and product label before application.",
-    "content_bn": "এই নোডটি নির্দিষ্ট ফসল-পোকামাকড় দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক অনুমোদিত নিবন্ধিত সালফারভিত্তিক কীটনাশক (80WG/WDG/WP/DF ফর্মুলেশন) সম্পর্কিত তথ্য প্রদান করে। প্রধান প্রয়োগগুলোর মধ্যে রয়েছে: চা-তে লাল মাকড় দমন (সাধারণত 2.25 kg/ha), পাটে হলুদ মাকড় দমন (পণ্য ভেদে ডোজ 1.00 kg/ha থেকে 3.30 kg/ha পর্যন্ত হতে পারে), করলামিষ্টি কুমড়ো এবং আমে গুঁড়া উইল বা পাউডারী মিলডিউ রোগ দমন (সাধারণত 2 g/L পানি)। প্রয়োগের পূর্বে সর্বদা নির্দিষ্ট নিবন্ধন নম্বর এবং পণ্যের লেবেল যাচাই করুন।",
-    "source": "List of Registered Agricultural Pesticides (DAE)",
-    "citation": "DAE. page_730. List of Registered Agricultural Pesticides (DAE). pp. 730-730.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "pesticide",
-      "sulfur",
-      "DAE",
-      "mite control",
-      "powdery mildew",
-      "কীটনাশক",
-      "সালফার"
-     ],
-     "title_en": "Registered Sulfur-based Pesticides for Crop Protection",
-     "title_bn": "",
-     "section_title": "page_730",
-     "publisher": "DAE",
-     "citation": "DAE. page_730. List of Registered Agricultural Pesticides (DAE). pp. 730-730.",
-     "summary": "A list of DAE-registered sulfur-based pesticide products (80% concentration formulations) used for managing red spider mites in tea, yellow mites in jute, and powdery mildew in cucurbits and mango.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "DAE_PEST_26974A_001",
-    "score": 0.0476,
-    "title_en": "Registered Sulfur-based Pesticides for Crop Protection",
-    "title_bn": "",
-    "content_en": "This section provides a list of registered sulfur-based pesticides (80% concentration in various formulations like WG, WP, DF, WDG) approved for use in Bangladesh. These products are primarily used to control powdery mildew, mites (yellow, red, and red spider mites), leaf scald in rice, and wilt in tomato. Application rates vary by crop and pest, ranging from 1.25 kg/ha to 3.30 kg/ha, or 2 g/L of water for specific applications.",
-    "content_bn": "এই বিভাগে বাংলাদেশে ব্যবহারের জন্য অনুমোদিত নিবন্ধিত সালফার-ভিত্তিক কীটনাশকের (বিভিন্ন ফর্মুলেশনে যেমন WG, WP, DF, -তে ৮০ ঘনত্ব) একটি তালিকা প্রদান করা হয়েছে। এই পণ্যগুলি মূলত গুঁড়ো কালশিটে রোগ (powdery mildew), মাকড়সা (হলুদ, লাল এবং লাল মাকড়সা), ধানের পাতার স্ক্যাল্ড এবং টমেটোর উইল্ট দমনে ব্যবহৃত হয়। ফসল এবং পোকাভেদে প্রয়োগের মাত্রা ভিন্ন হয়, যা ক্ষেত্রবিশেষে ১.২৫ কেজিহেক্টর থেকে ৩.৩০ কেজিহেক্টর, অথবা নির্দিষ্ট প্রয়োগের জন্য প্রতি লিটার জলে ২ গ্রাম পর্যন্ত হয়ে থাকে।",
-    "source": "List of Registered Agricultural Pesticides (DAE)",
-    "citation": "DAE. page_728. List of Registered Agricultural Pesticides (DAE). pp. 728-728.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "pesticide",
-      "sulfur",
-      "DAE",
-      "registered",
-      "mites",
-      "powdery mildew",
-      "কীটনাশক",
-      "সালফার"
-     ],
-     "title_en": "Registered Sulfur-based Pesticides for Crop Protection",
-     "title_bn": "",
-     "section_title": "page_728",
-     "publisher": "DAE",
-     "citation": "DAE. page_728. List of Registered Agricultural Pesticides (DAE). pp. 728-728.",
-     "summary": "A list of registered sulfur-based pesticide products (80WG/WP/DF/WDG formulations) approved by the DAE for managing mites, powdery mildew, leaf scald, and wilt across various crops.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "DAE_PEST_13CDBB_001",
-    "score": 0.0455,
-    "title_en": "Registered Pesticides for Rice and Other Crops (50SP Products)",
-    "title_bn": "",
-    "content_en": "This table provides the registration details and recommended application rates for various 50SP pesticide products. Farmers should follow the specific dosage rates provided for each crop and pest combination to ensure effective control.",
-    "content_bn": "এই সারণীটি বিভিন্ন 50SP কীটনাশক পণ্যের নিবন্ধন বিবরণ এবং প্রস্তাবিত প্রয়োগের হার প্রদান করে। কার্যকর দমন নিশ্চিত করতে কৃষকদের প্রতিটি ফসল এবং পোকার সমন্বয়ের জন্য প্রদত্ত নির্দিষ্ট ডোজের হার অনুসরণ করা উচিত।",
-    "source": "List of Registered Agricultural Pesticides (DAE)",
-    "citation": "DAE. page_788. List of Registered Agricultural Pesticides (DAE). pp. 788-788.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "pesticide",
-      "rice",
-      "DAE",
-      "pest control",
-      "50SP",
-      "কীটনাশক",
-      "ধান"
-     ],
-     "title_en": "Registered Pesticides for Rice and Other Crops (50SP Products)",
-     "title_bn": "",
-     "section_title": "page_788",
-     "publisher": "DAE",
-     "citation": "DAE. page_788. List of Registered Agricultural Pesticides (DAE). pp. 788-788.",
-     "summary": "A list of registered 50SP pesticide products and their recommended usage for controlling pests in rice, brinjal, bean, chilli, sugarcane, cotton, and tea.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "DAE_PEST_5985EB_001",
-    "score": 0.0435,
-    "title_en": "Registered Pesticides for Tea, Jute, and Cucurbit Pests",
-    "title_bn": "",
-    "content_en": "This section provides a list of registered agricultural pesticides (specifically sulphur-based formulations) approved by the DAE for use in Bangladesh. These products are indicated for the management of Red Spider Mites in tea, Yellow Mites in jute, and Powdery Mildew in cucurbits. Users must adhere to the specific dosage rates provided for each product.",
-    "content_bn": "এই বিভাগে বাংলাদেশে ব্যবহারের জন্য DAE কর্তৃক অনুমোদিত নিবন্ধিত কৃষি কীটনাশকের (বিশেষ করে সালফার-ভিত্তিক ফর্মুলেশন) একটি তালিকা প্রদান করা হয়েছে। এই পণ্যগুলো চা-এর Red Spider Mite, পাটের Yellow Mite এবং লতানো ফসলের (cucurbits) Powdery Mildew দমনের জন্য নির্দেশিত। ব্যবহারকারীদের প্রতিটি পণ্যের জন্য নির্দিষ্ট ডোজের হার অবশ্যই মেনে চলতে হবে।",
-    "source": "List of Registered Agricultural Pesticides (DAE)",
-    "citation": "DAE. page_731. List of Registered Agricultural Pesticides (DAE). pp. 731-731.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "pesticide",
-      "DAE",
-      "tea",
-      "jute",
-      "cucurbit",
-      "Red Spider Mite",
-      "Yellow Mite",
-      "Powdery mildew",
-      "কীটনাশক",
-      "চা",
-      "পাট",
-      "শসা"
-     ],
-     "title_en": "Registered Pesticides for Tea, Jute, and Cucurbit Pests",
-     "title_bn": "",
-     "section_title": "page_731",
-     "publisher": "DAE",
-     "citation": "DAE. page_731. List of Registered Agricultural Pesticides (DAE). pp. 731-731.",
-     "summary": "A list of registered pesticide brand names, their registration numbers, and recommended dosage rates for controlling Red Spider Mites, Yellow Mites, and Powdery Mildew in tea, jute, and cucurbit crops.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "DAE_PEST_4D00AE_001",
-    "score": 0.0435,
-    "title_en": "Registered Pesticides for Crop Disease Management",
-    "title_bn": "",
-    "content_en": "This section provides a list of registered agricultural pesticides, their active ingredients, brand names, and recommended usage for specific crops and diseases. Always follow the recommended dosage rates to ensure effective pest management.",
-    "content_bn": "এই বিভাগে নিবন্ধিত কৃষি বালাইনাশক, তাদের সক্রিয় উপাদান, ব্র্যান্ডের নাম এবং নির্দিষ্ট ফসল ও রোগের জন্য প্রস্তাবিত ব্যবহারের একটি তালিকা প্রদান করা হয়েছে। কার্যকর বালাই ব্যবস্থাপনার জন্য সর্বদা প্রস্তাবিত মাত্রা অনুসরণ করুন।",
-    "source": "List of Registered Agricultural Pesticides (DAE)",
-    "citation": "DAE. page_736. List of Registered Agricultural Pesticides (DAE). pp. 736-736.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "pesticide",
-      "fungicide",
-      "DAE",
-      "crop protection",
-      "বালাইনাশক",
-      "ছত্রাকনাশক"
-     ],
-     "title_en": "Registered Pesticides for Crop Disease Management",
-     "title_bn": "",
-     "section_title": "page_736",
-     "publisher": "DAE",
-     "citation": "DAE. page_736. List of Registered Agricultural Pesticides (DAE). pp. 736-736.",
-     "summary": "A list of registered fungicides and their recommended dosages for various crops and diseases as per DAE guidelines.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "আপনার সরিষা ফসলে powdery mildew দেখা দিয়েছে জেনে আমরা দুঃখিত",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "জ্ঞানভান্ডারে সরিষা ফসলে powdery mildew দমনের জন্য অনুমোদিত কীটনাশক সম্পর্কে সরাসরি তথ্য নেই",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "তবে, কুমড়ো জাতীয় ফসলে powdery mildew দমনের জন্য সালফার-ভিত্তিক কীটনাশক ব্যবহারের তথ্য রয়েছে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[DAE_PEST_4FDBA3_001], [DAE_PEST_26974A_001], [DAE_PEST_5985EB_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "এই কীটনাশকগুলো সাধারণত প্রতি লিটার জলে ২ গ্রাম হারে ব্যবহার করা হয়",
-    "verdict": "grounded",
-    "reason": ""
-   },
-   {
-    "text": "[DAE_PEST_4FDBA3_001], [DAE_PEST_26974A_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "তবে, সরিষা ফসলের জন্য নির্দিষ্ট মাত্রা এবং অনুমোদিত কীটনাশক সম্পর্কে নিশ্চিত তথ্যের জন্য, অনুগ্রহ করে **কৃষক কল সেন্টার ১৬১২৩** এ যোগাযোগ করুন",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "তারা আপনাকে সঠিক পরামর্শ দিতে পারবেন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
- "|||2026-08|আমার পেঁয়াজ ক্ষেতের পাতাত দাগ পড়ছে, কতটুক ওষুধ এক ড্রাম পানিতে গুলে স্প্রে করমু": {
-  "query": "আমার পেঁয়াজ ক্ষেতের পাতাত দাগ পড়ছে, কতটুক ওষুধ এক ড্রাম পানিতে গুলে স্প্রে করমু?",
-  "category": "safe_agri",
-  "answer": "আপনার পেঁয়াজ ক্ষেতের পাতায় দাগ পড়ার সমস্যায়, নিম্নলিখিত ব্যবস্থাগুলো গ্রহণ করতে পারেন:\n\n*   **ছত্রাকনাশক ব্যবহার:** যদি আপনার পেঁয়াজ গাছে অতিরিক্ত ঠাণ্ডাজনিত কারণে পাতা হলুদাভ হয়ে যায়, তবে প্রতি শতক জমিতে ৫০০ গ্রাম ইউরিয়া ও ৩০০ গ্রাম এমওপি (পটাশ) সার মিশিয়ে প্রয়োগ করুন। সার প্রয়োগের সময় পাতা যেন ভেজা না থাকে এবং প্রয়োগের পর নিড়ানি দিয়ে সার মাটির সাথে মিশিয়ে দিন। এরপর ক্যাব্রিওটপ নামক ছত্রাকনাশক প্রতি লিটার পানিতে ২ গ্রাম হারে মিশিয়ে ভালোভাবে স্প্রে করুন [B2B_PEYAJ6_CD297E_002]।\n\n*   **অন্যান্য রোগের জন্য:** যদি অলটারনারিয়া বা সারকোস্পোরা পাতার দাগ রোগের জন্য, প্রতি কেজি বীজে 3g/kg হারে Provax 200 দিয়ে বীজ শোধন করতে পারেন। এরপর প্রতি লিটার পানিতে 2 ml/l হারে Rubral অথবা প্রতি লিটার পানিতে 2 kg/litre হারে Bavistin বা Knowin স্প্রে করতে পারেন [B5_BARCAG_33EE1D_002]।\n\n*   **থ্রিপস দমন:** যদি থ্রিপস পোকার কারণে সমস্যা হয়, তবে জৈব পদ্ধতি হিসেবে এক কেজি নিম বীজ ২০ লিটার পানিতে ১২ ঘণ্টা ভিজিয়ে রেখে ছেঁকে স্প্রে করতে পারেন। আক্রমণ বেশি হলে কুইনালফস ২৫ ইসি বা ডাইমেথয়েট ৪০ ইসি প্রতি ১০ লিটার পানিতে ১০ মিলি হারে অথবা ট্রেসার প্রতি ১০ লিটার পানিতে ০.৪ মিলি হারে স্প্রে করতে পারেন [B2B_PEYAJ6_CD297E_001]।\n\n*   **পরামর্শ:** আপনার নির্দিষ্ট সমস্যার জন্য সঠিক ওষুধ এবং তার মাত্রা জানতে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "sources": [
-   {
-    "id": "B5_WFGUIDE_1250E2_001",
-    "score": 0.0476,
-    "title_en": "",
-    "title_bn": "রোটেনন প্রয়োগ পদ্ধতি",
-    "content_en": "",
-    "content_bn": "পুকুরে রোটেনন প্রয়োগের জন্য প্রথমে প্রয়োজনীয় পরিমাণ রোটেননের সাথে অল্প অল্প করে পানি মিশিয়ে আটার খামির মতো তৈরি করতে হবে। এরপর তিন ভাগের এক ভাগ ছোট ছোট বল আকারে পুরো পুকুরে ছিটিয়ে দিতে হবে। বাকি দুই ভাগ পানিতে গুলে পুরো পুকুরে ছিটিয়ে দিতে হবে। মাছ ভেসে উঠলে বা মারা গেলে দ্রুত জাল দিয়ে সরিয়ে ফেলতে হবে।",
-    "source": "WorldFish Farmers Guidebook 2020",
-    "citation": "WorldFish. রোটেনন প্রয়োগ পদ্ধতি. WorldFish Farmers Guidebook 2020. pp. 10-10.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "রোটেনন",
-      "পুকুর প্রস্তুতি",
-      "Rotenone",
-      "Pond preparation"
-     ],
-     "title_en": "",
-     "title_bn": "রোটেনন প্রয়োগ পদ্ধতি",
-     "section_title": "রোটেনন প্রয়োগ পদ্ধতি",
-     "publisher": "WorldFish",
-     "citation": "WorldFish. রোটেনন প্রয়োগ পদ্ধতি. WorldFish Farmers Guidebook 2020. pp. 10-10.",
-     "summary": "পুকুরে রোটেনন প্রয়োগের সঠিক পদ্ধতি এবং কার্যকারিতার সময়কাল বর্ণনা করা হয়েছে।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B2B_PEYAJ6_CD297E_002",
-    "score": 0.0476,
-    "title_en": "",
-    "title_bn": "পেঁয়াজের শীতজনিত সমস্যা ও প্রতিকার",
-    "content_en": "",
-    "content_bn": "টানা শৈত্যপ্রবাহ ও ঘন কুয়াশার কারণে পেঁয়াজ গাছের আগা থেকে নিচের দিকে মরে যেতে পারে, যা অতিরিক্ত ঠাণ্ডাজনিত একটি শারীরবৃত্তীয় সমস্যা। পাতা হলুদাভ হয়ে গেলে প্রতি শতক জমিতে ৫০০ গ্রাম ইউরিয়া ও ৩০০ গ্রাম এমওপি (পটাশ) সার মিশিয়ে প্রয়োগ করতে হবে। সার প্রয়োগের সময় পাতা শিশির ভেজা থাকা যাবে না এবং প্রয়োগের পর নিড়ানি দিয়ে সার মাটির সাথে মিশিয়ে দিতে হবে। এরপর ক্যাব্রিওটপ নামক ছত্রাকনাশক প্রতি লিটার পানিতে ২ গ্রাম হারে মিশিয়ে ভালোভাবে স্প্রে করতে হবে।",
-    "source": "BARI Piaz-6 Production Technology Manual",
-    "citation": "BARI. থ্রিপস. BARI Piaz-6 Production Technology Manual. pp. 149-149.",
-    "metadata": {
-     "category": "general",
-     "tags": [
-      "পেঁয়াজ",
-      "শৈত্যপ্রবাহ",
-      "Onion",
-      "Cold stress"
-     ],
-     "title_en": "",
-     "title_bn": "পেঁয়াজের শীতজনিত সমস্যা ও প্রতিকার",
-     "section_title": "থ্রিপস",
-     "publisher": "BARI",
-     "citation": "BARI. থ্রিপস. BARI Piaz-6 Production Technology Manual. pp. 149-149.",
-     "summary": "শৈত্যপ্রবাহ ও ঘন কুয়াশার কারণে পেঁয়াজ গাছের পাতা মরে যাওয়া রোধে সার ও ছত্রাকনাশক প্রয়োগ পদ্ধতি।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B2B_PEYAJ6_CD297E_001",
-    "score": 0.0455,
-    "title_en": "",
-    "title_bn": "পেঁয়াজের থ্রিপস দমন ব্যবস্থাপনা",
-    "content_en": "",
-    "content_bn": "থ্রিপস (Thrips tabaci Lindeman) নামক ছোট পোকা পেঁয়াজের ডগার রস শুষে খেয়ে ফসল নষ্ট করে। এটি দমনে সমন্বিত বালাই ব্যবস্থাপনা অনুসরণ করা জরুরি। আঠালো সাদা ফাঁদ ব্যবহার এবং পরভোজী মাকড়সা ও পোকার সংখ্যা বৃদ্ধির মাধ্যমে এদের নিয়ন্ত্রণ করা যায়। জৈব পদ্ধতি হিসেবে এক কেজি নিম বীজ ২০ লিটার পানিতে ১২ ঘণ্টা ভিজিয়ে রেখে ছেঁকে স্প্রে করা কার্যকর। আক্রমণ বেশি হলে কুইনালফস ২৫ ইসি বা ডাইমেথয়েট ৪০ ইসি প্রতি ১০ লিটার পানিতে ১০ মিলি হারে অথবা ট্রেসার প্রতি ১০ লিটার পানিতে ০.৪ মিলি হারে স্প্রে করতে হবে।",
-    "source": "BARI Piaz-6 Production Technology Manual",
-    "citation": "BARI. থ্রিপস. BARI Piaz-6 Production Technology Manual. pp. 149-149.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "পেঁয়াজ",
-      "থ্রিপস",
-      "Onion",
-      "Thrips",
-      "বালাই ব্যবস্থাপনা"
-     ],
-     "title_en": "",
-     "title_bn": "পেঁয়াজের থ্রিপস দমন ব্যবস্থাপনা",
-     "section_title": "থ্রিপস",
-     "publisher": "BARI",
-     "citation": "BARI. থ্রিপস. BARI Piaz-6 Production Technology Manual. pp. 149-149.",
-     "summary": "পেঁয়াজের থ্রিপস পোকা দমনে আঠালো ফাঁদ, জৈব বালাইনাশক ও রাসায়নিক পদ্ধতির সমন্বিত ব্যবস্থাপনা।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B5_BARCAG_33EE1D_002",
-    "score": 0.0455,
-    "title_en": "Management of Leaf Spot Diseases in Cauliflower",
-    "title_bn": "",
-    "content_en": "For Alternaria leaf spot, treat seeds with Provax 200 at 3g/kg of seed and perform foliar spraying with Rubral at 2 ml/l of water. For Cercospora leaf spot, treat seeds with Provax 200 at 3 g/kg of seed and apply foliar spray of Bavistin or Knowin at 2 kg/litre of water.",
-    "content_bn": "Publisher: BARC Section/Topic: Cauliflower — Harvesting & Preservation অলটারনারিয়া পাতার দাগ রোগের জন্য, প্রতি কেজি বীজে 3g/kg হারে Provax 200 দিয়ে বীজ শোধন করুন এবং প্রতি লিটার পানিতে 2 ml/l হারে Rubral দিয়ে পাতায় স্প্রে করুন। সারকোস্পোরা পাতার দাগ রোগের জন্য, প্রতি কেজি বীজে 3 g/kg হারে Provax 200 দিয়ে বীজ শোধন করুন এবং প্রতি লিটার পানিতে 2 kg/litre হারে Bavistin বা Knowin স্প্রে করুন।",
-    "source": "Hand Book of Agricultural Technology",
-    "citation": "BARC. Cauliflower — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 104-104.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "Cauliflower",
-      "Disease management",
-      "Alternaria leaf spot",
-      "Cercospora leaf spot",
-      "ফুলকপি",
-      "রোগ দমন"
-     ],
-     "title_en": "Management of Leaf Spot Diseases in Cauliflower",
-     "title_bn": "",
-     "section_title": "Cauliflower — Harvesting & Preservation",
-     "publisher": "BARC",
-     "citation": "BARC. Cauliflower — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 104-104.",
-     "summary": "Control protocols for Alternaria and Cercospora leaf spot diseases in cauliflower.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B5_BARCAG_D4BA83_004",
-    "score": 0.0417,
-    "title_en": "Groundnut Pest Management",
-    "title_bn": "",
-    "content_en": "Major insects: Hairy caterpillar, Jassids and Thriphs. Control measures: In case of hairy caterpillar insect infestation, leaves of infested plant should be destroyed along with the eggs and larvae of insects. For adult insect control, Ripcord 10 EC or Nogos 100 EC should be sprayed @ one ml of insecticide with one litre of water. Diazinon 60 EC @ 2 ml per litres of water should be sprayed to control Jassids and thriphs.",
-    "content_bn": "প্রধান পোকা: লোমশ শুঁয়োপোকা, জ্যাসিড ও থ্রিপস। দমনের ব্যবস্থা: লোমশ শুঁয়োপোকা পোকার আক্রমণ দেখা দিলে, পোকার ডিম ও লার্ভাসহ আক্রান্ত গাছের পাতা ধ্বংস করে ফেলতে হবে। পূর্ণাঙ্গ পোকা দমনের জন্য, এক লিটার পানির সাথে এক মিলি হারে কীটনাশক মিশিয়ে Ripcord 10 EC বা Nogos 100 EC স্প্রে করতে হবে। জ্যাসিড ও থ্রিপস দমনের জন্য প্রতি লিটার পানিতে ২ মিলি হারে Diazinon 60 EC স্প্রে করতে হবে। Publisher: BARC Section/Topic: Groundnut — Harvesting & Preservation",
-    "source": "Hand Book of Agricultural Technology",
-    "citation": "BARC. Groundnut — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 67-67.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "Groundnut",
-      "Pest",
-      "Insect",
-      "চিনাবাদাম",
-      "পোকা দমন"
-     ],
-     "title_en": "Groundnut Pest Management",
-     "title_bn": "",
-     "section_title": "Groundnut — Harvesting & Preservation",
-     "publisher": "BARC",
-     "citation": "BARC. Groundnut — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 67-67.",
-     "summary": "Control measures for major groundnut insects including Hairy caterpillar, Jassids, and Thrips.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "আপনার পেঁয়াজ ক্ষেতের পাতায় দাগ পড়ার সমস্যায়, নিম্নলিখিত ব্যবস্থাগুলো গ্রহণ করতে পারেন:",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **ছত্রাকনাশক ব্যবহার:** যদি আপনার পেঁয়াজ গাছে অতিরিক্ত ঠাণ্ডাজনিত কারণে পাতা হলুদাভ হয়ে যায়, তবে প্রতি শতক জমিতে ৫০০ গ্রাম ইউরিয়া ও ৩০০ গ্রাম এমওপি (পটাশ) সার মিশিয়ে প্রয়োগ করুন",
-    "verdict": "grounded",
-    "reason": ""
-   },
-   {
-    "text": "সার প্রয়োগের সময় পাতা যেন ভেজা না থাকে এবং প্রয়োগের পর নিড়ানি দিয়ে সার মাটির সাথে মিশিয়ে দিন",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "এরপর ক্যাব্রিওটপ নামক ছত্রাকনাশক প্রতি লিটার পানিতে ২ গ্রাম হারে মিশিয়ে ভালোভাবে স্প্রে করুন [B2B_PEYAJ6_CD297E_002]",
-    "verdict": "grounded",
-    "reason": ""
-   },
-   {
-    "text": "*   **অন্যান্য রোগের জন্য:** যদি অলটারনারিয়া বা সারকোস্পোরা পাতার দাগ রোগের জন্য, প্রতি কেজি বীজে 3g/kg হারে Provax 200 দিয়ে বীজ শোধন করতে পারেন",
-    "verdict": "grounded",
-    "reason": ""
-   },
-   {
-    "text": "এরপর প্রতি লিটার পানিতে 2 ml/l হারে Rubral অথবা প্রতি লিটার পানিতে 2 kg/litre হারে Bavistin বা Knowin স্প্রে করতে পারেন [B5_BARCAG_33EE1D_002]",
-    "verdict": "grounded",
-    "reason": ""
-   },
-   {
-    "text": "*   **থ্রিপস দমন:** যদি থ্রিপস পোকার কারণে সমস্যা হয়, তবে জৈব পদ্ধতি হিসেবে এক কেজি নিম বীজ ২০ লিটার পানিতে ১২ ঘণ্টা ভিজিয়ে রেখে ছেঁকে স্প্রে করতে পারেন",
-    "verdict": "grounded",
-    "reason": ""
-   },
-   {
-    "text": "আক্রমণ বেশি হলে কুইনালফস ২৫ ইসি বা ডাইমেথয়েট ৪০ ইসি প্রতি ১০ লিটার পানিতে ১০ মিলি হারে অথবা ট্রেসার প্রতি ১০ লিটার পানিতে ০.৪ মিলি হারে স্প্রে করতে পারেন [B2B_PEYAJ6_CD297E_001]",
-    "verdict": "grounded",
-    "reason": ""
-   },
-   {
-    "text": "*   **পরামর্শ:** আপনার নির্দিষ্ট সমস্যার জন্য সঠিক ওষুধ এবং তার মাত্রা জানতে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
  "|||2026-08|বাঁধাকপি গাছের পাতায় head rotর লক্ষণ দেখা যাচ্ছে। কীভাবে নিরাপদে প্রতিকার করব": {
   "query": "বাঁধাকপি গাছের পাতায় head rotর লক্ষণ দেখা যাচ্ছে। কীভাবে নিরাপদে প্রতিকার করব?",
   "category": "safe_agri",
@@ -27671,6 +26334,1418 @@
    },
    {
     "text": "আপনার নির্দিষ্ট পোকার ধরণ এবং তার জন্য সঠিক কীটনাশক সম্পর্কে বিস্তারিত জানতে, অনুগ্রহ করে **কৃষক কল সেন্টার ১৬১২৩** এ যোগাযোগ করুন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "|||2026-08|আলুর নাবি ধসা রোগের প্রতিকার কী": {
+  "query": "আলুর নাবি ধসা রোগের প্রতিকার কী?",
+  "category": "safe_agri",
+  "answer": "আলুর নাবি ধসা রোগ (late blight) একটি সাধারণ এবং ধ্বংসাত্মক রোগ যা আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে। এর ফলে সেগুলো বাদামী বা কালো হয়ে পচে যেতে পারে, যা ফলন উল্লেখযোগ্যভাবে কমিয়ে দেয়। [CABI_POTATO_834B4F_001]\n\nএই রোগ দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক কিছু কীটনাশক নিবন্ধিত আছে। বেশিরভাগ পণ্যের জন্য প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়। তবে, Rekazeb 80WP এর ক্ষেত্রে প্রতি লিটার পানিতে ১.৫ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়েছে। [DAE_PEST_B3531E_001]\n\nএছাড়াও, আলুর নাবি ধসা রোগ এবং অন্যান্য ছত্রাকজনিত রোগ দমনের জন্য কিছু ছত্রাকনাশক নিবন্ধিত আছে। এগুলোর ক্ষেত্রেও সাধারণত প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহারের পরামর্শ দেওয়া হয়। [DAE_PEST_135B8A_001]\n\nরোগটি ভেজা আবহাওয়ায় দ্রুত ছড়ায় এবং সংক্রামিত বীজ আলুর মাধ্যমেও ছড়াতে পারে। [CABI_POTATO_834B4F_001]\n\nসারের সঠিক ব্যবহারও ফসলের স্বাস্থ্যের জন্য গুরুত্বপূর্ণ। পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত অবস্থার উপর নির্ভর করে। সারের সঠিক হার নির্ধারণের জন্য '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত, যা সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান নির্ধারণে সাহায্য করে। [B4_FRG2024_973F4A_001]\n\nযদি আপনার আরও তথ্যের প্রয়োজন হয় বা নির্দিষ্ট কোনো পরামর্শের জন্য, অনুগ্রহ করে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করুন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "sources": [
+   {
+    "id": "B6_DOC_2FA541_001",
+    "score": 0.0476,
+    "title_en": "Earthwork Calculation for Pond Construction",
+    "title_bn": "",
+    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
+    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
+    "source": "Training Manual on Improved Carp Polyculture 2011",
+    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+    "metadata": {
+     "category": "cultivation_practice",
+     "tags": [
+      "pond construction",
+      "earth measurement",
+      "pond cost estimation",
+      "পুকুর খনন",
+      "মাটির পরিমাপ"
+     ],
+     "title_en": "Earthwork Calculation for Pond Construction",
+     "title_bn": "",
+     "section_title": "Earth measurement",
+     "publisher": "DoF",
+     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_POTATO_834B4F_001",
+    "score": 0.0476,
+    "title_en": "Potato Late Blight Management",
+    "title_bn": "",
+    "content_en": "Late blight is a common and potentially devastating disease of potatoes that affects leaves, stems, and tubers, causing them to turn brown or black and rot. It significantly reduces yield and causes storage rot. Unlike early blight, late blight spots do not have internal rings. The disease thrives in wet weather and can be transmitted through infected seed potatoes.",
+    "content_bn": "Publisher: CABI Section/Topic: Potato late blight লেট ব্লাইট বা মড়ক রোগ আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে এমন একটি সাধারণ এবং সম্ভাব্য ধ্বংসাত্মক রোগ, যার কারণে সেগুলো বাদামী বা কালো হয়ে পচে যায়। এটি ফলন উল্লেখযোগ্যভাবে হ্রাস করে এবং সংরক্ষণের সময় পচন ধরায়। আর্লি ব্লাইটের বিপরীতে, লেট ব্লাইটের দাগগুলোতে কোনো অভ্যন্তরীণ বলয় থাকে না। রোগটি ভেজা আবহাওয়ায় দ্রুত বৃদ্ধি পায় এবং সংক্রামিত বীজ আলুর মাধ্যমে ছড়াতে পারে।",
+    "source": "Potato Disease Manuals (Plantwise)",
+    "citation": "CABI. Potato late blight. Potato Disease Manuals (Plantwise). pp. 232-232.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "potato",
+      "late blight",
+      "Phytophthora infestans",
+      "disease management",
+      "আলু",
+      "লেট ব্লাইট"
+     ],
+     "title_en": "Potato Late Blight Management",
+     "title_bn": "",
+     "section_title": "Potato late blight",
+     "publisher": "CABI",
+     "citation": "CABI. Potato late blight. Potato Disease Manuals (Plantwise). pp. 232-232.",
+     "summary": "Late blight is a devastating potato disease caused by Phytophthora infestans, characterized by brown or black rotting on leaves, stems, and tubers, especially in wet weather.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_B3531E_001",
+    "score": 0.0455,
+    "title_en": "Registered Pesticides for Potato Late Blight",
+    "title_bn": "",
+    "content_en": "The following pesticides are registered by the Department of Agricultural Extension (DAE) for the control of late blight in potato. Most products are 80WP formulations and are recommended at a dosage of 2 g/L of water, with the exception of Rekazeb 80WP which is recommended at 1.5 g/L of water.",
+    "content_bn": "আলুর মোজাইক বা ধসা রোগ (late blight) দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত কীটনাশকগুলো নিবন্ধিত রয়েছে। অধিকাংশ পণ্যই 80WP ফরমুলেশনের এবং প্রতি লিটার পানিতে 2 g/L হারে ব্যবহারের সুপারিশ করা হয়, তবে Rekazeb 80WP এর ক্ষেত্রে প্রতি লিটার পানিতে 1.5 g/L হারে সুপারিশ করা হয়েছে।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_753. List of Registered Agricultural Pesticides (DAE). pp. 753-753.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "potato",
+      "late blight",
+      "pesticide",
+      "DAE",
+      "আলু",
+      "লেট ব্লাইট",
+      "কীটনাশক"
+     ],
+     "title_en": "Registered Pesticides for Potato Late Blight",
+     "title_bn": "",
+     "section_title": "page_753",
+     "publisher": "DAE",
+     "citation": "DAE. page_753. List of Registered Agricultural Pesticides (DAE). pp. 753-753.",
+     "summary": "A list of DAE-registered pesticides (mostly 80WP formulations) for the management of late blight in potato crops.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_135B8A_001",
+    "score": 0.0455,
+    "title_en": "Registered Fungicides for Potato Late Blight and Related Diseases",
+    "title_bn": "",
+    "content_en": "This list provides DAE-registered fungicides (typically 64% + 4% formulation) for the management of late blight in potatoes, as well as early blight, powdery mildew, and other fungal diseases in crops like tomato, mango, and betel vine. The standard recommended dosage for most of these products is 2 g per liter of water.",
+    "content_bn": "এই তালিকাটি আলুর পামসা রোগ (late blight), এবং টমেটো, আম ও পানের মতো ফসলের আর্লি ব্লাইট, পাউডারী মিলডিউ ও অন্যান্য ছত্রাকজনিত রোগ দমনের জন্য -নিবন্ধিত ছত্রাকনাশকগুলো (সাধারণত ৬৪ + ৪ ফরমুলেশন) প্রদান করে। বেশিরভাগ পণ্যের জন্য আদর্শ প্রস্তাবিত ডোজ হলো প্রতি লিটার পানিতে 2 g।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_759. List of Registered Agricultural Pesticides (DAE). pp. 759-759.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "fungicide",
+      "potato",
+      "late blight",
+      "DAE",
+      "pesticide registration",
+      "আলু",
+      "ছত্রাকনাশক"
+     ],
+     "title_en": "Registered Fungicides for Potato Late Blight and Related Diseases",
+     "title_bn": "",
+     "section_title": "page_759",
+     "publisher": "DAE",
+     "citation": "DAE. page_759. List of Registered Agricultural Pesticides (DAE). pp. 759-759.",
+     "summary": "A list of DAE-registered fungicides containing 64% + 4% active ingredients, commonly used for managing late blight in potatoes and various diseases in other crops.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_FRG2024_973F4A_001",
+    "score": 0.0435,
+    "title_en": "Principles of Crop Response to Fertilizers",
+    "title_bn": "",
+    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
+    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "fertilizer",
+      "nutrient management",
+      "crop response",
+      "4R stewardship",
+      "সার ব্যবস্থাপনা",
+      "ফসলের পুষ্টি"
+     ],
+     "title_en": "Principles of Crop Response to Fertilizers",
+     "title_bn": "",
+     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
+     "publisher": "BARC",
+     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources · কী→['কিতা', 'কি / কিবা', 'কী / কি', 'ক্যা / কী', 'কী / কিতা']; না→['না', 'না', 'না', 'না', 'না']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "আলুর নাবি ধসা রোগ (late blight) একটি সাধারণ এবং ধ্বংসাত্মক রোগ যা আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এর ফলে সেগুলো বাদামী বা কালো হয়ে পচে যেতে পারে, যা ফলন উল্লেখযোগ্যভাবে কমিয়ে দেয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_POTATO_834B4F_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই রোগ দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক কিছু কীটনাশক নিবন্ধিত আছে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "বেশিরভাগ পণ্যের জন্য প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "তবে, Rekazeb 80WP এর ক্ষেত্রে প্রতি লিটার পানিতে ১.৫ গ্রাম হারে ব্যবহারের সুপারিশ করা হয়েছে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[DAE_PEST_B3531E_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এছাড়াও, আলুর নাবি ধসা রোগ এবং অন্যান্য ছত্রাকজনিত রোগ দমনের জন্য কিছু ছত্রাকনাশক নিবন্ধিত আছে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এগুলোর ক্ষেত্রেও সাধারণত প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহারের পরামর্শ দেওয়া হয়",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[DAE_PEST_135B8A_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "রোগটি ভেজা আবহাওয়ায় দ্রুত ছড়ায় এবং সংক্রামিত বীজ আলুর মাধ্যমেও ছড়াতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_POTATO_834B4F_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "সারের সঠিক ব্যবহারও ফসলের স্বাস্থ্যের জন্য গুরুত্বপূর্ণ",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত অবস্থার উপর নির্ভর করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "সারের সঠিক হার নির্ধারণের জন্য '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত, যা সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান নির্ধারণে সাহায্য করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B4_FRG2024_973F4A_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয় বা নির্দিষ্ট কোনো পরামর্শের জন্য, অনুগ্রহ করে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করুন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "|||2026-08|হামার আলুর পাতা কুকড়ে যাচ্চে ক্যানে": {
+  "query": "হামার আলুর পাতা কুকড়ে যাচ্চে ক্যানে?",
+  "category": "safe_agri",
+  "answer": "আপনার আলুর পাতা কুকড়ে যাওয়ার কয়েকটি সম্ভাব্য কারণ থাকতে পারে।\n\n*   **পোকার আক্রমণ:** আলুর পাতায় বিভিন্ন ধরনের পোকা আক্রমণ করতে পারে। এর মধ্যে জাব পোকা অন্যতম, যা পাতার রস শুষে নিয়ে পাতা কুকড়ে দিতে পারে [NARS_PESTINFO_A73C8F_001]। কাটুই পোকা এবং আলুর টিউবার মথও আলুর ক্ষতি করতে পারে [B5_BARCAG_AF08BA_005]।\n\n*   **কীটনাশক ব্যবহার:** যদি আপনি কোনো কীটনাশক ব্যবহার করে থাকেন, তবে তার মাত্রা বা প্রয়োগ পদ্ধতিতে সমস্যা থাকলে এমন হতে পারে।\n\n*   **অন্যান্য কারণ:** আলুর পাতা কুকড়ে যাওয়ার পেছনে রোগ বা পরিবেশগত কারণও থাকতে পারে, যা এই জ্ঞানভান্ডারে বিস্তারিত নেই।\n\nএই সমস্যা সমাধানে আপনি **কৃষক কল সেন্টার ১৬১২৩** এ যোগাযোগ করতে পারেন। তারা আপনাকে সঠিক পরামর্শ দিতে পারবেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "sources": [
+   {
+    "id": "B4_DAEEXT_0E355D_001",
+    "score": 0.0476,
+    "title_en": "Statistics on Potato Production and Marketing in Bangladesh",
+    "title_bn": "বাংলাদেশে আলুর উৎপাদন ও বাজারজাতকরণ সংক্রান্ত পরিসংখ্যান",
+    "content_en": "",
+    "content_bn": "এই নথিতে ১৯৭২-৭৩ থেকে ২০১৯-২০ অর্থবছর পর্যন্ত বাংলাদেশে আলুর আবাদি জমি, মোট উৎপাদন এবং হেক্টর প্রতি ফলনের তথ্য দেওয়া হয়েছে। এছাড়া ১৯৯৯ থেকে ২০১৯ সাল পর্যন্ত আলুর বার্ষিক পাইকারি মূল্যের একটি তালিকা এবং ২০০৯ থেকে ২০১৯ সাল পর্যন্ত বিশ্বের প্রধান আলু উৎপাদনকারী দেশগুলোর সাথে বাংলাদেশের উৎপাদনের তুলনামূলক চিত্র উপস্থাপন করা হয়েছে।",
+    "source": "Crop Production & Price Study 2020",
+    "citation": "Ministry of Agriculture. References. Crop Production & Price Study 2020. pp. 505-508.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "আলু",
+      "উৎপাদন",
+      "ফলন",
+      "বাজারদর",
+      "Potato",
+      "Production",
+      "Yield",
+      "Market Price"
+     ],
+     "title_en": "Statistics on Potato Production and Marketing in Bangladesh",
+     "title_bn": "বাংলাদেশে আলুর উৎপাদন ও বাজারজাতকরণ সংক্রান্ত পরিসংখ্যান",
+     "section_title": "References",
+     "publisher": "Ministry of Agriculture",
+     "citation": "Ministry of Agriculture. References. Crop Production & Price Study 2020. pp. 505-508.",
+     "summary": "এই নথিতে বাংলাদেশে আলুর উৎপাদন, ফলন এবং পাইকারি মূল্যের ঐতিহাসিক পরিসংখ্যান এবং আন্তর্জাতিক প্রেক্ষাপটে আলুর উৎপাদনের তুলনামূলক চিত্র তুলে ধরা হয়েছে।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "NARS_PESTINFO_A73C8F_001",
+    "score": 0.0476,
+    "title_en": "Insect and Mite Pests of Tuber Crops",
+    "title_bn": "কন্দজাতীয় ফসলের ক্ষতিকারক পোকা ও মাকড়",
+    "content_en": "",
+    "content_bn": "কন্দজাতীয় ফসলের (যেমন: আলু, মিষ্টি আলু, কচু ও ওল) ক্ষতিকারক পোকা ও মাকড় সম্পর্কে এই তথ্যে আলু ও মিষ্টি আলুর প্রধান পোকাগুলোর তালিকা দেওয়া হয়েছে। মোট ৩৯টি পোকা ও মাকড়ের মধ্যে ৯টি পোকা বাংলাদেশে ব্যাপকভাবে বিস্তৃত এবং ফসলের জন্য অত্যন্ত ক্ষতিকর। আক্রান্ত অংশের মধ্যে চারা, শিকড়, পাতা, কাণ্ড, কুঁড়ি, ফুল ও ফল অন্তর্ভুক্ত।",
+    "source": "All Pest Information Books — 2.6 Insect & Mite Pests of Tuber Crops (pp. 289-291)",
+    "citation": "NARS. 2.6 Insect & Mite Pests of Tuber Crops. All Pest Information Books. pp. 289-291.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "আলু",
+      "মিষ্টি আলু",
+      "পোকা দমন",
+      "Potato",
+      "Sweet potato",
+      "Pest management"
+     ],
+     "title_en": "Insect and Mite Pests of Tuber Crops",
+     "title_bn": "কন্দজাতীয় ফসলের ক্ষতিকারক পোকা ও মাকড়",
+     "section_title": "2.6 Insect & Mite Pests of Tuber Crops",
+     "publisher": "NARS",
+     "citation": "NARS. 2.6 Insect & Mite Pests of Tuber Crops. All Pest Information Books. pp. 289-291.",
+     "summary": "আলু এবং মিষ্টি আলুর প্রধান ক্ষতিকারক পোকা ও মাকড়ের একটি তালিকা, যা তাদের আক্রান্ত করার স্থান এবং গুরুত্বের ভিত্তিতে শ্রেণীবদ্ধ করা হয়েছে।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_DAEEXT_5F3D89_001",
+    "score": 0.0455,
+    "title_en": "Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020",
+    "title_bn": "বাংলাদেশে আলুর প্রাপ্যতা ও মূল্য অস্থিরতা: ২০২০ সালের একটি আন্তঃপ্রাতিষ্ঠানিক সমীক্ষা",
+    "content_en": "",
+    "content_bn": "২০২০ সালে আলুর দাম কেজি প্রতি ৫০-৫৫ টাকায় পৌঁছানোর প্রেক্ষাপটে এই সমীক্ষাটি পরিচালিত হয়। সমীক্ষায় দেখা গেছে, আলুর উৎপাদন, চাহিদা এবং সরবরাহের তথ্যে অসামঞ্জস্যতা, হিমাগারে মজুত কম থাকা, সরকারি তদারকির অভাব এবং বাজারে গুজব আলুর মূল্য বৃদ্ধিতে ভূমিকা রেখেছে। সমীক্ষায় আলুর দাম স্থিতিশীল রাখার জন্য কৃষি মূল্য কমিশন গঠন, সঠিক তথ্য প্রচার এবং রপ্তানি ও প্রক্রিয়াজাতকরণ বৃদ্ধির সুপারিশ করা হয়েছে।",
+    "source": "Crop Production & Price Study 2020",
+    "citation": "Ministry of Agriculture. Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020. Crop Production & Price Study 2020. pp. 490-492.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "আলু",
+      "বাজার দর",
+      "Potato",
+      "Market Price",
+      "Cold Storage",
+      "হিমাগার"
+     ],
+     "title_en": "Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020",
+     "title_bn": "বাংলাদেশে আলুর প্রাপ্যতা ও মূল্য অস্থিরতা: ২০২০ সালের একটি আন্তঃপ্রাতিষ্ঠানিক সমীক্ষা",
+     "section_title": "Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020",
+     "publisher": "Ministry of Agriculture",
+     "citation": "Ministry of Agriculture. Availability and Price Volatility of Potato in Bangladesh: An Inter-Institutional Study in 2020. Crop Production & Price Study 2020. pp. 490-492.",
+     "summary": "২০২০ সালে বাংলাদেশে আলুর মূল্য বৃদ্ধির কারণ এবং বাজার পরিস্থিতি বিশ্লেষণের ওপর ভিত্তি করে এই সমীক্ষাটি পরিচালিত হয়েছে।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "BARC_SHATA_EE28C7_001",
+    "score": 0.0455,
+    "title_en": "",
+    "title_bn": "ফল ফসলের সার সুপারিশমালা (আম, কাঁঠাল, কলা, পেঁপে, পেঁয়ারা, নারিকেল)",
+    "content_en": "",
+    "content_bn": "ফল ফসলের সঠিক বৃদ্ধি ও কাঙ্ক্ষিত ফলন নিশ্চিত করতে বয়স ও জাত অনুযায়ী সুষম সার প্রয়োগ অত্যন্ত গুরুত্বপূর্ণ। আম, কাঁঠাল, পেঁয়ারা ও নারিকেলের ক্ষেত্রে গাছের বয়স অনুযায়ী এবং কলা ও পেঁপের ক্ষেত্রে নির্দিষ্ট কিস্তিতে সার প্রয়োগ করতে হয়। সার প্রয়োগের সময় গাছের গোড়া থেকে নির্দিষ্ট দূরত্ব বজায় রেখে ডালপালা বিস্তারের জায়গা পর্যন্ত সার ছিটিয়ে মাটির সাথে মিশিয়ে সেচ দিতে হবে।",
+    "source": "Shata Shuparish Mala (100 Recommendations)",
+    "citation": "BARC. Fruit Crop Fertilizer Recommendations (Mango, Jackfruit, Banana, Papaya, Guava, Coconut). Shata Shuparish Mala (100 Recommendations). pp. 80-84.",
+    "metadata": {
+     "category": "fertilizer",
+     "tags": [
+      "সার",
+      "ফল চাষ",
+      "আম",
+      "কাঁঠাল",
+      "কলা",
+      "পেঁপে",
+      "পেঁয়ারা",
+      "নারিকেল",
+      "Fertilizer",
+      "Fruit crops"
+     ],
+     "title_en": "",
+     "title_bn": "ফল ফসলের সার সুপারিশমালা (আম, কাঁঠাল, কলা, পেঁপে, পেঁয়ারা, নারিকেল)",
+     "section_title": "Fruit Crop Fertilizer Recommendations (Mango, Jackfruit, Banana, Papaya, Guava, Coconut)",
+     "publisher": "BARC",
+     "citation": "BARC. Fruit Crop Fertilizer Recommendations (Mango, Jackfruit, Banana, Papaya, Guava, Coconut). Shata Shuparish Mala (100 Recommendations). pp. 80-84.",
+     "summary": "ফল ফসলের (আম, কাঁঠাল, কলা, পেঁপে, পেঁয়ারা ও নারিকেল) বয়স ও জাতভেদে সুষম সার প্রয়োগের নির্দেশিকা।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_AF08BA_005",
+    "score": 0.0435,
+    "title_en": "Management of Potato Insect Pests",
+    "title_bn": "",
+    "content_en": "Major potato insect pests include Cutworm (Agrotis ipsilon), Potato Tuber Moth (Phthorimaea operculella), and Aphids (Myzus persicae, Macrosiphum euphorbiae). Cutworms can be managed by hand-picking, flooding fields, and using insecticides like Chlorpyrifos or Carbofuran. Potato Tuber Moth is controlled by hilling-up, pheromone traps, and dipping tubers in Phenthoat/Deltamethrin. Aphids are managed using Neem seed extract, soap water, yellow sticky traps, and insecticides like Malathion or Imidacloprid (Admire).",
+    "content_bn": "Publisher: BARC Section/Topic: Potato — Intercultural Operation আলুর প্রধান পোকার মধ্যে কাটুই পোকা (Agrotis ipsilon), আলুর টিউবার মথ (Phthorimaea operculella), এবং জাব পোকা (Myzus persicae, Macrosiphum euphorbiae) অন্যতম। হাত দিয়ে বেছে ফেলা, জমিতে সেচ দেওয়া এবং Chlorpyrifos বা -এর মতো কীটনাশক ব্যবহারের মাধ্যমে কাটুই পোকা দমন করা যায়। মাটি তুলে দেওয়া, ফেরোমন ফাঁদ এবং আলুর টিউবার -এ ডুবিয়ে রেখে আলুর টিউবার মথ দমন করা হয়। নিম বীজের নির্যাস, সাবান পানি, হলুদ রঙের আঠালো ফাঁদ এবং Malathion বা Imidacloprid ()-এর মতো কীটনাশক ব্যবহার করে জাব পোকা দমন করা হয়।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Potato — Intercultural Operation. Hand Book of Agricultural Technology. pp. 54-59.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "Potato",
+      "Insect",
+      "Cutworm",
+      "Tuber Moth",
+      "Aphid",
+      "আলু",
+      "পোকা দমন"
+     ],
+     "title_en": "Management of Potato Insect Pests",
+     "title_bn": "",
+     "section_title": "Potato — Intercultural Operation",
+     "publisher": "BARC",
+     "citation": "BARC. Potato — Intercultural Operation. Hand Book of Agricultural Technology. pp. 54-59.",
+     "summary": "Control measures for major potato insect pests: Cutworm, Tuber Moth, and Aphids.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources · পাতা→['পাতা', 'পাতা', 'পাতা', 'পাতা', 'পাতা']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "আপনার আলুর পাতা কুকড়ে যাওয়ার কয়েকটি সম্ভাব্য কারণ থাকতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **পোকার আক্রমণ:** আলুর পাতায় বিভিন্ন ধরনের পোকা আক্রমণ করতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এর মধ্যে জাব পোকা অন্যতম, যা পাতার রস শুষে নিয়ে পাতা কুকড়ে দিতে পারে [NARS_PESTINFO_A73C8F_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "কাটুই পোকা এবং আলুর টিউবার মথও আলুর ক্ষতি করতে পারে [B5_BARCAG_AF08BA_005]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **কীটনাশক ব্যবহার:** যদি আপনি কোনো কীটনাশক ব্যবহার করে থাকেন, তবে তার মাত্রা বা প্রয়োগ পদ্ধতিতে সমস্যা থাকলে এমন হতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **অন্যান্য কারণ:** আলুর পাতা কুকড়ে যাওয়ার পেছনে রোগ বা পরিবেশগত কারণও থাকতে পারে, যা এই জ্ঞানভান্ডারে বিস্তারিত নেই",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই সমস্যা সমাধানে আপনি **কৃষক কল সেন্টার ১৬১২৩** এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "তারা আপনাকে সঠিক পরামর্শ দিতে পারবেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "|||2026-08|ধানের ব্লাস্ট রোগ দমনে কোন ছত্রাকনাশক কত মাত্রায় দেব": {
+  "query": "ধানের ব্লাস্ট রোগ দমনে কোন ছত্রাকনাশক কত মাত্রায় দেব?",
+  "category": "safe_agri",
+  "answer": "ধানের ব্লাস্ট রোগ দমনে ছত্রাকনাশক ব্যবহারের বিষয়ে নিচে কিছু তথ্য দেওয়া হলো:\n\n*   ব্লাস্ট রোগ একটি ছত্রাকজনিত রোগ যা Pyricularia oryzae (Magnaporthe grisea) নামক ছত্রাকের কারণে হয়। [CABI_WHEAT_153BAE_001]\n*   এই রোগের লক্ষণগুলোর মধ্যে রয়েছে পাতার ওপর সুচালো প্রান্তসহ কৌণিক, চোখ আকৃতির দাগ, পাশাপাশি উদ্ভিদের পর্ব, ছড়া এবং গলার অংশে সংক্রমণ। [CABI_WHEAT_153BAE_001]\n*   ব্লাস্ট রোগ দমনের জন্য শস্য ব্যবস্থাপনাভিত্তিক প্রতিরোধমূলক ব্যবস্থা, নিয়মিত পর্যবেক্ষণ এবং প্রয়োজন অনুযায়ী রাসায়নিক নিয়ন্ত্রণের সমন্বয় করতে হবে। [CABI_WHEAT_17CE3C_001]\n*   ধানের ব্লাস্ট রোগ দমনে নির্দিষ্ট কোন ছত্রাকনাশকের নাম বা মাত্রা জ্ঞানভান্ডারে উল্লেখ নেই। তবে, তিল বীজ শোধনের জন্য Vitavex-200, Bavistin, Captan, অথবা Homai নামক অনুমোদিত ছত্রাকনাশক প্রতি কেজি বীজের জন্য ২ গ্রাম হারে ব্যবহার করার কথা বলা হয়েছে। [B5_BARCAG_64E35E_003]\n[DAE_PEST_7055CC_001]\n*   যদি আপনার ধানের ব্লাস্ট রোগ দমনে নির্দিষ্ট ছত্রাকনাশক বা তার মাত্রা সম্পর্কে আরও তথ্যের প্রয়োজন হয়, তবে অনুগ্রহ করে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করুন।",
+  "confidence": "flagged-unverified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "sources": [
+   {
+    "id": "CABI_WHEAT_153BAE_001",
+    "score": 0.0476,
+    "title_en": "Management of Rice Blast",
+    "title_bn": "",
+    "content_en": "Rice blast is a fungal disease caused by Pyricularia oryzae (Magnaporthe grisea). Management involves cultural prevention, regular monitoring during favorable weather conditions, and chemical control when necessary. Key symptoms include angular, eye-shaped lesions with pointed ends on leaves, as well as infections on nodes, panicles, and the neck of the plant.",
+    "content_bn": "রাইস ব্লাস্ট হলো একটি ছত্রাকজনিত রোগ যার কারণ Pyricularia oryzae (Magnaporthe grisea)। এর ব্যবস্থাপনার মধ্যে রয়েছে সাংস্কৃতিক প্রতিরোধ, অনুকূল আবহাওয়ায় নিয়মিত পর্যবেক্ষণ এবং প্রয়োজনে রাসায়নিক দমন। প্রধান লক্ষণগুলোর মধ্যে রয়েছে পাতার ওপর সুচালো প্রান্তসহ কৌণিক, চোখ আকৃতির দাগ, পাশাপাশি উদ্ভিদের পর্ব, ছড়া এবং গলার অংশে সংক্রমণ।",
+    "source": "Wheat Disease Management Manuals (Plantwise)",
+    "citation": "CABI. Management of Rice blast. Wheat Disease Management Manuals (Plantwise). pp. 2-2.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Rice blast",
+      "ধানের ব্লাস্ট রোগ",
+      "Pyricularia oryzae",
+      "Disease management",
+      "Fungicide"
+     ],
+     "title_en": "Management of Rice Blast",
+     "title_bn": "",
+     "section_title": "Management of Rice blast",
+     "publisher": "CABI",
+     "citation": "CABI. Management of Rice blast. Wheat Disease Management Manuals (Plantwise). pp. 2-2.",
+     "summary": "Rice blast, caused by Pyricularia oryzae (Magnaporthe grisea), is managed through a combination of cultural practices, monitoring for specific environmental conditions, and targeted fungicide applications.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_64E35E_003",
+    "score": 0.0476,
+    "title_en": "Sesame Seed Treatment",
+    "title_bn": "",
+    "content_en": "Seed treatment is crucial for healthy seedling development and preventing seed-borne pathogens. - Recommended Fungicides: Vitavex-200, Bavistin, Captan, or Homai. - Method: Use 2 g of fungicide per kg of seeds. Mix thoroughly in a container with a lid. Sow the treated seeds on the following day.",
+    "content_bn": "Publisher: BARC Section/Topic: Sesame — Production Technology বীজ শোধন সুস্থ চারা বৃদ্ধিতে এবং বীজবাহিত রোগজীবাণু প্রতিরোধে অত্যন্ত গুরুত্বপূর্ণ। - অনুমোদিত ছত্রাকনাশক: Vitavex-200, Bavistin, Captan, অথবা Homai। - পদ্ধতি: প্রতি কেজি বীজের জন্য ২ গ্রাম ছত্রাকনাশক ব্যবহার করুন। ঢাকনাযুক্ত একটি পাত্রে ভালোভাবে মিশিয়ে নিন। শোধিত বীজ পরের দিন বপন করুন।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Sesame — Production Technology. Hand Book of Agricultural Technology. pp. 68-69.",
+    "metadata": {
+     "category": "seed_tech",
+     "tags": [
+      "Sesame",
+      "Seed treatment",
+      "Fungicide",
+      "তিল",
+      "বীজ শোধন"
+     ],
+     "title_en": "Sesame Seed Treatment",
+     "title_bn": "",
+     "section_title": "Sesame — Production Technology",
+     "publisher": "BARC",
+     "citation": "BARC. Sesame — Production Technology. Hand Book of Agricultural Technology. pp. 68-69.",
+     "summary": "Instructions for treating sesame seeds to prevent seed-borne diseases.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_WHEAT_17CE3C_001",
+    "score": 0.0455,
+    "title_en": "Blast disease of Rice",
+    "title_bn": "",
+    "content_en": "Blast disease (Magnaporthe grisea) is a significant fungal disease in rice. Symptoms include diamond-shaped lesions on leaves with grey centers and brown or reddish borders, as well as symptoms on stem nodes. Management involves a combination of cultural prevention, regular monitoring, and chemical control when necessary.",
+    "content_bn": "ব্লাস্ট রোগ (Magnaporthe grisea) ধানের একটি অত্যন্ত গুরুত্বপূর্ণ ছত্রাকজনিত রোগ। লক্ষণগুলোর মধ্যে রয়েছে পাতার ওপর ধূসর কেন্দ্র এবং বাদামী বা লালচে সীমানা বিশিষ্ট হীরা আকৃতির দাগ, পাশাপাশি কাণ্ডের গাঁটেও লক্ষণ দেখা যায়। প্রতিকারের জন্য শস্য ব্যবস্থাপনাভিত্তিক প্রতিরোধমূলক ব্যবস্থা, নিয়মিত পর্যবেক্ষণ এবং প্রয়োজন অনুযায়ী রাসায়নিক নিয়ন্ত্রণের সমন্বয় করতে হবে।",
+    "source": "Wheat Disease Management Manuals (Plantwise)",
+    "citation": "CABI. Blast disease of Rice. Wheat Disease Management Manuals (Plantwise). pp. 1-1.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Rice",
+      "Blast",
+      "Magnaporthe grisea",
+      "Fungicide",
+      "Disease Management"
+     ],
+     "title_en": "Blast disease of Rice",
+     "title_bn": "",
+     "section_title": "Blast disease of Rice",
+     "publisher": "CABI",
+     "citation": "CABI. Blast disease of Rice. Wheat Disease Management Manuals (Plantwise). pp. 1-1.",
+     "summary": "Blast disease, caused by Magnaporthe grisea, is a fungal infection in rice characterized by diamond-shaped lesions on leaves and stem nodes, manageable through cultural practices and targeted fungicide application.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_7055CC_001",
+    "score": 0.0455,
+    "title_en": "Registered Herbicides for Rice Weed Control",
+    "title_bn": "",
+    "content_en": "The following table lists registered herbicide products for use in rice cultivation to control various weed species. All listed products have a recommended dosage rate of 1.00 L/ha.",
+    "content_bn": "নিচের সারণীতে ধান চাষে বিভিন্ন আগাছা দমনের জন্য নিবন্ধিত আগাছানাশক পণ্যের তালিকা দেওয়া হলো। তালিকাভুক্ত সমস্ত পণ্যের প্রস্তাবিত ডোজের হার 1.00 L/ha।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_881. List of Registered Agricultural Pesticides (DAE). pp. 881-881.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "rice",
+      "herbicide",
+      "weed control",
+      "DAE",
+      "ধান",
+      "আগাছানাশক"
+     ],
+     "title_en": "Registered Herbicides for Rice Weed Control",
+     "title_bn": "",
+     "section_title": "page_881",
+     "publisher": "DAE",
+     "citation": "DAE. page_881. List of Registered Agricultural Pesticides (DAE). pp. 881-881.",
+     "summary": "A list of registered herbicide products (500EC/50EC formulations) for weed management in rice, with a standard application dosage of 1.00 L/ha.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "IRRI_IRRI_A6AA96_001",
+    "score": 0.0435,
+    "title_en": "Blast (Node and Neck)",
+    "title_bn": "",
+    "content_en": "Blast is caused by the fungus Magnaporthe oryzae and can affect all above-ground parts of the rice plant. Node and neck blast commonly occur together. Node infection appears as blackish to grayish brown lesions in a banded pattern, which can cause the culm to break. Neck infection appears as grayish brown lesions that can girdle the neck, causing the panicle to fall over. Infection before the milky stage prevents grain formation, while later infection results in poor quality grains. It can also cause whiteheads, which, unlike those caused by stem borers, cannot be pulled apart from the plant.",
+    "content_bn": "ব্লাস্ট রোগটি Magnaporthe oryzae নামক ছত্রাকের কারণে হয় এবং ধান গাছের মাটির ওপরের সমস্ত অংশকে আক্রান্ত করতে পারে। গিট (নড) ও কলার (নেক) ব্লাস্ট সাধারণত একত্রে দেখা দেয়। গিটে infections কালো থেকে ধূসর-বাদামী রঙের ফিতার মতো দাগ হিসেবে দেখা দেয়, যা কান্ড ভেঙে ফেলতে পারে। কলারের ইনফেকশন ধূসর-বাদামী দাগ হিসেবে দেখা দেয় যা কলারকে বেষ্টন করে ফেলে এবং ছড়া নুইয়ে পড়ে। দুধ আসা স্তরের আগে ইনফেকশন হলে দানা গঠন রোধ হয়, আর পরবর্তীতে ইনফেকশন হলে মানসম্মত দানা হয় না। এটি হোয়াইটহেড বা সাদা শীষও সৃষ্টি করতে পারে, যা মাজরা পোকার কারণে সৃষ্ট সাদা শীষের মতো গাছ থেকে টেনে আলাদা করা যায় না।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. BLAST (NODE AND NECK). IRRI Rice Disease Reference Manual. pp. 49-53.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "rice",
+      "blast",
+      "fungal disease",
+      "Magnaporthe oryzae",
+      "node blast",
+      "neck blast",
+      "ধান",
+      "ব্লাস্ট রোগ"
+     ],
+     "title_en": "Blast (Node and Neck)",
+     "title_bn": "",
+     "section_title": "BLAST (NODE AND NECK)",
+     "publisher": "IRRI",
+     "citation": "IRRI. BLAST (NODE AND NECK). IRRI Rice Disease Reference Manual. pp. 49-53.",
+     "summary": "Blast is a destructive fungal disease of rice caused by Magnaporthe oryzae that affects nodes and necks, leading to significant yield loss and whiteheads.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources · ছত্রাকনাশক→['ছত্রাকনাশক', 'ছত্রাকনাশক', 'ছত্রাকনাশক', 'ছত্রাকনাশক', 'ছত্রাকনাশক']; ধান→['ধান', 'ধান', 'ধান', 'ধান', 'ধান']; না→['না', 'না', 'না', 'না', 'না']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "flagged-unverified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [
+   "Unverified dosage claim: 1 l (রাসায়নিক: আগাছানাশক)"
+  ],
+  "verifier_claims": [
+   {
+    "text": "ধানের ব্লাস্ট রোগ দমনে ছত্রাকনাশক ব্যবহারের বিষয়ে নিচে কিছু তথ্য দেওয়া হলো:",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   ব্লাস্ট রোগ একটি ছত্রাকজনিত রোগ যা Pyricularia oryzae (Magnaporthe grisea) নামক ছত্রাকের কারণে হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_153BAE_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   এই রোগের লক্ষণগুলোর মধ্যে রয়েছে পাতার ওপর সুচালো প্রান্তসহ কৌণিক, চোখ আকৃতির দাগ, পাশাপাশি উদ্ভিদের পর্ব, ছড়া এবং গলার অংশে সংক্রমণ",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_153BAE_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   ব্লাস্ট রোগ দমনের জন্য শস্য ব্যবস্থাপনাভিত্তিক প্রতিরোধমূলক ব্যবস্থা, নিয়মিত পর্যবেক্ষণ এবং প্রয়োজন অনুযায়ী রাসায়নিক নিয়ন্ত্রণের সমন্বয় করতে হবে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_17CE3C_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   ধানের ব্লাস্ট রোগ দমনে নির্দিষ্ট কোন ছত্রাকনাশকের নাম বা মাত্রা জ্ঞানভান্ডারে উল্লেখ নেই",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "তবে, তিল বীজ শোধনের জন্য Vitavex-200, Bavistin, Captan, অথবা Homai নামক অনুমোদিত ছত্রাকনাশক প্রতি কেজি বীজের জন্য ২ গ্রাম হারে ব্যবহার করার কথা বলা হয়েছে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[B5_BARCAG_64E35E_003]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   ধানের আগাছা দমনের জন্য নিবন্ধিত আগাছানাশক পণ্যের তালিকা এবং তাদের প্রস্তাবিত ডোজের হার 1.00 L/ha উল্লেখ করা হয়েছে",
+    "verdict": "unsupported",
+    "reason": "no passage contains 1 l (রাসায়নিক: আগাছানাশক)"
+   },
+   {
+    "text": "[DAE_PEST_7055CC_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   যদি আপনার ধানের ব্লাস্ট রোগ দমনে নির্দিষ্ট ছত্রাকনাশক বা তার মাত্রা সম্পর্কে আরও তথ্যের প্রয়োজন হয়, তবে অনুগ্রহ করে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করুন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "|||2026-08|ধানের ব্লাস্ট রোগ দমনে কী করব": {
+  "query": "ধানের ব্লাস্ট রোগ দমনে কী করব?",
+  "category": "safe_agri",
+  "answer": "ধানের ব্লাস্ট রোগ দমনে কিছু ব্যবস্থা গ্রহণ করা যেতে পারে:\n\n*   **রোগসহনশীল জাত ব্যবহার:** Nerica 1, 4, 10, এবং 11 জাতগুলো উফশী বা উচ্চভূমির এলাকার জন্য রোগসহনশীল। অন্যান্য এলাকার জন্য SC 213, NIBAM 108, NIBAM 109, NIBAM 110, IR-025, এবং N221 জাতগুলো ব্যবহার করা যেতে পারে। [CABI_WHEAT_D3A722_001]\n*   **শস্য পরিচর্যা:** সময়মতো বা আগেভাগে চারা রোপণ করা, জমিতে পানি জমিয়ে রাখা, অতিরিক্ত নাইট্রোজেন সার ব্যবহার থেকে বিরত থাকা এবং আক্রান্ত ফসলের অবশিষ্টাংশ পুড়িয়ে ফেলা বা ধ্বংস করা উচিত। [CABI_WHEAT_D3A722_001]\n*   **রোগ শনাক্তকরণ:** পাতার, কাদি ও ছড়ার গায়ে ধূসরসাদা কেন্দ্র এবং বাদামী সীমানা বিশিষ্ট হীরা আকৃতির দাগ দেখা যায়। এছাড়াও 'পচা গলা' বা 'rotten neck' লক্ষণ দেখা যাচ্ছে কি না তা পরীক্ষা করতে হবে। [CABI_WHEAT_D3A722_001]\n*   **রাসায়নিক প্রয়োগ:** লক্ষ্যভিত্তিক রাসায়নিক প্রয়োগের মাধ্যমেও এই রোগ দমন করা যেতে পারে। [CABI_WHEAT_D3A722_001]\n\nযদি আপনার আরও তথ্যের প্রয়োজন হয়, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "sources": [
+   {
+    "id": "B6_DOC_2FA541_001",
+    "score": 0.0476,
+    "title_en": "Earthwork Calculation for Pond Construction",
+    "title_bn": "",
+    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
+    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
+    "source": "Training Manual on Improved Carp Polyculture 2011",
+    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+    "metadata": {
+     "category": "cultivation_practice",
+     "tags": [
+      "pond construction",
+      "earth measurement",
+      "pond cost estimation",
+      "পুকুর খনন",
+      "মাটির পরিমাপ"
+     ],
+     "title_en": "Earthwork Calculation for Pond Construction",
+     "title_bn": "",
+     "section_title": "Earth measurement",
+     "publisher": "DoF",
+     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B2B_COTTON_FBB2B0_002",
+    "score": 0.0476,
+    "title_en": "",
+    "title_bn": "তুলা ফসলের রোগ দমন ব্যবস্থাপনা",
+    "content_en": "",
+    "content_bn": "তুলা ফসলের রোগ দমনে নিম্নোক্ত প্রযুক্তিগুলো ব্যবহার করা যেতে পারে: ১. সিডলিং বাইট রোগ: বীজ শোধনের জন্য ভিটাবেক্স-২০০ অথবা বেডিস্টিন ২-৩ গ্রামকেজি হারে ব্যবহার করতে হবে। ২. বোলরট ও লিফ স্পট রোগ: কিউপ্রাভিট, মেকুপ্রেক্স অথবা ডাইথেন এম-৪৫ ব্যবহার করে এই রোগ দমন করা যায়।",
+    "source": "Modern Cotton Production Technology",
+    "citation": "CDB. মৃত্তিকা বিজ্ঞান ডিসিপ্লিন. Modern Cotton Production Technology. pp. 208-208.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "তুলা",
+      "রোগ দমন",
+      "Cotton",
+      "Disease Management"
+     ],
+     "title_en": "",
+     "title_bn": "তুলা ফসলের রোগ দমন ব্যবস্থাপনা",
+     "section_title": "মৃত্তিকা বিজ্ঞান ডিসিপ্লিন",
+     "publisher": "CDB",
+     "citation": "CDB. মৃত্তিকা বিজ্ঞান ডিসিপ্লিন. Modern Cotton Production Technology. pp. 208-208.",
+     "summary": "তুলা ফসলের সিডলিং বাইট, বোলরট ও লিফ স্পট রোগ দমনের জন্য অনুমোদিত বালাইনাশক।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_FRG2024_973F4A_001",
+    "score": 0.0455,
+    "title_en": "Principles of Crop Response to Fertilizers",
+    "title_bn": "",
+    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
+    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "fertilizer",
+      "nutrient management",
+      "crop response",
+      "4R stewardship",
+      "সার ব্যবস্থাপনা",
+      "ফসলের পুষ্টি"
+     ],
+     "title_en": "Principles of Crop Response to Fertilizers",
+     "title_bn": "",
+     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
+     "publisher": "BARC",
+     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_WHEAT_D3A722_001",
+    "score": 0.0455,
+    "title_en": "Rice blast management in Kenya",
+    "title_bn": "",
+    "content_en": "Rice blast, caused by the fungus Magnaporthe grisea (Pyricularia grisea), is a significant disease affecting rice crops. Management involves a combination of resistant varieties, cultural practices, and targeted chemical applications. Key resistant varieties for upland areas include Nerica 1, 4, 10, and 11, and for other areas include SC 213, NIBAM 108, NIBAM 109, NIBAM 110, IR-025, and N221. Cultural practices include early planting, maintaining field flooding, avoiding excessive nitrogenous fertilizers, and destroying infested crop residues. Monitoring should focus on identifying diamond-shaped lesions with gray/white centers and brown borders on leaves, nodes, and panicles, as well as checking for 'rotten neck' symptoms.",
+    "content_bn": "ধানের ব্লাস্ট, যা *Magnaporthe grisea* (*Pyricularia grisea*) নামক ছত্রাকের কারণে হয়ে থাকে, ধান ফসলের একটি গুরুত্বপূর্ণ রোগ। ব্যবস্থাপনার মধ্যে রয়েছে রোগসহনশীল জাতের ব্যবহার, শস্য পরিচর্যা পদ্ধতি এবং লক্ষ্যভিত্তিক রাসায়নিক প্রয়োগ। উফশী বা উচ্চভূমির এলাকার জন্য প্রধান রোগসহনশীল জাতগুলোর মধ্যে রয়েছে Nerica 1, 4, 10, এবং 11, এবং অন্যান্য এলাকার জন্য রয়েছে SC 213, NIBAM 108, NIBAM 109, NIBAM 110, IR-025, এবং N221। শস্য পরিচর্যা পদ্ধতির মধ্যে রয়েছে সময়মতো বা আগেভাগে চারা রোপণ করা, জমিতে পানি জমিয়ে রাখা, অতিরিক্ত নাইট্রোজেন সার ব্যবহার থেকে বিরত থাকা এবং আক্রান্ত ফসলের অবশিষ্টাংশ পুড়িয়ে ফেলা বা ধ্বংস করা। পাতা, কাদি ও ছড়ার গায়ে ধূসরসাদা কেন্দ্র এবং বাদামী সীমানা বিশিষ্ট হীরা আকৃতির দাগ শনাক্ত করার দিকে নজর রাখতে হবে, পাশাপাশি 'পচা গলা' বা 'rotten neck' লক্ষণ দেখা যাচ্ছে কি না তা পরীক্ষা করতে হবে।",
+    "source": "Wheat Disease Management Manuals (Plantwise)",
+    "citation": "CABI. Rice blast - Kenya. Wheat Disease Management Manuals (Plantwise). pp. 3-3.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Rice blast",
+      "Magnaporthe grisea",
+      "Kenya",
+      "Rice disease",
+      "Plantwise",
+      "CABI"
+     ],
+     "title_en": "Rice blast management in Kenya",
+     "title_bn": "",
+     "section_title": "Rice blast - Kenya",
+     "publisher": "CABI",
+     "citation": "CABI. Rice blast - Kenya. Wheat Disease Management Manuals (Plantwise). pp. 3-3.",
+     "summary": "Management guidelines for Rice blast (Magnaporthe grisea) in Kenya, covering resistant varieties, cultural practices, and chemical control options.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_BRASSICA_843B60_001",
+    "score": 0.0435,
+    "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+    "title_bn": "",
+    "content_en": "Soft rot, also known as Bacterial black stalk, is caused by the bacterium Pectobacterium carotovorum ssp. carotovorum. The disease causes the lower end of the mid-rib to rot and lose its structural integrity. The infection spreads along the leaf veins, and a characteristic extremely unpleasant smell is often present. Bacterial ooze can be observed leaking from the affected rotting areas.",
+    "content_bn": "সফট রট, যা ব্যাকটেরিয়াল ব্ল্যাক স্টাক নামেও পরিচিত, এটি *Pectobacterium carotovorum ssp. carotovorum* নামক ব্যাকটেরিয়ার কারণে ঘটে। রোগটি মধ্য-শিরার নিচের অংশকে পচিয়ে দেয় এবং এর গঠনগত অখণ্ডতা নষ্ট করে। সংক্রমণ পাতার শিরা বরাবর ছড়িয়ে পড়ে এবং প্রায়ই একটি বিশেষ অত্যন্ত দুর্গন্ধ উপস্থিত থাকে। আক্রান্ত পচা অংশগুলো থেকে ব্যাকটেরিয়ার আঠা জাতীয় রস নিঃসরিত হতে দেখা যায়।",
+    "source": "Brassica Disease Manuals (Plantwise)",
+    "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "cabbage",
+      "soft rot",
+      "bacterial black stalk",
+      "Pectobacterium carotovorum",
+      "disease"
+     ],
+     "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+     "title_bn": "",
+     "section_title": "Soft rot of cabbage / Bacterial black Stalk",
+     "publisher": "CABI",
+     "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+     "summary": "Soft rot, caused by Pectobacterium carotovorum ssp. carotovorum, is a bacterial disease in cabbage characterized by tissue decay, foul odor, and bacterial ooze.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources · ধান→['ধান', 'ধান', 'ধান', 'ধান', 'ধান']; কী→['কিতা', 'কি / কিবা', 'কী / কি', 'ক্যা / কী', 'কী / কিতা']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "ধানের ব্লাস্ট রোগ দমনে কিছু ব্যবস্থা গ্রহণ করা যেতে পারে:",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **রোগসহনশীল জাত ব্যবহার:** Nerica 1, 4, 10, এবং 11 জাতগুলো উফশী বা উচ্চভূমির এলাকার জন্য রোগসহনশীল",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "অন্যান্য এলাকার জন্য SC 213, NIBAM 108, NIBAM 109, NIBAM 110, IR-025, এবং N221 জাতগুলো ব্যবহার করা যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_D3A722_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **শস্য পরিচর্যা:** সময়মতো বা আগেভাগে চারা রোপণ করা, জমিতে পানি জমিয়ে রাখা, অতিরিক্ত নাইট্রোজেন সার ব্যবহার থেকে বিরত থাকা এবং আক্রান্ত ফসলের অবশিষ্টাংশ পুড়িয়ে ফেলা বা ধ্বংস করা উচিত",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_D3A722_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **রোগ শনাক্তকরণ:** পাতার, কাদি ও ছড়ার গায়ে ধূসরসাদা কেন্দ্র এবং বাদামী সীমানা বিশিষ্ট হীরা আকৃতির দাগ দেখা যায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এছাড়াও 'পচা গলা' বা 'rotten neck' লক্ষণ দেখা যাচ্ছে কি না তা পরীক্ষা করতে হবে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_D3A722_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **রাসায়নিক প্রয়োগ:** লক্ষ্যভিত্তিক রাসায়নিক প্রয়োগের মাধ্যমেও এই রোগ দমন করা যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_D3A722_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয়, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "|||2026-08|ধানের ব্লাস্ট রোগের সমাধান কী": {
+  "query": "ধানের ব্লাস্ট রোগের সমাধান কী?",
+  "category": "safe_agri",
+  "answer": "ধানের ব্লাস্ট রোগ *Magnaporthe grisea* নামক ছত্রাকের কারণে হয়ে থাকে। [CABI_WHEAT_17CE3C_001]\n\nএই রোগের লক্ষণগুলো হলো: পাতার ওপর ধূসর কেন্দ্র এবং বাদামী বা লালচে সীমানা বিশিষ্ট হীরা আকৃতির দাগ। এছাড়া কাণ্ডের গাঁটেও লক্ষণ দেখা যেতে পারে। [CABI_WHEAT_17CE3C_001]\n\nব্যবস্থাপনার জন্য রোগসহনশীল জাত ব্যবহার করা যেতে পারে। উফশী বা উচ্চভূমির এলাকার জন্য Nerica 1, 4, 10, এবং 11 জাতগুলো সুপারিশ করা হয়। [CABI_WHEAT_D3A722_001]\n\nশস্য পরিচর্যা পদ্ধতির মধ্যে রয়েছে সময়মতো বা আগেভাগে চারা রোপণ করা, জমিতে পানি জমিয়ে রাখা, অতিরিক্ত নাইট্রোজেন সার ব্যবহার থেকে বিরত থাকা এবং আক্রান্ত ফসলের অবশিষ্টাংশ ধ্বংস করা। [CABI_WHEAT_D3A722_001]\n\nপ্রয়োজন অনুযায়ী রাসায়নিক নিয়ন্ত্রণের সমন্বয় করতে হবে। [CABI_WHEAT_17CE3C_001]\n\nযদি আপনার আরও তথ্যের প্রয়োজন হয়, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "sources": [
+   {
+    "id": "B6_DOC_2FA541_001",
+    "score": 0.0476,
+    "title_en": "Earthwork Calculation for Pond Construction",
+    "title_bn": "",
+    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
+    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
+    "source": "Training Manual on Improved Carp Polyculture 2011",
+    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+    "metadata": {
+     "category": "cultivation_practice",
+     "tags": [
+      "pond construction",
+      "earth measurement",
+      "pond cost estimation",
+      "পুকুর খনন",
+      "মাটির পরিমাপ"
+     ],
+     "title_en": "Earthwork Calculation for Pond Construction",
+     "title_bn": "",
+     "section_title": "Earth measurement",
+     "publisher": "DoF",
+     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_WHEAT_17CE3C_001",
+    "score": 0.0476,
+    "title_en": "Blast disease of Rice",
+    "title_bn": "",
+    "content_en": "Blast disease (Magnaporthe grisea) is a significant fungal disease in rice. Symptoms include diamond-shaped lesions on leaves with grey centers and brown or reddish borders, as well as symptoms on stem nodes. Management involves a combination of cultural prevention, regular monitoring, and chemical control when necessary.",
+    "content_bn": "ব্লাস্ট রোগ (Magnaporthe grisea) ধানের একটি অত্যন্ত গুরুত্বপূর্ণ ছত্রাকজনিত রোগ। লক্ষণগুলোর মধ্যে রয়েছে পাতার ওপর ধূসর কেন্দ্র এবং বাদামী বা লালচে সীমানা বিশিষ্ট হীরা আকৃতির দাগ, পাশাপাশি কাণ্ডের গাঁটেও লক্ষণ দেখা যায়। প্রতিকারের জন্য শস্য ব্যবস্থাপনাভিত্তিক প্রতিরোধমূলক ব্যবস্থা, নিয়মিত পর্যবেক্ষণ এবং প্রয়োজন অনুযায়ী রাসায়নিক নিয়ন্ত্রণের সমন্বয় করতে হবে।",
+    "source": "Wheat Disease Management Manuals (Plantwise)",
+    "citation": "CABI. Blast disease of Rice. Wheat Disease Management Manuals (Plantwise). pp. 1-1.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Rice",
+      "Blast",
+      "Magnaporthe grisea",
+      "Fungicide",
+      "Disease Management"
+     ],
+     "title_en": "Blast disease of Rice",
+     "title_bn": "",
+     "section_title": "Blast disease of Rice",
+     "publisher": "CABI",
+     "citation": "CABI. Blast disease of Rice. Wheat Disease Management Manuals (Plantwise). pp. 1-1.",
+     "summary": "Blast disease, caused by Magnaporthe grisea, is a fungal infection in rice characterized by diamond-shaped lesions on leaves and stem nodes, manageable through cultural practices and targeted fungicide application.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_FRG2024_973F4A_001",
+    "score": 0.0455,
+    "title_en": "Principles of Crop Response to Fertilizers",
+    "title_bn": "",
+    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
+    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "fertilizer",
+      "nutrient management",
+      "crop response",
+      "4R stewardship",
+      "সার ব্যবস্থাপনা",
+      "ফসলের পুষ্টি"
+     ],
+     "title_en": "Principles of Crop Response to Fertilizers",
+     "title_bn": "",
+     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
+     "publisher": "BARC",
+     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_WHEAT_D3A722_001",
+    "score": 0.0455,
+    "title_en": "Rice blast management in Kenya",
+    "title_bn": "",
+    "content_en": "Rice blast, caused by the fungus Magnaporthe grisea (Pyricularia grisea), is a significant disease affecting rice crops. Management involves a combination of resistant varieties, cultural practices, and targeted chemical applications. Key resistant varieties for upland areas include Nerica 1, 4, 10, and 11, and for other areas include SC 213, NIBAM 108, NIBAM 109, NIBAM 110, IR-025, and N221. Cultural practices include early planting, maintaining field flooding, avoiding excessive nitrogenous fertilizers, and destroying infested crop residues. Monitoring should focus on identifying diamond-shaped lesions with gray/white centers and brown borders on leaves, nodes, and panicles, as well as checking for 'rotten neck' symptoms.",
+    "content_bn": "ধানের ব্লাস্ট, যা *Magnaporthe grisea* (*Pyricularia grisea*) নামক ছত্রাকের কারণে হয়ে থাকে, ধান ফসলের একটি গুরুত্বপূর্ণ রোগ। ব্যবস্থাপনার মধ্যে রয়েছে রোগসহনশীল জাতের ব্যবহার, শস্য পরিচর্যা পদ্ধতি এবং লক্ষ্যভিত্তিক রাসায়নিক প্রয়োগ। উফশী বা উচ্চভূমির এলাকার জন্য প্রধান রোগসহনশীল জাতগুলোর মধ্যে রয়েছে Nerica 1, 4, 10, এবং 11, এবং অন্যান্য এলাকার জন্য রয়েছে SC 213, NIBAM 108, NIBAM 109, NIBAM 110, IR-025, এবং N221। শস্য পরিচর্যা পদ্ধতির মধ্যে রয়েছে সময়মতো বা আগেভাগে চারা রোপণ করা, জমিতে পানি জমিয়ে রাখা, অতিরিক্ত নাইট্রোজেন সার ব্যবহার থেকে বিরত থাকা এবং আক্রান্ত ফসলের অবশিষ্টাংশ পুড়িয়ে ফেলা বা ধ্বংস করা। পাতা, কাদি ও ছড়ার গায়ে ধূসরসাদা কেন্দ্র এবং বাদামী সীমানা বিশিষ্ট হীরা আকৃতির দাগ শনাক্ত করার দিকে নজর রাখতে হবে, পাশাপাশি 'পচা গলা' বা 'rotten neck' লক্ষণ দেখা যাচ্ছে কি না তা পরীক্ষা করতে হবে।",
+    "source": "Wheat Disease Management Manuals (Plantwise)",
+    "citation": "CABI. Rice blast - Kenya. Wheat Disease Management Manuals (Plantwise). pp. 3-3.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Rice blast",
+      "Magnaporthe grisea",
+      "Kenya",
+      "Rice disease",
+      "Plantwise",
+      "CABI"
+     ],
+     "title_en": "Rice blast management in Kenya",
+     "title_bn": "",
+     "section_title": "Rice blast - Kenya",
+     "publisher": "CABI",
+     "citation": "CABI. Rice blast - Kenya. Wheat Disease Management Manuals (Plantwise). pp. 3-3.",
+     "summary": "Management guidelines for Rice blast (Magnaporthe grisea) in Kenya, covering resistant varieties, cultural practices, and chemical control options.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_BRASSICA_843B60_001",
+    "score": 0.0435,
+    "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+    "title_bn": "",
+    "content_en": "Soft rot, also known as Bacterial black stalk, is caused by the bacterium Pectobacterium carotovorum ssp. carotovorum. The disease causes the lower end of the mid-rib to rot and lose its structural integrity. The infection spreads along the leaf veins, and a characteristic extremely unpleasant smell is often present. Bacterial ooze can be observed leaking from the affected rotting areas.",
+    "content_bn": "সফট রট, যা ব্যাকটেরিয়াল ব্ল্যাক স্টাক নামেও পরিচিত, এটি *Pectobacterium carotovorum ssp. carotovorum* নামক ব্যাকটেরিয়ার কারণে ঘটে। রোগটি মধ্য-শিরার নিচের অংশকে পচিয়ে দেয় এবং এর গঠনগত অখণ্ডতা নষ্ট করে। সংক্রমণ পাতার শিরা বরাবর ছড়িয়ে পড়ে এবং প্রায়ই একটি বিশেষ অত্যন্ত দুর্গন্ধ উপস্থিত থাকে। আক্রান্ত পচা অংশগুলো থেকে ব্যাকটেরিয়ার আঠা জাতীয় রস নিঃসরিত হতে দেখা যায়।",
+    "source": "Brassica Disease Manuals (Plantwise)",
+    "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "cabbage",
+      "soft rot",
+      "bacterial black stalk",
+      "Pectobacterium carotovorum",
+      "disease"
+     ],
+     "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+     "title_bn": "",
+     "section_title": "Soft rot of cabbage / Bacterial black Stalk",
+     "publisher": "CABI",
+     "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+     "summary": "Soft rot, caused by Pectobacterium carotovorum ssp. carotovorum, is a bacterial disease in cabbage characterized by tissue decay, foul odor, and bacterial ooze.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources · ধান→['ধান', 'ধান', 'ধান', 'ধান', 'ধান']; কী→['কিতা', 'কি / কিবা', 'কী / কি', 'ক্যা / কী', 'কী / কিতা']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "ধানের ব্লাস্ট রোগ *Magnaporthe grisea* নামক ছত্রাকের কারণে হয়ে থাকে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_17CE3C_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই রোগের লক্ষণগুলো হলো: পাতার ওপর ধূসর কেন্দ্র এবং বাদামী বা লালচে সীমানা বিশিষ্ট হীরা আকৃতির দাগ",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এছাড়া কাণ্ডের গাঁটেও লক্ষণ দেখা যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_17CE3C_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "ব্যবস্থাপনার জন্য রোগসহনশীল জাত ব্যবহার করা যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "উফশী বা উচ্চভূমির এলাকার জন্য Nerica 1, 4, 10, এবং 11 জাতগুলো সুপারিশ করা হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_D3A722_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "শস্য পরিচর্যা পদ্ধতির মধ্যে রয়েছে সময়মতো বা আগেভাগে চারা রোপণ করা, জমিতে পানি জমিয়ে রাখা, অতিরিক্ত নাইট্রোজেন সার ব্যবহার থেকে বিরত থাকা এবং আক্রান্ত ফসলের অবশিষ্টাংশ ধ্বংস করা",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_D3A722_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "প্রয়োজন অনুযায়ী রাসায়নিক নিয়ন্ত্রণের সমন্বয় করতে হবে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_WHEAT_17CE3C_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয়, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
     "verdict": "no_dosage",
     "reason": ""
    }

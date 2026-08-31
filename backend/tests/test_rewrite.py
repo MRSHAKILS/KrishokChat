@@ -195,6 +195,14 @@ class PipelineRewriteTests(unittest.TestCase):
         retrieval_complete = next(e for e in events if e["stage"] == "retrieval" and e["detail"])
         self.assertIn("rewritten", retrieval_complete["detail"])
 
+    def test_farmer_followup_markers_trigger_rewrite(self) -> None:
+        """Colloquial farmer follow-up queries (e.g. rain, mixing) trigger conversational rewrite."""
+        rewriter = ConversationalQueryRewriter(FakeLLM())
+        self.assertTrue(rewriter.should_rewrite("এখন বৃষ্টি হলে কী করব?", HISTORY))
+        self.assertTrue(rewriter.should_rewrite("সার মেশানো যাবে কি?", HISTORY))
+        self.assertTrue(rewriter.should_rewrite("আমি এটা আগে দিয়েছি, এখন কী করব?", HISTORY))
+        self.assertFalse(rewriter.should_rewrite("ধান চাষ পদ্ধতি কী?", ()))  # No history -> no rewrite
+
 
 if __name__ == "__main__":
     unittest.main()

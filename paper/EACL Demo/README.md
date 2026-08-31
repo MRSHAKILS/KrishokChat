@@ -29,7 +29,7 @@
 | **LaTeX Table Definitions** | 4 Tables | 4 Tables | 0 | **100% Pre-formatted** |
 | **Section Markdown Outlines** | 6 Drafts | 6 Outlines | 0 | **100% Ready** |
 | **BibTeX Literature Database** | 15 Citations | 15 Citations | 0 | **100% Verified Citations** |
-| **System Demo Experiments** | 8 Key Layers | 8 Layers | 0 | **100% Executed, Verified & Committed** |
+| **System Demo Experiments** | 9 Key Layers | 9 Layers | 0 | **100% Executed, Verified & Committed** |
 | **Unified Results Ground Truth** | 1 Master YAML | 1 Master YAML | 0 | **100% Compiled & Verified** |
 
 ---
@@ -50,11 +50,16 @@ paper/EACL Demo/
 │   │   ├── 04_empirical_usability.tex
 │   │   ├── 05_deployment_ethics.tex
 │   │   └── 06_conclusion.tex
-│   └── tables/                    # 4 modular LaTeX table definitions
-│       ├── tab1_system_capabilities.tex
-│       ├── tab2_demo_scenarios.tex
-│       ├── tab3_usability_metrics.tex
-│       └── tab4_deployment_footprint.tex
+│   ├── tables/                    # 4 modular LaTeX table definitions
+│   │   ├── tab1_system_capabilities.tex
+│   │   ├── tab2_demo_scenarios.tex
+│   │   ├── tab3_usability_metrics.tex
+│   │   └── tab4_deployment_footprint.tex
+│   └── figures/                   # 4 vector TikZ workflow flowcharts
+│       ├── fig1_cost_gated_decision_flowchart.tex
+│       ├── fig1_system_architecture.tex
+│       ├── fig2_slot_disambiguation_flowchart.tex
+│       └── fig3_multimodal_contradiction_flowchart.tex
 ├── drafts/                        # 6 section draft markdown skeletons
 │   ├── 01_introduction.md
 │   ├── 02_system_architecture.md
@@ -71,5 +76,6 @@ paper/EACL Demo/
     ├── E05_human_usability_sus/
     ├── E06_offline_cache_resilience/
     ├── E07_docker_deployment_footprint/
-    └── E08_cross_modal_conflict_handling/
+    ├── E08_cross_modal_conflict_handling/
+    └── E09_slot_disambiguation_gating/
 ```

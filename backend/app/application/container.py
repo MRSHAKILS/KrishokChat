@@ -27,6 +27,7 @@ from app.application.soil import SoilService
 from app.application.vision_pipeline import VisionPipeline
 from app.core.config import Settings
 from app.domain.crop_calendar import CropCalendarLibrary
+from app.domain.vision import VisionGateConfig
 from app.infrastructure.audit.jsonl import JSONLAuditSink
 from app.infrastructure.auth.jwks import SupabaseJWKSVerifier
 from app.infrastructure.agronomy.calendar_store import load_crop_calendars
@@ -236,14 +237,20 @@ def build_container(settings: Settings) -> AppContainer:
         resolver=resolver,
         chunk_fallback=chunk_fallback,
     )
+    vision_gate_config = VisionGateConfig(
+        crop_confidence_threshold=settings.vision_crop_confidence_threshold,
+        crop_margin_threshold=settings.vision_crop_margin_threshold,
+        crop_ood_threshold=settings.vision_crop_ood_threshold,
+        disease_confidence_threshold=settings.vision_disease_confidence_threshold,
+        disease_margin_threshold=settings.vision_disease_margin_threshold,
+    )
     vision = VisionPipeline(
         registry=ArtifactVisionRegistry(Path(settings.ml_assets_dir) / "vision"),
         runner=UltralyticsClassificationRunner(),
         qa=pipeline,
         audit=audit,
-        crop_threshold=settings.vision_crop_confidence_threshold,
-        disease_threshold=settings.vision_disease_confidence_threshold,
         max_image_bytes=settings.vision_max_image_bytes,
+        gate_config=vision_gate_config,
     )
     soil = SoilService(
         info=load_soil_dataset(Path(settings.soil_release_dir)),

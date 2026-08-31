@@ -11,6 +11,9 @@ class VisionStatus(StrEnum):
     DIAGNOSED = "diagnosed"
     HEALTHY = "healthy"
     NOT_RECOGNIZED = "not_recognized"
+    UNCERTAIN = "uncertain"
+    OUT_OF_DISTRIBUTION = "out_of_distribution"
+    REQUIRES_SECOND_IMAGE = "requires_second_image"
     NO_DISEASE_MODEL = "no_disease_model"
     MODEL_ERROR = "model_error"
     INVALID_IMAGE = "invalid_image"
@@ -48,6 +51,19 @@ class ImageQuality:
 
 
 @dataclass(frozen=True)
+class VisionGateConfig:
+    # Calibrated from empirical sweep across 436 real test artifacts (Layer E02)
+    crop_confidence_threshold: float = 0.90
+    crop_margin_threshold: float = 0.20
+    crop_ood_threshold: float = 0.40
+    disease_confidence_threshold: float = 0.80
+    disease_margin_threshold: float = 0.15
+    # Module 1B: Known botanical confusion pair risk gating
+    enable_confusion_risk_gating: bool = True
+    confusion_crops: tuple[str, ...] = ("potato", "solanacea", "wheat", "corn")
+
+
+@dataclass(frozen=True)
 class VisionTraceEvent:
     stage: VisionStage
     status: str
@@ -71,4 +87,7 @@ class VisionResult:
     verifier_flags: tuple[str, ...] = ()
     trace: tuple[VisionTraceEvent, ...] = ()
     quality: ImageQuality | None = None
+    clarification_prompt_bn: str | None = None
+    suggested_crops: tuple[str, ...] = ()
+    requires_second_image: bool = False
     error: str | None = None

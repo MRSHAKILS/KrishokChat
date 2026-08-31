@@ -133,6 +133,33 @@ class NoOverBlockTests(unittest.TestCase):
                     with self.subTest(alias=alias, word=word):
                         self.assertNotIn(alias, word)
 
+    def test_banned_brands_and_acute_poisoning_queries_blocked(self) -> None:
+        # Banned brand and chemical queries
+        banned_queries = [
+            "ফুরাডান কীটনাশক কীভাবে ব্যবহার করব?",
+            "Can I spray gramoxone to kill weeds?",
+            "ডাইমেক্রন বিষের দাম কত?",
+            "How to apply furadan on paddy?",
+        ]
+        for query in banned_queries:
+            with self.subTest(query=query):
+                match = precheck(query)
+                self.assertIsNotNone(match)
+                self.assertEqual(match[0], SafetyCategory.BANNED_OR_RESTRICTED_CHEMICAL)
+
+        # Accidental poisoning emergencies
+        emergency_queries = [
+            "বাচ্চা বিষ খেয়ে ফেলেছে কি করব?",
+            "চোখে কীটনাশক গেলে করণীয় কী?",
+            "pesticide in eyes emergency what to do",
+            "accidental poisoning from farm spray",
+        ]
+        for query in emergency_queries:
+            with self.subTest(query=query):
+                match = precheck(query)
+                self.assertIsNotNone(match)
+                self.assertEqual(match[0], SafetyCategory.SELF_HARM_OR_POISONING_RISK)
+
 
 if __name__ == "__main__":
     unittest.main()

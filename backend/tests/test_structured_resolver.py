@@ -280,3 +280,20 @@ async def test_terminal_safety_bypasses_resolver(tmp_path: Path) -> None:
     audit_call = fake_audit.record.call_args[0][0]
     assert audit_call["resolution_tier"] == "deterministic_guard"
     assert audit_call["llm_calls"] == 0
+
+
+@pytest.mark.asyncio
+async def test_pipeline_vision_hints_resolve_directly_to_t2(tmp_path: Path) -> None:
+    """When vision provides crop and disease hints, resolver binds directly to official prescription with 0 LLM calls."""
+    fb = FactBase(facts=(_sample_potato_fact(),))
+    resolver = StructuredResolver(fact_base=fb, min_confidence=0.85)
+
+    pipeline, fake_generator, fake_audit = _setup_mock_pipeline(resolver=resolver, tmp_path=tmp_path)
+
+    # Image detected Potato and Late Blight, generic query typed
+    result = await pipeline.run(QAInput(query="কী ওষুধ স্প্রে করতে হবে?", crop="potato", disease="Potato__Late_Blight"))
+
+    assert result.resolution_tier in (ResolutionTier.STRUCTURED_FACT, ResolutionTier.TEMPLATED_ADVISORY)
+    assert "mancozeb" in result.answer
+    assert result.confidence == VerificationConfidence.VERIFIED
+    fake_generator.generate.assert_not_called()

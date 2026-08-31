@@ -10,8 +10,8 @@ from app.domain.enums import SafetyCategory
 
 PATTERNS: dict[SafetyCategory, tuple[tuple[str, re.Pattern[str]], ...]] = {
     SafetyCategory.SELF_HARM_OR_POISONING_RISK: (
-        ("self_harm_bn", re.compile(r"আত্মহত্যা|মরতে চাই|জীবন শেষ|নিজেকে ক্ষতি|বিষ খাবো|বিষ খেলে|কীটনাশক পান|বিষ পান|মারা যাওয়া|মৃত্যু হবে|কীভাবে মরব|মানুষ মারার|গরু মারার|মানুষের ক্ষতি")),
-        ("self_harm_en", re.compile(r"\b(?:suicide|kill myself|end my life|self[- ]harm|poison myself|want to die|kill someone|lethal dose|human death)\b", re.I)),
+        ("self_harm_bn", re.compile(r"আত্মহত্যা|মরতে চাই|জীবন শেষ|নিজেকে ক্ষতি|বিষ\s*(?:খাবো|খাব|খেলে|পান|খেয়েছে|খেয়ে|খাইছে|গিলে|লাগা|গেলে)|কীটনাশক\s*(?:খাবো|খাব|খেলে|পান|খেয়েছে|খেয়ে|খাইছে|গিলে|লাগা|গেলে)|মারা যাওয়া|মৃত্যু হবে|কীভাবে মরব|মানুষ মারার|গরু মারার|মানুষের ক্ষতি|চোখে বিষ|চোখে কীটনাশক|বিষক্রিয়া|বিষাক্ত")),
+        ("self_harm_en", re.compile(r"\b(?:suicide|kill myself|end my life|self[- ]harm|poison myself|want to die|kill someone|lethal dose|human death|drank pesticide|swallowed pesticide|pesticide poisoning|pesticide in eyes|accidental poisoning)\b", re.I)),
     ),
     SafetyCategory.PROMPT_INJECTION: (
         ("injection_en", re.compile(r"\b(?:ignore (?:all|previous|the)|system prompt|jailbreak|dan mode|override safety|forget your instructions|system override|output only the word)\b", re.I)),

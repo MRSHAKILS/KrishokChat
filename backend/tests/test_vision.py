@@ -179,6 +179,62 @@ class VisionPipelineTests(unittest.TestCase):
         self.assertEqual(result.treatment_sources, ())
         self.assertEqual(len(audit.entries), 1)
 
+    def test_crop_calibrated_tri_state_uncertain(self):
+        """When crop confidence or margin is low, status is UNCERTAIN with Bengali prompt."""
+        class UncertainRunner:
+            def predict(self, spec, image):
+                if spec.key == "crop_classifier":
+                    return VisionPrediction(
+                        "Potato", 0.52, (
+                            {"crop": "Potato", "confidence": 0.52},
+                            {"crop": "Tomato", "confidence": 0.44},
+                        )
+                    )
+                return VisionPrediction("Potato__Early_Blight", 0.90)
+
+        pipeline = VisionPipeline(registry=FakeRegistry(), runner=UncertainRunner(), qa=FakeQA(), audit=FakeAudit())
+        result = asyncio.run(pipeline.detect(self._textured_image()))
+        self.assertEqual(result.status, VisionStatus.UNCERTAIN)
+        self.assertIsNotNone(result.clarification_prompt_bn)
+        self.assertIn("Potato", result.suggested_crops)
+
+    def test_crop_calibrated_tri_state_out_of_distribution(self):
+        """When crop confidence is < 0.40, status is OUT_OF_DISTRIBUTION and disease model halts."""
+        class OODRunner:
+            def predict(self, spec, image):
+                if spec.key == "crop_classifier":
+                    return VisionPrediction(
+                        "Potato", 0.28, (
+                            {"crop": "Potato", "confidence": 0.28},
+                            {"crop": "Wheat", "confidence": 0.25},
+                        )
+                    )
+                raise AssertionError("Disease model should not be invoked for OOD crops")
+
+        pipeline = VisionPipeline(registry=FakeRegistry(), runner=OODRunner(), qa=FakeQA(), audit=FakeAudit())
+        result = asyncio.run(pipeline.detect(self._textured_image()))
+        self.assertEqual(result.status, VisionStatus.OUT_OF_DISTRIBUTION)
+        self.assertIn("সমর্থিত ফসলের সাথে পর্যাপ্ত মিলছে না", result.clarification_prompt_bn)
+
+    def test_disease_requires_second_image_on_ambiguous_margin(self):
+        """When disease prediction has low margin below threshold, request second image."""
+        class AmbiguousDiseaseRunner:
+            def predict(self, spec, image):
+                if spec.key == "crop_classifier":
+                    return VisionPrediction("Potato", 0.95, ({"crop": "Potato", "confidence": 0.95},))
+                return VisionPrediction(
+                    "Potato__Early_Blight", 0.48, (
+                        {"disease": "Potato__Early_Blight", "confidence": 0.48},
+                        {"disease": "Potato__Late_Blight", "confidence": 0.42},
+                    )
+                )
+
+        pipeline = VisionPipeline(registry=FakeRegistry(), runner=AmbiguousDiseaseRunner(), qa=FakeQA(), audit=FakeAudit())
+        result = asyncio.run(pipeline.detect(self._textured_image()))
+        self.assertEqual(result.status, VisionStatus.REQUIRES_SECOND_IMAGE)
+        self.assertTrue(result.requires_second_image)
+        self.assertIn("কাছ থেকে", result.clarification_prompt_bn)
+
 
 if __name__ == "__main__":
     unittest.main()

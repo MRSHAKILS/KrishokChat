@@ -261,8 +261,8 @@ async def sms_advisory_endpoint(payload: SMSAdvisoryRequest, container: Containe
     """
     from app.application.qa_pipeline import QAInput
     
-    qa_input = QAInput(query=payload.query, source="sms")
-    qa_res = await container.qa.answer(qa_input)
+    qa_input = QAInput(query=payload.query, channel="sms")
+    qa_res = await container.qa.run(qa_input)
     
     tier = str(qa_res.resolution_tier.value) if hasattr(qa_res.resolution_tier, "value") else str(qa_res.resolution_tier)
     confidence = str(qa_res.confidence.value) if hasattr(qa_res.confidence, "value") else str(qa_res.confidence)
@@ -282,7 +282,7 @@ async def sms_advisory_endpoint(payload: SMSAdvisoryRequest, container: Containe
     # 2. Extract verified institutional source
     institution = "DAE"
     if qa_res.sources:
-        inst = qa_res.sources[0].publisher or qa_res.sources[0].publisher_bn or ""
+        inst = qa_res.sources[0].metadata.get("publisher", "") or qa_res.sources[0].metadata.get("publisher_bn", "") or qa_res.sources[0].source or ""
         if "BARI" in inst or "বারি" in inst:
             institution = "BARI"
         elif "BRRI" in inst or "ব্রি" in inst:

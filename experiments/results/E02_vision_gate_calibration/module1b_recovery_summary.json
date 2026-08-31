@@ -1,0 +1,16 @@
+{
+  "total_images": 436,
+  "safe_direct_automation_count": 81,
+  "safe_direct_automation_pct": 18.58,
+  "safe_farmer_confirmation_count": 267,
+  "safe_farmer_confirmation_pct": 61.24,
+  "safe_second_image_count": 0,
+  "safe_second_image_pct": 0.0,
+  "safe_ood_halt_count": 1,
+  "safe_ood_halt_pct": 0.23,
+  "safe_abstain_count": 82,
+  "safe_abstain_pct": 18.81,
+  "total_safe_containment_pct": 98.85,
+  "unsafe_auto_advisory_count": 5,
+  "unsafe_auto_advisory_pct": 1.15
+}

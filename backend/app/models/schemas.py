@@ -90,6 +90,8 @@ class ClassifyResponse(BaseModel):
     status: str = "diagnosed"
     top3: list[dict] = Field(default_factory=list)
     has_disease_model: bool = False
+    clarification_prompt_bn: str | None = None
+    suggested_crops: list[str] = Field(default_factory=list)
     quality_warnings: list[str] = Field(default_factory=list)
     agent_trace: list[AgentStageEvent] = Field(default_factory=list)
     error: str | None = None
@@ -105,7 +107,7 @@ class DetectionBox(BaseModel):
 
 
 class DetectResponse(BaseModel):
-    status: str = Field(..., description="diagnosed | healthy | not_recognized | no_disease_model | model_error | invalid_image")
+    status: str = Field(..., description="diagnosed | healthy | not_recognized | uncertain | out_of_distribution | requires_second_image | no_disease_model | model_error | invalid_image")
     detection_mode: str = Field(default="classification", description="classification; boxes are empty until a real detector is added")
     crop: str | None = None
     crop_confidence: float = 0.0
@@ -120,6 +122,9 @@ class DetectResponse(BaseModel):
     treatment_confidence: str | None = None
     treatment_sources: list[str] = Field(default_factory=list)
     verifier_flags: list[str] = Field(default_factory=list)
+    clarification_prompt_bn: str | None = None
+    suggested_crops: list[str] = Field(default_factory=list)
+    requires_second_image: bool = False
     agent_trace: list[AgentStageEvent] = Field(default_factory=list)
     quality_warnings: list[str] = Field(default_factory=list)
     error: str | None = None

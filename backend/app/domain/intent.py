@@ -51,11 +51,12 @@ class Intent:
 
 # ---------------------------------------------------------------------------
 # Keyword-first intent extraction
-# ----------------------------------------------------# Treatment keywords (Bengali + Banglish + English)
+# ----------------------------------------------------# Treatment keywords (Bengali + Banglish + Regional Dialects + English)
 _TREATMENT_KW = (
     "প্রতিকার", "চিকিৎসা", "ওষুধ", "ঔষধ", "কীটনাশক", "ছত্রাকনাশক",
-    "স্প্রে", "প্রয়োগ", "দাও", "কী দেব", "কী দিব", "কী করব", "কী করমু", "দমন", "সমাধান", "উপায়", "উপায়",
-    "করণীয়", "করনীয়", "বাঁচাব", "বাঁচানো", "দাবা", "বিখ",
+    "স্প্রে", "প্রয়োগ", "দাও", "কী দেব", "কী দিব", "কী করব", "কী করমু", "কী করুম",
+    "দমন", "সমাধান", "উপায়", "উপায়", "করণীয়", "করনীয়", "বাঁচাব", "বাঁচানো",
+    "বাঁচামু", "দাবা", "বিখ", "কী করণ যায়", "কি করমু",
     "treatment", "cure", "spray", "apply", "shomadhan", "bachamu", "kormu", "osudh", "dava",
     "fungicide", "pesticide", "medicine",
 )
@@ -63,18 +64,18 @@ _TREATMENT_KW = (
 # Prevention keywords
 _PREVENTION_KW = (
     "প্রতিরোধ", "রোধ", "বাঁচানো", "আগে থেকে", "prevent", "protection",
-    "prevention", "রক্ষা", "সুরক্ষা",
+    "prevention", "রক্ষা", "সুরক্ষা", "আগে থিকা", "বাঁচাইয়া রাখা",
 )
 
 # Fertilizer keywords
 _FERTILIZER_KW = (
     "সার", "ইউরিয়া", "পটাশ", "ফসফেট", "জৈব সার", "কম্পোস্ট", "shaar",
-    "fertilizer", "fertiliser", "urea", "npk", "potash", "compost",
+    "fertilizer", "fertiliser", "urea", "npk", "potash", "compost", "সার দেওন",
 )
 
 # Plant part keywords
 _PLANT_PART_MAP = {
-    "পাতা": "leaf", "পাতায়": "leaf", "পাতাত": "leaf", "leaf": "leaf", "leaves": "leaf", "pata": "leaf", "patat": "leaf",
+    "পাতা": "leaf", "পাতায়": "leaf", "পাতাত": "leaf", "পাতার": "leaf", "leaf": "leaf", "leaves": "leaf", "pata": "leaf", "patat": "leaf",
     "কাণ্ড": "stem", "কান্ড": "stem", "ডাল": "stem", "stem": "stem", "branch": "stem",
     "মূল": "root", "শিকড়": "root", "শিকড়": "root", "root": "root",
     "ফল": "fruit", "ফলে": "fruit", "fruit": "fruit", "fol": "fruit",
@@ -97,15 +98,28 @@ _PLANT_PART_BN = {
 
 # Crop aliases for deterministic keyword detection
 _CROP_ALIASES: dict[str, list[str]] = {
-    "potato": ["potato", "আলু", "আলুর", "aloo", "alu", "aloor"],
+    "potato": ["potato", "আলু", "আলুর", "আলুত", "aloo", "alu", "aloor"],
     "maize": ["maize", "corn", "ভুট্টা", "ভুট্টায়", "ভুট্তার", "ভুট্টা ফসলে", "bhutta", "makai"],
-    "rice": ["rice", "ধান", "ধানের", "ধানক্ষেত", "ধান ক্ষেতে", "dhan", "paddy", "dhanor"],
-    "tomato": ["tomato", "টমেটো", "টমেটোর"],
-    "wheat": ["wheat", "গম", "গমের", "গমে"],
-    "brinjal": ["brinjal", "eggplant", "বেগুন", "বেগুনের", "বেগুন গাছের", "baingon"],
-    "chilli": ["chilli", "chili", "মরিচ", "মরিচের", "moris", "morisor"],
-    "cabbage": ["cabbage", "বাঁধাকপি", "বাঁধাকপির", "পাতাকপি"],
+    "rice": ["rice", "ধান", "ধানের", "ধানক্ষেত", "ধান ক্ষেতে", "ধানর", "ধানত", "dhan", "paddy", "dhanor"],
+    "tomato": ["tomato", "টমেটো", "টমেটোর", "টমাটো", "টমাটোর"],
+    "wheat": ["wheat", "গম", "গমের", "গমে", "গমর"],
+    "brinjal": ["brinjal", "eggplant", "বেগুন", "বেগুনের", "বেগুনর", "বেগুন গাছের", "বাইঙ্গন", "baingon", "begun", "beguner"],
+    "chilli": ["chilli", "chili", "মরিচ", "মরিচের", "মরিচর", "মরিস", "মরিসর", "moris", "morisor", "morich"],
+    "cabbage": ["cabbage", "বাঁধাকপি", "বাঁধাকপির", "পাতাকপি", "বাধাকপি"],
     "cauliflower": ["cauliflower", "ফুলকপি", "ফুলকপির"],
+}
+
+
+CROP_NAMES_BN: dict[str, str] = {
+    "potato": "আলু",
+    "rice": "ধান",
+    "wheat": "গম",
+    "maize": "ভুট্টা",
+    "tomato": "টমেটো",
+    "brinjal": "বেগুন",
+    "chilli": "মরিচ",
+    "cabbage": "বাঁধাকপি",
+    "cauliflower": "ফুলকপি",
 }
 
 
@@ -114,6 +128,45 @@ def _match_crop_alias(lowered: str) -> str | None:
         if any(alias in lowered for alias in aliases):
             return crop
     return None
+
+
+def normalize_crop_name(crop: str | None) -> str | None:
+    if not crop:
+        return None
+    c = crop.strip().lower()
+    if c in ("corn", "maize"):
+        return "maize"
+    if c in ("eggplant", "brinjal"):
+        return "brinjal"
+    if c in ("paddy", "rice"):
+        return "rice"
+    return _match_crop_alias(c) or c
+
+
+def detect_cross_modal_conflict(
+    image_crop: str | None, query: str
+) -> tuple[bool, str | None, str | None, str | None]:
+    """Detect if an uploaded photo crop contradicts the user's text query.
+
+    Returns:
+        (has_conflict, image_crop_norm, query_crop_norm, clarification_prompt_bn)
+    """
+    if not image_crop or not query:
+        return False, None, None, None
+
+    img_norm = normalize_crop_name(image_crop)
+    query_norm = _match_crop_alias(query.lower())
+
+    if img_norm and query_norm and img_norm != query_norm:
+        img_bn = CROP_NAMES_BN.get(img_norm, img_norm.title())
+        query_bn = CROP_NAMES_BN.get(query_norm, query_norm.title())
+        prompt = (
+            f"আপনি {img_bn} গাছের ছবি দিয়েছেন, কিন্তু বার্তায় {query_bn}-এর কথা উল্লেখ করেছেন। "
+            f"আপনি কোন ফসলের সমস্যার জন্য পরামর্শ চাচ্ছেন? ({img_bn} নাকি {query_bn}?)"
+        )
+        return True, img_norm, query_norm, prompt
+
+    return False, img_norm, query_norm, None
 
 
 def keyword_intent(query: str) -> Intent | None:

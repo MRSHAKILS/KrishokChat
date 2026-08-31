@@ -304,6 +304,8 @@ class QAPipeline:
                 resolved = self.resolver.resolve(
                     request.query,
                     stage=getattr(context, "stage", None),
+                    crop_hint=request.crop,
+                    problem_hint=request.disease,
                 )
                 if resolved is not None:
                     # Build the source from the fact row's provenance.
@@ -337,11 +339,52 @@ class QAPipeline:
                     )
                     return result
 
+            # Module 2: Cross-Modal Contradiction Intercept
+            # If the user uploaded a photo of Crop A (request.crop / context.crop) but typed a question about Crop B:
+            # (e.g. Image = Potato, Text = Begun / Brinjal), halt retrieval to prevent dangerous cross-crop pesticide recommendation!
+            from app.domain.intent import _match_crop_alias, detect_cross_modal_conflict
+
+            img_crop = request.crop or context.crop
+            has_conflict, img_norm, query_norm, conflict_prompt = detect_cross_modal_conflict(
+                img_crop, request.query
+            )
+            if has_conflict and conflict_prompt:
+                for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
+                    await emit(stage, StageStatus.SKIP, "cross-modal contradiction — clarification requested")
+                if not decision.matched_rules:
+                    llm_calls += 1
+                result = QAResult(
+                    query=request.query,
+                    category=decision.category,
+                    answer=conflict_prompt,
+                    sources=(),
+                    confidence=VerificationConfidence.VERIFIED,
+                    trace=tuple(trace),
+                    matched_rules=decision.matched_rules,
+                    safety_reason="Cross-modal contradiction: image and text crop mismatch",
+                    resolution_tier=ResolutionTier.INTERACTIVE_CLARIFICATION,
+                )
+                self._audit(
+                    request,
+                    result,
+                    verifier_flags=(),
+                    decision=decision,
+                    retrieved=[],
+                    cached=False,
+                    retrieval_query=retrieval_query,
+                    rewritten=False,
+                    timings=timings,
+                    generation_lane=None,
+                    llm_calls=llm_calls,
+                )
+                if request.session_id:
+                    self.sessions.append(request.session_id, "user", request.query)
+                    self.sessions.append(request.session_id, "assistant", result.answer)
+                return result
+
             # NLU Disambiguation & Clarification Intercept:
             # If the query is an ambiguous crop-specific problem/treatment inquiry with NO crop context,
             # do NOT retrieve blindly across unrelated crops. Intercept with a targeted clarification turn.
-            from app.domain.intent import _match_crop_alias
-
             has_crop = bool(
                 request.crop
                 or context.crop
