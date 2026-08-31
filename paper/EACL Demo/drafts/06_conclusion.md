@@ -1,8 +1,8 @@
-# EACL Demo Section 06: Conclusion & Availability (Draft Skeleton)
+﻿# EACL Demo Section 06: Conclusion & Availability (Draft Skeleton)
 
 ## 6.1 Summary of Platform
 - KrishokChat integrates safety screening, hybrid retrieval, grounded generation, multimodal diagnosis, and observable verification traces.
-- Achieves 84.6/100 SUS score and 61.5% zero-LLM traffic resolution.
+- Deterministic T1+T2 coverage 51.04%, safety/refusal T0+T4 10.48%, T3 LLM-dependent 38.48% (T0+T1+T2 57.44%); vision 6-classification-only (4 INT8 accepted) with 100% FP32-vs-pt agreement; no formal SUS study yet (pending IRB).
 
 ## 6.2 Availability & Open Science
 - Open source under Apache-2.0.

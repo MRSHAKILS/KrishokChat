@@ -13,9 +13,9 @@
   },
   "size-limit": [
     {
-      "name": "First Load JS (gzip) — baseline 2026-08-21: 621KB; W7 target 200KB",
+      "name": "First Load JS (gzip) — baseline 2026-08-21: 621KB; W7 target 200KB — plus lazy on-device WASM chunk ~63KB gzipped (not in First Load; dynamic import of onnxruntime-web/wasm)",
       "path": ".next/static/**/*.js",
-      "limit": "650 KB",
+      "limit": "700 KB",
       "gzip": true,
       "running": false
     }
@@ -31,6 +31,7 @@
     "lucide-react": "^1.29.0",
     "motion": "^13.0.0",
     "next": "16.3.0",
+    "onnxruntime-web": "1.29.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "recharts": "^3.10.1",

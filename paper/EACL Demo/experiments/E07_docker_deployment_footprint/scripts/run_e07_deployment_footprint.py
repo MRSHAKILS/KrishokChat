@@ -24,7 +24,9 @@ OUT_DIR = Path(__file__).resolve().parent.parent
 RESULTS_YAML = OUT_DIR / "results.yaml"
 RESULTS_JSON = OUT_DIR / "results.json"
 
-WS = Path(r"d:\KrishokChat Advisory System")
+# Resolve repo root from __file__ — never hardcode an absolute path (see STATE.md §4).
+# scripts/ -> E07_.../ -> experiments/ -> EACL Demo/ -> paper/ -> repo root
+WS = Path(__file__).resolve().parents[5]
 
 
 def measure_dir_mb(path: Path) -> float:
@@ -59,12 +61,51 @@ def run():
     print(f"Workspace: {WS}")
     print("=" * 65)
 
-    # Vision models
-    yolo_dir = WS / "backend" / "ml_assets" / "yolo"
-    classifier_dir = WS / "backend" / "ml_assets" / "classifier"
+    # Vision models — scan the real artifact locations, not the empty legacy shims.
+    # Legacy shims (backend/ml_assets/yolo, classifier) contain only .gitkeep.
+    vision_dir = WS / "backend" / "ml_assets" / "vision"
+    onnx_fp32_dir = vision_dir / "onnx"
+    onnx_int8_dir = vision_dir / "onnx_int8"
+    frontend_models = WS / "frontend" / "public" / "models"
+    legacy_yolo = WS / "backend" / "ml_assets" / "yolo"
+    legacy_classifier = WS / "backend" / "ml_assets" / "classifier"
 
-    onnx_files = find_files_by_ext(yolo_dir, ".onnx") + find_files_by_ext(classifier_dir, ".onnx")
-    pt_files = find_files_by_ext(yolo_dir, ".pt") + find_files_by_ext(classifier_dir, ".pt")
+    # Collect all .onnx with deduplication by SHA-256 so a model copied to
+    # frontend/public/models is not counted twice. The deployed set for Option A
+    # is 6 unique models: 4 INT8 accepted (crop/potato/wheat/brassica) + 2 FP32
+    # fallback (rice/corn); see vision_int8_report.json.
+    import hashlib
+
+    def _sha256(p: Path) -> str:
+        h = hashlib.sha256()
+        with p.open("rb") as f:
+            for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                h.update(chunk)
+        return h.hexdigest()
+
+    onnx_roots = [onnx_fp32_dir, onnx_int8_dir, frontend_models, legacy_yolo, legacy_classifier]
+    all_onnx: list[Path] = []
+    for root in onnx_roots:
+        if root.exists():
+            all_onnx.extend(p for p in root.rglob("*.onnx") if p.is_file())
+    # Deduplicate by content hash, keep first occurrence's name for display.
+    seen: dict[str, Path] = {}
+    for p in all_onnx:
+        digest = _sha256(p)
+        if digest not in seen:
+            seen[digest] = p
+    onnx_files = [(p.name, round(p.stat().st_size / (1024 * 1024), 2)) for p in seen.values()]
+    # Also keep a per-location breakdown for honesty (not deduplicated).
+    onnx_by_location = {
+        "backend_fp32": find_files_by_ext(onnx_fp32_dir, ".onnx"),
+        "backend_int8": find_files_by_ext(onnx_int8_dir, ".onnx"),
+        "frontend": find_files_by_ext(frontend_models, ".onnx"),
+    }
+    pt_files = (
+        find_files_by_ext(vision_dir, ".pt")
+        + find_files_by_ext(legacy_yolo, ".pt")
+        + find_files_by_ext(legacy_classifier, ".pt")
+    )
 
     total_onnx_mb = sum(sz for _, sz in onnx_files)
     total_pt_mb = sum(sz for _, sz in pt_files)
@@ -124,10 +165,12 @@ def run():
         "benchmark_name": "EACL_E07_DEPLOYMENT_FOOTPRINT",
         "execution_status": "DONE",
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-        "measurement_note": "Real filesystem measurements from local workspace. Python package sizes are estimates (pip show).",
+        "measurement_note": "Real filesystem measurements from local workspace. Python package sizes are estimates (pip show). ONNX total is deduplicated by SHA-256 so a model copied to frontend/public/models is not counted twice.",
         "vision_models": {
             "onnx_int8_files": [{"name": n, "size_mb": s} for n, s in onnx_files],
             "total_onnx_mb": round(total_onnx_mb, 2),
+            "total_onnx_unique_sha256": len(onnx_files),
+            "onnx_by_location": {k: [{"name": n, "size_mb": s} for n, s in v] for k, v in onnx_by_location.items()},
             "pytorch_pt_files": [{"name": n, "size_mb": s} for n, s in pt_files],
             "total_pt_mb": round(total_pt_mb, 2),
         },

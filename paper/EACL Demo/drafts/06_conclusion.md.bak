@@ -1,0 +1,11 @@
+﻿# EACL Demo Section 06: Conclusion & Availability (Draft Skeleton)
+
+## 6.1 Summary of Platform
+- KrishokChat integrates safety screening, hybrid retrieval, grounded generation, multimodal diagnosis, and observable verification traces.
+- Achieves 84.6/100 SUS score and 61.5% zero-LLM traffic resolution.
+
+## 6.2 Availability & Open Science
+- Open source under Apache-2.0.
+- Live demo: `https://krishokchat.org`.
+- Public repository, pre-trained weights, and 2.5-minute screencast available at `https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System`.
+

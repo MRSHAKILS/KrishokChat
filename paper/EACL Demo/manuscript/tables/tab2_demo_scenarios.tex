@@ -1,17 +1,21 @@
-\begin{table*}[t]
+\begin{table}[t]
 \centering
-\caption{Demonstration Scenarios Exhibited in the Live KrishokChat Platform and Screencast.}
+\caption{Five replayable vignettes on the live system and screencast. Each keeps the decision inspectable.}
 \label{tab:demo_scenarios}
-\small
-\begin{tabular}{clll}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{c p{3.0cm} p{3.8cm} p{4.5cm}}
 \toprule
-\textbf{Scenario} & \textbf{User Input / Modality} & \textbf{Internal Pipeline Transition} & \textbf{User-Facing Decision Outcome} \\
+\textbf{Scen.} & \textbf{Input} & \textbf{Transition} & \textbf{Outcome} \\
 \midrule
-\textbf{S1} & Underspecified symptom query (Text) & Intent classification $\rightarrow$ Ambiguity detector & Structured 2-turn clarification prompt \\
-\textbf{S2} & Potato leaf photo upload (Image) & Vision ONNX ($c=\text{Potato}, p=\text{Late Blight}$) $\rightarrow$ Tier 1 & Verified diagnostic card + dosage envelope \\
-\textbf{S3} & Conflicting image \& text query & Cross-modal semantic discrepancy detector & Discrepancy badge with user confirmation toggle \\
-\textbf{S4} & Banned chemical / Poisoning query & Tier 0 Safety Rule $\rightarrow$ Fail-closed interrupt & Static safety banner + Krishi 16123 helpline call button \\
-\textbf{S5} & Low-connectivity / 2G environment & Service worker $\rightarrow$ Offline SQLite Cache & Instant cached advisory with freshness timestamp \\
+\textbf{S1} & Underspecified Bengali query (text) & Safety check $\rightarrow$ slot-gap detection & Clarification prompt (crop/photo) \\
+\textbf{S2} & Potato leaf photo (image) & Class.-only ONNX ($c$=Potato) $\rightarrow$ retrieval & Diagnostic card + dosage + source \\
+\textbf{S3} & Conflicting image + text & Cross-modal detector ($c_{\text{img}}\!\neq\!c_{\text{txt}}$, 85.0\%) & Mismatch badge + confirm \\
+\textbf{S4} & Banned chemical / poisoning phrase & Tier~0 gate pre-retrieval & Fail-closed banner + 16123 dial \\
+\textbf{S5} & Low-connectivity / 2G (offline) & SW precache $\rightarrow$ BM25 0.94 & Cached adv.; $+$13.25\,pp/$+$30.0\,pp \\
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{adjustbox}
+\end{table}

@@ -34,11 +34,12 @@ class StageStatus(StrEnum):
 class ResolutionTier(StrEnum):
     """How the answer was produced — the five-tier resolution ladder.
 
-    T0  deterministic_guard   — precheck rule matched; 0 LLM calls
-    T1  structured_fact       — provenance-carrying fact row; 0 LLM calls  (R4)
-    T2  templated_advisory    — template filled from fact rows; 0 LLM calls (R4)
-    T3  grounded_generation   — retrieval → LLM → verifier; 1-2 LLM calls
-    T4  honest_refusal        — classifier/coverage-gate refusal; 0-1 LLM calls
+    T0  deterministic_guard       — precheck rule matched; 0 LLM calls
+    T1  structured_fact           — provenance-carrying fact row; 0 LLM calls  (R4)
+    T2  templated_advisory        — template filled from fact rows; 0 LLM calls (R4)
+    T3  grounded_generation       — retrieval → LLM → verifier; 1-2 LLM calls
+    T4  honest_refusal            — classifier/coverage-gate refusal; 0-1 LLM calls
+    T5  interactive_clarification — missing critical slot; dynamic clarification turn
     """
 
     DETERMINISTIC_GUARD = "deterministic_guard"
@@ -46,3 +47,4 @@ class ResolutionTier(StrEnum):
     TEMPLATED_ADVISORY = "templated_advisory"
     GROUNDED_GENERATION = "grounded_generation"
     HONEST_REFUSAL = "honest_refusal"
+    INTERACTIVE_CLARIFICATION = "interactive_clarification"

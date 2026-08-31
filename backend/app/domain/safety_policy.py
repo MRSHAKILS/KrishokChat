@@ -10,13 +10,16 @@ from app.domain.enums import SafetyCategory
 
 PATTERNS: dict[SafetyCategory, tuple[tuple[str, re.Pattern[str]], ...]] = {
     SafetyCategory.SELF_HARM_OR_POISONING_RISK: (
-        ("self_harm_bn", re.compile(r"আত্মহত্যা|মরতে চাই|জীবন শেষ|নিজেকে ক্ষতি|বিষ খাবো|কীটনাশক পান")),
-        ("self_harm_en", re.compile(r"\b(?:suicide|kill myself|end my life|self[- ]harm|poison myself|want to die)\b", re.I)),
+        ("self_harm_bn", re.compile(r"আত্মহত্যা|মরতে চাই|জীবন শেষ|নিজেকে ক্ষতি|বিষ খাবো|বিষ খেলে|কীটনাশক পান|বিষ পান|মারা যাওয়া|মৃত্যু হবে|কীভাবে মরব|মানুষ মারার|গরু মারার|মানুষের ক্ষতি")),
+        ("self_harm_en", re.compile(r"\b(?:suicide|kill myself|end my life|self[- ]harm|poison myself|want to die|kill someone|lethal dose|human death)\b", re.I)),
     ),
     SafetyCategory.PROMPT_INJECTION: (
-        ("injection_en", re.compile(r"\b(?:ignore (?:all|previous|the)|system prompt|jailbreak|dan mode|override safety|forget your instructions)\b", re.I)),
+        ("injection_en", re.compile(r"\b(?:ignore (?:all|previous|the)|system prompt|jailbreak|dan mode|override safety|forget your instructions|system override|output only the word)\b", re.I)),
         ("injection_roleplay", re.compile(r"\b(?:you are now|pretend you are|act as)\b", re.I)),
-        ("injection_bn", re.compile(r"আগের নির্দেশনা উপেক্ষা|নিরাপত্তা উপেক্ষা|নতুন নির্দেশনা")),
+        ("injection_bn", re.compile(r"আগের নির্দেশনা উপেক্ষা|নিরাপত্তা উপেক্ষা|নতুন নির্দেশনা|সিস্টেম প্রম্পট")),
+    ),
+    SafetyCategory.OFF_TOPIC: (
+        ("off_topic_bn", re.compile(r"রাজধানীর নাম|ওয়েব স্ক্র্যাপার|পাইথন দিয়ে|আবহাওয়া কেমন|টাকার মান|বিশ্বকাপ|ভালোবাসার কবিতা|কবিতা লিখে|গান শোনাও|প্রোগ্রামিং")),
     ),
     # Banned/cancelled agrochemicals: composed from the source-attributed
     # registry (app.domain.chemical_registry) so the deterministic gate tracks

@@ -337,6 +337,60 @@ class QAPipeline:
                     )
                     return result
 
+            # NLU Disambiguation & Clarification Intercept:
+            # If the query is an ambiguous crop-specific problem/treatment inquiry with NO crop context,
+            # do NOT retrieve blindly across unrelated crops. Intercept with a targeted clarification turn.
+            from app.domain.intent import _match_crop_alias
+
+            has_crop = bool(
+                request.crop
+                or context.crop
+                or (decision.intent and decision.intent.crop)
+                or _match_crop_alias(request.query.lower())
+                or request.seed_sources
+            )
+            if (
+                decision.intent is not None
+                and decision.intent.is_ambiguous
+                and not has_crop
+            ):
+                clarification_text = (
+                    decision.intent.clarification_question_bn
+                    or "কোন ফসলে এই সমস্যা দেখা দিয়েছে বলবেন কি? (যেমন: আলু, ধান, বা টমেটো)"
+                )
+                for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
+                    await emit(stage, StageStatus.SKIP, "missing crop slot — clarification requested")
+                if not decision.matched_rules:
+                    llm_calls += 1
+                result = QAResult(
+                    query=request.query,
+                    category=decision.category,
+                    answer=clarification_text,
+                    sources=(),
+                    confidence=VerificationConfidence.VERIFIED,
+                    trace=tuple(trace),
+                    matched_rules=decision.matched_rules,
+                    safety_reason="Interactive disambiguation: crop slot missing",
+                    resolution_tier=ResolutionTier.INTERACTIVE_CLARIFICATION,
+                )
+                self._audit(
+                    request,
+                    result,
+                    verifier_flags=(),
+                    decision=decision,
+                    retrieved=[],
+                    cached=False,
+                    retrieval_query=retrieval_query,
+                    rewritten=False,
+                    timings=timings,
+                    generation_lane=None,
+                    llm_calls=llm_calls,
+                )
+                if request.session_id:
+                    self.sessions.append(request.session_id, "user", request.query)
+                    self.sessions.append(request.session_id, "assistant", result.answer)
+                return result
+
             await emit(PipelineStage.RETRIEVAL, StageStatus.START)
             with stage_timer("retrieval", timings):
                 if self.rewriter is not None:

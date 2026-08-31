@@ -48,7 +48,16 @@ class ConversationalQueryRewriter:
     def should_rewrite(self, query: str, history: Sequence[dict[str, str]]) -> bool:
         if not history:
             return False
-        return any(marker in query for marker in self.markers)
+        if any(marker in query for marker in self.markers):
+            return True
+        # Trigger rewrite if the previous assistant turn was a clarification question
+        last_turn = history[-1] if history else {}
+        if last_turn.get("role") == "assistant" and (
+            "কোন ফসলে" in last_turn.get("content", "")
+            or "বলবেন কি" in last_turn.get("content", "")
+        ):
+            return True
+        return False
 
     @staticmethod
     def _prompt(query: str, history: Sequence[dict[str, str]], max_history: int) -> str:

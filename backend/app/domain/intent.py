@@ -36,22 +36,27 @@ class Intent:
       "none"     — no intent could be determined
     """
 
-    kind: str | None = None          # treatment | prevention | fertilizer | general_info
+    kind: str | None = None          # treatment | prevention | fertilizer | general_info | diagnosis
     crop: str | None = None
     problem: str | None = None
     stage: str | None = None
     upazila: str | None = None
+    plant_part: str | None = None    # leaf | stem | root | fruit | flower | whole_plant
+    problem_type: str | None = None  # disease | pest | fertilizer | weather | general
+    is_ambiguous: bool = False
+    clarification_question_bn: str | None = None
+    suggested_crops: tuple[str, ...] = ()
     source: str = "none"             # "keyword" | "llm" | "none"
 
 
 # ---------------------------------------------------------------------------
 # Keyword-first intent extraction
-# ---------------------------------------------------------------------------
-
-# Treatment keywords (Bengali + Banglish + English)
+# ----------------------------------------------------# Treatment keywords (Bengali + Banglish + English)
 _TREATMENT_KW = (
-    "প্রতিকার", "চিকিৎসা", "ওষুধ", "কীটনাশক", "ছত্রাকনাশক",
-    "স্প্রে", "প্রয়োগ", "দাও", "treatment", "cure", "spray", "apply",
+    "প্রতিকার", "চিকিৎসা", "ওষুধ", "ঔষধ", "কীটনাশক", "ছত্রাকনাশক",
+    "স্প্রে", "প্রয়োগ", "দাও", "কী দেব", "কী দিব", "কী করব", "কী করমু", "দমন", "সমাধান", "উপায়", "উপায়",
+    "করণীয়", "করনীয়", "বাঁচাব", "বাঁচানো", "দাবা", "বিখ",
+    "treatment", "cure", "spray", "apply", "shomadhan", "bachamu", "kormu", "osudh", "dava",
     "fungicide", "pesticide", "medicine",
 )
 
@@ -63,9 +68,52 @@ _PREVENTION_KW = (
 
 # Fertilizer keywords
 _FERTILIZER_KW = (
-    "সার", "ইউরিয়া", "পটাশ", "ফসফেট", "জৈব সার",
+    "সার", "ইউরিয়া", "পটাশ", "ফসফেট", "জৈব সার", "কম্পোস্ট", "shaar",
     "fertilizer", "fertiliser", "urea", "npk", "potash", "compost",
 )
+
+# Plant part keywords
+_PLANT_PART_MAP = {
+    "পাতা": "leaf", "পাতায়": "leaf", "পাতাত": "leaf", "leaf": "leaf", "leaves": "leaf", "pata": "leaf", "patat": "leaf",
+    "কাণ্ড": "stem", "কান্ড": "stem", "ডাল": "stem", "stem": "stem", "branch": "stem",
+    "মূল": "root", "শিকড়": "root", "শিকড়": "root", "root": "root",
+    "ফল": "fruit", "ফলে": "fruit", "fruit": "fruit", "fol": "fruit",
+    "ফুল": "flower", "ফুলে": "flower", "flower": "flower",
+    "শীষ": "panicle", "grain": "grain", "দানা": "grain", "shish": "panicle",
+    "গাছ": "whole_plant", "গাছে": "whole_plant", "গাছের": "whole_plant", "plant": "whole_plant", "gach": "whole_plant", "gache": "whole_plant",
+}
+
+_PLANT_PART_BN = {
+    "leaf": "পাতায়",
+    "stem": "কাণ্ডে",
+    "root": "শিকড়ে",
+    "fruit": "ফলে",
+    "flower": "ফুলে",
+    "panicle": "শীষে",
+    "grain": "দানায়",
+    "whole_plant": "গাছে",
+}
+
+
+# Crop aliases for deterministic keyword detection
+_CROP_ALIASES: dict[str, list[str]] = {
+    "potato": ["potato", "আলু", "আলুর", "aloo", "alu", "aloor"],
+    "maize": ["maize", "corn", "ভুট্টা", "ভুট্টায়", "ভুট্তার", "ভুট্টা ফসলে", "bhutta", "makai"],
+    "rice": ["rice", "ধান", "ধানের", "ধানক্ষেত", "ধান ক্ষেতে", "dhan", "paddy", "dhanor"],
+    "tomato": ["tomato", "টমেটো", "টমেটোর"],
+    "wheat": ["wheat", "গম", "গমের", "গমে"],
+    "brinjal": ["brinjal", "eggplant", "বেগুন", "বেগুনের", "বেগুন গাছের", "baingon"],
+    "chilli": ["chilli", "chili", "মরিচ", "মরিচের", "moris", "morisor"],
+    "cabbage": ["cabbage", "বাঁধাকপি", "বাঁধাকপির", "পাতাকপি"],
+    "cauliflower": ["cauliflower", "ফুলকপি", "ফুলকপির"],
+}
+
+
+def _match_crop_alias(lowered: str) -> str | None:
+    for crop, aliases in _CROP_ALIASES.items():
+        if any(alias in lowered for alias in aliases):
+            return crop
+    return None
 
 
 def keyword_intent(query: str) -> Intent | None:
@@ -77,15 +125,45 @@ def keyword_intent(query: str) -> Intent | None:
     3. Else if a fertilizer keyword is present → ``kind="fertilizer"``.
     4. None → caller will use LLM block or fall back to ``general_info``.
 
-    Only ``kind`` is set here; ``crop``, ``problem``, ``stage``, ``upazila``
-    are enriched from the LLM's intent block in ``SafetyClassifier.classify``.
+    Also deterministically resolves ``crop``, ``plant_part``, and ``is_ambiguous``.
     """
     lowered = query.lower()
 
+    kind: str | None = None
     if any(kw in lowered for kw in _TREATMENT_KW):
-        return Intent(kind="treatment", source="keyword")
-    if any(kw in lowered for kw in _PREVENTION_KW):
-        return Intent(kind="prevention", source="keyword")
-    if any(kw in lowered for kw in _FERTILIZER_KW):
-        return Intent(kind="fertilizer", source="keyword")
-    return None
+        kind = "treatment"
+    elif any(kw in lowered for kw in _PREVENTION_KW):
+        kind = "prevention"
+    elif any(kw in lowered for kw in _FERTILIZER_KW):
+        kind = "fertilizer"
+
+    if kind is None:
+        return None
+
+    detected_part: str | None = None
+    for alias, part in _PLANT_PART_MAP.items():
+        if alias in lowered:
+            detected_part = part
+            break
+
+    detected_crop = _match_crop_alias(lowered)
+
+    # An advisory/treatment/prevention/fertilizer query without any crop is ambiguous by definition
+    is_ambiguous = (detected_crop is None)
+    clarification_prompt = None
+    if is_ambiguous:
+        part_bn = _PLANT_PART_BN.get(detected_part or "", "")
+        part_text = f"{part_bn} " if part_bn else ""
+        if kind == "fertilizer":
+            clarification_prompt = "কোন ফসলের সার প্রয়োগ বা মাত্রা সম্পর্কে জানতে চাচ্ছেন বলবেন কি? (যেমন: ধান, আলু, বা ভুট্টা)"
+        else:
+            clarification_prompt = f"কোন ফসলের {part_text}এই সমস্যা হয়েছে বলবেন কি? (যেমন: আলু, ধান, বা টমেটো)"
+
+    return Intent(
+        kind=kind,
+        crop=detected_crop,
+        plant_part=detected_part,
+        is_ambiguous=is_ambiguous,
+        clarification_question_bn=clarification_prompt,
+        source="keyword",
+    )

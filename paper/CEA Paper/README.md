@@ -3,7 +3,7 @@
 **Target Journal:** *Computers and Electronics in Agriculture* (Elsevier, Impact Factor: 7.7, CiteScore: 12.2, Q1)  
 **Article Type:** Full Original Research Paper (approx. 9,000–12,000 words, 18 pages in Elsevier `cas-dc` format)  
 **Manuscript Title:** *Bounded-Authority Verification for Safety-Critical Pesticide Advisory in Low-Resource Bengali Agriculture*  
-**Authors:** Raiyaan Reza (North South University) & Md. Golam Rabiul Alam (BRAC University)  
+**Authors:** Raiyaan Reza (North South University)  
 **Status:** **100% Self-Contained, Audited, and Submission-Ready**  
 
 ---

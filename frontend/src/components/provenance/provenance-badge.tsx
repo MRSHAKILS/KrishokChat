@@ -19,6 +19,7 @@ export type ProvenanceKind =
   | "templated_advisory"
   | "grounded_generation"
   | "honest_refusal"
+  | "interactive_clarification"
   | "official_table"
   | "official_document"
   | "measured"
@@ -83,6 +84,15 @@ const BADGE_CONFIGS: Record<ProvenanceKind, BadgeConfig> = {
     bg: "bg-clay-soft/20",
     pill: "Refusal",
     isStrong: false,
+  },
+  interactive_clarification: {
+    icon: Sparkles,
+    label: "স্লট স্পষ্টকরণ (Clarification)",
+    desc: "সঠিক উত্তরের জন্য কৃষকের কাছে ফসলের নাম নিশ্চিত করা হচ্ছে",
+    color: "text-ochre-dark dark:text-ochre",
+    bg: "bg-ochre-soft/30",
+    pill: "Disambiguation",
+    isStrong: true,
   },
   official_table: {
     icon: BookOpen,

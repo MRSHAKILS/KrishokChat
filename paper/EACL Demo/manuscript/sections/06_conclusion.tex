@@ -1,7 +1,9 @@
-\section{Conclusion and Future Availability}
+\section{Conclusion}
 \label{sec:conclusion}
 
-This paper demonstrated \textbf{KrishokChat}, an open, production-oriented multimodal Bengali agricultural advisory platform. By subordinating generative language models to an 11-slot fail-closed factual authority layer and a five-tier selective resolution ladder, KrishokChat eliminates agricultural hallucinations while achieving an 84.6/100 System Usability Scale rating. Future extensions will expand on-device speech synthesis and multi-country crop knowledge packs across South Asia.
+We presented \textbf{KrishokChat}, an open, production-oriented multimodal Bengali advisory platform that brings safety screening, hybrid retrieval over 2,946 institutional sources, grounded generation, on-device classification-only vision, and fail-closed verification into one inspectable workflow. Its value for the demo track is integration and deployability: 100\% FP32-vs-{\tt .pt} parity with four INT8 models at 3.7--3.9$\times$ compression (rice INT8 rejected, corn unmeasured; potato/brassica INT8 not reportable for accuracy), 0.94 BM25 offline hit with $+$13.25\,pp rural-edge and $+$30.0\,pp severe-2G retention over cloud-only RAG, fully ordered streaming traces, and a 284\,MB minimal deployment. Deterministic and safety paths remain independent of the LLM, with escalation to 16123 where advice cannot be grounded.
 
-\paragraph{Availability:}
-KrishokChat is fully open-source under the Apache-2.0 license. The live platform, API documentation, pre-trained ONNX weights, and screencast video are available at \url{https://krishokchat.org} and \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}.
+\paragraph{Availability.}
+{\sloppy
+The platform, API docs, frozen indexes, ONNX weights at correct per-crop resolution, and screencast are released under Apache-2.0 at \url{https://krishokchat.org} and \href{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}{\nolinkurl{github.com/RaiyaanReza/KrishokChat}}. Future work will extend speech, additional crops, and a recruited IRB-approved usability study.\par
+}

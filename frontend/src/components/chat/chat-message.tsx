@@ -40,12 +40,14 @@ export function ChatMessage({
   traceEvents,
   streamedText,
   onRetry,
+  onSelectSuggestion,
 }: {
   message: ChatMessageData;
   streaming?: boolean;
   traceEvents?: AgentStageEvent[];
   streamedText?: string;
   onRetry?: () => void;
+  onSelectSuggestion?: (text: string) => void;
 }) {
   if (message.role === "user") {
     return (
@@ -76,7 +78,7 @@ export function ChatMessage({
         ) : message.error ? (
           <ErrorContent error={message.error} onRetry={onRetry} />
         ) : message.response ? (
-          <CompletedContent response={message.response} />
+          <CompletedContent response={message.response} onSelectSuggestion={onSelectSuggestion} />
         ) : (
           <p className="text-sm leading-relaxed text-ink">{message.content}</p>
         )}
@@ -233,7 +235,13 @@ function FormattedAnswerText({
   );
 }
 
-function CompletedContent({ response }: { response: QAResponse }) {
+function CompletedContent({
+  response,
+  onSelectSuggestion,
+}: {
+  response: QAResponse;
+  onSelectSuggestion?: (text: string) => void;
+}) {
   const blocked = response.category !== "safe_agri";
   const [traceOpen, setTraceOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -251,6 +259,7 @@ function CompletedContent({ response }: { response: QAResponse }) {
   }
 
   const cleanAnswer = formatAnswerWithCleanCitations(response.answer, response.sources);
+  const isClarification = response.resolution_tier === "interactive_clarification";
 
   const copyAnswer = async () => {
     try {
@@ -273,6 +282,34 @@ function CompletedContent({ response }: { response: QAResponse }) {
       >
         <FormattedAnswerText text={cleanAnswer} activeSentenceIndex={activeSentenceIndex} />
       </motion.p>
+
+      {/* Interactive Crop Chips on Clarification Turns */}
+      {isClarification && onSelectSuggestion && (
+        <div className="rounded-xl border border-ochre-soft/40 bg-ochre-soft/10 p-3">
+          <div className="mb-2 text-xs font-semibold text-ink-soft">
+            নির্দিষ্ট ফসল নির্বাচন করে দ্রুত উত্তর পান:
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { label: "🌾 ধান (Rice)", value: "ধান" },
+              { label: "🥔 আলু (Potato)", value: "আলু" },
+              { label: "🍅 টমেটো (Tomato)", value: "টমেটো" },
+              { label: "🌽 ভুট্টা (Maize)", value: "ভুট্টা" },
+              { label: "🍆 বেগুন (Brinjal)", value: "বেগুন" },
+              { label: "🌶️ মরিচ (Chilli)", value: "মরিচ" },
+            ].map((item) => (
+              <button
+                key={item.value}
+                type="button"
+                onClick={() => onSelectSuggestion(item.value)}
+                className="control-press inline-flex items-center gap-1.5 rounded-full border border-leaf/30 bg-paper px-3 py-1.5 text-xs font-medium text-leaf shadow-2xs transition-colors hover:bg-leaf hover:text-paper"
+              >
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Keep the answer actions to one useful voice control and one optional
           detail link. The verification badge is informational, not a button. */}

@@ -10,6 +10,10 @@
 \usepackage{url}
 \usepackage{listings}
 \usepackage{array}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, calc, backgrounds, shadows, decorations.pathreplacing}
 
 \title{KrishokChat: A Safety-Aware Multimodal Bengali Agricultural Advisory Platform}
 
@@ -26,7 +30,7 @@
 \maketitle
 
 \begin{abstract}
-Conversational AI systems in agricultural extension face severe reliability barriers in low-resource environments: unconstrained language models hallucinate chemical treatments, ignore critical safety bounds, and fail under regional linguistic drift. This paper demonstrates \textbf{KrishokChat}, an open, production-oriented multimodal agricultural advisory platform for Bengali farmers. KrishokChat integrates lightweight safety screening, hybrid BM25+dense retrieval over 2,946 institutional manuals, fine-tuned Gemma-4 4-bit generation, INT8 ONNX crop-disease vision models, and a five-tier deterministic resolution ladder into a unified, observable workflow. The platform features real-time agent execution traces, transparent ``Why this advice?'' evidence panels, structured fail-closed safety cards, and automated escalation to the national Krishi Call Center (16123). Across empirical usability evaluations with practicing agronomists and rural extension workers, KrishokChat achieves an average System Usability Scale (SUS) score of 84.6/100, eliminates 100\% of dangerous pesticide misbinding errors, and resolves 61.5\% of queries in under 550\,ms without invoking heavy generative LLMs. A live system and screencast are available at \url{https://krishokchat.org}.
+Smallholder agriculture in linguistically diverse, low-connectivity regions needs advice that is safe, grounded in trusted sources, and easy to inspect. We present \textbf{KrishokChat}, an open, production-oriented multimodal platform for Bengali agricultural advisory. It combines lightweight safety screening, hybrid BM25+dense retrieval over 2,946 institutional manuals, fine-tuned Gemma-4 4-bit generation, on-device \textbf{classification}-only vision, and fail-closed verification in one auditable session with live traces, ``Why this advice?'' evidence, and one-touch escalation to the national Krishi Call Center (16123). Six FP32 ONNX models ship at per-crop resolution with 100\% agreement to PyTorch ($n$=1,237, $\delta\le5{\times}10^{-5}$); four INT8 variants are accepted at 3.7--3.9$\times$ compression with no accuracy loss (potato n=15/brassica n=51 held-out not reportable) (rice INT8 rejected; corn still unmeasured). Browser WASM runs at 26--265\,ms p50 single-thread, inference-only. Offline-first BM25 hits 0.94 at p50~26.8\,ms and retains $+$13.25\,pp delivery at rural-edge (15\% loss) and $+$30.0\,pp at severe-2G (30\% loss) over cloud-only RAG. Traces are fully ordered in all 100 test streams (p50~9 events) and the minimal deployment is 284\,MB (95.64\,MB unique ONNX, 40.59\,MB browser primary). On 210 live safety probes (420 total with baseline) the audited system shows 0.95\% overall attack success with 6.67\% on Bangla native injection. A live system and screencast are at \url{https://krishokchat.org}.
 \end{abstract}
 
 % Include modular section files
@@ -37,7 +41,6 @@ Conversational AI systems in agricultural extension face severe reliability barr
 \input{sections/05_deployment_ethics.tex}
 \input{sections/06_conclusion.tex}
 
-\bibliographystyle{acl_natbib}
 \bibliography{krishokchat_eacl}
 
 \end{document}

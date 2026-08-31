@@ -433,6 +433,7 @@ export function QAPanel({
                   <ChatMessage
                     message={msg}
                     onRetry={msg.role === "assistant" && msg.retryQuery ? () => send(msg.retryQuery!) : undefined}
+                    onSelectSuggestion={(crop) => send(crop)}
                   />
                   {msg.role === "assistant" && msg.response && !savedMessages.has(i) && (
                     <SaveAnswerButton

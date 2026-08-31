@@ -28,6 +28,10 @@ manuscript:
     - manuscript/tables/tab2_demo_scenarios.tex
     - manuscript/tables/tab3_usability_metrics.tex
     - manuscript/tables/tab4_deployment_footprint.tex
+  figures:
+    - manuscript/figures/fig1_system_architecture.tex
+    - manuscript/figures/fig2_slot_disambiguation_flowchart.tex
+    - manuscript/figures/fig3_multimodal_contradiction_flowchart.tex
 
 drafts:
   root: drafts/
@@ -51,3 +55,4 @@ experiments:
     - experiments/E06_offline_cache_resilience/
     - experiments/E07_docker_deployment_footprint/
     - experiments/E08_cross_modal_conflict_handling/
+    - experiments/E09_slot_disambiguation_gating/

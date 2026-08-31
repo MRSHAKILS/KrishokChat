@@ -1,0 +1,87 @@
+% Figure 1: Exact Cost-Gated Decision Ladder & Disambiguation Architecture
+\begin{figure*}[t]
+\centering
+\begin{adjustbox}{width=0.92\textwidth}
+\begin{tikzpicture}[
+    >=Stealth,
+    thick,
+    font=\sffamily\footnotesize,
+    node distance=0.7cm and 1.2cm,
+    % Box styles
+    basebox/.style={rectangle, rounded corners=4pt, draw=black!70, fill=white, text width=3.4cm, align=center, minimum height=0.85cm, drop shadow={opacity=0.12, shadow xshift=1.2pt, shadow yshift=-1.2pt}},
+    inputbox/.style={basebox, fill=blue!6, draw=blue!70, font=\sffamily\bfseries\footnotesize},
+    safetybox/.style={basebox, fill=red!7, draw=red!70},
+    t0box/.style={basebox, fill=red!12, draw=red!80, font=\sffamily\bfseries\footnotesize},
+    tealbox/.style={basebox, fill=teal!7, draw=teal!75},
+    nlubox/.style={basebox, fill=orange!7, draw=orange!75},
+    ragbox/.style={basebox, fill=green!7, draw=green!75, font=\sffamily\bfseries\footnotesize},
+    clarifybox/.style={basebox, fill=yellow!15!orange!12, draw=orange!80},
+    sessionbox/.style={basebox, fill=gray!8, draw=gray!70, font=\sffamily\scriptsize},
+    % Diamond styles
+    decision/.style={diamond, draw=black!75, fill=yellow!25!orange!20, aspect=2.0, inner sep=1.5pt, text width=2.6cm, align=center, font=\sffamily\bfseries\scriptsize, drop shadow={opacity=0.10, shadow xshift=1pt, shadow yshift=-1pt}},
+    % Line styles
+    arrow/.style={->, draw=black!85, line width=0.85pt},
+    edge_label/.style={font=\sffamily\scriptsize, fill=white, inner sep=1.5pt}
+]
+
+    % Row 1: Farmer Input
+    \node[inputbox] (input) {\textbf{Farmer Input: Natural /}\\ \textbf{Dialectal Bangla Query}};
+
+    % Row 2: Deterministic Safety Precheck T0
+    \node[safetybox, below=0.65cm of input] (safety_precheck) {\textbf{Deterministic Safety Precheck T0}\\ \scriptsize Regex Active Ingredients + Crisis Rules ($0.32\,$ms)};
+
+    % Safety Escalation Left Node
+    \node[t0box, left=1.4cm of safety_precheck, yshift=-0.9cm] (safety_escalation) {\textbf{Canned Safety Escalation}\\ \scriptsize Krishi Call Center 16123 / T0 Guard};
+
+    % Row 3: Level 0 Matcher (Diamond)
+    \node[decision, below=0.85cm of safety_precheck] (level0_matcher) {Level 0: Deterministic\\Slot \& Alias Matcher};
+
+    % Left Sub-tree: Fact Base Check
+    \node[decision, below left=1.2cm and 1.2cm of level0_matcher] (in_fact_base) {In Fact Base?};
+    \node[tealbox, below left=0.9cm and 0.2cm of in_fact_base] (fact_answer) {\textbf{T1/T2 Structured Answer}\\ \scriptsize Curated Static Table (0 LLM Cost)};
+
+    % Center Node: Normalized RAG
+    \node[ragbox, below right=1.6cm and 0.4cm of in_fact_base] (rag_gen) {\textbf{Normalized Retrieval $\rightarrow$}\\ \textbf{Grounded Generation T3}\\ \scriptsize Hybrid BM25 + Dense BGE-M3 (2,946 Docs) + Gemma-4};
+
+    % Right Sub-tree: Level 1 Gemini Structured NLU
+    \node[nlubox, below right=0.8cm and 1.2cm of level0_matcher] (level1_nlu) {\textbf{Level 1: Gemini-2.5-Flash-Lite}\\ \textbf{Structured NLU}\\ \scriptsize Single Consolidated JSON Slot Parser};
+
+    % Crop Identified Diamond
+    \node[decision, below=0.8cm of level1_nlu] (crop_identified) {Crop\\Identified?};
+
+    % Clarification Intercept Path
+    \node[clarifybox, below=0.9cm of crop_identified] (clarify_intercept) {\textbf{Interactive Clarification Intercept}\\ \scriptsize Halts Blind Multi-Crop Retrieval};
+
+    \node[clarifybox, below=0.65cm of clarify_intercept, font=\sffamily\footnotesize] (clarify_prompt) {\textit{``\textbf{Which crop has this leaf problem?}''}\\ \scriptsize Interactive Quick-Reply Chips: [Rice] [Potato] [Tomato]};
+
+    \node[sessionbox, below=0.65cm of clarify_prompt] (session_store) {\textbf{Record Partial Slots in Session Store}\\ \scriptsize $\rightarrow$ SKIP Retrieval \& Generation ($\mathbf{88\%}$ Token Savings)};
+
+    % Arrows & Branch Connections
+    \draw[arrow] (input) -- (safety_precheck);
+
+    % Safety branches
+    \draw[arrow] (safety_precheck.west) -| node[edge_label, left, xshift=-0.1cm] {Violation Matched} (safety_escalation.north);
+    \draw[arrow] (safety_precheck) -- node[edge_label] {Pass} (level0_matcher);
+
+    % Level 0 Matcher branches
+    \draw[arrow] (level0_matcher.west) -| node[edge_label, near start, above left] {High Confidence Crop + Problem} (in_fact_base.north);
+    \draw[arrow] (level0_matcher.east) -| node[edge_label, near start, above right] {Missing Slots / Dialectal Phrasing} (level1_nlu.north);
+
+    % Fact base branches
+    \draw[arrow] (in_fact_base.west) -| node[edge_label, near start, left] {Yes} (fact_answer.north);
+    \draw[arrow] (in_fact_base.south) |- node[edge_label, near start, below] {No} (rag_gen.west);
+
+    % Level 1 NLU branches
+    \draw[arrow] (level1_nlu) -- node[edge_label] {Extracts Slots} (crop_identified);
+    \draw[arrow] (crop_identified.west) -| node[edge_label, near start, above left] {Crop Is Present} (rag_gen.north);
+    \draw[arrow] (crop_identified.south) -- node[edge_label, right] {\scriptsize Crop == NULL on Problem/Treatment} (clarify_intercept);
+
+    % Clarification flow
+    \draw[arrow] (clarify_intercept) -- (clarify_prompt);
+    \draw[arrow] (clarify_prompt) -- (session_store);
+
+\end{tikzpicture}
+\end{adjustbox}
+\caption{\textbf{KrishokChat Cost-Gated Decision Ladder and Disambiguation Architecture.} Natural dialectal inputs undergo Tier~0 safety prechecking before entering Level~0 deterministic matching. High-confidence queries resolve with zero LLM overhead (T1/T2 or normalized T3). Complex dialectal symptom queries invoke Level~1 structured NLU (\texttt{gemini-2.5-flash-lite}); when critical crop entities are missing ($crop=\emptyset$), the pipeline intercepts execution to request active clarification, completely preventing cross-crop hallucinations while slashing generation token costs by $88.0\%$.}
+\label{fig:system_architecture}
+\end{figure*}

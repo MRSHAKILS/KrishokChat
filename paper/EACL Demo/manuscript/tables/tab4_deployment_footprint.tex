@@ -1,20 +1,31 @@
 \begin{table*}[t]
 \centering
-\caption{Production Deployment Footprint, Artifact Sizes, Memory Consumption, and Hardware Requirements.}
+\caption{Measured on-disk footprint (SHA-256 deduplicated, 2026-08-30). ONNX is counted once even when copied to \texttt{frontend/public/models}; browser primary holds the six deployment models.}
 \label{tab:deployment_footprint}
-\small
-\begin{tabular}{llccc}
+\scriptsize
+\setlength{\tabcolsep}{2.4pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{p{2.9cm}p{2.9cm}c p{4.9cm}c}
 \toprule
-\textbf{Component / Service} & \textbf{Artifact Type / Format} & \textbf{Disk Size (MB)} & \textbf{RAM Allocation (MB)} & \textbf{Execution Target} \\
+\textbf{Component} & \textbf{Artifact} & \textbf{MB} & \textbf{Note} & \textbf{Target} \\
 \midrule
-Backend API Service & FastAPI + Uvicorn Async & 45.2 MB & 120.0 MB & Cloud VPS / Edge Server \\
-Frontend Web Application & Next.js 14 App Router + Tailwind & 18.5 MB & 85.0 MB & Edge CDN / Browser PWA \\
-Crop Classifier & INT8 ONNX (EfficientNet-B0) & 5.9 MB & 42.5 MB & Client Mobile CPU / VPS \\
-Potato Disease Classifier & INT8 ONNX (MobileNetV3) & 20.8 MB & 68.2 MB & Client Mobile CPU / VPS \\
-Structured Fact Pack & Compressed SQLite Database & 11.2 MB & 24.0 MB & On-Device Storage \\
-Hybrid RAG Index & Precomputed FAISS + BM25 Chunks & 84.5 MB & 165.0 MB & Backend In-Process \\
-Gemma-4 4-bit Base + LoRA & GGUF Q4\_K\_M Llama-Server & 2,450.0 MB & 3,200.0 MB & Backend GPU / CPU \\
-\textbf{Total System Footprint} & \textbf{Self-Contained Container} & \textbf{2.63 GB} & \textbf{3.70 GB} & \textbf{Single Linux VPS / Edge} \\
+Backend API & FastAPI + Uvicorn & 5.3 & \texttt{backend/app} & VPS \\
+Frontend & Next.js 16 App Router & 0.7\,* & 684\,KB gzipped (621\,KB + 63\,KB WASM) & CDN/PWA \\
+Crop classifier & 6-class YOLO26n \textbf{INT8} ONNX & 1.60 & 224\,px, 3.68$\times$ vs FP32, 0\,pp ($n$=578) & WASM/VPS \\
+Potato & 3-class YOLO26s INT8 & 5.34 & 224\,px, 3.90$\times$, $n$=15 held-out (not reportable) & WASM \\
+Rice & 8-class YOLO26n \textbf{FP32} & 5.91 & 320\,px, INT8 rej. (2.5\,pp drop, agree~0.875) & WASM \\
+Wheat & 11-class YOLO26n INT8 & 1.61 & 224\,px, 3.68$\times$, 0\,pp ($n$=400) & WASM \\
+Corn & 4-class YOLO26s FP32 & 20.79 & 256\,px, INT8/acc. unmeasured & WASM \\
+Brassica (Cab.+Caul.) & 11-class YOLO26s INT8 & 5.35 & 256\,px, 3.90$\times$, $n$=51 held-out (not reportable) & WASM \\
+RAG index & FAISS 8.34\,MB + BM25 & 112.7 & \texttt{rag\_index} (2,946 md, 11.8\,MB) & Backend \\
+\midrule
+ONNX unique (SHA-256) & 11 files (6 FP32 + 5 INT8) & 95.64 & Primary 40.59\,MB (81\,MB w/ aliases) & --- \\
+PyTorch fallbacks & 6 $\times$ \texttt{model.pt} & 55.60 & Via \texttt{YOLO()} on server & --- \\
+\textbf{Minimal} & \textbf{Self-contained} & \textbf{284.0} & \textbf{Without {\tt .pt}} & \textbf{4\,GB/2\,vCPU} \\
+\textbf{Full (with {\tt .pt})} & & \textbf{339.6} & & \\
 \bottomrule
+\multicolumn{5}{l}{\scriptsize * Frontend 0.7\,MB gzipped static JS via \texttt{pnpm size} (limit 700\,KB).} \\
 \end{tabular}
+\end{adjustbox}
 \end{table*}

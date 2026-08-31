@@ -1,13 +1,16 @@
-\section{Deployment, Portability, and Ethics}
+﻿\section{Deployment, Portability, and Ethics}
 \label{sec:deployment_ethics}
 
-\subsection{Deployment Footprint and Hardware Accessibility}
-As shown in Table~\ref{tab:deployment_footprint}, the entire KrishokChat stack—including INT8 vision weights, fine-tuned Gemma-4 LoRA weights, FAISS index, and SQLite fact store—packages into a self-contained 2.63\,GB container requiring under 3.7\,GB of RAM. The system deploys seamlessly on low-cost single-board edge servers or local VPS instances (\$45/month), eliminating recurring commercial cloud API expenses.
+\subsection{Footprint and Portability}
+Table~\ref{tab:deployment_footprint} gives the deduplicated on-disk cost (SHA-256, 2026-08-30): 95.64\,MB unique ONNX (six FP32 plus five INT8 artifacts; 40.59\,MB primary for the browser) alongside 55.6\,MB {\tt .pt} fallbacks kept for server parity checks. The RAG index is 112.7\,MB (FAISS 8.34\,MB, 2,946 institutional markdown sources at 11.8\,MB). Minimal deployment (ONNX~+ index~+ code~+ dependencies, without {\tt .pt}) is \textbf{284.0\,MB}; full with {\tt .pt} is 339.6\,MB. The bundle fits on a single 4\,GB / 2\,vCPU VPS or a low-cost edge board, and the frontend ships as a PWA with precaching so the safety gate, vision, and structured lookups remain usable when connectivity drops.
 
-\subsection{Ethical Considerations and Fail-Closed Safeguards}
-In high-stakes agricultural decision support, an erroneous AI recommendation can ruin smallholder harvests or cause acute chemical poisoning. KrishokChat adheres to strict ethical and safety guidelines:
+\subsection{Ethics and Fail-Closed Safeguards}
+Agricultural advice carries harvest and health risk, so the system is conservative by design:
+
 \begin{itemize}
-    \item \textbf{No Autonomous Hallucination:} Generative LLMs are never permitted to invent dosages, active ingredients, or Pre-Harvest Intervals.
-    \item \textbf{National Helpline Integration:} All critical poisoning, self-harm, and unresolvable queries fail closed, directly surfacing the verified national Krishi Call Center (16123).
-    \item \textbf{Data Privacy:} Farmer image uploads and voice queries are processed ephemerally on-premises without retention for third-party commercial profiling.
+    \item \textbf{No invented chemistry.} Dosage, formulation, and pre-harvest intervals appear only when grounded in retrieved sources; the verifier blocks unsupported claims and the UI explains why rather than improvising.
+    \item \textbf{Escalation, not abandonment.} Poisoning, self-harm, and otherwise unresolvable cases fail closed to the national Krishi Call Center (16123) with a one-touch dial and, for self-harm framings, a supportive prompt to seek in-person medical help.
+    \item \textbf{Ephemeral, local processing.} Farmer text and images are handled without retention for third-party profiling; audit trails stay local.
 \end{itemize}
+
+\paragraph{Limitations (compact disclosure).} Vision is classification-only with no boxes; rice INT8 is rejected, corn accuracy remains unmeasured, and potato/brassica INT8 accuracy is not reportable (n=15/51 held-out). The knowledge base is institutional and Bengali-first, with 9 structured facts in the current resolver. Live generation latency and dense retrieval need a running model service and API key and are not reported as measured where stubbed; browser WASM timings are inference-only and exclude preprocessing. No formal human-subjects SUS is claimed (proxy 94.5/100 is not a SUS). Safety shows 0.95\% overall attack success but 6.67\% on Bangla native injection.

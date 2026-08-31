@@ -1,19 +1,23 @@
-\begin{table*}[t]
+﻿\begin{table*}[t]
 \centering
-\caption{KrishokChat Subsystems, Architectural Ports, Primary Models, and Target Execution Latencies.}
+\caption{KrishokChat subsystems, their roles in the advisory session, and measured per-stage latency (\texttt{stage\_timer}, $n$=400 Bengali, BM25-only offline; live generation not claimed as measured).}
 \label{tab:system_capabilities}
-\small
-\begin{tabular}{llllc}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{p{2.3cm}p{2.5cm}p{3.4cm}p{2.5cm}p{3.0cm}}
 \toprule
-\textbf{Subsystem / Layer} & \textbf{Architectural Role} & \textbf{Underlying Engine / Model} & \textbf{Observable UX Artifact} & \textbf{Latency p50} \\
+\textbf{Subsystem} & \textbf{Role} & \textbf{Engine} & \textbf{Artifact} & \textbf{p50} \\
 \midrule
-Safety Screening Gate & Query hazard classification & 6-Way Rule + Gemma-4 Guard & Animated Safety Badge / Warning & 0.35 ms \\
-Perception Router & Visual crop \& disease ID & INT8 ONNX (Crop + Potato models) & Interactive Diagnostic Card & 47.8 ms \\
-Structured Fact Resolver & Deterministic 3-hop lookup & SQLite Typed Graph (2,135 nodes) & Verified Fact Pill (\checkmark Fact) & 0.42 ms \\
-Hybrid RAG Engine & Document evidence retrieval & BM25 (RankBM25) + BGE Dense & Expandable Source Drawer & 28.5 ms \\
-Language Generator & Grounded Bengali realization & Fine-Tuned Gemma-4 4-bit LoRA & Token-by-Token SSE Stream & 546.2 ms \\
-Relational Verifier & 11-Slot Fail-Closed Check & Single-Record Constraint Engine & ``Why this advice?'' Audit Panel & 3.80 ms \\
-Escalation Gateway & Human handoff \& telephony & National Krishi 16123 Redirect & Downloadable Case Summary ID & 0.15 ms \\
+Safety Gate & Hazard classification & 6-way rule + Gemma-4 guard & Safety badge & 0.32\,ms (p95~0.71\,ms) \\
+Perception Router & Crop \& disease \textbf{classif.} & 6 FP32 ONNX (224/224/320/224/256/256), 4 INT8 & Diagnostic card & 26--265\,ms WASM p50 (PT~23--44\,ms; 100\% agree.) \\
+Fact Resolver & Deterministic lookup & \texttt{fact\_base\_v1.json} (9 facts) & Fact pill & 0 hits/400; overhead 33.6\,ms \\
+Hybrid RAG & Evidence retrieval & BM25 + BGE dense (8.34\,MB) & Source drawer & 26.8\,ms (p95~61.2\,ms) \\
+Generator & Grounded realization & Gemma-4 4-bit LoRA & SSE stream & 0.08\,ms stub; live not meas. \\
+Verifier & Fail-closed dosage & \texttt{HardenedDosageVerifier} & ``Why this advice?'' & 4.82\,ms (p95~11.2\,ms) \\
+Escalation & Human handoff & Krishi 16123 redirect & Summary + dial & Instant (22/400) \\
 \bottomrule
 \end{tabular}
+\end{adjustbox}
 \end{table*}

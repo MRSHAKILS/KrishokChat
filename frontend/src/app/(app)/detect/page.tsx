@@ -16,6 +16,8 @@ import { SlideOverAdvisory } from "@/components/chat/slide-over-advisory";
 import { stagger, enter, dur, ease } from "@/lib/motion";
 import { prepareUploadImage } from "@/lib/image";
 
+const VISION_ONDEVICE_ENABLED = process.env.NEXT_PUBLIC_VISION_ONDEVICE_ENABLED === "true";
+
 /* =========================================================================
    DetectPage — the hero page.
    Left: image intake → pipeline rail → diagnosis → treatment.
@@ -113,6 +115,24 @@ export default function DetectPage() {
     if (preview) URL.revokeObjectURL(preview);
   }, [preview]);
 
+  useEffect(() => {
+    if (!VISION_ONDEVICE_ENABLED) return;
+    let cancelled = false;
+    const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
+    const run = async () => {
+      if (cancelled) return;
+      try {
+        const mod = await import("@/lib/vision-ondevice");
+        if (!cancelled && mod.isOnDeviceEnabled()) await mod.warmUpOnDevice(["crop_classifier"]);
+      } catch {
+        // warm-up is best-effort
+      }
+    };
+    if (idle) idle(run);
+    else window.setTimeout(run, 1200);
+    return () => { cancelled = true; };
+  }, []);
+
   const handleFile = useCallback(async (f: File) => {
     setPreparing(true);
     setError(null);
@@ -171,7 +191,8 @@ export default function DetectPage() {
   }, [handleFile]);
 
   const runDetect = useCallback(async () => {
-    if (!file || loading || !online) return;
+    if (!file || loading) return;
+    // Offline on-device path does not require `online`; the server fallback does.
     const controller = new AbortController();
     requestRef.current?.abort();
     requestRef.current = controller;
@@ -179,11 +200,88 @@ export default function DetectPage() {
     setError(null);
     setResult(null);
     try {
+      // 1) Try on-device WASM inference when the flag is on. This module is
+      // dynamically imported so onnxruntime-web never enters the First Load chunk.
+      if (VISION_ONDEVICE_ENABLED) {
+        try {
+          const mod = await import("@/lib/vision-ondevice");
+          if (mod.isOnDeviceEnabled()) {
+            const od = await mod.detectDiseaseOnDevice(file, {
+              cropHint: cropHint || undefined,
+            });
+            if (controller.signal.aborted) return;
+            const mapped: DetectResponse = {
+              status: od.status as DetectResponse["status"],
+              detection_mode: "classification",
+              crop: od.crop,
+              crop_confidence: od.cropConfidence,
+              crop_source: od.cropSource as DetectResponse["crop_source"],
+              disease: od.disease,
+              disease_confidence: od.diseaseConfidence,
+              boxes: [],
+              disease_info: null,
+              top3_crops: od.top3Crops,
+              top3_diseases: od.top3Diseases,
+              // Advisory still comes from the server when online; offline shows
+              // classification only (honest per AGENTS.md rule 5).
+              treatment_advice: null,
+              treatment_confidence: null,
+              treatment_sources: [],
+              verifier_flags: [],
+              agent_trace: [
+                { stage: "intake", status: "complete", detail: `on-device ${od.latencyMs}ms` },
+                { stage: "crop_classification", status: od.crop ? "complete" : "skip", detail: od.crop ?? undefined },
+                { stage: "disease_classification", status: od.disease ? "complete" : "skip", detail: od.disease ?? undefined },
+              ],
+              quality_warnings: [],
+            };
+            // When online, enrich with server-side advisory (grounded generation).
+            // Fire-and-forget: classification is already shown; advisory fills in.
+            if (online && od.crop && od.disease && (od.status === "diagnosed" || od.status === "healthy")) {
+              setResult(mapped);
+              if (mapped.crop && mapped.disease) setDetectedContext({ crop: mapped.crop, disease: mapped.disease });
+              try {
+                const server = await detectDisease(file, {
+                  cropHint: cropHint || undefined,
+                  signal: controller.signal,
+                });
+                if (controller.signal.aborted) return;
+                setResult({
+                  ...mapped,
+                  disease_info: server.disease_info ?? null,
+                  treatment_advice: server.treatment_advice,
+                  treatment_confidence: server.treatment_confidence,
+                  treatment_sources: server.treatment_sources,
+                  verifier_flags: server.verifier_flags,
+                  agent_trace: [...mapped.agent_trace, ...server.agent_trace],
+                });
+                return;
+              } catch {
+                // Advisory enrichment failed — keep the on-device classification alone.
+                return;
+              }
+            }
+            setResult(mapped);
+            if (mapped.crop && mapped.disease) setDetectedContext({ crop: mapped.crop, disease: mapped.disease });
+            else setDetectedContext(null);
+            return;
+          }
+        } catch (e) {
+          if (controller.signal.aborted) return;
+          // On-device path failed; fall through to server. Log for debugging, do not surface.
+          console.warn("[on-device] fallback to server:", e);
+        }
+      }
+      if (!online) {
+        setError("ইন্টারনেট সংযোগ নেই। অন-ডিভাইস মোড বন্ধ থাকায় সার্ভারে পৌঁছানো যায়নি।");
+        return;
+      }
       const r = await detectDisease(file, {
         cropHint: cropHint || undefined,
         signal: controller.signal,
       });
-        setResult(r);
+      if (controller.signal.aborted) return;
+      setResult(r);
       if (r.crop && r.disease) {
         setDetectedContext({ crop: r.crop, disease: r.disease });
       } else {
@@ -226,6 +324,9 @@ export default function DetectPage() {
           <div className="flex flex-wrap items-center gap-2 text-xs text-ink-faint">
             <span className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 py-1.5"><span className={`h-1.5 w-1.5 rounded-full ${online ? "bg-leaf" : "bg-clay"}`} />{online ? "সিস্টেম অনলাইন" : "অফলাইন"}</span>
             <span className="rounded-full border rule bg-paper-2/40 px-2.5 py-1.5">শ্রেণিবিন্যাস মোড</span>
+            {VISION_ONDEVICE_ENABLED && (
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-500/10 px-2.5 py-1.5 font-mono text-[10px] leading-none text-emerald-700">On-Device INT8</span>
+            )}
           </div>
         </div>
         <p className="mt-1 text-sm text-ink-soft">

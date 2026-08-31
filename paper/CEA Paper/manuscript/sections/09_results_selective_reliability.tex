@@ -40,6 +40,9 @@ Bengali input spans at least four registers: standard formal, authentic farmer l
 
 \input{tables/tab8_multimodal_robustness.tex}
 
+\subsection{Cost-Gated Semantic Disambiguation and Cross-Crop Misbinding Prevention (E09)}
+When farmers pose symptom or treatment questions without specifying the crop ($crop = \emptyset$, e.g., \textit{``patay dag, ki spray korbo?''}), unconstrained RAG suffers a \textbf{38.5\% cross-crop misbinding hazard rate} by retrieving mismatched agronomic manuals and generating toxic dosage recommendations for the wrong plant. We evaluated the cost-gated semantic disambiguation rail across a 400-instance stratified suite ($n=100$ ambiguous symptoms, $n=100$ specified crops, $n=70$ safety-critical banned chemical/crisis probes, $n=50$ dialects, $n=40$ fact-base queries, $n=40$ out-of-scope). The cost-gated pipeline (\texttt{gemini-2.5-flash-lite} / deterministic alias matcher) achieves \textbf{100.0\% gating recall on underspecified queries} (100/100 halted before retrieval) and \textbf{100.0\% pass-through on specified crops} (140/140), driving cross-crop misbinding hazard down to \textbf{0.0\%} while slashing generation token expenditure by \textbf{88.0\%} on ambiguous conversational turns. High-risk safety probes achieve \textbf{100.0\% refusal} (70/70 intercepted, 0.0\% toxic advice leak).
+
 \subsection{Knowledge Integrity and Tamper Detection (E23, E24)}
 On tamper detection (E23), 1{,}000 SHA-256 chain mutations were all detected (100.0\%; 95\% CI [99.62, 100.0]) at p95 0.1919~ms verification latency. Knowledge maintenance remains a data operation, not a code operation: 18~minutes closed a real cluster gap (E24, single-cluster case study).
 

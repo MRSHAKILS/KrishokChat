@@ -1,39 +1,150 @@
 {
-  "exported_at": "2026-08-25",
-  "framework": "Ultralytics YOLO (ONNX Export)",
+  "schema_version": 1,
+  "exported_at": "2026-08-30",
+  "framework": "Ultralytics YOLO (ONNX Export) — Option A: FP32 + INT8 static (ORT), browser via onnxruntime-web 1.29.0",
+  "runtime": "onnxruntime-web 1.29.0 (WASM, bundle variant, lazy-loaded, not in First Load)",
+  "gate": "default off: NEXT_PUBLIC_VISION_ONDEVICE_ENABLED; INT8 only where held-out sanity gate passed (drop <=2pp, agree >=0.90)",
   "models": [
     {
-      "classes_file": "crop_classifier_classes.json",
-      "format": "onnx",
-      "input_shape": [
-        1,
-        3,
-        224,
-        224
-      ],
       "model_name": "crop_classifier",
       "onnx_file": "crop_classifier.onnx",
-      "onnx_sha256": "1aba64ffc88c2be9a93081bf21595724d021dd47b27fbb4f0848a8754a8a1166",
-      "size_bytes": 6181631,
-      "source_pt_sha256": "6f14484768e54f28c2edc2c5d3858c2c1a57f18d7de40a001a119cbc04240c94",
-      "task": "classify"
-    },
-    {
-      "classes_file": "potato_disease_classes.json",
+      "onnx_aliases": [
+        "crop_classifier"
+      ],
+      "classes_file": "crop_classifier_classes.json",
+      "precision": "int8",
       "format": "onnx",
+      "task": "classify",
       "input_shape": [
         1,
         3,
         224,
         224
       ],
-      "model_name": "potato_disease",
-      "onnx_file": "potato_disease.onnx",
-      "onnx_sha256": "251174054e848fa7a386bc61972486d08d3c1dadf1ec7fab0d7064a9c8a4b409",
-      "size_bytes": 21798793,
+      "size_bytes": 1678848,
+      "onnx_sha256": "65a7abf0e2d89afce47c73b00e88d8a9aaf697dd2620ea405df082b83f42950b",
+      "source_pt_sha256": "6f14484768e54f28c2edc2c5d3858c2c1a57f18d7de40a001a119cbc04240c94",
+      "train_imgsz": 224,
+      "opset": 20
+    },
+    {
+      "model_name": "potato",
+      "onnx_file": "potato.onnx",
+      "onnx_aliases": [
+        "potato",
+        "potato_disease"
+      ],
+      "classes_file": "potato_classes.json",
+      "precision": "int8",
+      "format": "onnx",
+      "task": "classify",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "size_bytes": 5594555,
+      "onnx_sha256": "b05a344b3ced48451d27b2e5f1305e7265483e78aee00c6c43b03a73e8f1b450",
       "source_pt_sha256": "d57b961ebf78280c03ebd9ff25cb414a2a2151a50eec584d4fa9168bb56b6698",
-      "task": "classify"
+      "train_imgsz": 224,
+      "opset": 20
+    },
+    {
+      "model_name": "rice",
+      "onnx_file": "rice.onnx",
+      "onnx_aliases": [
+        "rice",
+        "rice_disease"
+      ],
+      "classes_file": "rice_classes.json",
+      "precision": "fp32",
+      "format": "onnx",
+      "task": "classify",
+      "input_shape": [
+        1,
+        3,
+        320,
+        320
+      ],
+      "size_bytes": 6191990,
+      "onnx_sha256": "6f7107321f79190de09dba6134fe56ea73b6546010b7d39bfc138347e762992d",
+      "source_pt_sha256": "f25243959a3d7dd0851f4d2e53e30890515cadd5e318871ffe04c0413865d61a",
+      "train_imgsz": 320,
+      "opset": 20
+    },
+    {
+      "model_name": "wheat",
+      "onnx_file": "wheat.onnx",
+      "onnx_aliases": [
+        "wheat",
+        "wheat_disease"
+      ],
+      "classes_file": "wheat_classes.json",
+      "precision": "int8",
+      "format": "onnx",
+      "task": "classify",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "size_bytes": 1685294,
+      "onnx_sha256": "4bf0141f6d2aee69114a8903e01e03bafb6394109b3657b2804ac2ff29eabc23",
+      "source_pt_sha256": "f4c6d2fa835744b2cab4392275556b918171cce61f04a058497e6dbe9965c7f3",
+      "train_imgsz": 224,
+      "opset": 20
+    },
+    {
+      "model_name": "corn",
+      "onnx_file": "corn.onnx",
+      "onnx_aliases": [
+        "corn",
+        "corn_disease"
+      ],
+      "classes_file": "corn_classes.json",
+      "precision": "fp32",
+      "format": "onnx",
+      "task": "classify",
+      "input_shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "size_bytes": 21803921,
+      "onnx_sha256": "861b0e1c12d28beaab10d4c28d7e39fbb832177cbe6a57cbc59595180dbd0a98",
+      "source_pt_sha256": "a5b92794445299bcb81fbacf664d7ac0478298e993e1f6b99230c6a01486d7a0",
+      "train_imgsz": 256,
+      "opset": 20
+    },
+    {
+      "model_name": "brassica",
+      "onnx_file": "brassica.onnx",
+      "onnx_aliases": [
+        "brassica",
+        "brassica_disease"
+      ],
+      "classes_file": "brassica_classes.json",
+      "precision": "int8",
+      "format": "onnx",
+      "task": "classify",
+      "input_shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "size_bytes": 5605142,
+      "onnx_sha256": "2b3a8cc1ae0a9dec93b0041d49be31a6d17b0c501a970c802fa9fcbd944cc5b7",
+      "source_pt_sha256": "c3632475083492be7f1d6db5601ed9cd44f1a3fecbc74d8419d4a738b83cf99e",
+      "train_imgsz": 256,
+      "opset": 20
     }
   ],
-  "schema_version": 1
+  "totals": {
+    "n_models": 6,
+    "total_onnx_mb": 40.588
+  }
 }

@@ -1,0 +1,52 @@
+{
+  "benchmark_name": "EACL_E06_OFFLINE_CACHE_RESILIENCE",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Demo/experiments/E06_offline_cache_resilience/scripts/run_real_e06_offline.py",
+    "run_at_utc": "2026-08-30T15:29:47.246167+00:00",
+    "git_head": "83d5efff65c18242aea400f58552d055200a6c81",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "bm25_index.pkl": "2ab484aca38b694937a92a4a27bb2779c9e2ffb89f397d3fa168f7ca19e836c5",
+      "cached_responses.json": "4d4bf7cd698cbcb6051f60dfd07813139bece60bbca8938b594267f7b3cd0fab",
+      "farmer_benchmark_1000.jsonl": "e2adc30d69aed9dee1d1b3f5f0ebf7584861b1df9c687b1b32812b6215a7b7aa",
+      "sw.js": "d827348301cfa766de7a1eff4f2c8daf45b79c35ec5b2c4a8c6a7d5b4243fbfd"
+    }
+  },
+  "run_config": {
+    "n": 400,
+    "seed": 42,
+    "retrieval": "BM25-only",
+    "llm": "StubLLM"
+  },
+  "cached_responses": {
+    "path": "demo-assets/cached_responses.json",
+    "n_keys": 100,
+    "hits": 0,
+    "hit_rate": 0.0
+  },
+  "bm25_retrieval": {
+    "hits": 376,
+    "n": 400,
+    "hit_rate": 0.94
+  },
+  "service_worker": {
+    "exists": true,
+    "size_bytes": 4901,
+    "has_precache": true
+  },
+  "note": "Deterministic fallback measurement. Live packet-loss simulation (15%/30% -> rural_edge/severe_2G +0.5pp/+2.9pp) needs Playwright network throttle lane."
+}

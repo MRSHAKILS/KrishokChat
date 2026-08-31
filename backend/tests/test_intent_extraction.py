@@ -309,3 +309,98 @@ def test_legacy_shim_uses_decision_intent() -> None:
     assert not error_box, f"classify_intent raised: {error_box[0]}"
     assert result_box, "classify_intent returned no result"
     assert result_box[0]["intent"] == "treatment"
+
+
+# ---------------------------------------------------------------------------
+# 7. Slot Disambiguation & Clarification Intercept Tests
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_ambiguous_treatment_query_triggers_clarification_slots() -> None:
+    """When a treatment/disease query has no crop, intent marks is_ambiguous=True with clarification prompt."""
+    clf = _make_classifier({
+        "category": "safe_agri",
+        "confidence": 0.95,
+        "reason": "disease symptom query without crop",
+        "matched_rules": [],
+        "requires_escalation": False,
+        "intent": {
+            "kind": "treatment",
+            "crop": None,
+            "problem": "leaf_spot",
+            "plant_part": "leaf",
+            "problem_type": "disease",
+            "is_ambiguous": True,
+            "clarification_question_bn": "কোন ফসলের পাতায় লালচে দাগ হয়েছে বলবেন কি?",
+            "suggested_crops": ["potato", "rice", "tomato"],
+        },
+    })
+    decision = await clf.classify("পাতায় লালচে দাগ হয়েছে প্রতিকার কী?", QueryContext())
+    assert decision.intent is not None
+    assert decision.intent.crop is None
+    assert decision.intent.plant_part == "leaf"
+    assert decision.intent.is_ambiguous is True
+    assert "কোন ফসলের" in (decision.intent.clarification_question_bn or "")
+    assert "rice" in decision.intent.suggested_crops
+
+
+@pytest.mark.asyncio
+async def test_pipeline_clarification_intercept_skips_retrieval() -> None:
+    """Pipeline intercepts ambiguous crop-less queries, returning clarification with 0 retrieval calls."""
+    from app.application.generation import GroundedAnswerGenerator
+    from app.application.qa_pipeline import QAInput, QAPipeline
+    from app.application.safety import SafetyClassifier
+    from app.domain.contracts import RetrievedSource
+    from app.domain.enums import PipelineStage, ResolutionTier, StageStatus
+    from app.infrastructure.verification.dosage import DosageVerifier
+
+    llm = MagicMock()
+    llm.classify_json = AsyncMock(return_value={
+        "category": "safe_agri",
+        "confidence": 0.95,
+        "reason": "treatment without crop",
+        "matched_rules": [],
+        "requires_escalation": False,
+        "intent": {
+            "kind": "treatment",
+            "crop": None,
+            "problem": "leaf_spot",
+            "plant_part": "leaf",
+            "problem_type": "disease",
+            "is_ambiguous": True,
+            "clarification_question_bn": "কোন ফসলের পাতায় সমস্যা হয়েছে?",
+        },
+    })
+    llm.generate = AsyncMock(side_effect=AssertionError("Generation must not run on clarification turn"))
+
+    retriever = MagicMock()
+    retriever.retrieve = MagicMock(side_effect=AssertionError("Retrieval must not run on clarification turn"))
+
+    audit = MagicMock()
+    sessions = MagicMock()
+    sessions.get.return_value = []
+
+    pipeline = QAPipeline(
+        safety=SafetyClassifier(llm),
+        retriever=retriever,
+        generator=GroundedAnswerGenerator(llm),
+        verifier=DosageVerifier(),
+        audit=audit,
+        sessions=sessions,
+    )
+
+    result = await pipeline.run(QAInput(query="পাতায় দাগ হয়েছে কী দেব?"))
+    assert result.resolution_tier is ResolutionTier.INTERACTIVE_CLARIFICATION
+    assert "কোন ফসলের" in result.answer
+    assert result.sources == ()
+    retriever.retrieve.assert_not_called()
+    llm.generate.assert_not_called()
+
+    # Check trace has RETRIEVAL/GENERATION as SKIP
+    stages_skipped = [
+        event.stage for event in result.trace if event.status is StageStatus.SKIP
+    ]
+    assert PipelineStage.RETRIEVAL in stages_skipped
+    assert PipelineStage.GENERATION in stages_skipped
+

@@ -22,20 +22,16 @@ REPORT_PATH = Path(__file__).resolve().parents[2] / "docs" / "production_readine
 def test_exported_onnx_models_exist_and_load() -> None:
     assert MODELS_DIR.exists(), f"Models directory not found: {MODELS_DIR}"
 
-    crop_onnx = MODELS_DIR / "crop_classifier.onnx"
-    potato_onnx = MODELS_DIR / "potato_disease.onnx"
     metadata_file = MODELS_DIR / "metadata.json"
-
-    assert crop_onnx.exists(), "crop_classifier.onnx must exist"
-    assert potato_onnx.exists(), "potato_disease.onnx must exist"
     assert metadata_file.exists(), "metadata.json must exist"
-
-    # Verify ONNX model sessions load cleanly
-    session_crop = ort.InferenceSession(str(crop_onnx), providers=["CPUExecutionProvider"])
-    assert session_crop.get_inputs()[0].shape == [1, 3, 224, 224]
-
-    session_potato = ort.InferenceSession(str(potato_onnx), providers=["CPUExecutionProvider"])
-    assert session_potato.get_inputs()[0].shape == [1, 3, 224, 224]
+    data = json.loads(metadata_file.read_text(encoding="utf-8"))
+    # Verify every model listed in metadata loads with the correct input shape
+    for model_meta in data["models"]:
+        onnx_path = MODELS_DIR / model_meta["onnx_file"]
+        assert onnx_path.exists(), f"{model_meta['onnx_file']} must exist"
+        session = ort.InferenceSession(str(onnx_path), providers=["CPUExecutionProvider"])
+        expected = model_meta.get("input_shape", [1, 3, 224, 224])
+        assert session.get_inputs()[0].shape == expected, f"{model_meta['onnx_file']} shape mismatch: {session.get_inputs()[0].shape} vs {expected}"
 
 
 def test_model_metadata_invariants() -> None:
@@ -44,13 +40,17 @@ def test_model_metadata_invariants() -> None:
 
     assert data["schema_version"] == 1
     assert "models" in data
-    assert len(data["models"]) == 2
+    # Option A (2026-08-30): 6 primary models — 4 INT8 accepted + 2 FP32 fallback (rice rejected, corn unmeasured)
+    assert len(data["models"]) == 6, f"expected 6 models after Option A, got {len(data['models'])}"
 
     for model_meta in data["models"]:
         assert model_meta["task"] == "classify", "Must be classification only"
         assert len(model_meta["source_pt_sha256"]) == 64
         assert len(model_meta["onnx_sha256"]) == 64
         assert (MODELS_DIR / model_meta["classes_file"]).exists()
+        # Legacy aliases must resolve (e.g., potato.onnx + potato_disease.onnx are both shipped)
+        for alias in model_meta.get("onnx_aliases", []):
+            assert (MODELS_DIR / alias).exists() or (MODELS_DIR / f"{alias}.onnx").exists() or (MODELS_DIR / model_meta["onnx_file"]).exists()
 
 
 def test_parity_report_satisfies_tolerances() -> None:

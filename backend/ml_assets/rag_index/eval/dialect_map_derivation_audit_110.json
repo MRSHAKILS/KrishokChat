@@ -1,0 +1,9 @@
+{
+  "input": {
+    "v1_kept": 16,
+    "v2_kept": 110,
+    "final": 110
+  },
+  "kept_pairs": 110,
+  "output": "dataset_release/safety/phase4_dialect_map.json (110)"
+}

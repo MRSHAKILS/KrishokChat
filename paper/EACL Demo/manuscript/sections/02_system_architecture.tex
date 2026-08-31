@@ -1,23 +1,27 @@
 \section{System Architecture and Decision Pipeline}
 \label{sec:system_architecture}
 
-\subsection{Architectural Blueprint and Port Separation}
-KrishokChat is engineered as a clean, decoupled full-stack platform following port-and-adapter architectural principles \citep{flexrag2025}. The system comprises a high-performance FastAPI asynchronous backend and a responsive Next.js 14 frontend optimized for mobile web and progressive web app (PWA) execution.
+\subsection{Architectural Blueprint}
+\input{figures/fig1_cost_gated_decision_flowchart.tex}
+
+KrishokChat is a decoupled full-stack platform built on port-and-adapter separation \citep{flexrag2025}: a FastAPI async backend behind a Next.js~14 frontend tuned for mobile web and PWA use. The separation keeps advisory logic provider-agnostic, so the same pipeline runs offline with a stub LLM or online with a hosted model without code changes.
 
 \input{tables/tab1_system_capabilities.tex}
 
-As outlined in Table~\ref{tab:system_capabilities}, the pipeline operates across five coordinated functional stages:
+Figure~\ref{fig:system_architecture} and Table~\ref{tab:system_capabilities} summarize the end-to-end decision pipeline and five-tier resolution ladder. A query moves through five coordinated stages, each with a visible artifact and a measured cost:
+
 \begin{enumerate}
-    \item \textbf{Safety Screening Gate:} Incoming text is classified against six intent categories: \texttt{safe\_agri}, \texttt{banned\_chemical}, \texttt{self\_harm}, \texttt{off\_topic}, \texttt{prompt\_injection}, and \texttt{low\_confidence}. Unsafe queries trigger immediate, static fail-closed redirects.
-    \item \textbf{Multimodal Perception Router:} If a field photograph is attached, INT8 ONNX classifiers identify the crop and disease, narrowing candidate retrieval to the relevant agronomic family.
-    \item \textbf{Deterministic Knowledge Resolver:} Structured factual queries are resolved directly via a 3-hop graph traversal over 2,135 institutional nodes without LLM intervention (0.42\,ms latency).
-    \item \textbf{Hybrid Grounded Generation:} Unstructured or exploratory queries invoke hybrid BM25 + dense retrieval over 2,946 institutional manuals, feeding a fine-tuned Gemma-4 4-bit LoRA generator streamed via Server-Sent Events (SSE).
-    \item \textbf{Relational Verifier:} Generated Bengali text is parsed by an 11-slot relational verifier that validates dosage, formulation, and Pre-Harvest Intervals against single-record evidence hashes before display.
+    \item \textbf{Safety gate.} Six-way classification (\texttt{safe\_agri}, \texttt{banned\_chemical}, \texttt{self\_harm}, \texttt{off\_topic}, \texttt{prompt\_injection}, \texttt{low\_confidence}) via \texttt{safety\_policy.precheck} and an LLM guard. Unsafe queries end before retrieval with a calm redirect and a one-touch dial to the Krishi Call Center 16123. Measured p50~0.32\,ms on 400 Bengali queries.
+    \item \textbf{Multimodal perception router.} When a photo is present, classification-only ONNX models identify crop and then disease and narrow the retrieval space. Six FP32 models ship at correct per-crop resolution (224/224/320/224/256/256) with 100\% agreement to PyTorch; four INT8 variants are accepted at 3.7--3.9$\times$ compression; rice INT8 rejected (2.5pp drop, agree 0.875); corn unmeasured; potato/brassica INT8 accuracy not reportable (n=15/51 held-out). Browser WASM runs at 26--265\,ms p50 single-thread, inference-only, with preprocessing excluded. The server still serves {\tt .pt} via \texttt{YOLO()} for parity.
+    \item \textbf{Deterministic knowledge resolver.} Structured lookups consult a compact fact base without calling the LLM. The current base holds 9 curated facts, so a 400-query held-out sweep saw no hits on this path; the path is extensible as the base grows and its cost is included in system overhead.
+    \item \textbf{Hybrid grounded generation.} Unstructured queries use hybrid BM25~+ dense retrieval (BGE-M3/FAISS 8.34\,MB) over 2,946 institutional manuals and stream a fine-tuned Gemma-4 4-bit LoRA answer via SSE. BM25-only p50 is 26.8\,ms (p95~61.2\,ms) on 400 queries; dense retrieval needs an API key and falls back gracefully. End-to-end T3 with a stub LLM is reported as system overhead p50~33.6\,ms; live \texttt{llama-server} latency is not claimed as measured.
+    \item \textbf{Relational verifier and escalation.} \texttt{HardenedDosageVerifier} checks dosage, formulation, and intervals against retrieved sources before rendering. Measured p50~4.82\,ms (p95~11.2\,ms). Unsupported claims lead to honest refusal or escalation, surfaced in the ``Why this advice?'' panel, rather than invention.
 \end{enumerate}
 
-\subsection{Dual-Audience User Experience (Farmer vs. Expert)}
-To support both smallholder farmers and agricultural extension officers, KrishokChat features a dynamic UX toggle:
+\subsection{Dual-Audience Experience}
+A toggle separates concerns without duplicating pages \citep{smartmatch2025}:
+
 \begin{itemize}
-    \item \textbf{Farmer Mode:} Minimalist, conversational Bengali interface with large voice/photo input buttons, audio playback, and clear, structured action cards.
-    \item \textbf{Extension / Expert Mode:} Comprehensive diagnostic interface displaying raw model confidence scores, retrieved source snippets, 11-slot verification matrices, and complete audit trail telemetry \citep{smartmatch2025}.
+    \item \textbf{Farmer mode:} conversational Bengali, large voice and photo affordances, and a structured Safe Action Card that foregrounds what to do, how much, and when, with evidence one tap away.
+    \item \textbf{Expert and research mode:} confidence scores, retrieved snippets, 11-slot verification, full trace (safety $\rightarrow$ retrieval $\rightarrow$ generation $\rightarrow$ verifier), and replay controls that let an extension officer audit the same case the farmer sees.
 \end{itemize}
