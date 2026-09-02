@@ -233,7 +233,15 @@ class VisionPipelineTests(unittest.TestCase):
         result = asyncio.run(pipeline.detect(self._textured_image()))
         self.assertEqual(result.status, VisionStatus.REQUIRES_SECOND_IMAGE)
         self.assertTrue(result.requires_second_image)
+        self.assertTrue(result.can_retry)
         self.assertIn("কাছ থেকে", result.clarification_prompt_bn)
+
+        # Stage 1 Step 8: When recovery_attempt >= 1, second image request is blocked and redirected to 16123
+        result_retry = asyncio.run(pipeline.detect(self._textured_image(), recovery_attempt=1))
+        self.assertEqual(result_retry.status, VisionStatus.NOT_RECOGNIZED)
+        self.assertFalse(result_retry.requires_second_image)
+        self.assertFalse(result_retry.can_retry)
+        self.assertIn("১৬১২৩", result_retry.clarification_prompt_bn)
 
 
 if __name__ == "__main__":

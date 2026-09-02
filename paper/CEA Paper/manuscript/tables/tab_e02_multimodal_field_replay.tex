@@ -1,0 +1,20 @@
+\begin{table}[pos=t]
+\centering
+\caption{End-to-end multimodal perception replay across held-out field library (Layer E02, $n=436$ spanning 45 pathological classes and 9 crop groups; 95\% Wilson CIs).}
+\label{tab:multimodal_field_replay}
+\small
+\resizebox{\columnwidth}{!}{\begin{tabular}{lcccc}
+\toprule
+\textbf{Resolution Stage} & \textbf{Count} & \textbf{Share (\%)} & \textbf{95\% Wilson CI} & \textbf{Safety Mechanism} \\
+\midrule
+Safe Direct Automation & 212 & 48.62 & [43.96, 53.31] & Entailed Diagnosis \& Fact Card \\
+Safe Interactive Clarification & 91 & 20.87 & [17.32, 24.93] & 0-Token Quick-Reply Chips \\
+Safe Second-Image Request & 1 & 0.23 & [0.04, 1.29] & One-Shot Under-Leaf Recovery \\
+Safe Abstention / OOD Halt & 123 & 28.21 & [24.19, 32.61] & Clean Fail-Closed Rejection \\
+\midrule
+\textbf{Total Safe Containment} & \textbf{427} & \textbf{97.94} & \textbf{[96.12, 98.91]} & \textbf{Harm Averted / Resolved} \\
+\textbf{Cross-Crop Chemical Hazard} & \textbf{0} & \textbf{0.00} & \textbf{[0.00, 0.87]} & \textbf{Zero Misbinding ($0/436$)} \\
+Residual Intra-Crop Error & 9 & 2.06 & [1.09, 3.88] & Managed Foliar Ambiguity \\
+\bottomrule
+\end{tabular}}
+\end{table}

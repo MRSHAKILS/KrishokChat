@@ -1,36 +1,113 @@
-# Dependencies
-node_modules/
-.pnpm-store/
+# ==============================================================================
+# KrishokChat Advisory System — Production & Research Repository .gitignore
+# ==============================================================================
 
-# Next.js
-.next/
-out/
-next-env.d.ts
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.venv/
-venv/
-env/
-*.egg-info/
-dist/
-build/
-
-# Environment — NEVER COMMIT
+# ------------------------------------------------------------------------------
+# 1. Environment Variables & Secret Credentials (STRICT — NEVER COMMIT)
+# ------------------------------------------------------------------------------
 .env
 .env.local
 .env.*.local
 *.env
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+credentials.json
+client_secrets.json
+service_account.json
 
-# Logs
+# ------------------------------------------------------------------------------
+# 2. Package Managers & Dependencies
+# ------------------------------------------------------------------------------
+node_modules/
+.pnpm-store/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+.venv/
+venv/
+env/
+ENV/
+
+# ------------------------------------------------------------------------------
+# 3. Python Runtime, Build & Distribution
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dylib
+*.dll
+dist/
+build/
+*.egg-info/
+*.egg
+
+# ------------------------------------------------------------------------------
+# 4. Next.js, Frontend Build & TypeScript
+# ------------------------------------------------------------------------------
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+.turbo/
+.vercel
+
+# ------------------------------------------------------------------------------
+# 5. Logs, Databases & Runtime Storage
+# ------------------------------------------------------------------------------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+backend/data/
 backend/app/logs/*
 !backend/app/logs/.gitkeep
-*.log
+*.sqlite
+*.sqlite3
+*.db
 
-# LaTeX build artifacts — never commit (keep .tex/.pdf/.sty/.bib only)
+# ------------------------------------------------------------------------------
+# 6. ML Assets, Training Checkpoints & Heavy Binary Archives (>100MB)
+# ------------------------------------------------------------------------------
+# Heavy raw training weights and checkpoints
+backend/ml_assets/yolo/*.pt
+backend/ml_assets/yolo/*.onnx
+backend/ml_assets/classifier/*.pt
+backend/ml_assets/classifier/*.onnx
+backend/ml_assets/classifier/*.h5
+backend/ml_assets/classifier/*.pkl
+backend/ml_assets/gemma/*.gguf
+backend/ml_assets/gemma/*.safetensors
+backend/ml_assets/gemma/raw/
+backend/ml_assets/rag_index/*.faiss
+backend/ml_assets/rag_index/*.index
+backend/ml_assets/rag_index/*.pkl
+backend/ml_assets/rag_index/*.json
+
+# Research retraining archives (multi-hundred MB training zip bundles)
+backend/ml_assets/updated retrain/**/*.zip
+backend/ml_assets/updated retrain/**/x/
+experiments/results/**/chilli_weights_cache/
+experiments/temp_*/
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Preserve directory structure
+!backend/ml_assets/**/.gitkeep
+
+# ------------------------------------------------------------------------------
+# 7. LaTeX Build Artifacts (Keep .tex, .bib, .sty, figures, and compiled .pdf)
+# ------------------------------------------------------------------------------
 *.aux
 *.dvi
 *.out
@@ -51,48 +128,39 @@ backend/app/logs/*
 *.abs
 page_screenshots/
 
-# Local SQLite database (T0-01 shared storage foundation)
-backend/data/
+# ------------------------------------------------------------------------------
+# 8. Testing, Coverage & Linters
+# ------------------------------------------------------------------------------
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage/
+.mypy_cache/
+.ruff_cache/
+.eslintcache
 
-# ML Assets (large binaries - DO NOT COMMIT)
-backend/ml_assets/yolo/*.pt
-backend/ml_assets/yolo/*.onnx
-backend/ml_assets/classifier/*.pt
-backend/ml_assets/classifier/*.onnx
-backend/ml_assets/classifier/*.h5
-backend/ml_assets/classifier/*.pkl
-backend/ml_assets/gemma/*.gguf
-backend/ml_assets/gemma/*.safetensors
-# Raw training checkpoints (multi-GB) — never commit
-backend/ml_assets/gemma/raw/
-backend/ml_assets/rag_index/*.faiss
-backend/ml_assets/rag_index/*.index
-backend/ml_assets/rag_index/*.pkl
-backend/ml_assets/rag_index/*.json
-!backend/ml_assets/**/.gitkeep
-
-# OS
+# ------------------------------------------------------------------------------
+# 9. Operating System & IDE Intermediates
+# ------------------------------------------------------------------------------
 .DS_Store
 Thumbs.db
 desktop.ini
+ehthumbs.db
 
-# IDE
-.vscode/
 .idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 *.swp
 *.swo
+*~
+.zcode/
 
-# Test coverage
-htmlcov/
-.coverage
-.pytest_cache/
-
-# Kaggle workspace intermediates — raw/clean image copies + phase-1 experiment
-# arrays (single files >100MB, GitHub hard limit). Official release lives in
-# dataset_release/soil_moisture/ (small, committed).
-# NOTE: historic spaced folder `Soil Moisture Detection` was renamed to `soil-moisture-detection` in H6 (kebab-case for shell safety).
+# ------------------------------------------------------------------------------
+# 10. Dataset Workspace Intermediates (Multi-GB Raw/Intermediate Copies)
+# ------------------------------------------------------------------------------
 dataset_release/soil-moisture-detection/dataset/raw/
 dataset_release/soil-moisture-detection/dataset/clean/
 dataset_release/soil-moisture-detection/dataset/updated_dataset/
 dataset_release/soil-moisture-detection/dataset/experiments/
-.zcode/

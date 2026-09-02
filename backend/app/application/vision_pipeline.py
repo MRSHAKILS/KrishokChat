@@ -36,10 +36,18 @@ CROP_DISPLAY = {
     "corn": "Corn",
     "potato": "Potato",
     "brassica": "Brassica",
+    "chilli": "Chilli",
 }
 
 
-def image_quality(image: Image.Image, *, min_dimension: int = 64) -> ImageQuality:
+def image_quality(
+    image: Image.Image,
+    *,
+    min_dimension: int = 64,
+    min_brightness: float = 20.0,
+    max_brightness: float = 240.0,
+    min_variance: float = 16.0,
+) -> ImageQuality:
     width, height = image.size
     warnings: list[str] = []
     if width < min_dimension or height < min_dimension:
@@ -47,12 +55,12 @@ def image_quality(image: Image.Image, *, min_dimension: int = 64) -> ImageQualit
     gray = image.convert("L")
     mean = ImageStat.Stat(gray).mean[0]
     variance = ImageStat.Stat(gray).var[0]
-    if mean < 8:
-        warnings.append("Image is extremely dark")
-    if mean > 247:
-        warnings.append("Image is extremely bright")
-    if variance < 4:
-        warnings.append("Image has very little visual detail")
+    if mean < min_brightness:
+        warnings.append("Image is too dark / underexposed")
+    if mean > max_brightness:
+        warnings.append("Image is too bright / overexposed")
+    if variance < min_variance:
+        warnings.append("Image is blurry or lacks sufficient foliar detail")
     return ImageQuality(accepted=not warnings, width=width, height=height, warnings=tuple(warnings))
 
 
@@ -117,11 +125,31 @@ class VisionPipeline:
         self._audit(result)
         return result
 
-    async def detect(self, image: Image.Image, *, crop_hint: str | None = None) -> VisionResult:
-        quality = image_quality(image)
+    async def detect(
+        self,
+        image: Image.Image,
+        *,
+        crop_hint: str | None = None,
+        recovery_attempt: int = 0,
+    ) -> VisionResult:
+        quality = image_quality(
+            image,
+            min_dimension=self.gate_config.min_dimension,
+            min_brightness=self.gate_config.min_brightness,
+            max_brightness=self.gate_config.max_brightness,
+            min_variance=self.gate_config.min_variance,
+        )
         trace = [VisionTraceEvent(VisionStage.INTAKE, "complete", f"{quality.width}x{quality.height}")]
         if not quality.accepted:
-            result = VisionResult(status=VisionStatus.INVALID_IMAGE, quality=quality, trace=tuple(trace))
+            prompt_bn = "ছবিটি যথেষ্ট পরিষ্কার নয় বা আলো পর্যাপ্ত নেই। অনুগ্রহ করে ভালো আলোতে আক্রান্ত পাতার কাছে থেকে আরেকটি পরিষ্কার ছবি দিন।"
+            result = VisionResult(
+                status=VisionStatus.INVALID_IMAGE,
+                quality=quality,
+                trace=tuple(trace),
+                clarification_prompt_bn=prompt_bn,
+                recovery_attempt=recovery_attempt,
+                can_retry=(recovery_attempt < self.gate_config.max_recovery_attempts),
+            )
             self._audit(result)
             return result
 
@@ -180,9 +208,9 @@ class VisionPipeline:
             if self.gate_config.enable_confusion_risk_gating and len(crop_prediction.top3) > 1:
                 c1 = str(crop_prediction.top3[0].get("crop") or crop_prediction.top3[0].get("class") or "").lower()
                 c2 = str(crop_prediction.top3[1].get("crop") or crop_prediction.top3[1].get("class") or "").lower()
-                solanaceae = {"potato", "solanacea", "tomato", "eggplant", "chili"}
+                solanaceae_foliar = {"potato", "solanacea", "tomato", "eggplant"}
                 poaceae = {"rice", "wheat", "corn"}
-                if (c1 in solanaceae and c2 in solanaceae) or (c1 in poaceae and c2 in poaceae):
+                if (c1 in solanaceae_foliar and c2 in solanaceae_foliar) or (c1 in poaceae and c2 in poaceae):
                     is_confusion_risk = True
 
             # State B: Uncertain crop prediction (margin too small, below confidence threshold, or known confusion risk)
@@ -268,15 +296,31 @@ class VisionPipeline:
         trace.append(VisionTraceEvent(VisionStage.DISEASE_CLASSIFICATION, "complete", disease_prediction.label))
         info = self.registry.disease_info(disease_spec.key, disease_prediction.label)
         
+        # Model-specific calibrated operating thresholds (Stage 1 Step 5 & 6)
+        conf_thresh, margin_thresh = self.gate_config.get_disease_threshold(disease_spec.key)
+
         # Check disease confidence margin
         d_p1 = disease_prediction.confidence
         d_p2 = float(disease_prediction.top3[1].get("confidence", 0.0)) if len(disease_prediction.top3) > 1 else 0.0
         d_margin = d_p1 - d_p2
-        requires_second = d_margin < self.gate_config.disease_margin_threshold and d_p1 < 0.80
+        is_narrow_margin = d_margin < margin_thresh and d_p1 < conf_thresh
+        can_attempt_recovery = recovery_attempt < self.gate_config.max_recovery_attempts
+        requires_second = is_narrow_margin and can_attempt_recovery
 
-        if disease_prediction.confidence < self.gate_config.disease_confidence_threshold:
+        if disease_prediction.confidence < conf_thresh or is_narrow_margin:
+            if requires_second:
+                status = VisionStatus.REQUIRES_SECOND_IMAGE
+                prompt_bn = "ছবিতে রোগটি নিশ্চিতভাবে আলাদা করা যায়নি। অনুগ্রহ করে আক্রান্ত পাতার আরও স্পষ্ট ও কাছ থেকে ছবি দিন।"
+            elif not can_attempt_recovery and is_narrow_margin:
+                # Stage 1 Step 8: Strict one-shot recovery limit exceeded -> Escalate / Abstain cleanly
+                status = VisionStatus.NOT_RECOGNIZED
+                prompt_bn = "একাধিক ছবিতেও রোগটি নিশ্চিতভাবে নির্ণয় করা যায়নি। অপ্রয়োজনীয় বালাইনাশক ব্যবহার না করে কৃষি কল সেন্টার ১৬১২৩-এ যোগাযোগ করুন বা স্থানীয় কৃষি কর্মকর্তার পরামর্শ নিন।"
+            else:
+                status = VisionStatus.NOT_RECOGNIZED
+                prompt_bn = None
+
             result = VisionResult(
-                status=VisionStatus.REQUIRES_SECOND_IMAGE if requires_second else VisionStatus.NOT_RECOGNIZED,
+                status=status,
                 crop=crop_label,
                 crop_confidence=crop_confidence,
                 crop_source=crop_source,
@@ -288,7 +332,28 @@ class VisionPipeline:
                 quality=quality,
                 trace=tuple(trace),
                 requires_second_image=requires_second,
-                clarification_prompt_bn="ছবিতে রোগটি নিশ্চিতভাবে আলাদা করা যায়নি। অনুগ্রহ করে আক্রান্ত পাতার আরও স্পষ্ট ও কাছ থেকে ছবি দিন।" if requires_second else None,
+                recovery_attempt=recovery_attempt,
+                can_retry=can_attempt_recovery and requires_second,
+                clarification_prompt_bn=prompt_bn,
+            )
+            self._audit(result)
+            return result
+
+        if disease_prediction.label.lower() in ("others", "unknown", "other"):
+            prompt_bn = "ছবিটি কোনো পরিচিত রোগের সাথে পর্যাপ্ত মিলছে না। অনুগ্রহ করে আক্রান্ত পাতার আরও স্পষ্ট ও কাছ থেকে ছবি দিন অথবা কৃষি কল সেন্টার ১৬১২৩-এ যোগাযোগ করুন।"
+            result = VisionResult(
+                status=VisionStatus.NOT_RECOGNIZED,
+                crop=crop_label,
+                crop_confidence=crop_confidence,
+                crop_source=crop_source,
+                disease=disease_prediction.label,
+                disease_confidence=disease_prediction.confidence,
+                top3_crops=top3_crops,
+                top3_diseases=disease_prediction.top3,
+                quality=quality,
+                trace=tuple(trace),
+                clarification_prompt_bn=prompt_bn,
+                can_retry=False,
             )
             self._audit(result)
             return result

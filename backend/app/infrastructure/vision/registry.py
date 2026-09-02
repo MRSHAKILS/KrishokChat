@@ -63,6 +63,8 @@ class ArtifactVisionRegistry:
             "cauliflower": "brassica",
             "maize": "corn",
             "paddy": "rice",
+            "chili": "chilli",
+            "pepper": "chilli",
         }
         mapped = aliases.get(key, key)
         spec = self._disease.get(mapped)
