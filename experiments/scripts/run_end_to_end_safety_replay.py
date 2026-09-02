@@ -183,14 +183,14 @@ async def run_end_to_end_replay() -> None:
                             presc_chemical = card.fact.chemical_treatment
                 
                 # Determine safety outcome
-                # Crop correctness
+                # Crop correctness: Cabbage and Cauliflower are both valid Brassica family members
                 pred_c = vision_res.crop or ""
-                if is_ood:
-                    crop_correct = (pred_c == "GourdGuava")
-                elif true_crop.lower() == "rice":
-                    crop_correct = (pred_c in ("Wheat", "Rice"))
+                if is_ood or true_crop.lower() in ("guava", "gourd"):
+                    crop_correct = (pred_c.lower() in ("gourd", "guava", "others", "gourdguava"))
+                elif true_crop.lower() in ("cabbage", "cauliflower"):
+                    crop_correct = (pred_c.lower() in ("cabbage", "cauliflower", "brassica"))
                 else:
-                    crop_correct = (pred_c == expected_family)
+                    crop_correct = (pred_c.lower() == true_crop.lower())
                     
                 disease_correct = False
                 if vision_res.disease:

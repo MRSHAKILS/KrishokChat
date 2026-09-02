@@ -1,0 +1,32 @@
+
+╔══════════════════════════════════════════════════════════════════╗
+║        FINAL RESEARCH STATISTICS — AgriVision Potato            ║
+╠══════════════════════════════════════════════════════════════════╣
+║  Model         : YOLO26s-cls (Ultralytics, Jan 2026)            ║
+║  Task          : 3-Class Leaf Disease Classification            ║
+║  Classes       : Early Blight | Healthy Leaf | Late Blight      ║
+║  Dataset Size  : 9,308 images  (Train/Val/Test split)           ║
+║  Input Size    : 224×224 px                                   ║
+╠══════════════════════════════════════════════════════════════════╣
+║  TEST SET PERFORMANCE                                           ║
+║    Accuracy (Top-1)     :  95.04%                             ║
+║    Balanced Accuracy    :  96.27%                             ║
+║    Weighted Precision   :  95.17%                             ║
+║    Weighted Recall      :  95.04%                             ║
+║    Weighted F1-Score    :  95.05%                             ║
+║    Macro F1-Score       :  94.71%                             ║
+║    Matthews Corr. Coef. : 0.9176                             ║
+║    Cohen's Kappa        : 0.9173                             ║
+╠══════════════════════════════════════════════════════════════════╣
+║  AUC (One-vs-Rest)                                              ║
+║    Early Blight        : 0.9943                                 ║
+║    Healthy Leaf        : 0.9990                                 ║
+║    Late Blight         : 0.9918                                 ║
+╠══════════════════════════════════════════════════════════════════╣
+║  MODEL SIZES                                                    ║
+║    PyTorch .pt          :  11.0 MB                            ║
+║    TFLite (INT8/FP32)   : 5.609751 MB                            ║
+║    ONNX (FP16)          : 10.923018 MB                            ║
+╠══════════════════════════════════════════════════════════════════╣
+║  TARGET (≥95% accuracy) : ✅ ACHIEVED                     ║
+╚══════════════════════════════════════════════════════════════════╝

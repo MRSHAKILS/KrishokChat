@@ -1,0 +1,24 @@
+description: Ultralytics YOLO26s-cls model trained on /kaggle/input/datasets/khanraiyanibnereza/agrivision-potato-dataset
+author: Ultralytics
+date: '2026-03-23T11:42:57.428747'
+version: 8.4.24
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 1
+task: classify
+batch: 1
+imgsz:
+- 224
+- 224
+names:
+  0: Potato__Early_Blight
+  1: Potato__Healthy_Leaf
+  2: Potato__Late_Blight
+args:
+  batch: 1
+  fraction: 1.0
+  half: false
+  int8: true
+  nms: false
+channels: 3
+end2end: false

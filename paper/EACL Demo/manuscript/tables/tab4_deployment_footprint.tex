@@ -12,7 +12,7 @@
 \midrule
 Backend API & FastAPI + Uvicorn & 5.3 & \texttt{backend/app} & VPS \\
 Frontend & Next.js 16 App Router & 0.7\,* & 684\,KB gzipped (621\,KB + 63\,KB WASM) & CDN/PWA \\
-Crop classifier & 6-class YOLO26n \textbf{INT8} ONNX & 1.60 & 224\,px, 3.68$\times$ vs FP32, 0\,pp ($n$=578) & WASM/VPS \\
+Crop classifier & 10-class YOLO26s ONNX/TFLite & 20.82 & 224\,px, 99.55\% test acc, 98.39\% field ($n$=436) & WASM/PWA \\
 Potato & 3-class YOLO26s INT8 & 5.34 & 224\,px, 3.90$\times$, $n$=15 held-out (not reportable) & WASM \\
 Rice & 8-class YOLO26n \textbf{FP32} & 5.91 & 320\,px, INT8 rej. (2.5\,pp drop, agree~0.875) & WASM \\
 Wheat & 11-class YOLO26n INT8 & 1.61 & 224\,px, 3.68$\times$, 0\,pp ($n$=400) & WASM \\

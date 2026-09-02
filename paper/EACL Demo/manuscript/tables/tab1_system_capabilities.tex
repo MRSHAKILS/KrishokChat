@@ -1,4 +1,4 @@
-﻿\begin{table*}[t]
+\begin{table*}[t]
 \centering
 \caption{KrishokChat subsystems, their roles in the advisory session, and measured per-stage latency (\texttt{stage\_timer}, $n$=400 Bengali, BM25-only offline; live generation not claimed as measured).}
 \label{tab:system_capabilities}
@@ -11,7 +11,7 @@
 \textbf{Subsystem} & \textbf{Role} & \textbf{Engine} & \textbf{Artifact} & \textbf{p50} \\
 \midrule
 Safety Gate & Hazard classification & 6-way rule + Gemma-4 guard & Safety badge & 0.32\,ms (p95~0.71\,ms) \\
-Perception Router & Crop \& disease \textbf{classif.} & 6 FP32 ONNX (224/224/320/224/256/256), 4 INT8 & Diagnostic card & 26--265\,ms WASM p50 (PT~23--44\,ms; 100\% agree.) \\
+Perception Router & Crop \& disease \textbf{classif.} & 10-crop YOLO26s (20.8\,MB) + 5 disease ONNX & Diagnostic card & 26--265\,ms WASM p50 (PT~23--44\,ms; 100\% agree.) \\
 Fact Resolver & Deterministic lookup & \texttt{fact\_base\_v1.json} (9 facts) & Fact pill & 0 hits/400; overhead 33.6\,ms \\
 Hybrid RAG & Evidence retrieval & BM25 + BGE dense (8.34\,MB) & Source drawer & 26.8\,ms (p95~61.2\,ms) \\
 Generator & Grounded realization & Gemma-4 4-bit LoRA & SSE stream & 0.08\,ms stub; live not meas. \\

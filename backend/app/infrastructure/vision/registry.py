@@ -53,7 +53,17 @@ class ArtifactVisionRegistry:
 
     def disease_candidates(self, crop: str) -> tuple[VisionModelSpec, ...]:
         key = crop.strip().lower().replace(" ", "")
-        aliases = {"gourdguava": "", "solanacea": "", "maize": "corn"}
+        aliases = {
+            "gourdguava": "",
+            "gourd": "",
+            "guava": "",
+            "others": "",
+            "solanacea": "",
+            "cabbage": "brassica",
+            "cauliflower": "brassica",
+            "maize": "corn",
+            "paddy": "rice",
+        }
         mapped = aliases.get(key, key)
         spec = self._disease.get(mapped)
         return (spec,) if spec else ()
