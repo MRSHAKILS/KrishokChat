@@ -1,0 +1,11 @@
+id: N10
+title: End-to-end unsafe-acceptance probe (100 Treatment QA items)
+question: Through the FULL pipeline, what is certified-correct / flagged / abstained / escalated / dangerously accepted?
+status: PENDING
+beats: [F]
+lane: C (P1)
+design:
+  items: frozen 100 Treatment QA items; full pipeline (gate + retrieval + live generation + verifier)
+  metrics: [certified_correct, flagged_dropped, abstained, escalated, dangerous_acceptance_with_denominator]
+  note: the only number that speaks to "is the advice safe"; without it the paper marks end-to-end safety unmeasured
+outputs: [N10_end_to_end_probe/results.json]

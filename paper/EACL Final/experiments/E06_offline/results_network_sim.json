@@ -1,0 +1,128 @@
+{
+  "benchmark_name": "EACL_E06_NETWORK_DEGRADATION",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Demo/experiments/E06_offline_cache_resilience/scripts/run_real_e06_network.py",
+    "run_at_utc": "2026-08-30T16:45:06.445164+00:00",
+    "git_head": "83d5efff65c18242aea400f58552d055200a6c81",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "bm25_index.pkl": "2ab484aca38b694937a92a4a27bb2779c9e2ffb89f397d3fa168f7ca19e836c5",
+      "farmer_benchmark_1000.jsonl": "e2adc30d69aed9dee1d1b3f5f0ebf7584861b1df9c687b1b32812b6215a7b7aa"
+    }
+  },
+  "run_config": {
+    "n": 400,
+    "seed": 42,
+    "retrieval": "BM25-only",
+    "profiles_tested": [
+      "perfect_4g",
+      "urban_3g",
+      "rural_edge",
+      "severe_2g"
+    ]
+  },
+  "base_bm25_hit_rate": 94.0,
+  "profiles_summary": {
+    "perfect_4g": {
+      "network_profile": {
+        "name": "perfect_4g",
+        "latency_ms": 60,
+        "packet_loss": 0.0,
+        "jitter_ms": 10
+      },
+      "cloud_only_rag": {
+        "delivery_success_rate_pct": 100.0,
+        "latency_p50_ms": 87.06
+      },
+      "offline_first_cache": {
+        "delivery_success_rate_pct": 100.0,
+        "latency_p50_ms": 26.8,
+        "cache_hit_ratio_pct": 94.0,
+        "bm25_hit_rate_pct": 94.0
+      },
+      "delivery_retention_advantage_pp": 0.0
+    },
+    "urban_3g": {
+      "network_profile": {
+        "name": "urban_3g",
+        "latency_ms": 300,
+        "packet_loss": 0.05,
+        "jitter_ms": 60
+      },
+      "cloud_only_rag": {
+        "delivery_success_rate_pct": 96.0,
+        "latency_p50_ms": 329.32
+      },
+      "offline_first_cache": {
+        "delivery_success_rate_pct": 100.0,
+        "latency_p50_ms": 26.8,
+        "cache_hit_ratio_pct": 94.0,
+        "bm25_hit_rate_pct": 94.0
+      },
+      "delivery_retention_advantage_pp": 4.0
+    },
+    "rural_edge": {
+      "network_profile": {
+        "name": "rural_edge",
+        "latency_ms": 800,
+        "packet_loss": 0.15,
+        "jitter_ms": 150
+      },
+      "cloud_only_rag": {
+        "delivery_success_rate_pct": 85.5,
+        "latency_p50_ms": 829.16
+      },
+      "offline_first_cache": {
+        "delivery_success_rate_pct": 98.75,
+        "latency_p50_ms": 26.8,
+        "cache_hit_ratio_pct": 94.0,
+        "bm25_hit_rate_pct": 94.0
+      },
+      "delivery_retention_advantage_pp": 13.25
+    },
+    "severe_2g": {
+      "network_profile": {
+        "name": "severe_2g",
+        "latency_ms": 1200,
+        "packet_loss": 0.3,
+        "jitter_ms": 250
+      },
+      "cloud_only_rag": {
+        "delivery_success_rate_pct": 67.0,
+        "latency_p50_ms": 1204.46
+      },
+      "offline_first_cache": {
+        "delivery_success_rate_pct": 97.0,
+        "latency_p50_ms": 26.8,
+        "cache_hit_ratio_pct": 94.0,
+        "bm25_hit_rate_pct": 94.0
+      },
+      "delivery_retention_advantage_pp": 30.0
+    }
+  },
+  "rural_edge_15pct_loss_comparison": {
+    "cloud_only_delivery_success_pct": 85.5,
+    "offline_cache_delivery_success_pct": 98.75,
+    "absolute_delivery_gain_pp": 13.25
+  },
+  "severe_2g_30pct_loss_comparison": {
+    "cloud_only_delivery_success_pct": 67.0,
+    "offline_cache_delivery_success_pct": 97.0,
+    "absolute_delivery_gain_pp": 30.0
+  },
+  "note": "Real BM25 hits per query + simulated packet-loss per profile (random drop, seed 42). Offline-first advantage is honest retention (offline − cloud), not fabricated 21.6pp. Previous 91.4%/80.3% fabricated; see STATE.md §3."
+}

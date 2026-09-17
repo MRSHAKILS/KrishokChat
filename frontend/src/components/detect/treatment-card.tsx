@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ShieldCheck, ShieldAlert, ShieldX, FileText, AlertCircle, Phone, CloudRain, MessageCircle, ChevronDown, ClipboardCheck, FileSpreadsheet } from "lucide-react";
+import { ShieldCheck, ShieldAlert, ShieldX, FileText, AlertCircle, Phone, CloudRain, MessageCircle, ChevronDown, ClipboardCheck, FileSpreadsheet, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { enter, dur, ease } from "@/lib/motion";
 import { HELPLINE } from "@/lib/constants";
@@ -79,10 +79,51 @@ export function TreatmentCard({
 }) {
   const [sourcesOpen, setSourcesOpen] = useState(false);
   const [prescriptionOpen, setPrescriptionOpen] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   if (!result.treatment_advice) return null;
 
   const cleanAdvice = formatTreatmentAdvice(result.treatment_advice, result.treatment_sources);
   const dosage = findDosage(cleanAdvice);
+
+  const handleToggleSpeak = () => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+
+    const cropName = result.crop ? cropBn(result.crop) : "ফসল";
+    const diseaseName = result.disease ? translateDiseaseToBn(result.disease) : "রোগ";
+    const textToRead = `${cropName} এর ${diseaseName} এর চিকিৎসা। ${cleanAdvice}. ${
+      dosage ? `প্রস্তাবিত মাত্রা: ${dosage}.` : ""
+    } নিরাপদ অপেক্ষমাণ সময়: বালাইনাশক স্প্রে করার পর কমপক্ষে ৭ থেকে ১৪ দিন ফসল তোলা বন্ধ রাখুন।`;
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.lang = "bn-BD";
+    utterance.rate = 0.92;
+
+    const voices = window.speechSynthesis.getVoices();
+    const bnVoice = voices.find(
+      (v) => v.lang.startsWith("bn") || v.lang.toLowerCase().includes("bengali") || v.lang.toLowerCase().includes("bangla")
+    );
+    if (bnVoice) utterance.voice = bnVoice;
+
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+
+    setIsSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
 
   return (
     <motion.div
@@ -104,6 +145,21 @@ export function TreatmentCard({
           <ClipboardCheck className="h-4 w-4" /> এখন কী করবেন
         </div>
         <div className="flex items-center gap-2">
+          {/* Audio Read-Aloud Button */}
+          <button
+            type="button"
+            onClick={handleToggleSpeak}
+            className={cn(
+              "control-press inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-semibold cursor-pointer shadow-2xs transition-colors",
+              isSpeaking
+                ? "border-clay bg-clay text-paper animate-pulse"
+                : "border-ochre/40 bg-ochre/10 text-ochre hover:bg-ochre hover:text-paper"
+            )}
+            title={isSpeaking ? "পড়া বন্ধ করুন" : "প্রেসক্রিপশন শুনে নিন"}
+          >
+            {isSpeaking ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
+            {isSpeaking ? "থামুন" : "শুনুন"}
+          </button>
           <button
             type="button"
             onClick={() => setPrescriptionOpen(true)}
@@ -121,21 +177,27 @@ export function TreatmentCard({
         <p className="text-sm leading-relaxed text-ink whitespace-pre-wrap">{cleanAdvice}</p>
       </div>
 
-      {/* Dosage and Weather Consideration */}
+      {/* Dosage, Spray Timing & Pre-Harvest Interval (PHI) */}
       <div className="grid gap-3 border-b rule p-5 sm:grid-cols-2">
         <div className="rounded-lg border border-ochre-soft/60 bg-ochre-soft/10 p-3">
-          <div className="text-xs font-semibold text-ochre">রাসায়নিক মাত্রা নির্দেশিকা</div>
+          <div className="text-xs font-semibold text-ochre">রাসায়নিক মাত্রা ও প্রয়োগ সতর্কতা</div>
           <p className="mt-1 text-xs leading-relaxed text-ink-soft">
-            {dosage ?? "এই ফলাফলে আলাদা মাত্রা উল্লেখ নেই। লেবেল ছাড়া ডোজ ঠিক করবেন না।"}
+            {dosage ?? "এই ফলাফলে আলাদা মাত্রা উল্লেখ নেই। প্যাকেটের লেবেল ও কৃষি কর্মকর্তার পরামর্শ ছাড়া ডোজ ঠিক করবেন না।"}
           </p>
+          <div className="mt-2.5 rounded border border-ochre/25 bg-paper/60 p-2 text-[11px] leading-relaxed text-ink-soft">
+            <span className="font-semibold text-ochre">নিরাপদ অপেক্ষমাণ সময় (PHI):</span> বালাইনাশক স্প্রে করার পর কমপক্ষে ৭ থেকে ১৪ দিন ফসল তোলা ও বাজারে বিক্রি বন্ধ রাখুন।
+          </div>
         </div>
         <div className="rounded-lg border border-leaf/20 bg-leaf/5 p-3">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-leaf">
-            <CloudRain className="h-3.5 w-3.5" /> আবহাওয়া বিবেচনা
+            <CloudRain className="h-3.5 w-3.5" /> স্প্রে করার উপযুক্ত সময় ও নিয়ম
           </div>
           <p className="mt-1 text-xs leading-relaxed text-ink-soft">
-            এই পরামর্শে আপনার এলাকার লাইভ আবহাওয়া নেই। স্প্রে করার আগে বৃষ্টি ও বাতাস দেখে নিন।
+            কখনও দুপুরের প্রখর রোদে স্প্রে করবেন না। সকালের শিশির শুকানোর পর বা বিকালের মৃদু রোদে বাতাসের অনুকূলে পিঠ রেখে স্প্রে করুন।
           </p>
+          <div className="mt-2.5 rounded border border-leaf/25 bg-paper/60 p-2 text-[11px] leading-relaxed text-ink-soft">
+            <span className="font-semibold text-leaf">ব্যক্তিগত সুরক্ষা:</span> স্প্রে করার সময় মুখে গামছা বা মাস্ক বাঁধুন এবং স্প্রে শেষে সাবান দিয়ে ভালো করে গোসল/হাত-মুখ ধুয়ে নিন।
+          </div>
         </div>
       </div>
 

@@ -1,0 +1,449 @@
+{
+  "layer": "E02_multimodal_diagnostic_workflow",
+  "artifact": "results_real_onnx_parity",
+  "schema_version": 1,
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N04_vision_rerun/scripts/run_n04b_onnx_parity.py",
+    "run_at_utc": "2026-09-17T15:10:25+00:00",
+    "git_head": "893269880c939379dfcd4105205c0d3bb2c8afbc",
+    "repo_root": "D:\\KrishokChat Advisory System",
+    "library_versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "torchvision": "0.28.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "numpy": "2.5.1",
+      "PIL": "12.3.0"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "machine": "AMD64",
+      "cpu_count_logical": 12,
+      "cpu_count_physical": 10,
+      "total_ram_bytes": 16794288128,
+      "cuda_available": false,
+      "onnxruntime_providers": [
+        "AzureExecutionProvider",
+        "CPUExecutionProvider"
+      ]
+    },
+    "input_sha256": {
+      "results_real_pt_baseline.json": "fc23d0b9aae7d102c5f1ceb04355150d46bfe0bc294bdae11133bfe4d0a00681",
+      "vision_eval_manifest.json": "1668a04dd2f51459a8eb11cde6338c1240a93d44b36fc54bd51a6b7bd40c045f",
+      "vision_onnx_export_report.json": "c858697d3e773d609d89c5c4a0846c5ecc5f441c08c89a2ad822fd9cb8943cbf"
+    }
+  },
+  "run_config": {
+    "limit_per_class": null,
+    "latency_runs": 200,
+    "warmup": 20,
+    "intra_op_num_threads": 1,
+    "task": "classify",
+    "preprocessing": "ultralytics classify_transforms: Resize(imgsz, bilinear, antialias) -> CenterCrop(imgsz) -> ToTensor -> Normalize(mean=0, std=1). No letterbox."
+  },
+  "summary": {
+    "n_models_measured": 5,
+    "n_models_unmeasured": 2,
+    "lowest_agreement_rate": 1.0,
+    "total_onnx_mb": 107.915,
+    "total_pt_mb": 60.532
+  },
+  "models": {
+    "potato": {
+      "status": "measured",
+      "precision": "FP32",
+      "onnx_artifact": "backend/ml_assets/vision/onnx/potato.onnx",
+      "onnx_sha256": "a71016d001d25cca1d263d33ed284dcf9edecc9636d1ca97f525b80d29563a96",
+      "pt_artifact": "backend/ml_assets/vision/potato_disease/model.pt",
+      "pt_sha256": "d57b961ebf78280c03ebd9ff25cb414a2a2151a50eec584d4fa9168bb56b6698",
+      "imgsz": 224,
+      "n_classes": 3,
+      "n_images": 30,
+      "parity": {
+        "agreement_rate": 1.0,
+        "n_agree": 30,
+        "n_disagree": 0,
+        "max_abs_probability_delta": 5e-05,
+        "disagreements": [],
+        "disagreements_truncated": 0
+      },
+      "accuracy": {
+        "onnx_top1": 0.9,
+        "pt_top1": 0.9,
+        "top1_delta_pp": 0.0,
+        "onnx_top3": 1.0,
+        "pt_top3": 1.0,
+        "paired_table": {
+          "both_correct": 27,
+          "only_pt_correct": 0,
+          "only_onnx_correct": 0,
+          "neither_correct": 3
+        },
+        "mcnemar": {
+          "discordant_pairs": 0,
+          "p_value": null,
+          "interpretation": "identical predictions on every image; no paired test is defined"
+        }
+      },
+      "latency_single_image": {
+        "onnxruntime_cpu": {
+          "n": 200,
+          "mean_ms": 60.8998,
+          "stdev_ms": 4.4692,
+          "p50_ms": 60.4227,
+          "p90_ms": 66.8891,
+          "p95_ms": 69.3525,
+          "p99_ms": 71.1118,
+          "min_ms": 42.612,
+          "max_ms": 72.2529
+        },
+        "pytorch_ultralytics": {
+          "n": 200,
+          "mean_ms": 49.4473,
+          "stdev_ms": 6.1768,
+          "p50_ms": 48.5767,
+          "p90_ms": 56.4344,
+          "p95_ms": 58.5807,
+          "p99_ms": 67.9476,
+          "min_ms": 36.7628,
+          "max_ms": 87.1873
+        },
+        "speedup_p50_pt_over_onnx": 0.804,
+        "config": {
+          "provider": "CPUExecutionProvider",
+          "intra_op_num_threads": 1,
+          "inter_op_num_threads": 1,
+          "batch": 1,
+          "warmup_runs": 20,
+          "timed_runs": 200,
+          "image": "backend/ml_assets/vision/test_images/full_library/Potato__Early_Blight/0001.jpg"
+        },
+        "note": "pytorch timing includes ultralytics' own preprocessing; the ONNX timing is session.run only, with preprocessing excluded. They are not a like-for-like end-to-end comparison of the request path."
+      },
+      "size": {
+        "pt_mb": 10.522,
+        "onnx_mb": 20.789
+      }
+    },
+    "rice": {
+      "status": "measured",
+      "precision": "FP32",
+      "onnx_artifact": "backend/ml_assets/vision/onnx/rice.onnx",
+      "onnx_sha256": "e2d52275bf3f96e650a8827484cabbfe1e7a0e9571835eb5b25d2616dd298f0a",
+      "pt_artifact": "backend/ml_assets/vision/rice_disease/model.pt",
+      "pt_sha256": "12c36c85c9f5330be3265ae3f6234978a37e10c0f6e7de4095177970852c302f",
+      "imgsz": 224,
+      "n_classes": 10,
+      "n_images": 80,
+      "parity": {
+        "agreement_rate": 1.0,
+        "n_agree": 80,
+        "n_disagree": 0,
+        "max_abs_probability_delta": 5e-05,
+        "disagreements": [],
+        "disagreements_truncated": 0
+      },
+      "accuracy": {
+        "onnx_top1": 0.9625,
+        "pt_top1": 0.9625,
+        "top1_delta_pp": 0.0,
+        "onnx_top3": 0.9875,
+        "pt_top3": 0.9875,
+        "paired_table": {
+          "both_correct": 77,
+          "only_pt_correct": 0,
+          "only_onnx_correct": 0,
+          "neither_correct": 3
+        },
+        "mcnemar": {
+          "discordant_pairs": 0,
+          "p_value": null,
+          "interpretation": "identical predictions on every image; no paired test is defined"
+        }
+      },
+      "latency_single_image": {
+        "onnxruntime_cpu": {
+          "n": 200,
+          "mean_ms": 180.5686,
+          "stdev_ms": 11.6126,
+          "p50_ms": 179.9836,
+          "p90_ms": 188.7675,
+          "p95_ms": 204.5938,
+          "p99_ms": 215.7925,
+          "min_ms": 125.5137,
+          "max_ms": 239.8236
+        },
+        "pytorch_ultralytics": {
+          "n": 200,
+          "mean_ms": 83.9075,
+          "stdev_ms": 6.5685,
+          "p50_ms": 83.1255,
+          "p90_ms": 91.1901,
+          "p95_ms": 100.9435,
+          "p99_ms": 104.141,
+          "min_ms": 71.5098,
+          "max_ms": 108.5217
+        },
+        "speedup_p50_pt_over_onnx": 0.462,
+        "config": {
+          "provider": "CPUExecutionProvider",
+          "intra_op_num_threads": 1,
+          "inter_op_num_threads": 1,
+          "batch": 1,
+          "warmup_runs": 20,
+          "timed_runs": 200,
+          "image": "backend/ml_assets/vision/test_images/full_library/Rice__Bacterial_Leaf_Blight/0001.jpg"
+        },
+        "note": "pytorch timing includes ultralytics' own preprocessing; the ONNX timing is session.run only, with preprocessing excluded. They are not a like-for-like end-to-end comparison of the request path."
+      },
+      "size": {
+        "pt_mb": 19.935,
+        "onnx_mb": 39.555
+      }
+    },
+    "wheat": {
+      "status": "measured",
+      "precision": "FP32",
+      "onnx_artifact": "backend/ml_assets/vision/onnx/wheat.onnx",
+      "onnx_sha256": "06dcd7f57ba868bc552694c7102b6620d885fe20bc584f0f39284a9646289c11",
+      "pt_artifact": "backend/ml_assets/vision/wheat_disease/model.pt",
+      "pt_sha256": "f4c6d2fa835744b2cab4392275556b918171cce61f04a058497e6dbe9965c7f3",
+      "imgsz": 224,
+      "n_classes": 11,
+      "n_images": 800,
+      "parity": {
+        "agreement_rate": 1.0,
+        "n_agree": 800,
+        "n_disagree": 0,
+        "max_abs_probability_delta": 5e-05,
+        "disagreements": [],
+        "disagreements_truncated": 0
+      },
+      "accuracy": {
+        "onnx_top1": 0.9413,
+        "pt_top1": 0.9413,
+        "top1_delta_pp": 0.0,
+        "onnx_top3": 1.0,
+        "pt_top3": 1.0,
+        "paired_table": {
+          "both_correct": 753,
+          "only_pt_correct": 0,
+          "only_onnx_correct": 0,
+          "neither_correct": 47
+        },
+        "mcnemar": {
+          "discordant_pairs": 0,
+          "p_value": null,
+          "interpretation": "identical predictions on every image; no paired test is defined"
+        }
+      },
+      "latency_single_image": {
+        "onnxruntime_cpu": {
+          "n": 200,
+          "mean_ms": 19.3383,
+          "stdev_ms": 2.2436,
+          "p50_ms": 19.5825,
+          "p90_ms": 21.6856,
+          "p95_ms": 22.071,
+          "p99_ms": 22.8438,
+          "min_ms": 8.3181,
+          "max_ms": 28.657
+        },
+        "pytorch_ultralytics": {
+          "n": 200,
+          "mean_ms": 27.797,
+          "stdev_ms": 4.1693,
+          "p50_ms": 28.4952,
+          "p90_ms": 32.2847,
+          "p95_ms": 34.2095,
+          "p99_ms": 39.0948,
+          "min_ms": 20.2473,
+          "max_ms": 44.3309
+        },
+        "speedup_p50_pt_over_onnx": 1.455,
+        "config": {
+          "provider": "CPUExecutionProvider",
+          "intra_op_num_threads": 1,
+          "inter_op_num_threads": 1,
+          "batch": 1,
+          "warmup_runs": 20,
+          "timed_runs": 200,
+          "image": "backend/ml_assets/vision/test_images/wheat_disease/BlackPoint/augmented_pil_225_b0.83_c1.23_col1.26.jpg"
+        },
+        "note": "pytorch timing includes ultralytics' own preprocessing; the ONNX timing is session.run only, with preprocessing excluded. They are not a like-for-like end-to-end comparison of the request path."
+      },
+      "size": {
+        "pt_mb": 9.0,
+        "onnx_mb": 5.92
+      }
+    },
+    "corn": {
+      "status": "unmeasured",
+      "reason": "no local labelled test images",
+      "n_classes": 4,
+      "train_imgsz": 256
+    },
+    "brassica": {
+      "status": "measured",
+      "precision": "FP32",
+      "onnx_artifact": "backend/ml_assets/vision/onnx/brassica.onnx",
+      "onnx_sha256": "85ceb12ed2d57f9a4046aae3ce4daf079240ee710a003d710f7b6bd94095a6cf",
+      "pt_artifact": "backend/ml_assets/vision/brassica_disease/model.pt",
+      "pt_sha256": "c3632475083492be7f1d6db5601ed9cd44f1a3fecbc74d8419d4a738b83cf99e",
+      "imgsz": 256,
+      "n_classes": 11,
+      "n_images": 102,
+      "parity": {
+        "agreement_rate": 1.0,
+        "n_agree": 102,
+        "n_disagree": 0,
+        "max_abs_probability_delta": 5e-05,
+        "disagreements": [],
+        "disagreements_truncated": 0
+      },
+      "accuracy": {
+        "onnx_top1": 0.9118,
+        "pt_top1": 0.9118,
+        "top1_delta_pp": 0.0,
+        "onnx_top3": 0.9804,
+        "pt_top3": 0.9804,
+        "paired_table": {
+          "both_correct": 93,
+          "only_pt_correct": 0,
+          "only_onnx_correct": 0,
+          "neither_correct": 9
+        },
+        "mcnemar": {
+          "discordant_pairs": 0,
+          "p_value": null,
+          "interpretation": "identical predictions on every image; no paired test is defined"
+        }
+      },
+      "latency_single_image": {
+        "onnxruntime_cpu": {
+          "n": 200,
+          "mean_ms": 76.1572,
+          "stdev_ms": 6.016,
+          "p50_ms": 75.178,
+          "p90_ms": 84.1918,
+          "p95_ms": 88.4084,
+          "p99_ms": 92.7235,
+          "min_ms": 43.3942,
+          "max_ms": 99.1038
+        },
+        "pytorch_ultralytics": {
+          "n": 200,
+          "mean_ms": 48.3451,
+          "stdev_ms": 5.4555,
+          "p50_ms": 46.9294,
+          "p90_ms": 56.5599,
+          "p95_ms": 59.6423,
+          "p99_ms": 64.7221,
+          "min_ms": 38.8781,
+          "max_ms": 70.1414
+        },
+        "speedup_p50_pt_over_onnx": 0.624,
+        "config": {
+          "provider": "CPUExecutionProvider",
+          "intra_op_num_threads": 1,
+          "inter_op_num_threads": 1,
+          "batch": 1,
+          "warmup_runs": 20,
+          "timed_runs": 200,
+          "image": "backend/ml_assets/vision/test_images/full_library/Cabbage__Alternaria_Spot/0001.jpg"
+        },
+        "note": "pytorch timing includes ultralytics' own preprocessing; the ONNX timing is session.run only, with preprocessing excluded. They are not a like-for-like end-to-end comparison of the request path."
+      },
+      "size": {
+        "pt_mb": 10.538,
+        "onnx_mb": 20.828
+      }
+    },
+    "chilli": {
+      "status": "unmeasured",
+      "reason": "no local labelled test images",
+      "n_classes": 8,
+      "train_imgsz": 224
+    },
+    "crop_classifier": {
+      "status": "measured",
+      "precision": "FP32",
+      "onnx_artifact": "backend/ml_assets/vision/onnx/crop_classifier.onnx",
+      "onnx_sha256": "b9c34acf76a3d8a04820d7f26c8318736478f54c568a655c09a73f55190837a5",
+      "pt_artifact": "backend/ml_assets/vision/crop_classifier/model.pt",
+      "pt_sha256": "12f6ba58051fc00e93ff84ed307efd833e1b4b0ddc0a408ab62a4653af84622f",
+      "imgsz": 224,
+      "n_classes": 10,
+      "n_images": 1157,
+      "parity": {
+        "agreement_rate": 1.0,
+        "n_agree": 1157,
+        "n_disagree": 0,
+        "max_abs_probability_delta": 5.1e-05,
+        "disagreements": [],
+        "disagreements_truncated": 0
+      },
+      "accuracy": {
+        "onnx_top1": 0.0259,
+        "pt_top1": 0.0259,
+        "top1_delta_pp": 0.0,
+        "onnx_top3": 0.0259,
+        "pt_top3": 0.0259,
+        "paired_table": {
+          "both_correct": 30,
+          "only_pt_correct": 0,
+          "only_onnx_correct": 0,
+          "neither_correct": 1127
+        },
+        "mcnemar": {
+          "discordant_pairs": 0,
+          "p_value": null,
+          "interpretation": "identical predictions on every image; no paired test is defined"
+        }
+      },
+      "latency_single_image": {
+        "onnxruntime_cpu": {
+          "n": 200,
+          "mean_ms": 14.8263,
+          "stdev_ms": 2.0164,
+          "p50_ms": 14.4463,
+          "p90_ms": 16.1173,
+          "p95_ms": 16.5031,
+          "p99_ms": 19.6591,
+          "min_ms": 12.9774,
+          "max_ms": 35.2509
+        },
+        "pytorch_ultralytics": {
+          "n": 200,
+          "mean_ms": 19.7095,
+          "stdev_ms": 2.2238,
+          "p50_ms": 19.6405,
+          "p90_ms": 22.7849,
+          "p95_ms": 23.5609,
+          "p99_ms": 25.784,
+          "min_ms": 14.063,
+          "max_ms": 26.6111
+        },
+        "speedup_p50_pt_over_onnx": 1.36,
+        "config": {
+          "provider": "CPUExecutionProvider",
+          "intra_op_num_threads": 1,
+          "inter_op_num_threads": 1,
+          "batch": 1,
+          "warmup_runs": 20,
+          "timed_runs": 200,
+          "image": "backend/ml_assets/vision/test_images/wheat_disease/BlackPoint/augmented_pil_225_b0.83_c1.23_col1.26.jpg"
+        },
+        "note": "pytorch timing includes ultralytics' own preprocessing; the ONNX timing is session.run only, with preprocessing excluded. They are not a like-for-like end-to-end comparison of the request path."
+      },
+      "size": {
+        "pt_mb": 10.537,
+        "onnx_mb": 20.823
+      },
+      "label_space_note": "Manifest truth is family-level; checkpoint predicts 10 species-level labels. Exact-match top-1 mixes label spaces — see the pt-baseline species breakdown. Parity (ONNX-vs-.pt agreement) is unaffected by label spaces."
+    }
+  }
+}

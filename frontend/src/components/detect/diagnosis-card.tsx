@@ -14,7 +14,15 @@ import type { DetectResponse } from "@/lib/api";
    dedicated, considered design.
    ========================================================================= */
 
-export function DiagnosisCard({ result, onClear }: { result: DetectResponse; onClear?: () => void }) {
+export function DiagnosisCard({
+  result,
+  onClear,
+  onSelectCrop,
+}: {
+  result: DetectResponse;
+  onClear?: () => void;
+  onSelectCrop?: (crop: string) => void;
+}) {
   // Defensive: a legacy backend response may lack a `status` field
   // (pre-refactor versions returned disease labels without status).
   // Never surface a bogus "model_error" for a valid legacy response.
@@ -25,6 +33,12 @@ export function DiagnosisCard({ result, onClear }: { result: DetectResponse; onC
       return <DiagnosedCard result={result} onClear={onClear} />;
     case "healthy":
       return <HealthyCard result={result} />;
+    case "uncertain":
+      return <UncertainClarificationCard result={result} onSelectCrop={onSelectCrop} onClear={onClear} />;
+    case "requires_second_image":
+      return <SecondImageCard result={result} onClear={onClear} />;
+    case "out_of_distribution":
+      return <OutOfDistributionCard result={result} onClear={onClear} />;
     case "not_recognized":
       return <NotRecognizedCard result={result} />;
     case "no_disease_model":
@@ -346,6 +360,180 @@ function ModelErrorCard({ result }: { result: DetectResponse }) {
         কৃষক কল সেন্টার
         <span className="tabular font-semibold text-leaf">{HELPLINE.krishiCallCenter}</span>
       </a>
+    </motion.div>
+  );
+}
+
+/* --- 7. UNCERTAIN — Disambiguation with Quick-Reply Chips --------------- */
+
+function UncertainClarificationCard({
+  result,
+  onSelectCrop,
+  onClear,
+}: {
+  result: DetectResponse;
+  onSelectCrop?: (crop: string) => void;
+  onClear?: () => void;
+}) {
+  const prompt =
+    result.clarification_prompt_bn ||
+    "ছবিটি দেখে ফসল শতভাগ নিশ্চিত হওয়া যায়নি। ভুল বালাইনাশক এড়াতে নিচে আপনার সঠিক ফসলটি নির্বাচন করুন:";
+  const suggestions =
+    result.suggested_crops && result.suggested_crops.length > 0
+      ? result.suggested_crops
+      : result.top3_crops?.map((c) => c.class).filter(Boolean) ?? [];
+
+  return (
+    <motion.div
+      variants={enter}
+      initial="hidden"
+      animate="visible"
+      className="rounded-xl border border-ochre/30 bg-ochre/10 p-5 shadow-sm"
+    >
+      <div className="flex items-start gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ochre/20 text-ochre">
+          <HelpCircle className="h-5 w-5" strokeWidth={2} />
+        </div>
+        <div className="flex-1 space-y-2">
+          <div className="flex items-center justify-between">
+            <h3 className="font-display text-lg font-semibold text-ink">
+              ফসল নিশ্চিতকরণ প্রয়োজন (নিরাপত্তা গেট)
+            </h3>
+            {onClear && (
+              <button
+                type="button"
+                onClick={onClear}
+                aria-label="মুছুন"
+                className="flex h-7 w-7 items-center justify-center rounded-md text-ink-faint hover:bg-paper-2 hover:text-ink"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+          <p className="text-sm leading-relaxed text-ink-soft">{prompt}</p>
+
+          {suggestions.length > 0 && (
+            <div className="pt-2">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-ochre">
+                সঠিক ফসল নির্বাচন করুন (এক-ট্যাপে বিশ্লেষণ):
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {suggestions.map((cropName) => (
+                  <button
+                    key={cropName}
+                    type="button"
+                    onClick={() => onSelectCrop?.(cropName.toLowerCase())}
+                    className="control-press flex min-h-11 items-center gap-2 rounded-lg border border-leaf/30 bg-paper px-4 py-2 text-sm font-semibold text-leaf shadow-sm transition-all hover:border-leaf hover:bg-leaf/10 active:scale-95"
+                  >
+                    <Leaf className="h-4 w-4 text-leaf" />
+                    <span>{cropBn(cropName)}</span>
+                    <span className="text-xs text-ink-faint">({cropName})</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* --- 8. REQUIRES_SECOND_IMAGE — One-Shot Recovery ----------------------- */
+
+function SecondImageCard({
+  result,
+  onClear,
+}: {
+  result: DetectResponse;
+  onClear?: () => void;
+}) {
+  return (
+    <motion.div
+      variants={enter}
+      initial="hidden"
+      animate="visible"
+      className="rounded-xl border border-leaf/30 bg-paper p-5 shadow-sm"
+    >
+      <div className="flex items-start gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-leaf/15 text-leaf">
+          <ImageIcon className="h-5 w-5" strokeWidth={2} />
+        </div>
+        <div className="flex-1 space-y-2">
+          <div className="flex items-center justify-between">
+            <h3 className="font-display text-lg font-semibold text-ink">
+              পাতার অপর পিঠের ছবি প্রয়োজন (One-Shot Recovery)
+            </h3>
+            {onClear && (
+              <button
+                type="button"
+                onClick={onClear}
+                aria-label="মুছুন"
+                className="flex h-7 w-7 items-center justify-center rounded-md text-ink-faint hover:bg-paper-2 hover:text-ink"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+          <p className="text-sm leading-relaxed text-ink-soft">
+            পাতার লক্ষণটি অন্যান্য রোগের সাথে সাদৃশ্যপূর্ণ হওয়ায় রোগ শতভাগ নিশ্চিত হতে পাতার নিচের পিঠ (Under-leaf) বা দাগের স্পষ্ট আরেকটি ছবি দিন।
+          </p>
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={onClear}
+              className="control-press inline-flex min-h-11 items-center gap-2 rounded-lg bg-leaf px-4 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-leaf-2"
+            >
+              <ImageIcon className="h-4 w-4" />
+              আরেকটি স্পষ্ট ছবি তুলুন
+            </button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* --- 9. OUT_OF_DISTRIBUTION — Safe Non-Agri Leaf Rejection --------------- */
+
+function OutOfDistributionCard({
+  result,
+  onClear,
+}: {
+  result: DetectResponse;
+  onClear?: () => void;
+}) {
+  return (
+    <motion.div
+      variants={enter}
+      initial="hidden"
+      animate="visible"
+      className="rounded-xl border border-bone bg-paper p-5 text-center shadow-sm"
+    >
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-bone text-ink-soft">
+        <AlertTriangle className="h-6 w-6" strokeWidth={1.5} />
+      </div>
+      <h3 className="mt-3 font-display text-lg font-semibold text-ink">অসমর্থিত ফসল বা পাতা</h3>
+      <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
+        প্রদত্ত ছবিটি সমর্থিত কোনো ফসলের সাথে মেলেনি। অনুগ্রহ করে ধান, গম, ভুট্টা, আলু, বাঁধাকপি বা মরিচ ফসলের স্পষ্ট পাতার ছবি দিন।
+      </p>
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+        {onClear && (
+          <button
+            type="button"
+            onClick={onClear}
+            className="control-press min-h-11 rounded-lg border rule bg-paper px-4 py-2 text-sm font-medium text-ink-soft hover:bg-paper-2"
+          >
+            নতুন ছবি দিন
+          </button>
+        )}
+        <a
+          href={`tel:${HELPLINE.krishiCallCenter}`}
+          className="control-press inline-flex min-h-11 items-center gap-2 rounded-lg bg-leaf/10 px-4 py-2 text-sm font-semibold text-leaf hover:bg-leaf/20"
+        >
+          কৃষক কল সেন্টার: {HELPLINE.krishiCallCenter}
+        </a>
+      </div>
     </motion.div>
   );
 }

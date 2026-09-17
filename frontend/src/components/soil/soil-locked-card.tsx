@@ -7,6 +7,51 @@ import type { SoilDatasetInfo, SoilAnalyzeResponse } from "@/lib/api";
 import { bn } from "@/lib/bn";
 import { dur, ease } from "@/lib/motion";
 
+interface AgronomicSoilState {
+  badgeTitle: string;
+  badgeDesc: string;
+  tone: "leaf" | "ochre" | "clay" | "sky";
+  irrigationAction: string;
+  squeezeTest: string;
+}
+
+function getSoilAgronomicState(kpa: number): AgronomicSoilState {
+  if (kpa < 2.0) {
+    return {
+      badgeTitle: "অতিরিক্ত আর্দ্র / জলমগ্ন অবস্থা",
+      badgeDesc: "মাটি পানিতে সম্পৃক্ত — অতিরিক্ত রস শিকড় পচা ঘটাতে পারে",
+      tone: "sky",
+      irrigationAction: "সেচ সম্পূর্ণ বন্ধ রাখুন ও নিকাশ নালা সচল করুন",
+      squeezeTest: "মাটি মুঠো করলে আঙুলের ফাঁক দিয়ে অতিরিক্ত পানি বা কাদা চুইয়ে পড়ে।",
+    };
+  }
+  if (kpa <= 10.0) {
+    return {
+      badgeTitle: "মাটির আদর্শ 'জো' অবস্থা (Optimum Moisture)",
+      badgeDesc: "মাটিতে উদ্ভিদের খাদ্য গ্রহণ ও বৃদ্ধির জন্য চমৎকার রস বিদ্যমান",
+      tone: "leaf",
+      irrigationAction: "এখনই কোনো সেচ প্রয়োজন নেই",
+      squeezeTest: "মাটি হাতে চেপে গোল লাড্ডু করলে সহজে বল বাঁধে, হাত কাদা হয় না এবং মাটিতে ধুলো ওড়ে না।",
+    };
+  }
+  if (kpa <= 15.0) {
+    return {
+      badgeTitle: "হালকা রস সংকট / শুকনা টান (Watch State)",
+      badgeDesc: "মাটির উপরিভাগে শুকনা ভাব দেখা দিয়েছে, রস দ্রুত কমছে",
+      tone: "ochre",
+      irrigationAction: "আগামী ১-২ দিনের মধ্যে হালকা সেচের প্রস্তুতি নিন",
+      squeezeTest: "মুঠো করলে লাড্ডু হয় কিন্তু সামান্য মৃদু আঘাতেই ভেঙে গুঁড়ো হয়ে যায়।",
+    };
+  }
+  return {
+    badgeTitle: "তীব্র খরা / শুষ্ক মাটি (Severe Stress)",
+    badgeDesc: "মাটির রস পুরোপুরি নিঃশেষিত — গাছ দ্রুত নুয়ে পড়ার ঝুঁকি",
+    tone: "clay",
+    irrigationAction: "অবিলম্বে পরিমিত সেচ প্রয়োগ করুন",
+    squeezeTest: "মাটি মুঠো করলে কোনো বল বা লাড্ডু বাঁধে না, ধুলোর মতো ঝরে পড়ে।",
+  };
+}
+
 export function SoilLockedCard({
   info,
   result,
@@ -19,6 +64,7 @@ export function SoilLockedCard({
   onAskChat?: () => void;
 }) {
   const [showTable, setShowTable] = useState(false);
+  const [showSqueezeGuide, setShowSqueezeGuide] = useState(false);
   const models = info?.model_results ?? [];
 
   // If the result is an analyzed (measured-sample replay), render the diagnostic card.
@@ -26,29 +72,43 @@ export function SoilLockedCard({
     const isReplay = Boolean(result.sample_id);
     const kpa = result.kpa;
     const soilType = result.soil_type_bn ?? result.soil_type ?? "";
-    const statusBn = result.moisture_status_bn ?? "";
     const advisory = result.advisory_bn ?? "";
     if (kpa == null || !soilType || !advisory) {
       // Defensive: a malformed analyzed payload must not invent values.
       return null;
     }
 
-    // Determine color styling based on kPa
-    const isDry = kpa >= 12.0;
-    const isWet = kpa <= 2.0;
+    const agro = getSoilAgronomicState(kpa);
+    const toneBorder =
+      agro.tone === "clay"
+        ? "border-clay/40"
+        : agro.tone === "ochre"
+        ? "border-ochre/40"
+        : agro.tone === "sky"
+        ? "border-sky-600/40"
+        : "border-leaf/40";
+
+    const toneBg =
+      agro.tone === "clay"
+        ? "bg-clay/10 text-clay"
+        : agro.tone === "ochre"
+        ? "bg-ochre/10 text-ochre"
+        : agro.tone === "sky"
+        ? "bg-sky-600/10 text-sky-700"
+        : "bg-leaf/10 text-leaf";
 
     return (
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: dur.normal, ease: ease.smooth }}
-        className="overflow-hidden rounded-2xl border border-leaf/40 bg-paper shadow-[0_12px_32px_rgba(34,70,44,0.08)]"
+        className={`overflow-hidden rounded-2xl border ${toneBorder} bg-paper shadow-[0_12px_32px_rgba(34,70,44,0.08)]`}
       >
         <div className="p-5 sm:p-6">
           {/* Header */}
           <div className="flex items-start justify-between gap-3 border-b rule pb-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-leaf/15 text-leaf">
+              <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${toneBg}`}>
                 <Droplets className="h-6 w-6" strokeWidth={1.75} />
               </div>
               <div>
@@ -56,62 +116,65 @@ export function SoilLockedCard({
                   <h3 className="font-display text-lg font-bold text-ink">মাটির আর্দ্রতা ও সেচ বিশ্লেষণ</h3>
                   {isReplay ? (
                     <span
-                      className="inline-flex items-center gap-1 rounded-full bg-sky-600/10 px-2 py-0.5 text-xs font-semibold text-sky-700"
-                      title="ডেটাসেট নমুনার মাঠে পরিমাপিত রেকর্ড — লাইভ মডেল নির্ণয় নয়"
+                      className="inline-flex items-center gap-1 rounded-full bg-sky-600/10 px-2.5 py-0.5 text-xs font-semibold text-sky-700"
+                      title="পাবনা রিসার্চ সাইটের মাঠে পরিমাপিত রেকর্ড"
                     >
                       <FlaskConical className="h-3 w-3" /> ডেটাসেট নমুনা {result.sample_id}
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2 py-0.5 text-xs font-semibold text-leaf">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2.5 py-0.5 text-xs font-semibold text-leaf">
                       <Sparkles className="h-3 w-3" /> নির্ণীত
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-ink-soft">পাবনা টেনশিওমিটার ফিল্ড সেন্সর গ্রাউন্ডেড · মাঠে পরিমাপিত মান</p>
+                <p className="text-xs text-ink-soft">পাবনা ফিল্ড সেন্সর গ্রাউন্ডেড · বৈজ্ঞানিক টেনশন ও কৃষকের 'জো' অবস্থা</p>
               </div>
             </div>
             <div className="text-right">
               <span className="text-xs font-medium text-ink-faint">উৎস</span>
-              <div className="font-display text-sm font-bold text-sky-700">{isReplay ? "পরিমাপিত" : bn(Math.round((result.confidence ?? 0) * 100)) + "%"}</div>
+              <div className="font-display text-sm font-bold text-leaf">{isReplay ? "মাঠ রেকর্ড" : bn(Math.round((result.confidence ?? 0) * 100)) + "%"}</div>
             </div>
+          </div>
+
+          {/* Practical Agronomic Condition Headline Banner */}
+          <div className={`mt-4 rounded-xl border ${toneBorder} ${toneBg} p-4`}>
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-xs font-bold uppercase tracking-wider">মাঠের বর্তমান অবস্থা:</span>
+              <span className="rounded-full bg-paper px-2.5 py-0.5 text-xs font-bold shadow-2xs">
+                {agro.irrigationAction}
+              </span>
+            </div>
+            <h4 className="mt-1 font-display text-lg font-bold">{agro.badgeTitle}</h4>
+            <p className="mt-0.5 text-xs leading-relaxed opacity-90">{agro.badgeDesc}</p>
           </div>
 
           {/* Key Metrics Grid */}
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {/* Metric 1: Tension in kPa */}
+            {/* Metric 1: Agronomic 'Jo' Status */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-xs font-medium text-ink-faint">আর্দ্রতা টান (Tension)</span>
-              <div className="mt-1 font-display text-2xl font-black text-ink">
-                {bn(kpa.toFixed(1))} <span className="text-xs font-normal text-ink-soft">kPa</span>
+              <span className="text-xs font-medium text-ink-faint">কৃষক নির্দেশক</span>
+              <div className="mt-1 font-display text-base font-bold text-ink">
+                {agro.badgeTitle.split("(")[0].trim()}
               </div>
-              <div className="mt-1 flex items-center justify-center gap-1 text-xs text-ink-soft">
-                {isDry ? (
-                  <span className="font-medium text-clay">ঘাটতি এলাকা (&gt;১২ kPa)</span>
-                ) : isWet ? (
-                  <span className="font-medium text-sky-600">সম্পৃক্ত এলাকা (&lt;২ kPa)</span>
-                ) : (
-                  <span className="font-medium text-leaf">আদর্শ মাত্রা (২-১০ kPa)</span>
-                )}
+              <div className="mt-1 text-xs font-semibold text-leaf">
+                {agro.irrigationAction}
               </div>
             </div>
 
             {/* Metric 2: Soil Classification */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-xs font-medium text-ink-faint">{isReplay ? "নমুনা রেকর্ডের মাটির ধরন" : "শনাক্তকৃত মাটির ধরন"}</span>
+              <span className="text-xs font-medium text-ink-faint">{isReplay ? "নমুনা মাটির ধরন" : "শনাক্তকৃত মাটির ধরন"}</span>
               <div className="mt-1 font-display text-lg font-bold text-ink">{soilType}</div>
               <span className="mt-1 inline-block text-xs text-ink-soft">{result.soil_type || ""}</span>
             </div>
 
-            {/* Metric 3: Moisture Condition */}
+            {/* Metric 3: Scientific Tension in kPa */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-xs font-medium text-ink-faint">আর্দ্রতার অবস্থা</span>
-              <div className={`mt-1 font-display text-base font-bold ${isDry ? "text-clay" : isWet ? "text-sky-700" : "text-leaf"}`}>
-                {statusBn}
+              <span className="text-xs font-medium text-ink-faint">বৈজ্ঞানিক আর্দ্রতা টান</span>
+              <div className="mt-1 font-display text-2xl font-black text-ink">
+                {bn(kpa.toFixed(1))} <span className="text-xs font-normal text-ink-soft">kPa</span>
               </div>
-              <div className="mt-1 flex items-center justify-center gap-1 text-xs text-ink-soft">
-                {isDry ? <AlertTriangle className="h-3 w-3 text-clay" /> : <CheckCircle2 className="h-3 w-3 text-leaf" />}
-                {isDry ? "সেচ প্রয়োজন" : isWet ? "সেচ স্থগিত রাখুন" : "সেচ প্রয়োজন নেই"}
-              </div>
+              <span className="mt-1 inline-block text-[11px] text-ink-faint">আদর্শ মাত্রা: ২.০–১০.০ kPa</span>
             </div>
           </div>
 
@@ -122,6 +185,33 @@ export function SoilLockedCard({
               মাঠ পর্যায়ের সেচ ও পরিচর্যা সুপারিশ:
             </h4>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">{advisory}</p>
+          </div>
+
+          {/* Traditional Field Squeeze Test Helper */}
+          <div className="mt-4 rounded-xl border rule bg-paper-2/40 p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs font-bold text-ink">
+                <CheckCircle2 className="h-4 w-4 text-leaf" />
+                মাঠে দাঁড়িয়ে মাটি মুঠো পরীক্ষা (Squeeze Test Guide):
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowSqueezeGuide((v) => !v)}
+                className="text-xs font-semibold text-leaf hover:underline cursor-pointer"
+              >
+                {showSqueezeGuide ? "সংক্ষেপ করুন" : "কীভাবে পরীক্ষা করবেন?"}
+              </button>
+            </div>
+            <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">
+              <strong>এই মাটির স্পর্শ লক্ষণ:</strong> {agro.squeezeTest}
+            </p>
+            {showSqueezeGuide && (
+              <div className="mt-3 border-t border-dashed border-bone pt-2 text-xs leading-relaxed text-ink-faint space-y-1">
+                <p>১. ফসলের মূল এলাকা (মাটির ২-৩ ইঞ্চি গভীর) থেকে একমুঠো মাটি নিন।</p>
+                <p>২. হাতের তালুতে শক্ত করে চেপে গোল লাড্ডু বানানোর চেষ্টা করুন।</p>
+                <p>৩. লাড্ডু স্বাভাবিকভাবে জমে থাকলে জমিতে পর্যাপ্ত রস ('জো') আছে; মুঠো খুলতেই ভেঙে গুঁড়ো হয়ে গেলে জরুরি সেচ দিন।</p>
+              </div>
+            )}
           </div>
 
           {/* Ask in Chat Action */}
@@ -158,12 +248,23 @@ export function SoilLockedCard({
             <Lock className="h-5 w-5" strokeWidth={1.5} />
           </motion.div>
           <div className="flex-1">
-            <h3 className="font-display text-lg text-ink">স্বয়ংক্রিয় আর্দ্রতা নির্ণয় — ডেটাসেট ভিত্তিক</h3>
+            <h3 className="font-display text-lg font-bold text-ink">সরাসরি ক্যামেরা নির্ণয় পরীক্ষাধীন · ফিল্ড ডেটাসেট বিশ্লেষণ চালু</h3>
             <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
               {message ??
-                "পাবনা রিসার্চ সাইটের বাস্তব ফিল্ড ডেটাসেটের ভিত্তিতে নমুনা মাটির আর্দ্রতা ও টেনশন বিশ্লেষণ করা হয়েছে।"}
+                "ছবি দেখে মাটির সঠিক আর্দ্রতা নির্ণয়ের কম্পিউটার ভিশন মডেল বর্তমানে মাঠ গবেষণাধীন। অসত্য বা ঝুঁকিপূর্ণ সেচ পরামর্শ রোধে শুধুমাত্র পাবনা ফিল্ড টেনশিওমিটারের পরিমাপিত নমুনাসমূহের বিশ্লেষণ ও চ্যাটে পরামর্শ সরাসরি চালু রয়েছে।"}
             </p>
           </div>
+        </div>
+
+        {/* Traditional Farmer Tip Card */}
+        <div className="mt-4 rounded-xl border border-leaf/30 bg-paper p-4">
+          <div className="flex items-center gap-2 text-xs font-bold text-leaf">
+            <CheckCircle2 className="h-4 w-4" />
+            মাঠে দাঁড়িয়ে মাটির আর্দ্রতা বোঝার সহজ কৌশল (মাটি মুঠো পরীক্ষা):
+          </div>
+          <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">
+            ফসলের গোড়ার ২-৩ ইঞ্চি গভীর থেকে একমুঠো মাটি হাতে নিয়ে শক্ত করে চেপে দেখুন। যদি মাটি স্বাভাবিক গোল বল বাঁধে এবং হাত কাদা না হয়, তবে জমিতে উপযুক্ত 'জো' অবস্থা রয়েছে এবং এখনই সেচের প্রয়োজন নেই। মাটি মুঠো না বেঁধে ভেঙে গুঁড়ো হয়ে ঝরে গেলে সেচ দিন।
+          </p>
         </div>
 
         {/* Honest benchmark table */}

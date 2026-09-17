@@ -74,9 +74,23 @@ class QAResponse(BaseModel):
             "deterministic_guard: precheck rule matched, 0 LLM calls. "
             "structured_fact / templated_advisory: answered from fact rows, 0 LLM calls (R4). "
             "grounded_generation: retrieval → LLM → verifier, 1-2 LLM calls. "
+            "progressive_guidance: non-chemical cultural guidance + observation checklist (KAERA A3). "
             "honest_refusal: classifier or coverage-gate refused."
         ),
     )
+    answerability_level: str = Field(
+        default="A2_strong_evidence",
+        description=(
+            "Stage 2 KAERA / PRISM 5-level answerability: "
+            "A1_fully_supported | A2_strong_evidence | A3_partial_evidence | "
+            "A4_missing_critical_info | A5_unsafe_action"
+        ),
+    )
+    progressive_guidance: dict | None = Field(
+        default=None,
+        description="Structured progressive help frame for A3 queries (field checks, cultural controls, non-chemical guidance)",
+    )
+
 
 
 class ClassifyRequest(BaseModel):

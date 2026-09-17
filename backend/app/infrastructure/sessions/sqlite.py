@@ -79,6 +79,7 @@ class SqliteSessionStore:
         self._retention_days: int | None = retention_days
         self._lock = threading.Lock()
         self._indexed_dbs: set[str] = set()
+        self._working_memory: dict[str, dict[str, Any]] = {}
         self._init_schema_and_purge()
 
     def _now_iso(self) -> str:
@@ -172,3 +173,22 @@ class SqliteSessionStore:
                         (json.dumps(history, ensure_ascii=False), now, session_id),
                     )
                 conn.commit()
+
+    def get_working_memory(self, session_id: str) -> dict[str, Any] | None:
+        with self._lock:
+            with db_connect(self.db_path, migrations=self.MIGRATIONS) as conn:
+                self._prepare(conn)
+                self._purge(conn)
+                row = conn.execute(
+                    "SELECT 1 FROM sessions WHERE session_id = ?",
+                    (session_id,),
+                ).fetchone()
+            if row is None:
+                self._working_memory.pop(session_id, None)
+                return None
+            mem = self._working_memory.get(session_id)
+            return dict(mem) if mem is not None else None
+
+    def update_working_memory(self, session_id: str, memory_dict: dict[str, Any]) -> None:
+        with self._lock:
+            self._working_memory[session_id] = dict(memory_dict)

@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-08-25T17:47:11.429720+00:00",
+  "dataset": "farmer_benchmark_1000.jsonl",
+  "total_queries": 1000,
+  "pricing_basis": {
+    "provider": "openrouter",
+    "model": "google/gemini-2.5-flash-lite",
+    "input_usd_per_1k": 0.0001,
+    "output_usd_per_1k": 0.0004,
+    "pricing_source": "https://openrouter.ai/models/google/gemini-2.5-flash-lite"
+  },
+  "zero_llm_resolution_rate_pct": 7.8,
+  "zero_llm_count": 78,
+  "tier_counts": {
+    "deterministic_guard": 56,
+    "structured_fact": 0,
+    "templated_advisory": 22,
+    "grounded_generation": 922,
+    "honest_refusal": 0
+  },
+  "tier_percents": {
+    "deterministic_guard": 5.6,
+    "structured_fact": 0.0,
+    "templated_advisory": 2.2,
+    "grounded_generation": 92.2,
+    "honest_refusal": 0.0
+  },
+  "latency_stats": {
+    "deterministic_guard": {
+      "count": 56,
+      "p50_ms": 0.48,
+      "p90_ms": 0.75,
+      "p95_ms": 0.87,
+      "mean_ms": 0.53
+    },
+    "structured_fact": {
+      "count": 0,
+      "p50_ms": 0.0,
+      "p90_ms": 0.0,
+      "p95_ms": 0.0,
+      "mean_ms": 0.0
+    },
+    "templated_advisory": {
+      "count": 22,
+      "p50_ms": 0.47,
+      "p90_ms": 0.61,
+      "p95_ms": 0.71,
+      "mean_ms": 0.51
+    },
+    "grounded_generation": {
+      "count": 922,
+      "p50_ms": 7.95,
+      "p90_ms": 13.16,
+      "p95_ms": 14.83,
+      "mean_ms": 8.93
+    },
+    "honest_refusal": {
+      "count": 0,
+      "p50_ms": 0.0,
+      "p90_ms": 0.0,
+      "p95_ms": 0.0,
+      "mean_ms": 0.0
+    }
+  },
+  "overall_latency": {
+    "p50_ms": 7.68,
+    "p90_ms": 13.06,
+    "p95_ms": 14.59,
+    "mean_ms": 8.27
+  },
+  "cost_analysis": {
+    "token_estimation_method": "Documented benchmark estimation: ~600 prompt / ~250 gen tokens for T3; 0 for T0-T2",
+    "cost_per_1000_pessimistic_usd": 0.195,
+    "cost_per_1000_measured_usd": 0.1798,
+    "cost_per_1000_projected_multi_crop_usd": 0.1188,
+    "cost_savings_pct": 7.79
+  }
+}

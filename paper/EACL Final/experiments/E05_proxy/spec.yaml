@@ -1,0 +1,20 @@
+id: E05
+title: Observability proxy (explicitly NOT a SUS)
+question: What measurable usability signals exist without a recruited study?
+status: REAL_MEASURED_PROXY
+beats: [C+G]
+runner:
+  path: paper/EACL Demo/experiments/E05_human_usability_sus/scripts/run_real_e05_proxy.py
+  git_head: 83d5eff
+key:
+  proxy_total_0_100: 94.5
+  dimensions_0_20_each:
+    trace_fidelity: 20.0
+    retrieval_hit: 18.8
+    vision_parity: 20.0
+    time_to_diagnosis: 18.7
+    cross_modal_detection: 17.0
+labels:
+  not_a_sus: No recruited IRB study ran. Never cite as SUS; cite Brooke (1996) only for the pending-study method.
+outputs:
+  - E05_proxy/results.json (frozen copy of results_real_proxy.json)

@@ -1,0 +1,30 @@
+{
+  "query_extractor": {
+    "intent_accuracy": 0.5789,
+    "crop_precision": 0.9748,
+    "crop_recall": 0.9667,
+    "crop_f1": 0.9707,
+    "location_accuracy": 1.0,
+    "follow_up_f1": 0.8889
+  },
+  "concept_normalizer": {
+    "concept_normalization_rate": 0.7533,
+    "hypothesis_generation_rate": 0.7533,
+    "evaluated_colloquial_queries": 300
+  },
+  "working_memory": {
+    "context_accumulation_accuracy": 1.0,
+    "topic_shift_isolation_rate": 1.0,
+    "cross_crop_memory_leak_rate": 0.0,
+    "evaluated_sessions": 100
+  },
+  "adaptive_router": {
+    "routing_accuracy": 0.8389,
+    "evaluated_queries": 900
+  },
+  "evidence_agreement": {
+    "conflict_detection_recall": 1.0,
+    "discriminative_question_rate": 1.0,
+    "evaluated_ambiguous_cases": 100
+  }
+}

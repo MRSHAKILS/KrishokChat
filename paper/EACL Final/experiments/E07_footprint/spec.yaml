@@ -1,0 +1,18 @@
+id: E07
+title: Deployment footprint (SHA-256 deduplicated)
+question: What is the measured on-disk footprint?
+status: REAL_MEASURED
+beats: [C+G]
+runner:
+  path: paper/EACL Demo/experiments/E07_docker_deployment_footprint/scripts/run_e07_deployment_footprint.py
+  git_head: 83d5eff
+  note: path bug fixed 2026-08-30 (repo-relative WS); scan covers vision/onnx* + frontend/public/models with SHA-256 dedup
+key:
+  unique_onnx_mb: 95.64
+  unique_onnx_files: 11
+  minimal_self_contained_mb: 284.0
+  full_with_pt_mb: 339.6
+labels:
+  recount_after_rerun: Re-run after the N04 vision re-run (artifacts may change).
+outputs:
+  - E07_footprint/results.json (frozen copy)

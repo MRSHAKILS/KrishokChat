@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from app.domain.enums import (
+    AnswerabilityLevel,
     PipelineStage,
     ResolutionTier,
     SafetyCategory,
@@ -13,6 +14,24 @@ from app.domain.enums import (
     VerificationConfidence,
 )
 from app.domain.intent import Intent
+
+
+@dataclass(frozen=True)
+class AgriculturalState:
+    """Stateful representation of the ongoing agronomic conversation.
+
+    Prevents blind conversation history dumping to the LLM by maintaining
+    an explicit structured semantic frame.
+    """
+
+    active_crop: str | None = None
+    active_problem: str | None = None
+    active_stage: str | None = None
+    growth_stage: str | None = None
+    location: str | None = None
+    confirmed_slots: tuple[str, ...] = ()
+    missing_slots: tuple[str, ...] = ()
+
 
 
 @dataclass(frozen=True)
@@ -126,3 +145,7 @@ class QAResult:
     # Default is grounded_generation — the only tier that can have been cached
     # before R3 landed (only verified safe_agri T3 answers were ever cached).
     resolution_tier: ResolutionTier = ResolutionTier.GROUNDED_GENERATION
+    # Stage 2 KAERA / PRISM: 5-level answerability scale & progressive help
+    answerability_level: AnswerabilityLevel = AnswerabilityLevel.A2_STRONG_EVIDENCE
+    progressive_guidance: dict[str, Any] | None = None
+

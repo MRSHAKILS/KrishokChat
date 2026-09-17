@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering\small
-\caption{Temporal Regulatory Replay (Layer~E48): Longitudinal system performance across 4 evolving regulatory periods (2022--2025, $N=200$, 50 queries per period). BAA maintains \textbf{100.0\% Gazette Adherence} and \textbf{0.0\% CUAR} across all historical and banned periods, while unconstrained LLMs exhibit severe parametric inertia, recommending banned substances in 72.0\% of cases.}
+\caption{Temporal Regulatory Replay (Layer~E48): Longitudinal system performance across 4 evolving regulatory periods (2022--2025, $N=200$, 50 queries per period). KrishokChat maintains \textbf{100.0\% Gazette Adherence} and \textbf{0.0\% CUAR} across all historical and banned periods, while unconstrained LLMs exhibit severe parametric inertia, recommending banned substances in 72.0\% of cases.}
 \label{tab:temporal_regulatory_replay}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccccccc}
@@ -11,7 +11,7 @@
 B0: Unconstrained LLM & 70.0\% & 6.0\% & 44.0\% & 14.0\% & 22.0\% & 36.0\% & 26.0\% & 74.0\% \\
 B1: Lexical BM25 RAG & 82.0\% & 16.0\% & 52.0\% & 14.0\% & 58.0\% & 26.0\% & 28.0\% & 72.0\% \\
 B3: Citation Multi-Doc RAG & 84.0\% & 10.0\% & 86.0\% & 4.0\% & 46.0\% & 32.0\% & 54.0\% & 30.0\% \\
-\textbf{B6: KrishokChat 11-Slot BAA} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
+\textbf{B6: KrishokChat (11-Slot Contract, Ours)} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
 \bottomrule
 \end{tabular}}
 \end{table*}

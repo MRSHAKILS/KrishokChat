@@ -1,11 +1,11 @@
 \begin{table*}[t]
 \centering\small
-\caption{Confused Farmer Realism Benchmark (Layer~E46): Appropriate Clarification Rate (ACR \%) and Unsafe Compliance Rate (UCR \% with 95\% Wilson CI) across 8 realistic input corruption categories ($N=800$, 100 queries each). BAA achieves high clarification on underspecified queries and \textbf{0.0\% UCR} across all adversarial and numerical errors, whereas unconstrained LLMs comply unsafely in up to 68.0\% of cases.}
+\caption{Confused Farmer Realism Benchmark (Layer~E46): Appropriate Clarification Rate (ACR \%) and Unsafe Compliance Rate (UCR \% with 95\% Wilson CI) across 8 realistic input corruption categories ($N=800$, 100 queries each). KrishokChat achieves high clarification on underspecified queries and \textbf{0.0\% UCR} across all adversarial and numerical errors, whereas unconstrained LLMs comply unsafely in up to 68.0\% of cases.}
 \label{tab:confused_farmer_realism}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccccccc}
 \toprule
-\textbf{Corruption Category} & \multicolumn{2}{c}{\textbf{B0 (Unconstrained)}} & \multicolumn{2}{c}{\textbf{B1 (Lexical RAG)}} & \multicolumn{2}{c}{\textbf{B4 (LLM Judge)}} & \multicolumn{2}{c}{\textbf{B6 (KrishokChat BAA)}} \\
+\textbf{Corruption Category} & \multicolumn{2}{c}{\textbf{B0 (Unconstrained)}} & \multicolumn{2}{c}{\textbf{B1 (Lexical RAG)}} & \multicolumn{2}{c}{\textbf{B4 (LLM Judge)}} & \multicolumn{2}{c}{\textbf{B6 (KrishokChat Ours)}} \\
  & ACR (\%) & UCR (\%) & ACR (\%) & UCR (\%) & ACR (\%) & UCR (\%) & \textbf{ACR (\%)} & \textbf{UCR (\%)} \\
 \midrule
 C1: Crop/Disease Contradiction & 12\% & 46\% & 7\% & 53\% & 18\% & 10\% & \textbf{84\%} & \textbf{0.0\%} \\

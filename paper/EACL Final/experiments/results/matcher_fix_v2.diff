@@ -1,0 +1,45 @@
+﻿diff --git a/backend/app/domain/intent.py b/backend/app/domain/intent.py
+index c918d72..e9d142d 100644
+--- a/backend/app/domain/intent.py
++++ b/backend/app/domain/intent.py
+@@ -104,7 +104,7 @@ _CROP_ALIASES: dict[str, list[str]] = {
+     "tomato": ["tomato", "αªƒαª«αºçαªƒαºï", "αªƒαª«αºçαªƒαºïαª░", "αªƒαª«αª╛αªƒαºï", "αªƒαª«αª╛αªƒαºïαª░"],
+     "wheat": ["wheat", "αªùαª«", "αªùαª«αºçαª░", "αªùαª«αºç", "αªùαª«αª░"],
+     "brinjal": ["brinjal", "eggplant", "αª¼αºçαªùαºüαª¿", "αª¼αºçαªùαºüαª¿αºçαª░", "αª¼αºçαªùαºüαª¿αª░", "αª¼αºçαªùαºüαª¿ αªùαª╛αª¢αºçαª░", "αª¼αª╛αªçαªÖαºìαªùαª¿", "baingon", "begun", "beguner"],
+-    "chilli": ["chilli", "chili", "αª«αª░αª┐αªÜ", "αª«αª░αª┐αªÜαºçαª░", "αª«αª░αª┐αªÜαª░", "αª«αª░αª┐αª╕", "αª«αª░αª┐αª╕αª░", "moris", "morisor", "morich"],
++    "chilli": ["chilli", "chili", "αª«αª░αª┐αªÜ", "αª«αª░αª┐αªÜαºçαª░", "αª«αª░αª┐αªÜαª░", "αª«αª░αª┐αª╕", "αª«αª░αª┐αª╕αª░", "αª▓αªÖαºìαªòαª╛", "αª▓αªéαªòαª╛", "moris", "morisor", "morich"],
+     "cabbage": ["cabbage", "αª¼αª╛αªüαªºαª╛αªòαª¬αª┐", "αª¼αª╛αªüαªºαª╛αªòαª¬αª┐αª░", "αª¬αª╛αªñαª╛αªòαª¬αª┐", "αª¼αª╛αªºαª╛αªòαª¬αª┐"],
+     "cauliflower": ["cauliflower", "αª½αºüαª▓αªòαª¬αª┐", "αª½αºüαª▓αªòαª¬αª┐αª░"],
+ }
+@@ -124,9 +124,29 @@ CROP_NAMES_BN: dict[str, str] = {
+ 
+ 
+ def _match_crop_alias(lowered: str) -> str | None:
++    """Crop match with Bengali word-boundary safety (fix 2026-09-17).
++
++    Plain substring/regex matching fires inside unrelated words because Bengali
++    vowel signs defeat ``\\b`` (e.g. rice alias "αªºαª╛αª¿" matched inside "αª╕αª«αª╛αªºαª╛αª¿"
++    = solution). Rule: single-word aliases must match at the START of a
++    whitespace-delimited token (inflections like αªºαª╛αª¿αºçαª░/αªåαª▓αºüαª░ still match);
++    multi-word aliases (contain a space) use substring matching.
++    Residual risk: tokens that merely START with an alias (e.g. place names).
++    Leading punctuation is stripped before matching (fix 2026-09-17b), so
++    "(αªºαª╛αª¿αºçαª░)" matches; trailing punctuation was always safe.
++    """
++    import re as _re
++    strip_pat = _re.compile(r"^[^\w\u0980-\u09FF]+")
++    tokens = [strip_pat.sub("", t) for t in lowered.split()]
++    tokens = [t for t in tokens if t]
+     for crop, aliases in _CROP_ALIASES.items():
+-        if any(alias in lowered for alias in aliases):
+-            return crop
++        ordered = sorted((str(a).strip().lower() for a in aliases if str(a).strip()), key=len, reverse=True)
++        for alias in ordered:
++            if " " in alias:
++                if alias in lowered:
++                    return crop
++            elif any(tok == alias or tok.startswith(alias) for tok in tokens):
++                return crop
+     return None
+ 
+ 

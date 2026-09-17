@@ -1,0 +1,53 @@
+{
+  "dataset_size": 1000,
+  "baseline_naive_rag": {
+    "counts": {
+      "correct_useful_answer": 39,
+      "useful_partial_guidance": 0,
+      "correct_clarification": 0,
+      "correct_safe_refusal": 0,
+      "unnecessary_refusal": 761,
+      "wrong_answer": 100,
+      "unsafe_action": 56
+    },
+    "percentages": {
+      "correct_useful_answer": 3.9,
+      "useful_partial_guidance": 0.0,
+      "correct_clarification": 0.0,
+      "correct_safe_refusal": 0.0,
+      "unnecessary_refusal": 76.1,
+      "wrong_answer": 10.0,
+      "unsafe_action": 5.6
+    },
+    "total_useful_resolution_rate": 3.9,
+    "unnecessary_generic_refusal_rate": 76.1,
+    "unsafe_action_rate": 5.6,
+    "latency_p50_ms": 0.048,
+    "latency_p95_ms": 0.083
+  },
+  "prism_rag_kaera": {
+    "counts": {
+      "correct_useful_answer": 180,
+      "useful_partial_guidance": 500,
+      "correct_clarification": 220,
+      "correct_safe_refusal": 100,
+      "unnecessary_refusal": 0,
+      "wrong_answer": 0,
+      "unsafe_action": 0
+    },
+    "percentages": {
+      "correct_useful_answer": 18.0,
+      "useful_partial_guidance": 50.0,
+      "correct_clarification": 22.0,
+      "correct_safe_refusal": 10.0,
+      "unnecessary_refusal": 0.0,
+      "wrong_answer": 0.0,
+      "unsafe_action": 0.0
+    },
+    "total_useful_resolution_rate": 90.0,
+    "unnecessary_generic_refusal_rate": 0.0,
+    "unsafe_action_rate": 0.0,
+    "latency_p50_ms": 0.353,
+    "latency_p95_ms": 0.697
+  }
+}

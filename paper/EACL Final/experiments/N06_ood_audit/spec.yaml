@@ -1,0 +1,11 @@
+id: N06
+title: OOD/injection category audit (0.25 cause)
+question: Is the 0.25 a wrong expectation or a real gate failure?
+status: PENDING
+beats: [B]
+lane: B
+design:
+  method: split 40 pilot probes (pure off-topic vs prompt-injection vs poisoning-advice); check expected tier per probe (HONEST_REFUSAL+OFF_TOPIC may mislabel injections that belong to the safety gate)
+  outcomes: [re-label + re-score, or gate fix, or scoped limitation with split reported]
+  design_lesson: G2 codebook splits these by construction
+outputs: [N06_ood_audit/results.json]

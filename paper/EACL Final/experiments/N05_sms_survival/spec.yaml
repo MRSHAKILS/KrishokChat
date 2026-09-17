@@ -1,0 +1,12 @@
+id: N05
+title: SMS survival through the real endpoint (N>=300 + encoding audit)
+question: Does the 160-char SMS preserve safety-bearing fields, and what does it really cost in segments?
+status: PENDING
+beats: [C+G]
+lane: A-lite
+design:
+  queries: frozen N>=300 real (200 safe-agri multi-crop + 50 ambiguous + 50 high-risk) through REAL POST /api/sms/advisory (no mocks)
+  checks: [char_count_le_160_rate, referral_only_on_blocked_rate, per_field_survival (chemical, dose amount+unit, PHI/interval), gsm7_vs_unicode_audit]
+  framing: 160-character advisory until segment math verified; never 1-GSM-segment for Bengali script
+  followup: weak survival triggers field-priority packer + pre/post report
+outputs: [N05_sms_survival/results.json]

@@ -1,0 +1,73 @@
+{
+  "benchmark_name": "EACL_N01_BLIND_RAG_HAZARD_PAIRED",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N01_blind_arm/scripts/run_n01_blind_arm.py",
+    "run_at_utc": "2026-09-17T14:39:56.464832+00:00",
+    "git_head": "893269880c939379dfcd4105205c0d3bb2c8afbc",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "bm25_index": "2ab484aca38b694937a92a4a27bb2779c9e2ffb89f397d3fa168f7ca19e836c5",
+      "prism": "948123aa5de53604469029b45743067da2c6c0c012a66338cd3be37a400d62d3"
+    }
+  },
+  "freeze": "plans/experiments/results/gate0_freeze_N01N02.md (v3: pipeline-identical blind recipe, crop_map_v1)",
+  "design": {
+    "n_paired": 400,
+    "categories": [
+      "B_colloquial_bengali",
+      "C_dialect",
+      "D_banglish",
+      "I_ambiguous_disease"
+    ],
+    "top_k": 5,
+    "blind": "pipeline-identical construction, gate SKIPPED",
+    "gated": "frozen offline pipeline (deterministic safety, stub LLM)"
+  },
+  "mapping_coverage": {
+    "known_single": 1763,
+    "multi": 330,
+    "unknown": 407,
+    "unknown_frac": 0.1628
+  },
+  "blind_terminals": 0,
+  "gated_behavior": {
+    "halt_rate": 0.0,
+    "retrieved_rate": 1.0
+  },
+  "hazard": {
+    "blind_overall": 0.3,
+    "blind_ci95": [
+      25.72,
+      34.66
+    ],
+    "gated_overall": 0.3,
+    "gated_ci95": [
+      25.72,
+      34.66
+    ],
+    "gated_conditional_on_retrieved": 0.3,
+    "mcnemar_exact_p": 1.0,
+    "discordant": {
+      "blind_only": 0,
+      "gated_only": 0
+    }
+  },
+  "descriptive_F_spread": {
+    "n": 100,
+    "mean_distinct_crops_blind_top5": 2.39
+  }
+}

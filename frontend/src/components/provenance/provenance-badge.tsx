@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Cpu, BookOpen, FileText, Sparkles, XCircle, CloudRain, Database, Smartphone, WifiOff } from "lucide-react";
+import { Cpu, BookOpen, FileText, Sparkles, XCircle, CloudRain, Database, Smartphone, WifiOff, Sprout } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /* =========================================================================
@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
    
    Explicitly informs farmers, researchers, and reviewers *how* information
    was derived:
-     - Tiers: deterministic_guard, structured_fact, templated_advisory, grounded_generation, honest_refusal
+     - Tiers: deterministic_guard, structured_fact, templated_advisory, grounded_generation, progressive_guidance, honest_refusal
      - Provenance kinds: official_table, official_document, measured, ai_drafted, forecast_derived, sample_data, offline_pack, on_device
    ========================================================================= */
 
@@ -18,6 +18,7 @@ export type ProvenanceKind =
   | "structured_fact"
   | "templated_advisory"
   | "grounded_generation"
+  | "progressive_guidance"
   | "honest_refusal"
   | "interactive_clarification"
   | "official_table"
@@ -75,6 +76,15 @@ const BADGE_CONFIGS: Record<ProvenanceKind, BadgeConfig> = {
     bg: "bg-bone/60",
     pill: "Grounded LLM",
     isStrong: false,
+  },
+  progressive_guidance: {
+    icon: Sprout,
+    label: "পরিবেশবান্ধব পরিচর্যা ও পর্যবেক্ষণ",
+    desc: "রাসায়নিক মাত্রা অনুপস্থিত থাকায় নন-কেমিক্যাল সাংস্কৃতিক ব্যবস্থাপনা ও মাঠ পর্যবেক্ষণ নির্দেশিকা",
+    color: "text-leaf",
+    bg: "bg-leaf/10",
+    pill: "নন-কেমিক্যাল",
+    isStrong: true,
   },
   honest_refusal: {
     icon: XCircle,

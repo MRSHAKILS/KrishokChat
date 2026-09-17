@@ -1,0 +1,18 @@
+id: E04
+title: Streaming trace fidelity and overhead (SSE)
+question: Are agent traces fully ordered, and what do they cost?
+status: REAL_MEASURED
+beats: [C+G]
+runner:
+  path: paper/EACL Demo/experiments/E04_agentic_trace_observability/scripts/run_real_e04_trace.py
+  git_head: 83d5eff
+design:
+  n: 100
+  method: FastAPI TestClient against POST /api/qa/stream; stage order + event counts
+key:
+  ordered_frac: 1.0
+  events_p50: 9.0
+  events_mean: 8.72
+  events_p95: 9.0
+outputs:
+  - E04_trace/results.json (frozen copy of results_real_trace.json)

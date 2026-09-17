@@ -1,0 +1,29 @@
+id: E09
+title: Slot-gating pilot on template-constructed suite (PILOT — not headline evidence)
+question: PILOT ONLY. Do gating mechanics work end-to-end on a constructed suite?
+status: PILOT
+beats: [B]
+runner_det:
+  path: paper/EACL Demo/experiments/E09_slot_disambiguation_gating/scripts/run_comprehensive_e09_eval.py
+  git_head: 83d5eff
+runner_live:
+  path: paper/EACL Demo/experiments/E09_slot_disambiguation_gating/scripts/run_live_gemini_flash_lite_e09.py
+  model: google/gemini-2.5-flash-lite
+  temperature: 0.0
+design_det:
+  n: 400
+  seed: 42
+  construction: template-built (10 ambiguous templates, 9-crop specified, 6 banned chemicals, 10 Banglish dialect templates, OOD/injection probes)
+design_live:
+  n: 60
+pilot_values:
+  deterministic: {recall: 1.0, precision: 1.0, pass_through: 1.0, refusal: 1.0, leak: 0.0, overall: 0.9, dialectal: 0.8, ood_injection: 0.25}
+  live_llm: {overall: 0.9167, recall: 0.8, pass_through: 1.0, refusal: 1.0, leak: 0.0, latency_mean_ms: 4168.73}
+  modeled_not_metered: {token_reduction_ambiguous_pct: 88.0, token_reduction_overall_pct: 34.38, basis: assumed 1250/150 budgets}
+  hardcoded_constant: {blind_hazard_pct: 38.5, note: constant in runner, provenance pending}
+labels:
+  pilot_only: Appendix row at most, labeled "template-constructed pilot (seed 42)". Headline gating evidence = N01/N09/G-runs on real queries.
+  repairs: blind arm (N01), metering (N02), OOD audit (N06), live expansion (G5 in B plan).
+outputs:
+  - E09_gating_pilot/results_deterministic.json (frozen copy)
+  - E09_gating_pilot/results_live_llm.json (frozen copy)

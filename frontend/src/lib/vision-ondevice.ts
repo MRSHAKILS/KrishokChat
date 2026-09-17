@@ -41,7 +41,7 @@ export function isOnDeviceEnabled(): boolean {
 
 // --- Model registry (must match backend/ml_assets/vision/* and frontend/public/models/metadata.json) ---
 
-export type OnDeviceModelKey = "crop_classifier" | "potato" | "rice" | "wheat" | "corn" | "brassica";
+export type OnDeviceModelKey = "crop_classifier" | "potato" | "rice" | "wheat" | "corn" | "brassica" | "chilli";
 
 export interface ModelSpec {
   key: OnDeviceModelKey;
@@ -64,12 +64,13 @@ export const MODEL_SPECS: Record<OnDeviceModelKey, ModelSpec> = {
   wheat: { key: "wheat", file: "wheat.onnx", classesFile: "wheat_classes.json", imgsz: 224, precision: "int8" },
   corn: { key: "corn", file: "corn.onnx", classesFile: "corn_classes.json", imgsz: 256, precision: "fp32" },
   brassica: { key: "brassica", file: "brassica.onnx", classesFile: "brassica_classes.json", imgsz: 256, precision: "int8" },
+  chilli: { key: "chilli", file: "chilli.onnx", classesFile: "chilli_classes.json", imgsz: 224, precision: "int8" },
 };
 
 // Legacy file aliases (potato_disease etc.) exist on disk so old URLs keep working,
 // but this module always requests the canonical name above.
 
-const DISEASE_KEYS: OnDeviceModelKey[] = ["potato", "rice", "wheat", "corn", "brassica"];
+const DISEASE_KEYS: OnDeviceModelKey[] = ["potato", "rice", "wheat", "corn", "brassica", "chilli"];
 
 const CROP_DISPLAY: Record<string, string> = {
   rice: "Rice",
@@ -77,6 +78,8 @@ const CROP_DISPLAY: Record<string, string> = {
   corn: "Corn",
   potato: "Potato",
   brassica: "Brassica",
+  chilli: "Chilli",
+  chili: "Chilli",
 };
 
 // --- ORT lazy singleton ---
@@ -114,10 +117,60 @@ async function getOrt(): Promise<OrtModule> {
   return ortPromise;
 }
 
-// --- Session + class-name cache ---
+// --- Session + class-name cache (In-memory + IndexedDB persistent) ---
 
 const sessionCache = new Map<OnDeviceModelKey, unknown>();
 const classesCache = new Map<OnDeviceModelKey, string[]>();
+
+const IDB_NAME = "krishokchat_models_v2";
+const IDB_STORE = "onnx_binaries";
+
+async function openModelDb(): Promise<IDBDatabase | null> {
+  if (typeof window === "undefined" || !("indexedDB" in window)) return null;
+  return new Promise((resolve) => {
+    try {
+      const req = indexedDB.open(IDB_NAME, 1);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains(IDB_STORE)) {
+          db.createObjectStore(IDB_STORE);
+        }
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => resolve(null);
+    } catch {
+      resolve(null);
+    }
+  });
+}
+
+async function getCachedModelBuffer(fileName: string): Promise<ArrayBuffer | null> {
+  const db = await openModelDb();
+  if (!db) return null;
+  return new Promise((resolve) => {
+    try {
+      const tx = db.transaction(IDB_STORE, "readonly");
+      const store = tx.objectStore(IDB_STORE);
+      const req = store.get(fileName);
+      req.onsuccess = () => resolve(req.result ? (req.result as ArrayBuffer) : null);
+      req.onerror = () => resolve(null);
+    } catch {
+      resolve(null);
+    }
+  });
+}
+
+async function setCachedModelBuffer(fileName: string, buffer: ArrayBuffer): Promise<void> {
+  const db = await openModelDb();
+  if (!db) return;
+  try {
+    const tx = db.transaction(IDB_STORE, "readwrite");
+    const store = tx.objectStore(IDB_STORE);
+    store.put(buffer, fileName);
+  } catch {
+    // Ignore storage quota or private-browsing errors
+  }
+}
 
 async function fetchClasses(key: OnDeviceModelKey): Promise<string[]> {
   const cached = classesCache.get(key);
@@ -143,10 +196,30 @@ async function getSession(key: OnDeviceModelKey): Promise<import("onnxruntime-we
   if (cached) return cached;
   const ort = await getOrt();
   const spec = MODEL_SPECS[key];
+
+  let modelInput: string | Uint8Array = `/models/${spec.file}`;
+  try {
+    const cachedBuf = await getCachedModelBuffer(spec.file);
+    if (cachedBuf && cachedBuf.byteLength > 1000) {
+      modelInput = new Uint8Array(cachedBuf);
+    } else {
+      const resp = await fetch(`/models/${spec.file}`, { cache: "force-cache" });
+      if (resp.ok) {
+        const buf = await resp.arrayBuffer();
+        if (buf.byteLength > 1000) {
+          setCachedModelBuffer(spec.file, buf);
+          modelInput = new Uint8Array(buf);
+        }
+      }
+    }
+  } catch {
+    // Fall back gracefully to direct URL string if IndexedDB fails
+    modelInput = `/models/${spec.file}`;
+  }
+
   // `executionProviders: ["wasm"]` is the browser WASM backend for onnxruntime-web 1.29.
-  // The type is not exported as a string union in older .d.ts, so cast via unknown.
-  const session = await (ort as unknown as { InferenceSession: { create: (path: string, opts: unknown) => Promise<import("onnxruntime-web").InferenceSession> } }).InferenceSession.create(
-    `/models/${spec.file}`,
+  const session = await (ort as unknown as { InferenceSession: { create: (src: string | Uint8Array, opts: unknown) => Promise<import("onnxruntime-web").InferenceSession> } }).InferenceSession.create(
+    modelInput,
     {
       executionProviders: ["wasm"],
       graphOptimizationLevel: "all",

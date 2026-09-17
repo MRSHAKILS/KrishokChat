@@ -1,8 +1,9 @@
 # paper/manifest.yaml — Single Source of Truth for the KrishokChat Paper Ecosystem.
-# Last audited: 2026-08-27
+# Last audited: 2026-09-03 (Stage 2 KAERA / PRISM Architecture Synced)
 
 meta:
   project: KrishokChat Agricultural Advisory System
+  framework: KAERA / PRISM (Answerability-Aware Progressive Advisory)
   active_venues:
     cea_journal:
       venue: Computers and Electronics in Agriculture (CEA), Elsevier
@@ -11,7 +12,7 @@ meta:
       status: in_active_preparation
     eacl_demo:
       venue: EACL 2027 System Demonstrations, ACL
-      type: System Demonstration Paper (<= 6 pages)
+      type: System Demonstration Paper (<= 6 pages main + unlimited refs/appendix)
       workspace: EACL Demo/
       status: in_active_preparation
   paper_policy: docs/PAPER_POLICY.md

@@ -1,0 +1,31 @@
+id: E06
+title: Offline-first delivery (deterministic) + network retention (simulated)
+question: Does cached/BM25 delivery survive offline, and how does it compare under packet loss?
+status: REAL_MEASURED_DETERMINISTIC_AND_SIMULATED
+beats: [C+G]
+runner_det:
+  path: paper/EACL Demo/experiments/E06_offline_cache_resilience/scripts/run_real_e06_offline.py
+  git_head: 83d5eff
+runner_sim:
+  path: paper/EACL Demo/experiments/E06_offline_cache_resilience/scripts/run_real_e06_network.py
+  git_head: 83d5eff
+design_det:
+  n: 400
+  seed: 42
+  retrieval: BM25-only, StubLLM
+key_det:
+  cached_hit_rate: 0.0
+  cached_hits: 0/400
+  bm25_hit_rate: 0.94
+  sw_precache: true
+  sw_size_bytes: 4901
+key_sim:
+  method: real BM25 hits per query + simulated random packet drop per profile (seed 42)
+  rural_edge_15pct_loss: {cloud_only_pct: 85.5, offline_first_pct: 98.75, advantage_pp: 13.25}
+  severe_2g_30pct_loss: {cloud_only_pct: 67.0, offline_first_pct: 97.0, advantage_pp: 30.0}
+labels:
+  cached_zero: The 100-key demo cache misses held-out queries entirely — reported as the reason offline relies on BM25-first, not answer caching.
+  sim_not_field: Network deltas are simulated loss, never field measurement. Throttle-lane upgrade is optional P1.
+outputs:
+  - E06_offline/results_offline.json (frozen deterministic copy)
+  - E06_offline/results_network_sim.json (frozen simulation copy, labeled)

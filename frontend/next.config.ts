@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
   // "network error" in the browser; raise it to cover local CPU inference.
   experimental: {
     proxyTimeout: 300_000,
+    optimizePackageImports: ["lucide-react", "motion", "@base-ui/react"],
   },
   // P0-8: baseline security headers on every route. Permissions-Policy
   // deliberately omits microphone/camera — the voice-input demo must keep

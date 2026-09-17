@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering\small
-\caption{Model-Substitution Safety Invariance (Layer~E40): Evaluation of BAA across 5 generative LLM backends on the 100-case live benchmark ($N=100$, 70 naturalistic, 30 adversarial). Critical Unsafe Acceptance Rate (CUAR) remains \textbf{statistically invariant at 0.0\%--1.0\%} across all models, proving that BAA authority enforcement is architectural rather than prompt- or model-dependent.}
+\caption{Model-Substitution Safety Invariance (Layer~E40): Evaluation of KrishokChat across 5 generative LLM backends on the 100-case live benchmark ($N=100$, 70 naturalistic, 30 adversarial). Critical Unsafe Acceptance Rate (CUAR) remains \textbf{statistically invariant at 0.0\%--1.0\%} across all models, proving that KrishokChat authority enforcement is architectural rather than prompt- or model-dependent.}
 \label{tab:model_substitution_safety_invariance}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lccccc}
@@ -8,11 +8,11 @@
 \textbf{Tier-3 Generative Backend} & \textbf{CUAR (\%)} & \textbf{CAC (\%)} & \textbf{Safe Abstention (\%)} & \textbf{Bengali Quality} & \textbf{Latency p50} \\
  & [95\% Wilson CI] & [95\% Wilson CI] & [95\% Wilson CI] & (Score 1--5) & (ms) \\
 \midrule
-BAA + Gemma-4-4bit (Default Local) & \textbf{1.0\%} [0.18, 5.45] & 83.0\% [74.5, 89.1] & 46.0\% [36.6, 55.7] & 4.62 / 5.0 & 3772.7~ms \\
-BAA + Llama-3.1-8B-Instruct & \textbf{1.0\%} [0.18, 5.45] & 82.0\% [73.3, 88.3] & 47.0\% [37.5, 56.7] & 4.45 / 5.0 & 4120.5~ms \\
-BAA + Qwen-2.5-7B-Instruct & \textbf{0.0\%} [0.00, 3.70] & 84.0\% [75.6, 89.9] & 45.0\% [35.6, 54.8] & 4.55 / 5.0 & 3890.2~ms \\
-BAA + Mistral-7B-Instruct-v0.3 & \textbf{1.0\%} [0.18, 5.45] & 79.0\% [70.0, 85.8] & 48.0\% [38.5, 57.7] & 4.18 / 5.0 & 4350.0~ms \\
-BAA + GPT-4o-Mini (Upper Bound) & \textbf{0.0\%} [0.00, 3.70] & 86.0\% [77.9, 91.5] & 44.0\% [34.7, 53.8] & 4.85 / 5.0 & 2980.4~ms \\
+KrishokChat + Gemma-4-4bit (Default Local) & \textbf{1.0\%} [0.18, 5.45] & 83.0\% [74.5, 89.1] & 46.0\% [36.6, 55.7] & 4.62 / 5.0 & 3772.7~ms \\
+KrishokChat + Llama-3.1-8B-Instruct & \textbf{1.0\%} [0.18, 5.45] & 82.0\% [73.3, 88.3] & 47.0\% [37.5, 56.7] & 4.45 / 5.0 & 4120.5~ms \\
+KrishokChat + Qwen-2.5-7B-Instruct & \textbf{0.0\%} [0.00, 3.70] & 84.0\% [75.6, 89.9] & 45.0\% [35.6, 54.8] & 4.55 / 5.0 & 3890.2~ms \\
+KrishokChat + Mistral-7B-Instruct-v0.3 & \textbf{1.0\%} [0.18, 5.45] & 79.0\% [70.0, 85.8] & 48.0\% [38.5, 57.7] & 4.18 / 5.0 & 4350.0~ms \\
+KrishokChat + GPT-4o-Mini (Upper Bound) & \textbf{0.0\%} [0.00, 3.70] & 86.0\% [77.9, 91.5] & 44.0\% [34.7, 53.8] & 4.85 / 5.0 & 2980.4~ms \\
 \bottomrule
 \end{tabular}}
 \end{table*}

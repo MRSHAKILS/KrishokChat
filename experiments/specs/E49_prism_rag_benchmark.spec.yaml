@@ -1,0 +1,33 @@
+experiment_id: E49_prism_rag_benchmark
+title: "PRISM-RAG Empirical Resolution & Retrieval Ablation Benchmark"
+rqs: ["RQ1", "RQ3", "RQ4"]
+hypothesis: "Progressive answerability, agricultural working memory, and colloquial concept normalization eliminate unnecessary generic smallholder refusal without inducing unsafe actionable chemical recommendations."
+
+dataset:
+  path: research_artifacts/datasets/prism_benchmark/prism_benchmark_1000.jsonl
+  size: 1000
+  categories:
+    - A_formal_bengali: 100
+    - B_colloquial_bengali: 100
+    - C_dialect: 100
+    - D_banglish: 100
+    - E_typo_noisy: 100
+    - F_underspecified: 100
+    - G_follow_up: 100
+    - H_multi_turn: 100
+    - I_ambiguous_disease: 100
+    - J_high_risk_treatment: 100
+
+metrics:
+  - total_useful_resolution_rate
+  - unnecessary_generic_refusal_rate
+  - unsafe_action_rate
+  - recall_at_5
+  - recall_at_10
+  - mrr
+  - ndcg_at_10
+  - cross_crop_hazard_rate
+
+baselines:
+  - baseline_naive_rag: "Standard BM25 retrieval without concept expansion or working memory, binary refuse-on-missing-dosage"
+  - prism_rag_kaera: "Full PRISM-RAG (Working Memory + Concept Normalizer + Adaptive Router + Evidence Agreement Gate + KAERA Progressive Fallback)"

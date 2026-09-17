@@ -1,0 +1,152 @@
+# KrishokChat EACL Final — Ground-Truth Results (ROOT SSOT)
+
+meta:
+  track: EACL Final (System Demonstrations)
+  updated_utc: '2026-09-17'
+  rule: Numbers here MUST match the frozen results.json copies in each folder. On conflict, results.json wins and this file is regenerated. Statuses use REAL_DATA_DOCTRINE labels (see plans/experiments/REAL_DATA_DOCTRINE.md).
+  corpus_units: {chunks_2135: live retrieval index, agritrust_2882: research benchmark nodes, source_docs_2946: source markdowns}
+  doctrine: no headline number from templates, constants, or simulations
+
+experiments:
+
+  E01_latency:
+    status: REAL_MEASURED
+    key: {n: 400, seed: 42, retrieval: BM25-only, llm: stub,
+      safety_p50_ms: 0.321, safety_p95_ms: 0.705,
+      retrieval_p50_ms: 26.831, retrieval_p95_ms: 61.248,
+      verifier_p50_ms: 4.815, verifier_p95_ms: 11.22,
+      overhead_p50_ms: 33.565, overhead_p95_ms: 67.833}
+    label: Live LLM latency UNMEASURED.
+
+  E02_vision:
+    status: SUPERSEDED_PENDING_RERUN
+    key: {}
+    label: Old-checkpoint values excluded. Replacement lands in N04.
+
+  E03_safety:
+    status: REAL_MEASURED
+    key:
+      live_calls_total: 420
+      baa_overall_asr_pct: 0.95
+      baa_overall_ci95: [0.26, 3.41]
+      baa_bangla_native_asr_pct: 6.67
+      baa_bangla_native_ci95: [1.85, 21.32]
+      baa_other_families_asr_pct: 0.0
+      unconstrained_overall_asr_pct: 36.19
+      unconstrained_overall_ci95: [29.99, 42.88]
+      unconstrained_bangla_native_asr_pct: 76.67
+    label: Residual 6.67% leak disclosed, never rounded.
+
+  E04_trace:
+    status: REAL_MEASURED
+    key: {n: 100, ordered_frac: 1.0, events_p50: 9.0, events_mean: 8.72}
+
+  E05_proxy:
+    status: REAL_MEASURED_PROXY
+    key: {proxy_total_0_100: 94.5, dims: [20.0, 18.8, 20.0, 18.7, 17.0]}
+    label: NOT a SUS. No recruited study ran.
+
+  E06_offline:
+    status: REAL_MEASURED_DETERMINISTIC_AND_SIMULATED
+    key:
+      cached_hit_rate: 0.0
+      bm25_hit_rate: 0.94
+      sw_precache: true
+      rural_edge_sim_advantage_pp: 13.25
+      severe_2g_sim_advantage_pp: 30.0
+    label: Network deltas are SIMULATED loss (seed 42), always qualified.
+
+  E07_footprint:
+    status: REAL_MEASURED
+    key: {unique_onnx_mb: 95.64, unique_onnx_files: 11, minimal_mb: 284.0, full_mb: 339.6}
+    label: Re-run after N04.
+
+  E08_crossmodal:
+    status: REAL_MEASURED_WITH_CROSS_TRACK_BASELINES
+    key:
+      divergence_rate: 0.85
+      divergence_n: 68/80
+      baseline_B0_clarify_pct: 20.0
+      baseline_B0_cuar_pct: 54.0
+      baseline_B1_clarify_pct: 13.0
+      baseline_B1_cuar_pct: 55.0
+      baseline_B4_clarify_pct: 26.0
+      baseline_B4_cuar_pct: 0.0
+    label: Divergence is not badge rate (see N07). B4 is a prompted judge, not the BAA gate. Baselines reused from CEA E31 with disclosure.
+
+  E09_gating_pilot:
+    status: PILOT
+    key:
+      det_recall: 1.0
+      det_precision: 1.0
+      det_pass_through: 1.0
+      det_refusal: 1.0
+      det_leak: 0.0
+      det_overall: 0.9
+      det_dialectal: 0.8
+      det_ood_injection: 0.25
+      live_overall: 0.9167
+      live_recall: 0.8
+      live_latency_mean_ms: 4168.73
+      live_n: 60
+    label: Template suite. Blind 38.5 constant and 88% modeled numbers are NOT ground truth (see N01/N02).
+
+  E10_tiermix:
+    status: REAL_MEASURED_MIX_MODELED_COST
+    key:
+      zero_llm_pct: 7.8
+      mix: {T0: 5.6, T1: 0.0, T2: 2.2, T3: 92.2, T4: 0.0}
+      cost_per_1k_usd: 0.1798
+      baseline_per_1k_usd: 0.195
+      saving_pct: 7.79
+      latency_p50_ms: 7.68
+      latency_p95_ms: 14.59
+    label: Costs MODELED (~600/250-token averages, disclosed). T1 0.0% = 9-fact base.
+
+  N01_blind_arm:
+    status: REAL_MEASURED
+    key:
+      equivalence_blind_eq_gated: 0.3
+      equivalence_ci95: [25.72, 34.66]
+      mcnemar_exact_p: 1.0
+      halt_rate_paired: 0.0
+      mapping_unknown_frac: 0.1628
+      F_spread_mean_distinct_crops: 2.39
+      farmer_halt_rate: 0.38
+      farmer_extractor_agreement_prefix: 0.51
+      farmer_extractor_miss_prefix: 0.445
+      farmer_extractor_fp_prefix: 0.045
+      farmer_extractor_agreement_postfix: 0.52
+      farmer_extractor_miss_postfix: 0.475
+      farmer_extractor_fp_postfix: 0.005
+      farmer_hazard_mapped: 0.1607
+      farmer_hazard_gated_postfix: 0.1607
+      farmer_hazard_ci95: [8.69, 27.81]
+      firewall_case: farmer_q_593
+    label: Matcher fix (token-start Bengali boundaries) applied post N01b-v1; full suite green (595 passed); N01a/N01b/N02 re-run. 9 FP rice cases now halt. Crop-universe limitation disclosed.
+  N02_token_metering:
+    status: REAL_MEASURED_PARTIAL
+    key:
+      clarification_p50: 89.0
+      clarification_n: 86
+      retrieval_context_p50: 2146.0
+      stub_answer_p50: 53.0
+    label: Modeled 150/1250/88% retired. No blended saving until live-generation lengths (provider-exact) land.
+  N03_verifier_catchrate: {status: PENDING, key: {}}
+  N04_vision_rerun:
+    status: REAL_MEASURED_PARTIAL
+    key:
+      potato_top1: 0.9
+      rice_top1: 0.9625
+      wheat_top1: 0.9413
+      brassica_top1: 0.9118
+      onnx_agreement: 1.0
+      onnx_max_delta: 5e-05
+      router_top1_diagnostic_only: 0.0259
+    label: Accuracy+parity locked (critic ACCEPT-WITH-FIXES, fixes applied). INT8/WASM pending. Router 0.0259 diagnostic-only. Coverage gap disclosed.
+  N05_sms_survival: {status: PENDING, key: {}}
+  N06_ood_audit: {status: PENDING, key: {}}
+  N07_badge_gate_rerun: {status: PENDING, key: {}}
+  N08_fence_study: {status: PENDING, key: {}}
+  N09_prism_routes: {status: PENDING, key: {}}
+  N10_end_to_end_probe: {status: PENDING, key: {}}

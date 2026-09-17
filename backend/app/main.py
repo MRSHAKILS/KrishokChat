@@ -183,6 +183,7 @@ def create_app(config=None) -> FastAPI:
         )
 
     @application.get("/health")
+    @application.get("/health/liveness")
     async def health_check():
         return {"status": "ok", "version": app_settings.app_version}
 
@@ -191,6 +192,7 @@ def create_app(config=None) -> FastAPI:
     # READINESS_STRICT=true turns failed checks into 503. Checks are local
     # file/dir probes only — no network calls, no model loading.
     @application.get("/readyz")
+    @application.get("/health/readiness")
     async def readyz_check():
         checks: list[dict[str, object]] = []
         failed: list[str] = []

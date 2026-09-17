@@ -159,9 +159,11 @@ class VisionPipeline:
         top3_crops: tuple[dict[str, str | float], ...] = ()
         candidates: tuple[VisionModelSpec, ...] = ()
 
-        # A user-verified crop (farmers know what they grow) bypasses the 6-class
-        # crop classifier, which was trained without Rice. This is the only way a
-        # rice leaf photo can reach the rice disease model today.
+        # A user-verified crop (farmers know what they grow) bypasses the 10-class
+        # crop classifier (Cabbage, Cauliflower, Chili, Eggplant, Gourd, Guava,
+        # Others, Potato, Rice, Tomato — verified 2026-09-17 from class_names.json).
+        # NOTE: Wheat and Corn have disease models but no router class; they reach
+        # their models via this hint bypass (or not at all — see tri-state gate).
         if crop_hint:
             hinted = self.registry.disease_candidates(crop_hint)
             if hinted:
@@ -244,10 +246,13 @@ class VisionPipeline:
             crop_confidence = crop_prediction.confidence
             top3_crops = crop_prediction.top3
             candidates = self.registry.disease_candidates(crop_label)
-            # Documented mitigation (live-verified 2026-08-08): the 6-class crop
-            # classifier has no Rice class and classifies rice leaves as Wheat.
-            # Run the rice disease model alongside wheat and let the higher
-            # confidence win, so a rice leaf still reaches the rice model.
+            # LEGACY mitigation (pre-10-class router): the old 6-class crop
+            # classifier had no Rice class and classified rice leaves as Wheat,
+            # so the rice model ran alongside wheat. The current 10-class router
+            # (verified 2026-09-17) includes Rice and has no Wheat class, making
+            # this branch unreachable via the classifier path. Retained as a
+            # harmless safety net pending P0-11 removal review — do not rely on
+            # it in paper prose.
             if crop_label == "Wheat":
                 for extra in self.registry.disease_candidates("rice"):
                     if not any(candidate.key == extra.key for candidate in candidates):

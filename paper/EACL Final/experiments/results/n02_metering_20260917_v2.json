@@ -1,0 +1,70 @@
+{
+  "benchmark_name": "EACL_N02_TOKEN_METERING_REAL_STRINGS",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N02_token_metering/scripts/run_n02_metering.py",
+    "run_at_utc": "2026-09-17T14:49:53.542935+00:00",
+    "git_head": "893269880c939379dfcd4105205c0d3bb2c8afbc",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "prism": "948123aa5de53604469029b45743067da2c6c0c012a66338cd3be37a400d62d3"
+    }
+  },
+  "tokenizer": "tiktoken 0.14.0 cl100k_base (disclosed approximation; live sides use provider-exact usage)",
+  "design": {
+    "n": 500,
+    "categories": [
+      "B_colloquial_bengali",
+      "C_dialect",
+      "D_banglish",
+      "I_ambiguous_disease",
+      "F_underspecified"
+    ],
+    "tiers": {
+      "grounded_generation": 309,
+      "honest_refusal": 105,
+      "interactive_clarification": 86
+    }
+  },
+  "metered_cl100k": {
+    "clarification_answer": {
+      "n": 86,
+      "p50": 89.0,
+      "p95": 109.0,
+      "mean": 90.7
+    },
+    "retrieval_context": {
+      "n": 414,
+      "p50": 2146.0,
+      "p95": 2975.0,
+      "mean": 2200.6
+    },
+    "stub_generated_answer": {
+      "n": 414,
+      "p50": 53.0,
+      "p95": 158.0,
+      "mean": 79.5
+    }
+  },
+  "modeled_vs_metered": {
+    "modeled_assumption": {
+      "clarification": 150,
+      "full_generation": 1250,
+      "saving_pct": 88.0
+    },
+    "note": "compared in analysis after results land; stub answers stand in for live generation length pending G5 provider-exact counts"
+  }
+}

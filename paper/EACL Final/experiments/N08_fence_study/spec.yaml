@@ -1,0 +1,11 @@
+id: N08
+title: Image-fence scope study (same query ± image scope)
+question: Does image-derived crop scope reduce candidates and wrong-crop sources?
+status: PENDING
+beats: [D+E]
+lane: C (P1)
+design:
+  queries: n>=300 text queries with known crops, paired arms (full-corpus vs image-scoped retrieval) over frozen 2135-node index
+  metrics: [candidate_count_delta, gold_in_scope_delta, wrong_crop_source_rate_delta]
+  note: without this the fence stays architecture prose
+outputs: [N08_fence_study/results.json]

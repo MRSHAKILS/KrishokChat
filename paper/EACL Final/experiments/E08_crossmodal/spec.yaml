@@ -1,0 +1,30 @@
+id: E08
+title: Cross-modal contradiction handling (local divergence + E31 baseline context)
+question: Do conflicting crop signals visibly diverge instead of silently merging?
+status: REAL_MEASURED_WITH_CROSS_TRACK_BASELINES
+beats: [D+E]
+runner_divergence:
+  path: paper/EACL Demo/experiments/E08_cross_modal_conflict_handling/scripts/run_real_e08_crossmodal.py
+  git_head: 83d5eff
+  design: {n: 80, seed: 42, vision: YOLO .pt via Ultralytics, qa: BM25-only StubLLM}
+  divergence_def: conflict.crop != image_only.crop OR conflict.status != image_only.status
+baseline_source:
+  path: paper/CEA Paper/experiments/E31_multimodal_perception_uncertainty/traces.jsonl
+  note: 100 conflict cases x 3 arms, live OpenRouter calls (CEA track). Reuse disclosed, not re-claimed.
+key_divergence:
+  mismatch_rate: 0.85
+  n_mismatch: 68/80
+  conflict_status: {diagnosed: 57, healthy: 18, not_recognized: 5}
+  non_divergent_cause: unroutable hint crop (e.g., brinjal — no disease model) falls back to image classification; safe default, counts as non-divergent
+key_baselines_E31:
+  B0_gpt4o_mini: {clarify_pct: 20.0, ci95: [13.34, 28.88], cuar_pct: 54.0, ci95_cu: [44.26, 63.44]}
+  B1_llama31_8b: {clarify_pct: 13.0, ci95: [7.76, 20.98], cuar_pct: 55.0, ci95_cu: [45.24, 64.39]}
+  B4_gemini25_flash_judge: {clarify_pct: 26.0, ci95: [18.4, 35.37], cuar_pct: 0.0, ci95_cu: [0.0, 3.7]}
+  B6_baa_gate: {clarify_pct: 100.0, ci95: [96.3, 100.0], cuar_pct: 0.0, ci95_cu: [0.0, 3.7], p50_ms: 1.25, location: CEA E31 only}
+labels:
+  divergence_not_badge: 68/80 is output divergence, not the user-facing badge rate. Badge rate = N07.
+  b4_not_baa: B4 is a prompted judge; never cite its row as the BAA gate.
+  b6_cross_track: B6 numbers live in CEA E31 until N07 mints a demo-track artifact.
+outputs:
+  - E08_crossmodal/results_divergence.json (frozen copy)
+  - E08_crossmodal/results_baselines_E31.json (frozen copy, cross-track disclosed)

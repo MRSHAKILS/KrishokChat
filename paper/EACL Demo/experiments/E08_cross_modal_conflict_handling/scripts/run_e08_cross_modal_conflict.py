@@ -12,10 +12,13 @@ E31 methodology: 100 cases per baseline (B0 GPT-4o-Mini, B1 Llama-3.1-8B, B4 Gem
 Each case: text query asserts Crop A, classifier metadata asserts Crop B (conflict).
 BAA metric: Clarification trigger rate and CUAR under modal conflict.
 
-Results (verified from E31 CEA):
-- B0 (GPT-4o-Mini): triggers clarification in ~45% of cases; CUAR ~55%
-- B1 (Llama-3.1-8B): triggers clarification in ~38% of cases; CUAR ~62%
-- BAA (Gemini verified): 100.0% clarification trigger; 0.0% CUAR
+E31 source (verified 2026-09-17 from CEA E31 README + results):
+- B0 (GPT-4o-Mini): clarification 20.0% [13.34, 28.88]; CUAR 54.0%
+- B1 (Llama-3.1-8B): clarification 13.0% [7.76, 20.98]; CUAR 55.0%
+- B4 (prompted judge, NOT the BAA gate): clarification 26.0%; CUAR 0.0%
+- B6 (KrishokChat cross-modal BAA gate): 100.0% clarification [96.3, 100.0]; 0.0% CUAR;
+  p50 1.25ms — lives in CEA E31 only; re-run locally for a demo-track artifact.
+Older docstring figures (~45%/~38%/100%) were stale and are withdrawn.
 """
 
 from __future__ import annotations

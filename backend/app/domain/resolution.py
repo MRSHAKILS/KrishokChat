@@ -76,6 +76,7 @@ TIER_LABELS_BN: dict[ResolutionTier, str] = {
     ResolutionTier.STRUCTURED_FACT: "অনুমোদিত তথ্যসারণি (এআই ব্যবহার হয়নি)",
     ResolutionTier.TEMPLATED_ADVISORY: "অনুমোদিত তথ্যসারণি (এআই ব্যবহার হয়নি)",
     ResolutionTier.GROUNDED_GENERATION: "সূত্রভিত্তিক এআই উত্তর",
+    ResolutionTier.PROGRESSIVE_GUIDANCE: "পরিবেশবান্ধব ও সাধারণ পরিচর্যা (নন-কেমিক্যাল)",
     ResolutionTier.HONEST_REFUSAL: "উত্তর দেওয়া হয়নি",
     ResolutionTier.INTERACTIVE_CLARIFICATION: "তথ্য স্পষ্টকরণ (স্লট যাচাই)",
 }

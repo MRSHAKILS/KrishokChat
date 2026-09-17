@@ -46,5 +46,24 @@ class ResolutionTier(StrEnum):
     STRUCTURED_FACT = "structured_fact"
     TEMPLATED_ADVISORY = "templated_advisory"
     GROUNDED_GENERATION = "grounded_generation"
+    PROGRESSIVE_GUIDANCE = "progressive_guidance"
     HONEST_REFUSAL = "honest_refusal"
     INTERACTIVE_CLARIFICATION = "interactive_clarification"
+
+
+class AnswerabilityLevel(StrEnum):
+    """The 5-Level Answerability Spectrum (KAERA / PRISM).
+
+    A1  fully_supported       — accredited fact row (T1/T2); direct 0-LLM resolution
+    A2  strong_evidence       — complete RAG grounding + verified dosage & PHI
+    A3  partial_evidence      — missing exact chemical dose; progressive cultural guidance + observation checklist
+    A4  missing_critical_info — underspecified query; minimum necessary clarification (single Q + chips)
+    A5  unsafe_action         — banned chemical / crisis probe; refuse action + 16123 referral
+    """
+
+    A1_FULLY_SUPPORTED = "A1_fully_supported"
+    A2_STRONG_EVIDENCE = "A2_strong_evidence"
+    A3_PARTIAL_EVIDENCE = "A3_partial_evidence"
+    A4_MISSING_CRITICAL_INFO = "A4_missing_critical_info"
+    A5_UNSAFE_ACTION = "A5_unsafe_action"
+

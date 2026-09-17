@@ -267,8 +267,12 @@ async def sms_advisory_endpoint(payload: SMSAdvisoryRequest, container: Containe
     tier = str(qa_res.resolution_tier.value) if hasattr(qa_res.resolution_tier, "value") else str(qa_res.resolution_tier)
     confidence = str(qa_res.confidence.value) if hasattr(qa_res.confidence, "value") else str(qa_res.confidence)
     
-    # 1. Safety Blocked or Out of Scope -> Strict 16123 referral SMS
-    if qa_res.category.value != "safe_agri" or confidence == "blocked" or confidence == "low_confidence":
+    # 1. Safety Blocked or Out of Scope -> Strict 16123 referral SMS.
+    # Fix 2026-09-17 (found by N05 measurement): answers carrying verifier flags
+    # contain UNSUPPORTED dosage claims, which must never be compressed into an
+    # SMS where the flag context is lost. They take the referral path too.
+    vflags = tuple(getattr(qa_res, "verifier_flags", ()) or ())
+    if qa_res.category.value != "safe_agri" or confidence == "blocked" or confidence == "low_confidence" or len(vflags) > 0:
         msg = "কৃষি তথ্য ও পরামর্শ পেতে সরকারি কৃষি কল সেন্টারে সরাসরি ডায়াল করুন: ১৬১২৩ (সকাল ৭টা-সন্ধ্যা ৭টা)।"
         return SMSAdvisoryResponse(
             sms_text=msg[:160],

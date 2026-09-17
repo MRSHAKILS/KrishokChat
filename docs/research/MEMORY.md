@@ -207,6 +207,19 @@ remains the uncovered floor (dense rescues; scope-gated future lane).
 out-of-corpus intents the keyword gate doesn't cover. Scoring churn risk
 handled by pinned sample.
 
+## Completed Milestones — Architecture Version 2.0 (2026-09-03)
+- **E02 Multimodal Edge Perception & Hazard Elimination SHIPPED:**
+  - 10-Class Primary Crop Classifier deployed (`yolo26s` base).
+  - Chilli Disease Specialist deployed (`yolo26n-cls`, 8 classes, 5.91 MB ONNX INT8, 99.68% held-out test accuracy).
+  - Calibrated Botanical Confusion Gate ($C_d \ge 0.85$, $M_d \ge 0.18$) halts Solanaceae cross-crop misclassification.
+  - Replay on 436 field-image benchmark: **$0.00\%$ cross-crop toxic hazard** ($0/436$), $48.62\%$ direct safe automation, $97.94\%$ total containment.
+  - Fail-closed Gate Disambiguation Cards implemented in frontend (`UncertainClarificationCard`, `SecondImageCard`, `OutOfDistributionCard`).
+- **Agronomic & Field Usability Hardening SHIPPED:**
+  - Integrated Pre-Harvest Interval (PHI: 7–14 days) and DAE Golden Spray Rules across UI and printable prescription slips.
+  - De-mystified soil tensiometer kPa metrics into tactile 'Jo' condition states and field squeeze tests.
+  - Added rural household matchbox powder benchmark (1 matchbox $\approx$ 10–12 g) in Dosage Calculator.
+  - Both paper tracks (EACL Demo v2.0 and CEA Research v2.0) compiling with 0 LaTeX errors.
+
 ## Next Actions
 1. **Researcher: fill `dataset_release/benchmark/scoring_sheet_v1.csv`** (2
    evaluators, per `scoring_rubric_v1.md`), then rerun `11_publish_golden_stats.py`.
@@ -222,8 +235,11 @@ handled by pinned sample.
 
 ## Key Files
 `docs/competitive-landscape.md`, `docs/research/LITERATURE_SCOUT_2026.md`,
-`docs/research/CRITIC_GAPS_2026.md`, `docs/research/ROADMAP_2026.md`.
+`docs/research/CRITIC_GAPS_2026.md`, `docs/research/ROADMAP_2026.md`,
+`docs/research/SYSTEM_SYNTHESIS_V2.md`, `docs/research/competitive/`.
 P4: `dataset_release/benchmark/{golden_qa_v1.jsonl, golden_runs_v1.json,
 scoring_sheet_v1.csv, scoring_rubric_v1.md, golden_review_dump_v1.md,
 golden_stats_v1.json}` + `frontend/src/lib/golden_stats.json`;
 `backend/ml_assets/rag_index/scripts/08..11_*.py`; `backend/app/api/benchmark.py`.
+Vision 2.0: `backend/app/domain/vision.py`, `backend/ml_assets/vision/`,
+`frontend/src/lib/vision-ondevice.ts`, `frontend/src/components/detect/diagnosis-card.tsx`.

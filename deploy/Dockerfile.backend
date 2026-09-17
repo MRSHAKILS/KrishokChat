@@ -1,0 +1,61 @@
+# syntax=docker/dockerfile:1
+FROM python:3.12-slim AS builder
+
+WORKDIR /app
+
+# Install build-time system packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install uv for ultra-fast deterministic dependency resolution
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+
+# Copy dependency specifications
+COPY pyproject.toml uv.lock* ./
+
+# Install production dependencies into virtual environment
+RUN uv sync --frozen --no-dev --no-install-project
+
+# ----------------------------------------------------------------------
+# Runtime Stage
+# ----------------------------------------------------------------------
+FROM python:3.12-slim AS runner
+
+WORKDIR /app
+
+# Runtime libraries required for PyTorch, OpenCV, and ONNX Runtime
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgomp1 \
+    libglib2.0-0 \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create non-root system user
+RUN groupadd -r krishok && useradd -r -g krishok -d /app -s /sbin/nologin krishok
+
+# Copy virtualenv and uv binary from builder
+COPY --from=builder /app/.venv /app/.venv
+COPY --from=builder /bin/uv /bin/uv
+
+ENV PATH="/app/.venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    KRISHOKCHAT_ENV=production
+
+# Copy application code and assets
+COPY app ./app
+COPY ml_assets ./ml_assets
+
+# Permissions
+RUN chown -R krishok:krishok /app
+
+USER krishok
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD curl -f http://localhost:8000/health/liveness || exit 1
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]

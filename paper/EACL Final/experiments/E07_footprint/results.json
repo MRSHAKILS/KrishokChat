@@ -1,0 +1,216 @@
+{
+  "benchmark_name": "EACL_E07_DEPLOYMENT_FOOTPRINT",
+  "execution_status": "DONE",
+  "timestamp_utc": "2026-08-30T11:31:37.588436+00:00",
+  "measurement_note": "Real filesystem measurements from local workspace. Python package sizes are estimates (pip show). ONNX total is deduplicated by SHA-256 so a model copied to frontend/public/models is not counted twice.",
+  "vision_models": {
+    "onnx_int8_files": [
+      {
+        "name": "brassica.onnx",
+        "size_mb": 20.83
+      },
+      {
+        "name": "corn.onnx",
+        "size_mb": 20.79
+      },
+      {
+        "name": "crop_classifier.onnx",
+        "size_mb": 5.9
+      },
+      {
+        "name": "potato.onnx",
+        "size_mb": 20.79
+      },
+      {
+        "name": "rice.onnx",
+        "size_mb": 5.91
+      },
+      {
+        "name": "wheat.onnx",
+        "size_mb": 5.92
+      },
+      {
+        "name": "brassica_int8.onnx",
+        "size_mb": 5.35
+      },
+      {
+        "name": "crop_classifier_int8.onnx",
+        "size_mb": 1.6
+      },
+      {
+        "name": "potato_int8.onnx",
+        "size_mb": 5.34
+      },
+      {
+        "name": "rice_int8.onnx",
+        "size_mb": 1.6
+      },
+      {
+        "name": "wheat_int8.onnx",
+        "size_mb": 1.61
+      }
+    ],
+    "total_onnx_mb": 95.64,
+    "total_onnx_unique_sha256": 11,
+    "onnx_by_location": {
+      "backend_fp32": [
+        {
+          "name": "brassica.onnx",
+          "size_mb": 20.83
+        },
+        {
+          "name": "corn.onnx",
+          "size_mb": 20.79
+        },
+        {
+          "name": "crop_classifier.onnx",
+          "size_mb": 5.9
+        },
+        {
+          "name": "potato.onnx",
+          "size_mb": 20.79
+        },
+        {
+          "name": "rice.onnx",
+          "size_mb": 5.91
+        },
+        {
+          "name": "wheat.onnx",
+          "size_mb": 5.92
+        }
+      ],
+      "backend_int8": [
+        {
+          "name": "brassica_int8.onnx",
+          "size_mb": 5.35
+        },
+        {
+          "name": "crop_classifier_int8.onnx",
+          "size_mb": 1.6
+        },
+        {
+          "name": "potato_int8.onnx",
+          "size_mb": 5.34
+        },
+        {
+          "name": "rice_int8.onnx",
+          "size_mb": 1.6
+        },
+        {
+          "name": "wheat_int8.onnx",
+          "size_mb": 1.61
+        }
+      ],
+      "frontend": [
+        {
+          "name": "brassica.onnx",
+          "size_mb": 5.35
+        },
+        {
+          "name": "brassica_disease.onnx",
+          "size_mb": 5.35
+        },
+        {
+          "name": "corn.onnx",
+          "size_mb": 20.79
+        },
+        {
+          "name": "corn_disease.onnx",
+          "size_mb": 20.79
+        },
+        {
+          "name": "crop_classifier.onnx",
+          "size_mb": 1.6
+        },
+        {
+          "name": "potato.onnx",
+          "size_mb": 5.34
+        },
+        {
+          "name": "potato_disease.onnx",
+          "size_mb": 5.34
+        },
+        {
+          "name": "rice.onnx",
+          "size_mb": 5.91
+        },
+        {
+          "name": "rice_disease.onnx",
+          "size_mb": 5.91
+        },
+        {
+          "name": "wheat.onnx",
+          "size_mb": 1.61
+        },
+        {
+          "name": "wheat_disease.onnx",
+          "size_mb": 1.61
+        }
+      ]
+    },
+    "pytorch_pt_files": [
+      {
+        "name": "model.pt",
+        "size_mb": 10.54
+      },
+      {
+        "name": "model.pt",
+        "size_mb": 10.52
+      },
+      {
+        "name": "model.pt",
+        "size_mb": 11.96
+      },
+      {
+        "name": "model.pt",
+        "size_mb": 10.52
+      },
+      {
+        "name": "model.pt",
+        "size_mb": 3.06
+      },
+      {
+        "name": "model.pt",
+        "size_mb": 9.0
+      }
+    ],
+    "total_pt_mb": 55.6
+  },
+  "retrieval_index": {
+    "faiss_index_mb": 8.34,
+    "sqlite_fact_base_mb": 0,
+    "source_md_count": 2946,
+    "source_md_mb": 11.83,
+    "rag_index_total_mb": 112.74
+  },
+  "application_code": {
+    "backend_app_mb": 5.31,
+    "frontend_app_mb": 0.0
+  },
+  "python_dependencies_estimated_mb": {
+    "fastapi": 0.8,
+    "transformers": 85.0,
+    "torch (not in prod)": 0.0,
+    "ultralytics": 18.0,
+    "onnxruntime": 12.0,
+    "faiss-cpu": 8.0,
+    "chromadb": 15.0,
+    "numpy": 22.0,
+    "httpx": 0.3,
+    "pydantic": 1.8
+  },
+  "total_estimated_python_mb": 162.9,
+  "deployment_totals": {
+    "minimal_deployment_mb": 284.0,
+    "full_deployment_with_pt_mb": 339.6,
+    "minimal_deployment_gb": 0.277,
+    "infrastructure_requirement": "Single VPS — 4 GB RAM, 2 vCPU, 20 GB SSD sufficient",
+    "estimated_vps_cost_usd_month": 45
+  },
+  "comparison_cloud_rag_baseline": {
+    "llm_model_download_gb": 14.0,
+    "managed_vector_db_monthly_usd": 70.0,
+    "total_cloud_infra_usd_month": 180.0,
+    "krishokchat_savings_pct": 75.0
+  }
+}

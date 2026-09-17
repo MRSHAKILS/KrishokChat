@@ -1,0 +1,12 @@
+id: N07
+title: BAA cross-modal gate re-run locally (demo-track badge number)
+question: What clarification trigger + CUAR does the deterministic gate get on 100 conflict cases, locally?
+status: PENDING
+beats: [D+E]
+lane: C (P1)
+design:
+  cases: E31 100 conflict cases (text Crop A + classifier Crop B @ high confidence)
+  method: deterministic qa_pipeline cross-modal halt path (no API cost); record trigger + would-be-chemical delivery
+  comparison: B0/B1/B4 rows from E08 baselines file (disclosed cross-track)
+  target_context: CEA B6 holds 100% [96.3,100] / 0% [0,3.7] at 1.25ms; local re-run mints the demo-track artifact
+outputs: [N07_badge_gate_rerun/results.json]

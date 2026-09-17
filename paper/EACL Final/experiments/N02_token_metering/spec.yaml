@@ -1,0 +1,24 @@
+id: N02
+title: Metered tokens on real strings (offline components locked; live lengths pending)
+question: What do clarification vs full-generation turns REALLY cost in tokens?
+status: REAL_MEASURED_PARTIAL
+beats: [B, C+G]
+lane: A
+locked_offline:
+  design: {n: 500, categories: [B, C, D, I, F], tokenizer: tiktoken-0.14.0-cl100k}
+  key:
+    clarification_answer: {n: 86, p50: 89.0, p95: 109.0, mean: 90.7}
+    retrieval_context: {n: 414, p50: 2146.0, p95: 2975.0, mean: 2200.6}
+    stub_answer: {n: 414, p50: 53.0, p95: 158.0, mean: 79.5}
+    tiers: {grounded_generation: 309, honest_refusal: 105, interactive_clarification: 86}
+  findings:
+    - The modeled 150-token clarification was 68% too high (metered p50 89).
+    - The modeled 1250-token generation ignored context: real retrieval context alone is p50 2,146.
+    - The modeled 88% is RETIRED. No single blended saving is claimed until live-generation lengths land (provider-exact, G5/SMS-live runs).
+pending_live_lengths:
+  method: provider usage records from G5 (n=400 NLU + generation) and SMS-live subsets
+  then: full-turn metered comparison (query + context + live generation vs clarification)
+outputs:
+  - N02_token_metering/results.json (offline components locked copy)
+labels:
+  stub_not_live: Stub answer lengths (p50 53) stand in for nothing; live lengths pending.

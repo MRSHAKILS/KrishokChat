@@ -25,12 +25,11 @@ paper/CEA Paper/
 ├── README.md                      <-- This guidebook
 ├── manifest.yaml                  <-- Machine-readable file & artifact manifest
 ├── manuscript/                    <-- Active, compilable LaTeX manuscript package
-│   ├── krishokchat_cea_main.tex   <-- Main LaTeX entry point (cas-dc document class)
-│   ├── krishokchat_cea_main.pdf   <-- Compiled 18-page publication PDF (0 errors)
+│   ├── main.tex                   <-- Consolidated monolithic LaTeX manuscript (cas-dc document class)
+│   ├── main.pdf                   <-- Compiled 22-page publication PDF (0 errors)
 │   ├── krishokchat_cea.bib        <-- Complete verified BibTeX database (0 placeholders)
 │   ├── NUMBER_BANK.md             <-- 160 KB canonical dictionary for all quantitative claims
-│   ├── sections/                  <-- 16 modular section .tex files (§1 Intro through §18 Conclusion)
-│   ├── tables/                    <-- 10 booktabs LaTeX tables (tab1 through tab10)
+│   ├── tables/                    <-- Reference booktabs LaTeX tables
 │   ├── figures/                   <-- All 6 high-resolution publication figures (fig_1 to fig_6)
 │   └── thumbnails/                <-- Elsevier CAS template visual assets
 ├── experiments/                   <-- Complete empirical research layer repository
@@ -57,10 +56,10 @@ The manuscript uses Elsevier's official `cas-dc` double-column document class. T
 
 ```bash
 cd "paper/CEA Paper/manuscript"
-pdflatex -interaction=nonstopmode krishokchat_cea_main.tex
-bibtex krishokchat_cea_main
-pdflatex -interaction=nonstopmode krishokchat_cea_main.tex
-pdflatex -interaction=nonstopmode krishokchat_cea_main.tex
+pdflatex -interaction=nonstopmode main.tex
+bibtex main
+pdflatex -interaction=nonstopmode main.tex
+pdflatex -interaction=nonstopmode main.tex
 ```
 
 > **Note on Float Placement:** All figure and table environments use `[pos=t]` syntax adhering to Elsevier CAS parser specifications. Figures are positioned inline within their respective sections (§3, §4, §8, §9, §10).

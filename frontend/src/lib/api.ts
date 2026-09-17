@@ -47,6 +47,17 @@ export interface SourceNode {
   expert_verified?: boolean;
 }
 
+export interface ProgressiveGuidance {
+  mode: string;
+  crop?: string | null;
+  problem?: string | null;
+  is_non_chemical: boolean;
+  title_bn: string;
+  field_checks_bn: string[];
+  cultural_controls_bn: string[];
+  safety_boundary_bn: string;
+}
+
 export interface QAResponse {
   query: string;
   category: string;
@@ -60,6 +71,9 @@ export interface QAResponse {
   safety_reason?: string | null;
   /** R3: how the answer was produced — resolution tier value from the backend. */
   resolution_tier?: string | null;
+  /** Stage 2 KAERA / PRISM: 5-level answerability rating */
+  answerability_level?: "A1_fully_supported" | "A2_strong_evidence" | "A3_partial_evidence" | "A4_missing_critical_info" | "A5_unsafe_action" | string | null;
+  progressive_guidance?: ProgressiveGuidance | null;
 }
 
 export interface ClassifyResponse {
@@ -99,6 +113,9 @@ export interface DetectResponse {
   verifier_flags: string[];
   agent_trace: AgentStageEvent[];
   quality_warnings: string[];
+  clarification_prompt_bn?: string | null;
+  suggested_crops?: string[];
+  requires_second_image?: boolean;
   error?: string | null;
 }
 

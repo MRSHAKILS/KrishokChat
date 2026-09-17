@@ -8,30 +8,15 @@ meta:
   venue: Computers and Electronics in Agriculture (CEA)
   publisher: Elsevier
   article_type: Original Research Paper
-  title: 'Bounded-Authority Verification for Safety-Critical Pesticide Advisory in Low-Resource Bengali Agriculture'
+  title: 'Neurosymbolic Safeguards for Agricultural Advisory: Deterministic Contract Verification in Safety-Critical Crop Protection'
   policy: ../../docs/PAPER_POLICY.md
   master_results_ssot: experiments/results.yaml
   registry_trace: ../../experiments/registry.yaml
 manuscript:
   root: manuscript/
-  driver: manuscript/krishokchat_cea_main.tex
+  driver: manuscript/main.tex
   bib: manuscript/krishokchat_cea.bib
-  sections:
-  - manuscript/sections/01_introduction.tex
-  - manuscript/sections/02_related_work.tex
-  - manuscript/sections/03_problem_formulation.tex
-  - manuscript/sections/04_system_architecture.tex
-  - manuscript/sections/05_knowledge_governance.tex
-  - manuscript/sections/06_experimental_methodology.tex
-  - manuscript/sections/07_results_advisory_quality.tex
-  - manuscript/sections/08_results_authority_safety.tex
-  - manuscript/sections/09_results_selective_reliability.tex
-  - manuscript/sections/10_results_robustness.tex
-  - manuscript/sections/14_discussion.tex
-  - manuscript/sections/15_deployment_implications.tex
-  - manuscript/sections/16_limitations.tex
-  - manuscript/sections/17_reproducibility.tex
-  - manuscript/sections/18_conclusion.tex
+  format: monolithic
   tables:
   - manuscript/tables/tab1_system_requirements.tex
   - manuscript/tables/tab2_literature_positioning.tex

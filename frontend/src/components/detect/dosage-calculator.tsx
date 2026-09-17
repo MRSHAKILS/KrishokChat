@@ -87,14 +87,18 @@ export function DosageCalculator({
   }, [calcMode, selectedTank, landArea, landUnit]);
 
   // Convert to practical household measurements
-  // Standard tea spoon = ~2 grams powder; 1 bottle cap (ছিপি) = ~10 ml liquid
+  // Standard tea spoon = ~2 grams powder; 1 matchbox = ~10-12 grams; 1 bottle cap (ছিপি) = ~10 ml liquid
   const practicalHouseholdMeasure = useMemo(() => {
     if (unitType === "g") {
       const spoons = Math.round((calculatedTotalDose / 2) * 10) / 10;
-      return `${toBn(spoons)} চা চামচ (প্রতি চামচ প্রায় ২ গ্রাম)`;
+      const matchboxes = Math.round((calculatedTotalDose / 10) * 10) / 10;
+      if (calculatedTotalDose >= 10) {
+        return `${toBn(spoons)} চা চামচ (বা প্রায় ${toBn(matchboxes)} দিয়াশলাই/ম্যাচ বাক্স — প্রতি বাক্সে প্রায় ১০ গ্রাম)`;
+      }
+      return `${toBn(spoons)} চা চামচ (প্রতি চামচ প্রায় ২ গ্রাম পাউডার)`;
     } else {
       const caps = Math.round((calculatedTotalDose / 10) * 10) / 10;
-      return `${toBn(caps)} বোতলের ছিপি (প্রতি ছিপি প্রায় ১০ মিলি)`;
+      return `${toBn(caps)} বোতলের ছিপি (প্রতি ছিপি প্রায় ১০ মিলি তরল ওষুধ)`;
     }
   }, [calculatedTotalDose, unitType]);
 

@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from typing import Protocol
+from typing import Any, Protocol
 
 
 class SessionStore(Protocol):
     def get(self, session_id: str) -> list[dict[str, str]]: ...
 
     def append(self, session_id: str, role: str, content: str) -> None: ...
+
+    def get_working_memory(self, session_id: str) -> dict[str, Any] | None: ...
+
+    def update_working_memory(self, session_id: str, memory_dict: dict[str, Any]) -> None: ...

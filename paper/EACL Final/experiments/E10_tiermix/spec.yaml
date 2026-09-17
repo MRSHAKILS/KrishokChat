@@ -1,0 +1,24 @@
+id: E10
+title: Tier-mix resolution distribution and modeled cost (n=1000)
+question: What share of real queries resolves with zero LLM calls, at what modeled cost?
+status: REAL_MEASURED_MIX_MODELED_COST
+beats: [C+G]
+runner:
+  report: docs/production_readiness/reports/tier_mix_20260825.md
+  dataset: backend/ml_assets/rag_index/eval/farmer_benchmark_1000.jsonl
+  n: 1000
+  price_basis: openrouter/google/gemini-2.5-flash-lite ($0.0001/1k in, $0.0004/1k out)
+key:
+  zero_llm_pct: 7.8
+  mix: {T0_deterministic_guard: 5.6, T1_structured_fact: 0.0, T2_templated_advisory: 2.2, T3_grounded_generation: 92.2, T4_honest_refusal: 0.0}
+  cost_per_1k_measured_mix_usd: 0.1798
+  cost_per_1k_baseline_usd: 0.195
+  saving_pct: 7.79
+  latency_p50_ms: 7.68
+  latency_p95_ms: 14.59
+labels:
+  costs_modeled: No token-metering hooks in batch mode; ~600 prompt / ~250 generation assumed. Metering upgrade = N02.
+  t1_zero_explained: 9-fact base — disclosed, motivates base growth.
+  projection_not_result: Fact-base expansion ~39% saving is scenario modeling.
+outputs:
+  - E10_tiermix/results.json (frozen copy of tier_mix_20260825.json)

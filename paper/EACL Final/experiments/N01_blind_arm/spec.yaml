@@ -1,0 +1,65 @@
+id: N01
+title: Blind-RAG hazard arm (equivalence locked; delta pending labels)
+question: What cross-crop hazard does the gate prevent vs blind retrieval on IDENTICAL real queries?
+status: REAL_MEASURED_PARTIAL
+beats: [B]
+lane: A
+locked_N01a:
+  design: {n_paired: 400, categories: [B, C, D, I], top_k: 5, blind: pipeline-identical minus gate, gated: frozen offline pipeline}
+  key:
+    blind_overall: 0.3
+    blind_ci95: [25.72, 34.66]
+    gated_overall: 0.3
+    gated_ci95: [25.72, 34.66]
+    gated_conditional_on_retrieved: 0.3
+    mcnemar_exact_p: 1.0
+    halt_rate: 0.0
+    unknown_frac: 0.1628
+    blind_terminals: 0
+    F_spread_mean_distinct_crops: 2.39
+  meaning: All 400 rows mention a recognizable crop, so the gate correctly passes everywhere and both arms retrieve identically. This checks construction fidelity ONLY (p=1.0 with zero discordants = no observed difference, not equivalence, not gate efficacy — the set cannot test the gate).
+pending_N01b:
+  needs: crop-absent-with-gold queries → team labels crop_slot_labeling_sheet_200.json (137 extractor-missing rows + 63 confirmations)
+  then: same frozen recipe, paired McNemar, hazard delta
+locked_N01b_farmer:
+  design: {n: 200, labels: agent-single-review-2026-09-17, arms: paired blind/gated, McNemar: true}
+  key_v2_current:
+    halt_rate: 0.38
+    halted_n: 76
+    passed_n: 122
+    refused_n: 2
+    extractor_agreement: 0.52
+    extractor_miss: 0.475
+    extractor_fp: 0.005
+    hazard_mapped_n: 56
+    hazard_blind_eq_gated: 0.1607
+    hazard_ci95: [8.69, 27.81]
+  history:
+    prefix_original_code: {halt_rate: 0.34, hazard: tie-0.1786}
+    v1_token_start_only: {halt_rate: 0.385, hazard_blind: 0.1786, hazard_gated: 0.1607, discordant_blind_only: 1}
+    v2_plus_punct_plus_lonka: {halt_rate: 0.38, hazard_tie: 0.1607, discordant: 0/0}
+  firewall_case_farmer_q_593:
+    prefix: misrouted as rice (FP via সমাধান); blind pulled rice chemicals
+    v1: halted (clarification) — blind hazard vs gated safe
+    v2: routes correctly to chilli (লঙ্কা synonym added) — both arms tie
+  meaning: >
+    On real queries the gate halts 38% (76/200: crop-less/general/dialectal rows) with zero
+    sources; blind retrieves on most halted rows but outside the chemical-hazard space
+    (0 mapped crops on halted rows). Mapped-crop rows all mention recognizable crops, so
+    the gate passes and arms tie at 16.07% [8.69, 27.81] (no observed difference; n=56
+    too small for equivalence). Halts concentrate on non-mapped crops
+    (mango/banana/papaya/dialectal): safe direction, but the crop universe needs
+    extension (disclosed limitation). No mappable-crop chemical-hazard case is observable
+    in these records (tier/preview only; rule-level chemical-entity audit pending) — the
+    chemical case rests on the E09 pilot until a gate-silent mappable set is measured.
+    Hazard numbers are single-reviewer; second human pass pending on disagreements +
+    unclear set.
+outputs:
+  - N01_blind_arm/results_equivalence.json (N01a locked copy)
+  - N01_blind_arm/results_farmer.json (N01b locked copy)
+  - N01_blind_arm/labeling_sheet_200.json (team labels with provenance)
+  - experiments/results/n01_records_20260917.jsonl (500 per-query records)
+  - experiments/results/n01b_records_20260917.jsonl (200 per-query records)
+labels:
+  retired: The 38.5% constant is dead.
+  method_split: Paired arms use thresholded retrieve(top_k=5); F-spread uses unthresholded candidates(depth=10)[:5] — F stays descriptive.

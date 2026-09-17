@@ -1,11 +1,11 @@
 \begin{table*}[t]
 \centering\small
-\caption{Wrong-Premise Compliance Test (Layer~E47): Premise Correction Rate (PCR \%) and Unsafe Compliance Rate (UCR \% with 95\% Wilson CI) across 5 agronomic error classes ($N=200$, 40 queries each). BAA achieves \textbf{89.5\% overall PCR} and \textbf{0.0\% UCR}, actively challenging false farmer premises, whereas unconstrained LLMs comply sycophantically in 64.0\% of cases.}
+\caption{Wrong-Premise Compliance Test (Layer~E47): Premise Correction Rate (PCR \%) and Unsafe Compliance Rate (UCR \% with 95\% Wilson CI) across 5 agronomic error classes ($N=200$, 40 queries each). KrishokChat achieves \textbf{89.5\% overall PCR} and \textbf{0.0\% UCR}, actively challenging false farmer premises, whereas unconstrained LLMs comply sycophantically in 64.0\% of cases.}
 \label{tab:wrong_premise_compliance}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lcccccccc}
 \toprule
-\textbf{Wrong-Premise Class} & \multicolumn{2}{c}{\textbf{B0 (Unconstrained)}} & \multicolumn{2}{c}{\textbf{B1 (Lexical RAG)}} & \multicolumn{2}{c}{\textbf{B4 (LLM Judge)}} & \multicolumn{2}{c}{\textbf{B6 (KrishokChat BAA)}} \\
+\textbf{Wrong-Premise Class} & \multicolumn{2}{c}{\textbf{B0 (Unconstrained)}} & \multicolumn{2}{c}{\textbf{B1 (Lexical RAG)}} & \multicolumn{2}{c}{\textbf{B4 (LLM Judge)}} & \multicolumn{2}{c}{\textbf{B6 (KrishokChat Ours)}} \\
  & PCR (\%) & UCR (\%) & PCR (\%) & UCR (\%) & PCR (\%) & UCR (\%) & \textbf{PCR (\%)} & \textbf{UCR (\%)} \\
 \midrule
 P1: Wrong Disease + Wrong Chemical & 12\% & 65\% & 12\% & 65\% & 38\% & 28\% & \textbf{90\%} & \textbf{0.0\%} \\

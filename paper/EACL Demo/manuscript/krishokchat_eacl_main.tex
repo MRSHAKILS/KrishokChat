@@ -18,10 +18,10 @@
 \title{KrishokChat: A Safety-Aware Multimodal Bengali Agricultural Advisory Platform}
 
 \author{
-  Raiyaan Reza \quad Research Collaborator \\
-  Department of Electrical and Computer Engineering \\
+  Khan Raiyan Ibne Reza \quad Sanjana Aktar Maria \quad Shakil Ahmed \quad Sumaiya Tabassum Nimi \\
+  Department of Computer Science and Engineering \\
   North South University, Dhaka 1229, Bangladesh \\
-  \texttt{raiyaan.reza@northsouth.edu}
+  \texttt{\{raiyan.reza, sanjana.maria, shakil.ahmed02, sumaiya.nimi\}@northsouth.edu}
 }
 
 \date{}
@@ -30,7 +30,7 @@
 \maketitle
 
 \begin{abstract}
-Smallholder agriculture in linguistically diverse, low-connectivity regions needs advice that is safe, grounded in trusted sources, and easy to inspect. We present \textbf{KrishokChat}, an open, production-oriented multimodal platform for Bengali agricultural advisory. It combines lightweight safety screening, hybrid BM25+dense retrieval over 2,946 institutional manuals, fine-tuned Gemma-4 4-bit generation, on-device classification vision, and fail-closed verification in one auditable session with live traces, ``Why this advice?'' evidence, and one-touch escalation to the national Krishi Call Center (16123). On-device perception couples a 10-crop YOLO26s router ($20.82$\,MB ONNX) with specialized disease models (including 10-class Rice covering Tungro virus, 11-class Brassica, and 3-class Potato) with $100\%$ PyTorch agreement, eliminating cross-crop chemical hazards ($0.0\%$ misbinding) and executing browser WASM inference in 26--265\,ms p50 single-thread. Offline-first BM25 hits 0.94 at p50~26.8\,ms and retains $+$13.25\,pp delivery at rural-edge (15\% loss) and $+$30.0\,pp at severe-2G (30\% loss) over cloud-only RAG. Traces are fully ordered in all 100 test streams (p50~9 events) and the minimal deployment is 284\,MB. On 210 live safety probes (420 total with baseline) the audited system shows 0.95\% overall attack success with 6.67\% on Bangla native injection. A live system and screencast are at \url{https://krishokchat.org}.
+Smallholder agriculture in linguistically diverse, low-connectivity regions needs advice that is safe, grounded in trusted sources, and easy to inspect. We present \textbf{KrishokChat}, an open, production-oriented multimodal platform for Bengali agricultural advisory. It combines lightweight safety screening, hybrid BM25+dense retrieval over 2,946 institutional manuals, fine-tuned Gemma-4 4-bit generation, on-device classification vision, and fail-closed verification in one auditable session with live traces, ``Why this advice?'' evidence, and one-touch escalation to the national Krishi Call Center (16123). On-device perception couples a 10-crop YOLO26s router ($20.82$\,MB ONNX) with specialized disease models (including 8-class Chilli, 10-class Rice covering Tungro virus, 11-class Brassica, and 3-class Potato) with $100\%$ PyTorch agreement, eliminating cross-crop chemical hazards ($0.0\%$ misbinding) and executing browser WASM inference in 26--265\,ms p50 single-thread. To prevent unhelpful farmer abandonment under uncertainty, KrishokChat incorporates a 5-level answerability framework ($A_1\text{--}A_5$) with Minimum Necessary Clarification (MNC) and progressive non-chemical cultural guidance. Offline-first BM25 hits 0.94 at p50~26.8\,ms and retains $+$13.25\,pp delivery at rural-edge (15\% loss) and $+$30.0\,pp at severe-2G (30\% loss) over cloud-only RAG. Traces are fully ordered in all 100 test streams (p50~9 events) and the minimal deployment is 284\,MB. On 210 live safety probes (420 total with baseline) the audited system shows 0.95\% overall attack success with 6.67\% on Bangla native injection. A live system and screencast are at \url{https://krishokchat.org}.
 \end{abstract}
 \input{sections/01_introduction.tex}
 \input{sections/02_system_architecture.tex}
@@ -40,5 +40,15 @@ Smallholder agriculture in linguistically diverse, low-connectivity regions need
 \input{sections/06_conclusion.tex}
 
 \bibliography{krishokchat_eacl}
+
+\clearpage
+\appendix
+\section{Decision Flowcharts and Extended Technical Schematics}
+\label{sec:appendix_flowcharts}
+
+This appendix provides the full-page algorithmic flowcharts for active slot disambiguation (Figure~\ref{fig:slot_disambiguation}) and on-device multimodal perception and contradiction resolution (Figure~\ref{fig:multimodal_contradiction}).
+
+\input{figures/fig2_slot_disambiguation_flowchart.tex}
+\input{figures/fig3_multimodal_contradiction_flowchart.tex}
 
 \end{document}

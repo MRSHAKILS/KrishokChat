@@ -104,7 +104,7 @@ _CROP_ALIASES: dict[str, list[str]] = {
     "tomato": ["tomato", "টমেটো", "টমেটোর", "টমাটো", "টমাটোর"],
     "wheat": ["wheat", "গম", "গমের", "গমে", "গমর"],
     "brinjal": ["brinjal", "eggplant", "বেগুন", "বেগুনের", "বেগুনর", "বেগুন গাছের", "বাইঙ্গন", "baingon", "begun", "beguner"],
-    "chilli": ["chilli", "chili", "মরিচ", "মরিচের", "মরিচর", "মরিস", "মরিসর", "moris", "morisor", "morich"],
+    "chilli": ["chilli", "chili", "মরিচ", "মরিচের", "মরিচর", "মরিস", "মরিসর", "লঙ্কা", "লংকা", "moris", "morisor", "morich"],
     "cabbage": ["cabbage", "বাঁধাকপি", "বাঁধাকপির", "পাতাকপি", "বাধাকপি"],
     "cauliflower": ["cauliflower", "ফুলকপি", "ফুলকপির"],
 }
@@ -124,9 +124,29 @@ CROP_NAMES_BN: dict[str, str] = {
 
 
 def _match_crop_alias(lowered: str) -> str | None:
+    """Crop match with Bengali word-boundary safety (fix 2026-09-17).
+
+    Plain substring/regex matching fires inside unrelated words because Bengali
+    vowel signs defeat ``\\b`` (e.g. rice alias "ধান" matched inside "সমাধান"
+    = solution). Rule: single-word aliases must match at the START of a
+    whitespace-delimited token (inflections like ধানের/আলুর still match);
+    multi-word aliases (contain a space) use substring matching.
+    Residual risk: tokens that merely START with an alias (e.g. place names).
+    Leading punctuation is stripped before matching (fix 2026-09-17b), so
+    "(ধানের)" matches; trailing punctuation was always safe.
+    """
+    import re as _re
+    strip_pat = _re.compile(r"^[^\w\u0980-\u09FF]+")
+    tokens = [strip_pat.sub("", t) for t in lowered.split()]
+    tokens = [t for t in tokens if t]
     for crop, aliases in _CROP_ALIASES.items():
-        if any(alias in lowered for alias in aliases):
-            return crop
+        ordered = sorted((str(a).strip().lower() for a in aliases if str(a).strip()), key=len, reverse=True)
+        for alias in ordered:
+            if " " in alias:
+                if alias in lowered:
+                    return crop
+            elif any(tok == alias or tok.startswith(alias) for tok in tokens):
+                return crop
     return None
 
 

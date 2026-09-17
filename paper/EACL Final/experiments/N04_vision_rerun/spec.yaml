@@ -1,0 +1,38 @@
+id: N04
+title: Vision re-run on current 10-class checkpoints (E02 replacement)
+question: What are per-model accuracy, ONNX parity, INT8 reportability, WASM timings on CURRENT hashes?
+status: REAL_MEASURED_PARTIAL
+beats: [D+E]
+lane: A
+contract: plans/experiments/results/artifact_hashes.md
+locked_accuracy_parity:
+  design: {manifest_n: 1237, checkpoints: current-20260917, imgsz_per_model: true}
+  key:
+    potato_top1: 0.9
+    potato_n: 30
+    rice_top1: 0.9625
+    rice_n: 80
+    rice_scope: 8 legacy classes (Others/Turongo support 0 — untested)
+    wheat_top1: 0.9413
+    wheat_n: 800
+    brassica_top1: 0.9118
+    brassica_n: 102
+    corn: unmeasured
+    chilli: unmeasured
+    onnx_agreement: 1.0
+    onnx_max_delta: 5e-05
+    router_top1_exact_match: 0.0259
+    router_rule: report ONLY as label-space-mismatch diagnostic + species breakdown; never as quality; drop router macroF1
+    routing_hint_off: {diagnosed: 308, uncertain: 387, not_recognized: 162, no_disease_model: 183, ood: 15, invalid_image: 10, requires_second_image: 38, healthy: 134}
+  forensic: critic ACCEPT-WITH-FIXES 2026-09-17, all 8 fixes applied (true notes, chilli listed, hashes regenerated); re-run reproduced identical metrics (deterministic)
+pending:
+  int8_rerun: conditional (gated on this pass — PASSED; schedule next)
+  wasm_rerun: conditional (needs playwright install + refreshed frontend models)
+  family_mapped_router_rescore: only with frozen preregistered mapping (none exists — do not post-hoc)
+labels:
+  coverage_gap: Tomato/Eggplant/Gourd/Guava route to no model; Wheat/Corn models have no router class (hint-only). Product limitation, disclosed.
+  gate_disclosure: tri-state crop gate + per-disease thresholds drive the distribution (VisionGateConfig values to be published in methods).
+outputs:
+  - N04_vision_rerun/results_baseline.json (locked copy)
+  - N04_vision_rerun/results_parity.json (locked copy)
+  - N04_vision_rerun/export_report.json (locked copy)

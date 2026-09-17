@@ -1,0 +1,12 @@
+﻿diff --git "a/paper\\EACL Final\\experiments\\results\\matcher_fix_v2_query_extractor_FULL.py" "b/backend\\app\\domain\\query_extractor.py"
+index 94d8907..c0509ee 100644
+--- "a/paper\\EACL Final\\experiments\\results\\matcher_fix_v2_query_extractor_FULL.py"	
++++ "b/backend\\app\\domain\\query_extractor.py"
+@@ -117,7 +117,6 @@ class QueryExtractor:
+         import re as _re
+         strip_pat = _re.compile(r"^[^\w\u0980-\u09FF]+")
+         lowered_tokens = [t for t in (strip_pat.sub("", t) for t in lowered.split()) if t]
+-        lowered_tokens = lowered.split()
+         detected_crop: str | None = None
+         detected_alias: str | None = None
+         for crop_id, aliases in _CROP_ALIASES.items():

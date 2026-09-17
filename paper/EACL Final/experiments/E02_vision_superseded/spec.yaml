@@ -1,0 +1,22 @@
+id: E02
+title: Vision accuracy/parity/INT8/WASM on pre-update checkpoints (SUPERSEDED)
+question: SUPERSEDED. What did the old-checkpoint vision stack measure?
+status: SUPERSEDED_PENDING_RERUN
+beats: [D+E]
+superseded_values:
+  note: Measured 2026-08-30 on checkpoints predating the 10-class router update. Excluded from all paper claims until N04 re-measures on current hashes (see plans/experiments/results/artifact_hashes.md).
+  per_model_top1: {potato: 0.9, rice: 0.925, wheat: 0.941, brassica: 0.912, crop_router: 0.941}
+  onnx_parity: {agreement: 1.0, max_delta: 5e-05, n: 1237}
+  int8: {accepted: 4, reportable: [crop_classifier, wheat_disease], rejected: [rice_disease], unmeasured: [corn_disease]}
+  wasm_browser_p50_ms: 26-265
+valid_inputs_for_rerun:
+  manifest: paper/EACL Demo/experiments/E02_multimodal_diagnostic_workflow/vision_eval_manifest.json
+  manifest_n: 1237
+  scripts:
+    - paper/EACL Demo/experiments/E02_multimodal_diagnostic_workflow/scripts/run_real_e02a_pt_baseline.py
+    - paper/EACL Demo/experiments/E02_multimodal_diagnostic_workflow/scripts/run_real_e02b_onnx_parity.py
+    - paper/EACL Demo/experiments/E02_multimodal_diagnostic_workflow/scripts/quantize_vision_int8.py
+    - paper/EACL Demo/experiments/E02_multimodal_diagnostic_workflow/scripts/measure_browser_standalone.mjs
+labels:
+  do_not_cite: No E02 number enters Tab.2/abstract until N04 lands.
+outputs: []

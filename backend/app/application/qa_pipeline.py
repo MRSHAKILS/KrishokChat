@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 from dataclasses import replace
 
 from app.application.chunk_fallback import ChunkFallbackResolver
-from app.application.generation import GroundedAnswerGenerator, REFERRAL
+from app.application.generation import GroundedAnswerGenerator, REFERRAL, format_progressive_guidance_text
 from app.application.query_builder import build_retrieval_query
 from app.application.rewrite import ConversationalQueryRewriter
 from app.application.safety import SafetyClassifier
@@ -23,6 +23,7 @@ from app.application.telemetry import (
     stage_timer,
 )
 from app.core.config import settings
+from app.domain.answerability import AnswerabilityEvaluator
 from app.domain.contracts import (
     PipelineEvent,
     QAResult,
@@ -31,9 +32,21 @@ from app.domain.contracts import (
     SafetyDecision,
     VerificationResult,
 )
-from app.domain.enums import PipelineStage, ResolutionTier, SafetyCategory, StageStatus, VerificationConfidence
+from app.domain.enums import (
+    AnswerabilityLevel,
+    PipelineStage,
+    ResolutionTier,
+    SafetyCategory,
+    StageStatus,
+    VerificationConfidence,
+)
 from app.domain.resolution import tier_for
 from app.domain.safety_policy import canned_response
+from app.application.adaptive_router import AdaptiveRetrievalRouter, RetrievalRoute
+from app.application.evidence_agreement import EvidenceAgreementGate
+from app.domain.concept_normalizer import ConceptNormalizer
+from app.domain.query_extractor import QueryExtractor
+from app.domain.working_memory import AgriculturalWorkingMemory
 from app.infrastructure.cache.demo import DemoAnswerCache, qa_result_from_dict, qa_result_to_dict
 from app.ports.audit import AuditSink
 from app.ports.retriever import Retriever
@@ -174,6 +187,33 @@ class QAPipeline:
             history=tuple(history),
             farmer_context=request.farmer_context,
         )
+        raw_mem = (
+            getattr(self.sessions, "get_working_memory", lambda _: None)(request.session_id)
+            if request.session_id
+            else None
+        )
+        working_memory = AgriculturalWorkingMemory.from_dict(raw_mem)
+        info_state = QueryExtractor.extract(request.query)
+        effective_crop = request.crop or context.crop or info_state.crop or working_memory.crop
+        concept_res = ConceptNormalizer.normalize(request.query, crop=effective_crop)
+        working_memory = working_memory.merge(
+            crop=effective_crop,
+            problem_type=info_state.problem_type,
+            symptom=info_state.symptom or concept_res.matched_expression,
+            location=info_state.location,
+            temporal_event=info_state.temporal_event,
+            candidate_hypotheses=concept_res.retrieval_hypotheses,
+        )
+        if request.session_id and hasattr(self.sessions, "update_working_memory"):
+            self.sessions.update_working_memory(request.session_id, working_memory.to_dict())
+
+        if not context.crop and working_memory.crop:
+            context = QueryContext(
+                crop=working_memory.crop,
+                disease=context.disease or working_memory.disease_candidate,
+                history=context.history,
+                farmer_context=context.farmer_context,
+            )
         decision: SafetyDecision | None = None
         sources: list[RetrievedSource] = []
         retrieved: list[RetrievedSource] = []
@@ -280,6 +320,7 @@ class QAPipeline:
                         category=decision.category,
                         matched_rules=decision.matched_rules,
                     ),
+                    answerability_level=AnswerabilityLevel.A5_UNSAFE_ACTION,
                 )
                 return result
 
@@ -336,6 +377,7 @@ class QAPipeline:
                         matched_rules=decision.matched_rules,
                         safety_reason=None,
                         resolution_tier=resolved.tier,
+                        answerability_level=AnswerabilityLevel.A1_FULLY_SUPPORTED,
                     )
                     return result
 
@@ -363,6 +405,7 @@ class QAPipeline:
                     matched_rules=decision.matched_rules,
                     safety_reason="Cross-modal contradiction: image and text crop mismatch",
                     resolution_tier=ResolutionTier.INTERACTIVE_CLARIFICATION,
+                    answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
                 )
                 self._audit(
                     request,
@@ -388,6 +431,7 @@ class QAPipeline:
             has_crop = bool(
                 request.crop
                 or context.crop
+                or working_memory.crop
                 or (decision.intent and decision.intent.crop)
                 or _match_crop_alias(request.query.lower())
                 or request.seed_sources
@@ -415,6 +459,7 @@ class QAPipeline:
                     matched_rules=decision.matched_rules,
                     safety_reason="Interactive disambiguation: crop slot missing",
                     resolution_tier=ResolutionTier.INTERACTIVE_CLARIFICATION,
+                    answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
                 )
                 self._audit(
                     request,
@@ -434,14 +479,24 @@ class QAPipeline:
                     self.sessions.append(request.session_id, "assistant", result.answer)
                 return result
 
+            # Stage 2B: Adaptive Retrieval Routing (PRISM-RAG Module 2B.4)
+            routing_decision = AdaptiveRetrievalRouter.route(request.query, working_memory=working_memory)
+
             await emit(PipelineStage.RETRIEVAL, StageStatus.START)
             with stage_timer("retrieval", timings):
+                base_query = (
+                    routing_decision.primary_query
+                    if routing_decision.route in (RetrievalRoute.ROUTE_C_CONCEPT_HYPOTHESES, RetrievalRoute.ROUTE_D_CONVERSATIONAL_FOLLOW_UP)
+                    else request.query
+                )
                 if self.rewriter is not None:
                     retrieval_query, rewritten = await self.rewriter.maybe_rewrite(
-                        request.query, context.history
+                        base_query, context.history
                     )
                     if rewritten:
                         llm_calls += 1  # R3: rewriter consumed one LLM call
+                else:
+                    retrieval_query = base_query
                 retrieval_query = build_retrieval_query(retrieval_query, context, decision.category.value)
                 retrieved = await asyncio.to_thread(self.retriever.retrieve, retrieval_query, top_k=self.top_k)
                 seen_ids: set[str] = set()
@@ -472,6 +527,50 @@ class QAPipeline:
                 if expansion and expansion[2]:
                     detail += " · " + "; ".join(expansion[2][:3])
                 await emit(PipelineStage.RETRIEVAL, StageStatus.COMPLETE, detail)
+
+            # Module 2B.5 & 2B.6: Evidence Disagreement Gate & Discriminative MNC
+            agreement_res = EvidenceAgreementGate.evaluate(
+                sources=[{"content": s.content_bn or s.content_en} for s in sources],
+                candidate_hypotheses=working_memory.candidate_hypotheses,
+            )
+            if agreement_res.is_conflicting and agreement_res.discriminative_question and len(sources) >= 2:
+                for stage in (PipelineStage.GENERATION, PipelineStage.VERIFIER):
+                    await emit(stage, StageStatus.SKIP, "evidence conflict — discriminative clarification requested")
+                conflict_answer = (
+                    f"আপনার ফসলের লক্ষণে একাধিক সম্ভাব্য রোগের আভাস পাওয়া গেছে "
+                    f"({', '.join(agreement_res.competing_diseases)})।\n\n"
+                    f"{agreement_res.discriminative_question}"
+                )
+                result = QAResult(
+                    query=request.query,
+                    category=decision.category,
+                    answer=conflict_answer,
+                    sources=tuple(sources[:2]),
+                    confidence=VerificationConfidence.VERIFIED,
+                    trace=tuple(trace),
+                    matched_rules=decision.matched_rules,
+                    safety_reason="Evidence disagreement: competing pathogen hypotheses",
+                    resolution_tier=ResolutionTier.INTERACTIVE_CLARIFICATION,
+                    answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
+                    quick_reply_chips=list(agreement_res.quick_reply_chips),
+                )
+                self._audit(
+                    request,
+                    result,
+                    verifier_flags=(),
+                    decision=decision,
+                    retrieved=retrieved,
+                    cached=False,
+                    retrieval_query=retrieval_query,
+                    rewritten=rewritten,
+                    timings=timings,
+                    generation_lane=None,
+                    llm_calls=llm_calls,
+                )
+                if request.session_id:
+                    self.sessions.append(request.session_id, "user", request.query)
+                    self.sessions.append(request.session_id, "assistant", result.answer)
+                return result
 
             await emit(PipelineStage.GENERATION, StageStatus.START)
             with stage_timer("generation", timings):
@@ -523,6 +622,46 @@ class QAPipeline:
                     final_answer = verification.sanitized_answer or REFERRAL
                 await emit(PipelineStage.VERIFIER, StageStatus.COMPLETE, verification.confidence.value)
 
+            # Stage 2 KAERA / PRISM: Answerability & Progressive Guidance
+            answerability_lvl = AnswerabilityEvaluator.evaluate(
+                category=decision.category,
+                intent=decision.intent,
+                query=request.query,
+                has_crop=has_crop,
+                retrieved_sources=sources,
+                is_fact_resolved=False,
+                matched_rules=decision.matched_rules,
+            )
+            progressive_payload = None
+
+            # If final_answer collapsed to REFERRAL, provide structured
+            # non-chemical cultural guidance and field inspection points
+            # instead of an empty unhelpful refusal!
+            if final_answer == REFERRAL:
+                crop_name = request.crop or context.crop or (decision.intent.crop if decision.intent else None)
+                prob_name = request.disease or context.disease or (decision.intent.problem if decision.intent else None)
+                if crop_name or prob_name:
+                    progressive_payload = AnswerabilityEvaluator.build_progressive_guidance(
+                        crop=crop_name,
+                        problem=prob_name,
+                        sources=sources,
+                    )
+                    final_answer = format_progressive_guidance_text(progressive_payload)
+                    answerability_lvl = AnswerabilityLevel.A3_PARTIAL_EVIDENCE
+                    tier = ResolutionTier.PROGRESSIVE_GUIDANCE
+                else:
+                    tier = tier_for(
+                        category=decision.category,
+                        matched_rules=decision.matched_rules,
+                        generated=False,
+                    )
+            else:
+                tier = tier_for(
+                    category=decision.category,
+                    matched_rules=decision.matched_rules,
+                    generated=True,
+                )
+
             # R3: LLM was called if the safety classifier had no precheck match.
             if not decision.matched_rules:
                 llm_calls += 1  # safety LLM branch
@@ -538,11 +677,9 @@ class QAPipeline:
                 verifier_claims=verification.claims,
                 model=generated.model,
                 error=generated.error,
-                resolution_tier=tier_for(
-                    category=decision.category,
-                    matched_rules=decision.matched_rules,
-                    generated=True,
-                ),
+                resolution_tier=tier,
+                answerability_level=answerability_lvl,
+                progressive_guidance=progressive_payload,
             )
             # B1: store verified safe answers for exact replay. Terminal
             # refusals are never cached (they must re-run safety every time),

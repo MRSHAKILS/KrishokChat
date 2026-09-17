@@ -81,6 +81,7 @@ export function IntakeZone({
           <option value="corn">ভুট্টা</option>
           <option value="potato">আলু</option>
           <option value="brassica">বাঁধাকপি / ফুলকপি</option>
+          <option value="chilli">মরিচ</option>
         </select>
         {cropHint && (
           <span className="w-full text-xs text-leaf sm:w-auto">

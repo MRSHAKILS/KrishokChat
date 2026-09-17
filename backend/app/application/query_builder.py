@@ -20,7 +20,23 @@ BNGLISH_TERMS = {
 def build_retrieval_query(query: str, context: QueryContext, category: str) -> str:
     terms = [query]
     lowered = query.lower()
-    terms.extend(english for bengali, english in BNGLISH_TERMS.items() if bengali in lowered)
+    # Token-start matching (fix 2026-09-17): plain substring matching injected
+    # false bridge terms because Bengali vowel signs defeat \b (e.g. "ধান"→rice
+    # fired inside "সমাধান"=solution). Single-word keys must open a token;
+    # multi-word keys (contain a space) keep substring matching. Residual risk:
+    # tokens merely starting with a key (place names); other substring keyword
+    # lists (follow-up/fertilizer/symptom) are unchanged and noted as residual.
+    tokens = lowered.split()
+    for bengali, english in BNGLISH_TERMS.items():
+        key = bengali.strip().lower()
+        if not key:
+            continue
+        if " " in key:
+            hit = key in lowered
+        else:
+            hit = any(tok == key or tok.startswith(key) for tok in tokens)
+        if hit:
+            terms.append(english)
     if context.crop:
         terms.append(context.crop.replace("__", " ").replace("_", " ").lower())
     if context.disease:

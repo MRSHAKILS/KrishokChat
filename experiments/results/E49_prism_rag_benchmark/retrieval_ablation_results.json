@@ -1,0 +1,52 @@
+{
+  "1_BM25_Raw": {
+    "recall_at_5": 67.1,
+    "recall_at_10": 74.3,
+    "mrr": 0.5831,
+    "ndcg_at_10": 0.6937,
+    "evidence_coverage": 74.3,
+    "cross_crop_hazard_rate": 3.18,
+    "latency_p50_ms": 5.878,
+    "latency_p95_ms": 14.141
+  },
+  "2_BM25_Dialect_Lexical": {
+    "recall_at_5": 67.1,
+    "recall_at_10": 74.3,
+    "mrr": 0.5831,
+    "ndcg_at_10": 0.6937,
+    "evidence_coverage": 74.3,
+    "cross_crop_hazard_rate": 3.18,
+    "latency_p50_ms": 5.674,
+    "latency_p95_ms": 13.394
+  },
+  "3_PRISM_Concept_Expansion": {
+    "recall_at_5": 87.0,
+    "recall_at_10": 93.4,
+    "mrr": 0.779,
+    "ndcg_at_10": 0.8558,
+    "evidence_coverage": 93.4,
+    "cross_crop_hazard_rate": 3.74,
+    "latency_p50_ms": 9.454,
+    "latency_p95_ms": 19.89
+  },
+  "4_PRISM_Adaptive_Filtered": {
+    "recall_at_5": 87.0,
+    "recall_at_10": 93.4,
+    "mrr": 0.779,
+    "ndcg_at_10": 0.8558,
+    "evidence_coverage": 93.4,
+    "cross_crop_hazard_rate": 3.74,
+    "latency_p50_ms": 9.026,
+    "latency_p95_ms": 18.271
+  },
+  "5_PRISM_Full_Working_Memory": {
+    "recall_at_5": 89.7,
+    "recall_at_10": 94.2,
+    "mrr": 0.807,
+    "ndcg_at_10": 0.8731,
+    "evidence_coverage": 94.2,
+    "cross_crop_hazard_rate": 3.74,
+    "latency_p50_ms": 9.004,
+    "latency_p95_ms": 18.2
+  }
+}

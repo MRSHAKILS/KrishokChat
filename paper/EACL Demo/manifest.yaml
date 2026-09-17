@@ -1,13 +1,13 @@
 # paper/EACL Demo/manifest.yaml — Local Manifest for the EACL 2027 System Demonstration Package
 # Target Venue: EACL 2027 System Demonstrations (ACL)
-# Article Type: System Demonstration Paper (<= 6 pages)
-# Status: All 8 Experiments Executed, Verified, and Synced
-# Last Audited: 2026-08-28
+# Article Type: System Demonstration Paper (<= 6 pages main + unlimited refs/appendix)
+# Status: All Experiments Executed, Verified, and Synced with Formal Appendix
+# Last Audited: 2026-09-03
 
 meta:
   venue: EACL 2027 System Demonstrations
   publisher: Association for Computational Linguistics (ACL)
-  article_type: System Demonstration Paper (<= 6 pages)
+  article_type: System Demonstration Paper (<= 6 pages main + unlimited refs/appendix)
   title: "KrishokChat: A Safety-Aware Multimodal Bengali Agricultural Advisory Platform"
   policy: ../../docs/PAPER_POLICY.md
   master_results_ssot: experiments/results.yaml

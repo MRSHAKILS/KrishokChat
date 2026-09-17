@@ -37,7 +37,14 @@ from app.domain.contracts import (
     RetrievedSource,
     VerifierClaim,
 )
-from app.domain.enums import PipelineStage, ResolutionTier, SafetyCategory, StageStatus, VerificationConfidence
+from app.domain.enums import (
+    AnswerabilityLevel,
+    PipelineStage,
+    ResolutionTier,
+    SafetyCategory,
+    StageStatus,
+    VerificationConfidence,
+)
 
 
 # --------------------------------------------------------------------------
@@ -57,6 +64,8 @@ def qa_result_to_dict(result: QAResult) -> dict[str, Any]:
         "safety_reason": result.safety_reason,
         # R3: tier stored so replays report the original tier, not the default.
         "resolution_tier": result.resolution_tier.value,
+        "answerability_level": getattr(result, "answerability_level", AnswerabilityLevel.A2_STRONG_EVIDENCE).value,
+        "progressive_guidance": getattr(result, "progressive_guidance", None),
         "sources": [
             {
                 "id": source.id,
@@ -98,6 +107,13 @@ def qa_result_from_dict(payload: dict[str, Any]) -> QAResult:
         tier = ResolutionTier(raw_tier)
     except ValueError:
         tier = ResolutionTier.GROUNDED_GENERATION
+
+    raw_ans = payload.get("answerability_level", "A2_strong_evidence")
+    try:
+        ans_lvl = AnswerabilityLevel(raw_ans)
+    except ValueError:
+        ans_lvl = AnswerabilityLevel.A2_STRONG_EVIDENCE
+
     return QAResult(
         query=payload["query"],
         category=SafetyCategory(payload["category"]),
@@ -108,6 +124,8 @@ def qa_result_from_dict(payload: dict[str, Any]) -> QAResult:
         matched_rules=tuple(payload.get("matched_rules") or ()),
         safety_reason=payload.get("safety_reason"),
         resolution_tier=tier,
+        answerability_level=ans_lvl,
+        progressive_guidance=payload.get("progressive_guidance"),
         sources=tuple(
             RetrievedSource(
                 id=source["id"],

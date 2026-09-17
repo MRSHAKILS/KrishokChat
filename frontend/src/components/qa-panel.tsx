@@ -263,6 +263,17 @@ export function QAPanel({
     return () => window.removeEventListener("focus", checkLocalAvailability);
   }, [checkLocalAvailability]);
 
+  // Clean up in-flight requests and animation frames on unmount
+  useEffect(() => {
+    return () => {
+      requestRef.current?.abort();
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, []);
+
   // Scroll management — scroll ONLY the chat container, never the page.
   const scrollRef = useRef<HTMLDivElement>(null);
   const prevMsgCount = useRef(0);

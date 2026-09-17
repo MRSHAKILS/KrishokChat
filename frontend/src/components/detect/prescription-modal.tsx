@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
@@ -14,7 +14,10 @@ import {
   AlertCircle,
   Copy,
   Check,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { APP, HELPLINE } from "@/lib/constants";
 import { toBn } from "@/lib/use-count-up";
 import { cropBn, translateDiseaseToBn, humanizeLabel } from "@/lib/bn";
@@ -34,7 +37,16 @@ export function PrescriptionModal({
   cropHint,
 }: PrescriptionModalProps) {
   const [copied, setCopied] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const printRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
 
   if (!open) return null;
 
@@ -46,6 +58,34 @@ export function PrescriptionModal({
     month: "long",
     day: "numeric",
   }).format(new Date());
+
+  const handleToggleSpeak = () => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+
+    const textToRead = `কৃষি পরামর্শ ও ব্যবস্থাপত্র পত্রক। ফসল: ${cropDisplay}। শনাক্তকৃত রোগ: ${diseaseDisplay}। মূল পরামর্শ ও প্রেসক্রিপশন: ${result.treatment_advice ?? "কোনো প্রেসক্রিপশন নেই"}। জরুরি পরামর্শের জন্য কল করুন ১৬১২৩।`;
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.lang = "bn-BD";
+    utterance.rate = 0.92;
+
+    const voices = window.speechSynthesis.getVoices();
+    const bnVoice = voices.find(
+      (v) => v.lang.startsWith("bn") || v.lang.toLowerCase().includes("bengali") || v.lang.toLowerCase().includes("bangla")
+    );
+    if (bnVoice) utterance.voice = bnVoice;
+
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+
+    setIsSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  };
 
   const handlePrint = () => {
     window.print();
@@ -103,6 +143,20 @@ export function PrescriptionModal({
               <span>কৃষি পরামর্শ ও ব্যবস্থাপত্র পত্রক</span>
             </div>
             <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleToggleSpeak}
+                className={cn(
+                  "control-press inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-semibold cursor-pointer shadow-2xs transition-colors",
+                  isSpeaking
+                    ? "border-clay bg-clay text-paper animate-pulse"
+                    : "border-ochre/40 bg-ochre/10 text-ochre hover:bg-ochre hover:text-paper"
+                )}
+                title={isSpeaking ? "পড়া বন্ধ করুন" : "প্রেসক্রিপশন শুনে নিন"}
+              >
+                {isSpeaking ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
+                {isSpeaking ? "থামুন" : "শুনুন"}
+              </button>
               <button
                 type="button"
                 onClick={handlePrint}
@@ -211,15 +265,15 @@ export function PrescriptionModal({
               <ul className="space-y-2 text-xs text-ink-soft">
                 <li className="flex items-start gap-2">
                   <span className="text-leaf font-bold">•</span>
-                  <span><strong>স্প্রে করার উপযুক্ত সময়:</strong> কড়া রোদে স্প্রে করবেন না; সকালের দিকে বা বিকেলে স্প্রে করুন।</span>
+                  <span><strong>স্প্রে করার উপযুক্ত সময়:</strong> কখনও দুপুরের প্রখর রোদে স্প্রে করবেন না। সকালের শিশির শুকানোর পর (সকাল ৯টা-১১টা) অথবা বিকালের মৃদু রোদে বাতাসের অনুকূলে পিঠ রেখে স্প্রে করুন।</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-leaf font-bold">•</span>
-                  <span><strong>সুরক্ষা পোশাক:</strong> মাস্ক, গ্লাভস ও ফুল হাতা জামা পরে স্প্রে করুন। স্প্রে করার সময় ধুমপান বা খাবার গ্রহণ করবেন না।</span>
+                  <span><strong>ব্যক্তিগত সুরক্ষা ও সতর্কতা:</strong> মুখে গামছা বা মাস্ক বাঁধুন এবং ফুল হাতা জামা পরে স্প্রে করুন। স্প্রে করার সময় ধূমপান বা কোনো কিছু খাওয়া নিষিদ্ধ। স্প্রে শেষে সাবান দিয়ে ভালো করে হাত-মুখ ধুয়ে গোসল করুন।</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-leaf font-bold">•</span>
-                  <span><strong>ফসল তোলার বিরতি (PHI):</strong> বালাইনাশক স্প্রে করার পর অন্তত ৭ থেকে ১৪ দিন পর্যন্ত ফসল বাজারজাত বা খাওয়া থেকে বিরত থাকুন।</span>
+                  <span><strong>ফসল তোলার অপেক্ষমাণ সময় (PHI):</strong> বালাইনাশক স্প্রে করার পর অন্তত ৭ থেকে ১৪ দিন পর্যন্ত ফসল তোলা, বাজারে বিক্রি বা পরিবারের খাওয়ার জন্য ব্যবহার সম্পূর্ণ বন্ধ রাখুন।</span>
                 </li>
               </ul>
             </div>

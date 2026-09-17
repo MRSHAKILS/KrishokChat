@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../deploy/Dockerfile.backend
+    container_name: krishokchat_backend
+    restart: unless-stopped
+    environment:
+      - KRISHOKCHAT_ENV=production
+      - LOG_LEVEL=INFO
+      - SQLITE_DB_PATH=/app/data/krishokchat.sqlite3
+      - AUDIT_LOG_PATH=/app/data/audit.jsonl
+    env_file:
+      - .env
+    volumes:
+      - krishokchat_data:/app/data
+      - ./backend/ml_assets:/app/ml_assets:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/liveness"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - krishok_net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../deploy/Dockerfile.frontend
+    container_name: krishokchat_frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      - krishok_net
+
+  proxy:
+    image: nginx:alpine
+    container_name: krishokchat_proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - krishok_net
+
+volumes:
+  krishokchat_data:
+    driver: local
+
+networks:
+  krishok_net:
+    driver: bridge

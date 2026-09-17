@@ -116,6 +116,8 @@ def _response(result: QAResult) -> QAResponse:
         matched_rules=list(result.matched_rules),
         safety_reason=result.safety_reason,
         resolution_tier=result.resolution_tier.value,
+        answerability_level=getattr(result, "answerability_level", None) and result.answerability_level.value or "A2_strong_evidence",
+        progressive_guidance=getattr(result, "progressive_guidance", None),
     )
 
 

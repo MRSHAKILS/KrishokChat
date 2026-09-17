@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, AlertCircle, Eye, EyeOff, Copy, Check } from "lucide-react";
+import { ChevronDown, AlertCircle, Eye, EyeOff, Copy, Check, Sprout } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { dur, ease } from "@/lib/motion";
 import { QA_STAGES, PipelineRail, type RailEvent } from "@/components/detect/pipeline-rail";
@@ -273,6 +273,14 @@ function CompletedContent({
 
   return (
     <div className="space-y-3">
+      {/* KAERA A3 Progressive Non-Chemical Guidance Badge */}
+      {response.progressive_guidance && (
+        <div className="flex items-center gap-2 rounded-xl bg-leaf/10 border border-leaf/20 px-3.5 py-2 text-xs font-semibold text-leaf shadow-2xs">
+          <Sprout className="h-4 w-4 shrink-0" />
+          <span>পরিবেশবান্ধব ও সাধারণ পরিচর্যা নির্দেশিকা (নন-কেমিক্যাল)</span>
+        </div>
+      )}
+
       {/* Answer text with styled citation pills and synchronized TTS highlighting */}
       <motion.p
         initial={{ opacity: 0, y: 4 }}

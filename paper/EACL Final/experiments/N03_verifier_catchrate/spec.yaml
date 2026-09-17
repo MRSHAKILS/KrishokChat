@@ -1,0 +1,14 @@
+id: N03
+title: Verifier catch-rate on mutated real answers
+question: Does the dosage-claim verifier catch single-field mutations in REAL generated answers?
+status: PENDING
+beats: [F]
+lane: B-lite
+design:
+  answers: frozen T3 pipeline with LIVE generation over >=200 Treatment QA items (real answers + real sources; stub outputs banned)
+  mutations_per_item: [dose_x2, dose_div2, unit_swap, phi_swap, chemical_swap, interval_swap]
+  controls: 1 clean copy per item (>=200)
+  metrics: [catch_rate_per_type, false_positive_rate, verdict_confusion, latency_p50_p95]
+  review: 50 catches + 50 misses manually characterized
+  lite_lane_b: 100 items x 4 types acceptable if week presses
+outputs: [N03_verifier_catchrate/results.json]

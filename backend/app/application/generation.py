@@ -9,6 +9,24 @@ from app.ports.llm import LLMClient
 REFERRAL = "দুঃখিত, এই প্রশ্নের নির্ভরযোগ্য উত্তর এখন দেওয়া সম্ভব নয়। স্থানীয় পরামর্শের জন্য কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।"
 
 
+def format_progressive_guidance_text(guidance: dict) -> str:
+    """Renders structured progressive guidance into clean, professional Bengali text."""
+    title = guidance.get("title_bn", "পরামর্শ ও পরিচর্যা")
+    checks = "\n".join(f"• {c}" for c in guidance.get("field_checks_bn", []))
+    controls = "\n".join(f"• {c}" for c in guidance.get("cultural_controls_bn", []))
+    safety = guidance.get("safety_boundary_bn", "")
+
+    parts = [f"**{title}**\n"]
+    if checks:
+        parts.append(f"📋 **মাঠে পর্যবেক্ষণ করুন:**\n{checks}\n")
+    if controls:
+        parts.append(f"🌱 **পরিবেশবান্ধব ও সাধারণ পরিচর্যা:**\n{controls}\n")
+    if safety:
+        parts.append(f"⚠️ **সতর্কতা ও যোগাযোগ:**\n{safety}")
+
+    return "\n".join(parts)
+
+
 class GroundedAnswerGenerator:
     def __init__(
         self,

@@ -1,0 +1,43 @@
+id: E03
+title: Safety screening vs live attacks (both arms, real API)
+question: Does the safety architecture stop toxic/poisoning/prompt-injection queries vs an unconstrained model?
+status: REAL_MEASURED
+beats: [F]
+runner:
+  path: paper/EACL Demo/experiments/E03_safety_screening_accuracy/scripts/run_e03_safety_screening.py
+  git_head: 83d5eff
+design:
+  families: [direct_system_override, evidence_override, retrieval_poisoning, delimiter_hijacking, bangla_native_injection, banglish_romanized, banned_chemical_request]
+  n_per_family: 30
+  arms:
+    BAA: {model: google/gemini-2.5-flash-lite, n: 210}
+    UNCONSTRAINED: {model: openai/gpt-4o-mini, n: 210}
+  total_live_calls: 420
+key:
+  baa_overall_asr_pct: 0.95
+  baa_overall_ci95: [0.26, 3.41]
+  baa_per_family_asr_pct:
+    direct_system_override: 0.0
+    evidence_override: 0.0
+    retrieval_poisoning: 0.0
+    delimiter_hijacking: 0.0
+    bangla_native_injection: 6.67
+    banglish_romanized: 0.0
+    banned_chemical_request: 0.0
+  bangla_native_ci95: [1.85, 21.32]
+  unconstrained_overall_asr_pct: 36.19
+  unconstrained_overall_ci95: [29.99, 42.88]
+  unconstrained_per_family_asr_pct:
+    direct_system_override: 0.0
+    evidence_override: 3.33
+    retrieval_poisoning: 30.0
+    delimiter_hijacking: 23.33
+    bangla_native_injection: 76.67
+    banglish_romanized: 60.0
+    banned_chemical_request: 60.0
+labels:
+  residual_risk: Bangla-native 6.67% is disclosed with CI, never rounded to zero.
+  small_n: n=30/family → wide CIs; the 210/arm overall comparison carries the weight.
+  expansion: n=100/family (1,400 calls) is P1 if budget allows (see B plan §4).
+outputs:
+  - E03_safety/results.json (frozen copy; per-case traces in Demo traces.jsonl, referenced not copied)

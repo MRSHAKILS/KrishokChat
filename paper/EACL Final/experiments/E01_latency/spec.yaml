@@ -1,0 +1,32 @@
+id: E01
+title: Subsystem latency breakdown (stage_timer, BM25-only offline)
+question: What is the per-stage latency via telemetry.stage_timer on held-out Bengali queries?
+status: REAL_MEASURED
+beats: [C+G]
+runner:
+  path: paper/EACL Demo/experiments/E01_system_latency_breakdown/scripts/run_real_e01_latency.py
+  command: backend/.venv python run_real_e01_latency.py (cwd=backend)
+  git_head: 83d5eff
+dataset:
+  path: backend/ml_assets/rag_index/eval/farmer_benchmark_1000.jsonl
+  n: 400
+  seed: 42
+corpus:
+  index: backend/ml_assets/rag_index/indexes/bm25_index.pkl
+  retrieval: BM25-only (dense needs OPENROUTER_API_KEY)
+  llm: offline StubLLM (generation stubbed; system_overhead excludes generation)
+metrics: [safety_ms, retrieval_ms, generation_stub_ms, verifier_ms, system_overhead_ms]
+key:
+  n: 400
+  safety_p50_ms: 0.321
+  safety_p95_ms: 0.705
+  retrieval_p50_ms: 26.831
+  retrieval_p95_ms: 61.248
+  verifier_p50_ms: 4.815
+  verifier_p95_ms: 11.22
+  overhead_p50_ms: 33.565
+  overhead_p95_ms: 67.833
+labels:
+  scope: BM25-only, stub LLM. Live llama-server latency UNMEASURED — never imply end-to-end.
+outputs:
+  - E01_latency/results.json (frozen copy of results_real_latency.json)

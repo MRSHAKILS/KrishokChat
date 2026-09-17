@@ -87,6 +87,16 @@ export default function DetectPage() {
     }
   }, [result, cropHint]);
 
+  /* Cleanup preview object URL on change or unmount to avoid memory leaks. */
+  useEffect(() => () => {
+    if (preview) URL.revokeObjectURL(preview);
+  }, [preview]);
+
+  /* Abort any in-flight detection request when unmounting. */
+  useEffect(() => () => {
+    requestRef.current?.abort();
+  }, []);
+
   /* Pipeline events — derived from the result's agent_trace.
      While loading (no result yet), we show the rail in an "active" state
      with the intake node complete and the rest pending. */
@@ -306,6 +316,40 @@ export default function DetectPage() {
     }
   }, [file, cropHint, loading, online]);
 
+  const handleSelectCrop = useCallback(
+    async (selectedCrop: string) => {
+      setCropHint(selectedCrop);
+      if (!file || loading) return;
+      setError(null);
+      setLoading(true);
+      const controller = new AbortController();
+      requestRef.current = controller;
+      try {
+        const r = await detectDisease(file, {
+          cropHint: selectedCrop,
+          signal: controller.signal,
+        });
+        if (controller.signal.aborted) return;
+        setResult(r);
+        if (r.crop && r.disease) {
+          setDetectedContext({ crop: r.crop, disease: r.disease });
+        } else {
+          setDetectedContext(null);
+        }
+      } catch (e: unknown) {
+        if (!controller.signal.aborted) {
+          setError(e instanceof Error ? e.message : "বিশ্লেষণে সমস্যা হয়েছে");
+        }
+      } finally {
+        if (requestRef.current === controller) {
+          requestRef.current = null;
+          setLoading(false);
+        }
+      }
+    },
+    [file, loading]
+  );
+
   return (
     <div className="mx-auto max-w-4xl space-y-7 pb-16">
       <UrgentAlertBanner />
@@ -453,7 +497,11 @@ export default function DetectPage() {
               exit={{ opacity: 0, y: -8 }}
               variants={enter}
             >
-              <DiagnosisCard result={result} onClear={handleClearScan} />
+              <DiagnosisCard
+                result={result}
+                onClear={handleClearScan}
+                onSelectCrop={handleSelectCrop}
+              />
             </motion.div>
           )}
         </AnimatePresence>

@@ -1,4 +1,4 @@
-﻿# experiments/registry.yaml â€” Canonical Master Trace for all KrishokChat Experiments (E02â€“E31)
+# experiments/registry.yaml â€” Canonical Master Trace for all KrishokChat Experiments (E02â€“E31)
 # Status values: done | done_unverified | planned | blocked
 # IMPORTANT: "target" fields are HYPOTHESES for power analysis / acceptance gates,
 # never measured results. Publishing a target as a result violates AGENTS.md rule 5.
@@ -406,12 +406,11 @@ planned_layers:
     status: done
     note: "Evaluated across 200 longitudinal instances (2022-2025) under ACCEPTANCE_PROTOCOL.md. BAA achieves 100.0% Gazette Adherence and 0.0% CUAR across all periods with 0.0% temporal drift."
 
-
-
-
-
-
-
-
-
-
+  E49_prism_rag_benchmark:
+    question: "On 1,000 messy realistic farmer queries, does PRISM-RAG eliminate smallholder abandonment while preventing unsafe actions?"
+    rq: RQ1, RQ3, RQ4
+    spec: experiments/specs/E49_prism_rag_benchmark.spec.yaml
+    results: experiments/results/E49_prism_rag_benchmark/e2e_resolution_comparison.json
+    claims: [S-E49]
+    status: done
+    note: "Evaluated across 1,000 queries over 10 balanced categories. PRISM-RAG + KAERA achieves 90.0% total useful resolution rate, drops unnecessary generic refusal from 76.1% to 0.0%, and preserves 0.0% unsafe action rate with 89.7% Recall@5."

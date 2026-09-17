@@ -1,0 +1,246 @@
+﻿diff --git a/backend/app/domain/query_extractor.py b/backend/app/domain/query_extractor.py
+new file mode 100644
+index 0000000..c0509ee
+--- /dev/null
++++ b/backend/app/domain/query_extractor.py
+@@ -0,0 +1,240 @@
++"""Stage 2B: Query Intent & Information-State Extraction (PRISM-RAG Module 2B.1).
++
++Extracts structured agronomic slots from user queries deterministically
++before invoking retrieval or generation.
++"""
++
++from __future__ import annotations
++
++import re
++from dataclasses import dataclass, field
++from typing import Any
++
++from app.domain.intent import (
++    CROP_NAMES_BN,
++    _CROP_ALIASES,
++    _FERTILIZER_KW,
++    _PLANT_PART_BN,
++    _PLANT_PART_MAP,
++    _PREVENTION_KW,
++    _TREATMENT_KW,
++    _match_crop_alias,
++)
++
++
++@dataclass(frozen=True)
++class QueryInformationState:
++    """Structured information state extracted from a single user turn."""
++
++    intent: str
++    crop: str | None = None
++    crop_bn: str | None = None
++    problem_type: str | None = None
++    symptom: str | None = None
++    plant_part: str | None = None
++    location: str | None = None
++    growth_stage: str | None = None
++    temporal_event: str | None = None
++    actionability: str = "high"  # "high" (seeking action/dose) | "informational"
++    extracted_tokens: tuple[str, ...] = field(default_factory=tuple)
++
++    def to_dict(self) -> dict[str, Any]:
++        return {
++            "intent": self.intent,
++            "crop": self.crop,
++            "crop_bn": self.crop_bn,
++            "problem_type": self.problem_type,
++            "symptom": self.symptom,
++            "plant_part": self.plant_part,
++            "location": self.location,
++            "growth_stage": self.growth_stage,
++            "temporal_event": self.temporal_event,
++            "actionability": self.actionability,
++            "extracted_tokens": list(self.extracted_tokens),
++        }
++
++
++# Known Bangladesh agricultural districts
++_DISTRICTS_BN: dict[str, str] = {
++    "αª¿αª╛αªƒαºïαª░": "Natore", "αª¿αª╛αªƒαºïαª░αºç": "Natore", "natore": "Natore",
++    "αª¼αªùαºüαªíαª╝αª╛": "Bogura", "αª¼αªùαºüαº£αª╛αºƒ": "Bogura", "αª¼αªùαºüαº£αª╛αªñ": "Bogura", "bogura": "Bogura",
++    "αª░αª╛αª£αª╢αª╛αª╣αºÇ": "Rajshahi", "αª░αª╛αª£αª╢αª╛αª╣αºÇαªñαºç": "Rajshahi", "rajshahi": "Rajshahi",
++    "αª░αªéαª¬αºüαª░": "Rangpur", "αª░αªéαª¬αºüαª░αºç": "Rangpur", "rangpur": "Rangpur",
++    "αªªαª┐αª¿αª╛αª£αª¬αºüαª░": "Dinajpur", "αªªαª┐αª¿αª╛αª£αª¬αºüαª░αºç": "Dinajpur", "dinajpur": "Dinajpur",
++    "αª»αª╢αºïαª░": "Jashore", "αª»αª╢αºïαª░αºç": "Jashore", "jashore": "Jashore",
++    "αªòαºüαª╖αºìαªƒαª┐αª»αª╝αª╛": "Kushtia", "αªòαºüαª╖αºìαªƒαª┐αª»αª╝αª╛αª»αª╝": "Kushtia", "kushtia": "Kushtia",
++    "αª«αª»αª╝αª«αª¿αª╕αª┐αªéαª╣": "Mymensingh", "αª«αª»αª╝αª«αª¿αª╕αª┐αªéαª╣αºç": "Mymensingh", "mymensingh": "Mymensingh",
++    "αª¬αª╛αª¼αª¿αª╛": "Pabna", "αª¬αª╛αª¼αª¿αª╛αª»αª╝": "Pabna", "pabna": "Pabna",
++    "αªòαºüαª«αª┐αª▓αºìαª▓αª╛": "Cumilla", "αªòαºüαª«αª┐αª▓αºìαª▓αª╛αª»αª╝": "Cumilla", "cumilla": "Cumilla",
++    "αª¼αª░αª┐αª╢αª╛αª▓": "Barishal", "αª¼αª░αª┐αª╢αª╛αª▓αºç": "Barishal", "barishal": "Barishal",
++    "αª╕αª┐αª▓αºçαªƒ": "Sylhet", "αª╕αª┐αª▓αºçαªƒαºç": "Sylhet", "sylhet": "Sylhet",
++    "αªÜαªƒαºìαªƒαªùαºìαª░αª╛αª«": "Chattogram", "αªÜαªƒαºìαªƒαªùαºìαª░αª╛αª«αºç": "Chattogram", "chattogram": "Chattogram",
++}
++
++# Romanized & dialectal crop mappings
++_ROMAN_CROP_ALIASES: dict[str, str] = {
++    "dhan": "rice", "dhaner": "rice", "αªºαª╛αª¿αª░": "rice", "αªºαª╛αª¿αªñ": "rice",
++    "alu": "potato", "alor": "potato", "αªåαª▓αºüαªñ": "potato",
++    "tomato": "tomato", "tomator": "tomato",
++    "begun": "brinjal", "beguner": "brinjal", "αª¼αª╛αªçαªÖαºìαªùαª¿": "brinjal",
++    "moris": "chilli", "moricer": "chilli", "morich": "chilli", "αª«αª░αª┐αª╕": "chilli",
++    "gom": "wheat", "gomer": "wheat",
++    "bhutta": "maize",
++}
++
++# Temporal / Weather events
++_TEMPORAL_PATTERNS = [
++    (r"(αªùαªñ\s*αª╕αª¬αºìαªñαª╛αª╣αºç\s*αª¼αºâαª╖αºìαªƒαª┐|αª¼αºâαª╖αºìαªƒαª┐αª░\s*αª¬αª░|αª¼αºâαª╖αºìαªƒαª┐\s*αª╣αªçαª¢αª┐αª▓|αª¼αºâαª╖αºìαªƒαª┐\s*αª╣αºƒαºçαª¢αºç|αª¡αª╛αª░αºÇ\s*αª¼αºâαª╖αºìαªƒαª┐|αª¥αº£\s*αª¼αºâαª╖αºìαªƒαª┐|αª¼αºâαª╖αºìαªƒαª┐)", "αª¼αºâαª╖αºìαªƒαª┐αª░ αª¬αª░"),
++    (r"(αªûαª░αª╛|αª░αºïαªªαºçαª░\s*αª¬αª░|αªñαºÇαª¼αºìαª░\s*αªùαª░αª«|αª╢αºüαªòαª¿αª╛\s*αªåαª¼αª╣αª╛αªôαºƒαª╛)", "αªûαª░αª╛αª░ αª¬αª░"),
++    (r"(αªòαºüαºƒαª╛αª╢αª╛|αªòαºüαª»αª╝αª╛αª╢αª╛|αª╢αºÇαªñαºçαª░\s*αª╕αªòαª╛αª▓αºç|αªáαª╛αª¿αºìαªíαª╛\s*αª¬αº£αª¢αºç)", "αªòαºüαª»αª╝αª╛αª╢αª╛αª░ αª¬αª░"),
++    (r"(αªåαª£αªòαºç|αªòαª╛αª▓αªòαºç|αª╕αªòαª╛αª▓αºç|αª¼αª┐αªòαª╛αª▓αºç)", "αª╕αª╛αª«αºìαª¬αºìαª░αªñαª┐αªò αª╕αª«αª»αª╝"),
++]
++
++# Follow-up patterns
++_FOLLOW_UP_PATTERNS = (
++    "αªåαªùαºçαª░αª¼αª╛αª░", "αªåαªùαºçαª░", "αªåαªùαºç αª»αºç", "αªåαª¼αª╛αª░ αªòαªô", "αªåαª¼αª╛αª░ αª¼αª▓", "αªåαª¼αª╛αª░ αª¼αª▓αºüαª¿",
++    "αªñαª╛αª░αª¬αª░ αªòαª┐", "αªÅαª░αª¬αª░ αªòαª┐", "αªñαª╛αª░αª¬αª░αºç αªòαª┐", "αªåαª░αºçαªòαª¼αª╛αª░", "αªôαª╖αºüαªºαºçαª░ αª¿αª╛αª« αªåαª¼αª╛αª░",
++    "αª¼αª┐αªòαª▓αºìαª¬", "αªàαª¿αºìαª» αªòαºïαª¿αºï", "αªñαºüαª▓αºç αª½αºçαª▓αªñαºç αª╣αª¼αºç", "αªòαªñαªªαª┐αª¿ αª¬αª░", "αªòαªñ αªªαª┐αª¿ αª¬αª░",
++)
++
++
++class QueryExtractor:
++    """Deterministic extractor for agricultural information state."""
++
++    @classmethod
++    def extract(cls, query: str) -> QueryInformationState:
++        lowered = query.lower()
++        extracted_tokens: list[str] = []
++
++        # 1. Follow-up detection
++        is_follow_up = any(p in lowered for p in _FOLLOW_UP_PATTERNS)
++
++        # 2. Crop detection (token-start matching; see intent._match_crop_alias:
++        # Bengali vowel signs defeat \b, so substring/regex matching fired inside
++        # unrelated words, e.g. rice "αªºαª╛αª¿" inside "αª╕αª«αª╛αªºαª╛αª¿" (solution). An alias
++        # must open a whitespace-delimited token (leading punctuation stripped);
++        # inflections (αªºαª╛αª¿αºçαª░/αªåαª▓αºüαª░) match. Fix 2026-09-17 (v2: punct-strip + αª▓αªÖαºìαªòαª╛).
++        import re as _re
++        strip_pat = _re.compile(r"^[^\w\u0980-\u09FF]+")
++        lowered_tokens = [t for t in (strip_pat.sub("", t) for t in lowered.split()) if t]
++        detected_crop: str | None = None
++        detected_alias: str | None = None
++        for crop_id, aliases in _CROP_ALIASES.items():
++            ordered = sorted((str(a).strip() for a in aliases if str(a).strip()), key=len, reverse=True)
++            for alias in ordered:
++                alias_lower = alias.lower()
++                if " " in alias_lower:
++                    hit = alias_lower in lowered
++                else:
++                    hit = any(tok == alias_lower or tok.startswith(alias_lower) for tok in lowered_tokens)
++                if hit:
++                    detected_crop = crop_id
++                    detected_alias = alias
++                    extracted_tokens.append(alias)
++                    break
++            if detected_crop:
++                break
++
++        if not detected_crop:
++            for word, crop_id in _ROMAN_CROP_ALIASES.items():
++                word_lower = str(word).strip().lower()
++                if not word_lower:
++                    continue
++                if " " in word_lower:
++                    hit = word_lower in lowered
++                else:
++                    hit = any(tok == word_lower or tok.startswith(word_lower) for tok in lowered_tokens)
++                if hit:
++                    detected_crop = crop_id
++                    extracted_tokens.append(word)
++                    break
++
++        # 3. Location detection
++        detected_location: str | None = None
++        for dist_key, dist_en in _DISTRICTS_BN.items():
++            if dist_key in lowered:
++                detected_location = dist_en
++                extracted_tokens.append(dist_key)
++                break
++
++        # 4. Temporal event detection
++        detected_temporal: str | None = None
++        for pat, label in _TEMPORAL_PATTERNS:
++            if re.search(pat, query):
++                detected_temporal = label
++                extracted_tokens.append(label)
++                break
++
++        # 5. Plant part detection
++        detected_plant_part: str | None = None
++        for kw, part in _PLANT_PART_MAP.items():
++            if kw in lowered:
++                detected_plant_part = part
++                extracted_tokens.append(kw)
++                break
++
++        # 6. Intent and Problem Type classification
++        intent = "general_agriculture"
++        problem_type = None
++
++        treatment_extended = _TREATMENT_KW + (
++            "αªòαª░αªúαºÇαª»αª╝", "αªòαºÇ αªòαª░αªúαºÇαª»αª╝", "αªòαª┐ αªòαª░αªúαºÇαª»αª╝", "αªëαª¬αª╛αª»αª╝", "αªëαª¬αª╛αºƒ", "αªòαºÇ αªòαª░αª¼",
++            "αªòαºÇ αªòαª░αª¼αºï", "αªòαª┐ αªòαª░αª¼", "αªòαª┐ αªòαª░αª¼αºï", "αªòαª┐ αªòαª░αºüαª«", "αªòαª┐ αªªαª┐αª«αºü", "αªªαª╛αª¼αª╛ αªòαª┐",
++            "αªôαª╖αºüαªº αªòαª¿", "αªòαª┐ αª╕αºìαª¬αºìαª░αºç", "αªªαª«αª¿ αª¼αºìαª»αª¼αª╕αºìαªÑαª╛", "αªªαª«αª¿", "αªÜαª┐αªòαª┐αºÄαª╕αª╛", "αªëαª¬αª╛αºƒ αªòαª┐",
++            "spray", "osudh", "cikitsha", "dava", "αª¬αºìαª░αªñαª┐αªòαª╛αª░", "αª▓αªòαºìαª╖αªú αªô",
++        )
++
++        if is_follow_up:
++            intent = "follow_up"
++        elif any(kw in lowered for kw in _FERTILIZER_KW + ("αª╕αª╛αª░", "αªçαªëαª░αª┐αª»αª╝αª╛", "αªçαªëαª░αª┐αºƒαª╛", "αª¬αªƒαª╛αª╢", "αªƒαª┐αªÅαª╕αª¬αª┐", "αªòαªñ αªòαºçαª£αª┐", "αªòαªñαªƒαºüαªòαºü")):
++            intent = "fertilizer"
++            problem_type = "fertilizer"
++        elif any(kw in lowered for kw in ("αª¬αºïαªòαª╛", "αª¬αºïαªüαªòαª╛", "αª«αª╛αª£αª░αª╛", "αª▓αºçαªªαª╛", "αª£αª╛αª¼ αª¬αºïαªòαª╛", "αªòαºÇαªƒαª¬αªñαªÖαºìαªù", "pest", "worm", "chidro", "fota")):
++            intent = "pest_management"
++            problem_type = "pest"
++        elif any(kw in lowered for kw in treatment_extended):
++            intent = "disease_treatment"
++            problem_type = "disease"
++        elif any(kw in lowered for kw in _PREVENTION_KW):
++            intent = "disease_prevention"
++            problem_type = "prevention"
++        elif any(kw in lowered for kw in ("αªòαªûαª¿ αª¼αºüαª¿αª¼", "αª░αºïαª¬αªú", "αª░αºïαª¬αª¿", "αª¼αª¬αª¿", "αª½αª╕αª▓ αªñαºïαª▓αª╛αª░ αª╕αª«αºƒ", "αªòαºìαª»αª╛αª▓αºçαª¿αºìαªíαª╛αª░", "αª╕αª«αºƒ")):
++            intent = "crop_calendar"
++            problem_type = "management"
++        elif any(kw in lowered for kw in ("αª¬αª╛αª¿αª┐ αªªαª┐αª¼", "αª╕αºçαªÜ", "αª¬αª╛αª¿αª┐ αªªαºçαªôαºƒαª╛", "αªíαºìαª░αºçαª¿αºçαª£", "αª¬αª╛αª¿αª┐ αª¿αª┐αª╖αºìαªòαª╛αª╢αª¿", "irrigation", "αªíαºìαª░αºçαª¿")):
++            intent = "irrigation"
++            problem_type = "irrigation"
++        elif any(kw in lowered for kw in ("αª▓αªòαºìαª╖αªú", "αªªαª╛αªù", "αª░αºïαªùαºçαª░ αª¿αª╛αª«", "αªòαª┐ αª░αºïαªù", "αªòαºÇ αª░αºïαªù", "diagnosis")):
++            intent = "disease_identification"
++            problem_type = "disease"
++
++
++        # 7. Symptom token extraction
++        symptom_kws = (
++            "αª¼αª╛αªªαª╛αª«αª┐ αªªαª╛αªù", "αªòαª╛αª▓αºï αªªαª╛αªù", "αª╣αª▓αºüαªª αªªαª╛αªù", "αªùαºïαª▓ αªªαª╛αªù", "αª¢αª┐αªƒαª╛ αªªαª╛αªù", "αª¬αºüαªçαº£αª╛ αªùαºçαª¢αºç",
++            "αª¬αºïαº£αª╛ αªªαª╛αªù", "αª«αªçαª░αª╛ αª»αª╛αºƒ", "αªóαª▓αºç αª¬αº£αª╛", "αªòαºüαªüαªòαº£αª╛αºƒ", "αª¬αª╛αªñαª╛ αª╣αª▓αºüαªª", "αªùαª╛αª¢ αª╣αª▓αºüαªª",
++            "αªíαªùαª╛ αª¬αªÜαª╛", "αª½αª▓ αª¬αªÜαª╛", "αªùαºïαº£αª╛ αª¬αªÜαª¿", "αª╢αª┐αªòαº£ αª¬αªÜαª╛", "αªåαªáαª╛ αª¥αª░αª╛",
++        )
++        detected_symptom: str | None = None
++        for skw in symptom_kws:
++            if skw in query:
++                detected_symptom = skw
++                extracted_tokens.append(skw)
++                break
++
++        # Actionability
++        actionability = "high" if any(kw in lowered for kw in _TREATMENT_KW + _FERTILIZER_KW) else "informational"
++
++        return QueryInformationState(
++            intent=intent,
++            crop=detected_crop,
++            crop_bn=CROP_NAMES_BN.get(detected_crop) if detected_crop else None,
++            problem_type=problem_type,
++            symptom=detected_symptom,
++            plant_part=detected_plant_part,
++            location=detected_location,
++            growth_stage=None,
++            temporal_event=detected_temporal,
++            actionability=actionability,
++            extracted_tokens=tuple(dict.fromkeys(extracted_tokens)),
++        )

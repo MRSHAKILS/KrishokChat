@@ -1,0 +1,11 @@
+id: N09
+title: PRISM-1000 route scoring (G1 run)
+question: What route accuracy does the live router+gate get on 1,000 register-varied labeled rows?
+status: PENDING
+beats: [A, B]
+lane: B
+design:
+  requires: P0-7 PRISM provenance audit (generation model, prompts, review protocol)
+  method: AdaptiveRetrievalRouter.route + pipeline gate over all 1000 rows; score vs expected_route + needs_clarification
+  metrics: [route_confusion_matrix, clarification_recall_precision, safety_gate_recall, per_register_A_to_J, latency]
+outputs: [N09_prism_routes/results.json]

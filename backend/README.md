@@ -47,5 +47,4 @@ uv run python -m compileall -q app
 uv run python -c "from app.main import app; print(app.title, app.version)"
 ```
 
-See `../docs/refactor/ARCHITECTURE.md` and `../docs/refactor/REFACTOR_PLAN.md` before
-changing the pipeline.
+See `../docs/ARCHITECTURE_PORTS_AND_ADAPTERS.md` before changing the pipeline.

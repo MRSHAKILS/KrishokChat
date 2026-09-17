@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering\small
-\caption{Retrieval Failure Injection Evaluation (Layer~E41): Critical Unsafe Acceptance Rate (CUAR \% with 95\% Wilson CI) across 5 controlled retrieval failure modes ($N=1{,}000$, 200 cases per mode). The BAA 11-slot contract verifier acts as a fail-closed safety floor, achieving \textbf{0.0\% CUAR} across all failure conditions, while standard RAG baselines suffer 30\%--71\% hazard rates under retrieval corruption.}
+\caption{Retrieval Failure Injection Evaluation (Layer~E41): Critical Unsafe Acceptance Rate (CUAR \% with 95\% Wilson CI) across 5 controlled retrieval failure modes ($N=1{,}000$, 200 cases per mode). The KrishokChat 11-slot contract verifier acts as a fail-closed safety floor, achieving \textbf{0.0\% CUAR} across all failure conditions, while standard RAG baselines suffer 30\%--71\% hazard rates under retrieval corruption.}
 \label{tab:retrieval_failure_injection}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lccccc}
@@ -12,7 +12,7 @@ B0: Unconstrained LLM & 8.0\% [5.0, 12.6] & 85.0\% [79.4, 89.3] & 55.5\% [48.6, 
 B1: Lexical BM25 RAG & 15.0\% [10.7, 20.6] & 76.5\% [70.2, 81.8] & 42.5\% [35.9, 49.4] & 53.5\% [46.6, 60.3] & 73.0\% [66.5, 78.7] \\
 B3: Citation Multi-Doc RAG (TarAG) & 4.0\% [2.0, 7.7] & 41.5\% [34.9, 48.4] & 17.0\% [12.4, 22.8] & 37.5\% [31.1, 44.4] & 31.5\% [25.5, 38.2] \\
 B5: Partial 8-Slot Matcher & 0.0\% [0.0, 1.9] & 0.0\% [0.0, 1.9] & 0.0\% [0.0, 1.9] & 100.0\% [98.1, 100.0] & 0.0\% [0.0, 1.9] \\
-\textbf{B6: KrishokChat 11-Slot BAA} & \textbf{0.0\%} [0.0, 1.9] & \textbf{0.0\%} [0.0, 1.9] & \textbf{0.0\%} [0.0, 1.9] & \textbf{0.0\%} [0.0, 1.9] & \textbf{0.0\%} [0.0, 1.9] \\
+\textbf{B6: KrishokChat (11-Slot Contract, Ours)} & \textbf{0.0\%} [0.0, 1.9] & \textbf{0.0\%} [0.0, 1.9] & \textbf{0.0\%} [0.0, 1.9] & \textbf{0.0\%} [0.0, 1.9] & \textbf{0.0\%} [0.0, 1.9] \\
 \bottomrule
 \end{tabular}}
 \end{table*}

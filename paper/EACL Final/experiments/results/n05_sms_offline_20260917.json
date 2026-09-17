@@ -1,0 +1,43 @@
+{
+  "benchmark_name": "EACL_N05_SMS_SURVIVAL",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N05_sms_survival/scripts/run_n05_sms.py",
+    "run_at_utc": "2026-09-17T16:30:00.159310+00:00",
+    "git_head": "893269880c939379dfcd4105205c0d3bb2c8afbc",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "farmer": "e2adc30d69aed9dee1d1b3f5f0ebf7584861b1df9c687b1b32812b6215a7b7aa",
+      "prism": "948123aa5de53604469029b45743067da2c6c0c012a66338cd3be37a400d62d3"
+    }
+  },
+  "mode": "offline",
+  "design": {
+    "n": 300,
+    "seed": 42
+  },
+  "enforcement": {
+    "n_ok": 299,
+    "n_fail": 1,
+    "over_160": 0,
+    "blocked_or_lowconf": 44,
+    "blocked_referral_only": 44
+  },
+  "encoding": {
+    "non_gsm7_texts": 299,
+    "note": "Bengali script travels as UCS-2 on real gateways (70 chars/segment); length claim is characters, not GSM segments."
+  }
+}
