@@ -1,0 +1,94 @@
+{
+  "benchmark_name": "EACL_N09_PRISM_ROUTE_CONFORMANCE",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N09_prism_routes/scripts/run_n09_prism.py",
+    "run_at_utc": "2026-09-17T17:40:52.976644+00:00",
+    "git_head": "998ead69c2e312d7d718132b6195cc2fcef9a5e8",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "prism": "948123aa5de53604469029b45743067da2c6c0c012a66338cd3be37a400d62d3"
+    }
+  },
+  "design": {
+    "n": 1000,
+    "memory": "seeded from gold fields (tests route selection, not context inference)",
+    "mapping": "pipeline tier for clarify/guard/refusal/fact; router route otherwise",
+    "circularity": "expected_route assigned by generator template arm — conformance, not independent accuracy (see prism_audit.md)"
+  },
+  "overall_agreement": 0.458,
+  "per_expected_route": {
+    "clarification": {
+      "n": 100,
+      "agree": 86,
+      "rate": 0.86,
+      "predicted_dist": {
+        "clarification": 86,
+        "concept_hypotheses": 14
+      }
+    },
+    "concept_hypotheses": {
+      "n": 458,
+      "agree": 258,
+      "rate": 0.5633,
+      "predicted_dist": {
+        "concept_hypotheses": 258,
+        "honest_refusal_other": 200
+      }
+    },
+    "conversational_follow_up": {
+      "n": 100,
+      "agree": 0,
+      "rate": 0.0,
+      "predicted_dist": {
+        "clarification": 80,
+        "document_rag": 20
+      }
+    },
+    "document_rag": {
+      "n": 168,
+      "agree": 16,
+      "rate": 0.0952,
+      "predicted_dist": {
+        "document_rag": 16,
+        "concept_hypotheses": 121,
+        "honest_refusal_other": 26,
+        "fact_base": 5
+      }
+    },
+    "fact_base": {
+      "n": 74,
+      "agree": 54,
+      "rate": 0.7297,
+      "predicted_dist": {
+        "fact_base": 54,
+        "honest_refusal_other": 8,
+        "document_rag": 12
+      }
+    },
+    "safety_gate": {
+      "n": 100,
+      "agree": 44,
+      "rate": 0.44,
+      "predicted_dist": {
+        "safety_gate": 44,
+        "clarification": 28,
+        "concept_hypotheses": 14,
+        "document_rag": 14
+      }
+    }
+  }
+}

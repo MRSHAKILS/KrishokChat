@@ -5,7 +5,7 @@ status: REAL_MEASURED_PARTIAL
 beats: [B]
 lane: A
 locked_N01a:
-  design: {n_paired: 400, categories: [B, C, D, I], top_k: 5, blind: pipeline-identical minus gate, gated: frozen offline pipeline}
+  design: {n_paired: 400, categories: [B, C, D, I], top_k: 5, blind: pipeline-identical minus gate, gated: frozen offline pipeline (deterministic precheck-only safety, stub LLM, BM25-only)}
   key:
     blind_overall: 0.3
     blind_ci95: [25.72, 34.66]

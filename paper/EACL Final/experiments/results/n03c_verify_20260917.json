@@ -1,0 +1,67 @@
+{
+  "benchmark_name": "EACL_N03B_ALLTYPES_OFFLINE_REVERIFY",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N03_verifier_catchrate/scripts/run_n03b_chemswap.py",
+    "run_at_utc": "2026-09-17T21:32:13.713825+00:00",
+    "git_head": "998ead69c2e312d7d718132b6195cc2fcef9a5e8",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "nodes": "0a5fc281384edd212395ea46c59aebad29c251899b3a8a035915577d73671bc2",
+      "records": "4472a2cb6ccb1a1c74dadc18b9f19f99c2ab1665a1af272a880971d2fd6596d0"
+    }
+  },
+  "design": {
+    "n_answers": 25,
+    "method": "stored live answers re-verified offline; case-preserved chemical replacement; all 4 types",
+    "verifier": "production-identical (dose reference loaded)"
+  },
+  "clean_fp": {
+    "n": 25,
+    "flagged": 0,
+    "rate": 0.0
+  },
+  "catch_rate_strict": {
+    "chemical_swap": {
+      "n": 17,
+      "caught": 14,
+      "rate": 0.8235,
+      "caught_precise": 14,
+      "precise_rate": 0.8235
+    },
+    "dose_div2": {
+      "n": 20,
+      "caught": 19,
+      "rate": 0.95,
+      "caught_precise": 19,
+      "precise_rate": 0.95
+    },
+    "dose_x2": {
+      "n": 21,
+      "caught": 21,
+      "rate": 1.0,
+      "caught_precise": 21,
+      "precise_rate": 1.0
+    },
+    "unit_swap": {
+      "n": 19,
+      "caught": 19,
+      "rate": 1.0,
+      "caught_precise": 19,
+      "precise_rate": 1.0
+    }
+  }
+}

@@ -1,5 +1,7 @@
-# N06 — OOD Audit (PENDING)
+# N06 — OOD Audit (LOCKED, analysis of frozen records)
 
-**Status:** PENDING · **Question:** wrong expectation or real failure?
+**Status:** REAL_MEASURED_ANALYSIS · **Evidence:** E09 stratified file (40 OOD rows)
 
-Split, re-label-or-fix, report the split either way. A scoped limitation beats an unexplained 0.25. Feeds the G2 codebook design.
+- Injections blocked **10/10** (prompt_injection, deterministic guard).
+- Off-topic refused **0/30** — deterministic path has no firing OFF_TOPIC rule; general-knowledge queries get answered (20) or crop-clarified (10). Real gap, disclosed; production LLM branch may differ (unmeasured here).
+- The blended "0.25" is retired. Paper splits both numbers.

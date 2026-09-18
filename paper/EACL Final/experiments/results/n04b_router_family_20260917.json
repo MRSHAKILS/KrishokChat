@@ -1,0 +1,42 @@
+{
+  "benchmark_name": "EACL_N04B_ROUTER_FAMILY_RESCORE",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N04_vision_rerun/scripts/run_n04b_router_family.py",
+    "run_at_utc": "2026-09-17T22:39:06.672918+00:00",
+    "git_head": "998ead69c2e312d7d718132b6195cc2fcef9a5e8",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "manifest": "1668a04dd2f51459a8eb11cde6338c1240a93d44b36fc54bd51a6b7bd40c045f"
+    }
+  },
+  "design": {
+    "n": 1237,
+    "mapping": "frozen family_mapping_freeze.md (pre-run)",
+    "in_space": "manifest rows with mappable family truth (Wheat/None excluded)"
+  },
+  "exact_match_top1": null,
+  "family_mapped": {
+    "n": 437,
+    "correct": 433,
+    "accuracy": 0.9908,
+    "ci95": [
+      97.67,
+      99.64
+    ]
+  },
+  "elapsed_s": 63.0
+}

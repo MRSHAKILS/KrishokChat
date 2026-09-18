@@ -53,7 +53,7 @@ The ONLY difference vs the gated arm is the skipped halt. Stored per query: retr
 ## v7 entry — critic re-audit fixes (2026-09-17): punct-strip dead line removed, BNGLISH_TERMS bridge fixed, n04a 6-class strings fixed
 - `query_extractor.py`: deleted the dead `lowered_tokens = lowered.split()` overwrite — punct-strip now live on the pipeline path (regression test asserts pipeline-path behavior).
 - `query_builder.py`: BNGLISH_TERMS single-word keys use token-start matching (ধান-in-সমাধান bridge dead; verified by new test). Multi-word keys unchanged. Other substring keyword lists noted as residual.
-- Full suite: 601 passed, 7 skipped (595 + 6 boundary tests).
+- Full suite: 601 passed, 7 skipped at fix time (595 + 6 new boundary tests); independent reproduction showed 600 passed, 8 skipped (one conditionally-skipped env/live test). Zero failures in both. Counts recorded, not claimed as a result.
 - Re-runs v3 (deterministic): N01a identical; N01b halt 76 (38.0%), hazard tie 16.07% [8.69,27.81], 0 discordants, extractor 0.52/0.475/0.005; N02 tiers identical. v2 outputs archived as `_v2`; v3 takes base names.
 - n04a/n04b re-run (note-only changes): metrics identical, 6-class strings replaced with 10-species truth.
 - v3 records: `matcher_fix_v3.diff` (tracked intent.py + query_builder.py hunks), `matcher_fix_v3_query_extractor_FULL.py` + `--no-index` diff vs the v2 FULL copy (all three are untracked working-tree records — "tracked" is never claimed for results/ files).

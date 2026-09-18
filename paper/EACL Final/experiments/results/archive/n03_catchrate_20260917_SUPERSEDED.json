@@ -1,0 +1,77 @@
+{
+  "benchmark_name": "EACL_N03_VERIFIER_CATCHRATE_LITE",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N03_verifier_catchrate/scripts/run_n03_catchrate.py",
+    "run_at_utc": "2026-09-17T16:55:44.144744+00:00",
+    "git_head": "998ead69c2e312d7d718132b6195cc2fcef9a5e8",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "dose_reference": "13efdd5d0235746fa12ac073761032cd49f51d44771ea048c8f2df6c1cceca0f"
+    }
+  },
+  "live_config": {
+    "model": "google/gemini-2.5-flash-lite",
+    "max_output_tokens": 1000,
+    "temperature": 0.2
+  },
+  "design": {
+    "n_entries": 71,
+    "arms": [
+      "clean",
+      "mut:dose_x2",
+      "mut:dose_div2",
+      "mut:unit_swap",
+      "mut:chemical_swap"
+    ],
+    "elicitation": "crop-paired (node title/section, else snippet scan, else cropless): '{crop_bn} গাছে {active} এর অনুমোদিত প্রয়োগমাত্রা কত?' (disclosed uniform template)",
+    "elicitation_note": "v1 cropless elicitation yielded 0 dose claims (41 refusals incl. banned actives + 27 clarifications); v2 pairs each entry with its source-node crop so generation can ground"
+  },
+  "flow": {
+    "generated_ok": 71,
+    "excluded_no_dose_claim": 58,
+    "generation_failed": 0,
+    "scored": 13
+  },
+  "clean_fp": {
+    "n": 13,
+    "flagged": 0,
+    "rate": 0.0,
+    "note": "flagged clean answers need sample review (verifier error vs generation hallucination)"
+  },
+  "catch_rate_strict": {
+    "dose_x2": {
+      "n": 12,
+      "caught": 8,
+      "rate": 0.6667
+    },
+    "dose_div2": {
+      "n": 12,
+      "caught": 8,
+      "rate": 0.6667
+    },
+    "unit_swap": {
+      "n": 12,
+      "caught": 8,
+      "rate": 0.6667
+    },
+    "chemical_swap": {
+      "n": 12,
+      "caught": 0,
+      "rate": 0.0
+    }
+  }
+}

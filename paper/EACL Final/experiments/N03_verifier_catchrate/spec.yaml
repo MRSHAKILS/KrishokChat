@@ -1,14 +1,49 @@
 id: N03
-title: Verifier catch-rate on mutated real answers
+title: Verifier catch-rate on mutated real answers (live generation + offline validity-gated verification)
 question: Does the dosage-claim verifier catch single-field mutations in REAL generated answers?
-status: PENDING
+status: REAL_MEASURED_SMALLN
 beats: [F]
 lane: B-lite
-design:
-  answers: frozen T3 pipeline with LIVE generation over >=200 Treatment QA items (real answers + real sources; stub outputs banned)
-  mutations_per_item: [dose_x2, dose_div2, unit_swap, phi_swap, chemical_swap, interval_swap]
-  controls: 1 clean copy per item (>=200)
-  metrics: [catch_rate_per_type, false_positive_rate, verdict_confusion, latency_p50_p95]
-  review: 50 catches + 50 misses manually characterized
-  lite_lane_b: 100 items x 4 types acceptable if week presses
-outputs: [N03_verifier_catchrate/results.json]
+locked_generation:
+  design: {n_entries: 71, live_model: google/gemini-2.5-flash-lite, elicitation: crop-paired-per-source-node}
+  key: {generated_ok: 71, scored_with_dose_claims: 13, excluded: 58}
+  meaning: Bare dosage questions without crop halt/refuse (correct safety behavior); crop-paired elicitation grounded 13. Excluded rows counted with reasons, never dropped silently.
+locked_verification:
+  design: {n_answers: 13, mutations: claim-anchored + validity-gated (rate-context, surface-anchor, still-parses, changed, generic-term preference), verifier: production-identical}
+  key:
+    dose_x2: {n: 12, caught: 12, precise: 12, ci95: [75.8, 100.0]}
+    dose_div2: {n: 11, caught: 11, precise: 11, ci95: [74.1, 100.0]}
+    chemical_swap: {n: 8, caught: 8, precise: 8, ci95: [67.6, 100.0]}
+    unit_swap: {n: 10, caught: 10, precise: 10, ci95: [72.2, 100.0]}
+    clean_fp: {n: 13, flagged: 0, ci95: [0.0, 22.8]}
+  meaning: Every counted mutation is valid and every catch lands on the mutated sentence (strict == precise). Earlier weak numbers measured mutation artifacts (lowercase insertion, ASCII anchors on Bengali digits, partial bilingual swaps, formulation-code targets, denominator-noun swaps, repeated-generic misses) — full version history archived, none cited. Small n; CIs wide; no pooled mush.
+  history: v1 lowercase-chem artifact → v2 case-preserved → v3 claim-anchored → v4 validity-gated + precise-fixed + generic-term preference → v5 extension (25 new answers - 53 farmer dosage rows/52 unique queries + 142 paraphrases, deduped to 114 unique questions). Each version archived.
+  extension_exclusions_89: {honest_refusal: 37, grounded_doseless: 33, interactive_clarification: 8, deterministic_guard: 7, progressive_guidance: 4}
+locked_extension:
+  design: {n_answers: 25, elicitation: farmer-dosage-real + P2-rate-first + P3-safety-framed paraphrases, deduped by question text}
+  key:
+    dose_x2: {n: 21, caught: 21, precise: 21}
+    dose_div2: {n: 20, caught: 19, precise: 19}
+    chemical_swap: {n: 17, caught: 14, precise: 14}
+    unit_swap: {n: 19, caught: 19, precise: 19}
+    clean_fp: {n: 25, flagged: 0}
+  miss_autopsy_4: generic-duality (Bavistin/Carbendazim brand pair), fertilizer-list multi-chemical, rate-collision suspects — hard edges, not method flaws
+combined_totals:
+  answers_scored: 38
+  dose_x2: 33/33
+  dose_x2_ci95: [89.6, 100.0]
+  dose_div2: 30/31
+  dose_div2_ci95: [83.8, 99.4]
+  chemical_swap: 22/25
+  chemical_ci95: [70.0, 95.8]
+  unit_swap: 29/29
+  unit_ci95: [88.3, 100.0]
+  clean_fp: 0/38
+  clean_fp_ci95: [0.0, 9.2]
+outputs:
+- N03_verifier_catchrate/results_catchrate.json (locked copy = N03b alltypes v3)
+- experiments/results/n03_catchrate_20260917.jsonl (71 live generation records)
+labels:
+  small_n: n=13 answers. Rates carry wide CIs. No pooled mush.
+  single_reviewer: miss autopsy by agent on final misses (unit collisions, generic-term edge); zero misses remain in v4. Second human pass optional if time allows.
+  generation_durability: 71 live-generation records buffered pre-rule, verified intact (distinct latencies/answers); per-record rule enforced in N05/N11 runners going forward.

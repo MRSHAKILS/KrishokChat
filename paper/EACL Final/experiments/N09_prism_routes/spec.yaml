@@ -1,11 +1,30 @@
 id: N09
-title: PRISM-1000 route scoring (G1 run)
-question: What route accuracy does the live router+gate get on 1,000 register-varied labeled rows?
-status: PENDING
+title: PRISM-1000 route conformance (design, not independent accuracy)
+question: Does the live router+pipeline behave as designed across 1,000 register-varied rows?
+status: REAL_MEASURED
 beats: [A, B]
 lane: B
-design:
-  requires: P0-7 PRISM provenance audit (generation model, prompts, review protocol)
-  method: AdaptiveRetrievalRouter.route + pipeline gate over all 1000 rows; score vs expected_route + needs_clarification
-  metrics: [route_confusion_matrix, clarification_recall_precision, safety_gate_recall, per_register_A_to_J, latency]
-outputs: [N09_prism_routes/results.json]
+locked:
+  design:
+    n: 1000
+    harness: frozen offline pipeline (deterministic precheck-only safety, stub LLM, BM25-only) — route-selection behavior, not live safety/generation
+    memory: seeded crop/symptom/temporal from gold (disease_candidate and candidate_hypotheses NEVER seeded); pipeline ran UNSEEDED (query only)
+    mapping: pipeline tier for clarify/guard/refusal; router route otherwise (fact-grounding branch INACTIVE, resolver off — the 59 fact predictions arrive via router ROUTE_A)
+  key:
+    overall_agreement: 0.458
+    clarification: 0.86
+    concept_hypotheses: 0.5633
+    conversational_follow_up: 0.0
+    document_rag: 0.0952
+    fact_base: 0.7297
+    safety_gate: 0.44
+  gaps_found:
+    - concept-overrouting: router tests concept before document RAG by design order (verified — ConceptNormalizer hits 125/168 document_rag rows); router-only split on those rows is 126 concept / 22 document / 20 fact
+    - followup_UNTESTED_not_failed: follow_up intent fired 80/100 G rows but memory gate needs crop-or-disease (0/100 seedable); ROUTE_D fired 0 times in 1000 rows; pipeline defines no D tier. The D path is intact but untested by this set.
+    - deterministic_safety_lower_bound: harness safety is precheck-rules-only (44/100 J hits, exact row overlap with safety_gate predictions); production LLM branch would add recall
+  meaning: 45.8% is a gap map, not a grade. Each gap is a design question with a concrete fix direction; none blocks the paper, all three are disclosed.
+outputs:
+  - N09_prism_routes/results.json (locked copy)
+  - experiments/results/n09_prism_20260917.jsonl (1000 per-row records)
+labels:
+  conformance_not_accuracy: expected_route assigned by generator template arm (see prism_audit.md).

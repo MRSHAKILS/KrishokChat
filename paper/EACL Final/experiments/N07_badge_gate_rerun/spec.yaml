@@ -1,12 +1,26 @@
 id: N07
-title: BAA cross-modal gate re-run locally (demo-track badge number)
-question: What clarification trigger + CUAR does the deterministic gate get on 100 conflict cases, locally?
-status: PENDING
+title: Badge-gate on the user-facing cross-modal path (mismatch vs control)
+question: Does an image crop contradicting the text crop trigger the clarification halt?
+status: REAL_MEASURED
 beats: [D+E]
-lane: C (P1)
-design:
-  cases: E31 100 conflict cases (text Crop A + classifier Crop B @ high confidence)
-  method: deterministic qa_pipeline cross-modal halt path (no API cost); record trigger + would-be-chemical delivery
-  comparison: B0/B1/B4 rows from E08 baselines file (disclosed cross-track)
-  target_context: CEA B6 holds 100% [96.3,100] / 0% [0,3.7] at 1.25ms; local re-run mints the demo-track artifact
-outputs: [N07_badge_gate_rerun/results.json]
+lane: C
+locked:
+  design: {n_pairs: 54, arms: [mismatch, control], path: QAInput(query, crop=*) cross-modal check}
+  key:
+    mismatch_halt_rate: 0.9815
+    mismatch_n: 54
+    control_false_halt_rate: 0.0
+    control_n: 54
+    sole_miss: farmer_q_63
+    prism_extension_n400: {mismatch_halt_rate: 1.0, mismatch_ci95: [99.05, 100.0],
+      control_false_halt_rate: 0.0, control_ci95: [0.0, 0.95]}
+    combined: {halted: 453, total: 454, false_halts: 0}
+  miss_autopsy: Query asks about Aman-season varieties without naming rice (human-labeled rice as implied); text carries no rice token, so query_norm is None and no contradiction is computable. Design boundary, not a bug — the check needs an explicit text crop. Correct outcome class is "untestable input," counted as a miss conservatively.
+  meaning: 53/54 explicit conflicts halt with zero sources; matched controls never false-halt in either set (0/454). PRISM extension — 400/400 halt. Combined 453/454. This IS the S3 badge path measured.
+outputs:
+  - N07_badge_gate_rerun/results.json (locked copy)
+  - experiments/results/n07_badge_20260917.jsonl (108 records)
+  - N07_badge_gate_rerun/results_prism.json (locked PRISM copy)
+  - experiments/results/n07b_prism_20260917.jsonl (800 records)
+labels:
+  local_not_E31: Independent of CEA E31; E31/B6 stays as companion context.

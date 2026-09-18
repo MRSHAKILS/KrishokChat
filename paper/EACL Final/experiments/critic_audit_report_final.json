@@ -1,0 +1,154 @@
+{
+  "audit_name": "EACL_FINAL_CRITIC_AUDIT_NTRACK",
+  "timestamp": "2026-09-17T23:55:36.146705+00:00",
+  "total_experiments": 12,
+  "status_breakdown": {
+    "REAL_MEASURED_PARTIAL": 2,
+    "REAL_MEASURED": 8,
+    "REAL_MEASURED_SMALLN": 1,
+    "REAL_MEASURED_ANALYSIS": 1
+  },
+  "issues": [
+    "N01: missing fields ['locked']",
+    "N01: NO locked results.json",
+    "N01: NO key metrics in locked section",
+    "N02: missing fields ['locked']",
+    "N02: NO key metrics in locked section",
+    "N03: missing fields ['locked']",
+    "N03: NO locked results.json",
+    "N03: NO key metrics in locked section",
+    "N04: missing fields ['locked']",
+    "N04: NO locked results.json",
+    "N04: NO key metrics in locked section",
+    "N05: missing fields ['locked']",
+    "N05: NO locked results.json",
+    "N05: NO key metrics in locked section",
+    "N06: NO locked results.json",
+    "N06: NO results.jsonl in results dir",
+    "In spec but not ground_truth: {'N02', 'N06', 'N04', 'N07', 'N08', 'N09', 'N10', 'N05', 'N11', 'N01', 'N03', 'N12'}",
+    "In ground_truth but not spec: {'N09_prism_routes', 'N07_badge_gate_rerun', 'N11_gating_live_llm', 'N04_vision_rerun', 'N10_end_to_end_probe', 'N06_ood_audit', 'N08_fence_study', 'N01_blind_arm', 'N12_safety_bangla_topup', 'N02_token_metering', 'N03_verifier_catchrate', 'N05_sms_survival'}"
+  ],
+  "experiments": [
+    {
+      "id": "N01",
+      "status": "REAL_MEASURED_PARTIAL",
+      "has_locked_results": false,
+      "has_jsonl": true,
+      "missing_fields": [
+        "locked"
+      ],
+      "has_key_metrics": false,
+      "spec_path": "paper\\EACL Final\\experiments\\N01_blind_arm\\spec.yaml"
+    },
+    {
+      "id": "N02",
+      "status": "REAL_MEASURED",
+      "has_locked_results": true,
+      "has_jsonl": true,
+      "missing_fields": [
+        "locked"
+      ],
+      "has_key_metrics": false,
+      "spec_path": "paper\\EACL Final\\experiments\\N02_token_metering\\spec.yaml"
+    },
+    {
+      "id": "N03",
+      "status": "REAL_MEASURED_SMALLN",
+      "has_locked_results": false,
+      "has_jsonl": true,
+      "missing_fields": [
+        "locked"
+      ],
+      "has_key_metrics": false,
+      "spec_path": "paper\\EACL Final\\experiments\\N03_verifier_catchrate\\spec.yaml"
+    },
+    {
+      "id": "N04",
+      "status": "REAL_MEASURED_PARTIAL",
+      "has_locked_results": false,
+      "has_jsonl": true,
+      "missing_fields": [
+        "locked"
+      ],
+      "has_key_metrics": false,
+      "spec_path": "paper\\EACL Final\\experiments\\N04_vision_rerun\\spec.yaml"
+    },
+    {
+      "id": "N05",
+      "status": "REAL_MEASURED",
+      "has_locked_results": false,
+      "has_jsonl": true,
+      "missing_fields": [
+        "locked"
+      ],
+      "has_key_metrics": false,
+      "spec_path": "paper\\EACL Final\\experiments\\N05_sms_survival\\spec.yaml"
+    },
+    {
+      "id": "N06",
+      "status": "REAL_MEASURED_ANALYSIS",
+      "has_locked_results": false,
+      "has_jsonl": false,
+      "missing_fields": [],
+      "has_key_metrics": true,
+      "spec_path": "paper\\EACL Final\\experiments\\N06_ood_audit\\spec.yaml"
+    },
+    {
+      "id": "N07",
+      "status": "REAL_MEASURED",
+      "has_locked_results": true,
+      "has_jsonl": true,
+      "missing_fields": [],
+      "has_key_metrics": true,
+      "spec_path": "paper\\EACL Final\\experiments\\N07_badge_gate_rerun\\spec.yaml"
+    },
+    {
+      "id": "N08",
+      "status": "REAL_MEASURED",
+      "has_locked_results": true,
+      "has_jsonl": true,
+      "missing_fields": [],
+      "has_key_metrics": true,
+      "spec_path": "paper\\EACL Final\\experiments\\N08_fence_study\\spec.yaml"
+    },
+    {
+      "id": "N09",
+      "status": "REAL_MEASURED",
+      "has_locked_results": true,
+      "has_jsonl": true,
+      "missing_fields": [],
+      "has_key_metrics": true,
+      "spec_path": "paper\\EACL Final\\experiments\\N09_prism_routes\\spec.yaml"
+    },
+    {
+      "id": "N10",
+      "status": "REAL_MEASURED",
+      "has_locked_results": true,
+      "has_jsonl": true,
+      "missing_fields": [],
+      "has_key_metrics": true,
+      "spec_path": "paper\\EACL Final\\experiments\\N10_end_to_end_probe\\spec.yaml"
+    },
+    {
+      "id": "N11",
+      "status": "REAL_MEASURED",
+      "has_locked_results": true,
+      "has_jsonl": true,
+      "missing_fields": [],
+      "has_key_metrics": true,
+      "spec_path": "paper\\EACL Final\\experiments\\N11_gating_live_llm\\spec.yaml"
+    },
+    {
+      "id": "N12",
+      "status": "REAL_MEASURED",
+      "has_locked_results": true,
+      "has_jsonl": true,
+      "missing_fields": [],
+      "has_key_metrics": true,
+      "spec_path": "paper\\EACL Final\\experiments\\N12_safety_bangla_topup\\spec.yaml"
+    }
+  ],
+  "ground_truth_count": 12,
+  "spec_count": 12,
+  "all_good": false
+}

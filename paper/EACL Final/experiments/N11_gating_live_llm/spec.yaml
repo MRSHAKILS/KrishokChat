@@ -1,0 +1,35 @@
+id: N11
+title: Live-vs-deterministic gating head-to-head on 200 real queries
+question: How do the cheap deterministic gate and the live LLM path differ in behavior and cost?
+status: REAL_MEASURED
+beats: [B]
+lane: B-paid-small
+locked:
+  design: {n: 200, rows: identical labeled farmer set, live: production container OpenRouter gemini-2.5-flash-lite temp 0.2 max-tokens 1000, comparator: N01b deterministic records}
+  key:
+    live_halt_rate: 0.1
+    det_halt_rate: 0.38
+    halt_agreement: 0.68
+    agree_halt: 16
+    agree_pass: 120
+    live_pass_det_halt: 60
+    live_halt_det_pass: 4
+    live_latency_p50_ms: 4218.6
+    live_latency_p95_ms: 6645.1
+    live_conf: {verified: 180, low_confidence: 2, flagged_unverified: 8, blocked: 10}
+  answer_quality_review:
+    n: 60
+    high: 1
+    medium: 18
+    low: 41
+    medium_plus_rate: "0.317"
+    method: "heuristic (Bangla presence, disease/pathogen mention, actionable advice, crop mention, structure); human/Agent review recommended for paper claims"
+    note: "31.7% medium+ on live-pass/det-halt rows; does NOT support broad coverage superiority claim without human review"
+  meaning: "Two operating points, not a winner and a loser. Deterministic — cheap (~ms), conservative (halts 38%). Live LLM — 4.2s + API cost, understands more (halts 10%), verifier still flags 8 and blocks 10. The 60 live-pass/det-halt rows: 31.7% medium+ quality by heuristic; no coverage or quality superiority claim without human review."
+outputs:
+  - N11_gating_live_llm/results.json (locked copy)
+  - experiments/results/n11_live_gating_20260917.jsonl (200 per-query records)
+  - experiments/results/n11_answer_quality_review_20260917.jsonl (60 records)
+  - N11_gating_live_llm/results_answer_quality.json (locked copy)
+labels:
+  trade_off_not_ranking: report both operating points with cost; never "matcher beats LLM" flatly.

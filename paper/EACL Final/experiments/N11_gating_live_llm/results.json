@@ -1,0 +1,78 @@
+{
+  "benchmark_name": "EACL_N11_LIVE_GATING_HEADTOHEAD",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N11_gating_live_llm/scripts/run_n11_live.py",
+    "run_at_utc": "2026-09-17T18:10:08.110960+00:00",
+    "git_head": "998ead69c2e312d7d718132b6195cc2fcef9a5e8",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "sheet": "91beaf1afef4b65cf857cd3c75708f3b2ee998f8280b20ff647ca3aab4dcd9a1"
+    }
+  },
+  "live_config": {
+    "model": "google/gemini-2.5-flash-lite",
+    "temperature": 0.2,
+    "max_output_tokens": 1000
+  },
+  "design": {
+    "n": 200,
+    "comparator": "N01b deterministic records, identical rows+code"
+  },
+  "live": {
+    "n_ok": 200,
+    "n_fail": 0,
+    "halt_rate": 0.1,
+    "halt_agreement_with_deterministic": 0.68,
+    "latency_p50_ms": 4218.6,
+    "latency_p95_ms": 6645.1
+  },
+  "deterministic_comparator": {
+    "halt_rate": 0.38,
+    "source": "N01b records"
+  },
+  "crosstab": {
+    "agree_halt": 16,
+    "agree_pass": 120,
+    "live_pass_det_halt": 60,
+    "live_halt_det_pass": 4
+  },
+  "live_confidence": {
+    "verified": 180,
+    "low_confidence": 2,
+    "flagged-unverified": 8,
+    "blocked": 10
+  },
+  "live_tiers": {
+    "grounded_generation": 178,
+    "interactive_clarification": 10,
+    "honest_refusal": 3,
+    "deterministic_guard": 9
+  },
+  "halt_definition": "operational halt = len(sources)==0 (clarification, guard, refusal, or no-retrieval outcome)",
+  "provider": {
+    "gateway": "OpenRouter",
+    "model": "google/gemini-2.5-flash-lite",
+    "temperature": 0.2,
+    "max_output_tokens": 1000,
+    "access_date": "2026-09-17",
+    "n_requests": 200,
+    "token_usage": "not recorded by runner; monetary cost not measured"
+  },
+  "amendments": [
+    "2026-09-17: added deterministic comparator, crosstab, confidence counts, halt definition, provider disclosure (recomputed from jsonl)"
+  ]
+}

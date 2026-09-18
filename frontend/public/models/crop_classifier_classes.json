@@ -1,8 +1,12 @@
 {
-  "0": "Brassica",
-  "1": "Corn",
-  "2": "GourdGuava",
-  "3": "Potato",
-  "4": "Solanacea",
-  "5": "Wheat"
+  "0": "Cabbage",
+  "1": "Cauliflower",
+  "2": "Chili",
+  "3": "Eggplant",
+  "4": "Gourd",
+  "5": "Guava",
+  "6": "Others",
+  "7": "Potato",
+  "8": "Rice",
+  "9": "Tomato"
 }

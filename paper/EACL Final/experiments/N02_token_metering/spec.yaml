@@ -1,7 +1,7 @@
 id: N02
-title: Metered tokens on real strings (offline components locked; live lengths pending)
+title: Metered tokens on real strings (offline components + provider-exact live lengths)
 question: What do clarification vs full-generation turns REALLY cost in tokens?
-status: REAL_MEASURED_PARTIAL
+status: REAL_MEASURED
 beats: [B, C+G]
 lane: A
 locked_offline:
@@ -14,10 +14,17 @@ locked_offline:
   findings:
     - The modeled 150-token clarification was 68% too high (metered p50 89).
     - The modeled 1250-token generation ignored context: real retrieval context alone is p50 2,146.
-    - The modeled 88% is RETIRED. No single blended saving is claimed until live-generation lengths land (provider-exact, G5/SMS-live runs).
+    - The modeled 88% is RETIRED. No single blended saving is claimed.
+locked_live_lengths:
+  design: {n_calls: 58, source: provider usage records on N03c live grounded-generation rows ONLY (rows without a generation call carry no usage; stale prior-row values excluded after audit), model: google/gemini-2.5-flash-lite}
+  key:
+    input_p50: 1111.0
+    input_p95: 1264.9
+    output_p50: 221.0
+    output_p95: 479.4
+  meaning: Provider-exact (not estimated). Retrieval context dominates input; live answers run ~4x longer than stubs (221 vs 53). Cost arithmetic uses the disclosed tier-mix price basis; no new money claim.
 pending_live_lengths:
-  method: provider usage records from G5 (n=400 NLU + generation) and SMS-live subsets
-  then: full-turn metered comparison (query + context + live generation vs clarification)
+  method: CLOSED by locked_live_lengths above (was G5/SMS-live provider records).
 outputs:
   - N02_token_metering/results.json (offline components locked copy)
 labels:

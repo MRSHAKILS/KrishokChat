@@ -23,10 +23,26 @@ locked_accuracy_parity:
     onnx_max_delta: 5e-05
     router_top1_exact_match: 0.0259
     router_rule: report ONLY as label-space-mismatch diagnostic + species breakdown; never as quality; drop router macroF1
+    router_family_mapped: {n: 437, correct: 433, accuracy: 0.9908, ci95: [97.67, 99.64], mapping: frozen family_mapping_freeze.md pre-run, wheat-800 excluded as out-of-space}
     routing_hint_off: {diagnosed: 308, uncertain: 387, not_recognized: 162, no_disease_model: 183, ood: 15, invalid_image: 10, requires_second_image: 38, healthy: 134}
+  browser_wasm_latency:
+    crop_classifier: {p50_ms: 51.3, p95_ms: 52.9, n: 10, shape: [1,3,224,224]}
+    wheat: {p50_ms: 16.7, p95_ms: 17.6, n: 10, shape: [1,3,224,224]}
+    env: {num_threads: 1, simd: true, cross_origin_isolated: false}
+    subset: "2/6 models (smallest); 3 warmup + 10 measured; inference-only random tensor; prep excluded"
   forensic: critic ACCEPT-WITH-FIXES 2026-09-17, all 8 fixes applied (true notes, chilli listed, hashes regenerated); re-run reproduced identical metrics (deterministic)
+locked_int8:
+  design: {method: ORT static quantization, disjoint calibration/held-out splits, gate: 2.0pp max drop + agreement}
+  key:
+    wheat: {accepted: true, reportable: true, drop_pp: 0.0, agree: 1.0}
+    crop_classifier: {artifact_produced: true, agree: 0.9377, accuracy_claimable: false, reason: top-1 is the label-space diagnostic, not router accuracy}
+    potato: {artifact_produced: true, accuracy_claimable: false, reason: held-out n=15 below n=100 floor}
+    brassica: {artifact_produced: true, accuracy_claimable: false, reason: held-out n=51 below n=100 floor}
+    rice: {rejected: true, drop_pp: 2.5, agree: 0.975, reason: exceeds 2.0pp gate — artifact exists, unusable, never deployed}
+    corn: unmeasured
+    chilli: unmeasured
+  meaning: Only wheat carries a quantitative INT8 accuracy claim. INT8 is NOT faster here (higher latency than FP32 on measured models) — never claim speedup. Artifact-produced ≠ accuracy-supported.
 pending:
-  int8_rerun: conditional (gated on this pass — PASSED; schedule next)
   wasm_rerun: conditional (needs playwright install + refreshed frontend models)
   family_mapped_router_rescore: only with frozen preregistered mapping (none exists — do not post-hoc)
 labels:

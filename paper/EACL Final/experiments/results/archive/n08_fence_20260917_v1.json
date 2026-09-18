@@ -1,0 +1,63 @@
+{
+  "benchmark_name": "EACL_N08_IMAGE_FENCE_SCOPE",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N08_fence_study/scripts/run_n08_fence.py",
+    "run_at_utc": "2026-09-17T17:53:45.646023+00:00",
+    "git_head": "998ead69c2e312d7d718132b6195cc2fcef9a5e8",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "bm25_index": "2ab484aca38b694937a92a4a27bb2779c9e2ffb89f397d3fa168f7ca19e836c5",
+      "prism": "948123aa5de53604469029b45743067da2c6c0c012a66338cd3be37a400d62d3"
+    }
+  },
+  "freeze": "gate0 v3 conventions (crop_map_v1, Wilson, McNemar exact)",
+  "design": {
+    "n": 400,
+    "categories": [
+      "B_colloquial_bengali",
+      "C_dialect",
+      "D_banglish",
+      "I_ambiguous_disease"
+    ],
+    "top_k": 5,
+    "depth": 50,
+    "open": "text as-is, no crop context",
+    "fenced": "context.crop preset to gold (perfect-vision simulation; classifier accuracy is N04)"
+  },
+  "top5_wrong_crop_rate": {
+    "open": 0.3625,
+    "open_ci95": [
+      31.69,
+      41.07
+    ],
+    "fenced": 0.3,
+    "fenced_ci95": [
+      25.72,
+      34.66
+    ],
+    "mcnemar_exact_p": 0.0,
+    "discordant": {
+      "open_only": 25,
+      "fenced_only": 0
+    }
+  },
+  "top5_gold_purity_mean": {
+    "open": 0.6924,
+    "fenced": 0.6924
+  },
+  "elapsed_s": 21.0
+}

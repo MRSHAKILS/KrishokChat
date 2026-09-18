@@ -122,12 +122,15 @@ def wilson(k: int, n: int, z: float = 1.95996) -> list[float]:
     return [round(max(0.0, center - half) * 100, 2), round(min(1.0, center + half) * 100, 2)]
 
 
-def mcnemar_exact(b: int, c: int) -> float:
+def mcnemar_exact(b: int, c: int):
+    """Two-sided exact McNemar p-value. Full precision below 1e-6 (fix 2026-09-17:
+    rounding tiny p to 0.0 misreads as 'impossible'; report the small value)."""
     n = b + c
     if n == 0:
         return 1.0
     k = min(b, c)
-    return round(2 * sum(math.comb(n, i) for i in range(k + 1)) / (2 ** n), 6)
+    p = min(1.0, 2 * sum(math.comb(n, i) for i in range(k + 1)) / (2 ** n))
+    return round(p, 6) if p >= 1e-6 else p
 
 
 def append_jsonl(path: Path, record: dict) -> None:

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "exported_at": "2026-08-30",
+  "exported_at": "2026-09-17",
   "framework": "Ultralytics YOLO (ONNX Export) — Option A: FP32 + INT8 static (ORT), browser via onnxruntime-web 1.29.0",
   "runtime": "onnxruntime-web 1.29.0 (WASM, bundle variant, lazy-loaded, not in First Load)",
   "gate": "default off: NEXT_PUBLIC_VISION_ONDEVICE_ENABLED; INT8 only where held-out sanity gate passed (drop <=2pp, agree >=0.90)",
@@ -21,9 +21,9 @@
         224,
         224
       ],
-      "size_bytes": 1678848,
-      "onnx_sha256": "65a7abf0e2d89afce47c73b00e88d8a9aaf697dd2620ea405df082b83f42950b",
-      "source_pt_sha256": "6f14484768e54f28c2edc2c5d3858c2c1a57f18d7de40a001a119cbc04240c94",
+      "size_bytes": 5603712,
+      "onnx_sha256": "c18c781d784e8eda76f851e702fe97b86efb5c3a7209cae3b21e1077341dcd7a",
+      "source_pt_sha256": "12f6ba58051fc00e93ff84ed307efd833e1b4b0ddc0a408ab62a4653af84622f",
       "train_imgsz": 224,
       "opset": 20
     },
@@ -45,7 +45,7 @@
         224
       ],
       "size_bytes": 5594555,
-      "onnx_sha256": "b05a344b3ced48451d27b2e5f1305e7265483e78aee00c6c43b03a73e8f1b450",
+      "onnx_sha256": "f5f9b46bf61d463cec8e68485514eb36fe9d1bf6958a9a529981d85a2e954975",
       "source_pt_sha256": "d57b961ebf78280c03ebd9ff25cb414a2a2151a50eec584d4fa9168bb56b6698",
       "train_imgsz": 224,
       "opset": 20
@@ -64,13 +64,13 @@
       "input_shape": [
         1,
         3,
-        320,
-        320
+        224,
+        224
       ],
-      "size_bytes": 6191990,
-      "onnx_sha256": "6f7107321f79190de09dba6134fe56ea73b6546010b7d39bfc138347e762992d",
-      "source_pt_sha256": "f25243959a3d7dd0851f4d2e53e30890515cadd5e318871ffe04c0413865d61a",
-      "train_imgsz": 320,
+      "size_bytes": 41476690,
+      "onnx_sha256": "e2d52275bf3f96e650a8827484cabbfe1e7a0e9571835eb5b25d2616dd298f0a",
+      "source_pt_sha256": "12c36c85c9f5330be3265ae3f6234978a37e10c0f6e7de4095177970852c302f",
+      "train_imgsz": 224,
       "opset": 20
     },
     {
@@ -91,7 +91,7 @@
         224
       ],
       "size_bytes": 1685294,
-      "onnx_sha256": "4bf0141f6d2aee69114a8903e01e03bafb6394109b3657b2804ac2ff29eabc23",
+      "onnx_sha256": "49920527d24f0b5e617b85e1d6f83bc36e83ef83f32adbc4e8ce716eef2db855",
       "source_pt_sha256": "f4c6d2fa835744b2cab4392275556b918171cce61f04a058497e6dbe9965c7f3",
       "train_imgsz": 224,
       "opset": 20
@@ -114,7 +114,7 @@
         256
       ],
       "size_bytes": 21803921,
-      "onnx_sha256": "861b0e1c12d28beaab10d4c28d7e39fbb832177cbe6a57cbc59595180dbd0a98",
+      "onnx_sha256": "a641c528d68c6b8fec0735db6dffaf8c74126172737f109188bf084989adbd69",
       "source_pt_sha256": "a5b92794445299bcb81fbacf664d7ac0478298e993e1f6b99230c6a01486d7a0",
       "train_imgsz": 256,
       "opset": 20
@@ -137,7 +137,7 @@
         256
       ],
       "size_bytes": 5605142,
-      "onnx_sha256": "2b3a8cc1ae0a9dec93b0041d49be31a6d17b0c501a970c802fa9fcbd944cc5b7",
+      "onnx_sha256": "ed554ecb653439857b5d26556b6189387a122fd57955c2ffeefb12bdbc8f3ec0",
       "source_pt_sha256": "c3632475083492be7f1d6db5601ed9cd44f1a3fecbc74d8419d4a738b83cf99e",
       "train_imgsz": 256,
       "opset": 20
@@ -145,6 +145,6 @@
   ],
   "totals": {
     "n_models": 6,
-    "total_onnx_mb": 40.588
+    "total_onnx_mb": 77.981
   }
 }

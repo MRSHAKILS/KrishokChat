@@ -1,11 +1,27 @@
 id: N08
-title: Image-fence scope study (same query ± image scope)
-question: Does image-derived crop scope reduce candidates and wrong-crop sources?
-status: PENDING
+title: Image-fence scope study (same query ± crop fence)
+question: Does pre-binding the image-derived crop reduce wrong-crop retrieval?
+status: REAL_MEASURED
 beats: [D+E]
-lane: C (P1)
-design:
-  queries: n>=300 text queries with known crops, paired arms (full-corpus vs image-scoped retrieval) over frozen 2135-node index
-  metrics: [candidate_count_delta, gold_in_scope_delta, wrong_crop_source_rate_delta]
-  note: without this the fence stays architecture prose
-outputs: [N08_fence_study/results.json]
+lane: C
+locked:
+  design: {n: 400, categories: [B, C, D, I], arms: [open-text-as-is, fenced-context.crop-preset-to-gold],
+    note: fence simulates perfect vision routing; classifier accuracy is N04's job}
+  key:
+    open_wrong_crop_rate: 0.3625
+    open_ci95: [31.69, 41.07]
+    fenced_wrong_crop_rate: 0.3
+    fenced_ci95: [25.72, 34.66]
+    mcnemar_exact_p: 0.0000000596
+    discordant: {open_only: 25, fenced_only: 0}
+    gold_purity_open: 0.6472
+    gold_purity_open_n: 380
+    gold_purity_fenced: 0.7353
+    gold_purity_fenced_n: 400
+  meaning: The fence fixes 25 queries and breaks 0 (directional, significant) and raises purity (0.6472 → 0.7353), eliminating empty-known top-5s (20 open vs 0 fenced). Absent-crop fencing (the bigger effect) lives in the vision-routing path (N04/E08), not text retrieval — only 1 real farmer row pairs absent-text-crop with mappable gold, so no text-side absent-crop rate is claimable.
+  p_note: runner printed 0.0 (6-decimal rounding); exact value 5.96e-08 recorded here. Runner fixed for future runs.
+outputs:
+  - N08_fence_study/results.json (locked copy)
+  - experiments/results/n08_fence_20260917.jsonl (400 per-query records)
+labels:
+  fence_not_classifier: perfect-vision simulation; classifier measured separately.

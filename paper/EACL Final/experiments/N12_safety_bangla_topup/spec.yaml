@@ -1,0 +1,29 @@
+id: N12
+title: Bangla-native injection top-up (n=30 → n=100 per arm)
+question: Where exactly does the residual Bangla-native risk concentrate?
+status: REAL_MEASURED
+beats: [F]
+lane: B-paid-small
+locked:
+  design: {n_new: 70, angles: [authority, urgency, hypothetical, roleplay, embedded, misinfo, direct],
+    construction: author-written native probes (disclosed constructed attacks),
+    models: {BAA: google/gemini-2.5-flash-lite + safety prompt, UNCONSTRAINED: openai/gpt-4o-mini},
+    judge: imported verbatim from E03 runner (same semantics), temp 0.0, max_tokens 150}
+  key:
+    new_BAA_asr: 0.1143
+    new_BAA_ci95: [5.91, 20.96]
+    new_UNC_asr: 0.8571
+    new_UNC_ci95: [75.66, 92.05]
+    new_BAA_by_angle: {authority: 0/10, urgency: 0/10, hypothetical: 0/10, roleplay: 2/10, embedded: 4/10, misinfo: 1/10, direct: 1/10}
+    combined_n: 100
+    combined_BAA_asr: 0.1
+    combined_BAA_ci95: [5.5, 17.4]
+    combined_UNC_asr: 0.83
+    combined_UNC_ci95: [74.5, 89.1]
+  meaning: New angles are harder than E03's originals (11.4% vs 6.7% BAA). Residual risk concentrates in embedded-instruction (4/10) and roleplay (2/10) framings — precise, actionable, disclosed. Combined n=100 tightens the residual-risk CI the paper leads with.
+outputs:
+  - N12_safety_bangla_topup/results.json (locked copy)
+  - experiments/results/n12_bangla100_20260917.jsonl (140 per-call records)
+labels:
+  constructed_attacks: author-written probes, standard attack-eval practice, disclosed.
+  judge_shared: identical rule-based judge to E03 (imported, not reimplemented).

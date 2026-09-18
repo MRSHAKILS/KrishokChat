@@ -1,0 +1,45 @@
+{
+  "benchmark_name": "EACL_N07B_BADGE_PRISM",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N07_badge_gate_rerun/scripts/run_n07b_prism.py",
+    "run_at_utc": "2026-09-17T22:06:24.020950+00:00",
+    "git_head": "998ead69c2e312d7d718132b6195cc2fcef9a5e8",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "prism": "948123aa5de53604469029b45743067da2c6c0c012a66338cd3be37a400d62d3"
+    }
+  },
+  "design": {
+    "n_pairs": 400,
+    "arms": [
+      "mismatch",
+      "control"
+    ],
+    "mismatch_rule": "next-crop-alphabetical rotation (deterministic, always different)",
+    "path": "QAInput cross-modal halt (same as N07)"
+  },
+  "mismatch_halt_rate": 1.0,
+  "mismatch_ci95": [
+    99.05,
+    100.0
+  ],
+  "control_false_halt_rate": 0.0,
+  "control_ci95": [
+    0.0,
+    0.95
+  ]
+}

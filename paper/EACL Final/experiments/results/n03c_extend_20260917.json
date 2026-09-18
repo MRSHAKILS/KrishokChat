@@ -1,0 +1,44 @@
+{
+  "benchmark_name": "EACL_N03C_EXTENSION_GENERATION",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N03_verifier_catchrate/scripts/run_n03c_extend.py",
+    "run_at_utc": "2026-09-17T21:29:56.147505+00:00",
+    "git_head": "998ead69c2e312d7d718132b6195cc2fcef9a5e8",
+    "python": "3.13.14",
+    "versions": {
+      "python": "3.13.14",
+      "torch": "2.13.0+cpu",
+      "ultralytics": "8.4.116",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.28.0",
+      "fastapi": "0.141.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "dose_reference": "13efdd5d0235746fa12ac073761032cd49f51d44771ea048c8f2df6c1cceca0f",
+      "farmer": "e2adc30d69aed9dee1d1b3f5f0ebf7584861b1df9c687b1b32812b6215a7b7aa",
+      "nodes": "0a5fc281384edd212395ea46c59aebad29c251899b3a8a035915577d73671bc2"
+    }
+  },
+  "live_config": {
+    "model": "google/gemini-2.5-flash-lite",
+    "temperature": 0.2,
+    "max_output_tokens": 1000
+  },
+  "design": {
+    "n_elicitations": 114,
+    "farmer_dosage": 52,
+    "paraphrases": 62
+  },
+  "flow": {
+    "ok": 86,
+    "failed": 0,
+    "with_dose_claims": 9,
+    "with_usage": 86
+  }
+}

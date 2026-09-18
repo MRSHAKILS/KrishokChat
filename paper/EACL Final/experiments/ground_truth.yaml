@@ -35,7 +35,17 @@ experiments:
       unconstrained_overall_asr_pct: 36.19
       unconstrained_overall_ci95: [29.99, 42.88]
       unconstrained_bangla_native_asr_pct: 76.67
-    label: Residual 6.67% leak disclosed, never rounded.
+    label: Residual leak disclosed, never rounded. Bangla n=30 superseded by N12 combined n=100 below.
+  N12_safety_bangla_topup:
+    status: REAL_MEASURED
+    key:
+      bangla_n: 100
+      baa_asr: 0.1
+      baa_ci95: [5.5, 17.4]
+      unc_asr: 0.83
+      unc_ci95: [74.5, 89.1]
+      weak_angles: {embedded: 4/10, roleplay: 2/10}
+    label: Residual risk with tightened CI; weakness localized to embedded/roleplay framings.
 
   E04_trace:
     status: REAL_MEASURED
@@ -125,14 +135,24 @@ experiments:
       firewall_case: farmer_q_593
     label: Matcher fix (token-start Bengali boundaries) applied post N01b-v1; full suite green (595 passed); N01a/N01b/N02 re-run. 9 FP rice cases now halt. Crop-universe limitation disclosed.
   N02_token_metering:
-    status: REAL_MEASURED_PARTIAL
+    status: REAL_MEASURED
     key:
       clarification_p50: 89.0
-      clarification_n: 86
       retrieval_context_p50: 2146.0
       stub_answer_p50: 53.0
-    label: Modeled 150/1250/88% retired. No blended saving until live-generation lengths (provider-exact) land.
-  N03_verifier_catchrate: {status: PENDING, key: {}}
+      live_input_p50: 1111.0
+      live_output_p50: 221.0
+    label: Offline components + provider-exact live lengths (n=58 grounded only; stale reads excluded). Modeled 88% retired; no blended saving claimed.
+  N03_verifier_catchrate:
+    status: REAL_MEASURED_SMALLN
+    key:
+      answers_scored: 38
+      dose_x2: 33/33
+      dose_div2: 30/31
+      chemical_swap: 22/25
+      unit_swap: 29/29
+      clean_fp: 0/38
+    label: Claim-anchored, validity-gated, strict==precise. CIs in spec. Small n, no pooling. 4 misses autopsied (hard edges).
   N04_vision_rerun:
     status: REAL_MEASURED_PARTIAL
     key:
@@ -142,11 +162,92 @@ experiments:
       brassica_top1: 0.9118
       onnx_agreement: 1.0
       onnx_max_delta: 5e-05
-      router_top1_diagnostic_only: 0.0259
-    label: Accuracy+parity locked (critic ACCEPT-WITH-FIXES, fixes applied). INT8/WASM pending. Router 0.0259 diagnostic-only. Coverage gap disclosed.
-  N05_sms_survival: {status: PENDING, key: {}}
-  N06_ood_audit: {status: PENDING, key: {}}
-  N07_badge_gate_rerun: {status: PENDING, key: {}}
-  N08_fence_study: {status: PENDING, key: {}}
-  N09_prism_routes: {status: PENDING, key: {}}
-  N10_end_to_end_probe: {status: PENDING, key: {}}
+    router_top1_diagnostic_only: 0.0259
+    router_family_mapped: 0.9908
+    router_family_ci95: [97.67, 99.64]
+    int8_wheat_reportable: true
+    int8_rice_rejected_2_5pp: true
+    browser_wasm_latency:
+      crop_classifier_p50_ms: 51.3
+      crop_classifier_p95_ms: 52.9
+      wheat_p50_ms: 16.7
+      wheat_p95_ms: 17.6
+      env: {num_threads: 1, simd: true, cross_origin_isolated: false}
+      note: "subset 2/6 models; 3 warmup + 10 measured; inference-only random tensor"
+    label: Accuracy+parity+INT8+browserWASM locked (audited). INT8 accuracy claimed for wheat ONLY; rice rejected; crop/potato/brassica diagnostic-only; corn/chilli unmeasured. Browser WASM subset measured. No speedup claim.
+  N05_sms_survival:
+    status: REAL_MEASURED
+    key:
+      offline_ok: 299/300
+      offline_over_160: 0
+      offline_referral_only: 44/44
+      live_ok: 100/100
+      live_over_160: 0
+      live_verified_advice: 75
+      live_flagged_referral: 9
+      live_blocked_referral: 16
+      live_safe_dose: 0/84
+      live_referral_purity: 16/16 blocked (+9 flagged clean)
+    label: Enforcement + purity hold. Dose fields do NOT survive truncation (packer pending). SMS guard fix proven (9/9 flips).
+  N11_gating_live_llm:
+    status: REAL_MEASURED
+    key:
+      live_halt_rate: "0.1"
+      det_halt_rate: "0.38"
+      halt_agreement: "0.68"
+      live_latency_p50_ms: 4218.6
+      answer_quality_60row:
+        high: 1
+        medium: 18
+        low: 41
+        medium_plus_rate: "0.317"
+        method: "heuristic; human/Agent review recommended"
+    label: "Coverage/cost trade-off (cheap-conservative vs 4.2s-broader), not a ranking. 60-row answer review: 31.7% medium+ (heuristic); no coverage claim without human review."
+  N06_ood_audit:
+    status: REAL_MEASURED_ANALYSIS
+    key:
+      injection_blocked: 10/10
+      off_topic_refused: 0/30
+    label: 0.25 retired (expectation error + real off-topic gap). Split reported.
+  N07_badge_gate_rerun:
+    status: REAL_MEASURED
+    key:
+      mismatch_halt_rate: 0.9815
+      control_false_halt: 0.0
+      n_pairs: 54
+      prism_mismatch_halt_rate: 1.0
+      prism_mismatch_ci95: [99.05, 100.0]
+      prism_control_false_halt: 0.0
+      prism_n_pairs: 400
+      combined_halt: 453/454
+    label: S3 badge path on real queries (farmer) + PRISM pairs. Sole miss = implicit-crop query (no text token to contradict); counted as miss.
+  N08_fence_study:
+    status: REAL_MEASURED
+    key:
+      open_wrong_crop: 0.3625
+      fenced_wrong_crop: 0.3
+      mcnemar_p: 0.0000000596
+      discordant_open_only: 25
+      discordant_fenced_only: 0
+      purity_open: 0.6472
+      purity_fenced: 0.7353
+    label: Fence fixes 25, breaks 0, raises purity. Absent-crop fencing lives in vision routing, not text.
+  N09_prism_routes:
+    status: REAL_MEASURED
+    key:
+      overall_agreement: 0.458
+      clarification: 0.86
+      concept_hypotheses: 0.5633
+      conversational_follow_up: 0.0
+      document_rag: 0.0952
+      fact_base: 0.7297
+      safety_gate: 0.44
+    label: Design-conformance (generator-assigned expectations), not independent accuracy. Follow-up = UNTESTED (no D tier, unseedable memory), not failed. Safety = precheck-only lower bound.
+  N10_end_to_end_probe:
+    status: REAL_MEASURED
+    key:
+      certify_recall: 0.7165
+      refuse_recall: 0.493
+      dangerous_acceptance: 0.374
+      abstain_other_n: 438
+    label: OFFLINE deterministic envelope (stub generation), not deployment. Dangerous 37.4% motivates the LLM safety branch; 13% empty-retrieval is a coverage finding.

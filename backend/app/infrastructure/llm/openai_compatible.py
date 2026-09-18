@@ -55,9 +55,24 @@ class OpenAICompatibleClient:
         self.max_output_tokens = max_output_tokens
         self.max_retries = max_retries
         self.name = model
+        # Token usage of the most recent call, when the gateway reports it.
+        # telemetry.capture_tokens reads lane.last_usage; previously never set.
+        self.last_usage: dict[str, int] | None = None
 
     def _headers(self) -> dict[str, str]:
         return {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
+
+    def _record_usage(self, payload: Any) -> None:
+        try:
+            usage = (payload or {}).get("usage", {})
+            prompt = usage.get("prompt_tokens")
+            completion = usage.get("completion_tokens")
+            if isinstance(prompt, int) and isinstance(completion, int):
+                self.last_usage = {"input": prompt, "output": completion}
+                return
+        except (AttributeError, TypeError, ValueError):
+            pass
+        self.last_usage = None
 
     async def _request(self, payload: dict[str, Any]) -> httpx.Response:
         """POST with bounded retries so transient network drops do not fail closed."""
@@ -93,7 +108,9 @@ class OpenAICompatibleClient:
         ):
             try:
                 response = await self._request(payload)
-                content = response.json()["choices"][0]["message"]["content"]
+                body = response.json()
+                content = body["choices"][0]["message"]["content"]
+                self._record_usage(body)
             except (LLMError, KeyError, IndexError, TypeError, ValueError):
                 continue
             try:
@@ -112,11 +129,16 @@ class OpenAICompatibleClient:
             }
         )
         try:
-            content = response.json()["choices"][0]["message"]["content"]
+            body = response.json()
+            content = body["choices"][0]["message"]["content"]
         except (KeyError, IndexError, TypeError, ValueError) as exc:
             raise LLMError("LLM response did not contain chat content") from exc
         if not isinstance(content, str) or not content.strip():
             raise LLMError("LLM returned an empty answer")
+        try:
+            self._record_usage(body)
+        except LLMError:
+            pass
         return content.strip()
 
     async def stream(self, prompt: str, *, metadata: dict[str, Any] | None = None) -> AsyncIterator[str]:
