@@ -1,0 +1,140 @@
+# KrishokChat — Paper-Ready Results (EACL 2027 System Demonstrations)
+# Generated: 2026-09-18. SSOT source: experiments/ground_truth.yaml (2026-09-17 audit).
+# Rule: every number here traces to a frozen results.json in experiments/<ID>/.
+# Statuses: REAL_MEASURED / REAL_MEASURED_SMALLN / REAL_MEASURED_PARTIAL /
+#   REAL_MEASURED_ANALYSIS / REAL_MEASURED_PROXY / REAL_MEASURED_MIX_MODELED_COST /
+#   REAL_MEASURED_DETERMINISTIC_AND_SIMULATED / REAL_MEASURED_WITH_CROSS_TRACK_BASELINES / PILOT
+
+meta:
+  system: KrishokChat Bengali agricultural advisory (fail-closed, BM25-first, ONNX on-device vision)
+  venue: EACL 2027 System Demonstrations (Athens, 9-14 Mar 2027)
+  page_budget: 6 + unlimited refs/appendix/ethics
+  desk_reject_gate:
+    paper_pdf_acl_style: required
+    video_screencast_max_150s_with_narration: required
+    live_demo_url_or_installable_package_in_pdf_and_form: required
+    reciprocal_reviewer_nomination: required
+  review_axes: [motivation_fit_novelty, related_work_contribution, system_demo_description,
+    evaluation_availability_licensing, presentation_quality]
+  evidence_policy: some_form_of_evidence_mandatory_or_desk_reject
+  reviewing: single-blind (names shown, self-refs allowed)
+
+contributions:
+  C1_halt_before_retrieval:
+    tagline: The cheapest and safest retrieval is the one the system refuses to run.
+    problem: Crop-less symptom queries make blind retrieval return index-dominant-crop
+      sources, which fluent generation verbalizes as confident wrong-crop advice.
+    fix: Deterministic extractor -> crop empty on treatment intent -> A4 clarification
+      with ZERO retrieval; A3 non-chemical guidance; A5 refuse + 16123 helpline.
+    novelty: Halt-before-retrieval as measured safety primitive (not UX polish); published
+      halt rates + hazard deltas + cost deltas; helpline as terminal state.
+    evidence:
+      E09_pilot: {ambiguous_halt: 100/100, specified_pass: 140/140, status: PILOT}
+      N01b_farmer_200: {halt_rate: 0.38, halted_n: 76, extractor_agreement: 0.52,
+        extractor_miss: 0.475, extractor_fp: 0.005, hazard_mapped: 0.1607,
+        hazard_ci95: [8.69, 27.81], firewall_case: farmer_q_593, status: REAL_MEASURED,
+        caveat: single-reviewer labels; no gate-silent mappable set in real data}
+      N09_conformance: {clarification: 0.86, overall: 0.458, status: REAL_MEASURED,
+        caveat: design-conformance not independent accuracy; follow-up UNTESTED}
+      N02_metering: {clarification_p50_tokens: 89, retrieval_context_p50_tokens: 2146,
+        live_input_p50: 1111, live_output_p50: 221, status: REAL_MEASURED,
+        caveat: modeled-88pct retired; no blended saving claimed}
+      N11_live_vs_det_200: {live_halt: 0.10, det_halt: 0.38, agreement: 0.68,
+        live_latency_p50_ms: 4218.6, answer_quality_medium_plus: 19/60,
+        status: REAL_MEASURED, caveat: cost unmeasured; no coverage-superiority claim}
+    demo: S1 (halt -> chips -> resume, sources_retrieved 0)
+
+  C2_fence_and_badge:
+    tagline: The photo is a fence around the evidence — when words jump the fence, the system says so.
+    problem: Text-only retrieval poisons the wrong crop; vision-only diagnosis never sees
+      text disagreement.
+    fix: Tri-state gated crop router -> per-crop disease models -> crop pre-binds advisory
+      query; text-vs-image mismatch -> badge + confirm-crop before any chemical.
+    novelty: Photo as retrieval fence (not just diagnosis endpoint) + measured text-vs-image
+      conflict rate for Bengali advisory; on-device measured (not size-claimed).
+    evidence:
+      N04_accuracy_parity: {potato_top1: 0.90, rice_top1: 0.9625, wheat_top1: 0.9413,
+        brassica_top1: 0.9118, onnx_agreement: 1.0, onnx_max_delta: 5e-05,
+        status: REAL_MEASURED_PARTIAL,
+        caveat: corn/chilli unmeasured; router exact-match 0.0259 diagnostic ONLY}
+      N04_router_family_mapped: {correct: 433/437, accuracy: 0.9908, ci95: [97.67, 99.64],
+        mapping: frozen pre-run, wheat-800 excluded as out-of-space}
+      N04_int8: {wheat_reportable: true, rice_rejected_2_5pp: true,
+        caveat: size story only, never speedup; potato/brassica diagnostic-only}
+      N04_browser_wasm: {crop_classifier_p50_ms: 51.3, crop_classifier_p95_ms: 52.9,
+        wheat_p50_ms: 16.7, wheat_p95_ms: 17.6,
+        env: single-thread-SIMD-no-COOP-COEP, subset_2_of_6_models: true}
+      N08_fence: {open_wrong_crop: 0.3625, fenced_wrong_crop: 0.30,
+        discordant: 25/0, mcnemar_p: 5.96e-08, purity_open: 0.6472,
+        purity_fenced: 0.7353, status: REAL_MEASURED,
+        caveat: perfect-gold simulation, not classifier performance}
+      N07_badge: {farmer: 53/54, prism: 400/400, combined: 453/454, false_halts: 0,
+        prism_ci95: [99.05, 100.0], sole_miss: farmer_q_63_implicit_crop_counted_as_miss,
+        status: REAL_MEASURED, scope: explicit-text contradiction only}
+      E08_divergence: {divergent: 68/80, rate: 0.85, status: REAL_MEASURED_WITH_CROSS_TRACK_BASELINES,
+        caveat: divergence is not badge rate; B4 is prompted judge}
+    demo: S2 (photo fence -> card) + S3 (badge before chemical)
+
+  C3_two_walls_mouthpiece_four_renderings:
+    tagline: The LLM is the mouthpiece; the evidence is the witness; the verifier is the judge — and the farmer sees all three.
+    problem: Oracle evidence still leaves 4-7% chemical hallucinations (companion 2606);
+      SFT collapses refusal; unconstrained models fail 83% of Bangla injections (n=100).
+    fix: Upstream gate (Tier-0 + classifier) -> untrusted generator -> dosage-claim verifier
+      (same-passage binding, annotate-and-drop, ~5ms) -> authorship badges -> one decision
+      rendered as full answer / SMS / offline / 16123 referral.
+    novelty: Pre-render sentence-dropping with same-passage binding + dose-band check +
+      visible authorship; refusal path dials a real national helpline.
+    evidence:
+      E03_N12_safety: {baa_overall_asr_pct: 0.95, baa_ci95: [0.26, 3.41],
+        unc_overall_asr_pct: 36.19, unc_ci95: [29.99, 42.88], live_calls: 420,
+        bangla_n100_baa_asr: 0.10, bangla_ci95: [5.5, 17.4], bangla_unc_asr: 0.83,
+        bangla_weak_angles: {embedded: 4/10, roleplay: 2/10}, status: REAL_MEASURED,
+        caveat: residual risk reported, never rounded; motivates verifier wall}
+      N03_verifier: {dose_x2: 33/33, dose_div2: 30/31, chemical_swap: 22/25,
+        unit_swap: 29/29, clean_fp: 0/38, answers_scored: 38,
+        status: REAL_MEASURED_SMALLN, caveat: per-type CIs, no pooling, 4 misses autopsied}
+      N05_sms: {offline_ok: 299/300, live_ok: 100/100, over_160: 0,
+        referral_purity: 16/16, guard_fix: 9/9 flips, live_safe_dose: 0/84,
+        status: REAL_MEASURED,
+        caveat: enforcement+purity claimed; dose does NOT survive truncation, packer pending}
+      E06_offline: {bm25_hit: 0.94, cached: 0/400, sw_precache: true,
+        status: REAL_MEASURED_DETERMINISTIC_AND_SIMULATED,
+        caveat: network deltas are simulated loss, always qualified}
+      E07_footprint: {unique_onnx_mb: 95.64, minimal_mb: 284.0, full_mb: 339.6, status: REAL_MEASURED}
+      E10_tiermix: {zero_llm_pct: 7.8, cost_per_1k_usd: 0.1798, saving_pct: 7.79,
+        status: REAL_MEASURED_MIX_MODELED_COST, caveat: costs MODELED, T1 0.0pct is 9-fact base}
+      E01_latency: {safety_p50_ms: 0.321, retrieval_p50_ms: 26.831, verifier_p50_ms: 4.815,
+        overhead_p50_ms: 33.565, status: REAL_MEASURED, caveat: live LLM latency UNMEASURED}
+      E04_trace: {n: 100, ordered_frac: 1.0, events_p50: 9.0, status: REAL_MEASURED}
+      N10_envelope: {certify_recall: 0.7165, dangerous_acceptance: 0.374,
+        status: REAL_MEASURED, caveat: OFFLINE stub envelope, not deployment}
+    demo: S4 (refuse + 16123) + S5 (SMS/offline) + Why/trace panel
+
+supporting:
+  E05_proxy: {score_0_100: 94.5, status: REAL_MEASURED_PROXY, caveat: NOT a SUS, no recruited study}
+  N06_ood: {injection_blocked: 10/10, off_topic_refused: 0/30, status: REAL_MEASURED_ANALYSIS,
+    caveat: 0.25 retired; split reported; deterministic-path gap disclosed}
+
+kill_list:
+  - First-Bengali-RAG / first-multimodal / first-voice
+  - 11-slot live certification (product path = dosage claims only; 11-slot is CEA companion)
+  - SUS scores, guaranteed SMS dose survival, measured network retention
+  - INT8-for-all, INT8 speedup, voice/ASR claims
+  - $2.30/92pct figure, 38.5pct baseline, 88pct tokens, E08 100pct, pooled purity 0.6924
+  - proven-equivalent (p=1.0 is no-observed-difference only)
+
+demo_scenarios:
+  S1: halt-chips-resume (C1)
+  S2: photo-fence-to-card (C2)
+  S3: mismatch-badge (C2)
+  S4: refuse-plus-16123 (C3)
+  S5: sms-offline (C3)
+
+paper_map:
+  abstract_intro_0_8pp: [C1, C2, C3, hook numbers 38pct halt, 0.95-vs-36.19, 25/0 fence]
+  system_1_0pp: [pipeline T0-T4, badges, verifier, router, vision pipeline]
+  demo_scenarios_1_2pp: [S1, S2, S3, S4, S5]
+  evaluation_1_6pp: Tab2 ground-truth key rows
+  related_work_0_6pp: 4-row matrix (Farmer.Chat / KrishokBondhu / Krishi Sathi / CoPilot)
+  limitations_0_4pp: LIMITATIONS.md 18 rows verbatim
+  figures: [Fig1 five-stage pipeline, Fig2 workspace-plus-Why screenshots, Tab1 honesty table, Tab2 results]
