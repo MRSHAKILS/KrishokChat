@@ -90,6 +90,10 @@ class QAResponse(BaseModel):
         default=None,
         description="Structured progressive help frame for A3 queries (field checks, cultural controls, non-chemical guidance)",
     )
+    quick_reply_chips: list[str] = Field(
+        default_factory=list,
+        description="Interactive quick-reply buttons for ambiguous or clarification turns",
+    )
 
 
 

@@ -1,0 +1,124 @@
+{
+  "benchmark_name": "EACL_N04_INT8_THREAD_SCALING",
+  "description": "Characterization of INT8 vs FP32 latency across 1, 2, 4 threads on x86 CPU",
+  "hardware_context": "Consumer x86_64 CPU without AVX-512 VNNI support. ONNX Runtime CPUExecutionProvider.",
+  "findings": "Multi-threading accelerates both precisions (optimal at 2-4 threads), but INT8 remains consistently ~1.5x-2.0x slower than FP32 due to lack of hardware VNNI int8 dot-product instructions. INT8 is validated strictly as a 3.68x storage footprint optimization (0.00 pp drop), not an inference speedup.",
+  "results_by_model": {
+    "wheat": {
+      "threads_1": {
+        "threads": 1,
+        "fp32_p50_ms": 3.97,
+        "fp32_mean_ms": 4.18,
+        "int8_p50_ms": 7.35,
+        "int8_mean_ms": 7.58,
+        "speedup_ratio_fp32_over_int8": 0.54,
+        "int8_latency_multiplier_vs_fp32": 1.85
+      },
+      "threads_2": {
+        "threads": 2,
+        "fp32_p50_ms": 2.32,
+        "fp32_mean_ms": 2.53,
+        "int8_p50_ms": 4.99,
+        "int8_mean_ms": 5.31,
+        "speedup_ratio_fp32_over_int8": 0.465,
+        "int8_latency_multiplier_vs_fp32": 2.15
+      },
+      "threads_4": {
+        "threads": 4,
+        "fp32_p50_ms": 2.38,
+        "fp32_mean_ms": 2.47,
+        "int8_p50_ms": 5.26,
+        "int8_mean_ms": 5.83,
+        "speedup_ratio_fp32_over_int8": 0.452,
+        "int8_latency_multiplier_vs_fp32": 2.21
+      }
+    },
+    "potato": {
+      "threads_1": {
+        "threads": 1,
+        "fp32_p50_ms": 14.47,
+        "fp32_mean_ms": 14.43,
+        "int8_p50_ms": 21.25,
+        "int8_mean_ms": 21.96,
+        "speedup_ratio_fp32_over_int8": 0.681,
+        "int8_latency_multiplier_vs_fp32": 1.47
+      },
+      "threads_2": {
+        "threads": 2,
+        "fp32_p50_ms": 8.56,
+        "fp32_mean_ms": 8.34,
+        "int8_p50_ms": 14.55,
+        "int8_mean_ms": 14.83,
+        "speedup_ratio_fp32_over_int8": 0.588,
+        "int8_latency_multiplier_vs_fp32": 1.7
+      },
+      "threads_4": {
+        "threads": 4,
+        "fp32_p50_ms": 6.92,
+        "fp32_mean_ms": 6.99,
+        "int8_p50_ms": 14.05,
+        "int8_mean_ms": 14.34,
+        "speedup_ratio_fp32_over_int8": 0.493,
+        "int8_latency_multiplier_vs_fp32": 2.03
+      }
+    },
+    "brassica": {
+      "threads_1": {
+        "threads": 1,
+        "fp32_p50_ms": 18.81,
+        "fp32_mean_ms": 19.07,
+        "int8_p50_ms": 26.58,
+        "int8_mean_ms": 27.39,
+        "speedup_ratio_fp32_over_int8": 0.708,
+        "int8_latency_multiplier_vs_fp32": 1.41
+      },
+      "threads_2": {
+        "threads": 2,
+        "fp32_p50_ms": 10.65,
+        "fp32_mean_ms": 10.91,
+        "int8_p50_ms": 16.91,
+        "int8_mean_ms": 17.21,
+        "speedup_ratio_fp32_over_int8": 0.63,
+        "int8_latency_multiplier_vs_fp32": 1.59
+      },
+      "threads_4": {
+        "threads": 4,
+        "fp32_p50_ms": 9.19,
+        "fp32_mean_ms": 9.99,
+        "int8_p50_ms": 24.49,
+        "int8_mean_ms": 24.89,
+        "speedup_ratio_fp32_over_int8": 0.375,
+        "int8_latency_multiplier_vs_fp32": 2.66
+      }
+    },
+    "crop_classifier": {
+      "threads_1": {
+        "threads": 1,
+        "fp32_p50_ms": 17.34,
+        "fp32_mean_ms": 17.6,
+        "int8_p50_ms": 22.81,
+        "int8_mean_ms": 23.04,
+        "speedup_ratio_fp32_over_int8": 0.76,
+        "int8_latency_multiplier_vs_fp32": 1.32
+      },
+      "threads_2": {
+        "threads": 2,
+        "fp32_p50_ms": 10.29,
+        "fp32_mean_ms": 10.62,
+        "int8_p50_ms": 19.3,
+        "int8_mean_ms": 20.24,
+        "speedup_ratio_fp32_over_int8": 0.533,
+        "int8_latency_multiplier_vs_fp32": 1.88
+      },
+      "threads_4": {
+        "threads": 4,
+        "fp32_p50_ms": 10.92,
+        "fp32_mean_ms": 11.1,
+        "int8_p50_ms": 20.68,
+        "int8_mean_ms": 20.77,
+        "speedup_ratio_fp32_over_int8": 0.528,
+        "int8_latency_multiplier_vs_fp32": 1.89
+      }
+    }
+  }
+}

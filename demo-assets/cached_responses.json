@@ -1,546 +1,4 @@
 {
- "|||2026-08|আমি জেনেছি,সুপারী গাছ ৪হাত দুরত্বে রোপণ করতে হয়।কিন্তু আমি ৩হাত দুরত্বে রোপন করে ফেলেছি।এখন কি সুপারি ধরবে": {
-  "query": "আমি জেনেছি,সুপারী গাছ ৪হাত দুরত্বে রোপণ করতে হয়।কিন্তু আমি ৩হাত দুরত্বে রোপন করে ফেলেছি।এখন কি সুপারি ধরবে?",
-  "category": "safe_agri",
-  "answer": "আপনার সুপারী গাছ ৩ হাত দূরত্বে রোপণ করার ফলে ফলন কেমন হবে, সে বিষয়ে জ্ঞানভান্ডারে কোনো তথ্য নেই।\n\nতবে, বিভিন্ন ফসলের আন্তঃফসল চাষের জন্য সার ও রোপণ পদ্ধতি সম্পর্কে তথ্য রয়েছে। যেমন:\n\n*   **পটল + লালশাক + আদা:** পটল ৩৬x৩৬ ইঞ্চি দূরত্বে, লালশাক ছিটিয়ে এবং আদা ১২x১০ ইঞ্চি দূরত্বে রোপণ করতে হয়।\n*   **ভুট্টা + পুঁইশাক:** ভুট্টার সারির মাঝে পুঁইশাক রোপণ করা যায়।\n*   **মিষ্টি কুমড়া + বাঁধাকপি:** মিষ্টি কুমড়া ৮০x৮০ ইঞ্চি দূরত্বে এবং মাঝে ৩ সারি বাঁধাকপি রোপণ করতে হয়।\n*   **বেগুন + ধনিয়া:** বেগুন ২৮x২৪ ইঞ্চি দূরত্বে এবং মাঝে ২ সারি ধনিয়া রোপণ করতে হয়।\n*   **ভুট্টা + সয়াবিন/গাজর/পালংশাক/লালশাক/ঢেঁড়স/কলমী:** ভুট্টার সারির মাঝে এই ফসলগুলো রোপণ করা যায়।\n*   **ছোলা + তিসি/সরিষা এবং গম + ছোলা:** কার্তিক বা অগ্রহায়ণ মাসে সারিতে রোপণ করতে হয়।\n\nযদি আপনার অন্য কোনো কৃষি বিষয়ক প্রশ্ন থাকে, তবে কৃষক কল সেন্টার ১৬১২৩ নম্বরে যোগাযোগ করতে পারেন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "answerability_level": "A2_strong_evidence",
-  "progressive_guidance": null,
-  "sources": [
-   {
-    "id": "B6_DOC_2FA541_001",
-    "score": 0.0476,
-    "title_en": "Earthwork Calculation for Pond Construction",
-    "title_bn": "",
-    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
-    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
-    "source": "Training Manual on Improved Carp Polyculture 2011",
-    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
-    "metadata": {
-     "category": "cultivation_practice",
-     "tags": [
-      "pond construction",
-      "earth measurement",
-      "pond cost estimation",
-      "পুকুর খনন",
-      "মাটির পরিমাপ"
-     ],
-     "title_en": "Earthwork Calculation for Pond Construction",
-     "title_bn": "",
-     "section_title": "Earth measurement",
-     "publisher": "DoF",
-     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
-     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B4_FRG2024_6FCB69_004",
-    "score": 0.0476,
-    "title_en": "Sugarcane + Onion Intercropping",
-    "title_bn": "",
-    "content_en": "Suitable for highland and medium highland areas (AEZ 1a, 11a, 25a). Sugarcane is spaced at 100cm x 45cm and Onion at 30cm x 10cm. Five rows of onion bulbs are planted between two rows of sugarcane. Sugarcane fertilizer: 50kg N at 20 DAT, 65kg N + 45kg K at 4-6 tiller stage, 65kg N + 45kg K at earthing up; other fertilizers as basal. Onion fertilizer: All as basal.",
-    "content_bn": "উঁচু এবং মাঝারি উঁচু এলাকার জন্য উপযুক্ত (AEZ 1a, 11a, 25a)। আখ ১০০ সেমি x ৪৫ সেমি দূরত্বে এবং পেঁয়াজ ৩০ সেমি x ১০ সেমি দূরত্বে রোপণ করা হয়। আখের দুটি সারির মাঝে পেঁয়াজের পাঁচটি সারি রোপণ করা হয়। আখের সার: রোপণের ২০ দিন পর ৫০ কেজি N, ৪-৬ কুশি পর্যায়ে ৬৫ কেজি N + ৪৫ কেজি K, মাটি তোলার সময় ৬৫ কেজি N + ৪৫ কেজি K; অন্যান্য সার বেসাল হিসেবে প্রয়োগ করতে হবে। পেঁয়াজের সার: সব সার বেসাল হিসেবে দিতে হবে। Publisher: BARC Section/Topic: WHEAT + CHICKPEA MIXEDCROPPING",
-    "source": "Fertilizer Recommendation Guide 2024",
-    "citation": "BARC. WHEAT + CHICKPEA MIXEDCROPPING. Fertilizer Recommendation Guide 2024. pp. 223-225.",
-    "metadata": {
-     "category": "cropping_system",
-     "tags": [
-      "Sugarcane",
-      "Onion",
-      "Intercropping",
-      "Rabi"
-     ],
-     "title_en": "Sugarcane + Onion Intercropping",
-     "title_bn": "",
-     "section_title": "WHEAT + CHICKPEA MIXEDCROPPING",
-     "publisher": "BARC",
-     "citation": "BARC. WHEAT + CHICKPEA MIXEDCROPPING. Fertilizer Recommendation Guide 2024. pp. 223-225.",
-     "summary": "Intercropping guidelines for Sugarcane and Onion in highland and medium highland areas.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B4_FRG2024_973F4A_001",
-    "score": 0.0455,
-    "title_en": "Principles of Crop Response to Fertilizers",
-    "title_bn": "",
-    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
-    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
-    "source": "Fertilizer Recommendation Guide 2024",
-    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
-    "metadata": {
-     "category": "general",
-     "tags": [
-      "fertilizer",
-      "nutrient management",
-      "crop response",
-      "4R stewardship",
-      "সার ব্যবস্থাপনা",
-      "ফসলের পুষ্টি"
-     ],
-     "title_en": "Principles of Crop Response to Fertilizers",
-     "title_bn": "",
-     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
-     "publisher": "BARC",
-     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
-     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "BARC_SHATA_A80EBF_001",
-    "score": 0.0455,
-    "title_en": "",
-    "title_bn": "আন্তঃফসল চাষাবাদ: পটল, ভুট্টা, সবজি ও ডালজাতীয় ফসলের সমন্বয়",
-    "content_en": "",
-    "content_bn": "উঁচু ও মাঝারি উঁচু জমিতে বিভিন্ন ফসলের আন্তঃফসল চাষের জন্য সার ও রোপণ পদ্ধতি নিচে দেওয়া হলো: ১. পটল + লালশাক + আদা: পটল কার্তিক মাসে ৩৬৩৬ ইঞ্চি দূরত্বে রোপণ করতে হবে। লালশাক ছিটিয়ে এবং আদা চৈত্র মাসে ১২১০ ইঞ্চি দূরত্বে রোপণ করতে হবে। ২. ভুট্টা + পুঁইশাক: চৈত্র-বৈশাখ মাসে চাষযোগ্য। ভুট্টার জোড় সারির মাঝে ৩ সারি পুঁইশাক বা একক সারির মাঝে ১ সারি পুঁইশাক রোপণ করা যায়। ৩. মিষ্টি কুমড়া + বাঁধাকপি: কার্তিকের মাঝামাঝি থেকে অগ্রহায়ণের মাঝামাঝি সময়ে চাষযোগ্য। ৮০৮০ ইঞ্চি দূরত্বে মিষ্টি কুমড়া এবং মাঝে ৩ সারি বাঁধাকপি রোপণ করতে হবে। ৪. বেগুন + ধনিয়া: কার্তিক মাসে চাষযোগ্য। ২৮২৪ ইঞ্চি দূরত্বে বেগুন এবং মাঝে ২ সারি ধনিয়া রোপণ করতে হবে। ৫. ভুট্টা + সয়াবিনগাজরপালংশাকলালশাকগিমাকলমী: অগ্রহায়ণ মাসে চাষযোগ্য। ভুট্টার সারির মাঝে সয়াবিন, গাজর বা শাকজাতীয় ফসল রোপণ করতে হবে। ৬. ছোলা + তিশিসরিষা এবং গম + ছোলা: কার্তিক বা অগ্রহায়ণ মাসে সারিতে রোপণ করতে হবে।",
-    "source": "Shata Shuparish Mala (100 Recommendations)",
-    "citation": "BARC. Intercropping Recommendations (Group 1). Shata Shuparish Mala (100 Recommendations). pp. 102-106.",
-    "metadata": {
-     "category": "cropping_system",
-     "tags": [
-      "আন্তঃফসল",
-      "Intercropping",
-      "সার ব্যবস্থাপনা",
-      "Fertilizer Management",
-      "কৃষি প্রযুক্তি"
-     ],
-     "title_en": "",
-     "title_bn": "আন্তঃফসল চাষাবাদ: পটল, ভুট্টা, সবজি ও ডালজাতীয় ফসলের সমন্বয়",
-     "section_title": "Intercropping Recommendations (Group 1)",
-     "publisher": "BARC",
-     "citation": "BARC. Intercropping Recommendations (Group 1). Shata Shuparish Mala (100 Recommendations). pp. 102-106.",
-     "summary": "বিভিন্ন ফসলের সমন্বয়ে আন্তঃফসল চাষের সার সুপারিশ এবং রোপণ পদ্ধতি সম্পর্কে নির্দেশনা।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "CABI_BRASSICA_843B60_001",
-    "score": 0.0435,
-    "title_en": "Soft rot of cabbage / Bacterial black Stalk",
-    "title_bn": "",
-    "content_en": "Soft rot, also known as Bacterial black stalk, is caused by the bacterium Pectobacterium carotovorum ssp. carotovorum. The disease causes the lower end of the mid-rib to rot and lose its structural integrity. The infection spreads along the leaf veins, and a characteristic extremely unpleasant smell is often present. Bacterial ooze can be observed leaking from the affected rotting areas.",
-    "content_bn": "সফট রট, যা ব্যাকটেরিয়াল ব্ল্যাক স্টাক নামেও পরিচিত, এটি *Pectobacterium carotovorum ssp. carotovorum* নামক ব্যাকটেরিয়ার কারণে ঘটে। রোগটি মধ্য-শিরার নিচের অংশকে পচিয়ে দেয় এবং এর গঠনগত অখণ্ডতা নষ্ট করে। সংক্রমণ পাতার শিরা বরাবর ছড়িয়ে পড়ে এবং প্রায়ই একটি বিশেষ অত্যন্ত দুর্গন্ধ উপস্থিত থাকে। আক্রান্ত পচা অংশগুলো থেকে ব্যাকটেরিয়ার আঠা জাতীয় রস নিঃসরিত হতে দেখা যায়।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "cabbage",
-      "soft rot",
-      "bacterial black stalk",
-      "Pectobacterium carotovorum",
-      "disease"
-     ],
-     "title_en": "Soft rot of cabbage / Bacterial black Stalk",
-     "title_bn": "",
-     "section_title": "Soft rot of cabbage / Bacterial black Stalk",
-     "publisher": "CABI",
-     "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
-     "summary": "Soft rot, caused by Pectobacterium carotovorum ssp. carotovorum, is a bacterial disease in cabbage characterized by tissue decay, foul odor, and bacterial ooze.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources · আমি→['আমি', 'আঁই', 'আঁই', 'মায় / মুই', 'আমা']; এখন→['এখন / অখন', 'এখন / অহন', 'এহন / অহন', 'এ্যাকান / এ্যালা', 'এহন']; গাছ→['গাছ', 'গাছ', 'গাছ', 'গাছ', 'গাছ']",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "আপনার সুপারী গাছ ৩ হাত দূরত্বে রোপণ করার ফলে ফলন কেমন হবে, সে বিষয়ে জ্ঞানভান্ডারে কোনো তথ্য নেই",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "তবে, বিভিন্ন ফসলের আন্তঃফসল চাষের জন্য সার ও রোপণ পদ্ধতি সম্পর্কে তথ্য রয়েছে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "যেমন:",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **পটল + লালশাক + আদা:** পটল ৩৬x৩৬ ইঞ্চি দূরত্বে, লালশাক ছিটিয়ে এবং আদা ১২x১০ ইঞ্চি দূরত্বে রোপণ করতে হয়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **ভুট্টা + পুঁইশাক:** ভুট্টার সারির মাঝে পুঁইশাক রোপণ করা যায়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **মিষ্টি কুমড়া + বাঁধাকপি:** মিষ্টি কুমড়া ৮০x৮০ ইঞ্চি দূরত্বে এবং মাঝে ৩ সারি বাঁধাকপি রোপণ করতে হয়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **বেগুন + ধনিয়া:** বেগুন ২৮x২৪ ইঞ্চি দূরত্বে এবং মাঝে ২ সারি ধনিয়া রোপণ করতে হয়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **ভুট্টা + সয়াবিন/গাজর/পালংশাক/লালশাক/ঢেঁড়স/কলমী:** ভুট্টার সারির মাঝে এই ফসলগুলো রোপণ করা যায়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "*   **ছোলা + তিসি/সরিষা এবং গম + ছোলা:** কার্তিক বা অগ্রহায়ণ মাসে সারিতে রোপণ করতে হয়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "যদি আপনার অন্য কোনো কৃষি বিষয়ক প্রশ্ন থাকে, তবে কৃষক কল সেন্টার ১৬১২৩ নম্বরে যোগাযোগ করতে পারেন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
- "|||2026-08|ভাই, লাউ গাছ তো অনেক বড় হলো, কিন্তু একটাও ফুল ফুটছে না। কী করব": {
-  "query": "ভাই, লাউ গাছ তো অনেক বড় হলো, কিন্তু একটাও ফুল ফুটছে না। কী করব?",
-  "category": "safe_agri",
-  "answer": "আপনার লাউ গাছে ফুল না আসার কারণ হতে পারে আগাছার উপস্থিতি। সবজি ফসলে সারা বছর বিভিন্ন ধরনের আগাছা জন্মে এবং এগুলো গাছের পুষ্টি শোষণ করে ফলন কমিয়ে দিতে পারে। [NARS_PESTINFO_605206_002]\n\nবিশেষ করে বেগুন, টমেটো, শিম, বাঁধাকপি, ফুলকপি, ঢেঁড়স এবং লাউয়ের মতো ফসলে বারমুডা ঘাস, গুস গ্রাস, পিগউইড, স্পাইনি অ্যামারান্থ, নাটসেজ এবং পার্সলে ইত্যাদি আগাছা বেশি দেখা যায়। [NARS_PESTINFO_605206_002]\n\nআগাছা দমনের জন্য সঠিক সময়ে নিড়ানি দেওয়া অত্যন্ত গুরুত্বপূর্ণ। উদাহরণস্বরূপ, পুঁইশাকের ক্ষেত্রে চারা রোপণের ৩০ দিনের মধ্যে দুইবার হাত দিয়ে আগাছা পরিষ্কার করলে সর্বোচ্চ ফলন পাওয়া যায়। [NARS_PESTINFO_605206_002]\n\nআপনার লাউ গাছের জন্য সঠিক পুষ্টি উপাদান প্রয়োগের বিষয়টিও গুরুত্বপূর্ণ। বিভিন্ন ফসলের পুষ্টি উপাদানের প্রতি সাড়া ভিন্ন হতে পারে। [B4_FRG2024_973F4A_001]\n\nযদি আপনি আগাছা দমন এবং পুষ্টি ব্যবস্থাপনা সম্পর্কে আরও বিস্তারিত জানতে চান, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "answerability_level": "A2_strong_evidence",
-  "progressive_guidance": null,
-  "sources": [
-   {
-    "id": "B6_DOC_2FA541_001",
-    "score": 0.0476,
-    "title_en": "Earthwork Calculation for Pond Construction",
-    "title_bn": "",
-    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
-    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
-    "source": "Training Manual on Improved Carp Polyculture 2011",
-    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
-    "metadata": {
-     "category": "cultivation_practice",
-     "tags": [
-      "pond construction",
-      "earth measurement",
-      "pond cost estimation",
-      "পুকুর খনন",
-      "মাটির পরিমাপ"
-     ],
-     "title_en": "Earthwork Calculation for Pond Construction",
-     "title_bn": "",
-     "section_title": "Earth measurement",
-     "publisher": "DoF",
-     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
-     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "NARS_PESTINFO_89428F_001",
-    "score": 0.0476,
-    "title_en": "Weed Management in Fruit Orchards",
-    "title_bn": "ফল বাগানে আগাছা ব্যবস্থাপনা",
-    "content_en": "",
-    "content_bn": "ফল গাছ দীর্ঘজীবী হওয়ায় বাগানে বিভিন্ন ধরনের আগাছা জন্মাতে পারে। অধিকাংশ ফল গাছ গভীর মূলী হওয়ায় সাধারণ ঘাস জাতীয় আগাছা পুষ্টির জন্য তেমন প্রতিযোগিতা করে না, তবে লোরানথাস (Loranthus sp.) এর মতো পরজীবী উদ্ভিদ গাছের শাখা বা কাণ্ড থেকে সরাসরি পুষ্টি শোষণ করে ক্ষতি করতে পারে। স্ট্রবেরি আগাছার প্রতি অত্যন্ত সংবেদনশীল। পলিথিন মালচ বা খড় ব্যবহার করে আগাছা দমন করলে ফলন বৃদ্ধি পায়।",
-    "source": "All Pest Information Books — 4.8 Weeds of Fruit Crops (pp. 568-569)",
-    "citation": "NARS. 4.8 Weeds of Fruit Crops. All Pest Information Books. pp. 568-569.",
-    "metadata": {
-     "category": "cultivation_practice",
-     "tags": [
-      "আগাছা",
-      "ফল বাগান",
-      "মালচিং",
-      "Weed management",
-      "Fruit orchard"
-     ],
-     "title_en": "Weed Management in Fruit Orchards",
-     "title_bn": "ফল বাগানে আগাছা ব্যবস্থাপনা",
-     "section_title": "4.8 Weeds of Fruit Crops",
-     "publisher": "NARS",
-     "citation": "NARS. 4.8 Weeds of Fruit Crops. All Pest Information Books. pp. 568-569.",
-     "summary": "ফল বাগানে আগাছা দমনের গুরুত্ব এবং বিভিন্ন ফল ফসলে সাধারণত দেখা যায় এমন আগাছার তালিকা প্রদান করা হয়েছে।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B4_FRG2024_973F4A_001",
-    "score": 0.0455,
-    "title_en": "Principles of Crop Response to Fertilizers",
-    "title_bn": "",
-    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
-    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
-    "source": "Fertilizer Recommendation Guide 2024",
-    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
-    "metadata": {
-     "category": "general",
-     "tags": [
-      "fertilizer",
-      "nutrient management",
-      "crop response",
-      "4R stewardship",
-      "সার ব্যবস্থাপনা",
-      "ফসলের পুষ্টি"
-     ],
-     "title_en": "Principles of Crop Response to Fertilizers",
-     "title_bn": "",
-     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
-     "publisher": "BARC",
-     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
-     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "NARS_PESTINFO_605206_002",
-    "score": 0.0455,
-    "title_en": "Weeds of Vegetable Crops",
-    "title_bn": "সবজি ফসলের আগাছা পরিচিতি",
-    "content_en": "",
-    "content_bn": "সবজি ফসলে সারা বছর বিভিন্ন ধরনের আগাছা জন্মে। বেগুন, টমেটো, শিম, বাঁধাকপি, ফুলকপি, ঢেঁড়স এবং লাউয়ের মতো ফসলে বারমুডা ঘাস, গুস গ্রাস, পিগউইড, স্পাইনি অ্যামারান্থ, নাটসেজ এবং পার্সলে ইত্যাদি আগাছা বেশি দেখা যায়। আগাছা দমনের জন্য সঠিক সময়ে নিড়ানি দেওয়া অত্যন্ত গুরুত্বপূর্ণ। উদাহরণস্বরূপ, পুঁইশাকের ক্ষেত্রে চারা রোপণের ৩০ দিনের মধ্যে দুইবার হাত দিয়ে আগাছা পরিষ্কার করলে সর্বোচ্চ ফলন পাওয়া যায়।",
-    "source": "All Pest Information Books — 4.6 Weeds of Tuber Crops (pp. 565-566)",
-    "citation": "NARS. 4.6 Weeds of Tuber Crops. All Pest Information Books. pp. 565-566.",
-    "metadata": {
-     "category": "general",
-     "tags": [
-      "সবজি",
-      "আগাছা",
-      "Vegetables",
-      "Weeds"
-     ],
-     "title_en": "Weeds of Vegetable Crops",
-     "title_bn": "সবজি ফসলের আগাছা পরিচিতি",
-     "section_title": "4.6 Weeds of Tuber Crops",
-     "publisher": "NARS",
-     "citation": "NARS. 4.6 Weeds of Tuber Crops. All Pest Information Books. pp. 565-566.",
-     "summary": "বাংলাদেশে বিভিন্ন সবজি ফসলে (যেমন বেগুন, টমেটো, শিম, বাঁধাকপি, ফুলকপি, ঢেঁড়স, লাউ) সাধারণত যেসব আগাছা জন্মে, তাদের তালিকা ও উপস্থিতির হার এখানে দেওয়া হলো।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "CABI_BRASSICA_997AAE_003",
-    "score": 0.0435,
-    "title_en": "Leaf spot / Black spot in Cabbage",
-    "title_bn": "",
-    "content_en": "Leaf spot (or black spot) is caused by Alternaria brassicicola. It appears as light brown to grey or dark brown spots surrounded by a yellow halo, up to 25 mm wide. Unlike ring spot, these lesions are not limited by leaf veins. They contain tiny black fruiting bodies arranged in concentric circles and are most common on older leaves of mature plants.",
-    "content_bn": "পাতার দাগ (বা কালো দাগ) Alternaria brassicicola দ্বারা হয়ে থাকে। এটি হালকা বাদামী থেকে ধুসর বা গাড় বাদামী রঙের দাগ হিসেবে দেখা যায় যা হলুদ হ্যালো দ্বারা পরিবেষ্টিত থাকে এবং ২৫ মিমি পর্যন্ত প্রশস্ত হয়। রিং স্পটের বিপরীতে, এই ক্ষতরোগ পাতার শিরা দ্বারা সীমাবদ্ধ থাকে না। এগুলোতে সমকেন্দ্রিক বৃত্তে সাজানো ক্ষুদ্র কালো ফলের দেহ থাকে এবং এটি পরিপক্ব উদ্ভিদের পুরোনো পাতায় সবচেয়ে বেশি দেখা যায়।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "cabbage",
-      "leaf spot",
-      "black spot",
-      "disease",
-      "Alternaria brassicicola"
-     ],
-     "title_en": "Leaf spot / Black spot in Cabbage",
-     "title_bn": "",
-     "section_title": "Common pests and diseases on cabbage in Ghana",
-     "publisher": "CABI",
-     "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
-     "summary": "Leaf spot, caused by Alternaria brassicicola, appears as large spots with concentric circles not limited by leaf veins.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources · গাছ→['গাছ', 'গাছ', 'গাছ', 'গাছ', 'গাছ']; ভাই→['ভাই', 'ভাই', 'ভাই', 'ভাই', 'ভাই']; কী→['কিতা', 'কি / কিবা', 'কী / কি', 'ক্যা / কী', 'কী / কিতা']",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "আপনার লাউ গাছে ফুল না আসার কারণ হতে পারে আগাছার উপস্থিতি",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "সবজি ফসলে সারা বছর বিভিন্ন ধরনের আগাছা জন্মে এবং এগুলো গাছের পুষ্টি শোষণ করে ফলন কমিয়ে দিতে পারে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[NARS_PESTINFO_605206_002]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "বিশেষ করে বেগুন, টমেটো, শিম, বাঁধাকপি, ফুলকপি, ঢেঁড়স এবং লাউয়ের মতো ফসলে বারমুডা ঘাস, গুস গ্রাস, পিগউইড, স্পাইনি অ্যামারান্থ, নাটসেজ এবং পার্সলে ইত্যাদি আগাছা বেশি দেখা যায়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[NARS_PESTINFO_605206_002]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "আগাছা দমনের জন্য সঠিক সময়ে নিড়ানি দেওয়া অত্যন্ত গুরুত্বপূর্ণ",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "উদাহরণস্বরূপ, পুঁইশাকের ক্ষেত্রে চারা রোপণের ৩০ দিনের মধ্যে দুইবার হাত দিয়ে আগাছা পরিষ্কার করলে সর্বোচ্চ ফলন পাওয়া যায়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[NARS_PESTINFO_605206_002]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "আপনার লাউ গাছের জন্য সঠিক পুষ্টি উপাদান প্রয়োগের বিষয়টিও গুরুত্বপূর্ণ",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "বিভিন্ন ফসলের পুষ্টি উপাদানের প্রতি সাড়া ভিন্ন হতে পারে",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[B4_FRG2024_973F4A_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "যদি আপনি আগাছা দমন এবং পুষ্টি ব্যবস্থাপনা সম্পর্কে আরও বিস্তারিত জানতে চান, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
  "|||2026-08|সবজি বাগানে কি খৈল পচা সার দেওয়া ঠিক হবে": {
   "query": "সবজি বাগানে কি খৈল পচা সার দেওয়া ঠিক হবে?",
   "category": "safe_agri",
@@ -26965,6 +26423,611 @@
    },
    {
     "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয় বা কোনো নির্দিষ্ট বিষয়ে নিশ্চিত হতে চান, তাহলে কৃষক কল সেন্টার ১৬১২৩-এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "||gemini|2026-08|আলু": {
+  "query": "আলু",
+  "category": "safe_agri",
+  "answer": "আপনার আলুর পাতায় হলুদ দাগ দেখা যাচ্ছে। এটি সাদা মাছি বা ছত্রাকজনিত রোগের কারণে হতে পারে।\n\nসাদা মাছির আক্রমণে পাতা হলুদ হয়ে যায় এবং কালো ছাঁচ পড়তে পারে। এটি দমনের জন্য অপ্রয়োজনীয় কীটনাশক ব্যবহার এড়িয়ে চলুন। হলুদ আঠালো ফাঁদ ব্যবহার করতে পারেন। নিম বীজের নির্যাস (১০ লিটার পানিতে ১ কেজি, ১২ ঘণ্টা ভিজিয়ে রাখা) অথবা সাবান পানি (২ গ্রাম/লিটার) প্রতি ৩ দিন পর পর প্রয়োগ করা যেতে পারে। রাসায়নিক দমনের জন্য Malathion (Fyfanon 57EC, Malataf 57 EC @ ৫ মিলি/১ লিটার) অথবা Imidacloprid (Admire 200SL @ ০.৫ মিলি/১ লিটার) ব্যবহার করা যেতে পারে [B5_BARCAG_E89FD1_001]।\n\nআল্টারনারিয়া স্পট নামক ছত্রাকজনিত রোগেও পাতায় দাগ দেখা যায়। এই রোগে ছোট, গাঢ় বাদামী বা কালো দাগ হয় যা বড় হতে পারে এবং বলয়াকার গঠন দেখা যেতে পারে। আক্রান্ত পাতা হলুদ হয়ে ঝরে পড়ে। এই রোগ দমনের জন্য আক্রান্ত পাতা সরিয়ে ফেলুন। ছত্রাকনাশক যেমন ম্যানকোজেব, ক্লোরোথ্যালোনিল, বা কপার-ভিত্তিক ছত্রাকনাশক ব্যবহার করা যেতে পারে [GEN_BRASSICA_Cabbage_Alternaria_Spot]।\n\nপুষ্টি উপাদানের অভাবের কারণেও পাতায় হলুদ দাগ হতে পারে। যেমন, নাইট্রোজেনের অভাবে পুরাতন পাতা হলুদ হয়ে যায় [BARC_SHATA_C104EB_001]।\n\nযদি আপনি নিশ্চিত না হন যে এটি কোন রোগ বা পুষ্টি উপাদানের অভাব, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করুন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "answerability_level": "A2_strong_evidence",
+  "progressive_guidance": null,
+  "sources": [
+   {
+    "id": "B5_BARCAG_E89FD1_001",
+    "score": 0.0476,
+    "title_en": "Management of Whiteflies in Potato",
+    "title_bn": "",
+    "content_en": "Whiteflies (Aleurodicus disper, Bemisia tabaci) infest the underside of potato leaves, causing yellowing. They excrete honeydew which promotes black sooty mould growth. They are also vectors for the potato apical leaf curl virus. Control measures include avoiding unnecessary insecticide use, using yellow sticky traps, applying neem seed extract (1 kg in 10 litres of water, soaked for 12 hours), or soap water (2g/L) every 3 days. Chemical control includes Malathion (Fyfanon 57EC, Malataf 57 EC @ 5 ml/1L) or Imidacloprid (Admire 200SL @ 0.5ml/1L).",
+    "content_bn": "Publisher: BARC Section/Topic: Potato — Harvesting & Preservation সাদা মাছি (Aleurodicus disper, Bemisia tabaci) আলু গাছের পাতার নিচের অংশে আক্রমণ করে এবং পাতা হলুদ করে দেয়। এরা মধুবিসর্জন করে যা কালো কালচে ছাঁচ বা sooty -এর বৃদ্ধিতে সহায়তা করে। এরা আলুর এপিকাল লিফ কার্ল ভাইরাসের বাহক হিসেবেও কাজ করে। দমনের ব্যবস্থার মধ্যে রয়েছে অপ্রয়োজনীয় কীটনাশক ব্যবহার এড়িয়ে চলা, হলুদ আঠালো ফাঁদ ব্যবহার করা, নিম বীজের নির্যাস (১০ লিটার পানিতে ১ কেজি, ১২ ঘণ্টা ভিজিয়ে রাখা) অথবা সাবান পানি (2g/L) প্রতি ৩ দিন পর পর প্রয়োগ করা। রাসায়নিক দমনের মধ্যে রয়েছে Malathion (Fyfanon 57EC, Malataf 57 EC @ 5 ml/1L) অথবা Imidacloprid (Admire 200SL @ 0.5ml/1L)।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Potato — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 60-60.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "Potato",
+      "Whitefly",
+      "Pest Management",
+      "আলু",
+      "সাদা মাছি"
+     ],
+     "title_en": "Management of Whiteflies in Potato",
+     "title_bn": "",
+     "section_title": "Potato — Harvesting & Preservation",
+     "publisher": "BARC",
+     "citation": "BARC. Potato — Harvesting & Preservation. Hand Book of Agricultural Technology. pp. 60-60.",
+     "summary": "Whiteflies cause leaf yellowing and transmit potato apical leaf curl virus; management involves cultural practices, traps, and specific insecticides.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_A496E2_001",
+    "score": 0.0476,
+    "title_en": "Registered Herbicides for Potato Production",
+    "title_bn": "",
+    "content_en": "The following herbicides are registered by the Department of Agricultural Extension (DAE) for use in potato cultivation to manage specific weed species. Always follow the recommended dosage rates provided.",
+    "content_bn": "আলু চাষে নির্দিষ্ট আগাছা দনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত herbicides নিবন্ধিত হয়েছে। সর্বদা প্রদত্ত প্রস্তাবিত ডোজের হার মেনে চলুন।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_877. List of Registered Agricultural Pesticides (DAE). pp. 877-877.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "potato",
+      "herbicide",
+      "weed management",
+      "DAE",
+      "আলু",
+      "আগাছানাশক"
+     ],
+     "title_en": "Registered Herbicides for Potato Production",
+     "title_bn": "",
+     "section_title": "page_877",
+     "publisher": "DAE",
+     "citation": "DAE. page_877. List of Registered Agricultural Pesticides (DAE). pp. 877-877.",
+     "summary": "A list of DAE-registered herbicides (33EC formulation) for weed management in potato cultivation.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "GEN_BRASSICA_Cabbage_Alternaria_Spot",
+    "score": 0.0455,
+    "title_en": "Alternaria Spot",
+    "title_bn": "আল্টারনারিয়া স্পট (ব্রাসিকাতে)",
+    "content_en": "Alternaria Spot, also known as Black Spot, Grey Leaf Spot, and Target Spot, is primarily caused by the fungus Alternaria brassicicola. This disease can manifest from the seedling stage through various phases of crop growth. In seedbeds, it can cause damping off and small leaf spots. Characteristic symptoms include small, dark brown or black leaf spots that enlarge over time, often displaying concentric rings, giving it the name 'Target Spot'. Affected leaves may turn yellow and eventually fall off. Severe infestations can damage the entire plant, significantly impacting yield. The disease thrives in warm and humid conditions.\n\n**Cause:**\nPrimarily the fungus Alternaria brassicicola.\n\n**Symptoms:**\n*   Small, dark brown or black spots on leaves that gradually enlarge.\n*   Concentric or target-like patterns within the spots.\n*   Yellowing and shedding of affected leaves.\n*   Damping off in seedlings.\n\n**Treatment:**\n*   Removal and destruction of infected leaves or plants.\n*   Application of fungicides such as Mancozeb, Chlorothalonil, or copper-based fungicides.\n*   Selection of disease-resistant varieties.",
+    "content_bn": "আল্টারনারিয়া স্পট, যা কালো দাগ, ধূসর পাতা দাগ এবং লক্ষ্য দাগ নামেও পরিচিত, এটি প্রধানত আল্টারনারিয়া ব্রাসিসিচোলা (Alternaria brassicicola) নামক ছত্রাকের কারণে হয়ে থাকে। এই রোগটি বীজতলা থেকে শুরু করে ফসলের বিভিন্ন পর্যায়ে দেখা দিতে পারে। বীজতলায় এটি পাতা শুকিয়ে যাওয়া (damping off) এবং ছোট ছোট দাগ সৃষ্টি করে। গাছের পাতায় প্রথমে ছোট, গাঢ় বাদামী বা কালো দাগ দেখা যায় যা সময়ের সাথে সাথে বড় হতে থাকে। অনেক সময় এই দাগগুলোর মধ্যে বলয়াকার (target-like) গঠন দেখা যায়, যা রোগটিকে ‘টার্গেট স্পট’ নামে পরিচিতি দিয়েছে। আক্রান্ত পাতাগুলো হলুদ হয়ে যেতে পারে এবং অবশেষে ঝরে পড়ে। তীব্র আক্রমণে পুরো গাছই ক্ষতিগ্রস্ত হতে পারে, যা ফলনের উপর মারাত্মক প্রভাব ফেলে। এই রোগটি উষ্ণ ও আর্দ্র আবহাওয়ায় বেশি বিস্তার লাভ করে।\n\n**কারণ:**\nমূলত আল্টারনারিয়া ব্রাসিসিচোলা (Alternaria brassicicola) ছত্রাক।\n\n**লক্ষণ:**\n*   পাতায় ছোট, গাঢ় বাদামী বা কালো দাগ, যা ধীরে ধীরে বড় হয়।\n*   দাগগুলোর মধ্যে বলয়াকার বা লক্ষ্যভেদের মতো (target-like) গঠন।\n*   আক্রান্ত পাতা হলুদ হয়ে ঝরে পড়া।\n*   বীজতলায় পাতা শুকিয়ে যাওয়া (damping off)।\n\n**প্রতিকার:**\n*   আক্রান্ত পাতা বা গাছ সরিয়ে ফেলা এবং ধ্বংস করা।\n*   ছত্রাকনাশক যেমন ম্যানকোজেব (Mancozeb), ক্লোরোথ্যালোনিল (Chlorothalonil), বা কপার-ভিত্তিক ছত্রাকনাশক ব্যবহার করা যেতে পারে।\n*   রোগ প্রতিরোধী জাত নির্বাচন করা।",
+    "source": "Generated by Gemini-3.1-Flash-Lite (advisory workflow)",
+    "citation": "Generated for Brassica - Alternaria Spot",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "কালো দাগ",
+      "ধূসর পাতা দাগ",
+      "লক্ষ্য দাগ",
+      "আল্টারনারিয়া",
+      "ব্রাসিকা রোগ",
+      "ছত্রাক রোগ",
+      "Brassica",
+      "Alternaria Spot"
+     ],
+     "title_en": "Alternaria Spot",
+     "title_bn": "আল্টারনারিয়া স্পট (ব্রাসিকাতে)",
+     "section_title": "Alternaria Spot",
+     "publisher": "AI-Generated",
+     "citation": "Generated for Brassica - Alternaria Spot",
+     "summary": "আল্টারনারিয়া স্পট, যা কালো দাগ, ধূসর পাতা দাগ এবং লক্ষ্য দাগ নামেও পরিচিত, এটি প্রধানত আল্টারনারিয়",
+     "treatment_summary_bn": "আক্রান্ত অংশ অপসারণ ও ধ্বংস করা, ম্যানকোজেব বা ক্লোরোথ্যালোনিলের মতো ছত্রাকনাশক ব্যবহার করা এবং রোগ প্রতিরোধী জাত নির্বাচন করা।",
+     "prevention_bn": "বীজ বপনের আগে বীজ শোধন করা, রোগমুক্ত বীজ ব্যবহার করা, ফসলের অবশিষ্টাংশ পরিষ্কার রাখা, পর্যাপ্ত বায়ু চলাচল নিশ্চিত করা, এবং সঠিক সময়ে ছত্রাকনাশক স্প্রে করা।"
+    }
+   },
+   {
+    "id": "DAE_PEST_73768F_001",
+    "score": 0.0455,
+    "title_en": "Registered Pesticides for Weed Control in Potato",
+    "title_bn": "",
+    "content_en": "The following pesticide is registered for weed control in potato crops: - Product: Not specified in the table for the first entry (referring to the general weed control entry for Potato). - Recommended Crop: Potato - Target Pests: Weeds (specifically Fimbristylis miliacea, Ludwigia octavalvia) - Dosage Rate: 1.00 L/ha",
+    "content_bn": "আলু ফসলে আগাছা দমনের জন্য নিম্নলিখিত কীটনাশকটি নিবন্ধিত রয়েছে: - পণ্য: প্রথম এন্ট্রির জন্য সারণীতে নির্দিষ্ট করা হয়নি (আলুর সাধারণ আগাছা দমন এন্ট্রি বোঝানো হয়েছে)। - প্রস্তাবিত ফসল: আলু - লক্ষ্য পোকাআগাছা: আগাছা (বিশেষ করে Fimbristylis miliacea, Ludwigia octavalvia) - মাত্রাডোজ: 1.00 L/ha",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_876. List of Registered Agricultural Pesticides (DAE). pp. 876-876.",
+    "metadata": {
+     "category": "pest",
+     "tags": [
+      "potato",
+      "weeds",
+      "pesticide",
+      "weed control",
+      "DAE",
+      "আলু",
+      "আগাছা দমন"
+     ],
+     "title_en": "Registered Pesticides for Weed Control in Potato",
+     "title_bn": "",
+     "section_title": "page_876",
+     "publisher": "DAE",
+     "citation": "DAE. page_876. List of Registered Agricultural Pesticides (DAE). pp. 876-876.",
+     "summary": "This node lists the registered pesticide product for controlling weeds in potato cultivation as per DAE records.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "BARC_SHATA_C104EB_001",
+    "score": 0.0435,
+    "title_en": "",
+    "title_bn": "ফসলে পুষ্টি উপাদানের অভাবজনিত লক্ষণ",
+    "content_en": "",
+    "content_bn": "ফসলে পুষ্টি উপাদানের অভাবজনিত লক্ষণসমূহ নিচে দেওয়া হলো: ১. নাইট্রোজেন: পুরাতন পাতা হলুদ হয়ে যায়, বেশি ঘাটতি হলে নতুন পাতাও হলুদ হয়। ২. ফসফরাস: পুরাতন পাতা বেগুনি রং ধারণ করে, দানাদার ফসলে কুশি কম হয়। ৩. পটাসিয়াম: পাতার কিনারা থেকে ভিতর দিকে সাদাটে হয়ে শুকিয়ে যায়, ধানের খড় দুর্বল হয়। ৪. সালফার: কচি বা নতুন পাতা প্রথমে হলুদ হয়, সরিষা জাতীয় ফসলের পাতার তলা লালচে হয়। ৫. ম্যাগনেসিয়াম: পুরাতন পাতার শিরার মাঝে হলুদাভ বা সাদাটে রং হয়, তুলা গাছের নিচের পাতা লালচে-বেগুনি হয়। ৬. জিংক (দস্তা): ধানের পাতার গোড়ায় সাদাটে রং ও পরে মরিচার মতো দাগ পড়ে। ভুট্টার পাতার শিরার মাঝে হলুদাভ লম্বা দাগ হয় এবং ডগা সাদাটে হয়। ফল গাছে ছোট পাতার গুচ্ছ তৈরি হয়। ৭. বোরন: গম, সরিষা, ভুট্টা ও সূর্যমুখীতে দানা হয় না বা অপুষ্টি হয়। ডাল ফসলের চারা দুর্বল হয়, ফুলকপির মাঝে ফাঁপা হয়, পেঁপে ও কাঁঠাল এবড়ো-খেবড়ো হয়।",
+    "source": "Shata Shuparish Mala (100 Recommendations)",
+    "citation": "BARC. Nutrient Deficiency Symptoms & Figures. Shata Shuparish Mala (100 Recommendations). pp. 11-20.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "পুষ্টির অভাব",
+      "ফসলের রোগ",
+      "Nutrient Deficiency",
+      "Crop Health"
+     ],
+     "title_en": "",
+     "title_bn": "ফসলে পুষ্টি উপাদানের অভাবজনিত লক্ষণ",
+     "section_title": "Nutrient Deficiency Symptoms & Figures",
+     "publisher": "BARC",
+     "citation": "BARC. Nutrient Deficiency Symptoms & Figures. Shata Shuparish Mala (100 Recommendations). pp. 11-20.",
+     "summary": "ফসলে বিভিন্ন পুষ্টি উপাদানের অভাব হলে গাছে নির্দিষ্ট কিছু লক্ষণ দেখা দেয়, যা দেখে পুষ্টির ঘাটতি শনাক্ত করা সম্ভব।",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources · rewritten · পাতা→['পাতা', 'পাতা', 'পাতা', 'পাতা', 'পাতা']; গাছ→['গাছ', 'গাছ', 'গাছ', 'গাছ', 'গাছ']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "আপনার আলুর পাতায় হলুদ দাগ দেখা যাচ্ছে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এটি সাদা মাছি বা ছত্রাকজনিত রোগের কারণে হতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "সাদা মাছির আক্রমণে পাতা হলুদ হয়ে যায় এবং কালো ছাঁচ পড়তে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এটি দমনের জন্য অপ্রয়োজনীয় কীটনাশক ব্যবহার এড়িয়ে চলুন",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "হলুদ আঠালো ফাঁদ ব্যবহার করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "নিম বীজের নির্যাস (১০ লিটার পানিতে ১ কেজি, ১২ ঘণ্টা ভিজিয়ে রাখা) অথবা সাবান পানি (২ গ্রাম/লিটার) প্রতি ৩ দিন পর পর প্রয়োগ করা যেতে পারে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "রাসায়নিক দমনের জন্য Malathion (Fyfanon 57EC, Malataf 57 EC @ ৫ মিলি/১ লিটার) অথবা Imidacloprid (Admire 200SL @ ০.৫ মিলি/১ লিটার) ব্যবহার করা যেতে পারে [B5_BARCAG_E89FD1_001]",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "আল্টারনারিয়া স্পট নামক ছত্রাকজনিত রোগেও পাতায় দাগ দেখা যায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই রোগে ছোট, গাঢ় বাদামী বা কালো দাগ হয় যা বড় হতে পারে এবং বলয়াকার গঠন দেখা যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "আক্রান্ত পাতা হলুদ হয়ে ঝরে পড়ে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই রোগ দমনের জন্য আক্রান্ত পাতা সরিয়ে ফেলুন",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "ছত্রাকনাশক যেমন ম্যানকোজেব, ক্লোরোথ্যালোনিল, বা কপার-ভিত্তিক ছত্রাকনাশক ব্যবহার করা যেতে পারে [GEN_BRASSICA_Cabbage_Alternaria_Spot]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "পুষ্টি উপাদানের অভাবের কারণেও পাতায় হলুদ দাগ হতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যেমন, নাইট্রোজেনের অভাবে পুরাতন পাতা হলুদ হয়ে যায় [BARC_SHATA_C104EB_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনি নিশ্চিত না হন যে এটি কোন রোগ বা পুষ্টি উপাদানের অভাব, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করুন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "Rice|Rice__Brown_Spot||2026-08|Rice Rice__Brown_Spot রোগের লক্ষণ, কারণ ও নিরাপদ ব্যবস্থাপনা কী": {
+  "query": "Rice Rice__Brown_Spot রোগের লক্ষণ, কারণ ও নিরাপদ ব্যবস্থাপনা কী?",
+  "category": "safe_agri",
+  "answer": "**ধানের বাদামী দাগ রোগ (Brown Spot)**\n\n*   **লক্ষণ:** ধানের পাতায় ছোট, ডিম্বাকৃতি বা গোলাকার গাঢ় বাদামী দাগ দেখা যায়, যার চারপাশে হালকা হলুদ আভা থাকে। অনেক দাগ একসাথে মিলে পাতা শুকিয়ে ফেলতে পারে। ধানের দানাতেও দাগ হতে পারে, যা ধানের উজ্জ্বলতা ও ওজন কমিয়ে দেয়। [cite: 1]\n\n*   **কারণ:** এই রোগটি মূলত ছত্রাক (Bipolaris oryzae) দ্বারা ঘটে। মাটি ও বীজের মাধ্যমে এটি ছড়ায়। মাটির উর্বরতা কম থাকলে বা পটাশ, ফসফরাস বা সিলিকনের অভাব থাকলে ধানের গাছ এই রোগে বেশি আক্রান্ত হয়। ২৫-৩০ ডিগ্রি সেলসিয়াস তাপমাত্রা এবং দীর্ঘ সময় ধরে পাতা ভেজা থাকা এই ছত্রাকের বংশবৃদ্ধির জন্য অনুকূল। সেচের অভাব বা খরা পরিস্থিতিও রোগের বিস্তার ঘটায়। [cite: 1]\n\n*   **ব্যবস্থাপনা:** সুষম সার প্রয়োগ, বিশেষ করে পর্যাপ্ত পরিমাণে পটাশ (MoP) সার ব্যবহার এই রোগ দমনে সহায়ক। [cite: 1]\n\n*   **অন্যান্য তথ্য:** এই রোগটি বাংলাদেশের উত্তরাঞ্চলে, যেখানে মাটি বেলে এবং পুষ্টিহীন, সেখানে বেশি দেখা যায়। [cite: 1]\n\n*   **আরও তথ্যের জন্য:** আপনার এলাকার কৃষি কর্মকর্তার সাথে যোগাযোগ করুন অথবা কৃষক কল সেন্টার ১৬১২৩-এ ফোন করুন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "answerability_level": "A2_strong_evidence",
+  "progressive_guidance": null,
+  "sources": [
+   {
+    "id": "vision-details:rice:Rice__Brown_Spot",
+    "score": 100.0,
+    "title_en": "",
+    "title_bn": "Brown Spot (বাদামী দাগ রোগ)",
+    "content_en": "",
+    "content_bn": "বাদামী দাগ বা ব্রাউন স্পট বাংলাদেশের ধানের একটি প্রাচীন এবং পরিচিত রোগ যা মূলত ছত্রাক (Bipolaris oryzae) দ্বারা ঘটে[cite: 1]। এই রোগটি ইতিহাসে কুখ্যাত কারণ ১৯৪৩ সালের 'পঞ্চাশের মন্বন্তর' বা বাংলার দুর্ভিক্ষের পেছনে এই রোগের বড় ভূমিকা ছিল[cite: 1]। এটি সাধারণত সেই সব জমিতে বেশি হয় যেখানে মাটির উর্বরতা কম বা পুষ্টির অভাব রয়েছে[cite: 1]। পাতায় ছোট ছোট ডিম্বাকৃতি বা গোলাকার গাঢ় বাদামী দাগ পড়ে যার চারপাশে হালকা হলুদ আভা দেখা যায়[cite: 1]। অনেকগুলো দাগ একসাথে মিলে বড় হয়ে পুরো পাতাটি শুকিয়ে ফেলতে পারে[cite: 1]। শুধু পাতাই নয়, ধানের দানাতেও এই দাগ হতে পারে, যা ধানের উজ্জ্বলতা এবং ওজন কমিয়ে দেয়[cite: 1]। বাংলাদেশের উত্তরাঞ্চলে যেখানে মাটি কিছুটা বেলে এবং পুষ্টিহীন, সেখানে এই রোগের প্রকোপ বেশি দেখা যায়[cite: 1]।\nএই রোগের মূল কারণ হলো ছত্রাক সংক্রমণ যা মূলত মাটি এবং বীজের মাধ্যমে ছড়ায়[cite: 1]। মাটিতে যদি পটাশ, ফসফরাস বা সিলিকনের অভাব থাকে তবে ধানের গাছ এই রোগে আক্রান্ত হওয়ার সম্ভাবনা অনেক বেড়ে যায়[cite: 1]। বাংলাদেশের পরিবেশে ২৫-৩০ ডিগ্রি সেলসিয়াস তাপমাত্রা এবং দীর্ঘ সময় পাতা ভিজে থাকা এই ছত্রাকের বংশবৃদ্ধির জন্য আদর্শ[cite: 1]। এছাড়া সেচের অভাব বা জমিতে খরা পরিস্থিতি তৈরি হলেও এই রোগের বিস্তার ঘটে[cite: 1]।\nসুষম সার প্রয়োগ বিশেষ করে পর্যাপ্ত পরিমাণে পটাশ (MoP) সার ব্যবহার এই রোগ দমনের প্রধান হাতিয়ার[cite: 1]। বীজ বপনের আগে কার্বেন্ডাজিম জাতীয় ছত্রাকনাশক দিয়ে বীজ শোধন করা বাধ্যতামূলক[cite: 1]। জমিতে সবসময় পরিমিত আর্দ্রতা বজায় রাখতে হবে[cite: 1]। রোগের তীব্রতা বেশি হলে প্রোপিকোনাজল (যেমন: টিল্ট) বা ম্যানকোজেব জাতীয় ছত্রাকনাশক নির্দিষ্ট মাত্রায় স্প্রে করতে হবে[cite: 1]।",
+    "source": "vision/rice/disease_details.json",
+    "citation": "",
+    "metadata": {}
+   },
+   {
+    "id": "CABI_BRASSICA_997AAE_003",
+    "score": 0.0476,
+    "title_en": "Leaf spot / Black spot in Cabbage",
+    "title_bn": "",
+    "content_en": "Leaf spot (or black spot) is caused by Alternaria brassicicola. It appears as light brown to grey or dark brown spots surrounded by a yellow halo, up to 25 mm wide. Unlike ring spot, these lesions are not limited by leaf veins. They contain tiny black fruiting bodies arranged in concentric circles and are most common on older leaves of mature plants.",
+    "content_bn": "পাতার দাগ (বা কালো দাগ) Alternaria brassicicola দ্বারা হয়ে থাকে। এটি হালকা বাদামী থেকে ধুসর বা গাড় বাদামী রঙের দাগ হিসেবে দেখা যায় যা হলুদ হ্যালো দ্বারা পরিবেষ্টিত থাকে এবং ২৫ মিমি পর্যন্ত প্রশস্ত হয়। রিং স্পটের বিপরীতে, এই ক্ষতরোগ পাতার শিরা দ্বারা সীমাবদ্ধ থাকে না। এগুলোতে সমকেন্দ্রিক বৃত্তে সাজানো ক্ষুদ্র কালো ফলের দেহ থাকে এবং এটি পরিপক্ব উদ্ভিদের পুরোনো পাতায় সবচেয়ে বেশি দেখা যায়।",
+    "source": "Brassica Disease Manuals (Plantwise)",
+    "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "cabbage",
+      "leaf spot",
+      "black spot",
+      "disease",
+      "Alternaria brassicicola"
+     ],
+     "title_en": "Leaf spot / Black spot in Cabbage",
+     "title_bn": "",
+     "section_title": "Common pests and diseases on cabbage in Ghana",
+     "publisher": "CABI",
+     "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
+     "summary": "Leaf spot, caused by Alternaria brassicicola, appears as large spots with concentric circles not limited by leaf veins.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "IRRI_IRRI_0F67B4_001",
+    "score": 0.0476,
+    "title_en": "Brown Spot of Rice",
+    "title_bn": "",
+    "content_en": "Brown spot is a fungal disease that infects the coleoptile, leaves, leaf sheath, panicle branches, glumes, and spikelets of rice. It is most critical from maximum tillering to ripening stages. The disease thrives in high humidity (86–100%) and temperatures between 16–36°C, particularly in nutrient-deficient or unflooded soils. It spreads via air and survives in infected seeds, volunteer rice, debris, and weeds.",
+    "content_bn": "ব্রাউন স্পট ধান গাছের কোলিপটাইড, পাতা, পাতার খোল, ছড়ার শাখা, গ্লুম এবং স্পাইকলেটে আক্রমণকারী একটি ছত্রাকজনিত রোগ। সর্বাধিক কুঁশি আসা থেকে পরিপক্বতা পর্যায় পর্যন্ত এটি সবচেয়ে বেশি ক্ষতিকর। এই রোগটি উচ্চ আর্দ্রতা (৮৬-১০০) এবং ১৬-৩৬ সেন্টিগ্রেড তাপমাত্রায়, বিশেষ করে পুষ্টি উপাদান ঘাটতিযুক্ত বা জলমগ্নতাহীন মাটিতে দ্রুত বিস্তার লাভ করে। এটি বাতাসের মাধ্যমে ছড়ায় এবং সংক্রামিত বীজ, পরিত্যক্ত ধান, ফসলের অবশিষ্টাংশ ও আগাছায় বেঁচে থাকে।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. BROWN SPOT. IRRI Rice Disease Reference Manual. pp. 54-57.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "rice",
+      "brown spot",
+      "fungal disease",
+      "ধান",
+      "বাদামী দাগ রোগ"
+     ],
+     "title_en": "Brown Spot of Rice",
+     "title_bn": "",
+     "section_title": "BROWN SPOT",
+     "publisher": "IRRI",
+     "citation": "IRRI. BROWN SPOT. IRRI Rice Disease Reference Manual. pp. 54-57.",
+     "summary": "Brown spot is a fungal disease affecting rice at all stages, causing leaf lesions, grain discoloration, and significant yield losses.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_FRG2024_973F4A_001",
+    "score": 0.0455,
+    "title_en": "Principles of Crop Response to Fertilizers",
+    "title_bn": "",
+    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
+    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "fertilizer",
+      "nutrient management",
+      "crop response",
+      "4R stewardship",
+      "সার ব্যবস্থাপনা",
+      "ফসলের পুষ্টি"
+     ],
+     "title_en": "Principles of Crop Response to Fertilizers",
+     "title_bn": "",
+     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
+     "publisher": "BARC",
+     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "IRRI_IRRI_DA722C_001",
+    "score": 0.0455,
+    "title_en": "Red Stripe of Rice",
+    "title_bn": "",
+    "content_en": "Red stripe is a rice disease that causes lesions on leaves, typically appearing from the panicle initiation stage onwards. It is favored by high temperatures, high relative humidity, high leaf wetness, and excessive nitrogen supply. Initial lesions are pin-sized and yellow-green to light orange, eventually becoming necrotic and coalescing into a blight appearance. It can be confused with orange leaf blight or advanced bacterial leaf blight. Management involves using resistant varieties, balanced nitrogen application, proper plant spacing, and intermittent drainage during panicle initiation. Seed treatment with benzimidazole fungicides is also recommended.",
+    "content_bn": "রেড স্ট্রাইপ ধানের একটি রোগ যা পাতার উপর দাগ সৃষ্টি করে, যা সাধারণত ছড়ার মোচড় বা প্যানিকল ইনিসিয়েশন পর্যায় থেকে প্রকাশ পায়। উচ্চ তাপমাত্রা, উচ্চ আপেক্ষিক আর্দ্রতা, পাতার দীর্ঘক্ষণ ভেজা থাকা এবং অতিরিক্ত নাইট্রোজেন প্রয়োগ এই রোগ ছড়াতে অনুকূল পরিবেশ সৃষ্টি করে। প্রাথমিক লক্ষণ হিসেবে পিন-আকৃতির হলুদ-সবুজ থেকে হালকা কমলা রঙের দাগ দেখা দেয়, যা পরবর্তীতে নেক্রোটিক (পচে যাওয়া) হয়ে একত্রিত হয়ে ব্লাইট বা পাতার পোড়া রোগের রূপ নেয়। এটি অনেক সময় কমলা পাতার ব্লাইট বা উন্নত ব্যাকটেরিয়াল লিফ ব্লাইট রোগের সাথে বিভ্রান্ত হতে পারে। রোগ ব্যবস্থাপনার মধ্যে রয়েছে রোগ প্রতিরোধী জাতের ব্যবহার, সুষম নাইট্রোজেন প্রয়োগ, সঠিক দূরত্বে চারা রোপণ এবং প্যানিকল ইনিসিয়েশন পর্যায়ে জমিতে পর্যায়ক্রমে সেচ ও নিষ্কাশন করা। বেনজিমিডাজল ছত্রাকনাশক দিয়ে বীজ শোধন করারও পরামর্শ দেওয়া হয়।",
+    "source": "IRRI Rice Disease Reference Manual",
+    "citation": "IRRI. RED STRIPE. IRRI Rice Disease Reference Manual. pp. 66-67.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "rice",
+      "red stripe",
+      "disease management",
+      "ধান",
+      "রেড স্ট্রাইপ",
+      "রোগ ব্যবস্থাপনা"
+     ],
+     "title_en": "Red Stripe of Rice",
+     "title_bn": "",
+     "section_title": "RED STRIPE",
+     "publisher": "IRRI",
+     "citation": "IRRI. RED STRIPE. IRRI Rice Disease Reference Manual. pp. 66-67.",
+     "summary": "Red stripe is a rice disease characterized by leaf lesions that typically appears during the reproductive stage, favored by high temperature, humidity, and nitrogen levels.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B6_DOC_2FA541_001",
+    "score": 0.0435,
+    "title_en": "Earthwork Calculation for Pond Construction",
+    "title_bn": "",
+    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
+    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
+    "source": "Training Manual on Improved Carp Polyculture 2011",
+    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+    "metadata": {
+     "category": "cultivation_practice",
+     "tags": [
+      "pond construction",
+      "earth measurement",
+      "pond cost estimation",
+      "পুকুর খনন",
+      "মাটির পরিমাপ"
+     ],
+     "title_en": "Earthwork Calculation for Pond Construction",
+     "title_bn": "",
+     "section_title": "Earth measurement",
+     "publisher": "DoF",
+     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "6 sources · কী→['কিতা', 'কি / কিবা', 'কী / কি', 'ক্যা / কী', 'কী / কিতা']; না→['না', 'না', 'না', 'না', 'না']; ও→['ও', 'অ', 'অ / ও', 'ও', 'ও']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "**ধানের বাদামী দাগ রোগ (Brown Spot)**",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **লক্ষণ:** ধানের পাতায় ছোট, ডিম্বাকৃতি বা গোলাকার গাঢ় বাদামী দাগ দেখা যায়, যার চারপাশে হালকা হলুদ আভা থাকে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "অনেক দাগ একসাথে মিলে পাতা শুকিয়ে ফেলতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "ধানের দানাতেও দাগ হতে পারে, যা ধানের উজ্জ্বলতা ও ওজন কমিয়ে দেয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[cite: 1]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **কারণ:** এই রোগটি মূলত ছত্রাক (Bipolaris oryzae) দ্বারা ঘটে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "মাটি ও বীজের মাধ্যমে এটি ছড়ায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "মাটির উর্বরতা কম থাকলে বা পটাশ, ফসফরাস বা সিলিকনের অভাব থাকলে ধানের গাছ এই রোগে বেশি আক্রান্ত হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "২৫-৩০ ডিগ্রি সেলসিয়াস তাপমাত্রা এবং দীর্ঘ সময় ধরে পাতা ভেজা থাকা এই ছত্রাকের বংশবৃদ্ধির জন্য অনুকূল",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "সেচের অভাব বা খরা পরিস্থিতিও রোগের বিস্তার ঘটায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[cite: 1]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **ব্যবস্থাপনা:** সুষম সার প্রয়োগ, বিশেষ করে পর্যাপ্ত পরিমাণে পটাশ (MoP) সার ব্যবহার এই রোগ দমনে সহায়ক",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[cite: 1]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **অন্যান্য তথ্য:** এই রোগটি বাংলাদেশের উত্তরাঞ্চলে, যেখানে মাটি বেলে এবং পুষ্টিহীন, সেখানে বেশি দেখা যায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[cite: 1]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   **আরও তথ্যের জন্য:** আপনার এলাকার কৃষি কর্মকর্তার সাথে যোগাযোগ করুন অথবা কৃষক কল সেন্টার ১৬১২৩-এ ফোন করুন",
     "verdict": "no_dosage",
     "reason": ""
    }

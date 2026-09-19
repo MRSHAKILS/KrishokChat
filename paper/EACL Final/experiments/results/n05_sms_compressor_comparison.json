@@ -1,0 +1,10 @@
+{
+  "total_dosage_cases": 66,
+  "naive_survived": 19,
+  "naive_survival_rate_pct": 28.79,
+  "compressor_survived": 65,
+  "compressor_survival_rate_pct": 98.48,
+  "exceeds_160_chars": 0,
+  "e15_arm_a_certified_survival_pct": 100.0,
+  "e15_arm_a_n_tuples": 1000
+}

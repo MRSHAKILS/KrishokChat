@@ -142,7 +142,10 @@ experiments:
       stub_answer_p50: 53.0
       live_input_p50: 1111.0
       live_output_p50: 221.0
-    label: Offline components + provider-exact live lengths (n=58 grounded only; stale reads excluded). Modeled 88% retired; no blended saving claimed.
+      computed_cost_per_turn_p50_usd: 0.0001995
+      computed_cost_per_1k_pure_gen_usd: 0.1995
+      computed_cost_per_1k_tier_mix_usd: 0.1839
+    label: Offline components + provider-exact live lengths (n=58 grounded only; stale reads excluded). Computed monetary cost ($0.1839/1k tier mix) aligns with modeled $0.1798/1k (+2.3%). Modeled 88% retired; no blended saving claimed.
   N03_verifier_catchrate:
     status: REAL_MEASURED_SMALLN
     key:
@@ -154,18 +157,30 @@ experiments:
       clean_fp: 0/38
     label: Claim-anchored, validity-gated, strict==precise. CIs in spec. Small n, no pooling. 4 misses autopsied (hard edges).
   N04_vision_rerun:
-    status: REAL_MEASURED_PARTIAL
+    status: REAL_MEASURED
     key:
-      potato_top1: 0.9
+      potato_top1: 0.9504
+      potato_n: 1170
       rice_top1: 0.9625
+      rice_n: 80
       wheat_top1: 0.9413
-      brassica_top1: 0.9118
+      wheat_n: 800
+      brassica_top1: 0.9729
+      brassica_n: 443
+      corn_top1: 0.9723
+      corn_n: 940
+      chilli_top1: 0.9907
+      chilli_n: 861
       onnx_agreement: 1.0
       onnx_max_delta: 5e-05
     router_top1_diagnostic_only: 0.0259
     router_family_mapped: 0.9908
     router_family_ci95: [97.67, 99.64]
     int8_wheat_reportable: true
+    int8_potato_reportable: true
+    int8_brassica_reportable: true
+    int8_potato_drop_pp: 0.09
+    int8_brassica_drop_pp: 0.00
     int8_rice_rejected_2_5pp: true
     browser_wasm_latency:
       crop_classifier_p50_ms: 51.3
@@ -174,7 +189,7 @@ experiments:
       wheat_p95_ms: 17.6
       env: {num_threads: 1, simd: true, cross_origin_isolated: false}
       note: "subset 2/6 models; 3 warmup + 10 measured; inference-only random tensor"
-    label: Accuracy+parity+INT8+browserWASM locked (audited). INT8 accuracy claimed for wheat ONLY; rice rejected; crop/potato/brassica diagnostic-only; corn/chilli unmeasured. Browser WASM subset measured. No speedup claim.
+    label: Accuracy+parity+INT8+browserWASM locked (audited). INT8 accuracy claimed for wheat, potato, and brassica; rice rejected. All 6 disease models measured on full test sets. Browser WASM subset measured. INT8 latency characterized across 1-4 threads: 1.5-2.0x overhead on x86 due to lack of AVX-512 VNNI; validated strictly as 3.7x storage reduction (0.00pp drop), not speedup.
   N05_sms_survival:
     status: REAL_MEASURED
     key:
@@ -186,9 +201,9 @@ experiments:
       live_verified_advice: 75
       live_flagged_referral: 9
       live_blocked_referral: 16
-      live_safe_dose: 0/84
+      live_safe_dose: 0/84 naive baseline; 65/66 (98.5%) gold survival with SMSCompressor; 100.0% (1000/1000) E15 Arm A
       live_referral_purity: 16/16 blocked (+9 flagged clean)
-    label: Enforcement + purity hold. Dose fields do NOT survive truncation (packer pending). SMS guard fix proven (9/9 flips).
+    label: Enforcement + purity hold. Naive truncation drops dose (0/84), resolved by deterministic 11-slot SMSCompressor (100% E15 Arm A, 65/66 live gold). SMS guard fix proven (9/9 flips).
   N11_gating_live_llm:
     status: REAL_MEASURED
     key:
@@ -207,8 +222,12 @@ experiments:
     status: REAL_MEASURED_ANALYSIS
     key:
       injection_blocked: 10/10
-      off_topic_refused: 0/30
-    label: 0.25 retired (expectation error + real off-topic gap). Split reported.
+      deterministic_off_topic_refused: 0/30
+      live_llm_off_topic_refused: 25/30
+      live_llm_refusal_rate_pct: 83.33
+      live_llm_refusal_ci95: [66.44, 92.66]
+      weather_safe_agri_passed: 5/5
+    label: 0.25 retired (expectation error + real off-topic gap). Split reported: Tier-0 precheck passes non-crisis off-topic by design (0/30 refused), while Tier-1 live LLM NLU refuses 25/30 (83.33% [66.4, 92.7]); 5/5 weather queries pass to safe_agri by design.
   N07_badge_gate_rerun:
     status: REAL_MEASURED
     key:

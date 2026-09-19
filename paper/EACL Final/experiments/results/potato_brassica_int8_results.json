@@ -1,0 +1,220 @@
+{
+  "evaluation_target": "Potato and Brassica FP32 vs INT8 Full Test Set Evaluation",
+  "timestamp": "2026-09-19T12:43:33Z",
+  "results": {
+    "potato": {
+      "crop": "potato",
+      "n_samples": 1170,
+      "fp32_top1": 0.9504,
+      "fp32_ci95": [
+        0.9364,
+        0.9615
+      ],
+      "int8_top1": 0.9496,
+      "int8_ci95": [
+        0.9355,
+        0.9607
+      ],
+      "drop_pp": 0.0855,
+      "agreement_rate": 0.988,
+      "max_delta": 0.3109757,
+      "gate_passed_2pp": true,
+      "reportable": true,
+      "mcnemar": {
+        "discordant_pairs": 13,
+        "only_fp32_correct": 7,
+        "only_int8_correct": 6,
+        "p_value": 1.0,
+        "test": "two-sided exact binomial McNemar (paired)",
+        "statistically_significant": false
+      },
+      "fp32_latency_ms": {
+        "n": 1170,
+        "mean_ms": 112.1423,
+        "stdev_ms": 39.4521,
+        "p50_ms": 121.885,
+        "p90_ms": 149.6996,
+        "p95_ms": 157.7502,
+        "p99_ms": 175.3234,
+        "min_ms": 6.6875,
+        "max_ms": 208.5178
+      },
+      "int8_latency_ms": {
+        "n": 1170,
+        "mean_ms": 199.2932,
+        "stdev_ms": 60.195,
+        "p50_ms": 216.2655,
+        "p90_ms": 248.9586,
+        "p95_ms": 257.7713,
+        "p99_ms": 274.8817,
+        "min_ms": 19.2478,
+        "max_ms": 415.7294
+      },
+      "per_class": {
+        "Potato__Early_Blight": {
+          "index": 0,
+          "total_images": 511,
+          "fp32_correct": 483,
+          "fp32_accuracy": 0.9452,
+          "int8_correct": 479,
+          "int8_accuracy": 0.9374
+        },
+        "Potato__Healthy_Leaf": {
+          "index": 1,
+          "total_images": 133,
+          "fp32_correct": 133,
+          "fp32_accuracy": 1.0,
+          "int8_correct": 133,
+          "int8_accuracy": 1.0
+        },
+        "Potato__Late_Blight": {
+          "index": 2,
+          "total_images": 526,
+          "fp32_correct": 496,
+          "fp32_accuracy": 0.943,
+          "int8_correct": 499,
+          "int8_accuracy": 0.9487
+        }
+      }
+    },
+    "brassica": {
+      "crop": "brassica",
+      "n_samples": 443,
+      "fp32_top1": 0.9729,
+      "fp32_ci95": [
+        0.9533,
+        0.9844
+      ],
+      "int8_top1": 0.9729,
+      "int8_ci95": [
+        0.9533,
+        0.9844
+      ],
+      "drop_pp": 0.0,
+      "agreement_rate": 0.991,
+      "max_delta": 0.12328,
+      "gate_passed_2pp": true,
+      "reportable": true,
+      "mcnemar": {
+        "discordant_pairs": 2,
+        "only_fp32_correct": 1,
+        "only_int8_correct": 1,
+        "p_value": 1.0,
+        "test": "two-sided exact binomial McNemar (paired)",
+        "statistically_significant": false
+      },
+      "fp32_latency_ms": {
+        "n": 443,
+        "mean_ms": 49.5622,
+        "stdev_ms": 33.6255,
+        "p50_ms": 47.3713,
+        "p90_ms": 97.9694,
+        "p95_ms": 108.4161,
+        "p99_ms": 142.7466,
+        "min_ms": 8.1814,
+        "max_ms": 163.9119
+      },
+      "int8_latency_ms": {
+        "n": 443,
+        "mean_ms": 89.0157,
+        "stdev_ms": 36.0689,
+        "p50_ms": 85.5421,
+        "p90_ms": 138.2547,
+        "p95_ms": 149.0979,
+        "p99_ms": 200.0047,
+        "min_ms": 21.5557,
+        "max_ms": 240.8123
+      },
+      "per_class": {
+        "Cabbage__Alternaria_Spot": {
+          "index": 0,
+          "total_images": 11,
+          "fp32_correct": 9,
+          "fp32_accuracy": 0.8182,
+          "int8_correct": 9,
+          "int8_accuracy": 0.8182
+        },
+        "Cabbage__Black_Rot": {
+          "index": 1,
+          "total_images": 7,
+          "fp32_correct": 6,
+          "fp32_accuracy": 0.8571,
+          "int8_correct": 6,
+          "int8_accuracy": 0.8571
+        },
+        "Cabbage__Downy_Mildew": {
+          "index": 2,
+          "total_images": 5,
+          "fp32_correct": 2,
+          "fp32_accuracy": 0.4,
+          "int8_correct": 2,
+          "int8_accuracy": 0.4
+        },
+        "Cabbage__Healthy_Leaf": {
+          "index": 3,
+          "total_images": 11,
+          "fp32_correct": 8,
+          "fp32_accuracy": 0.7273,
+          "int8_correct": 9,
+          "int8_accuracy": 0.8182
+        },
+        "Cauliflower__Alternaria_Disease": {
+          "index": 4,
+          "total_images": 54,
+          "fp32_correct": 53,
+          "fp32_accuracy": 0.9815,
+          "int8_correct": 53,
+          "int8_accuracy": 0.9815
+        },
+        "Cauliflower__Bacterial_Soft_Rot": {
+          "index": 5,
+          "total_images": 31,
+          "fp32_correct": 31,
+          "fp32_accuracy": 1.0,
+          "int8_correct": 31,
+          "int8_accuracy": 1.0
+        },
+        "Cauliflower__Bacterial_Spot": {
+          "index": 6,
+          "total_images": 62,
+          "fp32_correct": 61,
+          "fp32_accuracy": 0.9839,
+          "int8_correct": 61,
+          "int8_accuracy": 0.9839
+        },
+        "Cauliflower__Black_Spot": {
+          "index": 7,
+          "total_images": 39,
+          "fp32_correct": 39,
+          "fp32_accuracy": 1.0,
+          "int8_correct": 39,
+          "int8_accuracy": 1.0
+        },
+        "Cauliflower__Downy_Mildew": {
+          "index": 8,
+          "total_images": 62,
+          "fp32_correct": 61,
+          "fp32_accuracy": 0.9839,
+          "int8_correct": 61,
+          "int8_accuracy": 0.9839
+        },
+        "Cauliflower__Healthy": {
+          "index": 9,
+          "total_images": 137,
+          "fp32_correct": 137,
+          "fp32_accuracy": 1.0,
+          "int8_correct": 136,
+          "int8_accuracy": 0.9927
+        },
+        "Cauliflower__Nutrient_Deficiency": {
+          "index": 10,
+          "total_images": 24,
+          "fp32_correct": 24,
+          "fp32_accuracy": 1.0,
+          "int8_correct": 24,
+          "int8_accuracy": 1.0
+        }
+      }
+    }
+  }
+}

@@ -19,9 +19,9 @@ The headliner is the farmer det halt 0.38 (N01b). The pilot (E09) shows the gate
 
 | Measure | Result | Limit in-cell |
 |---|---|---|
-| Per-crop top-1 (N04) | Potato 0.90; rice 0.9625; wheat 0.9413; brassica 0.9118; ONNX agreement 1.0 within 5e-05 | Corn/chilli unmeasured; router exact-match 0.0259 is diagnostic ONLY |
+| Per-crop top-1 (N04) | Potato 0.9504; rice 0.9625; wheat 0.9413; brassica 0.9729; corn 0.9723; chilli 0.9907; ONNX agreement 1.0 within 5e-05 | All 6 disease models measured on full test sets (N=4,294); router exact-match 0.0259 is diagnostic ONLY |
 | Router family-mapped (N04) | 433/437 at 0.9908 [97.67, 99.64] | Frozen pre-run mapping; wheat-800 excluded as out-of-space |
-| INT8 (N04) | Wheat reportable; rice rejected on 2.5pp drop | Size story only; potato/brassica (n=15/51) diagnostic-only |
+| INT8 (N04) | Wheat, potato, and brassica reportable (drops <= 0.09pp <= 2.0pp gate); rice rejected on 2.5pp drop | Size story only; never speedup |
 | Browser WASM (N04) | Crop-classifier p50 51.3 ms, p95 52.9 ms; wheat p50 16.7 ms, p95 17.6 ms | Single-thread SIMD without COOP/COEP; 2-of-6-model subset |
 | Fence (N08) | Open wrong-crop 0.3625 vs fenced 0.30; discordant 25/0; McNemar p 5.96e-08; purity open 0.6472 vs fenced 0.7353 | Perfect-gold simulation upper bound, not classifier performance |
 | Badge (N07) | 53/54 farmer and 400/400 PRISM, 453/454 combined; 0 false halts; PRISM CI [99.05, 100.0]; sole miss farmer_q_63 implicit | Explicit-text contradiction only |

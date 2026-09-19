@@ -1,0 +1,52 @@
+{
+  "benchmark_name": "EACL_N02_MONETARY_COST_COMPUTATION",
+  "description": "Exact monetary operating costs derived from provider-exact metered tokens (Limitation #12 resolution)",
+  "token_statistics": {
+    "n_calls": 58,
+    "model": "google/gemini-2.5-flash-lite",
+    "source": "provider usage records on N03c live grounded-generation rows",
+    "input_tokens": {
+      "p50": 1111.0,
+      "p95": 1264.9
+    },
+    "output_tokens": {
+      "p50": 221.0,
+      "p95": 479.4
+    }
+  },
+  "pricing_basis": {
+    "provider": "openrouter",
+    "model": "google/gemini-2.5-flash-lite",
+    "input_usd_per_1k": 0.0001,
+    "output_usd_per_1k": 0.0004
+  },
+  "tier_mix": {
+    "zero_llm_pct": 7.8,
+    "grounded_generation_pct": 92.2,
+    "deterministic_guard_pct": 5.6,
+    "templated_advisory_pct": 2.2
+  },
+  "per_turn_generation_cost_usd": {
+    "p50": {
+      "input_cost": 0.0001111,
+      "output_cost": 8.84e-05,
+      "total_cost": 0.0001995
+    },
+    "p95": {
+      "input_cost": 0.0001265,
+      "output_cost": 0.0001918,
+      "total_cost": 0.0003183
+    }
+  },
+  "cost_per_1000_turns_usd": {
+    "pure_grounded_generation_p50": 0.1995,
+    "pure_grounded_generation_p95": 0.3183,
+    "evaluated_tier_mix_p50": 0.1839,
+    "evaluated_tier_mix_p95": 0.2934,
+    "previous_modeled_tier_mix": 0.1798,
+    "difference_vs_previous_modeled_usd": 0.0041,
+    "percentage_difference": 2.3,
+    "tier_mix_cost_saving_pct": 7.8
+  },
+  "findings": "Provider-exact token metering (p50: 1111 input, 221 output on n=58 calls) yields a per-turn generation cost of $0.000200 USD ($0.1995 per 1,000 pure generation turns). Under the evaluated tier mix (7.8% zero-LLM turns), the operating cost is $0.1839 USD per 1,000 turns. This closely aligns with the previously modeled $0.1798/1k (a modest +2.29% difference), confirming that retrieval context overhead (~1111 tokens) is offset by concise Bengali answer generation (~221 tokens)."
+}

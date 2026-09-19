@@ -5,8 +5,8 @@ meta:
     SMS truncates them?
   script: experiments/scripts/E15_sms_compressor/run_e15.py
   spec: experiments/specs/E15_sms_compressor.spec.yaml
-  git_commit: 24385def2b1412fe8ff01856a5873d61bebe3b57
-  date: '2026-08-26'
+  git_commit: 17d0e6661914ea1450fc4aeae0a42eb3ef0afd0e
+  date: '2026-09-19'
   seed: 20260827
   duration_seconds: 0.07
 environment:

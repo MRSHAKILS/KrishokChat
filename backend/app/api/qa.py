@@ -118,6 +118,7 @@ def _response(result: QAResult) -> QAResponse:
         resolution_tier=result.resolution_tier.value,
         answerability_level=getattr(result, "answerability_level", None) and result.answerability_level.value or "A2_strong_evidence",
         progressive_guidance=getattr(result, "progressive_guidance", None),
+        quick_reply_chips=list(getattr(result, "quick_reply_chips", ()) or []),
     )
 
 

@@ -5,8 +5,8 @@
 1. N03 small n: 38 answers with per-type n 8-33; per-type rates with Wilson CIs, no pooling, no claim beyond dosage-claim sentences.
 2. Crop-router label mismatch: family truth vs 10-species predictions with top-1 0.0259 kept as mismatch diagnostic only with species breakdown; router accuracy unclaimed on that metric.
 3. Rice INT8 rejected on a 2.5pp drop past the 2.0pp gate; artifact exists but is never deployed and never cited as usable.
-4. Potato/brassica INT8 sets too small (n=15/51); diagnostic-only, with quantitative INT8 accuracy claimed for wheat only.
-5. Corn and chilli unmeasured for lack of local labeled photos; no claim of any kind for either model.
+4. Potato/brassica INT8 sets resolved (n=1170/443; drops 0.09pp/0.00pp <= 2.0pp gate); quantitative INT8 accuracy validated for wheat, potato, and brassica.
+5. Corn and chilli resolved (Corn n=940 top-1 0.9723; Chilli n=861 top-1 0.9907); measured on full held-out test sets with 100% ONNX/PyTorch agreement.
 6. INT8 not faster here (higher latency than FP32); size story only with no speed claim.
 7. N07 implicit-crop miss (farmer_q_63, counted as miss); badge scoped to explicit-text contradiction at 53/54 farmer and 400/400 PRISM, 453/454 combined.
 8. N08 perfect-gold fence; simulation of perfect routing, not classifier performance, with no absent-crop generalization.

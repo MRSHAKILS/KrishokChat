@@ -1,0 +1,207 @@
+{
+  "evaluation_target": "Corn and Chilli On-Device Edge Classifiers",
+  "timestamp": "2026-09-19T12:34:24Z",
+  "results": {
+    "corn": {
+      "crop": "corn",
+      "n_samples": 940,
+      "onnx_top1": 0.9723,
+      "onnx_ci95": [
+        0.9598,
+        0.9811
+      ],
+      "pt_top1": 0.9723,
+      "pt_ci95": [
+        0.9598,
+        0.9811
+      ],
+      "onnx_pt_agreement": 1.0,
+      "onnx_max_delta": 0.5246331,
+      "latency_stats_ms": {
+        "n": 940,
+        "mean_ms": 16.8573,
+        "stdev_ms": 16.9688,
+        "p50_ms": 9.5428,
+        "p90_ms": 46.1847,
+        "p95_ms": 53.9314,
+        "p99_ms": 73.7876,
+        "min_ms": 6.7424,
+        "max_ms": 116.4188
+      },
+      "per_class": {
+        "Common_Rust": {
+          "index": 0,
+          "total_images": 216,
+          "correct": 211,
+          "accuracy": 0.9769,
+          "ci95": [
+            0.947,
+            0.9901
+          ],
+          "precision": 0.9906,
+          "recall": 0.9769,
+          "f1": 0.9837
+        },
+        "Gray_Leaf_Spot": {
+          "index": 1,
+          "total_images": 221,
+          "correct": 211,
+          "accuracy": 0.9548,
+          "ci95": [
+            0.9187,
+            0.9752
+          ],
+          "precision": 0.9505,
+          "recall": 0.9548,
+          "f1": 0.9526
+        },
+        "Healthy": {
+          "index": 2,
+          "total_images": 330,
+          "correct": 329,
+          "accuracy": 0.997,
+          "ci95": [
+            0.983,
+            0.9995
+          ],
+          "precision": 0.988,
+          "recall": 0.997,
+          "f1": 0.9925
+        },
+        "Northern_Leaf_Blight": {
+          "index": 3,
+          "total_images": 173,
+          "correct": 163,
+          "accuracy": 0.9422,
+          "ci95": [
+            0.8969,
+            0.9683
+          ],
+          "precision": 0.9477,
+          "recall": 0.9422,
+          "f1": 0.9449
+        }
+      }
+    },
+    "chilli": {
+      "crop": "chilli",
+      "n_samples": 861,
+      "onnx_top1": 0.9907,
+      "onnx_ci95": [
+        0.9818,
+        0.9953
+      ],
+      "pt_top1": 0.9907,
+      "pt_ci95": [
+        0.9818,
+        0.9953
+      ],
+      "onnx_pt_agreement": 1.0,
+      "onnx_max_delta": 0.7202919,
+      "latency_stats_ms": {
+        "n": 861,
+        "mean_ms": 16.6243,
+        "stdev_ms": 10.4204,
+        "p50_ms": 17.8907,
+        "p90_ms": 24.6308,
+        "p95_ms": 28.258,
+        "p99_ms": 61.8749,
+        "min_ms": 2.4877,
+        "max_ms": 84.9894
+      },
+      "per_class": {
+        "Chili__Bacterial_Spot": {
+          "index": 0,
+          "total_images": 46,
+          "correct": 44,
+          "accuracy": 0.9565,
+          "ci95": [
+            0.8547,
+            0.988
+          ],
+          "precision": 0.9565,
+          "recall": 0.9565,
+          "f1": 0.9565
+        },
+        "Chili__Cercospora_Leaf_Spot": {
+          "index": 1,
+          "total_images": 54,
+          "correct": 52,
+          "accuracy": 0.963,
+          "ci95": [
+            0.8746,
+            0.9898
+          ],
+          "precision": 0.963,
+          "recall": 0.963,
+          "f1": 0.963
+        },
+        "Chili__Curl_Virus": {
+          "index": 2,
+          "total_images": 126,
+          "correct": 126,
+          "accuracy": 1.0,
+          "ci95": [
+            0.9704,
+            1.0
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "Chili__Healthy_Leaf": {
+          "index": 3,
+          "total_images": 137,
+          "correct": 137,
+          "accuracy": 1.0,
+          "ci95": [
+            0.9727,
+            1.0
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "Chili__Nutrition_Deficiency": {
+          "index": 4,
+          "total_images": 314,
+          "correct": 310,
+          "accuracy": 0.9873,
+          "ci95": [
+            0.9677,
+            0.995
+          ],
+          "precision": 1.0,
+          "recall": 0.9873,
+          "f1": 0.9936
+        },
+        "Chili__Powdery_Mildew": {
+          "index": 6,
+          "total_images": 126,
+          "correct": 126,
+          "accuracy": 1.0,
+          "ci95": [
+            0.9704,
+            1.0
+          ],
+          "precision": 0.9844,
+          "recall": 1.0,
+          "f1": 0.9921
+        },
+        "Chili__White_Spot": {
+          "index": 7,
+          "total_images": 58,
+          "correct": 58,
+          "accuracy": 1.0,
+          "ci95": [
+            0.9379,
+            1.0
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      }
+    }
+  }
+}

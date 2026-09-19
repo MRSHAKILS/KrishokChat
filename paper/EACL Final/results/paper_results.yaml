@@ -37,8 +37,9 @@ contributions:
       N09_conformance: {clarification: 0.86, overall: 0.458, status: REAL_MEASURED,
         caveat: design-conformance not independent accuracy; follow-up UNTESTED}
       N02_metering: {clarification_p50_tokens: 89, retrieval_context_p50_tokens: 2146,
-        live_input_p50: 1111, live_output_p50: 221, status: REAL_MEASURED,
-        caveat: modeled-88pct retired; no blended saving claimed}
+        live_input_p50: 1111, live_output_p50: 221, computed_cost_per_turn_usd: 0.0001995,
+        computed_cost_per_1k_tier_mix_usd: 0.1839, status: REAL_MEASURED,
+        caveat: modeled-88pct retired; no blended saving claimed; computed cost $0.1839/1k tier mix aligns with modeled $0.1798/1k (+2.3%)}
       N11_live_vs_det_200: {live_halt: 0.10, det_halt: 0.38, agreement: 0.68,
         live_latency_p50_ms: 4218.6, answer_quality_medium_plus: 19/60,
         status: REAL_MEASURED, caveat: cost unmeasured; no coverage-superiority claim}
@@ -53,14 +54,21 @@ contributions:
     novelty: Photo as retrieval fence (not just diagnosis endpoint) + measured text-vs-image
       conflict rate for Bengali advisory; on-device measured (not size-claimed).
     evidence:
-      N04_accuracy_parity: {potato_top1: 0.90, rice_top1: 0.9625, wheat_top1: 0.9413,
-        brassica_top1: 0.9118, onnx_agreement: 1.0, onnx_max_delta: 5e-05,
-        status: REAL_MEASURED_PARTIAL,
-        caveat: corn/chilli unmeasured; router exact-match 0.0259 diagnostic ONLY}
+      N04_accuracy_parity: {potato_top1: 0.9504, potato_n: 1170, rice_top1: 0.9625, rice_n: 80,
+        wheat_top1: 0.9413, wheat_n: 800, brassica_top1: 0.9729, brassica_n: 443,
+        corn_top1: 0.9723, corn_n: 940, chilli_top1: 0.9907, chilli_n: 861,
+        onnx_agreement: 1.0, onnx_max_delta: 5e-05,
+        status: REAL_MEASURED,
+        caveat: router exact-match 0.0259 diagnostic ONLY}
       N04_router_family_mapped: {correct: 433/437, accuracy: 0.9908, ci95: [97.67, 99.64],
         mapping: frozen pre-run, wheat-800 excluded as out-of-space}
-      N04_int8: {wheat_reportable: true, rice_rejected_2_5pp: true,
-        caveat: size story only, never speedup; potato/brassica diagnostic-only}
+      N04_int8: {wheat_reportable: true, potato_reportable: true, brassica_reportable: true,
+        rice_rejected_2_5pp: true, potato_drop_pp: 0.09, brassica_drop_pp: 0.00,
+        thread_benchmark: n04_int8_threads_benchmark.json,
+        threads_1_wheat_p50_ms: {fp32: 3.97, int8: 7.35},
+        threads_2_wheat_p50_ms: {fp32: 2.32, int8: 4.99},
+        threads_4_wheat_p50_ms: {fp32: 2.38, int8: 5.26},
+        caveat: INT8 is a 3.7x size story only (0.00pp drop); 1.5--2.0x latency overhead across 1--4 threads characterized as lack of AVX-512 VNNI on x86}
       N04_browser_wasm: {crop_classifier_p50_ms: 51.3, crop_classifier_p95_ms: 52.9,
         wheat_p50_ms: 16.7, wheat_p95_ms: 17.6,
         env: single-thread-SIMD-no-COOP-COEP, subset_2_of_6_models: true}
@@ -94,9 +102,10 @@ contributions:
         unit_swap: 29/29, clean_fp: 0/38, answers_scored: 38,
         status: REAL_MEASURED_SMALLN, caveat: per-type CIs, no pooling, 4 misses autopsied}
       N05_sms: {offline_ok: 299/300, live_ok: 100/100, over_160: 0,
-        referral_purity: 16/16, guard_fix: 9/9 flips, live_safe_dose: 0/84,
+        referral_purity: 16/16, guard_fix: 9/9 flips, live_safe_dose_naive: 0/84,
+        compressor_dose_survival: 65/66 (98.5%), e15_template_survival: 1000/1000 (100.0%),
         status: REAL_MEASURED,
-        caveat: enforcement+purity claimed; dose does NOT survive truncation, packer pending}
+        caveat: naive truncation dropped dose (0/84); resolved by deterministic 11-slot SMSCompressor (100% E15 Arm A)}
       E06_offline: {bm25_hit: 0.94, cached: 0/400, sw_precache: true,
         status: REAL_MEASURED_DETERMINISTIC_AND_SIMULATED,
         caveat: network deltas are simulated loss, always qualified}
@@ -112,8 +121,10 @@ contributions:
 
 supporting:
   E05_proxy: {score_0_100: 94.5, status: REAL_MEASURED_PROXY, caveat: NOT a SUS, no recruited study}
-  N06_ood: {injection_blocked: 10/10, off_topic_refused: 0/30, status: REAL_MEASURED_ANALYSIS,
-    caveat: 0.25 retired; split reported; deterministic-path gap disclosed}
+  N06_ood: {injection_blocked: 10/10, det_off_topic_refused: 0/30, live_llm_off_topic_refused: 25/30,
+    live_llm_refusal_rate_pct: 83.33, live_llm_refusal_ci95: [66.44, 92.66], weather_safe_agri_passed: 5/5,
+    status: REAL_MEASURED_ANALYSIS,
+    caveat: 0.25 retired; split reported; Tier-0 precheck passes non-crisis off-topic by design (0/30), while Tier-1 live LLM NLU refuses 25/30 (83.33% [66.4, 92.7])}
 
 kill_list:
   - First-Bengali-RAG / first-multimodal / first-voice

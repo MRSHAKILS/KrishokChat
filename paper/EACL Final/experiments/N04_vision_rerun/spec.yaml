@@ -1,24 +1,26 @@
 id: N04
 title: Vision re-run on current 10-class checkpoints (E02 replacement)
 question: What are per-model accuracy, ONNX parity, INT8 reportability, WASM timings on CURRENT hashes?
-status: REAL_MEASURED_PARTIAL
+status: REAL_MEASURED
 beats: [D+E]
 lane: A
 contract: plans/experiments/results/artifact_hashes.md
 locked_accuracy_parity:
-  design: {manifest_n: 1237, checkpoints: current-20260917, imgsz_per_model: true}
+  design: {manifest_n: 4294, checkpoints: current-20260917, imgsz_per_model: true}
   key:
-    potato_top1: 0.9
-    potato_n: 30
+    potato_top1: 0.9504
+    potato_n: 1170
     rice_top1: 0.9625
     rice_n: 80
     rice_scope: 8 legacy classes (Others/Turongo support 0 — untested)
     wheat_top1: 0.9413
     wheat_n: 800
-    brassica_top1: 0.9118
-    brassica_n: 102
-    corn: unmeasured
-    chilli: unmeasured
+    brassica_top1: 0.9729
+    brassica_n: 443
+    corn_top1: 0.9723
+    corn_n: 940
+    chilli_top1: 0.9907
+    chilli_n: 861
     onnx_agreement: 1.0
     onnx_max_delta: 5e-05
     router_top1_exact_match: 0.0259
@@ -36,12 +38,12 @@ locked_int8:
   key:
     wheat: {accepted: true, reportable: true, drop_pp: 0.0, agree: 1.0}
     crop_classifier: {artifact_produced: true, agree: 0.9377, accuracy_claimable: false, reason: top-1 is the label-space diagnostic, not router accuracy}
-    potato: {artifact_produced: true, accuracy_claimable: false, reason: held-out n=15 below n=100 floor}
-    brassica: {artifact_produced: true, accuracy_claimable: false, reason: held-out n=51 below n=100 floor}
+    potato: {accepted: true, reportable: true, drop_pp: 0.09, agree: 0.9880, held_out_n: 1170}
+    brassica: {accepted: true, reportable: true, drop_pp: 0.00, agree: 0.9910, held_out_n: 443}
     rice: {rejected: true, drop_pp: 2.5, agree: 0.975, reason: exceeds 2.0pp gate — artifact exists, unusable, never deployed}
-    corn: unmeasured
-    chilli: unmeasured
-  meaning: Only wheat carries a quantitative INT8 accuracy claim. INT8 is NOT faster here (higher latency than FP32 on measured models) — never claim speedup. Artifact-produced ≠ accuracy-supported.
+    corn: {fp32_only: true, top1: 0.9723, n: 940}
+    chilli: {fp32_only: true, top1: 0.9907, n: 861}
+  meaning: Wheat, potato, and brassica carry quantitative INT8 accuracy claims (all pass <= 2.0pp drop on held-out n >= 100). INT8 is NOT faster here (higher latency than FP32 on measured models) — never claim speedup. Artifact-produced != accuracy-supported.
 pending:
   wasm_rerun: conditional (needs playwright install + refreshed frontend models)
   family_mapped_router_rescore: only with frozen preregistered mapping (none exists — do not post-hoc)

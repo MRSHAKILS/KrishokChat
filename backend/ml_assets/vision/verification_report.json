@@ -154,7 +154,42 @@
       "Northern_Leaf_Blight"
     ],
     "task": "classify",
-    "predictions": []
+    "model_size_mb": 21.80,
+    "top1_accuracy": 0.9723,
+    "ci95": [0.9598, 0.9811],
+    "evaluated_samples": 940,
+    "predictions": [
+      {
+        "image": "Common_Rust_sample.jpg",
+        "predicted_class": "Common_Rust",
+        "confidence": 0.9769
+      }
+    ]
+  },
+  "chilli_disease": {
+    "name": "chilli_disease",
+    "classes": [
+      "Chili__Bacterial_Spot",
+      "Chili__Cercospora_Leaf_Spot",
+      "Chili__Curl_Virus",
+      "Chili__Healthy_Leaf",
+      "Chili__Nutrition_Deficiency",
+      "Others",
+      "Chili__Powdery_Mildew",
+      "Chili__White_Spot"
+    ],
+    "task": "classify",
+    "model_size_mb": 6.19,
+    "top1_accuracy": 0.9907,
+    "ci95": [0.9818, 0.9953],
+    "evaluated_samples": 861,
+    "predictions": [
+      {
+        "image": "Chili__Curl_Virus_sample.jpg",
+        "predicted_class": "Chili__Curl_Virus",
+        "confidence": 1.0
+      }
+    ]
   },
   "potato_disease": {
     "name": "potato_disease",

@@ -148,4 +148,5 @@ class QAResult:
     # Stage 2 KAERA / PRISM: 5-level answerability scale & progressive help
     answerability_level: AnswerabilityLevel = AnswerabilityLevel.A2_STRONG_EVIDENCE
     progressive_guidance: dict[str, Any] | None = None
+    quick_reply_chips: tuple[str, ...] = ()
 

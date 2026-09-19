@@ -294,28 +294,13 @@ async def sms_advisory_endpoint(payload: SMSAdvisoryRequest, container: Containe
         elif "BARC" in inst or "বার্ক" in inst:
             institution = "BARC"
             
-    # 3. Clean and compress answer into strict 160-char template
-    import re
-    clean_ans = re.sub(r"\[[A-Za-z0-9_\-]+\]", "", qa_res.answer).strip()
-    clean_ans = re.sub(r"\s+", " ", clean_ans)
-    
-    # Format deterministic SMS template
-    prefix = f"{institution} পরামর্শ: "
-    suffix = " | হেল্প: ১৬১২৩"
-    available_chars = 160 - len(prefix) - len(suffix)
-    
-    body = clean_ans[:available_chars].strip()
-    # End cleanly on sentence or space if truncated
-    if len(clean_ans) > available_chars:
-        last_space = body.rfind(" ")
-        if last_space > 20:
-            body = body[:last_space]
-            
-    sms_text = f"{prefix}{body}{suffix}"
+    # 3. Compress answer into strict 160-char template using deterministic SMSCompressor
+    from app.domain.sms_compressor import SMSCompressor
+    sms_text = SMSCompressor.compress_from_qa_result(qa_res, institution=institution, max_chars=160)
     
     return SMSAdvisoryResponse(
-        sms_text=sms_text[:160],
-        char_count=len(sms_text[:160]),
+        sms_text=sms_text,
+        char_count=len(sms_text),
         gsm_segments=1,
         resolution_tier=tier,
         confidence=confidence,
