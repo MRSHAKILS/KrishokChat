@@ -37,3 +37,37 @@ outputs:
   - N05_sms_survival/results_live.json (locked copy)
 labels:
   no_dose_claim: SMS dose survival is measured 0-ish on truncation; never claim field survival until the packer lands.
+
+# ---- N05c: LLM-summarizer strong baseline (reviewer-driven, 2026-09-19) ----
+n05c_llm_summarizer_baseline:
+  status: REAL_MEASURED
+  question: Does the deterministic 11-slot compressor stay necessary against
+    an actual LLM summarizer (not just naive truncation)?
+  design:
+    n: 100
+    seed: 42
+    pool: 652 advisories from farmer_benchmark_1000.jsonl with
+      len(gold_answer) > 160 AND a frozen dose pattern
+    prompt: reviewer's wording verbatim + "Output only the SMS text, no preamble"
+    live_config: {model: google/gemini-2.5-flash-lite, temperature: 0.2,
+      max_output_tokens: 500, gateway: OpenRouter}
+  key:
+    dose_survival: {naive: 23/100, llm: 89/100, compressor: 92/100}
+    chem_survival: {naive: 20/100, llm: 56/100, compressor: 34/100}
+    len_ok: {naive: 100/100, llm: 98/100, compressor: 100/100}
+    llm_hallucinations: 2 records with new dose pairs (1 genuine invention,
+      farmer_q_608: "800-1000g urea" with no numeric urea basis in source;
+      1 borderline paraphrase, farmer_q_304: "per litre" rendered "1 litre");
+      0 chemical hallucinations after urea-spelling normalization.
+  meaning: The LLM is a strong baseline (89% dose) but probabilistic — it
+    violates the length ceiling (2/100) and invents dosage (genuine case
+    observed). The compressor matches/beats it on dose (92/100) with a
+    100% length guarantee and zero hallucination by construction. Chem-name
+    retention favors the LLM (56 vs 34) and is reported honestly; the
+    certified compressor claim stays dose/interval/PHI slot survival.
+  outputs:
+    - N05_sms_survival/results/n05c_sample_100.json (frozen manifest)
+    - N05_sms_survival/results/n05c_records_20260919.jsonl (per-record, fsync'd)
+    - N05_sms_survival/results/n05c_summary_20260919.json (aggregate + Wilson CIs)
+  labels:
+    paired_design: same 100 advisories, same frozen detectors, all arms.

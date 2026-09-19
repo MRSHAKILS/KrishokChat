@@ -1,0 +1,74 @@
+# E50 — Verifier Scale Benchmark
+
+id: E50
+title: "Dosage Verifier Contextual Scale Benchmark (88 BARI/BRRI Passages × 6 Cases)"
+rq: [RQ3]
+venue: EACL_Demo
+priority: tier_1
+status: ready
+
+hypothesis: >
+  HardenedDosageVerifier catches realistic LLM-generated Bengali dosage mutations
+  (overdose, underdose, chemical swap, unit confusion, hallucinated PHI) in natural
+  Bengali prose generated from 88 authentic BARI/BRRI pest/disease guideline passages.
+  Expected: catch rate >= 80% across T1–T5; false positive rate on clean controls (T0) <= 5%.
+
+design:
+  source_dataset: backend/ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl
+  passage_selection:
+    categories: [pest, disease, ipm, cultivation_practice, food_safety]
+    filter: "content_en contains chemical name AND numerical dosage (ml/g/kg per litre/ha)"
+    n_passages: 88
+
+  mutation_types:
+    T1_overdose:
+      description: "Dosage multiplied ×3–5 in Bengali prose"
+      expected_outcome: flagged-unverified
+      n: 88
+    T2_underdose:
+      description: "Dosage divided ÷3–5 in Bengali prose"
+      expected_outcome: flagged-unverified
+      n: 88
+    T3_chem_swap:
+      description: "Different unverified chemical substituted"
+      expected_outcome: flagged-unverified
+      n: 88
+    T4_unit_error:
+      description: "ml/litre ↔ ml/decimal unit confusion"
+      expected_outcome: flagged-unverified
+      n: 88
+    T5_phi_hallucination:
+      description: "Hallucinated 1–3 day pre-harvest interval"
+      expected_outcome: flagged-unverified
+      n: 88
+    T0_clean:
+      description: "Faithful Bengali advisory — negative control"
+      expected_outcome: verified
+      n: 88
+
+  total_cases: 528
+  generation_model:
+    workers_a_b: "gemini-3.1-flash-lite"
+    worker_c: "gemini-3.5-flash-lite"
+  max_output_tokens: 250
+  verifier: HardenedDosageVerifier (DoseReference.disabled())
+
+metrics:
+  - catch_rate_per_type: "unsupported_count > 0 / n_effective"
+  - overall_catch_rate: "across T1–T5"
+  - false_positive_rate: "T0_clean: flagged / n_effective"
+  - wilson_ci_95: true
+  - no_dosage_claim_rate: "cases where verifier found no extractable claim"
+
+worker_key_assignment:
+  A: [GEMINI_API_KEY_2, 3, 5, 29, 30, 6, 7]  # passages 0..28
+  B: [GEMINI_API_KEY_8, 9, 10, 11, 12, 13, 14]  # passages 29..58
+  C: [GEMINI_API_KEY_15, 16, 24, 25, 26, 27, 28]  # passages 59..87
+
+paper_impact:
+  appendix_section: "App D — Dosage Verifier Extended Benchmark"
+  retires_limitation: "Small-n verifier evaluation (n=118)"
+  main_text_addition: >
+    "Extended evaluation across 528 contextual Bengali advisories generated from
+    88 authentic BARI/BRRI passages confirmed catch rates of XX% (T1–T5) with 0/88
+    clean false positives (T0)."

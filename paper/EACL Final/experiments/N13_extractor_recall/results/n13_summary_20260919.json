@@ -1,0 +1,305 @@
+{
+  "experiment": "N13_EXTRACTOR_RECALL",
+  "execution_status": "DONE_OFFLINE_DETERMINISTIC",
+  "design": {
+    "n": 200,
+    "ground_truth": "crop_slot_labeling_sheet_200.json",
+    "alias_table": "data/crop_alias_v2.json",
+    "n_crops": 45,
+    "fuzzy_threshold": 86
+  },
+  "layers": {
+    "L0_baseline": {
+      "agree": 104,
+      "miss": 95,
+      "miss_rate": 0.475,
+      "miss_ci95": [
+        0.4069,
+        0.544
+      ],
+      "mismatch": 0,
+      "fp": 1,
+      "miss_ids": [
+        "farmer_q_748",
+        "farmer_q_51",
+        "farmer_q_258",
+        "farmer_q_282",
+        "farmer_q_49",
+        "farmer_q_311",
+        "farmer_q_83",
+        "farmer_q_44",
+        "farmer_q_841",
+        "farmer_q_701",
+        "farmer_q_301",
+        "farmer_q_176",
+        "farmer_q_116",
+        "farmer_q_930",
+        "farmer_q_620",
+        "farmer_q_998",
+        "farmer_q_140",
+        "farmer_q_98",
+        "farmer_q_698",
+        "farmer_q_79",
+        "farmer_q_982",
+        "farmer_q_719",
+        "farmer_q_494",
+        "farmer_q_661",
+        "farmer_q_107",
+        "farmer_q_406",
+        "farmer_q_985",
+        "farmer_q_769",
+        "farmer_q_12",
+        "farmer_q_3",
+        "farmer_q_640",
+        "farmer_q_667",
+        "farmer_q_528",
+        "farmer_q_634",
+        "farmer_q_507",
+        "farmer_q_668",
+        "farmer_q_648",
+        "farmer_q_848",
+        "farmer_q_535",
+        "farmer_q_828",
+        "farmer_q_945",
+        "farmer_q_35",
+        "farmer_q_792",
+        "farmer_q_836",
+        "farmer_q_997",
+        "farmer_q_327",
+        "farmer_q_467",
+        "farmer_q_788",
+        "farmer_q_194",
+        "farmer_q_331",
+        "farmer_q_618",
+        "farmer_q_316",
+        "farmer_q_883",
+        "farmer_q_937",
+        "farmer_q_761",
+        "farmer_q_845",
+        "farmer_q_52",
+        "farmer_q_623",
+        "farmer_q_22",
+        "farmer_q_142",
+        "farmer_q_308",
+        "farmer_q_844",
+        "farmer_q_538",
+        "farmer_q_530",
+        "farmer_q_763",
+        "farmer_q_745",
+        "farmer_q_279",
+        "farmer_q_181",
+        "farmer_q_13",
+        "farmer_q_772",
+        "farmer_q_687",
+        "farmer_q_603",
+        "farmer_q_229",
+        "farmer_q_654",
+        "farmer_q_950",
+        "farmer_q_739",
+        "farmer_q_744",
+        "farmer_q_302",
+        "farmer_q_946",
+        "farmer_q_15",
+        "farmer_q_57",
+        "farmer_q_309",
+        "farmer_q_834",
+        "farmer_q_63",
+        "farmer_q_710",
+        "farmer_q_899",
+        "farmer_q_148",
+        "farmer_q_886",
+        "farmer_q_951",
+        "farmer_q_791",
+        "farmer_q_445",
+        "farmer_q_150",
+        "farmer_q_411",
+        "farmer_q_567",
+        "farmer_q_676"
+      ],
+      "fp_ids": [
+        {
+          "id": "farmer_q_734",
+          "ext": "chilli"
+        }
+      ],
+      "mismatch_ids": [],
+      "fuzzy_hits": []
+    },
+    "L1_taxonomy": {
+      "agree": 188,
+      "miss": 5,
+      "miss_rate": 0.025,
+      "miss_ci95": [
+        0.0107,
+        0.0572
+      ],
+      "mismatch": 0,
+      "fp": 7,
+      "miss_ids": [
+        "farmer_q_79",
+        "farmer_q_634",
+        "farmer_q_57",
+        "farmer_q_63",
+        "farmer_q_710"
+      ],
+      "fp_ids": [
+        {
+          "id": "farmer_q_110",
+          "ext": "leafy_greens"
+        },
+        {
+          "id": "farmer_q_23",
+          "ext": "bottle_gourd"
+        },
+        {
+          "id": "farmer_q_232",
+          "ext": "bottle_gourd"
+        },
+        {
+          "id": "farmer_q_989",
+          "ext": "mushroom"
+        },
+        {
+          "id": "farmer_q_992",
+          "ext": "mango"
+        },
+        {
+          "id": "farmer_q_734",
+          "ext": "chilli"
+        },
+        {
+          "id": "farmer_q_678",
+          "ext": "mango"
+        }
+      ],
+      "mismatch_ids": [],
+      "fuzzy_hits": []
+    },
+    "L2_plus_norm": {
+      "agree": 188,
+      "miss": 5,
+      "miss_rate": 0.025,
+      "miss_ci95": [
+        0.0107,
+        0.0572
+      ],
+      "mismatch": 0,
+      "fp": 7,
+      "miss_ids": [
+        "farmer_q_79",
+        "farmer_q_634",
+        "farmer_q_57",
+        "farmer_q_63",
+        "farmer_q_710"
+      ],
+      "fp_ids": [
+        {
+          "id": "farmer_q_110",
+          "ext": "leafy_greens"
+        },
+        {
+          "id": "farmer_q_23",
+          "ext": "bottle_gourd"
+        },
+        {
+          "id": "farmer_q_232",
+          "ext": "bottle_gourd"
+        },
+        {
+          "id": "farmer_q_989",
+          "ext": "mushroom"
+        },
+        {
+          "id": "farmer_q_992",
+          "ext": "mango"
+        },
+        {
+          "id": "farmer_q_734",
+          "ext": "chilli"
+        },
+        {
+          "id": "farmer_q_678",
+          "ext": "mango"
+        }
+      ],
+      "mismatch_ids": [],
+      "fuzzy_hits": []
+    },
+    "L3_plus_fuzzy": {
+      "agree": 186,
+      "miss": 5,
+      "miss_rate": 0.025,
+      "miss_ci95": [
+        0.0107,
+        0.0572
+      ],
+      "mismatch": 0,
+      "fp": 9,
+      "miss_ids": [
+        "farmer_q_79",
+        "farmer_q_634",
+        "farmer_q_57",
+        "farmer_q_63",
+        "farmer_q_710"
+      ],
+      "fp_ids": [
+        {
+          "id": "farmer_q_110",
+          "ext": "leafy_greens"
+        },
+        {
+          "id": "farmer_q_23",
+          "ext": "bottle_gourd"
+        },
+        {
+          "id": "farmer_q_232",
+          "ext": "bottle_gourd"
+        },
+        {
+          "id": "farmer_q_860",
+          "ext": "banana"
+        },
+        {
+          "id": "farmer_q_702",
+          "ext": "wheat"
+        },
+        {
+          "id": "farmer_q_989",
+          "ext": "mushroom"
+        },
+        {
+          "id": "farmer_q_992",
+          "ext": "mango"
+        },
+        {
+          "id": "farmer_q_734",
+          "ext": "chilli"
+        },
+        {
+          "id": "farmer_q_678",
+          "ext": "mango"
+        }
+      ],
+      "mismatch_ids": [],
+      "fuzzy_hits": [
+        {
+          "id": "farmer_q_860",
+          "alias": "কলার",
+          "score": 88.9
+        },
+        {
+          "id": "farmer_q_702",
+          "alias": "wheat",
+          "score": 88.9
+        }
+      ]
+    }
+  },
+  "first_fix_attribution": {
+    "L1_taxonomy": 90
+  },
+  "regressions_vs_L0": [],
+  "target": {
+    "miss_lt_10pct": true
+  }
+}

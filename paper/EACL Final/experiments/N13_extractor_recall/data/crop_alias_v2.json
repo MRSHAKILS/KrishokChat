@@ -1,0 +1,427 @@
+{
+ "excluded_forms_rationale": {
+  "aam_not_am": "bare 'am' collides with English 'I am'; kept 'aam'",
+  "ata_short_exact": "'আতা' (2 chars) exact-only; pronouns share prefixes",
+  "jam_not_bare_jam": "bare 'jam' collides with English; kept 'jamun'",
+  "jamun_short_exact": "'জাম' (2 chars) exact-only; 'জামা' (shirt) shares the prefix",
+  "mango_short_exact": "'আম' (2 chars) exact-only; pronouns আমার/আমাকে/আমাদের/আমি share the prefix",
+  "no_data_no_dal_no_rai": "'data' (English), 'dal' (lentils), 'rai' collide with non-crop words; omitted"
+ },
+ "match_rule": {
+  "alias_order": "longest-first within crop; crops in table order (existing 9 first, pineapple before pomegranate so 'আনারস' beats 'আনার')",
+  "fuzzy": "rapidfuzz ratio>=86, token>=4 chars, alias>=4 chars single-word, same first char, only when exact fails",
+  "multiword": "substring match",
+  "normalization": "NFKC + lowercase + leading-punct strip (same as production)",
+  "short_exact": "crops flagged short_exact match single-word aliases by exact token equality only",
+  "single_word": "token equality or token startswith alias"
+ },
+ "version": "v2.1-2026-09-19",
+ "crops": {
+  "potato": [
+   "potato",
+   "আলু",
+   "আলুর",
+   "আলুত",
+   "aloo",
+   "alu",
+   "aloor"
+  ],
+  "maize": [
+   "maize",
+   "corn",
+   "ভুট্টা",
+   "ভুট্টায়",
+   "ভুট্তার",
+   "ভুট্টা ফসলে",
+   "bhutta",
+   "makai"
+  ],
+  "rice": [
+   "rice",
+   "ধান",
+   "ধানের",
+   "ধানক্ষেত",
+   "ধান ক্ষেতে",
+   "ধানর",
+   "ধানত",
+   "dhan",
+   "paddy",
+   "dhanor"
+  ],
+  "tomato": [
+   "tomato",
+   "টমেটো",
+   "টমেটোর",
+   "টমাটো",
+   "টমাটোর"
+  ],
+  "wheat": [
+   "wheat",
+   "গম",
+   "গমের",
+   "গমে",
+   "গমর"
+  ],
+  "brinjal": [
+   "brinjal",
+   "eggplant",
+   "বেগুন",
+   "বেগুনের",
+   "বেগুনর",
+   "বেগুন গাছের",
+   "বাইঙ্গন",
+   "baingon",
+   "begun",
+   "beguner"
+  ],
+  "chilli": [
+   "chilli",
+   "chili",
+   "মরিচ",
+   "মরিচের",
+   "মরিচর",
+   "মরিস",
+   "মরিসর",
+   "লঙ্কা",
+   "লংকা",
+   "moris",
+   "morisor",
+   "morich"
+  ],
+  "cabbage": [
+   "cabbage",
+   "বাঁধাকপি",
+   "বাঁধাকপির",
+   "পাতাকপি",
+   "বাধাকপি"
+  ],
+  "cauliflower": [
+   "cauliflower",
+   "ফুলকপি",
+   "ফুলকপির"
+  ],
+  "mango": {
+   "aliases": [
+    "আম",
+    "আমের",
+    "আমে",
+    "আমটি",
+    "আমগুলো",
+    "আমগাছ",
+    "আমগাছে",
+    "আমগাছের",
+    "আমবাগান",
+    "আমবাগানে",
+    "আম্রপালি",
+    "আম্রপালির",
+    "aam",
+    "mango"
+   ],
+   "short_exact": true
+  },
+  "papaya": [
+   "পেঁপে",
+   "পেপে",
+   "পেঁপের",
+   "পেপের",
+   "পেঁপেগাছ",
+   "পেঁপেতে",
+   "pepe",
+   "papaw",
+   "pawpaw",
+   "papaya"
+  ],
+  "mustard": [
+   "সরিষা",
+   "সরষে",
+   "সরিষার",
+   "সরষের",
+   "সরিষায়",
+   "সরিষাক্ষেত",
+   "সরিষা ক্ষেত",
+   "shorisha",
+   "sorisha",
+   "mustard"
+  ],
+  "cucumber": [
+   "শসা",
+   "শসার",
+   "শসাগাছ",
+   "শসাক্ষেত",
+   "shosha",
+   "cucumber"
+  ],
+  "coconut": [
+   "নারকেল",
+   "নারিকেল",
+   "নারকেলের",
+   "নারিকেলের",
+   "নারকেলগাছ",
+   "ডাব",
+   "ডাবের",
+   "coconut",
+   "narkel",
+   "dab"
+  ],
+  "lemon": [
+   "লেবু",
+   "লেবুর",
+   "লেবুগাছ",
+   "লেবুবাগান",
+   "lebu",
+   "lemon"
+  ],
+  "guava": [
+   "পেয়ারা",
+   "পেয়ারা",
+   "পেয়ারার",
+   "পেয়ারার",
+   "পেয়ারাগাছ",
+   "peyara",
+   "guava"
+  ],
+  "banana": [
+   "কলা",
+   "কলার",
+   "কলাগাছ",
+   "কলাবাগান",
+   "kola",
+   "banana"
+  ],
+  "bottle_gourd": [
+   "লাউ",
+   "লাউয়ের",
+   "লাউতে",
+   "লাউগাছ",
+   "lau",
+   "bottle gourd"
+  ],
+  "watermelon": [
+   "তরমুজ",
+   "তরমুজের",
+   "তরমুজগাছ",
+   "tormuj",
+   "watermelon"
+  ],
+  "mushroom": [
+   "মাশরুম",
+   "মাশরুমের",
+   "মাশরুমচাষ",
+   "mashroom",
+   "mushroom"
+  ],
+  "jackfruit": [
+   "কাঁঠাল",
+   "কাঠাল",
+   "কাঁঠালের",
+   "কাঠালের",
+   "কাঁঠালগাছ",
+   "kathal",
+   "jackfruit"
+  ],
+  "jute": {
+   "aliases": [
+    "পাট",
+    "পাটের",
+    "পাটে",
+    "পাটক্ষেত",
+    "পাটখেতে",
+    "jute"
+   ],
+   "short_exact": true
+  },
+  "strawberry": [
+   "স্ট্রবেরি",
+   "স্ট্রবেরির",
+   "স্ট্রবেরিগাছ",
+   "strawberry"
+  ],
+  "bamboo": [
+   "বাঁশ",
+   "বাঁশের",
+   "বাঁশঝাড়",
+   "বাঁশঝাড়ে",
+   "bash",
+   "bamboo"
+  ],
+  "cashew": [
+   "কাজুবাদাম",
+   "কাজুবাদামের",
+   "কাজুবাদামগাছ",
+   "কাজু",
+   "কাজুর",
+   "কাজুগাছ",
+   "kaju",
+   "cashew"
+  ],
+  "okra": [
+   "ঢেঁড়স",
+   "ঢেঁড়শ",
+   "ঢেঁড়সের",
+   "ঢেঁড়শের",
+   "ঢেঁড়সগাছ",
+   "ঢ্যাঁড়স",
+   "ঢ্যাঁড়সের",
+   "dherosh",
+   "okra"
+  ],
+  "betelnut": [
+   "সুপারি",
+   "সুপারির",
+   "সুপারিগাছ",
+   "supari",
+   "betelnut"
+  ],
+  "beans": [
+   "শিম",
+   "শিমের",
+   "শিমগাছ",
+   "বরবটি",
+   "বরবটির",
+   "বরবটিগাছ",
+   "shim",
+   "borboti",
+   "beans"
+  ],
+  "onion": [
+   "পেঁয়াজ",
+   "পিঁয়াজ",
+   "পেঁয়াজের",
+   "পিঁয়াজের",
+   "পেঁয়াজগাছ",
+   "peyaj",
+   "piyaj",
+   "onion"
+  ],
+  "rose": [
+   "গোলাপ",
+   "গোলাপের",
+   "গোলাপগাছ",
+   "golap",
+   "rose"
+  ],
+  "stem_amaranth": [
+   "ডাঁটা",
+   "ডাঁটার",
+   "ডাঁটাগাছ",
+   "ডাটা",
+   "ডাটার",
+   "ডাটাগাছ",
+   "danta"
+  ],
+  "grape": [
+   "আঙুর",
+   "আঙুরের",
+   "আঙুরগাছ",
+   "angur",
+   "grape"
+  ],
+  "pineapple": [
+   "আনারস",
+   "আনারসের",
+   "আনারসগাছ",
+   "anarosh",
+   "pineapple"
+  ],
+  "pomegranate": [
+   "ডালিম",
+   "ডালিমের",
+   "ডালিমগাছ",
+   "আনার",
+   "আনারের",
+   "dalim",
+   "anar",
+   "pomegranate"
+  ],
+  "leafy_greens": [
+   "শাক",
+   "শাকের",
+   "শাকে",
+   "shak"
+  ],
+  "turmeric": [
+   "হলুদগাছ",
+   "হলুদগাছের",
+   "হলুদ চাষ",
+   "হলুদচাষ",
+   "holud",
+   "turmeric"
+  ],
+  "litchi": [
+   "লিচু",
+   "লিচুর",
+   "লিচুগাছ",
+   "lichu",
+   "litchi",
+   "lychee"
+  ],
+  "jamun": {
+   "aliases": [
+    "জাম",
+    "জামের",
+    "জামে",
+    "জামগাছ",
+    "jamun"
+   ],
+   "short_exact": true
+  },
+  "ata": {
+   "aliases": [
+    "আতা",
+    "আতার",
+    "আতায়",
+    "আতাগাছ",
+    "ata"
+   ],
+   "short_exact": true
+  },
+  "gladiolus": [
+   "গ্ল্যাডিওলাস",
+   "গ্ল্যাডিওলাসের",
+   "gladiolus"
+  ],
+  "bitter_gourd": [
+   "করলা",
+   "করলার",
+   "করলাগাছ",
+   "korola",
+   "bitter gourd"
+  ],
+  "hog_plum": [
+   "আমড়া",
+   "আমড়ার",
+   "আমড়াগাছ",
+   "amra",
+   "hog plum"
+  ],
+  "dragon_fruit": [
+   "ড্রাগন",
+   "ড্রাগনের",
+   "ড্রাগন ফল",
+   "ড্রাগনফল",
+   "dragon",
+   "dragonfruit",
+   "dragon fruit"
+  ],
+  "pomelo": [
+   "জাম্বুরা",
+   "জাম্বুরার",
+   "জাম্বুরাগাছ",
+   "বাতাবি",
+   "বাতাবিলেবু",
+   "jambura",
+   "pomelo"
+  ],
+  "akashmoni": [
+   "আকাশমণি",
+   "আকাশমণির",
+   "আকাশমনি",
+   "আকাশমনির",
+   "akashmoni"
+  ]
+ },
+ "removed": {
+  "grass": "weed-control queries dominate over pasture advisory; no grass manual in the 2,135-node scope, so extraction would misroute. 1 grass miss accepted and disclosed."
+ },
+ "ordering_note": "stem_amaranth precedes leafy_greens (more specific first: ডাঁটা শাক contains শাক)"
+}

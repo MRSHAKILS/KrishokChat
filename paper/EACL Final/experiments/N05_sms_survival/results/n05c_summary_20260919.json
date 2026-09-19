@@ -1,0 +1,89 @@
+{
+  "arm": "N05c_LLM_SUMMARIZER_BASELINE",
+  "execution_status": "DONE_DETERMINISTIC_SCORING",
+  "design": {
+    "n_scored": 100,
+    "n_skipped_failed_llm": 0,
+    "seed": 42,
+    "pool_n": 652,
+    "live_config": {
+      "model": "google/gemini-2.5-flash-lite",
+      "temperature": 0.2,
+      "max_output_tokens": 500,
+      "base_url": "https://openrouter.ai/api/v1"
+    }
+  },
+  "files": {
+    "manifest": "n05c_sample_100.json",
+    "records": "n05c_records_20260919.jsonl"
+  },
+  "arms": {
+    "naive_truncation": {
+      "n": 100,
+      "len_ok": 100,
+      "len_ok_rate": 1.0,
+      "len_ok_ci95": [
+        0.963,
+        1.0
+      ],
+      "dose_survived": 23,
+      "dose_rate": 0.23,
+      "dose_ci95": [
+        0.1584,
+        0.3215
+      ],
+      "chem_survived": 20,
+      "chem_rate": 0.2,
+      "chem_ci95": [
+        0.1334,
+        0.2888
+      ]
+    },
+    "llm_summarizer": {
+      "n": 100,
+      "len_ok": 98,
+      "len_ok_rate": 0.98,
+      "len_ok_ci95": [
+        0.93,
+        0.9945
+      ],
+      "dose_survived": 89,
+      "dose_rate": 0.89,
+      "dose_ci95": [
+        0.8137,
+        0.9375
+      ],
+      "chem_survived": 56,
+      "chem_rate": 0.56,
+      "chem_ci95": [
+        0.4623,
+        0.6533
+      ],
+      "records_with_hallucinated_dose": 2,
+      "hallucinated_dose_pairs_total": 2,
+      "records_with_hallucinated_chem": 0
+    },
+    "deterministic_compressor": {
+      "n": 100,
+      "len_ok": 100,
+      "len_ok_rate": 1.0,
+      "len_ok_ci95": [
+        0.963,
+        1.0
+      ],
+      "dose_survived": 92,
+      "dose_rate": 0.92,
+      "dose_ci95": [
+        0.85,
+        0.9589
+      ],
+      "chem_survived": 34,
+      "chem_rate": 0.34,
+      "chem_ci95": [
+        0.2546,
+        0.4372
+      ]
+    }
+  },
+  "notes": "Same 100 advisories, paired by row_id; same frozen dose/chemical detectors for all arms. Hallucinated = dose pair or chemical in the summary absent from the source advisory (bn digits normalized, bn<->en units unified). Length claim is characters, never segments."
+}

@@ -1,0 +1,2717 @@
+{
+  "gate": {
+    "crop_ood_threshold": 0.4,
+    "crop_confidence_threshold": 0.9,
+    "crop_margin_threshold": 0.2
+  },
+  "summary": {
+    "total": 100,
+    "C": 1,
+    "B": 35,
+    "A": 64,
+    "safe": 36,
+    "hazard": 64
+  },
+  "records": [
+    {
+      "category": "banana",
+      "file": "banana/banana_00_orig0447_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.995,
+      "p2": 0.0027,
+      "margin": 0.9923,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.995
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0027
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0021
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.995)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_01_orig0476_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9894,
+      "p2": 0.0049,
+      "margin": 0.9845,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9894
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0049
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.003
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.989)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_02_orig1034_segatoka.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9001,
+      "p2": 0.0995,
+      "margin": 0.8006,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9001
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0995
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0003
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.900)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_03_orig1232_segatoka.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Tomato",
+      "p1": 0.4494,
+      "p2": 0.2449,
+      "margin": 0.2045,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.4494
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.2449
+        },
+        {
+          "label": "Cabbage",
+          "conf": 0.1726
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_04_orig0054_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9833,
+      "p2": 0.0062,
+      "margin": 0.9771,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9833
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0062
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0045
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.983)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_05_orig1149_segatoka.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.8824,
+      "p2": 0.1132,
+      "margin": 0.7692,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.8824
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.1132
+        },
+        {
+          "label": "Rice",
+          "conf": 0.004
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_06_orig0407_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Rice",
+      "p1": 0.3984,
+      "p2": 0.3477,
+      "margin": 0.0507,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.3984
+        },
+        {
+          "label": "Cabbage",
+          "conf": 0.3477
+        },
+        {
+          "label": "Potato",
+          "conf": 0.1012
+        }
+      ],
+      "gate_state": "C_OOD_REJECT",
+      "decision": "State C: prompt for re-capture (out_of_distribution)",
+      "is_ood_rejected": true,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_07_orig1116_segatoka.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9588,
+      "p2": 0.0301,
+      "margin": 0.9287,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9588
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0301
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0101
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.959)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_08_orig0859_healthy.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9998,
+      "p2": 0.0002,
+      "margin": 0.9996,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9998
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0002
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_09_orig0451_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9997,
+      "p2": 0.0001,
+      "margin": 0.9996,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9997
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0001
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0001
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_10_orig0919_healthy.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9978,
+      "p2": 0.0011,
+      "margin": 0.9967,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9978
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0011
+        },
+        {
+          "label": "Rice",
+          "conf": 0.001
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.998)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_11_orig1206_segatoka.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.8072,
+      "p2": 0.1752,
+      "margin": 0.632,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.8072
+        },
+        {
+          "label": "Rice",
+          "conf": 0.1752
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0085
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_12_orig0569_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.6454,
+      "p2": 0.1882,
+      "margin": 0.4572,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.6454
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.1882
+        },
+        {
+          "label": "Rice",
+          "conf": 0.1416
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_13_orig0013_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9983,
+      "p2": 0.0014,
+      "margin": 0.9969,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9983
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0014
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0002
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.998)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_14_orig0326_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9508,
+      "p2": 0.0389,
+      "margin": 0.9119,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9508
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0389
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0089
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.951)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_15_orig0865_healthy.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9969,
+      "p2": 0.0025,
+      "margin": 0.9944,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9969
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0025
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0003
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.997)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_16_orig0696_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.9789,
+      "p2": 0.0176,
+      "margin": 0.9613,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.9789
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0176
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0014
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Cabbage (0.979)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_17_orig0318_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Rice",
+      "p1": 0.4873,
+      "p2": 0.2614,
+      "margin": 0.2259,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.4873
+        },
+        {
+          "label": "Cabbage",
+          "conf": 0.2614
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.2231
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_18_orig0440_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Cabbage",
+      "p1": 0.8951,
+      "p2": 0.1035,
+      "margin": 0.7916,
+      "top3": [
+        {
+          "label": "Cabbage",
+          "conf": 0.8951
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.1035
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0009
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "banana",
+      "file": "banana/banana_19_orig0689_xamthomonas.jpg",
+      "true_ood_crop": "banana",
+      "predicted_label": "Rice",
+      "p1": 0.9391,
+      "p2": 0.029,
+      "margin": 0.9101,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9391
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.029
+        },
+        {
+          "label": "Cabbage",
+          "conf": 0.0156
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (0.939)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_00_orig0209_Holed.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 0.9864,
+      "p2": 0.0134,
+      "margin": 0.973,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9864
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0134
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0001
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (0.986)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_01_orig0189_Holed.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Guava",
+      "p1": 0.9979,
+      "p2": 0.002,
+      "margin": 0.9959,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.9979
+        },
+        {
+          "label": "Potato",
+          "conf": 0.002
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Guava (0.998)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_02_orig0778_Dieback.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 0.9057,
+      "p2": 0.0897,
+      "margin": 0.816,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9057
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0897
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0042
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (0.906)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_03_orig0198_Holed.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Guava",
+      "p1": 0.7746,
+      "p2": 0.2071,
+      "margin": 0.5675,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.7746
+        },
+        {
+          "label": "Potato",
+          "conf": 0.2071
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0126
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_04_orig0735_Dieback.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Rice",
+      "p1": 0.7212,
+      "p2": 0.2505,
+      "margin": 0.4707,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.7212
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.2505
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0277
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_05_orig0704_Dieback.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Rice",
+      "p1": 0.9996,
+      "p2": 0.0004,
+      "margin": 0.9992,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9996
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0004
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_06_orig1236_Fresh.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 0.6553,
+      "p2": 0.2877,
+      "margin": 0.3676,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.6553
+        },
+        {
+          "label": "Potato",
+          "conf": 0.2877
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0445
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_07_orig0541_Dieback.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Guava",
+      "p1": 0.9996,
+      "p2": 0.0004,
+      "margin": 0.9992,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.9996
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0004
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Guava (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_08_orig0088_Holed.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Potato",
+      "p1": 0.6586,
+      "p2": 0.3347,
+      "margin": 0.3239,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.6586
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.3347
+        },
+        {
+          "label": "Chili",
+          "conf": 0.0055
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_09_orig0940_Stem_Soft_Rot.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Rice",
+      "p1": 0.8397,
+      "p2": 0.1488,
+      "margin": 0.6909,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.8397
+        },
+        {
+          "label": "Potato",
+          "conf": 0.1488
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0113
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_10_orig1098_Stem_Soft_Rot.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Rice",
+      "p1": 0.541,
+      "p2": 0.4172,
+      "margin": 0.1238,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.541
+        },
+        {
+          "label": "Chili",
+          "conf": 0.4172
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0235
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_11_orig0255_Holed.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 0.9998,
+      "p2": 0.0002,
+      "margin": 0.9996,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9998
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0002
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_12_orig0775_Dieback.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 0.9268,
+      "p2": 0.0732,
+      "margin": 0.8536,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9268
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0732
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (0.927)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_13_orig0161_Holed.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Potato",
+      "p1": 0.7178,
+      "p2": 0.2782,
+      "margin": 0.4396,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.7178
+        },
+        {
+          "label": "Guava",
+          "conf": 0.2782
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0038
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_14_orig1130_Fresh.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 0.4725,
+      "p2": 0.4601,
+      "margin": 0.0124,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.4725
+        },
+        {
+          "label": "Rice",
+          "conf": 0.4601
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0487
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_15_orig0600_Dieback.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 0.9917,
+      "p2": 0.0051,
+      "margin": 0.9866,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9917
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0051
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0016
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (0.992)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_16_orig1287_Fresh.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 0.9215,
+      "p2": 0.0762,
+      "margin": 0.8453,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9215
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0762
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0017
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (0.921)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_17_orig1266_Fresh.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Guava",
+      "p1": 0.9584,
+      "p2": 0.0413,
+      "margin": 0.9171,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.9584
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0413
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0002
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Guava (0.958)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_18_orig0740_Dieback.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 0.9506,
+      "p2": 0.0287,
+      "margin": 0.9219,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9506
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0287
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0105
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (0.951)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "jute",
+      "file": "jute/jute_19_orig1182_Fresh.jpg",
+      "true_ood_crop": "jute",
+      "predicted_label": "Tomato",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 1.0
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0
+        },
+        {
+          "label": "Gourd",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_00_orig2619_Die_Back.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Tomato",
+      "p1": 0.5051,
+      "p2": 0.3224,
+      "margin": 0.1827,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.5051
+        },
+        {
+          "label": "Potato",
+          "conf": 0.3224
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0695
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_01_orig0456_Bacterial_Canker.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Guava",
+      "p1": 0.9948,
+      "p2": 0.0052,
+      "margin": 0.9896,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.9948
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0052
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Guava (0.995)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_02_orig0102_Bacterial_Canker.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Rice",
+      "p1": 0.9997,
+      "p2": 0.0003,
+      "margin": 0.9994,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9997
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0003
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_03_orig3037_Sooty_Mould.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Guava",
+      "p1": 0.9589,
+      "p2": 0.0355,
+      "margin": 0.9234,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.9589
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0355
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0055
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Guava (0.959)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_04_orig1126_Healthy.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Guava",
+      "p1": 0.8328,
+      "p2": 0.1562,
+      "margin": 0.6766,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.8328
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.1562
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0086
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_05_orig1003_Healthy.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Gourd",
+      "p1": 0.9549,
+      "p2": 0.0352,
+      "margin": 0.9197,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.9549
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0352
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0067
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Gourd (0.955)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_06_orig0914_Anthracnose.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Potato",
+      "p1": 0.9619,
+      "p2": 0.0329,
+      "margin": 0.929,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.9619
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0329
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0022
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Potato (0.962)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_07_orig0571_Anthracnose.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Gourd",
+      "p1": 0.782,
+      "p2": 0.1578,
+      "margin": 0.6242,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.782
+        },
+        {
+          "label": "Guava",
+          "conf": 0.1578
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0552
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_08_orig3016_Sooty_Mould.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Rice",
+      "p1": 0.5244,
+      "p2": 0.3416,
+      "margin": 0.1828,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.5244
+        },
+        {
+          "label": "Guava",
+          "conf": 0.3416
+        },
+        {
+          "label": "Chili",
+          "conf": 0.0779
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_09_orig0419_Bacterial_Canker.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Guava",
+      "p1": 0.7429,
+      "p2": 0.1421,
+      "margin": 0.6008,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.7429
+        },
+        {
+          "label": "Cabbage",
+          "conf": 0.1421
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0715
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_10_orig2771_Die_Back.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Rice",
+      "p1": 0.9369,
+      "p2": 0.0255,
+      "margin": 0.9114,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9369
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0255
+        },
+        {
+          "label": "Others",
+          "conf": 0.0208
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (0.937)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_11_orig3033_Sooty_Mould.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Guava",
+      "p1": 0.9622,
+      "p2": 0.0362,
+      "margin": 0.926,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.9622
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0362
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0014
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Guava (0.962)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_12_orig3654_Gall_Midge.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Gourd",
+      "p1": 0.8401,
+      "p2": 0.1427,
+      "margin": 0.6974,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.8401
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.1427
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0124
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_13_orig2233_Cutting_Weevil.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Tomato",
+      "p1": 0.5271,
+      "p2": 0.4717,
+      "margin": 0.0554,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.5271
+        },
+        {
+          "label": "Others",
+          "conf": 0.4717
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0003
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_14_orig0356_Bacterial_Canker.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Potato",
+      "p1": 0.9979,
+      "p2": 0.0018,
+      "margin": 0.9961,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.9979
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0018
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0003
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Potato (0.998)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_15_orig2418_Cutting_Weevil.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Tomato",
+      "p1": 0.6153,
+      "p2": 0.3087,
+      "margin": 0.3066,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.6153
+        },
+        {
+          "label": "Chili",
+          "conf": 0.3087
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0629
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_16_orig1728_Powdery_Mildew.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Potato",
+      "p1": 0.54,
+      "p2": 0.4069,
+      "margin": 0.1331,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.54
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.4069
+        },
+        {
+          "label": "Gourd",
+          "conf": 0.0422
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_17_orig0130_Bacterial_Canker.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Potato",
+      "p1": 0.7865,
+      "p2": 0.1604,
+      "margin": 0.6261,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.7865
+        },
+        {
+          "label": "Gourd",
+          "conf": 0.1604
+        },
+        {
+          "label": "Eggplant",
+          "conf": 0.0306
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_18_orig0122_Bacterial_Canker.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Potato",
+      "p1": 0.6633,
+      "p2": 0.2495,
+      "margin": 0.4138,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.6633
+        },
+        {
+          "label": "Gourd",
+          "conf": 0.2495
+        },
+        {
+          "label": "Eggplant",
+          "conf": 0.0224
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "mango",
+      "file": "mango/mango_19_orig0383_Bacterial_Canker.jpg",
+      "true_ood_crop": "mango",
+      "predicted_label": "Potato",
+      "p1": 0.999,
+      "p2": 0.0007,
+      "margin": 0.9983,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.999
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0007
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0001
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Potato (0.999)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_00_orig1575_Banded_Chlorosis.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 0.9992,
+      "p2": 0.0007,
+      "margin": 0.9985,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9992
+        },
+        {
+          "label": "Eggplant",
+          "conf": 0.0007
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (0.999)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_01_orig5771_Brown_Spot.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_02_orig0569_Yellow_Leaf.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_03_orig0375_Yellow_Leaf.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_04_orig5417_Brown_Spot.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_05_orig1866_Banded_Chlorosis.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_06_orig6332_Brown_Spot.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_07_orig2370_Sett_Rot.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Cauliflower",
+      "p1": 0.8916,
+      "p2": 0.0929,
+      "margin": 0.7987,
+      "top3": [
+        {
+          "label": "Cauliflower",
+          "conf": 0.8916
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0929
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0124
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_08_orig0653_Yellow_Leaf.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_09_orig1907_Banded_Chlorosis.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 0.9997,
+      "p2": 0.0003,
+      "margin": 0.9994,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9997
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0003
+        },
+        {
+          "label": "Others",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_10_orig0827_Yellow_Leaf.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_11_orig3113_Grassy_shoot.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 0.9938,
+      "p2": 0.0043,
+      "margin": 0.9895,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9938
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0043
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.002
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (0.994)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_12_orig2277_Sett_Rot.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 0.994,
+      "p2": 0.0057,
+      "margin": 0.9883,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.994
+        },
+        {
+          "label": "Chili",
+          "conf": 0.0057
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0002
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (0.994)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_13_orig3714_Pokkah_Boeng.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 0.9975,
+      "p2": 0.0024,
+      "margin": 0.9951,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9975
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0024
+        },
+        {
+          "label": "Eggplant",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (0.998)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_14_orig5207_Brown_Spot.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_15_orig2988_Healthy.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_16_orig1332_Yellow_Leaf.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 0.9995,
+      "p2": 0.0003,
+      "margin": 0.9992,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9995
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0003
+        },
+        {
+          "label": "Others",
+          "conf": 0.0002
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_17_orig3032_Healthy.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_18_orig2910_Healthy.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 1.0,
+      "p2": 0.0,
+      "margin": 1.0,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 1.0
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "sugarcane",
+      "file": "sugarcane/sugarcane_19_orig1716_Banded_Chlorosis.jpg",
+      "true_ood_crop": "sugarcane",
+      "predicted_label": "Rice",
+      "p1": 0.9979,
+      "p2": 0.0019,
+      "margin": 0.996,
+      "top3": [
+        {
+          "label": "Rice",
+          "conf": 0.9979
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.0019
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0001
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Rice (0.998)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_00_orig2187_Helopeltis.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Potato",
+      "p1": 0.9373,
+      "p2": 0.0259,
+      "margin": 0.9114,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.9373
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0259
+        },
+        {
+          "label": "Rice",
+          "conf": 0.0092
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Potato (0.937)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_01_orig0584_Gray_Blight.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Tomato",
+      "p1": 0.5568,
+      "p2": 0.4043,
+      "margin": 0.1525,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.5568
+        },
+        {
+          "label": "Gourd",
+          "conf": 0.4043
+        },
+        {
+          "label": "Others",
+          "conf": 0.0228
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_02_orig4990_Green_mirid_bug.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Tomato",
+      "p1": 0.9948,
+      "p2": 0.003,
+      "margin": 0.9918,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9948
+        },
+        {
+          "label": "Potato",
+          "conf": 0.003
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0013
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (0.995)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_03_orig5201_Green_mirid_bug.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Tomato",
+      "p1": 0.9997,
+      "p2": 0.0003,
+      "margin": 0.9994,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9997
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0003
+        },
+        {
+          "label": "Gourd",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (1.000)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_04_orig1401_Healthy_leaf.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Gourd",
+      "p1": 0.7877,
+      "p2": 0.0865,
+      "margin": 0.7012,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.7877
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0865
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0653
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_05_orig4375_Green_mirid_bug.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Gourd",
+      "p1": 0.6455,
+      "p2": 0.235,
+      "margin": 0.4105,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.6455
+        },
+        {
+          "label": "Others",
+          "conf": 0.235
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.1038
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_06_orig2005_Helopeltis.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Tomato",
+      "p1": 0.925,
+      "p2": 0.0711,
+      "margin": 0.8539,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.925
+        },
+        {
+          "label": "Gourd",
+          "conf": 0.0711
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0027
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (0.925)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_07_orig1338_Healthy_leaf.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Gourd",
+      "p1": 0.98,
+      "p2": 0.02,
+      "margin": 0.96,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.98
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.02
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Gourd (0.980)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_08_orig3786_Brown_Blight.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Potato",
+      "p1": 0.5695,
+      "p2": 0.4283,
+      "margin": 0.1412,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.5695
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.4283
+        },
+        {
+          "label": "Cauliflower",
+          "conf": 0.001
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_09_orig3108_Red_spider.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Tomato",
+      "p1": 0.9646,
+      "p2": 0.0161,
+      "margin": 0.9485,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.9646
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0161
+        },
+        {
+          "label": "Guava",
+          "conf": 0.008
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Tomato (0.965)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_10_orig2211_Helopeltis.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Gourd",
+      "p1": 0.9405,
+      "p2": 0.0574,
+      "margin": 0.8831,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.9405
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0574
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0017
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Gourd (0.941)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_11_orig5242_Green_mirid_bug.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Gourd",
+      "p1": 0.9184,
+      "p2": 0.055,
+      "margin": 0.8634,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.9184
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.055
+        },
+        {
+          "label": "Potato",
+          "conf": 0.012
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Gourd (0.918)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_12_orig4562_Green_mirid_bug.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Tomato",
+      "p1": 0.8954,
+      "p2": 0.1004,
+      "margin": 0.795,
+      "top3": [
+        {
+          "label": "Tomato",
+          "conf": 0.8954
+        },
+        {
+          "label": "Gourd",
+          "conf": 0.1004
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0026
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_13_orig1799_Healthy_leaf.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Gourd",
+      "p1": 0.9964,
+      "p2": 0.0031,
+      "margin": 0.9933,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.9964
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0031
+        },
+        {
+          "label": "Potato",
+          "conf": 0.0003
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Gourd (0.996)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_14_orig2656_Tea_algal_leaf_spot.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Gourd",
+      "p1": 0.4192,
+      "p2": 0.3044,
+      "margin": 0.1148,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.4192
+        },
+        {
+          "label": "Potato",
+          "conf": 0.3044
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.2651
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_15_orig0458_Gray_Blight.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Gourd",
+      "p1": 0.9715,
+      "p2": 0.0273,
+      "margin": 0.9442,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.9715
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0273
+        },
+        {
+          "label": "Others",
+          "conf": 0.0006
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Gourd (0.972)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_16_orig1876_Healthy_leaf.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Guava",
+      "p1": 0.5007,
+      "p2": 0.3508,
+      "margin": 0.1499,
+      "top3": [
+        {
+          "label": "Guava",
+          "conf": 0.5007
+        },
+        {
+          "label": "Potato",
+          "conf": 0.3508
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.1194
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_17_orig0262_Gray_Blight.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Potato",
+      "p1": 0.9955,
+      "p2": 0.0032,
+      "margin": 0.9923,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.9955
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0032
+        },
+        {
+          "label": "Guava",
+          "conf": 0.0009
+        }
+      ],
+      "gate_state": "A_CONFIDENT",
+      "decision": "State A: CONFIDENTLY misclassifies as Potato (0.996)",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": true
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_18_orig2584_Tea_algal_leaf_spot.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Gourd",
+      "p1": 0.6035,
+      "p2": 0.2035,
+      "margin": 0.4,
+      "top3": [
+        {
+          "label": "Gourd",
+          "conf": 0.6035
+        },
+        {
+          "label": "Potato",
+          "conf": 0.2035
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.1731
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    },
+    {
+      "category": "tea",
+      "file": "tea/tea_19_orig3286_Red_spider.jpg",
+      "true_ood_crop": "tea",
+      "predicted_label": "Potato",
+      "p1": 0.8542,
+      "p2": 0.0608,
+      "margin": 0.7934,
+      "top3": [
+        {
+          "label": "Potato",
+          "conf": 0.8542
+        },
+        {
+          "label": "Gourd",
+          "conf": 0.0608
+        },
+        {
+          "label": "Tomato",
+          "conf": 0.0214
+        }
+      ],
+      "gate_state": "B_UNCERTAIN",
+      "decision": "State B: ask user to select crop chip",
+      "is_ood_rejected": false,
+      "is_misclassified_confident": false
+    }
+  ]
+}
