@@ -1,0 +1,21 @@
+﻿Item #,Query ID,Crop Name (বাংলায় ফসলের নাম),Crop Taxonomy (English),Is Crop Specified?,Intent Category,Confidence,Reviewer Notes
+141,farmer_q_181,সরিষা,mustard,YES,Treatment,High,সরিষায় ফুল আসার পর জাব পোকা (Aphid); কীটনাশক প্রয়োগের সময়সঙ্গততা ও নিরাপত্তা সংক্রান্ত প্রশ্ন।
+142,farmer_q_361,কোনো ফসল নেই,none,NO,General,High,"মাটি শক্ত হওয়া (Soil compaction); ফসল উল্লেখ নেই, সাধারণ মাটি ব্যবস্থাপনা।"
+143,farmer_q_365,ফুলকপি,cauliflower,YES,Treatment,High,ফুলকপিতে পোকা দমনে রাসায়নিক নাকি বিকল্প পদ্ধতি; কীট ব্যবস্থাপনা।
+144,farmer_q_13,করলা,bitter_gourd,YES,Treatment,High,করলার কচি ফল ঝরে পড়া; শারীরবৃত্তীয় বা পোকা/রোগজনিত সমস্যার প্রতিকার।
+145,farmer_q_772,আমড়া,other_crop,YES,General,High,আমড়া (Hog plum) তালিকায় নেই → other_crop; কলম (Grafting) করার পদ্ধতি; বংশবিস্তার কৌশল।
+146,farmer_q_569,ধান,rice,YES,Treatment,High,ধানের পাতায় লালচে দাগ (Brown spot / Blast সন্দেহ); রোগ লক্ষণ ও প্রতিকার।
+147,farmer_q_461,বেগুন,brinjal,YES,Treatment,High,বেগুনে পোকা ও কীটনাশকের নাম জানতে চাওয়া; স্পষ্ট কীট দমন প্রশ্ন।
+148,farmer_q_274,ধান,rice,YES,Treatment,High,ধানে মরিচা (Rust) বা ব্লাস্ট (Blast) রোগ; ফলন রক্ষায় প্রতিকার।
+149,farmer_q_687,মাশরুম,mushroom,YES,General,High,মাশরুমের ফলন বাড়ানো ও যোগাযোগের তথ্য; সাধারণ চাষ ও ব্যবসা সংক্রান্ত প্রশ্ন।
+150,farmer_q_603,শসা,cucumber,YES,Treatment,High,শসা গাছে হলুদ দাগ (Downy mildew বা ভাইরাস সন্দেহ) ও ওষুধ চাওয়া হয়েছে; রোগ প্রতিকার।
+151,farmer_q_572,কোনো ফসল নেই,none,NO,Treatment,High,"কীটনাশক স্প্রের পর বৃষ্টি হলে পুনঃপ্রয়োগের নিয়ম; ফসল নেই, কিন্তু রাসায়নিক ব্যবস্থাপনা সংক্রান্ত।"
+152,farmer_q_229,শসা,cucumber,YES,Treatment,High,শসার পাতায় হলুদ মোজাইক দাগ (Cucumber Mosaic Virus); রোগ নির্ণয় ও ব্যবস্থাপনা।
+153,farmer_q_654,সুপারি,other_crop,YES,General,High,সুপারি (Betel nut) তালিকায় নেই → other_crop; রোপণ দূরত্ব (৩ হাত বনাম ৪ হাত) ও ফলনের প্রভাব; সাধারণ পরামর্শ।
+154,farmer_q_950,লাউ,bottle_gourd,YES,General,High,লাউ গাছ বড় হওয়া কিন্তু ফুল না ফোটা; শারীরবৃত্তীয়/পুষ্টি সংক্রান্ত সাধারণ সমস্যা।
+155,farmer_q_404,কোনো ফসল নেই,none,NO,Fertilizer,High,"""সবজি"" generic → "none; খৈল পচা সার (Organic fertilizer) প্রয়োগের উপযোগিতা; সার ব্যবস্থাপনা।
+156,farmer_q_295,কোনো ফসল নেই,none,NO,Fertilizer,High,"""শীতকালীন সবজি"" generic → "none; NPK সারের অনুপাত; সার ব্যবস্থাপনা।
+157,farmer_q_739,লেবু,lemon,YES,Treatment,High,লেবু পাতা হলুদ ও নিচে সাদা দাগ (Citrus psyllid বা Powdery mildew সন্দেহ); রোগ/পোকা প্রতিকার।
+158,farmer_q_631,কোনো ফসল নেই,none,NO,Fertilizer,High,কম খরচে সারের বিকল্প; ফসল উল্লেখ নেই; সার ব্যবস্থাপনা।
+159,farmer_q_961,ধান (আমন),rice,YES,Treatment,High,আমন ধানের বীজতলায় পোকা দমন; কীট ব্যবস্থাপনা।
+160,farmer_q_904,কোনো ফসল নেই,none,NO,General,High,ছাদ বাগান বিষয়ক ট্রেনিং; ফসল উল্লেখ নেই; সাধারণ কৃষি পরামর্শ/তথ্য।

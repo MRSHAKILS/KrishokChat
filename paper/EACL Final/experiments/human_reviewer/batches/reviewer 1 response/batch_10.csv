@@ -1,0 +1,21 @@
+Item #,Query ID,Crop Name (বাংলায় ফসলের নাম),Crop Taxonomy (English),Is Crop Specified?,Intent Category,Confidence,Reviewer Notes
+181,farmer_q_349,কোনো ফসল নেই,none,NO,Treatment,High,ফসলের নাম নেই; ফল আসার আগে গাছ ঝিমিয়ে পড়ার লক্ষণ ও প্রতিকার।
+182,farmer_q_677,কোনো ফসল নেই,none,NO,General,High,"""ফল গাছ"" generic; অতিবৃষ্টিতে ছাদের গাছের যত্ন/ব্যবস্থাপনা।"
+183,farmer_q_710,জাম,other_crop,YES,Treatment,High,"Banglish: ""jam gacer"" = জাম গাছের; জাম তালিকায় নেই → "other_crop; পাতা খাওয়া পোকা দমন।
+184,farmer_q_899,লিচু,litchi,YES,General,High,লিচুর কলম (grafting) করার নিয়ম ও সময়কাল; বংশবিস্তার কৌশল।
+185,farmer_q_458,ধান (আমন),rice,YES,Fertilizer,High,আমন ধানে সার প্রয়োগের ক্রম/সময়সূচী।
+186,farmer_q_148,সরিষা,mustard,YES,Treatment,High,"সরিষায় জাব পোকা থেকে ""বাঁচার উপায়""; পূর্বের ব্যাচের নিয়ম অনুযায়ী পোকা দমন/প্রতিকার।"
+187,farmer_q_886,মাশরুম,mushroom,YES,General,High,মাশরুমের ফলন বাড়ানোর উপায়; চাষ ব্যবস্থাপনা।
+188,farmer_q_951,লাউ,bottle_gourd,YES,General,High,লাউ গাছে লতা বৃদ্ধি কিন্তু ফুল না আসা; শারীরবৃত্তীয়/পুষ্টি সংক্রান্ত সাধারণ সমস্যা।
+189,farmer_q_791,কাজু,other_crop,YES,General,High,কাজু তালিকায় নেই → other_crop; ফুল ঝরে পড়া ও ফল না ধরা (Item 83-এর অনুরূপ)।
+190,farmer_q_678,"আম, ডালিম, কমলা","mango, other_crop",YES,Fertilizer,High,"একাধিক ফসল; ফুল ঝরা, ফলের স্বাদহীনতা, পাতা হলুদ হওয়া — মাইক্রোনিউট্রিয়েন্ট ঘাটতির লক্ষণ; Item 40-এর সাথে সামঞ্জস্যপূর্ণ।"
+191,farmer_q_357,কোনো ফসল নেই,none,NO,Fertilizer,High,ফসল নেই; বীজতলায় ভিটামিন/মাইক্রোনিউট্রিয়েন্ট প্রয়োগ সংক্রান্ত প্রশ্ন।
+192,farmer_q_183,ধান,rice,YES,Treatment,High,ধানের পাতায় বাদামী দাগ (Brown spot/Blast); রোগ নির্ণয় ও প্রতিকার।
+193,farmer_q_445,সরিষা,mustard,YES,Treatment,High,সরিষায় হলুদ পোকা (Mustard aphid/sawfly); কীট দমন।
+194,farmer_q_390,আলু,potato,YES,Treatment,High,আলুতে মড়ক/লেট ব্লাইট; ওষুধের কার্যকারিতা নিয়ে প্রশ্ন।
+195,farmer_q_593,মরিচ (লঙ্কা),chilli,YES,Treatment,High,"""লঙ্কা"" = মরিচ (alias); পাতা কুঁকড়ে যাওয়া (Leaf Curl Virus) রোগের ঘরোয়া প্রতিকার।"
+196,farmer_q_150,তরমুজ,watermelon,YES,Fertilizer,High,তরমুজে ভালো ফলন ও মিষ্টি স্বাদের (Brix) জন্য সারের সময় ও ধরন।
+197,farmer_q_696,কোনো ফসল নেই,none,NO,General,High,"Banglish: ""chad bagan korte koto khoroc hoy"" = ছাদ বাগানের খরচ; ফসলহীন সাধারণ প্রশ্ন।"
+198,farmer_q_411,সরিষা,mustard,YES,Fertilizer,High,সরিষায় ফুল আসার সময় সার প্রয়োগের সময়সঙ্গততা।
+199,farmer_q_567,ঢেঁড়স (ঢ্যাঁড়স),okra,YES,Treatment,High,"""ঢ্যাঁড়স"" = ঢেঁড়স (alias); সাদা পোকা (Whitefly/Jassid) দমন।"
+200,farmer_q_676,আকাশমনি,other_crop,YES,General,High,"আকাশমনি (Acacia/Timber tree) তালিকায় নেই → other_crop; বৃদ্ধি, সার ও ছাঁটাই (pruning) সংক্রান্ত বনায়ন/সাধারণ পরামর্শ।"

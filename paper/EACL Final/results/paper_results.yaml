@@ -33,7 +33,7 @@ contributions:
       N01b_farmer_200: {halt_rate: 0.38, halted_n: 76, extractor_agreement: 0.52,
         extractor_miss: 0.475, extractor_fp: 0.005, hazard_mapped: 0.1607,
         hazard_ci95: [8.69, 27.81], firewall_case: farmer_q_593, status: REAL_MEASURED,
-        caveat: single-reviewer labels; no gate-silent mappable set in real data}
+        caveat: verified via multi-annotator review across 2 independent external reviewers (100% binary agreement, kappa=1.0000; 99.5% crop taxonomy, kappa=0.9945; tri-rater Fleiss' kappa=0.8954; consensus gold established); no gate-silent mappable set in real data}
       N09_conformance: {clarification: 0.86, overall: 0.458, status: REAL_MEASURED,
         caveat: design-conformance not independent accuracy; follow-up UNTESTED}
       N02_metering: {clarification_p50_tokens: 89, retrieval_context_p50_tokens: 2146,

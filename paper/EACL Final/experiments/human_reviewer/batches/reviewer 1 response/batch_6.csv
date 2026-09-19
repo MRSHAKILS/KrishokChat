@@ -1,0 +1,21 @@
+﻿Item #,Query ID,Crop Name (বাংলায় ফসলের নাম),Crop Taxonomy (English),Is Crop Specified?,Intent Category,Confidence,Reviewer Notes
+101,farmer_q_235,কোনো ফসল নেই,none,NO,Fertilizer,High,"""শীতকালীন সবজি"" generic → "none; জৈব সার তৈরির পদ্ধতি (সার ব্যবস্থাপনা)।
+102,farmer_q_616,বেগুন,brinjal,YES,Treatment,High,বেগুন (brinjal); ডগা মরে যাওয়া এবং পোকা (shoot borer) সন্দেহ।
+103,farmer_q_194,শিম,bean,YES,Treatment,High,শিম (bean); জাব পোকা (aphids) দমনের জৈব/বিকল্প উপায় জানতে চাওয়া হয়েছে।
+104,farmer_q_119,ধান,rice,YES,Treatment,High,ধান (rice); মাজরা পোকা দমনের জৈব পদ্ধতি (IPM)।
+105,farmer_q_989,মাশরুম,mushroom,YES,General,Medium,"কোয়েল (পশুপাখি, off-topic) এবং মাশরুম (mushroom)। কৃষিভিত্তিক ব্যবসা ও প্রশিক্ষণ সংক্রান্ত সাধারণ প্রশ্ন।"
+106,farmer_q_331,সরিষা,mustard,YES,Treatment,High,সরিষা (mustard); জাব পোকা (aphids) আক্রমণ ও দমন।
+107,farmer_q_992,"আম, কমলা, মাল্টা","mango, other_crop",YES,General,High,আম (mango); কমলা ও মাল্টা তালিকায় নেই → other_crop। চারা সংগ্রহ ও জাতের তফাত/নির্বাচন।
+108,farmer_q_734,"মরিচ, লেবু, পেয়ারা","chilli, lemon, guava",YES,Treatment,High,একাধিক ফসল; পাতায় সাদা মাছি (whitefly) আক্রমণ ও দমনের সমাধান।
+109,farmer_q_618,কোনো ফসল নেই,none,NO,Treatment,Medium,"""শাক"" generic leafy veg → "none; পাতা ছিদ্র হওয়া (পোকা/রোগ লক্ষণ) নির্ণয়।
+110,farmer_q_316,পেঁপে,papaya,YES,Treatment,High,পেঁপে (papaya); পাতা কুঁকড়ে যাওয়া (PRV ভাইরাস সন্দেহ) এবং রোগ নির্ণয়।
+111,farmer_q_883,আম (আম্রপালি),mango,YES,Treatment,High,আম্রপালি আমের জাত (mango); ফল ঝরে পড়া (শারীরবৃত্তীয়/পোকা/রোগ) সমস্যা ও প্রতিকার।
+112,farmer_q_114,বেগুন,brinjal,YES,Treatment,High,বেগুন (brinjal); জাব পোকা ও ডগা ছিদ্রকারী পোকা (shoot/fruit borer) দমন।
+113,farmer_q_937,আম,mango,YES,General,High,আম (mango); চারা রোপণের সঠিক নিয়ম/পদ্ধতি।
+114,farmer_q_185,টমেটো,tomato,YES,Fertilizer,High,টমেটো (tomato); ভালো ফলনের জন্য সারের ধরন ও মাত্রা।
+115,farmer_q_499,মরিচ,chilli,YES,Fertilizer,High,মরিচ (chilli); গাছের বৃদ্ধির জন্য সার প্রয়োগ।
+116,farmer_q_761,আম,mango,YES,General,High,আম (mango); কেমিক্যাল ছাড়া ফল পাকানোর (post-harvest) ঘরোয়া পদ্ধতি।
+117,farmer_q_518,টমেটো,tomato,YES,Treatment,High,টমেটো (tomato); পোকা দমনের কীটনাশক/বিষ চাওয়া হয়েছে।
+118,farmer_q_845,নারিকেল,coconut,YES,Treatment,High,"নারিকেল (coconut); পাতা চিরা, মাথা মরে যাওয়া, ফল ঝরা (রোগ/পোকা লক্ষণ) ও প্রতিকার।"
+119,farmer_q_52,ডালিম,other_crop,YES,Treatment,High,ডালিম (Pomegranate) তালিকায় নেই → other_crop; পাতা লাল হওয়া ও গাছ মরে যাওয়ার রোগ লক্ষণ।
+120,farmer_q_623,সরিষা,mustard,YES,Treatment,High,সরিষা (mustard); পোকা দমনের ঔষধ/বিষ চাওয়া হয়েছে।

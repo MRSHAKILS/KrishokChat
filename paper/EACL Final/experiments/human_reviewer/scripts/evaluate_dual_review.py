@@ -40,8 +40,10 @@ def load_reviewer_2_annotations():
     """Load annotations from either master sheet or batch sheets."""
     annotations = {}
 
-    # Check batch files
-    batch_files = sorted(glob.glob(os.path.join(BATCHES_DIR, "*.xlsx")))
+    # Check batch files (including reviewer 2 response subfolder)
+    batch_files = sorted(glob.glob(os.path.join(BATCHES_DIR, "reviewer 2 response", "*.xlsx")))
+    if not batch_files:
+        batch_files = sorted(glob.glob(os.path.join(BATCHES_DIR, "*.xlsx")))
     for bf in batch_files:
         wb = openpyxl.load_workbook(bf, data_only=True)
         ws = wb.active

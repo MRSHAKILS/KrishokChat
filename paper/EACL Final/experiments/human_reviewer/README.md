@@ -11,7 +11,8 @@ This directory provides the complete independent double-blind evaluation setup f
 
 ```
 human_reviewer/
-├── ANNOTATION_GUIDELINES.md          # 📖 Step-by-step annotation rules, taxonomy, and examples
+├── ANNOTATION_GUIDELINES.pdf          # 📄 High-res printable 4-page PDF with full rules, samples, and tables
+├── ANNOTATION_GUIDELINES.md          # 📖 Markdown protocol: definitions, taxonomy, & worked samples
 ├── README.md                         # 🧭 This manifest & quick start guide
 ├── master_blind_sheet_200.xlsx       # 📊 All 200 queries in a single multi-tab workbook
 ├── batches/                          # 📂 10 modular workbooks (20 queries each) for easy distribution
@@ -27,6 +28,7 @@ human_reviewer/
 │   └── batch_10_queries_181_200.xlsx
 ├── scripts/
 │   ├── build_annotation_sheets.py    # ⚙️ Script that formatted and generated all Excel sheets
+│   ├── build_guidelines_pdf.py       # 🖨️ Script that generates the styled 4-page guidelines PDF
 │   └── evaluate_dual_review.py      # 📈 Automated Cohen's Kappa, agreement, and autopsy runner
 └── reference_ground_truth/
     └── reviewer_1_labels_sealed.json # 🔒 Sealed Reviewer 1 ground truth (strictly isolated from annotators)
@@ -36,7 +38,7 @@ human_reviewer/
 
 ## 🚀 Quick Start for Annotators
 
-1. **Read the Protocol:** Read [`ANNOTATION_GUIDELINES.md`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_reviewer/ANNOTATION_GUIDELINES.md) first to familiarize yourself with the crop vocabulary and intent categories.
+1. **Read the Protocol:** Open and read [`ANNOTATION_GUIDELINES.pdf`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_reviewer/ANNOTATION_GUIDELINES.pdf) (or [`ANNOTATION_GUIDELINES.md`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_reviewer/ANNOTATION_GUIDELINES.md)) to familiarize yourself with the 37 controlled crop options, the 6 intent definitions, and the worked boundary samples.
 2. **Choose Your Annotation Mode:**
    - **Mode A (Recommended — Modular Batches):** Open each file in [`batches/`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_reviewer/batches) (20 queries per file, ~10-15 minutes per batch).
    - **Mode B (Single Master File):** Open [`master_blind_sheet_200.xlsx`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_reviewer/master_blind_sheet_200.xlsx) and fill in either the `All 200 Queries` sheet or the individual batch tabs.
@@ -51,20 +53,35 @@ human_reviewer/
 
 ---
 
-## 📊 Computing Agreement & Kappa
+## 📊 Evaluation Runners & Multi-Reviewer Results
 
-Once the second reviewer has finished annotating the sheets, run the evaluation pipeline:
+Both external annotator sets are preserved in `batches/`:
+- `batches/reviewer 1 response/`: 10 CSV files (20 queries each) completed by External Annotator 1.
+- `batches/reviewer 2 response/`: 10 XLSX files (20 queries each) completed by External Annotator 2.
+- `reference_ground_truth/reviewer_1_labels_sealed.json`: Sealed initial baseline reference.
+
+To run the complete multi-reviewer evaluation pipeline:
 
 ```bash
-cd "D:\KrishokChat Advisory System\paper\EACL Final\experiments\human_reviewer\scripts"
-python evaluate_dual_review.py
+cd "D:\KrishokChat Advisory System\paper\EACL Final\experiments\human_reviewer"
+python scripts/evaluate_all_reviewers.py
 ```
 
-The script will automatically:
-1. Scan `batches/*.xlsx` or `master_blind_sheet_200.xlsx`.
-2. Extract Reviewer 2's annotations and match them with Reviewer 1's sealed ground truth.
-3. Calculate:
-   - **Binary Crop Ambiguity Agreement (%)** & **Cohen's Kappa ($\kappa$)**
-   - **Exact Crop Taxonomy Agreement (%)** & **Cohen's Kappa ($\kappa$)**
-   - **Discrepancy Count**
-4. Output a detailed JSON discrepancy autopsy file (`dual_review_report.json`), ready for final consensus review and updating the paper text!
+### Empirical Results (N = 200 authentic farmer queries):
+
+1. **Independent External Reviewers (Reviewer 1 vs. Reviewer 2):**
+   - **Binary Crop Ambiguity (`Is Crop Specified?`):** **100.00%** agreement ($200/200$, Cohen's $\kappa = \mathbf{1.0000}$, Perfect Agreement).
+   - **Controlled Crop Taxonomy (37 classes):** **99.50%** agreement ($199/200$, Cohen's $\kappa = \mathbf{0.9945}$, Near-Perfect Agreement).  
+     *(Single edge-case difference: `farmer_q_848` on pomelo/বাতাবি লেবু mapped to `lemon` [citrus] vs `other_crop`).*
+   - **Query Intent Category:** **93.50%** agreement ($187/200$, Cohen's $\kappa = \mathbf{0.8958}$).
+   - **High-Confidence Rates:** 91.0% (R1) and 92.5% (R2).
+
+2. **Tri-Annotator Consensus (External R1 + External R2 + Sealed Baseline R0):**
+   - **Fleiss' Multi-Rater Kappa (Binary Presence):** $\mathbf{0.8954}$ (Substantial / Near-Perfect Reliability).
+   - **Unanimous 3-Way Binary Agreement:** $189 / 200$ (**94.50%**).
+   - **Unanimous 3-Way Taxonomy Agreement:** $188 / 200$ (**94.00%**).
+   - **Majority 2-to-1 Consensus:** $200 / 200$ (**100.00%**).
+
+3. **Outputs & Adjudication Artifacts:**
+   - [`consensus_gold_200.json`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_reviewer/consensus_gold_200.json): Full 200-row consensus gold dataset with all 3 raters, confidence scores, notes, and adjudication verdicts.
+   - [`dual_review_report.json`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_reviewer/dual_review_report.json) / [`multi_reviewer_evaluation_report.json`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_reviewer/multi_reviewer_evaluation_report.json): Complete machine-readable audit report.

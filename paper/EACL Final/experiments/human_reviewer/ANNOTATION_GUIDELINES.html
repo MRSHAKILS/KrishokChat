@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KrishokChat - Human Annotation Protocol & Guidelines</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm 12mm 12mm 12mm;
+    @top-left {
+      content: "KrishokChat Dual-Review Protocol";
+      font-family: 'Inter', sans-serif;
+      font-size: 7.5pt;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    @top-right {
+      content: "EACL 2027 Demonstration Track";
+      font-family: 'Inter', sans-serif;
+      font-size: 7.5pt;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+      font-family: 'Inter', sans-serif;
+      font-size: 8pt;
+      color: #64748b;
+      font-weight: 700;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', 'Hind Siliguri', 'Nirmala UI', 'Segoe UI', sans-serif;
+    color: #1e293b;
+    line-height: 1.4;
+    font-size: 8.5pt;
+    background: #ffffff;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .bangla {
+    font-family: 'Hind Siliguri', 'Nirmala UI', sans-serif;
+  }
+
+  .page-container {
+    height: 271mm;
+    position: relative;
+    page-break-after: always;
+    break-after: page;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .page-container:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Header card */
+  .header-card {
+    background: linear-gradient(135deg, #064e3b 0%, #047857 55%, #059669 100%);
+    color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 6.8pt;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .header-title {
+    font-size: 13.5pt;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+
+  .header-subtitle {
+    font-size: 8.5pt;
+    font-weight: 400;
+    opacity: 0.95;
+    line-height: 1.3;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .meta-item {
+    font-size: 7.5pt;
+  }
+  .meta-label {
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.8;
+    font-size: 6.5pt;
+    letter-spacing: 0.04em;
+  }
+  .meta-value {
+    font-weight: 700;
+    margin-top: 1px;
+  }
+
+  /* Headings */
+  h2 {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 1.5px solid #059669;
+    padding-bottom: 3px;
+    margin-top: 8px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+  }
+
+  h2 .num {
+    background: #059669;
+    color: white;
+    width: 17px;
+    height: 17px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7.5pt;
+    font-weight: 800;
+    margin-right: 6px;
+  }
+
+  h3 {
+    font-size: 8.8pt;
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 6px;
+    margin-bottom: 4px;
+  }
+
+  p {
+    margin-bottom: 5px;
+    line-height: 1.35;
+    text-align: justify;
+  }
+
+  /* Callout boxes */
+  .callout {
+    padding: 7px 10px;
+    border-radius: 5px;
+    margin: 6px 0;
+    font-size: 8pt;
+    line-height: 1.35;
+  }
+
+  .callout-important {
+    background: #eff6ff;
+    border-left: 3.5px solid #2563eb;
+    color: #1e3a8a;
+  }
+  .callout-important strong {
+    color: #1d4ed8;
+  }
+
+  .callout-rule {
+    background: #fef2f2;
+    border-left: 3.5px solid #dc2626;
+    color: #991b1b;
+  }
+  .callout-rule strong {
+    color: #b91c1c;
+  }
+
+  .callout-tip {
+    background: #f0fdf4;
+    border-left: 3.5px solid #16a34a;
+    color: #166534;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 7pt;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    vertical-align: middle;
+  }
+  .badge-yes {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #86efac;
+  }
+  .badge-no {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
+  }
+  .badge-token {
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+  }
+  .badge-intent {
+    background: #e0e7ff;
+    color: #4338ca;
+    border: 1px solid #c7d2fe;
+  }
+  .badge-crisis {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #f87171;
+  }
+  .badge-general {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4px 0 6px 0;
+    font-size: 7.5pt;
+  }
+
+  th {
+    background: #0f172a;
+    color: #f8fafc;
+    font-weight: 600;
+    text-align: left;
+    padding: 4px 6px;
+    font-size: 7.2pt;
+    letter-spacing: 0.02em;
+  }
+
+  td {
+    padding: 3.5px 6px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+    line-height: 1.25;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  .step-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin: 6px 0;
+  }
+
+  .step-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    padding: 6px 7px;
+    background: #f8fafc;
+    font-size: 7.2pt;
+    line-height: 1.3;
+  }
+
+  .step-num {
+    font-weight: 800;
+    color: #059669;
+    font-size: 8pt;
+    margin-bottom: 2px;
+  }
+
+  /* Split columns for Taxonomy Table */
+  .taxonomy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .taxonomy-grid table {
+    margin: 0;
+  }
+
+  .taxonomy-grid td:nth-child(1) { width: 24%; font-weight: 600; }
+  .taxonomy-grid td:nth-child(2) { width: 22%; font-weight: 600; }
+  .taxonomy-grid td:nth-child(3) { width: 54%; font-size: 7pt; color: #475569; }
+
+  /* Example Card */
+  .example-card {
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    padding: 6px 8px;
+    margin-bottom: 6px;
+    background: #ffffff;
+  }
+
+  .example-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 3px;
+    margin-bottom: 4px;
+  }
+
+  .example-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 7.8pt;
+    color: #0f172a;
+  }
+
+  .example-query {
+    font-size: 8.5pt;
+    color: #1e293b;
+    font-weight: 600;
+    margin: 2px 0 4px 0;
+    background: #f8fafc;
+    padding: 4px 7px;
+    border-left: 3px solid #059669;
+    border-radius: 0 3px 3px 0;
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+
+  .example-slots {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+    font-size: 7.2pt;
+  }
+
+  .slot-chip {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .slot-label {
+    color: #64748b;
+    font-size: 6.5pt;
+    text-transform: uppercase;
+    margin-right: 3px;
+    font-weight: 600;
+  }
+
+  .example-rationale {
+    font-size: 7.4pt;
+    color: #334155;
+    line-height: 1.3;
+    background: #fafafa;
+    border: 1px solid #f1f5f9;
+    padding: 4px 6px;
+    border-radius: 3px;
+  }
+
+  .example-rationale strong {
+    color: #047857;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    background: #f1f5f9;
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-size: 7.4pt;
+    color: #0f172a;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1 ==================== -->
+  <div class="page-container">
+    <div class="header-card">
+      <div class="header-badge">Scientific Rigor & Validation Protocol</div>
+      <div class="header-title">KrishokChat Human Annotation Protocol & Guidelines</div>
+      <div class="header-subtitle">Independent Double-Blind Second Reviewer Pass for Bengali Agricultural NLU (200 Farmer Queries)</div>
+      
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-label">Task Objective</div>
+          <div class="meta-value">Double-Blind Crop & Intent Review</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Dataset Scale</div>
+          <div class="meta-value">200 Authentic Field Queries</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Metric Target</div>
+          <div class="meta-value">Cohen's Kappa (&kappa;) Agreement</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Controlled Options</div>
+          <div class="meta-value">In-Cell Dropdowns (No Guessing)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-important">
+      <strong>Strict Double-Blind Scientific Integrity Rule:</strong> Reviewer 2 must annotate all queries without seeing model predictions (<code>extractor_crop</code>) or Reviewer 1's labels. All files in <code>batches/</code> and <code>master_blind_sheet_200.xlsx</code> have been pre-stripped of prior annotations to ensure complete scientific independence.
+    </div>
+
+    <h2><span class="num">1</span>Background & Scientific Motivation</h2>
+    <p>
+      In agricultural advisory systems, crop ambiguity represents a severe safety hazard: recommending a rice herbicide or pesticide dosage to a farmer whose crop is potato, tomato, or chilli can burn crops and destroy livelihoods. In earlier versions of this research, 200 Bengali farmer queries were annotated by a single expert reviewer, which was disclosed as a limitation in the manuscript. This protocol establishes an independent second review to compute rigorous inter-annotator agreement (Cohen's &kappa;) and establish a verified gold benchmark.
+    </p>
+
+    <h2><span class="num">2</span>How to Annotate: 4-Step Workflow</h2>
+    <div class="step-flow">
+      <div class="step-card">
+        <div class="step-num">Step 1: Open Workbook</div>
+        Open <code>master_blind_sheet_200.xlsx</code> (all 200 queries) or manageable modular batches in <code>batches/batch_01...10.xlsx</code> (20 queries each).
+      </div>
+      <div class="step-card">
+        <div class="step-num">Step 2: Read Bengali Query</div>
+        Read authentic farmer phrasing in <strong>Col D</strong>. Identify crop mentions, dialectal spellings, pests, symptoms, and fertilizer inquiries.
+      </div>
+      <div class="step-card">
+        <div class="step-num">Step 3: Select Controlled Dropdowns</div>
+        In <strong>Cols F, G, H, I</strong>, click the cell to reveal the in-cell <strong>dropdown menu</strong>. Choose from standardized options rather than free-typing.
+      </div>
+      <div class="step-card">
+        <div class="step-num">Step 4: Automated Evaluation</div>
+        Save the workbook. Run <code>python scripts/evaluate_dual_review.py</code> to compute agreement percentage, Cohen's &kappa;, and autopsy discordances.
+      </div>
+    </div>
+
+    <h2><span class="num">3</span>Annotation Sheet Column Specifications</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 7%;">Col</th>
+          <th style="width: 22%;">Header Name</th>
+          <th style="width: 15%;">Input Mode</th>
+          <th style="width: 56%;">Instructions & Controlled Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A</strong></td>
+          <td><code>Item #</code></td>
+          <td>Context</td>
+          <td>Sequential query index from <code>1</code> to <code>200</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>B</strong></td>
+          <td><code>Query ID</code></td>
+          <td>Context</td>
+          <td>Unique trace identifier (e.g. <code>farmer_q_042</code>).</td>
+        </tr>
+        <tr>
+          <td><strong>C</strong></td>
+          <td><code>Source Channel</code></td>
+          <td>Context</td>
+          <td>Query origin: <code>field_sourced_farmer</code>, <code>fb_group_real_farmer</code>, <code>krishibangla.com</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>D</strong></td>
+          <td><code>Farmer Bengali Query</code></td>
+          <td>Context</td>
+          <td>Authentic colloquial query submitted by the farmer (do not edit).</td>
+        </tr>
+        <tr>
+          <td><strong>E</strong></td>
+          <td><code>Crop Name (বাংলায়)</code></td>
+          <td>Free-text (BN)</td>
+          <td>Write the crop name in Bengali (e.g. <span class="bangla">ধান, আলু, মরিচ</span>). If omitted, write <span class="bangla">কোনো ফসল নেই</span> or leave blank.</td>
+        </tr>
+        <tr>
+          <td><strong>F</strong></td>
+          <td><code>Crop Taxonomy (EN)</code></td>
+          <td><strong>Dropdown (37)</strong></td>
+          <td>Select from <strong>37 controlled classes</strong> (e.g., <code>rice</code>, <code>potato</code>, <code>wheat</code>, <code>none</code>). Bound to Reference Sheet.</td>
+        </tr>
+        <tr>
+          <td><strong>G</strong></td>
+          <td><code>Is Crop Specified?</code></td>
+          <td><strong>Dropdown (2)</strong></td>
+          <td><span class="badge badge-yes">YES</span> if crop is explicitly named. <span class="badge badge-no">NO</span> if crop is omitted, generic, or ambiguous.</td>
+        </tr>
+        <tr>
+          <td><strong>H</strong></td>
+          <td><code>Intent Category</code></td>
+          <td><strong>Dropdown (6)</strong></td>
+          <td>Choose from: <span class="badge badge-intent">Treatment</span>, <span class="badge badge-intent">Fertilizer</span>, <span class="badge badge-intent">Prevention</span>, <span class="badge badge-general">General</span>, <span class="badge badge-crisis">Crisis</span>, <span class="badge badge-token">Off-Topic</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>I</strong></td>
+          <td><code>Confidence</code></td>
+          <td><strong>Dropdown (3)</strong></td>
+          <td>Select confidence level: <span class="badge badge-token">High</span>, <span class="badge badge-token">Medium</span>, <span class="badge badge-token">Low</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>J</strong></td>
+          <td><code>Reviewer Notes</code></td>
+          <td>Optional Text</td>
+          <td>Dialect notes, symptoms observed, or justification for ambiguity.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: auto; padding: 6px 10px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 7.2pt; color: #64748b; display: flex; justify-content: space-between;">
+      <span>KrishokChat Advisory System &bull; EACL Demonstration Submission</span>
+      <span>Double-Blind Reviewer Protocol &bull; Page 1 of 4</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="page-container">
+    <h2><span class="num">4</span>Core Decision Rules (How to Avoid Random Annotations)</h2>
+    
+    <div class="callout callout-rule">
+      <strong>Rule 1: Explicit Crop Mention vs. Symptom Guesses (Crucial Safety Rule)</strong><br>
+      Do <strong>NOT</strong> guess or assume a crop just because a pest or symptom is mentioned!
+      <br>&bull; <em>"মাজরা পোকা দমনে কী স্প্রে করব?"</em> (Stem borer control): Even though stem borer attacks rice, it also attacks corn and sugarcane. Mark <code>Is Crop Specified?</code> = <span class="badge badge-no">NO</span> and <code>Crop Taxonomy</code> = <span class="badge badge-token">none</span>.
+      <br>&bull; <em>"পাতার নিচে সাদা মাছি বসে পাতা হলুদ করে ফেলছে"</em> (Whitefly yellowing): Whitefly attacks tomato, brinjal, chilli, and cotton with different chemical dosages. Mark <span class="badge badge-no">NO</span> / <span class="badge badge-token">none</span>.
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>Rule 2: Dialectal Names & Spelling Aliases</strong><br>
+      Bengali farmers use regional expressions that map to standard taxonomy:
+      <br>&bull; <em>"আইলু"</em> / <em>"গোল আলু"</em> &rarr; <code>potato</code> (<span class="bangla">আলু</span>) &nbsp;|&nbsp; <em>"আমন"</em> / <em>"বোরো"</em> / <em>"ইরি"</em> / <em>"স্বর্ণা"</em> / <em>"ব্রি ধান"</em> &rarr; <code>rice</code> (<span class="bangla">ধান</span>)
+      <br>&bull; <em>"বিলাতি বেগুন"</em> &rarr; <code>tomato</code> (<span class="bangla">টমেটো</span>) &nbsp;|&nbsp; <em>"কদু"</em> &rarr; <code>bottle_gourd</code> (<span class="bangla">লাউ</span>) &nbsp;|&nbsp; <em>"ভেন্ডি"</em> &rarr; <code>okra</code> (<span class="bangla">ঢেঁড়শ</span>)
+    </div>
+
+    <h3>Controlled Crop Taxonomy: 37 Valid In-Cell Dropdown Options</h3>
+    <p style="font-size: 7.6pt; color: #475569; margin-bottom: 4px;">
+      Column F in Excel contains an in-cell dropdown list bound to the reference sheet. Reviewers must select exclusively from these 37 tokens:
+    </p>
+
+    <div class="taxonomy-grid">
+      <!-- Left Column: Cereals, Tubers, Cash Crops, Common Vegetables -->
+      <table>
+        <thead>
+          <tr>
+            <th>Dropdown Token</th>
+            <th>Bangla</th>
+            <th>Trigger Words & Aliases</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fee2e2;">
+            <td><strong><code>none</code></strong></td>
+            <td><span class="bangla"><strong>কোনো ফসল নেই</strong></span></td>
+            <td>ফসল অনুল্লিখিত, গাছের, পাতার, জমিতে</td>
+          </tr>
+          <tr><td><code>rice</code></td><td><span class="bangla">ধান</span></td><td>আমন, বোরো, আউশ, ব্রি ধান, ইরি, স্বর্ণা</td></tr>
+          <tr><td><code>potato</code></td><td><span class="bangla">আলু</span></td><td>গোল আলু, ডায়মন্ড, কার্ডিনাল, আইলু</td></tr>
+          <tr><td><code>wheat</code></td><td><span class="bangla">গম</span></td><td>বারি গম, গমের শিষ, গমের জমি</td></tr>
+          <tr><td><code>corn</code></td><td><span class="bangla">ভুট্টা</span></td><td>ভুট্টা, হাইব্রিড ভুট্টা, মাক্কা, ভুট্টার মোচা</td></tr>
+          <tr><td><code>tomato</code></td><td><span class="bangla">টমেটো</span></td><td>টমেটো, বিলাতি বেগুন, টমেটোর চারা</td></tr>
+          <tr><td><code>chilli</code></td><td><span class="bangla">মরিচ</span></td><td>মরিচ, কাঁচা মরিচ, শুকনো মরিচ, লঙ্কা</td></tr>
+          <tr><td><code>brinjal</code></td><td><span class="bangla">বেগুন</span></td><td>বেগুন, তাল বেগুন, গোল বেগুন, বেগুন গাছ</td></tr>
+          <tr><td><code>mustard</code></td><td><span class="bangla">সরিষা</span></td><td>সরিষা, টরি-৭, বারি সরিষা, রাই সরিষা</td></tr>
+          <tr><td><code>jute</code></td><td><span class="bangla">পাট</span></td><td>পাট, তোষা পাট, দেশী পাট, পাটের পাতা</td></tr>
+          <tr><td><code>cabbage</code></td><td><span class="bangla">বাঁধাকপি</span></td><td>বাঁধাকপি, পাতাকপি</td></tr>
+          <tr><td><code>cauliflower</code></td><td><span class="bangla">ফুলকপি</span></td><td>ফুলকপি, ফুলকপির চারা</td></tr>
+          <tr><td><code>onion</code></td><td><span class="bangla">পেঁয়াজ</span></td><td>পেঁয়াজ, পেয়াজ, পেঁয়াজের চারা</td></tr>
+          <tr><td><code>garlic</code></td><td><span class="bangla">রসুন</span></td><td>রসুন, রসুনের কোয়া</td></tr>
+          <tr><td><code>ginger</code></td><td><span class="bangla">আদা</span></td><td>আদা, আদার গাঁট</td></tr>
+          <tr><td><code>turmeric</code></td><td><span class="bangla">হলুদ</span></td><td>হলুদ, কাঁচা হলুদ</td></tr>
+          <tr><td><code>tea</code></td><td><span class="bangla">চা</span></td><td>চা, চা বাগান, চায়ের পাতা</td></tr>
+          <tr><td><code>betel_leaf</code></td><td><span class="bangla">পান</span></td><td>পান, পানের বরজ, পান পাতা</td></tr>
+          <tr><td><code>mushroom</code></td><td><span class="bangla">মাশরুম</span></td><td>মাশরুম, মাশরুম চাষ, স্পন</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Right Column: Fruits, Cucurbits, Legumes, Others -->
+      <table>
+        <thead>
+          <tr>
+            <th>Dropdown Token</th>
+            <th>Bangla</th>
+            <th>Trigger Words & Aliases</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>mango</code></td><td><span class="bangla">আম</span></td><td>আম, আম গাছ, মুকুল, হিমসাগর, ল্যাংড়া</td></tr>
+          <tr><td><code>papaya</code></td><td><span class="bangla">পেঁপে</span></td><td>পেঁপে, পেপে, পেঁপে গাছ, পেঁপের চারা</td></tr>
+          <tr><td><code>banana</code></td><td><span class="bangla">কলা</span></td><td>কলা, সাগর কলা, সবরি কলা, কলার চারা</td></tr>
+          <tr><td><code>guava</code></td><td><span class="bangla">পেয়ারা</span></td><td>পেয়ারা, কাজী পেয়ারা, থাই পেয়ারা</td></tr>
+          <tr><td><code>lemon</code></td><td><span class="bangla">লেবু</span></td><td>লেবু, কাগজি লেবু, বাতাবি লেবু</td></tr>
+          <tr><td><code>watermelon</code></td><td><span class="bangla">তরমুজ</span></td><td>তরমুজ, তরমুজের লতা, তরমুজ ক্ষেত</td></tr>
+          <tr><td><code>coconut</code></td><td><span class="bangla">নারিকেল</span></td><td>নারিকেল, ডাব, নারিকেল গাছ</td></tr>
+          <tr><td><code>jackfruit</code></td><td><span class="bangla">কাঁঠাল</span></td><td>কাঁঠাল, কাঁঠাল গাছ, কাঁঠালের মুচি</td></tr>
+          <tr><td><code>cucumber</code></td><td><span class="bangla">শসা</span></td><td>শসা, শশা, শসার জালি, শসা গাছ</td></tr>
+          <tr><td><code>bottle_gourd</code></td><td><span class="bangla">লাউ</span></td><td>লাউ, কদু, লাউয়ের ডগা, লাউ মাচা</td></tr>
+          <tr><td><code>bitter_gourd</code></td><td><span class="bangla">করলা</span></td><td>করলা, উচ্ছে, করলার পাতা</td></tr>
+          <tr><td><code>pointed_gourd</code></td><td><span class="bangla">পটল</span></td><td>পটল, পটলের লতা, পটলের জালি</td></tr>
+          <tr><td><code>okra</code></td><td><span class="bangla">ঢেঁড়শ</span></td><td>ঢেঁড়শ, ভেন্ডি, ঢেঁড়শ গাছ</td></tr>
+          <tr><td><code>bean</code></td><td><span class="bangla">শিম</span></td><td>শিম, সীম, শিমের ফুল, শিম মাচা</td></tr>
+          <tr><td><code>strawberry</code></td><td><span class="bangla">স্ট্রবেরি</span></td><td>স্ট্রবেরি, স্ট্রবেরির চারা</td></tr>
+          <tr><td><code>dragon_fruit</code></td><td><span class="bangla">ড্রাগন ফল</span></td><td>ড্রাগন ফল, ড্রাগন গাছ, ক্যাকটাস</td></tr>
+          <tr><td><code>litchi</code></td><td><span class="bangla">লিচু</span></td><td>লিচু, বোম্বাই লিচু, বেদানা লিচু</td></tr>
+          <tr style="background:#f1f5f9;">
+            <td><strong><code>other_crop</code></strong></td>
+            <td><span class="bangla">অন্যান্য ফসল</span></td>
+            <td>তালিকাবহির্ভূত সুনির্দিষ্ট ফসল (যেমন তিল, চিনা বাদাম)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: auto; padding: 6px 10px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 7.2pt; color: #64748b; display: flex; justify-content: space-between;">
+      <span>KrishokChat Advisory System &bull; EACL Demonstration Submission</span>
+      <span>Double-Blind Reviewer Protocol &bull; Page 2 of 4</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== PAGE 3 ==================== -->
+  <div class="page-container">
+    <h2><span class="num">5</span>Intent Category Decision Matrix (Column H Dropdown)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 14%;">Intent Option</th>
+          <th style="width: 18%;">Bangla Meaning</th>
+          <th style="width: 33%;">Clinical Definition & Criteria</th>
+          <th style="width: 35%;">Typical Bengali Query Trigger Patterns</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-intent">Treatment</span></td>
+          <td><span class="bangla">রোগ বা পোকার প্রতিকার</span></td>
+          <td>Insects, fungus, rot, blights, chemical pesticide requests.</td>
+          <td><em>কী স্প্রে করব?, কোন বিষ দিব?, পাতা পচে যাচ্ছে, ওষুধ বলেন</em></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-intent">Fertilizer</span></td>
+          <td><span class="bangla">সার ব্যবস্থাপনা ও মাত্রা</span></td>
+          <td>Chemical dosage (Urea, TSP, MoP), application schedule, micronutrients.</td>
+          <td><em>শতকে কতটুকু ইউরিয়া?, ডিএপি কখন দিব?, জিপসাম কত কেজি?</em></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-intent">Prevention</span></td>
+          <td><span class="bangla">রোগ প্রতিরোধ ও শোধন</span></td>
+          <td>Seed treatment, preventative sprays before rainfall, nursery treatment.</td>
+          <td><em>বীজ শোধন করার নিয়ম কি?, আগাম প্রতিরোধে কী দেওয়া যায়?</em></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-general">General</span></td>
+          <td><span class="bangla">সাধারণ কৃষি পরামর্শ</span></td>
+          <td>Planting calendar, spacing, variety selection, irrigation, market prices.</td>
+          <td><em>রোপণের সঠিক সময় কবে?, জাত কোনটি ভালো?, সেচ কয়দিন পর পর?</em></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-crisis">Crisis</span></td>
+          <td><span class="bangla">জরুরি বিষক্রিয়া / সংকট</span></td>
+          <td>Pesticide ingestion, ocular/dermal burns, suicide, banned chemicals.</td>
+          <td><em>বিষ পেটে চলে গেছে, চোখে স্প্রে ঢুকছে, প্যারাকোয়াট কোথায় পাব?</em></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-token">Off-Topic</span></td>
+          <td><span class="bangla">অকৃষি বা অপ্রাসঙ্গিক</span></td>
+          <td>Non-agricultural queries, politics, casual banter, gibberish.</td>
+          <td><em>কেমন আছো?, ফুটবল খেলার খবর কি?, প্রধানমন্ত্রী কে?</em></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">6</span>Step-by-Step Worked Samples with Boundary Rationale</h2>
+
+    <!-- SAMPLE 1 -->
+    <div class="example-card">
+      <div class="example-card-header">
+        <span class="example-id">Sample #1 &mdash; farmer_q_136</span>
+        <span style="font-size:7pt; color:#64748b;">Source: Facebook Real Farmer Group</span>
+      </div>
+      <div class="example-query">"ধানের জমিতে খোল পোড়া রোগ দেখা দিছে, কি স্প্রে করলে ভালো হবে?"</div>
+      <div class="example-slots">
+        <span class="slot-chip"><span class="slot-label">Crop (BN):</span>ধান</span>
+        <span class="slot-chip"><span class="slot-label">Crop (EN):</span><span class="badge badge-token">rice</span></span>
+        <span class="slot-chip"><span class="slot-label">Specified?</span><span class="badge badge-yes">YES</span></span>
+        <span class="slot-chip"><span class="slot-label">Intent:</span><span class="badge badge-intent">Treatment</span></span>
+        <span class="slot-chip"><span class="slot-label">Confidence:</span><span class="badge badge-token">High</span></span>
+      </div>
+      <div class="example-rationale">
+        <strong>Explicit Crop:</strong> Farmer explicitly names <span class="bangla">ধান</span> (rice) and asks for chemical treatment for Sheath Blight (<span class="bangla">খোল পোড়া</span>). Full slot grounding is present.
+      </div>
+    </div>
+
+    <!-- SAMPLE 2 -->
+    <div class="example-card">
+      <div class="example-card-header">
+        <span class="example-id">Sample #2 &mdash; farmer_q_042</span>
+        <span style="font-size:7pt; color:#64748b;">Source: Field Extension Interview</span>
+      </div>
+      <div class="example-query">"পাতার নিচে সাদা সাদা মাছি বসে পাতা হলুদ করে ফেলছে, কোন বিষ দিব?"</div>
+      <div class="example-slots">
+        <span class="slot-chip"><span class="slot-label">Crop (BN):</span>কোনো ফসল নেই</span>
+        <span class="slot-chip"><span class="slot-label">Crop (EN):</span><span class="badge badge-token">none</span></span>
+        <span class="slot-chip"><span class="slot-label">Specified?</span><span class="badge badge-no">NO</span></span>
+        <span class="slot-chip"><span class="slot-label">Intent:</span><span class="badge badge-intent">Treatment</span></span>
+        <span class="slot-chip"><span class="slot-label">Confidence:</span><span class="badge badge-token">High</span></span>
+      </div>
+      <div class="example-rationale">
+        <strong>Critical Safety Boundary:</strong> Whiteflies (<span class="bangla">সাদা মাছি</span>) and chlorosis described, but <em>no crop is named</em>. Chemical advice here without knowing crop risks phytotoxicity. Marked <span class="badge badge-no">NO</span> so KrishokChat triggers disambiguation chips.
+      </div>
+    </div>
+
+    <!-- SAMPLE 3 -->
+    <div class="example-card">
+      <div class="example-card-header">
+        <span class="example-id">Sample #3 &mdash; farmer_q_059</span>
+        <span style="font-size:7pt; color:#64748b;">Source: Real Farmer Group</span>
+      </div>
+      <div class="example-query">"মাজরা পোকার কীড়া কান্ডের ভেতর ঢুকে কুশি কেটে দিচ্ছে, প্রতিকার কি?"</div>
+      <div class="example-slots">
+        <span class="slot-chip"><span class="slot-label">Crop (BN):</span>কোনো ফসল নেই</span>
+        <span class="slot-chip"><span class="slot-label">Crop (EN):</span><span class="badge badge-token">none</span></span>
+        <span class="slot-chip"><span class="slot-label">Specified?</span><span class="badge badge-no">NO</span></span>
+        <span class="slot-chip"><span class="slot-label">Intent:</span><span class="badge badge-intent">Treatment</span></span>
+        <span class="slot-chip"><span class="slot-label">Confidence:</span><span class="badge badge-token">High</span></span>
+      </div>
+      <div class="example-rationale">
+        <strong>Pest vs Crop Ambiguity:</strong> Yellow stem borer is common in rice, but also ravages maize and sugarcane. Since text omits <em>"ধান"</em>, annotators must <strong>not assume rice</strong>. Label as <span class="badge badge-token">none</span> / <span class="badge badge-no">NO</span>.
+      </div>
+    </div>
+
+    <!-- SAMPLE 4 -->
+    <div class="example-card">
+      <div class="example-card-header">
+        <span class="example-id">Sample #4 &mdash; farmer_q_088</span>
+        <span style="font-size:7pt; color:#64748b;">Source: Field Extension Interview</span>
+      </div>
+      <div class="example-query">"আলুর জমিতে শতকে কি পরিমাণ ইউরিয়া ও জিপসাম দিতে হয়?"</div>
+      <div class="example-slots">
+        <span class="slot-chip"><span class="slot-label">Crop (BN):</span>আলু</span>
+        <span class="slot-chip"><span class="slot-label">Crop (EN):</span><span class="badge badge-token">potato</span></span>
+        <span class="slot-chip"><span class="slot-label">Specified?</span><span class="badge badge-yes">YES</span></span>
+        <span class="slot-chip"><span class="slot-label">Intent:</span><span class="badge badge-intent">Fertilizer</span></span>
+        <span class="slot-chip"><span class="slot-label">Confidence:</span><span class="badge badge-token">High</span></span>
+      </div>
+      <div class="example-rationale">
+        <strong>Dosage Intent:</strong> Clear crop (<span class="bangla">আলু</span> = <code>potato</code>) and asking for exact metric fertilizer rates (Urea, Gypsum per decimal).
+      </div>
+    </div>
+
+    <!-- SAMPLE 5 -->
+    <div class="example-card">
+      <div class="example-card-header">
+        <span class="example-id">Sample #5 &mdash; farmer_q_198</span>
+        <span style="font-size:7pt; color:#64748b;">Source: Real Farmer Group</span>
+      </div>
+      <div class="example-query">"প্যারাকোয়াট বিষ কি আগাছা দমনে স্প্রে করা যাবে?"</div>
+      <div class="example-slots">
+        <span class="slot-chip"><span class="slot-label">Crop (BN):</span>কোনো ফসল নেই</span>
+        <span class="slot-chip"><span class="slot-label">Crop (EN):</span><span class="badge badge-token">none</span></span>
+        <span class="slot-chip"><span class="slot-label">Specified?</span><span class="badge badge-no">NO</span></span>
+        <span class="slot-chip"><span class="slot-label">Intent:</span><span class="badge badge-crisis">Crisis</span></span>
+        <span class="slot-chip"><span class="slot-label">Confidence:</span><span class="badge badge-token">High</span></span>
+      </div>
+      <div class="example-rationale">
+        <strong>Banned Chemical / Safety Intercept:</strong> Paraquat is a banned, lethal herbicide in Bangladesh. Triggers emergency helpline 16123 escalation.
+      </div>
+    </div>
+
+    <div style="margin-top: auto; padding: 6px 10px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 7.2pt; color: #64748b; display: flex; justify-content: space-between;">
+      <span>KrishokChat Advisory System &bull; EACL Demonstration Submission</span>
+      <span>Double-Blind Reviewer Protocol &bull; Page 3 of 4</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== PAGE 4 ==================== -->
+  <div class="page-container">
+    <h2><span class="num">7</span>Post-Annotation Agreement Evaluation (&kappa;) & Automated Pipeline</h2>
+    <p>
+      Once Reviewer 2 completes all batches or the master sheet, the automated evaluation script is run. It compares Reviewer 2's labels against the sealed Reviewer 1 reference to calculate agreement statistics and isolate disagreements for consensus adjudication.
+    </p>
+
+    <div class="callout callout-important">
+      <strong>How to Run the Automated Agreement Script:</strong>
+      <br>Open PowerShell / Terminal in the repository root and run:
+      <br><code>cd "D:\KrishokChat Advisory System\paper\EACL Final\experiments\human_reviewer\scripts"</code>
+      <br><code>python evaluate_dual_review.py</code>
+    </div>
+
+    <h3>Metrics Computed by the Pipeline:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Evaluation Metric</th>
+          <th style="width: 35%;">Formulation</th>
+          <th style="width: 40%;">Scientific Significance for EACL Demo Paper</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Raw Agreement %</strong></td>
+          <td><code>(Agreed Items / 200) &times; 100%</code></td>
+          <td>Overall baseline human agreement on Bengali agricultural queries.</td>
+        </tr>
+        <tr>
+          <td><strong>Binary Crop Ambiguity &kappa;</strong></td>
+          <td>Cohen's &kappa; on <code>Is Crop Specified?</code> (<span class="badge badge-yes">YES</span> vs <span class="badge badge-no">NO</span>)</td>
+          <td>Validates human agreement on whether a query requires interactive disambiguation chips.</td>
+        </tr>
+        <tr>
+          <td><strong>Exact Taxonomy &kappa;</strong></td>
+          <td>Multi-class Cohen's &kappa; across the 37 crop tokens</td>
+          <td>Confirms fine-grained crop slot reliability across Bengali dialectal variations.</td>
+        </tr>
+        <tr>
+          <td><strong>Intent Classification &kappa;</strong></td>
+          <td>Multi-class Cohen's &kappa; across the 6 intent categories</td>
+          <td>Measures consistency in distinguishing Treatment vs Fertilizer vs Crisis.</td>
+        </tr>
+        <tr>
+          <td><strong>Disagreement Autopsy</strong></td>
+          <td>Exported to <code>dual_review_report.json</code></td>
+          <td>Isolates genuine dialectal edge cases for final consensus adjudication.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Frequently Asked Questions (FAQ) for Annotators</h3>
+    <div style="font-size: 7.8pt; line-height: 1.35; color: #334155; margin-top: 4px;">
+      <p style="margin-bottom: 4px;"><strong>Q1: What if the farmer mentions two crops, e.g., "ধান ও গম"?</strong><br>
+      <strong>A:</strong> Select the primary crop from the dropdown (e.g., <code>rice</code>) and add a note in Column J: <em>"Dual crop: ধান ও গম"</em>.</p>
+      
+      <p style="margin-bottom: 4px;"><strong>Q2: What if the crop is not among the 36 named crops?</strong><br>
+      <strong>A:</strong> Select <code>other_crop</code> from the dropdown, write the exact Bengali name in Column E, and explain in Column J (e.g., <em>"ড্রাগন ফল"</em> or <em>"পান সুপারী"</em>).</p>
+
+      <p style="margin-bottom: 4px;"><strong>Q3: Should I correct spelling mistakes in the farmer's query?</strong><br>
+      <strong>A:</strong> No! Leave Column D completely untouched. The query reflects authentic farmer input with colloquial spellings.</p>
+
+      <p style="margin-bottom: 4px;"><strong>Q4: Can I use Excel desktop or Google Sheets?</strong><br>
+      <strong>A:</strong> Both work! The files are standard <code>.xlsx</code> with standard openpyxl Data Validation dropdown lists compatible with Microsoft Excel, LibreOffice, and Google Sheets.</p>
+    </div>
+
+    <h3>Pre-Submission Quality Checklist</h3>
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 5px; padding: 6px 10px; font-size: 7.6pt; line-height: 1.35; color: #166534; margin-top: 6px;">
+      &bull; <strong>All 200 rows completed:</strong> No blanks in Column F (Crop EN), Column G (Specified?), or Column H (Intent).<br>
+      &bull; <strong>Valid dropdown tokens used:</strong> No typos or unauthorized category names entered.<br>
+      &bull; <strong>Double-blind preserved:</strong> Review performed without referencing model outputs or Reviewer 1 labels.<br>
+      &bull; <strong>Saved properly:</strong> Files saved in <code>batches/</code> or <code>master_blind_sheet_200.xlsx</code>.
+    </div>
+
+    <div style="margin-top: auto; padding: 6px 10px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 7.2pt; color: #64748b; display: flex; justify-content: space-between;">
+      <span>KrishokChat Advisory System &bull; EACL Demonstration Submission</span>
+      <span>Double-Blind Reviewer Protocol &bull; Page 4 of 4</span>
+    </div>
+  </div>
+
+</body>
+</html>

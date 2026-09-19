@@ -1,0 +1,21 @@
+﻿Item #,Query ID,Crop Name (বাংলায় ফসলের নাম),Crop Taxonomy (English),Is Crop Specified?,Intent Category,Confidence,Reviewer Notes
+121,farmer_q_450,কোনো ফসল নেই,none,NO,General,High,মাটি পরীক্ষা ও ফলন হ্রাস সংক্রান্ত সাধারণ কৃষি/মাটি ব্যবস্থাপনা প্রশ্ন; ফসল উল্লেখ নেই।
+122,farmer_q_214,টমেটো,tomato,YES,Treatment,High,টমেটো পাতা কোঁকড়ানো রোগ (Leaf Curl Virus সন্দেহ) দূর করার উপায়; রোগ প্রতিকার।
+123,farmer_q_22,পাট,jute,YES,Fertilizer,High,পাটে হিউমিক এসিড প্রয়োগের পদ্ধতি (পাতায় স্প্রে নাকি মাটিতে); সার/মাটি সংশোধক বিষয়ক।
+124,farmer_q_142,আম,mango,YES,Prevention,High,"""মুকুল ঝরা রোধে"" — স্পষ্ট প্রতিরোধমূলক ফ্রেজিং; ফুল ঝরা প্রতিরোধে করণীয়।"
+125,farmer_q_308,পেয়ারা,guava,YES,Treatment,High,পেয়ারা কান্ডে আঠালো রস (Stem bleeding/gummosis) ও গাছ দুর্বল হওয়া; রোগ লক্ষণ ও প্রতিকার।
+126,farmer_q_469,ধান,rice,YES,General,High,জলাবদ্ধতা ও ধান রোপণের সম্ভাব্যতা; সাধারণ কৃষি/আবহাওয়া ব্যবস্থাপনা।
+127,farmer_q_844,নারিকেল,coconut,YES,Treatment,High,"নারিকেল পাতা খাওয়া, আগা শুকানো ও ফল ঝরা; পোকা (Rhinoceros beetle/Red palm weevil) বা রোগের লক্ষণ ও প্রতিকার।"
+128,farmer_q_538,শসা,cucumber,YES,General,High,শসা গাছে স্ত্রী ফুল (জালি) না আসা; শারীরবৃত্তীয়/পরাগায়ণ সংক্রান্ত সাধারণ প্রশ্ন।
+129,farmer_q_530,ডাটা শাক,other_crop,YES,Treatment,High,ডাটা শাক (Amaranth) তালিকায় নেই → other_crop; পাতায় ফুটো ও স্প্রে/কীটনাশক চাওয়া হয়েছে।
+130,farmer_q_172,ধান,rice,YES,Fertilizer,High,ধানে ইউরিয়া সারের অপচয় কমানো (যেমন: USG বা নিম-লেপ্ত ইউরিয়া); সার ব্যবস্থাপনা।
+131,farmer_q_763,কাঁঠাল,jackfruit,YES,Treatment,High,কাঁঠালের মুচি/কচি ফল কালো হয়ে পচে ঝরে পড়া (Fruit rot/Anthracnose); রোগ প্রতিকার।
+132,farmer_q_712,ধান (আমন),rice,YES,Treatment,High,"Banglish: ""Amon dhan bijtolar poka domon"" = আমন ধানের বীজতলার পোকা দমন; কীট ব্যবস্থাপনা।"
+133,farmer_q_889,কোনো ফসল নেই,none,NO,Off-Topic,High,গরুর খামার (Dairy farming); ফসল-ভিত্তিক অ্যাডভাইজরি সিস্টেমের আওতার বাইরে (Livestock-only)।
+134,farmer_q_416,ধান,rice,YES,Treatment,High,ধানের শিষ সাদা হওয়া (Ufra পোকা বা Blast রোগ সন্দেহ); রোগ/পোকা নির্ণয় ও প্রতিকার।
+135,farmer_q_745,কাঁঠাল,jackfruit,YES,Treatment,High,কাঁঠালের অভ্যন্তরীণ পচন ও দুর্গন্ধ (Soft rot / Bacterial disease); দীর্ঘ বর্ণনামূলক রোগ-ব্যবস্থাপনা প্রশ্ন (Item 62-এর অনুরূপ)।
+136,farmer_q_287,আলু,potato,YES,Treatment,High,Item 1 (farmer_q_136)-এর হুবহু ডুপ্লিকেট; আলুর লেট ব্লাইট/মড়ক রোগের প্রতিকার।
+137,farmer_q_279,লেবু,lemon,YES,Treatment,High,লেবুতে ক্যাংকার (Canker) ও পাতায় বাদামী দাগ; ব্যাকটেরিয়াজনিত রোগের প্রতিকার।
+138,farmer_q_588,ভুট্টা,corn,YES,Treatment,High,ভুট্টা ক্ষেতে ইঁদুরের উপদ্রব; ক্ষতিকারক প্রাণী/পোকা দমন।
+139,farmer_q_527,মরিচ,chilli,YES,Treatment,High,মরিচ গাছের ডগা পোড়া (Dieback/Anthracnose) ও ওষুধ চাওয়া হয়েছে; রোগ প্রতিকার।
+140,farmer_q_874,কোনো ফসল নেই,none,NO,General,High,"সমন্বিত খামার (মুরগি, মাছ, সবজি) প্রশিক্ষণ; ""সবজি"" generic হওয়ায় "none; সাধারণ কৃষি প্রশিক্ষণ সংক্রান্ত।

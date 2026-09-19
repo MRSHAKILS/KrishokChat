@@ -1,0 +1,21 @@
+﻿Item #,Query ID,Crop Name (বাংলায় ফসলের নাম),Crop Taxonomy (English),Is Crop Specified?,Intent Category,Confidence,Reviewer Notes
+161,farmer_q_744,ড্রাগন ফল,dragon_fruit,YES,Treatment,High,ফুল ঝরে পড়ার লক্ষণ এবং ওষুধ/সারের মাধ্যমে প্রতিকার চাওয়া হয়েছে।
+162,farmer_q_16,মরিচ,chilli,YES,General,High,নির্দিষ্ট জমির আয়তনে মরিচের ফলনের সম্ভাব্যতা/চাষ ব্যবস্থাপনা সংক্রান্ত সাধারণ প্রশ্ন।
+163,farmer_q_896,কোনো ফসল নেই,none,NO,General,High,"""ফলের চাষ"" generic; ফল চাষে প্রশিক্ষণ ও সরকারি অনুদান সংক্রান্ত সাধারণ তথ্য।"
+164,farmer_q_302,শসা,cucumber,YES,Treatment,High,শসা গাছের গোড়ায় পচন (রোগ লক্ষণ) এবং জৈব প্রতিকার চাওয়া হয়েছে।
+165,farmer_q_946,আম,mango,YES,General,High,আম্রপালি ও বারি-৪ এর সাথে বাণিজ্যিকভাবে লাভজনক নতুন আমের জাত নির্বাচন; সাধারণ পরামর্শ।
+166,farmer_q_15,শিম,bean,YES,General,High,শিমের জাত ও বীজ কোম্পানি নির্বাচন; বীজ বপন/চাষ পরামর্শ।
+167,farmer_q_57,হলুদ,turmeric,YES,Treatment,High,হলুদ জমিতে আগাছানাশক (herbicide) প্রয়োগ; আগাছা দমনে রাসায়নিক/ওষুধ চাওয়ায় Treatment।
+168,farmer_q_309,তরমুজ,watermelon,YES,Treatment,High,তরমুজ গাছের গোড়ায় পচন ও শুকিয়ে যাওয়া; রোগ লক্ষণ ও সমাধান।
+169,farmer_q_775,মরিচ,chilli,YES,General,High,"টবের মরিচ গাছে ফুল ঝরে পড়া; পোকা/রোগের উল্লেখ নেই, তাই শারীরবৃত্তীয়/পরাগায়ণ সংক্রান্ত General।"
+170,farmer_q_834,পেঁপে,papaya,YES,General,High,"পেঁপের জাত নির্বাচন, বীজের উৎস, বীজতলা ও রোপণ দূরত্ব; বিস্তারিত চাষ পরামর্শ।"
+171,farmer_q_414,টমেটো,tomato,YES,Treatment,High,টমেটো গাছ হলুদ হওয়া (রোগ/পুষ্টি লক্ষণ) এবং প্রতিকার চাওয়া হয়েছে।
+172,farmer_q_338,ধান,rice,YES,Treatment,High,ধানের পাতায় লাল দাগ (রোগ লক্ষণ) এবং প্রতিকার।
+173,farmer_q_125,টমেটো,tomato,YES,Treatment,High,টমেটো ফলের নিচের দিক কালো হয়ে পচা (Blossom End Rot সন্দেহ); রোগ প্রতিকার।
+174,farmer_q_325,বেগুন,brinjal,YES,Treatment,High,বেগুনের ডগা ও ফল ছিদ্রকারী পোকা (shoot/fruit borer) দমনে জৈব উপায়; কীট ব্যবস্থাপনা।
+175,farmer_q_216,কোনো ফসল নেই,none,NO,Fertilizer,High,"""শীতকালীন সবজি"" generic → "none; সার প্রয়োগের নিয়ম; সার ব্যবস্থাপনা।
+176,farmer_q_135,বেগুন,brinjal,YES,Treatment,High,Item 174-এর প্রায় ডুপ্লিকেট; বেগুনের ডগা/ফল ছিদ্রকারী পোকা দমন।
+177,farmer_q_63,ধান (আমন),rice,YES,General,High,আমন ধান (rice alias); উচ্চ ফলনশীল জাত নির্বাচন।
+178,farmer_q_970,কোনো ফসল নেই,none,NO,Fertilizer,High,ফসল উল্লেখ নেই; লিটোসেন ও ডিএপি সারের বাজার/প্রাপ্যতা সংক্রান্ত সার-বিষয়ক প্রশ্ন।
+179,farmer_q_470,ধান,rice,YES,Treatment,High,ধানের জমিতে আগাছা দমনে ওষুধ (herbicide); কীট/আগাছা ব্যবস্থাপনা।
+180,farmer_q_537,ধান,rice,YES,General,High,অকাল বৃষ্টিতে ধানের ক্ষতি ও পুনরায় চাষ/লাগানোর সম্ভাব্যতা; আবহাওয়া ও চাষ ব্যবস্থাপনা।

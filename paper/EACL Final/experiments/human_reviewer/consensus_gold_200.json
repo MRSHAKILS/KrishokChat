@@ -1,0 +1,6202 @@
+[
+  {
+    "item_no": 1,
+    "query_id": "farmer_q_136",
+    "source": "fb_group_real_farmer",
+    "query": "আলুর জমিতে লেট ব্লাইট বা মড়ক রোগ থেকে বাঁচার উপায় কী?",
+    "gold_crop": "potato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "লেট ব্লাইট/মড়ক রোগ ব্যবস্থাপনা চাওয়া হয়েছে; লক্ষণ সুস্পষ্টভাবে উল্লেখ নেই, তাই প্রতিরোধমূলক পরামর্শও প্রাসঙ্গিক হতে পারে।"
+    },
+    "external_r2": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "লেট ব্লাইট (late blight) স্পষ্ট; আলু নির্দিষ্ট। প্রতিকার/প্রতিরোধ চাওয়া।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "potato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 2,
+    "query_id": "farmer_q_856",
+    "source": "krishibangla.com",
+    "query": "ভাই, অতিরিক্ত বৃষ্টির কারণে আমার ছাদের ফলের গাছগুলো কেমন যেন ঝিমিয়ে গেছে আর দুর্বল হয়ে পড়ছে। এখন আমি কী করতে পারি?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "“ছাদের ফলের গাছ” বলা হয়েছে, কিন্তু নির্দিষ্ট কোনো ফসল/ফলের গাছ উল্লেখ নেই; অতিরিক্ত বৃষ্টিতে ঝিমিয়ে পড়া বিষয়ে সাধারণ পরামর্শ চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদের ফলের গাছ — নির্দিষ্ট ফসলের নাম নেই (আম/লিচু/অন্যান্য হতে পারে)। সাধারণ পরামর্শ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "rooftop fruit trees, general weakness"
+    }
+  },
+  {
+    "item_no": 3,
+    "query_id": "farmer_q_748",
+    "source": "fb_group_real_farmer",
+    "query": "আতা গাছে প্রচুর ফুল আসে কিন্তু ঝরে যায়, কী করলে ফুলগুলো টিকবে আর ফল হবে?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আতা",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আতা নিয়ন্ত্রিত ফসল তালিকায় নেই, তাই other_crop; ফুল ঝরে যাওয়া ও ফল ধারণ বিষয়ে সাধারণ কৃষি পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "আতা",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আতা (sugar apple / Annona squamosa) তালিকায় নেই → other_crop। ফুল ঝরা ও ফলধারণের সাধারণ পরামর্শ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "custard apple"
+    }
+  },
+  {
+    "item_no": 4,
+    "query_id": "farmer_q_51",
+    "source": "fb_group_real_farmer",
+    "query": "আমের ভিতরে পোকা মারার জন্য কোন বিষ স্পে করতে হবে?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আমের ফলের ভেতরের পোকা দমনের জন্য কীটনাশক/বিষ স্প্রে জানতে চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আমের ভিতরের পোকা (fruit borer) দমনে কীটনাশক চাওয়া।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 5,
+    "query_id": "farmer_q_258",
+    "source": "fb_group_real_farmer",
+    "query": "আম গাছে ছত্রাক বা পাউডারি মিলডিউ রোগের প্রকোপ বাড়ছে। ঘরোয়া বা ভালো কোনো সমাধান আছে কি?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আম গাছে ছত্রাক/পাউডারি মিলডিউ প্রকোপ; প্রতিকার বা সমাধান চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাউডারি মিলডিউ (powdery mildew) ও ছত্রাক রোগের প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": "FIX extractor said rice"
+    }
+  },
+  {
+    "item_no": 6,
+    "query_id": "farmer_q_332",
+    "source": "fb_group_real_farmer",
+    "query": "ধানের চারাগাছ লাল হয়ে যাচ্ছে, কি কোনো সারের ঘাটতি?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ধানের চারা লাল হয়ে যাচ্ছে এবং সারের ঘাটতি কি না জানতে চাওয়া হয়েছে; পুষ্টি/সার সম্পর্কিত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "চারা লাল হওয়া — সার/পুষ্টি ঘাটতির সন্দেহ; সার ব্যবস্থাপনা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 7,
+    "query_id": "farmer_q_81",
+    "source": "fb_group_real_farmer",
+    "query": "সলুবোর + কুইকপটাশ +চিলেটেড জিংক \nএকসাথে মিশিয়ে স্প্রে করা যাবে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "সলুবোর + কুইকপটাশ + চিলেটেড জিংক একসাথে মিশিয়ে স্প্রে করা যাবে কি না; ফসল উল্লেখ নেই, কিন্তু সার/মাইক্রোনিউট্রিয়েন্ট প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "মাইক্রোনিউট্রিয়েন্ট (বোরন, পটাশ, জিংক) মিশ্রণের সামঞ্জস্য — ফসল উল্লেখ নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "fertilizer-mix compatibility, no crop"
+    }
+  },
+  {
+    "item_no": 8,
+    "query_id": "farmer_q_607",
+    "source": "field_sourced_farmer",
+    "query": "আমন ধানের জমিতে কি এখন পটাশ সার দেওয়া যাবে?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "আমন ধানের জমিতে পটাশ সার প্রয়োগের সময়সঙ্গততা জানতে চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "আমন ধান নির্দিষ্ট; পটাশ সার প্রয়োগের সময় জিজ্ঞাসা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 9,
+    "query_id": "farmer_q_282",
+    "source": "fb_group_real_farmer",
+    "query": "পেঁপে গাছের গোড়া পচা রোধে কী করণীয়?",
+    "gold_crop": "papaya",
+    "gold_specified": "YES",
+    "gold_intent": "Prevention/Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Prevention",
+      "confidence": "High",
+      "notes": "পেঁপে গাছের গোড়া পচা রোধে করণীয়; “রোধে” শব্দটি প্রতিরোধমূলক উদ্দেশ্য নির্দেশ করে।"
+    },
+    "external_r2": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "গোড়া পচা (collar/root rot) রোধ/প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "papaya",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 10,
+    "query_id": "farmer_q_389",
+    "source": "field_sourced_farmer",
+    "query": "ফসলের মাঠ খুব শুকনা, কতদিন পর পর পানি দিমু?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "“ফসলের মাঠ” বলা হয়েছে কিন্তু নির্দিষ্ট ফসল নেই; শুকনা জমিতে সেচ ব্যবস্থাপনা বিষয়ে সাধারণ প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ফসলের নাম নেই; সেচ ব্যবস্থাপনা — সাধারণ পরামর্শ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "irrigation timing, no crop"
+    }
+  },
+  {
+    "item_no": 11,
+    "query_id": "farmer_q_413",
+    "source": "field_sourced_farmer",
+    "query": "ধানের পাতায় কেমন জানি লাল দাগ হইছে, কি ঔষধ দিমু?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধানের পাতায় লাল দাগ দেখা গেছে এবং ঔষধ জানতে চাওয়া হয়েছে; রোগ/লক্ষণভিত্তিক প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতায় লাল দাগ — রোগের লক্ষণ; ঔষধ/স্প্রে চাওয়া।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 12,
+    "query_id": "farmer_q_49",
+    "source": "fb_group_real_farmer",
+    "query": "\"আমাদের আম গাছের ফলগুলো এই বছর এরকম বাদামী-কালো দাগযুক্ত, কুঁচকে যাওয়া এবং অনেক ফল ঝরে পড়ছে (ছবি সংযুক্ত)। এটা কোন রোগ হতে পারে? বিশেষ করে এনথ্রাকনোজ নাকি অন্য কিছু?\nএর প্রতিকার কি?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আমের ফলে বাদামী-কালো দাগ, কুঁচকে যাওয়া ও ঝরে পড়া; এনথ্রাকনোজ সন্দেহ এবং প্রতিকার চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ফলের বাদামী-কালো দাগ, ঝরে পড়া — অ্যানথ্রাকনোজ সন্দেহ; রোগ নির্ণয় ও প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": "photo attached"
+    }
+  },
+  {
+    "item_no": 13,
+    "query_id": "farmer_q_311",
+    "source": "fb_group_real_farmer",
+    "query": "কলা গাছের পাতা হলুদ হয়ে ঝুলে পড়ছে, গোড়া থেকে কালো দাগ আসছে। করণীয় কী?",
+    "gold_crop": "banana",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কলা",
+      "crop_en": "banana",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কলা গাছের পাতা হলুদ হয়ে ঝুলে পড়া এবং গোড়া থেকে কালো দাগ; রোগ ব্যবস্থাপনা/প্রতিকার প্রয়োজন।"
+    },
+    "external_r2": {
+      "crop_bn": "কলা",
+      "crop_en": "banana",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা হলুদ, গোড়ায় কালো দাগ — সম্ভবত পানামা/রট রোগ; প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "banana",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 14,
+    "query_id": "farmer_q_174",
+    "source": "fb_group_real_farmer",
+    "query": "টমেটো গাছে পাতা মোড়ানো রোগ হয়েছে, গাছগুলো একদম কুঁকড়ে গেছে। প্রতিকার কী?",
+    "gold_crop": "tomato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "টমেটো গাছে পাতা মোড়ানো/কুঁকড়ে যাওয়া রোগ দেখা দিয়েছে; প্রতিকার চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা মোড়ানো (leaf curl) রোগ — ভাইরাস/পোকা সম্পর্কিত; প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "tomato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 15,
+    "query_id": "farmer_q_83",
+    "source": "fb_group_real_farmer",
+    "query": "পাটের জমিতে শুধু কিউলোপ দিছি এতে কি কাজ হবে?",
+    "gold_crop": "jute",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment/Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পাট",
+      "crop_en": "jute",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Low",
+      "notes": "“কিউলোপ” সম্ভবত কীটনাশক/আগাছানাশক বাণিজ্যিক পণ্য; প্রশ্নে সুনির্দিষ্ট সমস্যা বা লক্ষণ উল্লেখ নেই, তাই আত্মবিশ্বাস কম।"
+    },
+    "external_r2": {
+      "crop_bn": "পাট",
+      "crop_en": "jute",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "কিউলোপ (সম্ভবত Q-lop / পটাশ জাতীয় সার) একক ব্যবহারের কার্যকারিতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "jute",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 16,
+    "query_id": "farmer_q_110",
+    "source": "fb_group_real_farmer",
+    "query": "শীতকালীন শাকসবজি চাষে হরমোন কি ব্যবহার করা ঠিক?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "শীতকালীন শাকসবজি চাষে হরমোন ব্যবহারের যথার্থতা নিয়ে সাধারণ প্রশ্ন; নির্দিষ্ট কোনো ফসল উল্লেখ নেই।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "Medium",
+      "notes": "শীতকালীন শাকসবজি সাধারণ; নির্দিষ্ট ফসল নেই। হরমোন ব্যবহার — সাধারণ পরামর্শ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "winter vegetables hormones, general"
+    }
+  },
+  {
+    "item_no": 17,
+    "query_id": "farmer_q_468",
+    "source": "field_sourced_farmer",
+    "query": "মাটি খুব শক্ত হয়ে গেছে, আবাদ কি ভালো হবে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাটি শক্ত হয়ে যাওয়া ও আবাদ ভালো হবে কি না; ফসল উল্লেখ নেই; সাধারণ মাটি/চাষ ব্যবস্থাপনা প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাটির গঠন/কঠিনতা — সাধারণ জমি ব্যবস্থাপনা; ফসল উল্লেখ নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "hard soil, general"
+    }
+  },
+  {
+    "item_no": 18,
+    "query_id": "farmer_q_112",
+    "source": "fb_group_real_farmer",
+    "query": "সবজির পাতায় সাদা রঙের মাকড়সার মতো কী যেন দেখা যাচ্ছে, গাছ বিবর্ণ হয়ে যাচ্ছে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "“সবজি” বলা হলেও নির্দিষ্ট ফসল নয়; পাতায় সাদা মাকড়সার মতো কীট/মাইট সন্দেহ এবং গাছ বিবর্ণ হওয়ার লক্ষণ আছে।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সবজি সাধারণ; সাদা মাকড়সা (red spider mite?) লক্ষণ। নির্দিষ্ট ফসল নেই → NO।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "vegetables in general, no single crop"
+    }
+  },
+  {
+    "item_no": 19,
+    "query_id": "farmer_q_44",
+    "source": "fb_group_real_farmer",
+    "query": "ভালো জাতের লাউ বীজ সাজেস্ট করেন প্লিজ, যেগুলা রোগপ্রতিরোধী এবং অধিক ফলশীন!",
+    "gold_crop": "bottle_gourd",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "লাউ",
+      "crop_en": "bottle_gourd",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লাউ বীজের জাত নির্বাচন; রোগপ্রতিরোধী ও অধিক ফলনশীল জাত জানতে চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "লাউ",
+      "crop_en": "bottle_gourd",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লাউ জাত নির্বাচন — রোগপ্রতিরোধী ও উচ্চ ফলনশীল বীজ সাজেশন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "bottle_gourd",
+      "specified": "YES",
+      "notes": "seed selection"
+    }
+  },
+  {
+    "item_no": 20,
+    "query_id": "farmer_q_841",
+    "source": "krishibangla.com",
+    "query": "গ্ল্যাডিওলাস লাগানোর সময় টিএসপি সার দিতে ভুলে গিয়েছিলাম, বাকি সব সার দেওয়া হয়েছে। এখন এই অবস্থায় টিএসপি সারটা কীভাবে প্রয়োগ করলে ভালো হয়?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "গ্ল্যাডিওলাস",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "গ্ল্যাডিওলাস তালিকায় নেই, তাই other_crop; টিএসপি সার প্রয়োগ পদ্ধতি/সময় নিয়ে"
+    },
+    "external_r2": {
+      "crop_bn": "গ্ল্যাডিওলাস",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "গ্ল্যাডিওলাস (gladiolus) তালিকায় নেই → other_crop। টিএসপি উপরিপ্রয়োগের পদ্ধতি।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 21,
+    "query_id": "farmer_q_379",
+    "source": "field_sourced_farmer",
+    "query": "ধানের জমিতে ইউরিয়া সার কতটুকু দেওয়া উচিত?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ধানের জমিতে ইউরিয়ার মাত্রা জানতে চাওয়া হয়েছে; সরাসরি সার-ডোজ প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ধান + ইউরিয়া মাত্রা — স্পষ্ট সার ব্যবস্থাপনা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 22,
+    "query_id": "farmer_q_186",
+    "source": "fb_group_real_farmer",
+    "query": "বর্ষাকালে মরিচ গাছে গোড়া পচা রোগ থেকে বাঁচার উপায় কী?",
+    "gold_crop": "chilli",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "বর্ষাকালে গোড়া পচা রোগ থেকে বাঁচার উপায়; লক্ষণের উল্লেখ নেই, তাই প্রতিরোধমূলকও হতে পারে — Batch 01-এর একই ধরনের ফ্রেজিংয়ের সাথে সামঞ্জস্য রাখা হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "মরিচের গোড়া পচা (collar rot) — রোগ প্রতিরোধ/প্রতিকার। Prevention-এর কাছাকাছি কিন্তু রোগ থেকে বাঁচার উপায় → Treatment।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "chilli",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 23,
+    "query_id": "farmer_q_701",
+    "source": "fb_group_real_farmer",
+    "query": "strawberry chas shomporke jante cai",
+    "gold_crop": "strawberry",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "স্ট্রবেরি",
+      "crop_en": "strawberry",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "প্রশ্নটি রোমানাইজড বাংলা (Banglish): \"strawberry chas shomporke jante cai\"; স্ট্রবেরি চাষ সম্পর্কে সাধারণ তথ্য চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "স্ট্রবেরি",
+      "crop_en": "strawberry",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "Romanized Bangla: স্ট্রবেরি চাষ সম্পর্কে জানতে চাই — সাধারণ চাষ পদ্ধতি।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "strawberry",
+      "specified": "YES",
+      "notes": "Banglish"
+    }
+  },
+  {
+    "item_no": 24,
+    "query_id": "farmer_q_552",
+    "source": "field_sourced_farmer",
+    "query": "ভুইতে জল দিলে গাছ হলুদ হইয়া যায়, কি করব?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General/Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "Medium",
+      "notes": "ফসলের নাম নেই; জল দেওয়ার পর গাছ হলুদ হওয়া — সেচ/নিষ্কাশন ব্যবস্থাপনা সংক্রান্ত; পুষ্টি ঘাটতি সন্দেহ হলে Fertilizer হতে পারে।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "‘ভুইতে’ = মাটিতে/জমিতে; গাছ হলুদ — ফসলের নাম নেই। লক্ষণভিত্তিক কিন্তু underspecified।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "field watering, no crop"
+    }
+  },
+  {
+    "item_no": 25,
+    "query_id": "farmer_q_471",
+    "source": "field_sourced_farmer",
+    "query": "ফুলকপি বড় হচ্ছে না, কী খৈল বা সার দিমু?",
+    "gold_crop": "cauliflower",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ফুলকপি",
+      "crop_en": "cauliflower",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ফুলকপি বড় না হওয়ায় খৈল বা সার জানতে চাওয়া হয়েছে; সার-সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "ফুলকপি",
+      "crop_en": "cauliflower",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ফুলকপি বৃদ্ধি না হওয়া — খৈল/সার চাওয়া।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "cauliflower",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 26,
+    "query_id": "farmer_q_301",
+    "source": "fb_group_real_farmer",
+    "query": "সরিষা ক্ষেতে জাব পোকার আক্রমণ থেকে মুক্তি পাওয়ার উপায় কী?",
+    "gold_crop": "mustard",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সরিষা ক্ষেতে জাব পোকার (aphid) আক্রমণ থেকে মুক্তি; কীট দমন/প্রতিকার চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "জাব পোকা (aphid) সরিষায় — কীটনাশক/দমন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mustard",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 27,
+    "query_id": "farmer_q_176",
+    "source": "fb_group_real_farmer",
+    "query": "তরমুজ চাষের জন্য ভালো কোনো হাইব্রিড জাতের নাম বলবেন কি?",
+    "gold_crop": "watermelon",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "তরমুজ",
+      "crop_en": "watermelon",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "তরমুজ চাষের হাইব্রিড জাত নির্বাচন; সাধারণ কৃষি পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "তরমুজ",
+      "crop_en": "watermelon",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "তরমুজ হাইব্রিড জাত নির্বাচন — সাধারণ পরামর্শ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "watermelon",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 28,
+    "query_id": "farmer_q_116",
+    "source": "fb_group_real_farmer",
+    "query": "পেঁপে গাছের পাতা কুকড়ে যাচ্ছে, এটি কি কোনো পোকার আক্রমণ?",
+    "gold_crop": "papaya",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পেঁপে পাতা কুঁকড়ে যাওয়া; পোকার আক্রমণ কি না রোগনির্ণয় ও প্রতিকার চাওয়া হয়েছে (মাইট/ভাইরাস সন্দেহ)।"
+    },
+    "external_r2": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা কুঁকড়ে যাওয়া — পোকা/রোগ নির্ণয় ও প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "papaya",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 29,
+    "query_id": "farmer_q_930",
+    "source": "krishibangla.com",
+    "query": "স্ট্রবেরি চাষ করতে কী কী লাগে আর এর পরিচর্যা কীভাবে করতে হয়?",
+    "gold_crop": "strawberry",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "স্ট্রবেরি",
+      "crop_en": "strawberry",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "স্ট্রবেরি চাষের উপকরণ ও পরিচর্যা পদ্ধতি; সাধারণ চাষ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "স্ট্রবেরি",
+      "crop_en": "strawberry",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "স্ট্রবেরি চাষ ও পরিচর্যা — সাধারণ agronomic advice।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "strawberry",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 30,
+    "query_id": "farmer_q_620",
+    "source": "field_sourced_farmer",
+    "query": "শসা গাছে ফুল আসছে কিন্তু ঝরে যাচ্ছে, কী করি?",
+    "gold_crop": "cucumber",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "শসা গাছে ফুল ঝরে পড়া; পরাগায়ণ/পরিচর্যা সংক্রান্ত সাধারণ সমস্যা, পোকা-রোগ বা সারের উল্লেখ নেই।"
+    },
+    "external_r2": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "শসায় ফুল ঝরা — পরাগায়ন/পুষ্টি/হরমোন সম্পর্কিত সাধারণ পরামর্শ (রোগ/পোকা স্পষ্ট নয়)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "cucumber",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 31,
+    "query_id": "farmer_q_189",
+    "source": "fb_group_real_farmer",
+    "query": "ধানের জমিতে ইউরিয়া সারের অপচয় কমাতে করণীয় কী?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ধানের জমিতে ইউরিয়ার অপচয় কমানোর কৌশল (যেমন USG, বিভক্ত প্রয়োগ); সার ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ইউরিয়া অপচয় কমানো — সার ব্যবস্থাপনা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 32,
+    "query_id": "farmer_q_23",
+    "source": "fb_group_real_farmer",
+    "query": "লাউ, করলা, ধুন্দল, চালকুমড়া\nএই মাসে (জুন) এগুলোর মধ্যে কোনটা কোনটা চাষ করলে বেশি ভালো হবে?",
+    "gold_crop": "bottle_gourd",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "লাউ, করলা, ধুন্দল, চালকুমড়া",
+      "crop_en": "bottle_gourd, bitter_gourd, other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "একাধিক ফসল; জুন মাসে কোনটি চাষ উপযোগী — বপন ক্যালেন্ডার/জাত-মৌসুম নির্বাচন। ধুন্দল ও চালকুমড়া তালিকায় নেই → other_crop।"
+    },
+    "external_r2": {
+      "crop_bn": "লাউ, করলা",
+      "crop_en": "bottle_gourd, bitter_gourd",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "একাধিক ফসল (লাউ, করলা, ধুন্দল, চালকুমড়া); প্রাথমিক দুটি তালিকায় আছে। জুন মাসে জাত/চাষ উপযোগিতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "multi-crop choice question"
+    }
+  },
+  {
+    "item_no": 33,
+    "query_id": "farmer_q_998",
+    "source": "krishibangla.com",
+    "query": "বাঁশের গোড়ায় মাটি দেওয়ার পর কোন সার ব্যবহার করলে বাঁশ মোটা আর বেশি হবে, সেটা জানতে চাচ্ছিলাম।",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বাঁশ",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "বাঁশ নিয়ন্ত্রিত তালিকায় নেই → other_crop; গোড়ায় মাটি দেওয়ার পর কোন সার দেবে — সার প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "বাঁশ",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "বাঁশ (bamboo) তালিকায় নেই → other_crop। সার প্রয়োগ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 34,
+    "query_id": "farmer_q_933",
+    "source": "fb_group_real_farmer",
+    "query": "আমাদের পত্নীতলার জমিতে মাল্টা বা বেদানার বাগান করা কি ঠিক হবে? জমিটা এতদিন খালি পড়ে ছিল, এখন এখানে চাষ করার জন্য ভালো জাতের পরামর্শ দিলে খুব উপকার হতো।",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "মাল্টা, বেদানা",
+      "crop_en": "other_crop, litchi",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "পতিত জমিতে মাল্টা/বেদানা বাগানের উপযোগিতা ও জাত পরামর্শ; বেদানা = লিচুর জাত (তালিকার alias), মাল্টা তালিকায় নেই → other_crop।"
+    },
+    "external_r2": {
+      "crop_bn": "মাল্টা, বেদানা",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাল্টা (sweet orange) ও বেদানা (pomegranate) তালিকায় নেই → other_crop। জাত ও বাগান উপযোগিতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "orchard-choice malta/pomegranate"
+    }
+  },
+  {
+    "item_no": 35,
+    "query_id": "farmer_q_140",
+    "source": "fb_group_real_farmer",
+    "query": "পেঁপে গাছের কান্ডে পচন দেখা দিচ্ছে, কী ঔষধ দিব?",
+    "gold_crop": "papaya",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পেঁপে কান্ডে পচন দেখা দিয়েছে এবং ঔষধ জানতে চাওয়া হয়েছে; দৃশ্যমান লক্ষণ + রাসায়নিক প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কান্ড পচা — ঔষধ/ছত্রাকনাশক চাওয়া।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "papaya",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 36,
+    "query_id": "farmer_q_964",
+    "source": "fb_group_real_farmer",
+    "query": "বেগুনের ডগার পোকা সব নষ্ট করে দিচ্ছে, ডগাগুলো ঝুলে মরে যাচ্ছে। এর কি কোনো ওষুধ আছে?",
+    "gold_crop": "brinjal",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বেগুনের ডগা/ফল ছিদ্রকারী পোকা (shoot/fruit borer) আক্রমণ ও ওষুধ চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ডগা পোকা (shoot borer) বেগুনে — কীটনাশক।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "brinjal",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 37,
+    "query_id": "farmer_q_700",
+    "source": "fb_group_real_farmer",
+    "query": "আমি ছাদে বাগান করার বিষয়ে আগ্রহী। কিভাবে ছাদে বাগান করার কৌশল জানতে পারবো দয়া করে জানাবেন।",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদে বাগান করার কৌশল; নির্দিষ্ট ফসল নেই; সাধারণ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদে বাগান সাধারণ — নির্দিষ্ট ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "rooftop gardening general"
+    }
+  },
+  {
+    "item_no": 38,
+    "query_id": "farmer_q_232",
+    "source": "fb_group_real_farmer",
+    "query": "বর্ষাকালের লাউ বা মিষ্টি কুমড়া চাষে গোড়া পচা রোধে কী করণীয়?",
+    "gold_crop": "bottle_gourd",
+    "gold_specified": "YES",
+    "gold_intent": "Prevention/Treatment",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "লাউ, মিষ্টি কুমড়া",
+      "crop_en": "bottle_gourd, other_crop",
+      "is_specified": "YES",
+      "intent": "Prevention",
+      "confidence": "High",
+      "notes": "\"গোড়া পচা রোধে\" — স্পষ্ট প্রতিরোধমূলক ফ্রেজিং; মিষ্টি কুমড়া তালিকায় নেই → other_crop।"
+    },
+    "external_r2": {
+      "crop_bn": "লাউ, মিষ্টি কুমড়া",
+      "crop_en": "bottle_gourd, other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "লাউ + মিষ্টি কুমড়া (sweet gourd/pumpkin — other_crop)। গোড়া পচা রোধ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "two crops: lau or sweet pumpkin"
+    }
+  },
+  {
+    "item_no": 39,
+    "query_id": "farmer_q_98",
+    "source": "fb_group_real_farmer",
+    "query": "তীব্র রোধে বারি ৪ আমের পোড়া দাগ রোধে কী করবো?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Prevention/Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম (বারি ৪)",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Prevention",
+      "confidence": "Medium",
+      "notes": "তীব্র রোদে ফলের পোড়া দাগ (sunscald) রোধ — রোগ নয়, শারীরবৃত্তীয় সমস্যা; দৃশ্যমান ক্ষতির আগে প্রতিরোধমূলক ব্যবস্থা, তাই Prevention; সাধারণ ব্যবস্থাপনা ভাবলে General-ও হতে পারে।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বারি-৪ আম; রোদে পোড়া দাগ (sunburn/scorch) রোধ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": "BARI-4 mango"
+    }
+  },
+  {
+    "item_no": 40,
+    "query_id": "farmer_q_860",
+    "source": "krishibangla.com",
+    "query": "আমার বাগানের আম-ডালিম গাছে ফুল ঝরে যাচ্ছে আর কিছু গাছে তো ফুলই আসছে না। এছাড়া কমলার স্বাদ টক-মিষ্টি হচ্ছে না এবং গাছের পাতাও হলুদ হয়ে যাচ্ছে, এর কোনো সমাধান আছে কি?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer/Treatment",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "আম, ডালিম, কমলা",
+      "crop_en": "mango, other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "Medium",
+      "notes": "একাধিক ফল গাছে ফুল ঝরা, ফুল না আসা, স্বাদহীনতা ও পাতা হলুদ — মাইক্রোনিউট্রিয়েন্ট (জিংক/বোরন) ঘাটতির লক্ষণ; সার-ভিত্তিক সমাধান প্রাসঙ্গিক। ডালিম ও কমলা তালিকায় নেই → other_crop।"
+    },
+    "external_r2": {
+      "crop_bn": "আম, ডালিম, কমলা",
+      "crop_en": "mango, other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "আম + ডালিম (pomegranate) + কমলা (orange)। ফুল ঝরা, পাতা হলুদ — পুষ্টি/রোগ মিশ্র; Treatment প্রাধান্য। ডালিম/কমলা → other_crop।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "multi: mango/pomegranate/orange"
+    }
+  },
+  {
+    "item_no": 41,
+    "query_id": "farmer_q_917",
+    "source": "fb_group_real_farmer",
+    "query": "টবের মাটিতে প্রচুর পিঁপড়া ধরেছে, গাছের ক্ষতি না করে কীভাবে এদের দূর করা যায় একটু জানাবেন?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "টবের মাটিতে পিঁপড়া দমন; নির্দিষ্ট ফসল নেই, কিন্তু কীট দমন/প্রতিকার প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "টবের মাটিতে পিঁপড়া — নির্দিষ্ট ফসল নেই। কীট দমন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "potted plants ants, general"
+    }
+  },
+  {
+    "item_no": 42,
+    "query_id": "farmer_q_698",
+    "source": "krishibangla.com",
+    "query": "মাশরুম চাষ করতে চাই,এবং চাষের পদ্ধিতি জানতে চাই",
+    "gold_crop": "mushroom",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "মাশরুম",
+      "crop_en": "mushroom",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাশরুম চাষ পদ্ধতি জানতে চাওয়া হয়েছে; সাধারণ চাষ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "মাশরুম",
+      "crop_en": "mushroom",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাশরুম চাষ পদ্ধতি — সাধারণ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mushroom",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 43,
+    "query_id": "farmer_q_79",
+    "source": "fb_group_real_farmer",
+    "query": "বাতির স্প্রে করার পরও\nঘাসের কচি পাতা খাওয়া পোকা (ফল আর্মি ওয়ার্ম) দমন হচ্ছে না।\nকরণীয়?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ফল আর্মি ওয়ার্ম দমন হচ্ছে না; ফসলের নাম নেই (ভুট্টা অনুমানযোগ্য নয়) — নিয়ম ৪.১ ও farmer_q_059 নজির অনুযায়ী none/NO।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "ফল আর্মি ওয়ার্ম (FAW) সাধারণত ভুট্টা/ধান/সবজিতে; ফসল স্পষ্ট নয় (‘ঘাসের কচি পাতা’)। Treatment।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "pasture grass, fall armyworm"
+    }
+  },
+  {
+    "item_no": 44,
+    "query_id": "farmer_q_982",
+    "source": "fb_group_real_farmer",
+    "query": "শুনলাম নরসিংদী থেকে এখন বিদেশে লেবু পাঠাচ্ছে। আমি আমার বাগানের লেবু তাদের কাছে বিক্রি করতে চাই, কিন্তু কীভাবে যোগাযোগ করব বা কার সাথে কথা বলব বুঝতে পারছি না।",
+    "gold_crop": "lemon",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "লেবু",
+      "crop_en": "lemon",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লেবু রপ্তানিকারকের সাথে যোগাযোগ/বিক্রয়; বাজার-সংক্রান্ত সাধারণ প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "লেবু",
+      "crop_en": "lemon",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লেবু রপ্তানি/বাজার সংযোগ — সাধারণ বাজারজাতকরণ পরামর্শ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "lemon",
+      "specified": "YES",
+      "notes": "marketing"
+    }
+  },
+  {
+    "item_no": 45,
+    "query_id": "farmer_q_585",
+    "source": "field_sourced_farmer",
+    "query": "জমিতে কি এখন गोबर সার দেওয়া যাবে নাকি দেরি আছে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "গোবর সার (জৈব সার) প্রয়োগের সময়; মিশ্র লিপি (\"गोबर\"); ফসল উল্লেখ নেই।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "গোবর সার প্রয়োগের সময় — ফসল উল্লেখ নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "manure timing general (Hindi mix)"
+    }
+  },
+  {
+    "item_no": 46,
+    "query_id": "farmer_q_719",
+    "source": "krishibangla.com",
+    "query": "নরসিংদী হতে ইদানিং বিদেশে লেবু রপ্তানী করা হচ্ছে কিন্তু তাদের সাথে কি ভাবে যোগাযোগ করিব? দয়া করে জানাবেন কি? কোন ফোন নম্বর অথবা ইমেই নম্বর দিতে পারিবেন কি?",
+    "gold_crop": "lemon",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "লেবু",
+      "crop_en": "lemon",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "farmer_q_982-এর প্রায় ডুপ্লিকেট; লেবু রপ্তানি যোগাযোগ/ফোন-ইমেইল — মার্কেট প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "লেবু",
+      "crop_en": "lemon",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লেবু রপ্তানিকারকদের সাথে যোগাযোগ — বাজারজাতকরণ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "lemon",
+      "specified": "YES",
+      "notes": "export contact"
+    }
+  },
+  {
+    "item_no": 47,
+    "query_id": "farmer_q_494",
+    "source": "field_sourced_farmer",
+    "query": "পেপে গাছের পাতা কোঁকড়ে যাচ্ছে, কী রোগ এটা?",
+    "gold_crop": "papaya",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পেঁপে পাতা কোঁকড়ানো; রোগ নির্ণয় চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা কুঁকড়ে যাওয়া — রোগ নির্ণয়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "papaya",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 48,
+    "query_id": "farmer_q_661",
+    "source": "fb_group_real_farmer",
+    "query": "এক জাতের পোকা নারকেল গাছে  পাতা খেয়ে ফেলছে।কি করনীয়। কিভাবে নারকেলের ফলন বাড়ানো যায়।",
+    "gold_crop": "coconut",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "নারকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "দ্বৈত উদ্দেশ্য: পাতা খাওয়া পোকা দমন (প্রধান) + ফলন বৃদ্ধি (গৌণ); প্রধান সমস্যা কীট হওয়ায় Treatment।"
+    },
+    "external_r2": {
+      "crop_bn": "নারিকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা খাওয়া পোকা + ফলন বৃদ্ধি; Treatment প্রাধান্য।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "coconut",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 49,
+    "query_id": "farmer_q_107",
+    "source": "fb_group_real_farmer",
+    "query": "পেয়ারা গাছের পাতা কুঁকড়ে যাচ্ছে, কী পোকা হতে পারে?",
+    "gold_crop": "guava",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেয়ারা",
+      "crop_en": "guava",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পেয়ারা পাতা কুঁকড়ানো; পোকা শনাক্তকরণ ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "পেয়ারা",
+      "crop_en": "guava",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা কুঁকড়ানো — পোকা/রোগ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "guava",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 50,
+    "query_id": "farmer_q_406",
+    "source": "field_sourced_farmer",
+    "query": "সরিষার ফুল আসতেছে, এখন কি আর জল দিমু জমিতে?",
+    "gold_crop": "mustard",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ফুল আসার পর সেচ দেওয়া কি না — সেচ ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ফুল আসার সময় সেচ — সাধারণ পরিচর্যা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mustard",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 51,
+    "query_id": "farmer_q_660",
+    "source": "krishibangla.com",
+    "query": "আমি ছাদে বাগান করি। প্রশিক্ষণ চাই।",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদে বাগানের প্রশিক্ষণ চাওয়া হয়েছে; ফসল উল্লেখ নেই।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদে বাগান প্রশিক্ষণ — নির্দিষ্ট ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "rooftop garden training"
+    }
+  },
+  {
+    "item_no": 52,
+    "query_id": "farmer_q_101",
+    "source": "fb_group_real_farmer",
+    "query": "সলুবোর + কুইকপটাশ +চিলেটেড জিংক \nএকসাথে মিশিয়ে স্প্রে করা যাবে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "farmer_q_81 (Batch 01, Item 7)-এর হুবহু ডুপ্লিকেট; মাইক্রোনিউট্রিয়েন্ট মিশ্রণ স্প্রে প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "মাইক্রোনিউট্রিয়েন্ট মিশ্রণ সামঞ্জস্য — ফসল নেই (batch1-এর অনুরূপ)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "fertilizer-mix compatibility, no crop"
+    }
+  },
+  {
+    "item_no": 53,
+    "query_id": "farmer_q_985",
+    "source": "krishibangla.com",
+    "query": "আমার গোলাপ গাছের নতুন কুঁড়িগুলো সব কুঁকড়ে যাচ্ছে আর পাতা ও ফুলে কালো দাগ পড়ছে। ফুলগুলোও ঠিকমতো ফুটছে না, ছোট হয়ে ঝরে যাচ্ছে; এখন কী করলে গাছটা বাঁচবে?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "গোলাপ",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "গোলাপ তালিকায় নেই → other_crop; কুঁড়ি কুঁকড়ানো, পাতা-ফুলে কালো দাগ — রোগ লক্ষণ ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "গোলাপ",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "গোলাপ (rose) তালিকায় নেই → other_crop। কুঁড়ি কুঁকড়ানো, কালো দাগ — রোগ/পোকা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 54,
+    "query_id": "farmer_q_769",
+    "source": "fb_group_real_farmer",
+    "query": "নারকেল গাছে বড় কালো রঙের শক্ত পোকা ধরেছে, গাছের মাথায় প্রায় ২ সেন্টিমিটারের মতো গর্ত করে ফেলেছে। গাছ বাঁচানোর উপায় কী?",
+    "gold_crop": "coconut",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "নারকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কালো শক্ত বিটল/বোরার পোকা, মাথায় ~২ সেমি গর্ত; গাছ বাঁচানোর প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "নারিকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কালো শক্ত পোকা (সম্ভবত rhinoceros beetle) — গাছ বাঁচানো।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "coconut",
+      "specified": "YES",
+      "notes": "rhinoceros beetle"
+    }
+  },
+  {
+    "item_no": 55,
+    "query_id": "farmer_q_12",
+    "source": "fb_group_real_farmer",
+    "query": "৩৩ শতাংশ জমিতে ঢেঁড়সের বীজ কতটুকু লাগবে?",
+    "gold_crop": "okra",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ঢেঁড়স",
+      "crop_en": "okra",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "৩৩ শতাংশ জমিতে বীজের পরিমাণ; বীজ বপন/চাষ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "ঢেঁড়শ",
+      "crop_en": "okra",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ঢেঁড়শ বীজের পরিমাণ — বপন হার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "okra",
+      "specified": "YES",
+      "notes": "seed rate"
+    }
+  },
+  {
+    "item_no": 56,
+    "query_id": "farmer_q_3",
+    "source": "fb_group_real_farmer",
+    "query": "আম গাছে আমের গোড়ায় এমন সাদা কালো দাগ এ অবস্থায় কি করা যায়?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আমের গোড়ায় সাদা-কালো দাগ; রোগ/পোকা লক্ষণ ও ব্যবস্থাপনা (মিলিবাগ/অ্যানথ্রাকনোজ সন্দেহ)।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আমের গোড়ায় সাদা-কালো দাগ — রোগ/পোকা প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 57,
+    "query_id": "farmer_q_702",
+    "source": "krishibangla.com",
+    "query": "Sir can i commercially planted mata or bedana on our land. ( Patnitola, Naogaon) un fartil land. what type is good. pls sujjest.",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "মাল্টা, বেদানা",
+      "crop_en": "other_crop, litchi",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ইংরেজি প্রশ্ন; farmer_q_933 (Batch 02)-এর অনুরূপ; mata = মাল্টা (তালিকায় নেই), bedana = বেদানা লিচু; জাত/উপযোগিতা পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "মাল্টা, বেদানা",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "Mata=malta, bedana=pomegranate; English query। জাত ও বাণিজ্যিক চাষ উপযোগিতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "orchard-choice EN"
+    }
+  },
+  {
+    "item_no": 58,
+    "query_id": "farmer_q_403",
+    "source": "field_sourced_farmer",
+    "query": "ধানের ক্ষেতে ইঁদুরের উপদ্রব খুব, কি করুম?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধানের ক্ষেতে ইঁদুরের উপদ্রব দমন; ক্ষতিকারক প্রাণী ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ইঁদুর দমন ধানক্ষেতে — বালাই নিয়ন্ত্রণ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": "rat problem"
+    }
+  },
+  {
+    "item_no": 59,
+    "query_id": "farmer_q_857",
+    "source": "krishibangla.com",
+    "query": "টানা বৃষ্টির চোটে ছাদের গাছগুলো একদম নেতিয়ে গেছে, ডালপালাও খুব দুর্বল দেখাচ্ছে। এখন গাছের যত্ন নিতে কী কী করা দরকার?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "টানা বৃষ্টিতে ছাদের গাছ নেতিয়ে পড়া; যত্ন/ব্যবস্থাপনা; ফসল নেই (Batch 01 Item 2-এর অনুরূপ)।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদের গাছ (অনির্দিষ্ট) বৃষ্টির পর যত্ন — সাধারণ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "rooftop rain damage, general"
+    }
+  },
+  {
+    "item_no": 60,
+    "query_id": "farmer_q_441",
+    "source": "field_sourced_farmer",
+    "query": "আলু গাছে কালো দাগ পড়তেছে, এটা কি পচন রোগ?",
+    "gold_crop": "potato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আলু গাছে কালো দাগ; পচন/ব্লাইট রোগ কি না নির্ণয় (লেট ব্লাইট সন্দেহ)।"
+    },
+    "external_r2": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কালো দাগ — পচন রোগ সন্দেহ; নির্ণয় ও প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "potato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 61,
+    "query_id": "farmer_q_483",
+    "source": "field_sourced_farmer",
+    "query": "বেগুনের ডগা পচা রোগ হইছে, কি করমু বুঝতেছি না",
+    "gold_crop": "brinjal",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বেগুনের ডগা পচা রোগ দেখা দিয়েছে; প্রতিকার চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ডগা পচা রোগ বেগুনে — প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "brinjal",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 62,
+    "query_id": "farmer_q_640",
+    "source": "krishibangla.com",
+    "query": "আমি আমার বাড়ীর পাশে কিছু সংখ্যক কাঠালের চারা রুপন করি গত ৩-৪ বছর আগে।\nবিগত কয়েক বছর ধরে প্রায় সব গাছেই কাঠাল আসছে। কিন্তু আমার একটি গাছের কাঠাল পচে ঝরে যায়।\nপচার ধরন -বাইরে থেকে বুঝা যায় না , যখন কাঠাল পরিপক্ক হয় বা খাওয়ার উপযোগি হই তখন গাছ থেকে পেড়ে নিই।\nবড়ই দুঃখের বিষয় এই যে পাকার জন্য রেখে দিলে পরে দেখা যাই মুলি(মুল দন্ড যার চার পাশে কোষ থাকে) পচে যায় ও কাঠালে দুর্ঘ্নদ সৃস্টি হয় ফলে খাওার উপযোগি থাকেনা।\nভেবে ছিলাম আমাদের পাকানোর কোন ভুল তাই পরবর্তি বছর মানে এই মৌসোম এ কাঠাল গাছে পাকানোর সিদ্ধান্ত নিই ।কিন্তু\nযখন দেখতে পেলাম কাঠাল গাছেই পূর্বে বর্ণিত অবস্থায় পচে যাচ্ছে তখন খুভই মর্মাহত হলাম।\nআমি এর সঠিক সমাধান চাই। ধন্যবাদ",
+    "gold_crop": "jackfruit",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কাঠাল",
+      "crop_en": "jackfruit",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কাঠালের অভ্যন্তরীণ পচন (মূল দণ্ড পচে দুর্গন্ধ); দীর্ঘ বর্ণনামূলক রোগ-ব্যবস্থাপনা প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কাঁঠাল",
+      "crop_en": "jackfruit",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কাঁঠাল পচা (internal soft rot) — রোগ নির্ণয় ও সমাধান।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "jackfruit",
+      "specified": "YES",
+      "notes": "FIX extractor said rice"
+    }
+  },
+  {
+    "item_no": 63,
+    "query_id": "farmer_q_667",
+    "source": "krishibangla.com",
+    "query": "আম গাছের বৃদ্ধি হয়না ও ফুল ধরে না। গাছের বয়স ৭-৮ বছর।\nএখন কি ধরনের সার দিতে হবে?\n\n\nধন্যবাদ।।",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "৭–৮ বছর বয়সী আম গাছে বৃদ্ধিহীনতা ও ফুল না ধরা; কোন সার দিবে স্পষ্টভাবে জিজ্ঞাসা।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "৭-৮ বছর বয়সী আম — বৃদ্ধি ও ফুলের জন্য সার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 64,
+    "query_id": "farmer_q_528",
+    "source": "field_sourced_farmer",
+    "query": "কলা গাছের গোড়ায় কি যেন লালচে দাগ, এটা কি রোগ?",
+    "gold_crop": "banana",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কলা",
+      "crop_en": "banana",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কলা গাছের গোড়ায় লালচে দাগ; রোগ কি না নির্ণয় (উইলট/পানামা সন্দেহ)।"
+    },
+    "external_r2": {
+      "crop_bn": "কলা",
+      "crop_en": "banana",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "গোড়ায় লালচে দাগ — রোগ নির্ণয়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "banana",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 65,
+    "query_id": "farmer_q_321",
+    "source": "fb_group_real_farmer",
+    "query": "গম চাষে আগাছা দমনে কি করব?",
+    "gold_crop": "wheat",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "গম",
+      "crop_en": "wheat",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "গম চাষে আগাছা দমন; herbicide-ভিত্তিক দমন ধরা হয়েছে (farmer_q_063 নজির); যান্ত্রিক নিড়ানি হিসেবে ভাবলে General হতে পারে।"
+    },
+    "external_r2": {
+      "crop_bn": "গম",
+      "crop_en": "wheat",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আগাছা দমন গমে — হার্বিসাইড/ব্যবস্থাপনা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "wheat",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 66,
+    "query_id": "farmer_q_634",
+    "source": "krishibangla.com",
+    "query": "angor geser pata bindo bindo hoea pataer majkan shokea jea.porea pata jora jea.pls help me. sir.",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আঙুর",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "Banglish: \"angor geser pata bindo bindo...\" = আঙুর গাছের পাতায় বিন্দু বিন্দু দাগ, মাঝে শুকিয়ে পাতা ঝরে পড়া; আঙুর তালিকায় নেই → other_crop; লিপ্যন্তরজনিত অনিশ্চয়তা।"
+    },
+    "external_r2": {
+      "crop_bn": "আঙ্গুর",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "Romanized: আঙ্গুর গাছের পাতা বিন্দু বিন্দু হয়ে মাঝখান শুকিয়ে পুড়ে জোড়া হয়ে যাচ্ছে। আঙ্গুর তালিকায় নেই → other_crop।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "Banglish romanized"
+    }
+  },
+  {
+    "item_no": 67,
+    "query_id": "farmer_q_507",
+    "source": "field_sourced_farmer",
+    "query": "কলা গাছে কি যেন কালো দাগ হইছে, গাছটা কি কাইটা ফেলমু?",
+    "gold_crop": "banana",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কলা",
+      "crop_en": "banana",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কলা গাছে কালো দাগ; গাছ কেটে ফেলবে কি না — রোগ লক্ষণ ও ব্যবস্থাপনা সিদ্ধান্ত।"
+    },
+    "external_r2": {
+      "crop_bn": "কলা",
+      "crop_en": "banana",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কালো দাগ — রোগ/পোকা; গাছ কাটার সিদ্ধান্ত।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "banana",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 68,
+    "query_id": "farmer_q_668",
+    "source": "fb_group_real_farmer",
+    "query": "about good papaw seet  where",
+    "gold_crop": "papaya",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ইংরেজি খণ্ড প্রশ্ন: \"papaw seet\" = পেঁপের ভালো বীজ/চারা কোথায় পাওয়া যাবে; বীজ/চারা উৎস — সাধারণ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "Medium",
+      "notes": "Romanized/English: good papaw (papaya) seed where — বীজ উৎস/জাত।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "papaya",
+      "specified": "YES",
+      "notes": "EN: papaw seed"
+    }
+  },
+  {
+    "item_no": 69,
+    "query_id": "farmer_q_40",
+    "source": "fb_group_real_farmer",
+    "query": "জমি দুবলা ঘাসে চেপে গেছে। এই ঘাস হাল চাষের পূর্বেই নির্মূল করতে (পুড়িয়ে ফেলতে) কোন ওষুধ স্প্রে করলে ভালো ফলাফল পাওয়া যাবে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "দুবলা ঘাস হাল চাষের পূর্বে নির্মূলে ওষুধ/স্প্রে (herbicide); ফসল উল্লেখ নেই — farmer_q_063 নজির।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "দুবলা ঘাস (weed) দমন — ফসল উল্লেখ নেই; হার্বিসাইড।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "land-prep weeds, no crop"
+    }
+  },
+  {
+    "item_no": 70,
+    "query_id": "farmer_q_648",
+    "source": "fb_group_real_farmer",
+    "query": "নারকেল গাছে একধরনের বড় বিটল জাতীয় পোকা গাছ খেয়ে ফেলছে।পোকা দেখতে কালো ও শক্ত আবরন।পোকার গর্তের পরিধি আনুমানিক 2cm প্রায়। করনীয় কি।",
+    "gold_crop": "coconut",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "নারকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বিটল জাতীয় বোরার পোকা (~২ সেমি গর্ত); প্রতিকার; farmer_q_769-এর অনুরূপ।"
+    },
+    "external_r2": {
+      "crop_bn": "নারিকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "রhinoceros beetle-সদৃশ পোকা নারিকেলে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "coconut",
+      "specified": "YES",
+      "notes": "beetle"
+    }
+  },
+  {
+    "item_no": 71,
+    "query_id": "farmer_q_111",
+    "source": "fb_group_real_farmer",
+    "query": "আলুর নাভি ধসা রোগ থেকে বাঁচতে কী করণীয়?",
+    "gold_crop": "potato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "আলুর নাভি ধসা রোগ থেকে বাঁচতে করণীয়; লক্ষণের উল্লেখ নেই তাই প্রতিরোধমূলকও হতে পারে — পূর্বের ব্যাচের ফ্রেজিং নিয়মের সাথে সামঞ্জস্যপূর্ণ।"
+    },
+    "external_r2": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "নাভি ধসা (likely hollow heart / physiological or disease) — প্রতিরোধ/প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "potato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 72,
+    "query_id": "farmer_q_840",
+    "source": "krishibangla.com",
+    "query": "মুরগির বাচ্চার স্বাস্থ্য ভালো রাখতে প্রাকৃতিক প্রোবায়োটিক হিসেবে কী খাওয়ানো ভালো? এমন কিছু খুঁজছি যাতে বাচ্চার পেটে উপকারী ব্যাকটেরিয়া বাড়ে।",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Off-Topic",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Off-Topic",
+      "confidence": "Medium",
+      "notes": "মুরগির বাচ্চার প্রোবায়োটিক — পোল্ট্রি/প্রাণিসম্পদ বিষয়ক, ফসল-পরামর্শ সিস্টেমের আওতার বাইরে; প্রাণিসম্পদকে in-scope ধরলে General হতে পারে।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Off-Topic",
+      "confidence": "High",
+      "notes": "মুরগির বাচ্চা — পশুপালন/পোল্ট্রি; কৃষি ফসল নয় → Off-Topic।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "livestock chicks, out-of-scope"
+    }
+  },
+  {
+    "item_no": 73,
+    "query_id": "farmer_q_193",
+    "source": "fb_group_real_farmer",
+    "query": "বেগুন গাছের গোড়া পচে যাচ্ছে এবং গাছ ঝিমিয়ে পড়ছে। কোন ছত্রাকনাশক ব্যবহার করলে ভালো ফল পাব?",
+    "gold_crop": "brinjal",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বেগুন গাছের গোড়া পচা ও ঝিমিয়ে পড়া; ছত্রাকনাশক চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "গোড়া পচা + ঝিমিয়ে পড়া — ছত্রাকনাশক।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "brinjal",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 74,
+    "query_id": "farmer_q_420",
+    "source": "field_sourced_farmer",
+    "query": "জমিতে আগাছা বেশি হইয়া গেছে, ওষুধ দিয়া কি মরব?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "জমিতে আগাছা বেশি; ওষুধ (herbicide) দিয়ে মারবে কি না; ফসল উল্লেখ নেই।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আগাছা দমন — ফসল উল্লেখ নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "weeds herbicide, no crop"
+    }
+  },
+  {
+    "item_no": 75,
+    "query_id": "farmer_q_848",
+    "source": "fb_group_real_farmer",
+    "query": "গত তিন বছর ধরে জাম্বুরা গাছে ফল আসছে, কিন্তু এ বছর ফলগুলো একদমই বাড়ছে না। ঝড়ের মতো সব পচে নিচে পড়ে যাচ্ছে, এর কোনো সমাধান আছে কি?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Taxonomy Adjudication",
+    "external_r1": {
+      "crop_bn": "জাম্বুরা (বাতাবি লেবু)",
+      "crop_en": "lemon",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "জাম্বুরা = বাতাবি লেবু (নিয়ন্ত্রিত alias); ফল না বেড়ে পচে ঝরে পড়া — রোগ লক্ষণ ও সমাধান।"
+    },
+    "external_r2": {
+      "crop_bn": "জাম্বুরা",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "জাম্বুরা (pomelo/batabi lebu variant) তালিকায় নেই → other_crop। ফল পচা ও ঝরে পড়া।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "FIX extractor said rice"
+    }
+  },
+  {
+    "item_no": 76,
+    "query_id": "farmer_q_535",
+    "source": "field_sourced_farmer",
+    "query": "শসা গাছে প্রচুর জালি আসছে কিন্তু বড় হওয়ার আগেই ঝরে যাচ্ছে কেন?",
+    "gold_crop": "cucumber",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "\"জালি\" (স্ত্রী ফুল/কচি ফল) বড় হওয়ার আগে ঝরে পড়ছে কেন — শারীরবৃত্তীয়/পরাগায়ণ সংক্রান্ত সাধারণ প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "শসায় জালি (fruit) ঝরে যাওয়া — পুষ্টি/পরাগায়ন/সেচ সম্পর্কিত সাধারণ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "cucumber",
+      "specified": "YES",
+      "notes": "fruit drop"
+    }
+  },
+  {
+    "item_no": 77,
+    "query_id": "farmer_q_784",
+    "source": "fb_group_real_farmer",
+    "query": "ফলের গাছের কলম করার জন্য ভালো কোনো রুটিং হরমোনের নাম বলবেন কি? কোনটা ব্যবহার করলে কলম ভালো টিকবে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ফলের গাছের কলমের জন্য রুটিং হরমোন; নির্দিষ্ট ফসল নেই; বংশবিস্তার/পরিচর্যা কৌশল।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ফলের গাছ সাধারণ; রুটিং হরমোন — কলম/বংশবিস্তার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "grafting general"
+    }
+  },
+  {
+    "item_no": 78,
+    "query_id": "farmer_q_828",
+    "source": "fb_group_real_farmer",
+    "query": "অনেকদিন হলো সাত-আট বছর বয়সী আম গাছটা একদম ঝিমিয়ে আছে, ফুলও ধরছে না। গাছ সতেজ করতে আর ফুল আনতে এখন কী ধরনের সার দেওয়া উচিত?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ঝিমিয়ে থাকা আম গাছ সতেজ করতে ও ফুল আনতে সারের ধরন; স্পষ্ট সার প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ঝিমিয়ে পড়া আম গাছ — সার দিয়ে সতেজ ও ফুল আনা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 79,
+    "query_id": "farmer_q_945",
+    "source": "fb_group_real_farmer",
+    "query": "ড্রাম অর্ধেক করে পেয়ারা গাছ লাগাতে চাচ্ছি, এভাবে কি গাছ টিকবে? পরামর্শ দিলে উপকৃত হতাম।",
+    "gold_crop": "guava",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেয়ারা",
+      "crop_en": "guava",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "অর্ধেক ড্রামে/টবে পেয়ারা লাগানোর উপযোগিতা; চাষ পদ্ধতি পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "পেয়ারা",
+      "crop_en": "guava",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ড্রাম/পাত্রে পেয়ারা চাষ উপযোগিতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "guava",
+      "specified": "YES",
+      "notes": "drum planting"
+    }
+  },
+  {
+    "item_no": 80,
+    "query_id": "farmer_q_608",
+    "source": "field_sourced_farmer",
+    "query": "কম খরচে কোন সার দিলে ধান ভালো হইবো?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "কম খরচে কোন সারে ধান ভালো হবে; সার নির্বাচন/ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "কম খরচে ধানের সার সুপারিশ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 81,
+    "query_id": "farmer_q_35",
+    "source": "fb_group_real_farmer",
+    "query": "বর্তমান আবহাওয়ায়(June, Rainy) আনারসের খেতে সার দেওয়া যাবে??",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আনারস",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "আনারস (Pineapple) নিয়ন্ত্রিত তালিকায় নেই → other_crop; বর্ষাকালে সার প্রয়োগের সময়সঙ্গততা জানতে চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "আনারস",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "আনারস (pineapple) তালিকায় নেই → other_crop। বর্ষায় সার প্রয়োগ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 82,
+    "query_id": "farmer_q_36",
+    "source": "fb_group_real_farmer",
+    "query": "গত সোমবার ওয়ান স্টপ+ফরোয়ার্ড ঔষধ দেওয়ার পর ড্রামে কিছু ঔষধ থেকে যায় আজকে সেই ঔষধ দেওয়া যাবে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "ফসলের নাম নেই; অবশিষ্ট কীটনাশক/ঔষধ সংরক্ষণ ও পুনঃপ্রয়োগের নিরাপত্তা সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "অবশিষ্ট ঔষধ পুনরায় ব্যবহার — ফসল/রোগ উল্লেখ নেই। Treatment (pesticide handling)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "leftover pesticide reuse, no crop"
+    }
+  },
+  {
+    "item_no": 83,
+    "query_id": "farmer_q_792",
+    "source": "fb_group_real_farmer",
+    "query": "১২ বছরের পুরনো কাজু গাছে ফুল তো প্রচুর দেখি, কিন্তু ফল আর দেখা যায় না। ৪-৫ বছর ধরে একই অবস্থা, মার্চ মাসে ফুল আসে আর শুকিয়ে পড়ে যায়। সমাধানটা একটু জানাবেন?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "General/Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কাজু",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "কাজু (Cashew) তালিকায় নেই → other_crop; ফুল ঝরে পড়া ও ফল না ধরা সংক্রান্ত শারীরবৃত্তীয়/সাধারণ সমস্যা।"
+    },
+    "external_r2": {
+      "crop_bn": "কাজু",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কাজু (cashew) তালিকায় নেই → other_crop। ফুল ঝরে ফল না ধরা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 84,
+    "query_id": "farmer_q_914",
+    "source": "fb_group_real_farmer",
+    "query": "ছাদে বাগান করার শখ আছে, কিন্তু বাজেটটা কত রাখা উচিত বুঝতে পারছি না। খরচাপাতি কেমন পড়বে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদ বাগানের বাজেট ও খরচ; ফসল উল্লেখ নেই, সাধারণ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদে বাগানের বাজেট — নির্দিষ্ট ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "rooftop budget"
+    }
+  },
+  {
+    "item_no": 85,
+    "query_id": "farmer_q_549",
+    "source": "field_sourced_farmer",
+    "query": "বোরো ধানে এখন কি পটাশ দেয়া যাবে?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান (বোরো)",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "বোরো ধান (rice alias); পটাশ সার প্রয়োগের সময় জানতে চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "বোরো ধান + পটাশ সময়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 86,
+    "query_id": "farmer_q_47",
+    "source": "fb_group_real_farmer",
+    "query": "রুপনের বয়স ১৪দিন।গোরা পোচার জন্য কোন ছত্রাক নাশক ও কীটনাশক  দিবো?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "\"রুপন\" (রোপণ) বলা হয়েছে কিন্তু ফসলের নাম নেই; গোড়া পচা রোগের জন্য ছত্রাকনাশক ও কীটনাশক চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "রোপণের ১৪ দিন; গোড়া পোকা — ফসল উল্লেখ নেই (সম্ভবত ধান/সবজি)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "transplant crop unstated"
+    }
+  },
+  {
+    "item_no": 87,
+    "query_id": "farmer_q_606",
+    "source": "field_sourced_farmer",
+    "query": "বোরো ধানে মাজরা পোকা কি বেশি হইছে?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান (বোরো)",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বোরো ধান (rice); মাজরা পোকার প্রকোপ ও দমন সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বোরো ধানে মাজরা পোকা প্রাদুর্ভাব।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 88,
+    "query_id": "farmer_q_565",
+    "source": "field_sourced_farmer",
+    "query": "ধান পাতায় লাল দাগ কেন পরতাছে, কোনো ওষুধ আছে?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধান (rice); পাতায় লাল দাগ (রোগ লক্ষণ) এবং ওষুধ জানতে চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতায় লাল দাগ — রোগ + ঔষধ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 89,
+    "query_id": "farmer_q_665",
+    "source": "krishibangla.com",
+    "query": "মাটির উবরতা কম",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "Medium",
+      "notes": "ফসল নেই; \"মাটির উর্বরতা কম\" — মাটির পুষ্টি ঘাটতি পূরণে সার/মাটি ব্যবস্থাপনা সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "মাটির উর্বরতা কম — সাধারণ সার/মাটি ব্যবস্থাপনা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "soil fertility, general"
+    }
+  },
+  {
+    "item_no": 90,
+    "query_id": "farmer_q_459",
+    "source": "field_sourced_farmer",
+    "query": "ধান পাকার আগে জল কি বন্ধ করে দিতে হয়?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ধান (rice); ফসল পাকার আগে সেচ বন্ধ করার নিয়ম (সাধারণ কৃষি/সেচ ব্যবস্থাপনা)।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ধান পাকার আগে সেচ বন্ধ — সাধারণ পরিচর্যা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 91,
+    "query_id": "farmer_q_836",
+    "source": "fb_group_real_farmer",
+    "query": "আমার পেয়ারা বাগানে সাদা সাদা পোকা ধরেছে, এগুলো দমনের জন্য ভালো কোনো কীটনাশকের নাম বলতে পারবেন?",
+    "gold_crop": "guava",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেয়ারা",
+      "crop_en": "guava",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পেয়ারা (guava); সাদা পোকা (সম্ভবত মিলিবাগ বা সাদা মাছি) দমনের কীটনাশক চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "পেয়ারা",
+      "crop_en": "guava",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সাদা পোকা পেয়ারায় — কীটনাশক।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "guava",
+      "specified": "YES",
+      "notes": "mealybug"
+    }
+  },
+  {
+    "item_no": 92,
+    "query_id": "farmer_q_997",
+    "source": "krishibangla.com",
+    "query": "বৈশাখ মাসে বাঁশঝাড়ের গোড়ায় মাটি তো দিলাম, এখন ফলন বাড়াতে কী সার দিলে ভালো হয় একটু বলবেন?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বাঁশ",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "বাঁশ (Bamboo) তালিকায় নেই → other_crop; ফলন বাড়াতে সার প্রয়োগ সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "বাঁশ",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "বাঁশঝাড় — other_crop। সার দিয়ে ফলন বৃদ্ধি।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 93,
+    "query_id": "farmer_q_391",
+    "source": "field_sourced_farmer",
+    "query": "মাঠে তো সার দিলাম, তাও গাছ হলুদ হইয়া যাইতেছে কেন?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer/Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "Medium",
+      "notes": "ফসল নেই; সার দেওয়ার পরেও গাছ হলুদ হওয়া — পুষ্টি ঘাটতি (যেমন: সালফার/জিংক) বা রোগ নির্ণয় সংক্রান্ত।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "গাছ হলুদ — ফসল উল্লেখ নেই; সম্ভবত পুষ্টি/রোগ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "yellowing, no crop"
+    }
+  },
+  {
+    "item_no": 94,
+    "query_id": "farmer_q_632",
+    "source": "field_sourced_farmer",
+    "query": "জমি চাষ করার পর কি কি সার আগে দিমু?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ফসল নেই; জমি চাষের পর basal dose (গোড়া সার) প্রয়োগ সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "জমি চাষের পর ভিত্তি সার — ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "basal fertilizer general"
+    }
+  },
+  {
+    "item_no": 95,
+    "query_id": "farmer_q_327",
+    "source": "fb_group_real_farmer",
+    "query": "পেঁয়াজ চাষে গোড়া পচা রোধে জিপসাম সারের ভূমিকা কতটুকু?",
+    "gold_crop": "onion",
+    "gold_specified": "YES",
+    "gold_intent": "Prevention/Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেঁয়াজ",
+      "crop_en": "onion",
+      "is_specified": "YES",
+      "intent": "Prevention",
+      "confidence": "High",
+      "notes": "পেঁয়াজ (onion); \"গোড়া পচা রোধে\" স্পষ্ট প্রতিরোধমূলক ফ্রেজিং; জিপসাম সারের ভূমিকা।"
+    },
+    "external_r2": {
+      "crop_bn": "পেঁয়াজ",
+      "crop_en": "onion",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "গোড়া পচা রোধে জিপসাম — সারের ভূমিকা (Prevention-এর কাছাকাছি কিন্তু সার প্রশ্ন)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "onion",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 96,
+    "query_id": "farmer_q_467",
+    "source": "field_sourced_farmer",
+    "query": "পেঁপে গাছে হলুদ দাগ পড়তাছে, গাছ কি বাঁচবো?",
+    "gold_crop": "papaya",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পেঁপে (papaya); পাতায় হলুদ দাগ (ভাইরাস/ছত্রাক সন্দেহ) এবং গাছ বাঁচানোর প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "হলুদ দাগ পেঁপেতে — রোগ/পুষ্টি।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "papaya",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 97,
+    "query_id": "farmer_q_366",
+    "source": "field_sourced_farmer",
+    "query": "ধান কাটতে দেরি হইলে কি ক্ষতি হইব?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ধান (rice); ফসল তোলার সময় বিলম্ব হওয়ার প্রভাব (হারভেস্টিং ম্যানেজমেন্ট)।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ফসল তোলার সময় বিলম্বের ক্ষতি — সাধারণ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 98,
+    "query_id": "farmer_q_71",
+    "source": "fb_group_real_farmer",
+    "query": "আমন মৌসুমে উঁচু জমিতে কোন ধান সবচেয়ে বেশি ফলন দেয়।।\nপরবর্তীতে সরিষা করার চিন্তা আছে",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান, সরিষা",
+      "crop_en": "rice, mustard",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "একাধিক ফসল; উঁচু জমিতে আমন ধানের জাত নির্বাচন এবং পরবর্তীতে সরিষা চাষের ফসল বিন্যাস (cropping pattern)।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আমন ধানের জাত নির্বাচন (উঁচু জমি) + সরিষা ফলো-আপ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": "note: mustard next season"
+    }
+  },
+  {
+    "item_no": 99,
+    "query_id": "farmer_q_788",
+    "source": "krishibangla.com",
+    "query": "আমি শুনেছি সুপারির চারা ৪ হাত দূরে রোপণ করতে হয়, কিন্তু আমার বাগানে চারাগুলো ৩ হাত দূরত্বে লাগানো হয়ে গেছে। এতে কি ফলন কমে যাবে বা ভবিষ্যতে গাছের কোনো ক্ষতি হবে?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সুপারি",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "সুপারি (Betel nut) তালিকায় নেই → other_crop; রোপণ দূরত্ব ও ভবিষ্যৎ ফলন/ক্ষতি সংক্রান্ত সাধারণ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "সুপারি",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "সুপারি (arecanut/betel nut) তালিকায় নেই → other_crop। রোপণ দূরত্ব।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "spacing"
+    }
+  },
+  {
+    "item_no": 100,
+    "query_id": "farmer_q_555",
+    "source": "field_sourced_farmer",
+    "query": "মাঠে পোকা ধরছে, সব পাতা খাইয়া ফেলতাছে।",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ফসল নেই; পাতা খাওয়া পোকার লক্ষণ ও দমন সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা খাওয়া পোকা — ফসল উল্লেখ নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "field insects, no crop"
+    }
+  },
+  {
+    "item_no": 101,
+    "query_id": "farmer_q_235",
+    "source": "fb_group_real_farmer",
+    "query": "শীতকালীন সবজির জন্য জৈব সার কীভাবে তৈরি করবো?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "\"শীতকালীন সবজি\" generic → none; জৈব সার তৈরির পদ্ধতি (সার ব্যবস্থাপনা)।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "শীতকালীন সবজি সাধারণ; জৈব সার তৈরি — ফসল নির্দিষ্ট নয়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "winter vegetables organic fertilizer"
+    }
+  },
+  {
+    "item_no": 102,
+    "query_id": "farmer_q_616",
+    "source": "field_sourced_farmer",
+    "query": "আমার বেগুনের ডগা মরে যাচ্ছে, পোকা কি ভেতরে?",
+    "gold_crop": "brinjal",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বেগুন (brinjal); ডগা মরে যাওয়া এবং পোকা (shoot borer) সন্দেহ।"
+    },
+    "external_r2": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ডগা মরা — সম্ভবত shoot borer; পোকা নির্ণয়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "brinjal",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 103,
+    "query_id": "farmer_q_194",
+    "source": "fb_group_real_farmer",
+    "query": "শীতকালীন শিমের গাছে প্রচুর জাব পোকা দেখা যাচ্ছে। বিষ না দিয়ে দমন করার উপায় আছে কি?",
+    "gold_crop": "bean",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "শিম",
+      "crop_en": "bean",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "শিম (bean); জাব পোকা (aphids) দমনের জৈব/বিকল্প উপায় জানতে চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "শিম",
+      "crop_en": "bean",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "জাব পোকা শিমে — জৈব দমন পদ্ধতি।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "bean",
+      "specified": "YES",
+      "notes": "winter shim"
+    }
+  },
+  {
+    "item_no": 104,
+    "query_id": "farmer_q_119",
+    "source": "fb_group_real_farmer",
+    "query": "ধানের ক্ষেতে মাজরা পোকা দমনে জৈব পদ্ধতি আছে কি?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধান (rice); মাজরা পোকা দমনের জৈব পদ্ধতি (IPM)।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "মাজরা পোকা ধানে — জৈব দমন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 105,
+    "query_id": "farmer_q_989",
+    "source": "krishibangla.com",
+    "query": "ভাই, কোয়েল আর মাশরুমের ব্যবসা শুরু করার ইচ্ছা আছে। রংপুরে এই বিষয়ে প্রশিক্ষণ নেওয়ার মতো কোনো জায়গা আছে নাকি? এছাড়া মালপত্র কোথায় কিনব আর কোথায় বিক্রি করব তা জানালে খুব উপকার হতো।",
+    "gold_crop": "mushroom",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "মাশরুম",
+      "crop_en": "mushroom",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "Medium",
+      "notes": "কোয়েল (পশুপাখি, off-topic) এবং মাশরুম (mushroom)। কৃষিভিত্তিক ব্যবসা ও প্রশিক্ষণ সংক্রান্ত সাধারণ প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "মাশরুম",
+      "crop_en": "mushroom",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "Medium",
+      "notes": "মাশরুম + কোয়েল (পোল্ট্রি)। মাশরুম প্রাধান্য; ব্যবসা/প্রশিক্ষণ — General। কোয়েল Off-Topic অংশ কিন্তু মূল query মাশরুম।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "quail+mushroom business/training"
+    }
+  },
+  {
+    "item_no": 106,
+    "query_id": "farmer_q_331",
+    "source": "fb_group_real_farmer",
+    "query": "সরিষা ক্ষেতে জাব পোকা (Aphids) আক্রমণ করেছে, কী করব?",
+    "gold_crop": "mustard",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সরিষা (mustard); জাব পোকা (aphids) আক্রমণ ও দমন।"
+    },
+    "external_r2": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "জাব পোকা সরিষায়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mustard",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 107,
+    "query_id": "farmer_q_992",
+    "source": "fb_group_real_farmer",
+    "query": "কুমিল্লায় বারি-৪ আমের চারা কোথায় পাব একটু জানাবেন কি? এছাড়া কমলা আর মালটার মধ্যে তফাতটা কী আর আমাদের এলাকায় চাষ করার জন্য কোনটার জাত ভালো হবে বুঝতে পারছি না।",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "আম, কমলা, মাল্টা",
+      "crop_en": "mango, other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আম (mango); কমলা ও মাল্টা তালিকায় নেই → other_crop। চারা সংগ্রহ ও জাতের তফাত/নির্বাচন।"
+    },
+    "external_r2": {
+      "crop_bn": "আম, কমলা, মাল্টা",
+      "crop_en": "mango, other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "বারি-৪ আম চারা + কমলা/মাল্টা জাত পার্থক্য ও উপযোগিতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "nursery multi: mango/orange/malta"
+    }
+  },
+  {
+    "item_no": 108,
+    "query_id": "farmer_q_734",
+    "source": "krishibangla.com",
+    "query": "নমস্কার, আমার বাগানের মরিচ, লেবু আর পেয়ারা গাছের পাতায় সাদা মাছি ভরে গেছে। গাছগুলোকে এই পোকার হাত থেকে বাঁচানোর কোনো কার্যকরী সমাধান জানালে খুব উপকার হতো।",
+    "gold_crop": "chilli",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "মরিচ, লেবু, পেয়ারা",
+      "crop_en": "chilli, lemon, guava",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "একাধিক ফসল; পাতায় সাদা মাছি (whitefly) আক্রমণ ও দমনের সমাধান।"
+    },
+    "external_r2": {
+      "crop_bn": "মরিচ, লেবু, পেয়ারা",
+      "crop_en": "chilli, lemon, guava",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সাদা মাছি (whitefly) তিন ফসলে — দমন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "multi: chilli/lemon/guava whitefly"
+    }
+  },
+  {
+    "item_no": 109,
+    "query_id": "farmer_q_618",
+    "source": "field_sourced_farmer",
+    "query": "শাকের পাতা ছিদ্র ছিদ্র হইয়া গেছে, কী হইলো?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "\"শাক\" generic leafy veg → none; পাতা ছিদ্র হওয়া (পোকা/রোগ লক্ষণ) নির্ণয়।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "শাক সাধারণ (leafy veg); পাতা ছিদ্র — পোকা/রোগ; নির্দিষ্ট ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "shak"
+    }
+  },
+  {
+    "item_no": 110,
+    "query_id": "farmer_q_316",
+    "source": "fb_group_real_farmer",
+    "query": "পেঁপে গাছের পাতা কুকড়ে যাচ্ছে, এটি কি ভাইরাস?",
+    "gold_crop": "papaya",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পেঁপে (papaya); পাতা কুঁকড়ে যাওয়া (PRV ভাইরাস সন্দেহ) এবং রোগ নির্ণয়।"
+    },
+    "external_r2": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা কুঁকড়ানো — ভাইরাস সন্দেহ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "papaya",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 111,
+    "query_id": "farmer_q_883",
+    "source": "fb_group_real_farmer",
+    "query": "আমার আম্রপালি গাছের গুটিগুলো বড় হওয়ার আগেই ঝরে যাচ্ছে, এখন কী করা যায়?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম (আম্রপালি)",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আম্রপালি আমের জাত (mango); ফল ঝরে পড়া (শারীরবৃত্তীয়/পোকা/রোগ) সমস্যা ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আম্রপালি আমের গুটি ঝরে যাওয়া।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": "Amrapali"
+    }
+  },
+  {
+    "item_no": 112,
+    "query_id": "farmer_q_114",
+    "source": "fb_group_real_farmer",
+    "query": "বেগুন গাছে জাব পোকা ও ডগা ছিদ্রকারী পোকার আক্রমণ হয়েছে, উপায় বলুন।",
+    "gold_crop": "brinjal",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বেগুন (brinjal); জাব পোকা ও ডগা ছিদ্রকারী পোকা (shoot/fruit borer) দমন।"
+    },
+    "external_r2": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "জাব + shoot borer বেগুনে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "brinjal",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 113,
+    "query_id": "farmer_q_937",
+    "source": "fb_group_real_farmer",
+    "query": "আম গাছের চারা লাগানোর সঠিক নিয়মটা একটু বলবেন কি?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আম (mango); চারা রোপণের সঠিক নিয়ম/পদ্ধতি।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আম চারা রোপণ পদ্ধতি।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": "saplings"
+    }
+  },
+  {
+    "item_no": 114,
+    "query_id": "farmer_q_185",
+    "source": "fb_group_real_farmer",
+    "query": "টমেটো চাষে ভালো ফলন পেতে কোন সার কতটুকু দেব?",
+    "gold_crop": "tomato",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "টমেটো (tomato); ভালো ফলনের জন্য সারের ধরন ও মাত্রা।"
+    },
+    "external_r2": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "টমেটো সার মাত্রা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "tomato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 115,
+    "query_id": "farmer_q_499",
+    "source": "field_sourced_farmer",
+    "query": "কোন সারটা দিলে মরিচ গাছ বড় হইবো?",
+    "gold_crop": "chilli",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "মরিচ (chilli); গাছের বৃদ্ধির জন্য সার প্রয়োগ।"
+    },
+    "external_r2": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "মরিচ বৃদ্ধির জন্য সার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "chilli",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 116,
+    "query_id": "farmer_q_761",
+    "source": "krishibangla.com",
+    "query": "বিষাক্ত ওষুধ না দিয়ে আম পাকানোর সহজ ও ঘরোয়া পদ্ধতি কী?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আম (mango); কেমিক্যাল ছাড়া ফল পাকানোর (post-harvest) ঘরোয়া পদ্ধতি।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আম পাকানোর ঘরোয়া পদ্ধতি (বিষাক্ত ethrel ইত্যাদি এড়ানো)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": "ripening"
+    }
+  },
+  {
+    "item_no": 117,
+    "query_id": "farmer_q_518",
+    "source": "field_sourced_farmer",
+    "query": "টমেটো গাছে পোকা ধরছে, কোনো বিষের নাম বলবেন?",
+    "gold_crop": "tomato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "টমেটো (tomato); পোকা দমনের কীটনাশক/বিষ চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "টমেটোতে পোকা — কীটনাশক।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "tomato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 118,
+    "query_id": "farmer_q_845",
+    "source": "krishibangla.com",
+    "query": "গাছটার বয়স অনেক হলো, কিন্তু এখন দেখছি পাতার ধারগুলো চিরে গেছে আর মাথাটা মরে যাচ্ছে। নারিকেল বড় হচ্ছে না, উল্টো ঝরে পড়ে যাচ্ছে; এর কোনো ওষুধ বা প্রতিকার আছে কি?",
+    "gold_crop": "coconut",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "নারিকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "নারিকেল (coconut); পাতা চিরা, মাথা মরে যাওয়া, ফল ঝরা (রোগ/পোকা লক্ষণ) ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "নারিকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "নারিকেল — পাতা চিরে যাওয়া, মাথা মরা, ফল ঝরা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "coconut",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 119,
+    "query_id": "farmer_q_52",
+    "source": "fb_group_real_farmer",
+    "query": "ডালিম গাছ হঠাৎ করে পাতাগুলো লাল হয়ে গাছ মরে যাচ্ছে। এখন করনীয় কি সবার পরামর্শ চাচ্ছি?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ডালিম",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ডালিম (Pomegranate) তালিকায় নেই → other_crop; পাতা লাল হওয়া ও গাছ মরে যাওয়ার রোগ লক্ষণ।"
+    },
+    "external_r2": {
+      "crop_bn": "ডালিম",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ডালিম (pomegranate) তালিকায় নেই → other_crop। পাতা লাল + মরে যাওয়া।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 120,
+    "query_id": "farmer_q_623",
+    "source": "field_sourced_farmer",
+    "query": "সরষে গাছে পোকা ধরছে, কোন বিষ দিব?",
+    "gold_crop": "mustard",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সরিষা (mustard); পোকা দমনের ঔষধ/বিষ চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সরিষায় পোকা — কীটনাশক।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mustard",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 121,
+    "query_id": "farmer_q_450",
+    "source": "field_sourced_farmer",
+    "query": "মাটি কি পরীক্ষা করানো লাগে? ফলন তো আগের মতো পাই না।",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাটি পরীক্ষা ও ফলন হ্রাস সংক্রান্ত সাধারণ কৃষি/মাটি ব্যবস্থাপনা প্রশ্ন; ফসল উল্লেখ নেই।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাটি পরীক্ষা ও ফলন হ্রাস — ফসল উল্লেখ নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "soil testing general"
+    }
+  },
+  {
+    "item_no": 122,
+    "query_id": "farmer_q_214",
+    "source": "fb_group_real_farmer",
+    "query": "টমেটোর পাতা কোঁকড়ানো রোগ দূর করার উপায় কী?",
+    "gold_crop": "tomato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "টমেটো পাতা কোঁকড়ানো রোগ (Leaf Curl Virus সন্দেহ) দূর করার উপায়; রোগ প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা কোঁকড়ানো রোগ টমেটোতে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "tomato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 123,
+    "query_id": "farmer_q_22",
+    "source": "fb_group_real_farmer",
+    "query": "পাটের জমিতে হিউমিক এসিড স্প্রে ভালো নাকি\nসারের সাথে মাটিতে দেওয়া ভালো?",
+    "gold_crop": "jute",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পাট",
+      "crop_en": "jute",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "পাটে হিউমিক এসিড প্রয়োগের পদ্ধতি (পাতায় স্প্রে নাকি মাটিতে); সার/মাটি সংশোধক বিষয়ক।"
+    },
+    "external_r2": {
+      "crop_bn": "পাট",
+      "crop_en": "jute",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "হিউমিক অ্যাসিড প্রয়োগ পদ্ধতি পাটে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "jute",
+      "specified": "YES",
+      "notes": "humic acid"
+    }
+  },
+  {
+    "item_no": 124,
+    "query_id": "farmer_q_142",
+    "source": "fb_group_real_farmer",
+    "query": "আমের মুকুল ঝরা রোধে কী ব্যবস্থা নেওয়া প্রয়োজন?",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Prevention/Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Prevention",
+      "confidence": "High",
+      "notes": "\"মুকুল ঝরা রোধে\" — স্পষ্ট প্রতিরোধমূলক ফ্রেজিং; ফুল ঝরা প্রতিরোধে করণীয়।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "মুকুল ঝরা রোধ আমের।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": "blossom drop"
+    }
+  },
+  {
+    "item_no": 125,
+    "query_id": "farmer_q_308",
+    "source": "fb_group_real_farmer",
+    "query": "পেয়ারা গাছের কান্ডে আঠালো রস বের হচ্ছে, গাছ দুর্বল হয়ে পড়ছে। প্রতিকার কী?",
+    "gold_crop": "guava",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেয়ারা",
+      "crop_en": "guava",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পেয়ারা কান্ডে আঠালো রস (Stem bleeding/gummosis) ও গাছ দুর্বল হওয়া; রোগ লক্ষণ ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "পেয়ারা",
+      "crop_en": "guava",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কান্ডে আঠালো রস — সম্ভবত stem borer/canker।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "guava",
+      "specified": "YES",
+      "notes": "gum"
+    }
+  },
+  {
+    "item_no": 126,
+    "query_id": "farmer_q_469",
+    "source": "field_sourced_farmer",
+    "query": "জমিতে পানি জমে আছে, এখন কি আর ধান লাগানো যাবে?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "জলাবদ্ধতা ও ধান রোপণের সম্ভাব্যতা; সাধারণ কৃষি/আবহাওয়া ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "জলাবদ্ধ জমিতে ধান রোপণ উপযোগিতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": "planting?"
+    }
+  },
+  {
+    "item_no": 127,
+    "query_id": "farmer_q_844",
+    "source": "krishibangla.com",
+    "query": "আমাদের ৪০ বছরের পুরনো নারিকেল গাছটার পাতাগুলো কেমন যেন খণ্ড খণ্ড হয়ে খাওয়া, আর আগাটা শুকিয়ে যাচ্ছে। গাছে নতুন নারিকেল আসছে না, যা-ও আছে সেগুলো ঝরে যাচ্ছে; এখন কী করব?",
+    "gold_crop": "coconut",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "নারিকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "নারিকেল পাতা খাওয়া, আগা শুকানো ও ফল ঝরা; পোকা (Rhinoceros beetle/Red palm weevil) বা রোগের লক্ষণ ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "নারিকেল",
+      "crop_en": "coconut",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা খাওয়া + আগা শুকানো + ফল ঝরা নারিকেলে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "coconut",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 128,
+    "query_id": "farmer_q_538",
+    "source": "field_sourced_farmer",
+    "query": "শসা গাছে প্রচুর জালি আসছে না কেন?",
+    "gold_crop": "cucumber",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "শসা গাছে স্ত্রী ফুল (জালি) না আসা; শারীরবৃত্তীয়/পরাগায়ণ সংক্রান্ত সাধারণ প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "শসায় ফল (জালি) না আসা — পুষ্টি/পরাগায়ন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "cucumber",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 129,
+    "query_id": "farmer_q_530",
+    "source": "field_sourced_farmer",
+    "query": "ডাটা শাকের পাতায় ফুটো ফুটো, কি স্প্রে করুম?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ডাটা শাক",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ডাটা শাক (Amaranth) তালিকায় নেই → other_crop; পাতায় ফুটো ও স্প্রে/কীটনাশক চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "ডাটা শাক",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ডাটা শাক (amaranth) তালিকায় নেই → other_crop। পাতায় ফুটো — পোকা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "data shak"
+    }
+  },
+  {
+    "item_no": 130,
+    "query_id": "farmer_q_172",
+    "source": "fb_group_real_farmer",
+    "query": "ধানের জমিতে ইউরিয়া সারের অপচয় কমাতে কী করা যায়?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ধানে ইউরিয়া সারের অপচয় কমানো (যেমন: USG বা নিম-লেপ্ত ইউরিয়া); সার ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ইউরিয়া অপচয় কমানো ধানে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 131,
+    "query_id": "farmer_q_763",
+    "source": "krishibangla.com",
+    "query": "গাছে প্রচুর কাঁঠালের মুচি এসেছিল, কিন্তু সব ছোট থাকতেই কালো হয়ে পচে ঝরে যাচ্ছে। একটা কাঁঠালও টিকছে না, কী করব?",
+    "gold_crop": "jackfruit",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কাঁঠাল",
+      "crop_en": "jackfruit",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কাঁঠালের মুচি/কচি ফল কালো হয়ে পচে ঝরে পড়া (Fruit rot/Anthracnose); রোগ প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "কাঁঠাল",
+      "crop_en": "jackfruit",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কাঁঠাল মুচি পচে ঝরা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "jackfruit",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 132,
+    "query_id": "farmer_q_712",
+    "source": "fb_group_real_farmer",
+    "query": "Amon dhan bijtolar poka domon.",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান (আমন)",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "Banglish: \"Amon dhan bijtolar poka domon\" = আমন ধানের বীজতলার পোকা দমন; কীট ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "Romanized: আমন ধান বিজতলার পোকা দমন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": "Banglish Amon dhan"
+    }
+  },
+  {
+    "item_no": 133,
+    "query_id": "farmer_q_889",
+    "source": "krishibangla.com",
+    "query": "ভাই, আমি নতুন করে গরুর খামার শুরু করতে চাই, আসলে কোন দিক দিয়ে শুরু করলে ভালো হয় একটু বলবেন?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Off-Topic",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Off-Topic",
+      "confidence": "High",
+      "notes": "গরুর খামার (Dairy farming); ফসল-ভিত্তিক অ্যাডভাইজরি সিস্টেমের আওতার বাইরে (Livestock-only)।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Off-Topic",
+      "confidence": "High",
+      "notes": "গরুর খামার — পশুপালন; কৃষি ফসল নয় → Off-Topic।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "livestock cow farm, out-of-scope"
+    }
+  },
+  {
+    "item_no": 134,
+    "query_id": "farmer_q_416",
+    "source": "field_sourced_farmer",
+    "query": "ধানের শিষ সাদা হইয়া যাইতেছে, এটার নাম কি রোগ?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধানের শিষ সাদা হওয়া (Ufra পোকা বা Blast রোগ সন্দেহ); রোগ/পোকা নির্ণয় ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "শিষ সাদা হওয়া — সম্ভবত মাজরা/বাকানি/অন্য রোগ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 135,
+    "query_id": "farmer_q_745",
+    "source": "krishibangla.com",
+    "query": "আমার কাঠাল গাছের কাঠালগুলো বাইরে থেকে ভালো দেখালেও পাকলে ভেতর থেকে পচে যায় এবং দুর্গন্ধ বের হয়, এমনকি গাছে থাকা অবস্থায়ও এমন হচ্ছে। এর কোনো প্রতিকার আছে কি?",
+    "gold_crop": "jackfruit",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কাঁঠাল",
+      "crop_en": "jackfruit",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কাঁঠালের অভ্যন্তরীণ পচন ও দুর্গন্ধ (Soft rot / Bacterial disease); দীর্ঘ বর্ণনামূলক রোগ-ব্যবস্থাপনা প্রশ্ন (Item 62-এর অনুরূপ)।"
+    },
+    "external_r2": {
+      "crop_bn": "কাঁঠাল",
+      "crop_en": "jackfruit",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কাঁঠাল অভ্যন্তরীণ পচন (internal soft rot)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "jackfruit",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 136,
+    "query_id": "farmer_q_287",
+    "source": "fb_group_real_farmer",
+    "query": "আলুর জমিতে লেট ব্লাইট বা মড়ক রোগ থেকে বাঁচার উপায় কী?",
+    "gold_crop": "potato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "Item 1 (farmer_q_136)-এর হুবহু ডুপ্লিকেট; আলুর লেট ব্লাইট/মড়ক রোগের প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "লেট ব্লাইট আলুতে (batch1 #1-এর অনুরূপ)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "potato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 137,
+    "query_id": "farmer_q_279",
+    "source": "fb_group_real_farmer",
+    "query": "লেবু গাছে ক্যাংকার বা পাতায় বাদামী দাগ পড়ছে, এর সমাধান কী?",
+    "gold_crop": "lemon",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "লেবু",
+      "crop_en": "lemon",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "লেবুতে ক্যাংকার (Canker) ও পাতায় বাদামী দাগ; ব্যাকটেরিয়াজনিত রোগের প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "লেবু",
+      "crop_en": "lemon",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সাইট্রাস ক্যাংকার লেবুতে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "lemon",
+      "specified": "YES",
+      "notes": "FIX extractor said rice"
+    }
+  },
+  {
+    "item_no": 138,
+    "query_id": "farmer_q_588",
+    "source": "field_sourced_farmer",
+    "query": "ভুট্টা ক্ষেতে ইঁদুরের উপদ্রব খুব বাড়ছে, কি করুম ভাই?",
+    "gold_crop": "corn",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ভুট্টা",
+      "crop_en": "corn",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ভুট্টা ক্ষেতে ইঁদুরের উপদ্রব; ক্ষতিকারক প্রাণী/পোকা দমন।"
+    },
+    "external_r2": {
+      "crop_bn": "ভুট্টা",
+      "crop_en": "corn",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ইঁদুর দমন ভুট্টায়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "corn",
+      "specified": "YES",
+      "notes": "rats"
+    }
+  },
+  {
+    "item_no": 139,
+    "query_id": "farmer_q_527",
+    "source": "field_sourced_farmer",
+    "query": "আমার মরিচ গাছের ডগা সব পইড়া যাইতেছে, কোনো ওষুধ আছে?",
+    "gold_crop": "chilli",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "মরিচ গাছের ডগা পোড়া (Dieback/Anthracnose) ও ওষুধ চাওয়া হয়েছে; রোগ প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ডগা পুড়ে যাওয়া মরিচে — রোগ/পোকা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "chilli",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 140,
+    "query_id": "farmer_q_874",
+    "source": "krishibangla.com",
+    "query": "আমি মুরগি, মাছ আর সবজি চাষের সমন্বিত খামার করতে চাই, কিন্তু এ বিষয়ে হাতে-কলমে শেখার জন্য ভালো কোনো প্রশিক্ষণের খোঁজ পাচ্ছি না। কোথায় গেলে এই বিষয়ে স্বল্পমেয়াদী প্রশিক্ষণ নিতে পারব জানাবেন কি?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "সমন্বিত খামার (মুরগি, মাছ, সবজি) প্রশিক্ষণ; \"সবজি\" generic হওয়ায় none; সাধারণ কৃষি প্রশিক্ষণ সংক্রান্ত।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "Medium",
+      "notes": "সমন্বিত খামার (মুরগি+মাছ+সবজি) প্রশিক্ষণ — সবজি অংশ আছে কিন্তু নির্দিষ্ট ফসল নেই; মূলত General training।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "integrated farm training"
+    }
+  },
+  {
+    "item_no": 141,
+    "query_id": "farmer_q_181",
+    "source": "fb_group_real_farmer",
+    "query": "সরিষার ফুল আসার পর জাব পোকার আক্রমণ হয়েছে, এখন কি বিষ দেওয়া যাবে?",
+    "gold_crop": "mustard",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সরিষায় ফুল আসার পর জাব পোকা (Aphid); কীটনাশক প্রয়োগের সময়সঙ্গততা ও নিরাপত্তা সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "জাব পোকা সরিষায় ফুল আসার পর — কীটনাশক নিরাপত্তা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mustard",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 142,
+    "query_id": "farmer_q_361",
+    "source": "field_sourced_farmer",
+    "query": "মাটি শক্ত হইয়া গেছে, এখন কি করুম?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাটি শক্ত হওয়া (Soil compaction); ফসল উল্লেখ নেই, সাধারণ মাটি ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাটি শক্ত — জমি ব্যবস্থাপনা; ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "hard soil"
+    }
+  },
+  {
+    "item_no": 143,
+    "query_id": "farmer_q_365",
+    "source": "field_sourced_farmer",
+    "query": "ফুলকপি চাষে পোকা ধরলে কি বিষ দেওয়া ভালো না অন্য কিছু?",
+    "gold_crop": "cauliflower",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ফুলকপি",
+      "crop_en": "cauliflower",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ফুলকপিতে পোকা দমনে রাসায়নিক নাকি বিকল্প পদ্ধতি; কীট ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ফুলকপি",
+      "crop_en": "cauliflower",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ফুলকপিতে পোকা — কীটনাশক বিকল্প।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "cauliflower",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 144,
+    "query_id": "farmer_q_13",
+    "source": "fb_group_real_farmer",
+    "query": "করলা গাছের ছোট ছোট ফল হয়ে ঝরে পরতিছে 🥲 এর প্রতিকার কিভাবে করবো??",
+    "gold_crop": "bitter_gourd",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "করলা",
+      "crop_en": "bitter_gourd",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "করলার কচি ফল ঝরে পড়া; শারীরবৃত্তীয় বা পোকা/রোগজনিত সমস্যার প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "করলা",
+      "crop_en": "bitter_gourd",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "করলায় ছোট ফল ঝরে যাওয়া।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "bitter_gourd",
+      "specified": "YES",
+      "notes": "fruit drop"
+    }
+  },
+  {
+    "item_no": 145,
+    "query_id": "farmer_q_772",
+    "source": "fb_group_real_farmer",
+    "query": "বাড়িতে একটা খুব ভালো জাতের আমড়া গাছ আছে যা বছরে দুইবার ফল দেয়, কিন্তু ঘর বড় করার জন্য গাছটা কাটতে হবে। আমি এই জাতটা বাঁচাতে চাই, আমড়া গাছে কলম করার নিয়মটা একটু বলবেন?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আমড়া",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আমড়া (Hog plum) তালিকায় নেই → other_crop; কলম (Grafting) করার পদ্ধতি; বংশবিস্তার কৌশল।"
+    },
+    "external_r2": {
+      "crop_bn": "আমড়া",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আমড়া (hog plum / Spondias) তালিকায় নেই → other_crop। কলম পদ্ধতি।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "grafting"
+    }
+  },
+  {
+    "item_no": 146,
+    "query_id": "farmer_q_569",
+    "source": "field_sourced_farmer",
+    "query": "ধানের পাতায় কেমন জানি লালচে দাগ পড়ছে, কী করমু?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধানের পাতায় লালচে দাগ (Brown spot / Blast সন্দেহ); রোগ লক্ষণ ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "লালচে দাগ ধানের পাতায়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 147,
+    "query_id": "farmer_q_461",
+    "source": "field_sourced_farmer",
+    "query": "বেগুন গাছে পোকা লেগেছে, কোনো ভালো কীটনাশকের নাম বলবেন?",
+    "gold_crop": "brinjal",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বেগুনে পোকা ও কীটনাশকের নাম জানতে চাওয়া; স্পষ্ট কীট দমন প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বেগুনে পোকা — কীটনাশক।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "brinjal",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 148,
+    "query_id": "farmer_q_274",
+    "source": "fb_group_real_farmer",
+    "query": "ধানের পাতায় মরিচা বা ব্লাস্ট রোগ দেখা দিয়েছে। কি করলে ফলন রক্ষা করা যাবে?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধানে মরিচা (Rust) বা ব্লাস্ট (Blast) রোগ; ফলন রক্ষায় প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "মরিচা/ব্লাস্ট রোগ ধানে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 149,
+    "query_id": "farmer_q_687",
+    "source": "krishibangla.com",
+    "query": "ভাই, আসসালামুআলাইকুম।\nআমি একজন মাশরুম চাষী। আমার বর্তমানে ৫০০০ খরের প্যাকেট (১২*১৮) আআছে।ওয়েস্টার ws +po2 জাতের কিন্তু ফলন তুলনা মূলক অনেক কম হচ্ছে।দয়াকরে ফলন কি ভাবে বাড়ানো যায় জানাবেন কি ? মোবাইল নং ০১৭৫২-৪১২২৫৫। আপনাদের সাথে যোগাযোগের মোবাইল নং দেবেন plz.",
+    "gold_crop": "mushroom",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "মাশরুম",
+      "crop_en": "mushroom",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাশরুমের ফলন বাড়ানো ও যোগাযোগের তথ্য; সাধারণ চাষ ও ব্যবসা সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "মাশরুম",
+      "crop_en": "mushroom",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাশরুম ফলন বৃদ্ধি (WS+PO2 জাত)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mushroom",
+      "specified": "YES",
+      "notes": "oyster"
+    }
+  },
+  {
+    "item_no": 150,
+    "query_id": "farmer_q_603",
+    "source": "field_sourced_farmer",
+    "query": "শসা গাছে হলুদ হলুদ কি যেন হইতাছে, কোনো ওষুধ আছে?",
+    "gold_crop": "cucumber",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "শসা গাছে হলুদ দাগ (Downy mildew বা ভাইরাস সন্দেহ) ও ওষুধ চাওয়া হয়েছে; রোগ প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "হলুদ দাগ/লক্ষণ শসায় — ঔষধ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "cucumber",
+      "specified": "YES",
+      "notes": "yellowing"
+    }
+  },
+  {
+    "item_no": 151,
+    "query_id": "farmer_q_572",
+    "source": "field_sourced_farmer",
+    "query": "কীটনাশক দেওয়ার পর বৃষ্টি আইলে কি আবার দিতে হইবো?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কীটনাশক স্প্রের পর বৃষ্টি হলে পুনঃপ্রয়োগের নিয়ম; ফসল নেই, কিন্তু রাসায়নিক ব্যবস্থাপনা সংক্রান্ত।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বৃষ্টির পর কীটনাশক পুনরায় প্রয়োগ — ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "rain after pesticide, no crop"
+    }
+  },
+  {
+    "item_no": 152,
+    "query_id": "farmer_q_229",
+    "source": "fb_group_real_farmer",
+    "query": "আমার শসা গাছে পাতার ওপর হলুদ মোজাইক আকৃতির দাগ দেখা যাচ্ছে, এটি কি ভাইরাস?",
+    "gold_crop": "cucumber",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "শসার পাতায় হলুদ মোজাইক দাগ (Cucumber Mosaic Virus); রোগ নির্ণয় ও ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "মোজাইক দাগ — সম্ভবত ভাইরাস।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "cucumber",
+      "specified": "YES",
+      "notes": "mosaic virus"
+    }
+  },
+  {
+    "item_no": 153,
+    "query_id": "farmer_q_654",
+    "source": "krishibangla.com",
+    "query": "আমি জেনেছি,সুপারী গাছ ৪হাত দুরত্বে রোপণ করতে হয়।কিন্তু আমি ৩হাত দুরত্বে রোপন করে ফেলেছি।এখন কি সুপারি ধরবে?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সুপারি",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "সুপারি (Betel nut) তালিকায় নেই → other_crop; রোপণ দূরত্ব (৩ হাত বনাম ৪ হাত) ও ফলনের প্রভাব; সাধারণ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "সুপারি",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "সুপারি (arecanut) — রোপণ দূরত্বের প্রভাব (batch5 #99-এর অনুরূপ)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "spacing"
+    }
+  },
+  {
+    "item_no": 154,
+    "query_id": "farmer_q_950",
+    "source": "krishibangla.com",
+    "query": "ভাই, লাউ গাছ তো অনেক বড় হলো, কিন্তু একটাও ফুল ফুটছে না। কী করব?",
+    "gold_crop": "bottle_gourd",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "লাউ",
+      "crop_en": "bottle_gourd",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লাউ গাছ বড় হওয়া কিন্তু ফুল না ফোটা; শারীরবৃত্তীয়/পুষ্টি সংক্রান্ত সাধারণ সমস্যা।"
+    },
+    "external_r2": {
+      "crop_bn": "লাউ",
+      "crop_en": "bottle_gourd",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লাউয়ের ফুল না আসা — পুষ্টি/হরমোন/সেচ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "bottle_gourd",
+      "specified": "YES",
+      "notes": "no flowering"
+    }
+  },
+  {
+    "item_no": 155,
+    "query_id": "farmer_q_404",
+    "source": "field_sourced_farmer",
+    "query": "সবজি বাগানে কি খৈল পচা সার দেওয়া ঠিক হবে?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "\"সবজি\" generic → none; খৈল পচা সার (Organic fertilizer) প্রয়োগের উপযোগিতা; সার ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "সবজি সাধারণ; খৈল সার — নির্দিষ্ট ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "vegetable garden manure general"
+    }
+  },
+  {
+    "item_no": 156,
+    "query_id": "farmer_q_295",
+    "source": "fb_group_real_farmer",
+    "query": "শীতকালীন সবজির জন্য এনপিকে (NPK) সারের সঠিক অনুপাত কী হওয়া উচিত?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "\"শীতকালীন সবজি\" generic → none; NPK সারের অনুপাত; সার ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "শীতকালীন সবজি সাধারণ; NPK অনুপাত।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "winter vegetables NPK general"
+    }
+  },
+  {
+    "item_no": 157,
+    "query_id": "farmer_q_739",
+    "source": "fb_group_real_farmer",
+    "query": "আমার লেবু গাছের পাতাগুলো হলুদ হয়ে শুকিয়ে যাচ্ছে, আর পাতার নিচে সাদা সাদা দাগ দেখা যাচ্ছে। এর জন্য কী করতে পারি?",
+    "gold_crop": "lemon",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "লেবু",
+      "crop_en": "lemon",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "লেবু পাতা হলুদ ও নিচে সাদা দাগ (Citrus psyllid বা Powdery mildew সন্দেহ); রোগ/পোকা প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "লেবু",
+      "crop_en": "lemon",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "পাতা হলুদ + সাদা দাগ — সম্ভবত মাইট/স্কেল।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "lemon",
+      "specified": "YES",
+      "notes": "yellow + whitefly"
+    }
+  },
+  {
+    "item_no": 158,
+    "query_id": "farmer_q_631",
+    "source": "field_sourced_farmer",
+    "query": "একটু কম খরচে কী সার দেওয়া যায়?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "কম খরচে সারের বিকল্প; ফসল উল্লেখ নেই; সার ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "কম খরচে সার — ফসল উল্লেখ নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "cheap fertilizer general"
+    }
+  },
+  {
+    "item_no": 159,
+    "query_id": "farmer_q_961",
+    "source": "krishibangla.com",
+    "query": "আমন ধানের বীজতলায় পোকা ধরেছে, এখন কী করলে ভালো হয়?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান (আমন)",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আমন ধানের বীজতলায় পোকা দমন; কীট ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আমন ধানের বীজতলায় পোকা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": "seedbed"
+    }
+  },
+  {
+    "item_no": 160,
+    "query_id": "farmer_q_904",
+    "source": "fb_group_real_farmer",
+    "query": "ভাই, ছাদ বাগান করার ওপর কোনো ট্রেনিংয়ের ব্যবস্থা আছে কি? থাকলে কোথায় যোগাযোগ করব জানাবেন?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদ বাগান বিষয়ক ট্রেনিং; ফসল উল্লেখ নেই; সাধারণ কৃষি পরামর্শ/তথ্য।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদ বাগান প্রশিক্ষণ — নির্দিষ্ট ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "rooftop training"
+    }
+  },
+  {
+    "item_no": 161,
+    "query_id": "farmer_q_744",
+    "source": "fb_group_real_farmer",
+    "query": "ড্রাগন গাছে ফুল আসার পর সেগুলো লাল হয়ে কেন ঝরে পড়ছে বুঝতে পারছি না, কোনো ওষুধ বা সার দিলে কি কাজ হবে?",
+    "gold_crop": "dragon_fruit",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ড্রাগন ফল",
+      "crop_en": "dragon_fruit",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ফুল ঝরে পড়ার লক্ষণ এবং ওষুধ/সারের মাধ্যমে প্রতিকার চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "ড্রাগন ফল",
+      "crop_en": "dragon_fruit",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ড্রাগন ফলের ফুল ঝরে যাওয়া — ওষুধ/সার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "dragon_fruit",
+      "specified": "YES",
+      "notes": "flower drop"
+    }
+  },
+  {
+    "item_no": 162,
+    "query_id": "farmer_q_16",
+    "source": "fb_group_real_farmer",
+    "query": "এক বিঘা মরিচের জমি থেকে কি ৪ হাজার কেজি মরিচ পাওয়া সম্ভব..? মানে চার হাজার গাছ থেকে ৪ হাজার কেজি..? মানে ১০০ মন..?",
+    "gold_crop": "chilli",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "নির্দিষ্ট জমির আয়তনে মরিচের ফলনের সম্ভাব্যতা/চাষ ব্যবস্থাপনা সংক্রান্ত সাধারণ প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মরিচের সম্ভাব্য ফলন (বিঘাপ্রতি) — সাধারণ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "chilli",
+      "specified": "YES",
+      "notes": "yield question"
+    }
+  },
+  {
+    "item_no": 163,
+    "query_id": "farmer_q_896",
+    "source": "krishibangla.com",
+    "query": "স্যার, আমি সিরাজগঞ্জের উল্লাপাড়ার বাসিন্দা। পড়াশোনা শেষ করে বাড়িতে ফলের চাষ শুরু করতে চাচ্ছি, তাই এ বিষয়ে ভালো কোনো প্রশিক্ষণের ব্যবস্থা বা সরকারি অনুদান পাওয়ার কোনো উপায় আছে কি না জানাবেন?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "\"ফলের চাষ\" generic; ফল চাষে প্রশিক্ষণ ও সরকারি অনুদান সংক্রান্ত সাধারণ তথ্য।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ফল চাষ প্রশিক্ষণ/অনুদান — নির্দিষ্ট ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "fruit farming training/subsidy general"
+    }
+  },
+  {
+    "item_no": 164,
+    "query_id": "farmer_q_302",
+    "source": "fb_group_real_farmer",
+    "query": "শসা গাছের গোড়ায় পচন দেখা যাচ্ছে, আমি কি কোনো জৈব পদ্ধতি ব্যবহার করতে পারি?",
+    "gold_crop": "cucumber",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "শসা গাছের গোড়ায় পচন (রোগ লক্ষণ) এবং জৈব প্রতিকার চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "শসা",
+      "crop_en": "cucumber",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "গোড়া পচা শসায় — জৈব প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "cucumber",
+      "specified": "YES",
+      "notes": "root rot"
+    }
+  },
+  {
+    "item_no": 165,
+    "query_id": "farmer_q_946",
+    "source": "krishibangla.com",
+    "query": "স্যার, আমার দেড় বিঘা আম্রপালি আর আধা বিঘা বারি-৪ বাগান আছে, এখন বাণিজ্যিকভাবে লাভবান হওয়ার জন্য আর কী কী জাতের আম লাগানো ভালো হবে? আমি একটু দ্বিধায় আছি, সঠিক পরামর্শ দিলে উপকৃত হতাম।",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আম্রপালি ও বারি-৪ এর সাথে বাণিজ্যিকভাবে লাভজনক নতুন আমের জাত নির্বাচন; সাধারণ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "আম",
+      "crop_en": "mango",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "বাণিজ্যিক আম জাত নির্বাচন (আম্রপালি + বারি-৪ আছে)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mango",
+      "specified": "YES",
+      "notes": "commercial varieties"
+    }
+  },
+  {
+    "item_no": 166,
+    "query_id": "farmer_q_15",
+    "source": "fb_group_real_farmer",
+    "query": "এখন কোন জাতের শিম চাষ করা যাবে সকলের পরামর্শ চাচ্ছি আর কোন কোম্পানির?",
+    "gold_crop": "bean",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "শিম",
+      "crop_en": "bean",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "শিমের জাত ও বীজ কোম্পানি নির্বাচন; বীজ বপন/চাষ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "শিম",
+      "crop_en": "bean",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "শিম জাত ও কোম্পানি সাজেশন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "bean",
+      "specified": "YES",
+      "notes": "variety question"
+    }
+  },
+  {
+    "item_no": 167,
+    "query_id": "farmer_q_57",
+    "source": "fb_group_real_farmer",
+    "query": "আসসালামু আলাইকুম সার হলুদের জমিতে আগাছা নাশক মারা জাবে কি?",
+    "gold_crop": "turmeric",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "হলুদ",
+      "crop_en": "turmeric",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "হলুদ জমিতে আগাছানাশক (herbicide) প্রয়োগ; আগাছা দমনে রাসায়নিক/ওষুধ চাওয়ায় Treatment।"
+    },
+    "external_r2": {
+      "crop_bn": "হলুদ",
+      "crop_en": "turmeric",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "হলুদে আগাছানাশক ব্যবহারযোগ্যতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "turmeric",
+      "specified": "YES",
+      "notes": "herbicide in turmeric land"
+    }
+  },
+  {
+    "item_no": 168,
+    "query_id": "farmer_q_309",
+    "source": "fb_group_real_farmer",
+    "query": "তরমুজ গাছের গোড়ায় পচন ধরে গাছ হঠাৎ শুকিয়ে যাচ্ছে, কী সমাধান?",
+    "gold_crop": "watermelon",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "তরমুজ",
+      "crop_en": "watermelon",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "তরমুজ গাছের গোড়ায় পচন ও শুকিয়ে যাওয়া; রোগ লক্ষণ ও সমাধান।"
+    },
+    "external_r2": {
+      "crop_bn": "তরমুজ",
+      "crop_en": "watermelon",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "গোড়া পচা তরমুজে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "watermelon",
+      "specified": "YES",
+      "notes": "FIX extractor said rice"
+    }
+  },
+  {
+    "item_no": 169,
+    "query_id": "farmer_q_775",
+    "source": "krishibangla.com",
+    "query": "দাদা, আমার টবের মরিচ গাছে ফুল তো প্রচুর আসে, কিন্তু একটাও মরিচ দাঁড়াচ্ছে না, সব ফুল ঝরে যাচ্ছে। এর কি কোনো উপায় আছে?",
+    "gold_crop": "chilli",
+    "gold_specified": "YES",
+    "gold_intent": "General/Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "টবের মরিচ গাছে ফুল ঝরে পড়া; পোকা/রোগের উল্লেখ নেই, তাই শারীরবৃত্তীয়/পরাগায়ণ সংক্রান্ত General।"
+    },
+    "external_r2": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "মরিচের ফুল ঝরে ফল না ধরা (টব)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "chilli",
+      "specified": "YES",
+      "notes": "potted"
+    }
+  },
+  {
+    "item_no": 170,
+    "query_id": "farmer_q_834",
+    "source": "fb_group_real_farmer",
+    "query": "আমি সিলেটে পেঁপে চাষ শুরু করতে চাচ্ছি, কোন জাতের পেঁপে দ্রুত ফলে আর বেশি ফলন দেয়? ভালো বীজ কোথা থেকে কিনবো? আর বীজতলা তৈরির পদ্ধতিসহ এক শতক জমিতে কতগুলো চারা রোপণ করা যায় তা জানাবেন।",
+    "gold_crop": "papaya",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "পেঁপের জাত নির্বাচন, বীজের উৎস, বীজতলা ও রোপণ দূরত্ব; বিস্তারিত চাষ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "পেঁপে",
+      "crop_en": "papaya",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "পেঁপে জাত, বীজ উৎস, বীজতলা ও রোপণ ঘনত্ব।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "papaya",
+      "specified": "YES",
+      "notes": "varieties"
+    }
+  },
+  {
+    "item_no": 171,
+    "query_id": "farmer_q_414",
+    "source": "field_sourced_farmer",
+    "query": "টমেটো গাছ হলুদ হয়ে যাচ্ছে কেন বুঝতে পারছি না, কি করবো?",
+    "gold_crop": "tomato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "টমেটো গাছ হলুদ হওয়া (রোগ/পুষ্টি লক্ষণ) এবং প্রতিকার চাওয়া হয়েছে।"
+    },
+    "external_r2": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "টমেটো হলুদ হওয়া — রোগ/পুষ্টি।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "tomato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 172,
+    "query_id": "farmer_q_338",
+    "source": "field_sourced_farmer",
+    "query": "ধানের পাতায় কেমন জানি লাল দাগ হইছে, কি করুম?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধানের পাতায় লাল দাগ (রোগ লক্ষণ) এবং প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "লাল দাগ ধানের পাতায়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 173,
+    "query_id": "farmer_q_125",
+    "source": "fb_group_real_farmer",
+    "query": "টমেটো গাছে ফল আসার পর ফল পচা শুরু হয়েছে, নিচের দিক থেকে কালো হয়ে যাচ্ছে। কী করব?",
+    "gold_crop": "tomato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "টমেটো ফলের নিচের দিক কালো হয়ে পচা (Blossom End Rot সন্দেহ); রোগ প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "টমেটো",
+      "crop_en": "tomato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ফল পচা (blossom end rot / fruit rot) টমেটোতে।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "tomato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 174,
+    "query_id": "farmer_q_325",
+    "source": "fb_group_real_farmer",
+    "query": "বেগুন গাছের ডগা ও ফল ছিদ্রকারী পোকা দমনে জৈব বা নিরাপদ কোনো উপায় আছে কি?",
+    "gold_crop": "brinjal",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বেগুনের ডগা ও ফল ছিদ্রকারী পোকা (shoot/fruit borer) দমনে জৈব উপায়; কীট ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "shoot & fruit borer বেগুনে — জৈব দমন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "brinjal",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 175,
+    "query_id": "farmer_q_216",
+    "source": "fb_group_real_farmer",
+    "query": "শীতকালীন সবজির জন্য সার প্রয়োগের সঠিক নিয়ম কী?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "\"শীতকালীন সবজি\" generic → none; সার প্রয়োগের নিয়ম; সার ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "শীতকালীন সবজি সাধারণ — সার নিয়ম।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "winter vegetables fertilizer general"
+    }
+  },
+  {
+    "item_no": 176,
+    "query_id": "farmer_q_135",
+    "source": "fb_group_real_farmer",
+    "query": "বেগুন গাছে ডগা ও ফল ছিদ্রকারী পোকা দমনে জৈব পদ্ধতি কী?",
+    "gold_crop": "brinjal",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "Item 174-এর প্রায় ডুপ্লিকেট; বেগুনের ডগা/ফল ছিদ্রকারী পোকা দমন।"
+    },
+    "external_r2": {
+      "crop_bn": "বেগুন",
+      "crop_en": "brinjal",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "shoot & fruit borer — জৈব (duplicate-like of 174)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "brinjal",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 177,
+    "query_id": "farmer_q_63",
+    "source": "fb_group_real_farmer",
+    "query": "আমন মৌসুমে সবচেয়ে উচ্চ ফলনশীল জাত কোনটি আমন মৌসুমে ৩৫ শতাংশ জমিতে আবাদ করতে চাই",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান (আমন)",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আমন ধান (rice alias); উচ্চ ফলনশীল জাত নির্বাচন।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আমন উচ্চ ফলনশীল জাত নির্বাচন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": "Aman-season implied"
+    }
+  },
+  {
+    "item_no": 178,
+    "query_id": "farmer_q_970",
+    "source": "fb_group_real_farmer",
+    "query": "ভাই, চিটাগাং শহরে লিটোসেন আর ডিএপি সার কোথায় পাওয়া যাবে একটু বলবেন?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ফসল উল্লেখ নেই; লিটোসেন ও ডিএপি সারের বাজার/প্রাপ্যতা সংক্রান্ত সার-বিষয়ক প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "লিটোসেন (Likely Lithovit/micronutrient) + DAP কোথায় পাওয়া যায় — ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "fertilizer shop location"
+    }
+  },
+  {
+    "item_no": 179,
+    "query_id": "farmer_q_470",
+    "source": "field_sourced_farmer",
+    "query": "ধানের জমিতে প্রচুর আগাছা, কী ওষুধ মারলে ভালো হইবো?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধানের জমিতে আগাছা দমনে ওষুধ (herbicide); কীট/আগাছা ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধানক্ষেতে আগাছা দমন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": "weeds"
+    }
+  },
+  {
+    "item_no": 180,
+    "query_id": "farmer_q_537",
+    "source": "field_sourced_farmer",
+    "query": "অকাল বৃষ্টিতে ধানের খুব ক্ষতি হইছে, এখন কি আর কিছু লাগানো যাবে?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "অকাল বৃষ্টিতে ধানের ক্ষতি ও পুনরায় চাষ/লাগানোর সম্ভাব্যতা; আবহাওয়া ও চাষ ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "অকাল বৃষ্টিতে ক্ষতিগ্রস্ত ধানের পর বিকল্প ফসল।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": "rain damage replant"
+    }
+  },
+  {
+    "item_no": 181,
+    "query_id": "farmer_q_349",
+    "source": "field_sourced_farmer",
+    "query": "ফল আসার আগে গাছ ঝিমিয়ে পড়ছে, কি করবো?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ফসলের নাম নেই; ফল আসার আগে গাছ ঝিমিয়ে পড়ার লক্ষণ ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "ফল আসার আগে গাছ ঝিমিয়ে — ফসল উল্লেখ নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "unspecified fruit trees wilting"
+    }
+  },
+  {
+    "item_no": 182,
+    "query_id": "farmer_q_677",
+    "source": "fb_group_real_farmer",
+    "query": "আমার বাড়ীর ছাদে কিছু ফল গাছ অতি বৃষ্টি হওয়াতে\nকিছুটা দুরল হয়ে পরেছে।\nএই মুহুর্তে আমার করনিয় কি?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "\"ফল গাছ\" generic; অতিবৃষ্টিতে ছাদের গাছের যত্ন/ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "ছাদের ফল গাছ (অনির্দিষ্ট) বৃষ্টির পর যত্ন।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "rooftop rain damage general"
+    }
+  },
+  {
+    "item_no": 183,
+    "query_id": "farmer_q_710",
+    "source": "krishibangla.com",
+    "query": "Amar jam gacer boyosh pray 3 year.gacer patha kishe jeno kheye felce.akshomoy puro patha kheye felce.akon ki korbo sir?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "জাম",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "Banglish: \"jam gacer\" = জাম গাছের; জাম তালিকায় নেই → other_crop; পাতা খাওয়া পোকা দমন।"
+    },
+    "external_r2": {
+      "crop_bn": "জাম",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "Romanized: জাম গাছের পাতা কেউ খেয়ে ফেলছে। জাম (Syzygium) তালিকায় নেই → other_crop।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "Banglish black plum"
+    }
+  },
+  {
+    "item_no": 184,
+    "query_id": "farmer_q_899",
+    "source": "krishibangla.com",
+    "query": "লিচুর কলম করার নিয়মটা কি? বছরের কোন সময়ে কলম দিলে ভালো ফল পাওয়া যাবে?",
+    "gold_crop": "litchi",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "লিচু",
+      "crop_en": "litchi",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লিচুর কলম (grafting) করার নিয়ম ও সময়কাল; বংশবিস্তার কৌশল।"
+    },
+    "external_r2": {
+      "crop_bn": "লিচু",
+      "crop_en": "litchi",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লিচু কলমের সময় ও পদ্ধতি।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "litchi",
+      "specified": "YES",
+      "notes": "grafting"
+    }
+  },
+  {
+    "item_no": 185,
+    "query_id": "farmer_q_458",
+    "source": "field_sourced_farmer",
+    "query": "আমন ধানের সময় কোন সার আগে দিবো?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান (আমন)",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "আমন ধানে সার প্রয়োগের ক্রম/সময়সূচী।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "আমন ধানে ভিত্তি সার ক্রম।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 186,
+    "query_id": "farmer_q_148",
+    "source": "fb_group_real_farmer",
+    "query": "সরিষা ক্ষেতে জাব পোকার আক্রমণ থেকে বাঁচার উপায় কী?",
+    "gold_crop": "mustard",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সরিষায় জাব পোকা থেকে \"বাঁচার উপায়\"; পূর্বের ব্যাচের নিয়ম অনুযায়ী পোকা দমন/প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "জাব পোকা সরিষায়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mustard",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 187,
+    "query_id": "farmer_q_886",
+    "source": "krishibangla.com",
+    "query": "ভাই, আসসালামু আলাইকুম। আমার ৫০০০ খরের প্যাকেট (WS+PO2) আছে, কিন্তু মাশরুমের ফলন একদমই আশানুরূপ পাচ্ছি না। ফলন বাড়ানোর কোনো কার্যকর উপায় জানালে খুব উপকার হতো।",
+    "gold_crop": "mushroom",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "মাশরুম",
+      "crop_en": "mushroom",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাশরুমের ফলন বাড়ানোর উপায়; চাষ ব্যবস্থাপনা।"
+    },
+    "external_r2": {
+      "crop_bn": "মাশরুম",
+      "crop_en": "mushroom",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "মাশরুম ফলন বৃদ্ধি (WS+PO2) — batch8 #149-এর অনুরূপ।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mushroom",
+      "specified": "YES",
+      "notes": "oyster WS+PO2"
+    }
+  },
+  {
+    "item_no": 188,
+    "query_id": "farmer_q_951",
+    "source": "fb_group_real_farmer",
+    "query": "লাউ গাছে শুধু লতা বাড়ছে, কিন্তু ফুল তো ধরছে না। এটার সমাধান কী?",
+    "gold_crop": "bottle_gourd",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "লাউ",
+      "crop_en": "bottle_gourd",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লাউ গাছে লতা বৃদ্ধি কিন্তু ফুল না আসা; শারীরবৃত্তীয়/পুষ্টি সংক্রান্ত সাধারণ সমস্যা।"
+    },
+    "external_r2": {
+      "crop_bn": "লাউ",
+      "crop_en": "bottle_gourd",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "লাউয়ের ফুল না আসা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "bottle_gourd",
+      "specified": "YES",
+      "notes": "FIX extractor said rice"
+    }
+  },
+  {
+    "item_no": 189,
+    "query_id": "farmer_q_791",
+    "source": "krishibangla.com",
+    "query": "দাদা, আমার কাজু গাছে প্রতি বছর মার্চ মাসে থোকায় থোকায় ফুল ফোটে, কিন্তু ফুলগুলো ঝরে যায়, কোনো ফল হয় না। গাছটার বয়স তো ১২ বছর হলো, এখন ফল না আসার কারণ কী হতে পারে?",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "General/Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কাজু",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "কাজু তালিকায় নেই → other_crop; ফুল ঝরে পড়া ও ফল না ধরা (Item 83-এর অনুরূপ)।"
+    },
+    "external_r2": {
+      "crop_bn": "কাজু",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "কাজু (cashew) — ফুল ঝরে ফল না ধরা (batch5 #83-এর অনুরূপ)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 190,
+    "query_id": "farmer_q_678",
+    "source": "krishibangla.com",
+    "query": "সমস্যা সমুহ:-\n১.আম,ডালিম গাছে ফুল আসে কিন্তু ফল হয় না।তাছাড়াও ফুল ঝরে যায়।\n২.চীনা কমলার ফলন ভাল হয়,কিন্তু টক মিস্টি হই না।\n৩.কিছু কিছু গাছের পাতা হলুদ হয়ে যাচ্ছে।\n৪.কয়েকটি আম গাছে ফুল আসছে না।",
+    "gold_crop": "mango",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer/Treatment",
+    "consensus_status": "Majority External Consensus (2 vs 1)",
+    "external_r1": {
+      "crop_bn": "আম, ডালিম, কমলা",
+      "crop_en": "mango, other_crop",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "একাধিক ফসল; ফুল ঝরা, ফলের স্বাদহীনতা, পাতা হলুদ হওয়া — মাইক্রোনিউট্রিয়েন্ট ঘাটতির লক্ষণ; Item 40-এর সাথে সামঞ্জস্যপূর্ণ।"
+    },
+    "external_r2": {
+      "crop_bn": "আম, ডালিম, কমলা",
+      "crop_en": "mango, other_crop",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "Medium",
+      "notes": "আম + ডালিম + চীনা কমলা — ফুল ঝরা, স্বাদ, পাতা হলুদ (multi-crop)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "multi: mango/pomegranate/orange"
+    }
+  },
+  {
+    "item_no": 191,
+    "query_id": "farmer_q_357",
+    "source": "field_sourced_farmer",
+    "query": "বীজতলায় কি কোনো ভিটামিন দিতে হয়?",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "ফসল নেই; বীজতলায় ভিটামিন/মাইক্রোনিউট্রিয়েন্ট প্রয়োগ সংক্রান্ত প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "Fertilizer",
+      "confidence": "Medium",
+      "notes": "বীজতলায় ভিটামিন/মাইক্রোনিউট্রিয়েন্ট — ফসল নেই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "seedbed vitamins general"
+    }
+  },
+  {
+    "item_no": 192,
+    "query_id": "farmer_q_183",
+    "source": "fb_group_real_farmer",
+    "query": "ধানের পাতায় বাদামী রঙের দাগ পড়ছে, এটা কি রোগ এবং প্রতিকার কী?",
+    "gold_crop": "rice",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ধানের পাতায় বাদামী দাগ (Brown spot/Blast); রোগ নির্ণয় ও প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "ধান",
+      "crop_en": "rice",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "বাদামী দাগ ধানে — রোগ নির্ণয় ও প্রতিকার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "rice",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 193,
+    "query_id": "farmer_q_445",
+    "source": "field_sourced_farmer",
+    "query": "সরষের খেতে হলুদ পোকা, কি করবো?",
+    "gold_crop": "mustard",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "সরিষায় হলুদ পোকা (Mustard aphid/sawfly); কীট দমন।"
+    },
+    "external_r2": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "হলুদ পোকা (possibly painted bug / mustard sawfly) সরিষায়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mustard",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 194,
+    "query_id": "farmer_q_390",
+    "source": "field_sourced_farmer",
+    "query": "আলু গাছে মড়ক ধরলে এখন কি আর কোনো ওষুধ কাজ করবে?",
+    "gold_crop": "potato",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "আলুতে মড়ক/লেট ব্লাইট; ওষুধের কার্যকারিতা নিয়ে প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "আলু",
+      "crop_en": "potato",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "মড়ক (late blight) আলুতে — ঔষধ কার্যকারিতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "potato",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 195,
+    "query_id": "farmer_q_593",
+    "source": "field_sourced_farmer",
+    "query": "লঙ্কা গাছে কুঁকড়ে যাওয়া রোগের কি কোনো ঘরোয়া সমাধান আছে?",
+    "gold_crop": "chilli",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "মরিচ (লঙ্কা)",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "\"লঙ্কা\" = মরিচ (alias); পাতা কুঁকড়ে যাওয়া (Leaf Curl Virus) রোগের ঘরোয়া প্রতিকার।"
+    },
+    "external_r2": {
+      "crop_bn": "মরিচ",
+      "crop_en": "chilli",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "লঙ্কা = মরিচ; পাতা কুঁকড়ানো রোগ — ঘরোয়া সমাধান।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "chilli",
+      "specified": "YES",
+      "notes": "FIX extractor said rice; lonka=dialectal chilli"
+    }
+  },
+  {
+    "item_no": 196,
+    "query_id": "farmer_q_150",
+    "source": "fb_group_real_farmer",
+    "query": "তরমুজ চাষে ভালো ফলন ও মিষ্টি স্বাদ পাওয়ার জন্য কোন সার কখন দেব?",
+    "gold_crop": "watermelon",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "তরমুজ",
+      "crop_en": "watermelon",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "তরমুজে ভালো ফলন ও মিষ্টি স্বাদের (Brix) জন্য সারের সময় ও ধরন।"
+    },
+    "external_r2": {
+      "crop_bn": "তরমুজ",
+      "crop_en": "watermelon",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "তরমুজ সার সময়সূচী ও ফলন/মিষ্টতা।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "watermelon",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 197,
+    "query_id": "farmer_q_696",
+    "source": "fb_group_real_farmer",
+    "query": "chad bagan korte koto khoroc hoy",
+    "gold_crop": "none",
+    "gold_specified": "NO",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "Banglish: \"chad bagan korte koto khoroc hoy\" = ছাদ বাগানের খরচ; ফসলহীন সাধারণ প্রশ্ন।"
+    },
+    "external_r2": {
+      "crop_bn": "কোনো ফসল নেই",
+      "crop_en": "none",
+      "is_specified": "NO",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "Romanized: ছাদ বাগান করতে কত খরচ হয়।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "none",
+      "specified": "NO",
+      "notes": "rooftop cost Banglish"
+    }
+  },
+  {
+    "item_no": 198,
+    "query_id": "farmer_q_411",
+    "source": "field_sourced_farmer",
+    "query": "সরিষা ফুল আসার সময় কি সার দেওয়া লাগে?",
+    "gold_crop": "mustard",
+    "gold_specified": "YES",
+    "gold_intent": "Fertilizer",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "সরিষায় ফুল আসার সময় সার প্রয়োগের সময়সঙ্গততা।"
+    },
+    "external_r2": {
+      "crop_bn": "সরিষা",
+      "crop_en": "mustard",
+      "is_specified": "YES",
+      "intent": "Fertilizer",
+      "confidence": "High",
+      "notes": "সরিষায় ফুল আসার সময় সার।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "mustard",
+      "specified": "YES",
+      "notes": ""
+    }
+  },
+  {
+    "item_no": 199,
+    "query_id": "farmer_q_567",
+    "source": "field_sourced_farmer",
+    "query": "ঢ্যাঁড়স গাছে সাদা সাদা পোকা দেখা দিচ্ছে, কী করবো?",
+    "gold_crop": "okra",
+    "gold_specified": "YES",
+    "gold_intent": "Treatment",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "ঢেঁড়স (ঢ্যাঁড়স)",
+      "crop_en": "okra",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "\"ঢ্যাঁড়স\" = ঢেঁড়স (alias); সাদা পোকা (Whitefly/Jassid) দমন।"
+    },
+    "external_r2": {
+      "crop_bn": "ঢেঁড়শ",
+      "crop_en": "okra",
+      "is_specified": "YES",
+      "intent": "Treatment",
+      "confidence": "High",
+      "notes": "ঢেঁড়শে সাদা পোকা (whitefly/mealybug)।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "okra",
+      "specified": "YES",
+      "notes": "whitefly"
+    }
+  },
+  {
+    "item_no": 200,
+    "query_id": "farmer_q_676",
+    "source": "krishibangla.com",
+    "query": "২০১৩ সালে প্রায় ২৫০ টি আকাশমনি গাছের চারা রোপন করি বর্গাকার পদ্ধতিতে। প্রতিটি চারার দুরত্ব প্রায় সাড়ে তিন হাত। বর্ষাকালের এক মাস বাগানে পানি অবস্থান করে। বর্তমানে পানি শুকিয়েছে। জমিতে প্রচুর পরিমানে আগাছা জন্মেছে। গাছগুলো আশারনুরুপ বড় হয়নি। গাছগুলোর কান্ড খুবই বাকা । কান্ড সুজা করা যাচ্ছে না। আমার পরামর্শ লাগবে কিভাবে দ্রুত বড় করা যায়। কখন কি কি সার, কিভাবে প্রয়োগ করতে হবে? ডালপালা ছেটে দিলে কখন কিভাবে কি পরিমান ছাটতে হবে? দয়া করে জানাবেন।",
+    "gold_crop": "other_crop",
+    "gold_specified": "YES",
+    "gold_intent": "General",
+    "consensus_status": "Unanimous External Reviewers",
+    "external_r1": {
+      "crop_bn": "আকাশমনি",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আকাশমনি (Acacia/Timber tree) তালিকায় নেই → other_crop; বৃদ্ধি, সার ও ছাঁটাই (pruning) সংক্রান্ত বনায়ন/সাধারণ পরামর্শ।"
+    },
+    "external_r2": {
+      "crop_bn": "আকাশমনি",
+      "crop_en": "other_crop",
+      "is_specified": "YES",
+      "intent": "General",
+      "confidence": "High",
+      "notes": "আকাশমনি (Acacia / rain tree) তালিকায় নেই → other_crop। বৃদ্ধি, সার, ছাঁটাই।"
+    },
+    "sealed_baseline_r0": {
+      "crop": "other_crop",
+      "specified": "YES",
+      "notes": "timber spacing"
+    }
+  }
+]

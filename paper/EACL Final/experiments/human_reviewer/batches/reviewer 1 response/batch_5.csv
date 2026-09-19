@@ -1,0 +1,21 @@
+﻿Item #,Query ID,Crop Name (বাংলায় ফসলের নাম),Crop Taxonomy (English),Is Crop Specified?,Intent Category,Confidence,Reviewer Notes
+81,farmer_q_35,আনারস,other_crop,YES,Fertilizer,High,আনারস (Pineapple) নিয়ন্ত্রিত তালিকায় নেই → other_crop; বর্ষাকালে সার প্রয়োগের সময়সঙ্গততা জানতে চাওয়া হয়েছে।
+82,farmer_q_36,কোনো ফসল নেই,none,NO,Treatment,Medium,ফসলের নাম নেই; অবশিষ্ট কীটনাশক/ঔষধ সংরক্ষণ ও পুনঃপ্রয়োগের নিরাপত্তা সংক্রান্ত প্রশ্ন।
+83,farmer_q_792,কাজু,other_crop,YES,General,High,কাজু (Cashew) তালিকায় নেই → other_crop; ফুল ঝরে পড়া ও ফল না ধরা সংক্রান্ত শারীরবৃত্তীয়/সাধারণ সমস্যা।
+84,farmer_q_914,কোনো ফসল নেই,none,NO,General,High,"ছাদ বাগানের বাজেট ও খরচ; ফসল উল্লেখ নেই, সাধারণ পরামর্শ।"
+85,farmer_q_549,ধান (বোরো),rice,YES,Fertilizer,High,বোরো ধান (rice alias); পটাশ সার প্রয়োগের সময় জানতে চাওয়া হয়েছে।
+86,farmer_q_47,কোনো ফসল নেই,none,NO,Treatment,Medium,"""রুপন"" (রোপণ) বলা হয়েছে কিন্তু ফসলের নাম নেই; গোড়া পচা রোগের জন্য ছত্রাকনাশক ও কীটনাশক চাওয়া হয়েছে।"
+87,farmer_q_606,ধান (বোরো),rice,YES,Treatment,High,বোরো ধান (rice); মাজরা পোকার প্রকোপ ও দমন সংক্রান্ত প্রশ্ন।
+88,farmer_q_565,ধান,rice,YES,Treatment,High,ধান (rice); পাতায় লাল দাগ (রোগ লক্ষণ) এবং ওষুধ জানতে চাওয়া হয়েছে।
+89,farmer_q_665,কোনো ফসল নেই,none,NO,Fertilizer,Medium,"ফসল নেই; ""মাটির উর্বরতা কম"" — মাটির পুষ্টি ঘাটতি পূরণে সার/মাটি ব্যবস্থাপনা সংক্রান্ত প্রশ্ন।"
+90,farmer_q_459,ধান,rice,YES,General,High,ধান (rice); ফসল পাকার আগে সেচ বন্ধ করার নিয়ম (সাধারণ কৃষি/সেচ ব্যবস্থাপনা)।
+91,farmer_q_836,পেয়ারা,guava,YES,Treatment,High,পেয়ারা (guava); সাদা পোকা (সম্ভবত মিলিবাগ বা সাদা মাছি) দমনের কীটনাশক চাওয়া হয়েছে।
+92,farmer_q_997,বাঁশ,other_crop,YES,Fertilizer,High,বাঁশ (Bamboo) তালিকায় নেই → other_crop; ফলন বাড়াতে সার প্রয়োগ সংক্রান্ত প্রশ্ন।
+93,farmer_q_391,কোনো ফসল নেই,none,NO,Fertilizer,Medium,ফসল নেই; সার দেওয়ার পরেও গাছ হলুদ হওয়া — পুষ্টি ঘাটতি (যেমন: সালফার/জিংক) বা রোগ নির্ণয় সংক্রান্ত।
+94,farmer_q_632,কোনো ফসল নেই,none,NO,Fertilizer,High,ফসল নেই; জমি চাষের পর basal dose (গোড়া সার) প্রয়োগ সংক্রান্ত প্রশ্ন।
+95,farmer_q_327,পেঁয়াজ,onion,YES,Prevention,High,"পেঁয়াজ (onion); ""গোড়া পচা রোধে"" স্পষ্ট প্রতিরোধমূলক ফ্রেজিং; জিপসাম সারের ভূমিকা।"
+96,farmer_q_467,পেঁপে,papaya,YES,Treatment,High,পেঁপে (papaya); পাতায় হলুদ দাগ (ভাইরাস/ছত্রাক সন্দেহ) এবং গাছ বাঁচানোর প্রতিকার।
+97,farmer_q_366,ধান,rice,YES,General,High,ধান (rice); ফসল তোলার সময় বিলম্ব হওয়ার প্রভাব (হারভেস্টিং ম্যানেজমেন্ট)।
+98,farmer_q_71,"ধান, সরিষা","rice, mustard",YES,General,High,একাধিক ফসল; উঁচু জমিতে আমন ধানের জাত নির্বাচন এবং পরবর্তীতে সরিষা চাষের ফসল বিন্যাস (cropping pattern)।
+99,farmer_q_788,সুপারি,other_crop,YES,General,High,সুপারি (Betel nut) তালিকায় নেই → other_crop; রোপণ দূরত্ব ও ভবিষ্যৎ ফলন/ক্ষতি সংক্রান্ত সাধারণ পরামর্শ।
+100,farmer_q_555,কোনো ফসল নেই,none,NO,Treatment,High,ফসল নেই; পাতা খাওয়া পোকার লক্ষণ ও দমন সংক্রান্ত প্রশ্ন।
