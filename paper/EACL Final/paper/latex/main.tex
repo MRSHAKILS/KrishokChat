@@ -64,9 +64,9 @@ We present \textsc{KrishokChat}, a Bengali agricultural advisory system designed
 \section{Introduction}
 \label{sec:introduction}
 
-For a farmer in Bangladesh, agricultural advice is urgently needed when symptoms appear, pests spread, or treatment cannot wait for an extension visit. Agriculture accounted for 11.7\% of GDP and 44.3\% of employment in 2025 \citep{worldbank2026}, yet smallholders face a severe extension workforce deficit \citep{dae_extension_manual,dlec_bangladesh}. A digital assistant can extend access, but only if it reliably recognizes when requests are underspecified or unsafe.
+For a farmer in Bangladesh, agricultural advice is urgently needed when symptoms appear, pests spread, or treatment cannot wait for an extension visit. Agriculture accounted for 11.7\% of GDP and 44.3\% of employment in 2025 \citep{worldbank2026}, yet smallholders face a severe extension workforce deficit \citep{dae_extension_manual,dlec_bangladesh}. A digital assistant can extend access, but only if it accurately recognizes when requests are underspecified or unsafe.
 
-The challenge exceeds providing a Bengali chat interface. Farmers describe symptoms in colloquial or regional Bangla, whereas agricultural resources use standardized terms; our prior work found a substantial formal-to-colloquial retrieval gap \citep{our_bengali_retrieval}. Crucially, retrieval can fail before generation: treatment requests often omit the crop, photographs may contradict text, and generated dosages may lack evidence grounding. Fluent models turn unresolved uncertainties into confident, dangerous recommendations. Prior work revealed residual unsupported chemical advice even under oracle evidence \citep{our_agricultural_safety}, and vision-language models often exhibit blind faith in contradictory text \citep{Deng_2025_CVPR}.
+The challenge exceeds providing a Bengali chat interface. Farmers describe symptoms in colloquial or regional Bangla, whereas agricultural resources use standardized terms; our prior work found a substantial formal-to-colloquial retrieval gap \citep{our_bengali_retrieval}. Retrieval can also fail before generation: treatment requests often omit the crop, photographs may contradict text, and generated dosages may lack evidence grounding. Fluent models turn unresolved uncertainties into confident, dangerous recommendations. Prior work revealed residual unsupported chemical advice even under oracle evidence \citep{our_agricultural_safety}, and vision-language models often exhibit blind faith in contradictory text \citep{Deng_2025_CVPR}.
 
 We present \textbf{KrishokChat}, a Bengali agricultural advisory system structured around explicit decision boundaries rather than ungrounded generation:
 First, \emph{the cheapest and safest retrieval is the one the system refuses to run} (\textbf{C1}): when a treatment query lacks a crop, a deterministic gate halts before search and serves clarification chips or helpline referral (halting 76/200 farmer queries with zero retrieval).
@@ -221,12 +221,13 @@ Across S1--S5, the same principle recurs from a different angle each time: Krish
 \section{Evaluation}
 \label{sec:evaluation}
 
-The preceding section demonstrated how KrishokChat handles underspecified, multimodal, unsafe, and constrained interactions. We now evaluate whether the corresponding decision boundaries behave as intended under the measured test conditions. The evaluation is organized around the three core contributions: whether the system halts underspecified treatment requests before retrieval (C1), whether crop information reliably constrains evidence and catches text--image contradictions (C2), and whether generated dosage claims remain verified and safe across constrained delivery channels (C3). Table~\ref{tab:claim_honesty} establishes the empirical status and validated scope of all headline claims.
+The preceding section demonstrated how KrishokChat handles underspecified, multimodal, unsafe, and constrained interactions. We now evaluate whether the corresponding decision boundaries behave as intended under the measured test conditions. The evaluation is organized around the three core contributions: whether the system halts underspecified treatment requests before retrieval (C1), whether crop information consistently constrains evidence and catches text--image contradictions (C2), and whether generated dosage claims remain verified and safe across constrained delivery channels (C3). Table~\ref{tab:claim_honesty} establishes the empirical status and validated scope of all headline claims (a comprehensive evidence breakdown across all pipeline layers is provided in Table~\ref{tab:evidence_summary}, Appendix~\ref{app:evidence_table}).
 
 \begin{table*}[t]
 \centering
-\footnotesize
-\renewcommand{\arraystretch}{0.9}
+\scriptsize
+\renewcommand{\arraystretch}{0.85}
+\setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\textwidth}{l l X X}
 \toprule
 \textbf{Claim \& Mechanism} & \textbf{Status} & \textbf{What It Shows} & \textbf{What It Does Not Show / Validated Boundary} \\
@@ -236,8 +237,8 @@ Controlled pilot halt/pass (C1) & \textsc{Pilot} & 100/100 ambiguous halted, 140
 Crop fence: 36.25\% $\to$ 30.0\% error (C2) & \textsc{Real\_Measured} (sim) & Fencing reduces wrong-crop advice ($p=5.96\times 10^{-8}$, 25/0 discordant). & Upper-bound simulation under perfect gold routing; not end-to-end vision accuracy. \\
 Mismatch badge: 453/454 (C2) & \textsc{Real\_Measured} & Explicit contradictions caught (53/54 farmer, 400/400 PRISM; 0 false halts). & Scoped to explicit textual contradictions; implicit conflicts (\texttt{farmer\_q\_63}) missed. \\
 Safety guard: 0.95\% vs 36.19\% ASR (C3) & \textsc{Real\_Measured} & Guard cuts attack success across 420 live calls (95\% CI: [0.26, 3.41]). & Bangla-native residual 10/100 remains (embedded 4/10, roleplay 2/10); motivates verifier. \\
-Dosage verifier: 114/118 caught (C3) & \textsc{Real\_Measured\_SmallN} & Mutations detected reliably (0/38 clean false positives). & Small-$n$ (25--33 per mutation type); applies to dosage claims, not general factuality. \\
-SMS 160-char enforcement (C3) & \textsc{Real\_Measured} & 399/400 $\le 160$ chars; 16/16 referral purity; 100\% (1,000/1,000) slot survival with deterministic packer. & Naive truncation dropped dose (0/84); resolved by deterministic 11-slot compressor (E15 Arm A). \\
+Dosage verifier: 114/118 caught (C3) & \textsc{Real\_Measured\_SmallN} & Per-type mutations detected; 0/38 clean false positives. & Small-$n$ (25--33 per mutation type); applies to dosage claims, not general factuality. \\
+SMS 160-char enforcement (C3) & \textsc{Real\_Measured} & 399/400 $\le 160$ chars; 16/16 referral purity; 100\% (1,000/1,000) slot survival with deterministic packer. & Naive truncation dropped dose (0/84); resolved by deterministic 11-slot compressor . \\
 Offline BM25 hit: 0.94 (C3) & \textsc{Real\_Measured} (path) & Local BM25 hit rate 0.94 with service-worker precache enabled. & Network loss simulated (+13.25 / +30.0\,pp drop without local index); not field deployment. \\
 \bottomrule
 \end{tabularx}
@@ -245,44 +246,13 @@ Offline BM25 hit: 0.94 (C3) & \textsc{Real\_Measured} (path) & Local BM25 hit ra
 \label{tab:claim_honesty}
 \end{table*}
 
-\begin{table*}[t]
-\centering
-\scriptsize
-\renewcommand{\arraystretch}{0.85}
-\begin{tabularx}{\textwidth}{@{}p{0.18\textwidth} p{0.27\textwidth} p{0.22\textwidth} r X@{}}
-\toprule
-\textbf{Component} & \textbf{Metric / Evaluation Target} & \textbf{Result (95\% CI)} & \textbf{Sample ($n$)} & \textbf{Condition / Benchmark Scope} \\
-\midrule
-\multicolumn{5}{l}{\textit{C1: Halting Before Retrieval}} \\
-Deterministic Gate & Halt rate on treatment queries & 0.3800 [76 halted / 0 sources] & 200 & Authentic farmer queries, single-reviewer \\
-Controlled Pilot & Ambiguous halt / Specified pass & 100/100 / 140/140 & 240 & Conformance check on constructed pairs \\
-Token Footprint & Clarification vs Retrieval context & p50: 89 vs 2,146 tokens & 200 & Separate medians; no blended saving claimed \\
-Live vs Deterministic & Halt agreement / Live p50 latency & 0.68 / 4,218.6\,ms & 200 & Live LLM halts 10\% vs 38\% deterministic \\
-\midrule
-\multicolumn{5}{l}{\textit{C2: Crop Constraint and Multimodal Consistency}} \\
-Crop Vision Top-1 & Potato / Rice / Wheat / Brassica / Corn / Chilli & 0.9504 / 0.9625 / 0.9413 / 0.9729 / 0.9723 / 0.9907 & 4,294 & All 6 disease models measured on full test sets \\
-Family Router & Botanical family assignment & 0.9908 [97.67, 99.64] & 437 & 433/437 correct; wheat-800 excluded \\
-Crop Fence & Wrong-crop advice reduction & 36.25\% $\to$ 30.00\% ($p=5.96\times 10^{-8}$) & 400 & Perfect-gold simulation, 25/0 discordant \\
-Mismatch Badge & Explicit contradiction detection & 453/454 (99.78\%) [99.05, 100.0] & 454 & 53/54 farmer + 400/400 PRISM; 1 miss \\
-Prompted Divergence & Cross-track divergence rate & 68/80 (85.00\%) & 80 & Prompted judge threshold at 0.85 (B4) \\
-\midrule
-\multicolumn{5}{l}{\textit{C3: Safety Verification and Constrained Delivery}} \\
-Live Safety Guard & Attack Success Rate (Guarded vs Unguarded) & 0.95\% [0.26, 3.41] vs 36.19\% & 420 & Live API calls; Bangla-native ASR 10/100 \\
-Dosage Verifier & Targeted mutation detection rate & 114/118 (96.61\%) [FP: 0/38] & 156 & x2 33/33, /2 30/31, chem 22/25, unit 29/29 \\
-SMS Enforcement & Length ($\le 160$c) / Purity / Slot survival & 399/400 (99.75\%) / 16/16 (100\%) / 100.0\% & 1,400 & Naive dose 0/84; 1,000/1,000 E15 Arm A, 65/66 gold \\
-Offline Retrieval & Local BM25 hit rate / Precache active & 0.94 / 0/400 cached misses & 400 & Local index; network loss simulated \\
-Non-LLM Overhead & Pipeline latency (Safety + BM25 + Verifier) & p50: 33.565\,ms (p95: 67.833\,ms) & 400 & Safety 0.32\,ms, BM25 26.83\,ms, Verifier 4.82\,ms \\
-Tier-Mix Mix/Cost & Zero-LLM turns / Computed cost per 1k & 7.8\% zero-LLM / \$0.1839 (\$0.1798 modeled) & 1,000 & Metered tokens on 58 grounded calls (\$0.10/\$0.40 per 1M); T1 0.0\% \\
-\bottomrule
-\end{tabularx}
-\caption{Comprehensive evidence summary across the three core contributions and deployment layers. Every number traces directly to frozen experiment artifacts in the evaluation registry.}
-\label{tab:evidence_summary}
-\end{table*}
+% Table 2 (comprehensive evidence summary) moved to Appendix G.
+
 
 \subsection{C1: Pre-Retrieval Gating}
 \label{sec:eval_gating}
 
-We evaluate the deterministic gate on 200 authentic Bengali farmer treatment queries (Table~\ref{tab:evidence_summary}). The gate halted 76 queries (halt rate $0.3800$), passed 122 to fenced search, and refused 2 with immediate 16123 referral. Halted turns retrieved zero sources ($sources\_retrieved = 0$), preventing ungrounded generation. Extractor agreement was $0.52$ (miss rate $0.475$, false-positive rate $0.005$, mapped hazard $0.1607$ [8.69, 27.81], firewall diagnostic case \texttt{farmer\_q\_593}); crop slots were labeled by a single reviewer. A pilot check confirmed the mechanism: 100/100 ambiguous requests halted and 140/140 specified passed. Clarification required median 89 tokens versus 2,146 for retrieval context (no blended percentage saving is claimed). In live comparison, an unconstrained LLM halted only 10\% of ambiguous queries (median latency 4,218.6\,ms; p95: 6,645.1\,ms).
+We evaluate the deterministic gate on 200 authentic Bengali farmer treatment queries (Table~\ref{tab:claim_honesty}). The gate halted 76 queries (halt rate $0.3800$), passed 122 to fenced search, and refused 2 with immediate 16123 referral. Halted turns retrieved zero sources ($sources\_retrieved = 0$), preventing ungrounded generation. Extractor agreement was $0.52$ (miss rate $0.475$, false-positive rate $0.005$, mapped hazard $0.1607$ [8.69, 27.81], firewall diagnostic case \texttt{farmer\_q\_593}); crop slots were labeled by a single reviewer. A pilot check confirmed the mechanism: 100/100 ambiguous requests halted and 140/140 specified passed. Clarification required median 89 tokens versus 2,146 for retrieval context (no blended percentage saving is claimed). In live comparison, an unconstrained LLM halted only 10\% of ambiguous queries (median latency 4,218.6\,ms; p95: 6,645.1\,ms).
 
 \subsection{C2: Crop Constraint and Multimodal Consistency}
 \label{sec:eval_multimodal}
@@ -292,7 +262,7 @@ Top-1 accuracy across all six crop-specific vision models was 0.9504 (potato, $n
 \subsection{C3: Safety Verification and Constrained Delivery}
 \label{sec:eval_safety}
 
-Across 420 live API calls, the guarded system achieved 0.95\% ASR [0.26, 3.41] versus 36.19\% [29.99, 42.88] unguarded. On Bangla-native attacks ($n=100$), guarded ASR was 0.10 [5.5, 17.4] versus 0.83, with residual failures in embedded (4/10) and roleplay (2/10) variants, motivating the downstream verifier. The T4 dosage verifier detected 33/33 dose-doubling, 30/31 dose-halving, 22/25 chemical substitution, and 29/29 unit substitution mutations (114/118 overall, 96.61\%; 0/38 clean false positives). The SMS packer achieved 399/400 compliance with the 160-character ceiling and 16/16 referral purity. While naive string truncation dropped dosage fields (0/84 survival) due to preamble displacement, the deterministic 11-slot SMS template compressor (E15 Arm A) achieves 100.0\% (1,000/1,000) critical slot survival within 102--115 GSM characters (0 violations over 160 characters) and 98.5\% (65/66) on live gold benchmark queries. Offline BM25 achieved a 0.94 hit rate; under simulated packet loss, local retrieval preserved 0.94 while remote dropped by 13.25--30.0\,pp. Median non-LLM overhead was 33.565\,ms (0.321\,ms safety, 26.831\,ms BM25, 4.815\,ms verification; 284.0\,MB minimal footprint). The evaluated tier mix yielded 7.8\% zero-LLM turns (\$0.1839 computed cost per 1k turns from provider-exact metered tokens, vs \$0.1798 modeled).
+Across 420 live API calls, the guarded system achieved 0.95\% ASR [0.26, 3.41] versus 36.19\% [29.99, 42.88] unguarded. On Bangla-native attacks ($n=100$), guarded ASR was 0.10 [5.5, 17.4] versus 0.83, with residual failures in embedded (4/10) and roleplay (2/10) variants, motivating the downstream verifier. The T4 dosage verifier detected 33/33 dose-doubling, 30/31 dose-halving, 22/25 chemical substitution, and 29/29 unit substitution mutations (114/118 overall, 96.61\%; 0/38 clean false positives). The SMS packer achieved 399/400 compliance with the 160-character ceiling and 16/16 referral purity. While naive string truncation dropped dosage fields (0/84 survival) due to preamble displacement, the deterministic 11-slot SMS template compressor  achieves 100.0\% (1,000/1,000) critical slot survival within 102--115 GSM characters (0 violations over 160 characters) and 98.5\% (65/66) on live gold benchmark queries. Offline BM25 achieved a 0.94 hit rate; under simulated packet loss, local retrieval preserved 0.94 while remote dropped by 13.25--30.0\,pp. Median non-LLM overhead was 33.565\,ms (0.321\,ms safety, 26.831\,ms BM25, 4.815\,ms verification; 284.0\,MB minimal footprint). The evaluated tier mix yielded 7.8\% zero-LLM turns (\$0.1839 computed cost per 1k turns from provider-exact metered tokens, vs \$0.1798 modeled).
 
 \subsection{What This Evaluation Does Not Establish}
 \label{sec:eval_boundaries}
@@ -308,9 +278,9 @@ We explicitly state the evaluation boundaries: (1) no longitudinal farmer adopti
 \subsection{Limitations}
 \label{sec:limitations}
 
-Table~\ref{tab:limitations_curated} summarizes the primary system limitations, drawn from the complete 18-row limitations ledger in Appendix~\ref{app:limitations_full}.
+Table~\ref{tab:limitations_curated} summarizes primary system limitations; the full validated boundaries ledger is detailed in Appendix~\ref{app:limitations_full}.
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \scriptsize
 \renewcommand{\arraystretch}{0.85}
@@ -318,7 +288,7 @@ Table~\ref{tab:limitations_curated} summarizes the primary system limitations, d
 \toprule
 \textbf{Limitation} & \textbf{Scope and What We Do Instead} \\
 \midrule
-Small-$n$ Verifier & 38 answers, 8--33 per mutation. Report per-type rates; no pooled factuality score. \\
+Small-$n$ Verifier & 38 answers, 25--33 per mutation. Report per-type rates; no pooled factuality score. \\
 Gold-Routed Fence & Simulation of perfect routing. Scoped as retrieval upper bound, not vision accuracy. \\
 Implicit Contradictions & Misses implicit crop mentions (\texttt{farmer\_q\_63}). Scoped to explicit conflicts. \\
 INT8 Latency Gap & Slower than FP32 on x86 lacking AVX-512 VNNI across 1--4 threads. INT8 is a 3.7$\times$ size reduction story (0.00\,pp drop), not speedup. \\
@@ -357,7 +327,7 @@ Agricultural advisory in smallholder contexts directly affects food security, ru
 
 \paragraph{Helpline Referral.} Unsafe and crisis-pattern requests are referred to Bangladesh's national Krishi Call Centre (16123), a real, currently operating government service under the Department of Agricultural Extension. The helpline operates from 9:00\,AM to 5:00\,PM, Saturday through Thursday (closed Fridays and official public holidays). The referral interface explicitly displays these operating hours, directing off-hours users to wait for the next active shift or seek local in-person extension assistance.
 
-\paragraph{Third-Party Model Use.} The cloud benchmark comparison uses a third-party API (\texttt{google/gemini-2.5-flash-lite}). Calls were conducted under commercial enterprise terms with strict zero-data-retention (ZDR) agreements ensuring that prompt and response text is not logged, retained, or utilized for model training. Furthermore, cloud calls were restricted entirely to the offline benchmark evaluation and never received farmer images or direct PII; production self-hosting executes entirely locally via \texttt{krishokchat-4b} on \texttt{llama-server} with zero external network transmission.
+\paragraph{Third-Party Model Use.} The cloud benchmark comparison uses a third-party API (\texttt{google/gemini-2.5-flash-lite}). Calls were conducted under commercial enterprise terms with strict zero-data-retention (ZDR) agreements ensuring that prompt and response text is not logged, retained, or used for model training. In addition, cloud calls were restricted entirely to the offline benchmark evaluation and never received farmer images or direct PII; production self-hosting executes entirely locally via \texttt{krishokchat-4b} on \texttt{llama-server} with zero external network transmission.
 
 \paragraph{Human Oversight.} KrishokChat is designed to augment, not replace, human agricultural extension officers; the terminal outcome for unresolved or unsafe cases is referral to a human expert, not a generated answer. All reported evaluation numbers are scoped to their measured conditions (Section~\ref{sec:eval_boundaries}), and single-reviewer or simulated components are disclosed rather than presented as field-validated guarantees.
 
@@ -380,7 +350,7 @@ This section details the internal decision rules, threshold calibrations, and co
 \subsection{Provenance Badge Taxonomy}
 Every response rendered in KrishokChat carries exactly one visible provenance badge indicating the authorization pathway and evidence type (Table~\ref{tab:badges}).
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \small
 \begin{tabularx}{\linewidth}{@{}p{0.25\linewidth}p{0.14\linewidth}X@{}}
@@ -421,7 +391,7 @@ To prevent adversarial evasion and unauthorized dual-use, the exact regex dictio
 \subsection{Crop-Specific Vision Models}
 Table~\ref{tab:crop_models} reports the measured top-1 performance across all six crop-specific vision models evaluated on full held-out test sets ($N=4,294$).
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \small
 \begin{tabular}{lccc}
@@ -448,7 +418,7 @@ INT8 evaluation is treated as a model-size optimization rather than a speedup cl
 \subsection{Crop-Fence Evaluation}
 Table~\ref{tab:fence} reports the effect of crop fencing under perfect-gold crop routing. Wrong-crop advice decreased from $0.3625$ to $0.3000$ (25/0 discordant transitions, McNemar $p=5.96\times 10^{-8}$).
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \small
 \begin{tabular}{lcc}
@@ -504,7 +474,7 @@ Over 420 live API calls, the guarded configuration produced an attack success ra
 \subsection{Dosage-Claim Verifier}
 Table~\ref{tab:verifier} reports dosage-verifier accuracy across targeted mutation categories ($n=38$ answers, 114/118 mutations detected, 0/38 clean false positives).
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \small
 \begin{tabular}{lc}
@@ -534,7 +504,7 @@ A composite observability evaluation across 400 held-out requests yielded an agg
 \label{app:deployment}
 
 \subsection{SMS Enforcement}
-The SMS packer produced 299/300 valid offline-ready messages and 100/100 valid live-ready messages ($\le 160$ characters). Referral purity was 16/16. In the baseline live run, naive hard truncation dropped dosage fields in 0/84 advisory cases because conversational preambles displaced numerical parameters past 160 characters. We resolved this by implementing the deterministic 11-slot SMS template compressor (E15 Arm A), which guarantees 100.0\% critical slot survival (dose, application interval $\tau$, and pre-harvest interval $\phi$) across 1,000 certified tuples within 102--115 GSM characters (0 violations over 160 characters), and preserves 98.5\% (65/66) of dosage claims on the live benchmark.
+The SMS packer produced 299/300 valid offline-ready messages and 100/100 valid live-ready messages ($\le 160$ characters). Referral purity was 16/16. In the baseline live run, naive hard truncation dropped dosage fields in 0/84 advisory cases because conversational preambles displaced numerical parameters past 160 characters. We resolved this by implementing the deterministic 11-slot SMS template compressor , which guarantees 100.0\% critical slot survival (dose, application interval $\tau$, and pre-harvest interval $\phi$) across 1,000 certified tuples within 102--115 GSM characters (0 violations over 160 characters), and preserves 98.5\% (65/66) of dosage claims on the live benchmark.
 
 \subsection{Offline Retrieval}
 Local BM25 achieved a hit rate of $0.94$ with service-worker precaching (0/400 cached misses). Under simulated packet loss, local retrieval preserved 0.94, whereas remote retrieval dropped by 13.25\,pp (rural edge, 15\% loss) and 30.0\,pp (severe 2G, 30\% loss).
@@ -542,7 +512,7 @@ Local BM25 achieved a hit rate of $0.94$ with service-worker precaching (0/400 c
 \subsection{Installation Footprint}
 Table~\ref{tab:footprint} details measured installation footprints.
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \small
 \begin{tabular}{lr}
@@ -561,7 +531,7 @@ Full installation & 339.6 \\
 \subsection{Latency Breakdown}
 Table~\ref{tab:latency} details measured non-LLM latency components ($n=400$, median 33.565\,ms; live LLM excluded).
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \small
 \begin{tabular}{lrr}
@@ -649,12 +619,52 @@ Figures~\ref{fig:app_halt}--\ref{fig:app_delivery} provide visual walkthroughs o
 
 \paragraph{Off-Topic Handling Across Tiers.} The Tier-0 deterministic precheck is strictly scoped to emergency crisis language, banned chemicals, and prompt injections (blocking 10/10 injections but passing 30/30 non-crisis off-topic queries). Evaluating these 30 queries through the production Tier-1 LLM classification branch (\texttt{google/gemini-2.5-flash-lite}) achieves a 25/30 (83.33\% [66.44, 92.66]) refusal rate, with the remaining 5 weather queries routed to safe agricultural information by design.
 
-\paragraph{SMS Dose Truncation and Deterministic Resolution.} Baseline naive string truncation resulted in 0/84 dosage field survival as introductory conversational text pushed dosage parameters past the 160-character boundary. Implementing the deterministic 11-slot template compressor (E15 Arm A) in the backend resolved this, achieving 100.0\% critical slot survival across 1,000 certified tuples and 98.5\% (65/66) on authentic farmer benchmark advisories.
+\paragraph{SMS Dose Truncation and Deterministic Resolution.} Baseline naive string truncation resulted in 0/84 dosage field survival as introductory conversational text pushed dosage parameters past the 160-character boundary. Implementing the deterministic 11-slot template compressor  in the backend resolved this, achieving 100.0\% critical slot survival across 1,000 certified tuples and 98.5\% (65/66) on authentic farmer benchmark advisories.
 
-\section{Active Limitations Ledger, Retired Resolutions, and Scope of Claims}
+\section{Comprehensive Evidence Summary}
+\label{app:evidence_table}
+
+Table~\ref{tab:evidence_summary} details the measured performance, sample sizes, and benchmark conditions across all system components and pipeline layers.
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{0.90}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}p{0.14\textwidth} p{0.21\textwidth} p{0.22\textwidth} r X@{}}
+\toprule
+\textbf{Component} & \textbf{Metric / Evaluation Target} & \textbf{Result} & \textbf{$n$} & \textbf{Condition / Benchmark Scope} \\
+\midrule
+\multicolumn{5}{l}{\textit{C1: Halting Before Retrieval}} \\
+Deterministic Gate & Halt rate on treatment queries & 76/200 (38.0\%; Wilson [31.6, 44.9]) & 200 & Authentic farmer queries, single-reviewer \\
+Controlled Pilot & Ambiguous halt / Specified pass & 100/100 / 140/140 & 240 & Conformance check on constructed pairs \\
+Token Footprint & Clarification vs Retrieval context & p50: 89 vs 2,146 tokens & 200 & Separate medians; no blended saving claimed \\
+Live vs Deterministic & Halt agreement / Live p50 latency & 0.68 / 4,218.6\,ms & 200 & Live LLM halts 10\% vs 38\% deterministic \\
+\midrule
+\multicolumn{5}{l}{\textit{C2: Crop Constraint and Multimodal Consistency}} \\
+Crop Vision Top-1 & Potato / Rice / Wheat / Brassica / Corn / Chilli & 0.9413--0.9907 (all 6 crops $\ge 0.94$; Tab.~\ref{tab:crop_models}) & 4,294 & 6 disease classifiers; species exact match 0.0259 (diagnostic) \\
+Family Router & Botanical family assignment & 0.9908 [97.67, 99.64] & 437 & 433/437; wheat-800 excluded \\
+Crop Fence & Wrong-crop advice reduction & 36.25\% $\to$ 30.00\% ($p=5.96\times 10^{-8}$) & 400 & Perfect-gold simulation, 25/0 discordant \\
+Mismatch badge & Explicit contradiction detection & Farmer 53/54 [90.2, 99.7]; PRISM 400/400 [99.05, 100.0] & 454 & Combined 453/454; 0 false halts; 1 implicit miss \\
+Prompted Divergence & Cross-track divergence rate & 68/80 (85.0\%) & 80 & Prompted judge threshold 0.85 (B4) \\
+\midrule
+\multicolumn{5}{l}{\textit{C3: Safety Verification and Constrained Delivery}} \\
+Live Safety Guard & ASR (guarded vs unguarded) & 0.95\% [0.26, 3.41] vs 36.19\% & 420 & Live cloud generator; Bangla-native ASR 10/100 \\
+Dosage Verifier & Mutation detection (per type) & 33/33, 30/31, 22/25, 29/29; FP 0/38 & 156 & Synthetic mutations on $n=38$ answers; not a factuality rate \\
+SMS Enforcement & Length / Purity / Slot survival & 399/400 / 16/16 / 100\% (1,000/1,000) & 1,416 & Naive dose 0/84; template compressor 65/66 live gold \\
+Offline Retrieval & Local BM25 hit rate & 0.94; 0/400 cache misses & 400 & Local index; network loss simulated (+13.25/+30.0\,pp) \\
+Non-LLM Overhead & Pipeline latency (Safety + BM25 + Verifier) & p50: 33.565\,ms (p95: 67.833\,ms) & 400 & Safety 0.32\,ms, BM25 26.83\,ms, Verifier 4.82\,ms \\
+Tier Mix/Cost & Zero-LLM turns / Cost per 1k turns & 7.8\% zero-LLM / \$0.1839 (\$0.1798 modeled) & 1,000 & Metered tokens; 92.2\% T3; T1 0\% (9-fact deterministic base) \\
+\bottomrule
+\end{tabularx}
+\caption{Full evidence summary across the three core contributions and deployment layers. Generator for all C3 live calls: \texttt{google/gemini-2.5-flash-lite}. Every number traces directly to frozen artifacts in the evaluation registry.}
+\label{tab:evidence_summary}
+\end{table*}
+
+\section{System Limitations Ledger and Scope of Claims}
 \label{app:limitations_full}
 
-To ensure complete transparency and reproducibility, Table~\ref{tab:limitations_active} reproduces the active system limitations and validated boundaries ledger from \texttt{LIMITATIONS.md}. Table~\ref{tab:limitations_retired} documents the limitations that were empirically resolved and retired through new measurements and verified implementations. Table~\ref{tab:claim_scope} further summarizes the empirical distinctions and validated boundaries of all claims throughout the paper.
+To ensure complete transparency and rigorous boundary reporting, Table~\ref{tab:limitations_full} documents the active system limitations and validated boundaries of KrishokChat. Table~\ref{tab:claim_scope} summarizes the empirical status and validated scope of all claims across components.
 
 \begin{table*}[t]
 \centering
@@ -664,48 +674,30 @@ To ensure complete transparency and reproducibility, Table~\ref{tab:limitations_
 \toprule
 \textbf{\#} & \textbf{Limitation} & \textbf{Evidence Status} & \textbf{What We Do Instead / Validated Scope} \\
 \midrule
-1 & N03 small $n$ (38 answers; per-type $n$ 8--33) & \textsc{Real\_Measured\_SmallN} & Report per-type rates with Wilson CIs; no pooling; no generalization beyond dosage-claim sentences. \\
-2 & Crop-router label mismatch (family vs species; top-1 0.0259) & Measured + Disclosed & Report 0.0259 ONLY as mismatch diagnostic with species breakdown; router accuracy unclaimed. \\
-3 & Rice INT8 rejected (2.5\,pp drop $> 2.0$\,pp gate) & Measured & Artifact exists, never deployed, never cited as usable. \\
-4 & INT8 latency gap on non-VNNI x86 CPU & Measured & Lack of AVX-512 VNNI on x86 causes 1.5--2.0$\times$ software dot-product emulation overhead. Validated strictly as 3.7$\times$ storage reduction (0.00\,pp drop), not speedup. \\
-5 & N07 implicit-crop miss (\texttt{farmer\_q\_63}) & Measured & Badge claim scoped to explicit-text contradiction; 53/54 farmer + 400/400 PRISM (453/454 combined). \\
-6 & N08 perfect-gold fence & Measured & Simulation of perfect routing, not classifier performance; no absent-crop generalization. \\
-7 & N09 seeded-memory conformance & Measured & Conformance, not independent accuracy; follow-up D untested; safety is precheck-only lower bound. \\
-8 & N11 cost vs coverage trade-off & Stated & Operating-point comparison (halt + latency) only; 60-row manual rubric scoring pending; no coverage claim. \\
-9 & Single-reviewer labels (200 crop slots) + autopsies & Disclosed & Second human pass listed as upgrade path; hazard numbers labeled single-reviewer. \\
+1 & Small-$n$ dosage verification (38 answers; per-type $n$ 25--33) & \textsc{Real\_Measured\_SmallN} & Report per-type rates with Wilson CIs; no pooling; no generalization beyond dosage-claim sentences. \\
+2 & Crop-router taxonomy divergence (species match 0.0259) & Measured + Disclosed & Report 0.0259 ONLY as diagnostic with species breakdown; router accuracy unclaimed. \\
+3 & Rice INT8 rejected (2.5\,pp drop $> 2.0$\,pp gate) & Measured & Artifact exists; never deployed; not cited as usable. \\
+4 & INT8 latency gap on non-VNNI x86 CPU & Measured & Lack of AVX-512 VNNI causes 1.5--2.0$\times$ software dot-product emulation overhead. Validated strictly as 3.7$\times$ storage reduction (0.00\,pp drop), not speedup. \\
+5 & Implicit crop references in multimodal queries (\texttt{farmer\_q\_63}) & Measured & Badge claim scoped to explicit-text contradiction; 53/54 farmer + 400/400 PRISM (453/454 combined). \\
+6 & Gold-routing simulation for crop fencing & Measured & Simulation of perfect routing, not end-to-end classifier performance; no absent-crop generalization. \\
+7 & Clarification dialog conformance & Measured & Conformance check, not independent open-domain accuracy; safety is precheck-only lower bound. \\
+8 & Cost vs coverage operating point & Stated & Operating-point comparison (halt + latency) only; manual rubric scoring pending; no coverage claim. \\
+9 & Single-reviewer query annotation (200 crop slots) & Disclosed & Second human pass listed as upgrade path; hazard numbers labeled single-reviewer. \\
 10 & Dense retrieval unevaluated (BM25-only throughout) & Stated & All retrieval numbers scoped BM25-only; dense is fallback, out of scope. \\
-11 & Live LLM latency excluded from overhead p50s & Stated & All p50 figures exclude generation unless labeled live (N11 p50 4.2\,s). \\
+11 & Live LLM latency excluded from overhead p50s & Stated & All p50 figures exclude generation unless labeled live (median live latency 4.2\,s). \\
 12 & Bangla-native injection residual (10.0\% [5.5, 17.4], $n=100$) & Measured with CI & Reported as residual risk with localized weakness (embedded 4/10, roleplay 2/10); motivates downstream verifier wall. \\
 \bottomrule
 \end{tabularx}
-\caption{Active system limitations and validated boundaries ledger reproduced verbatim from the experimental registry (\texttt{LIMITATIONS.md}).}
-\label{tab:limitations_active}
+\caption{System limitations and validated boundaries ledger.}
+\label{tab:limitations_full}
 \end{table*}
 
 \begin{table*}[t]
 \centering
 \scriptsize
 \renewcommand{\arraystretch}{0.85}
-\begin{tabularx}{\textwidth}{@{}l p{0.24\textwidth} X l@{}}
-\toprule
-\textbf{Orig.\,\#} & \textbf{Limitation Topic} & \textbf{Resolution Evidence \& Measurement} & \textbf{Status} \\
-\midrule
-L4 & Potato/brassica INT8 sets too small ($n=15/51$) & Evaluated on full held-out test sets: Potato $n=1,170$ (drop 0.09\,pp), Brassica $n=443$ (drop 0.00\,pp). Both pass $\le 2.0$\,pp gate ($n \ge 100$). & \textsc{Resolved} \\
-L5 & Corn/chilli vision unmeasured & Evaluated on full test sets: Corn $n=940$ (top-1 97.23\%), Chilli $n=861$ (top-1 99.07\%). 100.00\% ONNX/PyTorch prediction agreement. & \textsc{Resolved} \\
-L12 & Live-generation monetary cost uncomputed & Computed exact monetary costs from provider-exact metered tokens ($n=58$ grounded calls): \$0.1995/1k pure gen, \$0.1839/1k under 7.8\% zero-LLM mix (+2.3\% vs \$0.1798 modeled). & \textsc{Resolved} \\
-L15 & N03 generation buffered pre-rule & Verified 71 rows intact; strict per-record durable disk sync (\texttt{f.flush()}, \texttt{os.fsync()}) enforced in all runners. & \textsc{Resolved} \\
-L16 & SMS dose truncation dropped dosage (0/84) & Implemented deterministic 11-slot SMS template compressor (\texttt{backend/app/domain/sms\_compressor.py}). Achieves 100.0\% (1,000/1,000) tuple survival in E15 and 98.5\% (65/66) on live gold benchmark queries without $>160$c violations. & \textsc{Resolved} \\
-L17 & Off-topic refusal absent in deterministic path (0/30) & Evaluated 30 queries through live production Tier-1 LLM NLU (\texttt{google/gemini-2.5-flash-lite}): 25/30 refused (83.33\% [66.4, 92.7]); 5/5 weather queries pass to \texttt{safe\_agri} by domain design. & \textsc{Resolved} \\
-\bottomrule
-\end{tabularx}
-\caption{Empirically resolved and retired limitations. These items were addressed through new measurements, verified implementations, and comprehensive held-out benchmarks, and are now reported as validated features in Section~5.}
-\label{tab:limitations_retired}
-\end{table*}
-
-\begin{table*}[t]
-\centering
-\small
-\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth} p{0.20\textwidth} X@{}}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} p{0.18\textwidth} X@{}}
 \toprule
 \textbf{Component} & \textbf{Status} & \textbf{Interpretation and Validated Boundary} \\
 \midrule
@@ -730,5 +722,6 @@ LLM latency & Not measured in overhead & Live latency is excluded from the 33.56
 \caption{Evaluation-status summary. The table separates direct measurements, controlled simulations, pilot checks, and modeled quantities to avoid overextending individual results.}
 \label{tab:claim_scope}
 \end{table*}
+
 
 \end{document}

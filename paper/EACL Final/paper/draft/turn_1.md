@@ -408,7 +408,7 @@ The following figures illustrate the complete visual walkthroughs of the applica
 
 To ensure complete transparency and reproducibility, Table 10 reproduces the active system limitations and validated boundaries ledger from `LIMITATIONS.md`. Table 11 documents the limitations that were empirically resolved and retired through new measurements and verified implementations. Table 12 further summarizes the empirical distinctions and validated boundaries of all claims throughout the paper.
 
-### Table 10: Active System Limitations and Validated Boundaries Ledger
+### Table 10: System Limitations and Validated Boundaries Ledger
 | # | Limitation | Evidence Status | What We Do Instead / Validated Scope |
 |---|---|---|---|
 | 1 | N03 small $n$ (38 answers; per-type $n$ 8--33) | `Real_Measured_SmallN` | Report per-type rates with Wilson CIs; no pooling; no generalization beyond dosage-claim sentences. |
@@ -424,17 +424,7 @@ To ensure complete transparency and reproducibility, Table 10 reproduces the act
 | 11 | Live LLM latency excluded from overhead p50s | Stated | All p50 figures exclude generation unless labeled live (N11 p50 4.2 s). |
 | 12 | Bangla-native injection residual (10.0% [5.5, 17.4], $n=100$) | Measured with CI | Reported as residual risk with localized weakness (embedded 4/10, roleplay 2/10); motivates downstream verifier wall. |
 
-### Table 11: Empirically Resolved and Retired Limitations
-| Orig. # | Limitation Topic | Resolution Evidence & Measurement | Status |
-|---|---|---|---|
-| L4 | Potato/brassica INT8 sets too small ($n=15/51$) | Evaluated on full held-out test sets: Potato $n=1,170$ (drop 0.09 pp), Brassica $n=443$ (drop 0.00 pp). Both pass $\le 2.0$ pp gate ($n \ge 100$). | `Resolved` |
-| L5 | Corn/chilli vision unmeasured | Evaluated on full test sets: Corn $n=940$ (top-1 97.23%), Chilli $n=861$ (top-1 99.07%). 100.00% ONNX/PyTorch prediction agreement. | `Resolved` |
-| L12 | Live-generation monetary cost uncomputed | Computed exact monetary costs from provider-exact metered tokens ($n=58$ grounded calls): $0.1995/1k pure gen, $0.1839/1k under 7.8% zero-LLM mix (+2.3% vs $0.1798 modeled). | `Resolved` |
-| L15 | N03 generation buffered pre-rule | Verified 71 rows intact; strict per-record durable disk sync (`f.flush()`, `os.fsync()`) enforced in all runners. | `Resolved` |
-| L16 | SMS dose truncation dropped dosage (0/84) | Implemented deterministic 11-slot SMS template compressor (`backend/app/domain/sms_compressor.py`). Achieves 100.0% (1,000/1,000) tuple survival in E15 and 98.5% (65/66) on live gold benchmark queries without $>160$c violations. | `Resolved` |
-| L17 | Off-topic refusal absent in deterministic path (0/30) | Evaluated 30 queries through live production Tier-1 LLM NLU (`google/gemini-2.5-flash-lite`): 25/30 refused (83.33% [66.4, 92.7]); 5/5 weather queries pass to `safe_agri` by domain design. | `Resolved` |
-
-### Table 12: Evaluation-Status Summary and Scope of Claims
+### Table 11: Evaluation-Status Summary and Scope of Claims
 | Component | Status | Interpretation and Validated Boundary |
 |---|---|---|
 | Deterministic farmer gate | Real measured | 76/200 halted (122 passed, 2 refused); single-reviewer labeling limits generalization. |
