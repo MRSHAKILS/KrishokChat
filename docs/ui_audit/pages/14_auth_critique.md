@@ -1,8 +1,8 @@
 # Page Critique: Authentication / Demo Access (`/auth`)
 
 **Target Route**: `/auth`  
-**Source Code**: [frontend/src/app/(marketing)/auth/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/auth/page.tsx)  
-**Screenshot**: ![14_auth.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/14_auth.png)  
+**Source Code**: [frontend/src/app/(marketing)/auth/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/auth/page.tsx)  
+**Screenshot**: ![14_auth.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/14_auth.png)  
 
 ---
 

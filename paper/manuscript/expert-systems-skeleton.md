@@ -14,7 +14,7 @@
 
 ## Front Matter (Wiley title page)
 
-- **Title:** [TODO: descriptive title without abbreviations, with major keywords — e.g., KrishokChat: Evidence-Linked Relation Verification and Calibrated Selective Certification for Bengali Agricultural Advice] `TODO`
+- **Title:** [TODO: descriptive title without abbreviations, with major keywords — e.g., KrishokTech: Evidence-Linked Relation Verification and Calibrated Selective Certification for Bengali Agricultural Advice] `TODO`
 - **Running title:** [≤40 characters] `TODO`
 - **Authors & affiliations:** [TODO — full names, institutional affiliations, present address footnote if needed, corresponding author contact] `TODO`
 - **Funding / Acknowledgments / Conflict of Interest:** [Wiley requires these as separate statements] `TODO`
@@ -83,7 +83,7 @@
 
 ### 2.2 Closest-system matrix (Table 1) — placeholder
 
-- Rows: Farmer.Chat, KrishokBondhu, Cross-lingual Bengali Agricultural RAG, My Climate CoPilot, DG-Eval, RAGChecker/RAGAS, ClinicBot/MedRAGChecker, BhasaBodh/BUNO, current KrishokChat runtime (`02_LANDSCAPE_GAPS_COMPETITIVE.md:32-46`).
+- Rows: Farmer.Chat, KrishokBondhu, Cross-lingual Bengali Agricultural RAG, My Climate CoPilot, DG-Eval, RAGChecker/RAGAS, ClinicBot/MedRAGChecker, BhasaBodh/BUNO, current KrishokTech runtime (`02_LANDSCAPE_GAPS_COMPETITIVE.md:32-46`).
 - Columns: task, language support, verification mechanism, retrieval, abstention, evidence span, safety handling.
 - Source for external facts: `paper/literature review/*` + URLs in `02_NOVELTY_ATTACK.md`; **re-validate every URL before submission** `TODO (G0)`.
 - Positioning statement (frozen): paper claims a *measured* relation-verification and abstention protocol + intent-preserving dialect evaluation; does **not** claim multi-agent orchestration, trace UI, generic RAG, or detection/localization.
@@ -108,7 +108,7 @@
 - Verifier: captured `DosageVerifier` = normalized lexical dosage matcher (S02), not semantic/relation-aware/calibrated (F02). Structured candidate lives in `backend/app/infrastructure/verification/{normalization,claim_parser,relation_matcher,structured}.py` (T15, offline).
 - Vision: artifacts are classification-only, `detection_mode: classification`, `boxes: []` (S05); fallback defect (S06, verified `+` empty sources) specified in T06 and remediated in T21 — never `verified` with empty sources; E7 fixture.
 - Benchmark: `GET /api/benchmark` serves **precomputed** `golden_stats_v1.json` (S12); live computation absent.
-- Local GGUF: `krishokchat.f16.gguf` artifact present with hashes (S08); no performance claim (F06).
+- Local GGUF: `krishoktech.f16.gguf` artifact present with hashes (S08); no performance claim (F06).
 - Coverage gate D1a (S17): six keyword families → `low_confidence` refusal; golden re-run 14/14 refused, 0/32 answerable refused — keyword-scoped, not semantic.
 - Audit: local-only JSONL + SQLite sink (T0-01/T0-02), exactly one record per request; no external telemetry.
 
@@ -259,7 +259,7 @@
 - Interpretation of E1–E5 under the frozen thesis; mechanism vs aggregate result.
 - Why lexical matching fails on relation-specific errors (denominator, PHI, applicability) even when numeric hit-rate looks acceptable.
 - Retrieval–safety tension: when dictionary expansion helps retrieval but threatens slot/polarity (F09), and how the factorial (E5) isolates interaction.
-- Comparison to closest systems (Table 1) — where KrishokChat advances measurement vs literature gaps (`02_LANDSCAPE_GAPS_COMPETITIVE.md`).
+- Comparison to closest systems (Table 1) — where KrishokTech advances measurement vs literature gaps (`02_LANDSCAPE_GAPS_COMPETITIVE.md`).
 - Practical implication: calibrated thresholds expose the cost tradeoff rather than hiding it in one accuracy number.
 - Do **not** re-state Results numbers here without citing their table/manifest.
 
@@ -304,8 +304,8 @@
 
 ## References
 
-- Authoritative KrishokChat papers **by filename/path only** per `docs/PAPER_POLICY.md` (do not invent arXiv IDs/DOIs until provided):
-  - `paper/done papers/KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf`
+- Authoritative KrishokTech papers **by filename/path only** per `docs/PAPER_POLICY.md` (do not invent arXiv IDs/DOIs until provided):
+  - `paper/done papers/KrishokTech__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf`
   - `paper/done papers/AgriTrust.pdf`
 - Literature package URLs from `02_NOVELTY_ATTACK.md` — **full-text re-verification required at assembly (G0)**; stable URLs only.
 - **Banned citation:** `arXiv:2606.29243` (“Citation-Grounded Dataset and Benchmark” v1) is **deprecated and INVALID** — `docs/PAPER_POLICY.md` — CI/local grep `2606.29243` must return empty; see `paper/manuscript/README.md`.

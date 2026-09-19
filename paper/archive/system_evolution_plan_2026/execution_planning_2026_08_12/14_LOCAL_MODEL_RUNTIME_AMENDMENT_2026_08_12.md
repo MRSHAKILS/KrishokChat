@@ -7,7 +7,7 @@
 ## Decision
 
 Permit `llama-server` as the active local serving process for the existing public model ID
-`krishokchat-4b`. It exposes an OpenAI-compatible endpoint at
+`krishoktech-4b`. It exposes an OpenAI-compatible endpoint at
 `http://127.0.0.1:11435/v1` and is consumed through the existing
 `OpenAICompatibleClient`. Ollama remains supported, but is not required for the current
 demo machine.
@@ -20,7 +20,7 @@ audit sink, or frontend workflow.
 
 The authoritative merged FP16 checkpoint is approximately 15 GB and is not a fluent
 runtime choice on the available CPU-only 16 GB Windows machine. The existing quantized
-base GGUF plus the trained KrishokChat LoRA adapter loads successfully through llama.cpp,
+base GGUF plus the trained KrishokTech LoRA adapter loads successfully through llama.cpp,
 fits the machine, and produces Bengali agricultural text. Direct llama.cpp serving also
 avoids an additional Ollama model-store copy during the demo window.
 
@@ -28,13 +28,13 @@ avoids an additional Ollama model-store copy during the demo window.
 
 | Role | Path | Bytes | Status |
 |---|---|---:|---|
-| Quantized base | `E:\CSE499 Prototype\backend\models\krishokchat\gemma-4-E4B-it-Q4_K_M.gguf` | 4,977,171,584 | Load verified |
-| Fine-tuned LoRA | `E:\CSE499 Prototype\backend\models\krishokchat\krishokchat-5362-adapter.gguf` | 279,088,320 | Apply verified |
-| Authoritative merged checkpoint backup | `E:\CSE499 Prototype\backend\models\krishokchat\merge_tmp\merged_fp16_backup\model.safetensors` | 15,992,595,884 | Hugging Face byte-size match |
-| Truncated checked-in GGUF | `backend/ml_assets/gemma/krishokchat.f16.gguf` | 1,358,004,160 | Invalid; do not serve |
+| Quantized base | `E:\CSE499 Prototype\backend\models\krishoktech\gemma-4-E4B-it-Q4_K_M.gguf` | 4,977,171,584 | Load verified |
+| Fine-tuned LoRA | `E:\CSE499 Prototype\backend\models\krishoktech\krishoktech-5362-adapter.gguf` | 279,088,320 | Apply verified |
+| Authoritative merged checkpoint backup | `E:\CSE499 Prototype\backend\models\krishoktech\merge_tmp\merged_fp16_backup\model.safetensors` | 15,992,595,884 | Hugging Face byte-size match |
+| Truncated checked-in GGUF | `backend/ml_assets/gemma/krishoktech.f16.gguf` | 1,358,004,160 | Invalid; do not serve |
 
 Hugging Face provenance source:
-`RaiyanKhaan/krishokchat-model-files`, path `merged_fp16_backup/`.
+`RaiyanKhaan/krishoktech-model-files`, path `merged_fp16_backup/`.
 
 ## Verified Runtime Evidence
 
@@ -44,8 +44,8 @@ Hugging Face provenance source:
   for one Bengali smoke prompt. This is an engineering smoke observation, not a paper
   quality or latency benchmark.
 - OpenAI-compatible UTF-8 completion returned Bengali content with reasoning disabled.
-- `GET /api/models` reported `krishokchat-4b available=true`.
-- Full `POST /api/qa` with `model="krishokchat-4b"` returned `safe_agri`, five BM25
+- `GET /api/models` reported `krishoktech-4b available=true`.
+- Full `POST /api/qa` with `model="krishoktech-4b"` returned `safe_agri`, five BM25
   sources, `confidence="verified"`, and Bengali answer text.
 - Eleven standard-library backend tests passed. `pytest` was unavailable in the current
   backend environment; no dependency was installed during the demo repair.

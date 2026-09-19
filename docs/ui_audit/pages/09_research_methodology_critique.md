@@ -1,8 +1,8 @@
 # Page Critique: AI Pipeline Methodology (`/research/methodology`)
 
 **Target Route**: `/research/methodology`  
-**Source Code**: [frontend/src/app/(marketing)/research/methodology/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/research/methodology/page.tsx)  
-**Screenshot**: ![09_research_methodology.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/09_research_methodology.png)  
+**Source Code**: [frontend/src/app/(marketing)/research/methodology/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/research/methodology/page.tsx)  
+**Screenshot**: ![09_research_methodology.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/09_research_methodology.png)  
 
 ---
 

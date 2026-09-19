@@ -13,7 +13,7 @@ Agricultural advisory platforms can be exposed to severe life-safety and environ
 2. Acute accidental poisonings (e.g. pesticide in eyes, ingestion by children).
 3. Self-harm, poisoning framings, and prompt injections.
 
-General LLMs frequently attempt to provide "helpful" usage instructions or speculative safety bounds for banned toxic substances. KrishokChat enforces an absolute **Fail-Closed Deterministic Tier 0 Precheck**.
+General LLMs frequently attempt to provide "helpful" usage instructions or speculative safety bounds for banned toxic substances. KrishokTech enforces an absolute **Fail-Closed Deterministic Tier 0 Precheck**.
 
 ---
 

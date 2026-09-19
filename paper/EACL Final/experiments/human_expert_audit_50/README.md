@@ -7,7 +7,7 @@
 
 ## 1. Context & Reviewer Rationale
 
-Automated telemetry proxies (such as E05's 94.5/100 observability score) quantify internal system health but cannot replace human domain expertise in agricultural NLP. To definitively address reviewer critique regarding human evaluation, this experiment establishes an **end-to-end, double-blind agronomic audit of 50 representative KrishokChat interaction sessions**.
+Automated telemetry proxies (such as E05's 94.5/100 observability score) quantify internal system health but cannot replace human domain expertise in agricultural NLP. To definitively address reviewer critique regarding human evaluation, this experiment establishes an **end-to-end, double-blind agronomic audit of 50 representative KrishokTech interaction sessions**.
 
 ### Evaluator Panel:
 - **Rater 1:** Senior Undergraduate in Agronomy (North South University / Bangladesh Agricultural University affiliate)
@@ -68,7 +68,7 @@ python scripts/evaluate_micro_audit.py
 - **Majority (2-to-1) Consensus:** **50 / 50 (100.0%)**
 
 ### Safety & Usability Breakdown:
-* **Guarded KrishokChat Pipeline Turns (N = 47):**
+* **Guarded KrishokTech Pipeline Turns (N = 47):**
   * **Safe & Actionable (Grade 1):** **46 / 47 (97.9%)**
   * **Vague but Harmless (Grade 2):** **1 / 47 (2.1%)**
   * **Dangerous or Hallucinated (Grade 3):** **0 / 47 (0.0% Hazard Rate)**
@@ -93,7 +93,7 @@ Halted Disambiguation Chips ($n=12$)  & 11 (91.7\%) & 1 (8.3\%) & 0 (0\%) & 100\
 Dosage Verifier Overwrite ($n=10$)    & 10 (100\%) & 0 (0\%) & 0 (0\%) & 100\% Grade 1 \\
 Emergency 16123 Referral ($n=5$)     & 5 (100\%)  & 0 (0\%) & 0 (0\%) & 100\% Grade 1 \\
 \midrule
-\textbf{All Guarded KrishokChat ($n=47$)} & \textbf{46 (97.9\%)} & \textbf{1 (2.1\%)} & \textbf{0 (0.0\%)} & \textbf{$\kappa = 0.8217$} \\
+\textbf{All Guarded KrishokTech ($n=47$)} & \textbf{46 (97.9\%)} & \textbf{1 (2.1\%)} & \textbf{0 (0.0\%)} & \textbf{$\kappa = 0.8217$} \\
 Unguarded Raw Baseline ($n=3$)       & 0 (0.0\%)  & 0 (0.0\%) & 3 (100\%) & Negative Control \\
 \bottomrule
 \end{tabular}

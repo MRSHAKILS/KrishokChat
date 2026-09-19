@@ -1,5 +1,5 @@
 # Post-Experiment Research Audit
-**Project:** Bounded-Authority Agricultural Advisory (KrishokChat / BAA)
+**Project:** Bounded-Authority Agricultural Advisory (KrishokTech / BAA)
 **Target venue:** *Computers and Electronics in Agriculture* (Elsevier, Q1)
 **Audit date:** 2026-08-28
 **Scope of inspection:** `manuscript/` (15 .tex sections, 10 tables, 6 figures, NUMBER_BANK), `drafts/` (18 + planning digest), `experiments/` (39 layer folders, 46 scripts, results.yaml 188 KB, 12 trace files), `reviews/reviewer_1.md` (4,597 lines), `manifest.yaml`, `README.md`.
@@ -23,7 +23,7 @@ The baselines in those same layers are real. The traces confirm it: `E27/real_tr
 - **E13 (agronomist study).** `run_human_expert_eval.py` contains no rater data, no per-item ratings, no input file and no computation. The mean 4.82/5, SD 0.28, 100.0% safety pass, and Gwet's AC1 = 0.862 are Python literals. `evaluation_duration_seconds: 0.0`. The README describes "3 independent certified agricultural extension specialists" and a "double-blind" protocol; §6.5 of the manuscript describes blinding and randomised presentation order; the **abstract** reports the AC1. If no such study took place, this is fabricated human-subjects data in an Elsevier submission. There is also no ethics approval or consent statement anywhere in the manuscript, which CEA/Elsevier require for human-participant research.
 - **E27 (headline live benchmark).** The abstract's "97.0% certified advisory correctness and 0.0% critical unsafe acceptance ... on a 100-case live end-to-end benchmark" comes from `baa_verifier_classify()`, which returns `is_cuar: False` in every branch and draws coverage from `random.random() < 0.892`. The layer README asserts "All metrics computed from 100% real live API completions. Zero synthetic data." That sentence is false for the row it is defending.
 
-I want to be precise about what I can and cannot see. I can see the code and the outputs. I cannot see whether a real agronomist study happened offline and its results were transcribed into the script, or whether a real KrishokChat system exists that these harnesses were meant to stand in for. `run_all_remaining.py` references `d:\KrishokChat Advisory System`, which is not in the connected folder, so a real system may well exist and be runnable. **Which of those is true determines whether the remedy is two weeks of re-running or a withdrawal of specific claims.** That is the first question in Part 10, and nothing else in this audit should be acted on before it is answered.
+I want to be precise about what I can and cannot see. I can see the code and the outputs. I cannot see whether a real agronomist study happened offline and its results were transcribed into the script, or whether a real KrishokTech system exists that these harnesses were meant to stand in for. `run_all_remaining.py` references `d:\KrishokTech Advisory System`, which is not in the connected folder, so a real system may well exist and be runnable. **Which of those is true determines whether the remedy is two weeks of re-running or a withdrawal of specific claims.** That is the first question in Part 10, and nothing else in this audit should be acted on before it is answered.
 
 Everything below assumes you want the paper to survive. It is written to tell you what to keep, what to cut, and what genuinely must be re-measured — deliberately minimising the last category.
 
@@ -170,7 +170,7 @@ Ten proposed experiments, tested against your criteria. I have deliberately kept
 - Claim: CL-3, central; also substitutes for CL-6/7/8's BAA arms.
 - Design: same frozen generator, same retrieval corpus, same prompts, same queries. Arms: A0 direct LLM, A1 vanilla RAG, A2 RAG + judge, A3 evidence-constrained RAG (no single-record binding), A4 BAA. n = 300–500 stratified (naturalistic × 4 registers, adversarial, ambiguous, dialect). Metrics: CUAR, CAC over certified set, coverage, appropriate abstention, **false abstention**, per-slot violation.
 - This is reviewer §16 and §140 — but note I am recommending **n = 300–500, not 1,000**. The reviewer's 500–1,000 assumes your existing evidence is real and needs scaling. It is not, so the priority is *one measurement that exists* rather than a large one.
-- **This is only feasible if a runnable KrishokChat system exists.** If it does not, this experiment is not "missing" — the paper's central claim is not yet supportable, and the correct action is to narrow the paper to CL-1 (see Part 9).
+- **This is only feasible if a runnable KrishokTech system exists.** If it does not, this experiment is not "missing" — the paper's central claim is not yet supportable, and the correct action is to narrow the paper to CL-1 (see Part 9).
 - Local status: **Category D or E** — cannot determine from this folder.
 
 **M3 — Ethics documentation and raw rating data for E13, or removal of E13.**
@@ -215,7 +215,7 @@ Ten proposed experiments, tested against your criteria. I have deliberately kept
 | **C. Exists but needs re-running** | **E03** (harness exists, result fabricated), E04, E05, E06, E07/E08, E12, E17, E21, E22, E24 — all have runnable structure but simulated or constant outcomes |
 | **D. Code exists, experiment never run** | E16, E40 (honestly labelled); E32–E39 per-layer runners are stubs (the real runner is `run_all_remaining.py`) |
 | **E. No evidence exists; genuinely new work required** | **E13** (human study), **E27/E34 BAA arms**, E29/E30/E31 BAA arms |
-| **F. Cannot determine from this folder** | All evaluation datasets (`research_artifacts/` not connected); whether a runnable KrishokChat system exists at `d:\KrishokChat Advisory System`; whether E13 rating sheets exist offline |
+| **F. Cannot determine from this folder** | All evaluation datasets (`research_artifacts/` not connected); whether a runnable KrishokTech system exists at `d:\KrishokTech Advisory System`; whether E13 rating sheets exist offline |
 
 ---
 
@@ -259,7 +259,7 @@ Model-invariance sweeps, full Pareto sweeps, provenance-removal isolation, autho
 ### 10. Questions that require your decision
 
 1. **Did the E13 agronomist study actually take place?** If yes: produce raw ratings, consent records and ethics approval, and add the ethics statement CEA requires. If no: every reference to it must be deleted before this manuscript goes anywhere. *Nothing else in this audit matters until you answer this.*
-2. **Does a runnable KrishokChat system exist at `d:\KrishokChat Advisory System`?** If yes, M1/M2/M4/M5 are weeks of work and the paper is recoverable at close to its current ambition. If no, the honest paper is a narrower one built on E02 + E28 + the real baseline halves — which is still a good CEA paper, and which I would rather see submitted than the current draft.
+2. **Does a runnable KrishokTech system exist at `d:\KrishokTech Advisory System`?** If yes, M1/M2/M4/M5 are weeks of work and the paper is recoverable at close to its current ambition. If no, the honest paper is a narrower one built on E02 + E28 + the real baseline halves — which is still a good CEA paper, and which I would rather see submitted than the current draft.
 3. **Was your co-author aware of how these layers were produced?** The manuscript carries a supervisor's name. That is their exposure too, and they should know before submission, not after.
 4. **Do the evaluation datasets in `research_artifacts/` exist and how were they constructed?** They could not be inspected here. Reviewer §121 will ask how adversarial cases were generated and validated; you need that answer regardless.
 5. **Is there a prior or companion paper** (the acknowledgments mention a 1,001-query benchmark and an EACL systems paper) **that already published any of these numbers?** If a fabricated figure has already appeared elsewhere, that is a correction obligation, not a revision.

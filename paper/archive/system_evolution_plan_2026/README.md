@@ -1,4 +1,4 @@
-# KrishokChat System Evolution Plan 2026
+# KrishokTech System Evolution Plan 2026
 
 > **Execution routing:** This directory contains the original proposal and verified T01-T04 context. It is not the current task queue. All local agents must execute from `execution_planning_2026_08_12/README.md` and `execution_planning_2026_08_12/11_FINAL_IMPLEMENTATION_SPEC.md`. Where the two layers differ, the dated execution package supersedes this parent plan.
 
@@ -16,7 +16,7 @@ Preserve the current safety-first pipeline and evaluate two bounded additions: (
 
 Authoritative team paper filenames:
 
-- `paper/done papers/KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf`
+- `paper/done papers/KrishokTech__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf`
 - `paper/done papers/AgriTrust.pdf`
 
 ## Index

@@ -18,7 +18,7 @@
 | Strengths inventory | **COMPLETE** (see §STRENGTHS below — extracted from rotation content, privacy transparency, institutional citations, 12-feature surface, price disclaimer) | This document |
 | "Beat Them" synthesis | **COMPLETE** (see §ROADMAP) | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §4-§5 + this file |
 
-**Bottom line:** Gacher Doctor is a credible solo-developer Next.js app with real agronomic content (21-crop rotation guide, institutional BARI/BRRI/DAM citations, transparent privacy policy) — but it fails on safety-critical dimensions (fake certification stamps, broken weather pipeline, no source citations, CSR-only body, no banned-pesticide check, no 16123 escalation, no local LLM fallback, broken meta encoding). Every single critical flaw is a **publishable, defensible gap** that KrishokChat already closes structurally.
+**Bottom line:** Gacher Doctor is a credible solo-developer Next.js app with real agronomic content (21-crop rotation guide, institutional BARI/BRRI/DAM citations, transparent privacy policy) — but it fails on safety-critical dimensions (fake certification stamps, broken weather pipeline, no source citations, CSR-only body, no banned-pesticide check, no 16123 escalation, no local LLM fallback, broken meta encoding). Every single critical flaw is a **publishable, defensible gap** that KrishokTech already closes structurally.
 
 ---
 
@@ -90,7 +90,7 @@ These are confirmed by direct fetch, not speculation.
 ### S2 — Explicit institutional source citations on page surface
 **Evidence:** Footer (`BRRI ও BARI নির্দেশিকা দ্বারা ভেরিফাইড`), rotation page (`ব্রি ধান ২৯`), homepage (`BARI ও BRRI অনুমোদিত` in crop book description, `DAE` and `BINA` in information board description).  
 **Why it's strong:** The user sees institutional credibility signals without clicking away.  
-**How we adopt:** Our frontend should render the same badges but **with clickable citations** linked to the audit-log chunk ID. This is exactly the KrishokChat Verifier Agent design (`docs/functionalities/04_grounded_contextual_multiturn_chat.md`).
+**How we adopt:** Our frontend should render the same badges but **with clickable citations** linked to the audit-log chunk ID. This is exactly the KrishokTech Verifier Agent design (`docs/functionalities/04_grounded_contextual_multiturn_chat.md`).
 
 ### S3 — Strong anti-syndicate price disclaimer
 **Evidence:** `/prices` SSR payload contains the full `মধ্যস্বত্বভোগী বা সিন্ডিকেটের ফাঁদ থেকে বাঁচতে` warning paragraph.  
@@ -105,7 +105,7 @@ These are confirmed by direct fetch, not speculation.
 ### S5 — Transparent privacy policy with named third parties
 **Evidence:** `/privacy` explicitly names `Supabase Cloud`, `Google Cloud & Vertex AI / Gemini`, `Open-Meteo & BMD`. It describes ephemeral audio processing.  
 **Why it's strong:** Most Bangladeshi apps hide model/provider identity. Transparency builds trust — but only if backed by verifiable behavior.  
-**How we adopt:** Our privacy policy (`docs/functionalities/06_failclosed_safety_and_emergency_escalation.md`) should list `krishokchat-4b` (local Gemma-4), `gemini-2.5-flash-lite` (cloud NLU), `YOLOv8` (vision), and `Supabase` explicitly. We should also publish a `MANIFEST.md` showing which query class hits which model — the opposite of gacherdoctor's opaque `Gemini` reference.
+**How we adopt:** Our privacy policy (`docs/functionalities/06_failclosed_safety_and_emergency_escalation.md`) should list `krishoktech-4b` (local Gemma-4), `gemini-2.5-flash-lite` (cloud NLU), `YOLOv8` (vision), and `Supabase` explicitly. We should also publish a `MANIFEST.md` showing which query class hits which model — the opposite of gacherdoctor's opaque `Gemini` reference.
 
 ### S6 — 12-feature integrated surface
 **Evidence:** Home page lists 12 distinct calculators/tools (chat, crop book, fertilizer, prices, info board, disease guide, pesticide calculator, irrigation, soil test, seed quantity, loan guide, rotation, profit finder).  
@@ -126,7 +126,7 @@ These are not "they are bad" — these are **measurable, reproducible, defensibl
 ### F-CRIT-1 — Fake `APPROVED ★ ★ ★` certification on empty diagnosis
 **Evidence:** Direct fetch of `/crops/diagnostics` confirms SSR payload renders `APPROVED` + 3 gold stars + empty `ফসল:`, `চিহ্নিত রোগ:`, `জীবাণু/কারণ:`, `ছবি সংযুক্ত নেই`.  
 **Why it matters:** If a farmer uploads a wrong image and sees a green approval stamp + chemical dosage section headings, they may apply the wrong pesticide. This is a near-miss safety failure.  
-**Our beat:** KrishokChat's `docs/functionalities/01_safe_vision_ingestion_and_uncertainty_gating.md` requires confidence gating before any diagnostic text is emitted. We never render `APPROVED` stamps — we render `confidence: low` chips and `no image attached` refusal messages. This is a **reproducible paper claim** (CEA §10 / EACL §03).
+**Our beat:** KrishokTech's `docs/functionalities/01_safe_vision_ingestion_and_uncertainty_gating.md` requires confidence gating before any diagnostic text is emitted. We never render `APPROVED` stamps — we render `confidence: low` chips and `no image attached` refusal messages. This is a **reproducible paper claim** (CEA §10 / EACL §03).
 
 ### F-CRIT-2 — Pesticide calculator has no active-ingredient input
 **Evidence:** @critic analysis (§2.1 S1) + sitemap entry `/calculator/pesticide`. No molecule selection field.  
@@ -162,9 +162,9 @@ These are not "they are bad" — these are **measurable, reproducible, defensibl
 
 ## 4. SYNTHESIS — HOW KRISHOKCHAT ALREADY WINS
 
-Every critical flaw is matched by an existing KrishokChat structural feature:
+Every critical flaw is matched by an existing KrishokTech structural feature:
 
-| Gacher Doctor Critical Flaw | KrishokChat Existing Countermeasure | Evidence File |
+| Gacher Doctor Critical Flaw | KrishokTech Existing Countermeasure | Evidence File |
 |---|---|---|
 | F-CRIT-1 Fake APPROVED stamp | `01_safe_vision_ingestion_and_uncertainty_gating.md` — confidence gating, no stamps | `docs/functionalities/01_...` |
 | F-CRIT-2 Pesticide calculator no molecule | `AGENTS.md` §0 — model registry; `dataset_release/safety/` — curated registered list | `AGENTS.md`, `dataset_release/` |
@@ -189,7 +189,7 @@ Every critical flaw is matched by an existing KrishokChat structural feature:
 | P1 | Implement weather retry + `last-update` chip (opposite of their broken panel) | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F3 / `08_WEATHER_DATA_SOURCING.md` | 30 days |
 | P1 | Render advisory content via SSR (`generateMetadata`, structured JSON) — opposite of their CSR loader | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F5 | 30 days |
 | P1 | Per-crop permalink (`/crops/ধান`) with `lastmod` and source citation badge | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F14 / `PAPER_AND_DEMO_CLAIMS.md` | 30 days |
-| P2 | Publish privacy policy that names `krishokchat-4b`, `gemini-2.5-flash-lite`, `YOLOv8`, `Supabase` — opposite of their opaque `Gemini` reference | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F9 / `/privacy` evidence | 60 days |
+| P2 | Publish privacy policy that names `krishoktech-4b`, `gemini-2.5-flash-lite`, `YOLOv8`, `Supabase` — opposite of their opaque `Gemini` reference | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F9 / `/privacy` evidence | 60 days |
 | P2 | Fix meta encoding (`locales: ['bn']`, UTF-8 `Content-Type`) — one line vs their broken title | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F6 / `F17` | 60 days |
 | P2 | Add `security@` alias + PGP key (they have only `info@gacherdoctor.site`) | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §P5 / `P21` | 60 days |
 
@@ -197,12 +197,12 @@ Every critical flaw is matched by an existing KrishokChat structural feature:
 
 | Paper | Claim | Evidence needed | Source file |
 |---|---|---|---|
-| **CEA (Frontiers)** | §07 / §08 — Banned-chemical dose verification under structured NLU vs free-form chat. Show 0% toxic leak with KrishokChat precheck vs gacherdoctor-style calculator (no molecule). | `safety_refusal_t3.jsonl` (3,216 T3, 144 over-refusal) + dosage evaluation set | `dataset_release/safety/` + `AGENTS.md` §0.1 |
-| **CEA** | §10 / §12 — False-positive `APPROVED` rate: measure how often a fake certification is emitted without grounded evidence. Compare gacherdoctor-style SSR (stamp always visible) vs KrishokChat (no stamp until verifier passes). | Direct fetch evidence (`APPROVED` + empty fields) + audit-log design (`PAPER_AND_DEMO_CLAIMS.md`) | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F1 / `01_...` |
+| **CEA (Frontiers)** | §07 / §08 — Banned-chemical dose verification under structured NLU vs free-form chat. Show 0% toxic leak with KrishokTech precheck vs gacherdoctor-style calculator (no molecule). | `safety_refusal_t3.jsonl` (3,216 T3, 144 over-refusal) + dosage evaluation set | `dataset_release/safety/` + `AGENTS.md` §0.1 |
+| **CEA** | §10 / §12 — False-positive `APPROVED` rate: measure how often a fake certification is emitted without grounded evidence. Compare gacherdoctor-style SSR (stamp always visible) vs KrishokTech (no stamp until verifier passes). | Direct fetch evidence (`APPROVED` + empty fields) + audit-log design (`PAPER_AND_DEMO_CLAIMS.md`) | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F1 / `01_...` |
 | **CEA** | §13 — Efficiency: 0.32 ms deterministic precheck (0 LLM tokens) vs LLM-only routing (~250 ms + ≥180 tokens) for 16123 escalation. | `AGENTS.md` §2 decision ladder + `safety_refusal_t3.jsonl` latency measurement | `AGENTS.md` / `docs/functionalities/06_...` |
 | **CEA** | Temporal source verification (`E30`) — real `lastmod` vs frozen sitemap (`2026-05-27`). | Sitemap evidence (`/sitemap.xml`) + our live refresh design | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F4 |
-| **EACL (Demo)** | §02 — Bangla-first local LLM (`krishokchat-4b` Gemma-4 4-bit LoRA) vs cloud-only Vertex AI (`/privacy` §3). Show offline advisory works. | `AGENTS.md` §0 model registry + `krishokchat-4b` adapter files | `AGENTS.md` |
-| **EACL** | §03 — Side-by-side demo: poisoning query → KrishokChat precheck → `tel:16123` + refusal card vs gacherdoctor-style Gemini routing (no escalation, no refusal visible). | Direct `/chat` shell evidence (`/chat` SSR only shows loader) + our refusal dataset | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F12 |
+| **EACL (Demo)** | §02 — Bangla-first local LLM (`krishoktech-4b` Gemma-4 4-bit LoRA) vs cloud-only Vertex AI (`/privacy` §3). Show offline advisory works. | `AGENTS.md` §0 model registry + `krishoktech-4b` adapter files | `AGENTS.md` |
+| **EACL** | §03 — Side-by-side demo: poisoning query → KrishokTech precheck → `tel:16123` + refusal card vs gacherdoctor-style Gemini routing (no escalation, no refusal visible). | Direct `/chat` shell evidence (`/chat` SSR only shows loader) + our refusal dataset | `docs/research/GACHERDOCTOR_CRITIQUE_2026.md` §F12 |
 | **EACL** | §04 — Empirical usability: 50-farmer first-task completion, refusal recognition, hotline-recall rate. Compare against gacherdoctor footer (plain text `১৬১২৩`). | Our usability testing framework (`docs/ui_ux_design_plan.md`, `FRONTEND_DESIGN_PLAN.md`) | `docs/ui_audit/` / `docs/ui_ux_design_plan.md` |
 | **JCDL / IR** | Per-claim citation provenance: measure citation precision@k, over-attribution rate vs gacherdoctor (0% citation rate). Cite `Wallat et al.` (ICTIR 2025, up to 57% post-rationalised citations in Command-R+). | `docs/functionalities/04_...` audit-log claim fields | `docs/functionalities/04_...` |
 | **AAAI / EMNLP** | Low-resource Bengali dialect robustness: measure NLU accuracy on 110-word dialect map vs Standard-Bangla-only baseline (gacherdoctor makes no dialect claim). | `dataset_release/safety/` phase-4 dialect map (110-word) + `docs/research/LITERATURE_SCOUT_2026.md` | `dataset_release/safety/` |
@@ -230,4 +230,4 @@ Every critical flaw is matched by an existing KrishokChat structural feature:
 
 ---
 
-*This document was produced by direct competitor site analysis, adversarial critique, and synthesis against the KrishokChat architecture (`AGENTS.md`, `docs/functionalities/`, `docs/advisory_workflow/`, `dataset_release/safety/`, `paper/planning/`). It is intended for both production and academic publication planning. Nothing in this document is speculative — every claim references either a direct URL fetch result or the saved `GACHERDOCTOR_CRITIQUE_2026.md` evidence file.*
+*This document was produced by direct competitor site analysis, adversarial critique, and synthesis against the KrishokTech architecture (`AGENTS.md`, `docs/functionalities/`, `docs/advisory_workflow/`, `dataset_release/safety/`, `paper/planning/`). It is intended for both production and academic publication planning. Nothing in this document is speculative — every claim references either a direct URL fetch result or the saved `GACHERDOCTOR_CRITIQUE_2026.md` evidence file.*

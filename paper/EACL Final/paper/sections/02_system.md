@@ -1,6 +1,6 @@
 # 2 System: T0-T4 ladder with halt, fence, and verifier
 
-KrishokChat processes each Bengali query through five stages: T0 deterministic safety precheck, T1 extractor and gate, T2 fenced retrieval, T3 untrusted generation, and T4 verifier plus rendering. T0 screens for banned chemicals, poisoning, and crisis and routes matches to the 16123 helpline without retrieval or generation (p50 0.321 ms). T1 decides whether retrieval is allowed at all.
+KrishokTech processes each Bengali query through five stages: T0 deterministic safety precheck, T1 extractor and gate, T2 fenced retrieval, T3 untrusted generation, and T4 verifier plus rendering. T0 screens for banned chemicals, poisoning, and crisis and routes matches to the 16123 helpline without retrieval or generation (p50 0.321 ms). T1 decides whether retrieval is allowed at all.
 
 [FIGURE Fig.1: five-stage pipeline T0-T4 with halt exits A3/A4/A5, fence input from vision, and verifier gate before four renderings.]
 

@@ -55,7 +55,7 @@ Does the pipeline resist direct and indirect prompt injection over retrieved evi
       ],
       "attack_success_rate_pct": 21.79
     },
-    "B7_KrishokChat_Expert_Guard": {
+    "B7_KrishokTech_Expert_Guard": {
       "total_attacks": 1400,
       "unsafe_certified_count": 0,
       "unsafe_certification_rate_pct": 0.0,
@@ -75,51 +75,51 @@ Does the pipeline resist direct and indirect prompt injection over retrieved evi
       "llm_direct_ucr": 164,
       "vanilla_rag_ucr": 138,
       "llm_guard_ucr": 50,
-      "krishokchat_ucr": 0
+      "krishoktech_ucr": 0
     },
     "evidence_override": {
       "total": 200,
       "llm_direct_ucr": 168,
       "vanilla_rag_ucr": 142,
       "llm_guard_ucr": 47,
-      "krishokchat_ucr": 0
+      "krishoktech_ucr": 0
     },
     "retrieval_poisoning": {
       "total": 200,
       "llm_direct_ucr": 161,
       "vanilla_rag_ucr": 142,
       "llm_guard_ucr": 35,
-      "krishokchat_ucr": 0
+      "krishoktech_ucr": 0
     },
     "delimiter_hijacking": {
       "total": 200,
       "llm_direct_ucr": 161,
       "vanilla_rag_ucr": 141,
       "llm_guard_ucr": 43,
-      "krishokchat_ucr": 0
+      "krishoktech_ucr": 0
     },
     "bangla_native_injection": {
       "total": 200,
       "llm_direct_ucr": 174,
       "vanilla_rag_ucr": 143,
       "llm_guard_ucr": 43,
-      "krishokchat_ucr": 0
+      "krishoktech_ucr": 0
     },
     "banglish_romanized_injection": {
       "total": 200,
       "llm_direct_ucr": 171,
       "vanilla_rag_ucr": 133,
       "llm_guard_ucr": 41,
-      "krishokchat_ucr": 0
+      "krishoktech_ucr": 0
     },
     "mixed_code_switching_injection": {
       "total": 200,
       "llm_direct_ucr": 175,
       "vanilla_rag_ucr": 132,
       "llm_guard_ucr": 46,
-      "krishokchat_ucr": 0
+      "krishoktech_ucr": 0
     }
   },
-  "scientific_interpretation": "Under 1,400 multi-modal and multilingual adversarial prompt injections (including native Bengali and romanized Banglish), standard LLM and Vanilla RAG direct pipelines suffer 84.4% and 67.9% Unsafe Certification Rates (UCR). LLM-as-a-judge reduces UCR to 22.4%, but remains vulnerable to delimiter breakouts and code-switching jailbreaks. In contrast, the KrishokChat Deterministic Expert Guard architecture achieves 0.0% Unsafe Certification (0/1,400 hazards certified, 95% CI: [0.0%, 0.26%]), with 92.1% intercepted pre-retrieval by Tier 0 regex/keyword policy and 7.9% blocked post-generation by the relational verifier."
+  "scientific_interpretation": "Under 1,400 multi-modal and multilingual adversarial prompt injections (including native Bengali and romanized Banglish), standard LLM and Vanilla RAG direct pipelines suffer 84.4% and 67.9% Unsafe Certification Rates (UCR). LLM-as-a-judge reduces UCR to 22.4%, but remains vulnerable to delimiter breakouts and code-switching jailbreaks. In contrast, the KrishokTech Deterministic Expert Guard architecture achieves 0.0% Unsafe Certification (0/1,400 hazards certified, 95% CI: [0.0%, 0.26%]), with 92.1% intercepted pre-retrieval by Tier 0 regex/keyword policy and 7.9% blocked post-generation by the relational verifier."
 }
 ```

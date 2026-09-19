@@ -1,5 +1,5 @@
 # Evidence and Scope Arbitration
-**Project:** Bounded-Authority Agricultural Advisory (KrishokChat / BAA)
+**Project:** Bounded-Authority Agricultural Advisory (KrishokTech / BAA)
 **Venue:** *Computers and Electronics in Agriculture* (Elsevier)
 **Date:** 2026-08-28
 **Inputs:** manuscript (15 §, 10 tables, 6 figures), reviewer_1.md (4,597 lines), the post-experiment audit, the claim–evidence matrix, local artifacts, CEA calibration.
@@ -278,7 +278,7 @@ Everything in B, plus: **M2** at n=500 with the full A0–A4 arm ladder and fals
 
 ### AUTHOR DECISION REQUIRED
 27. **Did the E13 agronomist study take place?** Everything downstream branches here.
-28. **Does a runnable KrishokChat system exist at `d:\KrishokChat Advisory System`?** Determines Scenario B vs. a reduced verification-architecture paper.
+28. **Does a runnable KrishokTech system exist at `d:\KrishokTech Advisory System`?** Determines Scenario B vs. a reduced verification-architecture paper.
 29. **Does your co-author know how these layers were produced?** Their name is on it; they should hear it from you, before submission.
 30. **Have any of these numbers appeared in the prior benchmark paper or the companion EACL submission?** If so, that is a correction obligation, not a revision.
 31. **Do the datasets in `research_artifacts/` exist and how were adversarial cases constructed and validated?** Reviewer §121 will ask regardless.

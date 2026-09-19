@@ -7,7 +7,7 @@
 ## Decision
 
 Introduce Supabase Auth (hosted project + local CLI) as the authentication layer for
-KrishokChat, in preparation for future premium features (user accounts, saved history,
+KrishokTech, in preparation for future premium features (user accounts, saved history,
 subscriptions). This supersedes the prior "no authentication" prohibitions in:
 
 - Root `AGENTS.md` §2 rule 1 ("No authentication, no user accounts...")
@@ -66,7 +66,7 @@ Hosted path chosen (researcher provided keys). Live evidence recorded:
   for client endpoints. Legacy anon JWT alone returns 401 (not used).
 - Admin API response shape: `{"users":[...],"aud":"authenticated"}`; admin user
   update is `PUT /auth/v1/admin/users/{id}` (PATCH/POST return 405).
-- Test user `test@krishokchat.com` created pre-confirmed via admin API
+- Test user `test@krishoktech.com` created pre-confirmed via admin API
   (`email_confirm: true`); password grant login succeeds; `/auth/v1/user` session
   verification succeeds. Script run 3x consecutively: create path + reset path
   (idempotent password/confirmation refresh) all `TEST LOGIN SUCCEEDED` (exit 0).

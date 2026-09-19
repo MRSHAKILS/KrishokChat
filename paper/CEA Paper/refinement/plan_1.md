@@ -242,7 +242,7 @@ That is much more defensible.
 
 I would describe the novelty approximately as:
 
-> **Existing work verifies faithfulness, retrieval security, temporal consistency, structured agricultural knowledge, or LLM tool execution separately. KrishokChat instantiates these ideas around a domain-specific actionable safety contract whose fields must be jointly authorized by one current institutional record before a pesticide recommendation can be released.**
+> **Existing work verifies faithfulness, retrieval security, temporal consistency, structured agricultural knowledge, or LLM tool execution separately. KrishokTech instantiates these ideas around a domain-specific actionable safety contract whose fields must be jointly authorized by one current institutional record before a pesticide recommendation can be released.**
 
 That is a much stronger literature position.
 
@@ -309,7 +309,7 @@ You have eight realistic farmer-query corruption classes:
 * false certainty
 * adversarial bypass
 
-and KrishokChat achieves high clarification while maintaining 0 unsafe compliance. 
+and KrishokTech achieves high clarification while maintaining 0 unsafe compliance. 
 
 This is very relevant to the current broader concern that agricultural AI needs evaluation beyond model scores and must work under actual local language/context conditions. A 2026 IFPRI discussion specifically emphasizes that agricultural AI systems must be evaluated at model, system and process levels, including local language, geography and inclusion. ([IFPRI][9])
 
@@ -369,7 +369,7 @@ Your temporal control is solid:
 * immutable/hash-chained offline packs
 * differential updates. 
 
-The temporal replay experiment is also good. KrishokChat maintains 100% gazette adherence across the simulated regulatory periods, while the baselines degrade heavily as the chemical status changes. 
+The temporal replay experiment is also good. KrishokTech maintains 100% gazette adherence across the simulated regulatory periods, while the baselines degrade heavily as the chemical status changes. 
 
 But don't market this as:
 
@@ -1580,7 +1580,7 @@ Doc D
 
 ### Right:
 
-**KrishokChat**
+**KrishokTech**
 
 Query
 ↓
@@ -1615,7 +1615,7 @@ You should pull everything back toward one thesis:
 
 Then:
 
-> **KrishokChat enforces that boundary through a complete, current, provenance-bound 11-slot contract and fail-closed selective resolution.**
+> **KrishokTech enforces that boundary through a complete, current, provenance-bound 11-slot contract and fail-closed selective resolution.**
 
 Everything else proves the thesis under different kinds of uncertainty.
 

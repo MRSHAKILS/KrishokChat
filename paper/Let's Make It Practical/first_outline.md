@@ -2,7 +2,7 @@
 
 এবার আমি তোমাকে একটা জিনিস দেব:
 
-# **KrishokChat-এর Full Practical Research & Development Roadmap**
+# **KrishokTech-এর Full Practical Research & Development Roadmap**
 
 ### Paper impress করার জন্য না — Bangladesh-এর farmer-এর জন্য সত্যিকারের usable system বানানোর roadmap।
 
@@ -1228,4 +1228,4 @@ LLM দিয়ে সুন্দর কথা বলা না।
 
 **একটা একটা করে। কোনো overhype না।**
 
-এটাই আমার মতে তোমার পুরো KrishokChat research-এর সবচেয়ে practical starting point।
+এটাই আমার মতে তোমার পুরো KrishokTech research-এর সবচেয়ে practical starting point।

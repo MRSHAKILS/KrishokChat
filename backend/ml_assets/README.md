@@ -10,10 +10,10 @@ ml_assets/
 │   └── disease_knowledge_map.json
 ├── classifier/        # crop classifier weights (ignored, .gitkeep)
 ├── gemma/             # local LLM — GGUF is ignored, Modelfile is tracked
-│   ├── krishokchat.f16.gguf   (ignored, canonical, 1.36 GB, hardlinked to model.gguf)
+│   ├── krishoktech.f16.gguf   (ignored, canonical, 1.36 GB, hardlinked to model.gguf)
 │   ├── model.gguf             (ignored, hardlink alias for config default)
 │   ├── Modelfile              (tracked, hardlinked to scripts/Modelfile)
-│   ├── Modelfile.krishokchat  (tracked, archived variant FROM gemma3:4b)
+│   ├── Modelfile.krishoktech  (tracked, archived variant FROM gemma3:4b)
 │   └── README.md              (this repo: H2 docs)
 ├── rag_index/         # RAG corpus + indexes (tracked: .pkl/.faiss/.json <20 MB)
 │   ├── processed/     # knowledge_nodes_clean.jsonl (2120 nodes)
@@ -39,10 +39,10 @@ ml_assets/
 | `**/.gitkeep` | tracked | Keeps empty dirs visible |
 
 **Hardlinks (H2-H3, zero extra space):**
-* `gemma/model.gguf ↔ krishokchat.f16.gguf` (2 entries, SHA `1D6273…`, `fsutil hardlink list`)
-* `demo-assets/krishokchat_demo.* ↔ frontend/public/krishokchat_demo.*` (2 entries each)
+* `gemma/model.gguf ↔ krishoktech.f16.gguf` (2 entries, SHA `1D6273…`, `fsutil hardlink list`)
+* `demo-assets/krishoktech_demo.* ↔ frontend/public/krishoktech_demo.*` (2 entries each)
 
-**Truncation warning:** `gemma/krishokchat.f16.gguf` is truncated and must not be served (see `docs/refactor/PROJECT_HANDOFF.md` + amendment 14). Verified runtime uses external Q4_K_M base + LoRA via `tools/ops/start_krishokchat_local.ps1`.
+**Truncation warning:** `gemma/krishoktech.f16.gguf` is truncated and must not be served (see `docs/refactor/PROJECT_HANDOFF.md` + amendment 14). Verified runtime uses external Q4_K_M base + LoRA via `tools/ops/start_krishoktech_local.ps1`.
 
 ## Verification
 

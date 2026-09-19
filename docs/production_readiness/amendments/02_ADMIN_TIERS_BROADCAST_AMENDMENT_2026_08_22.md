@@ -1,7 +1,7 @@
 ﻿# Admin Console, User Tiers & Broadcast Announcements Amendment (APPROVED 2026-08-22)
 
 **Date:** 2026-08-22
-**Status:** APPROVED 2026-08-22 — via researcher-approved implementation plan ("KrishokChat → Government-Ready: UI Refinement + User Tiers + Admin Panel & Broadcast Alerts")
+**Status:** APPROVED 2026-08-22 — via researcher-approved implementation plan ("KrishokTech → Government-Ready: UI Refinement + User Tiers + Admin Panel & Broadcast Alerts")
 **Tier:** 1 (post-capstone, government-handoff lane)
 **Depends on:** Supabase Auth amendment 15 (`paper/archive/system_evolution_plan_2026/execution_planning_2026_08_12/15_SUPABASE_AUTH_AMENDMENT_2026_08_14.md`), premium-lane design 16, P0 hardening (API versioning `/api/v1`, API keys, error envelope)
 **Blocks:** admin ops console, free/premium tier management, broadcast announcements & disease alerts
@@ -171,7 +171,7 @@ No tier-gating setting exists because **no gating ships** (researcher decision).
 ## 10. Approval
 
 - [x] **APPROVED** — 2026-08-22, via researcher approval of the implementation plan
-      containing exactly this scope ("KrishokChat → Government-Ready…"). Options
+      containing exactly this scope ("KrishokTech → Government-Ready…"). Options
       chosen are recorded in §9. Any scope growth beyond §5 requires a new
       amendment or a recorded researcher decision.
 

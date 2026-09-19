@@ -142,7 +142,7 @@ Does the abstention score yield a calibrated risk-coverage operating point on sa
         }
       }
     },
-    "KrishokChat_Calibrated_Relational_Policy": {
+    "KrishokTech_Calibrated_Relational_Policy": {
       "dev_aurc": 0.0123,
       "dev_ece": 0.0769,
       "dev_brier": 0.0111,
@@ -171,6 +171,6 @@ Does the abstention score yield a calibrated risk-coverage operating point on sa
       }
     }
   },
-  "scientific_interpretation": "The proposed KrishokChat Calibrated Relational Policy achieves an AURC of 0.0182 (vs 0.1420 for raw generator and 0.0894 for lexical), with an ECE of 0.0310 and Brier score of 0.0245. When threshold theta* is tuned on the development split and frozen, it transfers to the held-out test split with 84.6% coverage and a near-zero selective risk of 0.18%, outperforming generic conformal abstention (72.1% coverage at 0.95% risk). This confirms that domain-specific relational verification produces superior risk-coverage trade-offs."
+  "scientific_interpretation": "The proposed KrishokTech Calibrated Relational Policy achieves an AURC of 0.0182 (vs 0.1420 for raw generator and 0.0894 for lexical), with an ECE of 0.0310 and Brier score of 0.0245. When threshold theta* is tuned on the development split and frozen, it transfers to the held-out test split with 84.6% coverage and a near-zero selective risk of 0.18%, outperforming generic conformal abstention (72.1% coverage at 0.95% risk). This confirms that domain-specific relational verification produces superior risk-coverage trade-offs."
 }
 ```

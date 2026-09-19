@@ -11,7 +11,7 @@
 | Role / Pipeline Stage | Exact Authorized Model Identifier | Gateway / Provider | Quota / Concurrency Policy |
 |---|---|---|---|
 | **Production NLU & Cloud Benchmark** | `google/gemini-2.5-flash-lite` | OpenRouter (`OPENROUTER_API_KEY`) | Single consolidated JSON slot extraction ($\le 180$ tok) |
-| **Local Advisory Generation (LoRA)** | `krishokchat-4b` | `llama-server` / Ollama (`127.0.0.1:11434/v1`) | Fine-tuned Gemma-4 4-bit base + LoRA adapter |
+| **Local Advisory Generation (LoRA)** | `krishoktech-4b` | `llama-server` / Ollama (`127.0.0.1:11434/v1`) | Fine-tuned Gemma-4 4-bit base + LoRA adapter |
 | **Free Gemini Key Pool (Worker A & B)** | `gemini-3.1-flash-lite` | Google Generative Language API | 14 Keys (Pool A: 7 keys, Pool B: 7 keys in `.env`) |
 | **Free Gemini Key Pool (Worker C)** | `gemini-3.5-flash-lite` | Google Generative Language API | 7 Keys (Pool C: 7 keys in `.env`) |
 | **On-Device Edge Perception** | YOLOv8 / YOLO26n (INT8/FP32) | ONNX Runtime / WASM ($26\text{--}265\,$ms) | 6 per-crop classifiers (Wheat, Rice, Potato, etc.) |
@@ -100,7 +100,7 @@ Before launching any batch inference or evaluation script ($>50$ calls):
 The repository strictly enforces a two-track boundary:
 
 ```
-d:\KrishokChat Advisory System\
+d:\KrishokTech Advisory System\
 ├── backend/                   # Production Track (FastAPI, Domain, Ports, Adapters)
 ├── frontend/                  # Production Track (Next.js 14, TypeScript, Tailwind, UI)
 ├── paper/
@@ -116,7 +116,7 @@ d:\KrishokChat Advisory System\
 2. **Paper Track (`paper/CEA Paper/`, `paper/EACL Demo/`, `experiments/`):**
    - **EACL Demo Paper:** Focuses on **WHAT** features exist (3 TikZ flowcharts, interactive quick-reply chips, latency, streaming provenance traces).
    - **CEA Research Paper:** Focuses on **WHY** BAA is architecturally safer (eliminating $38.5\%$ cross-crop hazard, fail-closed prechecks, $0.0\%$ toxic leak rate).
-3. **External Research Data Root (`E:\CSE498R\Agri-LLM\KrishokChat`):**
+3. **External Research Data Root (`E:\CSE498R\Agri-LLM\KrishokTech`):**
    - Read-only source for base datasets, raw chunk libraries, and reference archives.
    - The production app depends solely on mirrored assets under `backend/ml_assets/`.
 

@@ -76,13 +76,13 @@ Quoted verbatim from the source:
    > **Agricultural AI should not maximize the number of answers; it should maximize the number of answers that are justified.**
 
 8. **Strongest originality framing (§73, line 2350):**
-   > **KrishokChat does not treat agricultural AI as a chatbot problem; it treats it as an evidence, decision, safety and delivery problem—and integrates those layers into one Bengali-first system.**
+   > **KrishokTech does not treat agricultural AI as a chatbot problem; it treats it as an evidence, decision, safety and delivery problem—and integrates those layers into one Bengali-first system.**
 
 9. **Safety-behaviour claim (§77, line 2380):**
    > **When the system cannot establish the evidence required for a high-risk recommendation, it does not complete the recommendation—it asks, refuses, or escalates.**
 
 10. **Contrast-with-general-LLM claim (§125, line 3297):**
-    > **"ChatGPT can generate an answer. KrishokChat is designed to decide whether an agricultural answer is justified before it is delivered."**
+    > **"ChatGPT can generate an answer. KrishokTech is designed to decide whether an agricultural answer is justified before it is delivered."**
 
 11. **Biggest-innovation answer (§124, line 3289):**
     > **"Our innovation is that the agricultural decision is not delegated blindly to a generative model. We built a system where farmer language, vision, agricultural evidence and safety controls work together, and the system can deliberately answer, clarify, refuse or escalate depending on what it can establish."**
@@ -216,7 +216,7 @@ Security benchmark, 1,400 injection cases (§19, line 870):
 | LLM direct      |               83.86% |
 | Vanilla RAG     |               69.36% |
 | RAG + LLM guard |               21.79% |
-| KrishokChat     |      **0% observed** |
+| KrishokTech     |      **0% observed** |
 
 Evidence-binding / counterfactual result (§20, line 885):
 
@@ -275,17 +275,17 @@ Numbers explicitly deprioritised (§34, lines 1261–1265) — "Don't headline":
 - **BAMIS and the 16123 Agricultural Call Center (§39, §90):** treated as existing
   national advisory infrastructure that establishes demand rather than as competitors.
   "the advisory demand already exists; we are modernizing its delivery layer." And:
-  "KrishokChat provides an AI-native, Bengali, multimodal layer that can complement
+  "KrishokTech provides an AI-native, Bengali, multimodal layer that can complement
   these channels rather than pretending to replace them."
 
 - **National-significance framing (§91):** "Not: > 'AI will feed Bangladesh.'
   Instead: > **'Bangladesh has already built agricultural advisory institutions.
-  KrishokChat can provide a new digital intelligence layer that makes those services
+  KrishokTech can provide a new digital intelligence layer that makes those services
   more accessible, personalized, multimodal and scalable.'**"
 
 - **Comparison categories used instead of named products (§Slide 2 matrix and §36
-  matrix):** "Generic AI / RAG only / Vision only / KrishokChat" and
-  "Generic AI / Typical agri app / Generic RAG / KrishokChat". Instruction: "Don't
+  matrix):** "Generic AI / RAG only / Vision only / KrishokTech" and
+  "Generic AI / Typical agri app / Generic RAG / KrishokTech". Instruction: "Don't
   claim that all competitors have zeros. Use: > 'typical' and: > 'selected
   alternatives.'"
 
@@ -350,7 +350,7 @@ the framing correction up front (lines 3–10):
 
 > **I would not make your two papers "application vs. theory."**
 > I would make them:
-> 1. **EACL System Demonstration:** the *engineering-integrated artifact* — what KrishokChat is, how the complete system works, why the integration matters, and evidence that it is usable.
+> 1. **EACL System Demonstration:** the *engineering-integrated artifact* — what KrishokTech is, how the complete system works, why the integration matters, and evidence that it is usable.
 > 2. **CEA:** the *scientific architectural paper* — a generalizable **bounded-authority / fail-closed advisory architecture**, rigorously evaluated as a decision-support system.
 
 ### 2.1 Titles proposed
@@ -359,8 +359,8 @@ the framing correction up front (lines 3–10):
   Fail-Closed Routing and Evidence-Bound Verification for Bengali Decision Support**"
   (note: the actual manuscript title uses "Selective Resolution" in place of
   "Fail-Closed Routing", and adds "Safe").
-- **EACL working title (line 60):** "**KrishokChat: A Safety-Aware Multimodal Bengali
-  Agricultural Advisory System**"; alternative (line 64): "**KrishokChat:
+- **EACL working title (line 60):** "**KrishokTech: A Safety-Aware Multimodal Bengali
+  Agricultural Advisory System**"; alternative (line 64): "**KrishokTech:
   Evidence-Grounded and Safety-Aware Agricultural Advisory for Bengali Farmers**".
 
 ### 2.2 Named framework, mechanisms, acronyms, formalisms (exact)
@@ -404,7 +404,7 @@ Summarised as: "> **knowledge authority → language realization**" (line 1288).
 - **SAFE-RAG** — **Safety-Aware Fact-Entailment RAG**
 - **FARM-GUARD** — **Fact-Authority Routing and Mitigated Generation for Guided
   Agricultural User Recommendations and Decisions**
-- Preferred: "## **BAA — Bounded-Authority Advisory**"; system name "**BAA-KrishokChat**"
+- Preferred: "## **BAA — Bounded-Authority Advisory**"; system name "**BAA-KrishokTech**"
 - Explicit dissatisfaction with the incumbent name: "I'm not convinced 'DGDR' is the
   best final name. It sounds like primarily a routing mechanism. The deeper idea is
   authority."
@@ -680,10 +680,10 @@ three agronomists in the current work, with Gwet's AC1 reported as 0.862."
 - C3 — User-visible safety/provenance/verification trace for an open, reproducible system
 
 **EACL system-contribution sentence (§7, line 302), verbatim:**
-> **KrishokChat contributes an openly accessible Bengali agricultural advisory system that integrates safety screening, evidence-grounded retrieval, multimodal disease diagnosis, response verification, provenance tracing, and deployable service interfaces into a single auditable interaction workflow.**
+> **KrishokTech contributes an openly accessible Bengali agricultural advisory system that integrates safety screening, evidence-grounded retrieval, multimodal disease diagnosis, response verification, provenance tracing, and deployable service interfaces into a single auditable interaction workflow.**
 
 **Overall project positioning (§80, line 2576), verbatim:**
-> **KrishokChat is an open Bengali agricultural advisory platform developed around a research program on trustworthy agricultural language technology. Earlier work established the knowledge and retrieval foundations; the current system integrates multimodal diagnosis, retrieval, safety routing, evidence verification and deployment-oriented interfaces. This work then studies bounded factual authority as the reliability layer connecting those components.**
+> **KrishokTech is an open Bengali agricultural advisory platform developed around a research program on trustworthy agricultural language technology. Earlier work established the knowledge and retrieval foundations; the current system integrates multimodal diagnosis, retrieval, safety routing, evidence verification and deployment-oriented interfaces. This work then studies bounded factual authority as the reliability layer connecting those components.**
 
 Four-paper arc (§43): **P1** Knowledge and benchmark → **P2** Retrieval uncertainty →
 **P3** Decision/authority architecture (CEA) → **P4** System artifact (EACL).

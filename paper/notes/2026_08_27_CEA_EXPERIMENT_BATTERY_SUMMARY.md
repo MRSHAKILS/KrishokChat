@@ -1,4 +1,4 @@
-# KrishokChat — Master Experiment Battery Summary (E02–E25)
+# KrishokTech — Master Experiment Battery Summary (E02–E25)
 **Date:** 2026-08-27  
 **Status:** FROZEN & VERIFIED (SSOT for CEA Manuscript Aggregation)  
 **Authority:** `experiments/registry.yaml`, `paper/manuscript/CLAIM_LEDGER_FREEZE.md`, `experiments/ACCEPTANCE_PROTOCOL.md`  
@@ -7,7 +7,7 @@
 
 ## 1. Executive Summary & Master Results Matrix
 
-This document provides a single-source-of-truth reference for all completed empirical experiments in the KrishokChat research battery (original safety battery E02–E13 and the Computers & Electronics in Agriculture (CEA) systems-engineering pivot E14–E25). Every number is derived from frozen results YAMLs, with exact seeds, confidence intervals, sample sizes, and reproduction commands.
+This document provides a single-source-of-truth reference for all completed empirical experiments in the KrishokTech research battery (original safety battery E02–E13 and the Computers & Electronics in Agriculture (CEA) systems-engineering pivot E14–E25). Every number is derived from frozen results YAMLs, with exact seeds, confidence intervals, sample sizes, and reproduction commands.
 
 ### Master Empirical Table
 
@@ -106,7 +106,7 @@ This document provides a single-source-of-truth reference for all completed empi
 - **Constants:** 1 USD = 120.00 BDT; BTRC Approved A2P Bulk SMS = 0.25 BDT / SMS; Local VPS = $45.00 / month amortized.
 - **Key Findings:**
   - Cost per safe advisory ($C_{\text{safe}}$): App Online = 0.0308 BDT ($0.2567 / 1k); SMS Fallback = 0.2808 BDT ($2.3401 / 1k); vs Commercial Cloud LLM API Baseline = 0.2976 BDT ($2.4800 / 1k).
-  - National Deployment Projection across 16M Smallholder Farmers (96M annual queries): Commercial Cloud APIs would cost 28.57 Crore BDT ($238.1k USD), while KrishokChat costs 2.17 Crore BDT ($18.1k USD), saving 22.8 Crore BDT ($190.0k USD) annually (75.95% budget savings).
+  - National Deployment Projection across 16M Smallholder Farmers (96M annual queries): Commercial Cloud APIs would cost 28.57 Crore BDT ($238.1k USD), while KrishokTech costs 2.17 Crore BDT ($18.1k USD), saving 22.8 Crore BDT ($190.0k USD) annually (75.95% budget savings).
 - **Allowed Manuscript Claim (S26):** *"Deploying tiered deterministic routing alongside localized Bangladesh A2P SMS gateways achieves an online advisory cost of 0.0308 BDT ($0.2567/1k), yielding 22.8 Crore BDT ($190,000 USD) in projected annual savings across a national 16-million farmer deployment relative to commercial cloud LLMs."*
 
 ---

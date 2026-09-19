@@ -1,8 +1,8 @@
-# RAG Database — KrishokChat Advisory System
+# RAG Database — KrishokTech Advisory System
 
 ## Overview
 
-This folder contains the retrieval-augmented generation (RAG) database for the KrishokChat Bengali agricultural advisory system.
+This folder contains the retrieval-augmented generation (RAG) database for the KrishokTech Bengali agricultural advisory system.
 
 **2,120 knowledge nodes** covering crops, diseases, pests, fertilizers, and cultivation practices — sourced from 13 Bangladeshi agricultural institutions (BARC, BARI, DAE, CABI, etc.).
 

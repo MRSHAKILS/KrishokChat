@@ -1,4 +1,4 @@
-# KrishokChat — Production & Future Scope Outline
+# KrishokTech — Production & Future Scope Outline
 
 **Status:** RESEARCH / PLANNING DOCUMENT — nothing here changes code until a task executes it.
 **Date:** 2026-08-23

@@ -8,7 +8,7 @@
 
 ## 1. T02 — Dataset Inventory
 
-### 1.1 External Dataset: `E:\CSE498R\Agri-LLM\KrishokChat\krishokchat_dataset_main`
+### 1.1 External Dataset: `E:\CSE498R\Agri-LLM\KrishokTech\krishoktech_dataset_main`
 
 #### 1.1.1 Farmers Benchmark
 
@@ -91,7 +91,7 @@
 
 ---
 
-### 1.2 External Knowledge Nodes: `E:\CSE498R\Agri-LLM\KrishokChat\agritrust knowledge nodes`
+### 1.2 External Knowledge Nodes: `E:\CSE498R\Agri-LLM\KrishokTech\agritrust knowledge nodes`
 
 | File | Items/Lines | Size (bytes) | SHA-256 |
 |------|------------|-------------|---------|
@@ -104,7 +104,7 @@
 
 ---
 
-### 1.3 In-Repo Datasets: `D:\KrishokChat Advisory System\backend\ml_assets\`
+### 1.3 In-Repo Datasets: `D:\KrishokTech Advisory System\backend\ml_assets\`
 
 | File | Lines/Items | Size (bytes) | SHA-256 | Schema |
 |------|------------|-------------|---------|--------|
@@ -324,19 +324,19 @@ Key fields:
 
 | Path | Type | Records | Size (bytes) | SHA-256 |
 |------|------|---------|-------------|---------|
-| `krishokchat_dataset_main/farmers_benchmark/farmer_benchmark_1000.jsonl` | JSONL | 1,000 | 5,648,266 | `E2ADC30D...` |
-| `krishokchat_dataset_main/farmers_benchmark/splits/test.jsonl` | JSONL | 350 | 2,122,297 | `69CE51E7...` |
-| `krishokchat_dataset_main/text_qa/safety/safety_refusal_t3.jsonl` | JSONL | 3,216 | 3,636,107 | `27ACDB64...` |
-| `krishokchat_dataset_main/text_qa/safety/safety_requery_t4.jsonl` | JSONL | 16,896 | 15,854,076 | `A5780234...` |
-| `krishokchat_dataset_main/text_qa/general/general_full.jsonl` | JSONL | 28,993 | 40,490,278 | `6EE95FE9...` |
-| `krishokchat_dataset_main/text_qa/treatment/treatment_full.jsonl` | JSONL | 11,224 | 22,026,143 | `DC9B87A0...` |
-| `krishokchat_dataset_main/table_qa/qa/tableqa_all.jsonl` | JSONL | 9,022 | 6,904,746 | `26E3A9F6...` |
-| `krishokchat_dataset_main/table_qa/qa/dialects/tableqa_all_dialects.jsonl` | JSONL | 25,650 | 17,040,666 | `BA8362AD...` |
-| `krishokchat_dataset_main/image_qa/image_qa_pairs.jsonl` | JSONL | 2,045 | 5,306,535 | `5829D1A5...` |
-| `krishokchat_dataset_main/markdown_corpus/qa/complete_queries.jsonl` | JSONL | 1,536 | 1,613,671 | `073C83AA...` |
-| `krishokchat_dataset_main/markdown_corpus/qa/critical_treatment.jsonl` | JSONL | 2,190 | 5,361,262 | `414D17F5...` |
-| `krishokchat_dataset_main/markdown_corpus/qa/general_sft_diverse_full.jsonl` | JSONL | 28,993 | 34,923,017 | `D8A32C3A...` |
-| `krishokchat_dataset_main/markdown_corpus/retriever/retriever_train.jsonl` | JSONL | 9,231 | 73,865,004 | `5A8FF2E4...` |
+| `krishoktech_dataset_main/farmers_benchmark/farmer_benchmark_1000.jsonl` | JSONL | 1,000 | 5,648,266 | `E2ADC30D...` |
+| `krishoktech_dataset_main/farmers_benchmark/splits/test.jsonl` | JSONL | 350 | 2,122,297 | `69CE51E7...` |
+| `krishoktech_dataset_main/text_qa/safety/safety_refusal_t3.jsonl` | JSONL | 3,216 | 3,636,107 | `27ACDB64...` |
+| `krishoktech_dataset_main/text_qa/safety/safety_requery_t4.jsonl` | JSONL | 16,896 | 15,854,076 | `A5780234...` |
+| `krishoktech_dataset_main/text_qa/general/general_full.jsonl` | JSONL | 28,993 | 40,490,278 | `6EE95FE9...` |
+| `krishoktech_dataset_main/text_qa/treatment/treatment_full.jsonl` | JSONL | 11,224 | 22,026,143 | `DC9B87A0...` |
+| `krishoktech_dataset_main/table_qa/qa/tableqa_all.jsonl` | JSONL | 9,022 | 6,904,746 | `26E3A9F6...` |
+| `krishoktech_dataset_main/table_qa/qa/dialects/tableqa_all_dialects.jsonl` | JSONL | 25,650 | 17,040,666 | `BA8362AD...` |
+| `krishoktech_dataset_main/image_qa/image_qa_pairs.jsonl` | JSONL | 2,045 | 5,306,535 | `5829D1A5...` |
+| `krishoktech_dataset_main/markdown_corpus/qa/complete_queries.jsonl` | JSONL | 1,536 | 1,613,671 | `073C83AA...` |
+| `krishoktech_dataset_main/markdown_corpus/qa/critical_treatment.jsonl` | JSONL | 2,190 | 5,361,262 | `414D17F5...` |
+| `krishoktech_dataset_main/markdown_corpus/qa/general_sft_diverse_full.jsonl` | JSONL | 28,993 | 34,923,017 | `D8A32C3A...` |
+| `krishoktech_dataset_main/markdown_corpus/retriever/retriever_train.jsonl` | JSONL | 9,231 | 73,865,004 | `5A8FF2E4...` |
 | `agritrust knowledge nodes/master/knowledge_nodes.json` | JSON | 2,120 | 9,157,705 | `95A4CB55...` |
 | `agritrust knowledge nodes/image_nodes/image_nodes_high_quality.jsonl` | JSONL | 1,022 | 5,808,249 | `AF1B06E8...` |
 
@@ -351,14 +351,14 @@ Key fields:
 | `rag_index/indexes/embeddings.npy` | `manifest.json` `retrieval.dense.file` | **NOT FOUND** — Dense embedding index not built |
 | `rag_index/indexes/nodes.faiss` | `manifest.json` `retrieval.faiss.file` | **NOT FOUND** — FAISS index not built |
 | `rag_index/bm25_build_report.json` | Task specification | **NOT FOUND** — Build report missing |
-| `dataset_release/` | CLAUDE.md session summary | **NOT FOUND** at `D:\KrishokChat Advisory System\` |
+| `dataset_release/` | CLAUDE.md session summary | **NOT FOUND** at `D:\KrishokTech Advisory System\` |
 | Embedding model weights | Manifest declares `intfloat/multilingual-e5-small` | **NOT FOUND** — No local embedding model files |
 
 ### 4.2 External
 
 | Artifact | Referenced In | Status |
 |----------|--------------|--------|
-| `image_nodes/image_nodes_high_quality.jsonl` at `krishokchat_dataset_main/` | Task specification | **NOT FOUND** — Only exists at `agritrust knowledge nodes/image_nodes/` |
+| `image_nodes/image_nodes_high_quality.jsonl` at `krishoktech_dataset_main/` | Task specification | **NOT FOUND** — Only exists at `agritrust knowledge nodes/image_nodes/` |
 | `farmers_benchmark/splits/train.jsonl` | Split convention | **NOT FOUND** — Only `test.jsonl` split exists |
 
 ### 4.3 Gemma Checkpoint
@@ -378,12 +378,12 @@ Key fields:
 
 | External Source | In-Repo Copy | Relationship |
 |-----------------|-------------|--------------|
-| `krishokchat_dataset_main/farmers_benchmark/farmer_benchmark_1000.jsonl` | `ml_assets/rag_index/eval/farmer_benchmark_1000.jsonl` | **Bit-identical** (SHA match) |
+| `krishoktech_dataset_main/farmers_benchmark/farmer_benchmark_1000.jsonl` | `ml_assets/rag_index/eval/farmer_benchmark_1000.jsonl` | **Bit-identical** (SHA match) |
 | `agritrust knowledge nodes/master/knowledge_nodes.json` | `ml_assets/rag_index/raw/knowledge_nodes.json` | **Bit-identical** (SHA match) |
-| `krishokchat_dataset_main/text_qa/general/general_full.jsonl` | `ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl` | **Different** — different schemas, different content. general_full has 28,993 QA pairs; clean nodes have 2,135 knowledge nodes. |
-| `krishokchat_dataset_main/markdown_corpus/qa/general_sft_diverse_full.jsonl` | `ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl` | **Different** — same line count (28,993 vs 2,135) is coincidental; different file types (QA pairs vs knowledge nodes) |
-| `krishokchat_dataset_main/markdown_corpus/qa/complete_queries.jsonl` | `ml_assets/advisory/generated_knowledge_nodes.jsonl` | **Different** — complete_queries (1,536) are T4 slot queries; generated_knowledge_nodes (13) are disease knowledge nodes |
-| `krishokchat_dataset_main/markdown_corpus/qa/critical_treatment.jsonl` | `ml_assets/advisory/disease_knowledge_map.json` | **Different** — critical_treatment has 2,190 QA pairs; disease_knowledge_map has 34 disease entries. Complementary. |
+| `krishoktech_dataset_main/text_qa/general/general_full.jsonl` | `ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl` | **Different** — different schemas, different content. general_full has 28,993 QA pairs; clean nodes have 2,135 knowledge nodes. |
+| `krishoktech_dataset_main/markdown_corpus/qa/general_sft_diverse_full.jsonl` | `ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl` | **Different** — same line count (28,993 vs 2,135) is coincidental; different file types (QA pairs vs knowledge nodes) |
+| `krishoktech_dataset_main/markdown_corpus/qa/complete_queries.jsonl` | `ml_assets/advisory/generated_knowledge_nodes.jsonl` | **Different** — complete_queries (1,536) are T4 slot queries; generated_knowledge_nodes (13) are disease knowledge nodes |
+| `krishoktech_dataset_main/markdown_corpus/qa/critical_treatment.jsonl` | `ml_assets/advisory/disease_knowledge_map.json` | **Different** — critical_treatment has 2,190 QA pairs; disease_knowledge_map has 34 disease entries. Complementary. |
 
 **Key insight:** Only 2 files are true bit-identical copies between external and in-repo. The in-repo files are processed/refined derivatives of the external source data, not raw copies.
 

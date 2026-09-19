@@ -1,4 +1,4 @@
-# KrishokChat EACL Final — Roadmap (Clean Idea + Professional Plan)
+# KrishokTech EACL Final — Roadmap (Clean Idea + Professional Plan)
 
 **Venue:** EACL System Demonstrations (≤6 pages + refs + live URL + ≤2.5-min screencast)
 **Status:** 2026-09-17 — story-building phase; Beat A research pass 1 documented; no new features
@@ -10,7 +10,7 @@
 
 ## 1. Clean idea (one sentence)
 
-> **KrishokChat is one auditable Bengali advisory session where fail-closed gating happens *before* retrieval, hierarchical on-device classification narrows retrieval to prevent cross-crop chemical error, and verification + trace + 16123 escalation stay user-visible — degrading to BM25 + SMS without inventing advice.**
+> **KrishokTech is one auditable Bengali advisory session where fail-closed gating happens *before* retrieval, hierarchical on-device classification narrows retrieval to prevent cross-crop chemical error, and verification + trace + 16123 escalation stay user-visible — degrading to BM25 + SMS without inventing advice.**
 
 One paragraph version: a farmer's text, photo, retrieved evidence, verification state, and escalation live in a single session object, not disconnected pages. Deterministic safeguards sit alongside grounded generation. Every answer exposes *why*: safety route, evidence passage, verifier verdict, latency, and a safe next step (clarify / refuse / escalate / SMS-export). The same pipeline runs offline with a stub LLM or online with a hosted model without code changes.
 

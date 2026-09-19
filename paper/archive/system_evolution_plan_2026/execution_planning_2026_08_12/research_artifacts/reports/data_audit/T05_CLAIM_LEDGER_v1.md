@@ -21,11 +21,11 @@ Primary numbers lacking a stable artifact are marked `NEEDS RECONCILIATION` and 
 promoted. All numbers derived purely from a PDF with no on-disk artifact are held at
 `NEEDS RECONCILIATION`.
 
-## PDF A — KrishokChat Benchmark: Dataset Size Reconciliations
+## PDF A — KrishokTech Benchmark: Dataset Size Reconciliations
 
 Claim IDs use `PCA-<page>-<n>` (PDF A) / `PCB-<page>-<n>` (PDF B).
 
-| Claim ID | PDF | Value (PDF) | Reconciled | Artifact (rel to `E:\CSE498R\...\krishokchat_dataset_main`) | Method | Status |
+| Claim ID | PDF | Value (PDF) | Reconciled | Artifact (rel to `E:\CSE498R\...\krishoktech_dataset_main`) | Method | Status |
 |---|---|---|---|---|---|---|
 | PCA-1 / 2 / 3 | Total instances | 85,979 | **85,979** | Sum of 4 track files below | Independent line-count sum of 4 track files | **VERIFIED** |
 | PCA-3 | General QA | 28,993 | **28,993** | `text_qa/general/general_full.jsonl` | Line count | **VERIFIED** |
@@ -38,14 +38,14 @@ Claim IDs use `PCA-<page>-<n>` (PDF A) / `PCB-<page>-<n>` (PDF B).
 | PCA-5 | T3 refusal records | 3,216 | **3,216** | `text_qa/safety/safety_refusal_t3.jsonl` | Line count | **VERIFIED** |
 | PCA-5 | T4 re-query records | 16,896 | **16,896** | `text_qa/safety/safety_requery_t4.jsonl` | Line count | **VERIFIED** |
 | PCA-5 | Safety test split n | 323 (=51 refusal + 272 re-query) | **323** total; modes `refusal=51, requery=272` | `text_qa/safety/splits/test.jsonl` | Programmatic `safety_mode` count | **VERIFIED** |
-| PCA-3 | Semantic knowledge units | 2,946 | **2,946** | KrishokChat paper value adopted; `knowledge_nodes.json` (2,120 items) is a different artifact (AgriTrust KG nodes, not the KrishokChat corpus). No single KrishokChat corpus file enumerates all 2,946 units. | Paper value accepted; artifact is a different corpus | **VERIFIED** (paper-authoritative) |
-| PCA-1 | Source publications | 284 | **284** | KrishokChat paper value adopted; `dataset_split_manifest.json` (`total_books=30`) is the train/dev/test book split, not the source-publication count. These are different claims. | Paper value accepted; manifest is a split descriptor | **VERIFIED** (paper-authoritative) |
+| PCA-3 | Semantic knowledge units | 2,946 | **2,946** | KrishokTech paper value adopted; `knowledge_nodes.json` (2,120 items) is a different artifact (AgriTrust KG nodes, not the KrishokTech corpus). No single KrishokTech corpus file enumerates all 2,946 units. | Paper value accepted; artifact is a different corpus | **VERIFIED** (paper-authoritative) |
+| PCA-1 | Source publications | 284 | **284** | KrishokTech paper value adopted; `dataset_split_manifest.json` (`total_books=30`) is the train/dev/test book split, not the source-publication count. These are different claims. | Paper value accepted; manifest is a split descriptor | **VERIFIED** (paper-authoritative) |
 
 ## PDF B — AgriTrust: Knowledge Base Reconciliations
 
-| Claim ID | PDF | Value (PDF) | Reconciled | Artifact (rel to `E:\CSE498R\Agri-LLM\KrishokChat`) | Method | Status |
+| Claim ID | PDF | Value (PDF) | Reconciled | Artifact (rel to `E:\CSE498R\Agri-LLM\KrishokTech`) | Method | Status |
 |---|---|---|---|---|---|---|
-| PCB-1 / 2 | Knowledge nodes | 2,882 | **2,120** | `agritrust knowledge nodes/master/knowledge_nodes.json` | JSON array length | **CONFLICTED** (2,120 vs 2,882; AgriTrust paper claim, not KrishokChat paper). NOT promoted. |
+| PCB-1 / 2 | Knowledge nodes | 2,882 | **2,120** | `agritrust knowledge nodes/master/knowledge_nodes.json` | JSON array length | **CONFLICTED** (2,120 vs 2,882; AgriTrust paper claim, not KrishokTech paper). NOT promoted. |
 | PCB-4 / 5 / 6 | Entities / triples | 19,768 / 17,501 | **NOT RECONCILABLE** | No local KG entity/triple artifact located | — | **NEEDS RECONCILIATION** |
 | PCB-3 | Image-linked nodes | 1,022 | **1,022** | `agritrust knowledge nodes/image_nodes/image_nodes_high_quality.jsonl` (1,022 lines) | Line count | **VERIFIED** (proxy artifact; cross-check needed) |
 | PCB-4 | Source PDFs | 284 | **NOT RECONCILABLE** | No local 284-item PDF manifest | — | **NEEDS RECONCILIATION** |
@@ -57,7 +57,7 @@ Claim IDs use `PCA-<page>-<n>` (PDF A) / `PCB-<page>-<n>` (PDF B).
 | PCA-24 | Base model | Gemma-4-E4B (4-bit) | **unsloth/gemma-4-E4B-it-unsloth-bnb-4bit** | `backend/ml_assets/gemma/raw/checkpoint-4020/adapter_config.json` | Config read | **VERIFIED** |
 | PCA-24 | LoRA r / alpha / dropout | 32 / 64 / — | **32 / 64 / 0** | `adapter_config.json` | Config read | **VERIFIED** |
 | PCA-24 | Target modules | 6 | regex (not enumerable) | `adapter_config.json` (`target_modules` is a regex, not a module list) | Config read | **NEEDS RECONCILIATION** |
-| PCA-24 | 1-epoch step | 2,680 | **2,680** | KrishokChat paper value adopted as authoritative for the released model. The checked-in `checkpoint-4020/trainer_state.json` (`global_step=4020`) is an intermediate 1.5-epoch checkpoint, NOT the released model. No step-2,680 artifact exists in the repo. | Paper value accepted; checked-in checkpoint is not the released artifact | **VERIFIED** (paper-authoritative; repo lacks released artifact) |
+| PCA-24 | 1-epoch step | 2,680 | **2,680** | KrishokTech paper value adopted as authoritative for the released model. The checked-in `checkpoint-4020/trainer_state.json` (`global_step=4020`) is an intermediate 1.5-epoch checkpoint, NOT the released model. No step-2,680 artifact exists in the repo. | Paper value accepted; checked-in checkpoint is not the released artifact | **VERIFIED** (paper-authoritative; repo lacks released artifact) |
 | PCA-24 | 2-epoch step | 5,362 | **5,362** | `trainer_state.json` (`max_steps`) | Config read | **VERIFIED** |
 | PCA-24 | Peak LR | 2×10⁻⁴ | **2.00e-04** (max observed) | `trainer_state.json` log_history | Config read | **VERIFIED** |
 
@@ -66,7 +66,7 @@ Claim IDs use `PCA-<page>-<n>` (PDF A) / `PCB-<page>-<n>` (PDF B).
 The following are all non-primary or require a model-eval run artifact (logs, raw predictions,
 run manifest) that does not exist in the current inventory. They are held at
 **NEEDS RECONCILIATION** and MUST NOT be promoted until a regenerable eval artifact exists:
-KrishokChat-4B GenF1 0.314 / TrtCor 35.55% / GenHal 19.83% / Safety compliance 0.31%; all
+KrishokTech-4B GenF1 0.314 / TrtCor 35.55% / GenHal 19.83% / Safety compliance 0.31%; all
 zero-shot baseline TrtCor% / Halluc% / F1 values; the 4.05–7.00% oracle hallucination floor;
 Table QA EM/F1; Farmer Benchmark closed-book (n=350) values; Chem-PRF / Dosage Compliance;
 all significance-test p-values; the L4-GPU / seq-len 4,096 / batch training setup claims
@@ -77,13 +77,13 @@ all significance-test p-values; the L4-GPU / seq-len 4,096 / batch training setu
 - **VERIFIED (dataset/sample):** 85,979 total; 28,993 / 11,224 / 20,112 / 25,650 per track;
   1,000 farmer queries; 350 eval split; 7,437 chemical-bearing (66.3%); T3 3,216 + T4 16,896;
   safety test n=323 (51/272); Table QA 6 dialects × 4,275 = 25,650.
-- **VERIFIED (paper-authoritative, KrishokChat paper value adopted):** 2,946 semantic units
+- **VERIFIED (paper-authoritative, KrishokTech paper value adopted):** 2,946 semantic units
   (knowledge_nodes.json is a different, 2,120-item corpus); 284 source publications
   (manifest's 30 books is a split descriptor, not a publication count); released model =
   one-epoch step 2,680 (checked-in checkpoint-4020 is an intermediate, not the released
   artifact).
 - **CONFLICTED (not promoted):** AgriTrust knowledge nodes 2,882 vs 2,120 — this is an
-  AgriTrust paper claim, not a KrishokChat paper claim.
+  AgriTrust paper claim, not a KrishokTech paper claim.
 - **NEEDS RECONCILIATION (no stable artifact):** 19,768/17,501 entities/triples (PDF B);
   284 source PDFs (PDF B); all evaluation metrics; target-module count; L4 GPU / batch /
   seq-len training setup.
@@ -93,7 +93,7 @@ all significance-test p-values; the L4-GPU / seq-len 4,096 / batch training setu
 **STOP criteria:** any primary dataset/sample claim lacking stable artifact evidence.
 - Primary dataset/sample counts all have stable artifacts and are VERIFIED. **Primary dataset
   side does not trigger STOP.**
-- The KrishokChat paper's corpus claims (2,946 units, 284 publications, released 1-epoch
+- The KrishokTech paper's corpus claims (2,946 units, 284 publications, released 1-epoch
   checkpoint) are accepted as paper-authoritative per project decision (2026-08-12); the
   checked-in artifacts that conflict (2,120 nodes, checkpoint-4020) are documented as
   different artifacts and NOT used to override the paper.
@@ -103,7 +103,7 @@ all significance-test p-values; the L4-GPU / seq-len 4,096 / batch training setu
 - AgriTrust entity/triple counts and source-PDF counts (PDF B) must not be promoted without a
   regenerable artifact.
 
-**Recommendation:** GO for dataset-size claims and KrishokChat paper-authoritative corpus
+**Recommendation:** GO for dataset-size claims and KrishokTech paper-authoritative corpus
 claims. Do not include AgriTrust entity/triple counts or source-PDF counts in any paper claim
 without a regenerable artifact. Any checkpoint-based claim must reference the released
 one-epoch (step 2,680) artifact, not the checked-in 4,020-step checkpoint.

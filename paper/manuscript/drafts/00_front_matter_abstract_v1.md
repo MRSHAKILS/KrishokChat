@@ -6,7 +6,7 @@
 
 ### Title Page
 
-**Title:** KrishokChat: Evidence-Linked Relation Verification and Calibrated Selective Certification for Bengali Agricultural Advisory Systems
+**Title:** KrishokTech: Evidence-Linked Relation Verification and Calibrated Selective Certification for Bengali Agricultural Advisory Systems
 
 **Short Running Title (≤ 40 characters):** Relation Verification for Agri-AI
 

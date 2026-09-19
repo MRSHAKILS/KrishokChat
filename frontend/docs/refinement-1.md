@@ -1,4 +1,4 @@
-# 🌾 KrishokChat (কৃষক চ্যাট) — Comprehensive Senior Frontend & UI/UX Roadmap
+# 🌾 KrishokTech (কৃষক চ্যাট) — Comprehensive Senior Frontend & UI/UX Roadmap
 
 > **Role & Perspective:** Senior Frontend Architect & Principal UI/UX Engineer  
 > **Domain Alignment:** Safety-First Bengali Agri-AI Advisory System for Bangladeshi Smallholder Farmers & Academic Evaluators  
@@ -8,7 +8,7 @@
 
 ## 🏛️ Executive Architectural & Design Summary
 
-KrishokChat addresses a critical dual-audience challenge:
+KrishokTech addresses a critical dual-audience challenge:
 1. **Bangladeshi Smallholder Farmers & Extension Officers (মাঠ পর্যায়):** Requires high-contrast outdoor legibility, voice/audio multi-modal interaction, low-bandwidth resilience, large touch targets, and clear structured **Advisory Cards** rather than generic chat bubbles.
 2. **Academic Evaluators, Capstone Defense Jury & Investors (গবেষণা ও মূল্যায়ন):** Requires instant visual comprehension of the **4-stage safety pipeline** (Safety/Router → Retrieval → Generation → Verifier), provenance tracking over 2,120 nodes, hallucination floor explanations, and verified research metrics.
 
@@ -99,7 +99,7 @@ All proposed enhancements adhere strictly to the project’s hard constraints: *
 * **Feature:**
   - **Zero-Shot vs. Fine-Tuned (SFT) vs. RAG Diff Inspector:** Allow users to toggle side-by-side answer comparisons for the same benchmark question:
     - *Column A (Generic LLM Zero-Shot):* Shows typical chemical omission or hallucination highlighted in clay/red.
-    - *Column B (KrishokChat Fine-Tuned + Grounded RAG):* Shows exact cited passages with green grounding checkmarks.
+    - *Column B (KrishokTech Fine-Tuned + Grounded RAG):* Shows exact cited passages with green grounding checkmarks.
   - **Hallucination Floor Visualizer:** Interactive threshold slider illustrating the `4.05% - 7.00%` chemical hallucination floor, demonstrating why the **Stage 4 Verifier Agent** is mandatory.
 
 ### 2.4 Live Safety & Verifier Audit Stream (রিয়েল-টাইম অডিট মনিটর)
@@ -237,7 +237,7 @@ Here is the structured priority matrix for frontend enhancements:
 
 ## 7. 💡 Recommendation & Next Steps
 
-This plan provides a comprehensive blueprint to elevate **KrishokChat** from an already strong capstone prototype into a stunning, institute-grade agricultural platform.
+This plan provides a comprehensive blueprint to elevate **KrishokTech** from an already strong capstone prototype into a stunning, institute-grade agricultural platform.
 
 ### Suggested Immediate Actions:
 1. **P0 Step 1:** Implement the **Client-Side Image Compressor** and **Dosage Calculator Widget** on the `/detect` advisory card to immediately enhance both user performance and practical utility.

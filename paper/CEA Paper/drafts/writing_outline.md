@@ -4,7 +4,7 @@
 
 **Venue:** Computers and Electronics in Agriculture (Elsevier) — Full Original Research Paper
 **Target length:** ~9,000–12,000 words main text
-**Format:** LaTeX `cas-dc` (Elsevier CAS double-column), driver `krishokchat_cea_main.tex`, bib `krishokchat_cea.bib`
+**Format:** LaTeX `cas-dc` (Elsevier CAS double-column), driver `krishoktech_cea_main.tex`, bib `krishoktech_cea.bib`
 
 ---
 

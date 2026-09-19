@@ -8,7 +8,7 @@
 
 | Source | Evidence to use | Boundary |
 |---|---|---|
-| `arXiv:2606.29243` (KrishokChat benchmark) | 4.05–7.00% chemical hallucination floor under oracle; Treatment QA <44% all zero-shot; SFT → safety compliance 0.31% | Benchmark finding, not a system result; frame as the problem the system answers |
+| `arXiv:2606.29243` (KrishokTech benchmark) | 4.05–7.00% chemical hallucination floor under oracle; Treatment QA <44% all zero-shot; SFT → safety compliance 0.31% | Benchmark finding, not a system result; frame as the problem the system answers |
 | E03 `results.json` (420 live calls) | BAA 0.95% [0.26, 3.41] vs unconstrained 36.19% [29.99, 42.88]; Bangla native 6.67% vs 76.67% | n=30/family → wide CIs; report intervals, not point claims |
 | E01 latency sweep | Verifier p50 ~4.82ms, p95 ~11.2ms | Latency measured; catch-rate is not |
 

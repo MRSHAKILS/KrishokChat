@@ -33,7 +33,7 @@ step; never delete history, only append or amend in place.
 
 ## 1. Environment (verified, do not re-derive)
 
-- Windows / PowerShell 5.1. Repo root `D:\KrishokChat Advisory System`.
+- Windows / PowerShell 5.1. Repo root `D:\KrishokTech Advisory System`.
 - **Python: `backend\.venv\Scripts\python.exe` → 3.13.14.** The root `.venv` does not exist;
   system Python 3.12.0 is not the project interpreter.
 - Backend imports work **only with cwd = `backend`**:
@@ -44,7 +44,7 @@ step; never delete history, only append or amend in place.
   faiss OK. `onnxsim` is NOT installed (onnxslim replaces it). CUDA unavailable — CPU only.
   ONNX Runtime providers: `['AzureExecutionProvider', 'CPUExecutionProvider']`.
 - MiKTeX `pdflatex` at `C:\Users\raiya\AppData\Local\Programs\MiKTeX\miktex\bin\x64\pdflatex.exe`.
-- **`acl.sty` does not exist anywhere in the repo.** `manuscript/krishokchat_eacl_main.log` ends
+- **`acl.sty` does not exist anywhere in the repo.** `manuscript/krishoktech_eacl_main.log` ends
   with `Fatal error occurred, no output PDF file produced!`. The manuscript has never compiled,
   so its page count is unverified.
 - Subagent delegation is unavailable (quota exhausted). All work is direct.

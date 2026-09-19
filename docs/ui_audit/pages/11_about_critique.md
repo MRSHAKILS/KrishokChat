@@ -1,8 +1,8 @@
-# Page Critique: About KrishokChat (`/about`)
+# Page Critique: About KrishokTech (`/about`)
 
 **Target Route**: `/about`  
-**Source Code**: [frontend/src/app/(marketing)/about/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/about/page.tsx)  
-**Screenshot**: ![11_about.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/11_about.png)  
+**Source Code**: [frontend/src/app/(marketing)/about/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/about/page.tsx)  
+**Screenshot**: ![11_about.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/11_about.png)  
 
 ---
 

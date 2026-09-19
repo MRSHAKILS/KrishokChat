@@ -10,7 +10,7 @@ config reads), not copies of T02/T03.
 
 ## 1. Dataset file line counts + SHA-256 (external corpus)
 
-Root: `E:\CSE498R\Agri-LLM\KrishokChat\krishokchat_dataset_main`
+Root: `E:\CSE498R\Agri-LLM\KrishokTech\krishoktech_dataset_main`
 
 | File | Lines | Size (bytes) | SHA-256 (first 16) | Matches T02? |
 |---|---|---|---|---|
@@ -65,13 +65,13 @@ lines (`if line.strip()`).
 
 - All primary dataset/sample counts VERIFIED against stable artifacts.
 - STOP avoided for dataset-size claims (all have artifacts).
-- **Conflict resolution (project decision, 2026-08-12):** where the KrishokChat paper makes a
+- **Conflict resolution (project decision, 2026-08-12):** where the KrishokTech paper makes a
   claim (2,946 semantic units; 284 source publications; released one-epoch step-2,680 model),
   the paper's value is adopted as authoritative. Conflicting on-disk artifacts (2,120
   knowledge nodes; checkpoint-4020 at step 4,020) are documented as different artifacts, not
   used to override the paper, and not promoted in their place.
 - AgriTrust-specific claims (2,882 nodes; 19,768/17,501 entities/triples; 284 source PDFs)
-  remain NOT promoted — they are not KrishokChat paper claims and lack matching artifacts.
+  remain NOT promoted — they are not KrishokTech paper claims and lack matching artifacts.
 - Evaluation/metric numbers are non-primary TODOs.
 
 ## 5. Recovery / reproduction

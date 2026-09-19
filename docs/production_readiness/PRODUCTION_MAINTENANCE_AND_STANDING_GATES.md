@@ -1,5 +1,5 @@
 # Production Maintenance & Standing Gates Plan
-## KrishokChat Agricultural Advisory System
+## KrishokTech Agricultural Advisory System
 
 > **Document Type:** Production Maintenance Protocol & Standing Safety Gate Specification  
 > **Target Audience:** Core Maintainers, Reviewers, Engineering Agents  

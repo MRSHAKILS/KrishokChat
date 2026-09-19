@@ -1,5 +1,5 @@
 # CEA Paper Repair — Master Execution Plan Index
-**Project:** Bounded-Authority Agricultural Advisory (KrishokChat / BAA)  
+**Project:** Bounded-Authority Agricultural Advisory (KrishokTech / BAA)  
 **Venue:** Computers and Electronics in Agriculture (Elsevier, Q1)  
 **Plan authored:** 2026-08-28  
 **Executor:** Gemini 2.5 Flash  

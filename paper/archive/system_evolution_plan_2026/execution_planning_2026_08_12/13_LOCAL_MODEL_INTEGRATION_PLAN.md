@@ -1,13 +1,13 @@
-# KrishokChat-4B GGUF Integration Plan
+# KrishokTech-4B GGUF Integration Plan
 
 ## Scope
 
-Enable the existing `krishokchat-4b` chat-model option gracefully. This is an engineering integration, not a research contribution. Do not implement it during planning, replace Gemini as the default, add a second QA pipeline, or alter safety, BM25 retrieval, generation grounding, verification, vision, sessions, or audit contracts.
+Enable the existing `krishoktech-4b` chat-model option gracefully. This is an engineering integration, not a research contribution. Do not implement it during planning, replace Gemini as the default, add a second QA pipeline, or alter safety, BM25 retrieval, generation grounding, verification, vision, sessions, or audit contracts.
 
 ## Existing Assets and Seams
 
-- GGUF candidate: `backend/ml_assets/gemma/krishokchat.f16.gguf`.
-- Existing public model ID: `krishokchat-4b`.
+- GGUF candidate: `backend/ml_assets/gemma/krishoktech.f16.gguf`.
+- Existing public model ID: `krishoktech-4b`.
 - Existing UI selector: `frontend/src/components/qa-panel.tsx`.
 - Existing request field: `backend/app/models/schemas.py`.
 - Existing model registry/wiring: `backend/app/application/container.py`.
@@ -18,7 +18,7 @@ Enable the existing `krishokchat-4b` chat-model option gracefully. This is an en
 ## Invariants
 
 1. `gemini` remains the default and continues to work unchanged.
-2. `krishokchat-4b` remains the only local-model ID across UI, API, audit, tests, and configuration.
+2. `krishoktech-4b` remains the only local-model ID across UI, API, audit, tests, and configuration.
 3. Model selection changes only the generation adapter. The safety classifier still runs first using its configured classifier adapter.
 4. Unavailable local serving disables the selector option or returns the existing controlled referral; it never falls back silently to a different model under the same ID.
 5. Both JSON and SSE routes use the same `QAPipeline` and produce equivalent final contracts.
@@ -31,10 +31,10 @@ Enable the existing `krishokchat-4b` chat-model option gracefully. This is an en
 
 - [ ] Record absolute/relative path, byte size, SHA-256, modification time, and Git tracking/ignore status.
 - [ ] Use installed llama.cpp GGUF tooling to record architecture, tensor types/quantization, context metadata, tokenizer, and embedded chat template.
-- [ ] Reconcile the `krishokchat.f16.gguf` filename with the stated 4-bit provenance. Do not rename or requantize during this task.
+- [ ] Reconcile the `krishoktech.f16.gguf` filename with the stated 4-bit provenance. Do not rename or requantize during this task.
 - [ ] Record the exact llama.cpp binary/version and commands that work on this machine.
 
-**Gate:** Stop if the file is unreadable, architecture is unsupported, metadata is inconsistent, or provenance cannot be tied to the fine-tuned KrishokChat checkpoint.
+**Gate:** Stop if the file is unreadable, architecture is unsupported, metadata is inconsistent, or provenance cannot be tied to the fine-tuned KrishokTech checkpoint.
 
 ### P0 - LM01: Reproduce Standalone Inference
 
@@ -49,10 +49,10 @@ Enable the existing `krishokchat-4b` chat-model option gracefully. This is an en
 
 - [ ] Confirm the current official Ollama custom-GGUF import procedure before editing setup files.
 - [ ] Create/review the minimal Modelfile or registration script that references the existing GGUF without duplicating it.
-- [ ] Register the stable tag `krishokchat-4b` and verify it through Ollama CLI and its local API.
+- [ ] Register the stable tag `krishoktech-4b` and verify it through Ollama CLI and its local API.
 - [ ] Keep llama.cpp direct serving out of the active app path unless root `AGENTS.md` is explicitly amended.
 
-**Gate:** `krishokchat-4b` is discoverable and answers through Ollama's OpenAI-compatible endpoint after a clean restart.
+**Gate:** `krishoktech-4b` is discoverable and answers through Ollama's OpenAI-compatible endpoint after a clean restart.
 
 ### P1 - LM03: Align Configuration and Health Contract
 
@@ -60,13 +60,13 @@ Enable the existing `krishokchat-4b` chat-model option gracefully. This is an en
 - [ ] Make local base URL, model tag, timeout, and optional API key configuration-driven; update `.env.example` comments.
 - [ ] Keep `/api/models` provider-aware and non-blocking; do not hardcode an unrelated health URL inside the route.
 - [ ] Report `available=true` only when the configured server is reachable and the exact stable model ID/tag exists.
-- [ ] Keep labels factual: `KrishokChat-4B` and `local fine-tuned model`; add the verified base/quantization wording only after LM00.
+- [ ] Keep labels factual: `KrishokTech-4B` and `local fine-tuned model`; add the verified base/quantization wording only after LM00.
 
 **Gate:** Local unavailability does not affect backend startup or Gemini/default requests.
 
 ### P2 - LM04: Wire Existing Selector Without Behavioral Changes
 
-- [ ] Reuse `generation_clients` and the existing `krishokchat-4b` request value; do not create a route or pipeline.
+- [ ] Reuse `generation_clients` and the existing `krishoktech-4b` request value; do not create a route or pipeline.
 - [ ] Preserve frontend selector layout and existing messages. Only fix availability/disabled behavior if required.
 - [ ] Ensure selected-model identity is present in the final response/audit diagnostics without exposing filesystem paths.
 - [ ] Ensure model selection cannot alter terminal safety decisions or retrieve before safety classification.
@@ -87,7 +87,7 @@ Enable the existing `krishokchat-4b` chat-model option gracefully. This is an en
 
 ## Optional Future Amendment: Direct llama.cpp Serving
 
-Direct llama.cpp serving is not required because the current architecture already supports the GGUF through Ollama. Consider it only if measured Ollama overhead or compatibility blocks LM02. Before implementation, amend the locked stack explicitly, verify llama.cpp's current OpenAI-compatible endpoint and streaming format, then add it as another infrastructure adapter/configuration choice behind the same `krishokchat-4b` public ID. Routes, schemas, UI IDs, and pipeline order must remain unchanged.
+Direct llama.cpp serving is not required because the current architecture already supports the GGUF through Ollama. Consider it only if measured Ollama overhead or compatibility blocks LM02. Before implementation, amend the locked stack explicitly, verify llama.cpp's current OpenAI-compatible endpoint and streaming format, then add it as another infrastructure adapter/configuration choice behind the same `krishoktech-4b` public ID. Routes, schemas, UI IDs, and pipeline order must remain unchanged.
 
 ## Agent Start Rule
 

@@ -1,8 +1,8 @@
 # Page Critique: Safety-Aware Guardrails (`/research/safety`)
 
 **Target Route**: `/research/safety`  
-**Source Code**: [frontend/src/app/(marketing)/research/safety/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/research/safety/page.tsx)  
-**Screenshot**: ![10_research_safety.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/10_research_safety.png)  
+**Source Code**: [frontend/src/app/(marketing)/research/safety/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/research/safety/page.tsx)  
+**Screenshot**: ![10_research_safety.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/10_research_safety.png)  
 
 ---
 

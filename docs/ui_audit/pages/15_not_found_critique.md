@@ -1,8 +1,8 @@
 # Page Critique: 404 Page Not Found (`/non-existent-page`)
 
 **Target Route**: `/non-existent-page`  
-**Source Code**: [frontend/src/app/not-found.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/not-found.tsx)  
-**Screenshot**: ![15_not_found.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/15_not_found.png)  
+**Source Code**: [frontend/src/app/not-found.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/not-found.tsx)  
+**Screenshot**: ![15_not_found.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/15_not_found.png)  
 
 ---
 

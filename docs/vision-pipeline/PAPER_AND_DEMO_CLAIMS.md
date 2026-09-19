@@ -4,7 +4,7 @@ This file prevents the demo narrative from drifting beyond the verified artifact
 
 ## Defensible claim today
 
-> KrishokChat implements a modular, safety-aware multimodal crop-disease advisory
+> KrishokTech implements a modular, safety-aware multimodal crop-disease advisory
 > workflow for Bengali agricultural support. An image is quality-checked, classified into
 > a crop, routed to a crop-specific disease classification model, matched to Bengali
 > disease knowledge, and passed through the same grounded retrieval/generation/verifier

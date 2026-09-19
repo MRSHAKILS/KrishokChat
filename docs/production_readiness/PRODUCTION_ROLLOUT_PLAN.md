@@ -1,11 +1,11 @@
-# KrishokChat — Production Rollout Plan
+# KrishokTech — Production Rollout Plan
 
 **Status:** ADVISORY PLAN — nothing here changes code until a task executes it.
 **Date:** 2026-08-17
 **Audience:** the researcher (approver) + future executing agents.
 **Companion docs:** `docs/production_readiness_roadmap.md` (Tier 0/1/2 system, amendment process), `docs/production_readiness/README.md` (execution rules), `docs/business_model_implementation_plan.md`.
 
-> This plan answers: *"if we take KrishokChat to production now, what do we do, one by one?"* All internet research was done today (Aug 2026) by five parallel research agents; key sources are cited inline. Items in **Phase 0** are local-only, additive, reversible, need **no researcher intervention**, and respect every hard rule in `AGENTS.md`. Phases 1–3 need your decisions (Section 7).
+> This plan answers: *"if we take KrishokTech to production now, what do we do, one by one?"* All internet research was done today (Aug 2026) by five parallel research agents; key sources are cited inline. Items in **Phase 0** are local-only, additive, reversible, need **no researcher intervention**, and respect every hard rule in `AGENTS.md`. Phases 1–3 need your decisions (Section 7).
 
 ---
 
@@ -40,7 +40,7 @@
 - **No SSE heartbeat** in `/api/qa/stream` — every proxy hop with an idle timeout (Next proxy `proxyTimeout: 300000`, Caddy/Nginx later) can drop a quiet generation. (Research: heartbeat ≤15–30s is mandatory once proxies sit in front — tianpan.co 2026-06.)
 - No consistent JSON error envelope; FastAPI defaults can leak stack traces when `debug` is mis-set.
 - `/docs`, `/redoc`, `/openapi.json` always exposed.
-- **Local lane has no concurrency cap** — several parallel `model=krishokchat-4b` requests would thrash CPU (research: CPU cannot sustain >2–4 concurrent generations at 5 tok/s).
+- **Local lane has no concurrency cap** — several parallel `model=krishoktech-4b` requests would thrash CPU (research: CPU cannot sustain >2–4 concurrent generations at 5 tok/s).
 - Demo cache key lacks corpus/model versioning (research: versioned cache namespace — invalidate on corpus rebuild).
 - `.env.example` is good but missing newer fields (SOIL_RELEASE_DIR, ML_ASSETS_DIR, RAG_* paths, SUPABASE_JWKS_URL, DOCS_ENABLED, READINESS_STRICT, LOCAL_LLM_MAX_CONCURRENCY, CORPUS_VERSION, …).
 - No dependency audit artifacts (pip-audit / npm audit), 10 stray `print(` in backend.
@@ -83,7 +83,7 @@ Every item: additive, single bounded commit, default behavior unchanged, verifie
 - Files: `main.py`, `.env.example` + test.
 
 ### P0-6  Local-lane concurrency cap — ✅ `98e77b9` (test_local_lane_concurrency.py; wait-queued, not 429)
-- `asyncio.Semaphore(LOCAL_LLM_MAX_CONCURRENCY=2)` around local generations only (model=krishokchat-4b); saturated requests get `429` + `Retry-After` (or wait-queued — pick simplest: 429). Remote lane untouched.
+- `asyncio.Semaphore(LOCAL_LLM_MAX_CONCURRENCY=2)` around local generations only (model=krishoktech-4b); saturated requests get `429` + `Retry-After` (or wait-queued — pick simplest: 429). Remote lane untouched.
 - Files: `qa_pipeline.py`/container wiring + config + tests.
 
 ### P0-7  Cache key versioning — ✅ `19fc060`
@@ -104,7 +104,7 @@ Every item: additive, single bounded commit, default behavior unchanged, verifie
 ### P0-11  `print(` → logger cleanup (10 found) — ✅ no-op, justified (all 10 live in legacy CLI build/smoke scripts under `services/advisory/`; request-path code is logger-only; AGENTS.md §5.1 forbids reworking shims)
 - Replace with `logger` where they sit in app code (scripts may keep them).
 
-### P0-12  Production run scripts + README section — ✅ `c4d6549` (`scripts/start_prod.ps1` + `logrotate.krishokchat` + README "Production Deployment")
+### P0-12  Production run scripts + README section — ✅ `c4d6549` (`scripts/start_prod.ps1` + `logrotate.krishoktech` + README "Production Deployment")
 - `scripts/start_prod.ps1` (uvicorn with `--proxy-headers`, `--timeout-graceful-shutdown 30`, `--limit-concurrency`), README "Running in production" section, log rotation notes (logrotate sample for JSONL/SQLite). Not executed here — ready for Phase 1.
 
 ### P0-13  Retention policy doc — ✅ `c4d6549` (`docs/production_readiness/retention_policy.md`; `AUDIT_RETENTION_DAYS=90`, app never auto-deletes)

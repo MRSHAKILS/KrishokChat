@@ -12,7 +12,7 @@ The farmer has a feature phone, not a smartphone. The village has 2G that drops 
 
 Meanwhile the one number that is free and always works is printed on fertilizer bags across the country: **16123**, the national Krishi Call Center. And the one channel that reaches every phone ever sold fits 160 characters.
 
-KrishokChat treats these facts as architecture: spend nothing when a rule suffices, survive disconnection by construction, compress advice into an SMS without inventing it, and when the system cannot speak safely, hand the farmer to a human — by name and number, not by error message.
+KrishokTech treats these facts as architecture: spend nothing when a rule suffices, survive disconnection by construction, compress advice into an SMS without inventing it, and when the system cannot speak safely, hand the farmer to a human — by name and number, not by error message.
 
 **Feel-line candidate:**
 
@@ -70,7 +70,7 @@ Farmer.Chat rides WhatsApp/Telegram (needs mobile data + app). KrishokBondhu rid
 
 ---
 
-## 4. What KrishokChat does out of necessity
+## 4. What KrishokTech does out of necessity
 
 ```text
 every turn enters the ladder:
@@ -124,7 +124,7 @@ Do **not** claim:
 
 Defensible wording:
 
-> KrishokChat treats cost and connectivity as reliability design: a five-tier ladder resolves safety and fact turns in ~0.5ms with zero LLM calls (7.8% of 1,000 farmer queries today, measured; savings modeled at 7.79% and disclosed as modeled), every turn degrades through KB fallback when the LLM is unreachable, and the same decided answer renders as full advisory, 160-character SMS, or 16123 referral — with the SMS field-survival rate under active measurement rather than assumed.
+> KrishokTech treats cost and connectivity as reliability design: a five-tier ladder resolves safety and fact turns in ~0.5ms with zero LLM calls (7.8% of 1,000 farmer queries today, measured; savings modeled at 7.79% and disclosed as modeled), every turn degrades through KB fallback when the LLM is unreachable, and the same decided answer renders as full advisory, 160-character SMS, or 16123 referral — with the SMS field-survival rate under active measurement rather than assumed.
 
 ---
 

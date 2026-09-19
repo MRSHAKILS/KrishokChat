@@ -1,4 +1,4 @@
-# Definitive Paper Writing Outline: KrishokChat for CEA
+# Definitive Paper Writing Outline: KrishokTech for CEA
 
 ## Target: *Computers and Electronics in Agriculture* (Elsevier, IF ~7.7)
 
@@ -7,7 +7,7 @@
 ## PAPER IDENTITY
 
 **Final Title:**
-> *KrishokChat: A Fail-Closed, Detection-Gated Expert System for Safety-Critical Agricultural Advisory under Low-Resource Deployment Constraints*
+> *KrishokTech: A Fail-Closed, Detection-Gated Expert System for Safety-Critical Agricultural Advisory under Low-Resource Deployment Constraints*
 
 **One-Sentence Pitch:**
 > We present a deployable expert system that guarantees 0% hazardous advisory delivery across 25 evaluation layers by combining detection-gated deterministic routing, offline-first caching, relational verification, and SMS fallback—achieving 61.5% zero-LLM resolution, 91.4% advisory delivery under rural 2G packet loss, and 2.17 Crore BDT annual national savings.
@@ -77,7 +77,7 @@ PROOF:    25 empirical layers, 0.0% hazard across ALL conditions
 - **C6:** National-scale economic projection: 2.17 Crore BDT annual savings (75.95% budget reduction)
 
 **Para 5 — Relationship to Prior Work:**
-- Paper 1: `paper/done papers/KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf` — dataset + SFT benchmark, with the documented hallucination floor
+- Paper 1: `paper/done papers/KrishokTech__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf` — dataset + SFT benchmark, with the documented hallucination floor
 - Paper 2: `paper/done papers/AgriTrust.pdf` — retrieval diagnosis and dialect failure analysis
 - Paper 3 (THIS): The Expert System → solves both via architecture
 
@@ -209,7 +209,7 @@ PROOF:    25 empirical layers, 0.0% hazard across ALL conditions
 - Table 3: E2 Misbinding (10,000 cases) — 0.0% hazard vs 80.0% lexical
 - Table 4: E3 Slot Ablation — dosage bounds most critical (+31.6pp)
 - Table 5: E5 Counterfactual Binding — CBC = 1.0000
-- **Key sentence:** "Across 25 evaluation layers and 45,000+ total evaluations, KrishokChat achieves exactly 0.0% dangerous acceptance."
+- **Key sentence:** "Across 25 evaluation layers and 45,000+ total evaluations, KrishokTech achieves exactly 0.0% dangerous acceptance."
 
 **5.2 Detection-Gated Routing: Dialect Immunity**
 - Table 6: E17 per-register Hit@1 gains (Regional: +36.6pp, Banglish: +39.7pp)
@@ -233,7 +233,7 @@ PROOF:    25 empirical layers, 0.0% hazard across ALL conditions
 - Table 13: E9 cost comparison ($0.1798/1k vs $2.30/1k commercial)
 - Table 14: E20 national projection (96M queries/year, 16M farmers)
   - Commercial: 2.86 Crore BDT
-  - KrishokChat: 0.69 Crore BDT
+  - KrishokTech: 0.69 Crore BDT
   - **Savings: 2.17 Crore BDT ($180k USD), 75.95% reduction**
 - Table 15: E24 growth loop (2 facts, 18 minutes → 100% cluster closure, +55 queries)
 - **Key sentence:** "At national scale (16M farmers, 96M queries/year), the architecture yields 2.17 Crore BDT in annual savings, transforming Agri-AI from research prototype to economically viable public infrastructure."
@@ -290,7 +290,7 @@ Restate the three problems solved:
 3. **Economics:** 61.5% zero-LLM resolution; $0.0767/1k queries; 2.17 Crore BDT national savings
 
 Final sentence:
-> "KrishokChat demonstrates that safety-critical agricultural AI is not a question of model scale or generation quality. It is a question of systems engineering: deterministic routing, typed verification, fail-closed abstention, and economic viability. The farmer does not need a better language model. The farmer needs a system that will never poison them."
+> "KrishokTech demonstrates that safety-critical agricultural AI is not a question of model scale or generation quality. It is a question of systems engineering: deterministic routing, typed verification, fail-closed abstention, and economic viability. The farmer does not need a better language model. The farmer needs a system that will never poison them."
 
 ---
 
@@ -303,7 +303,7 @@ Final sentence:
 | Fig 3 | Graph | Knowledge Graph traversal (3-hop example) | §3.3 |
 | Fig 4 | Plot | Network degradation: Cloud vs Cache delivery curves | §5.3 |
 | Fig 5 | Plot | Coverage vs. Register: Text-first vs Detection-gated | §5.2 |
-| Fig 6 | Plot | Risk-Coverage frontier (KrishokChat vs Conformal vs Raw) | §5.1 |
+| Fig 6 | Plot | Risk-Coverage frontier (KrishokTech vs Conformal vs Raw) | §5.1 |
 | Tab 1 | Matrix | Competitive landscape (updated) | §2 |
 | Tab 2 | Data | ClaimSafe-BN dataset splits | §4.2 |
 | Tab 3 | Results | E2 Misbinding (10k cases) | §5.1 |

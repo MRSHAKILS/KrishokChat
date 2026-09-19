@@ -1,7 +1,7 @@
 # Research Lane Memory — Product Improvement Roadmap 2026
 
 ## Project State
-KrishokChat product lane (post-auth). Auth + premium saved-history SHIPPED and
+KrishokTech product lane (post-auth). Auth + premium saved-history SHIPPED and
 pushed (commits 6290eef, af0659e). Next: execute the 5-phase improvement
 roadmap (`docs/research/ROADMAP_2026.md`) before the investor demo.
 

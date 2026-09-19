@@ -58,7 +58,7 @@ a code change). Both are design requirements below, not aspirations.
 **Worst case today: 3 LLM calls per farmer question** (safety + rewrite +
 generation). Best case on a deterministic refusal: **0**. Provider config:
 `llm_provider=openrouter`, `openrouter_model=google/gemini-2.5-flash-lite`,
-`gemini_model=gemini-2.5-flash-lite`, local lane `krishokchat-4b` via
+`gemini_model=gemini-2.5-flash-lite`, local lane `krishoktech-4b` via
 llama-server, ASR `groq/whisper-large-v3-turbo`. Failover chain + circuit
 breaker exist (T0-06). `cost_estimate` is recorded but **null** — there is no
 price table yet.

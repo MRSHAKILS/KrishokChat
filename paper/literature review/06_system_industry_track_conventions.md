@@ -12,7 +12,7 @@
 - **Evaluation is mandatory:** ACL 2026 CFP states "submissions that fail to provide any form of evaluation may be desk rejected" ([2026 CFP](https://2026.aclweb.org/calls/system_demonstration/)).
 - **Numbers:** 2025: 187 submitted, 178 valid, 64 accepted (34.22%); 2026: 227 submitted, 215 valid, 85 accepted (37.45%). Best Demo 2026: olmOCR.
 - **2026 accepted-demo profile:** an explicit "LLM safety tooling" cluster — DialogGuard (multi-agent psychosocial safety evaluation), RiskLab, Fast-MIA membership inference — plus agent instrumentation (PROTEA) and domain QA (GovScape, ClinQueryAgent).
-- **Closest accepted analogue:** *My Climate CoPilot: A Question Answering System for Climate Adaptation in Agriculture* ([2025.acl-demo.7](https://aclanthology.org/2025.acl-demo.7/)) — evidence-grounded RAG QA for farmer advisors, evaluated by 50 domain experts, with automatic evaluation built in. **This is the template for KrishokChat.**
+- **Closest accepted analogue:** *My Climate CoPilot: A Question Answering System for Climate Adaptation in Agriculture* ([2025.acl-demo.7](https://aclanthology.org/2025.acl-demo.7/)) — evidence-grounded RAG QA for farmer advisors, evaluated by 50 domain experts, with automatic evaluation built in. **This is the template for KrishokTech.**
 
 ### ACL / NAACL / EMNLP Industry Tracks
 - **Format:** 6 pages; references, limitations, ethics unlimited. EMNLP 2025: mandatory "Limitations" section, desk-reject without it ([EMNLP 2025 CFP](https://2025.emnlp.org/calls/industry_track/)). ACL 2026 industry does not use ARR — direct OpenReview, deadline Feb 14, 2026 ([ACL 2026 CFP](https://2026.aclweb.org/calls/industry_track/)).
@@ -53,7 +53,7 @@ Applications track judged on systems-level innovation, novelty of domain, compar
 
 The "just another LLM wrapper" critique is documented reviewer behavior: the 2026 study *Reporting and Reviewing LLM-Integrated Systems in HCI* ([arXiv 2602.05128](https://arxiv.org/html/2602.05128v1)) interviewed 18 authors/reviewers and found: chatbot-shaped UIs, unpositioned work, and unjustified LLM use trigger the label; acceptance now requires component-level evals on 30–100 representative inputs. Authors who survive reviewers (a) de-emphasize LLM framing when the system is the contribution, (b) center a niche domain, (c) report exact model names/versions and an "engineering methodology," (d) position against pre-LLM literature. Track CFPs encode the same norm: KDD ADS and WACV relocate novelty to "application domain, engineering design, usability"; ACL demo novelty is judged on "the approach/technology on which this system is based." ACL 2026 industry confirms the base RAG pipeline is a commodity — accepted papers differentiate on evaluation design and deployment realities.
 
-## 4. Concrete gaps KrishokChat can exploit
+## 4. Concrete gaps KrishokTech can exploit
 
 1. **No Bengali agricultural-safety dataset at tier-1 venues.** The ACL 2025 demo volume contains one agriculture-QA system (My Climate CoPilot, English, expert-facing); the nearest Bengali system (KrishokBondhu) has no safety layer and no dialect coverage. A 20,112-record, 6-dialect safety refusal/re-query dataset is unmatched in any 2025–2026 demo/industry volume.
 2. **Safety-evaluation tooling is a recognized category, but only for English/enterprise.** EMNLP 2025 accepted SAGE; ACL 2026 demos accepted DialogGuard and RiskLab. None addresses low-resource agri-advisory refusal behavior or chemical/self-harm escalation routing.

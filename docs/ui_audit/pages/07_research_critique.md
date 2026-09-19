@@ -1,8 +1,8 @@
 # Page Critique: Research Overview (`/research`)
 
 **Target Route**: `/research`  
-**Source Code**: [frontend/src/app/(marketing)/research/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/research/page.tsx)  
-**Screenshot**: ![07_research.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/07_research.png)  
+**Source Code**: [frontend/src/app/(marketing)/research/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/research/page.tsx)  
+**Screenshot**: ![07_research.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/07_research.png)  
 
 ---
 

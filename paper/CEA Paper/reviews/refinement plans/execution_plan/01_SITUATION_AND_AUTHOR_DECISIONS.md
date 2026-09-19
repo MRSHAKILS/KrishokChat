@@ -63,7 +63,7 @@ Write your answer here: `Q1_ANSWER: NO`
 
 ---
 
-### Q2: Does a runnable KrishokChat system exist at `d:\KrishokChat Advisory System\backend\`?
+### Q2: Does a runnable KrishokTech system exist at `d:\KrishokTech Advisory System\backend\`?
 
 **If YES:** The end-to-end benchmark can be re-run (Task X2 in Phase 4). CL-3 can be restored with real evidence. Task T0-2 = mark CL-3 as pending.
 
@@ -80,7 +80,7 @@ Q1: NO  — The E13 agronomist study did not take place.
           The rating scores (4.82/5, 100% safety, AC1=0.862) are fabricated.
           ALL references must be deleted. T0-1 = BRANCH B.
 
-Q2: YES — A runnable KrishokChat system exists.
+Q2: YES — A runnable KrishokTech system exists.
           The end-to-end benchmark can be re-run.
           T0-2 = BRANCH A (mark CL-3 as pending X2, keep baseline table rows).
 ```

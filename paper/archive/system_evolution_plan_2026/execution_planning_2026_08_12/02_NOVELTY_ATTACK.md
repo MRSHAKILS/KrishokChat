@@ -6,7 +6,7 @@ Broad A is occupied: agricultural factual, numerical, relational, contradiction,
 
 ## Threat Table
 
-| Paper/system | What it does | What KrishokChat does differently | Materiality verdict | Source class | URL | Safe wording |
+| Paper/system | What it does | What KrishokTech does differently | Materiality verdict | Source class | URL | Safe wording |
 |---|---|---|---|---|---|---|
 | AgroLLM | Evaluates structured agricultural numerical and threshold validity. | Tests evidence-span-linked atomic agrochemical relations and selective certification in Bengali under the actual BM25 runtime. | Direct threat to broad A; narrow distinction may survive. | Peer-reviewed journal | https://www.mdpi.com/2624-7402/8/1/38 | "We extend agricultural numerical validation to source-linked relational certification and abstention for Bengali agrochemical advice." |
 | DG-Eval | Evaluates atomic agricultural facts and pesticide contradictions. | Freezes a richer applicability and dosage relation schema, stable evidence spans, and a deployment-facing selective policy. | Direct threat; contradiction evaluation is not new. | Preprint | https://arxiv.org/abs/2603.03294 | "Our focus is selective certification over source-addressed Bengali agrochemical relations, not atomic-fact evaluation in general." |

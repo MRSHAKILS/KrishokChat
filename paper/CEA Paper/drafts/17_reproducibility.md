@@ -1,7 +1,7 @@
 # Section 17: Reproducibility & Artifact Availability (Draft Skeleton)
 
 ## 17.1 Open Research Artifacts & Cryptographic Hashes
-- Public code repository: `https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System`.
+- Public code repository: `https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System`.
 - Frozen dataset SHA-256 digests and model checkpoint hashes.
 - Standardized environment lockfiles and container configuration.
 

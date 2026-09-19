@@ -16,7 +16,7 @@
   - `L2`: + Dense FAISS Retrieval (Hybrid RAG)
   - `L3`: + Prompted Safety Guardrail (Gemini-2.5-Flash-Lite)
   - `L4`: + SQLite Fact Base / Deterministic Routing (5-Tier Ladder)
-  - `L5`: + 11-Slot Single-Record BAA (Full Proposed KrishokChat)
+  - `L5`: + 11-Slot Single-Record BAA (Full Proposed KrishokTech)
 - **Trace Log:** 100% real completions, prompts, and classification tags saved in `traces.jsonl`.
 - **Exact Runner Script:** `scripts/run_e34_ablation_eval.py`
 - **Output Formats:** `results.yaml` & `results.json`

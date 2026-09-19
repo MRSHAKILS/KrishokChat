@@ -1,8 +1,8 @@
 # Page Critique: Datasets & Research Data (`/data`)
 
 **Target Route**: `/data`  
-**Source Code**: [frontend/src/app/(marketing)/data/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/data/page.tsx)  
-**Screenshot**: ![06_data.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/06_data.png)  
+**Source Code**: [frontend/src/app/(marketing)/data/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/data/page.tsx)  
+**Screenshot**: ![06_data.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/06_data.png)  
 
 ---
 

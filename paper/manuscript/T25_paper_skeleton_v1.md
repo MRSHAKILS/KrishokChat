@@ -38,7 +38,7 @@
 | Vision and multimodal routing | Crop-disease vision literature | Classification-only routing norms | Source-grounded treatment evidence in vision fallback (secondary scope; see `05_vision_crop_disease.md`) |
 | Systems evidence and compute | Industry-track conventions | Component evaluation, latency accounting, artifact release norms | — |
 
-**Closest-system matrix (Table 1):** external facts trace to the literature package; **re-validate every URL before submission** `TODO (G0)`. Rows: Farmer.Chat, KrishokBondhu, Cross-lingual Bengali Agricultural RAG, My Climate CoPilot, DG-Eval, RAGChecker/RAGAS, ClinicBot/MedRAGChecker, BhasaBodh/BUNO, current KrishokChat runtime (`02_LANDSCAPE_GAPS_COMPETITIVE.md:32-46`).
+**Closest-system matrix (Table 1):** external facts trace to the literature package; **re-validate every URL before submission** `TODO (G0)`. Rows: Farmer.Chat, KrishokBondhu, Cross-lingual Bengali Agricultural RAG, My Climate CoPilot, DG-Eval, RAGChecker/RAGAS, ClinicBot/MedRAGChecker, BhasaBodh/BUNO, current KrishokTech runtime (`02_LANDSCAPE_GAPS_COMPETITIVE.md:32-46`).
 
 **Positioning statement (frozen):** the paper claims a measured relation-verification and abstention protocol for Bengali agricultural advice, paired with an intent-preserving dialect normalization evaluation. It does **not** claim novelty from multiple agents, a trace UI, generic RAG, or classification-only vision (`02_LANDSCAPE_GAPS_COMPETITIVE.md:48-50`; forbidden claims F08 in `12_CLAIM_LEDGER.md`).
 

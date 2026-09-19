@@ -1,4 +1,4 @@
-# KrishokChat Improvement Roadmap 2026 — Post-Auth Product Lane
+# KrishokTech Improvement Roadmap 2026 — Post-Auth Product Lane
 
 Date: 2026-08-14. Source of truth for decisions: `docs/research/CRITIC_GAPS_2026.md`
 (adversarial review of 19 candidates from `docs/research/LITERATURE_SCOUT_2026.md`

@@ -1,8 +1,8 @@
 # Page Critique: System Analytics & Safety Audit Dashboard (`/analytics`)
 
 **Target Route**: `/analytics`  
-**Source Code**: [frontend/src/app/(app)/analytics/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28app%29/analytics/page.tsx)  
-**Screenshot**: ![04_analytics.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/04_analytics.png)  
+**Source Code**: [frontend/src/app/(app)/analytics/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28app%29/analytics/page.tsx)  
+**Screenshot**: ![04_analytics.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/04_analytics.png)  
 
 ---
 
@@ -14,7 +14,7 @@ The Analytics page acts as the safety metrics and live audit trail dashboard. It
 ## 🔍 Detailed Analysis & Critique
 
 ### 1. Navigation Visibility Bug
-- **Bug**: `/analytics` is completely missing from the global navbar ([navbar.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/components/navbar.tsx)). Evaluators examining the headline safety feature have no direct header link to access this dashboard.
+- **Bug**: `/analytics` is completely missing from the global navbar ([navbar.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/components/navbar.tsx)). Evaluators examining the headline safety feature have no direct header link to access this dashboard.
 - **Fix**: Add `/analytics` ("পরিসংখ্যান") to the desktop navigation header.
 
 ### 2. Audit Trail Log Table Presentation

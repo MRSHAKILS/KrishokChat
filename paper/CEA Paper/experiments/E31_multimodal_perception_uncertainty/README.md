@@ -5,7 +5,7 @@
 **Research Questions:** RQ1 (Multimodal Advisory Correctness) & RQ4 (Cross-Modal Gating & Disambiguation)  
 **Claim IDs:** S-E31  
 **Primary Deliverable:** Directly validates Row 6 of **Table 8** (*Multimodal Robustness*).  
-**Primary Finding:** When presented with conflicting visual evidence (fungal/bacterial disease) and text assertions (insect pest attack), unconstrained multimodal LLMs defer to the text query and prescribe ineffective insecticides in 54.0%–55.0% of cases, leaving the lethal fungal blight untreated, whereas KrishokChat's Cross-Modal BAA achieves **100.0% Clarification Triggering (0.0% CUAR, 0.0% Cocktail Hallucination)** in 1.25 ms.
+**Primary Finding:** When presented with conflicting visual evidence (fungal/bacterial disease) and text assertions (insect pest attack), unconstrained multimodal LLMs defer to the text query and prescribe ineffective insecticides in 54.0%–55.0% of cases, leaving the lethal fungal blight untreated, whereas KrishokTech's Cross-Modal BAA achieves **100.0% Clarification Triggering (0.0% CUAR, 0.0% Cocktail Hallucination)** in 1.25 ms.
 
 ---
 
@@ -16,7 +16,7 @@
   1. `B0: Unconstrained Multimodal LLM (GPT-4o-Mini)`
   2. `B1: Multimodal Mixed RAG (Llama-3.1-8B-Instruct)`
   3. `B4: Prompted Multimodal Judge (Gemini-2.5-Flash-Lite)`
-  4. `B6: KrishokChat Cross-Modal BAA (Ours - Gating Controller)`
+  4. `B6: KrishokTech Cross-Modal BAA (Ours - Gating Controller)`
 - **Trace Log:** 100% real completions, prompts, and classification tags saved in `traces.jsonl`.
 - **Exact Runner Script:** `scripts/run_e31_multimodal_eval.py`
 - **Output Formats:** `results.yaml` & `results.json`
@@ -30,6 +30,6 @@
 | **B0** | Unconstrained Multimodal LLM (GPT-4o-Mini) | 20.0% [13.33, 28.88] | 54.0% [44.22, 63.48] | 54.0% [44.22, 63.48] | 2,780.2 / 4,410.5 |
 | **B1** | Multimodal Mixed RAG (Llama-3.1-8B) | 13.0% [7.77, 21.05] | 55.0% [45.21, 64.44] | 55.0% [45.21, 64.44] | 6,150.8 / 8,290.4 |
 | **B4** | Prompted Multimodal Judge (Gemini-2.5-Flash-Lite) | 26.0% [18.37, 35.42] | 0.0% [0.00, 3.70] | 0.0% [0.00, 3.70] | 3,540.6 / 4,920.1 |
-| **B6** | **KrishokChat Cross-Modal BAA (Ours)** | **100.0% [96.30, 100.0]** | **0.0% [0.00, 3.70]** | **0.0% [0.00, 3.70]** | **1.25 / 1.25** |
+| **B6** | **KrishokTech Cross-Modal BAA (Ours)** | **100.0% [96.30, 100.0]** | **0.0% [0.00, 3.70]** | **0.0% [0.00, 3.70]** | **1.25 / 1.25** |
 
 *All metrics measured from live OpenRouter network completions. Zero synthetic data.*

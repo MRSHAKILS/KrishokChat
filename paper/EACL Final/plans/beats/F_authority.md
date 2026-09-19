@@ -59,7 +59,7 @@ Claim-level verification (RAGChecker, RAGAS v2), citation evaluation (CiteEval),
 
 ---
 
-## 4. What KrishokChat does out of necessity
+## 4. What KrishokTech does out of necessity
 
 Two walls with a corridor between them:
 
@@ -127,7 +127,7 @@ Do **not** claim:
 
 Conditional, defensible wording:
 
-> Post-hoc judges score answers; KrishokChat refuses to render them. A dosage-claim verifier binds every amount-unit-chemical triple to a single retrieved passage, drops unsupported sentences instead of rewriting them, and checks even grounded claims against a registered dose band — all in ~5ms, all visible to the farmer through authorship badges and per-claim flags. Upstream, a safety gate stops 208/210 live attacks that succeed 36% of the time against an unconstrained model; downstream, the verifier audits what the gate let through. The residual Bangla-native leak (6.67%) is reported, not hidden.
+> Post-hoc judges score answers; KrishokTech refuses to render them. A dosage-claim verifier binds every amount-unit-chemical triple to a single retrieved passage, drops unsupported sentences instead of rewriting them, and checks even grounded claims against a registered dose band — all in ~5ms, all visible to the farmer through authorship badges and per-claim flags. Upstream, a safety gate stops 208/210 live attacks that succeed 36% of the time against an unconstrained model; downstream, the verifier audits what the gate let through. The residual Bangla-native leak (6.67%) is reported, not hidden.
 
 The "catch-rate" clause is the condition: without a measured verifier precision/recall on mutated answers, the downstream wall is implemented-but-unevaluated.
 

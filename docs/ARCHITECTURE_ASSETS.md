@@ -58,12 +58,12 @@ All checkpoints verified as `task: classify` (see `verification_report_live.md` 
 
 | Asset | Path | Size | Git | Provenance | Note |
 |-------|------|------|-----|------------|------|
-| **Canonical GGUF** | `gemma/krishokchat.f16.gguf` | 1.36 GB | **ignored** (`*.gguf`) | SHA256 `1D627304F74520284844812600F5F0E172240C8A23C88126BA7D1C1F73B84673` | Truncated â€” **must not be served** (see `PROJECT_HANDOFF.md` + amendment 14) |
-| **Alias** | `gemma/model.gguf` | 1.36 GB | ignored | **Hardlink** to `krishokchat.f16.gguf` (2 entries, 0 extra space, H2) | `config.py:gguf_path` default |
+| **Canonical GGUF** | `gemma/krishoktech.f16.gguf` | 1.36 GB | **ignored** (`*.gguf`) | SHA256 `1D627304F74520284844812600F5F0E172240C8A23C88126BA7D1C1F73B84673` | Truncated â€” **must not be served** (see `PROJECT_HANDOFF.md` + amendment 14) |
+| **Alias** | `gemma/model.gguf` | 1.36 GB | ignored | **Hardlink** to `krishoktech.f16.gguf` (2 entries, 0 extra space, H2) | `config.py:gguf_path` default |
 | **Modelfile (canonical)** | `gemma/Modelfile` | 1.9 KB | tracked | `FROM ./model.gguf`, hardlinked to `scripts/Modelfile` (H4) | `scripts/Modelfile` is SSOT |
-| **Modelfile variant** | `gemma/Modelfile.krishokchat` | 2.5 KB | tracked | `FROM gemma3:4b`, archived variant | Not used by `tools/ops/local_model.ps1` |
+| **Modelfile variant** | `gemma/Modelfile.krishoktech` | 2.5 KB | tracked | `FROM gemma3:4b`, archived variant | Not used by `tools/ops/local_model.ps1` |
 | **Raw checkpoint** | `gemma/raw/checkpoint-4020/` | ~300 MB | ignored (`gemma/raw/`) | LoRA adapter | â€” |
-| **Verified runtime** | â€” | â€” | â€” | External Q4_K_M base + LoRA via `tools/ops/start_krishokchat_local.ps1` (amendment 14), **not** the truncated `f16` | Scientific perf unevaluated |
+| **Verified runtime** | â€” | â€” | â€” | External Q4_K_M base + LoRA via `tools/ops/start_krishoktech_local.ps1` (amendment 14), **not** the truncated `f16` | Scientific perf unevaluated |
 
 ## 5. Advisory Knowledge Map â€” `backend/ml_assets/advisory/`
 
@@ -80,7 +80,7 @@ Grounded in 11 institutions, used by vision pipeline for treatment advice (via `
 | Asset | Path | Size | Git |
 |-------|------|------|-----|
 | **Cached responses** | `demo-assets/cached_responses.json` | 1.6 MB | tracked (M in soil branch) |
-| **Demo media (canonical)** | `demo-assets/krishokchat_demo.{gif,mp4,webp}` | 20.7 MB + 1.0 MB + 11 KB | **tracked** (H3 deduped, hardlinked to `frontend/public/`) |
+| **Demo media (canonical)** | `demo-assets/krishoktech_demo.{gif,mp4,webp}` | 20.7 MB + 1.0 MB + 11 KB | **tracked** (H3 deduped, hardlinked to `frontend/public/`) |
 | **Soil thumbnails** | `demo-assets/images/soil/` + `thumbnails/` | ? | tracked |
 
 `CORPUS_VERSION=2026-08` in cache keys (P0-7) â€” bump after index rebuild.
@@ -89,7 +89,7 @@ Grounded in 11 institutions, used by vision pipeline for treatment advice (via `
 
 * **Tracked (small, reproducible):** `*.json`, `*.pkl` (<20 MB), `*.faiss` (8.7 MB), `*.md`, `*.jsonl`, `*.jpg` thumbnails. Large binaries are **gitignored** and verified via `verification_report_live.md` / `PHASE0_AUDIT_REPORT.md`.
 * **Ignored (large, not for git):** `*.pt`, `*.onnx`, `*.gguf`, `*.safetensors`, `*.faiss` (if >50 MB), `dataset/raw`, `gemma/raw/`, `backend/data/`, `*.log`, `__pycache__/`, `.pytest_cache/`.
-* **Hardlinks (H2-H3):** `model.gguf â†” krishokchat.f16.gguf` (2 entries), `demo-assets â†” frontend/public` demo media (2 entries each) â€” zero extra working-tree space.
+* **Hardlinks (H2-H3):** `model.gguf â†” krishoktech.f16.gguf` (2 entries), `demo-assets â†” frontend/public` demo media (2 entries each) â€” zero extra working-tree space.
 * **Verification:** `uv run python -m compileall -q app` + `uv run pytest` + `python backend/scripts/replay_golden.py` (50/50) + `GET /health` + `GET /readyz` after every asset move.
 
 ## 8. Pointers

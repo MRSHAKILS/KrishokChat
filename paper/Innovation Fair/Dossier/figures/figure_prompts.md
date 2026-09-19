@@ -1,4 +1,4 @@
-# Figure & Image Generation Prompts — KrishokChat Innovation Dossier
+# Figure & Image Generation Prompts — KrishokTech Innovation Dossier
 
 Every visual referenced by `main.tex` is listed here. The LaTeX compiles today with
 **blank placeholder boxes** (via `\IfFileExists`). When you generate/drop the real
@@ -44,7 +44,7 @@ overlaid impression of a phone screen, quiet and confident, room for one line of
 
 ## Real product screenshots (`screenshots/`)
 
-Capture from the live KrishokChat UI. Do **not** fabricate.
+Capture from the live KrishokTech UI. Do **not** fabricate.
 
 | File | What to capture |
 |------|-----------------|

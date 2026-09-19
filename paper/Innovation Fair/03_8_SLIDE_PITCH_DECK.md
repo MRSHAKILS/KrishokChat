@@ -1,6 +1,6 @@
 # Bangladesh Innovation Fair 2026 — 8-Slide Pitch Deck Specification
 
-**Project Title:** KrishokChat — Bengali Agricultural Intelligence for Farmers, Extension and Rural Communities  
+**Project Title:** KrishokTech — Bengali Agricultural Intelligence for Farmers, Extension and Rural Communities  
 **Format:** 16:9 Widescreen Presentation (PPTX / Marp / Web Slides)  
 **Tone:** Field-Grounded, Rigorous, Authoritative, National Impact, Responsible AI  
 **Palette:** Deep Agricultural Green (`#1E5E3A`), Warm Earth (`#B87333`), Charcoal Ink (`#2C241E`), Clean White (`#FFFFFF`)
@@ -39,7 +39,7 @@
   * **Vanilla RAG:** Better text retrieval, but breaks under dialect variations, cannot handle multimodal conflict, and misbinds chemical attributes.
   * **Vision-Only Tools:** Classifies leaf disease, but cannot provide holistic IPM guidance, weather-aware timing, or safe dosage calculations.
 * **The Breakthrough (Right Card):**
-  * **KrishokChat:** **Language + Vision + Evidence + Safety + Rural Delivery** in one unified fail-closed architecture.
+  * **KrishokTech:** **Language + Vision + Evidence + Safety + Rural Delivery** in one unified fail-closed architecture.
 * **Footer:** *Our published research analyzed these exact failure modes before designing the platform architecture.*
 
 ---
@@ -82,7 +82,7 @@
   * **Tier 3 — Hybrid RAG & Gemma-4:** Multi-source dense+sparse retrieval over 2,946 institutional documents.
   * **Tier 4 — Relational Verifier:** Schema enforcement over 11 critical agronomic slots (dose bounds, safety gear, pre-harvest interval).
   * **Delivery Channels:** Web PWA, Local Offline Cache, SMS Compression Engine.
-* **Core Principle:** **KrishokChat is not a chatbot wrapper. It is an accountable agricultural intelligence engine.**
+* **Core Principle:** **KrishokTech is not a chatbot wrapper. It is an accountable agricultural intelligence engine.**
 
 ---
 
@@ -112,7 +112,7 @@
 
 ### Layout & Visuals
 * **Structure:** 3-Pillar Stakeholder Ecosystem (Farmers, Institutions, Agribusiness).
-* **Flow:** Farmer Beneficiary $\rightarrow$ KrishokChat Platform $\rightarrow$ Institutional Partners $\rightarrow$ Sustainable Revenue.
+* **Flow:** Farmer Beneficiary $\rightarrow$ KrishokTech Platform $\rightarrow$ Institutional Partners $\rightarrow$ Sustainable Revenue.
 
 ### Slide Content
 * **Header / Eyebrow:** SUSTAINABLE VALUE CREATION
@@ -167,5 +167,5 @@
     * Real-time soil sensor & satellite weather API integration
 * **Call to Action:** *"Support the transition from a scientifically validated AI system to a national agricultural service."*
 * **Access Links:**
-  * **Live Demo:** `https://krishokchat.vercel.app` (or local demo URL)
-  * **Research Dossier & Code:** GitHub / KrishokChat Repository
+  * **Live Demo:** `https://krishoktech.vercel.app` (or local demo URL)
+  * **Research Dossier & Code:** GitHub / KrishokTech Repository

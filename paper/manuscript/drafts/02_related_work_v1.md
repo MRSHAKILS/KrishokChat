@@ -29,7 +29,7 @@ System papers are expected to evaluate components in isolation, account for late
 |---|---|---|---|
 | Claim verification & selective answering | RT4CHART; VeriCite; MedRAGChecker; ClinicBot; RefusalBench; Zhou et al.; Huang et al.; Shankar et al. | Atomic claim decomposition, NLI/span verification, production-proven abstention with latency budgets | No agricultural relation verifier; nothing for Bengali dosage advice; no calibrated abstention under lexical-only retrieval |
 | Bengali language resources & retrieval | KrishokBondhu; cross-lingual bn-en-bn RAG; BUNO; BhasaBodh; MIRACL-Bengali; IndicSafe/IndicJR | Bengali RAG works; dialect normalization is tractable; standard-script retrieval benchmarks exist | No dialect-to-retrieval measurement for Bangla agriculture; slot preservation under rewriting unmeasured; no multi-dialect safety benchmark |
-| Agricultural advisory & escalation | Farmer.Chat; DG-Eval; AgriEval; IPM-AgriGPT; AIEP; My Climate CoPilot; KrishokChat benchmark | Deployment scale; expert-grounded fact-checking protocol; dosing identified as weakest axis; chemical hallucination floor | No output-time claim audit in an advisory system; no refusal coupled to a live national helpline |
+| Agricultural advisory & escalation | Farmer.Chat; DG-Eval; AgriEval; IPM-AgriGPT; AIEP; My Climate CoPilot; KrishokTech benchmark | Deployment scale; expert-grounded fact-checking protocol; dosing identified as weakest axis; chemical hallucination floor | No output-time claim audit in an advisory system; no refusal coupled to a live national helpline |
 | Vision & multimodal routing | Supervised crop-disease classifiers; VLM comparisons | Supervised classification beats zero-shot VLMs; calibration/OOD norms transfer | Grounding of treatment advice behind vision routes (secondary scope here) |
 | Systems evidence & compute | Faithful Industrial RAG; DecEx-RAG; refusal-metric conventions | Component evaluation, latency accounting, artifact release, risk-coverage reporting | Applied to Bengali agrochemical certification nowhere |
 
@@ -49,7 +49,7 @@ Table 2 compares the nine systems closest to ours along the dimensions that matt
 | RAGChecker / RAGAS (2025) | Generic RAG diagnostics | No domain action policy | Claim-level NLI | No validated Bengali agricultural judge | Method baseline, not an advisory system |
 | ClinicBot / MedRAGChecker family (2026 [G0]) | Clinical RAG | Medical abstention/validation | Numeric or KG+NLI checks | English clinical | Transferable mechanism; different relations and risks |
 | BhasaBodh / BUNO (NAACL 2025; LREC-COLING 2024) | Not agricultural RAG | No safety outcome | None | Dialect/romanized normalization resources | Normalization baselines without downstream safety measurement |
-| KrishokChat runtime (this work, before measurement) | BM25 over 2,135-node national-institution corpus | Six-way pre-retrieval terminal gate; keyword-scoped coverage gate; 16123 escalation | Normalized lexical dosage matching | Deterministic Bengali checks; dialect behavior unevaluated | Starting point; this paper adds relation-aware, calibrated certification |
+| KrishokTech runtime (this work, before measurement) | BM25 over 2,135-node national-institution corpus | Six-way pre-retrieval terminal gate; keyword-scoped coverage gate; 16123 escalation | Normalized lexical dosage matching | Deterministic Bengali checks; dialect behavior unevaluated | Starting point; this paper adds relation-aware, calibrated certification |
 
 ## Positioning
 
@@ -78,7 +78,7 @@ The reviewed literature leaves two adjacent cells empty. No system we are aware 
 - Yan et al. (2026). AgriEval. AAAI 2026, arXiv:2507.21773.
 - Yang et al. (2024). GPT-4 as evaluator: pest management. arXiv:2403.11858.
 - Singh et al. (2026) [G0]. Fine-tuning and evaluating conversational AI for agricultural advisory (DG-Eval). arXiv:2603.03294.
-- Reza, Nimi & Shahid (2026). KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory. EACL 2026. *(cite by filename per docs/PAPER_POLICY.md; local PDF in `paper/done papers/`)*
+- Reza, Nimi & Shahid (2026). KrishokTech: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory. EACL 2026. *(cite by filename per docs/PAPER_POLICY.md; local PDF in `paper/done papers/`)*
 - Reza, Maria & Nimi (n.d.). AgRiTrust retrieval benchmark companion. *(local PDF in `paper/done papers/`; public identifier pending)*
 - Anonymous et al. (2025) [G0]. Supervised vs zero-shot VLM crop-disease identification. arXiv:2512.15977. *(authorship to resolve at assembly)*
 - IPM-AgriGPT (2025). Mathematics 13(4):566, DOI 10.3390/math13040566.

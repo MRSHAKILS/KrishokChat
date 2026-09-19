@@ -1,4 +1,4 @@
-# KrishokChat Backend
+# KrishokTech Backend
 
 FastAPI backend for the safety-aware Bengali agricultural advisory prototype.
 

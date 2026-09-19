@@ -91,7 +91,7 @@ Every script must:
 - run as `Set-Location backend; ..\.venv\Scripts\python.exe <path>` **or** do
   `sys.path.insert(0, str(REPO/"backend"))` and be runnable from anywhere. Prefer the latter and
   resolve the repo root from `Path(__file__).resolve().parents[...]` — **do not** hardcode
-  `r"d:\KrishokChat Advisory System"` the way `run_e07_deployment_footprint.py` does (fix that too).
+  `r"d:\KrishokTech Advisory System"` the way `run_e07_deployment_footprint.py` does (fix that too).
 - record, in the output JSON: UTC timestamp, `git rev-parse HEAD`, python version, versions of
   torch/ultralytics/onnx/onnxruntime, the SHA-256 of every input artifact, and the exact machine
   CPU model + core count (`platform.processor()`, `os.cpu_count()`).
@@ -288,7 +288,7 @@ branch under the R-series gates, not in the paper folder.
 - `tab4_deployment_footprint.tex`: **2.63 GB disk / 3.70 GB RAM** must become the real numbers.
   E07 measured 187.3 MB minimal deployment with `total_onnx_mb: 0`; that ONNX figure changes once
   V3 lands and E07's scan roots are updated.
-- Fix `run_e07_deployment_footprint.py`'s hardcoded `WS = Path(r"d:\KrishokChat Advisory System")`
+- Fix `run_e07_deployment_footprint.py`'s hardcoded `WS = Path(r"d:\KrishokTech Advisory System")`
   → resolve from `__file__`.
 - Every vision claim must say **classification, not detection**. There is no detection artifact;
   `ultralytics_classifier.py:30-33` actively refuses to fabricate boxes and AGENTS.md §3 says the

@@ -33,7 +33,7 @@ The mandate is critique; brief acknowledgement of genuine strengths is filed in 
 
 **H4. Single-author / single-developer concentration risk.** Every page renders `ডিজাইন ও ডেভেলপমেন্ট: Adnan Shah Abir` in the footer; the developer-attribution banner is hard-coded in the header (`<div id="developer-attribution-banner">`). No team, no institutional backing, no error-status page, no `mailto:` contact for safety issues (only `info@gacherdoctor.site` for privacy/account deletion), no `/about`, no `/disclaimer`, no incident-reporting channel. If the developer goes offline, the whole product stops being updated. There is also no public roadmap, no CHANGELOG, and no test/build artifacts visible.
 
-**H5. The chat surface is a black box.** `/chat` shows `গাছের ডাক্তার চ্যাট লোড হচ্ছে…` ("loading…") in SSR. The privacy policy admits the system sends voice and chat history to `Google Cloud & Vertex AI / Gemini` and `Supabase Cloud`. There is no published model card, no refusal behaviour, no version pinning, no documentation of whether any safety precheck exists for banned chemicals (e.g. WHO Class Ia/Ib, Bangladesh Schedule 1 banned pesticides — pesticides actually responsible for hundreds of Bangladeshi farmer deaths each year). The site also exposes no audit log, no claim-level evidence, no per-step agent trace. KrishokChat's `0.32 ms` deterministic precheck + `16123` escalation path is the exact gap this leaves open.
+**H5. The chat surface is a black box.** `/chat` shows `গাছের ডাক্তার চ্যাট লোড হচ্ছে…` ("loading…") in SSR. The privacy policy admits the system sends voice and chat history to `Google Cloud & Vertex AI / Gemini` and `Supabase Cloud`. There is no published model card, no refusal behaviour, no version pinning, no documentation of whether any safety precheck exists for banned chemicals (e.g. WHO Class Ia/Ib, Bangladesh Schedule 1 banned pesticides — pesticides actually responsible for hundreds of Bangladeshi farmer deaths each year). The site also exposes no audit log, no claim-level evidence, no per-step agent trace. KrishokTech's `0.32 ms` deterministic precheck + `16123` escalation path is the exact gap this leaves open.
 
 ---
 
@@ -68,10 +68,10 @@ The mandate is critique; brief acknowledgement of genuine strengths is filed in 
 | ID | Flaw | Evidence | Severity |
 |---|---|---|---|
 | N1 | No model card, no system-prompt disclosure, no refusal/fallback policy visible. Cannot evaluate hallucination, over-refusal, or dialect robustness without testing the chat. SUSPECTED — needs live API check. | `/chat` SSR payload shows only `লোড হচ্ছে…`. | **HIGH (suspected)** |
-| N2 | No dialectal handling visible. The site is a single Bengali register (`ভাই` register, formal Standard Bangla) and the homepage slogan (`প্রিয় কৃকষ ভাই`) and example queries do not mention Sylheti, Chittagonian, or Noakhali variants, which KrishokChat's 110-word dialect map explicitly handles. | Homepage example queries. | **MEDIUM** |
+| N2 | No dialectal handling visible. The site is a single Bengali register (`ভাই` register, formal Standard Bangla) and the homepage slogan (`প্রিয় কৃকষ ভাই`) and example queries do not mention Sylheti, Chittagonian, or Noakhali variants, which KrishokTech's 110-word dialect map explicitly handles. | Homepage example queries. | **MEDIUM** |
 | N3 | No source grounding on chat answers. Each chat response (when it lands) has no per-claim citation or evidence trace. Without seeing a live response this is suspected; the privacy policy makes no grounding claim. | `/privacy` §2 + absence in `/chat` SSR. | **HIGH (suspected)** |
 | N4 | No claim-level provenance for the `/crops/rotation` "ideal follower crop" prose. Each crop-pair recommendation is free text. | `/crops/rotation` raw HTML. | **HIGH** |
-| N5 | No version pinning of the underlying Gemini model. Privacy policy says "Google Vertex AI / Gemini" but does not pin a model identifier. AGENTS.md §0 forbids model switching for KrishokChat for exactly this reason. | `/privacy` §3. | **MEDIUM** |
+| N5 | No version pinning of the underlying Gemini model. Privacy policy says "Google Vertex AI / Gemini" but does not pin a model identifier. AGENTS.md §0 forbids model switching for KrishokTech for exactly this reason. | `/privacy` §3. | **MEDIUM** |
 
 ### 2.4 Data Freshness & Provenance
 
@@ -127,7 +127,7 @@ The mandate is critique; brief acknowledgement of genuine strengths is filed in 
 
 | ID | Flaw | Evidence | Severity |
 |---|---|---|---|
-| I1 | Only Standard Bangla. No Sylheti (`অহন`), Noakhali, Chittagonian, or Barisal dialect support. The KrishokChat 110-word dialect map exists for exactly this gap. | Homepage examples. | **MEDIUM** |
+| I1 | Only Standard Bangla. No Sylheti (`অহন`), Noakhali, Chittagonian, or Barisal dialect support. The KrishokTech 110-word dialect map exists for exactly this gap. | Homepage examples. | **MEDIUM** |
 | I2 | `হাইбрид ভুট্টা` (Cyrillic "hybrid" + Bengali "maize") in the rotation page indicates the dataset was machine-translated or imported without script normalisation. | `/crops/rotation`. | **HIGH** |
 | I3 | No English interface despite the homepage using Latin tokens like `BRRI`, `BARI`, `DAM`, `GD-১৮৮৬৩৬`, `APPROVED`. A bilingual layer would help agricultural officers and extension workers. | Mixed-script evidence across `/`. | **LOW** |
 
@@ -139,31 +139,31 @@ The mandate is critique; brief acknowledgement of genuine strengths is filed in 
 | C2 | No saline-coastal-zone specialisation (Khulna, Bagerhat, Satkhira, Barguna) despite the homepage listing those districts in the soil-pH dropdown. | `/calculator/soil-ph` district list. | **MEDIUM** |
 | C3 | No haor / flood / char / hill-track adaptation. | Absence. | **MEDIUM** |
 | C4 | No integration with 16123 — only a footer mention. A farmer in distress cannot reach a human from this site. | Footer + `/privacy`. | **HIGH** |
-| C5 | No SMS / USSD channel. KrishokChat's SMS compressor (E15) targets exactly this constraint. | Absence. | **MEDIUM** |
+| C5 | No SMS / USSD channel. KrishokTech's SMS compressor (E15) targets exactly this constraint. | Absence. | **MEDIUM** |
 
 ---
 
 ## 3. Severity Matrix
 
-| # | Flaw | Evidence | Severity | Paper-Claimable? | KrishokChat Countermeasure |
+| # | Flaw | Evidence | Severity | Paper-Claimable? | KrishokTech Countermeasure |
 |---|---|---|---|---|---|
-| F1 | "APPROVED ★ ★ ★" stamp on empty scanner / soil-pH report (SF1) | `/crops/diagnostics`, `/calculator/soil-ph` SSR payload with `ছবি সংযুক্ত নেই` | CRITICAL | YES — claim-certification hallucination is a measurable agent-trust failure | Remove the stamp until a real verifier step passes; show explicit `confidence: low` chips; never render green-check badges without grounded evidence (matches KrishokChat verifier logic) |
-| F2 | Pesticide calculator has no active-ingredient input (S1 / SF2) | `/calculator/pesticide` form fields | CRITICAL | YES — pesticide dose hallucination on vegetable is a paper-grade safety case | Force the user to select molecule from a curated Bangladesh-registered list; deny output if input is missing; route to 16123 for ambiguous queries (matches KrishokChat 0.32 ms precheck + escalation) |
-| F3 | Live weather pipeline is broken (C3) | `আবহাওয়া তথ্য লোড সম্ভব হয়নি` on `/`, empty panel on `/weather/irrigation` | CRITICAL | YES — claim "live advisory" is unverifiable when the feed is dead | Wire to BMD OpenData + Open-Meteo with a determinstic 3-attempt fallback; cache last-good values; expose staleness in UI (mirrors KrishokChat chunk-fallback E26) |
-| F4 | Sitemap freshness is dishonest; prices never load (C4, D1, S6) | `sitemap.xml` `lastmod=2026-05-27`; `/prices` `লোডিং বাজার দর…` | CRITICAL | YES — temporal-governance claim is a measurable paper angle (E30 Temporal Source Verification in KrishokChat) | Real per-row `lastmod` per price; per-day DAM/Kawran Bazar attested source; refuse to publish stale rows |
-| F5 | Whole body of deep routes is CSR shell (C5, U1, U2) | `<template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING">` on `/chat`, `/calculator`, `/crops`, etc. | CRITICAL | YES — SSR vs CSR indexability is a measurable robustness axis | Render advisory content via Next.js server components with `generateMetadata` per crop; ship `<noscript>` fallback (already in KrishokChat pattern) |
+| F1 | "APPROVED ★ ★ ★" stamp on empty scanner / soil-pH report (SF1) | `/crops/diagnostics`, `/calculator/soil-ph` SSR payload with `ছবি সংযুক্ত নেই` | CRITICAL | YES — claim-certification hallucination is a measurable agent-trust failure | Remove the stamp until a real verifier step passes; show explicit `confidence: low` chips; never render green-check badges without grounded evidence (matches KrishokTech verifier logic) |
+| F2 | Pesticide calculator has no active-ingredient input (S1 / SF2) | `/calculator/pesticide` form fields | CRITICAL | YES — pesticide dose hallucination on vegetable is a paper-grade safety case | Force the user to select molecule from a curated Bangladesh-registered list; deny output if input is missing; route to 16123 for ambiguous queries (matches KrishokTech 0.32 ms precheck + escalation) |
+| F3 | Live weather pipeline is broken (C3) | `আবহাওয়া তথ্য লোড সম্ভব হয়নি` on `/`, empty panel on `/weather/irrigation` | CRITICAL | YES — claim "live advisory" is unverifiable when the feed is dead | Wire to BMD OpenData + Open-Meteo with a determinstic 3-attempt fallback; cache last-good values; expose staleness in UI (mirrors KrishokTech chunk-fallback E26) |
+| F4 | Sitemap freshness is dishonest; prices never load (C4, D1, S6) | `sitemap.xml` `lastmod=2026-05-27`; `/prices` `লোডিং বাজার দর…` | CRITICAL | YES — temporal-governance claim is a measurable paper angle (E30 Temporal Source Verification in KrishokTech) | Real per-row `lastmod` per price; per-day DAM/Kawran Bazar attested source; refuse to publish stale rows |
+| F5 | Whole body of deep routes is CSR shell (C5, U1, U2) | `<template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING">` on `/chat`, `/calculator`, `/crops`, etc. | CRITICAL | YES — SSR vs CSR indexability is a measurable robustness axis | Render advisory content via Next.js server components with `generateMetadata` per crop; ship `<noscript>` fallback (already in KrishokTech pattern) |
 | F6 | Homepage meta title / description are mojibake (E1) | Raw HTML `<title>��-��_��>� …</title>` | CRITICAL | YES — i18n encoding bug is a peer-review-worthy reproducible defect | Use UTF-8 `Content-Type`; `next.config.js` `i18n` with `locales: ['bn']`; encode Bengali metadata server-side |
 | F7 | Pesticide section headings render in SSR even when no image is uploaded (S7) | `/crops/diagnostics` raw HTML | CRITICAL | YES — empty-state honesty is part of refusal taxonomy | Hide the chemical-control section unless grounded; show "no diagnosis possible without a leaf image" |
-| F8 | No source citations on any recommendation (H1, N4, D4) | All recommendation prose on `/crops/rotation`, `/crops/matchmaker` | HIGH | YES — per-claim citation is the verifiable KrishokChat Verifier-Agent claim | Render per-claim citation badges inline; expose the BRRI/BARI source chunk ID and revision date (matches KrishokChat audit-log claim-level fields) |
+| F8 | No source citations on any recommendation (H1, N4, D4) | All recommendation prose on `/crops/rotation`, `/crops/matchmaker` | HIGH | YES — per-claim citation is the verifiable KrishokTech Verifier-Agent claim | Render per-claim citation badges inline; expose the BRRI/BARI source chunk ID and revision date (matches KrishokTech audit-log claim-level fields) |
 | F9 | No chat model card, no refusal behaviour, no version pin (H5, N1, N5) | `/privacy` §3 + `/chat` shell | HIGH | YES — model-dependency transparency is paper-grade (E18 LLM-Dependency) | Publish a model card with refusal patterns, dialect coverage, banned-chemical blocklist, and version-pinning |
-| F10 | Chat sends voice and chat to Google Vertex AI / Gemini; no local fallback (P2, SF7) | `/privacy` §2.ঘ, §3 | HIGH | YES — local-on-device advisory is a KrishokChat headline (E40 Edge, E16 Hardware Profiling) | Ship local Gemma-4 4-bit LoRA (`krishokchat-4b`) as default for sensitive queries; Vertex AI only for cloud benchmark |
+| F10 | Chat sends voice and chat to Google Vertex AI / Gemini; no local fallback (P2, SF7) | `/privacy` §2.ঘ, §3 | HIGH | YES — local-on-device advisory is a KrishokTech headline (E40 Edge, E16 Hardware Profiling) | Ship local Gemma-4 4-bit LoRA (`krishoktech-4b`) as default for sensitive queries; Vertex AI only for cloud benchmark |
 | F11 | Footer "১৬১২৩" hotline is plain text, not a `tel:` link (U6, C4) | Footer raw HTML across every page | HIGH | YES — escalation affordance is a measurable safety panel | Make ১৬১২৩ a sticky `tel:16123` button on crisis queries; precheck in 0.32 ms routes poisoning queries there deterministically |
-| F12 | No escalation path for poisoning queries (SF3, C4) | `/chat` SSR + `/privacy` §3 | HIGH | YES — crisis-query routing is paper-grade (E46 Confused Farmer, KrishokChat Safety T3 refusal set) | Deterministic precheck matches "খেয়ে ফেলেছি", "বিষ", "জ্বালা", "শ্বাসকষ্ট" → escalate to 16123 with persisted refusal in T3 (already shipped) |
-| F13 | No banned-pesticide blocklist evidence (SF4, SF6) | Absence site-wide | HIGH | YES — banned-chemical coverage is paper-grade (E45 Safety Coverage, E48 Temporal Regulation) | Encode WHO Class Ia/Ib + Bangladesh Schedule 1 list in a versioned JSON blocklist; precheck before any dose answer (already shipped as KrishokChat `safety_refusal_t3.jsonl`) |
+| F12 | No escalation path for poisoning queries (SF3, C4) | `/chat` SSR + `/privacy` §3 | HIGH | YES — crisis-query routing is paper-grade (E46 Confused Farmer, KrishokTech Safety T3 refusal set) | Deterministic precheck matches "খেয়ে ফেলেছি", "বিষ", "জ্বালা", "শ্বাসকষ্ট" → escalate to 16123 with persisted refusal in T3 (already shipped) |
+| F13 | No banned-pesticide blocklist evidence (SF4, SF6) | Absence site-wide | HIGH | YES — banned-chemical coverage is paper-grade (E45 Safety Coverage, E48 Temporal Regulation) | Encode WHO Class Ia/Ib + Bangladesh Schedule 1 list in a versioned JSON blocklist; precheck before any dose answer (already shipped as KrishokTech `safety_refusal_t3.jsonl`) |
 | F14 | "৫২+ টি দেশীয় ফসল" claim is unverifiable in SSR (H2, U1) | `/crops` SSR shell | HIGH | YES — coverage honesty is a paper-grade claim (E24 Coverage Gap) | Ship a per-crop permalink with structured data; expose coverage count in sitemap |
-| F15 | No `tel:` link or visual escalation affordance for crisis queries (U6) | Footer raw HTML | HIGH | YES — UX safety affordance is measurable | Add the sticky "জরুরি প্রয়োজনে ১৬১২৩" CTA — already designed in KrishokChat |
+| F15 | No `tel:` link or visual escalation affordance for crisis queries (U6) | Footer raw HTML | HIGH | YES — UX safety affordance is measurable | Add the sticky "জরুরি প্রয়োজনে ১৬১২৩" CTA — already designed in KrishokTech |
 | F16 | Single-developer concentration (H4, X1, X2) | Every footer | HIGH | NO — out of paper scope | Add an institutional partner page (e.g. DAE / BARI letter of collaboration) — not a paper claim, but a credibility requirement for EACL demo |
-| F17 | Crop name `হাইбрид ভুট্টা` mixes Cyrillic + Bengali (S4, I2) | `/crops/rotation` | MEDIUM | YES — normalisation defect is a reproducible low-resource-NLP finding | Unicode-normalise every crop label with NFKC; flag any mixed-script entries in CI (matches KrishokChat AgriEnBn hygiene) |
+| F17 | Crop name `হাইбрид ভুট্টা` mixes Cyrillic + Bengali (S4, I2) | `/crops/rotation` | MEDIUM | YES — normalisation defect is a reproducible low-resource-NLP finding | Unicode-normalise every crop label with NFKC; flag any mixed-script entries in CI (matches KrishokTech AgriEnBn hygiene) |
 | F18 | `/crops/matchmaker` returns empty on default load (S3) | `/crops/matchmaker` raw HTML | MEDIUM | NO — UI polish | Set sensible default district + season and pre-fill the result list |
 | F19 | Soil-pH calculator displays empty report card on default load (S2) | `/calculator/soil-ph` raw HTML | MEDIUM | NO — UI polish | Hide the report card until a soil sample is provided |
 | F20 | No `noscript` fallback (U2) | Raw HTML inspection | MEDIUM | NO — UX polish | Add `<noscript>` summary text |
@@ -182,9 +182,9 @@ Ranked by combined safety / credibility / paper-publishable return.
 
 ### Tier 1 — Ship within 30 days, paper-grade
 
-1. **Publish a Bengali dosage-verification paper** that measures a domain SFT LLM with and without KrishokChat's claim-level precheck + 11-slot relational verification on the BAA-style dosage test set. Show 0% toxic leak on the BAA banned-chemical subset vs the gacherdoctor-style "calculator emits dose from severity + tank size alone" baseline (which has no molecule input). Targets **CEA research paper** §07 results-advisory-quality and §08 authority-safety.
+1. **Publish a Bengali dosage-verification paper** that measures a domain SFT LLM with and without KrishokTech's claim-level precheck + 11-slot relational verification on the BAA-style dosage test set. Show 0% toxic leak on the BAA banned-chemical subset vs the gacherdoctor-style "calculator emits dose from severity + tank size alone" baseline (which has no molecule input). Targets **CEA research paper** §07 results-advisory-quality and §08 authority-safety.
 2. **Open-source the fail-closed precheck + 16123 escalation pattern** with a reproducible benchmark. Show that a deterministic precheck on a curated "poisoning" / "pesticide choice" query set routes to `tel:16123` with zero LLM call. Targets CEA §12 robustness and EACL demo §03 demonstration scenarios.
-3. **Ship the local Gemma-4 4-bit LoRA path (`krishokchat-4b`)** as the default for sensitive query classes; route only low-risk queries to `gemini-2.5-flash-lite` for structured NLU. Show latency / privacy / refusal-quality trade-off. Targets CEA §13 efficiency and EACL §02 architecture.
+3. **Ship the local Gemma-4 4-bit LoRA path (`krishoktech-4b`)** as the default for sensitive query classes; route only low-risk queries to `gemini-2.5-flash-lite` for structured NLU. Show latency / privacy / refusal-quality trade-off. Targets CEA §13 efficiency and EACL §02 architecture.
 
 ### Tier 2 — Ship within 60 days, demo-grade
 
@@ -204,23 +204,23 @@ Ranked by combined safety / credibility / paper-publishable return.
 
 ### CEA Research Paper (Frontiers / Computers & Electronics in Agriculture)
 
-- **§07 / §08 — Banned-Chemical Coverage under Free-Form Advisory Generation.** Measure the proportion of banned / WHO Class Ia/Ib / Bangladesh Schedule 1 pesticide mentions that pass a dose-emission gate under (a) gacherdoctor-style deterministic calculator + free-form chat, (b) vanilla RAG, (c) KrishokChat precheck + structured NLU + 11-slot relational verification + RAG. Report proportion of queries where banned chemicals slip through. Cite KrishokChat `safety_refusal_t3.jsonl` (3,216 T3 records, 144 over-refusal tests).
-- **§10 / §12 — Claim-Level Provenance under Soil-Photo Diagnosis.** Build a soil-pH / leaf-disease evaluation set. Measure the rate at which a `false-positive APPROVED` (stamp shown without grounded evidence) is emitted. Cite KrishokChat E45 safety coverage + E34 full-architecture audit log.
+- **§07 / §08 — Banned-Chemical Coverage under Free-Form Advisory Generation.** Measure the proportion of banned / WHO Class Ia/Ib / Bangladesh Schedule 1 pesticide mentions that pass a dose-emission gate under (a) gacherdoctor-style deterministic calculator + free-form chat, (b) vanilla RAG, (c) KrishokTech precheck + structured NLU + 11-slot relational verification + RAG. Report proportion of queries where banned chemicals slip through. Cite KrishokTech `safety_refusal_t3.jsonl` (3,216 T3 records, 144 over-refusal tests).
+- **§10 / §12 — Claim-Level Provenance under Soil-Photo Diagnosis.** Build a soil-pH / leaf-disease evaluation set. Measure the rate at which a `false-positive APPROVED` (stamp shown without grounded evidence) is emitted. Cite KrishokTech E45 safety coverage + E34 full-architecture audit log.
 - **§13 — Efficiency: Deterministic Precheck vs LLM Call.** Measure end-to-end latency and token cost for 16123 escalation queries. Show 0.32 ms precheck + 0 LLM tokens vs ~250 ms + ≥180 tokens for LLM-only routing. Cite AGENTS.md §2 decision ladder.
 
 ### EACL Demo Paper (System / Demo track)
 
-- **§02 — Bangla-First Local LLM Advisory** with fail-closed precheck. Compare against gacherdoctor's cloud-only Vertex AI path (no offline mode, no local fallback). Cite KrishokChat `krishokchat-4b` (Gemma-4 4-bit LoRA).
-- **§03 — Demonstration Scenarios** that explicitly contrast (a) "Farmer types 'ধানে কীটনাশক খেয়ে ফেলেছি, কী করব?'" → KrishokChat precheck → `tel:16123` escalation + Bengali safety card vs (b) gacherdoctor-style chat routed to Gemini with no escalation. Both are publicly accessible; screenshots side-by-side.
+- **§02 — Bangla-First Local LLM Advisory** with fail-closed precheck. Compare against gacherdoctor's cloud-only Vertex AI path (no offline mode, no local fallback). Cite KrishokTech `krishoktech-4b` (Gemma-4 4-bit LoRA).
+- **§03 — Demonstration Scenarios** that explicitly contrast (a) "Farmer types 'ধানে কীটনাশক খেয়ে ফেলেছি, কী করব?'" → KrishokTech precheck → `tel:16123` escalation + Bengali safety card vs (b) gacherdoctor-style chat routed to Gemini with no escalation. Both are publicly accessible; screenshots side-by-side.
 - **§04 — Empirical Usability** with 50 farmers measuring first-task completion, refusal recognition, and hotline-recall. Compare against the gacherdoctor footer that shows "১৬১২৩" as plain text.
 
 ### JCDL / Information Retrieval Track
 
-- **Per-Claim Source Provenance for Crop-Disease QA.** Build an evaluation set over BARI/BRRI publications; measure recall@k, citation precision@k, and over-attribution rate (Wallat et al., ICTIR 2025 reports up to 57% post-rationalised citations even in Command-R+). Cite KrishokChat Verifier Agent + audit-log claim fields.
+- **Per-Claim Source Provenance for Crop-Disease QA.** Build an evaluation set over BARI/BRRI publications; measure recall@k, citation precision@k, and over-attribution rate (Wallat et al., ICTIR 2025 reports up to 57% post-rationalised citations even in Command-R+). Cite KrishokTech Verifier Agent + audit-log claim fields.
 
 ### AAAI / EMNLP Track
 
-- **Low-Resource Bengali NLU with Structured Output Constraints.** Use the 20,112-record KrishokChat safety dataset + 110-word dialect map. Measure dialect robustness vs a Standard-Bangla-only baseline (gacherdoctor's chat, which makes no dialect claim). Cite KrishokChat phase-4 dialect map.
+- **Low-Resource Bengali NLU with Structured Output Constraints.** Use the 20,112-record KrishokTech safety dataset + 110-word dialect map. Measure dialect robustness vs a Standard-Bangla-only baseline (gacherdoctor's chat, which makes no dialect claim). Cite KrishokTech phase-4 dialect map.
 
 ### Reproducible-Defect Track (Software Engineering / NLP Engineering)
 
@@ -235,14 +235,14 @@ Ranked by combined safety / credibility / paper-publishable return.
 - The site acknowledges `BARI`, `BRRI`, `DAM`, `DAE`, and `BINA` by name, and the rotation page cites `BRRI ধান ২৯` and agronomic rationale in plain Bengali — at least the surface is rooted in the right institutional corpus.
 - The price table disclaimer correctly warns about `মধ্যস্বত্বভোগী বা সিন্ডিকেটের ফাঁদ` ("middlemen and syndicate traps") — a real Bangladesh-context concern that most academic systems ignore.
 
-These strengths do not offset the critical flaws in §1, but they make the comparison honest: gacherdoctor is a credibly-built hobbyist project, not a malicious one. KrishokChat's defensible position is not "they are bad"; it is "we ship the safety, evidence, and provenance layer they do not".
+These strengths do not offset the critical flaws in §1, but they make the comparison honest: gacherdoctor is a credibly-built hobbyist project, not a malicious one. KrishokTech's defensible position is not "they are bad"; it is "we ship the safety, evidence, and provenance layer they do not".
 
 ---
 
 ## 7. Closing note for reviewers
 
-Two of the seven paper-ready novelty angles above (the banned-chemical coverage angle and the UTF-8 encoding defect) are reproducible today with the existing KrishokChat corpus + a public fetch of gacherdoctor. Both can be turned into camera-ready artifacts within one conference cycle. The local-LLM fallback angle is the strongest single defensibility claim and ties directly to AGENTS.md §0 (model registry) and §0.1 (zero-token-waste), which are unique to KrishokChat's posture.
+Two of the seven paper-ready novelty angles above (the banned-chemical coverage angle and the UTF-8 encoding defect) are reproducible today with the existing KrishokTech corpus + a public fetch of gacherdoctor. Both can be turned into camera-ready artifacts within one conference cycle. The local-LLM fallback angle is the strongest single defensibility claim and ties directly to AGENTS.md §0 (model registry) and §0.1 (zero-token-waste), which are unique to KrishokTech's posture.
 
 The single line that sums up this critique:
 
-> **gacherdoctor renders an `APPROVED` stamp on an empty report; KrishokChat renders no stamp until the verifier passes.**
+> **gacherdoctor renders an `APPROVED` stamp on an empty report; KrishokTech renders no stamp until the verifier passes.**

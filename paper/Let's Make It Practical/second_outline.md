@@ -30,7 +30,7 @@
 
 আমি যেটা recommend করছি সেটা হলো:
 
-# 🧠 **KrishokChat Adaptive Evidence & Response Architecture (KAERA)**
+# 🧠 **KrishokTech Adaptive Evidence & Response Architecture (KAERA)**
 
 এটা তোমার existing architecture-এর উপর বসবে।
 
@@ -844,7 +844,7 @@ HELPFUL + SAFE ANSWER
 
 এই order-এ।
 
-এবং honestly, আমার মতে এই Stage 2 পুরো KrishokChat project-এর **সবচেয়ে valuable research contribution** হতে পারে—কারণ এখানে আমরা শুধু “আরেকটা RAG chatbot” বানাব না।
+এবং honestly, আমার মতে এই Stage 2 পুরো KrishokTech project-এর **সবচেয়ে valuable research contribution** হতে পারে—কারণ এখানে আমরা শুধু “আরেকটা RAG chatbot” বানাব না।
 
 আমরা বানাব:
 

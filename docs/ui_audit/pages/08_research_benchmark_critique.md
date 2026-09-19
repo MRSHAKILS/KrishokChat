@@ -1,8 +1,8 @@
 # Page Critique: Evaluation Benchmark (`/research/benchmark`)
 
 **Target Route**: `/research/benchmark`  
-**Source Code**: [frontend/src/app/(marketing)/research/benchmark/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/research/benchmark/page.tsx)  
-**Screenshot**: ![08_research_benchmark.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/08_research_benchmark.png)  
+**Source Code**: [frontend/src/app/(marketing)/research/benchmark/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/research/benchmark/page.tsx)  
+**Screenshot**: ![08_research_benchmark.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/08_research_benchmark.png)  
 
 ---
 

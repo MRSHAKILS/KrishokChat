@@ -1,8 +1,8 @@
 # Page Critique: Contact & Emergency Helplines (`/contact`)
 
 **Target Route**: `/contact`  
-**Source Code**: [frontend/src/app/(marketing)/contact/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/contact/page.tsx)  
-**Screenshot**: ![13_contact.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/13_contact.png)  
+**Source Code**: [frontend/src/app/(marketing)/contact/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/contact/page.tsx)  
+**Screenshot**: ![13_contact.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/13_contact.png)  
 
 ---
 

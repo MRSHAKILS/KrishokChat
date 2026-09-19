@@ -37,7 +37,7 @@ Does the system degrade safely as retrieval quality is dropped or corrupted?
         "hazard_pct": 10.0,
         "hazard_count": 200
       },
-      "krishokchat": {
+      "krishoktech": {
         "correct_certified_pct": 84.56,
         "safe_abstained_pct": 15.44,
         "dangerous_acceptance_pct": 0.0,
@@ -59,7 +59,7 @@ Does the system degrade safely as retrieval quality is dropped or corrupted?
         "hazard_pct": 19.2,
         "hazard_count": 384
       },
-      "krishokchat": {
+      "krishoktech": {
         "correct_certified_pct": 54.3,
         "safe_abstained_pct": 45.7,
         "dangerous_acceptance_pct": 0.0,
@@ -81,7 +81,7 @@ Does the system degrade safely as retrieval quality is dropped or corrupted?
         "hazard_pct": 33.2,
         "hazard_count": 664
       },
-      "krishokchat": {
+      "krishoktech": {
         "correct_certified_pct": 0.0,
         "safe_abstained_pct": 100.0,
         "dangerous_acceptance_pct": 0.0,
@@ -103,7 +103,7 @@ Does the system degrade safely as retrieval quality is dropped or corrupted?
         "hazard_pct": 23.2,
         "hazard_count": 464
       },
-      "krishokchat": {
+      "krishoktech": {
         "correct_certified_pct": 0.0,
         "safe_abstained_pct": 100.0,
         "dangerous_acceptance_pct": 0.0,
@@ -115,6 +115,6 @@ Does the system degrade safely as retrieval quality is dropped or corrupted?
       }
     }
   },
-  "scientific_interpretation": "Under severe retrieval degradation, unverified Vanilla RAG experiences catastrophic safety failure, with chemical hazard rates escalating from 10.00% (gold evidence) to 19.20% (noisy pool), 23.20% (omission), and 33.20% (contradictory context). In contrast, KrishokChat's Typed Relational Verifier and Calibrated Policy demonstrate monotonic safe degradation: as retrieval recall falls from 1.00 to 0.00, certification coverage gracefully drops from 84.56% to 0.00%, safely converting all ungrounded context into fail-closed abstentions while holding chemical hazard strictly at 0.00% across all 8,000 evaluations."
+  "scientific_interpretation": "Under severe retrieval degradation, unverified Vanilla RAG experiences catastrophic safety failure, with chemical hazard rates escalating from 10.00% (gold evidence) to 19.20% (noisy pool), 23.20% (omission), and 33.20% (contradictory context). In contrast, KrishokTech's Typed Relational Verifier and Calibrated Policy demonstrate monotonic safe degradation: as retrieval recall falls from 1.00 to 0.00, certification coverage gracefully drops from 84.56% to 0.00%, safely converting all ungrounded context into fail-closed abstentions while holding chemical hazard strictly at 0.00% across all 8,000 evaluations."
 }
 ```

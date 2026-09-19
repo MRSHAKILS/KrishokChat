@@ -71,7 +71,7 @@ series overlap.
 **The dataset is the released asset. The regression model is NOT.**
 
 All trained models currently underperform the mean predictor (negative R²).
-See `model_status.json` for the frozen benchmark table. The KrishokChat UI
+See `model_status.json` for the frozen benchmark table. The KrishokTech UI
 ships the analyzer **locked** ("মডেল উন্নয়নে") until a validated artifact exists
 (target: positive R² on held-out series).
 
@@ -87,7 +87,7 @@ Pabna District field campaign, May 29–31 2026.
 
 ## Access
 
-- This folder ships inside the KrishokChat repository (`dataset_release/soil_moisture/`).
+- This folder ships inside the KrishokTech repository (`dataset_release/soil_moisture/`).
 - Display copy for the UI: `frontend/public/assets/soil_samples/` (12 thumbnails + grid).
 - Hugging Face upload: TODO (follows `RaiyanKhaan/krishokChat` pattern).
 - Regenerate UI assets: `python scripts/build_soil_release.py` (idempotent).

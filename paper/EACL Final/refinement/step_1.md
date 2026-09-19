@@ -184,7 +184,7 @@ The goal of this stage is diagnosis, not writing.
 
 
 
-I'll start by checking the uploaded files, then verify the official EACL 2027 requirements.# Forensic audit: KrishokChat manuscript vs. EACL 2027 System Demonstrations
+I'll start by checking the uploaded files, then verify the official EACL 2027 requirements.# Forensic audit: KrishokTech manuscript vs. EACL 2027 System Demonstrations
 
 ## Read this first
 
@@ -241,7 +241,7 @@ Source: the official [Demo CFP](https://2027.eacl.org/calls/demos/). I cross-che
 - **Access is stated up front.** Many abstracts end with a repo, live demo, package or video link and often a license. DeepPavlov cites Apache 2.0 and an online demo; AlignFix cites a live demo and Apache 2.0. BanSuite puts its YouTube link in the abstract.
 - **Six pages carry the story; detail goes to appendices.** Climate Finance's main paper runs pages 492–497, followed by appendices A–K (methods, demo details, deployment case studies, dataset statistics) through page 511. BanSuite moves UI screenshots, code snippets and energy analysis to appendices.
 - **Short related work.** My Climate CoPilot uses about half a page. Climate Finance uses roughly one paragraph.
-- **The stack is named.** My Climate CoPilot names Rust, Elasticsearch and Claude Sonnet 3.5. Climate Finance names FastAPI, Weaviate and the OpenAI API. KrishokChat never names its generator LLM.
+- **The stack is named.** My Climate CoPilot names Rust, Elasticsearch and Claude Sonnet 3.5. Climate Finance names FastAPI, Weaviate and the OpenAI API. KrishokTech never names its generator LLM.
 - **Evaluation is proportionate and comparative.** BanSuite compares against toolkits and LLMs and reports energy. Climate Finance compares against four baselines and two black-box assistants, and adds an ablation. My Climate CoPilot used over 50 domain experts, ratings and two long interviews.
 - **Modest novelty framing.** Climate Finance says its components are individually established and claims only their domain-specific integration.
 - **Ethics and limitations come after the main text.** My Climate CoPilot has an ethics-approval statement. Climate Finance has limitations, ethics and reproducibility statements.
@@ -329,7 +329,7 @@ I ranked these by contribution to what a viewer would see, not by manuscript spa
 
 ## 6. Current story
 
-KrishokChat is a Bengali agricultural advisory system that treats the LLM as an untrusted stage inside a fixed pipeline. A deterministic precheck blocks unsafe requests. A slot gate halts treatment queries with no crop before retrieval. Crop identity from text or an on-device image model restricts BM25 retrieval. A verifier removes unsupported dosage claims before display. Answers can go out through the web, SMS, an offline card, TTS or a helpline referral. Motivation comes from Bangladesh's extension-agent shortage and the authors' earlier colloquial-retrieval study. Support is a series of operating-point measurements: 76/200 halts, a perfect-routing fence simulation (36.25%→30.0%) and a 36.19%→0.95% attack-success drop. A demonstration section narrates six scenarios against placeholder figures. Related work is a 13-feature table in which nearly every distinguishing row is checked for KrishokChat alone. The manuscript reads as an evaluation report on a control architecture with a demo section attached.
+KrishokTech is a Bengali agricultural advisory system that treats the LLM as an untrusted stage inside a fixed pipeline. A deterministic precheck blocks unsafe requests. A slot gate halts treatment queries with no crop before retrieval. Crop identity from text or an on-device image model restricts BM25 retrieval. A verifier removes unsupported dosage claims before display. Answers can go out through the web, SMS, an offline card, TTS or a helpline referral. Motivation comes from Bangladesh's extension-agent shortage and the authors' earlier colloquial-retrieval study. Support is a series of operating-point measurements: 76/200 halts, a perfect-routing fence simulation (36.25%→30.0%) and a 36.19%→0.95% attack-success drop. A demonstration section narrates six scenarios against placeholder figures. Related work is a 13-feature table in which nearly every distinguishing row is checked for KrishokTech alone. The manuscript reads as an evaluation report on a control architecture with a demo section attached.
 
 ## 7. Desired system-demonstration story (described, not drafted)
 
@@ -405,7 +405,7 @@ About two of the six pages should be figures. Ethics, references and appendices 
 
 I did not verify the World Bank, DAE, DLEC, Bhasabodh, AIEP or FrugalGPT (venue) entries; check them all. The corrected KrishokBondhu and Farmer.Chat records already exist in your own arXiv paper.
 
-6. **Overlap check.** Confirm that the crop-fence experiment, the 1,000-query PRISM suite and the safety evaluation do not also appear as results in your other KrishokChat-family manuscripts (the benchmark paper under review, AgriDial-NLU, and the structured-retrieval paper).
+6. **Overlap check.** Confirm that the crop-fence experiment, the 1,000-query PRISM suite and the safety evaluation do not also appear as results in your other KrishokTech-family manuscripts (the benchmark paper under review, AgriDial-NLU, and the structured-retrieval paper).
 
 **P1: what a careful reviewer will find**
 - **Comparison table contradicted.**
@@ -414,7 +414,7 @@ I did not verify the World Bank, DAE, DLEC, Bhasabodh, AIEP or FrugalGPT (venue)
   - The manuscript credits Krishi Sathi with image-based diagnosis. I found no support for that in its abstract.
   - My Climate CoPilot's self-evaluation scores presentation and epistemic criteria. It is not a dosage verifier, yet Table 1 gives it a check in that row.
   - A directly relevant Bengali agricultural RAG system, Hossain et al. 2026 (arXiv:2601.02065), appears in your other paper's reference list but is missing here.
-- **Motivation mismatch.** In your prior paper, dense retrieval scores 0.093 on colloquial queries and 0.970 on formal safety queries. Hybrid reaches 0.539 across all 900 queries, and BM25 scores 0.523 on colloquial farmer queries. KrishokChat deploys BM25 and says dense retrieval was not evaluated, so the colloquial gap that motivates the DialectSelector is largely a dense-retrieval phenomenon.
+- **Motivation mismatch.** In your prior paper, dense retrieval scores 0.093 on colloquial queries and 0.970 on formal safety queries. Hybrid reaches 0.539 across all 900 queries, and BM25 scores 0.523 on colloquial farmer queries. KrishokTech deploys BM25 and says dense retrieval was not evaluated, so the colloquial gap that motivates the DialectSelector is largely a dense-retrieval phenomenon.
 - **Numbers that do not reconcile.** (Wilson intervals recomputed by me.)
   - The reported intervals [0.26, 3.41] and [29.99, 42.88] match 2/210 and 76/210, so "420 calls" appears to be the total across two arms, not the guarded n.
   - The Bangla-native intervals match 10/100 and 83/100, which implies 10 guarded failures. That exceeds the roughly 2 implied for the whole guarded arm. Embedded (4/10) and roleplay (2/10) failures alone total 6.

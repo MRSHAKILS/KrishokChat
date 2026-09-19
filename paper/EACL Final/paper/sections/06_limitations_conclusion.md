@@ -23,7 +23,7 @@
 
 ## Conclusion
 
-KrishokChat is designed for the phone, the network, and the budget the farmer already has. The phone holds a 284.0 MB minimal install (95.64 MB unique ONNX) with on-device models measured in-browser on a subset. The network is assumed absent. BM25 hits 0.94 from cache with precache on and deltas marked SIMULATED.
+KrishokTech is designed for the phone, the network, and the budget the farmer already has. The phone holds a 284.0 MB minimal install (95.64 MB unique ONNX) with on-device models measured in-browser on a subset. The network is assumed absent. BM25 hits 0.94 from cache with precache on and deltas marked SIMULATED.
 
 Long answers collapse to 160-character SMS or to a 16123 referral when safety requires it. The budget is explicit. Turns at zero LLM are 7.8% at a modeled 0.1798 USD per 1k. Clarification is p50 89 tokens against context p50 2146 with no blended figure.
 

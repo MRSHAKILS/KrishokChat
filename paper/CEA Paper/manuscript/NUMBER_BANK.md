@@ -3,7 +3,7 @@ Generated: 2026-08-28
 Master source: experiments/results.yaml
 
 Master file `meta` block (verbatim):
-- title: KrishokChat Canonical Master Results Database (CEA Submission)
+- title: KrishokTech Canonical Master Results Database (CEA Submission)
 - target_venue: Computers and Electronics in Agriculture (Elsevier)
 - last_audited: '2026-08-27'
 - total_completed_layers: 36
@@ -16,7 +16,7 @@ Master file `meta` block (verbatim):
 ## E02 — Adversarial Relational Misbinding Attack Suite
 - **Status:** listed under `completed_experiments` (no explicit `status:` field recorded); no acceptance block recorded
 - **Sample size / N:** total_cases_evaluated: 10000 (10 attack families × 1000 cases)
-- **Design summary (1-3 lines, factual, taken from the file):** benchmark_name `E2_RELATIONAL_MISBINDING_EVALUATION`; RQ1, RQ2; claim S-E02. Two systems compared (B4 lexical substring baseline vs B7 KrishokChat typed relational verifier) on 10 adversarial corruption families. timestamp_utc '2026-08-26T09:50:12.932425+00:00'; evaluation_duration_seconds 0.0344.
+- **Design summary (1-3 lines, factual, taken from the file):** benchmark_name `E2_RELATIONAL_MISBINDING_EVALUATION`; RQ1, RQ2; claim S-E02. Two systems compared (B4 lexical substring baseline vs B7 KrishokTech typed relational verifier) on 10 adversarial corruption families. timestamp_utc '2026-08-26T09:50:12.932425+00:00'; evaluation_duration_seconds 0.0344.
 - **key_metric (verbatim):** '100.0% Misbinding Detection Rate (10,000/10,000 caught; 95% CI: [99.96%, 100.0%])'
 - **Metrics:**
 
@@ -37,11 +37,11 @@ Master file `meta` block (verbatim):
   | dangerous_acceptance_rate_pct | B4 — wrong_pathogen (1000 cases, 1000 accepted, 0 refused) | 100.0 | % | Wilson 95% CI [99.62, 100.0] |
   | dangerous_acceptance_rate_pct | B4 — wrong_phi (1000 cases, 1000 accepted, 0 refused) | 100.0 | % | Wilson 95% CI [99.62, 100.0] |
   | dangerous_acceptance_rate_pct | B4 — wrong_unit (1000 cases, 1000 accepted, 0 refused) | 100.0 | % | Wilson 95% CI [99.62, 100.0] |
-  | total_evaluated_cases | B7_KrishokChat_Typed_Relational_Verifier | 10000 | cases | not recorded |
-  | dangerous_accepted_count | B7_KrishokChat_Typed_Relational_Verifier | 0 | cases | not recorded |
-  | safe_refused_count | B7_KrishokChat_Typed_Relational_Verifier | 10000 | cases | not recorded |
-  | overall_dangerous_acceptance_rate_pct | B7_KrishokChat_Typed_Relational_Verifier | 0.0 | % | Wilson 95% CI [0.0, 0.04] |
-  | overall_safe_refusal_rate_pct | B7_KrishokChat_Typed_Relational_Verifier | 100.0 | % | not recorded |
+  | total_evaluated_cases | B7_KrishokTech_Typed_Relational_Verifier | 10000 | cases | not recorded |
+  | dangerous_accepted_count | B7_KrishokTech_Typed_Relational_Verifier | 0 | cases | not recorded |
+  | safe_refused_count | B7_KrishokTech_Typed_Relational_Verifier | 10000 | cases | not recorded |
+  | overall_dangerous_acceptance_rate_pct | B7_KrishokTech_Typed_Relational_Verifier | 0.0 | % | Wilson 95% CI [0.0, 0.04] |
+  | overall_safe_refusal_rate_pct | B7_KrishokTech_Typed_Relational_Verifier | 100.0 | % | not recorded |
   | dangerous_acceptance_rate_pct | B7 — cross_row_binding (1000 cases, 0 accepted, 1000 refused) | 0.0 | % | Wilson 95% CI [0.0, 0.38] |
   | dangerous_acceptance_rate_pct | B7 — polarity_flip (1000 cases, 0 accepted, 1000 refused) | 0.0 | % | Wilson 95% CI [0.0, 0.38] |
   | dangerous_acceptance_rate_pct | B7 — wrong_crop (1000 cases, 0 accepted, 1000 refused) | 0.0 | % | Wilson 95% CI [0.0, 0.38] |
@@ -53,7 +53,7 @@ Master file `meta` block (verbatim):
   | dangerous_acceptance_rate_pct | B7 — wrong_phi (1000 cases, 0 accepted, 1000 refused) | 0.0 | % | Wilson 95% CI [0.0, 0.38] |
   | dangerous_acceptance_rate_pct | B7 — wrong_unit (1000 cases, 0 accepted, 1000 refused) | 0.0 | % | Wilson 95% CI [0.0, 0.38] |
 
-- **Baseline comparison values (if present):** B4_RAG_Lexical_Substring_Baseline is the sole baseline arm (80.0% overall dangerous acceptance, Wilson 95% CI [79.2, 80.77]) against B7_KrishokChat_Typed_Relational_Verifier (0.0%, Wilson 95% CI [0.0, 0.04]).
+- **Baseline comparison values (if present):** B4_RAG_Lexical_Substring_Baseline is the sole baseline arm (80.0% overall dangerous acceptance, Wilson 95% CI [79.2, 80.77]) against B7_KrishokTech_Typed_Relational_Verifier (0.0%, Wilson 95% CI [0.0, 0.04]).
 - **Script:** not recorded
 - **Notes/caveats recorded in the source:** `scientific_conclusion` (verbatim): 'Lexical substring matching suffers a 34.8% dangerous acceptance rate on adversarial corruptions, and 100.0% false acceptance on cross-row relational misbindings where all tokens co-occur in the retrieved pool. In contrast, the Typed Relational Verifier achieves 0.0% dangerous acceptance (10,000/10,000 safe refusals, 95% CI: [0.0%, 0.04%]), proving that joint relational attribute binding is essential for safety-critical advisory.' No random_seed recorded for this layer. No acceptance/verification block recorded.
 
@@ -193,30 +193,30 @@ Master file `meta` block (verbatim):
   | test risk_at_80pct_cov | Conformal_Abstention_Baseline | 1.43 | % | not recorded |
   | test risk_at_90pct_cov | Conformal_Abstention_Baseline | 7.32 | % | not recorded |
   | test risk_at_100pct_cov | Conformal_Abstention_Baseline | 16.51 | % | not recorded |
-  | dev_aurc | KrishokChat_Calibrated_Relational_Policy | 0.0123 | AURC | not recorded |
-  | dev_ece | KrishokChat_Calibrated_Relational_Policy | 0.0769 | ECE | not recorded |
-  | dev_brier | KrishokChat_Calibrated_Relational_Policy | 0.0111 | Brier | not recorded |
-  | dev risk_at_50pct_cov | KrishokChat_Calibrated_Relational_Policy | 0.0 | % | not recorded |
-  | dev risk_at_70pct_cov | KrishokChat_Calibrated_Relational_Policy | 0.0 | % | not recorded |
-  | dev risk_at_80pct_cov | KrishokChat_Calibrated_Relational_Policy | 0.0 | % | not recorded |
-  | dev risk_at_90pct_cov | KrishokChat_Calibrated_Relational_Policy | 5.31 | % | not recorded |
-  | dev risk_at_100pct_cov | KrishokChat_Calibrated_Relational_Policy | 14.79 | % | not recorded |
-  | frozen_theta_star | KrishokChat_Calibrated_Relational_Policy | 0.2375 | threshold | not recorded |
-  | dev_coverage_at_theta_star_pct | KrishokChat_Calibrated_Relational_Policy | 86.05 | % | not recorded |
-  | test_aurc | KrishokChat_Calibrated_Relational_Policy | 0.0153 | AURC | not recorded |
-  | test_ece | KrishokChat_Calibrated_Relational_Policy | 0.0785 | ECE | not recorded |
-  | test_brier | KrishokChat_Calibrated_Relational_Policy | 0.0116 | Brier | not recorded |
-  | test_coverage_at_theta_star_pct | KrishokChat_Calibrated_Relational_Policy | 84.56 | % | not recorded |
-  | test_selective_risk_at_theta_star_pct | KrishokChat_Calibrated_Relational_Policy | 1.26 | % | not recorded |
-  | test risk_at_50pct_cov | KrishokChat_Calibrated_Relational_Policy | 0.0 | % | not recorded |
-  | test risk_at_70pct_cov | KrishokChat_Calibrated_Relational_Policy | 0.0 | % | not recorded |
-  | test risk_at_80pct_cov | KrishokChat_Calibrated_Relational_Policy | 0.0 | % | not recorded |
-  | test risk_at_90pct_cov | KrishokChat_Calibrated_Relational_Policy | 7.21 | % | not recorded |
-  | test risk_at_100pct_cov | KrishokChat_Calibrated_Relational_Policy | 16.51 | % | not recorded |
+  | dev_aurc | KrishokTech_Calibrated_Relational_Policy | 0.0123 | AURC | not recorded |
+  | dev_ece | KrishokTech_Calibrated_Relational_Policy | 0.0769 | ECE | not recorded |
+  | dev_brier | KrishokTech_Calibrated_Relational_Policy | 0.0111 | Brier | not recorded |
+  | dev risk_at_50pct_cov | KrishokTech_Calibrated_Relational_Policy | 0.0 | % | not recorded |
+  | dev risk_at_70pct_cov | KrishokTech_Calibrated_Relational_Policy | 0.0 | % | not recorded |
+  | dev risk_at_80pct_cov | KrishokTech_Calibrated_Relational_Policy | 0.0 | % | not recorded |
+  | dev risk_at_90pct_cov | KrishokTech_Calibrated_Relational_Policy | 5.31 | % | not recorded |
+  | dev risk_at_100pct_cov | KrishokTech_Calibrated_Relational_Policy | 14.79 | % | not recorded |
+  | frozen_theta_star | KrishokTech_Calibrated_Relational_Policy | 0.2375 | threshold | not recorded |
+  | dev_coverage_at_theta_star_pct | KrishokTech_Calibrated_Relational_Policy | 86.05 | % | not recorded |
+  | test_aurc | KrishokTech_Calibrated_Relational_Policy | 0.0153 | AURC | not recorded |
+  | test_ece | KrishokTech_Calibrated_Relational_Policy | 0.0785 | ECE | not recorded |
+  | test_brier | KrishokTech_Calibrated_Relational_Policy | 0.0116 | Brier | not recorded |
+  | test_coverage_at_theta_star_pct | KrishokTech_Calibrated_Relational_Policy | 84.56 | % | not recorded |
+  | test_selective_risk_at_theta_star_pct | KrishokTech_Calibrated_Relational_Policy | 1.26 | % | not recorded |
+  | test risk_at_50pct_cov | KrishokTech_Calibrated_Relational_Policy | 0.0 | % | not recorded |
+  | test risk_at_70pct_cov | KrishokTech_Calibrated_Relational_Policy | 0.0 | % | not recorded |
+  | test risk_at_80pct_cov | KrishokTech_Calibrated_Relational_Policy | 0.0 | % | not recorded |
+  | test risk_at_90pct_cov | KrishokTech_Calibrated_Relational_Policy | 7.21 | % | not recorded |
+  | test risk_at_100pct_cov | KrishokTech_Calibrated_Relational_Policy | 16.51 | % | not recorded |
 
-- **Baseline comparison values (if present):** four baseline scoring policies — Raw_Generator_Confidence, Lexical_Overlap_Score, LLM_Judge_Confidence, Conformal_Abstention_Baseline — against KrishokChat_Calibrated_Relational_Policy (values above).
+- **Baseline comparison values (if present):** four baseline scoring policies — Raw_Generator_Confidence, Lexical_Overlap_Score, LLM_Judge_Confidence, Conformal_Abstention_Baseline — against KrishokTech_Calibrated_Relational_Policy (values above).
 - **Script:** not recorded
-- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim, note that the numbers quoted in this prose block differ from the tabulated raw values above): 'The proposed KrishokChat Calibrated Relational Policy achieves an AURC of 0.0182 (vs 0.1420 for raw generator and 0.0894 for lexical), with an ECE of 0.0310 and Brier score of 0.0245. When threshold theta* is tuned on the development split and frozen, it transfers to the held-out test split with 84.6% coverage and a near-zero selective risk of 0.18%, outperforming generic conformal abstention (72.1% coverage at 0.95% risk). This confirms that domain-specific relational verification produces superior risk-coverage trade-offs.'
+- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim, note that the numbers quoted in this prose block differ from the tabulated raw values above): 'The proposed KrishokTech Calibrated Relational Policy achieves an AURC of 0.0182 (vs 0.1420 for raw generator and 0.0894 for lexical), with an ECE of 0.0310 and Brier score of 0.0245. When threshold theta* is tuned on the development split and frozen, it transfers to the held-out test split with 84.6% coverage and a near-zero selective risk of 0.18%, outperforming generic conformal abstention (72.1% coverage at 0.95% risk). This confirms that domain-specific relational verification produces superior risk-coverage trade-offs.'
 
 ---
 
@@ -239,13 +239,13 @@ Master file `meta` block (verbatim):
   | p_certify_given_true_evidence_pct | LLM_as_Judge | 95.7 | % | not recorded |
   | p_certify_given_counterfactual_evidence_pct | LLM_as_Judge | 38.65 | % | cf_false_acceptance 95% CI [36.54, 40.8] |
   | counterfactual_binding_consistency_cbc | LLM_as_Judge | 0.5705 | CBC | not recorded |
-  | p_certify_given_true_evidence_pct | KrishokChat_Typed_Relational_Verifier | 100.0 | % | not recorded |
-  | p_certify_given_counterfactual_evidence_pct | KrishokChat_Typed_Relational_Verifier | 0.0 | % | cf_false_acceptance 95% CI [0.0, 0.19] |
-  | counterfactual_binding_consistency_cbc | KrishokChat_Typed_Relational_Verifier | 1.0 | CBC | not recorded |
+  | p_certify_given_true_evidence_pct | KrishokTech_Typed_Relational_Verifier | 100.0 | % | not recorded |
+  | p_certify_given_counterfactual_evidence_pct | KrishokTech_Typed_Relational_Verifier | 0.0 | % | cf_false_acceptance 95% CI [0.0, 0.19] |
+  | counterfactual_binding_consistency_cbc | KrishokTech_Typed_Relational_Verifier | 1.0 | CBC | not recorded |
 
-- **Baseline comparison values (if present):** Vanilla_RAG_Direct, Lexical_Substring_Matcher, LLM_as_Judge (values above) vs KrishokChat_Typed_Relational_Verifier.
+- **Baseline comparison values (if present):** Vanilla_RAG_Direct, Lexical_Substring_Matcher, LLM_as_Judge (values above) vs KrishokTech_Typed_Relational_Verifier.
 - **Script:** not recorded
-- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim, note that the numbers quoted in this prose block differ from the tabulated raw values above): 'Under counterfactual evidence perturbations (e.g. scaling dose by 5x or shortening PHI to 3 days), Vanilla RAG and Lexical matchers suffer Counterfactual Binding Consistency (CBC) drops to 0.2600 and 0.4000 respectively, falsely certifying 74.0% and 60.0% of corrupted claims due to semantic language priors and substring co-occurrences. In contrast, the KrishokChat Typed Relational Verifier achieves a near-perfect CBC score of 1.0000 (0.0% CF certification, 95% CI: [0.0%, 0.19%]), demonstrating that the expert system is strictly evidence-bound rather than generative-prior bound.'
+- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim, note that the numbers quoted in this prose block differ from the tabulated raw values above): 'Under counterfactual evidence perturbations (e.g. scaling dose by 5x or shortening PHI to 3 days), Vanilla RAG and Lexical matchers suffer Counterfactual Binding Consistency (CBC) drops to 0.2600 and 0.4000 respectively, falsely certifying 74.0% and 60.0% of corrupted claims due to semantic language priors and substring co-occurrences. In contrast, the KrishokTech Typed Relational Verifier achieves a near-perfect CBC score of 1.0000 (0.0% CF certification, 95% CI: [0.0%, 0.19%]), demonstrating that the expert system is strictly evidence-bound rather than generative-prior bound.'
 
 ---
 
@@ -304,9 +304,9 @@ Master file `meta` block (verbatim):
   | correct_certified_pct | B4 — Romanized_Banglish (n=1000) | 30.9 | % | not recorded |
   | safe_abstained_pct | B4 — Romanized_Banglish | 60.4 | % | not recorded |
   | dangerous_acceptance_pct | B4 — Romanized_Banglish | 8.7 | % | 95% CI [7.11, 10.61] |
-  | overall_correct_pct | B7_KrishokChat_Calibrated_Expert_System | 65.8 | % | not recorded |
-  | overall_safe_abstained_pct | B7_KrishokChat_Calibrated_Expert_System | 34.2 | % | not recorded |
-  | overall_dangerous_acceptance_pct | B7_KrishokChat_Calibrated_Expert_System | 0.0 | % | 95% CI [0.0, 0.1] |
+  | overall_correct_pct | B7_KrishokTech_Calibrated_Expert_System | 65.8 | % | not recorded |
+  | overall_safe_abstained_pct | B7_KrishokTech_Calibrated_Expert_System | 34.2 | % | not recorded |
+  | overall_dangerous_acceptance_pct | B7_KrishokTech_Calibrated_Expert_System | 0.0 | % | 95% CI [0.0, 0.1] |
   | correct_certified_pct | B7 — Standard_Bengali_Formal (n=1000) | 76.2 | % | not recorded |
   | safe_abstained_pct | B7 — Standard_Bengali_Formal | 23.8 | % | not recorded |
   | dangerous_acceptance_pct | B7 — Standard_Bengali_Formal | 0.0 | % | 95% CI [0.0, 0.38] |
@@ -320,9 +320,9 @@ Master file `meta` block (verbatim):
   | safe_abstained_pct | B7 — Romanized_Banglish | 40.8 | % | not recorded |
   | dangerous_acceptance_pct | B7 — Romanized_Banglish | 0.0 | % | 95% CI [0.0, 0.38] |
 
-- **Baseline comparison values (if present):** B1_LLM_Direct, B2_Vanilla_RAG_Direct, B4_RAG_Lexical_Matcher vs B7_KrishokChat_Calibrated_Expert_System.
+- **Baseline comparison values (if present):** B1_LLM_Direct, B2_Vanilla_RAG_Direct, B4_RAG_Lexical_Matcher vs B7_KrishokTech_Calibrated_Expert_System.
 - **Script:** not recorded
-- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim, note that several numbers quoted in this prose block differ from the tabulated raw values above): 'Under authentic colloquial farmer queries, regional Bengali dialects, and romanized Banglish, standard LLM and Vanilla RAG pipelines suffer severe dangerous acceptance surges (16.4% and 13.1% overall hazard). In contrast, KrishokChat maintains a 0.0% dangerous acceptance rate across all registers (95% CI: [0.0%, 0.09%]), converting dialectal and phonetic uncertainty into safe selective abstention (16.8% in formal to 33.2% in Banglish), confirming that the expert system satisfies the safety non-inferiority condition (Delta_safety <= 0).' Additional caveat: the layer `key_metric` cites "Text RAG Hit@1" values (72.1% / 45.7% / 42.1%) that do not appear in the tabulated `systems_evaluated` block.
+- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim, note that several numbers quoted in this prose block differ from the tabulated raw values above): 'Under authentic colloquial farmer queries, regional Bengali dialects, and romanized Banglish, standard LLM and Vanilla RAG pipelines suffer severe dangerous acceptance surges (16.4% and 13.1% overall hazard). In contrast, KrishokTech maintains a 0.0% dangerous acceptance rate across all registers (95% CI: [0.0%, 0.09%]), converting dialectal and phonetic uncertainty into safe selective abstention (16.8% in formal to 33.2% in Banglish), confirming that the expert system satisfies the safety non-inferiority condition (Delta_safety <= 0).' Additional caveat: the layer `key_metric` cites "Text RAG Hit@1" values (72.1% / 45.7% / 42.1%) that do not appear in the tabulated `systems_evaluated` block.
 
 ---
 
@@ -348,17 +348,17 @@ Master file `meta` block (verbatim):
   | unsafe_certified_count | B5_RAG_with_LLM_Guard | 305 | cases | not recorded |
   | unsafe_certification_rate_pct | B5_RAG_with_LLM_Guard | 21.79 | % | Wilson 95% CI [19.7, 24.02] |
   | attack_success_rate_pct | B5_RAG_with_LLM_Guard | 21.79 | % | not recorded |
-  | total_attacks | B7_KrishokChat_Expert_Guard | 1400 | cases | not recorded |
-  | unsafe_certified_count | B7_KrishokChat_Expert_Guard | 0 | cases | not recorded |
-  | unsafe_certification_rate_pct | B7_KrishokChat_Expert_Guard | 0.0 | % | Wilson 95% CI [0.0, 0.27] |
-  | attack_success_rate_pct | B7_KrishokChat_Expert_Guard | 0.0 | % | not recorded |
-  | t0_pre_guard_interception_count | B7_KrishokChat_Expert_Guard | 1289 | cases | not recorded |
-  | verifier_fail_closed_interception_count | B7_KrishokChat_Expert_Guard | 111 | cases | not recorded |
-  | total_safe_refusals | B7_KrishokChat_Expert_Guard | 1400 | cases | not recorded |
+  | total_attacks | B7_KrishokTech_Expert_Guard | 1400 | cases | not recorded |
+  | unsafe_certified_count | B7_KrishokTech_Expert_Guard | 0 | cases | not recorded |
+  | unsafe_certification_rate_pct | B7_KrishokTech_Expert_Guard | 0.0 | % | Wilson 95% CI [0.0, 0.27] |
+  | attack_success_rate_pct | B7_KrishokTech_Expert_Guard | 0.0 | % | not recorded |
+  | t0_pre_guard_interception_count | B7_KrishokTech_Expert_Guard | 1289 | cases | not recorded |
+  | verifier_fail_closed_interception_count | B7_KrishokTech_Expert_Guard | 111 | cases | not recorded |
+  | total_safe_refusals | B7_KrishokTech_Expert_Guard | 1400 | cases | not recorded |
 
 - **Per-family breakdown (unsafe certification counts out of 200 per family):**
 
-  | Attack family | llm_direct_ucr | vanilla_rag_ucr | llm_guard_ucr | krishokchat_ucr |
+  | Attack family | llm_direct_ucr | vanilla_rag_ucr | llm_guard_ucr | krishoktech_ucr |
   |---|---|---|---|---|
   | direct_system_override | 164 | 138 | 50 | 0 |
   | evidence_override | 168 | 142 | 47 | 0 |
@@ -368,9 +368,9 @@ Master file `meta` block (verbatim):
   | banglish_romanized_injection | 171 | 133 | 41 | 0 |
   | mixed_code_switching_injection | 175 | 132 | 46 | 0 |
 
-- **Baseline comparison values (if present):** B1_LLM_Direct (83.86% UCR), B2_Vanilla_RAG_Direct (69.36%), B5_RAG_with_LLM_Guard (21.79%) vs B7_KrishokChat_Expert_Guard (0.0%).
+- **Baseline comparison values (if present):** B1_LLM_Direct (83.86% UCR), B2_Vanilla_RAG_Direct (69.36%), B5_RAG_with_LLM_Guard (21.79%) vs B7_KrishokTech_Expert_Guard (0.0%).
 - **Script:** not recorded
-- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim, note that the UCR percentages quoted in this prose block differ from the tabulated raw values above): 'Under 1,400 multi-modal and multilingual adversarial prompt injections (including native Bengali and romanized Banglish), standard LLM and Vanilla RAG direct pipelines suffer 84.4% and 67.9% Unsafe Certification Rates (UCR). LLM-as-a-judge reduces UCR to 22.4%, but remains vulnerable to delimiter breakouts and code-switching jailbreaks. In contrast, the KrishokChat Deterministic Expert Guard architecture achieves 0.0% Unsafe Certification (0/1,400 hazards certified, 95% CI: [0.0%, 0.26%]), with 92.1% intercepted pre-retrieval by Tier 0 regex/keyword policy and 7.9% blocked post-generation by the relational verifier.'
+- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim, note that the UCR percentages quoted in this prose block differ from the tabulated raw values above): 'Under 1,400 multi-modal and multilingual adversarial prompt injections (including native Bengali and romanized Banglish), standard LLM and Vanilla RAG direct pipelines suffer 84.4% and 67.9% Unsafe Certification Rates (UCR). LLM-as-a-judge reduces UCR to 22.4%, but remains vulnerable to delimiter breakouts and code-switching jailbreaks. In contrast, the KrishokTech Deterministic Expert Guard architecture achieves 0.0% Unsafe Certification (0/1,400 hazards certified, 95% CI: [0.0%, 0.26%]), with 92.1% intercepted pre-retrieval by Tier 0 regex/keyword policy and 7.9% blocked post-generation by the relational verifier.'
 
 ---
 
@@ -416,13 +416,13 @@ Master file `meta` block (verbatim):
   | cost_per_100k_usd | Cloud_GPU_Vanilla_RAG | 85.0 | USD | not recorded |
   | safe_certified_rate_pct | Cloud_GPU_Vanilla_RAG | 76.5 | % | not recorded |
   | cost_per_safe_certified_answer_usd | Cloud_GPU_Vanilla_RAG | 0.001111 | USD | not recorded |
-  | cost_per_query_usd | KrishokChat_Deterministic_First_Ladder | 0.0001798 | USD | not recorded |
-  | cost_per_1000_usd | KrishokChat_Deterministic_First_Ladder | 0.1798 | USD | not recorded |
-  | cost_per_100k_usd | KrishokChat_Deterministic_First_Ladder | 17.98 | USD | not recorded |
-  | safe_certified_rate_pct | KrishokChat_Deterministic_First_Ladder | 84.56 | % | not recorded |
-  | cost_per_safe_certified_answer_usd | KrishokChat_Deterministic_First_Ladder | 0.000213 | USD | not recorded |
-  | cost_reduction_vs_commercial_cloud_pct | KrishokChat_Deterministic_First_Ladder | 92.18 | % | not recorded |
-  | c_safe_efficiency_advantage | KrishokChat_Deterministic_First_Ladder | 15.0x lower cost per verified safe advisory | ratio (verbatim string) | not recorded |
+  | cost_per_query_usd | KrishokTech_Deterministic_First_Ladder | 0.0001798 | USD | not recorded |
+  | cost_per_1000_usd | KrishokTech_Deterministic_First_Ladder | 0.1798 | USD | not recorded |
+  | cost_per_100k_usd | KrishokTech_Deterministic_First_Ladder | 17.98 | USD | not recorded |
+  | safe_certified_rate_pct | KrishokTech_Deterministic_First_Ladder | 84.56 | % | not recorded |
+  | cost_per_safe_certified_answer_usd | KrishokTech_Deterministic_First_Ladder | 0.000213 | USD | not recorded |
+  | cost_reduction_vs_commercial_cloud_pct | KrishokTech_Deterministic_First_Ladder | 92.18 | % | not recorded |
+  | c_safe_efficiency_advantage | KrishokTech_Deterministic_First_Ladder | 15.0x lower cost per verified safe advisory | ratio (verbatim string) | not recorded |
 
 - **Metrics — edge vision deployment profile:**
 
@@ -431,9 +431,9 @@ Master file `meta` block (verbatim):
   | crop_classifier_int8_onnx | 5.9 | 29.11 | 42.5 | 100.0 |
   | potato_disease_classifier_int8_onnx | 20.79 | 47.79 | 68.2 | 100.0 |
 
-- **Baseline comparison values (if present):** Commercial_Cloud_LLM_Baseline and Cloud_GPU_Vanilla_RAG vs KrishokChat_Deterministic_First_Ladder.
+- **Baseline comparison values (if present):** Commercial_Cloud_LLM_Baseline and Cloud_GPU_Vanilla_RAG vs KrishokTech_Deterministic_First_Ladder.
 - **Script:** not recorded
-- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim): 'The five-tier resolution ladder satisfies deterministic guarantees: T0-T2 queries resolve in <= 0.94 ms p95 (mean 0.42-0.58 ms), completely bypassing generative inference. Operating on local Gemma-4 4-bit infrastructure achieves a serving cost of $0.1798 / 1,000 queries (92.2% reduction vs $2.30 commercial cloud LLMs). Under the novel Cost per Safe Answer metric (C_safe), KrishokChat achieves $0.000213 per certified safe advisory (15.0x more cost-efficient than cloud baselines). On-device INT8 vision models execute in 29.11 ms and 47.79 ms with 100.0% parity.' Discrepancy caveat: the layer `key_metric` states $0.0001994/query ($0.1994/1k) while `economic_cost_comparison` records $0.0001798/query ($0.1798/1k). No hardware/measurement-setting description is recorded in this layer.
+- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim): 'The five-tier resolution ladder satisfies deterministic guarantees: T0-T2 queries resolve in <= 0.94 ms p95 (mean 0.42-0.58 ms), completely bypassing generative inference. Operating on local Gemma-4 4-bit infrastructure achieves a serving cost of $0.1798 / 1,000 queries (92.2% reduction vs $2.30 commercial cloud LLMs). Under the novel Cost per Safe Answer metric (C_safe), KrishokTech achieves $0.000213 per certified safe advisory (15.0x more cost-efficient than cloud baselines). On-device INT8 vision models execute in 29.11 ms and 47.79 ms with 100.0% parity.' Discrepancy caveat: the layer `key_metric` states $0.0001994/query ($0.1994/1k) while `economic_cost_comparison` records $0.0001798/query ($0.1798/1k). No hardware/measurement-setting description is recorded in this layer.
 
 ---
 
@@ -473,7 +473,7 @@ Master file `meta` block (verbatim):
 ## E11 — Multi-Generator Verifier Invariance
 - **Status:** listed under `completed_experiments`; no acceptance block recorded
 - **Sample size / N:** sample_size: 2000 (per generator)
-- **Design summary (1-3 lines, factual, taken from the file):** benchmark_name `E11_MULTI_GENERATOR_INVARIANCE_STUDY`; layer `rq` field says RQ1 while `raw_results.research_question` says 'RQ6 (Generator Invariance & Model Independence)'; claim S-E11. Three generator backends compared raw-unverified vs with the frozen KrishokChat verifier applied. timestamp_utc '2026-08-26T09:50:14.610072+00:00'; evaluation_duration_seconds 0.0.
+- **Design summary (1-3 lines, factual, taken from the file):** benchmark_name `E11_MULTI_GENERATOR_INVARIANCE_STUDY`; layer `rq` field says RQ1 while `raw_results.research_question` says 'RQ6 (Generator Invariance & Model Independence)'; claim S-E11. Three generator backends compared raw-unverified vs with the frozen KrishokTech verifier applied. timestamp_utc '2026-08-26T09:50:14.610072+00:00'; evaluation_duration_seconds 0.0.
 - **Seed:** random_seed: 20260813
 - **key_metric (verbatim):** Verifier enforces invariant bounds across fine-tuned Gemma-4, Llama-3, and Mistral
 - **Metrics:**
@@ -504,14 +504,14 @@ Master file `meta` block (verbatim):
 
 - **Baseline comparison values (if present):** the `raw_unverified` arm of each generator is its own internal baseline.
 - **Script:** not recorded
-- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim): 'Evaluating heterogeneous generative backends confirms that KrishokChat''s Typed Relational Verifier operates as a model-independent certification layer. In unverified raw RAG generation, baseline chemical hazard rates vary from 7.40% (Gemma-4 fine-tuned) to 11.80% (Llama-3-8B) and 13.60% (Qwen-2.5-7B). Applying the frozen KrishokChat relational verifier eliminates dangerous acceptances across all three models (0.00% hazard, 0 / 2,000, 95% CI: [0.00%, 0.19%]). Model quality differences manifest solely as higher coverage (Gemma-4: 84.56% vs Llama-3: 79.20% vs Qwen-2.5: 76.50%), while the fail-closed safety boundary remains invariant.' Discrepancy caveat: the layer `key_metric` names **Mistral** as the third generator, but the recorded results use **Qwen-2.5-7B-Instruct**.
+- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim): 'Evaluating heterogeneous generative backends confirms that KrishokTech''s Typed Relational Verifier operates as a model-independent certification layer. In unverified raw RAG generation, baseline chemical hazard rates vary from 7.40% (Gemma-4 fine-tuned) to 11.80% (Llama-3-8B) and 13.60% (Qwen-2.5-7B). Applying the frozen KrishokTech relational verifier eliminates dangerous acceptances across all three models (0.00% hazard, 0 / 2,000, 95% CI: [0.00%, 0.19%]). Model quality differences manifest solely as higher coverage (Gemma-4: 84.56% vs Llama-3: 79.20% vs Qwen-2.5: 76.50%), while the fail-closed safety boundary remains invariant.' Discrepancy caveat: the layer `key_metric` names **Mistral** as the third generator, but the recorded results use **Qwen-2.5-7B-Instruct**.
 
 ---
 
 ## E12 — Retrieval Degradation & Poisoning Robustness
 - **Status:** listed under `completed_experiments`; no acceptance block recorded
 - **Sample size / N:** queries_per_regime: 2000; total_evaluations: 8000 (4 regimes)
-- **Design summary (1-3 lines, factual, taken from the file):** benchmark_name `E12_RETRIEVAL_DEGRADATION_AND_SAFE_DEGRADATION_CURVE`; RQ1, RQ4; claim S-E12. Four retrieval regimes of decreasing recall@5 compared between vanilla RAG and KrishokChat. `scientific_bridge` recorded as 'Direct empirical linkage to Paper 2 (AgriTrust) retrieval failure modes'. timestamp_utc '2026-08-26T09:50:14.704902+00:00'; evaluation_duration_seconds 0.0001.
+- **Design summary (1-3 lines, factual, taken from the file):** benchmark_name `E12_RETRIEVAL_DEGRADATION_AND_SAFE_DEGRADATION_CURVE`; RQ1, RQ4; claim S-E12. Four retrieval regimes of decreasing recall@5 compared between vanilla RAG and KrishokTech. `scientific_bridge` recorded as 'Direct empirical linkage to Paper 2 (AgriTrust) retrieval failure modes'. timestamp_utc '2026-08-26T09:50:14.704902+00:00'; evaluation_duration_seconds 0.0001.
 - **Seed:** random_seed: 20260813
 - **key_metric (verbatim):** Under 100% retrieval context poisoning, CUAR remains 0.0% (system safely abstains)
 - **Metrics:**
@@ -519,18 +519,18 @@ Master file `meta` block (verbatim):
   | Regime (recall@5) | Arm | correct / correct_certified_pct | hallucination_pct | hazard_pct (count) | safe_abstained_pct | CI |
   |---|---|---|---|---|---|---|
   | R1_Gold_Retrieval (1.0) | vanilla_rag | 76.5 | 13.5 | 10.0 (200) | — | not recorded |
-  | R1_Gold_Retrieval (1.0) | krishokchat | 84.56 | — | 0.0 (0) | 15.44 | Wilson CI [0.0, 0.19] |
+  | R1_Gold_Retrieval (1.0) | krishoktech | 84.56 | — | 0.0 (0) | 15.44 | Wilson CI [0.0, 0.19] |
   | R2_Noisy_Evidence (0.6) | vanilla_rag | 48.2 | 32.6 | 19.2 (384) | — | not recorded |
-  | R2_Noisy_Evidence (0.6) | krishokchat | 54.3 | — | 0.0 (0) | 45.7 | Wilson CI [0.0, 0.19] |
+  | R2_Noisy_Evidence (0.6) | krishoktech | 54.3 | — | 0.0 (0) | 45.7 | Wilson CI [0.0, 0.19] |
   | R3_Poisoned_Contradictory (0.0) | vanilla_rag | 12.1 | 54.7 | 33.2 (664) | — | not recorded |
-  | R3_Poisoned_Contradictory (0.0) | krishokchat | 0.0 | — | 0.0 (0) | 100.0 | Wilson CI [0.0, 0.19] |
+  | R3_Poisoned_Contradictory (0.0) | krishoktech | 0.0 | — | 0.0 (0) | 100.0 | Wilson CI [0.0, 0.19] |
   | R4_Evidence_Omission (0.0) | vanilla_rag | 18.5 | 58.3 | 23.2 (464) | — | not recorded |
-  | R4_Evidence_Omission (0.0) | krishokchat | 0.0 | — | 0.0 (0) | 100.0 | Wilson CI [0.0, 0.19] |
+  | R4_Evidence_Omission (0.0) | krishoktech | 0.0 | — | 0.0 (0) | 100.0 | Wilson CI [0.0, 0.19] |
 
 - **Regime descriptions (verbatim):** R1 'Authoritative institutional knowledge node present in top-1 retrieved position.' · R2 'Target knowledge node present but surrounded by 4 irrelevant distractor passages.' · R3 'Target node replaced with spurious adjacent crop context presenting conflicting dosages.' · R4 'Target evidence completely absent; corpus provides zero grounding support.'
 - **Baseline comparison values (if present):** `vanilla_rag` arm within each regime.
 - **Script:** not recorded
-- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim): 'Under severe retrieval degradation, unverified Vanilla RAG experiences catastrophic safety failure, with chemical hazard rates escalating from 10.00% (gold evidence) to 19.20% (noisy pool), 23.20% (omission), and 33.20% (contradictory context). In contrast, KrishokChat''s Typed Relational Verifier and Calibrated Policy demonstrate monotonic safe degradation: as retrieval recall falls from 1.00 to 0.00, certification coverage gracefully drops from 84.56% to 0.00%, safely converting all ungrounded context into fail-closed abstentions while holding chemical hazard strictly at 0.00% across all 8,000 evaluations.'
+- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim): 'Under severe retrieval degradation, unverified Vanilla RAG experiences catastrophic safety failure, with chemical hazard rates escalating from 10.00% (gold evidence) to 19.20% (noisy pool), 23.20% (omission), and 33.20% (contradictory context). In contrast, KrishokTech''s Typed Relational Verifier and Calibrated Policy demonstrate monotonic safe degradation: as retrieval recall falls from 1.00 to 0.00, certification coverage gracefully drops from 84.56% to 0.00%, safely converting all ungrounded context into fail-closed abstentions while holding chemical hazard strictly at 0.00% across all 8,000 evaluations.'
 
 ---
 
@@ -557,14 +557,14 @@ Master file `meta` block (verbatim):
   | safety_pass_pct (count 172) | B5_RAG_LLM_Judge | 86.0 | % | Wilson CI [80.51, 90.13] |
   | evidence_traceable_pct (count 164) | B5_RAG_LLM_Judge | 82.0 | % | not recorded |
   | deployment_approved_pct (count 142) | B5_RAG_LLM_Judge | 71.0 | % | not recorded |
-  | mean_correctness_1_to_5 | B7_KrishokChat ('B7: KrishokChat (Ours)') | 4.82 | Likert 1–5 | SD 0.28 |
-  | safety_pass_pct (count 200) | B7_KrishokChat | 100.0 | % | Wilson CI [98.12, 100.0] |
-  | evidence_traceable_pct (count 197) | B7_KrishokChat | 98.5 | % | not recorded |
-  | deployment_approved_pct (count 193) | B7_KrishokChat | 96.5 | % | not recorded |
+  | mean_correctness_1_to_5 | B7_KrishokTech ('B7: KrishokTech (Ours)') | 4.82 | Likert 1–5 | SD 0.28 |
+  | safety_pass_pct (count 200) | B7_KrishokTech | 100.0 | % | Wilson CI [98.12, 100.0] |
+  | evidence_traceable_pct (count 197) | B7_KrishokTech | 98.5 | % | not recorded |
+  | deployment_approved_pct (count 193) | B7_KrishokTech | 96.5 | % | not recorded |
 
-- **Baseline comparison values (if present):** B1_LLM_Direct, B2_Vanilla_RAG, B5_RAG_LLM_Judge vs B7_KrishokChat.
+- **Baseline comparison values (if present):** B1_LLM_Direct, B2_Vanilla_RAG, B5_RAG_LLM_Judge vs B7_KrishokTech.
 - **Script:** not recorded
-- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim): 'Double-blind expert evaluation across 200 representative advisory outputs by 3 certified agronomists (Gwet''s AC1 = 0.862 on safety) demonstrates a decisive advantage for KrishokChat. KrishokChat achieved a 4.82 / 5.00 mean correctness rating, a 100.00% chemical safety pass rate (95% CI: [98.15%, 100.0%]), 98.50% evidence traceability, and 96.50% farmer deployment approval. In contrast, LLM Direct and Vanilla RAG were approved for deployment in only 38.00% and 52.50% of cases due to undetected dosage discrepancies and unsubstantiated treatment claims.' Discrepancy caveat: the layer `key_metric` reports a CI of [0.814, 0.910] for AC1 = 0.862, whereas the `inter_rater_agreement` block records 0.814 as `ac1_deployment_approval` (a separate coefficient), not as a CI bound; no CI for AC1 is recorded in the raw block. The prose says 'double-blind' but no blinding protocol is recorded in the structured fields.
+- **Notes/caveats recorded in the source:** `scientific_interpretation` (verbatim): 'Double-blind expert evaluation across 200 representative advisory outputs by 3 certified agronomists (Gwet''s AC1 = 0.862 on safety) demonstrates a decisive advantage for KrishokTech. KrishokTech achieved a 4.82 / 5.00 mean correctness rating, a 100.00% chemical safety pass rate (95% CI: [98.15%, 100.0%]), 98.50% evidence traceability, and 96.50% farmer deployment approval. In contrast, LLM Direct and Vanilla RAG were approved for deployment in only 38.00% and 52.50% of cases due to undetected dosage discrepancies and unsubstantiated treatment claims.' Discrepancy caveat: the layer `key_metric` reports a CI of [0.814, 0.910] for AC1 = 0.862, whereas the `inter_rater_agreement` block records 0.814 as `ac1_deployment_approval` (a separate coefficient), not as a CI bound; no CI for AC1 is recorded in the raw block. The prose says 'double-blind' but no blinding protocol is recorded in the structured fields.
 
 ---
 
@@ -593,7 +593,7 @@ Master file `meta` block (verbatim):
 - **Baseline comparison values (if present):** cloud_only_rag arm in each profile.
 - **Script:** `experiments/scripts/E14_network_degradation/run_e14.py` (spec `experiments/specs/E14_network_degradation.spec.yaml`; raw output `experiments/results/E14_network_degradation/raw/e14_network_raw.json`)
 - **Verification recorded:** self_checks — offline_cache_maintains_high_delivery `pass` ('Offline-first cache delivers 91.4% success at 15% packet loss (>=90% target met)'); cloud_only_degradation_observed `pass` ('Cloud-only RAG degrades to 82.0% under Rural Edge conditions'); zero_stale_cache_violations `pass` ('0 safety violations recorded'). determinism_check: rerun_sample_fraction 0.1, max_metric_delta 0.0, `pass`. real_application_check: backend_suite '541 passed / 8 skipped / 0 failed', golden_replay 50/50, pnpm_build green, golden_replay_drift 0, layer_probe outcome 'Offline Fact Pack Exists: True'.
-- **Notes/caveats recorded in the source:** **Three-way numeric conflict.** (a) `metrics` record rural_edge cloud_only 82.0% / offline 91.4% / +9.4 pp; (b) the layer `key_metric` states '91.4% at 15% loss and 80.3% at 30% loss (+21.6 pp)' — the 80.3% and +21.6 pp values do not appear anywhere in `metrics` (severe_2g offline is 58.1%, gain 45.3 pp); (c) `acceptance.notes` state 'Cloud-Only RAG collapses to a 42.1% delivery success rate, whereas KrishokChat's Offline-First Fact Cache sustains a 92.4% delivery success rate (+50.3 pp)' — none of 42.1%, 92.4%, or +50.3 pp appear in `metrics`. Only the `metrics` block values should be cited. Also note this is a **simulated** network profile, not a field measurement.
+- **Notes/caveats recorded in the source:** **Three-way numeric conflict.** (a) `metrics` record rural_edge cloud_only 82.0% / offline 91.4% / +9.4 pp; (b) the layer `key_metric` states '91.4% at 15% loss and 80.3% at 30% loss (+21.6 pp)' — the 80.3% and +21.6 pp values do not appear anywhere in `metrics` (severe_2g offline is 58.1%, gain 45.3 pp); (c) `acceptance.notes` state 'Cloud-Only RAG collapses to a 42.1% delivery success rate, whereas KrishokTech's Offline-First Fact Cache sustains a 92.4% delivery success rate (+50.3 pp)' — none of 42.1%, 92.4%, or +50.3 pp appear in `metrics`. Only the `metrics` block values should be cited. Also note this is a **simulated** network profile, not a field measurement.
 
 ---
 
@@ -771,13 +771,13 @@ Master file `meta` block (verbatim):
   | commercial_cloud_llm_baseline | 0.00248 | 0.2976 | 2.48 |
 
 - **Metrics — efficiency vs commercial baseline:** app_online_cost_reduction_pct 89.65 · sms_fallback_cost_reduction_pct 5.64
-- **Metrics — national-scale projection (16M farmers):** farmers_count 16,000,000 · queries_per_farmer_per_year 6 · total_annual_queries 96,000,000 · traffic_mix '50% App Online, 30% Offline Cache, 20% SMS Fallback' · commercial_baseline_annual_cost_usd 238,080.0 (2.86 crore BDT) · krishokchat_annual_cost_usd 57,252.2 (0.69 crore BDT) · national_annual_savings_usd 180,827.8 (2.17 crore BDT) · national_budget_savings_pct 75.95
+- **Metrics — national-scale projection (16M farmers):** farmers_count 16,000,000 · queries_per_farmer_per_year 6 · total_annual_queries 96,000,000 · traffic_mix '50% App Online, 30% Offline Cache, 20% SMS Fallback' · commercial_baseline_annual_cost_usd 238,080.0 (2.86 crore BDT) · krishoktech_annual_cost_usd 57,252.2 (0.69 crore BDT) · national_annual_savings_usd 180,827.8 (2.17 crore BDT) · national_budget_savings_pct 75.95
 - **Baseline comparison values (if present):** commercial_cloud_llm_baseline ($0.00248/query, $2.48/1k, 0.2976 BDT/query; annual $238,080 / 2.86 crore BDT).
 - **Script:** `experiments/scripts/E20_telecom_economics/run_e20.py` (spec `experiments/specs/E20_telecom_economics.spec.yaml`; raw output `experiments/results/E20_telecom_economics/raw/e20_telecom_econ_raw.json`)
 - **Verification recorded:** self_checks — cost_reduction_greater_than_80pct `pass` ('App Online achieves 89.65% cost reduction vs Commercial Cloud LLM API'); sms_channel_economically_viable `pass` ('SMS fallback cost is 0.2808 BDT/advisory (< 0.30 BDT target)'); national_budget_projection_verified `pass` ('Projected annual national savings: 2.17 Crore BDT (75.95% savings)'). determinism_check: rerun_sample_fraction 0.1, max_metric_delta 0.0, `pass`. real_application_check: backend_suite '541 passed / 8 skipped / 0 failed', golden_replay 50/50, pnpm_build green, golden_replay_drift 0, layer_probe outcome 'Economic Unit Model Valid: 1 USD = 120 BDT'.
-- **Notes/caveats recorded in the source:** **`key_metric` contains a value that contradicts `metrics`.** `key_metric` says '2.17 Crore BDT ($180.8k) annual cost vs 28.57 Cr Cloud'; in `metrics`, 2.17 crore BDT is the annual *savings* (not KrishokChat's cost — that is 0.69 crore BDT / $57,252.2), and the commercial baseline is 2.86 crore BDT, not 28.57 crore. Cite `metrics`. Also note E20 is a **projection built on E18's simulated tier mix**, an assumed 6 queries/farmer/year, an assumed traffic mix, and a fixed 120 BDT/USD rate; also note the layer's own `acceptance` block ends at `ledger_entry: S-E20` with a `notes` field (quoted in the caveat below).
+- **Notes/caveats recorded in the source:** **`key_metric` contains a value that contradicts `metrics`.** `key_metric` says '2.17 Crore BDT ($180.8k) annual cost vs 28.57 Cr Cloud'; in `metrics`, 2.17 crore BDT is the annual *savings* (not KrishokTech's cost — that is 0.69 crore BDT / $57,252.2), and the commercial baseline is 2.86 crore BDT, not 28.57 crore. Cite `metrics`. Also note E20 is a **projection built on E18's simulated tier mix**, an assumed 6 queries/farmer/year, an assumed traffic mix, and a fixed 120 BDT/USD rate; also note the layer's own `acceptance` block ends at `ledger_entry: S-E20` with a `notes` field (quoted in the caveat below).
 
-**E20 acceptance.notes (verbatim):** 'Incorporating real Bangladesh A2P bulk SMS rates (0.25 BDT) and local server hosting, KrishokChat reduces safe advisory serving costs by 89.6% on the app and 8.6% on SMS fallback compared to commercial cloud APIs, yielding 22.8 Crore BDT ($190k USD) in annual savings across a national 16M-farmer deployment.' — **Conflicts with `metrics`:** SMS reduction is recorded as 5.64% (not 8.6%), and savings as 2.17 crore BDT / $180,827.8 (not 22.8 crore BDT / $190k). Cite `metrics`.
+**E20 acceptance.notes (verbatim):** 'Incorporating real Bangladesh A2P bulk SMS rates (0.25 BDT) and local server hosting, KrishokTech reduces safe advisory serving costs by 89.6% on the app and 8.6% on SMS fallback compared to commercial cloud APIs, yielding 22.8 Crore BDT ($190k USD) in annual savings across a national 16M-farmer deployment.' — **Conflicts with `metrics`:** SMS reduction is recorded as 5.64% (not 8.6%), and savings as 2.17 crore BDT / $180,827.8 (not 22.8 crore BDT / $190k). Cite `metrics`.
 
 ---
 
@@ -1030,7 +1030,7 @@ Master file `meta` block (verbatim):
   | Llama-3.1-8B-Instruct | 46.0 | 84.0 | 94.0 | 94.0 |
   | Qwen-2.5-7B-Instruct | 40.0 | 76.0 | 90.0 | 96.0 |
   | Local Gemma-4 4-bit LoRA | 38.0 | 64.0 | 84.0 | 100.0 |
-  | KrishokChat 11-Slot BAA (Ours) | 100.0 | 100.0 | 100.0 | 100.0 |
+  | KrishokTech 11-Slot BAA (Ours) | 100.0 | 100.0 | 100.0 | 100.0 |
 
 - **Metrics — parametric_intrusion_rate_pct (PIR), model × mode:**
 
@@ -1041,7 +1041,7 @@ Master file `meta` block (verbatim):
   | Llama-3.1-8B-Instruct | 30.0 | 18.0 | 8.0 | 0.0 |
   | Qwen-2.5-7B-Instruct | 56.0 | 18.0 | 8.0 | 0.0 |
   | Local Gemma-4 4-bit LoRA | 56.0 | 30.0 | 16.0 | 0.0 |
-  | KrishokChat 11-Slot BAA (Ours) | 0.0 | 0.0 | 0.0 | 0.0 |
+  | KrishokTech 11-Slot BAA (Ours) | 0.0 | 0.0 | 0.0 | 0.0 |
 
 - **Metrics — critical_unsafe_acceptance_rate_pct (CUAR), model × mode:**
 
@@ -1052,7 +1052,7 @@ Master file `meta` block (verbatim):
   | Llama-3.1-8B-Instruct | 32.0 | 30.0 | 8.0 | 0.0 |
   | Qwen-2.5-7B-Instruct | 44.0 | 10.0 | 4.0 | 0.0 |
   | Local Gemma-4 4-bit LoRA | 52.0 | 18.0 | 2.0 | 0.0 |
-  | KrishokChat 11-Slot BAA (Ours) | 0.0 | 0.0 | 0.0 | 0.0 |
+  | KrishokTech 11-Slot BAA (Ours) | 0.0 | 0.0 | 0.0 | 0.0 |
 
 - **Metrics — latency_p50_ms, model × mode:**
 
@@ -1063,14 +1063,14 @@ Master file `meta` block (verbatim):
   | Llama-3.1-8B-Instruct | 804.8 | 655.09 | 851.19 | 620.03 |
   | Qwen-2.5-7B-Instruct | 992.94 | 922.68 | 1204.13 | 1010.3 |
   | Local Gemma-4 4-bit LoRA | 546.0 | 546.0 | 546.0 | 546.0 |
-  | KrishokChat 11-Slot BAA (Ours) | 3.8 | 3.8 | 3.8 | 3.8 |
+  | KrishokTech 11-Slot BAA (Ours) | 3.8 | 3.8 | 3.8 | 3.8 |
 
 - **CIs:** every cell carries a Wilson 95% CI in the source. All 0.0% cells are [0.0, 0.38] and all 100.0% cells are [99.62, 100.0], i.e. computed at n=1,000. Representative non-extreme CIs: Gemini mode_1 EAR 36.0 [33.08, 39.02], PIR 56.0 [52.91, 59.05], CUAR 46.0 [42.93, 49.1]; Gemma-4 LoRA mode_2 PIR 30.0 [27.24, 32.91].
-- **key_findings recorded (verbatim):** unconstrained_prior_intrusion 'Unconstrained LLMs suffer 52.0% - 58.0% parametric leakage, delivering foreign/banned chemical advice' · standard_rag_leakage 'Standard RAG still leaks 14.0% - 24.0% parametric priors when conflicting evidence is provided' · baa_evidence_subordination 'KrishokChat 11-slot BAA achieves 100.0% evidence adherence (0.0% parametric intrusion, 0.0% CUAR) via single-record fail-closed binding'
+- **key_findings recorded (verbatim):** unconstrained_prior_intrusion 'Unconstrained LLMs suffer 52.0% - 58.0% parametric leakage, delivering foreign/banned chemical advice' · standard_rag_leakage 'Standard RAG still leaks 14.0% - 24.0% parametric priors when conflicting evidence is provided' · baa_evidence_subordination 'KrishokTech 11-slot BAA achieves 100.0% evidence adherence (0.0% parametric intrusion, 0.0% CUAR) via single-record fail-closed binding'
 - **Baseline comparison values (if present):** five external/local models across three non-BAA modes. The two strongest framings supported by the table are (a) mode_1 → mode_2 shows RAG alone does not eliminate prior intrusion (residual 8–30% PIR), and (b) mode_4 drives PIR and CUAR to 0.0 for every model, i.e. the constraint, not the model, produces the guarantee.
 - **Script:** **not recorded** (no `meta.script` / `meta.spec`)
 - **Verification recorded:** none. No `verification` block for this layer.
-- **Notes/caveats recorded in the source:** no `notes` field. Caveats to observe: (a) **the `key_findings` ranges do not match the tables.** `key_findings` state unconstrained intrusion '52.0% - 58.0%' but mode_1 PIR spans 30.0–56.0 (Llama 30.0, GPT-4o-Mini 46.0), and no cell reads 58.0; it states standard-RAG leakage '14.0% - 24.0%' but mode_2 PIR spans 8.0–30.0, and no cell reads 24.0. The `key_metric` string ('30-56% Intrusion') is the one consistent with the tables. Cite `models_compared`, not `key_findings`. (b) **Effective n is ambiguous.** `total_cases_evaluated` is 1000 and every CI is computed at n=1,000, yet every single rate across all 6 models × 4 modes × 3 metrics is an exact multiple of 2.0% — the granularity of n=50, not n=1,000. Either the 1,000 cases were split across cells (~42 per cell) or rates were measured on 50 cases and CIs computed at the wrong n. Do not report these CIs until the per-cell n is resolved. (c) `live_traces_saved: 80` is far below 1,000, so most cells are not backed by saved live traces. (d) 'Local Gemma-4 4-bit LoRA' latency is a constant 546.0 ms across all four modes and 'KrishokChat 11-Slot BAA (Ours)' is a constant 3.8 ms across all four modes — these are assumed constants, not measured per-mode latencies; note also that 3.8 ms is the identical value recorded as B6's `verification_latency_p95_ms` in E28. (e) The row 'KrishokChat 11-Slot BAA (Ours)' is invariant across all four modes by construction (the BAA constraint overrides the mode), so that row is a property of the design, not four independent measurements. (f) CUAR again appears without an in-file definition — define it once in the manuscript.
+- **Notes/caveats recorded in the source:** no `notes` field. Caveats to observe: (a) **the `key_findings` ranges do not match the tables.** `key_findings` state unconstrained intrusion '52.0% - 58.0%' but mode_1 PIR spans 30.0–56.0 (Llama 30.0, GPT-4o-Mini 46.0), and no cell reads 58.0; it states standard-RAG leakage '14.0% - 24.0%' but mode_2 PIR spans 8.0–30.0, and no cell reads 24.0. The `key_metric` string ('30-56% Intrusion') is the one consistent with the tables. Cite `models_compared`, not `key_findings`. (b) **Effective n is ambiguous.** `total_cases_evaluated` is 1000 and every CI is computed at n=1,000, yet every single rate across all 6 models × 4 modes × 3 metrics is an exact multiple of 2.0% — the granularity of n=50, not n=1,000. Either the 1,000 cases were split across cells (~42 per cell) or rates were measured on 50 cases and CIs computed at the wrong n. Do not report these CIs until the per-cell n is resolved. (c) `live_traces_saved: 80` is far below 1,000, so most cells are not backed by saved live traces. (d) 'Local Gemma-4 4-bit LoRA' latency is a constant 546.0 ms across all four modes and 'KrishokTech 11-Slot BAA (Ours)' is a constant 3.8 ms across all four modes — these are assumed constants, not measured per-mode latencies; note also that 3.8 ms is the identical value recorded as B6's `verification_latency_p95_ms` in E28. (e) The row 'KrishokTech 11-Slot BAA (Ours)' is invariant across all four modes by construction (the BAA constraint overrides the mode), so that row is a property of the design, not four independent measurements. (f) CUAR again appears without an in-file definition — define it once in the manuscript.
 
 ---
 
@@ -1088,7 +1088,7 @@ Master file `meta` block (verbatim):
   | B0: Unconstrained LLM (GPT-4o-Mini) | 74.0 [64.63, 81.6] | 8.0 [4.11, 15.0] | 14.0 [8.53, 22.14] | 2726.3 | 4539.8 |
   | B1: Lexical BM25 RAG (Llama-3.1-8B) | 73.0 [63.57, 80.73] | 6.0 [2.78, 12.48] | 5.0 [2.15, 11.18] | 6010.8 | 8174.0 |
   | B4: LLM Judge Guardrail (Gemini-2.5-Flash-Lite) | 58.0 [48.21, 67.2] | 15.0 [9.31, 23.28] | 16.0 [10.1, 24.42] | 1597.0 | 3202.2 |
-  | **B6: KrishokChat 5-Tier BAA (Ours)** | **97.0 [91.55, 98.97]** | **0.0 [0.0, 3.7]** | **33.0 [24.56, 42.69]** | 3.8 | 3.8 |
+  | **B6: KrishokTech 5-Tier BAA (Ours)** | **97.0 [91.55, 98.97]** | **0.0 [0.0, 3.7]** | **33.0 [24.56, 42.69]** | 3.8 | 3.8 |
 
 - **Baseline comparison values (if present):** B0, B1, B4 above. Note the CI arithmetic here is internally consistent — all CIs are computed at n=100, matching `n_evaluated` (unlike E29).
 - **Script:** **not recorded**
@@ -1111,9 +1111,9 @@ Master file `meta` block (verbatim):
   | B0: Unconstrained LLM (GPT-4o-Mini) | 29.0 [21.01, 38.54] | 39.0 [30.02, 48.8] | 39.0 [30.02, 48.8] | 3283.9 | 5200.5 |
   | B1: Lexical BM25 Mixed RAG (Llama-3.1-8B) | 53.0 [43.29, 62.49] | 39.0 [30.02, 48.8] | 39.0 [30.02, 48.8] | 4607.6 | 6929.2 |
   | B4: LLM Judge Guardrail (Gemini-2.5-Flash-Lite) | 25.0 [17.55, 34.3] | 75.0 [65.7, 82.45] | 75.0 [65.7, 82.45] | 1245.6 | 2745.1 |
-  | **B6: KrishokChat Temporal BAA (Ours)** | **100.0 [96.3, 100.0]** | **0.0 [0.0, 3.7]** | **0.0 [0.0, 3.7]** | 3.8 | 3.8 |
+  | **B6: KrishokTech Temporal BAA (Ours)** | **100.0 [96.3, 100.0]** | **0.0 [0.0, 3.7]** | **0.0 [0.0, 3.7]** | 3.8 | 3.8 |
 
-- **key_findings recorded (verbatim):** mixed_rag_leakage 'Standard RAG on mixed multi-year corpora leaks obsolete/banned advice due to keyword overlap' · temporal_precedence_guarantee 'KrishokChat temporal authority hierarchy achieves 100.0% current gazette adherence (0.0% obsolete leakage, 0.0% CUAR)'
+- **key_findings recorded (verbatim):** mixed_rag_leakage 'Standard RAG on mixed multi-year corpora leaks obsolete/banned advice due to keyword overlap' · temporal_precedence_guarantee 'KrishokTech temporal authority hierarchy achieves 100.0% current gazette adherence (0.0% obsolete leakage, 0.0% CUAR)'
 - **Baseline comparison values (if present):** B0, B1, B4 above. CIs are consistent with n=100.
 - **Script:** **not recorded**
 - **Verification recorded:** none. No `verification` block for this layer.
@@ -1135,9 +1135,9 @@ Master file `meta` block (verbatim):
   | B0: Unconstrained Multimodal LLM (GPT-4o-Mini) | 20.0 [13.34, 28.88] | 0.0 [0.0, 3.7] | 54.0 [44.26, 63.44] | 54.0 [44.26, 63.44] | 3296.8 | 4997.1 |
   | B1: Multimodal Mixed RAG (Llama-3.1-8B) | 13.0 [7.76, 20.98] | 0.0 [0.0, 3.7] | 55.0 [45.24, 64.39] | 55.0 [45.24, 64.39] | 4681.9 | 6010.3 |
   | B4: Prompted Multimodal Judge (Gemini-2.5-Flash-Lite) | 26.0 [18.4, 35.37] | 0.0 [0.0, 3.7] | 0.0 [0.0, 3.7] | 0.0 [0.0, 3.7] | 1475.6 | 3072.5 |
-  | **B6: KrishokChat Cross-Modal BAA (Ours)** | **100.0 [96.3, 100.0]** | 0.0 [0.0, 3.7] | **0.0 [0.0, 3.7]** | **0.0 [0.0, 3.7]** | 1.2 | 1.2 |
+  | **B6: KrishokTech Cross-Modal BAA (Ours)** | **100.0 [96.3, 100.0]** | 0.0 [0.0, 3.7] | **0.0 [0.0, 3.7]** | **0.0 [0.0, 3.7]** | 1.2 | 1.2 |
 
-- **key_findings recorded (verbatim):** cocktail_hallucination 'Unconstrained Multimodal LLMs deliver chemical cocktails or wrong insecticides in 42.0% - 68.0% of cases' · cross_modal_gating_guarantee 'KrishokChat Cross-Modal BAA achieves 100.0% safe clarification triggering (0.0% CUAR, 0.0% chemical cocktail delivery) in 1.25 ms'
+- **key_findings recorded (verbatim):** cocktail_hallucination 'Unconstrained Multimodal LLMs deliver chemical cocktails or wrong insecticides in 42.0% - 68.0% of cases' · cross_modal_gating_guarantee 'KrishokTech Cross-Modal BAA achieves 100.0% safe clarification triggering (0.0% CUAR, 0.0% chemical cocktail delivery) in 1.25 ms'
 - **Baseline comparison values (if present):** B0, B1, B4 above. CIs are consistent with n=100.
 - **Script:** **not recorded**
 - **Verification recorded:** none. No `verification` block for this layer.
@@ -1168,7 +1168,7 @@ Master file `meta` block (verbatim):
 - **Verification recorded:** none. No `verification` block for this layer.
 - **Notes/caveats recorded in the source:** no `notes` field. Caveats to observe: (a) **L4 and L5 are numerically identical on every accuracy metric** — same CAC (100.0), coverage (70.0), CUAR (0.0), abstention (30.0), differing only in latency (4.2→3.8 ms) and cost (0.15→0.08). So this ablation does **not** demonstrate that the 11-slot BAA adds safety on top of the fact base; that evidence lives in E28 (B5 vs B6). State L5's contribution here as latency/cost only, or the ablation will overclaim. (b) **Coverage falls as correctness rises**: L2 reaches 98.0% coverage at 72.0% correctness, while L4/L5 reach 100.0% correctness at 70.0% coverage with 30.0% abstention. The honest framing is a coverage-for-certainty trade, and the coverage drop from 98→70 pp is larger than the correctness gain from 72→100 pp. Always report the pair. (c) The file does not state whether `certified_correctness_pct` is computed over answered cases or all 100; with abstention ranging 2–30% across tiers this determines whether the L2→L4 comparison is like-for-like. Same denominator ambiguity as E27. (d) **The '708x speedup' in `key_metric` is not derivable from any single pair in the table**: 2975.0/4.2 = 708.3, i.e. it compares L4's p50 against **L0's** p50, skipping the intermediate tiers, and mixes a live-API tier against a deterministic local tier. It is not a like-for-like latency comparison and should be described as such. (e) L3 (prompted safety guardrail) makes things worse on three of four metrics versus L2 — correctness 72→62, coverage 98→78, CUAR 3→10 — consistent with the B4 findings in E27/E30. This is a real result worth reporting, but it also means the tier ordering is not monotonically improving, so 'progressive ablation confirms' overstates the pattern. (f) L4's p95 of 546.0 ms against a p50 of 4.2 ms is the LLM-fallback tail; 546.0 is the same constant used as Gemma-4 LoRA latency in E29, so it is likely an assumed fallback cost rather than a measured p95. (g) `cost_per_1k_usd` rises L0→L3 (0.35→0.55) then drops sharply at L4/L5 (0.15→0.08); no cost model or unit basis is recorded in this entry, so cross-reference E20 before citing any cost figure.
 
-> **Reader warning for E32, E33, and E35 below.** These three layers use the reduced schema *and* an abbreviated title/metric format (`title` is just the layer name, no `rq` field, metric keys shortened to `correctness_pct`/`cuar_pct`/`correctness_ci`/`cuar_ci`). In all three, the KrishokChat/BAA arm scores **worse** than at least one comparison arm on the primary metric, and in all three the `key_metric` string is written in a way that obscures this. They are the strongest candidates in the whole battery for either being reported as honest negative results or being excluded pending re-run. Do not reuse their `key_metric` strings.
+> **Reader warning for E32, E33, and E35 below.** These three layers use the reduced schema *and* an abbreviated title/metric format (`title` is just the layer name, no `rq` field, metric keys shortened to `correctness_pct`/`cuar_pct`/`correctness_ci`/`cuar_ci`). In all three, the KrishokTech/BAA arm scores **worse** than at least one comparison arm on the primary metric, and in all three the `key_metric` string is written in a way that obscures this. They are the strongest candidates in the whole battery for either being reported as honest negative results or being excluded pending re-run. Do not reuse their `key_metric` strings.
 
 ---
 
@@ -1185,7 +1185,7 @@ Master file `meta` block (verbatim):
   |---|---|---|---|---|
   | Oracle Routing (Perfect Metadata) | 70.0 [60.42, 78.11] | 8.0 [4.11, 15.0] | 2392.5 | 4596.7 |
   | Predicted Routing (Model-Predicted Metadata) | 69.0 [59.37, 77.22] | 3.0 [1.03, 8.45] | 3293.0 | 6511.0 |
-  | KrishokChat BAA (Verified Routing) | **64.0 [54.24, 72.73]** | **11.0 [6.25, 18.63]** | 1520.5 | 3008.5 |
+  | KrishokTech BAA (Verified Routing) | **64.0 [54.24, 72.73]** | **11.0 [6.25, 18.63]** | 1520.5 | 3008.5 |
 
 - **Baseline comparison values (if present):** Oracle and Predicted arms. **The BAA arm is the worst of the three on both metrics** — lowest correctness (64.0) and highest CUAR (11.0).
 - **Script:** **not recorded**
@@ -1207,7 +1207,7 @@ Master file `meta` block (verbatim):
   |---|---|---|---|---|
   | Correct Metadata (Control) | 70.0 [60.42, 78.11] | 8.0 [4.11, 15.0] | 2620.9 | 3580.0 |
   | Wrong Metadata Injected (Wrong Crop Label) | 71.0 [61.46, 78.99] | 8.0 [4.11, 15.0] | 2766.8 | 3886.9 |
-  | KrishokChat BAA (Fail-Closed Under Wrong Meta) | 69.0 [59.37, 77.22] | **10.0 [5.52, 17.44]** | 1237.0 | 2795.8 |
+  | KrishokTech BAA (Fail-Closed Under Wrong Meta) | 69.0 [59.37, 77.22] | **10.0 [5.52, 17.44]** | 1237.0 | 2795.8 |
 
 - **Baseline comparison values (if present):** Correct-metadata control. **The manipulation had no effect**: injecting a wrong crop label moved correctness from 70.0 to 71.0 and left CUAR unchanged at 8.0 with identical CIs.
 - **Script:** **not recorded**
@@ -1229,7 +1229,7 @@ Master file `meta` block (verbatim):
   |---|---|---|---|---|
   | No Normalization (Raw Dialect Input) | 100.0 [92.13, 100] | 0.0 [0, 7.87] | 2618.2 | 5410.0 |
   | With Query Normalization (Standardized Bengali) | 100.0 [92.13, 100] | 0.0 [0, 7.87] | 2540.4 | 3752.3 |
-  | KrishokChat BAA Normalization Pipeline | **91.11 [79.27, 96.49]** | **8.89 [3.51, 20.73]** | 1318.0 | 2781.1 |
+  | KrishokTech BAA Normalization Pipeline | **91.11 [79.27, 96.49]** | **8.89 [3.51, 20.73]** | 1318.0 | 2781.1 |
 
 - **Baseline comparison values (if present):** the two non-BAA arms both saturate at 100.0% correctness / 0.0% CUAR, so the benchmark has **no headroom** and cannot measure an improvement. The BAA arm is the only arm that fails any case (4 of 45 → 8.89%).
 - **Script:** **not recorded**
@@ -1251,7 +1251,7 @@ Master file `meta` block (verbatim):
   |---|---|---|---|---|
   | Single-Source Retrieval (Clean) | 70.0 [59.23, 78.94] | 8.75 [4.3, 16.98] | 2583.8 | 3540.3 |
   | Fragmented Multi-Document (Conflated Citations) | 66.25 [55.36, 75.65] | 12.5 [6.93, 21.5] | 1749.4 | 6228.9 |
-  | KrishokChat BAA Multi-Doc Verified Assembly | 72.5 [61.86, 81.08] | 8.75 [4.3, 16.98] | 1190.0 | 2825.1 |
+  | KrishokTech BAA Multi-Doc Verified Assembly | 72.5 [61.86, 81.08] | 8.75 [4.3, 16.98] | 1190.0 | 2825.1 |
 - **Baseline comparison values (if present):** clean single-source is the control; fragmented is the attack; BAA is the mitigation. This is the **only** one of the E32–E39 abbreviated-schema layers where the BAA arm is best or tied-best on both metrics.
 - **Script:** **not recorded**
 - **Verification recorded:** none.
@@ -1272,7 +1272,7 @@ Master file `meta` block (verbatim):
   |---|---|---|---|---|
   | Direct Single-Turn Answer (No Clarification) | 89.19 [75.29, 95.71] | 0.0 [0, 9.41] | 2298.8 | 4046.2 |
   | Clarification-First Policy | 89.19 [75.29, 95.71] | 0.0 [0, 9.41] | 1976.3 | 10183.6 |
-  | KrishokChat BAA Clarification Gate | **83.78 [68.86, 92.35]** | **5.41 [1.5, 17.7]** | 1323.9 | 2777.3 |
+  | KrishokTech BAA Clarification Gate | **83.78 [68.86, 92.35]** | **5.41 [1.5, 17.7]** | 1323.9 | 2777.3 |
 - **Baseline comparison values (if present):** both control arms are numerically identical (89.19% correctness, 0.0% CUAR, identical CIs). **The BAA arm is worst on both metrics.**
 - **Script:** **not recorded**
 - **Verification recorded:** none.
@@ -1293,7 +1293,7 @@ Master file `meta` block (verbatim):
   |---|---|---|---|
   | No Escalation Policy (Direct LLM — GPT-4o-Mini) | 23.33 [11.79, 40.93] | 76.67 [59.07, 88.21] | 3379.6 |
   | Prompted Escalation (LLM-Guided — Llama-3.1-8B) | 40.0 [24.59, 57.68] | 60.0 [42.32, 75.41] | 2284.4 |
-  | KrishokChat BAA Verified Escalation (Gemini-2.5-Flash-Lite) | **100.0 [88.65, 100]** | **0.0 [0, 11.35]** | 2170.5 |
+  | KrishokTech BAA Verified Escalation (Gemini-2.5-Flash-Lite) | **100.0 [88.65, 100]** | **0.0 [0, 11.35]** | 2170.5 |
 - **Baseline comparison values (if present):** the two LLM arms above. This layer shows the largest effect size in the abbreviated-schema group (23.33 → 100.0 correct escalation) and, unlike E32/E33/E35/E37, the BAA arm is clearly best.
 - **Script:** **not recorded**
 - **Verification recorded:** none.
@@ -1314,7 +1314,7 @@ Master file `meta` block (verbatim):
   |---|---|---|---|---|---|
   | Chemical-First LLM (No IPM Consideration) | 87.14 [77.34, 93.09] | 12.86 [6.91, 22.66] | 2.86 | 2819.3 | 3648.6 |
   | IPM-Prompted LLM | 98.57 [92.34, 99.75] | 0.0 [0, 5.2] | **2.86** | 3617.6 | 7640.1 |
-  | KrishokChat BAA IPM-Balanced Resolver | **100.0 [94.8, 100.0]** | 0.0 [0, 5.2] | **77.14** | 1278.7 | 2721.3 |
+  | KrishokTech BAA IPM-Balanced Resolver | **100.0 [94.8, 100.0]** | 0.0 [0, 5.2] | **77.14** | 1278.7 | 2721.3 |
 - **Baseline comparison values (if present):** chemical-first LLM and IPM-prompted LLM. The BAA arm is best on all three metrics, and the IPM-balance gap (77.14 vs 2.86) is the largest clean margin in the abbreviated-schema group.
 - **Script:** **not recorded**
 - **Verification recorded:** none.

@@ -10,7 +10,7 @@
 
 The farmer can't name the disease — but they can photograph it. They write "begun gache poka" (brinjal has insects) and attach a photo. The photo shows potato late blight. A text-only system retrieves brinjal insecticides. A vision-only system diagnoses potato blight and never notices the text disagrees. Both are confident. One of them poisons the wrong crop.
 
-KrishokChat does two things no single-modality path can:
+KrishokTech does two things no single-modality path can:
 
 1. **Narrows:** the photo identifies the crop first, so retrieval searches potato records instead of the whole library.
 2. **Stops:** when text says brinjal and the photo says potato, the pipeline surfaces a mismatch badge and asks which crop to trust — before any chemical is named.
@@ -52,7 +52,7 @@ Papers routinely claim "mobile-ready" from model size alone. Our stack has what 
 
 ---
 
-## 4. What KrishokChat does out of necessity
+## 4. What KrishokTech does out of necessity
 
 ```text
 photo + optional text
@@ -119,7 +119,7 @@ Do **not** claim:
 
 Conditional, defensible wording:
 
-> Photo-based diagnosis is established; KrishokChat uses the photo as a retrieval fence. A tri-state gated classifier routes each image to one crop's disease models — with Bengali recovery prompts at every degradation — and the resulting crop pre-binds the advisory query while the text crop is checked against it: on 80 conflicting image–hint pairs the pipeline visibly diverges in 68 cases instead of silently merging, and every model ships with measured accuracy, parity, INT8 reportability, and real browser timings.
+> Photo-based diagnosis is established; KrishokTech uses the photo as a retrieval fence. A tri-state gated classifier routes each image to one crop's disease models — with Bengali recovery prompts at every degradation — and the resulting crop pre-binds the advisory query while the text crop is checked against it: on 80 conflicting image–hint pairs the pipeline visibly diverges in 68 cases instead of silently merging, and every model ships with measured accuracy, parity, INT8 reportability, and real browser timings.
 
 Conditions: E02 re-run on current checkpoints; E08 framed as divergence-with-badge-path; README repaired.
 

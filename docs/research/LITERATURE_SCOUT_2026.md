@@ -1,4 +1,4 @@
-# Literature Scout — 2026 Survey for KrishokChat
+# Literature Scout — 2026 Survey for KrishokTech
 
 Scope: 2024–2026 publications on agricultural LLM/RAG, Bengali low-resource NLP,
 grounding/safety, voice/multimodal, agentic pipelines, and agri-AI evaluation.
@@ -6,7 +6,7 @@ All URLs were surfaced via live search (arXiv, ACL Anthology, Frontiers, MDPI, I
 PubMed, Semantic-Scholar-indexed pages) on 2026-08-14. Claims marked `[unverified]`
 where the source was a search snippet rather than a full read.
 
-> **Policy note:** search surfaced the deprecated KrishokChat v1 paper
+> **Policy note:** search surfaced the deprecated KrishokTech v1 paper
 > (arXiv:2606.29243). Per `AGENTS.md` §2.9 and `docs/PAPER_POLICY.md` it is INVALID
 > and excluded here; no number from it is reused.
 
@@ -164,7 +164,7 @@ retrieval + structured knowledge + query-adaptive retrieval**:
   questions, 6 extension agents vs ChatGPT, judged by 4 evaluators — chatbot
   responses preferred in 78% of cases but *poorer on planting time, seed rate,
   and fertilizer rate/timing* (the exact dose/local-appropriateness failure
-  mode KrishokChat's verifier targets). *Frontiers in Sustainable Food Systems /
+  mode KrishokTech's verifier targets). *Frontiers in Sustainable Food Systems /
   PubMed 38341517*, 2024.
 - **Expert-grounded benchmarks are the 2025 trend:** AgMMU (746 MCQ + 746
   open-ended Qs distilled from 116k real farmer↔USDA-extension dialogues,
@@ -186,7 +186,7 @@ retrieval + structured knowledge + query-adaptive retrieval**:
 
 ---
 
-## (b) Transferable techniques for KrishokChat (8–12 concrete)
+## (b) Transferable techniques for KrishokTech (8–12 concrete)
 
 | # | Technique | What it is | Why it matters here | Effort | Source |
 |---|-----------|-----------|---------------------|--------|--------|

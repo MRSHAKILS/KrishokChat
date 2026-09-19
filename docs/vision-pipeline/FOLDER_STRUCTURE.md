@@ -324,7 +324,7 @@ repository root:
 
 ```bash
 # correct — VISION_DIR resolves to <repo>/backend/ml_assets/vision
-cd "D:\KrishokChat Advisory System"
+cd "D:\KrishokTech Advisory System"
 uv run --directory backend fastapi dev app/main.py
 
 # wrong — resolves to <repo>/backend/backend/ml_assets/vision
@@ -344,7 +344,7 @@ Two robust fixes:
    BACKEND_ROOT = Path(__file__).resolve().parents[2]
    VISION_DIR = BACKEND_ROOT / "ml_assets" / "vision"
    ```
-2. **Set an absolute path in `.env`** — `ML_ASSETS_DIR=D:/KrishokChat Advisory System/backend/ml_assets`,
+2. **Set an absolute path in `.env`** — `ML_ASSETS_DIR=D:/KrishokTech Advisory System/backend/ml_assets`,
    with the variable documented in `.env.example` per `AGENTS.md §2` rule 4.
 
 Option 1 removes the failure class entirely and needs no environment setup.

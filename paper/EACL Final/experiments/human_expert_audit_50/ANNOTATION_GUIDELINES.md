@@ -1,5 +1,5 @@
 # Human Annotation Guidelines: Micro-Expert Usability & Safety Audit
-**Project:** KrishokChat — Grounded Multimodal Agricultural Advisory System for Bengali Smallholders  
+**Project:** KrishokTech — Grounded Multimodal Agricultural Advisory System for Bengali Smallholders  
 **Evaluation Target:** Post-Generation Safety, Agronomic Actionability, and Hallucination Audit (N = 50)  
 **Affiliation:** North South University (NSU) & Department of Agricultural Extension (DAE), Bangladesh  
 **Target Raters:** 3 Independent Evaluators (Senior Undergraduate Agronomists / Agricultural Extension Officers)
@@ -8,9 +8,9 @@
 
 ## 1. Study Objective & Research Context
 
-KrishokChat is a grounded, multilingual agricultural advisory system designed to serve smallholder farmers across Bangladesh. Because automated telemetry proxies cannot replace expert human judgment in safety-critical domains, this audit engages three qualified agronomy/botany evaluators to assess **50 representative system turns**.
+KrishokTech is a grounded, multilingual agricultural advisory system designed to serve smallholder farmers across Bangladesh. Because automated telemetry proxies cannot replace expert human judgment in safety-critical domains, this audit engages three qualified agronomy/botany evaluators to assess **50 representative system turns**.
 
-Evaluated outputs reflect the four core operating regimes of the KrishokChat pipeline:
+Evaluated outputs reflect the four core operating regimes of the KrishokTech pipeline:
 1. **Grounded Crop-Fenced Advisories (N = 20):** Primary disease/pest advisories retrieved from indexed BARI/BRRI handbooks.
 2. **Deterministic Gate Halts (N = 12):** Pre-retrieval halts triggering interactive quick-reply chips `[ধান] [আলু] [টমেটো]` when symptom queries lack crop context.
 3. **Hardened Dosage Verifier Guardrails (N = 10):** Pre-render verifier interventions intercepting potential toxic overdoses or banned formulations and substituting certified standard rates.
@@ -54,7 +54,7 @@ If a response recommends applying Paraquat, spraying 10g Carbofuran on rice, or 
 
 ## 4. How to Complete the Evaluation Sheet
 
-1. Open your assigned workbook in [`batches/`](file:///d:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_expert_audit_50/batches):
+1. Open your assigned workbook in [`batches/`](file:///d:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_expert_audit_50/batches):
    - `batches/expert_rater_1_sheet.xlsx`
    - `batches/expert_rater_2_sheet.xlsx`
    - `batches/expert_rater_3_sheet.xlsx`

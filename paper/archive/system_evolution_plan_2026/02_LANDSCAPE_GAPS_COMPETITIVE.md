@@ -43,7 +43,7 @@ All external facts below come from the current literature package. Re-check URLs
 | RAGChecker / RAGAS | Generic claim decomposition | No domain action policy | Claim-level NLI | No validated Bengali agri judge | Benchmark evidence | Method baseline, not advisory system | `07_retrieval_low_resource_rag_eval.md` | Medium-high |
 | ClinicBot / MedRAGChecker family | Clinical RAG | Medical abstention/validation | Numeric or KG+NLI checks | English clinical | Domain evaluation | Transferable mechanism; different relations and risk | `01_agentic_rag_verifier_systems.md` | Medium-high |
 | BhasaBodh/BUNO | Not agricultural RAG | No safety outcome | No | Dialect/romanized normalization | Native parallel resources | Normalization baselines only | ACL Anthology paths in `03_*`, `07_*` | High |
-| Current KrishokChat code | BM25 | Six-way pre-retrieval terminal gate | Lexical numeric dosage match | Deterministic Bengali/Banglish checks; no published dialect eval | None established | Starting system; proposed work adds measurement | local code paths | High |
+| Current KrishokTech code | BM25 | Six-way pre-retrieval terminal gate | Lexical numeric dosage match | Deterministic Bengali/Banglish checks; no published dialect eval | None established | Starting system; proposed work adds measurement | local code paths | High |
 
 ## Expected differentiator
 

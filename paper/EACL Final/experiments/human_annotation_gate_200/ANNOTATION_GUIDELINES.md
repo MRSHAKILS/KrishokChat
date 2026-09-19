@@ -1,5 +1,5 @@
 # Human Annotation Protocol & Guidelines (Second Reviewer Pass)
-**Project:** KrishokChat Agricultural Advisory System  
+**Project:** KrishokTech Agricultural Advisory System  
 **Task:** Independent Double-Blind Human Annotation of 200 Authentic Bengali Farmer Queries  
 **Evaluation Target:** Establishing Inter-Annotator Agreement ($\kappa$), Resolving Single-Reviewer Limitation, and Producing Verified Consensus Gold Data  
 
@@ -157,10 +157,10 @@ The table below illustrates the exact reasoning required for difficult boundary 
 ## 6. Post-Annotation Workflow & Dual-Review Script
 
 Once Reviewer 2 completes the Excel sheet:
-1. Save the annotated files in [`batches/`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/batches) or update [`master_blind_sheet_200.xlsx`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/master_blind_sheet_200.xlsx).
+1. Save the annotated files in [`batches/`](file:///D:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/batches) or update [`master_blind_sheet_200.xlsx`](file:///D:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/master_blind_sheet_200.xlsx).
 2. Run the automated evaluation script:
    ```bash
-   cd "D:\KrishokChat Advisory System\paper\EACL Final\experiments\human_annotation_gate_200\scripts"
+   cd "D:\KrishokTech Advisory System\paper\EACL Final\experiments\human_annotation_gate_200\scripts"
    python evaluate_dual_review.py
    ```
 3. The script will automatically:

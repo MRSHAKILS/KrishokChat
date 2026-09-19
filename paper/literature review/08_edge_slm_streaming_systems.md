@@ -22,7 +22,7 @@
 
 **Evaluating LLMs' Multilingual Capabilities for Bengali** — Bhowmik et al., arXiv:2507.23248, Jul 2025. Llama 3.2-3B drops 0.567→0.280 (English MMLU → Bengali); Qwen2.5-7B 0.690→0.414; inverse tokenization-efficiency/accuracy relation (Bengali costs ~2× tokens per word).
 
-**KrishokChat benchmark (team's own)** — Reza, Nimi & Shahid, EACL 2026 (local copy in `paper/done papers/`). On the 350-query Farmer Benchmark eval split, Gemini-2.5-FL leads (Token F1 0.2196, halluc. 38.29%) followed by Gemma-4-26B-A4B (0.1375, 23.14%) and the fine-tuned KrishokChat-4B (0.1170, 41.14%); LLaMA-3.1-8B scores 0.0078. Fine-tuning closes most of the gap to same-scale open baselines but not to frontier scale, and closed-book generation without retrieval raises the fine-tuned model's hallucination rate — the benchmark's value is as a verifiable RAG knowledge base, not parametric memory.
+**KrishokTech benchmark (team's own)** — Reza, Nimi & Shahid, EACL 2026 (local copy in `paper/done papers/`). On the 350-query Farmer Benchmark eval split, Gemini-2.5-FL leads (Token F1 0.2196, halluc. 38.29%) followed by Gemma-4-26B-A4B (0.1375, 23.14%) and the fine-tuned KrishokTech-4B (0.1170, 41.14%); LLaMA-3.1-8B scores 0.0078. Fine-tuning closes most of the gap to same-scale open baselines but not to frontier scale, and closed-book generation without retrieval raises the fine-tuned model's hallucination rate — the benchmark's value is as a verifiable RAG knowledge base, not parametric memory.
 
 **KrishokBondhu** — arXiv:2510.18355, Oct 2025. Voice RAG with Gemma 3-4B + LanceDB; 72.7% high-quality answers; 4.53 vs 3.13 (+44.7%) over KisanQRS. Direct precedent that a 4B model with retrieval carries a Bengali agri advisory system.
 
@@ -47,7 +47,7 @@
 
 ## 3. Research gaps
 
-**G1 — No Bengali agricultural SLM benchmark.** BnMMLU has no agriculture domain; AgriEval's Bengali split has no peer review and no sub-4B ranking; KrishokBondhu evaluated on self-curated queries; KrishiGyan is training data, not an eval suite; only the team's Farmer Benchmark evaluates Bengali agri at small scale (Gemini-2.5-FL 0.2196, Gemma-4-26B 0.1375, KrishokChat-4B 0.1170, Qwen-2.5-7B 0.0841, LLaMA-3.1-8B 0.0078) — one corpus, one metric family, zero replication.
+**G1 — No Bengali agricultural SLM benchmark.** BnMMLU has no agriculture domain; AgriEval's Bengali split has no peer review and no sub-4B ranking; KrishokBondhu evaluated on self-curated queries; KrishiGyan is training data, not an eval suite; only the team's Farmer Benchmark evaluates Bengali agri at small scale (Gemini-2.5-FL 0.2196, Gemma-4-26B 0.1375, KrishokTech-4B 0.1170, Qwen-2.5-7B 0.0841, LLaMA-3.1-8B 0.0078) — one corpus, one metric family, zero replication.
 
 **G2 — No latency–grounding tradeoff data for low-resource-tokenized domains.** TTFT budgets, caching, routing characterized on English/Chinese; Bengali's token inefficiency changes prefill cost exactly where the seed must quote p95 budgets. The dosage-hallucination rate as a function of TTFT budget is unmeasured for any language — the verifier agent can produce exactly this curve.
 
@@ -57,9 +57,9 @@
 
 System papers 2025–2026 report latency as **TTFT and TBT** with **p50/p95/p99 and SLO attainment** at explicit thresholds (ServeGen: P99 TTFT 2.25 s / TBT 0.5 s; T-LRU 200 ms SLO; Nexus mean/P50/P95/P99 TTFT-TBT-normalized). Hardware constraints as **quantized weight + KV-cache footprints** at fixed context (Gemma 3: int4 2.6 GB + KV 7.3 GB @32K; Gemma 4 E2B <3 GB RAM 4-bit). Streaming UX as **tokens/s and TTFT** with perception thresholds (25 tokens/s; >4 s conversational degradation). Cost claims cite **per-1M-token pricing and cache hit savings (50–90%)**. Agentic system papers treat multi-stage requests as first-class workloads with stage-level SLOs.
 
-## 5. Positioning recommendations for KrishokChat
+## 5. Positioning recommendations for KrishokTech
 
-- Lead with the architecture the Bengali-agri literature itself converged on — citation-grounded RAG + 4B-class decoder — and present KrishokChat as the full system embodiment, with retrieval as the dosage-safety mechanism rather than parametric memory.
+- Lead with the architecture the Bengali-agri literature itself converged on — citation-grounded RAG + 4B-class decoder — and present KrishokTech as the full system embodiment, with retrieval as the dosage-safety mechanism rather than parametric memory.
 - Justify model choice with the BnMMLU scaling curve (sublinear returns; Qwen3-32B 65.34 ≈ ceiling) and Bengali degradation numbers (Llama 3.2-3B 0.280 vs 0.567); state explicitly which capability losses the local Gemma path accepts and which it routes to flash-lite.
 - Report TTFT/TBT per agent stage (Safety → Retrieval → Generation → Verification) with p50/p95 and SLO attainment (ServeGen conventions); anchor SLO at the measured perception envelope (≤4 s conversational threshold; 9 s deliberation-sweet-spot for the advice task).
 - Cite T-LRU (50–90% caching savings) and RouteLLM (>2× cost reduction) for semantic caching of repeat farmer queries and classifier-first routing.

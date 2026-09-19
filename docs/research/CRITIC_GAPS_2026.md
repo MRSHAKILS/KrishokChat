@@ -1,4 +1,4 @@
-# KrishokChat Improvement Gap Analysis — Adversarial Review
+# KrishokTech Improvement Gap Analysis — Adversarial Review
 
 Date: 2026-08-14. Scope: 19 candidates — 12 transferable techniques from `LITERATURE_SCOUT_2026.md` and 7 opportunities from `competitive-landscape.md` — pressure-tested against four rejection criteria: (i) marketing claim, (ii) unverifiable within project scope, (iii) violates hard rules (new services, auth gating the demo, fabricated metrics), (iv) more than 2 days of effort with low demo payoff. Horizon: 3–4 minute investor demo first; marketplace later. Every evidence citation is drawn from the two source files; no external claims added.
 

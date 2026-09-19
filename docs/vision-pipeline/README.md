@@ -1,4 +1,4 @@
-# Vision Pipeline — KrishokChat Advisory System
+# Vision Pipeline — KrishokTech Advisory System
 
 Documentation for the crop disease detection subsystem: a two-stage, agentic
 computer-vision pipeline that takes a farmer's leaf photograph and returns a
@@ -29,7 +29,7 @@ space from 32 classes to between 3 and 11.
 
 ## 2. Where it fits in the overall system
 
-KrishokChat has two independent user-facing capabilities that share a backend
+KrishokTech has two independent user-facing capabilities that share a backend
 process:
 
 ```

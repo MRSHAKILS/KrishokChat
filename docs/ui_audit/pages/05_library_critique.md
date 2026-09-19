@@ -1,8 +1,8 @@
 # Page Critique: Advisory Knowledge Library (`/library`)
 
 **Target Route**: `/library`  
-**Source Code**: [frontend/src/app/(marketing)/library/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/library/page.tsx)  
-**Screenshot**: ![05_library.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/05_library.png)  
+**Source Code**: [frontend/src/app/(marketing)/library/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/library/page.tsx)  
+**Screenshot**: ![05_library.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/05_library.png)  
 
 ---
 

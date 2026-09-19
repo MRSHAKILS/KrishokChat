@@ -38,7 +38,7 @@ The paper also reports that only **3.5%** of gold entity names appear verbatim i
 
 ### 2.2 Bengali agricultural transfer remains difficult after evidence access
 
-The companion benchmark, *KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory* (`arXiv:2606.29243`), reports persistent farmer-language transfer difficulty and a chemical hallucination floor even under oracle evidence. The benchmark also distinguishes controlled dialect-expanded surfaces from a smaller authentic farmer benchmark.
+The companion benchmark, *KrishokTech: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory* (`arXiv:2606.29243`), reports persistent farmer-language transfer difficulty and a chemical hallucination floor even under oracle evidence. The benchmark also distinguishes controlled dialect-expanded surfaces from a smaller authentic farmer benchmark.
 
 This matters for the system story: retrieval repair cannot be judged only by whether a relevant passage appears. The system must preserve the information needed to identify a safe agricultural relation.
 
@@ -75,7 +75,7 @@ The paper should say “queries may be short, colloquial, dialectal, or underspe
 
 ---
 
-## 4. What KrishokChat does out of necessity
+## 4. What KrishokTech does out of necessity
 
 Beat A connects several existing components into a causal sequence:
 
@@ -149,7 +149,7 @@ Do **not** claim:
 
 Conditional, defensible wording:
 
-> The companion work diagnoses register-conditioned retrieval failure in Bengali agricultural search. KrishokChat turns that failure into an auditable control problem: it preserves the farmer query, applies bounded interpretation, selects a retrieval scope or clarification path, and records whether the transformation preserved safety-bearing fields.
+> The companion work diagnoses register-conditioned retrieval failure in Bengali agricultural search. KrishokTech turns that failure into an auditable control problem: it preserves the farmer query, applies bounded interpretation, selects a retrieval scope or clarification path, and records whether the transformation preserved safety-bearing fields.
 
 This becomes a contribution only if the paired intervention and safety-preservation experiments are completed.
 
@@ -162,7 +162,7 @@ If those experiments are not completed, Beat A remains motivation and system des
 1. **Opening:** the farmer’s symptom-only Bengali query does not identify one safe treatment record.
 2. **Failure:** standard retrieval is evaluated on formal/document language, while the companion study shows a sharp colloquial-vs-formal gap.
 3. **Risk:** generation can fill a missing crop or disease fluently, but evidence access and factual authority are different problems.
-4. **Design response:** KrishokChat spends cheap computation first on interpretation and scope; it clarifies when scope is unsafe, narrows retrieval when supported, and leaves an auditable trail.
+4. **Design response:** KrishokTech spends cheap computation first on interpretation and scope; it clarifies when scope is unsafe, narrows retrieval when supported, and leaves an auditable trail.
 5. **System demo payoff:** the reviewer can watch the raw query, route, scope, evidence, verification state, and final action rather than seeing an opaque answer.
 
 This is the Beat A story. The final six-page paper should use no more than 2–3 sentences from it.
@@ -186,7 +186,7 @@ This is the Beat A story. The final six-page paper should use no more than 2–3
 
 **Keep Beat A, but do not promote it to a separate contribution yet.** Use it as the motivating failure mechanism for the broader story:
 
-> Bengali farmer language makes retrieval scope uncertain; KrishokChat spends cheap computation to determine whether it can safely narrow that scope, whether it must ask, and whether the final evidence is sufficient to speak.
+> Bengali farmer language makes retrieval scope uncertain; KrishokTech spends cheap computation to determine whether it can safely narrow that scope, whether it must ask, and whether the final evidence is sufficient to speak.
 
 The next beat should be **Beat F (fluency versus factual authority)** or **Beat B (missing slots before retrieval)**. Beat B is the immediate system intervention; Beat F supplies the high-stakes reason that the intervention matters.
 

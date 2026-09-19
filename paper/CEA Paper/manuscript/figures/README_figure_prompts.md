@@ -7,7 +7,7 @@ into `manuscript/figures/` with the names below and recompile.
 
 ---
 
-## FIGURE 1 — KrishokChat Neurosymbolic Advisory Architecture (referenced in Section 4)
+## FIGURE 1 — KrishokTech Neurosymbolic Advisory Architecture (referenced in Section 4)
 
 **File:** `figures/fig1_architecture.png`
 **Style:** clean academic system-architecture diagram, flat vector style, white
@@ -15,7 +15,7 @@ background, blue/green accent palette, no photorealism, no text gibberish — al
 must be spelled exactly as given.
 
 **Prompt:**
-"Create a professional academic system-architecture diagram titled 'KrishokChat Neurosymbolic
+"Create a professional academic system-architecture diagram titled 'KrishokTech Neurosymbolic
 Advisory Architecture'. Vertical flow from top to bottom. Top box: 'Farmer Query
 (text / image / voice)'. Below it a box labeled 'Tier 0: Risk & Context Gate'
 (deterministic policy: safe_agri, banned chemical, self-harm, off-topic, prompt
@@ -50,7 +50,7 @@ Flat vector, white background, academic style.
 
 **File:** `figures/fig_governance_pipeline.png` (Source: `Governed Knowledge Compilation and Fact Authority Pipeline.png`)
 **Prompt:**
-"A high-resolution, clean academic vector architecture diagram titled 'KrishokChat: Governed Knowledge Compilation and Fact Authority Pipeline'. Horizontal 5-stage dataflow:
+"A high-resolution, clean academic vector architecture diagram titled 'KrishokTech: Governed Knowledge Compilation and Fact Authority Pipeline'. Horizontal 5-stage dataflow:
 Stage 1: Accredited Institutional Corpus (2,946 Docs) — BARI, BRRI, DAE/MoA.
 Stage 2: Governed Ingestion & Conflict Resolution — Staging, Semi-automated regex/rule extraction (18-25 min/profile), Double-blind expert review, Authority Precedence Rule (MoA > BARI/BRRI > Legacy > Secondary), Policy Override on superseded/banned chemicals.
 Stage 3: Canonical Relational Record (Two-Layer Schema) — Layer A (11-Slot Decision Contract) + Layer B (Governance Metadata) -> Single-Record Joint Entailment.
@@ -63,7 +63,7 @@ Stage 5: Governed Deployment Runtime — Signed SQLite Fact Pack (Edge / Offline
 Layer E04)'. X-axis: Coverage (%), 0-100. Y-axis: Selective Risk (%), 0-16. Plot five
 monotone curves labeled: 'Raw Generator Confidence' (rises steeply: at 50% coverage
 6.96% risk, at 100% 16.51%), 'Lexical Overlap' (11.19% at 50%), 'LLM-Judge' (1.24% at
-50%), 'Conformal Abstention' (0.05% at 50%, 7.32% at 90%), 'Calibrated Relational KrishokChat
+50%), 'Conformal Abstention' (0.05% at 50%, 7.32% at 90%), 'Calibrated Relational KrishokTech
 (bold blue)' (0.0% at 50%, 0.0% at 80%, 7.21% at 90%). Mark a vertical dashed line at
 84.56% coverage with an annotation 'frozen theta* = 0.2375, risk 1.26%'. Legend at
 bottom-right. Academic ggplot style, white background, clean typography."
@@ -75,7 +75,7 @@ bottom-right. Academic ggplot style, white background, clean typography."
 **Prompt:** "A grouped bar chart 'Metamorphic Rejection Rate (11,000 mutations per
 system)'. X axis systems: B0 Unconstrained LLM 18.41%, B1 Lexical 36.36%, B2 Dense
 37.05%, B3 Citation 57.33%, B4 LLM Judge 72.25%, B5 Partial 8-slot 63.64%, B6 11-Slot
-KrishokChat 100.0%. B6 bar highlighted in green with '100%' label on top; others in gray with
+KrishokTech 100.0%. B6 bar highlighted in green with '100%' label on top; others in gray with
 confidence-interval whiskers (e.g. 18.41 [17.70, 19.14]). Academic style, white
 background."
 

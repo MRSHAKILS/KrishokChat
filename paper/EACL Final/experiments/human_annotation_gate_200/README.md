@@ -1,4 +1,4 @@
-# Human Reviewer Package — KrishokChat 200 Farmer Queries
+# Human Reviewer Package — KrishokTech 200 Farmer Queries
 
 **Target Limitation:**  
 `| 9 | Single-reviewer labels (200 crop slots) + autopsies | Disclosed | Second human pass listed as upgrade path; hazard numbers labeled single-reviewer. |`
@@ -38,10 +38,10 @@ human_annotation_gate_200/
 
 ## 🚀 Quick Start for Annotators
 
-1. **Read the Protocol:** Open and read [`ANNOTATION_GUIDELINES.pdf`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/ANNOTATION_GUIDELINES.pdf) (or [`ANNOTATION_GUIDELINES.md`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/ANNOTATION_GUIDELINES.md)) to familiarize yourself with the 37 controlled crop options, the 6 intent definitions, and the worked boundary samples.
+1. **Read the Protocol:** Open and read [`ANNOTATION_GUIDELINES.pdf`](file:///D:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/ANNOTATION_GUIDELINES.pdf) (or [`ANNOTATION_GUIDELINES.md`](file:///D:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/ANNOTATION_GUIDELINES.md)) to familiarize yourself with the 37 controlled crop options, the 6 intent definitions, and the worked boundary samples.
 2. **Choose Your Annotation Mode:**
-   - **Mode A (Recommended — Modular Batches):** Open each file in [`batches/`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/batches) (20 queries per file, ~10-15 minutes per batch).
-   - **Mode B (Single Master File):** Open [`master_blind_sheet_200.xlsx`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/master_blind_sheet_200.xlsx) and fill in either the `All 200 Queries` sheet or the individual batch tabs.
+   - **Mode A (Recommended — Modular Batches):** Open each file in [`batches/`](file:///D:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/batches) (20 queries per file, ~10-15 minutes per batch).
+   - **Mode B (Single Master File):** Open [`master_blind_sheet_200.xlsx`](file:///D:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/master_blind_sheet_200.xlsx) and fill in either the `All 200 Queries` sheet or the individual batch tabs.
 3. **Fill the Input Columns (Columns E to J):**
    - **Col E (`Crop Name` / বাংলায় ফসলের নাম):** Name of the crop in Bangla (e.g., `ধান`, `আলু`, `টমেটো`), or leave blank if no crop is stated.
    - **Col F (`Crop Taxonomy` / English):** English standardized name (`rice`, `potato`, `wheat`, `chilli`, `brinjal`, etc.).
@@ -63,7 +63,7 @@ Both external annotator sets are preserved in `batches/`:
 To run the complete multi-reviewer evaluation pipeline:
 
 ```bash
-cd "D:\KrishokChat Advisory System\paper\EACL Final\experiments\human_annotation_gate_200"
+cd "D:\KrishokTech Advisory System\paper\EACL Final\experiments\human_annotation_gate_200"
 python scripts/evaluate_all_reviewers.py
 ```
 
@@ -83,5 +83,5 @@ python scripts/evaluate_all_reviewers.py
    - **Majority 2-to-1 Consensus:** $200 / 200$ (**100.00%**).
 
 3. **Outputs & Adjudication Artifacts:**
-   - [`consensus_gold_200.json`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/consensus_gold_200.json): Full 200-row consensus gold dataset with all 3 raters, confidence scores, notes, and adjudication verdicts.
-   - [`dual_review_report.json`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/dual_review_report.json) / [`multi_reviewer_evaluation_report.json`](file:///D:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/multi_reviewer_evaluation_report.json): Complete machine-readable audit report.
+   - [`consensus_gold_200.json`](file:///D:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/consensus_gold_200.json): Full 200-row consensus gold dataset with all 3 raters, confidence scores, notes, and adjudication verdicts.
+   - [`dual_review_report.json`](file:///D:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/dual_review_report.json) / [`multi_reviewer_evaluation_report.json`](file:///D:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/human_annotation_gate_200/multi_reviewer_evaluation_report.json): Complete machine-readable audit report.

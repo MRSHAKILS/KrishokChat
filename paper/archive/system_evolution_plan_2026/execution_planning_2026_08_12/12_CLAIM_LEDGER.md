@@ -33,7 +33,7 @@
 | F05 | The benchmark endpoint serves computed or precomputed results. **SUPERSEDED by S12 (2026-08-14)** — it now serves precomputed stats. | T04 shows `not_implemented`. |
 | F06 | Local Gemma achieves any quality, safety, latency, or benchmark value. | Checkpoint presence is not an inference evaluation. |
 | F07 | Current vision artifacts detect/localize disease or produce bounding boxes. | Artifacts report classification and boxes are empty. |
-| F08 | KrishokChat is the first agricultural claim verifier, first selective certifier, first Bengali agricultural RAG system, or first dialect/Banglish RAG study. | Direct literature threats in `02_NOVELTY_ATTACK.md`. |
+| F08 | KrishokTech is the first agricultural claim verifier, first selective certifier, first Bengali agricultural RAG system, or first dialect/Banglish RAG study. | Direct literature threats in `02_NOVELTY_ATTACK.md`. |
 | F09 | Normalization improves safety because it improves retrieval. | E4/E5 require independent safety invariance; the relation is not assumed. |
 | F10 | An LLM judge supplies gold labels or proves factuality. | Expert labels are required by the protocol. |
 | F11 | Any PDF-extracted number is verified before T05 reconciliation. | `../T01_PDF_EXTRACTION.md:8-10`. |
@@ -62,6 +62,6 @@
 ## Citation Sources
 
 - Local implementation and artifact claims cite repository paths and hashes.
-- Authoritative KrishokChat papers may be referenced only by the filenames/paths allowed in `docs/PAPER_POLICY.md` until public identifiers are supplied.
+- Authoritative KrishokTech papers may be referenced only by the filenames/paths allowed in `docs/PAPER_POLICY.md` until public identifiers are supplied.
 - Literature claims use the URLs listed in `02_NOVELTY_ATTACK.md` after T07 full-text verification.
 - Do not promote a TODO by repeating it in prose. Update this ledger with a run or artifact ID first.

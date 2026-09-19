@@ -166,7 +166,7 @@ And globally, Plantix already provides image diagnosis and treatment recommendat
 
 China also has regionally deployed intelligent plant-protection systems combining image recognition, agricultural knowledge and expert services; China's Ministry of Agriculture has explicitly made AI + agriculture a national strategic direction, emphasizing application-driven, incremental deployment and “small entry points, deep applications.” ([nyncj.beijing.gov.cn][7])
 
-So **do not pitch KrishokChat as “Bangladesh's first agricultural AI app.”**
+So **do not pitch KrishokTech as “Bangladesh's first agricultural AI app.”**
 
 That would be weak and factually unsafe.
 
@@ -643,7 +643,7 @@ You currently have:
 
 **Can we create authoritative Bengali agricultural knowledge?**
 
-Your KrishokChat resource paper addresses this: 290 audited knowledge nodes, citation-grounded data, farmer benchmark, etc. ([arXiv][8])
+Your KrishokTech resource paper addresses this: 290 audited knowledge nodes, citation-grounded data, farmer benchmark, etc. ([arXiv][8])
 
 ### Paper 2 — Retrieval
 
@@ -896,7 +896,7 @@ I would not pitch this as:
 
 I'd eventually pitch:
 
-# **KrishokChat = a safety-controlled digital agricultural extension layer**
+# **KrishokTech = a safety-controlled digital agricultural extension layer**
 
 with five capabilities:
 
@@ -1096,7 +1096,7 @@ Right now I see a surprisingly coherent program:
 
 ### Foundation
 
-**KrishokChat dataset**
+**KrishokTech dataset**
 → authoritative Bengali agricultural knowledge.
 
 ### Language
@@ -1180,5 +1180,5 @@ And one final encouraging point: your CEA paper already contains the philosophic
 [5]: https://moa.gov.bd/pages/internal-eservices/%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A6%BF-%E0%A6%95%E0%A6%B2-%E0%A6%B8%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0-%E0%A7%A7%E0%A7%AC%E0%A7%A7%E0%A7%A8%E0%A7%A9-a71861-694031b6a31054345f0d0e12?utm_source=chatgpt.com "কৃষি কল সেন্টার (১৬১২৩) | অভ্যন্তরীণ ই সেবা | কৃষি মন্ত্রণালয়"
 [6]: https://www.plantix.net/en/plantix-intelligence/api-toolkit/?utm_source=chatgpt.com "Crop Disease Diagnosis & Produce Grading API | Plantix"
 [7]: https://nyncj.beijing.gov.cn/nyj/snxx/gzdt/21214340/index.html?utm_source=chatgpt.com "北京首款植保APP “烽火惠农” 上线，为传统植保注入“智慧”因子"
-[8]: https://arxiv.org/pdf/2606.29243 "KrishokChat: A Citation-Grounded Dataset and Benchmark for Bengali Agricultural Advisory"
+[8]: https://arxiv.org/pdf/2606.29243 "KrishokTech: A Citation-Grounded Dataset and Benchmark for Bengali Agricultural Advisory"
 [9]: https://app.www.gov.cn/govdata/gov/202410/29/521138/article.html?utm_source=chatgpt.com "农业农村部关于大力发展智慧农业的指导意见"

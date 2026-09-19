@@ -1,4 +1,4 @@
-# KrishokChat — CEA-Pivot Implementation & Aggregation Plan
+# KrishokTech — CEA-Pivot Implementation & Aggregation Plan
 
 Author: research-engineering plan, 2026-08-27
 Inputs: `paper/reviews/suggestions_1.md` (CEA pivot review), `paper/manuscript/` (Wiley Expert
@@ -9,7 +9,7 @@ Systems draft + frozen claim ledger), `research_artifacts/` (E02–E13 results),
 
 ## 1. Expert assessment — where we actually stand
 
-**Manuscript.** A Wiley *Expert Systems* manuscript exists (`paper/manuscript/krishokchat_wiley_expert_systems.tex`,
+**Manuscript.** A Wiley *Expert Systems* manuscript exists (`paper/manuscript/krishoktech_wiley_expert_systems.tex`,
 ~875 lines, compiled PDF) with a frozen claim ledger (S/F/U IDs) and a completed empirical battery
 E02–E13: relational misbinding (10k adversarial cases), slot ablation, risk-coverage calibration,
 counterfactual binding, farmer/dialect robustness (4k queries), prompt injection, latency/economics,

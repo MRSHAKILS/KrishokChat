@@ -15,7 +15,7 @@ A farmer writes, in perfectly ordinary Bengali:
 
 No crop name. For a human extension officer this is the start of a conversation: *"Which crop?"* For a standard RAG pipeline it is a retrieval query — and retrieval will return *something*, usually from whatever crop dominates the index. The system then generates a fluent, confident spray recommendation for a crop the farmer may not grow.
 
-KrishokChat instead answers:
+KrishokTech instead answers:
 
 > "কোন ফসলের পাতায় এই সমস্যা হয়েছে বলবেন কি? (যেমন: আলু, ধান, বা টমেটো)"
 > "Could you tell me which crop's leaves have this problem? (e.g., potato, rice, or tomato)"
@@ -65,7 +65,7 @@ The paper should say "underspecified" with a concrete definition (`crop = ∅` o
 
 ---
 
-## 4. What KrishokChat does out of necessity
+## 4. What KrishokTech does out of necessity
 
 ```text
 query
@@ -135,7 +135,7 @@ Do **not** claim:
 
 Conditional, defensible wording:
 
-> Existing agricultural assistants classify intent and then retrieve. KrishokChat inserts a cheap deterministic gate *between* understanding and retrieval: when the crop slot is empty on a treatment intent, it halts before any retrieval, asks one minimum-necessary question, and resumes with the slot bound. On a 400-case stratified suite the gate halts 100/100 ambiguous queries with zero retrieval, passes 140/140 specified queries, refuses 70/70 high-risk probes, and a paired blind-RAG arm shows the measured cross-crop hazard it prevents — while a live-LLM NLU arm reaches only 80% gating recall at ~4.2s per query.
+> Existing agricultural assistants classify intent and then retrieve. KrishokTech inserts a cheap deterministic gate *between* understanding and retrieval: when the crop slot is empty on a treatment intent, it halts before any retrieval, asks one minimum-necessary question, and resumes with the slot bound. On a 400-case stratified suite the gate halts 100/100 ambiguous queries with zero retrieval, passes 140/140 specified queries, refuses 70/70 high-risk probes, and a paired blind-RAG arm shows the measured cross-crop hazard it prevents — while a live-LLM NLU arm reaches only 80% gating recall at ~4.2s per query.
 
 The "paired blind-RAG arm" and "metered tokens" clauses are the conditions. Without them, report the gating rates alone and mark hazard/token deltas as modeled.
 

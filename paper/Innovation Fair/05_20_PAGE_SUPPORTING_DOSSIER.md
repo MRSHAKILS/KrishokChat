@@ -1,9 +1,9 @@
-# KrishokChat — Current Status, Research Evidence & Deployment Dossier
+# KrishokTech — Current Status, Research Evidence & Deployment Dossier
 
 **A Comprehensive Due-Diligence & Technical Support Document for the Bangladesh Innovation Fair 2026**  
 **Lead Researcher & Engineer:** Raiyaan Reza  
 **Institutional Affiliation:** Research Artifact & System Demonstration Ecosystem  
-**Repository & Demo:** `https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System`
+**Repository & Demo:** `https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System`
 
 ---
 
@@ -36,9 +36,9 @@
 ## PAGE 1 — COVER & EXECUTIVE SUMMARY
 
 ### Executive Summary
-KrishokChat is a Bengali-first agricultural intelligence platform engineered to bridge the critical gap between smallholder farmers, agricultural extension services, and safe scientific agronomy in Bangladesh. Addressing the compounding rural realities of dialect variation, illiteracy, scarce expert availability, and intermittent connectivity, KrishokChat combines natural Bengali conversation, leaf photo pathology, pre-indexed institutional knowledge retrieval, pre-generation safety screening, relational fact verification, and offline-first delivery into a unified advisory engine.
+KrishokTech is a Bengali-first agricultural intelligence platform engineered to bridge the critical gap between smallholder farmers, agricultural extension services, and safe scientific agronomy in Bangladesh. Addressing the compounding rural realities of dialect variation, illiteracy, scarce expert availability, and intermittent connectivity, KrishokTech combines natural Bengali conversation, leaf photo pathology, pre-indexed institutional knowledge retrieval, pre-generation safety screening, relational fact verification, and offline-first delivery into a unified advisory engine.
 
-Backed by an exhaustive empirical foundation of 36 experimental evaluation layers, KrishokChat achieves **97.0% certified correctness** with **0.0% critical unsafe acceptance** on live expert benchmarks, delivering answers in **3.8 ms** via its deterministic fact-base. KrishokChat transitions AI from speculative conversational chatbots into reliable, accountable national agricultural infrastructure.
+Backed by an exhaustive empirical foundation of 36 experimental evaluation layers, KrishokTech achieves **97.0% certified correctness** with **0.0% critical unsafe acceptance** on live expert benchmarks, delivering answers in **3.8 ms** via its deterministic fact-base. KrishokTech transitions AI from speculative conversational chatbots into reliable, accountable national agricultural infrastructure.
 
 ---
 
@@ -114,9 +114,9 @@ Banglish (Romanized Bengali Script)      ──► 41.8% Top-10 Recall (-31.4 pp
 
 ## PAGE 7 — EVIDENCE-DRIVEN ARCHITECTURAL REDESIGN
 
-Every architectural component in KrishokChat directly addresses a proven empirical failure mode:
+Every architectural component in KrishokTech directly addresses a proven empirical failure mode:
 
-| Empirical Failure Mode Discovered | Architectural Solution in KrishokChat | Impact & Benefit |
+| Empirical Failure Mode Discovered | Architectural Solution in KrishokTech | Impact & Benefit |
 |---|---|---|
 | LLMs hallucinate non-existent pesticides | **Tier 0 Deterministic Safety Gate** | 100% fail-closed block of banned agrochemicals |
 | Cloud LLMs take 2.5–4.5s on mobile | **Tier 1/2 Structured SQLite Fact-Base** | Sub-4ms resolution, 708$\times$ speedup, $0.00 cost |
@@ -188,7 +188,7 @@ In a 1,400-case adversarial evaluation comprising prompt injections, jailbreak t
 * **Generic LLM Baseline:** Accepted **83.86%** of dangerous chemical queries.
 * **Vanilla RAG Baseline:** Accepted **69.36%** of dangerous chemical queries.
 * **RAG + LLM Judge Baseline:** Accepted **21.79%** of dangerous chemical queries.
-* **KrishokChat (Tier 0 Gate):** **0.00% Unsafe Acceptance (100% Fail-Closed Protection)**.
+* **KrishokTech (Tier 0 Gate):** **0.00% Unsafe Acceptance (100% Fail-Closed Protection)**.
 
 Every refusal immediately surfaces the Bangladesh National Agricultural Helpline **16123** and emergency **999** for human medical support.
 
@@ -198,13 +198,13 @@ Every refusal immediately surfaces the Bangladesh National Agricultural Helpline
 
 Standard LLMs suffer from "attribute misbinding"—correctly retrieving an active ingredient but combining it with a lethal dosage from an adjacent paragraph. In a 2,000-pair counterfactual experiment where dosages, crops, and pre-harvest intervals were systematically mutated:
 * **Vanilla RAG:** Certified **72.65%** of corrupted, toxic recommendations.
-* **KrishokChat Typed Verifier:** **0.00% False Certification (100% Rejection of Corrupted Evidence)**.
+* **KrishokTech Typed Verifier:** **0.00% False Certification (100% Rejection of Corrupted Evidence)**.
 
 ---
 
 ## PAGE 12 — THE 11-SLOT AGRONOMIC SAFETY CONTRACT
 
-KrishokChat enforces an immutable 11-slot relational schema before any advisory sentence is shown to a farmer:
+KrishokTech enforces an immutable 11-slot relational schema before any advisory sentence is shown to a farmer:
 1. `crop` (Validated crop entity)
 2. `problem` (Verified pathology or pest)
 3. `active_ingredient` (National registered active)
@@ -225,7 +225,7 @@ KrishokChat enforces an immutable 11-slot relational schema before any advisory 
 
 When a farmer submits a leaf photo with conflicting text (e.g., text mentions *"Tomato blight"* while the computer vision model detects *Potato Late Blight* with 96% confidence):
 * Generic multimodal models hallucinate an unscientific compromise treatment in **88%** of cases.
-* KrishokChat intercepts the contradiction, pauses treatment generation, and prompts the farmer: *"আপনার প্রশ্ন টমেটো সম্পর্কে, কিন্তু ছবিতে আলু শনাক্ত হয়েছে। আপনি কোন ফসলের পরামর্শ চান?"* (Achieving **100% conflict detection** and **0.0% hazard** across 100 benchmark test cases).
+* KrishokTech intercepts the contradiction, pauses treatment generation, and prompts the farmer: *"আপনার প্রশ্ন টমেটো সম্পর্কে, কিন্তু ছবিতে আলু শনাক্ত হয়েছে। আপনি কোন ফসলের পরামর্শ চান?"* (Achieving **100% conflict detection** and **0.0% hazard** across 100 benchmark test cases).
 
 ---
 
@@ -233,7 +233,7 @@ When a farmer submits a leaf photo with conflicting text (e.g., text mentions *"
 
 Performance comparison across 4 linguistic registers on the 900-query benchmark:
 
-| Linguistic Register | Vanilla Cloud RAG Top-10 Recall | KrishokChat Verified Accuracy | Delta Improvement |
+| Linguistic Register | Vanilla Cloud RAG Top-10 Recall | KrishokTech Verified Accuracy | Delta Improvement |
 |---|:---:|:---:|:---:|
 | **Standard Bengali** | 73.2% | **97.0%** | **+23.8 pp** |
 | **Farmer Colloquial** | 58.4% | **96.2%** | **+37.8 pp** |
@@ -255,7 +255,7 @@ In a formal evaluation conducted with **3 certified agricultural extension speci
 ## PAGE 16 — GRACEFUL DEGRADATION & SELECTIVE RISK ABSTENTION
 
 Under simulated retrieval failure (where knowledge corpus recall is artificially degraded from 1.0 to 0.0):
-* Instead of hallucinating plausible advice, KrishokChat's certification coverage smoothly decreases from 97% to 0%, while **chemical hazard remains fixed at 0.0%**.
+* Instead of hallucinating plausible advice, KrishokTech's certification coverage smoothly decreases from 97% to 0%, while **chemical hazard remains fixed at 0.0%**.
 * The platform safely abstains and routes the farmer to the **16123** national hotline rather than delivering unverified advice.
 
 ---
@@ -263,16 +263,16 @@ Under simulated retrieval failure (where knowledge corpus recall is artificially
 ## PAGE 17 — RURAL CONNECTIVITY, EDGE PWA & SMS ARCHITECTURE
 
 Under rigorous packet-loss simulation modeling Bangladesh rural telecom realities:
-* **Moderate 3G (5% Packet Loss):** Cloud RAG = 94.2% delivery | KrishokChat PWA = **99.1%** (+4.9 pp)
-* **Rural Edge (15% Packet Loss):** Cloud RAG = 82.0% delivery | KrishokChat PWA = **91.4%** (+9.4 pp)
-* **Severe 2G Rural (30% Packet Loss):** Cloud RAG = 12.8% delivery | KrishokChat PWA = **58.1%** (**+45.3 pp**)
+* **Moderate 3G (5% Packet Loss):** Cloud RAG = 94.2% delivery | KrishokTech PWA = **99.1%** (+4.9 pp)
+* **Rural Edge (15% Packet Loss):** Cloud RAG = 82.0% delivery | KrishokTech PWA = **91.4%** (+9.4 pp)
+* **Severe 2G Rural (30% Packet Loss):** Cloud RAG = 12.8% delivery | KrishokTech PWA = **58.1%** (**+45.3 pp**)
 * **Non-Smartphone Delivery:** SMS Template Compression delivers 100% of critical dosage slots within a single 160-character Bengali text.
 
 ---
 
 ## PAGE 18 — COMPUTATIONAL EFFICIENCY & LOCAL ZERO-COST SERVING
 
-KrishokChat replaces expensive cloud LLM calls with sub-millisecond local lookups:
+KrishokTech replaces expensive cloud LLM calls with sub-millisecond local lookups:
 * **Workload Distribution:** **61.5%** of common farming queries are resolved deterministically (Tier 0/1/2) with **0 LLM calls**.
 * **Serving Latency:** Fact-base resolution executes in **3.8 ms** (vs. 2,971 ms for cloud LLM generation — a **708$\times$ speedup**).
 * **Cost Efficiency:** Serving cost reduced from **$1.05 / 1k queries** (cloud LLM) to **$0.08 / 1k queries** (**92% cost reduction**).
@@ -293,7 +293,7 @@ The platform is maintained under strict continuous-integration standing release 
 
 ### 12-Month Deployment Pathway
 1. **Q3 2026 (Field Pilot):** Controlled pilot with 1,000 potato and rice farmers in Bogura and Rangpur in collaboration with local DAE extension offices.
-2. **Q4 2026 (Institutional SAAO Integration):** Deploy KrishokChat Extension Copilot to 250 SAAO field officers.
+2. **Q4 2026 (Institutional SAAO Integration):** Deploy KrishokTech Extension Copilot to 250 SAAO field officers.
 3. **Q1 2027 (Edge Model & Voice Expansion):** Deploy on-device INT8 classifiers for maize, wheat, and brassica; roll out Bengali speech-to-text.
 4. **Q2 2027 (National Scale):** Expand to 50,000+ farmers via NGO, telecom (USSD/SMS), and agribusiness digital advisory partnerships.
 
@@ -307,7 +307,7 @@ The platform is maintained under strict continuous-integration standing release 
 ## APPENDICES A–H: EXPERIMENTAL CATALOG & EMPIRICAL BENCHMARKS
 
 * **Appendix A:** Comprehensive Index of 36 Completed CEA Experimental Layers.
-* **Appendix B:** Full Baseline Comparison Matrix (Base LLM vs. Vanilla RAG vs. KrishokChat).
+* **Appendix B:** Full Baseline Comparison Matrix (Base LLM vs. Vanilla RAG vs. KrishokTech).
 * **Appendix C:** 1,400-Item Adversarial Attack Taxonomy & Refusal Rates.
 * **Appendix D:** 11,000-Case Metamorphic Mutation Operators.
 * **Appendix E:** Temporal Source Fragmentation & Outdated Advice Suppression Benchmark.

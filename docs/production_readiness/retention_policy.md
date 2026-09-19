@@ -49,7 +49,7 @@ schema in `backend/app/infrastructure/audit/sqlite.py`.)
 - Demo cache (`demo-assets/cached_responses.json`) — curated, precomputed
   content, not user data; managed by `DEMO_CACHE_MAX_ENTRIES`.
 - Backend/app JSON logs (`LOG_LEVEL` rotation is the logrotate sample in
-  `docs/production_readiness/logrotate.krishokchat`).
+  `docs/production_readiness/logrotate.krishoktech`).
 - Session history — TTL-bounded in-app (`SESSION_TTL_SECONDS`,
   `SESSION_MAX_TURNS`); SQLite sessions table is pruned by the same daily
   window if it grows.

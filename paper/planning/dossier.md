@@ -1,6 +1,6 @@
 You were right to stop me. **The supporting artifact should be one serious PDF dossier, authored in LaTeX, not another PPT.** The 7–8 slide PPT is the mandatory screening deck; the optional “Supporting File / Document Related to the Current Status” is where we should put the deeper evidence package. The official form confirms the main presentation is strictly PPT/PPTX, while the supporting-document field is separate and has no public format restriction shown on the form. ([Innovation Fair][1])
 
-And I corrected the most important research mistake you flagged: **KrishokChat v2 is not the old 145,500-instance story.** The authoritative v2 paper is the 26-page paper, *“KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory,”* with **85,979 core benchmark instances across four tracks + a 1,000-query Real-World Farmer Benchmark**, built from **284 government publications, 13 institutions, six Bengali dialects, and 2,946 semantic knowledge units**. Its released tracks are 28,993 General QA, 11,224 Treatment QA, 20,112 Safety Refusal/Re-query, and 25,650 Table QA. ([arXiv][2])
+And I corrected the most important research mistake you flagged: **KrishokTech v2 is not the old 145,500-instance story.** The authoritative v2 paper is the 26-page paper, *“KrishokTech: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory,”* with **85,979 core benchmark instances across four tracks + a 1,000-query Real-World Farmer Benchmark**, built from **284 government publications, 13 institutions, six Bengali dialects, and 2,946 semantic knowledge units**. Its released tracks are 28,993 General QA, 11,224 Treatment QA, 20,112 Safety Refusal/Re-query, and 25,650 Table QA. ([arXiv][2])
 
 The current Hugging Face repository has a larger row count because the released dataset representation contains additional/configured rows; that is **not** what I will use as the headline v2 benchmark count. The paper's 85,979 core-instance figure is the correct number for the research story. ([Hugging Face][3])
 
@@ -21,7 +21,7 @@ This is **not**:
 
 It is:
 
-# **The KrishokChat Innovation Due-Diligence Dossier**
+# **The KrishokTech Innovation Due-Diligence Dossier**
 
 Its job is to answer, in order:
 
@@ -148,7 +148,7 @@ Do **not** generate the whole page with GPT.
 Use:
 
 * one actual field photograph;
-* one actual KrishokChat UI crop/screenshot;
+* one actual KrishokTech UI crop/screenshot;
 * subtle agricultural background;
 * clean typography.
 
@@ -162,7 +162,7 @@ The cover should immediately communicate:
 
 ## Title
 
-# **What KrishokChat is today**
+# **What KrishokTech is today**
 
 This page should be almost entirely visual.
 
@@ -176,9 +176,9 @@ Six capability cards.
 
 ## Exact body text
 
-KrishokChat is a Bengali-first agricultural intelligence platform built to help farmers obtain useful agricultural guidance without requiring specialist terminology, constant access to an expert, or uninterrupted connectivity.
+KrishokTech is a Bengali-first agricultural intelligence platform built to help farmers obtain useful agricultural guidance without requiring specialist terminology, constant access to an expert, or uninterrupted connectivity.
 
-The platform brings together conversational agricultural question answering, evidence-grounded retrieval, crop and disease image analysis, safety screening, response verification, provenance, auditability and constrained-delivery pathways in one system. The engineering direction is deliberately broader than a chatbot: KrishokChat is being developed as a reusable advisory platform that can support farmers directly and, through the same infrastructure, extension officers, NGOs, agribusinesses and public agricultural services.
+The platform brings together conversational agricultural question answering, evidence-grounded retrieval, crop and disease image analysis, safety screening, response verification, provenance, auditability and constrained-delivery pathways in one system. The engineering direction is deliberately broader than a chatbot: KrishokTech is being developed as a reusable advisory platform that can support farmers directly and, through the same infrastructure, extension officers, NGOs, agribusinesses and public agricultural services.
 
 ### Six cards
 
@@ -278,7 +278,7 @@ This is the v2 paper.
 
 Our first major research contribution was a provenance-traceable Bengali agricultural benchmark designed specifically for agricultural knowledge, treatment advice, safety behavior and structured reasoning.
 
-The released KrishokChat v2 benchmark contains 85,979 core instances across four tracks: General Knowledge QA, Treatment QA, Safety Refusal and Re-query, and Table QA. The resource is built from 284 government agricultural publications across 13 institutions and six Bengali dialects, with every benchmark instance linked back to its originating semantic knowledge unit and source publication.
+The released KrishokTech v2 benchmark contains 85,979 core instances across four tracks: General Knowledge QA, Treatment QA, Safety Refusal and Re-query, and Table QA. The resource is built from 284 government agricultural publications across 13 institutions and six Bengali dialects, with every benchmark instance linked back to its originating semantic knowledge unit and source publication.
 
 The benchmark was deliberately designed to separate what is often collapsed into a single “agricultural QA” score: ordinary agricultural knowledge, safety-critical treatment advice, refusal/clarification behavior, and reasoning over structured agricultural tables.
 
@@ -443,7 +443,7 @@ This sentence connects your papers to the product naturally.
 
 ---
 
-# 14. Page 10 — The complete KrishokChat architecture
+# 14. Page 10 — The complete KrishokTech architecture
 
 ## Title
 
@@ -532,7 +532,7 @@ Use short labels:
 
 ### Text
 
-KrishokChat treats a farmer interaction as a case rather than a single prompt. The system can carry the farmer's question, available crop context, image evidence, retrieved agricultural sources, verification status and subsequent follow-up within the same advisory flow.
+KrishokTech treats a farmer interaction as a case rather than a single prompt. The system can carry the farmer's question, available crop context, image evidence, retrieved agricultural sources, verification status and subsequent follow-up within the same advisory flow.
 
 This allows different capabilities to contribute to the same decision instead of forcing the farmer to understand which technical tool should be used first.
 
@@ -613,7 +613,7 @@ The vision workflow is deliberately integrated with the advisory layer. A photog
 
 This separation also allows uncertainty to propagate. A low-confidence or contradictory visual prediction does not have to become a confident agricultural recommendation; it can instead trigger clarification or another evidence path.
 
-The existing system documentation describes crop classification followed by per-crop disease routing, while the CEA work explicitly treats the vision output as routing metadata rather than claiming a new detector. ([github.com](https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System)) 
+The existing system documentation describes crop classification followed by per-crop disease routing, while the CEA work explicitly treats the vision output as routing metadata rather than claiming a new detector. ([github.com](https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System)) 
 
 ---
 
@@ -621,7 +621,7 @@ The existing system documentation describes crop classification followed by per-
 
 ## Title
 
-# **When evidence disagrees, KrishokChat asks before it acts**
+# **When evidence disagrees, KrishokTech asks before it acts**
 
 This is one of the features I would absolutely build before final PDF generation.
 
@@ -685,11 +685,11 @@ Then:
 
 ### Exact copy
 
-KrishokChat treats safety-sensitive agricultural requests differently from ordinary information requests. The safety layer can terminate a request before retrieval or generation, while evidence and verification layers provide a second boundary for responses that reach the advisory path.
+KrishokTech treats safety-sensitive agricultural requests differently from ordinary information requests. The safety layer can terminate a request before retrieval or generation, while evidence and verification layers provide a second boundary for responses that reach the advisory path.
 
 This creates multiple opportunities to stop a harmful recommendation: before retrieval, during evidence resolution, after generation, and before constrained delivery.
 
-The current application implements six safety categories and terminal handling before retrieval, with a local audit trail. ([github.com](https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System))
+The current application implements six safety categories and terminal handling before retrieval, with a local audit trail. ([github.com](https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System))
 
 ---
 
@@ -726,7 +726,7 @@ Don't overwhelm the reader with the algorithm.
 
 For safety-critical treatment advice, correctness depends on relationships among fields rather than the presence of individual words.
 
-A recommendation can contain the right chemical name and still be unsafe if the dosage belongs to another crop, the formulation is different, the pre-harvest interval is unsupported, or the recommendation comes from an obsolete or conflicting source. KrishokChat therefore represents critical treatment information as a typed relational record and requires the necessary fields to remain jointly supportable before certification.
+A recommendation can contain the right chemical name and still be unsafe if the dosage belongs to another crop, the formulation is different, the pre-harvest interval is unsupported, or the recommendation comes from an obsolete or conflicting source. KrishokTech therefore represents critical treatment information as a typed relational record and requires the necessary fields to remain jointly supportable before certification.
 
 This reflects the existing CEA contract and its 11-slot relational verification design. 
 
@@ -822,14 +822,14 @@ No evidence
 
 Current results:
 
-| Evidence condition | Vanilla RAG hazard | KrishokChat hazard |
+| Evidence condition | Vanilla RAG hazard | KrishokTech hazard |
 | ------------------ | -----------------: | -----------------: |
 | Gold               |              10.0% |               0.0% |
 | Noisy              |              19.2% |               0.0% |
 | Contradictory      |              33.2% |               0.0% |
 | Omitted            |              23.2% |               0.0% |
 
-Current KrishokChat safe-abstention rates increase as evidence quality deteriorates. 
+Current KrishokTech safe-abstention rates increase as evidence quality deteriorates. 
 
 ### Exact paragraph
 
@@ -945,7 +945,7 @@ These values are from the current uploaded results.
 
 Automated testing is necessary but not sufficient for agricultural deployment. We therefore included a double-blind expert review of 200 representative advisory outputs by three certified agronomists.
 
-KrishokChat received a mean correctness score of 4.82/5, a 100% chemical-safety pass rate in the evaluated sample, 98.5% evidence traceability, and 96.5% deployment approval. The resulting safety agreement was Gwet's AC1 = 0.862.
+KrishokTech received a mean correctness score of 4.82/5, a 100% chemical-safety pass rate in the evaluated sample, 98.5% evidence traceability, and 96.5% deployment approval. The resulting safety agreement was Gwet's AC1 = 0.862.
 
 These results do not replace field validation, but they provide a second form of evidence: the structured safety behavior was evaluated by agricultural specialists rather than judged only by the system itself.
 
@@ -1163,7 +1163,7 @@ Current result baseline:
 
 ### Exact paragraph
 
-KrishokChat is not tied to one model provider, one retrieval implementation, or one frontend workflow. The codebase separates application logic from infrastructure adapters, keeps research artifacts separate from runtime assets, and provides explicit deployment, audit and testing layers.
+KrishokTech is not tied to one model provider, one retrieval implementation, or one frontend workflow. The codebase separates application logic from infrastructure adapters, keeps research artifacts separate from runtime assets, and provides explicit deployment, audit and testing layers.
 
 This matters commercially because the agricultural knowledge, models and external services will change over time. The platform therefore has to accommodate new models, new evidence packs, new crops and new delivery channels without forcing a complete rebuild.
 
@@ -1372,7 +1372,7 @@ Supported by codebase, deployment layers and test infrastructure—not by field 
 
 Then a final line:
 
-# **These findings led us to build KrishokChat as a platform, not a chatbot.**
+# **These findings led us to build KrishokTech as a platform, not a chatbot.**
 
 ---
 
@@ -1414,11 +1414,11 @@ Then:
 
 ### Exact paragraph
 
-The most realistic commercialization path is not to assume that individual smallholder farmers will finance the entire service directly. KrishokChat is better positioned as shared advisory infrastructure: the farmer is the beneficiary, while institutions can finance deployment, support, knowledge integration and operational services.
+The most realistic commercialization path is not to assume that individual smallholder farmers will finance the entire service directly. KrishokTech is better positioned as shared advisory infrastructure: the farmer is the beneficiary, while institutions can finance deployment, support, knowledge integration and operational services.
 
 Potential deployment customers include agricultural programmes, NGOs, agribusinesses, extension networks and public agricultural services. The same core platform can therefore support multiple channels without creating separate products for each organization.
 
-Your production planning already identifies institutional/B2B/B2G deployment as the more durable path. ([github.com](https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System/blob/main/production/future_plan/00_SCOPE_OUTLINE.md))
+Your production planning already identifies institutional/B2B/B2G deployment as the more durable path. ([github.com](https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System/blob/main/production/future_plan/00_SCOPE_OUTLINE.md))
 
 ---
 
@@ -1442,9 +1442,9 @@ BAMIS publishes agricultural advisory information, and 16123 is the national agr
 
 Bangladesh does not need to invent demand for agricultural advice. Farmers already seek support through extension officers, agricultural call centres, weather and advisory services, local experts and informal information networks.
 
-The opportunity for KrishokChat is to add a digital intelligence layer to that existing ecosystem: understanding farmer-language questions, combining text and image evidence, grounding responses in agricultural knowledge, enforcing safety checks, and routing unresolved cases toward human or institutional support.
+The opportunity for KrishokTech is to add a digital intelligence layer to that existing ecosystem: understanding farmer-language questions, combining text and image evidence, grounding responses in agricultural knowledge, enforcing safety checks, and routing unresolved cases toward human or institutional support.
 
-This is much stronger than pretending KrishokChat replaces existing extension institutions.
+This is much stronger than pretending KrishokTech replaces existing extension institutions.
 
 ---
 
@@ -1479,7 +1479,7 @@ Then explain:
 * offline/cache;
 * future voice input.
 
-Your repository's frontend roadmap explicitly considers WCAG-oriented touch targets, Bengali font optimization, PWA/offline UX, on-device diagnosis and voice affordances. ([github.com](https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System/tree/main/production/future_plan))
+Your repository's frontend roadmap explicitly considers WCAG-oriented touch targets, Bengali font optimization, PWA/offline UX, on-device diagnosis and voice affordances. ([github.com](https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System/tree/main/production/future_plan))
 
 ---
 
@@ -1491,7 +1491,7 @@ Your repository's frontend roadmap explicitly considers WCAG-oriented touch targ
 
 Do not claim:
 
-> KrishokChat reduces pesticide usage nationally.
+> KrishokTech reduces pesticide usage nationally.
 
 Instead state:
 
@@ -1601,11 +1601,11 @@ Do not use inflated titles.
 
 ## Title
 
-# **What separates KrishokChat from a feature demo**
+# **What separates KrishokTech from a feature demo**
 
 This page should be a direct comparison:
 
-| Typical prototype           | KrishokChat                               |
+| Typical prototype           | KrishokTech                               |
 | --------------------------- | ----------------------------------------- |
 | Model-first                 | Problem-first                             |
 | One model                   | Multiple controlled capabilities          |
@@ -1790,7 +1790,7 @@ Four cards.
 
 ### Research 01
 
-**KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory**
+**KrishokTech: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory**
 
 **Contribution:** knowledge/evaluation foundation.
 
@@ -1808,7 +1808,7 @@ Four cards.
 
 ### Research 04
 
-**KrishokChat System Demonstration / EACL submission**
+**KrishokTech System Demonstration / EACL submission**
 
 **Contribution:** integrated public system.
 
@@ -1832,7 +1832,7 @@ Four large QR codes, maximum.
 
 ### LIVE SYSTEM
 
-> Try KrishokChat
+> Try KrishokTech
 
 ### SOURCE CODE
 
@@ -1840,7 +1840,7 @@ Four large QR codes, maximum.
 
 ### RESEARCH
 
-> KrishokChat v2
+> KrishokTech v2
 
 ### RETRIEVAL STUDY
 
@@ -1848,7 +1848,7 @@ Four large QR codes, maximum.
 
 Then small:
 
-> **Primary repository:** github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System
+> **Primary repository:** github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System
 
 The repository is public and currently exposes backend, frontend, deployment, research artifacts, production plans and experiment-related materials. ([GitHub][6])
 
@@ -1866,7 +1866,7 @@ Use the full system image.
 
 Exact copy:
 
-KrishokChat began with a practical question from the field:
+KrishokTech began with a practical question from the field:
 
 **How can agricultural technology become genuinely useful to a farmer when language, evidence, uncertainty and connectivity all matter at the same time?**
 
@@ -2187,7 +2187,7 @@ Use:
 
 Every chart gets:
 
-> **Source: KrishokChat evaluation artifact, [experiment name].**
+> **Source: KrishokTech evaluation artifact, [experiment name].**
 
 For simulated experiments:
 
@@ -2343,7 +2343,7 @@ Example:
 ```yaml
 evidence_nodes:
   value: 2946
-  source: KrishokChat_v2
+  source: KrishokTech_v2
   status: measured
 ```
 
@@ -2873,7 +2873,7 @@ That is a credible innovation story.
 
 I would end the whole supporting PDF with:
 
-> **KrishokChat is no longer only a question of whether an AI model can answer an agricultural question. The project is now about whether Bangladesh can build a locally grounded, evidence-aware, safe and deployable intelligence layer for agricultural decision support.**
+> **KrishokTech is no longer only a question of whether an AI model can answer an agricultural question. The project is now about whether Bangladesh can build a locally grounded, evidence-aware, safe and deployable intelligence layer for agricultural decision support.**
 
 That is the level at which I would pitch the innovation.
 
@@ -2913,12 +2913,12 @@ innovation_fair_supporting_doc/
 │   ├── offline.*
 │   └── admin.*
 ├── sources/
-│   ├── krishokchat_v2.pdf
+│   ├── krishoktech_v2.pdf
 │   ├── retrieval_paper.pdf
 │   ├── cea_paper.pdf
 │   └── results.yaml
 └── build/
-    └── KrishokChat_Innovation_Fair_Supporting_Dossier.pdf
+    └── KrishokTech_Innovation_Fair_Supporting_Dossier.pdf
 ```
 
 And the build pipeline must be:
@@ -2977,7 +2977,7 @@ The official Fair's mission makes this especially appropriate because it is expl
 
 # 95. The single sentence that should govern every page
 
-# **Every page must either explain why KrishokChat exists, show what was built, prove that an important property was tested, or explain how the tested system becomes deployable.**
+# **Every page must either explain why KrishokTech exists, show what was built, prove that an important property was tested, or explain how the tested system becomes deployable.**
 
 If a page does none of those four things:
 
@@ -2986,8 +2986,8 @@ If a page does none of those four things:
 That is the discipline I would use for the final PDF.
 
 [1]: https://innovationfairbd.org/innovator-application-form "Innovation Fair"
-[2]: https://arxiv.org/html/2606.29243v2 "KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory"
-[3]: https://huggingface.co/datasets/RaiyanKhaan/KrishokChat?utm_source=chatgpt.com "RaiyanKhaan/KrishokChat · Datasets at Hugging Face"
+[2]: https://arxiv.org/html/2606.29243v2 "KrishokTech: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory"
+[3]: https://huggingface.co/datasets/RaiyanKhaan/KrishokTech?utm_source=chatgpt.com "RaiyanKhaan/KrishokTech · Datasets at Hugging Face"
 [4]: https://innovationfairbd.org/about "Innovation Fair"
 [5]: https://arxiv.org/abs/2608.14886?utm_source=chatgpt.com "Where Does Retrieval Fail? Evaluating RAG Architectures for Agricultural Advisory"
-[6]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
+[6]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"

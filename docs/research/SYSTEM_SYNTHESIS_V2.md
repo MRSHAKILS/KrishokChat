@@ -1,4 +1,4 @@
-# KrishokChat Architecture 2.0 — Unified Multimodal & Agronomic Synthesis
+# KrishokTech Architecture 2.0 — Unified Multimodal & Agronomic Synthesis
 
 > **CANONICAL RESEARCH & ARCHITECTURAL OVERVIEW**  
 > **Last Audited:** 2026-09-03 | **Architecture Version:** 2.0  
@@ -13,7 +13,7 @@ Traditional agricultural chatbots and digital advisory tools operate as decouple
 2. **Naive Image Classifiers:** Suffer from catastrophic cross-crop confusion (e.g., misclassifying solanaceous weed foliage or chili leaves as potato late blight, triggering lethal pesticide recommendations).
 3. **Black-Box Web Apps (e.g., Gacher Doctor):** Print fake certification stamps on empty reports and compute teaspoon doses without active ingredient or chemical molecule inputs.
 
-**KrishokChat 2.0 solves this through a closed-loop multimodal interlock:**
+**KrishokTech 2.0 solves this through a closed-loop multimodal interlock:**
 * An on-device edge perception pipeline classifies crop and disease with calibrated confidence and margin gates ($C_d \ge 0.85, M_d \ge 0.18$).
 * Any narrow-margin botanical ambiguity (such as lobed Solanaceae leaves) triggers an interactive clarification intercept (`[আলু] [টমেটো] [বেগুন] [মরিচ]`), completely halting downstream generation.
 * Validated diagnoses retrieve exact BARI/DAE monograph facts via a relational resolver, enforcing deterministic concentration math, Pre-Harvest Intervals (PHI), and household volume benchmarks (spoons, bottle caps, matchboxes).
@@ -52,7 +52,7 @@ Traditional agricultural chatbots and digital advisory tools operate as decouple
                      │
                      ▼ (Pass)
 [ Tier 3: Grounded Generation & Relational Verification ]
-   ├── Local Low-Cost LoRA: krishokchat-4b (llama-server / Ollama)
+   ├── Local Low-Cost LoRA: krishoktech-4b (llama-server / Ollama)
    ├── Production Cloud NLU: google/gemini-2.5-flash-lite (<= 180 tokens, single JSON slot call)
    └── Verifier Claim Enforcement: Strips unsupported dosage numbers; annotates live audit trail
 ```
@@ -71,8 +71,8 @@ Traditional agricultural chatbots and digital advisory tools operate as decouple
 | **Unanswerable Refusal Rate** | **$100\%$ ($12 / 12$)** | Powered by D1a deterministic coverage gate on 1,000 farmer queries. |
 
 ### Research Publications Supported:
-1. **EACL 2026 Demo Paper (8 pages):** Focuses on system features, interactive quick-reply chips, real-time latency, streaming provenance traces, and the official printable Prescription Slip (`krishokchat_eacl_main.pdf`).
-2. **Computers and Electronics in Agriculture (CEA) Research Paper (21 pages):** Focuses on architectural safety theory, empirical selective reliability, elimination of cross-crop toxic hazard, and formal mathematical bounds (`krishokchat_cea_main.pdf`).
+1. **EACL 2026 Demo Paper (8 pages):** Focuses on system features, interactive quick-reply chips, real-time latency, streaming provenance traces, and the official printable Prescription Slip (`krishoktech_eacl_main.pdf`).
+2. **Computers and Electronics in Agriculture (CEA) Research Paper (21 pages):** Focuses on architectural safety theory, empirical selective reliability, elimination of cross-crop toxic hazard, and formal mathematical bounds (`krishoktech_cea_main.pdf`).
 
 ---
 

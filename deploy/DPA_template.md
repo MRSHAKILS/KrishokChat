@@ -1,4 +1,4 @@
-# KrishokChat — Data Processing Terms (Template)
+# KrishokTech — Data Processing Terms (Template)
 
 > **Status:** Template for B2B tenants. This is not legal advice. Replace bracketed
 > placeholders (`[ ... ]`) and have counsel review before signing. Code behavior
@@ -7,7 +7,7 @@
 ## 1. Parties and scope
 
 - **Processor:** [Research prototype operator / deploying organization] operating the
-  KrishokChat Advisory System (the “System”).
+  KrishokTech Advisory System (the “System”).
 - **Controller:** [Tenant organization] subscribing to the System for agricultural
   advisory services.
 - **Scope:** This template covers personal data processed when the Tenant’s users
@@ -18,7 +18,7 @@
 
 | Category | Example fields | Source | Storage |
 |---|---|---|---|
-| Audit queries | `query` text, `category`, `action`, timestamps, safety flags | User input to `/api/qa` | Local JSONL `backend/app/logs/safety_audit.jsonl` and/or SQLite `backend/data/krishokchat.db` (`audit_records`) |
+| Audit queries | `query` text, `category`, `action`, timestamps, safety flags | User input to `/api/qa` | Local JSONL `backend/app/logs/safety_audit.jsonl` and/or SQLite `backend/data/krishoktech.db` (`audit_records`) |
 | Session history | `{"role","content"}` message lists per `session_id` | User + assistant turns | In-memory or SQLite `sessions` table (same DB) |
 | Helpline registrations | `name`, `phone`, `district`, `crop`, `notes` | `/api/helpline/register` opt-in form | Local JSONL `backend/app/logs/helpline_registrations.jsonl` |
 | Telemetry (optional) | `stage_timings_ms`, `tokens`, `provider`, `request_id` | Pipeline instrumentation | Same audit record (`record_json` + columns) |

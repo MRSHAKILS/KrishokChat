@@ -177,7 +177,7 @@ What is the hazard rate across Standard Bengali, authentic farmer, regional dial
         }
       }
     },
-    "B7_KrishokChat_Calibrated_Expert_System": {
+    "B7_KrishokTech_Calibrated_Expert_System": {
       "overall_correct_pct": 65.8,
       "overall_safe_abstained_pct": 34.2,
       "overall_dangerous_acceptance_pct": 0.0,
@@ -229,6 +229,6 @@ What is the hazard rate across Standard Bengali, authentic farmer, regional dial
       }
     }
   },
-  "scientific_interpretation": "Under authentic colloquial farmer queries, regional Bengali dialects, and romanized Banglish, standard LLM and Vanilla RAG pipelines suffer severe dangerous acceptance surges (16.4% and 13.1% overall hazard). In contrast, KrishokChat maintains a 0.0% dangerous acceptance rate across all registers (95% CI: [0.0%, 0.09%]), converting dialectal and phonetic uncertainty into safe selective abstention (16.8% in formal to 33.2% in Banglish), confirming that the expert system satisfies the safety non-inferiority condition (Delta_safety <= 0)."
+  "scientific_interpretation": "Under authentic colloquial farmer queries, regional Bengali dialects, and romanized Banglish, standard LLM and Vanilla RAG pipelines suffer severe dangerous acceptance surges (16.4% and 13.1% overall hazard). In contrast, KrishokTech maintains a 0.0% dangerous acceptance rate across all registers (95% CI: [0.0%, 0.09%]), converting dialectal and phonetic uncertainty into safe selective abstention (16.8% in formal to 33.2% in Banglish), confirming that the expert system satisfies the safety non-inferiority condition (Delta_safety <= 0)."
 }
 ```

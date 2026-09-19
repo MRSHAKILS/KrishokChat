@@ -1,7 +1,7 @@
-# KrishokChat — Literature Review Scope & Angles Master List
+# KrishokTech — Literature Review Scope & Angles Master List
 
 **Generated:** 2026-08-12
-**Purpose:** Definitive list of every literature-review angle needed to position KrishokChat
+**Purpose:** Definitive list of every literature-review angle needed to position KrishokTech
 as a **system / application / industry-track** paper (ACL System Demonstrations, EMNLP
 Industry, AAAI Demo, IJCAI, KDD Applied Data Science, CIKM Applied Research, NeurIPS
 Datasets & Benchmarks, WACV, ICT4D). Latest papers through **August 2026** are the
@@ -11,7 +11,7 @@ priority; each scout was told to focus on 2025 → 2026-08.
 
 ## Project Context (what we're positioning)
 
-KrishokChat is a safety-aware, retrieval-grounded, Bengali agricultural advisory system
+KrishokTech is a safety-aware, retrieval-grounded, Bengali agricultural advisory system
 for smallholder farmers in Bangladesh. Research artifacts:
 
 | Component | Details |
@@ -22,7 +22,7 @@ for smallholder farmers in Bangladesh. Research artifacts:
 | **Vision pipeline** | Crop classifier (6 families) → per-crop disease classifier (rice 8 / corn 4 / potato 3 / brassica 11 / wheat 11 = 35 disease classes), all `task: classify` (no detection claims); Bengali disease knowledge map; verified 88% wheat accuracy, 99.8% info coverage |
 | **LLM adapters** | Replaceable port: OpenRouter/Gemini, local fine-tuned Gemma 4B 4-bit via Ollama (GGUF), stub |
 | **Frontend** | Next.js 16, SSE streaming with agent-trace stepper, safety metrics + research/benchmark panels (precomputed) |
-| **Authoritative papers** | *KrishokChat: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory* (EACL 2026, 85,979 instances, 4 tracks, 6 dialects) + *AgRiTrust: A Provenance-Grounded Benchmark for Bengali Agricultural Retrieval* (2,882-node KG, 900-query retrieval benchmark); local copies in `paper/done papers/`; root `LITERATURE_REVIEW.md` covers RAG/trust/ethics only |
+| **Authoritative papers** | *KrishokTech: A Provenance-Traceable Multi-Task Bengali Agricultural Benchmark with Safety-Critical Chemical Advisory* (EACL 2026, 85,979 instances, 4 tracks, 6 dialects) + *AgRiTrust: A Provenance-Grounded Benchmark for Bengali Agricultural Retrieval* (2,882-node KG, 900-query retrieval benchmark); local copies in `paper/done papers/`; root `LITERATURE_REVIEW.md` covers RAG/trust/ethics only |
 
 ---
 
@@ -94,7 +94,7 @@ for smallholder farmers in Bangladesh. Research artifacts:
 2. **Citations:** real arXiv IDs / DOIs / official pages — no invented references.
 3. **Conventions:** each scout notes the *implementation/evaluation conventions* of similar accepted system/application/industry papers (what sections, what evals, what artifacts they released).
 4. **Gaps:** explicit "no one has done X" statements with evidence.
-5. **KrishokChat mapping:** how each finding maps to our components (pipeline, dataset, vision, UX).
+5. **KrishokTech mapping:** how each finding maps to our components (pipeline, dataset, vision, UX).
 
 ## Output file map (paper/literature review/)
 

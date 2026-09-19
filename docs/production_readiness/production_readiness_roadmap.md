@@ -1,4 +1,4 @@
-# KrishokChat — Production Readiness Roadmap
+# KrishokTech — Production Readiness Roadmap
 
 **Status:** ADVISORY ROADMAP — nothing here changes the demo before an agent executes a task.
 **Date:** 2026-08-17

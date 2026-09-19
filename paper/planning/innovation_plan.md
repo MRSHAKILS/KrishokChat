@@ -65,7 +65,7 @@ That is the psychological target.
 
 # 3. Your strongest strategic advantage
 
-After inspecting the repository again, I would characterize KrishokChat as having **four layers that most generic AI-project pitches don't have simultaneously**.
+After inspecting the repository again, I would characterize KrishokTech as having **four layers that most generic AI-project pitches don't have simultaneously**.
 
 ## Layer 1 — You did the research first
 
@@ -77,7 +77,7 @@ That gives you something most innovation-fair teams won't have:
 
 > **evidence that your architectural decisions came from observed failures, not from assembling trendy technologies.**
 
-Your KrishokChat benchmark work reports a citation-grounded agricultural corpus and Farmer Benchmark, and explicitly finds that fine-tuning alone still struggles with exact chemical-dose generalization. ([arXiv][4])
+Your KrishokTech benchmark work reports a citation-grounded agricultural corpus and Farmer Benchmark, and explicitly finds that fine-tuning alone still struggles with exact chemical-dose generalization. ([arXiv][4])
 
 Your current system repository then explicitly integrates those research artifacts into one advisory application. ([GitHub][5])
 
@@ -266,7 +266,7 @@ Headline:
 
 Small supporting line:
 
-> KrishokChat was born from field observation of farmers' information and irrigation/advisory problems in Bangladesh.
+> KrishokTech was born from field observation of farmers' information and irrigation/advisory problems in Bangladesh.
 
 Then one powerful quote-style element:
 
@@ -292,7 +292,7 @@ Do **not** insult Plantix or existing services.
 Instead compare categories.
 
 ```text
-                 Generic AI      RAG only      Vision only     KrishokChat
+                 Generic AI      RAG only      Vision only     KrishokTech
 Bengali-first        △              △             —               ✓
 Farmer-language      △              △             —               ✓
 Image diagnosis       —              —             ✓               ✓
@@ -697,7 +697,7 @@ But I would **not** make a random “paper dump.”
 
 Create one coherent document:
 
-# **KrishokChat: Evidence of Innovation, Research Validation and Deployment Readiness**
+# **KrishokTech: Evidence of Innovation, Research Validation and Deployment Readiness**
 
 I'd make it a **15–20 slide PDF dossier**, not another presentation competing with the main 8-slide pitch.
 
@@ -739,7 +739,7 @@ Concrete farmer-query examples.
 
 ## A4
 
-**KrishokChat Benchmark**
+**KrishokTech Benchmark**
 
 Show:
 
@@ -823,7 +823,7 @@ This is the bridge from research to product.
 
 ---
 
-# 18. Section C — Full KrishokChat product
+# 18. Section C — Full KrishokTech product
 
 ## A8
 
@@ -872,7 +872,7 @@ Show:
 | LLM direct      |               83.86% |
 | Vanilla RAG     |               69.36% |
 | RAG + LLM guard |               21.79% |
-| KrishokChat     |      **0% observed** |
+| KrishokTech     |      **0% observed** |
 
 This is one of your strongest visual tables. 
 
@@ -1075,7 +1075,7 @@ Your papers are **evidence**, not the innovation itself.
 
 The innovation remains:
 
-# **KrishokChat**
+# **KrishokTech**
 
 The papers prove that the team has:
 
@@ -1098,7 +1098,7 @@ It needs a very specific composition.
 
 Bangladesh farmer advisory is fragmented by language, expertise, connectivity and unreliable information.
 
-### Paragraph 2 — What KrishokChat is
+### Paragraph 2 — What KrishokTech is
 
 ~60 words.
 
@@ -1310,7 +1310,7 @@ Then compare **architecture**, not features.
 
 # 36. The differentiation matrix I would use in the supporting document
 
-| Capability                         | Generic AI | Typical agri app | Generic RAG | KrishokChat |
+| Capability                         | Generic AI | Typical agri app | Generic RAG | KrishokTech |
 | ---------------------------------- | ---------- | ---------------- | ----------- | ----------- |
 | Bengali-first                      | △          | △                | △           | ✓           |
 | Farmer-language                    | △          | △                | △           | ✓           |
@@ -1715,7 +1715,7 @@ Semi-realistic editorial illustration.
 
 ### UI
 
-Your actual KrishokChat UI.
+Your actual KrishokTech UI.
 
 ### Typography
 
@@ -1905,11 +1905,11 @@ The form also asks for a website/social/portfolio link, so make the live demo pr
 
 Ideally:
 
-> `krishokchat.bd` or equivalent.
+> `krishoktech.bd` or equivalent.
 
 Landing page:
 
-### Try KrishokChat
+### Try KrishokTech
 
 with:
 
@@ -1996,13 +1996,13 @@ Then:
 
 Not:
 
-> “We will build KrishokChat.”
+> “We will build KrishokTech.”
 
 It's already built.
 
 Instead:
 
-# **“We are seeking support to move KrishokChat from validated research system to field-deployed agricultural service.”**
+# **“We are seeking support to move KrishokTech from validated research system to field-deployed agricultural service.”**
 
 That distinction is extremely powerful.
 
@@ -2347,7 +2347,7 @@ That is extremely persuasive.
 
 I would use something close to:
 
-> **KrishokChat does not treat agricultural AI as a chatbot problem; it treats it as an evidence, decision, safety and delivery problem—and integrates those layers into one Bengali-first system.**
+> **KrishokTech does not treat agricultural AI as a chatbot problem; it treats it as an evidence, decision, safety and delivery problem—and integrates those layers into one Bengali-first system.**
 
 That is the strongest originality framing I see.
 
@@ -2511,9 +2511,9 @@ I recommend creating one final package:
 ```text id="d5o2k3"
 InnovationFair/
 │
-├── 01_KrishokChat_Main_8_Slides.pptx
+├── 01_KrishokTech_Main_8_Slides.pptx
 │
-├── 02_KrishokChat_Current_Status_Dossier.pdf
+├── 02_KrishokTech_Current_Status_Dossier.pdf
 │
 ├── 03_Brief_Description_250Words.txt
 │
@@ -2544,7 +2544,7 @@ once hosted.
 
 ### Paper 1
 
-KrishokChat benchmark. ([arXiv][4])
+KrishokTech benchmark. ([arXiv][4])
 
 ### Paper 2
 
@@ -2618,7 +2618,7 @@ That's enough at this stage.
 
 It's:
 
-> There is already a functioning agricultural advisory ecosystem in Bangladesh—BAMIS, 16123, extension infrastructure—and the need is real. KrishokChat provides an AI-native, Bengali, multimodal layer that can complement these channels rather than pretending to replace them. ([Bamis][11])
+> There is already a functioning agricultural advisory ecosystem in Bangladesh—BAMIS, 16123, extension infrastructure—and the need is real. KrishokTech provides an AI-native, Bengali, multimodal layer that can complement these channels rather than pretending to replace them. ([Bamis][11])
 
 That is much more credible.
 
@@ -2632,7 +2632,7 @@ Not:
 
 Instead:
 
-> **“Bangladesh has already built agricultural advisory institutions. KrishokChat can provide a new digital intelligence layer that makes those services more accessible, personalized, multimodal and scalable.”**
+> **“Bangladesh has already built agricultural advisory institutions. KrishokTech can provide a new digital intelligence layer that makes those services more accessible, personalized, multimodal and scalable.”**
 
 That is politically and institutionally much safer.
 
@@ -2800,7 +2800,7 @@ pesticide retailer
 ```text
 Farmer
  ↓
-KrishokChat
+KrishokTech
  ↓
 Understand
  ↓
@@ -2833,7 +2833,7 @@ This is what I would lock **before writing any slide copy**:
 
 ### 4.
 
-**KrishokChat turns language, vision, evidence and safety into one advisory system.**
+**KrishokTech turns language, vision, evidence and safety into one advisory system.**
 
 ### 5.
 
@@ -2879,7 +2879,7 @@ Exactly what you asked for.
 
 ---
 
-# 102. I would NOT put the 26-page KrishokChat paper into the supporting file unchanged
+# 102. I would NOT put the 26-page KrishokTech paper into the supporting file unchanged
 
 That would overwhelm the judge.
 
@@ -2905,7 +2905,7 @@ Example:
 
 ### Research Foundation
 
-**KrishokChat Benchmark**
+**KrishokTech Benchmark**
 
 > citation-grounded Bengali agricultural QA
 > Farmer Benchmark: 1,001 authentic queries
@@ -3072,7 +3072,7 @@ Then split:
 
 vs
 
-**KrishokChat**
+**KrishokTech**
 
 Show:
 
@@ -3236,7 +3236,7 @@ This is far stronger than:
 
 Something like:
 
-> **KrishokChat | Bengali-first agricultural intelligence for Bangladesh**
+> **KrishokTech | Bengali-first agricultural intelligence for Bangladesh**
 
 This anchors the brand.
 
@@ -3246,7 +3246,7 @@ This anchors the brand.
 
 Large:
 
-### **Try KrishokChat**
+### **Try KrishokTech**
 
 QR.
 
@@ -3264,7 +3264,7 @@ Every team member should memorize the same version.
 
 Something like conceptually:
 
-> “KrishokChat is a Bengali-first agricultural AI platform built from real farmer problems in Bangladesh. We first created and evaluated the agricultural knowledge and retrieval foundations, then identified where generic AI and retrieval fail under farmer language and safety-critical agricultural conditions. We turned those findings into a multimodal advisory system that combines crop-disease vision, evidence-grounded retrieval, safety verification, auditability and low-connectivity pathways. The system is already built and scientifically evaluated; the next step is field deployment and institutional scaling.”
+> “KrishokTech is a Bengali-first agricultural AI platform built from real farmer problems in Bangladesh. We first created and evaluated the agricultural knowledge and retrieval foundations, then identified where generic AI and retrieval fail under farmer language and safety-critical agricultural conditions. We turned those findings into a multimodal advisory system that combines crop-disease vision, evidence-grounded retrieval, safety verification, auditability and low-connectivity pathways. The system is already built and scientifically evaluated; the next step is field deployment and institutional scaling.”
 
 That is the verbal spine.
 
@@ -3294,7 +3294,7 @@ That is the answer.
 
 # 125. What I would say if asked “what makes this different from ChatGPT?”
 
-> **“ChatGPT can generate an answer. KrishokChat is designed to decide whether an agricultural answer is justified before it is delivered.”**
+> **“ChatGPT can generate an answer. KrishokTech is designed to decide whether an agricultural answer is justified before it is delivered.”**
 
 Excellent industry answer.
 
@@ -3572,7 +3572,7 @@ The Fair explicitly says it wants:
 
 and offers industry, investors, government, academic and corporate connections. ([Innovation Fair][1])
 
-KrishokChat has **all five of those touchpoints**:
+KrishokTech has **all five of those touchpoints**:
 
 * research;
 * product;
@@ -3644,7 +3644,7 @@ It reflects the actual architecture.
 
 # 146. The final one-line funding proposition
 
-# **KrishokChat is already built; the next investment is to prove it with farmers and deploy it through Bangladesh's agricultural ecosystem.**
+# **KrishokTech is already built; the next investment is to prove it with farmers and deploy it through Bangladesh's agricultural ecosystem.**
 
 That is the pitch.
 
@@ -3695,15 +3695,15 @@ Use **real product screenshots for proof** and **AI-generated visuals only for c
 
 > **We did not merely build another agricultural chatbot. We built a Bengali agricultural intelligence system around the places where agricultural AI actually fails: language, evidence, safety, multimodality and connectivity.**
 
-That is the direction I would now pursue. The official Fair criteria, the Fair's “Innovate to Market” mission, the current KrishokChat repository, and your research evidence all support this positioning. ([Innovation Fair][3])
+That is the direction I would now pursue. The official Fair criteria, the Fair's “Innovate to Market” mission, the current KrishokTech repository, and your research evidence all support this positioning. ([Innovation Fair][3])
 
 [1]: https://innovationfairbd.org/about "Innovation Fair"
 [2]: https://www.bssnews.net/news/416422?utm_source=chatgpt.com "Bangladesh Innovation Fair invites registration from innovators | News"
 [3]: https://innovationfairbd.org/innovator-application-form "Innovation Fair"
-[4]: https://arxiv.org/abs/2606.29243?utm_source=chatgpt.com "KrishokChat: A Citation-Grounded Dataset and Benchmark for Bengali Agricultural Advisory"
-[5]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
-[6]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System/blob/main/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md "KrishokChat-Agricultural-Advisory-System/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md at main · RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
-[7]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System/blob/main/production/future_plan/00_SCOPE_OUTLINE.md "KrishokChat-Agricultural-Advisory-System/production/future_plan/00_SCOPE_OUTLINE.md at main · RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
+[4]: https://arxiv.org/abs/2606.29243?utm_source=chatgpt.com "KrishokTech: A Citation-Grounded Dataset and Benchmark for Bengali Agricultural Advisory"
+[5]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"
+[6]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System/blob/main/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md "KrishokTech-Agricultural-Advisory-System/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md at main · RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"
+[7]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System/blob/main/production/future_plan/00_SCOPE_OUTLINE.md "KrishokTech-Agricultural-Advisory-System/production/future_plan/00_SCOPE_OUTLINE.md at main · RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"
 [8]: https://journal.bcsadminacademy.gov.bd/index.php/bjam/article/view/106?utm_source=chatgpt.com "Pesticide Use Knowledge among Vegetable Growers in Bangladesh: Implications for Sustainable Agriculture, Farmer Health, and Environmental Integrity | Bangladesh Journal of Administration and Management"
 [9]: https://sdgs.un.org/topics/rural-development?utm_source=chatgpt.com "Rural Development | Department of Economic and Social Affairs"
 [10]: https://bangladesh.un.org/sites/default/files/2023-09/Bangladesh_SDG%20Summit%202023_National%20Statement%20of%20Commitment_v2.pdf?utm_source=chatgpt.com "SDG National Commitment Statement 21Sep2023"

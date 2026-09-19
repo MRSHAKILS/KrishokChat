@@ -10,8 +10,8 @@
 
 ---
 
-## PDF A: KrishokChat Benchmark
-- File: KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf
+## PDF A: KrishokTech Benchmark
+- File: KrishokTech__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf
 - SHA-256: `75cca13c0e68ae834cdad3722a1f5fc938e452bea83404c00d73e8f1f2edf53f`
 - Pages: 25
 - Size: 1,671,455 bytes
@@ -50,18 +50,18 @@
 ### Numerical Claims Found
 | # | Page | Category | Value | Context (truncated) |
 |---|------|----------|-------|---------------------|
-| 1 | 1 | PERCENTAGE | 7.00% | icient regardless of model 018 scale. Oracle evidence narrows the gap, 019 but leaves a persistent floor of 4.05 to 020 7.00% of chemical hallucinations. Fine- 021 tuning on KrishokChat substantially  |
-| 2 | 1 | COUNT_COMMA | 85,979 | ultural Benchmark with Safety-Critical Chemical Advisory Anonymous ACL submission Abstract We introduce KrishokChat, an 85,979- 001 instance Bengali agricultural benchmark 002 built from 284 governmen |
+| 1 | 1 | PERCENTAGE | 7.00% | icient regardless of model 018 scale. Oracle evidence narrows the gap, 019 but leaves a persistent floor of 4.05 to 020 7.00% of chemical hallucinations. Fine- 021 tuning on KrishokTech substantially  |
+| 2 | 1 | COUNT_COMMA | 85,979 | ultural Benchmark with Safety-Critical Chemical Advisory Anonymous ACL submission Abstract We introduce KrishokTech, an 85,979- 001 instance Bengali agricultural benchmark 002 built from 284 governmen |
 | 3 | 1 | COUNT_COMMA | 1,000 | tracks: General 005 Knowledge QA, Treatment QA, Safety Re- 006 fusal and Re-query, and Table QA. It also 007 includes a 1,000-query Real-World Farmer 008 Benchmark collected independently from 009 fie |
-| 4 | 1 | METRIC | F1 | ine- 021 tuning on KrishokChat substantially out- 022 performs the strongest zero-shot baseline 023 on General QA Token F1. However, struc- 024 tured table reasoning and farmer-language 025 transfer r |
+| 4 | 1 | METRIC | F1 | ine- 021 tuning on KrishokTech substantially out- 022 performs the strongest zero-shot baseline 023 on General QA Token F1. However, struc- 024 tured table reasoning and farmer-language 025 transfer r |
 | 5 | 1 | REFERENCE | table
 067 | fety lens (Petroni et al., 065 2021; Thakur et al., 2021; Ghosh et al., 2025). 066 Pal et al. address Bengali and Hindi table 067 question answering through automatic large- 068 scale data generation, |
-| 6 | 2 | COUNT_COMMA | 85,979 | ted refusal behavior 096 zero-shot models exhibit on unsafe queries 097 (§5). 098 Contributions. 099 1. KrishokChat: an 85,979-instance, four- 100 track Bengali agricultural benchmark 101 built from 2 |
+| 6 | 2 | COUNT_COMMA | 85,979 | ted refusal behavior 096 zero-shot models exhibit on unsafe queries 097 (§5). 098 Contributions. 099 1. KrishokTech: an 85,979-instance, four- 100 track Bengali agricultural benchmark 101 built from 2 |
 | 7 | 2 | COUNT_COMMA | 1,000 | al behavior 117 under fine-tuning (exploratory analysis in 118 Appendix I.3). 119 4. A Real-World Farmer Benchmark: 120 1,000 authentic farmer queries, col- 121 lected independently of the constructio |
 | 8 | 2 | DATASET_SIZE | 085
 farmers | our construction pipeline, 300 of them from 084 structured field interviews with smallholder 085 farmers, to test whether performance on the 086 four tracks transfers to how farmers actually 087 ask q |
-| 9 | 3 | COUNT_COMMA | 28,993 | mmarizes the released re- 190 source. 191 Table 1: The KrishokChat benchmark at a glance. Track Total Probes General QA 28,993 Knowledge only, no chemicals Treatment QA 11,224 Chemical advisory w/ pro |
-| 10 | 3 | COUNT_COMMA | 11,224 | : The KrishokChat benchmark at a glance. Track Total Probes General QA 28,993 Knowledge only, no chemicals Treatment QA 11,224 Chemical advisory w/ provenance Safety (T3+T4) 20,112 Refusal + re-query  |
+| 9 | 3 | COUNT_COMMA | 28,993 | mmarizes the released re- 190 source. 191 Table 1: The KrishokTech benchmark at a glance. Track Total Probes General QA 28,993 Knowledge only, no chemicals Treatment QA 11,224 Chemical advisory w/ pro |
+| 10 | 3 | COUNT_COMMA | 11,224 | : The KrishokTech benchmark at a glance. Track Total Probes General QA 28,993 Knowledge only, no chemicals Treatment QA 11,224 Chemical advisory w/ provenance Safety (T3+T4) 20,112 Refusal + re-query  |
 | 11 | 3 | COUNT_COMMA | 20,112 | robes General QA 28,993 Knowledge only, no chemicals Treatment QA 11,224 Chemical advisory w/ provenance Safety (T3+T4) 20,112 Refusal + re-query Table QA 25,650 Structured reasoning Core Tracks Total |
 | 12 | 3 | COUNT_COMMA | 25,650 | nly, no chemicals Treatment QA 11,224 Chemical advisory w/ provenance Safety (T3+T4) 20,112 Refusal + re-query Table QA 25,650 Structured reasoning Core Tracks Total 85,979 Farmer Benchmark 1,000 Real |
 | 13 | 3 | COUNT_COMMA | 85,979 | advisory w/ provenance Safety (T3+T4) 20,112 Refusal + re-query Table QA 25,650 Structured reasoning Core Tracks Total 85,979 Farmer Benchmark 1,000 Real-world transfer 3.1 Knowledge Corpus and Semant |
@@ -71,17 +71,17 @@ farmers | our construction pipeline, 300 of them from 084 structured field inter
 | 17 | 3 | DATASET_SIZE | 243
 Answers | sistently across every track. 241 These principles are enforced by automated 242 quality gates throughout construction. 243 Answers are extracted, never gener- 244 ated; the generating model varies on |
 | 18 | 3 | MODEL_NAME | Mistral | ts and procedures that often span 208 multiple pages. We convert every publica- 209 tion into structured Markdown using Mistral 210 Document AI for multi-column OCR, preserv- 211 ing hierarchy, tables |
-| 19 | 3 | REFERENCE | Table 1 | r Benchmark 187 tests whether performance on the four tracks 188 transfers to how farmers actually ask ques- 189 tions. Table 1 summarizes the released re- 190 source. 191 Table 1: The KrishokChat ben |
+| 19 | 3 | REFERENCE | Table 1 | r Benchmark 187 tests whether performance on the four tracks 188 transfers to how farmers actually ask ques- 189 tions. Table 1 summarizes the released re- 190 source. 191 Table 1: The KrishokTech ben |
 | 20 | 3 | REFERENCE | Figure 1 | nstances across four tracks are each 235 linked back to their originating semantic unit 236 and government publication. Figure 1 illus- 237 trates the entire construction pipeline. 238 Figure 1: The p |
 | 21 | 4 | PERCENTAGE | 100% | ational 291 semantic units. The reference answer is 292 extracted directly from the underlying se- 293 mantic unit with 100% citation grounding. 294 The treatment_flag and chemical_trace 295 fields ar |
-| 22 | 4 | PERCENTAGE | 66.3% | d 321 elsewhere in KrishokChat (Appendix D). The 322 released benchmark contains 11,224 instances. 323 Of these, 7,437 (66.3%) carry at least one 324 provenance-tracked chemical mention. The re- 325 m |
+| 22 | 4 | PERCENTAGE | 66.3% | d 321 elsewhere in KrishokTech (Appendix D). The 322 released benchmark contains 11,224 instances. 323 Of these, 7,437 (66.3%) carry at least one 324 provenance-tracked chemical mention. The re- 325 m |
 | 23 | 4 | COUNT_COMMA | 4,048 | ricultural knowledge independently of chem- 286 ical advisory capability. 287 Instances are built by pairing one of 288 4,048 base generation cells with a diversi- 289 fied question surface. The gener |
 | 24 | 4 | COUNT_COMMA | 1,440 | ry because every 312 mentioned chemical is captured in a structured 313 chemical_trace array (§4.3). 314 The track uses 1,440 base generation cells 315 from 593 unique source semantic units. These 316 |
-| 25 | 4 | COUNT_COMMA | 11,224 | cts, personas, and stress scenarios used 321 elsewhere in KrishokChat (Appendix D). The 322 released benchmark contains 11,224 instances. 323 Of these, 7,437 (66.3%) carry at least one 324 provenance- |
-| 26 | 4 | COUNT_COMMA | 7,437 | ios used 321 elsewhere in KrishokChat (Appendix D). The 322 released benchmark contains 11,224 instances. 323 Of these, 7,437 (66.3%) carry at least one 324 provenance-tracked chemical mention. The re |
+| 25 | 4 | COUNT_COMMA | 11,224 | cts, personas, and stress scenarios used 321 elsewhere in KrishokTech (Appendix D). The 322 released benchmark contains 11,224 instances. 323 Of these, 7,437 (66.3%) carry at least one 324 provenance- |
+| 26 | 4 | COUNT_COMMA | 7,437 | ios used 321 elsewhere in KrishokTech (Appendix D). The 322 released benchmark contains 11,224 instances. 323 Of these, 7,437 (66.3%) carry at least one 324 provenance-tracked chemical mention. The re |
 | 27 | 4 | DATASET_SIZE | 287
 Instances | actually fails, so this design measures 285 agricultural knowledge independently of chem- 286 ical advisory capability. 287 Instances are built by pairing one of 288 4,048 base generation cells with a |
-| 28 | 4 | DATASET_SIZE | 224 instances | , personas, and stress scenarios used 321 elsewhere in KrishokChat (Appendix D). The 322 released benchmark contains 11,224 instances. 323 Of these, 7,437 (66.3%) carry at least one 324 provenance-tra |
+| 28 | 4 | DATASET_SIZE | 224 instances | , personas, and stress scenarios used 321 elsewhere in KrishokTech (Appendix D). The 322 released benchmark contains 11,224 instances. 323 Of these, 7,437 (66.3%) carry at least one 324 provenance-tra |
 | 29 | 4 | DATASET_SIZE | 334
 questions | pear in Appendix D. 331 3.5 Track 3: Safety Refusal and 332 Re-query 333 The first two tracks assume clear, answerable 334 questions. Real-world farmer queries, however, 335 often omit the crop, descr |
 | 30 | 4 | MODEL_NAME | Bloom | ed; question surfaces are drawn from a 251 partitioned matrix spanning dialect, persona, 252 formulation, scenario, and Bloom level (Wang 253 et al., 2024; Filice et al., 2025). 254 The content tokens |
@@ -93,7 +93,7 @@ questions | pear in Appendix D. 331 3.5 Track 3: Safety Refusal and 332 Re-query
 | 36 | 5 | COUNT_COMMA | 2,946 | er Q&A portal. The full channel break- 430 down is in Appendix G. 431 Because the benchmark is grounded in the 432 same 2,946-unit semantic corpus but collected 433 entirely outside it, it stands on i |
 | 37 | 5 | DATASET_SIZE | 112 instances | e safety boundary 360 as a standard-Bengali speaker, differing only 361 in register. 362 The released track contains 20,112 instances: 363 3,216 T3 refusal records and 16,896 T4 re- 364 query records. |
 | 38 | 5 | DATASET_SIZE | 415
-queries | rolled evalua- 413 tion holds up against how farmers actually ask: 414 short, colloquial, and often only half-specified 415 queries. 416 The benchmark is collected independently 417 of KrishokChat’s c |
+queries | rolled evalua- 413 tion holds up against how farmers actually ask: 414 short, colloquial, and often only half-specified 415 queries. 416 The benchmark is collected independently 417 of KrishokTech’s c |
 | 39 | 5 | DATASET_SIZE | 448
 queries | then have a domain- 446 informed author, not a retrieval score, select 447 the single grounding unit; 69 field-sourced 448 queries additionally received a second inde- 449 pendent pass by a practicing |
 | 40 | 5 | REFERENCE | Figure 3 | second inde- 449 pendent pass by a practicing extension oﬀicer. 450 The full five-stage procedure is in Appendix G 451 (Figure 3). 452 5 |
@@ -124,16 +124,16 @@ queries | then have a domain- 446 informed author, not a retrieval score, select
 | 64 | 7 | MODEL_NAME | GPT | d-book knowledge is 589 insuﬀicient 590 No baseline, including the 26B-parameter 591 Gemma-4-26B and the 116B-parameter GPT- 592 OSS-120B, reliably answers General QA or 593 gives a consistently safe  |
 | 65 | 7 | REFERENCE | Table 2 | nistic metrics, the subjective 580 LLM-judge configuration, and exact subset 581 sizes, are reported in Appendix H. 582 Table 2 reports the main closed-book and 583 oracle-context results for General  |
 | 66 | 7 | REFERENCE | Table 3 | ppendix H. 582 Table 2 reports the main closed-book and 583 oracle-context results for General QA and 584 Treatment QA, Table 3 reports Real-World 585 Farmer Benchmark performance, and Ap- 586 pendix  |
-| 67 | 8 | PERCENTAGE | 35.55% | ondition score, 642 with no retrieved context at all. On Treatment 643 QA, KrishokChat-4B is closed-book correct on 644 35.55% of instances, competitive with Gemma- 645 4-26B (38.73%) and approaching  |
-| 68 | 8 | PERCENTAGE | 38.73% | Treatment 643 QA, KrishokChat-4B is closed-book correct on 644 35.55% of instances, competitive with Gemma- 645 4-26B (38.73%) and approaching Gemini-2.5- 646 FL (43.64%). Table QA remains substan- 64 |
-| 69 | 8 | PERCENTAGE | 43.64% | book correct on 644 35.55% of instances, competitive with Gemma- 645 4-26B (38.73%) and approaching Gemini-2.5- 646 FL (43.64%). Table QA remains substan- 647 tially harder: KrishokChat-4B does not ma |
-| 70 | 8 | COUNT_COMMA | 1,000 | l re- 672 source (§3): the four-track benchmark, a 673 re-runnable chemical-provenance audit proto- 674 col (§4.3), the 1,000-query Farmer Benchmark 675 (§3.7), and the KrishokChat-4B checkpoint, 676  |
-| 71 | 8 | METRIC | F1 | Table 2: Closed-book (CB) and oracle-context zero-shot results: General QA Token F1 / Hallucination %, and Treatment QA Correct % / Hallucination %. KrishokChat-4B is fine-tuned on KrishokChat, not ze |
-| 72 | 8 | METRIC | F1 score | e-tuning closes most of the gap to same- 659 scale open baselines and comes within 0.02 of 660 the larger Gemma-4-26B’s F1 score, but not 661 to frontier commercial scale. KrishokChat-4B 662 also has  |
+| 67 | 8 | PERCENTAGE | 35.55% | ondition score, 642 with no retrieved context at all. On Treatment 643 QA, KrishokTech-4B is closed-book correct on 644 35.55% of instances, competitive with Gemma- 645 4-26B (38.73%) and approaching  |
+| 68 | 8 | PERCENTAGE | 38.73% | Treatment 643 QA, KrishokTech-4B is closed-book correct on 644 35.55% of instances, competitive with Gemma- 645 4-26B (38.73%) and approaching Gemini-2.5- 646 FL (43.64%). Table QA remains substan- 64 |
+| 69 | 8 | PERCENTAGE | 43.64% | book correct on 644 35.55% of instances, competitive with Gemma- 645 4-26B (38.73%) and approaching Gemini-2.5- 646 FL (43.64%). Table QA remains substan- 647 tially harder: KrishokTech-4B does not ma |
+| 70 | 8 | COUNT_COMMA | 1,000 | l re- 672 source (§3): the four-track benchmark, a 673 re-runnable chemical-provenance audit proto- 674 col (§4.3), the 1,000-query Farmer Benchmark 675 (§3.7), and the KrishokTech-4B checkpoint, 676  |
+| 71 | 8 | METRIC | F1 | Table 2: Closed-book (CB) and oracle-context zero-shot results: General QA Token F1 / Hallucination %, and Treatment QA Correct % / Hallucination %. KrishokTech-4B is fine-tuned on KrishokTech, not ze |
+| 72 | 8 | METRIC | F1 score | e-tuning closes most of the gap to same- 659 scale open baselines and comes within 0.02 of 660 the larger Gemma-4-26B’s F1 score, but not 661 to frontier commercial scale. KrishokTech-4B 662 also has  |
 | 73 | 8 | MODEL_NAME | Gemma | odel GenF1 GenHal TrtCor TrtHal GenF1 GenHal TrtCor TrtHal Gemini-2.5-FL 0.104 37.15 43.64 15.90 0.281 32.40 51.73 4.91 Gemma-4-26B 0.087 32.12 38.73 9.83 0.253 29.05 54.05 4.05 LLaMA-3.1-8B 0.165 10. |
 | 74 | 8 | MODEL_NAME | LLaMA | Gemini-2.5-FL 0.104 37.15 43.64 15.90 0.281 32.40 51.73 4.91 Gemma-4-26B 0.087 32.12 38.73 9.83 0.253 29.05 54.05 4.05 LLaMA-3.1-8B 0.165 10.06 12.43 1.73 0.230 16.48 30.64 5.49 Qwen-2.5-7B 0.136 11.1 |
 | 75 | 8 | MODEL_NAME | Qwen | 91 Gemma-4-26B 0.087 32.12 38.73 9.83 0.253 29.05 54.05 4.05 LLaMA-3.1-8B 0.165 10.06 12.43 1.73 0.230 16.48 30.64 5.49 Qwen-2.5-7B 0.136 11.17 13.29 2.02 0.198 20.54 41.33 4.62 GPT-OSS-120B 0.113 36. |
-| 76 | 8 | MODEL_NAME | GPT- | 05 LLaMA-3.1-8B 0.165 10.06 12.43 1.73 0.230 16.48 30.64 5.49 Qwen-2.5-7B 0.136 11.17 13.29 2.02 0.198 20.54 41.33 4.62 GPT-OSS-120B 0.113 36.20 32.92 9.47 0.191 30.00 49.79 7.00 KrishokChat-4B 0.314† |
+| 76 | 8 | MODEL_NAME | GPT- | 05 LLaMA-3.1-8B 0.165 10.06 12.43 1.73 0.230 16.48 30.64 5.49 Qwen-2.5-7B 0.136 11.17 13.29 2.02 0.198 20.54 41.33 4.62 GPT-OSS-120B 0.113 36.20 32.92 9.47 0.191 30.00 49.79 7.00 KrishokTech-4B 0.314† |
 | 77 | 8 | REFERENCE | Table 2 | Table 2: Closed-book (CB) and oracle-context zero-shot results: General QA Token F1 / Hallucination %, and Treatment QA Correct |
 | 78 | 8 | REFERENCE | Table 3 | 651 to structured tabular reasoning, genuine head- 652 room rather than a solved track. 653 5.5 Real-world transfer 654 Table 3: Real-World Farmer Benchmark, closed- book (n=350). Model Token F1 Hallu |
 | 79 | 9 | COUNT_COMMA | 2,946 | only partially automatable, for the rea- 749 son discussed in §4.1: attribute-guided filter- 750 ing typically narrows 2,946 candidate units to 751 5–15, but a human annotator is still required 752 to |
@@ -184,7 +184,7 @@ pages | nguistics and the 1072 11th International Joint Conference on Natural 10
 | 117 | 15 | REFERENCE | Table 12 | among those actually missing (Table 9), 1267 not an arbitrarily chosen one. 1268 E.1 Per-Dialect Refusal Breakdown 1269 Table 12 reports the full per-dialect count for 1270 the 323-instance Safety QA  |
 | 118 | 15 | REFERENCE | Table 13 | truction of the original vi- 1288 sual layout, and a flattened key-value Mark- 1289 down file for high-recall indexing. Table 13 1290 reports the per-level instance counts under- 1291 lying the three- |
 | 119 | 15 | REFERENCE | Table 14 | ble 13 1290 reports the per-level instance counts under- 1291 lying the three-level complexity stratification, 1292 and Table 14 reports the resulting train/vali- 1293 dation/test split across the six |
-| 120 | 16 | PERCENTAGE | 0.0% | already applied Table 12: KrishokChat-4B Safety QA refusals by dialect (n=323 total). Dialect n Refused Standard 51 0 (0.0%) Chittagonian 49 0 (0.0%) Noakhailli 53 0 (0.0%) Rangpuri 69 0 (0.0%) Barish |
+| 120 | 16 | PERCENTAGE | 0.0% | already applied Table 12: KrishokTech-4B Safety QA refusals by dialect (n=323 total). Dialect n Refused Standard 51 0 (0.0%) Chittagonian 49 0 (0.0%) Noakhailli 53 0 (0.0%) Rangpuri 69 0 (0.0%) Barish |
 | 121 | 16 | PERCENTAGE | 1.9% | ard 51 0 (0.0%) Chittagonian 49 0 (0.0%) Noakhailli 53 0 (0.0%) Rangpuri 69 0 (0.0%) Barishal 48 0 (0.0%) Sylheti 53 1 (1.9%) Total 323 1 (0.31%) Table 13: Table Reasoning QA instances by com- plexity |
 | 122 | 16 | PERCENTAGE | 0.31% | ttagonian 49 0 (0.0%) Noakhailli 53 0 (0.0%) Rangpuri 69 0 (0.0%) Barishal 48 0 (0.0%) Sylheti 53 1 (1.9%) Total 323 1 (0.31%) Table 13: Table Reasoning QA instances by com- plexity level. Level Insta |
 | 123 | 16 | COUNT_COMMA | 11,058 | 1.9%) Total 323 1 (0.31%) Table 13: Table Reasoning QA instances by com- plexity level. Level Instances L1: cell lookup 11,058 L2: row reasoning 12,540 L3: column aggregation 2,052 Total 25,650 16 |
@@ -195,7 +195,7 @@ pages | nguistics and the 1072 11th International Joint Conference on Natural 10
 | 128 | 16 | REFERENCE | Table 9 | guarantee veterinary_scope Livestock/animal-health request ethical_boundary Request to conceal risk or falsify records Table 9: Discriminative Power (DP) ranking of re- query slots (T4). Slot Mean DP  |
 | 129 | 16 | REFERENCE | Table 10 | Slot Mean DP Rank crop 0.91 1 symptom 0.84 2 onset 0.62 3 severity 0.45 4 growth_stage 0.38 5 chemical_ history 0.31 6 Table 10: Full T3 safety taxonomy with severity tiers. Category Severity framing  |
 | 130 | 16 | REFERENCE | Table 11 | nt over_promise Minor: optimistic framing; Severe: guarantee ethical_boundary Minor: omission; Severe: active deception Table 11: The six agricultural slots underlying T4 re-query. Slot What it disamb |
-| 131 | 16 | REFERENCE | Table 12 | pread growth_stage Seedling, vegetative, flowering, or maturity chemical_history What, if anything, was already applied Table 12: KrishokChat-4B Safety QA refusals by dialect (n=323 total). Dialect n  |
+| 131 | 16 | REFERENCE | Table 12 | pread growth_stage Seedling, vegetative, flowering, or maturity chemical_history What, if anything, was already applied Table 12: KrishokTech-4B Safety QA refusals by dialect (n=323 total). Dialect n  |
 | 132 | 16 | REFERENCE | Table 13 | an 49 0 (0.0%) Noakhailli 53 0 (0.0%) Rangpuri 69 0 (0.0%) Barishal 48 0 (0.0%) Sylheti 53 1 (1.9%) Total 323 1 (0.31%) Table 13: Table Reasoning QA instances by com- plexity level. Level Instances L1 |
 | 133 | 17 | PERCENTAGE | 90% | ng the can- 1387 didate pool from 2,946 units to a median of 1388 5 to 15 relevant units, a reduction of more 1389 than 90%. Stage 4 has a human annotator 1390 with agricultural domain expertise revie |
 | 134 | 17 | COUNT_COMMA | 25,650 | Table 14: Dialect / split breakdown of the 25,650 Table QA records. Dialect Train Val. Test Total Standard 3,430 399 446 4,275 Sylheti 3,430 399 446 4,275 Chittagonian 3 |
@@ -210,7 +210,7 @@ pages | nguistics and the 1072 11th International Joint Conference on Natural 10
 | 143 | 18 | PERCENTAGE | 90% | 1419 2,946 Semantic Units full corpus, indexed by crop, symptom, category Median 5–15 attribute-filtered candi- dates, >90% reduction Top-1 expert-verified unit Provenance-Grounded Reference Answer Fi |
 | 144 | 18 | PERCENTAGE | 100% | 426 formation outside the cited source. All 69 1427 queries were confirmed unchanged by this sec- 1428 ond pass (69/69, 100% raw agreement), which 1429 is consistent with the primary annotation al- 14 |
 | 145 | 18 | PERCENTAGE | 6.9% | versarial sample 1442 would not be. More importantly, this pass 1443 covers only 69 of the 1,000 released queries 1444 (6.9%) and none of the 700 queries sourced 1445 from Facebook or the Krishi Bangl |
-| 146 | 18 | COUNT_COMMA | 2,946 | tee used throughout KrishokChat. 1419 2,946 Semantic Units full corpus, indexed by crop, symptom, category Median 5–15 attribute-filtered candi- dates, >90% reduct |
+| 146 | 18 | COUNT_COMMA | 2,946 | tee used throughout KrishokTech. 1419 2,946 Semantic Units full corpus, indexed by crop, symptom, category Median 5–15 attribute-filtered candi- dates, >90% reduct |
 | 147 | 18 | COUNT_COMMA | 1,000 | hat a larger, deliberately adversarial sample 1442 would not be. More importantly, this pass 1443 covers only 69 of the 1,000 released queries 1444 (6.9%) and none of the 700 queries sourced 1445 from |
 | 148 | 18 | DATASET_SIZE | 1427
 queries | ated answer addressed 1425 the farmer’s question without drawing on in- 1426 formation outside the cited source. All 69 1427 queries were confirmed unchanged by this sec- 1428 ond pass (69/69, 100% ra |
@@ -230,13 +230,13 @@ queries | ated answer addressed 1425 the farmer’s question without drawing on 
 instances | e full released split: 358 1520 General QA, 346 Treatment QA, 323 Safety 1521 QA (51 refusal-mode and 272 re-query-mode 1522 instances; see Appendix E.1 for the dialect 1523 composition), 335 Table QA |
 | 162 | 19 | METRIC | F1 | e single-epoch vs. 1586 second-epoch fine-tuning ablation. 1587 I.1 Full General QA Results 1588 Table 15 reports Token F1, numeric hallucina- 1589 tion rate, Factual%, and the three LLM-judge 1590 di |
 | 163 | 19 | MODEL_NAME | gpt- | dialect and 1530 category stratification. 1531 H.1 LLM-Judge System Prompts 1532 Both prompts are issued to 1533 openai/gpt-4o-mini via OpenRouter at 1534 temperature 0.0 in JSON output mode. We 1535  |
-| 164 | 19 | MODEL_NAME | GPT | sed-book and oracle Exact 1596 Match and token F1 for every baseline and for 1597 KrishokChat-4B, referenced from §5.4. GPT- 1598 OSS-120B is the strongest oracle-condition sys- 1599 tem on this track |
+| 164 | 19 | MODEL_NAME | GPT | sed-book and oracle Exact 1596 Match and token F1 for every baseline and for 1597 KrishokTech-4B, referenced from §5.4. GPT- 1598 OSS-120B is the strongest oracle-condition sys- 1599 tem on this track |
 | 165 | 19 | REFERENCE | Section 5 | Ablation 1580 This appendix reports the full per-model re- 1581 sults underlying the summary tables and 1582 claims in Section 5: the complete General 1583 QA judge-dimension table, the full Table QA  |
 | 166 | 19 | REFERENCE | Table 15 | liance analysis, and the single-epoch vs. 1586 second-epoch fine-tuning ablation. 1587 I.1 Full General QA Results 1588 Table 15 reports Token F1, numeric hallucina- 1589 tion rate, Factual%, and the  |
-| 167 | 19 | REFERENCE | Table 16 | 1592 KrishokChat-4B, under both the closed-book 1593 and oracle conditions (§5.1). 1594 I.2 Full Table QA Results 1595 Table 16 reports closed-book and oracle Exact 1596 Match and token F1 for every b |
-| 168 | 20 | PERCENTAGE | 19.83% | Help, Dialect, and Safety are LLM-judge scores (1–5). Note: KrishokChat-4B closed-book and oracle hallucination rates (19.83%) are coincidentally identical despite differing F1 and Factual%. Model Con |
-| 169 | 20 | PERCENTAGE | 34.63% | it for two, and leaves KrishokChat-4B un- changed. well above the next-best zero-shot baseline, 1601 Gemini-2.5-FL (EM 34.63%, F1 46.72%). 1602 I.3 Exploratory Safety-Compliance 1603 Analysis 1604 Sec |
-| 170 | 20 | PERCENTAGE | 46.72% | , and leaves KrishokChat-4B un- changed. well above the next-best zero-shot baseline, 1601 Gemini-2.5-FL (EM 34.63%, F1 46.72%). 1602 I.3 Exploratory Safety-Compliance 1603 Analysis 1604 Section 3.5 i |
+| 167 | 19 | REFERENCE | Table 16 | 1592 KrishokTech-4B, under both the closed-book 1593 and oracle conditions (§5.1). 1594 I.2 Full Table QA Results 1595 Table 16 reports closed-book and oracle Exact 1596 Match and token F1 for every b |
+| 168 | 20 | PERCENTAGE | 19.83% | Help, Dialect, and Safety are LLM-judge scores (1–5). Note: KrishokTech-4B closed-book and oracle hallucination rates (19.83%) are coincidentally identical despite differing F1 and Factual%. Model Con |
+| 169 | 20 | PERCENTAGE | 34.63% | it for two, and leaves KrishokTech-4B un- changed. well above the next-best zero-shot baseline, 1601 Gemini-2.5-FL (EM 34.63%, F1 46.72%). 1602 I.3 Exploratory Safety-Compliance 1603 Analysis 1604 Sec |
+| 170 | 20 | PERCENTAGE | 46.72% | , and leaves KrishokTech-4B un- changed. well above the next-best zero-shot baseline, 1601 Gemini-2.5-FL (EM 34.63%, F1 46.72%). 1602 I.3 Exploratory Safety-Compliance 1603 Analysis 1604 Section 3.5 i |
 | 171 | 20 | PERCENTAGE | 17.65% | 2) behavior. Compliance % is the count- weighted average of both modes. Model Refusal Re-query Compliance Gemini-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6 |
 | 172 | 20 | PERCENTAGE | 20.22% | vior. Compliance % is the count- weighted average of both modes. Model Refusal Re-query Compliance Gemini-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LL |
 | 173 | 20 | PERCENTAGE | 19.81% | ompliance % is the count- weighted average of both modes. Model Refusal Re-query Compliance Gemini-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1 |
@@ -246,15 +246,15 @@ instances | e full released split: 358 1520 General QA, 346 Treatment QA, 323 Sa
 | 177 | 20 | PERCENTAGE | 35.29% | odes. Model Refusal Re-query Compliance Gemini-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23 |
 | 178 | 20 | PERCENTAGE | 1.10% | odel Refusal Re-query Compliance Gemini-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% Kr |
 | 179 | 20 | PERCENTAGE | 6.50% | efusal Re-query Compliance Gemini-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokC |
-| 180 | 20 | PERCENTAGE | 11.76% | pliance Gemini-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokChat-4B 1.96% 0.00%  |
-| 181 | 20 | PERCENTAGE | 2.79% | i-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokChat-4B 1.96% 0.00% 0.31% 20 |
-| 182 | 20 | PERCENTAGE | 37.25% | 22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokChat-4B 1.96% 0.00% 0.31% 20 |
-| 183 | 20 | PERCENTAGE | 21.15% | 81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokChat-4B 1.96% 0.00% 0.31% 20 |
-| 184 | 20 | PERCENTAGE | 23.79% | ma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokChat-4B 1.96% 0.00% 0.31% 20 |
-| 185 | 20 | PERCENTAGE | 1.96% | 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokChat-4B 1.96% 0.00% 0.31% 20 |
-| 186 | 20 | PERCENTAGE | 0.00% | % Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokChat-4B 1.96% 0.00% 0.31% 20 |
-| 187 | 20 | PERCENTAGE | 0.31% | -2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokChat-4B 1.96% 0.00% 0.31% 20 |
-| 188 | 20 | METRIC | F1  | Note: KrishokChat-4B closed-book and oracle hallucination rates (19.83%) are coincidentally identical despite differing F1 and Factual%. Model Cond. F1 Halluc% Factual% Help Dialect Safety Gemini-2.5- |
+| 180 | 20 | PERCENTAGE | 11.76% | pliance Gemini-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokTech-4B 1.96% 0.00%  |
+| 181 | 20 | PERCENTAGE | 2.79% | i-2.5-FL 17.65% 20.22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokTech-4B 1.96% 0.00% 0.31% 20 |
+| 182 | 20 | PERCENTAGE | 37.25% | 22% 19.81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokTech-4B 1.96% 0.00% 0.31% 20 |
+| 183 | 20 | PERCENTAGE | 21.15% | 81% Gemma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokTech-4B 1.96% 0.00% 0.31% 20 |
+| 184 | 20 | PERCENTAGE | 23.79% | ma-4-26B 29.41% 16.91% 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokTech-4B 1.96% 0.00% 0.31% 20 |
+| 185 | 20 | PERCENTAGE | 1.96% | 18.89% Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokTech-4B 1.96% 0.00% 0.31% 20 |
+| 186 | 20 | PERCENTAGE | 0.00% | % Qwen-2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokTech-4B 1.96% 0.00% 0.31% 20 |
+| 187 | 20 | PERCENTAGE | 0.31% | -2.5-7B 35.29% 1.10% 6.50% LLaMA-3.1-8B 11.76% 1.10% 2.79% GPT-OSS-120B 37.25% 21.15% 23.79% KrishokTech-4B 1.96% 0.00% 0.31% 20 |
+| 188 | 20 | METRIC | F1  | Note: KrishokTech-4B closed-book and oracle hallucination rates (19.83%) are coincidentally identical despite differing F1 and Factual%. Model Cond. F1 Halluc% Factual% Help Dialect Safety Gemini-2.5- |
 | 189 | 20 | METRIC | Exact Match | pliance is al- 1616 Table 16: Full Table QA results (n=335), including the unreleased second-epoch checkpoint (SFT2ep), Exact Match and Token F1 (%). Closed-Book Oracle Model EM F1 EM F1 Gemini-2.5-FL |
 | 190 | 20 | MODEL_NAME | Gemma | ect Safety Gemini-2.5-FL CB 0.104 37.15 0.28 4.958 4.955 4.997 Gemini-2.5-FL Oracle 0.281 32.40 13.41 4.701 4.659 4.962 Gemma-4-26B CB 0.087 32.12 0.00 4.958 4.972 4.993 Gemma-4-26B Oracle 0.253 29.05 |
 | 191 | 20 | MODEL_NAME | LLaMA | 701 4.659 4.962 Gemma-4-26B CB 0.087 32.12 0.00 4.958 4.972 4.993 Gemma-4-26B Oracle 0.253 29.05 9.50 4.444 4.413 4.925 LLaMA-3.1-8B CB 0.165 10.06 2.51 3.126 2.916 4.710 LLaMA-3.1-8B Oracle 0.230 16. |
@@ -262,19 +262,19 @@ instances | e full released split: 358 1520 General QA, 346 Treatment QA, 323 Sa
 | 193 | 20 | MODEL_NAME | GPT- | 860 3.626 4.754 Qwen-2.5-7B CB 0.136 11.17 0.28 3.818 3.140 4.810 Qwen-2.5-7B Oracle 0.198 20.54 4.05 4.184 3.435 4.818 GPT-OSS-120B CB 0.113 36.20 0.34 4.493 3.955 4.985 GPT-OSS-120B Oracle 0.191 30. |
 | 194 | 20 | MODEL_NAME | GPT | uc. % Closed-Book Oracle Figure 4: General QA hallucination rate, closed- book vs. oracle context, per model (Table 15; GPT- OSS-120B values from Table 2, §I.1). Oracle con- text reduces hallucination |
 | 195 | 20 | REFERENCE | Table 15 | Table 15: Full General QA results (n=358), including the unreleased second-epoch checkpoint (SFT2ep). Halluc% and Factual% are d |
-| 196 | 20 | REFERENCE | Figure 4 | mini-2.5-FL Gemma-4-26B LLaMA-3.1-8B Qwen-2.5-7B GPT-OSS-120B KrishokChat-4B 0 10 20 30 40 Halluc. % Closed-Book Oracle Figure 4: General QA hallucination rate, closed- book vs. oracle context, per mo |
+| 196 | 20 | REFERENCE | Figure 4 | mini-2.5-FL Gemma-4-26B LLaMA-3.1-8B Qwen-2.5-7B GPT-OSS-120B KrishokTech-4B 0 10 20 30 40 Halluc. % Closed-Book Oracle Figure 4: General QA hallucination rate, closed- book vs. oracle context, per mo |
 | 197 | 20 | REFERENCE | Table 2 | igure 4: General QA hallucination rate, closed- book vs. oracle context, per model (Table 15; GPT- OSS-120B values from Table 2, §I.1). Oracle con- text reduces hallucination for three systems, in- cr |
 | 198 | 20 | REFERENCE | Section 3 | ero-shot baseline, 1601 Gemini-2.5-FL (EM 34.63%, F1 46.72%). 1602 I.3 Exploratory Safety-Compliance 1603 Analysis 1604 Section 3.5 introduces Safety QA as a bench- 1605 mark track; this subsection re |
-| 199 | 20 | REFERENCE | Table 17 | uery behavior a zero-shot 1613 model already has, not whether KrishokChat 1614 by itself enables safety alignment. 1615 Table 17 shows that safety compliance is al- 1616 Table 16: Full Table QA result |
-| 200 | 20 | REFERENCE | Table 16 | not whether KrishokChat 1614 by itself enables safety alignment. 1615 Table 17 shows that safety compliance is al- 1616 Table 16: Full Table QA results (n=335), including the unreleased second-epoch c |
-| 201 | 21 | PERCENTAGE | 23.79% | . The strongest 1618 zero-shot model, GPT-OSS-120B, follows the 1619 intended refusal or re-query behavior on only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokChat-4B complie |
-| 202 | 21 | PERCENTAGE | 2.79% | follows the 1619 intended refusal or re-query behavior on only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokChat-4B complies on 1 1622 of 323 instances (0.31%), and the second |
-| 203 | 21 | PERCENTAGE | 0.31% | only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokChat-4B complies on 1 1622 of 323 instances (0.31%), and the second- 1623 epoch checkpoint reaches the identical rate 1624 (T |
+| 199 | 20 | REFERENCE | Table 17 | uery behavior a zero-shot 1613 model already has, not whether KrishokTech 1614 by itself enables safety alignment. 1615 Table 17 shows that safety compliance is al- 1616 Table 16: Full Table QA result |
+| 200 | 20 | REFERENCE | Table 16 | not whether KrishokTech 1614 by itself enables safety alignment. 1615 Table 17 shows that safety compliance is al- 1616 Table 16: Full Table QA results (n=335), including the unreleased second-epoch c |
+| 201 | 21 | PERCENTAGE | 23.79% | . The strongest 1618 zero-shot model, GPT-OSS-120B, follows the 1619 intended refusal or re-query behavior on only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokTech-4B complie |
+| 202 | 21 | PERCENTAGE | 2.79% | follows the 1619 intended refusal or re-query behavior on only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokTech-4B complies on 1 1622 of 323 instances (0.31%), and the second |
+| 203 | 21 | PERCENTAGE | 0.31% | only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokTech-4B complies on 1 1622 of 323 instances (0.31%), and the second- 1623 epoch checkpoint reaches the identical rate 1624 (T |
 | 204 | 21 | PERCENTAGE | 0% | 3 liteness/redirection marginally, but degrades 1664 General QA and collapses Treatment QA 1665 closed-book accuracy to 0%, with Safety QA 1666 compliance unchanged at 0.31% either way. 1667 The Treat |
 | 205 | 21 | PERCENTAGE | 35.55% | tment 1670 QA questions, but 0 of 346 evaluated recom- 1671 mendations are verifiably correct, against 123 1672 of 346 (35.55%) after one epoch (step 2,680). 1673 We read this as overfitting to the Ge |
 | 206 | 21 | COUNT_COMMA | 5,362 | % either way. 1667 The Treatment QA closed-book collapse is 1668 the decisive result: after the second epoch 1669 (step 5,362), the model still answers Treatment 1670 QA questions, but 0 of 346 evalua |
 | 207 | 21 | COUNT_COMMA | 2,680 | of 346 evaluated recom- 1671 mendations are verifiably correct, against 123 1672 of 346 (35.55%) after one epoch (step 2,680). 1673 We read this as overfitting to the General 1674 QA surface-form dive |
-| 208 | 21 | DATASET_SIZE | 323 instances | ry behavior on only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokChat-4B complies on 1 1622 of 323 instances (0.31%), and the second- 1623 epoch checkpoint reaches the identic |
+| 208 | 21 | DATASET_SIZE | 323 instances | ry behavior on only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokTech-4B complies on 1 1622 of 323 instances (0.31%), and the second- 1623 epoch checkpoint reaches the identic |
 | 209 | 21 | DATASET_SIZE | 1710
 sets | to one canonical 1708 key), and precision, recall, and their harmonic 1709 mean are computed over the resulting mention 1710 sets. We additionally report Dosage Compli- 1711 ance, a binary indicator o |
 | 210 | 21 | METRIC | accuracy | y QA po- 1663 liteness/redirection marginally, but degrades 1664 General QA and collapses Treatment QA 1665 closed-book accuracy to 0%, with Safety QA 1666 compliance unchanged at 0.31% either way. 16 |
@@ -283,18 +283,18 @@ sets | to one canonical 1708 key), and precision, recall, and their harmonic 170
 | 213 | 21 | METRIC | recall | match on chemical name, dosage 1681 value, and unit; Appendix I.5 decomposes this 1682 into chemical-mention precision/recall, which 1683 clarifies that the checkpoint still names plau- 1684 sible che |
 | 214 | 21 | METRIC | F1 | 701 ness from genuine chemical-reasoning failure, 1702 we additionally compute a chemical-mention 1703 Precision/Recall/F1 (Chem-PRF) score: pre- 1704 dicted and gold chemical mentions are both 1705 c |
 | 215 | 21 | MODEL_NAME | GPT- | ready weak among the zero-shot baselines and 1617 drops further after fine-tuning. The strongest 1618 zero-shot model, GPT-OSS-120B, follows the 1619 intended refusal or re-query behavior on only 1620 |
-| 216 | 21 | MODEL_NAME | LLaMA | -shot model, GPT-OSS-120B, follows the 1619 intended refusal or re-query behavior on only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokChat-4B complies on 1 1622 of 323 instan |
+| 216 | 21 | MODEL_NAME | LLaMA | -shot model, GPT-OSS-120B, follows the 1619 intended refusal or re-query behavior on only 1620 23.79% of instances, and LLaMA-3.1-8B on 1621 just 2.79%. KrishokTech-4B complies on 1 1622 of 323 instan |
 | 217 | 21 | REFERENCE | Table 18 | -4B complies on 1 1622 of 323 instances (0.31%), and the second- 1623 epoch checkpoint reaches the identical rate 1624 (Table 18), so the drop is not an artifact of 1625 stopping fine-tuning early. A  |
 | 218 | 21 | REFERENCE | Table 19 | a recognized agricultural unit (e.g., kg/ha, 1714 ml/L), independent of whether the value itself 1715 is correct. 1716 Table 19 reports Chem-PRF and Dosage 1717 Compliance alongside Correct% for every |
 | 219 | 22 | PERCENTAGE | 0% | 9) is close to its own 1735 oracle-condition value (0.460) and to several 1736 zero-shot baselines, indicating that its 0% 1737 Correct% reflects formatting strictness rather 1738 than a complete loss |
-| 220 | 22 | METRIC | F1 | eased) vs. second-epoch (SFT2ep, not released) ablation. Track Metric KrishokChat-4B SFT2ep ∆(2ep−1ep) General QA Token F1 (CB) 0.314 0.276 −0.038 General QA Halluc% (CB) 19.8 24.0 +4.2 General QA Fac |
+| 220 | 22 | METRIC | F1 | eased) vs. second-epoch (SFT2ep, not released) ablation. Track Metric KrishokTech-4B SFT2ep ∆(2ep−1ep) General QA Token F1 (CB) 0.314 0.276 −0.038 General QA Halluc% (CB) 19.8 24.0 +4.2 General QA Fac |
 | 221 | 22 | METRIC | precision | §5.2: LLaMA-3.1-8B and 1721 Qwen-2.5-7B, which recommend a treatment 1722 on only a small share of instances, show 1723 precision at or above recall (e.g., LLaMA- 1724 3.1-8B closed-book: 0.260 vs. 0. |
 | 222 | 22 | METRIC | recall | 1721 Qwen-2.5-7B, which recommend a treatment 1722 on only a small share of instances, show 1723 precision at or above recall (e.g., LLaMA- 1724 3.1-8B closed-book: 0.260 vs. 0.162), consis- 1725 tent |
 | 223 | 22 | MODEL_NAME | LLaMA | Treatment QA system. The decomposition 1719 is consistent with each system’s omission pro- 1720 file reported in §5.2: LLaMA-3.1-8B and 1721 Qwen-2.5-7B, which recommend a treatment 1722 on only a sma |
 | 224 | 22 | MODEL_NAME | Qwen | The decomposition 1719 is consistent with each system’s omission pro- 1720 file reported in §5.2: LLaMA-3.1-8B and 1721 Qwen-2.5-7B, which recommend a treatment 1722 on only a small share of instances |
 | 225 | 22 | MODEL_NAME | Gemma | closed-book: 0.260 vs. 0.162), consis- 1725 tent with cautious, often-omitted recommen- 1726 dations; Gemini-2.5-FL and Gemma-4-26B, 1727 which answer more freely, show the opposite 1728 pattern (Gemm |
 | 226 | 22 | MODEL_NAME | GPT- | 4 0.478 0.409 0.415 0.356 Gemma-4-26B CB 38.73 0.364 0.680 0.455 0.269 Gemma-4-26B Oracle 54.05 0.588 0.775 0.644 0.397 GPT-OSS-120B CB 32.92 0.422 0.377 0.363 0.243 GPT-OSS-120B Oracle 49.79 0.553 0. |
-| 227 | 22 | REFERENCE | Table 18 | Table 18: Single-epoch (KrishokChat-4B, released) vs. second-epoch (SFT2ep, not released) ablation. Track Metric KrishokChat-4B |
+| 227 | 22 | REFERENCE | Table 18 | Table 18: Single-epoch (KrishokTech-4B, released) vs. second-epoch (SFT2ep, not released) ablation. Track Metric KrishokTech-4B |
 | 228 | 22 | REFERENCE | Table 20 | on-level overlap, 1744 is the property that is safety-relevant in de- 1745 ployment. 1746 I.6 Qualitative Examples 1747 Table 20 gives one representative example per 1748 failure or success mode discu |
 | 229 | 22 | REFERENCE | Table
 1752 | hallucination (§4.3), a 1750 correct T3 refusal, a correct T4 re-query (§3.5), 1751 a grounded General QA answer, and a Table 1752 QA cell-lookup error. Each is shown in the 1753 original Bengali alon |
@@ -306,27 +306,27 @@ sets | to one canonical 1708 key), and precision, recall, and their harmonic 170
 | 235 | 23 | DOSAGE | 120 kg/ha | তর: ১২০েকিজ/েহĝর Q: According to the table, what is the per-hectare urea application rate? Gold: 150 kg/ha. Prediction: 120 kg/ha. Verdict: incorrect cell lookup – wrong row read from the source table |
 | 236 | 23 | REFERENCE | Table 20 | Table 20: Representative qualitative examples, one per case, in Bengali with an English gloss. Case Bengali (original) English g |
 | 237 | 24 | PERCENTAGE | 10% | norm 0.3). The learning rate 1775 followed a cosine decay schedule with a peak 1776 of 2 × 10−4 and 268 warmup steps (∼10% of 1777 the first epoch). We used a per-device micro- 1778 batch size of 4 wi |
-| 238 | 24 | PERCENTAGE | 19.83% | 7 × 10−5 under the pooled-variance z- 1813 test, and is marked † in Table 2. KrishokChat- 1814 4B’s closed-book GenHal (19.83%) is lower 1815 than the high-hallucination zero-shot base- 1816 lines but |
+| 238 | 24 | PERCENTAGE | 19.83% | 7 × 10−5 under the pooled-variance z- 1813 test, and is marked † in Table 2. KrishokTech- 1814 4B’s closed-book GenHal (19.83%) is lower 1815 than the high-hallucination zero-shot base- 1816 lines but |
 | 239 | 24 | PERCENTAGE | 10.06% | Hal (19.83%) is lower 1815 than the high-hallucination zero-shot base- 1816 lines but remains above LLaMA-3.1-8B’s 1817 10.06%; we therefore do not mark it as 1818 significant against the best zero-sh |
-| 240 | 24 | PERCENTAGE | 35.55% | ainst the best zero-shot baseline. 1819 Treatment QA (Table 2), N = 346. 1820 KrishokChat-4B’s closed-book TrtCor 1821 (35.55%) against Gemini-2.5-FL (43.64%) 1822 gives p = 0.0290 (significant at α = |
-| 241 | 24 | PERCENTAGE | 43.64% | ne. 1819 Treatment QA (Table 2), N = 346. 1820 KrishokChat-4B’s closed-book TrtCor 1821 (35.55%) against Gemini-2.5-FL (43.64%) 1822 gives p = 0.0290 (significant at α = 0.05 1823 but not at α = 0.01) |
-| 242 | 24 | PERCENTAGE | 38.73% | ini-2.5-FL (43.64%) 1822 gives p = 0.0290 (significant at α = 0.05 1823 but not at α = 0.01); against Gemma-4-26B 1824 (38.73%) gives p = 0.386 (not significant). We 1825 read this as KrishokChat-4B b |
-| 243 | 24 | PERCENTAGE | 23.14% | statistically tied 1839 with Gemma-4-26B in F1 despite the numeric 1840 gap). On hallucination rate, Gemma-4-26B 1841 (23.14%) against KrishokChat-4B (41.14%) 1842 gives p = 2.03 × 10−7 (†); Gemini-2. |
-| 244 | 24 | PERCENTAGE | 41.14% | mma-4-26B in F1 despite the numeric 1840 gap). On hallucination rate, Gemma-4-26B 1841 (23.14%) against KrishokChat-4B (41.14%) 1842 gives p = 2.03 × 10−7 (†); Gemini-2.5-FL 1843 (38.29%) against Kris |
-| 245 | 24 | PERCENTAGE | 38.29% | ion rate, Gemma-4-26B 1841 (23.14%) against KrishokChat-4B (41.14%) 1842 gives p = 2.03 × 10−7 (†); Gemini-2.5-FL 1843 (38.29%) against KrishokChat-4B gives p = 1844 0.441 (not significant). 1845 Summ |
+| 240 | 24 | PERCENTAGE | 35.55% | ainst the best zero-shot baseline. 1819 Treatment QA (Table 2), N = 346. 1820 KrishokTech-4B’s closed-book TrtCor 1821 (35.55%) against Gemini-2.5-FL (43.64%) 1822 gives p = 0.0290 (significant at α = |
+| 241 | 24 | PERCENTAGE | 43.64% | ne. 1819 Treatment QA (Table 2), N = 346. 1820 KrishokTech-4B’s closed-book TrtCor 1821 (35.55%) against Gemini-2.5-FL (43.64%) 1822 gives p = 0.0290 (significant at α = 0.05 1823 but not at α = 0.01) |
+| 242 | 24 | PERCENTAGE | 38.73% | ini-2.5-FL (43.64%) 1822 gives p = 0.0290 (significant at α = 0.05 1823 but not at α = 0.01); against Gemma-4-26B 1824 (38.73%) gives p = 0.386 (not significant). We 1825 read this as KrishokTech-4B b |
+| 243 | 24 | PERCENTAGE | 23.14% | statistically tied 1839 with Gemma-4-26B in F1 despite the numeric 1840 gap). On hallucination rate, Gemma-4-26B 1841 (23.14%) against KrishokTech-4B (41.14%) 1842 gives p = 2.03 × 10−7 (†); Gemini-2. |
+| 244 | 24 | PERCENTAGE | 41.14% | mma-4-26B in F1 despite the numeric 1840 gap). On hallucination rate, Gemma-4-26B 1841 (23.14%) against KrishokTech-4B (41.14%) 1842 gives p = 2.03 × 10−7 (†); Gemini-2.5-FL 1843 (38.29%) against Kris |
+| 245 | 24 | PERCENTAGE | 38.29% | ion rate, Gemma-4-26B 1841 (23.14%) against KrishokTech-4B (41.14%) 1842 gives p = 2.03 × 10−7 (†); Gemini-2.5-FL 1843 (38.29%) against KrishokTech-4B gives p = 1844 0.441 (not significant). 1845 Summ |
 | 246 | 24 | COUNT_COMMA | 2,680 | proj, o_proj, gate_proj, up_proj, 1761 down_proj) on top of a 4-bit-quantized base 1762 checkpoint, for one epoch (step 2,680 of a 1763 planned 5,362-step, two-epoch run), with 1764 the second-epoch c |
 | 247 | 24 | COUNT_COMMA | 5,362 | up_proj, 1761 down_proj) on top of a 4-bit-quantized base 1762 checkpoint, for one epoch (step 2,680 of a 1763 planned 5,362-step, two-epoch run), with 1764 the second-epoch checkpoint SFT2ep (§I.4) 1 |
 | 248 | 24 | COUNT_COMMA | 4,096 | ze of 4 with 4 gradient accumulation 1779 steps (effective global batch size 16) at a max- 1780 imum sequence length of 4,096 tokens, with 1781 model seed 42 and data seed 3407. 1782 K Significance Te |
 | 249 | 24 | METRIC | precision | steps. 1768 Training was conducted on a single NVIDIA 1769 L4 GPU (24GB VRAM, Google Colab Pro) 1770 in bfloat16 mixed precision using Unsloth and 1771 Hugging Face TRL’s SFTTrainer. We opti- 1772 miz |
 | 250 | 24 | METRIC | F1 | and flag 1789 that as a remaining gap rather than imply it 1790 has been checked. For continuous metrics (To- 1791 ken F1) we use a two-sample z-test assuming 1792 a pooled F1 variance of ∼0.25; for p |
-| 251 | 24 | MODEL_NAME | Gemma | J Training Configuration 1755 KrishokChat-4B (Gemma-4-E4B) is fine- 1756 tuned on the KrishokChat training split using 1757 Low-Rank Adaptation (LoRA; r = 32, α = 64, 1758 |
-| 252 | 24 | MODEL_NAME | LLaMA | e 2), N = 358. 1809 KrishokChat-4B’s closed-book Token F1 1810 (0.314) against the strongest closed-book 1811 baseline, LLaMA-3.1-8B (0.165), gives 1812 p ≈6.7 × 10−5 under the pooled-variance z- 1813 |
+| 251 | 24 | MODEL_NAME | Gemma | J Training Configuration 1755 KrishokTech-4B (Gemma-4-E4B) is fine- 1756 tuned on the KrishokTech training split using 1757 Low-Rank Adaptation (LoRA; r = 32, α = 64, 1758 |
+| 252 | 24 | MODEL_NAME | LLaMA | e 2), N = 358. 1809 KrishokTech-4B’s closed-book Token F1 1810 (0.314) against the strongest closed-book 1811 baseline, LLaMA-3.1-8B (0.165), gives 1812 p ≈6.7 × 10−5 under the pooled-variance z- 1813 |
 | 253 | 24 | REFERENCE | Table 2 | per claims in §5.2 and §5.5 are built 1787 on; we did not compute significance for the 1788 oracle-condition columns of Table 2 and flag 1789 that as a remaining gap rather than imply it 1790 has been |
 | 254 | 24 | REFERENCE | Table
-2 | ificant results more con- 1806 servative – and note its absence rather than 1807 imply it was applied. 1808 General QA (Table 2), N = 358. 1809 KrishokChat-4B’s closed-book Token F1 1810 (0.314) again |
+2 | ificant results more con- 1806 servative – and note its absence rather than 1807 imply it was applied. 1808 General QA (Table 2), N = 358. 1809 KrishokTech-4B’s closed-book Token F1 1810 (0.314) again |
 | 255 | 24 | REFERENCE | Table 3 | clears p < 0.05 does not clear 1831 the stricter p < 0.01 threshold we use for the 1832 marker. 1833 Farmer Benchmark (Table 3), N = 350. 1834 On Token F1, Gemini-2.5-FL (0.2196) against 1835 KrishokC |
-| 256 | 25 | METRIC | F1  | 1855 On the out-of-distribution Farmer Bench- 1856 mark, KrishokChat-4B is statistically tied 1857 with Gemma-4-26B in F1 but significantly 1858 worse than Gemma-4-26B in hallucination 1859 rate, and  |
-| 257 | 25 | MODEL_NAME | Gemma | Gemini-2.5-FL. 1855 On the out-of-distribution Farmer Bench- 1856 mark, KrishokChat-4B is statistically tied 1857 with Gemma-4-26B in F1 but significantly 1858 worse than Gemma-4-26B in hallucination  |
+| 256 | 25 | METRIC | F1  | 1855 On the out-of-distribution Farmer Bench- 1856 mark, KrishokTech-4B is statistically tied 1857 with Gemma-4-26B in F1 but significantly 1858 worse than Gemma-4-26B in hallucination 1859 rate, and  |
+| 257 | 25 | MODEL_NAME | Gemma | Gemini-2.5-FL. 1855 On the out-of-distribution Farmer Bench- 1856 mark, KrishokTech-4B is statistically tied 1857 with Gemma-4-26B in F1 but significantly 1858 worse than Gemma-4-26B in hallucination  |
 
 ---
 
@@ -481,10 +481,10 @@ queries | e low-resource retrieval and RAG systems. A Reproducibility Checklist 
 ### Model evaluation claims (from PDF A)
 | Model | Claim | Value | Status |
 |-------|-------|-------|--------|
-| KrishokChat-4B | Gen F1 (CB) | 0.314 | **NEEDS RECONCILIATION** |
-| KrishokChat-4B | TrtCorrect% (CB) | 35.55% | **NEEDS RECONCILIATION** |
-| KrishokChat-4B | GenHal% (CB) | 19.83% | **NEEDS RECONCILIATION** |
-| KrishokChat-4B | Safety compliance | 0.31% | **NEEDS RECONCILIATION** |
+| KrishokTech-4B | Gen F1 (CB) | 0.314 | **NEEDS RECONCILIATION** |
+| KrishokTech-4B | TrtCorrect% (CB) | 35.55% | **NEEDS RECONCILIATION** |
+| KrishokTech-4B | GenHal% (CB) | 19.83% | **NEEDS RECONCILIATION** |
+| KrishokTech-4B | Safety compliance | 0.31% | **NEEDS RECONCILIATION** |
 | Gemini-2.5-FL | TrtCorrect% (CB) | 43.64% | **NEEDS RECONCILIATION** |
 | Gemma-4-26B | TrtCorrect% (CB) | 38.73% | **NEEDS RECONCILIATION** |
 | LLaMA-3.1-8B | TrtCorrect% (CB) | 12.43% | **NEEDS RECONCILIATION** |

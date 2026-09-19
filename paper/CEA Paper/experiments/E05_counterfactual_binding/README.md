@@ -51,7 +51,7 @@ Do counterfactual evidence edits flip the bound answer (evidence sensitivity)?
       ],
       "counterfactual_binding_consistency_cbc": 0.5705
     },
-    "KrishokChat_Typed_Relational_Verifier": {
+    "KrishokTech_Typed_Relational_Verifier": {
       "p_certify_given_true_evidence_pct": 100.0,
       "p_certify_given_counterfactual_evidence_pct": 0.0,
       "cf_false_acceptance_95_ci_pct": [
@@ -61,6 +61,6 @@ Do counterfactual evidence edits flip the bound answer (evidence sensitivity)?
       "counterfactual_binding_consistency_cbc": 1.0
     }
   },
-  "scientific_interpretation": "Under counterfactual evidence perturbations (e.g. scaling dose by 5x or shortening PHI to 3 days), Vanilla RAG and Lexical matchers suffer Counterfactual Binding Consistency (CBC) drops to 0.2600 and 0.4000 respectively, falsely certifying 74.0% and 60.0% of corrupted claims due to semantic language priors and substring co-occurrences. In contrast, the KrishokChat Typed Relational Verifier achieves a near-perfect CBC score of 1.0000 (0.0% CF certification, 95% CI: [0.0%, 0.19%]), demonstrating that the expert system is strictly evidence-bound rather than generative-prior bound."
+  "scientific_interpretation": "Under counterfactual evidence perturbations (e.g. scaling dose by 5x or shortening PHI to 3 days), Vanilla RAG and Lexical matchers suffer Counterfactual Binding Consistency (CBC) drops to 0.2600 and 0.4000 respectively, falsely certifying 74.0% and 60.0% of corrupted claims due to semantic language priors and substring co-occurrences. In contrast, the KrishokTech Typed Relational Verifier achieves a near-perfect CBC score of 1.0000 (0.0% CF certification, 95% CI: [0.0%, 0.19%]), demonstrating that the expert system is strictly evidence-bound rather than generative-prior bound."
 }
 ```

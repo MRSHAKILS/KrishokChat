@@ -105,7 +105,7 @@
       "safe_certified_rate_pct": 76.5,
       "cost_per_safe_certified_answer_usd": 0.001111
     },
-    "KrishokChat_Deterministic_First_Ladder": {
+    "KrishokTech_Deterministic_First_Ladder": {
       "cost_per_query_usd": 0.0001798,
       "cost_per_1000_usd": 0.1798,
       "cost_per_100k_usd": 17.98,
@@ -129,6 +129,6 @@
       "top1_agreement_vs_pytorch_fp32_pct": 100.0
     }
   },
-  "scientific_interpretation": "The five-tier resolution ladder satisfies deterministic guarantees: T0-T2 queries resolve in <= 0.94 ms p95 (mean 0.42-0.58 ms), completely bypassing generative inference. Operating on local Gemma-4 4-bit infrastructure achieves a serving cost of $0.1798 / 1,000 queries (92.2% reduction vs $2.30 commercial cloud LLMs). Under the novel Cost per Safe Answer metric (C_safe), KrishokChat achieves $0.000213 per certified safe advisory (15.0x more cost-efficient than cloud baselines). On-device INT8 vision models execute in 29.11 ms and 47.79 ms with 100.0% parity."
+  "scientific_interpretation": "The five-tier resolution ladder satisfies deterministic guarantees: T0-T2 queries resolve in <= 0.94 ms p95 (mean 0.42-0.58 ms), completely bypassing generative inference. Operating on local Gemma-4 4-bit infrastructure achieves a serving cost of $0.1798 / 1,000 queries (92.2% reduction vs $2.30 commercial cloud LLMs). Under the novel Cost per Safe Answer metric (C_safe), KrishokTech achieves $0.000213 per certified safe advisory (15.0x more cost-efficient than cloud baselines). On-device INT8 vision models execute in 29.11 ms and 47.79 ms with 100.0% parity."
 }
 ```

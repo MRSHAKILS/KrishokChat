@@ -1,8 +1,8 @@
 # Page Critique: Research Team & Credits (`/team`)
 
 **Target Route**: `/team`  
-**Source Code**: [frontend/src/app/(marketing)/team/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28marketing%29/team/page.tsx)  
-**Screenshot**: ![12_team.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/12_team.png)  
+**Source Code**: [frontend/src/app/(marketing)/team/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28marketing%29/team/page.tsx)  
+**Screenshot**: ![12_team.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/12_team.png)  
 
 ---
 

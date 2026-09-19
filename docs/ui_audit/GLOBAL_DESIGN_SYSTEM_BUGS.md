@@ -1,6 +1,6 @@
 # Global Design System & Cross-Cutting UI/UX Critique
 
-**Project**: KrishokChat — Bangladesh Agri-AI Advisory System  
+**Project**: KrishokTech — Bangladesh Agri-AI Advisory System  
 **Scope**: Site-wide layout, navigation, typography, accessibility, and theme tokens  
 
 ---
@@ -8,9 +8,9 @@
 ## 1. Global Navigation & Auth Confusion (`navbar.tsx`)
 
 ### 🔴 Critical Issues
-- **Unnecessary Auth Buttons**: [navbar.tsx:L66-L79](file:///d:/KrishokChat%20Advisory%20System/frontend/src/components/navbar.tsx#L66-L79) renders "প্রবেশ" (Login) and "নিবন্ধন" (Register) buttons on desktop, leading to `/auth`. Project directive explicitly states: *No authentication, no user accounts*. Having auth buttons misleads users into thinking account creation is required before using the AI advisory service.
-- **Missing Top Navigation Links**: Pages like `/analytics`, `/data`, and `/contact` are present in the app router but missing from the desktop navbar `NAV` array in [navbar.tsx:L11-L18](file:///d:/KrishokChat%20Advisory%20System/frontend/src/components/navbar.tsx#L11-L18). Users are forced to scroll down to the footer to locate these pages.
-- **Hidden Emergency Call Helpline**: The national **Krishi Call Center helpline (16123)** is currently hidden inside the mobile dropdown menu ([navbar.tsx:L136-L142](file:///d:/KrishokChat%20Advisory%20System/frontend/src/components/navbar.tsx#L136-L142)) and absent from the desktop header.
+- **Unnecessary Auth Buttons**: [navbar.tsx:L66-L79](file:///d:/KrishokTech%20Advisory%20System/frontend/src/components/navbar.tsx#L66-L79) renders "প্রবেশ" (Login) and "নিবন্ধন" (Register) buttons on desktop, leading to `/auth`. Project directive explicitly states: *No authentication, no user accounts*. Having auth buttons misleads users into thinking account creation is required before using the AI advisory service.
+- **Missing Top Navigation Links**: Pages like `/analytics`, `/data`, and `/contact` are present in the app router but missing from the desktop navbar `NAV` array in [navbar.tsx:L11-L18](file:///d:/KrishokTech%20Advisory%20System/frontend/src/components/navbar.tsx#L11-L18). Users are forced to scroll down to the footer to locate these pages.
+- **Hidden Emergency Call Helpline**: The national **Krishi Call Center helpline (16123)** is currently hidden inside the mobile dropdown menu ([navbar.tsx:L136-L142](file:///d:/KrishokTech%20Advisory%20System/frontend/src/components/navbar.tsx#L136-L142)) and absent from the desktop header.
 
 ### 💡 Recommendation for `navbar.tsx`
 1. Remove "প্রবেশ" and "নিবন্ধন" buttons completely.

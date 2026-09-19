@@ -233,7 +233,7 @@ Advisory delivery success rate of offline cache vs cloud RAG under 2G/Edge cellu
   "acceptance": {
     "accepted_by": "PENDING",
     "ledger_entry": "S-E14",
-    "notes": "Under simulated rural Bangladeshi network conditions (800ms latency, 15% packet loss), Cloud-Only RAG collapses to a 42.1% delivery success rate, whereas KrishokChat's Offline-First Fact Cache sustains a 92.4% delivery success rate (+50.3 pp) with 0 safety violations."
+    "notes": "Under simulated rural Bangladeshi network conditions (800ms latency, 15% packet loss), Cloud-Only RAG collapses to a 42.1% delivery success rate, whereas KrishokTech's Offline-First Fact Cache sustains a 92.4% delivery success rate (+50.3 pp) with 0 safety violations."
   }
 }
 ```

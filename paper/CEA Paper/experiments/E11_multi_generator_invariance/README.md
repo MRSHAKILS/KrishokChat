@@ -36,7 +36,7 @@ Is 11-slot verifier behavior stable across different underlying generator models
         "chemical_hazard_pct": 7.4,
         "hazard_count": 148
       },
-      "verified_krishokchat": {
+      "verified_krishoktech": {
         "correct_certified_pct": 84.56,
         "safe_abstained_pct": 15.44,
         "dangerous_acceptance_pct": 0.0,
@@ -58,7 +58,7 @@ Is 11-slot verifier behavior stable across different underlying generator models
         "chemical_hazard_pct": 11.8,
         "hazard_count": 236
       },
-      "verified_krishokchat": {
+      "verified_krishoktech": {
         "correct_certified_pct": 79.2,
         "safe_abstained_pct": 20.8,
         "dangerous_acceptance_pct": 0.0,
@@ -80,7 +80,7 @@ Is 11-slot verifier behavior stable across different underlying generator models
         "chemical_hazard_pct": 13.6,
         "hazard_count": 272
       },
-      "verified_krishokchat": {
+      "verified_krishoktech": {
         "correct_certified_pct": 76.5,
         "safe_abstained_pct": 23.5,
         "dangerous_acceptance_pct": 0.0,
@@ -92,6 +92,6 @@ Is 11-slot verifier behavior stable across different underlying generator models
       }
     }
   },
-  "scientific_interpretation": "Evaluating heterogeneous generative backends confirms that KrishokChat's Typed Relational Verifier operates as a model-independent certification layer. In unverified raw RAG generation, baseline chemical hazard rates vary from 7.40% (Gemma-4 fine-tuned) to 11.80% (Llama-3-8B) and 13.60% (Qwen-2.5-7B). Applying the frozen KrishokChat relational verifier eliminates dangerous acceptances across all three models (0.00% hazard, 0 / 2,000, 95% CI: [0.00%, 0.19%]). Model quality differences manifest solely as higher coverage (Gemma-4: 84.56% vs Llama-3: 79.20% vs Qwen-2.5: 76.50%), while the fail-closed safety boundary remains invariant."
+  "scientific_interpretation": "Evaluating heterogeneous generative backends confirms that KrishokTech's Typed Relational Verifier operates as a model-independent certification layer. In unverified raw RAG generation, baseline chemical hazard rates vary from 7.40% (Gemma-4 fine-tuned) to 11.80% (Llama-3-8B) and 13.60% (Qwen-2.5-7B). Applying the frozen KrishokTech relational verifier eliminates dangerous acceptances across all three models (0.00% hazard, 0 / 2,000, 95% CI: [0.00%, 0.19%]). Model quality differences manifest solely as higher coverage (Gemma-4: 84.56% vs Llama-3: 79.20% vs Qwen-2.5: 76.50%), while the fail-closed safety boundary remains invariant."
 }
 ```

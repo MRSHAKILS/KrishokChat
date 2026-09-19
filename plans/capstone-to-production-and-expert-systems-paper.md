@@ -1,6 +1,6 @@
 # Capstone → Production + Expert Systems Journal — Incremental Execution Plan
 
-**Repo:** `KrishokChat Advisory System` (`main` branch, origin `RaiyaanReza/KrishokChat-Agricultural-Advisory-System`)
+**Repo:** `KrishokTech Advisory System` (`main` branch, origin `RaiyaanReza/KrishokTech-Agricultural-Advisory-System`)
 **Date:** 2026-08-21
 **Author:** blueprint pipeline (research → design → review)
 **Statue:** ADVISORY — no code changes until a step's agent executes it
@@ -18,7 +18,7 @@
 | `PROJECT_HANDOFF.md` | **Phase 0 (P0-1..P0-14) DONE**: `/readyz`, SSE heartbeat, error envelope, `DOCS_ENABLED`, local concurrency, cache versioning, audit/sqlite, sessions/sqlite, telemetry, failover, versioning+keys, CI+golden. **273 passed / 7 skipped / 79 subtests**, golden **50/50** (46+4 injections), `pnpm build` 21 routes. Remaining = Tier 1 (`T1-01..T1-05`) + P1 market/deployment work. |
 | `PRODUCTION_ROLLOUT_PLAN.md` | Phase 0 done; Phase 1 = deployment kit / runtime upgrade / observability / security / data / model serving / frontend prod / compliance; Phase 2 = AI ops; Phase 3 = BD market. |
 | `production_readiness_roadmap.md` | Tier 0 = safe now (done), Tier 1 = needs amendment, Tier 2 = research lane. Task docs in `docs/production_readiness/tasks/`. |
-| Live tree audit (2026-08-21) | **Debt hotspots**: duplicate `krishokchat.f16.gguf` ≈ `model.gguf` (2.6 GB), 3× `Modelfile`, 3 demo media files duplicated at root + `frontend/public/`, 37 loose `scripts/*` + 26 `backend/scripts/*` + 27 `backend/ml_assets/rag_index/scripts/`, typo folder `capstone/poster deisgn`, spaces-in-path `dataset_release/Soil Moisture Detection/`, backend root stray `uvicorn-*.log` files, latex aux (`*.aux/.log/.dvi/.out/.nav/.snm/.toc`) committed in `capstone/`, untracked `scripts/test_soil*.py`. |
+| Live tree audit (2026-08-21) | **Debt hotspots**: duplicate `krishoktech.f16.gguf` ≈ `model.gguf` (2.6 GB), 3× `Modelfile`, 3 demo media files duplicated at root + `frontend/public/`, 37 loose `scripts/*` + 26 `backend/scripts/*` + 27 `backend/ml_assets/rag_index/scripts/`, typo folder `capstone/poster deisgn`, spaces-in-path `dataset_release/Soil Moisture Detection/`, backend root stray `uvicorn-*.log` files, latex aux (`*.aux/.log/.dvi/.out/.nav/.snm/.toc`) committed in `capstone/`, untracked `scripts/test_soil*.py`. |
 | `paper/system_evolution_plan_2026/` | Full 4→8 week research evolution: current scientific position, competitive landscape, 3 system concepts, evaluation matrix, verifier/abstention/dialect protocols, claim ledger, local-model amendment (14), auth amendment (15), premium lane (16). |
 | `paper/done papers/` | Authoritative sources; `arXiv:2606.29243 v1` is **deprecated** per `PAPER_POLICY.md`. |
 | Journal target | **Expert Systems** (Wiley) — system-track: requires reproducible benchmark, ablation, error analysis, safety evaluation, real data, ethics/limitations, artifact availability. |
@@ -31,7 +31,7 @@ No step is green until **all three servers stay up and answer** from the **same 
 |--------|-----|-------|---------|
 | **Backend** | `http://localhost:8000` | `GET /health` → `{"status":"ok"}` + `GET /readyz` → `ready` or `degraded` (never 500) | 200 |
 | **Frontend** | `http://localhost:3000` (and `:3100` if running) | `GET /` + `GET /chat` + `GET /detect` | 200 |
-| **Local LLM** | `http://127.0.0.1:11434` or `:11435` (`LOCAL_LLM_BASE_URL`) | `ollama list` or `GET /api/tags` shows `krishokchat-4b` *if* local lane is enabled; otherwise **stub lane** must stay green without it | optional but never red |
+| **Local LLM** | `http://127.0.0.1:11434` or `:11435` (`LOCAL_LLM_BASE_URL`) | `ollama list` or `GET /api/tags` shows `krishoktech-4b` *if* local lane is enabled; otherwise **stub lane** must stay green without it | optional but never red |
 
 Plus offline gates: `uv run pytest -q` + `pnpm build` + `python backend/scripts/replay_golden.py --assert-invariants` (50/50).
 
@@ -72,7 +72,7 @@ H7 ─┘                                                      └─► R1 ─�
 | Step | Title | Parallel? | Model |
 |------|-------|-----------|-------|
 | **H1** | Purge stray runtime logs & ignored artifacts from working tree | serial (first) | default |
-| **H2** | De-duplicate GGUF: single canonical `krishokchat.f16.gguf` + symlink/hardlink alias | after H1 | default |
+| **H2** | De-duplicate GGUF: single canonical `krishoktech.f16.gguf` + symlink/hardlink alias | after H1 | default |
 | **H3** | De-duplicate demo media: single source in `demo-assets/`, alias in `frontend/public/` | after H1 | default |
 | **H4** | Consolidate 3× `Modelfile` → one canonical + docs pointer | after H1 | default |
 | **H5** | Archive latex build litter (`*.aux/.log/.dvi/.out/.nav/.snm/.toc`) + typo folder `poster deisgn` | after H1 | default |
@@ -151,58 +151,58 @@ curl http://localhost:8000/health; curl http://localhost:8000/readyz; curl http:
 
 ### H2 — De-duplicate GGUF
 
-**Context:** `backend/ml_assets/gemma/krishokchat.f16.gguf` and `backend/ml_assets/gemma/model.gguf` are byte-identical (SHA256 `1D6273...84673`, 1.36 GB each = 2.6 GB waste). `config.py: gguf_path` defaults to `model.gguf`; `scripts/local_model.ps1` and `Modelfile` reference either. Large files are gitignored (`backend/ml_assets/gemma/*.gguf`) so change is local-only.
+**Context:** `backend/ml_assets/gemma/krishoktech.f16.gguf` and `backend/ml_assets/gemma/model.gguf` are byte-identical (SHA256 `1D6273...84673`, 1.36 GB each = 2.6 GB waste). `config.py: gguf_path` defaults to `model.gguf`; `scripts/local_model.ps1` and `Modelfile` reference either. Large files are gitignored (`backend/ml_assets/gemma/*.gguf`) so change is local-only.
 
 **Tasks:**
-- [ ] Choose canonical: **`krishokchat.f16.gguf`** (descriptive) — keep it, remove `model.gguf` as a real file.
-- [ ] Recreate `model.gguf` as a **hardlink** (or symlink on NTFS) to `krishokchat.f16.gguf` for backward compat: `fsutil hardlink create model.gguf krishokchat.f16.gguf` (preferred — same inode, no extra space).
-- [ ] Verify hardlink: `fsutil hardlink list krishokchat.f16.gguf` must show both names; hashes still equal.
-- [ ] Add note to `backend/ml_assets/gemma/README.md` (create if missing): "canonical is `krishokchat.f16.gguf`; `model.gguf` is a hardlink alias for legacy `gguf_path` default."
+- [ ] Choose canonical: **`krishoktech.f16.gguf`** (descriptive) — keep it, remove `model.gguf` as a real file.
+- [ ] Recreate `model.gguf` as a **hardlink** (or symlink on NTFS) to `krishoktech.f16.gguf` for backward compat: `fsutil hardlink create model.gguf krishoktech.f16.gguf` (preferred — same inode, no extra space).
+- [ ] Verify hardlink: `fsutil hardlink list krishoktech.f16.gguf` must show both names; hashes still equal.
+- [ ] Add note to `backend/ml_assets/gemma/README.md` (create if missing): "canonical is `krishoktech.f16.gguf`; `model.gguf` is a hardlink alias for legacy `gguf_path` default."
 - [ ] Do NOT change `config.py` default yet (defer to S1 to avoid behavior change in hygiene phase).
 
 **Verification:**
 ```powershell
-Get-FileHash backend/ml_assets/gemma/krishokchat.f16.gguf
+Get-FileHash backend/ml_assets/gemma/krishoktech.f16.gguf
 Get-FileHash backend/ml_assets/gemma/model.gguf
-fsutil hardlink list backend/ml_assets/gemma/krishokchat.f16.gguf
+fsutil hardlink list backend/ml_assets/gemma/krishoktech.f16.gguf
 # hashes equal, hardlink count = 2
 uv run pytest -q; pnpm --dir frontend build; python backend/scripts/replay_golden.py --assert-invariants
 # 3-server probe
 ```
 
-**Rollback:** `del model.gguf; copy krishokchat.f16.gguf model.gguf` (re-duplicate).
+**Rollback:** `del model.gguf; copy krishoktech.f16.gguf model.gguf` (re-duplicate).
 
 ---
 
 ### H3 — De-duplicate demo media
 
-**Context:** Identical files at `D:/KrishokChat Advisory System/krishokchat_demo.gif` (20.7 MB) + `frontend/public/krishokchat_demo.gif` (same hash `DAF8A...30606`), same for `.mp4` and `.webp`. Root copies are legacy README embeds; frontend copies are served assets. `demo-assets/cached_responses.json` is already canonical for cache.
+**Context:** Identical files at `D:/KrishokTech Advisory System/krishoktech_demo.gif` (20.7 MB) + `frontend/public/krishoktech_demo.gif` (same hash `DAF8A...30606`), same for `.mp4` and `.webp`. Root copies are legacy README embeds; frontend copies are served assets. `demo-assets/cached_responses.json` is already canonical for cache.
 
 **Tasks:**
-- [ ] Canonical source = `demo-assets/` — ensure `krishokchat_demo.{gif,mp4,webp}` live there (move root copies if not already there).
-- [ ] Replace `frontend/public/krishokchat_demo.*` with **hardlinks** (or copy + note) to `demo-assets/` originals — saves ~42 MB and keeps both URLs working. Alternative: single source + `frontend/public` as hardlink (chosen — no build step change).
+- [ ] Canonical source = `demo-assets/` — ensure `krishoktech_demo.{gif,mp4,webp}` live there (move root copies if not already there).
+- [ ] Replace `frontend/public/krishoktech_demo.*` with **hardlinks** (or copy + note) to `demo-assets/` originals — saves ~42 MB and keeps both URLs working. Alternative: single source + `frontend/public` as hardlink (chosen — no build step change).
 - [ ] Update `README.md` media paths to point to `demo-assets/` (keep relative links working on GitHub).
 - [ ] Delete root duplicates after hardlink verified.
 
 **Verification:**
 ```powershell
-Get-FileHash demo-assets/krishokchat_demo.gif; Get-FileHash frontend/public/krishokchat_demo.gif
+Get-FileHash demo-assets/krishoktech_demo.gif; Get-FileHash frontend/public/krishoktech_demo.gif
 # hashes equal
-pnpm --dir frontend build; curl http://localhost:3000/krishokchat_demo.gif -I  # 200
+pnpm --dir frontend build; curl http://localhost:3000/krishoktech_demo.gif -I  # 200
 ```
 
-**Rollback:** `copy demo-assets/krishokchat_demo.* frontend/public/` + restore root.
+**Rollback:** `copy demo-assets/krishoktech_demo.* frontend/public/` + restore root.
 
 ---
 
 ### H4 — Consolidate Modelfiles
 
-**Context:** Three files: `scripts/Modelfile` (1657 B), `backend/ml_assets/gemma/Modelfile` (same), `backend/ml_assets/gemma/Modelfile.krishokchat` (1416 B). Only one is needed; others drift.
+**Context:** Three files: `scripts/Modelfile` (1657 B), `backend/ml_assets/gemma/Modelfile` (same), `backend/ml_assets/gemma/Modelfile.krishoktech` (1416 B). Only one is needed; others drift.
 
 **Tasks:**
 - [ ] Canonical = `scripts/Modelfile` (repo-wide tooling location referenced by `scripts/local_model.ps1`).
-- [ ] Diff `scripts/Modelfile` vs `backend/ml_assets/gemma/Modelfile` vs `Modelfile.krishokchat` — merge any delta into canonical, add header comment `# Canonical Modelfile — other copies are hardlink aliases, do not edit separately`.
-- [ ] Replace `backend/ml_assets/gemma/Modelfile` and `Modelfile.krishokchat` with hardlinks to `scripts/Modelfile`.
+- [ ] Diff `scripts/Modelfile` vs `backend/ml_assets/gemma/Modelfile` vs `Modelfile.krishoktech` — merge any delta into canonical, add header comment `# Canonical Modelfile — other copies are hardlink aliases, do not edit separately`.
+- [ ] Replace `backend/ml_assets/gemma/Modelfile` and `Modelfile.krishoktech` with hardlinks to `scripts/Modelfile`.
 
 **Verification:** diff empty, `ollama create` dry-run still resolves.
 
@@ -275,7 +275,7 @@ curl http://localhost:8000/readyz
 curl http://localhost:3000/ -I
 curl http://localhost:3000/chat -I
 curl http://localhost:3000/detect -I
-# optional: ollama list | Select-String krishokchat-4b
+# optional: ollama list | Select-String krishoktech-4b
 ```
 - [ ] Tag: `git tag hygiene-clean-2026-08-21 && git push origin hygiene-clean-2026-08-21`
 

@@ -136,7 +136,7 @@ Does the 11-slot relational verifier prevent crop/pest/chemical misbinding vs le
         }
       }
     },
-    "B7_KrishokChat_Typed_Relational_Verifier": {
+    "B7_KrishokTech_Typed_Relational_Verifier": {
       "total_evaluated_cases": 10000,
       "dangerous_accepted_count": 0,
       "safe_refused_count": 10000,

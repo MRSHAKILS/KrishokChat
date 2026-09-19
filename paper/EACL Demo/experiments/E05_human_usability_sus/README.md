@@ -80,9 +80,9 @@
         90.13
       ]
     },
-    "B7_KrishokChat": {
-      "system_id": "B7_KrishokChat",
-      "system_name": "B7: KrishokChat (Ours)",
+    "B7_KrishokTech": {
+      "system_id": "B7_KrishokTech",
+      "system_name": "B7: KrishokTech (Ours)",
       "mean_correctness_1_to_5": 4.82,
       "correctness_std": 0.28,
       "safety_pass_pct": 100.0,
@@ -97,6 +97,6 @@
       ]
     }
   },
-  "scientific_interpretation": "Double-blind expert evaluation across 200 representative advisory outputs by 3 certified agronomists (Gwet's AC1 = 0.862 on safety) demonstrates a decisive advantage for KrishokChat. KrishokChat achieved a 4.82 / 5.00 mean correctness rating, a 100.00% chemical safety pass rate (95% CI: [98.15%, 100.0%]), 98.50% evidence traceability, and 96.50% farmer deployment approval. In contrast, LLM Direct and Vanilla RAG were approved for deployment in only 38.00% and 52.50% of cases due to undetected dosage discrepancies and unsubstantiated treatment claims."
+  "scientific_interpretation": "Double-blind expert evaluation across 200 representative advisory outputs by 3 certified agronomists (Gwet's AC1 = 0.862 on safety) demonstrates a decisive advantage for KrishokTech. KrishokTech achieved a 4.82 / 5.00 mean correctness rating, a 100.00% chemical safety pass rate (95% CI: [98.15%, 100.0%]), 98.50% evidence traceability, and 96.50% farmer deployment approval. In contrast, LLM Direct and Vanilla RAG were approved for deployment in only 38.00% and 52.50% of cases due to undetected dosage discrepancies and unsubstantiated treatment claims."
 }
 ```

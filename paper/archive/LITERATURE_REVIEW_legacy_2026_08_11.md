@@ -1,4 +1,4 @@
-# Literature Review: KrishokChat Agricultural AI Advisory System
+# Literature Review: KrishokTech Agricultural AI Advisory System
 
 **Generated:** 2026-08-09
 **Scope:** RAG-vs-LLM decision architectures, agricultural advisory AI, ethical frameworks, user trust, production best practices
@@ -20,7 +20,7 @@
 - With a perfect RAG backend, ConfRAG achieves >95% accuracy. With real RAG, it matches always-RAG quality while reducing P50 latency by **>600ms** and unnecessary retrievals by **5–19%**.
 - The "dampening prompt" ("answer only if you are confident") is the critical design choice.
 
-**Implication for KrishokChat:** A Bangla-calibrated confidence signal on the generator (Gemini) could trigger retrieval only when needed. However, Gemini's confidence is not directly accessible via API — alternative: use consistency sampling (generate multiple times, measure agreement) as a proxy (see §1.3).
+**Implication for KrishokTech:** A Bangla-calibrated confidence signal on the generator (Gemini) could trigger retrieval only when needed. However, Gemini's confidence is not directly accessible via API — alternative: use consistency sampling (generate multiple times, measure agreement) as a proxy (see §1.3).
 
 ---
 
@@ -40,7 +40,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 - Self-RAG 7B outperforms ChatGPT, Llama2-chat, and standard RAG on open-domain QA, reasoning, and fact verification.
 - Adaptive retrieval via threshold on `Retrieve=Yes` probability enables test-time control over retrieval frequency.
 
-**Limitation for KrishokChat:** Requires fine-tuning the generator — not feasible with closed API models (Gemini). The reflection-token architecture is incompatible with black-box LLM APIs. Alternative: emulate with prompt-based self-critique (see §6.2).
+**Limitation for KrishokTech:** Requires fine-tuning the generator — not feasible with closed API models (Gemini). The reflection-token architecture is incompatible with black-box LLM APIs. Alternative: emulate with prompt-based self-critique (see §6.2).
 
 ---
 
@@ -62,7 +62,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key finding:** Eccentricity-based uncertainty detection reduces retrieval calls by **>50%** while slightly *improving* F1 (0.605 vs 0.552). Lightweight Jaccard similarity on token sets works nearly as well.
 
-**Implication for KrishokChat:** Consistency-sampling with 3 generations + Jaccard similarity is computationally feasible and API-compatible. Threshold can be tuned on a Bangla agricultural query dev set.
+**Implication for KrishokTech:** Consistency-sampling with 3 generations + Jaccard similarity is computationally feasible and API-compatible. Threshold can be tuned on a Bangla agricultural query dev set.
 
 ---
 
@@ -77,7 +77,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key finding:** Outperforms always-RAG and no-retrieval baselines across mixed-complexity query distributions. The classifier is a small LM (e.g., T5-based) trained on automatically labeled data from actual model predictions.
 
-**Implication for KrishokChat:** A lightweight Bangla query classifier (even keyword-based) can route: "আলুর দেলি ব্লাইট" (potato late blight) → retrieval (specific treatment needed); "কত তারিখে ধান রোপা করব" (when to transplant rice) → retrieval needed with seasonal context; "টমেটো কি" (what is tomato) → LLM-only sufficient.
+**Implication for KrishokTech:** A lightweight Bangla query classifier (even keyword-based) can route: "আলুর দেলি ব্লাইট" (potato late blight) → retrieval (specific treatment needed); "কত তারিখে ধান রোপা করব" (when to transplant rice) → retrieval needed with seasonal context; "টমেটো কি" (what is tomato) → LLM-only sufficient.
 
 ---
 
@@ -92,7 +92,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 - Outperforms FLARE, DRAGIN, and Self-RAG on complex QA (HotpotQA, MuSiQue).
 - Tuning-free — works without fine-tuning.
 
-**Limitation for KrishokChat:** Requires white-box access to model hidden states — not available via Gemini API. Relevant as architectural aspiration for future self-hosted model.
+**Limitation for KrishokTech:** Requires white-box access to model hidden states — not available via Gemini API. Relevant as architectural aspiration for future self-hosted model.
 
 ---
 
@@ -107,7 +107,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 - Certainty-based KBM: reduces retrievals by 13.5% with slight performance gain.
 - Pearson correlation between accuracy and certainty: 0.64.
 
-**Implication for KrishokChat:** A certainty-based classifier trained on Bangla query consistency can serve as the routing gate. The training data can be auto-generated: run Gemini on labeled Bangla queries multiple times, measure agreement, label as "known" (high agreement, correct) vs "unknown" (disagreement or wrong).
+**Implication for KrishokTech:** A certainty-based classifier trained on Bangla query consistency can serve as the routing gate. The training data can be auto-generated: run Gemini on labeled Bangla queries multiple times, measure agreement, label as "known" (high agreement, correct) vs "unknown" (disagreement or wrong).
 
 ---
 
@@ -124,7 +124,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key production insight:** The confidence check at step 5 is the critical safety layer. Fin does NOT fall back to ungrounded generation — it escalates. Retrieval precision improved 30 points through domain-specific fine-tuning on hard positives/negatives from production logs.
 
-**Implication for KrishokChat:** (a) A validation gate after generation is essential; (b) domain-adapted retrieval matters more than generation model upgrades; (c) escalation path (human/helpline) is the correct behavior when confidence is low.
+**Implication for KrishokTech:** (a) A validation gate after generation is essential; (b) domain-adapted retrieval matters more than generation model upgrades; (c) escalation path (human/helpline) is the correct behavior when confidence is low.
 
 ---
 
@@ -136,7 +136,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key insight:** "Reasoning could not be left solely to the LLM; the RAG system needed to guide the reasoning process." Rich context enables intent inference rather than guessing.
 
-**Implication for KrishokChat:** The agentic pipeline architecture (safety → retrieval → generation → verifier) with self-reflection aligns with Glean's proven production pattern.
+**Implication for KrishokTech:** The agentic pipeline architecture (safety → retrieval → generation → verifier) with self-reflection aligns with Glean's proven production pattern.
 
 ---
 
@@ -154,7 +154,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key finding:** At matched-accuracy, the method skips retrieval for ~1/3 of TriviaQA queries while staying within 1.5 points of always-RAG accuracy. For low-headroom datasets (NQ, MS MARCO), it correctly chooses near-always retrieval.
 
-**Implication for KrishokChat:** This is the most operationally complete decision framework. The 4-way decision (LLM-only / compact / full / abstain) maps directly to KrishokChat's response modes. Calibration is essential — raw log-probabilities are miscalibrated.
+**Implication for KrishokTech:** This is the most operationally complete decision framework. The 4-way decision (LLM-only / compact / full / abstain) maps directly to KrishokTech's response modes. Calibration is essential — raw log-probabilities are miscalibrated.
 
 ---
 
@@ -178,7 +178,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key insight:** "Citations make claims checkable, not correct." Even the best retrieval-first system hallucinates. Grounding reduces but does not eliminate fabrication.
 
-**Implication for KrishokChat:** Citation-level transparency is essential. When the KB has partial info, the system should cite what it has and explicitly flag the gap. "According to [KB-node-47], late blight is caused by *Phytophthora infestans*. The specific dosage for your variety is not in my knowledge base — consult Krishi Call Center 16123 for local recommendations."
+**Implication for KrishokTech:** Citation-level transparency is essential. When the KB has partial info, the system should cite what it has and explicitly flag the gap. "According to [KB-node-47], late blight is caused by *Phytophthora infestans*. The specific dosage for your variety is not in my knowledge base — consult Krishi Call Center 16123 for local recommendations."
 
 ---
 
@@ -190,7 +190,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key feature:** "Allow ungrounded responses" setting loosens citation restriction — explicitly configurable. Default is grounded-only.
 
-**Implication for KrishokChat:** The configurable grounding strictness is a useful design pattern. KrishokChat should default to "grounded only" with explicit ungrounded flags when the LLM fills gaps.
+**Implication for KrishokTech:** The configurable grounding strictness is a useful design pattern. KrishokTech should default to "grounded only" with explicit ungrounded flags when the LLM fills gaps.
 
 ---
 
@@ -202,7 +202,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key finding:** More concise citations than document-level attribution, with maintained or improved generation quality and attribution accuracy. Significantly reduces human verification time.
 
-**Implication for KrishokChat:** Attribution granularity matters. Citing specific KB nodes (not just "the knowledge base") enables verification and builds trust. Each claim should trace to a specific retrieved passage.
+**Implication for KrishokTech:** Attribution granularity matters. Citing specific KB nodes (not just "the knowledge base") enables verification and builds trust. Each claim should trace to a specific retrieved passage.
 
 ---
 
@@ -217,7 +217,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Post-hoc verification:** Decompose answer into atomic claims; check each claim's cited source for entailment. RAGAS, TruLens, DeepEval implement variants. Faithfulness = fraction of claims entailed by cited source.
 
-**Implication for KrishokChat:** The prompt architecture for generation must include (a) explicit source-only instruction, (b) tagged KB nodes with IDs, (c) per-claim citation enforcement, (d) a verifier pass that checks entailment.
+**Implication for KrishokTech:** The prompt architecture for generation must include (a) explicit source-only instruction, (b) tagged KB nodes with IDs, (c) per-claim citation enforcement, (d) a verifier pass that checks entailment.
 
 ---
 
@@ -242,7 +242,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **GAIA Project Phase II (2025-2027):** IFPRI-led. Three objectives: (1) expand content + data governance framework + GenAI ethics toolkit, (2) integrate real-time data + predictive analytics + multimodal, (3) establish evaluation/benchmarking for LLM performance in agricultural extension (accuracy, timeliness, gender-sensitivity, contextualization).
 
-**Implication for KrishokChat:** Farmer.Chat is the closest architectural analog. The finding that **complete information drives 38 percentage points of confidence** (86% vs 48%) is the strongest evidence for building a robust "I don't know + redirect" mode rather than a hallucinated answer. The 65% action-match rate shows room for improvement — verification matters.
+**Implication for KrishokTech:** Farmer.Chat is the closest architectural analog. The finding that **complete information drives 38 percentage points of confidence** (86% vs 48%) is the strongest evidence for building a robust "I don't know + redirect" mode rather than a hallucinated answer. The 65% action-match rate shows room for improvement — verification matters.
 
 ---
 
@@ -261,7 +261,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key insight:** Technology is positioned as **aid, not authority**. Farmers maintain decision-making autonomy. Trust is high for diagnostic function but the system explicitly defers to human judgment for treatment decisions.
 
-**Implication for KrishokChat:** Position KrishokChat as decision-support, not decision-maker. Explicitly state "this is general guidance; for your specific field conditions, consult local extension." The Krishi Call Center 16123 redirect is exactly this deferral mechanism.
+**Implication for KrishokTech:** Position KrishokTech as decision-support, not decision-maker. Explicitly state "this is general guidance; for your specific field conditions, consult local extension." The Krishi Call Center 16123 redirect is exactly this deferral mechanism.
 
 ---
 
@@ -287,7 +287,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key design principle:** "Operate with minimal digital infrastructure, requires only basic connectivity and local data inputs."
 
-**Implication for KrishokChat:** The multi-channel delivery (WhatsApp, SMS) and minimal-infrastructure design is directly applicable for Bangladesh. The rule-based + AI hybrid engine is a pragmatic architecture when LLM reliability is imperfect.
+**Implication for KrishokTech:** The multi-channel delivery (WhatsApp, SMS) and minimal-infrastructure design is directly applicable for Bangladesh. The rule-based + AI hybrid engine is a pragmatic architecture when LLM reliability is imperfect.
 
 ---
 
@@ -301,7 +301,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Satisfaction data:** Puneeth et al. (2024) report farmer satisfaction with KCC advisories, but also document that AI-generated advisories often lack cultural fit, gender inclusivity, and localized examples. Farmers skeptical of source credibility via digital channels. Trust in AI advisories remains low; farmers prefer extension officers or local radio.
 
-**Implication for KrishokChat:** The KCC experience confirms: (a) SMS/WhatsApp delivery is viable at scale, (b) local language + cultural adaptation is non-negotiable, (c) trust requires credible source attribution, (d) the 16123 helpline is the established trusted channel KrishokChat should defer to.
+**Implication for KrishokTech:** The KCC experience confirms: (a) SMS/WhatsApp delivery is viable at scale, (b) local language + cultural adaptation is non-negotiable, (c) trust requires credible source attribution, (d) the 16123 helpline is the established trusted channel KrishokTech should defer to.
 
 ---
 
@@ -330,7 +330,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **User study (N=181):** Participants shown LLM predictions + uncertainty estimates. With calibrated uncertainty, participants modulated reliance correctly (agreed when confident, disagreed when uncertain). With random confidence, participants ignored the signal.
 
-**Implication for KrishokChat:** If KrishokChat communicates confidence to farmers (e.g., color-coded trust indicators), the confidence must be calibrated — not random. An uncalibrated confidence indicator is worse than no indicator.
+**Implication for KrishokTech:** If KrishokTech communicates confidence to farmers (e.g., color-coded trust indicators), the confidence must be calibrated — not random. An uncalibrated confidence indicator is worse than no indicator.
 
 ---
 
@@ -349,7 +349,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 3. Provide clear paths to withhold judgment / request evidence / ask for clarification
 4. Verify users can disregard or reverse AI output
 
-**Implication for KrishokChat:** This is the ethical core of the system. For crop-disease treatment queries: (a) never present a specific dosage without KB grounding, (b) confidence must be calibrated per consequence class, (c) the "I don't know — call 16123" path must be always available and easy to use.
+**Implication for KrishokTech:** This is the ethical core of the system. For crop-disease treatment queries: (a) never present a specific dosage without KB grounding, (b) confidence must be calibrated per consequence class, (c) the "I don't know — call 16123" path must be always available and easy to use.
 
 ---
 
@@ -364,7 +364,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 - **The fix is one line:** "If you don't have enough information to answer, say so." With the line: 92% correct behavior. Without: 76%.
 - Safety evaluations predict deployment behavior for properly-trained models (0pp divergence between eval and deploy framings).
 
-**Implication for KrishokChat:** The system prompt MUST contain an explicit "say I don't know" instruction. This is not optional — omitting it measurably degrades refusal behavior. The system prompt should explicitly state: "If the knowledge base does not contain the answer, say so and redirect to Krishi Call Center 16123."
+**Implication for KrishokTech:** The system prompt MUST contain an explicit "say I don't know" instruction. This is not optional — omitting it measurably degrades refusal behavior. The system prompt should explicitly state: "If the knowledge base does not contain the answer, say so and redirect to Krishi Call Center 16123."
 
 ---
 
@@ -377,7 +377,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 - **Medicolegal standard of reasonableness:** Decisions are reasonable if they draw from totality of evidence, contextualized to the situation. AI output is one input, not the sole source.
 - **Learned intermediary doctrine:** Clinicians using AI assume liability. The AI is an aid, not the decision-maker.
 
-**Implication for KrishokChat:** The system is a learned intermediary tool. The farmer (and by extension, any extension worker using the tool) bears responsibility. The system must: (a) present AI output as one input among many, (b) flag uncertainty explicitly, (c) maintain an audit trail (query → classification → action → timestamp), (d) never present AI output as definitive advice for high-consequence decisions (pesticide dosages, treatment amounts).
+**Implication for KrishokTech:** The system is a learned intermediary tool. The farmer (and by extension, any extension worker using the tool) bears responsibility. The system must: (a) present AI output as one input among many, (b) flag uncertainty explicitly, (c) maintain an audit trail (query → classification → action → timestamp), (d) never present AI output as definitive advice for high-consequence decisions (pesticide dosages, treatment amounts).
 
 ---
 
@@ -391,7 +391,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 - Accuracy and robustness appropriate to the intended purpose
 - Transparency about capabilities and limitations
 
-**Implication for KrishokChat:** While KrishokChat is not an EU-regulated system, Article 14 provides a best-practice checklist. The safety agent + verifier agent architecture satisfies the "human oversight" and "override" requirements by design.
+**Implication for KrishokTech:** While KrishokTech is not an EU-regulated system, Article 14 provides a best-practice checklist. The safety agent + verifier agent architecture satisfies the "human oversight" and "override" requirements by design.
 
 ---
 
@@ -407,7 +407,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 - **Intervention that works:** Providing uncertainty language linked to internal confidence (low: "I am not sure"; medium: "I am somewhat sure"; high: "I am sure") strongly influenced human confidence in the right direction.
 - **Dangerous confound:** Longer explanations increase user confidence even when accuracy is unchanged.
 
-**Implication for KrishokChat:** (a) Do not use verbose Bangla explanations as a trust signal — length correlates with confidence but not accuracy. (b) Explicit uncertainty phrasing in Bangla ("আমি নিশ্চিত নই" / "আমি মোটামুটি নিশ্চিত" / "আমি পুরো নিশ্চিত") should be used. (c) The default assumption must be that farmers will over-trust the system — the architecture must compensate.
+**Implication for KrishokTech:** (a) Do not use verbose Bangla explanations as a trust signal — length correlates with confidence but not accuracy. (b) Explicit uncertainty phrasing in Bangla ("আমি নিশ্চিত নই" / "আমি মোটামুটি নিশ্চিত" / "আমি পুরো নিশ্চিত") should be used. (c) The default assumption must be that farmers will over-trust the system — the architecture must compensate.
 
 ---
 
@@ -424,7 +424,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Four trust categories:** Cost, knowledge, security, confidence. Confidence = "I still need to field check the recommendations."
 
-**Implication for KrishokChat:** Trust is built through local intermediaries (extension officers, NGOs), not directly. The system should be positioned as a tool *for* extension workers, not a replacement. Field-checking (verification against reality) should be explicitly encouraged in the UI.
+**Implication for KrishokTech:** Trust is built through local intermediaries (extension officers, NGOs), not directly. The system should be positioned as a tool *for* extension workers, not a replacement. Field-checking (verification against reality) should be explicitly encouraged in the UI.
 
 ---
 
@@ -438,7 +438,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 - **Gender gap:** Women report higher trust and satisfaction (NPS 75 vs 57)
 - **Comprehension barrier:** 71% of those who understood "some/none" of the info did not apply it vs 51% of those who understood "all/most"
 
-**Implication for KrishokChat:** (a) Simpler Bangla + voice output addresses the comprehension barrier directly. (b) Trust is achievable but fragile — one bad experience with wrong advice can destroy it. (c) Female farmers may be a particularly responsive demographic in Bangladesh.
+**Implication for KrishokTech:** (a) Simpler Bangla + voice output addresses the comprehension barrier directly. (b) Trust is achievable but fragile — one bad experience with wrong advice can destroy it. (c) Female farmers may be a particularly responsive demographic in Bangladesh.
 
 ---
 
@@ -453,7 +453,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Risk factors for overreliance:** Low AI literacy, lack of domain expertise, low task familiarity, high overall trust in AI.
 
-**Implication for KrishokChat:** Bangladeshi farmers are high-risk for overreliance (low AI literacy, high trust). The system must: (a) explicitly state its limitations upfront, (b) show confidence/trust indicators, (c) make verification easy (show sources, cite KB nodes, provide 16123 for confirmation).
+**Implication for KrishokTech:** Bangladeshi farmers are high-risk for overreliance (low AI literacy, high trust). The system must: (a) explicitly state its limitations upfront, (b) show confidence/trust indicators, (c) make verification easy (show sources, cite KB nodes, provide 16123 for confirmation).
 
 ---
 
@@ -492,7 +492,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 2. Cross-encoder reranking: top-5 (full query-document interaction, 10-100× slower but more accurate)
 3. Reciprocal Rank Fusion (RRF) merges sparse + dense ranked lists (k=60 standard)
 
-**Implication for KrishokChat:** The existing BM25 + dense retrieval setup is correct. Adding a reranker (even a lightweight cross-encoder) would improve the top-K precision for generation. For 2,133 nodes, a reranker adds minimal latency.
+**Implication for KrishokTech:** The existing BM25 + dense retrieval setup is correct. Adding a reranker (even a lightweight cross-encoder) would improve the top-K precision for generation. For 2,133 nodes, a reranker adds minimal latency.
 
 ---
 
@@ -502,7 +502,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Finding:** Retrieval fusion (multi-query + RRF) increases raw recall but gains are **neutralized after re-ranking and truncation** in production. Hit@10 decreased from 0.51 to 0.48 in several fusion configurations vs single-query baseline. Fusion added **0.89s overhead** with no downstream benefit.
 
-**Implication for KrishokChat:** Do NOT add multi-query fusion as default. The added latency and complexity do not justify the marginal (or negative) quality improvement. Optimize the single-query pipeline first.
+**Implication for KrishokTech:** Do NOT add multi-query fusion as default. The added latency and complexity do not justify the marginal (or negative) quality improvement. Optimize the single-query pipeline first.
 
 ---
 
@@ -520,7 +520,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Cost management:** Use a smaller model (7B-class) for query rewriting than for generation. ElevenLabs: switching from externally-hosted LLM to self-hosted Qwen 3-4B/30B dropped rewrite latency from 326ms → 155ms.
 
-**Implication for KrishokChat:** A lightweight Bangla query reformulator (even a prompted smaller model) that converts farmer dialect queries into canonical KB-aligned queries would be the highest-ROI retrieval improvement. "আলুর দেরি ব্লাইটের প্রতিকার" → "আলুর দেরি ব্লাইট (Potato Late Blight) রোগের প্রতিকার ও ব্যবস্থাপনা."
+**Implication for KrishokTech:** A lightweight Bangla query reformulator (even a prompted smaller model) that converts farmer dialect queries into canonical KB-aligned queries would be the highest-ROI retrieval improvement. "আলুর দেরি ব্লাইটের প্রতিকার" → "আলুর দেরি ব্লাইট (Potato Late Blight) রোগের প্রতিকার ও ব্যবস্থাপনা."
 
 ---
 
@@ -533,7 +533,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 - **Incorrect:** Discard, fall back to web search
 - **Ambiguous:** Combine internal + external knowledge
 
-**Implication for KrishokChat:** The verifier agent already performs this function. CRAG validates the architectural pattern: evaluate retrieval quality before generation, and have corrective actions (re-retrieve, escalate, or synthesize).
+**Implication for KrishokTech:** The verifier agent already performs this function. CRAG validates the architectural pattern: evaluate retrieval quality before generation, and have corrective actions (re-retrieve, escalate, or synthesize).
 
 ---
 
@@ -545,7 +545,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **Key finding:** Improves InstructRAG accuracy by **5.8%** on Qwen-2.5-14B as a plug-in module, without architectural changes.
 
-**Implication for KrishokChat:** The verifier agent is the lightweight version of this critique loop. Training a dedicated Bangla agricultural critic model is overkill for a 7-day prototype, but the pattern (generate → critique → revise) is correct.
+**Implication for KrishokTech:** The verifier agent is the lightweight version of this critique loop. Training a dedicated Bangla agricultural critic model is overkill for a 7-day prototype, but the pattern (generate → critique → revise) is correct.
 
 ---
 
@@ -563,7 +563,7 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 **RagChecker** (arXiv:2408.08067): Separates retriever failures (claim recall, context precision) from generator failures (context utilization, noise sensitivity, hallucination rate). Surgical debugging tool.
 
-**Implication for KrishokChat:** Integrate RAGAS-style faithfulness scoring into the verifier agent. Track faithfulness as the primary quality metric.
+**Implication for KrishokTech:** Integrate RAGAS-style faithfulness scoring into the verifier agent. Track faithfulness as the primary quality metric.
 
 ---
 
@@ -586,11 +586,11 @@ At inference, segment-level beam search scores candidate continuations using wei
 
 ---
 
-## 7. Synthesis: Recommended Architecture for KrishokChat
+## 7. Synthesis: Recommended Architecture for KrishokTech
 
 ### 7.1 Decision Framework — The Four-Way Gate
 
-Based on the literature, KrishokChat should implement a **calibrated four-way decision** for each query:
+Based on the literature, KrishokTech should implement a **calibrated four-way decision** for each query:
 
 ```
 Query
@@ -691,7 +691,7 @@ The existing 4-agent pipeline (Safety → Retrieval → Generation → Verifier)
 - Self-RAG's reflection token architecture (emulated via prompting)
 - CRAG's corrective retrieval pattern
 
-**The differentiator for KrishokChat:** Domain-specific safety classification + agricultural knowledge-boundary awareness + calibrated refusal for critical decisions. This combination is not present in any competitor system reviewed.
+**The differentiator for KrishokTech:** Domain-specific safety classification + agricultural knowledge-boundary awareness + calibrated refusal for critical decisions. This combination is not present in any competitor system reviewed.
 
 ### 7.8 Audit Trail — Production Requirement
 
@@ -755,7 +755,7 @@ This log powers: (a) the safety metrics panel on the demo/poster, (b) calibratio
 
 ---
 
-## 9. Open Research Questions for KrishokChat
+## 9. Open Research Questions for KrishokTech
 
 1. **Bangla calibration:** Can a small calibration set (~100 Bangla agri queries) produce well-calibrated confidence estimates for Gemini API, or does calibration require model fine-tuning?
 

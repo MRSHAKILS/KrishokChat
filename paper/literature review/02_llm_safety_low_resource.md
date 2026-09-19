@@ -31,12 +31,12 @@
 - **LitmusEvals** (2026, litmusevals.org): the instruction "never say you don't know" causes catastrophic collapse in 8/11 models (**26-point cliff**); omitting the escape hatch produces **−15.6 pp degradation** in correct refusal; with the explicit line: 92% correct behavior vs 76% without.
 - **Do RALMs Know When They Don't Know?** (arXiv:2509.01476, AAAI 2026): irrelevant retrieved contexts cause **over-refusal** on answerable queries; two-stage uncertainty + context-utility signal balances refusal vs accuracy — "decide before you retrieve" is a published, validated pattern.
 - **Confidence-Based Response Abstinence** (arXiv:2510.13750, UncertaiNLP@EMNLP 2025): production financial RAG; abstains 29.9% of responses at precision 0.95 — abstention as a first-order feature with latency constraints.
-- **Energy-Based Abstention for Healthcare RAG** (arXiv:2509.04482): AUROC 0.961 on hard near-distribution abstention; two abstention classes (out-of-domain vs near-domain) — formalizes KrishokChat's `banned_or_restricted_chemical` vs `off_topic` as distinct abstention classes.
+- **Energy-Based Abstention for Healthcare RAG** (arXiv:2509.04482): AUROC 0.961 on hard near-distribution abstention; two abstention classes (out-of-domain vs near-domain) — formalizes KrishokTech's `banned_or_restricted_chemical` vs `off_topic` as distinct abstention classes.
 
 ### 1.4 Prompt injection defense (2025–2026)
 
 - Field state: detection-vs-mitigation split; safety classifier robustness against injection in RAG/agent pipelines is an open evaluation problem (no Bengali agricultural injection benchmark exists).
-- KrishokChat's own design (pre-retrieval terminal category, regex precheck + JSON classification; poisoned-context attacks impossible because context never reaches the generator for terminal classes) is ahead of every competitor reviewed in `11_RESEARCH_GAPS_competitive_matrix.md` Gap 2 (taxonomy containment: all five competitor decision vocabularies have zero intersection with the six KrishokChat classes).
+- KrishokTech's own design (pre-retrieval terminal category, regex precheck + JSON classification; poisoned-context attacks impossible because context never reaches the generator for terminal classes) is ahead of every competitor reviewed in `11_RESEARCH_GAPS_competitive_matrix.md` Gap 2 (taxonomy containment: all five competitor decision vocabularies have zero intersection with the six KrishokTech classes).
 
 ### 1.5 Domain-specific safety (agrochemical, self-harm, helpline patterns)
 
@@ -49,12 +49,12 @@
 - **Orthography changes safety behavior.** IndicJR: romanized/mixed orthography drops jailbreak success rate from 0.755 to 0.416 (Δ −0.34). Bengali farmers type Banglish/romanized — a separate attack surface with no dedicated benchmark.
 - **Dialectal safety is entirely unpublished.** Sylheti, Chittagong, Rangpur, Noakhali, Barishal, Mymensingh forms of the *same harmful or benign intent* have no published evaluation anywhere. Not in IndicSafe, not in LinguaSafe, not in any refusal benchmark.
 - **Refusal is an engineered, measurable capability** — RefusalBench's <50% multi-doc accuracy for frontier models means "selective refusal must be built and measured, not assumed."
-- **The "I don't know" line is load-bearing**: LitmusEvals' 92% vs 76% split is the quantitative case for KrishokChat's explicit system-prompt instruction.
+- **The "I don't know" line is load-bearing**: LitmusEvals' 92% vs 76% split is the quantitative case for KrishokTech's explicit system-prompt instruction.
 
 ## 3. Research gaps
 
 1. **No multi-dialect safety/refusal dataset for Bangla.** The team's 20,112-record, 6-dialect dataset is a first mover; the field's own data (IndicSafe 12.8% agreement; IndicJR −0.34 orthography shift) provides the quantified problem statement.
-2. **No agricultural-domain Bengali safety benchmark.** AgriEval is Chinese; agricultural safety scoring exists only as three-axis rubrics (IPM-AgriGPT: professionalism/safety/effectiveness) in Chinese; Bayer's E.L.Y. benchmark is English crop-protection. The banned-agrochemical + self-harm/poisoning categories KrishokChat classifies do not exist in any published taxonomy.
+2. **No agricultural-domain Bengali safety benchmark.** AgriEval is Chinese; agricultural safety scoring exists only as three-axis rubrics (IPM-AgriGPT: professionalism/safety/effectiveness) in Chinese; Bayer's E.L.Y. benchmark is English crop-protection. The banned-agrochemical + self-harm/poisoning categories KrishokTech classifies do not exist in any published taxonomy.
 3. **No helpline-escalation evaluation.** Nobody measures whether AI-system referrals to national helplines (16123) are followed, recalled, or acted on (see Cluster 9).
 4. **LLM-as-judge is documented as unreliable for Bengali** (Pariksha: lowest human–judge agreement for Bengali/Odia; multilingual judge κ≈0.3; JuICE best judge F1 0.52) — any safety evaluation must use native human validation with agreement statistics.
 
@@ -65,7 +65,7 @@
 - CC-BY-4.0 dominates dataset licensing; HF + GitHub release with a referenced dictionary/map file.
 - Safety evaluations must state oversensitivity separately from under-sensitivity (LinguaSafe convention).
 
-## 5. Positioning recommendations for KrishokChat
+## 5. Positioning recommendations for KrishokTech
 
 1. Position the safety dataset as **the first multi-dialect (6 varieties, 110-word genuine map) refusal/safety resource for Bangla**, opening with IndicSafe's 12.8% cross-language agreement and IndicJR's Δ −0.34 orthography result as the quantified problem statement.
 2. Present the 6-way taxonomy's enrichment claims with the taxonomy-containment argument (formalized in `11_RESEARCH_GAPS_competitive_matrix.md` Gap 2): no published guardrail or RAG-gating vocabulary contains banned-agrochemical/poisoning terminal classes.

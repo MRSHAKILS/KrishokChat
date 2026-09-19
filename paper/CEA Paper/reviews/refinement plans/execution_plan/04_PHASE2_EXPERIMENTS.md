@@ -251,7 +251,7 @@ READ lines 36-85 (the existing `BASE_FACT_TEMPLATES` list) to understand the exa
 
 ### RUN the script:
 ```powershell
-cd "D:\KrishokChat Advisory System"
+cd "D:\KrishokTech Advisory System"
 python "paper\CEA Paper\experiments\E28_metamorphic_authority_testing\scripts\run_e28_metamorphic_eval.py"
 ```
 

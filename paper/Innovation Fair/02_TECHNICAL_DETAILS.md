@@ -1,13 +1,13 @@
 # Bangladesh Innovation Fair 2026 — Technical Details Field
 
-**Project Name:** KrishokChat — Bengali Agricultural Intelligence for Farmers, Extension and Rural Communities  
+**Project Name:** KrishokTech — Bengali Agricultural Intelligence for Farmers, Extension and Rural Communities  
 **Portal Field:** Technical Details (Key components, design, programming languages, materials, tools & equipment)
 
 ---
 
 ### Technical Specification
 
-KrishokChat is implemented as a modular, production-oriented agricultural advisory platform built on a clean architectural separation of concerns (Application, Domain, Ports/Protocols, and Infrastructure layers). This architecture ensures that core agronomic logic and safety contracts remain immutable, while underlying ML models, retrieval backends, and external telecom gateways can be seamlessly upgraded or swapped.
+KrishokTech is implemented as a modular, production-oriented agricultural advisory platform built on a clean architectural separation of concerns (Application, Domain, Ports/Protocols, and Infrastructure layers). This architecture ensures that core agronomic logic and safety contracts remain immutable, while underlying ML models, retrieval backends, and external telecom gateways can be seamlessly upgraded or swapped.
 
 #### 1. Core Architecture & Languages
 * **Frontend:** Next.js 16 (React 19, TypeScript, Tailwind CSS, Motion animations, shadcn/ui components). Implements an offline-capable Progressive Web Application (PWA) with Service Worker precaching of knowledge packs.

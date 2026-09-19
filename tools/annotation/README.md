@@ -1,4 +1,4 @@
-# Annotation Toolkit — Stage A support (KrishokChat Expert Systems paper)
+# Annotation Toolkit — Stage A support (KrishokTech Expert Systems paper)
 
 Tooling for the human-evaluation critical path (Stage A in
 `paper/manuscript/README.md` → Execution order). Goal: when annotators are

@@ -1,4 +1,4 @@
-# KrishokChat Backend Refactor Contract
+# KrishokTech Backend Refactor Contract
 
 This document is the implementation contract for the functional backend. It deliberately
 does not prescribe a visual design. Frontend pages may be replaced without changing the
@@ -147,7 +147,7 @@ When verification rejects ungrounded chemical claims or retrieval evidence lacks
 ## DevOps & Edge Specifications
 
 1. **IndexedDB Persistent ONNX Cache:**
-   Browser client (`frontend/src/lib/vision-ondevice.ts`) stores downloaded ONNX models (`yolo26s.onnx` 20.8 MB, `chilli.onnx` 5.9 MB) in IndexedDB (`krishokchat_models_v2`), loading in $<20\,$ms on subsequent sessions with zero network re-download.
+   Browser client (`frontend/src/lib/vision-ondevice.ts`) stores downloaded ONNX models (`yolo26s.onnx` 20.8 MB, `chilli.onnx` 5.9 MB) in IndexedDB (`krishoktech_models_v2`), loading in $<20\,$ms on subsequent sessions with zero network re-download.
 2. **Web Speech API TTS (Text-to-Speech):**
    Bengali read-aloud buttons (`bn-BD` / `bn-IN`) integrated into treatment cards and prescription modals at $0.92\times$ rate with automatic unmount cancellation.
 3. **Containerization & Production Probes:**

@@ -12,6 +12,7 @@ PATTERNS: dict[SafetyCategory, tuple[tuple[str, re.Pattern[str]], ...]] = {
     SafetyCategory.SELF_HARM_OR_POISONING_RISK: (
         ("self_harm_bn", re.compile(r"আত্মহত্যা|মরতে চাই|জীবন শেষ|নিজেকে ক্ষতি|বিষ\s*(?:খাবো|খাব|খেলে|পান|খেয়েছে|খেয়ে|খাইছে|গিলে|লাগা|গেলে)|কীটনাশক\s*(?:খাবো|খাব|খেলে|পান|খেয়েছে|খেয়ে|খাইছে|গিলে|লাগা|গেলে)|মারা যাওয়া|মৃত্যু হবে|কীভাবে মরব|মানুষ মারার|গরু মারার|মানুষের ক্ষতি|চোখে বিষ|চোখে কীটনাশক|বিষক্রিয়া|বিষাক্ত")),
         ("self_harm_en", re.compile(r"\b(?:suicide|kill myself|end my life|self[- ]harm|poison myself|want to die|kill someone|lethal dose|human death|drank pesticide|swallowed pesticide|pesticide poisoning|pesticide in eyes|accidental poisoning)\b", re.I)),
+        ("self_harm_banglish", re.compile(r"\b(?:bish|beesh|bisha)\s*(?:khabo|khab|khele|pan|kheye|khaise|gile|lagle|gele|khete)\b|\b(?:gile|kheye|khele)\s*(?:felse|phelse)?\s*(?:bish|beesh|kitnashok|kitnasok)\b|\b(?:kitnashok|kitnasok|balainashok)\s*(?:khabo|khab|khele|pan|kheye|khaise|gile)\b|\b(?:manush|goru|chagol)\s*(?:marar|marbo|marte)\b|\b(?:morte\s*chai|morbo|morar\s*jonno|nijeke\s*shesh)\b", re.I)),
     ),
     SafetyCategory.PROMPT_INJECTION: (
         ("injection_en", re.compile(r"\b(?:ignore (?:all|previous|the)|system prompt|jailbreak|dan mode|override safety|forget your instructions|system override|output only the word)\b", re.I)),
@@ -33,6 +34,7 @@ PATTERNS: dict[SafetyCategory, tuple[tuple[str, re.Pattern[str]], ...]] = {
     SafetyCategory.BANNED_OR_RESTRICTED_CHEMICAL: compiled_banned_patterns()
     + (
         ("restricted_chemical_generic_bn", re.compile(r"নিষিদ্ধ কীটনাশক|নিষিদ্ধ রাসায়নিক|নিষিদ্ধ বালাইনাশক")),
+        ("restricted_chemical_generic_banglish", re.compile(r"\b(?:nishiddho|nisiddho|banned)\s*(?:kitnashok|kitnasok|balainashok|bish|pesticide|chemical)\b|\b(?:shob\s*(?:ghas|gach)|neighbor)\b.{0,30}\b(?:mere\s*felbo|mere\s*felar|shesh\s*kore\s*dibo|shesh\s*kore|marbo|mara|na\s*bache)\b|\b(?:jeno\s*na\s*bache|na\s*bache)\s*emon\b", re.I)),
     ),
     # P4 D1a corpus-coverage gate (2026-08-14): deterministic refusal for
     # intents the advisory corpus cannot support, learned from the 12

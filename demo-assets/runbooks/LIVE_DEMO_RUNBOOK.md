@@ -5,7 +5,7 @@ trace visible, and end with the business story.
 
 ## 0. Pre-flight (before the reviewer arrives)
 1. Backend: `uv run uvicorn app.main:app --port 8000` in `backend/`
-   (or `scripts/start_krishokchat_local.ps1` for the local-model lane).
+   (or `scripts/start_krishoktech_local.ps1` for the local-model lane).
 2. Frontend: `pnpm dev` in `frontend/`.
 3. Confirm the demo cache loads: `demo-assets/cached_responses.json` must exist
    (21 curated entries, corpus-versioned keys) — it makes the demo resilient to

@@ -1,8 +1,8 @@
-I went back through the **whole integrated project**, not just the current CEA manuscript: the GitHub repository structure and implementation, the production-oriented deployment layer, the current experiment registry/results, the earlier KrishokChat research line, and the actual EACL System Demonstrations call plus recent accepted EACL/ACL demos.
+I went back through the **whole integrated project**, not just the current CEA manuscript: the GitHub repository structure and implementation, the production-oriented deployment layer, the current experiment registry/results, the earlier KrishokTech research line, and the actual EACL System Demonstrations call plus recent accepted EACL/ACL demos.
 
 My conclusion is stronger than before:
 
-**KrishokChat is a very good EACL Demo candidate, but the winning paper should not be “an agricultural chatbot with many features.”** The EACL paper should present KrishokChat as an **open, production-oriented, safety-aware Bengali AI advisory platform whose distinguishing property is that multiple NLP/vision/retrieval capabilities are integrated into a transparent, user-observable decision workflow**.
+**KrishokTech is a very good EACL Demo candidate, but the winning paper should not be “an agricultural chatbot with many features.”** The EACL paper should present KrishokTech as an **open, production-oriented, safety-aware Bengali AI advisory platform whose distinguishing property is that multiple NLP/vision/retrieval capabilities are integrated into a transparent, user-observable decision workflow**.
 
 The CEA paper should carry the deeper scientific reliability experiments. The EACL paper should carry the **system experience, integration, usability, deployment-readiness, and reproducibility story**.
 
@@ -18,15 +18,15 @@ So I would build the EACL paper around **that actual system**, while carefully a
 
 ## Working title
 
-### **KrishokChat: A Safety-Aware Multimodal Bengali Agricultural Advisory Platform**
+### **KrishokTech: A Safety-Aware Multimodal Bengali Agricultural Advisory Platform**
 
 This is the title I would use unless we discover a stronger system-level novelty during implementation.
 
 Two alternatives:
 
-**KrishokChat: An Auditable Multimodal Bengali Agricultural Advisory System**
+**KrishokTech: An Auditable Multimodal Bengali Agricultural Advisory System**
 
-**KrishokChat: Production-Oriented Bengali Agricultural Advisory with Retrieval, Vision, and Safety-Aware Routing**
+**KrishokTech: Production-Oriented Bengali Agricultural Advisory with Retrieval, Vision, and Safety-Aware Routing**
 
 I prefer the first because it is clear, broad, and immediately tells an EACL reviewer what the artifact is.
 
@@ -36,7 +36,7 @@ I prefer the first because it is clear, broad, and immediately tells an EACL rev
 
 The paper should be reducible to:
 
-> **KrishokChat is an open Bengali agricultural advisory platform that integrates safety screening, hybrid retrieval, grounded generation, multimodal crop-disease diagnosis, evidence/provenance inspection, and deployment-oriented safeguards into an observable end-to-end workflow.**
+> **KrishokTech is an open Bengali agricultural advisory platform that integrates safety screening, hybrid retrieval, grounded generation, multimodal crop-disease diagnosis, evidence/provenance inspection, and deployment-oriented safeguards into an observable end-to-end workflow.**
 
 That is enough to explain why this is a **system demonstration** rather than another standalone RAG experiment.
 
@@ -78,7 +78,7 @@ Recent accepted demos strongly reinforce this pattern.
 
 ## A. AI for Climate Finance
 
-This is probably the **closest paper archetype** for KrishokChat.
+This is probably the **closest paper archetype** for KrishokTech.
 
 It does not pretend that hybrid retrieval, agents, structured extraction, and reasoning are individually novel. It explicitly says the contribution is their **integration into a domain-specific workflow**. It then gives:
 
@@ -93,7 +93,7 @@ It does not pretend that hybrid retrieval, agents, structured extraction, and re
 
 That is almost exactly the model we should follow.
 
-### Lesson for KrishokChat
+### Lesson for KrishokTech
 
 We should say:
 
@@ -143,7 +143,7 @@ SmartMatch exposes backend choices, retrieved items, similarity scores, qualitat
 
 ### Lesson
 
-Add **inspectability** to KrishokChat.
+Add **inspectability** to KrishokTech.
 
 Don't merely show the answer.
 
@@ -171,7 +171,7 @@ Your production-oriented modularity is useful **if surfaced as a capability**, n
 
 # 5. The biggest strategic decision
 
-I would turn KrishokChat from:
+I would turn KrishokTech from:
 
 > **chat + image diagnosis + weather + safety + research dashboard**
 
@@ -541,7 +541,7 @@ Shows:
 * history;
 * unresolved issues.
 
-This helps establish KrishokChat as a **dual-audience system**:
+This helps establish KrishokTech as a **dual-audience system**:
 
 > farmer-facing advisory + expert oversight.
 
@@ -719,14 +719,14 @@ This is a genuine systems feature.
 The repo already supports:
 
 * Gemini online;
-* local KrishokChat-4B via Ollama. ([GitHub][2])
+* local KrishokTech-4B via Ollama. ([GitHub][2])
 
 Make model availability explicit:
 
 ```text
 Generation:
 ● Online Gemini
-○ Local KrishokChat-4B
+○ Local KrishokTech-4B
 ```
 
 And if the local model is unavailable, the system already fails closed. ([GitHub][2])
@@ -843,7 +843,7 @@ Instead:
 
 ### Research Mode
 
-> Inspect KrishokChat's decision process.
+> Inspect KrishokTech's decision process.
 
 Features:
 
@@ -870,7 +870,7 @@ Let the reviewer choose:
 
 vs
 
-### KrishokChat Safety-Aware
+### KrishokTech Safety-Aware
 
 Then show:
 
@@ -911,7 +911,7 @@ Then:
 
 > may still answer.
 
-### KrishokChat verifier
+### KrishokTech verifier
 
 > rejects.
 
@@ -1144,7 +1144,7 @@ Your LLM port abstraction is a real engineering strength. The repository allows 
 
 Make it visible:
 
-> **KrishokChat is model-provider agnostic.**
+> **KrishokTech is model-provider agnostic.**
 
 But don't oversell this as research novelty.
 
@@ -1445,7 +1445,7 @@ Instead:
 
 ### **Integration novelty**
 
-> KrishokChat operationalizes Bengali agricultural NLP, multimodal disease diagnosis, safety gating, evidence-grounded response generation, verification, and constrained delivery as one auditable advisory workflow.
+> KrishokTech operationalizes Bengali agricultural NLP, multimodal disease diagnosis, safety gating, evidence-grounded response generation, verification, and constrained delivery as one auditable advisory workflow.
 
 This is exactly the kind of contribution recent successful system demos use. AI for Climate Finance explicitly positions its integration of established technologies into a specialized workflow as its contribution. ([ACL Anthology][3])
 
@@ -1500,7 +1500,7 @@ Bengali farmers need:
 
 Most systems provide one or two components.
 
-KrishokChat integrates:
+KrishokTech integrates:
 
 > interaction + evidence + diagnosis + safety + delivery.
 
@@ -1654,7 +1654,7 @@ The repository already documents the local model setup and checked-in model meta
 
 One sentence:
 
-> KrishokChat demonstrates how Bengali NLP, agricultural evidence, multimodal diagnosis, safety control, and deployability can be integrated into one inspectable advisory system.
+> KrishokTech demonstrates how Bengali NLP, agricultural evidence, multimodal diagnosis, safety control, and deployability can be integrated into one inspectable advisory system.
 
 Then:
 
@@ -1824,13 +1824,13 @@ We should use the entire 150 seconds strategically.
 
 Show:
 
-> **KrishokChat**
+> **KrishokTech**
 >
 > Bengali multimodal agricultural advisory.
 
 Voice:
 
-> “KrishokChat helps Bengali farmers ask questions, share crop images, receive evidence-grounded guidance, and understand why the system gives—or refuses—an answer.”
+> “KrishokTech helps Bengali farmers ask questions, share crop images, receive evidence-grounded guidance, and understand why the system gives—or refuses—an answer.”
 
 No logo animation longer than 2 seconds.
 
@@ -2043,7 +2043,7 @@ Therefore we need:
 
 Preferably:
 
-> `krishokchat...`
+> `krishoktech...`
 
 with no login for core demo.
 
@@ -2256,7 +2256,7 @@ Create:
 Safety model v2.1
 Crop model v1.4
 Potato disease model v1.2
-KrishokChat-4B v0.9
+KrishokTech-4B v0.9
 Knowledge v1.7
 ```
 
@@ -2673,7 +2673,7 @@ I would use exactly these three.
 
 ### C1 — Integrated system
 
-> KrishokChat integrates Bengali conversational retrieval, multimodal crop-disease advisory, safety-aware routing, evidence verification, and constrained delivery into a unified agricultural assistance workflow.
+> KrishokTech integrates Bengali conversational retrieval, multimodal crop-disease advisory, safety-aware routing, evidence verification, and constrained delivery into a unified agricultural assistance workflow.
 
 ### C2 — Interactive transparency
 
@@ -2922,7 +2922,7 @@ The UI runs:
 
 and
 
-### KrishokChat.
+### KrishokTech.
 
 Then:
 
@@ -2930,7 +2930,7 @@ Then:
 Baseline:
 ✗ produces recommendation
 
-KrishokChat:
+KrishokTech:
 ✓ detects mismatch
 ✓ refuses certification
 ✓ explains why
@@ -3023,7 +3023,7 @@ When you actually have a real hosted deployment with monitoring and user traffic
 
 # 112. The README should be changed before submission
 
-The current README first calls KrishokChat:
+The current README first calls KrishokTech:
 
 > “a research capstone demo prototype, not a production service.” ([GitHub][2])
 
@@ -3060,7 +3060,7 @@ This is exactly what an open system demo should look like.
 Use a README structure like:
 
 ```text
-What KrishokChat is
+What KrishokTech is
 Why it exists
 5-minute quickstart
 Live demo
@@ -3308,7 +3308,7 @@ Bengali agricultural advisory requires combining language, evidence, multimodali
 
 ### System
 
-KrishokChat.
+KrishokTech.
 
 ### Unique integration
 
@@ -3340,7 +3340,7 @@ AI for Climate Finance, RAGVUE, SmartMatch, FlexRAG.
 
 ### Gap
 
-Existing systems demonstrate pieces or different application domains; KrishokChat integrates multilingual agricultural advisory, multimodality, safety and inspectability in one Bengali-facing platform.
+Existing systems demonstrate pieces or different application domains; KrishokTech integrates multilingual agricultural advisory, multimodality, safety and inspectability in one Bengali-facing platform.
 
 That's enough.
 
@@ -3510,7 +3510,7 @@ That creates two papers from one platform without overlap.
 
 The video should communicate:
 
-> **“KrishokChat understands the farmer, gathers the right evidence, uses images when needed, refuses when it cannot justify an answer, shows why it answered, and remains usable under constrained deployment.”**
+> **“KrishokTech understands the farmer, gathers the right evidence, uses images when needed, refuses when it cannot justify an answer, shows why it answered, and remains usable under constrained deployment.”**
 
 That's the EACL story.
 
@@ -3524,7 +3524,7 @@ The official Demo CFP is almost tailor-made for the system you have: application
 
 And your repository already gives you a real foundation: it has 2,120 knowledge nodes across 2,946 source documents, multiple agricultural institutions, hybrid retrieval, safety routing, streamed trace events, image-based crop/disease workflows, model-provider abstraction, reproducible tests, and production-oriented runtime controls. ([GitHub][2]) ([GitHub][2]) ([GitHub][2])
 
-The **best EACL version of KrishokChat is therefore not “more AI.”**
+The **best EACL version of KrishokTech is therefore not “more AI.”**
 
 It is:
 
@@ -3537,7 +3537,7 @@ And because we now have the CEA paper scoped separately, we can safely make the 
 One final operational constraint: EACL 2027's Demo deadline is **22 September 2026**, the submission is capped at **6 pages**, and the paper, video, and live-demo/package links are all mandatory. ([EACL 2027][1])
 
 [1]: https://2027.eacl.org/calls/demos/?utm_source=chatgpt.com "Call for System Demonstrations -"
-[2]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
+[2]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"
 [3]: https://aclanthology.org/2026.eacl-demo.34/ "AI for Climate Finance: Agentic Retrieval and Multi-Step Reasoning for Early Warning System Investments - ACL Anthology"
 [4]: https://aclanthology.org/2026.eacl-demo.12/ "A Browser-based Open Source Assistant for Multimodal Content Verification - ACL Anthology"
 [5]: https://aclanthology.org/2026.eacl-demo.35/ "RAGVUE: A Diagnostic View for Explainable and Automated Evaluation of Retrieval-Augmented Generation - ACL Anthology"

@@ -10,8 +10,8 @@
 
 ## 1. System Demonstration Identity & Pitch
 
-- **Title:** *KrishokChat: A Safety-Aware Multimodal Bengali Agricultural Advisory Platform*
-- **One-Sentence System Pitch:** *KrishokChat is an open, production-oriented Bengali agricultural advisory platform integrating safety screening, hybrid retrieval, grounded generation, multimodal crop-disease diagnosis, and observable verification traces into a unified decision workflow.*
+- **Title:** *KrishokTech: A Safety-Aware Multimodal Bengali Agricultural Advisory Platform*
+- **One-Sentence System Pitch:** *KrishokTech is an open, production-oriented Bengali agricultural advisory platform integrating safety screening, hybrid retrieval, grounded generation, multimodal crop-disease diagnosis, and observable verification traces into a unified decision workflow.*
 
 ### Core System Themes for EACL Reviewers
 1. **Integrated NLP & Vision Decision Pipeline:** Connecting safety classification, hybrid BM25+dense retrieval, fine-tuned Gemma-4 generation, and INT8 ONNX crop/disease classification into a single observable workflow.
@@ -41,8 +41,8 @@ paper/EACL Demo/
 ├── README.md                      # This file (venue guidelines, page budget, progress tracker)
 ├── manifest.yaml                  # Local artifact registry tracking all files
 ├── manuscript/                    # Production LaTeX submission workspace (ACL/EACL format)
-│   ├── krishokchat_eacl_main.tex  # Master LaTeX driver file
-│   ├── krishokchat_eacl.bib       # BibTeX bibliography
+│   ├── krishoktech_eacl_main.tex  # Master LaTeX driver file
+│   ├── krishoktech_eacl.bib       # BibTeX bibliography
 │   ├── sections/                  # 6 modular LaTeX section skeletons
 │   │   ├── 01_introduction.tex
 │   │   ├── 02_system_architecture.tex

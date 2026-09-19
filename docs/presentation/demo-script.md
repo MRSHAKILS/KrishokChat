@@ -1,4 +1,4 @@
-# Demo Script — KrishokChat (3–4 minute investor walkthrough)
+# Demo Script — KrishokTech (3–4 minute investor walkthrough)
 
 Target: a non-technical judge understands (1) this is not a chatbot wrapper — it is
 a **safety-aware multi-agent pipeline**, (2) the vision workflow routes crop →
@@ -17,7 +17,7 @@ in the product.
 | Backend up | `http://localhost:8000/api/models` returns 200 |
 | LLM up (llama-server) | `http://localhost:11435/v1` responds (415 = alive) |
 | Frontend up | `http://localhost:3100` loads |
-| One-shot check | `scripts/start_full_demo.ps1` (or `start_krishokchat_local.ps1` for the llama runtime) |
+| One-shot check | `scripts/start_full_demo.ps1` (or `start_krishoktech_local.ps1` for the llama runtime) |
 
 Smoke every page once: `/`, `/detect`, `/chat`, `/soil`, `/data`, `/library`,
 `/research/benchmark`, `/analytics`. All should be 200.
@@ -28,7 +28,7 @@ so the first live answer is fast.
 
 ## 1. Opening — landing page (~25 s)
 
-**Say:** "KrishokChat is a Bengali agricultural advisory system for Bangladeshi
+**Say:** "KrishokTech is a Bengali agricultural advisory system for Bangladeshi
 farmers. Three things make it different: it routes every query through a safety
 pipeline, it detects crop diseases from a phone photo, and every number you'll see
 is backed by a published benchmark dataset."
@@ -86,7 +86,7 @@ This builds trust with exactly the kind of judge who checks whether you overclai
 1. **/data:** point at the knowledge-graph donut (**২,৮৮২** nodes), the category
    bar chart (it's real data, not decoration), and the table with **κ = ০.৭৮
    KG-grounded** / ০.৭২ farmer+safety agreement bars.
-2. **/research/benchmark:** point at the GenF1 chart — **KrishokChat-4B 0.314 vs
+2. **/research/benchmark:** point at the GenF1 chart — **KrishokTech-4B 0.314 vs
    0.165** (≈১.৯×) citation-grounded; toggle **খ-ওরাকল/সিবি** to show the second
    condition (০.৩০০ vs ০.২৫৩, ≈১.২×).
 3. One line: "1,022 of 2,882 knowledge nodes are directly linked to source images;
@@ -97,7 +97,7 @@ This builds trust with exactly the kind of judge who checks whether you overclai
 
 **Say:** "A Bengali farmer types in dialect, gets a grounded answer with the
 national helpline one keystroke away; an unsafe query is stopped before it reaches
-the model; every claim is verifiable in the published dataset. That's KrishokChat."
+the model; every claim is verifiable in the published dataset. That's KrishokTech."
 
 ---
 
@@ -131,7 +131,7 @@ the model; every claim is verifiable in the published dataset. That's KrishokCha
 | Answerable queries | ৯০০ (of ১,০০০) | AgriTrust |
 | κ KG-grounded | ০.৭৮ | AgriTrust |
 | κ farmer+safety | ০.৭২ | AgriTrust |
-| GenF1 KrishokChat-4B / baseline | ০.৩১৪ / ০.১৬৫ (≈১.৯×) | benchmark page constants |
+| GenF1 KrishokTech-4B / baseline | ০.৩১৪ / ০.১৬৫ (≈১.৯×) | benchmark page constants |
 | GenF1 cb / oracle | ০.৩০০ / ০.২৫৩ (≈১.২×) | benchmark page constants |
 | Safety dataset records | ২০,১১২ | `dataset_release/safety/README.md` |
 | National helpline | ১৬১২৩ (কৃষক কল সেন্টার), ৯৯৯ (emergency) | government services, verified |

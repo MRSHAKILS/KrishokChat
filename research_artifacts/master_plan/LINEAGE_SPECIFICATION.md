@@ -1,8 +1,8 @@
-# KrishokChat Master Knowledge & Dataset Lineage Specification
+# KrishokTech Master Knowledge & Dataset Lineage Specification
 
 **Venue Target:** Wiley *Expert Systems* (ISSN: 1468-0394)  
 **Document Status:** Frozen Architectural Reference  
-**Purpose:** Unambiguously define and deconflict all data, document, node, and tuple layers across the KrishokChat research ecosystem.
+**Purpose:** Unambiguously define and deconflict all data, document, node, and tuple layers across the KrishokTech research ecosystem.
 
 ---
 
@@ -82,7 +82,7 @@ To ensure total scientific clarity during peer review, every number and resource
 
 | Resource Identifier | Lineage Origin | Scope & Size | Function in v2 Manuscript |
 |---|---|---|---|
-| **KrishokChat-SFT-145K** | Paper 1 (Resource) | 145,500 QA pairs | Contextualizes limitations of pure instruction tuning. |
+| **KrishokTech-SFT-145K** | Paper 1 (Resource) | 145,500 QA pairs | Contextualizes limitations of pure instruction tuning. |
 | **Farmer-1001 Benchmark** | Paper 1 (Resource) | 1,001 authentic farmer queries | Evaluates ecological validity under real-world colloquial language. |
 | **AgriTrust Retrieval Corpus** | Paper 2 (Retrieval) | 2,882 nodes (284 publications) | Frozen retrieval environment for hybrid/dense retrieval tests. |
 | **ClaimSafe-BN (v2)** | Paper 3 (This Work) | 20,112 curated queries (60/20/20) | Primary benchmark for selective risk, calibration, and dialect testing. |

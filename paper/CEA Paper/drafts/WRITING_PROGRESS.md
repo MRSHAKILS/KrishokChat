@@ -13,14 +13,14 @@
 
 ## 1. The Assignment (verbatim intent)
 
-1. Read the plans in `D:\KrishokChat Advisory System\paper\planning` (4 files).
-2. Read the results/experiments in `D:\KrishokChat Advisory System\paper\CEA Paper\experiments`
+1. Read the plans in `D:\KrishokTech Advisory System\paper\planning` (4 files).
+2. Read the results/experiments in `D:\KrishokTech Advisory System\paper\CEA Paper\experiments`
    — **DO NOT re-verify**; results are already verified and clean. Just read and analyse.
 3. Do the analysis (what story do the numbers support?).
 4. **First** produce the best-possible paper-writing outline and save it as
-   `D:\KrishokChat Advisory System\paper\CEA Paper\manuscript\writing_outline.md`.
+   `D:\KrishokTech Advisory System\paper\CEA Paper\manuscript\writing_outline.md`.
 5. **Then** write the full paper section by section into
-   `D:\KrishokChat Advisory System\paper\CEA Paper\manuscript`.
+   `D:\KrishokTech Advisory System\paper\CEA Paper\manuscript`.
 6. Report back with a submission-ready paper.
 
 **Hard constraints from user:**
@@ -49,8 +49,8 @@
 | Length target | ~9,000–12,000 words main text |
 | Working title | *Bounded-Authority Agricultural Advisory: Selective Resolution and Evidence-Bound Verification for Safe Bengali Decision Support* |
 | Format | LaTeX, `cas-dc` class, modular `sections/*.tex` + `tables/*.tex` |
-| Driver file | `manuscript/krishokchat_cea_main.tex` |
-| Bib file | `manuscript/krishokchat_cea.bib` |
+| Driver file | `manuscript/krishoktech_cea_main.tex` |
+| Bib file | `manuscript/krishoktech_cea.bib` |
 
 ---
 
@@ -67,10 +67,10 @@
 - 38 layer folders E02…E40; all extracted into Number Bank.
 
 ### 3.3 Manuscript (rewritten 2026-08-28 — all 18 sections + driver + 10 tables + bib)
-- `manuscript/krishokchat_cea_main.tex` — driver with corrected macros + abstract.
+- `manuscript/krishoktech_cea_main.tex` — driver with corrected macros + abstract.
 - `manuscript/sections/01…18_*.tex` — ALL sections fully written (no skeletons remain).
 - `manuscript/tables/tab1…tab10_*.tex` — all tables rewritten against Number Bank.
-- `manuscript/krishokchat_cea.bib` — bibliographic metadata re-verified via web search.
+- `manuscript/krishoktech_cea.bib` — bibliographic metadata re-verified via web search.
 - `manuscript/NUMBER_BANK.md` — extracted metric ledger (1,381 lines).
 - `manuscript/PLANNING_DIGEST.md` — 980-line digest of the three planning files.
 - `manuscript/writing_outline.md` — **the outline deliverable** (created 2026-08-28).

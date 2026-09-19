@@ -27,7 +27,7 @@
 
 BEFORE EDITING: Run this grep and paste the output in your working notes (so you know what needs to be deleted):
 ```powershell
-cd "D:\KrishokChat Advisory System\paper\CEA Paper"
+cd "D:\KrishokTech Advisory System\paper\CEA Paper"
 grep -rn "agronomist\|Gwet\|AC1\|HumanGwet\|4.82\|E13\|chemical-safety pass" manuscript/sections/
 ```
 
@@ -42,7 +42,7 @@ EDIT:
 ### BRANCH B — Study did NOT happen (delete everything)
 
 READ these files first:
-- `manuscript/krishokchat_cea_main.tex` — find and delete `\HumanGwetAC` macro definition and any usage
+- `manuscript/krishoktech_cea_main.tex` — find and delete `\HumanGwetAC` macro definition and any usage
 - `manuscript/sections/01_introduction.tex` — find Table 1, line with "Gwet" or "agronomist" in RQ1 row
 - `manuscript/sections/06_experimental_methodology.tex` — find §6.5 entire subsection
 - `manuscript/sections/07_results_advisory_quality.tex` — find §7.2 entire subsection AND opening sentence mentioning "100.0% chemical-safety pass"
@@ -56,7 +56,7 @@ EDIT steps (do ALL of them — do not skip any):
 4. `01_introduction.tex` Table 1 RQ1 row: Remove "as judged by expert agronomists" phrase. Remove "Gwet's AC1" from the metric column.
 5. `14_discussion.tex`: For each of these terms — agronomist, E13, Gwet, AC1, 4.82, "chemical-safety pass" — delete the entire sentence containing it. Do not soften, do not paraphrase. Delete.
 6. `18_conclusion.tex`: Same — delete every sentence containing those terms.
-7. `manuscript/krishokchat_cea_main.tex`: Delete the `\HumanGwetAC` macro definition. Search for `\HumanGwetAC` usage sites and delete those lines too.
+7. `manuscript/krishoktech_cea_main.tex`: Delete the `\HumanGwetAC` macro definition. Search for `\HumanGwetAC` usage sites and delete those lines too.
 8. `manifest.yaml`: Add to the comments block: `# E13 claim removed — Q1=NO, study never happened, see reviews/refinement plans/POST_EXPERIMENT_AUDIT.md`
 
 STOP CONDITION — run this command and paste the EXACT output:

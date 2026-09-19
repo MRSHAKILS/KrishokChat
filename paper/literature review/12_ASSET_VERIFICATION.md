@@ -78,11 +78,11 @@ All have `class_names.json`. `verification_report_live.md` in `vision/` is SSOT.
 
 | Asset | Expected | Verified | Path | Hash |
 |---|---|---|---|---|
-| krishokchat.f16.gguf | 1.36 GB | 1.36 GB, SHA `1D627304F745` | `backend/ml_assets/gemma/krishokchat.f16.gguf` | `1D627304F74520284844812600F5F0E172240C8A23C88126BA7D1C1F73B84673` |
+| krishoktech.f16.gguf | 1.36 GB | 1.36 GB, SHA `1D627304F745` | `backend/ml_assets/gemma/krishoktech.f16.gguf` | `1D627304F74520284844812600F5F0E172240C8A23C88126BA7D1C1F73B84673` |
 | model.gguf | 1.36 GB | hardlink to above (2 entries, 0 extra) | `backend/ml_assets/gemma/model.gguf` | same |
 | Modelfile | — | 1,990 B, hardlinked to `scripts/Modelfile` | `backend/ml_assets/gemma/Modelfile` | — |
 
-**Truncated** — must not serve. Verified runtime is external Q4_K_M + LoRA via `tools/ops/start_krishokchat_local.ps1` per `paper/archive/system_evolution_plan_2026/.../14_LOCAL_MODEL_RUNTIME_AMENDMENT_2026_08_12.md`.
+**Truncated** — must not serve. Verified runtime is external Q4_K_M + LoRA via `tools/ops/start_krishoktech_local.ps1` per `paper/archive/system_evolution_plan_2026/.../14_LOCAL_MODEL_RUNTIME_AMENDMENT_2026_08_12.md`.
 
 ---
 

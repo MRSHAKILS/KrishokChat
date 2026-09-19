@@ -1,4 +1,4 @@
-# KrishokChat Functionality Specifications & Practical Flow Reference
+# KrishokTech Functionality Specifications & Practical Flow Reference
 
 > **SSOT Documentation for System Demonstrations & Scientific Papers**  
 > Last Audited: 2026-09-01 | Architecture Version: 2.0  

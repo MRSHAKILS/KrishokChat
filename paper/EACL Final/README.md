@@ -1,11 +1,11 @@
-# KrishokChat — EACL 2027 System Demonstration Track
+# KrishokTech — EACL 2027 System Demonstration Track
 
 This directory contains the complete publication package, experimental records, results Single Source of Truth (SSOT), and manuscript sources for the EACL 2027 System Demonstration submission:
 
-> **KrishokChat: Deterministic-First, Evidence-Bounded Bengali Agricultural Advisory**  
+> **KrishokTech: Deterministic-First, Evidence-Bounded Bengali Agricultural Advisory**  
 > *Khan Raiyan Ibne Reza, Sanjana Aktar Maria, Shakil Ahmed, Sumaiya Tabassum Nimi*  
 > Department of Computer Science and Engineering, North South University, Dhaka, Bangladesh  
-> Interactive Demo: [https://krishokchat.org](https://krishokchat.org) | Screencast: [https://krishokchat.org/screencast](https://krishokchat.org/screencast)
+> Interactive Demo: [https://krishoktech.org](https://krishoktech.org) | Screencast: [https://krishoktech.org/screencast](https://krishoktech.org/screencast)
 
 ---
 
@@ -17,7 +17,7 @@ EACL Final/
 │   ├── latex/                  # Production LaTeX Package
 │   │   ├── main.tex            # Canonical master LaTeX source
 │   │   ├── main.pdf            # Compiled publication PDF
-│   │   ├── krishokchat_eacl.bib# Verified bibliography
+│   │   ├── krishoktech_eacl.bib# Verified bibliography
 │   │   ├── acl.sty             # ACL / EACL official style file
 │   │   └── acl_natbib.bst      # ACL Natbib citation style
 │   ├── draft/                  # Markdown Manuscript Drafts
@@ -53,8 +53,8 @@ EACL Final/
 
 ## Key Artifacts & Verification
 
-- **LaTeX Master:** [`paper/latex/main.tex`](file:///d:/KrishokChat%20Advisory%20System/paper/EACL%20Final/paper/latex/main.tex) (compiles with `pdflatex` + `bibtex`, 0 errors, 0 undefined citations).
-- **Compiled PDF:** [`paper/latex/main.pdf`](file:///d:/KrishokChat%20Advisory%20System/paper/EACL%20Final/paper/latex/main.pdf).
-- **Markdown Draft:** [`paper/draft/turn_1.md`](file:///d:/KrishokChat%20Advisory%20System/paper/EACL%20Final/paper/draft/turn_1.md).
-- **Evidence SSOT:** [`results/paper_results.yaml`](file:///d:/KrishokChat%20Advisory%20System/paper/EACL%20Final/results/paper_results.yaml).
-- **Limitations Ledger:** [`experiments/LIMITATIONS.md`](file:///d:/KrishokChat%20Advisory%20System/paper/EACL%20Final/experiments/LIMITATIONS.md).
+- **LaTeX Master:** [`paper/latex/main.tex`](file:///d:/KrishokTech%20Advisory%20System/paper/EACL%20Final/paper/latex/main.tex) (compiles with `pdflatex` + `bibtex`, 0 errors, 0 undefined citations).
+- **Compiled PDF:** [`paper/latex/main.pdf`](file:///d:/KrishokTech%20Advisory%20System/paper/EACL%20Final/paper/latex/main.pdf).
+- **Markdown Draft:** [`paper/draft/turn_1.md`](file:///d:/KrishokTech%20Advisory%20System/paper/EACL%20Final/paper/draft/turn_1.md).
+- **Evidence SSOT:** [`results/paper_results.yaml`](file:///d:/KrishokTech%20Advisory%20System/paper/EACL%20Final/results/paper_results.yaml).
+- **Limitations Ledger:** [`experiments/LIMITATIONS.md`](file:///d:/KrishokTech%20Advisory%20System/paper/EACL%20Final/experiments/LIMITATIONS.md).

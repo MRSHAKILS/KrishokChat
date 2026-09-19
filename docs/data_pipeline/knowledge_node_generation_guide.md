@@ -1,4 +1,4 @@
-# KrishokChat — Knowledge Node Generation Guide
+# KrishokTech — Knowledge Node Generation Guide
 
 **Bangladesh Agricultural AI Advisory System**
 

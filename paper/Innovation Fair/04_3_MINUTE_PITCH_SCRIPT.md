@@ -3,7 +3,7 @@
 **Presenter:** Lead Researcher & Engineer  
 **Allocated Time:** 3 Minutes (180 Seconds) + 2 Minutes Q&A  
 **Target Audience:** National Innovation Fair Judges, Ministry of Agriculture Representatives, Agribusiness Executives, Investors  
-**Live Demo Prop:** Laptop connected to projector + Smartphone running KrishokChat PWA (simulating mobile / offline mode)
+**Live Demo Prop:** Laptop connected to projector + Smartphone running KrishokTech PWA (simulating mobile / offline mode)
 
 ---
 
@@ -27,7 +27,7 @@
 
 *In Bangladesh, over 16 million farming families make critical agronomic decisions every day with incomplete information, limited access to extension officers, and intermittent mobile connectivity. When a potato farmer in Bogura sees black spots spreading across his crop, guessing the wrong chemical or applying an overdose doesn't just destroy his harvest—it ruins his family's livelihood.*
 
-*We didn't start KrishokChat by asking 'How do we wrap an LLM around agriculture?' We started in the field, asking: **'How can technology become genuinely useful, safe, and accountable for a farmer?'**"*
+*We didn't start KrishokTech by asking 'How do we wrap an LLM around agriculture?' We started in the field, asking: **'How can technology become genuinely useful, safe, and accountable for a farmer?'**"*
 
 ---
 
@@ -41,7 +41,7 @@
 #### [0:50 – 1:30] Slide 4: Architecture & Live Demonstration
 *(Presenter transitions smoothly to live screen on projector)*
 
-*"KrishokChat is a coordinated 5-Tier Agricultural Intelligence Platform:*
+*"KrishokTech is a coordinated 5-Tier Agricultural Intelligence Platform:*
 
 1. **Watch this live query:** *'আলুর নাবি ধসায় কী দেব?'*  
    *(Presenter clicks or speaks query)*  
@@ -57,7 +57,7 @@
 
 #### [1:30 – 2:05] Slide 5: Empirical Proof
 *"This is not a mock-up. It is verified across 36 empirical experimental layers:*
-* In an independent double-blind benchmark evaluated by certified agricultural extension officers, KrishokChat achieved **97.0% certified advisory correctness** with **0.0% critical unsafe acceptance**, compared to 38% for standard baseline LLMs.
+* In an independent double-blind benchmark evaluated by certified agricultural extension officers, KrishokTech achieved **97.0% certified advisory correctness** with **0.0% critical unsafe acceptance**, compared to 38% for standard baseline LLMs.
 * In 11,000 metamorphic corruption tests, our relational schema rejected 100% of dosage tamper mutations.
 * And on rural 2G edge networks with 30% packet loss, our offline-first PWA caching maintains **89% advisory availability** when cloud-only apps drop to 67%."*
 
@@ -65,7 +65,7 @@
 
 #### [2:05 – 2:35] Slide 6 & 7: Market Sustainability & Impact
 *"How do we scale sustainably?  
-Farmers use KrishokChat for free via Web, offline PWA, and zero-cost SMS.  
+Farmers use KrishokTech for free via Web, offline PWA, and zero-cost SMS.  
 We monetize through **Institutional B2G and B2B partnerships**:
 * Serving as an intelligent digital copilot for Bangladesh's 14,000+ Department of Agricultural Extension (DAE) field officers.
 * Providing certified agronomic APIs and private knowledge packs for agribusinesses and NGOs.
@@ -77,7 +77,7 @@ We monetize through **Institutional B2G and B2B partnerships**:
 *"The technology has been built. The 559 backend test suite is green. The empirical science is validated.  
 What we need now is support to transition from controlled laboratory validation into multi-district field deployment with 1,000+ farmers across Northern Bangladesh.
 
-Join us in building the digital brain for Bangladesh's agriculture. Please scan the QR code to test KrishokChat live right now. Thank you!"*
+Join us in building the digital brain for Bangladesh's agriculture. Please scan the QR code to test KrishokTech live right now. Thank you!"*
 
 ---
 
@@ -90,4 +90,4 @@ Join us in building the digital brain for Bangladesh's agriculture. Please scan 
 *Answer:* *"Our frontend is an offline-first PWA with Service Worker caching. The top 50 crop disease solutions (Tier 1/2 Fact-Base) are stored locally on the phone's browser storage. For basic non-smartphones, our backend includes an SMS compression engine that transmits verified treatments in a single 160-character text."*
 
 **Q3: "Why not just use ChatGPT or Gemini directly?"**  
-*Answer:* *"Generic LLMs lack Bangladesh-specific regulatory grounding, fail under regional dialects by up to 48%, hallucinate unapproved chemical mixtures in 15–36% of cases, and cost $1.00+ per 1k queries. KrishokChat resolves 61.5% of queries locally at $0.00 cost with 0.0% chemical hazard."*
+*Answer:* *"Generic LLMs lack Bangladesh-specific regulatory grounding, fail under regional dialects by up to 48%, hallucinate unapproved chemical mixtures in 15–36% of cases, and cost $1.00+ per 1k queries. KrishokTech resolves 61.5% of queries locally at $0.00 cost with 0.0% chemical hazard."*

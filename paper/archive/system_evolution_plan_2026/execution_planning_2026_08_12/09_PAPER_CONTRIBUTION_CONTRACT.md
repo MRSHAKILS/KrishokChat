@@ -34,4 +34,4 @@
 
 ## Rejected Claims
 
-Reject any claim that KrishokChat is the first agricultural verifier, first claim-certification method, first Bengali agricultural RAG system, first Bengali dialect/Banglish RAG study, semantic verifier in its current form, hybrid retriever, calibrated runtime, verified local Gemma performer, object detector, or source-verified vision fallback. Reject accuracy, novelty, fairness, usability, trust, agronomic outcome, and deployment claims that lack a prespecified experiment and ledger entry.
+Reject any claim that KrishokTech is the first agricultural verifier, first claim-certification method, first Bengali agricultural RAG system, first Bengali dialect/Banglish RAG study, semantic verifier in its current form, hybrid retriever, calibrated runtime, verified local Gemma performer, object detector, or source-verified vision fallback. Reject accuracy, novelty, fairness, usability, trust, agronomic outcome, and deployment claims that lack a prespecified experiment and ledger entry.

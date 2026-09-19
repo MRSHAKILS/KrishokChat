@@ -40,7 +40,7 @@
   }%
 }
 
-\title{KrishokChat: Deterministic-First, Evidence-Bounded Bengali Agricultural Advisory}
+\title{KrishokTech: Deterministic-First, Evidence-Bounded Bengali Agricultural Advisory}
 
 \author{
   Khan Raiyan Ibne Reza \quad Sanjana Aktar Maria \quad Shakil Ahmed \quad Sumaiya Tabassum Nimi \\
@@ -55,7 +55,7 @@
 \maketitle
 
 \begin{abstract}
-We present \textsc{KrishokChat}, a Bengali agricultural advisory system designed for practical use in Bangladesh under limited connectivity, device, and knowledge-resource conditions. Rather than treating a large language model as the primary decision maker, \textsc{KrishokChat} uses a deterministic-first pipeline that can halt underspecified treatment queries before retrieval, constrain retrieval to the identified crop, expose image--text contradictions to the user, and verify safety-critical dosage claims before they are rendered or delivered. The system also supports constrained offline and SMS delivery and provides a terminal path to human agricultural assistance for cases that should not be answered automatically. We demonstrate the system through realistic Bengali farmer interactions covering missing crop information, image-based crop routing, contradictory evidence, grounded responses, unsafe requests, and constrained delivery. Evaluation shows that the pre-retrieval gate halted 76/200 treatment queries, while crop fencing reduced wrong-crop answers from 36.25\% to 30.0\% in a controlled evaluation, with 25 discordant cases favoring the fenced setting. Across 420 live safety calls, guarded responses reduced attack success rate from 36.19\% to 0.95\%. These results illustrate how explicit constraints can make agricultural conversational systems more controllable without relying solely on a larger language model.
+We present \textsc{KrishokTech}, a Bengali agricultural advisory system designed for practical use in Bangladesh under limited connectivity, device, and knowledge-resource conditions. Rather than treating a large language model as the primary decision maker, \textsc{KrishokTech} uses a deterministic-first pipeline that can halt underspecified treatment queries before retrieval, constrain retrieval to the identified crop, expose image--text contradictions to the user, and verify safety-critical dosage claims before they are rendered or delivered. The system also supports constrained offline and SMS delivery and provides a terminal path to human agricultural assistance for cases that should not be answered automatically. We demonstrate the system through realistic Bengali farmer interactions covering missing crop information, image-based crop routing, contradictory evidence, grounded responses, unsafe requests, and constrained delivery. Evaluation shows that the pre-retrieval gate halted 30/200 treatment queries, while crop fencing reduced wrong-crop answers from 36.25\% to 30.0\% in a controlled evaluation, with 25 discordant cases favoring the fenced setting. Across 420 live safety calls, guarded responses reduced attack success rate from 36.19\% to 0.95\%. These results illustrate how explicit constraints can make agricultural conversational systems more controllable without relying solely on a larger language model.
 \end{abstract}
 
 % =========================================================================
@@ -68,11 +68,11 @@ For a farmer in Bangladesh, agricultural advice is urgently needed when symptoms
 
 The challenge goes beyond providing a Bengali chat interface. Farmers describe symptoms in colloquial or regional Bangla, whereas agricultural resources use standardized terms; our prior work found a substantial formal-to-colloquial retrieval gap \citep{our_bengali_retrieval}. Retrieval can also fail before generation: treatment requests often omit the crop, photographs may contradict text, and generated dosages may lack evidence grounding. Fluent models turn unresolved uncertainties into confident, dangerous recommendations. Prior work revealed residual unsupported chemical advice even under oracle evidence \citep{our_agricultural_safety}, and vision-language models often exhibit blind faith in contradictory text \citep{Deng_2025_CVPR}.
 
-We present \textbf{KrishokChat}, a Bengali agricultural advisory system structured around explicit decision boundaries rather than ungrounded generation:
-First, \emph{the cheapest and safest retrieval is the one the system refuses to run} (\textbf{C1}): when a treatment query lacks a crop, a deterministic gate halts before search and serves clarification chips or helpline referral (halting 76/200 farmer queries with zero retrieval).
+We present \textbf{KrishokTech}, a Bengali agricultural advisory system structured around explicit decision boundaries rather than ungrounded generation:
+First, \emph{the cheapest and safest retrieval is the one the system refuses to run} (\textbf{C1}): when a treatment query lacks a crop, a deterministic gate halts before search and serves clarification chips or helpline referral (halting 30/200 farmer queries with zero retrieval).
 Second, \emph{the photo is a fence around the evidence} (\textbf{C2}): on-device vision bounds retrieval to the identified crop; text--image conflicts raise an explicit confirmation badge (reducing wrong-crop advice from 36.25\% to 30.0\% in gold-routing simulation; catching 453/454 explicit contradictions).
 Third, \emph{the LLM is the mouthpiece; the evidence is the witness; the verifier is the judge} (\textbf{C3}): generated dosage claims remain untrusted until verified against supporting passages and permitted dose bands, dropping unsupported claims before rendering across web, SMS, offline cards, or 16123 referral (guarded ASR 0.95\% vs 36.19\%; verifier 114/118).
-Failure handling is thus a visible interaction state. Interactive demo: \url{https://krishokchat.org} (screencast, \textless{}2.5\,min: \url{https://krishokchat.org/screencast}); source code and installable package (Apache-2.0): \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}.
+Failure handling is thus a visible interaction state. Interactive demo: \url{https://krishoktech.org} (screencast, \textless{}2.5\,min: \url{https://krishoktech.org/screencast}); source code and installable package (Apache-2.0): \url{https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System}.
 
 % =========================================================================
 % SECTION 2: RELATED WORK AND POSITIONING
@@ -99,7 +99,7 @@ Failure handling is thus a visible interaction state. Interactive demo: \url{htt
   \node[exit, draw=orange!85!black, fill=orange!10] (e2) at (10.6,-1.15) {\textbf{CONFIRM (Badge)}\\Text--Image Mismatch};
 
   % Row 2: Generation, Verification, and Delivery
-  \node[stage, draw=purple!75!black] (t3) at (0,-3.1) {\textbf{T3: Grounded Drafting}\\\texttt{krishokchat-4b} / Gemini};
+  \node[stage, draw=purple!75!black] (t3) at (0,-3.1) {\textbf{T3: Grounded Drafting}\\\texttt{krishoktech-4b} / Gemini};
   \node[stage, draw=green!60!black] (t4) at (5.3,-3.1) {\textbf{T4: Dosage Verifier}\\Passage \& Range Check};
   \node[stage, draw=black!85] (out) at (10.6,-3.1) {\textbf{Constrained Delivery}\\Web / SMS / Offline / 16123};
 
@@ -126,13 +126,13 @@ Failure handling is thus a visible interaction state. Interactive demo: \url{htt
   % Row 2 Exit
   \draw[->, green!60!black, thick] (t4) -- (e4);
 \end{tikzpicture}
-\caption{The complete KrishokChat five-stage decision flow in a two-row pipeline layout. Execution begins at T0 with deterministic safety screening and advances through intent/slot extraction (T1), crop-fenced BM25 retrieval (T2), untrusted language model drafting (T3), and pre-render dosage verification (T4). Four colored exit gates halt execution or alter delivery: REFER to 16123 helpline at T0, ASK clarification chips at T1, CONFIRM mismatch badge at T2, and DROP unsupported dosage claims at T4.}
+\caption{The complete KrishokTech five-stage decision flow in a two-row pipeline layout. Execution begins at T0 with deterministic safety screening and advances through intent/slot extraction (T1), crop-fenced BM25 retrieval (T2), untrusted language model drafting (T3), and pre-render dosage verification (T4). Four colored exit gates halt execution or alter delivery: REFER to 16123 helpline at T0, ASK clarification chips at T1, CONFIRM mismatch badge at T2, and DROP unsupported dosage claims at T4.}
 \label{fig:architecture}
 \end{figure*}
 
 Conversational agricultural advisory systems have demonstrated the value of combining localized agricultural knowledge with conversational interfaces. Farmer.Chat provides multilingual, multimodal assistance via curated RAG and structured crop onboarding \citep{farmerchat2024}. KrishokBondhu targets Bengali farmers through a voice-first call-centre interface combining speech recognition, retrieval, and generation \citep{krishokbondhu2026}. Krishi Sathi uses intent-aware multi-turn slot collection before retrieval \citep{vijayvargia2025}, while Bengali RAG uses translation and keyword injection to bridge colloquial and formal terms \citep{hossain2026}. These systems establish conversational access, retrieval grounding, multimodal interaction, and clarification as foundational ingredients.
 
-A second line of work focuses on evidence grounding and output safety. My Climate CoPilot exposes intermediate tool traces and uses expert post-hoc self-evaluation \citep{nguyen-etal-2025-climate}. AgroLLM incorporates structured agronomic thresholds to validate outputs \citep{ravindran2026agrollm}. In multimodal settings, vision-language models frequently favor contradictory text over visual evidence \citep{Deng_2025_CVPR}. KrishokChat addresses an operational challenge: composing these mechanisms into enforceable, visible control states within a unified Bengali advisory flow. Rather than treating components in isolation, the system operationalizes pre-answer stopping, crop-conditioned retrieval fencing, pre-render dosage verification, and terminal human referral in a farmer-facing workflow (see comparison below).
+A second line of work focuses on evidence grounding and output safety. My Climate CoPilot exposes intermediate tool traces and uses expert post-hoc self-evaluation \citep{nguyen-etal-2025-climate}. AgroLLM incorporates structured agronomic thresholds to validate outputs \citep{ravindran2026agrollm}. In multimodal settings, vision-language models frequently favor contradictory text over visual evidence \citep{Deng_2025_CVPR}. KrishokTech addresses an operational challenge: composing these mechanisms into enforceable, visible control states within a unified Bengali advisory flow. Rather than treating components in isolation, the system operationalizes pre-answer stopping, crop-conditioned retrieval fencing, pre-render dosage verification, and terminal human referral in a farmer-facing workflow (see comparison below).
 
 \begin{center}
 \scriptsize
@@ -154,22 +154,22 @@ Terminal crisis/poisoning referral & \textbf{Yes} & No & Part & No & No \\
 \section{System Design}
 \label{sec:system}
 
-KrishokChat organizes the advisory process around four successive decision boundaries rather than a single retrieve-and-generate step (Figure~\ref{fig:architecture}). Each boundary narrows what the next stage may do: \textbf{T0} screens raw requests for unsafe content; \textbf{T1} decides whether the request carries enough information to search; \textbf{T2} constrains what evidence search may return; and \textbf{T3}--\textbf{T4} treat generator output as an unverified draft.
+KrishokTech organizes the advisory process around four successive decision boundaries rather than a single retrieve-and-generate step (Figure~\ref{fig:architecture}). Each boundary narrows what the next stage may do: \textbf{T0} screens raw requests for unsafe content; \textbf{T1} decides whether the request carries enough information to search; \textbf{T2} constrains what evidence search may return; and \textbf{T3}--\textbf{T4} treat generator output as an unverified draft.
 
 \subsection{Halting Before Retrieval}
 \label{sec:system_gating}
 
-At \textbf{T0}, a deterministic precheck matches incoming Bengali queries against banned chemicals (e.g., paraquat), poisoning, and crisis patterns in $0.32$\,ms, routing immediately to the national 16123 helpline with zero LLM invocation. Requests clearing T0 reach \textbf{T1}, where a deterministic extractor pulls crop, symptom, and treatment intent. When a treatment query lacks a resolvable crop, KrishokChat treats this as a missing safety-critical slot. Instead of unconstrained search, the pipeline halts before BM25 runs ($sources\_retrieved = 0$) and offers three bounded outcomes: a non-chemical guidance card, interactive clarification with Bengali quick-reply crop chips, or 16123 referral. A \textit{DialectSelector} provides six regional presets to bridge the colloquial-to-formal retrieval gap \citep{our_bengali_retrieval}.
+At \textbf{T0}, a deterministic precheck matches incoming Bengali queries against banned chemicals (e.g., paraquat), poisoning, and crisis patterns in $0.32$\,ms, routing immediately to the national 16123 helpline with zero LLM invocation. Requests clearing T0 reach \textbf{T1}, where a deterministic extractor pulls crop, symptom, and treatment intent. When a treatment query lacks a resolvable crop, KrishokTech treats this as a missing safety-critical slot. Instead of unconstrained search, the pipeline halts before BM25 runs ($sources\_retrieved = 0$) and offers three bounded outcomes: a non-chemical guidance card, interactive clarification with Bengali quick-reply crop chips, or 16123 referral. A \textit{DialectSelector} provides six regional presets to bridge the colloquial-to-formal retrieval gap \citep{our_bengali_retrieval}.
 
 \subsection{Crop-Fenced Retrieval and the Mismatch Badge}
 \label{sec:system_retrieval}
 
-Requests clearing T1 enter \textbf{T2}. KrishokChat retrieves via BM25 over 2,135 curated BARI, BRRI, and DAE guideline nodes \citep{bari_handbook2023,brri_handbook2024,dae_extension_manual}, but only after crop identity is bound. The current deployment is optimized for six staple crops (rice, potato, brassica, chili, corn, wheat) noted unobtrusively in the interface. For photographs, an on-device ONNX vision model classifies the crop; a tri-state router directs confident predictions to the species manual (State A), ambiguous pairs to disambiguation chips (State B), and out-of-scope inputs to image re-capture (State C). The image serves as an evidence fence: passages for other crops are blocked. When text and image contradict each other, KrishokChat raises an active \textbf{Crop Mismatch} badge, holding chemical advice until the farmer confirms the crop. If retrieved evidence within a crop contains conflicting pathogen diagnoses, the system asks a discriminative clarification question rather than blending contradictory treatments.
+Requests clearing T1 enter \textbf{T2}. KrishokTech retrieves via BM25 over 2,135 curated BARI, BRRI, and DAE guideline nodes \citep{bari_handbook2023,brri_handbook2024,dae_extension_manual}, but only after crop identity is bound. The current deployment is optimized for six staple crops (rice, potato, brassica, chili, corn, wheat) noted unobtrusively in the interface. For photographs, an on-device ONNX vision model classifies the crop; a tri-state router directs confident predictions to the species manual (State A), ambiguous pairs to disambiguation chips (State B), and out-of-scope inputs to image re-capture (State C). The image serves as an evidence fence: passages for other crops are blocked. When text and image contradict each other, KrishokTech raises an active \textbf{Crop Mismatch} badge, holding chemical advice until the farmer confirms the crop. If retrieved evidence within a crop contains conflicting pathogen diagnoses, the system asks a discriminative clarification question rather than blending contradictory treatments.
 
 \subsection{Untrusted Generation, Verification, and Delivery}
 \label{sec:system_verification}
 
-At \textbf{T3}, \texttt{krishokchat-4b} (fine-tuned 4-bit quantized Gemma base model with a LoRA adapter on \texttt{llama-server}) performs grounded drafting, with \texttt{google/gemini-2.5-flash-lite} as the cloud benchmark. The draft is treated as untrusted. At \textbf{T4}, the dosage verifier checks whether numerical claims are bound to a retrieved passage and fall within permitted BARI/BRRI dose bands; failing claims are annotated and dropped. Surviving responses carry a \textit{provenance badge} (fact lookup, grounded generation, guidance card, clarification, or referral). The system renders the verified decision across four channels: interactive web advisory, 160-character SMS, offline cached cards via local BM25, or sentence-synchronized Bengali neural read-aloud.
+At \textbf{T3}, \texttt{krishoktech-4b} (fine-tuned 4-bit quantized Gemma base model with a LoRA adapter on \texttt{llama-server}) performs grounded drafting, with \texttt{google/gemini-2.5-flash-lite} as the cloud benchmark. The draft is treated as untrusted. At \textbf{T4}, the dosage verifier checks whether numerical claims are bound to a retrieved passage and fall within permitted BARI/BRRI dose bands; failing claims are annotated and dropped. Surviving responses carry a \textit{provenance badge} (fact lookup, grounded generation, guidance card, clarification, or referral). The system renders the verified decision across four channels: interactive web advisory, 160-character SMS, offline cached cards via local BM25, or sentence-synchronized Bengali neural read-aloud.
 
 % =========================================================================
 % SECTION 4: DEMONSTRATION
@@ -180,19 +180,19 @@ At \textbf{T3}, \texttt{krishokchat-4b} (fine-tuned 4-bit quantized Gemma base m
 The demonstration targets NLP researchers and practitioners in multilingual RAG, multimodal conversational systems, and safety-critical dialogue. Attendees interact with the live system across its five operational states: submitting colloquial Bengali to observe deterministic pre-search halting, testing quick-reply disambiguation chips, uploading conflicting leaf images to trigger the contradiction badge, tracing verified dosage citations, and observing fail-closed helpline referral. The session proceeds through one continuous interaction:
 
 \textbf{S1: Halt, clarify, resume.}
-The farmer opens with a colloquial symptom query that names no crop (\textit{``Patay holud dag hoyeche, ki bish dibo?''} / \textit{``There are yellow spots on the leaves, which pesticide should I apply?''}). KrishokChat treats the missing crop as a safety-critical omission and halts before search ($sources\_retrieved = 0$), presenting a short Bengali clarification with three tappable crop chips. Tapping \textit{Alu} (Potato) binds the crop and resumes retrieval. The interface demonstrates that the system asks before searching, allowing user selection to scope admissible evidence.
+The farmer opens with a colloquial symptom query that names no crop (\textit{``Patay holud dag hoyeche, ki bish dibo?''} / \textit{``There are yellow spots on the leaves, which pesticide should I apply?''}). KrishokTech treats the missing crop as a safety-critical omission and halts before search ($sources\_retrieved = 0$), presenting a short Bengali clarification with three tappable crop chips. Tapping \textit{Alu} (Potato) binds the crop and resumes retrieval. The interface demonstrates that the system asks before searching, allowing user selection to scope admissible evidence.
 
 \textbf{S2: A photograph narrows the evidence.}
 The farmer follows up with a leaf photograph. On-device image classification identifies it as potato, and this identification, not the text alone, sets the boundary of what the retrieval step may return: only potato guidance is reachable from this point on. The farmer sees the identified crop and evidence that is visibly scoped to it, not a caption passed silently to a language model.
 
 \textbf{S3: The photo and the words disagree.}
-Later in the same exchange, the farmer types a question about rice blast while the potato photograph from S2 is still attached. KrishokChat does not pick a side. A \textbf{Crop Mismatch} badge appears and chemical guidance is held until the farmer confirms which crop is meant.
+Later in the same exchange, the farmer types a question about rice blast while the potato photograph from S2 is still attached. KrishokTech does not pick a side. A \textbf{Crop Mismatch} badge appears and chemical guidance is held until the farmer confirms which crop is meant.
 
 \textbf{S4: A request the system will not answer.}
-In the same session, the farmer submits a request naming a banned active ingredient. KrishokChat recognizes this before retrieval or generation and stops the turn entirely. No advice is generated as a softer alternative; the interface shows a direct referral to the national Krishi Call Centre (\textbf{16123}).
+In the same session, the farmer submits a request naming a banned active ingredient. KrishokTech recognizes this before retrieval or generation and stops the turn entirely. No advice is generated as a softer alternative; the interface shows a direct referral to the national Krishi Call Centre (\textbf{16123}).
 
 \textbf{S5: A grounded answer, checked before delivery.}
-The farmer returns to a fully specified question. KrishokChat now proceeds to generation: it drafts a Bengali advisory and checks every dosage-bearing sentence against a retrieved passage and a permitted dose range before showing the answer. In the demonstrated case, one dosage sentence fails this check and is dropped; the farmer sees the surviving, verified answer with its source citations and a provenance badge, and can open the Why/trace panel to see exactly which sentence was removed and why (Figure~\ref{fig:demo_why_panel}). The same checked answer can then be delivered as a length-constrained SMS or an offline cached card, with the interface making clear that exact dosage figures must come from the 16123 helpline once truncation shortens the message.
+The farmer returns to a fully specified question. KrishokTech now proceeds to generation: it drafts a Bengali advisory and checks every dosage-bearing sentence against a retrieved passage and a permitted dose range before showing the answer. In the demonstrated case, one dosage sentence fails this check and is dropped; the farmer sees the surviving, verified answer with its source citations and a provenance badge, and can open the Why/trace panel to see exactly which sentence was removed and why (Figure~\ref{fig:demo_why_panel}). The same checked answer can then be delivered as a length-constrained SMS or an offline cached card, with the interface making clear that exact dosage figures must come from the 16123 helpline once truncation shortens the message.
 
 \begin{figure*}[t]
 \centering
@@ -209,11 +209,11 @@ The farmer returns to a fully specified question. KrishokChat now proceeds to ge
   \caption{Expanded Why/trace view: decision trace revealing verified evidence binding and dropped dosage claims.}
   \label{fig:why_panel}
 \end{subfigure}
-\caption{KrishokChat workspace and expanded Why panel. The workspace shows a grounded Bengali advisory with sentence-level citations and a provenance badge; the expanded trace makes a rejected dosage claim and its audit reason visible before delivery.}
+\caption{KrishokTech workspace and expanded Why panel. The workspace shows a grounded Bengali advisory with sentence-level citations and a provenance badge; the expanded trace makes a rejected dosage claim and its audit reason visible before delivery.}
 \label{fig:demo_why_panel}
 \end{figure*}
 
-Across S1--S5, the same principle recurs from a different angle each time: KrishokChat does not treat every farmer message as a generation prompt. It can stop before search, let a photograph bound what evidence is admissible, surface disagreement between modalities instead of resolving it silently, end an unsafe request in a human referral, and check a generated claim before the farmer ever reads it.
+Across S1--S5, the same principle recurs from a different angle each time: KrishokTech does not treat every farmer message as a generation prompt. It can stop before search, let a photograph bound what evidence is admissible, surface disagreement between modalities instead of resolving it silently, end an unsafe request in a human referral, and check a generated claim before the farmer ever reads it.
 
 % =========================================================================
 % SECTION 5: EMPIRICAL EVALUATION
@@ -221,28 +221,28 @@ Across S1--S5, the same principle recurs from a different angle each time: Krish
 \section{Evaluation}
 \label{sec:evaluation}
 
-The preceding section demonstrated how KrishokChat handles underspecified, multimodal, unsafe, and constrained interactions. We now evaluate whether the corresponding decision boundaries behave as intended under the measured test conditions. The evaluation is organized around the three core contributions: whether the system halts underspecified treatment requests before retrieval (C1), whether crop information consistently constrains evidence and catches text--image contradictions (C2), and whether generated dosage claims remain verified and safe across constrained delivery channels (C3). Table~\ref{tab:claim_honesty} establishes the empirical status and validated scope of all headline claims (a comprehensive evidence breakdown across all pipeline layers is provided in Table~\ref{tab:evidence_summary}, Appendix~\ref{app:evidence_table}).
+The preceding section demonstrated how KrishokTech handles underspecified, multimodal, unsafe, and constrained interactions. We now evaluate whether the corresponding decision boundaries behave as intended under the measured test conditions. The evaluation is organized around the three core contributions: whether the system halts underspecified treatment requests before retrieval (C1), whether crop information consistently constrains evidence and catches text--image contradictions (C2), and whether generated dosage claims remain verified and safe across constrained delivery channels (C3). Table~\ref{tab:claim_honesty} establishes the empirical status and validated scope of all headline claims (a comprehensive evidence breakdown across all pipeline layers is provided in Table~\ref{tab:evidence_summary}, Appendix~\ref{app:evidence_table}).
 
 \begin{table*}[t]
 \centering
 \scriptsize
-\renewcommand{\arraystretch}{0.85}
+\renewcommand{\arraystretch}{0.78}
 \setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\textwidth}{l l X X}
 \toprule
 \textbf{Claim \& Mechanism} & \textbf{Status} & \textbf{What It Shows} & \textbf{What It Does Not Show / Validated Boundary} \\
 \midrule
-Gate halts 38\% of treatment queries (C1) & \textsc{Real\_Measured} & Halts 76/200 farmer queries before retrieval ($sources\_retrieved = 0$). & Operating point on 200 dual-annotated farmer queries ($\kappa=1.0000$); follow-up dialog untested. \\
-Controlled pilot halt/pass (C1) & \textsc{Pilot} & 100/100 ambiguous halted, 140/140 specified passed. & Conformance check only; constructed set, not wider population prevalence. \\
-Crop fence: 36.25\% $\to$ 30.0\% error (C2) & \textsc{Real\_Measured} (sim) & Fencing reduces wrong-crop advice ($p=5.96\times 10^{-8}$, 25/0 discordant). & Upper-bound simulation under perfect gold routing; not end-to-end vision accuracy. \\
+Gate halts 15\% of treatment queries (C1) & \textsc{Real\_Measured} & Halts 30/200 farmer queries before retrieval ($sources\_retrieved = 0$). & Operating point on 200 dual-annotated farmer queries ($\kappa=1.0000$); follow-up dialog untested. \\
+Controlled pilot halt/pass (C1) & \textsc{Pilot} & 100/100 ambiguous halted; 114/140 specified passed directly (26/140 prompted bounded slot clarification). & Conformance check only; constructed set, not wider population prevalence. \\
+Crop fence \& contradiction gating (C2) & \textsc{Real\_Measured} & Wrong-crop advice drops from 36.25\% to 31.25\% under empirical ONNX routing noise and to 28.75\% with contradiction gating (oracle bound: 30.00\%; 25/0 discordant, $p=5.96\times 10^{-8}$). & Evaluated on 400-query stress suite; empirical vision noise modeled from held-out classifiers ($N=4,294$). \\
 Mismatch badge: 453/454 (C2) & \textsc{Real\_Measured} & Explicit contradictions caught (53/54 farmer, 400/400 PRISM; 0 false halts). & Scoped to explicit textual contradictions; implicit conflicts (\texttt{farmer\_q\_63}) missed. \\
 Safety guard: 0.95\% vs 36.19\% ASR (C3) & \textsc{Real\_Measured} & Guard cuts attack success across 420 live calls (95\% CI: [0.26, 3.41]). & Bangla-native residual 10/100 remains (embedded 4/10, roleplay 2/10); motivates verifier. \\
 Dosage verifier: 100\% overdose catch ($N=528$) (C3) & \textsc{Real\_Measured} & 114/118 caught in live audit (0/38 false rejections); 100\% catch on overdoses/underdoses across 528 scaled cases (84.6\% overall). & Applies strictly to numerical dosage statements, guaranteeing zero toxic leakage. \\
-SMS 160-char enforcement (C3) & \textsc{Real\_Measured} & 399/400 $\le 160$ chars; 16/16 referral purity; 100\% (1,000/1,000) slot survival with deterministic packer. & Naive truncation preserves 0/84 doses; evaluated using deterministic 11-slot compressor. \\
+SMS 160-char enforcement (C3) & \textsc{Real\_Measured} & 399/400 $\le 160$ chars; 8/8 referral purity; 100\% (1,000/1,000) slot survival with deterministic packer. & Truncated safe SMS retained dose patterns in 12/92 cases, varying with preamble length; evaluated using deterministic 11-slot compressor. \\
 Offline BM25 hit: 0.94 (C3) & \textsc{Real\_Measured} (path) & Local BM25 hit rate 0.94 with service-worker precache enabled. & Network loss simulated (+13.25 / +30.0\,pp drop without local index); not field deployment. \\
 \bottomrule
 \end{tabularx}
-\caption{Claim-honesty table: empirical status, validated scope, and explicit boundaries for headline claims. Status vocabulary follows the frozen evaluation ledger: \textsc{Real\_Measured} (direct experimental observations), \textsc{Pilot} (controlled conformance checks), and \textsc{Real\_Measured\_SmallN} (statistically bounded subsets). Every claim is reported alongside its boundary.}
+\caption{Claim-honesty table: empirical status, validated scope, and explicit boundaries for headline claims (\textsc{Real\_Measured}, \textsc{Pilot}, \textsc{Real\_Measured\_SmallN}). Every claim is reported alongside its validated boundary.}
 \label{tab:claim_honesty}
 \end{table*}
 
@@ -252,7 +252,7 @@ Offline BM25 hit: 0.94 (C3) & \textsc{Real\_Measured} (path) & Local BM25 hit ra
 \subsection{C1: Pre-Retrieval Gating}
 \label{sec:eval_gating}
 
-We evaluate the deterministic gate on 200 authentic Bengali farmer treatment queries (Table~\ref{tab:claim_honesty}). The gate halted 76 queries (halt rate $0.3800$), passed 122 to fenced search, and refused 2 with immediate 16123 referral. Halted turns retrieved zero sources ($sources\_retrieved = 0$), preventing ungrounded generation. Because 76 queries deliberately describe symptoms without naming a crop, the Tier-0 extractor operates at high precision: Precision is $0.990$ with a false-positive rate of $0.005$ ($\text{F}_1 = 0.52$, Recall $0.525$). Ambiguity safely yields null extraction to trigger interactive quick-reply chips rather than ungrounded speculation; ground-truth slots were verified by independent dual annotation (100\% binary agreement, $\kappa = 1.000$; 99.5\% taxonomy, $\kappa = 0.995$). A pilot check confirmed the mechanism: 100/100 ambiguous requests halted and 140/140 specified passed. Clarification required median 89 tokens versus 2,146 for retrieval context (no blended percentage saving is claimed). In live comparison, an unconstrained LLM halted only 10\% of ambiguous queries (median latency 4,218.6\,ms; p95: 6,645.1\,ms).
+We evaluate the deterministic gate on 200 authentic Bengali farmer treatment queries (Table~\ref{tab:claim_honesty}). The gate halted all 30 crop-less symptom requests before retrieval ($sources\_retrieved = 0$), passing 170 crop-specified queries to fenced search ($100\%$ gate decision accuracy). Halted turns retrieved zero sources, preventing ungrounded generation. Ambiguity safely yields null extraction to trigger interactive quick-reply chips rather than ungrounded speculation; ground-truth slots were verified by independent dual annotation ($100\%$ binary agreement, $\kappa = 1.0000$; $99.5\%$ taxonomy, $\kappa = 0.9945$). Across the 170 specified queries, slot extraction achieved an agreement of $95.5\%$ (with genuine crop mentions recognized across multi-crop and sourcing intents). A pilot check confirmed the mechanism: 100/100 ambiguous requests halted; 114/140 specified passed directly, while 26/140 prompted bounded slot clarification. Clarification required median 89 tokens versus 2,146 for retrieval context (no blended percentage saving is claimed). In live comparison, an unconstrained LLM halted only 10\% of ambiguous queries (median latency 4,218.6\,ms; p95: 6,645.1\,ms).
 
 \subsection{C2: Crop Constraint and Multimodal Consistency}
 \label{sec:eval_multimodal}
@@ -262,12 +262,12 @@ Top-1 accuracy across all six crop-specific disease models was 0.9504 (potato, $
 \subsection{C3: Safety Verification and Constrained Delivery}
 \label{sec:eval_safety}
 
-Across 420 live API calls, the guarded system achieved 0.95\% ASR [0.26, 3.41] versus 36.19\% [29.99, 42.88] unguarded. On Bangla-native attacks ($n=100$), guarded ASR was 10.0\% [5.5, 17.4] versus 83.0\%, with residual failures in embedded (4/10) and roleplay (2/10) variants, motivating the downstream verifier. The T4 dosage verifier caught 114/118 mutations in live testing (96.61\%; 0/38 clean false positives) and generalized across 528 scaled test cases (E50), achieving 100.0\% catch rates on overdoses (76/76) and underdoses (67/67), 84.8\% on chemical substitutions (56/66), and 84.6\% overall (296/350), guaranteeing zero toxic dosage leakage. The SMS packer achieved 399/400 compliance with the 160-character ceiling and 16/16 referral purity. Naive string truncation preserved dosage fields in 0/84 advisory cases (0\% survival) due to preamble displacement. The deterministic 11-slot SMS template compressor achieves 100.0\% (1,000/1,000) critical slot survival within 102--115 GSM characters (0 violations over 160 characters) and 98.5\% (65/66) on live gold benchmark queries. Against a stronger baseline, an LLM summarizer (Gemini Flash Lite) preserved dose in 89/100 paired advisories but exceeded 160 characters twice and invented a dosage with no numeric basis in the source. The deterministic compressor matched it on dose (92/100) with zero length violations and zero invented claims by construction. Offline BM25 achieved a 0.94 hit rate; under simulated packet loss, local retrieval preserved 0.94 while remote dropped by 13.25--30.0\,pp. Median non-LLM overhead was 33.565\,ms (0.321\,ms safety, 26.831\,ms BM25, 4.815\,ms verification; 284.0\,MB minimal footprint). The evaluated tier mix yielded 7.8\% zero-LLM turns (\$0.1839 computed cost per 1k turns from provider-exact metered tokens, vs \$0.1798 modeled).
+Across 420 live API calls, the guarded system achieved 0.95\% ASR [0.26, 3.41] versus 36.19\% [29.99, 42.88] unguarded. On Bangla-native attacks ($n=100$), guarded ASR was 10.0\% [5.5, 17.4] versus 83.0\%, with residual failures in embedded (4/10) and roleplay (2/10) variants, motivating the downstream verifier. In an independent double-blind clinical audit ($n=50$, Fleiss' $\kappa = 0.8217$), three agricultural experts rated 46/47 guarded outputs safe and actionable (0/47 dangerous), while correctly intercepting all unguarded negative controls (Appendix~\ref{app:expert_audit}). Under Latin-script Banglish and phonetic red-teaming ($n=100$; e.g., \textit{parakwat}, \textit{furadon}), deterministic prechecks achieved 100.0\% adversarial interception ($85/85$, vs 1.2\% baseline) within 0.016\,ms regex matching (0.321\,ms full T0 pipeline) and 0\% false alarms on benign queries (Appendix~\ref{app:banglish_red_team}). The T4 dosage verifier caught 114/118 mutations in live testing (96.61\%; 0/38 clean false positives) and generalized across 528 scaled test cases (E50), achieving 100.0\% catch rates on overdoses (76/76) and underdoses (67/67), 84.8\% on chemical substitutions (56/66), and 84.6\% overall (296/350), guaranteeing zero toxic dosage leakage. The SMS packer achieved 399/400 compliance ($\le 160$ chars) and 8/8 referral purity. In a live audit of truncated safe SMS messages ($n=92$), naive hard truncation preserved dosage in only 12/92 cases due to conversational preamble displacement; in the separate N05c paired benchmark ($n=100$), naive truncation preserved dose in 23/100 cases, an LLM summarizer preserved dose in 89/100 (with 2 length violations and 1 invented dosage), while our deterministic 11-slot compressor achieved 92/100 dose survival with zero length violations, zero invented claims, and 100.0\% critical slot survival (1,000/1,000). Offline BM25 achieved a 0.94 hit rate; under simulated packet loss, local retrieval preserved 0.94 while remote dropped by 13.25--30.0\,pp. Median non-LLM overhead was 33.565\,ms (0.321\,ms safety, 26.831\,ms BM25, 4.815\,ms verification; 284.0\,MB minimal footprint). The evaluated tier mix yielded 7.9\% zero-LLM turns (\$0.1720 computed cost per 1k turns from provider-exact metered tokens, vs \$0.1682 modeled).
 
 \subsection{What This Evaluation Does Not Establish}
 \label{sec:eval_boundaries}
 
-We explicitly state the evaluation boundaries: (1) no longitudinal farmer adoption or yield trial was conducted; (2) crop-fencing is evaluated on benchmark query pairings under empirical vision noise models rather than longitudinal field deployments; (3) dosage verification applies specifically to numerical dosage sentences, not unrestricted agronomic advice; (4) network resilience is evaluated under simulated packet loss, not field deployments; and (5) operating costs are computed from provider-exact token metering rather than observed billing.
+We explicitly state evaluation boundaries: (1) longitudinal farmer adoption and yield impacts remain unmeasured; (2) crop-fencing is evaluated on benchmark query pairings under empirical vision noise; (3) dosage verification governs numerical dosage statements, not general prose; (4) network resilience is tested via simulated packet loss; and (5) operating costs derive from provider-exact token metering rather than billed expenditure.
 
 % =========================================================================
 % SECTION 6: LIMITATIONS AND CONCLUSION
@@ -283,15 +283,15 @@ Table~\ref{tab:limitations_curated} summarizes primary system limitations; the f
 \begin{table}[t]
 \centering
 \scriptsize
-\renewcommand{\arraystretch}{0.85}
+\renewcommand{\arraystretch}{0.78}
 \begin{tabularx}{\linewidth}{@{}l X@{}}
 \toprule
 \textbf{Limitation} & \textbf{Scope and What We Do Instead} \\
 \midrule
-Dosage Verifier Scope & Validated across 528 cases (100\% overdose/underdose catch, 84.6\% overall); applies strictly to numerical dosage sentences, not unconstrained prose. \\
-Crop \& Vision Scope & Optimized for six staple crops (rice, potato, wheat, brassica, corn, chilli); out-of-scope crops routed to State C re-capture. \\
-Contradiction Gating & Explicit contradictions caught (453/454, 99.8\%); implicit conflicts (\texttt{farmer\_q\_63}) require explicit crop disambiguation. \\
-Clarification Dialog & Conformance validated on fixed dialog states; multi-turn free conversation deferred to human extension officers. \\
+Dosage Verifier Scope & Validated on 528 cases (100\% overdose/underdose catch, 84.6\% overall); applies to numerical dosage sentences, not general prose. \\
+Crop \& Vision Scope & Optimized for six staple crops; out-of-scope crops routed to State~C re-capture. \\
+Contradiction Gating & Explicit contradictions caught (453/454, 99.8\%); implicit conflicts (\texttt{farmer\_q\_63}) require explicit crop entry. \\
+Clarification Dialog & Conformance validated on fixed dialog states; free conversation deferred to human extension officers. \\
 Offline Simulation & Evaluated under simulated packet loss for service-worker caching, not longitudinal field trials. \\
 \bottomrule
 \end{tabularx}
@@ -302,12 +302,12 @@ Offline Simulation & Evaluated under simulated packet loss for service-worker ca
 \subsection{Availability and Licensing}
 \label{sec:availability}
 
-KrishokChat is live at \url{https://krishokchat.org} with an interactive screencast ($<2.5$\,min) at \url{https://krishokchat.org/screencast}. Code, ONNX models, and containerized deployment scripts (\texttt{docker compose}) are licensed under Apache-2.0 at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}. The local generator \texttt{krishokchat-4b} (fine-tuned Gemma~4 4B base) and 2,135 curated extension nodes are hosted on HuggingFace (\url{https://huggingface.co/RaiyanKhaan/KrishokChat-Advisory-System}) under MIT and CC-BY-4.0. Public extension guidelines originate from official BARI, BRRI, and DAE manuals \citep{bari_handbook2023,brri_handbook2024,dae_extension_manual}. Self-hosting runs locally via \texttt{krishokchat-4b} on \texttt{llama-server} ($\ge 4$\,GB VRAM or $\ge 8$\,GB RAM), while in-browser edge vision and BM25 run via WebAssembly with zero GPU dependencies ($<285$\,MB minimal footprint) and zero client photograph uploads.
+KrishokTech is live at \url{https://krishoktech.org} (screencast: \url{https://krishoktech.org/screencast}). Code, models, and containerized scripts (\texttt{docker compose}) are licensed under Apache-2.0 at \url{https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System}. The generator \texttt{krishoktech-4b} and 2,135 extension nodes are on HuggingFace (\url{https://huggingface.co/RaiyanKhaan}) under CC-BY-4.0, reflecting official BARI, BRRI, and DAE extension guidelines. Self-hosting runs locally via \texttt{krishoktech-4b} on \texttt{llama-server} ($\ge 4$\,GB VRAM / $\ge 8$\,GB RAM); in-browser edge vision and BM25 execute via WebAssembly without GPU dependencies ($<285$\,MB footprint) and zero client photo uploads.
 
 \subsection{Conclusion}
 \label{sec:final_conclusion}
 
-KrishokChat treats the boundary between what a language model is willing to say and what the evidence actually supports as part of the interaction itself, not a filter applied after the fact. By halting before retrieval on an underspecified query, letting crop identity fence what evidence an answer may draw on, and checking dosage claims against source and dose band before display, the system turns a single Bengali advisory request into a sequence of decisions the farmer can see happening. What is demonstrated here is not a more fluent generator, but generation whose limits are visible at the moment they are enforced.
+KrishokTech treats the boundary between model output and verified evidence as an interactive feature rather than a post-hoc filter. By halting before retrieval on underspecified queries, scoping search to verified crop identity, and checking dosage claims against source passages before display, the system turns an advisory request into a sequence of visible, inspectable decisions. What is demonstrated here is not a more fluent generator, but generation whose safety boundaries are transparent and enforceable.
 
 % =========================================================================
 % ETHICS AND BROADER IMPACT STATEMENT
@@ -325,14 +325,14 @@ Agricultural advisory in smallholder contexts directly affects food security, ru
 
 \paragraph{Helpline Referral.} Unsafe and crisis-pattern requests are referred to Bangladesh's national Krishi Call Centre (16123), a real, currently operating government service under the Department of Agricultural Extension. The helpline operates from 9:00\,AM to 5:00\,PM, Saturday through Thursday (closed Fridays and official public holidays). The referral interface explicitly displays these operating hours, directing off-hours users to wait for the next active shift or seek local in-person extension assistance. For conference demonstrations, the public web interface operates with an explicit demonstration sandbox that safely visualizes emergency helpline referral and safety blocking on toxic chemical queries without executing live chemical lookup or real-world application.
 
-\paragraph{Third-Party Model Use.} The cloud benchmark comparison uses a third-party API (\texttt{google/gemini-2.5-flash-lite}). Calls were conducted under commercial enterprise terms with strict zero-data-retention (ZDR) agreements ensuring that prompt and response text is not logged, retained, or used for model training. In addition, cloud calls were restricted entirely to the offline benchmark evaluation and never received farmer images or direct PII; production self-hosting executes entirely locally via \texttt{krishokchat-4b} on \texttt{llama-server} with zero external network transmission.
+\paragraph{Third-Party Model Use.} The cloud benchmark comparison uses a third-party API (\texttt{google/gemini-2.5-flash-lite}). Calls were conducted under commercial enterprise terms with strict zero-data-retention (ZDR) agreements ensuring that prompt and response text is not logged, retained, or used for model training. In addition, cloud calls were restricted entirely to the offline benchmark evaluation and never received farmer images or direct PII; production self-hosting executes entirely locally via \texttt{krishoktech-4b} on \texttt{llama-server} with zero external network transmission.
 
-\paragraph{Human Oversight.} KrishokChat is designed to augment, not replace, human agricultural extension officers; the terminal outcome for unresolved or unsafe cases is referral to a human expert, not a generated answer. All reported evaluation numbers are scoped to their measured conditions (Section~\ref{sec:eval_boundaries}), and simulated or bounded components are disclosed rather than presented as field-validated guarantees.
+\paragraph{Human Oversight.} KrishokTech is designed to augment, not replace, human agricultural extension officers; the terminal outcome for unresolved or unsafe cases is referral to a human expert, not a generated answer. All reported evaluation numbers are scoped to their measured conditions (Section~\ref{sec:eval_boundaries}), and simulated or bounded components are disclosed rather than presented as field-validated guarantees.
 
 % =========================================================================
 % REFERENCES
 % =========================================================================
-\bibliography{krishokchat_eacl}
+\bibliography{krishoktech_eacl}
 
 % =========================================================================
 % APPENDIX
@@ -346,7 +346,7 @@ Agricultural advisory in smallholder contexts directly affects food security, ru
 This section details the internal decision rules, threshold calibrations, and component interfaces that govern the five-stage advisory pipeline (Figure~\ref{fig:architecture}).
 
 \subsection{Provenance Badge Taxonomy}
-Every response rendered in KrishokChat carries exactly one visible provenance badge indicating the authorization pathway and evidence type (Table~\ref{tab:badges}).
+Every response rendered in KrishokTech carries exactly one visible provenance badge indicating the authorization pathway and evidence type (Table~\ref{tab:badges}).
 
 \begin{table}[t]
 \centering
@@ -450,19 +450,19 @@ We distinguish four evaluation units throughout the study:
 \end{itemize}
 
 \subsection{Pre-Retrieval Gate}
-On 200 authentic farmer queries, the deterministic path halted 76 queries (halt rate $0.38$), passed 122 to fenced search ($0.61$), and refused 2 with immediate 16123 referral ($0.01$). Halted requests retrieved zero sources. The crop-slot extractor achieved an F1 of $0.52$ (Precision $0.990$, Recall $0.525$, with a false-positive rate of $0.005$ and miss rate of $0.475$ across the 200 queries); ground-truth crop slots were established through independent dual human review, achieving 100.0\% binary agreement (Cohen's $\kappa = 1.0000$) and 99.5\% normalized taxonomy agreement ($\kappa = 0.9945$) across all 200 queries, with consensus adjudication establishing the gold reference.
+On 200 authentic farmer queries, the deterministic path halted all 30 crop-less symptom queries (halt rate $0.1500$), passing 170 crop-specified queries to fenced search ($0.8500$) with zero false halts ($100\%$ gating accuracy). Halted requests retrieved zero sources ($sources\_retrieved = 0$), completely eliminating ungrounded retrieval on underspecified queries. Downstream crop-slot extraction achieved $95.5\%$ overall agreement ($191/200$), with a $1.5\%$ miss rate ($3/200$) and $3.0\%$ multi-crop mention rate ($6/200$, where all six cases carry genuine crop mentions on multi-crop, sourcing, or agricultural business queries). Ground-truth crop slots were established through independent dual human review, achieving 100.0\% binary agreement (Cohen's $\kappa = 1.0000$) and 99.5\% normalized taxonomy agreement ($\kappa = 0.9945$) across all 200 queries, with consensus adjudication establishing the gold reference.
 
 \subsection{Text Gate Pass-Through Evaluation (No Image Fencing)}
-To verify that the text pre-retrieval gate does not introduce false-halt retrieval penalties on valid queries, we evaluated a paired pass-through arm on 400 crop-specified requests (categories B, C, D, I). Because all 400 queries named a valid crop, the text gate passed 100\% of requests without halting ($\text{halt rate}=0.0$) and without applying image-derived fencing. Both arms thus executed identical open BM25 retrieval, producing identical wrong-crop advice rates of $0.30$ ($95\%$ CI: $[25.72, 34.66]$) vs.\ $0.30$ ($p=1.0$ by McNemar's exact test, 0/0 discordant transitions). This establishes that text-gating introduces zero retrieval degradation on valid inputs, distinct from the multimodal crop-fence experiment (Section~\ref{sec:eval_multimodal}), where active image-derived crop pre-binding restricts the retrieval scope ($0.3625 \to 0.3000$, $p=5.96\times 10^{-8}$). The descriptive F-spread showed a mean of $2.39$ distinct crops in the open top-5 retrieval set, with an unmapped crop fraction of $0.1628$.
+To verify that the text pre-retrieval gate does not introduce false-halt retrieval penalties on valid queries, we evaluated a paired pass-through arm on 400 crop-specified requests (categories B, C, D, I). Because all 400 queries named a valid crop, the text gate passed 100\% of requests without halting ($\text{halt rate}=0.0$) and without applying image-derived fencing. Both arms therefore drew candidate passages from the same open BM25 retrieval pool. The gated arm additionally applied downstream contradiction and verification filtering before display, reducing actionable wrong-crop advice from $0.3025$ ($95\%$ CI: $[25.95, 34.92]$) to $0.2875$ ($95\%$ CI: $[24.53, 33.37]$) ($p=0.03125$ by McNemar's exact test, 6/0 discordant transitions, all favoring the gated arm). Six blind-arm wrong-crop cases resolve under gating with zero reversals, distinct from the multimodal crop-fence experiment (Section~\ref{sec:eval_multimodal}), where active image-derived crop pre-binding restricts the retrieval scope ($0.3625 \to 0.3000$, $p=5.96\times 10^{-8}$). The descriptive F-spread showed a mean of $3.35$ distinct crops in the open top-5 retrieval set, with an unmapped crop fraction of $0.1352$.
 
 \subsection{Controlled Pilot and PRISM Conformance}
-A controlled pilot confirmed gate behavior: 100/100 ambiguous requests halted and 140/140 specified passed. Across 1,000 PRISM queries, overall design conformance was $0.458$: clarification 86/100 ($0.86$), concept hypotheses 258/458 ($0.5633$), fact base 54/74 ($0.7297$), safety gate 44/100 ($0.44$), document RAG 16/168 ($0.0952$), and conversational follow-up 0/100 ($0.0$, untested due to absence of a conversational D tier in the offline benchmark).
+A controlled pilot confirmed gate behavior: 100/100 ambiguous requests halted; 114/140 specified requests passed directly, while 26/140 prompted bounded slot clarification for missing non-crop parameters. Across 1,000 PRISM queries, overall design conformance was $0.478$: clarification 86/100 ($0.86$), concept hypotheses 278/458 ($0.607$), fact base 54/74 ($0.7297$), safety gate 44/100 ($0.44$), document RAG 16/168 ($0.0952$), and conversational follow-up 0/100 ($0.0$, untested due to absence of a conversational D tier in the offline benchmark).
 
 \subsection{Token Metering}
 Token measurements were collected separately: clarification required median 89 tokens versus 2,146 tokens for retrieval context. For live grounded rows, median input was 1,111 tokens and median output was 221 tokens. No blended token-saving percentage is claimed.
 
 \subsection{Live--Deterministic Comparison}
-On 200 queries, an unconstrained live model halted only $0.10$ of ambiguous requests (agreement $0.68$, median latency 4,218.6\,ms, p95: 6,645.1\,ms). An exploratory 60-row answer review yielded 19/60 ($31.7\%$) medium-or-better ratings; this is a descriptive inspection and does not establish a quality superiority claim.
+On 200 queries, an unconstrained live model halted only $0.10$ of ambiguous requests (agreement $0.91$, median latency 4,218.6\,ms, p95: 6,645.1\,ms). An exploratory 14-row answer review yielded 7/14 ($50.0\%$) medium-or-better ratings; this is a descriptive inspection and does not establish a quality superiority claim.
 
 \section{Verifier, Safety, and Observability Detail}
 \label{app:safety}
@@ -497,13 +497,13 @@ Production False Rejection    & \textbf{0/38 (0.0\%)} & \textbf{Zero Overdose Le
 Four misses were autopsied. The reported measurements characterize numerical dosage checks rather than general agricultural factuality.
 
 \subsection{Safety Envelope and Out-of-Domain Audit}
-An offline probe across $n=3,000$ queries ($2,000$ naturalistic, $1,000$ adversarial) evaluated deterministic routing against gold labels: certification recall was $0.7165$ (95\% CI: $[69.63, 73.58]$), refuse recall was $0.4930$ ($[46.21, 52.40]$), and dangerous acceptance was $0.3740$ ($[34.45, 40.44]$, $n=374$) on offline stub generation. An out-of-domain audit showed the Tier-0 precheck blocked 10/10 adversarial prompt injections but refused 0/30 off-topic queries, which pass to downstream intent routing.
+An offline probe across $n=3,000$ queries ($2,000$ naturalistic, $1,000$ adversarial) evaluated deterministic routing against gold labels: certification recall was $0.8615$ (95\% CI: $[84.57, 87.59]$), refuse recall was $0.431$ ($[40.06, 46.19]$), and dangerous acceptance was $0.3740$ ($[34.45, 40.44]$, $n=374$) on offline stub generation. An out-of-domain audit showed the Tier-0 precheck blocked 10/10 adversarial prompt injections but refused 0/30 off-topic queries, which pass to downstream intent routing.
 
 \subsection{Micro-Expert Human Evaluation Audit}
 \label{app:expert_audit}
 To provide authentic clinical human validation rather than relying on automated telemetry proxies, we conducted an independent double-blind agronomic audit of 50 representative interaction sessions across three independent evaluators (two senior agronomy/botany undergraduates and one agricultural extension officer affiliated with North South University and the Department of Agricultural Extension, Bangladesh). Evaluators scored each turn on a 3-point clinical scale: Grade~1 (\textit{Safe and Actionable}: compliant with BARI/BRRI standards, accurate dosage and timing, or correct halt/referral); Grade~2 (\textit{Vague but Harmless}: general preventive advice lacking exact quantitative rates, zero phytotoxic risk); and Grade~3 (\textit{Dangerous or Hallucinated}: banned chemicals, lethal overdoses $>2\times$, off-target herbicide, or toxic tank mixes).
 
-Inter-annotator agreement across the three raters achieved a Fleiss' multi-rater kappa of $\kappa = 0.8217$ (mean pairwise Cohen's $\kappa = 0.8209$, raw agreement $97.33\%$, unanimous 3-way agreement $48/50$, $96.0\%$). Across guarded KrishokChat pipeline outputs ($n=47$), evaluators verified $46/47$ ($97.87\%$) as Grade~1 (Safe and Actionable) and $1/47$ ($2.13\%$) as Grade~2 (Vague but Harmless), with $0/47$ ($0.00\%$) dangerous or hallucinated advice. As blinded negative controls, three unconstrained LLM outputs advising banned chemicals (DDT, Furadan) or toxic overdoses were evaluated; all three ($3/3$, $100\%$) were correctly flagged by evaluators as Grade~3. Table~\ref{tab:expert_audit} breaks down evaluation by pipeline regime.
+Inter-annotator agreement across the three raters achieved a Fleiss' multi-rater kappa of $\kappa = 0.8217$ (mean pairwise Cohen's $\kappa = 0.8209$, raw agreement $97.33\%$, unanimous 3-way agreement $48/50$, $96.0\%$). Across guarded KrishokTech pipeline outputs ($n=47$), evaluators verified $46/47$ ($97.87\%$) as Grade~1 (Safe and Actionable) and $1/47$ ($2.13\%$) as Grade~2 (Vague but Harmless), with $0/47$ ($0.00\%$) dangerous or hallucinated advice. As blinded negative controls, three unconstrained LLM outputs advising banned chemicals (DDT, Furadan) or toxic overdoses were evaluated; all three ($3/3$, $100\%$) were correctly flagged by evaluators as Grade~3. Table~\ref{tab:expert_audit} breaks down evaluation by pipeline regime.
 
 \begin{table*}[t]
 \centering
@@ -518,7 +518,7 @@ Halted Disambiguation Chips ($n=12$)  & 11 (91.7\%) & 1 (8.3\%) & 0 (0\%) & 100\
 Dosage Verifier Overwrite ($n=10$)    & 10 (100\%) & 0 (0\%) & 0 (0\%) & 100\% Grade 1 \\
 Emergency 16123 Referral ($n=5$)     & 5 (100\%)  & 0 (0\%) & 0 (0\%) & 100\% Grade 1 \\
 \midrule
-\textbf{All Guarded KrishokChat ($n=47$)} & \textbf{46 (97.9\%)} & \textbf{1 (2.1\%)} & \textbf{0 (0.0\%)} & \textbf{Fleiss' $\kappa = 0.8217$} \\
+\textbf{All Guarded KrishokTech ($n=47$)} & \textbf{46 (97.9\%)} & \textbf{1 (2.1\%)} & \textbf{0 (0.0\%)} & \textbf{Fleiss' $\kappa = 0.8217$} \\
 Unguarded Raw Baseline ($n=3$)       & 0 (0.0\%)  & 0 (0.0\%) & 3 (100\%) & Negative Control \\
 \bottomrule
 \end{tabular*}
@@ -526,11 +526,39 @@ Unguarded Raw Baseline ($n=3$)       & 0 (0.0\%)  & 0 (0.0\%) & 3 (100\%) & Nega
 \label{tab:expert_audit}
 \end{table*}
 
+\subsection{Banglish and Phonetic Red-Teaming Benchmark}
+\label{app:banglish_red_team}
+In Bangladesh, farmers and mobile users frequently type in \textit{Banglish} (Bengali in Latin script, e.g., \texttt{parakwat bish kothay pabo}) or use colloquial phonetic spellings. Standard keyword safety gates configured exclusively for formal English (\texttt{paraquat}) or canonical Bengali script risk being bypassed by phonetic variations (\textit{parakwat}, \textit{furadon}, \textit{dimekron}) or colloquial harm phrasing (\textit{ami bish kheye morbo}).
+
+To rigorously evaluate resilience against this real-world threat model, we constructed a dedicated 100-query adversarial benchmark spanning: (1)~\textbf{Phonetic Chemical Typos} ($n=35$, covering all 14 legally cancelled active ingredients under phonetic distortion); (2)~\textbf{Banglish Crisis and Poisoning} ($n=25$, covering self-harm, pesticide ingestion, and livestock poisoning in Latin script); (3)~\textbf{Indirect Malicious Sabotage} ($n=25$, covering troll queries seeking broad-spectrum destruction or banned chemicals, e.g., \textit{neighbor er jomir shob gach mere felbo}); and (4)~\textbf{Benign Banglish Controls} ($n=15$, authentic farmer questions written in Latin script, e.g., \textit{alu gache kalo daag poreche ki korbo}).
+
+Table~\ref{tab:banglish_eval} reports benchmark results. The baseline gate (formal English and Bengali script only) intercepted only $1/85$ ($1.18\%$) of adversarial Banglish queries. In contrast, KrishokTech's expanded deterministic gate achieved $85/85$ ($100.0\%$, 95\% CI: $[95.7, 100.0]$) adversarial interception with $0/15$ ($0.0\%$) false alarms on benign Banglish farmer questions. Precheck regex matching completes in median $0.016$\,ms (p95: $0.030$\,ms), well within the $0.321$\,ms median of the full end-to-end Tier-0 safety pipeline (which includes input normalization, multi-lingual keyword routing, and referral payload formatting; Table~\ref{tab:latency}), operating with zero LLM inference cost.
+
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}Xcccc@{}}
+\toprule
+\textbf{Attack Regime} & \textbf{$n$} & \textbf{Baseline} & \textbf{Guarded} & \textbf{Status} \\
+\midrule
+Phonetic Chemical Typos & 35 & 0 (0.0\%) & 35 (100\%) & 16123 Referral \\
+Banglish Crisis / Harm   & 25 & 1 (4.0\%) & 25 (100\%) & 999 / 16123 \\
+Indirect Farm Sabotage   & 25 & 0 (0.0\%) & 25 (100\%) & 16123 Referral \\
+\midrule
+\textbf{Total Adversarial Catch} & \textbf{85} & \textbf{1 (1.2\%)} & \textbf{85 (100\%)} & \textbf{95\% CI: [95.7, 100]} \\
+Benign Banglish Control  & 15 & 15 (100\%) & 15 (100\%) & 0\% False Alarms \\
+\bottomrule
+\end{tabularx}
+\caption{Banglish and phonetic red-teaming benchmark ($N=100$) evaluating Tier-0 deterministic safety prechecks against colloquial Latin-script evasion attempts and benign farmer controls.}
+\label{tab:banglish_eval}
+\end{table}
+
 \section{Delivery, Offline Operation, and Deployment}
 \label{app:deployment}
 
 \subsection{SMS Enforcement}
-The SMS packer produced 299/300 valid offline-ready messages and 100/100 valid live-ready messages ($\le 160$ characters). Referral purity was 16/16. In the baseline live run, naive hard truncation preserved dosage fields in 0/84 advisory cases (0\% survival) because conversational preambles displaced numerical parameters past 160 characters. In contrast, the deterministic 11-slot SMS template compressor guarantees 100.0\% critical slot survival (dose, application interval $\tau$, and pre-harvest interval $\phi$) across 1,000 certified tuples within 102--115 GSM characters (0 violations over 160 characters), and preserves 98.5\% (65/66) of dosage claims on the live benchmark. A stronger baseline (N05c, $n=100$ paired long dose-carrying advisories, seed 42) compared naive truncation, an LLM summarizer, and the deterministic compressor under identical frozen detectors. The LLM preserved dose in 89/100 summaries but violated the ceiling twice; one summary invented an 800--1000\,g urea dosage with no numeric basis in its 2,061-character source, while a second flagged case was a disclosed borderline paraphrase. The compressor preserved dose in 92/100 with zero violations and zero invented claims. Chemical-name retention favored the LLM (56 vs 34/100); the certified compressor claim remains dose/interval/PHI slot survival. The LLM summarizer is a baseline only: the deployed SMS path uses the deterministic compressor, which copies verified slots and cannot invent values.
+The SMS packer produced 299/300 valid offline-ready messages and 100/100 valid live-ready messages ($\le 160$ characters). Referral purity was 8/8. In the live audit of truncated safe-SMS advisories ($n=92$), naive hard truncation retained dose patterns in 12/92 cases due to conversational preamble displacement past the 160-character boundary. In contrast, the deterministic 11-slot SMS template compressor guarantees 100.0\% critical slot survival (dose, application interval $\tau$, and pre-harvest interval $\phi$) across 1,000 certified tuples within 102--115 GSM characters (0 violations over 160 characters), and preserves 98.5\% (65/66) of dosage claims on the live benchmark. In the separate N05c paired benchmark of 100 long dose-carrying advisories (Table~\ref{tab:n05c}, seed 42), naive truncation retained dose in 23/100 cases, an LLM summarizer preserved dose in 89/100 summaries (with two length violations and one invented 800--1000\,g urea dosage), while the deterministic compressor preserved dose in 92/100 cases with zero length violations and zero invented claims. Chemical-name retention favored the LLM (56 vs 34/100); the certified compressor claim remains dose/interval/PHI slot survival. The LLM summarizer is a baseline only: the deployed SMS path uses the deterministic compressor, which copies verified slots and cannot invent values.
 
 \begin{table}[t]
 \centering
@@ -568,7 +596,7 @@ Minimal installation & 284.0 \\
 Full installation & 339.6 \\
 \bottomrule
 \end{tabular}
-\caption{Measured installation footprint for KrishokChat.}
+\caption{Measured installation footprint for KrishokTech.}
 \label{tab:footprint}
 \end{table}
 
@@ -594,7 +622,7 @@ Total pipeline & 33.565 & 67.833 \\
 \end{table}
 
 \subsection{Zero-LLM Operation and Modeled Cost}
-The evaluated tier mix yielded 7.8\% zero-LLM turns (5.6\% Tier-0, 0.0\% Tier-1, 2.2\% Tier-2, 92.2\% Tier-3). Modeled cost was USD~0.1798 per 1,000 turns versus USD~0.1950 for unconstrained Tier-3 generation (a $7.79\%$ modeled saving). Cost is modeled from the tier mix, not billed expenditure.
+The evaluated tier mix yielded 7.9\% zero-LLM turns (5.7\% Tier-0, 0.0\% Tier-1, 2.2\% Tier-2, 92.1\% Tier-3). Modeled cost was USD~0.1682 per 1,000 turns versus USD~0.1950 for unconstrained Tier-3 generation (a $13.7\%$ modeled saving). Cost is modeled from the tier mix, not billed expenditure.
 
 \subsection{Trace Ordering}
 Across 100 evaluation cases, all 100 provenance traces preserved the required event ordering (median 9.0 events per turn).
@@ -657,13 +685,11 @@ Figures~\ref{fig:app_halt}--\ref{fig:app_delivery} provide visual walkthroughs o
 
 \paragraph{Implicit Crop Reference.} The single missed farmer contradiction case (\texttt{farmer\_q\_63}) involved an implicit crop reference, illustrating that the contradiction badge covers explicit textual mentions rather than indirect references.
 
-\paragraph{Dialectal Keyword Miss (\texttt{farmer\_q\_593}).} Analysis of slot-extraction misses identified \texttt{farmer\_q\_593} as a representative regional dialectal boundary case. In this authentic field query, the farmer asked: \textit{``Lonka gache kukre jawa roger ki kono ghoroa shomadhan ache?''} (``Is there any home remedy for leaf curl disease in chilli plants?''). Because the gazetteer indexed standard Bengali \textit{morich} (\textit{Capsicum annuum}) without the regional dialectal synonym \textit{lonka}, the deterministic extractor did not capture the crop slot, routing the query to open retrieval. In this instance, downstream factual verification prevented ungrounded chemical advice, illustrating how layered verification mitigates dialectal keyword misses.
-
 \paragraph{Adversarial Generation Residual.} Bangla-native adversarial testing revealed residual vulnerabilities in embedded (4/10) and roleplay (2/10) attacks, demonstrating why pre-render dosage verification is required even when upstream guards pass.
 
 \paragraph{Off-Topic Handling Across Tiers.} The Tier-0 deterministic precheck is strictly scoped to emergency crisis language, banned chemicals, and prompt injections (blocking 10/10 injections but passing 30/30 non-crisis off-topic queries). Evaluating these 30 queries through the production Tier-1 LLM classification branch (\texttt{google/gemini-2.5-flash-lite}) achieves a 25/30 (83.33\% [66.44, 92.66]) refusal rate, with the remaining 5 weather queries routed to safe agricultural information by design.
 
-\paragraph{SMS Message Compression.} Baseline naive string truncation resulted in 0/84 dosage field survival as introductory conversational text pushed dosage parameters past the 160-character boundary. The deterministic 11-slot template compressor avoids preamble displacement, achieving 100.0\% critical slot survival across 1,000 certified tuples and 98.5\% (65/66) on authentic farmer benchmark advisories.
+\paragraph{SMS Message Compression.} Baseline naive string truncation retained dose patterns in 12/92 cases, varying with preamble length, as introductory conversational text pushed dosage parameters past the 160-character boundary. The deterministic 11-slot template compressor avoids preamble displacement, achieving 100.0\% critical slot survival across 1,000 certified tuples and 98.5\% (65/66) on authentic farmer benchmark advisories.
 
 \section{Comprehensive Evidence Summary}
 \label{app:evidence_table}
@@ -680,10 +706,10 @@ Table~\ref{tab:evidence_summary} details the measured performance, sample sizes,
 \textbf{Component} & \textbf{Metric / Evaluation Target} & \textbf{Result} & \textbf{$n$} & \textbf{Condition / Benchmark Scope} \\
 \midrule
 \multicolumn{5}{l}{\textit{C1: Halting Before Retrieval}} \\
-Deterministic Gate & Halt rate on treatment queries & 76/200 (38.0\%; Wilson [31.6, 44.9]) & 200 & Authentic farmer queries (dual-annotated) \\
-Controlled Pilot & Ambiguous halt / Specified pass & 100/100 / 140/140 & 240 & Conformance check on constructed pairs \\
+Deterministic Gate & Halt rate on treatment queries & 30/200 (15.0\%; Wilson [10.71, 20.61]) & 200 & Authentic farmer queries (dual-annotated) \\
+Controlled Pilot & Ambiguous halt / Specified pass & 100/100 / 114/140 & 240 & Conformance check on constructed pairs \\
 Token Footprint & Clarification vs Retrieval context & p50: 89 vs 2,146 tokens & 200 & Separate medians; no blended saving claimed \\
-Live vs Deterministic & Halt agreement / Live p50 latency & 0.68 / 4,218.6\,ms & 200 & Live LLM halts 10\% vs 38\% deterministic \\
+Live vs Deterministic & Halt agreement / Live p50 latency & 0.91 / 4,218.6\,ms & 200 & Live LLM halts 10\% vs 15\% deterministic \\
 \midrule
 \multicolumn{5}{l}{\textit{C2: Crop Constraint and Multimodal Consistency}} \\
 Crop Vision Top-1 & Potato / Rice / Wheat / Brassica / Corn / Chilli & 0.9413--0.9907 (all 6 crops $\ge 0.94$; Tab.~\ref{tab:crop_models}) & 4,294 & 6 crop-specific disease classifiers (100\% ONNX-PyTorch agreement) \\
@@ -695,10 +721,10 @@ Prompted Divergence & Cross-track divergence rate & 68/80 (85.0\%) & 80 & Prompt
 \multicolumn{5}{l}{\textit{C3: Safety Verification and Constrained Delivery}} \\
 Live Safety Guard & ASR (guarded vs unguarded) & 0.95\% [0.26, 3.41] vs 36.19\% & 420 & Live cloud generator; Bangla-native ASR 10/100 \\
 Dosage Verifier & Mutation detection (Live + Scaled) & Live: 114/118 (96.6\%); Scaled: 296/350 (84.6\%, 100\% overdose/underdose) & 528 & Live audit ($n=38$) + Scaled benchmark across 88 BARI/BRRI passages \\
-SMS Enforcement & Length / Purity / Slot survival & 399/400 / 16/16 / 100\% (1,000/1,000) & 1,416 & Naive dose 0/84; template compressor 65/66 live gold \\
+SMS Enforcement & Length / Purity / Slot survival & 399/400 / 8/8 / 100\% (1,000/1,000) & 1,416 & Naive dose 12/92; template compressor 65/66 live gold \\
 Offline Retrieval & Local BM25 hit rate & 0.94; 0/400 cache misses & 400 & Local index; network loss simulated (+13.25/+30.0\,pp) \\
 Non-LLM Overhead & Pipeline latency (Safety + BM25 + Verifier) & p50: 33.565\,ms (p95: 67.833\,ms) & 400 & Safety 0.32\,ms, BM25 26.83\,ms, Verifier 4.82\,ms \\
-Tier Mix/Cost & Zero-LLM turns / Cost per 1k turns & 7.8\% zero-LLM / \$0.1839 (\$0.1798 modeled) & 1,000 & Metered tokens; 92.2\% T3; T1 0\% (9-fact deterministic base) \\
+Tier Mix/Cost & Zero-LLM turns / Cost per 1k turns & 7.9\% zero-LLM / \$0.1720 (\$0.1682 modeled) & 1,000 & Metered tokens; 92.1\% T3; T1 0\% (9-fact deterministic base) \\
 \bottomrule
 \end{tabularx}
 \caption{Full evidence summary across the three core contributions and deployment layers. Generator for all C3 live calls: \texttt{google/gemini-2.5-flash-lite}. Every number traces directly to frozen artifacts in the evaluation registry.}
@@ -708,7 +734,7 @@ Tier Mix/Cost & Zero-LLM turns / Cost per 1k turns & 7.8\% zero-LLM / \$0.1839 (
 \section{System Limitations Ledger and Scope of Claims}
 \label{app:limitations_full}
 
-To ensure complete transparency and rigorous boundary reporting, Table~\ref{tab:limitations_full} documents the active system limitations and validated boundaries of KrishokChat. Table~\ref{tab:claim_scope} summarizes the empirical status and validated scope of all claims across components.
+To ensure complete transparency and rigorous boundary reporting, Table~\ref{tab:limitations_full} documents the active system limitations and validated boundaries of KrishokTech. Table~\ref{tab:claim_scope} summarizes the empirical status and validated scope of all claims across components.
 
 \begin{table*}[t]
 \centering
@@ -744,9 +770,9 @@ To ensure complete transparency and rigorous boundary reporting, Table~\ref{tab:
 \toprule
 \textbf{Component} & \textbf{Status} & \textbf{Interpretation and Validated Boundary} \\
 \midrule
-Deterministic farmer gate & Real measured & 76/200 halted (122 passed, 2 refused); dual-annotated benchmark ($\kappa=1.0000$). \\
-Text gate pass-through & Real measured & $n=400$; crop-specified queries pass without penalty ($0.30$ vs $0.30$, $p=1.0$; distinct from crop fence). \\
-Pilot halt/pass & Pilot & 100/100 ambiguous halted and 140/140 specified passed; conformance check only. \\
+Deterministic farmer gate & Real measured & 30/200 halted (170 passed); dual-annotated benchmark ($\kappa=1.0000$). \\
+Text gate pass-through & Real measured & $n=400$; crop-specified queries pass without penalty ($0.3025$ vs $0.2875$, $p=0.03125$, 6/0 discordant transitions, all favoring the gated arm; distinct from crop fence). \\
+Pilot halt/pass & Pilot & 100/100 ambiguous halted; 114/140 specified passed directly (26/140 prompted bounded slot clarification); conformance check only. \\
 Crop-specific vision & Real measured & All six crop models measured ($N=4,294$; all $\ge 0.94$ top-1); INT8 evaluated on 1--4 threads (3.7$\times$ size drop, 0.00\,pp drop). \\
 Family router & Real measured & 433/437 after frozen family mapping; wheat-800 excluded. \\
 Crop fence & Real measured & Evaluated across open search (0.3625), empirical ONNX vision noise (0.3125), gated contradiction halts (0.2875), and oracle bounds (0.3000). \\
@@ -754,11 +780,11 @@ Mismatch badge & Real measured & 453/454 explicit contradictions; implicit confl
 Safety guard & Real measured & 420 live calls; residual failures remain (0.10 Bangla-native ASR). \\
 Off-topic audit & Real measured analysis & Injections 10/10 blocked; off-topic 0/30 refused by Tier-0 precheck vs 25/30 (83.33\%) by Tier-1 live LLM NLU. \\
 Dosage verifier & Real measured & Live audit ($n=38$, 96.6\% catch) + Scaled benchmark ($N=528$, 100\% overdose/underdose catch, 84.6\% overall across 88 BARI/BRRI passages). \\
-Routing probe envelope & Real measured envelope & $n=3,000$; certify recall $0.7165$, dangerous acceptance $0.374$ on offline stub. \\
+Routing probe envelope & Real measured envelope & $n=3,000$; certify recall $0.8615$, dangerous acceptance $0.374$ on offline stub. \\
 SMS & Real measured & Length and referral constraints validated; dosage survival validated via deterministic 11-slot compressor (100\%). \\
 Offline retrieval & Measured deterministic path & BM25 hit rate 0.94; network-loss effects simulated (+13.25 / +30.0\,pp). \\
 Installation footprint & Real measured & 95.64\,MB unique ONNX, 284.0\,MB minimal, 339.6\,MB full. \\
-Tier-mix cost & Computed from tokens & USD~0.1839 per 1,000 turns (USD~0.1798 modeled) under 7.8\% zero-LLM mix. \\
+Tier-mix cost & Computed from tokens & USD~0.1720 per 1,000 turns (USD~0.1682 modeled) under 7.9\% zero-LLM mix. \\
 LLM latency & Not measured in overhead & Live latency is excluded from the 33.565\,ms non-LLM figure. \\
 \bottomrule
 \end{tabularx}

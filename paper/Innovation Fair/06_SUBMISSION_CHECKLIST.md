@@ -10,14 +10,14 @@
 
 | Form Field Name | Character / Word Constraint | Prepared Artifact in Repository |
 |---|:---:|---|
-| **Project Title** | Short string | `KrishokChat — Bengali Agricultural Intelligence for Farmers, Extension and Rural Communities` |
+| **Project Title** | Short string | `KrishokTech — Bengali Agricultural Intelligence for Farmers, Extension and Rural Communities` |
 | **Project Category / Track** | Dropdown / Selection | **AI / Digital Agriculture / Practical Application → Enterprise → Market** |
-| **Project Description / Abstract** | $\le 250$ Words | [`01_250_WORD_DESCRIPTION.md`](file:///d:/KrishokChat%20Advisory%20System/paper/Innovation%20Fair/01_250_WORD_DESCRIPTION.md) *(234 Words)* |
-| **Technical Details** | Text area | [`02_TECHNICAL_DETAILS.md`](file:///d:/KrishokChat%20Advisory%20System/paper/Innovation%20Fair/02_TECHNICAL_DETAILS.md) |
-| **Presentation Pitch Deck** | PPT / PPTX / PDF (7–8 Slides) | [`03_8_SLIDE_PITCH_DECK.md`](file:///d:/KrishokChat%20Advisory%20System/paper/Innovation%20Fair/03_8_SLIDE_PITCH_DECK.md) |
-| **Supporting Document / Dossier** | PDF Upload | [`05_20_PAGE_SUPPORTING_DOSSIER.md`](file:///d:/KrishokChat%20Advisory%20System/paper/Innovation%20Fair/05_20_PAGE_SUPPORTING_DOSSIER.md) |
-| **Live Demo URL** | Web Link | `https://krishokchat.vercel.app` (or repository link) |
-| **GitHub Repository Link** | Web Link | `https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System` |
+| **Project Description / Abstract** | $\le 250$ Words | [`01_250_WORD_DESCRIPTION.md`](file:///d:/KrishokTech%20Advisory%20System/paper/Innovation%20Fair/01_250_WORD_DESCRIPTION.md) *(234 Words)* |
+| **Technical Details** | Text area | [`02_TECHNICAL_DETAILS.md`](file:///d:/KrishokTech%20Advisory%20System/paper/Innovation%20Fair/02_TECHNICAL_DETAILS.md) |
+| **Presentation Pitch Deck** | PPT / PPTX / PDF (7–8 Slides) | [`03_8_SLIDE_PITCH_DECK.md`](file:///d:/KrishokTech%20Advisory%20System/paper/Innovation%20Fair/03_8_SLIDE_PITCH_DECK.md) |
+| **Supporting Document / Dossier** | PDF Upload | [`05_20_PAGE_SUPPORTING_DOSSIER.md`](file:///d:/KrishokTech%20Advisory%20System/paper/Innovation%20Fair/05_20_PAGE_SUPPORTING_DOSSIER.md) |
+| **Live Demo URL** | Web Link | `https://krishoktech.vercel.app` (or repository link) |
+| **GitHub Repository Link** | Web Link | `https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System` |
 
 ---
 

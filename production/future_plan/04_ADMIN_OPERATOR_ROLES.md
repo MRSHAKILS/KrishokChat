@@ -10,7 +10,7 @@
 
 DAE's **QIS platform** has onboarded 8,000+ Sub-Assistant Agriculture Officers (target 14,000); its "Farmers' Prescription" gives personalized dose/mineral/timing advice via audio/video ([TechnoVista QIS](https://technovista.com.bd/quality-information-system/)). This is both the credible **integration target** and the pattern to emulate — not compete blindly against.
 
-Partial infra already exists in KrishokChat: admin console (G0–G9), broadcast notifications, audit panel, telemetry (T0-05).
+Partial infra already exists in KrishokTech: admin console (G0–G9), broadcast notifications, audit panel, telemetry (T0-05).
 
 ---
 

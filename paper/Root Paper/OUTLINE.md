@@ -2,7 +2,7 @@
 
 **Target venue:** *Computers and Electronics in Agriculture* (Elsevier)
 
-**Manuscript:** `krishokchat_cea.tex`
+**Manuscript:** `krishoktech_cea.tex`
 
 **Revision status:** first-round manuscript revised after adversarial review of the Qwen literature review and cross-check against the project claim ledger, experiment registry, specifications, runners, and frozen result artifacts.
 
@@ -12,7 +12,7 @@
 
 ## 1. Editorial decision from the review
 
-The Qwen review supplied a strong CEA direction, but it also introduced claims that are not safe to publish. Its useful idea is to frame KrishokChat as a low-resource agricultural advisory system whose safety depends on the interaction between evidence, perception, routing, network failure, and delivery channel. Its unsupported parts are the claims of hard zero hazard, dialect immunity, field readiness, completed hardware profiling, and settled national economics.
+The Qwen review supplied a strong CEA direction, but it also introduced claims that are not safe to publish. Its useful idea is to frame KrishokTech as a low-resource agricultural advisory system whose safety depends on the interaction between evidence, perception, routing, network failure, and delivery channel. Its unsupported parts are the claims of hard zero hazard, dialect immunity, field readiness, completed hardware profiling, and settled national economics.
 
 The revised paper therefore makes a narrower and stronger argument:
 

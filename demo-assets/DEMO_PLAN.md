@@ -1,4 +1,4 @@
-# KrishokChat Reviewer Demo Plan
+# KrishokTech Reviewer Demo Plan
 
 This is the single entry point for preparing a reviewer-ready demo. Every case is
 stored under `demo-assets/cases/` with a stable case ID, the exact input, the
@@ -96,7 +96,7 @@ demo-assets/
 | Coverage gate | livestock, training, export, availability, government-assistance wording | review for false refusals; narrow only if evidence shows overblocking | precheck test matrix |
 | Verifier | answer containing unsupported dosage or Bengali numerals/units | unsupported dosage claim flagged and removed from final answer | verifier claims and sanitized answer |
 | Provider failure | intent/generation/retrieval adapter failure | fail closed; no unsupported answer | controlled referral + audit |
-| Local model | same safe question with `krishokchat-4b` | same QA contract and safety boundary; model lane only changes generation | model field + trace |
+| Local model | same safe question with `krishoktech-4b` | same QA contract and safety boundary; model lane only changes generation | model field + trace |
 | Streaming | `/api/qa/stream` for safe and terminal cases | stage events and final response agree with `/api/qa` | SSE transcript |
 
 ## Vision case matrix
@@ -124,7 +124,7 @@ demo-assets/
 
 1. List every configured online provider and local endpoint without exposing keys.
 2. Confirm intent and generation model names are independently configurable.
-3. Confirm the local `krishokchat-4b` lane uses the verified external Q4_K_M base
+3. Confirm the local `krishoktech-4b` lane uses the verified external Q4_K_M base
    plus LoRA runtime and never the truncated checked-in GGUF.
 4. Confirm all model/provider failures fail closed.
 5. Confirm demo cache is used only when `DEMO_MODE=true`, and terminal refusals are

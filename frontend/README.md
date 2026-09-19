@@ -1,4 +1,4 @@
-# KrishokChat Frontend
+# KrishokTech Frontend
 
 Next.js 16.3.0 + React 19.2.8 + Tailwind v4 + motion + shadcn/ui (base-nova).
 

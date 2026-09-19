@@ -1,7 +1,7 @@
-# KrishokChat v2 Experimental Master Plan & Execution Roadmap
+# KrishokTech v2 Experimental Master Plan & Execution Roadmap
 
 **Target Venue:** Wiley *Expert Systems* (ISSN: 1468-0394)  
-**Title:** *KrishokChat: A Knowledge-Engineered Expert System for Relation-Aware Certification of Safety-Critical Agricultural Advisory*  
+**Title:** *KrishokTech: A Knowledge-Engineered Expert System for Relation-Aware Certification of Safety-Critical Agricultural Advisory*  
 **Scope:** Knowledge Engineering, Calibrated Decision Making, Relational Certification, Edge Deployment & Robustness
 
 ---
@@ -27,7 +27,7 @@
 | **B4** | `RAG-Lexical` | None | Gemma-4 + BM25/Dense | Substring / Token matching | Fixed Overlap Cutoff | **[DONE]** |
 | **B5** | `RAG-LLM-Judge` | None | Gemma-4 + BM25/Dense | Dual LLM Self-Critique | Soft Confidence ($\theta$) | **[DONE]** |
 | **B6** | `RAG-Conformal` | None | Gemma-4 + BM25/Dense | CAP / Softmax Temperature | Conformal Threshold | **[DONE]** |
-| **B7 (Ours)** | **`KrishokChat-Full`** | **Tier 0–2 Deterministic** | **Gemma-4 4-bit** | **Typed Relational Matcher** | **Calibrated Selective** | **[DONE]** |
+| **B7 (Ours)** | **`KrishokTech-Full`** | **Tier 0–2 Deterministic** | **Gemma-4 4-bit** | **Typed Relational Matcher** | **Calibrated Selective** | **[DONE]** |
 
 ---
 
@@ -35,9 +35,9 @@
 
 ### 3.1 Completed & Frozen Benchmark Layers
 * **[DONE] Layer E1 (End-to-End Operational Matrix):** 20,112 rows, 60/20/20 train/dev/test split.
-* **[DONE] Layer E2 (Relational Misbinding Benchmark):** 10,000 cases across 10 hazard families. Lexical false accept: **80.0%**; KrishokChat hazard: **0.0%** (95% CI: `[0.00%, 0.04%]`). [Artifact: `misbinding_benchmark_results.yaml`]
+* **[DONE] Layer E2 (Relational Misbinding Benchmark):** 10,000 cases across 10 hazard families. Lexical false accept: **80.0%**; KrishokTech hazard: **0.0%** (95% CI: `[0.00%, 0.04%]`). [Artifact: `misbinding_benchmark_results.yaml`]
 * **[DONE] Layer E4 (Risk–Coverage Calibration & Conformal Abstention):** 20,112 rows, Dev-calibrated $\theta^*$, AURC **0.0153**, ECE **0.0785**, Test Coverage **84.56%**, Test Risk **1.26%**. [Artifact: `risk_coverage_calibration_results.yaml`]
-* **[DONE] Layer E5 (Counterfactual Evidence Binding):** 2,000 pairs, CBC = **1.0000** for KrishokChat vs 0.2735 for Vanilla RAG and 0.4045 for Lexical. [Artifact: `counterfactual_binding_results.yaml`]
+* **[DONE] Layer E5 (Counterfactual Evidence Binding):** 2,000 pairs, CBC = **1.0000** for KrishokTech vs 0.2735 for Vanilla RAG and 0.4045 for Lexical. [Artifact: `counterfactual_binding_results.yaml`]
 * **[DONE] Layer E6 (Ecological Farmer Benchmark):** 4,000 queries across 4 registers, **0.00% hazard**, 65.8% correct, safe degradation to abstention. [Artifact: `farmer_dialect_benchmark_results.yaml`]
 * **[DONE] Layer E7/E8 (Security & Prompt Injections):** 1,400 multi-lingual jailbreak attacks, **0.0% UCR** (95% CI: `[0.00%, 0.27%]`). [Artifact: `prompt_injection_benchmark_results.yaml`]
 * **[DONE] Layer E9 (Latency & Economics Decomposition):** $0.1798 / 1k queries, $0.000213 per safe answer ($C_{\text{safe}}$), $\le 0.94\text{ ms}$ deterministic p95. [Artifact: `latency_economics_decomposition_results.yaml`]
@@ -92,7 +92,7 @@
 1. **Turn 1 (Integrity Pass on Layer E3 & LaTeX Inconsistencies) — [COMPLETED]:**
    - Re-implemented `run_slot_ablation_eval.py` including Growth Stage $s$ and realistic empirical distribution.
    - Updated `slot_ablation_benchmark_results.yaml`.
-   - Fixed all dataset split numbers (12,067 / 4,022 / 4,023) and terminology in `krishokchat_wiley_expert_systems.tex`.
+   - Fixed all dataset split numbers (12,067 / 4,022 / 4,023) and terminology in `krishoktech_wiley_expert_systems.tex`.
 2. **Turn 2 (Bibliography & Literature Expansion) — [COMPLETED]:**
    - Created `references.bib` with 27 real peer-reviewed citations.
    - Expanded Related Work into 5 rich scholarly subfields.
@@ -112,4 +112,4 @@
 6. **Turn 6 (Master Verification & Final Submission Readiness) — [COMPLETED]:**
    - Ran `run_all_experiments.py` over all 11 evaluation runners (11/11 passed in 2.19s).
    - Ran full backend pytest regression suite (541 passed, 8 skipped, 0 failed in 52.31s).
-   - Compiled camera-ready PDF `krishokchat_wiley_expert_systems.pdf` (17 pages, 472,886 bytes, 0 errors).
+   - Compiled camera-ready PDF `krishoktech_wiley_expert_systems.pdf` (17 pages, 472,886 bytes, 0 errors).

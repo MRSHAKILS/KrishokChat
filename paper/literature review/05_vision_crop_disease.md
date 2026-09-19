@@ -7,10 +7,10 @@
 ## 1. Key papers
 
 **Supervised classifiers beat VLMs in agriculture.**
-- Ranario & Earles, "Are vision-language models ready to zero-shot replace supervised classification models in agriculture?", arXiv:2512.15977v3 (Dec 2025, rev. May 2026). Benchmarked open/closed VLMs on 27 AgML datasets (162 classes, 248k images). Zero-shot VLMs underperform a supervised YOLO11 baseline on every task: best VLM (Gemini-3 Pro) ≈62% under MCQA prompting; open-ended raw accuracy <25% (21%→30% under LLM semantic judging); open-source Qwen-VL-72B tops out at 42% MCQA. **Strongest evidence that KrishokChat's supervised `task: classify` pipeline is the correct anchor.**
+- Ranario & Earles, "Are vision-language models ready to zero-shot replace supervised classification models in agriculture?", arXiv:2512.15977v3 (Dec 2025, rev. May 2026). Benchmarked open/closed VLMs on 27 AgML datasets (162 classes, 248k images). Zero-shot VLMs underperform a supervised YOLO11 baseline on every task: best VLM (Gemini-3 Pro) ≈62% under MCQA prompting; open-ended raw accuracy <25% (21%→30% under LLM semantic judging); open-source Qwen-VL-72B tops out at 42% MCQA. **Strongest evidence that KrishokTech's supervised `task: classify` pipeline is the correct anchor.**
 
 **Vision+LLM+RAG advice pipeline.**
-- Mondal, "Vision Meets Language: A RAG-Augmented YOLOv8 Framework for Coffee Disease Diagnosis and Farmer Assistance", arXiv:2505.21544 (May 2025; SN Computer Science DOI 10.1007/s42979-026-05246-4). Fine-tuned YOLOv8 detects coffee leaf diseases; disease name queries a FAISS knowledge base; Llama-3 generates grounded remedy text. **The only located published predecessor of KrishokChat's exact loop (vision→diagnosis→grounded advice) — single-crop, no grounding metric, no safety layer, no rejection behavior.**
+- Mondal, "Vision Meets Language: A RAG-Augmented YOLOv8 Framework for Coffee Disease Diagnosis and Farmer Assistance", arXiv:2505.21544 (May 2025; SN Computer Science DOI 10.1007/s42979-026-05246-4). Fine-tuned YOLOv8 detects coffee leaf diseases; disease name queries a FAISS knowledge base; Llama-3 generates grounded remedy text. **The only located published predecessor of KrishokTech's exact loop (vision→diagnosis→grounded advice) — single-crop, no grounding metric, no safety layer, no rejection behavior.**
 
 **Hierarchical two-stage diagnosis.**
 - Suwa et al., "Hierarchical Object Detection and Recognition Framework for Practical Plant Disease Diagnosis", arXiv:2407.17906 (2024). Stage-1 YOLOv7 ROI detection, stage-2 EfficientNetV2 classification, on 281k Japanese field images (4 crops, 21 classes). Beats YOLOv7-alone by 5.8–21.5 F1 points on healthy cases; macro-F1 +1.1–7.2 over EfficientNetV2. Closest precedent for the crop-router→disease-classifier hierarchy.
@@ -52,9 +52,9 @@
 
 ## 3. Research gaps
 
-1. **No pipeline-level evaluation of "classification → grounded treatment advice" exists.** Mondal (2505.21544) is the only located vision→RAG-advice system; it reports no grounding metric, no hallucination audit, no safety routing, no rejection state. AgMMU/AgroBench evaluate VLM factuality but not closed-form two-stage pipelines. **KrishokChat's differentiator: verifier-flagged claims (dosages) as an explicit, measured artifact — no existing paper measures this.**
-2. **Selective prediction/calibration is unstudied at the system level for fine-grained multi-crop disease classifiers.** Plant-domain OOD work benchmarks algorithms, not deployed thresholds on a 35-class, class-imbalanced, multi-crop hierarchy; medical work (2603.02719) proves class-dependent miscalibration breaks naive rejection on rare classes. **KrishokChat lever: per-class calibrated thresholds over its 35 disease classes with coverage-vs-error tradeoffs (risk-coverage/AURC-style metrics) — precedented in chest X-ray (2509.10348), unclaimed in agriculture.**
-3. **Hierarchical crop-router→disease-classifier error propagation is unquantified.** HODRF validates two-stage design but for detection+classification, not router-then-classifier. PlantCLEF shows how much hierarchy + domain shift costs. **KrishokChat lever: router-error and classifier-error decomposition with honest rejection states (low-confidence → 16123 helpline), mirroring DR screening's ungradable-image protocol.**
+1. **No pipeline-level evaluation of "classification → grounded treatment advice" exists.** Mondal (2505.21544) is the only located vision→RAG-advice system; it reports no grounding metric, no hallucination audit, no safety routing, no rejection state. AgMMU/AgroBench evaluate VLM factuality but not closed-form two-stage pipelines. **KrishokTech's differentiator: verifier-flagged claims (dosages) as an explicit, measured artifact — no existing paper measures this.**
+2. **Selective prediction/calibration is unstudied at the system level for fine-grained multi-crop disease classifiers.** Plant-domain OOD work benchmarks algorithms, not deployed thresholds on a 35-class, class-imbalanced, multi-crop hierarchy; medical work (2603.02719) proves class-dependent miscalibration breaks naive rejection on rare classes. **KrishokTech lever: per-class calibrated thresholds over its 35 disease classes with coverage-vs-error tradeoffs (risk-coverage/AURC-style metrics) — precedented in chest X-ray (2509.10348), unclaimed in agriculture.**
+3. **Hierarchical crop-router→disease-classifier error propagation is unquantified.** HODRF validates two-stage design but for detection+classification, not router-then-classifier. PlantCLEF shows how much hierarchy + domain shift costs. **KrishokTech lever: router-error and classifier-error decomposition with honest rejection states (low-confidence → 16123 helpline), mirroring DR screening's ungradable-image protocol.**
 
 ## 4. Conventions
 
@@ -64,7 +64,7 @@
 - **Systems papers**: pipeline diagrams, per-stage metrics, deployment constraints, audit trails; medical-style deployment reporting (intention-to-screen sensitivity, image-rejection rate, threshold calibration on held-out sets, referral-adherence) is the quality bar transferable from DR screening.
 - **Safety framing**: abstention/deflection to human escalation with quantified coverage is now a legitimate evaluation dimension (2508.19322 AT-CXR, 2508.02319).
 
-## 5. Positioning recommendations for KrishokChat
+## 5. Positioning recommendations for KrishokTech
 
 - Anchor on supervised classification: cite arXiv:2512.15977 as direct 2026 evidence that off-the-shelf VLMs cannot replace YOLO11-class supervised models, validating the locked Ultralytics `classify` stack.
 - Make honest failure a headline: per-class calibrated rejection thresholds + OOD score over the 35 disease classes as coverage-vs-error curves (AURC/risk@80% convention from 2509.10348); pre-empt the 2603.02719 failure mode by evaluating rejection per class, not aggregate.

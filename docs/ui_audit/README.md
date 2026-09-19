@@ -1,4 +1,4 @@
-# KrishokChat (কৃষক চ্যাট) — Comprehensive UI/UX Audit & Action Plan
+# KrishokTech (কৃষক চ্যাট) — Comprehensive UI/UX Audit & Action Plan
 
 **Target Audience**: Bangladeshi Rural Farmers, Agricultural Extension Officers, and Capstone Demo Evaluators  
 **Report Date**: August 2026  
@@ -8,29 +8,29 @@
 
 ## 📌 Executive Summary
 
-This directory contains the exhaustive UI/UX, accessibility, visual polish, and Bangla localization critique for the **KrishokChat Bangladesh Agri-AI Advisory System**. Every page of the 15 system routes was rendered, audited via live browser execution, and analyzed with explicit focus on **Bangladeshi Farmer Usability** and **Live Investor Demo Impact**.
+This directory contains the exhaustive UI/UX, accessibility, visual polish, and Bangla localization critique for the **KrishokTech Bangladesh Agri-AI Advisory System**. Every page of the 15 system routes was rendered, audited via live browser execution, and analyzed with explicit focus on **Bangladeshi Farmer Usability** and **Live Investor Demo Impact**.
 
 ---
 
 ## 🗂️ Audit Directory Navigation
 
-- [🚨 Global Design System & Cross-Cutting Bugs](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/GLOBAL_DESIGN_SYSTEM_BUGS.md)
+- [🚨 Global Design System & Cross-Cutting Bugs](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/GLOBAL_DESIGN_SYSTEM_BUGS.md)
 - 📄 **Individual Page Critique Reports**:
-  1. [01. Home Landing Page (`/`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/01_home_critique.md)
-  2. [02. KrishokChat Assistant (`/chat`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/02_chat_critique.md)
-  3. [03. Crop Disease Detection (`/detect`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/03_detect_critique.md)
-  4. [04. System Analytics & Safety Audit (`/analytics`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/04_analytics_critique.md)
-  5. [05. Advisory Knowledge Library (`/library`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/05_library_critique.md)
-  6. [06. Datasets & Research Data (`/data`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/06_data_critique.md)
-  7. [07. Research Overview (`/research`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/07_research_critique.md)
-  8. [08. Evaluation Benchmark (`/research/benchmark`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/08_research_benchmark_critique.md)
-  9. [09. AI Pipeline Methodology (`/research/methodology`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/10_research_methodology_critique.md)
-  10. [10. Safety-Aware Guardrails (`/research/safety`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/10_research_safety_critique.md)
-  11. [11. About KrishokChat (`/about`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/11_about_critique.md)
-  12. [12. Research Team & Credits (`/team`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/12_team_critique.md)
-  13. [13. Contact & Support (`/contact`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/13_contact_critique.md)
-  14. [14. Authentication / Login (`/auth`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/14_auth_critique.md)
-  15. [15. 404 Page Not Found (`/non-existent-page`)](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/pages/15_not_found_critique.md)
+  1. [01. Home Landing Page (`/`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/01_home_critique.md)
+  2. [02. KrishokTech Assistant (`/chat`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/02_chat_critique.md)
+  3. [03. Crop Disease Detection (`/detect`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/03_detect_critique.md)
+  4. [04. System Analytics & Safety Audit (`/analytics`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/04_analytics_critique.md)
+  5. [05. Advisory Knowledge Library (`/library`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/05_library_critique.md)
+  6. [06. Datasets & Research Data (`/data`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/06_data_critique.md)
+  7. [07. Research Overview (`/research`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/07_research_critique.md)
+  8. [08. Evaluation Benchmark (`/research/benchmark`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/08_research_benchmark_critique.md)
+  9. [09. AI Pipeline Methodology (`/research/methodology`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/10_research_methodology_critique.md)
+  10. [10. Safety-Aware Guardrails (`/research/safety`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/10_research_safety_critique.md)
+  11. [11. About KrishokTech (`/about`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/11_about_critique.md)
+  12. [12. Research Team & Credits (`/team`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/12_team_critique.md)
+  13. [13. Contact & Support (`/contact`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/13_contact_critique.md)
+  14. [14. Authentication / Login (`/auth`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/14_auth_critique.md)
+  15. [15. 404 Page Not Found (`/non-existent-page`)](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/pages/15_not_found_critique.md)
 
 ---
 

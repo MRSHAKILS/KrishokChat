@@ -17,7 +17,7 @@ All offline, demo, and build scripts consolidated from three former homes:
 | `tools/rag/` | `backend/ml_assets/rag_index/scripts/` (29 files, `00_*` … `14_*`) | RAG corpus preprocessing, BM25/FAISS build, term map, golden set, coverage analysis | `python tools/rag/02_build_bm25.py` |
 | `tools/vision/` | `backend/ml_assets/vision/scripts/` (4 files) | Vision model verification & test matrices | `python tools/vision/01_verify_models.py` |
 | `backend/scripts/` | **stays** | Runtime-adjacent: `replay_golden.py`, `test_bm25_retrieval.py`, `test_full_pipeline.py` etc (import `app.*`) | `uv run python backend/scripts/replay_golden.py` |
-| `scripts/` | **stays (minimal)** | Only `Modelfile` (canonical per H4, hardlinked to `backend/ml_assets/gemma/Modelfile`) | `ollama create krishokchat-4b -f scripts/Modelfile` |
+| `scripts/` | **stays (minimal)** | Only `Modelfile` (canonical per H4, hardlinked to `backend/ml_assets/gemma/Modelfile`) | `ollama create krishoktech-4b -f scripts/Modelfile` |
 
 ## Migration notes (Hygiene → Structure)
 

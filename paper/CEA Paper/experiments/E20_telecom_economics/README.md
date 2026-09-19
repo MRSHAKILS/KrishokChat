@@ -84,8 +84,8 @@ What is C_safe with real Bangladesh A2P SMS rates (0.25 BDT) and local VPS hosti
       "traffic_mix": "50% App Online, 30% Offline Cache, 20% SMS Fallback",
       "commercial_baseline_annual_cost_usd": 238080.0,
       "commercial_baseline_annual_cost_crore_bdt": 2.86,
-      "krishokchat_annual_cost_usd": 57252.2,
-      "krishokchat_annual_cost_crore_bdt": 0.69,
+      "krishoktech_annual_cost_usd": 57252.2,
+      "krishoktech_annual_cost_crore_bdt": 0.69,
       "national_annual_savings_usd": 180827.8,
       "national_annual_savings_crore_bdt": 2.17,
       "national_budget_savings_pct": 75.95
@@ -134,7 +134,7 @@ What is C_safe with real Bangladesh A2P SMS rates (0.25 BDT) and local VPS hosti
   "acceptance": {
     "accepted_by": "PENDING",
     "ledger_entry": "S-E20",
-    "notes": "Incorporating real Bangladesh A2P bulk SMS rates (0.25 BDT) and local server hosting, KrishokChat reduces safe advisory serving costs by 89.6% on the app and 8.6% on SMS fallback compared to commercial cloud APIs, yielding 22.8 Crore BDT ($190k USD) in annual savings across a national 16M-farmer deployment."
+    "notes": "Incorporating real Bangladesh A2P bulk SMS rates (0.25 BDT) and local server hosting, KrishokTech reduces safe advisory serving costs by 89.6% on the app and 8.6% on SMS fallback compared to commercial cloud APIs, yielding 22.8 Crore BDT ($190k USD) in annual savings across a national 16M-farmer deployment."
   }
 }
 ```

@@ -10,7 +10,7 @@
 
 Standard end-to-end vision-language models often hallucinate confident crop diagnoses on out-of-distribution (OOD) foliage, weeds, or low-quality close-ups. In agricultural advisory, misidentifying a crop (e.g. diagnosing a tomato leaf as a potato plant) can lead to toxic chemical cross-application.
 
-KrishokChat implements a **Calibrated Tri-State Decision Gate** and **Margin-Based Second-Image Request** directly over ONNX edge models.
+KrishokTech implements a **Calibrated Tri-State Decision Gate** and **Margin-Based Second-Image Request** directly over ONNX edge models.
 
 ---
 

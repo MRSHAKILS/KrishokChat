@@ -1,5 +1,5 @@
 # Submission Execution Roadmap
-**Project:** Bounded-Authority Agricultural Advisory (KrishokChat / BAA) → *Computers and Electronics in Agriculture*
+**Project:** Bounded-Authority Agricultural Advisory (KrishokTech / BAA) → *Computers and Electronics in Agriculture*
 **Date:** 2026-08-28
 **Starting point:** current state of `D:\Downloads\CEA Paper`
 **Objective:** maximum scientific strength and submission readiness per unit of effort. Not perfection.
@@ -53,7 +53,7 @@ The resulting shape of this project is unusual and worth stating plainly: **almo
 | # | Task | Type | Effort |
 |---|---|---|---|
 | **T0-1** | **Decide E13.** Do rating sheets, rater consent and ethics approval exist? If yes → produce them and add an ethics statement (§6.5 + a Declarations block). If no → delete every trace of the study: abstract sentence, §6.5 protocol paragraph, §7.2 entirely, §14 references, §18, and the `\HumanGwetAC` macro in the driver. | Decision + edit | 1 h (delete) / days (document) |
-| **T0-2** | **Decide CL-3.** Does a runnable system exist at `d:\KrishokChat Advisory System`? If no → delete the abstract's "97.0% CAC / 0.0% CUAR on a 100-case live benchmark", §7.1, Table 5's B6 row, and the E27 claim throughout. If yes → it becomes **X2** in Tier 3. | Decision + edit | 1 h (delete) |
+| **T0-2** | **Decide CL-3.** Does a runnable system exist at `d:\KrishokTech Advisory System`? If no → delete the abstract's "97.0% CAC / 0.0% CUAR on a 100-case live benchmark", §7.1, Table 5's B6 row, and the E27 claim throughout. If yes → it becomes **X2** in Tier 3. | Decision + edit | 1 h (delete) |
 | **T0-3** | **Delete E32–E39 from the manuscript and the battery count.** Their "BAA" arm is `gemini-2.5-flash-lite` with an advisory system prompt. Remove §8's paragraph explaining E32/E33's non-zero CUAR as a "deliberate predicate bypass" — the code does not support that explanation. Remove E38 from §15.3. | Edit | 1 h |
 | **T0-4** | **Delete the BAA/L4/L5 rows of E27, E29, E30, E31, E34.** Keep the baseline halves — they are real, traced and publishable. | Edit | 1 h |
 | **T0-5** | **Rewrite §17 Data Availability.** It currently promises the scripts. Do not submit that sentence while the scripts contradict the paper. State precisely what is released. | Writing | 30 min |
@@ -242,7 +242,7 @@ Do X1, X3, X4 (all on the E28 harness), then X5, W11, and finally W13. If a runn
 
 **Checkpoint A — become submittable (~6 h)**
 - [ ] 1. Answer: did the E13 agronomist study happen, with consent and ethics approval?
-- [ ] 2. Answer: does a runnable system exist at `d:\KrishokChat Advisory System`?
+- [ ] 2. Answer: does a runnable system exist at `d:\KrishokTech Advisory System`?
 - [ ] 3. Execute the E13 branch — document fully, or delete every reference (abstract, §6.5, §7.2, §14, §18, `\HumanGwetAC`)
 - [ ] 4. Execute the CL-3 branch — schedule X2, or delete abstract sentence, §7.1, Table 5 B6 row
 - [ ] 5. Remove E32–E39 everywhere, including §8's "deliberate predicate bypass" paragraph and §15.3's E38 citation

@@ -36,7 +36,7 @@
 
 **Engineering seam:** Keep raw query immutable; add an optional normalizer port before query building, with both raw and normalized forms supplied to deterministic safety checks and audit. Exact placement requires a threat-model decision in Stage 2.
 
-## Concept C: KrishokChat-Evidence System Study
+## Concept C: KrishokTech-Evidence System Study
 
 **Research question:** Does the combined safety-first, claim-verified, dialect-aware system improve expert-rated evidence alignment and user-calibrated trust over the current pipeline?
 

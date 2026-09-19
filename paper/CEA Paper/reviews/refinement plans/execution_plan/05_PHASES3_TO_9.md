@@ -205,7 +205,7 @@ Run each grep. ALL "must be gone" greps return ZERO. ALL "must exist" greps retu
 
 ### Must be gone:
 ```powershell
-# Run from D:\KrishokChat Advisory System\paper\CEA Paper\
+# Run from D:\KrishokTech Advisory System\paper\CEA Paper\
 grep -r "97\.0.*CAC\|97\.0.*certified.*correctness" manuscript/sections/  # unless from real X2
 grep -r "4\.82\|Gwet.*0\.862\|AC1.*0\.862" manuscript/sections/           # unless from real E13
 grep -r "60,000\|60000\|36 experimental\|36 layers" manuscript/sections/
@@ -309,5 +309,5 @@ experiments/E31_multimodal_perception_uncertainty/real_traces_*
 
 manuscript/tables/tab4_baseline_taxonomies.tex  (describes baselines — likely still accurate)
 manuscript/tables/tab6_authority_verification.tex  (B6 100% rejection — from real E28 — keep)
-manuscript/krishokchat_cea.bib                  (bibliography — only add, never remove)
+manuscript/krishoktech_cea.bib                  (bibliography — only add, never remove)
 ```

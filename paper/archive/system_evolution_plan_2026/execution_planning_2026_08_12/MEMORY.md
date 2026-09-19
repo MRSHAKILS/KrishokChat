@@ -21,7 +21,7 @@ Frozen thesis: `Evidence-linked, relation-aware selective certification for Beng
 ## Evidence State
 
 - T05 v1 reconciliation complete: dataset sizes VERIFIED (85,979 total; per-track counts; 7,437
-  chemical-bearing / 66.3%; safety test n=323; 6 dialects × 4,275). KrishokChat-paper values
+  chemical-bearing / 66.3%; safety test n=323; 6 dialects × 4,275). KrishokTech-paper values
   adopted for 2,946 semantic units, 284 source publications, released 1-epoch step-2,680 model.
 - T06 vision-defect spec + remediation complete: source-empty KB fallback is now marked
   `low_confidence` (not `verified`) in both branches of `vision_pipeline.py`.
@@ -37,7 +37,7 @@ Frozen thesis: `Evidence-linked, relation-aware selective certification for Beng
 
 T05 numerical reconciliation, T06 vision-defect specification, and T07 protocol freeze come first. Then run annotation/gold creation, lexical reproduction, structured verifier, calibration, dialect robustness, A/B interaction, engineering repair/integration, expert evaluation, paper assembly, and independent release audit.
 
-The independent engineering lane `LM00-LM05` in `13_LOCAL_MODEL_INTEGRATION_PLAN.md` may proceed without changing the research order. It only enables the existing `krishokchat-4b` selector option through the existing generation adapter. It may not change safety classification, BM25 retrieval, verification, vision, audit behavior, or the default Gemini path.
+The independent engineering lane `LM00-LM05` in `13_LOCAL_MODEL_INTEGRATION_PLAN.md` may proceed without changing the research order. It only enables the existing `krishoktech-4b` selector option through the existing generation adapter. It may not change safety classification, BM25 retrieval, verification, vision, audit behavior, or the default Gemini path.
 
 ## Change Protocol
 
@@ -66,7 +66,7 @@ Do not overwrite this state. Append a dated amendment containing: proposed chang
 
 ## Local Model Artifact Note: 2026-08-12
 
-- Located GGUF: `backend/ml_assets/gemma/krishokchat.f16.gguf`.
+- Located GGUF: `backend/ml_assets/gemma/krishoktech.f16.gguf`.
 - llama.cpp is reported installed locally but has not been reproducibly verified in this package.
 - The `.f16.gguf` filename conflicts with an unverified 4-bit description. Quantization, architecture, embedded chat template, hash, and successful Bengali inference must be recorded before claims or runtime enablement.
 - Active execution checklist: `13_LOCAL_MODEL_INTEGRATION_PLAN.md`.
@@ -74,11 +74,11 @@ Do not overwrite this state. Append a dated amendment containing: proposed chang
 ## Amendment: Local Model Demo Runtime Verified, 2026-08-12
 
 - Proposed change: permit direct `llama-server` serving for the existing
-  `krishokchat-4b` generation option while retaining the same OpenAI-compatible adapter.
+  `krishoktech-4b` generation option while retaining the same OpenAI-compatible adapter.
 - Rationale and evidence: see `14_LOCAL_MODEL_RUNTIME_AMENDMENT_2026_08_12.md`.
 - Research impact: none. No hypothesis, experiment, schema, split, threshold, or result is
   changed or invalidated.
-- Runtime composition: Q4_K_M base GGUF plus trained KrishokChat LoRA adapter; no merged
+- Runtime composition: Q4_K_M base GGUF plus trained KrishokTech LoRA adapter; no merged
   4-bit artifact is claimed.
 - Verified path: safety -> BM25 retrieval -> selected local generation -> lexical verifier
   -> audit, through the existing shared `QAPipeline`.
@@ -330,7 +330,8 @@ Do not overwrite this state. Append a dated amendment containing: proposed chang
 o_dosage) pass, so out-of-corpus answers get erified.
   - Retrieval probe: ackend/ml_assets/rag_index/eval/golden_retrieval_probe.json — RRF top1 quantized (1/21); dense/BM25 raw scores fully overlapping between groups -> score thresholds cannot gate abstention (content-based gates only).
   - Scoring pipeline: scoring_sheet_v1.csv (46 rows) + scoring_rubric_v1.md; 11_publish_golden_stats.py -> golden_stats_v1.json (Cohen's kappa + per-category + validated refusal rate; honest pending_scores state). API GET /api/benchmark serves the precomputed artifact; frontend benchmark page Section G renders it (mechanical table + refusal callout + pending banner).
-  - Manifest: esearch_artifacts/manifests/P4_golden_benchmark_manifest_v1.json (all artifact sha256s).
+  - Manifest: 
+esearch_artifacts/manifests/P4_golden_benchmark_manifest_v1.json (all artifact sha256s).
 - Verification: backend suite 78/78; frontend 	sc --noEmit + pnpm build green; live probe of /api/benchmark returns pending state; servers healthy (backend :8000).
 - Gate: P4 TOOLING GO — pipeline fix (abstention) is NOT done; decision D1 (a–d) in 17_FINDINGS_LOG_2026_08_14.md awaits researcher choice; human scoring sheet is the only block for publishable kappa/accuracy numbers.
 - Effective next tasks: (1) researcher picks D1 abstention fix (recommended D1a query-type rules first, validated on the golden set); (2) score the sheet (2 evaluators) -> rerun 11_publish_golden_stats.py; (3) restore dataset_release/safety/ (dialect map + safety dataset) to re-measure expansion; (4) P5 voice lane remains open.

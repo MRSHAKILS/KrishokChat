@@ -5,7 +5,7 @@ The key correction is this:
 **I would not make your two papers “application vs. theory.”**
 I would make them:
 
-1. **EACL System Demonstration:** the *engineering-integrated artifact* — what KrishokChat is, how the complete system works, why the integration matters, and evidence that it is usable.
+1. **EACL System Demonstration:** the *engineering-integrated artifact* — what KrishokTech is, how the complete system works, why the integration matters, and evidence that it is usable.
 2. **CEA:** the *scientific architectural paper* — a generalizable **bounded-authority / fail-closed advisory architecture**, rigorously evaluated as a decision-support system.
 
 And I would build the software further specifically to make those two papers unusually strong.
@@ -57,17 +57,17 @@ That distinction will make or break the CEA paper.
 
 ### Working title
 
-**KrishokChat: A Safety-Aware Multimodal Bengali Agricultural Advisory System**
+**KrishokTech: A Safety-Aware Multimodal Bengali Agricultural Advisory System**
 
 Alternative:
 
-**KrishokChat: Evidence-Grounded and Safety-Aware Agricultural Advisory for Bengali Farmers**
+**KrishokTech: Evidence-Grounded and Safety-Aware Agricultural Advisory for Bengali Farmers**
 
 I prefer the first one for the demo track.
 
 ### What this paper answers
 
-> **What does KrishokChat provide as an integrated, usable NLP system, and how are its components connected to support Bengali agricultural advisory?**
+> **What does KrishokTech provide as an integrated, usable NLP system, and how are its components connected to support Bengali agricultural advisory?**
 
 This is an **artifact paper**.
 
@@ -131,7 +131,7 @@ Establish the practical problem:
 
 Then state:
 
-> KrishokChat integrates Bengali RAG, safety routing, evidence verification, image-based disease advisory, and deployable service interfaces into one open research system.
+> KrishokTech integrates Bengali RAG, safety routing, evidence verification, image-based disease advisory, and deployable service interfaces into one open research system.
 
 Your existing prior papers provide the knowledge/retrieval foundation; this paper is about integration.
 
@@ -299,7 +299,7 @@ Because you have time and local agents, we can make these measurements much bett
 
 The key sentence should approximately become:
 
-> **KrishokChat contributes an openly accessible Bengali agricultural advisory system that integrates safety screening, evidence-grounded retrieval, multimodal disease diagnosis, response verification, provenance tracing, and deployable service interfaces into a single auditable interaction workflow.**
+> **KrishokTech contributes an openly accessible Bengali agricultural advisory system that integrates safety screening, evidence-grounded retrieval, multimodal disease diagnosis, response verification, provenance tracing, and deployable service interfaces into a single auditable interaction workflow.**
 
 Notice what isn't claimed:
 
@@ -1535,7 +1535,7 @@ That's the non-overlap boundary.
 
 Very explicitly:
 
-> “The Bengali agricultural corpus and retrieval benchmark underlying KrishokChat were developed in prior work [X,Y]. This paper focuses on their integration into a safety-aware multimodal advisory system.”
+> “The Bengali agricultural corpus and retrieval benchmark underlying KrishokTech were developed in prior work [X,Y]. This paper focuses on their integration into a safety-aware multimodal advisory system.”
 
 Then EACL doesn't duplicate your old papers.
 
@@ -2009,7 +2009,7 @@ The demo paper doesn't need to pretend this architecture is a theorem.
 
 It can say:
 
-> “KrishokChat operationalizes the bounded-authority design in a complete farmer-facing application.”
+> “KrishokTech operationalizes the bounded-authority design in a complete farmer-facing application.”
 
 Then show it.
 
@@ -2052,7 +2052,7 @@ This means:
 ### EACL
 
 ```text
-KrishokChat
+KrishokTech
    ↓
 integrated application
    ↓
@@ -2062,7 +2062,7 @@ system demonstration
 ### CEA
 
 ```text
-KrishokChat
+KrishokTech
    ↓
 experimental platform
    ↓
@@ -2364,7 +2364,7 @@ I actually prefer something simpler:
 
 Then the system could be:
 
-> **BAA-KrishokChat**
+> **BAA-KrishokTech**
 
 But this is something we should settle only after formalizing the method.
 
@@ -2573,7 +2573,7 @@ EACL 2027's Demo criteria make exactly this distinction: design, novelty, archit
 
 I would position the whole project like this:
 
-> **KrishokChat is an open Bengali agricultural advisory platform developed around a research program on trustworthy agricultural language technology. Earlier work established the knowledge and retrieval foundations; the current system integrates multimodal diagnosis, retrieval, safety routing, evidence verification and deployment-oriented interfaces. This work then studies bounded factual authority as the reliability layer connecting those components.**
+> **KrishokTech is an open Bengali agricultural advisory platform developed around a research program on trustworthy agricultural language technology. Earlier work established the knowledge and retrieval foundations; the current system integrates multimodal diagnosis, retrieval, safety routing, evidence verification and deployment-oriented interfaces. This work then studies bounded factual authority as the reliability layer connecting those components.**
 
 That's clean.
 
@@ -2587,7 +2587,7 @@ Your CV then tells a story:
 
 ## PAPER 1 — EACL 2027 Demo
 
-**KrishokChat: A Safety-Aware Multimodal Bengali Agricultural Advisory System**
+**KrishokTech: A Safety-Aware Multimodal Bengali Agricultural Advisory System**
 
 **Identity:** software/system artifact.
 
@@ -2651,8 +2651,8 @@ And importantly, it means **you can still make the system much more impressive b
 
 The next step should be to turn these into **two frozen research protocols**: exact datasets, exact baselines, exact ablations, exact metrics, annotation protocol, statistical tests, figures/tables, software changes, and an explicit **EACL-vs-CEA overlap matrix** before we start implementation.
 
-[1]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
-[2]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System/blob/main/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md "KrishokChat-Agricultural-Advisory-System/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md at main · RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
+[1]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"
+[2]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System/blob/main/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md "KrishokTech-Agricultural-Advisory-System/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md at main · RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"
 [3]: https://arxiv.org/abs/2603.03294?utm_source=chatgpt.com "Fine-Tuning and Evaluating Conversational AI for Agricultural Advisory"
 [4]: https://2027.eacl.org/calls/demos/?utm_source=chatgpt.com "Call for System Demonstrations -"
 [5]: https://aclanthology.org/2026.eacl-demo.34/?utm_source=chatgpt.com "AI for Climate Finance: Agentic Retrieval and Multi-Step Reasoning for Early Warning System Investments - ACL Anthology"
@@ -2663,8 +2663,8 @@ The next step should be to turn these into **two frozen research protocols**: ex
 [10]: https://arxcompass.github.io/papers/llm/2026_07/papers_9.html?utm_source=chatgpt.com "llm - 2026_07 | ArXCompass"
 [11]: https://www.researchgate.net/publication/399930197_Building_AI-based_advisory_services_for_smallholder_farmers_Technical_learnings_from_the_AIEP_Initiative?utm_source=chatgpt.com "(PDF) Building AI-based advisory services for smallholder farmers: Technical learnings from the AIEP Initiative"
 [12]: https://scirate.com/?date=2025-10-28&page=106&range=7&utm_source=chatgpt.com "Top arXiv papers"
-[13]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System/blob/main/production/future_plan/06_PAPER_NOVELTY.md "KrishokChat-Agricultural-Advisory-System/production/future_plan/06_PAPER_NOVELTY.md at main · RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
-[14]: https://arxiv.org/abs/2606.29243?utm_source=chatgpt.com "KrishokChat: A Citation-Grounded Dataset and Benchmark for Bengali Agricultural Advisory"
+[13]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System/blob/main/production/future_plan/06_PAPER_NOVELTY.md "KrishokTech-Agricultural-Advisory-System/production/future_plan/06_PAPER_NOVELTY.md at main · RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"
+[14]: https://arxiv.org/abs/2606.29243?utm_source=chatgpt.com "KrishokTech: A Citation-Grounded Dataset and Benchmark for Bengali Agricultural Advisory"
 [15]: https://arxiv.org/abs/2608.14886?utm_source=chatgpt.com "Where Does Retrieval Fail? Evaluating RAG Architectures for Agricultural Advisory"
 [16]: https://2027.eacl.org/calls/industry/?utm_source=chatgpt.com "Industry Track Call for Papers -"
-[17]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System/blob/main/production/future_plan/00_SCOPE_OUTLINE.md "KrishokChat-Agricultural-Advisory-System/production/future_plan/00_SCOPE_OUTLINE.md at main · RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
+[17]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System/blob/main/production/future_plan/00_SCOPE_OUTLINE.md "KrishokTech-Agricultural-Advisory-System/production/future_plan/00_SCOPE_OUTLINE.md at main · RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"

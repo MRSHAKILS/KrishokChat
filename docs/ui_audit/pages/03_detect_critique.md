@@ -1,8 +1,8 @@
 # Page Critique: Crop Disease Advisory Workflow (`/detect`)
 
 **Target Route**: `/detect`  
-**Source Code**: [frontend/src/app/(app)/detect/page.tsx](file:///d:/KrishokChat%20Advisory%20System/frontend/src/app/%28app%29/detect/page.tsx)  
-**Screenshot**: ![03_detect.png](file:///d:/KrishokChat%20Advisory%20System/docs/ui_audit/screenshots/03_detect.png)  
+**Source Code**: [frontend/src/app/(app)/detect/page.tsx](file:///d:/KrishokTech%20Advisory%20System/frontend/src/app/%28app%29/detect/page.tsx)  
+**Screenshot**: ![03_detect.png](file:///d:/KrishokTech%20Advisory%20System/docs/ui_audit/screenshots/03_detect.png)  
 
 ---
 

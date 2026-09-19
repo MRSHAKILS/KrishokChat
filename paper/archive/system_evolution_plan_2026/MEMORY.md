@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-KrishokChat is a Bangladesh-focused Bengali agricultural advisory prototype with safety-before-retrieval QA and classification-based vision routing. The research plan preserves that architecture and tests two bounded modules: structured agricultural claim/dosage verification with calibrated abstention, and dialect-sensitive retrieval with safety-preserving normalization.
+KrishokTech is a Bangladesh-focused Bengali agricultural advisory prototype with safety-before-retrieval QA and classification-based vision routing. The research plan preserves that architecture and tests two bounded modules: structured agricultural claim/dosage verification with calibrated abstention, and dialect-sensitive retrieval with safety-preserving normalization.
 
 ## Research Objective
 
@@ -28,7 +28,7 @@ Stage 0 evidence reconciliation COMPLETE (T01-T04). Ready for T05 reconciliation
 - Reviewed the current literature package and designated research-gap file.
 - Inspected active QA, verifier, container, benchmark, and vision seams.
 - Defined concepts, architecture, evaluation, human study, roadmap, task graph, paper gates, and final decision.
-- **T01:** Both authoritative PDFs extracted (PyMuPDF, 265+103 claims). PDF hashes: KrishokChat=75cca13c..., AgriTrust=9b30b769...
+- **T01:** Both authoritative PDFs extracted (PyMuPDF, 265+103 claims). PDF hashes: KrishokTech=75cca13c..., AgriTrust=9b30b769...
 - **T02:** 158,764 records across 222.8 MB external dataset located and verified. 9 in-repo dataset files verified. 2 bit-identical copies confirmed. dataset_release/ absent from workspace root.
 - **T03:** BM25 index (17MB) + corpus tokenizer (4.7MB) present. FAISS/dense NOT built. 6 vision models (57.3MB total, all classify). Gemma LoRA checkpoint (279MB adapter, r=32, alpha=64, base=unsloth/gemma-4-E4B-it).
 - **T04:** All 14 behavior checks CONFIRMED with exact code quotes. 11/11 tests pass. Vision fallback defect confirmed (solution_bn stamped "verified" with empty sources).
@@ -47,7 +47,7 @@ T05 (PDF reconciliation), T06 (vision defect fix), T07 (schema freeze), T08-T26 
 
 ## Open Questions (resolved)
 
-- Dataset location: Found at `E:\CSE498R\Agri-LLM\KrishokChat\krishokchat_dataset_main` and `agritrust knowledge nodes`.
+- Dataset location: Found at `E:\CSE498R\Agri-LLM\KrishokTech\krishoktech_dataset_main` and `agritrust knowledge nodes`.
 - PDF claims: 265+103 raw claims extracted, all NEEDS RECONCILIATION for T05.
 - Hybrid retrieval: NOT built. Only BM25 is active.
 - Gemma: LoRA adapter exists but serving/quality unverified.

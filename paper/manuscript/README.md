@@ -22,7 +22,7 @@
 
 ## Enforcement — `docs/PAPER_POLICY.md` (`arXiv:2606.29243` ban)
 
-**Rule (non-negotiable):** `arXiv:2606.29243` (v1, "Citation-Grounded Dataset and Benchmark") is deprecated and INVALID. Do not cite, quote, link, summarize, or reuse any number/claim from it in this manuscript, docs, or commit messages. The authoritative papers are `paper/done papers/KrishokChat__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf` and `paper/done papers/AgriTrust.pdf` (reference by filename/path only).
+**Rule (non-negotiable):** `arXiv:2606.29243` (v1, "Citation-Grounded Dataset and Benchmark") is deprecated and INVALID. Do not cite, quote, link, summarize, or reuse any number/claim from it in this manuscript, docs, or commit messages. The authoritative papers are `paper/done papers/KrishokTech__A_Provenance_Traceable_Multi_Task_Bengali_Agricultural_Benchmark_with_Safety_Critical_Chemical_Advisory.pdf` and `paper/done papers/AgriTrust.pdf` (reference by filename/path only).
 
 ### Local check (run before every paper commit)
 
@@ -40,7 +40,7 @@ grep -R "2606\.29243" paper/ docs/ frontend/ 2>/dev/null; test $? -ne 0
 ### Checklist (run before any submission/commit that mentions research claims)
 
 - [ ] `grep -R "2606.29243" paper/ docs/ frontend/ backend/` returns nothing
-- [ ] No file references "Citation-Grounded Dataset and Benchmark" as KrishokChat's paper
+- [ ] No file references "Citation-Grounded Dataset and Benchmark" as KrishokTech's paper
 - [ ] Any paper link in UI/docs points to `paper/done papers/` or a real public ID (`TODO` if none)
 - [ ] All research stats trace to the updated papers or to verified local artifacts (`backend/ml_assets/`, `dataset_release/`, `research_artifacts/`)
 

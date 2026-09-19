@@ -1,4 +1,4 @@
-# KrishokChat — Competitive / Industry Landscape Report
+# KrishokTech — Competitive / Industry Landscape Report
 
 Research date: 2026-08-14. Compiled from live web research (websearch + page fetches). Claims not directly confirmed by a primary source are marked **[unverified]**. All figures are as reported by the cited sources.
 
@@ -76,7 +76,7 @@ Research date: 2026-08-14. Compiled from live web research (websearch + page fet
 4. **Government / donor funded (B2G)** — PxD (donors), Bhashini-backed state platforms (MahaVISTAAR), DAE/BARC apps, Krishi Call Center 16123 (gov budget, 25 paisa/min); blended finance (IFC/FMO/Rabo cornerstone LPs) is the capital layer ([Better Bioeconomy](https://www.betterbioeconomy.com/p/agritech-didnt-fail-in-southeast)).
 5. **B2B sales leads inside apps** — ACI's IDSS/Fosholi (Bangladesh) charges ACI business units for sales leads, messaging, content-subscription management, and GIS analytics (€3.5M 2025 revenue target) while exploring freemium for farmers ([IDSS](https://g4aw.spaceoffice.nl/en/g4aw-projects/g4aw-projects/3/idss.html)).
 
-**Implication for KrishokChat:** premium "saved history" is a thin wedge; the durable paths are (i) freemium knowledge + B2B (agro-dealers, extension officers, NGOs), (ii) government partnership (DAE/BARC/a2i — 16123 adjacency), (iii) commissions on input/market links at scale. The safety/audit-log engine is the least-commoditized asset for B2B/B2G trust stories.
+**Implication for KrishokTech:** premium "saved history" is a thin wedge; the durable paths are (i) freemium knowledge + B2B (agro-dealers, extension officers, NGOs), (ii) government partnership (DAE/BARC/a2i — 16123 adjacency), (iii) commissions on input/market links at scale. The safety/audit-log engine is the least-commoditized asset for B2B/B2G trust stories.
 
 ---
 
@@ -87,7 +87,7 @@ Research date: 2026-08-14. Compiled from live web research (websearch + page fet
    Sources: [FarmSaarthi](https://www.jetir.org/papers/JETIR2604936.pdf); [Google STT bn-BD](https://docs.cloud.google.com/speech-to-text/docs/v1/speech-to-text-supported-languages); [ElevenLabs Bengali](https://elevenlabs.io/text-to-speech/bengali); [KrishokBondhu proof-of-concept](https://arxiv.org/html/2510.18355v2).
 
 2. **Grounded photo diagnosis + dosage verifier (safety layer as product)**
-   Rationale: Plantix's documented weaknesses — single-disease assumption, non-local crops, unverified recommendations, no explanation of recommendation logic — are exactly what KrishokChat's verifier agent + audit trail solves; DAE's official pesticide-dosage guidelines (Balaynashok Nirdeshika) are the ground-truth corpus no competitor cites.
+   Rationale: Plantix's documented weaknesses — single-disease assumption, non-local crops, unverified recommendations, no explanation of recommendation logic — are exactly what KrishokTech's verifier agent + audit trail solves; DAE's official pesticide-dosage guidelines (Balaynashok Nirdeshika) are the ground-truth corpus no competitor cites.
    Sources: [Plantix limitations (Nigeria study)](https://www.ajol.info/index.php/ijs/article/view/247309/233912), [functional evaluation](https://doi.org/10.56975/ijcrt.v13i12.298178); [DAE pesticide guidelines](https://dae.lakshmipur.gov.bd/en).
 
 3. **Position as the AI front-end to the 16123 Krishi Call Center (triage + escalation, not competition)**
@@ -95,11 +95,11 @@ Research date: 2026-08-14. Compiled from live web research (websearch + page fet
    Sources: [Dhaka Tribune](https://www.dhakatribune.com/bangladesh/agriculture/345509/farmers%E2%80%99-friend-krishi-call-centre-struggling-to), [BSS](https://www.bssnews.net/special-stories/401845).
 
 4. **Agent-trace UI + safety-metrics panel as the trust differentiator and B2B/B2G asset**
-   Rationale: no competitor (Plantix, KissanAI, Farmer.Chat, Agrio) exposes pipeline decisions, claim grounding, or safety metrics — KrishokChat's stepper trace and audit log are both the poster story and the transparency the Plantix literature explicitly calls for; extension officers/NGOs can buy this as a compliance/audit product.
+   Rationale: no competitor (Plantix, KissanAI, Farmer.Chat, Agrio) exposes pipeline decisions, claim grounding, or safety metrics — KrishokTech's stepper trace and audit log are both the poster story and the transparency the Plantix literature explicitly calls for; extension officers/NGOs can buy this as a compliance/audit product.
    Sources: [Farmer.Chat pipeline](https://github.com/digitalgreenorg/monorepo/blob/main/farmer-chat/README.md); [Plantix transparency critique](https://doi.org/10.56975/ijcrt.v13i12.298178).
 
 5. **Dialect-aware input (Chittagonian / Sylheti / Noakhali) with a genuine dialect map**
-   Rationale: dialect gaps are the documented #1 accessibility failure in both India (Bhili added on demand at MahaVISTAAR) and Bangladesh (16123 agents can't serve non-Dhaka dialects) — a real dialect map (KrishokChat already has a 110-word one) is defensible and unmatched.
+   Rationale: dialect gaps are the documented #1 accessibility failure in both India (Bhili added on demand at MahaVISTAAR) and Bangladesh (16123 agents can't serve non-Dhaka dialects) — a real dialect map (KrishokTech already has a 110-word one) is defensible and unmatched.
    Sources: [Science.org](https://www.science.org/content/article/india-s-national-ai-platform-tackles-country-s-many-tongues), [Dhaka Tribune](https://www.dhakatribune.com/bangladesh/agriculture/345509/farmers%E2%80%99-friend-krishi-call-centre-struggling-to), [Agrinofy (Chittagonian)](https://agrinofy.com/ai-chatbot-for-farmers-by-agrinofy/).
 
 6. **Offline-first PWA with cached advisories + image diagnosis queue**

@@ -1,10 +1,10 @@
-# KrishokChat: Deterministic-First, Evidence-Bounded Bengali Agricultural Advisory
+# KrishokTech: Deterministic-First, Evidence-Bounded Bengali Agricultural Advisory
 ## EACL 2026 System Demonstrations — Paper Outline & Screenshot Inventory
 
 ### 1. Paper Overview & Structural Budget
 - **Target Venue:** EACL 2026 System Demonstrations Track
 - **Page Limit:** 6 pages of content + unlimited references & appendix
-- **Core Premise:** Agricultural advisory must not treat large language models as unconstrained decision-makers. KrishokChat employs a deterministic-first, evidence-bounded pipeline that halts underspecified queries pre-retrieval, enforces crop-fenced retrieval, highlights multimodal contradictions, verifies dosage claims, and provides multi-channel constrained delivery.
+- **Core Premise:** Agricultural advisory must not treat large language models as unconstrained decision-makers. KrishokTech employs a deterministic-first, evidence-bounded pipeline that halts underspecified queries pre-retrieval, enforces crop-fenced retrieval, highlights multimodal contradictions, verifies dosage claims, and provides multi-channel constrained delivery.
 
 ---
 
@@ -13,7 +13,7 @@
 | Page | Section | Core Content & Demonstration Focus | Primary Figures / Tables |
 |---|---|---|---|
 | **p. 1** | **§1. Introduction** | Agricultural context in Bangladesh (DAE, 85% smallholders, 1:900-2,000 ratio), the linguistic gap in rural Bengali (colloquial vs standard), risk of LLM hallucinations in crop chemical dosage. Core contributions (deterministic pre-retrieval gate, PRISM-RAG, multimodal fence, fail-closed verifier). | **Fig. 1**: Complete system architecture and decision flow |
-| **p. 2** | **§2. System Architecture** | 5-tier decision ladder: T0 deterministic safety check (0.32 ms), T1 slot extractor & pre-retrieval gate (halts crop-less queries), T2 crop-fenced PRISM-RAG retrieval, T3 untrusted generation, T4 fail-closed dosage verifier & provenance badges. Constrained delivery channels (Web, 160-char SMS, offline PWA, 16123 helpline). | **Tab. 1**: Honesty matrix comparing KrishokChat against Farmer.Chat, KrishokBondhu, Krishi Sathi, My Climate CoPilot |
+| **p. 2** | **§2. System Architecture** | 5-tier decision ladder: T0 deterministic safety check (0.32 ms), T1 slot extractor & pre-retrieval gate (halts crop-less queries), T2 crop-fenced PRISM-RAG retrieval, T3 untrusted generation, T4 fail-closed dosage verifier & provenance badges. Constrained delivery channels (Web, 160-char SMS, offline PWA, 16123 helpline). | **Tab. 1**: Honesty matrix comparing KrishokTech against Farmer.Chat, KrishokBondhu, Krishi Sathi, My Climate CoPilot |
 | **p. 3** | **§3. Demonstration & User Interaction** | Detailed walkthrough of farmer-facing interface and 6 demonstration scenarios: (S1) Incomplete crop-less treatment query, (S2) Multimodal on-device leaf scoping, (S3) Cross-modal contradiction handling, (S4) Evidence conflict resolution, (S5) Grounded advisory with provenance badges, (S6) Multi-channel delivery (SMS, TTS, Offline, 16123). | **Fig. 2**: Main application interface overview<br>**Fig. 3**: Interactive clarification intercept & resumed retrieval |
 | **p. 4** | **§3. Demonstration (cont.) & §4. Empirical Evaluation** | Completion of demo scenarios (S4-S6) and quantitative evaluation of decision boundaries: Pre-retrieval gate operating point (76/200 halted, 0 sources retrieved, 89-token median clarification vs 2,146 retrieval tokens). | **Fig. 4**: Multimodal consistency & mismatch badge<br>**Fig. 5**: Grounded answer & constrained delivery channels |
 | **p. 5** | **§4. Empirical Evaluation (cont.)** | Crop-fence upper-bound simulation ($n=400$, wrong-crop advice drops 36.25% → 30.00%, McNemar $p=5.96\times 10^{-8}$), text-image mismatch accuracy (453/454), live safety guard evaluation (attack success 0.95% vs 36.19%), dosage mutation detection (114/118), SMS length enforcement (399/400 $\le 160$ chars). | **Fig. 6**: Pre-retrieval gate evaluation<br>**Fig. 7**: Crop-fence simulation<br>**Fig. 8**: Safety verification & delivery metrics |
@@ -30,7 +30,7 @@ Directory: `paper/EACL Final/paper/screenshots/`
 
 #### Individual Screenshots:
 1. `fig2_main_interface.png` (283 KB)
-   - **Description:** Complete, clean overview of the KrishokChat chat workspace showing the colloquial Bengali input field, voice input toggle, message timeline, and response provenance card.
+   - **Description:** Complete, clean overview of the KrishokTech chat workspace showing the colloquial Bengali input field, voice input toggle, message timeline, and response provenance card.
 2. `screenshot1_halt_clarification.png` (288 KB)
    - **Description:** Pre-retrieval halt on an underspecified treatment query (*"পাতায় হলুদ দাগ হয়েছে, কি বিষ দিবো?"*). The system retrieves 0 sources and presents interactive quick-reply chips: `[ ধান (Rice) ]`, `[ আলু (Potato) ]`, `[ টমেটো (Tomato) ]`, etc.
 3. `screenshot2_resumed_retrieval.png` (377 KB)

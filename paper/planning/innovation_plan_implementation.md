@@ -14,7 +14,7 @@ So here is the **final execution specification**.
 
 ## Project name
 
-# **KrishokChat**
+# **KrishokTech**
 
 ### **Bengali Agricultural Intelligence for Farmers, Extension and Rural Communities**
 
@@ -51,13 +51,13 @@ This must sound like a founder/researcher describing something they actually bui
 
 ### Final version
 
-KrishokChat is a Bengali-first agricultural intelligence platform developed from field observations and direct engagement with farmers in Bangladesh. Farmers often face a combination of problems at once: difficulty communicating in standard language, limited access to agricultural experts, uncertainty about crop diseases and treatments, and unreliable connectivity. KrishokChat is designed around these real constraints rather than assuming that a generic AI assistant is sufficient.
+KrishokTech is a Bengali-first agricultural intelligence platform developed from field observations and direct engagement with farmers in Bangladesh. Farmers often face a combination of problems at once: difficulty communicating in standard language, limited access to agricultural experts, uncertainty about crop diseases and treatments, and unreliable connectivity. KrishokTech is designed around these real constraints rather than assuming that a generic AI assistant is sufficient.
 
 The platform combines Bengali conversational advisory, crop-image analysis, agricultural knowledge retrieval, safety screening, evidence verification, audit trails and low-connectivity delivery in one system. A farmer can describe a problem in Bengali or Banglish, upload a crop image, receive crop- and disease-specific guidance, inspect the supporting evidence, and obtain a response through the available connectivity path. For safety-critical recommendations, the system verifies agricultural facts before delivery and can ask for clarification, refuse unsupported advice or route a case for human assistance.
 
-The system is supported by our earlier research on Bengali agricultural knowledge and retrieval, followed by a large-scale reliability evaluation of the integrated architecture. Our current evaluation includes independent agronomist review, adversarial safety testing, evidence-binding tests, multilingual and dialect conditions, multimodal conflict cases, network-degradation tests and deployment benchmarks. In one 100-case live-model expert benchmark, KrishokChat achieved 97% certified correctness with no observed critical unsafe acceptance; separate 11,000-case metamorphic testing also found no observed invalid certification.
+The system is supported by our earlier research on Bengali agricultural knowledge and retrieval, followed by a large-scale reliability evaluation of the integrated architecture. Our current evaluation includes independent agronomist review, adversarial safety testing, evidence-binding tests, multilingual and dialect conditions, multimodal conflict cases, network-degradation tests and deployment benchmarks. In one 100-case live-model expert benchmark, KrishokTech achieved 97% certified correctness with no observed critical unsafe acceptance; separate 11,000-case metamorphic testing also found no observed invalid certification.
 
-KrishokChat is now moving from research validation toward field deployment, with a longer-term goal of supporting farmers, extension services, NGOs, agribusinesses and public agricultural services through a locally grounded and scalable technology platform.
+KrishokTech is now moving from research validation toward field deployment, with a longer-term goal of supporting farmers, extension services, NGOs, agribusinesses and public agricultural services through a locally grounded and scalable technology platform.
 
 ### Important
 
@@ -86,13 +86,13 @@ So this field should be technical but readable.
 
 ### Final version
 
-KrishokChat is implemented as a modular web-based agricultural advisory platform with a Next.js/React/TypeScript frontend and a FastAPI/Python backend. The system is organized into application, domain, port/protocol and infrastructure layers so that models and external service providers can be replaced without changing the core advisory logic.
+KrishokTech is implemented as a modular web-based agricultural advisory platform with a Next.js/React/TypeScript frontend and a FastAPI/Python backend. The system is organized into application, domain, port/protocol and infrastructure layers so that models and external service providers can be replaced without changing the core advisory logic.
 
 The NLP layer uses Bengali Unicode normalization, BM25 sparse retrieval and FAISS dense retrieval with precomputed agricultural knowledge indexes. A safety and routing layer screens requests before retrieval and supports terminal handling of unsafe, off-topic, prompt-injection and low-confidence cases. Generative responses can be produced through configurable remote or local LLM backends, including Ollama-based local inference. A verification layer checks grounded responses and safety-critical agricultural fields against structured evidence.
 
 The multimodal pipeline accepts crop images, identifies the crop family, routes the image to a crop-specific disease classifier, and connects the resulting diagnosis to Bengali agricultural knowledge and treatment guidance. The system also supports contextual services such as weather information, audit logging, streaming responses and constrained SMS delivery.
 
-For deployment, KrishokChat uses precomputed local assets, configurable model providers, health/readiness checks, containerized services and offline-oriented knowledge caching. The development process includes automated backend/frontend tests, reproducible experiment scripts, model verification, audit traces and versioned research artifacts.
+For deployment, KrishokTech uses precomputed local assets, configurable model providers, health/readiness checks, containerized services and offline-oriented knowledge caching. The development process includes automated backend/frontend tests, reproducible experiment scripts, model verification, audit traces and versioned research artifacts.
 
 The current platform has been engineered so that additional crops, agricultural knowledge packs, advisory capabilities and deployment channels can be introduced without rebuilding the farmer-facing application.
 
@@ -229,7 +229,7 @@ Do not solve the full advisory problem
 
 Right/bottom:
 
-# **KrishokChat**
+# **KrishokTech**
 
 > Language + Vision + Evidence + Safety + Delivery
 
@@ -338,7 +338,7 @@ Center badge:
 
 Bottom text:
 
-> KrishokChat is not a single model. It is a coordinated agricultural intelligence system.
+> KrishokTech is not a single model. It is a coordinated agricultural intelligence system.
 
 ---
 
@@ -428,7 +428,7 @@ Then bottom:
 ```text
 Farmer
   ↓
-KrishokChat
+KrishokTech
   ↓
 Extension / NGO / Agribusiness
   ↓
@@ -531,7 +531,7 @@ This is the only slide where you should explicitly make the funding transition.
 
 Every slide should use a tiny footer:
 
-> **KrishokChat | Bengali-first agricultural intelligence for Bangladesh**
+> **KrishokTech | Bengali-first agricultural intelligence for Bangladesh**
 
 And Slide 5 onward can use:
 
@@ -547,7 +547,7 @@ Do not upload the three papers separately.
 
 Create one:
 
-# **KrishokChat — Current Status, Research Evidence & Deployment Roadmap**
+# **KrishokTech — Current Status, Research Evidence & Deployment Roadmap**
 
 **Recommended format:** PDF.
 
@@ -571,7 +571,7 @@ This is a **due-diligence dossier**, not an academic paper archive.
 
 ## COVER
 
-# **KrishokChat**
+# **KrishokTech**
 
 ### From Field Problem to Deployable Agricultural Intelligence
 
@@ -747,7 +747,7 @@ This is one of the strongest supporting slides.
 
 Header:
 
-# **KrishokChat in one view**
+# **KrishokTech in one view**
 
 Use the full architecture diagram.
 
@@ -818,7 +818,7 @@ Below small comparison:
 > LLM direct: 83.86% unsafe certification
 > Vanilla RAG: 69.36%
 > LLM judge: 21.79%
-> KrishokChat: 0.00%
+> KrishokTech: 0.00%
 
 These numbers are directly in the current results file. 
 
@@ -977,7 +977,7 @@ Then compare:
 > LLM Direct: 38% deployment approval
 > Vanilla RAG: 52.5%
 > RAG + LLM Judge: 71%
-> KrishokChat: 96.5%
+> KrishokTech: 96.5%
 
 This is one of the strongest funding slides.
 
@@ -1520,7 +1520,7 @@ This is worth prioritizing.
 
 For every response, user can click:
 
-# **Why did KrishokChat answer this way?**
+# **Why did KrishokTech answer this way?**
 
 Then an animated vertical trace:
 
@@ -1574,7 +1574,7 @@ Then run:
 
 vs
 
-### KrishokChat
+### KrishokTech
 
 Show:
 
@@ -1582,7 +1582,7 @@ Show:
 Baseline
 ✗ accepts corrupted evidence
 
-KrishokChat
+KrishokTech
 ✓ detects mismatch
 ✓ rejects certification
 ✓ explains failure
@@ -1610,7 +1610,7 @@ Examples:
 
 The app shows:
 
-> **How KrishokChat interpreted your question**
+> **How KrishokTech interpreted your question**
 
 Then:
 
@@ -1678,7 +1678,7 @@ Use four cards:
 
 ### Research Foundation
 
-KrishokChat benchmark
+KrishokTech benchmark
 
 ### Retrieval Research
 
@@ -1720,7 +1720,7 @@ This is natural and strong.
 
 Use:
 
-> **KrishokChat is designed as shared advisory infrastructure rather than a single-purpose consumer app.**
+> **KrishokTech is designed as shared advisory infrastructure rather than a single-purpose consumer app.**
 
 Then:
 
@@ -1734,7 +1734,7 @@ This is a much more mature business proposition.
 
 Use:
 
-> Agricultural advisory demand already exists through Bangladesh's extension ecosystem, weather/advisory services and formal agricultural support channels. KrishokChat is designed as a digital intelligence layer that can complement these channels rather than replace them.
+> Agricultural advisory demand already exists through Bangladesh's extension ecosystem, weather/advisory services and formal agricultural support channels. KrishokTech is designed as a digital intelligence layer that can complement these channels rather than replace them.
 
 Bangladesh already has formal agricultural advisory infrastructure, including BAMIS services and the 16123 agricultural call center. ([bamis.gov.bd](https://www.bamis.gov.bd/en/advisory/?utm_source=chatgpt.com)) ([ais.gov.bd](https://ais.gov.bd/site/page/d9147061-2995-416f-b355-d7feb0d9f9a1/%5Bfront%5D?utm_source=chatgpt.com))
 
@@ -1884,7 +1884,7 @@ It avoids three separate-looking projects.
 
 Everything should converge toward this:
 
-> **KrishokChat is a Bangladesh-focused agricultural intelligence platform built from real farmer problems, strengthened by research, and engineered for safe deployment. It combines Bengali language interaction, crop-image understanding, agricultural evidence, safety verification and low-connectivity pathways so that the system can answer when it has evidence, ask when it needs context, and refuse when it cannot justify the advice.**
+> **KrishokTech is a Bangladesh-focused agricultural intelligence platform built from real farmer problems, strengthened by research, and engineered for safe deployment. It combines Bengali language interaction, crop-image understanding, agricultural evidence, safety verification and low-connectivity pathways so that the system can answer when it has evidence, ask when it needs context, and refuse when it cannot justify the advice.**
 
 That is the innovation.
 
@@ -1912,7 +1912,7 @@ Give your implementation agents these rules verbatim.
 
 ## Product
 
-> Treat KrishokChat as a unified agricultural advisory platform, not a collection of features.
+> Treat KrishokTech as a unified agricultural advisory platform, not a collection of features.
 
 ## UX
 
@@ -2019,7 +2019,7 @@ Before submitting the Innovation Fair application, run this exact checklist.
 
 # The single biggest thing I want you to remember
 
-**Do not try to convince the judges that KrishokChat contains the most technology.**
+**Do not try to convince the judges that KrishokTech contains the most technology.**
 
 Convince them that:
 
@@ -2032,7 +2032,7 @@ And your current evidence really does support that story: the repository shows a
 The right **next execution order** is therefore: **freeze the wording → build the 8-slide deck → build the 20-page evidence dossier → polish the live demo around the three “wow” workflows → audit every number once more → submit.**
 
 [1]: https://aclanthology.org/2026.eacl-demo.34/?utm_source=chatgpt.com "AI for Climate Finance: Agentic Retrieval and Multi-Step Reasoning for Early Warning System Investments - ACL Anthology"
-[2]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
-[3]: https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System/blob/main/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md "KrishokChat-Agricultural-Advisory-System/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md at main · RaiyaanReza/KrishokChat-Agricultural-Advisory-System · GitHub"
+[2]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System "GitHub - RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"
+[3]: https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System/blob/main/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md "KrishokTech-Agricultural-Advisory-System/production/future_plan/07_ARCHITECTURE_REFINEMENT_PLAN.md at main · RaiyaanReza/KrishokTech-Agricultural-Advisory-System · GitHub"
 [4]: https://aclanthology.org/2025.acl-demo.0/?utm_source=chatgpt.com "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 3: System Demonstrations) - ACL Anthology"
 [5]: https://innovationfairbd.org/innovator-application-form "Innovation Fair"

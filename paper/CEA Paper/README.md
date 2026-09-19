@@ -11,7 +11,7 @@
 ## 1. Executive Summary & Folder Self-Sufficiency
 
 This folder (`paper/CEA Paper/`) is designed as an **individually rich, completely self-contained research and manuscript package**. If you share or archive this folder, any writer, co-author, or reviewer can independently:
-1. **Review and Compile the Manuscript:** Full modular LaTeX source files (`.tex`, `.bib`, `tables/`, `sections/`, `figures/`) and freshly compiled `krishokchat_cea_main.pdf`.
+1. **Review and Compile the Manuscript:** Full modular LaTeX source files (`.tex`, `.bib`, `tables/`, `sections/`, `figures/`) and freshly compiled `krishoktech_cea_main.pdf`.
 2. **Audit Quantitative Claims:** Trace every single number, percentage, and confidence interval back to `manuscript/NUMBER_BANK.md`.
 3. **Inspect Experiment Layers (E02–E40):** 38 individual experiment directories containing layer-specific READMEs, frozen JSON/YAML data, and Python evaluation scripts (`scripts/`).
 4. **Access Peer Reviews & Writing Roadmaps:** Full 100 KB comprehensive reviewer report (`reviews/reviewer_1.md`) and editorial revision guide (`reviews/writing suggestions.md`).
@@ -27,7 +27,7 @@ paper/CEA Paper/
 ├── manuscript/                    <-- Active, compilable LaTeX manuscript package
 │   ├── main.tex                   <-- Consolidated monolithic LaTeX manuscript (cas-dc document class)
 │   ├── main.pdf                   <-- Compiled 22-page publication PDF (0 errors)
-│   ├── krishokchat_cea.bib        <-- Complete verified BibTeX database (0 placeholders)
+│   ├── krishoktech_cea.bib        <-- Complete verified BibTeX database (0 placeholders)
 │   ├── NUMBER_BANK.md             <-- 160 KB canonical dictionary for all quantitative claims
 │   ├── tables/                    <-- Reference booktabs LaTeX tables
 │   ├── figures/                   <-- All 6 high-resolution publication figures (fig_1 to fig_6)

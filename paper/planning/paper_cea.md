@@ -1591,7 +1591,7 @@ The broader prompt-injection benchmark is even stronger:
 * LLM-only 83.86%;
 * Vanilla RAG 69.36%;
 * RAG + LLM guard 21.79%;
-* KrishokChat 0/1,400. 
+* KrishokTech 0/1,400. 
 
 This should become the **security robustness subsection**.
 
@@ -4846,7 +4846,7 @@ Selective Resolution and Evidence-Bound Verification for Safe Bengali Decision S
 1. Introduction
    ├─ agricultural advisory is safety-sensitive
    ├─ fluent/RAG answers can still misbind facts
-   ├─ prior KrishokChat work exposed generation/retrieval limitations
+   ├─ prior KrishokTech work exposed generation/retrieval limitations
    ├─ research gap: factual authority in integrated advisory systems
    ├─ bounded-authority proposal
    └─ RQ1–RQ5
@@ -4986,7 +4986,7 @@ And I would make one hard rule for the rest of the project:
 
 That will stop the system from becoming bloated again.
 
-The final paper then becomes not “a paper about all the things KrishokChat can do,” but a much stronger claim:
+The final paper then becomes not “a paper about all the things KrishokTech can do,” but a much stronger claim:
 
 > **We designed and empirically evaluated an agricultural decision-support architecture in which factual authority is explicitly bounded, uncertainty can terminate safely, and generative language is subordinate to validated agricultural evidence.**
 

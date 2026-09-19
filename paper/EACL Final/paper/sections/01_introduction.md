@@ -1,6 +1,6 @@
 # 1 Introduction
 
-A farmer types a Bengali description of yellowing leaves without naming the crop. The index returns sources from the dominant crop, and fluent generation presents wrong-crop advice with confidence. This failure motivates KrishokChat, a Bengali advisory demo built around three checks: halt before retrieval, fence retrieval with the photo, and check dosage claims before rendering.
+A farmer types a Bengali description of yellowing leaves without naming the crop. The index returns sources from the dominant crop, and fluent generation presents wrong-crop advice with confidence. This failure motivates KrishokTech, a Bengali advisory demo built around three checks: halt before retrieval, fence retrieval with the photo, and check dosage claims before rendering.
 
 C1 is halt before retrieval. A deterministic extractor maps treatment intent with empty crop to clarification with zero retrieval (A4), non-chemical guidance (A3), or refusal with the 16123 helpline (A5). On 200 farmer queries the det halt is 0.38 (N01b) (76 halted; single-reviewer labels; no gate-silent mappable set in real data). A pilot with 100 ambiguous and 140 specified prompts halted 100/100 and passed 140/140 (PILOT, E09). Clarification costs p50 89 tokens against retrieval-context p50 2146 tokens, with no blended saving claimed (N02).
 
