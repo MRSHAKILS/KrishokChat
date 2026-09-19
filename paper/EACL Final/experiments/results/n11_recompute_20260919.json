@@ -1,0 +1,18 @@
+{
+  "benchmark_name": "EACL_N11_DET_RECOMPUTE",
+  "execution_status": "DONE_REAL",
+  "design": {
+    "n": 200,
+    "live": "frozen n11_live_gating_20260917 (no new API spend)",
+    "det": "n01b_records_20260919 (v2 extractor)"
+  },
+  "key": {
+    "live_halt_rate": 0.1,
+    "det_halt_rate": 0.15,
+    "halt_agreement": 0.91,
+    "agree_halt": 16,
+    "agree_pass": 166,
+    "live_pass_det_halt": 14,
+    "live_halt_det_pass": 4
+  }
+}

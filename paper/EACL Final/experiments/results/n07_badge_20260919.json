@@ -1,0 +1,38 @@
+{
+  "benchmark_name": "EACL_N07_BADGE_GATE_USER_PATH",
+  "execution_status": "DONE_REAL",
+  "provenance": {
+    "script": "paper/EACL Final/experiments/N07_badge_gate_rerun/scripts/run_n07_badge.py",
+    "run_at_utc": "2026-09-19T18:09:31.480148+00:00",
+    "git_head": "20a1063d2a8befa6ad44abc8546eb1f2f4303706",
+    "python": "3.12.0",
+    "versions": {
+      "python": "3.12.0",
+      "torch": "2.11.0+cpu",
+      "ultralytics": "8.3.0",
+      "onnx": "not installed",
+      "onnxruntime": "1.25.1",
+      "fastapi": "0.136.1"
+    },
+    "machine": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+      "cpu_count": 12
+    },
+    "input_sha256": {
+      "sheet": "1efd82704d49e7f7b38d5349499e809ac33b1315171c8017cdfa3bee7d518d96"
+    }
+  },
+  "design": {
+    "n_pairs": 54,
+    "arms": [
+      "mismatch",
+      "control"
+    ],
+    "path": "QAInput(query, crop=*) cross-modal check (S3 badge path)"
+  },
+  "mismatch_halt_rate": 0.9815,
+  "mismatch_n": 54,
+  "control_false_halt_rate": 0.0,
+  "control_n": 54
+}

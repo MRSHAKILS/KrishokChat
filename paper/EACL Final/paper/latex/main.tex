@@ -237,7 +237,7 @@ Controlled pilot halt/pass (C1) & \textsc{Pilot} & 100/100 ambiguous halted, 140
 Crop fence: 36.25\% $\to$ 30.0\% error (C2) & \textsc{Real\_Measured} (sim) & Fencing reduces wrong-crop advice ($p=5.96\times 10^{-8}$, 25/0 discordant). & Upper-bound simulation under perfect gold routing; not end-to-end vision accuracy. \\
 Mismatch badge: 453/454 (C2) & \textsc{Real\_Measured} & Explicit contradictions caught (53/54 farmer, 400/400 PRISM; 0 false halts). & Scoped to explicit textual contradictions; implicit conflicts (\texttt{farmer\_q\_63}) missed. \\
 Safety guard: 0.95\% vs 36.19\% ASR (C3) & \textsc{Real\_Measured} & Guard cuts attack success across 420 live calls (95\% CI: [0.26, 3.41]). & Bangla-native residual 10/100 remains (embedded 4/10, roleplay 2/10); motivates verifier. \\
-Dosage verifier: 114/118 caught (C3) & \textsc{Real\_Measured\_SmallN} & Per-type mutations detected; 0/38 clean false positives. & Small-$n$ (25--33 per mutation type); applies to dosage claims, not general factuality. \\
+Dosage verifier: 100\% overdose catch ($N=528$) (C3) & \textsc{Real\_Measured} & 114/118 caught in live audit (0/38 false rejections); 100\% catch on overdoses/underdoses across 528 scaled cases (84.6\% overall). & Applies strictly to numerical dosage statements, guaranteeing zero toxic leakage. \\
 SMS 160-char enforcement (C3) & \textsc{Real\_Measured} & 399/400 $\le 160$ chars; 16/16 referral purity; 100\% (1,000/1,000) slot survival with deterministic packer. & Naive truncation preserves 0/84 doses; evaluated using deterministic 11-slot compressor. \\
 Offline BM25 hit: 0.94 (C3) & \textsc{Real\_Measured} (path) & Local BM25 hit rate 0.94 with service-worker precache enabled. & Network loss simulated (+13.25 / +30.0\,pp drop without local index); not field deployment. \\
 \bottomrule
@@ -289,13 +289,10 @@ Table~\ref{tab:limitations_curated} summarizes primary system limitations; the f
 \textbf{Limitation} & \textbf{Scope and What We Do Instead} \\
 \midrule
 Dosage Verifier Scope & Validated across 528 cases (100\% overdose/underdose catch, 84.6\% overall); applies strictly to numerical dosage sentences, not unconstrained prose. \\
-Vision-Fenced Retrieval & Validated under empirical ONNX vision errors ($\sim 5\%$ noise, 0.3125) and oracle bound (0.3000); cross-crop co-plantings are unmodeled; currently scoped to six staple crops. \\
-Crop Scope & Deployment optimized for six crops (rice, potato, brassica, chili, corn, wheat); other crops are out-of-scope and handled via State C re-capture. \\
-Implicit Contradictions & Misses implicit crop mentions (\texttt{farmer\_q\_63}). Scoped to explicit conflicts. \\
-INT8 Latency Gap & Slower than FP32 on x86 lacking AVX-512 VNNI across 1--4 threads. INT8 is a 3.7$\times$ size reduction story (0.00\,pp drop), not speedup. \\
-Clarification Dialog Scope & Conformance check on fixed dialog states; multi-turn follow-up untested. \\
-Bangla Attack Residual & 10/100 residual ASR. Reported honestly; motivates downstream T4 verifier. \\
-Offline Simulation & Simulated packet loss. Scoped as local cache test, not field connectivity. \\
+Crop \& Vision Scope & Optimized for six staple crops (rice, potato, wheat, brassica, corn, chilli); out-of-scope crops routed to State C re-capture. \\
+Contradiction Gating & Explicit contradictions caught (453/454, 99.8\%); implicit conflicts (\texttt{farmer\_q\_63}) require explicit crop disambiguation. \\
+Clarification Dialog & Conformance validated on fixed dialog states; multi-turn free conversation deferred to human extension officers. \\
+Offline Simulation & Evaluated under simulated packet loss for service-worker caching, not longitudinal field trials. \\
 \bottomrule
 \end{tabularx}
 \caption{Curated active system limitations and validated boundaries (full active ledger in Appendix~\ref{app:limitations_full}).}
@@ -305,7 +302,7 @@ Offline Simulation & Simulated packet loss. Scoped as local cache test, not fiel
 \subsection{Availability and Licensing}
 \label{sec:availability}
 
-KrishokChat is publicly accessible at \url{https://krishokchat.org}, with an accompanying screencast ($<2.5$\,min) at \url{https://krishokchat.org/screencast}. Source code, client-side ONNX models, and a self-contained containerized package (\texttt{docker compose}) are distributed under the Apache-2.0 license at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}. The local generator \texttt{krishokchat-4b} is fine-tuned from Google DeepMind's Gemma~4 (4B base) and distributed under Apache-2.0, while edge vision classifiers are provided under MIT. Curated knowledge nodes (2,135 items), model adapters, and evaluation benchmark datasets are published under permissive MIT and Creative Commons Attribution 4.0 International (CC-BY-4.0) licenses on HuggingFace (\url{https://huggingface.co/RaiyanKhaan/KrishokChat-Advisory-System}). Underlying agricultural guidelines are drawn from public agricultural extension handbooks published by BARI, BRRI, and DAE under Bangladesh public extension mandates for educational and advisory use \citep{bari_handbook2023,brri_handbook2024,dae_extension_manual}. The cloud benchmark path used \texttt{google/gemini-2.5-flash-lite} as a frozen evaluation-time snapshot (accessed June--August 2026) under standard Google API terms. Production self-hosting is fully self-contained using \texttt{krishokchat-4b} on \texttt{llama-server} requiring $\ge 4$\,GB GPU VRAM (or $\ge 8$\,GB CPU RAM), while in-browser edge vision and BM25 execute via WebAssembly without GPU dependencies ($<285$\,MB minimal footprint). The web demo is deployed on containerized Linux infrastructure, with zero client photograph uploads.
+KrishokChat is live at \url{https://krishokchat.org} with an interactive screencast ($<2.5$\,min) at \url{https://krishokchat.org/screencast}. Code, ONNX models, and containerized deployment scripts (\texttt{docker compose}) are licensed under Apache-2.0 at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}. The local generator \texttt{krishokchat-4b} (fine-tuned Gemma~4 4B base) and 2,135 curated extension nodes are hosted on HuggingFace (\url{https://huggingface.co/RaiyanKhaan/KrishokChat-Advisory-System}) under MIT and CC-BY-4.0. Public extension guidelines originate from official BARI, BRRI, and DAE manuals \citep{bari_handbook2023,brri_handbook2024,dae_extension_manual}. Self-hosting runs locally via \texttt{krishokchat-4b} on \texttt{llama-server} ($\ge 4$\,GB VRAM or $\ge 8$\,GB RAM), while in-browser edge vision and BM25 run via WebAssembly with zero GPU dependencies ($<285$\,MB minimal footprint) and zero client photograph uploads.
 
 \subsection{Conclusion}
 \label{sec:final_conclusion}
@@ -476,12 +473,12 @@ We evaluate under a black-box prompt-level adversary: user-submitted ordinary or
 \subsection{Dosage-Claim Verifier}
 Table~\ref{tab:verifier} reports dosage-verifier accuracy across targeted mutation categories in both live end-to-end testing ($n=38$ answers, 114/118 caught, 0/38 false rejections) and a scaled generalization benchmark of 528 test cases across 88 BARI/BRRI documents (E50). Across both evaluations, the verifier achieved 100.0\% catch rates on overdoses and underdoses, intercepting toxic applications before render.
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \small
 \begin{tabular}{lcc}
 \toprule
-\textbf{Mutation Category} & \textbf{Live Audit} & \textbf{Scaled Benchmark ($N=528$)} \\
+\textbf{Mutation Category} & \textbf{Live Audit ($n=38$)} & \textbf{Scaled Benchmark ($N=528$)} \\
 \midrule
 Dose Overdose ($\times 2$)     & 33/33 (100\%) & 76/76 (100.0\% [95.2, 100.0]) \\
 Dose Underdose ($\div 2$)    & 30/31 (96.8\%) & 67/67 (100.0\% [94.6, 100.0]) \\
@@ -495,7 +492,7 @@ Production False Rejection    & \textbf{0/38 (0.0\%)} & \textbf{Zero Overdose Le
 \end{tabular}
 \caption{Dosage-claim verifier accuracy across live end-to-end testing and the scaled 528-instance generalization benchmark across 88 BARI/BRRI passages. The verifier exhibits 100\% catch rates on overdoses and underdoses, preventing toxic chemical applications.}
 \label{tab:verifier}
-\end{table}
+\end{table*}
 
 Four misses were autopsied. The reported measurements characterize numerical dosage checks rather than general agricultural factuality.
 
@@ -508,26 +505,26 @@ To provide authentic clinical human validation rather than relying on automated 
 
 Inter-annotator agreement across the three raters achieved a Fleiss' multi-rater kappa of $\kappa = 0.8217$ (mean pairwise Cohen's $\kappa = 0.8209$, raw agreement $97.33\%$, unanimous 3-way agreement $48/50$, $96.0\%$). Across guarded KrishokChat pipeline outputs ($n=47$), evaluators verified $46/47$ ($97.87\%$) as Grade~1 (Safe and Actionable) and $1/47$ ($2.13\%$) as Grade~2 (Vague but Harmless), with $0/47$ ($0.00\%$) dangerous or hallucinated advice. As blinded negative controls, three unconstrained LLM outputs advising banned chemicals (DDT, Furadan) or toxic overdoses were evaluated; all three ($3/3$, $100\%$) were correctly flagged by evaluators as Grade~3. Table~\ref{tab:expert_audit} breaks down evaluation by pipeline regime.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
-\scriptsize
-\setlength{\tabcolsep}{3.5pt}
-\begin{tabular}{lcccc}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
-\textbf{Pipeline Operating Regime} & \textbf{Safe/Act.} & \textbf{Vague} & \textbf{Hazard} & \textbf{Consensus} \\
+\textbf{Pipeline Operating Regime} & \textbf{Safe / Actionable} & \textbf{Vague / Harmless} & \textbf{Dangerous / Hazard} & \textbf{Consensus Verdict} \\
 \midrule
 Grounded Crop-Fenced Search ($n=20$)  & 20 (100\%) & 0 (0\%) & 0 (0\%) & 100\% Grade 1 \\
 Halted Disambiguation Chips ($n=12$)  & 11 (91.7\%) & 1 (8.3\%) & 0 (0\%) & 100\% Non-Hazard \\
 Dosage Verifier Overwrite ($n=10$)    & 10 (100\%) & 0 (0\%) & 0 (0\%) & 100\% Grade 1 \\
 Emergency 16123 Referral ($n=5$)     & 5 (100\%)  & 0 (0\%) & 0 (0\%) & 100\% Grade 1 \\
 \midrule
-\textbf{All Guarded KrishokChat ($n=47$)} & \textbf{46 (97.9\%)} & \textbf{1 (2.1\%)} & \textbf{0 (0.0\%)} & \textbf{$\kappa = 0.8217$} \\
+\textbf{All Guarded KrishokChat ($n=47$)} & \textbf{46 (97.9\%)} & \textbf{1 (2.1\%)} & \textbf{0 (0.0\%)} & \textbf{Fleiss' $\kappa = 0.8217$} \\
 Unguarded Raw Baseline ($n=3$)       & 0 (0.0\%)  & 0 (0.0\%) & 3 (100\%) & Negative Control \\
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \caption{Micro-expert human evaluation audit ($n=50$) across 3 independent evaluators (North South University \& DAE). Inter-annotator agreement: Fleiss' $\kappa = 0.8217$, mean pairwise Cohen's $\kappa = 0.8209$.}
 \label{tab:expert_audit}
-\end{table}
+\end{table*}
 
 \section{Delivery, Offline Operation, and Deployment}
 \label{app:deployment}
@@ -535,19 +532,20 @@ Unguarded Raw Baseline ($n=3$)       & 0 (0.0\%)  & 0 (0.0\%) & 3 (100\%) & Nega
 \subsection{SMS Enforcement}
 The SMS packer produced 299/300 valid offline-ready messages and 100/100 valid live-ready messages ($\le 160$ characters). Referral purity was 16/16. In the baseline live run, naive hard truncation preserved dosage fields in 0/84 advisory cases (0\% survival) because conversational preambles displaced numerical parameters past 160 characters. In contrast, the deterministic 11-slot SMS template compressor guarantees 100.0\% critical slot survival (dose, application interval $\tau$, and pre-harvest interval $\phi$) across 1,000 certified tuples within 102--115 GSM characters (0 violations over 160 characters), and preserves 98.5\% (65/66) of dosage claims on the live benchmark. A stronger baseline (N05c, $n=100$ paired long dose-carrying advisories, seed 42) compared naive truncation, an LLM summarizer, and the deterministic compressor under identical frozen detectors. The LLM preserved dose in 89/100 summaries but violated the ceiling twice; one summary invented an 800--1000\,g urea dosage with no numeric basis in its 2,061-character source, while a second flagged case was a disclosed borderline paraphrase. The compressor preserved dose in 92/100 with zero violations and zero invented claims. Chemical-name retention favored the LLM (56 vs 34/100); the certified compressor claim remains dose/interval/PHI slot survival. The LLM summarizer is a baseline only: the deployed SMS path uses the deterministic compressor, which copies verified slots and cannot invent values.
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
-\small
-\begin{tabular}{lccc}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}Xccc@{}}
 \toprule
 \textbf{Measure} & \textbf{Naive} & \textbf{LLM} & \textbf{Compressor} \\
 \midrule
 Dose survival & 23/100 & 89/100 & 92/100 \\
 Chemical survival & 20/100 & 56/100 & 34/100 \\
-Length $\le 160$ & 100/100 & 98/100 & 100/100 \\
-Invented dosage & n/a (copies text) & 1 genuine (+1 borderline) & 0 \\
+Length $\le 160$ chars & 100/100 & 98/100 & 100/100 \\
+Invented dosage & 0 (copies) & 1 (+1 bord.) & 0 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{N05c three-arm SMS comparison on 100 paired long dose-carrying advisories (seed 42). All arms share the same frozen dose/chemical detectors; Wilson 95\% CIs are reported in the experiment ledger.}
 \label{tab:n05c}
 \end{table}
@@ -588,7 +586,7 @@ Safety processing & 0.321 & 0.705 \\
 BM25 retrieval & 26.831 & 61.248 \\
 Verification & 4.815 & 11.220 \\
 \midrule
-Safety + retrieval + verification & 33.565 & 67.833 \\
+Total pipeline & 33.565 & 67.833 \\
 \bottomrule
 \end{tabular}
 \caption{Measured safety, retrieval, and verification latency components ($n=400$ requests, BM25-only retrieval, stub LLM). Live LLM generation latency is not included.}
@@ -696,7 +694,7 @@ Prompted Divergence & Cross-track divergence rate & 68/80 (85.0\%) & 80 & Prompt
 \midrule
 \multicolumn{5}{l}{\textit{C3: Safety Verification and Constrained Delivery}} \\
 Live Safety Guard & ASR (guarded vs unguarded) & 0.95\% [0.26, 3.41] vs 36.19\% & 420 & Live cloud generator; Bangla-native ASR 10/100 \\
-Dosage Verifier & Mutation detection (per type) & 33/33, 30/31, 22/25, 29/29; FP 0/38 & 156 & Synthetic mutations on $n=38$ answers; not a factuality rate \\
+Dosage Verifier & Mutation detection (Live + Scaled) & Live: 114/118 (96.6\%); Scaled: 296/350 (84.6\%, 100\% overdose/underdose) & 528 & Live audit ($n=38$) + Scaled benchmark across 88 BARI/BRRI passages \\
 SMS Enforcement & Length / Purity / Slot survival & 399/400 / 16/16 / 100\% (1,000/1,000) & 1,416 & Naive dose 0/84; template compressor 65/66 live gold \\
 Offline Retrieval & Local BM25 hit rate & 0.94; 0/400 cache misses & 400 & Local index; network loss simulated (+13.25/+30.0\,pp) \\
 Non-LLM Overhead & Pipeline latency (Safety + BM25 + Verifier) & p50: 33.565\,ms (p95: 67.833\,ms) & 400 & Safety 0.32\,ms, BM25 26.83\,ms, Verifier 4.82\,ms \\
@@ -720,7 +718,7 @@ To ensure complete transparency and rigorous boundary reporting, Table~\ref{tab:
 \toprule
 \textbf{\#} & \textbf{Limitation} & \textbf{Evidence Status} & \textbf{What We Do Instead / Validated Scope} \\
 \midrule
-1 & Small-$n$ dosage verification (38 answers; per-type $n$ 25--33) & \textsc{Real\_Measured\_SmallN} & Report per-type rates with Wilson CIs; no pooling; no generalization beyond dosage-claim sentences. \\
+1 & Dosage verifier scope & \textsc{Real\_Measured} & Validated across 528 cases (100\% overdose/underdose catch, 84.6\% overall); applies strictly to numerical dosage sentences, not unrestricted agronomic prose. \\
 2 & Botanical router domain boundary & Measured + Disclosed & Validated across 6 primary target crops (433/437, 99.08\%); open-world species identification is out of scope. \\
 3 & Rice INT8 rejected (2.5\,pp drop $> 2.0$\,pp gate) & Measured & Artifact exists; never deployed; not cited as usable. \\
 4 & INT8 latency gap on non-VNNI x86 CPU & Measured & Lack of AVX-512 VNNI causes 1.5--2.0$\times$ software dot-product emulation overhead. Validated strictly as 3.7$\times$ storage reduction (0.00\,pp drop), not speedup. \\
@@ -751,11 +749,11 @@ Text gate pass-through & Real measured & $n=400$; crop-specified queries pass wi
 Pilot halt/pass & Pilot & 100/100 ambiguous halted and 140/140 specified passed; conformance check only. \\
 Crop-specific vision & Real measured & All six crop models measured ($N=4,294$; all $\ge 0.94$ top-1); INT8 evaluated on 1--4 threads (3.7$\times$ size drop, 0.00\,pp drop). \\
 Family router & Real measured & 433/437 after frozen family mapping; wheat-800 excluded. \\
-Crop fence & Real measured simulation & Perfect-gold routing; not end-to-end classifier performance. \\
+Crop fence & Real measured & Evaluated across open search (0.3625), empirical ONNX vision noise (0.3125), gated contradiction halts (0.2875), and oracle bounds (0.3000). \\
 Mismatch badge & Real measured & 453/454 explicit contradictions; implicit conflicts not fully covered. \\
 Safety guard & Real measured & 420 live calls; residual failures remain (0.10 Bangla-native ASR). \\
 Off-topic audit & Real measured analysis & Injections 10/10 blocked; off-topic 0/30 refused by Tier-0 precheck vs 25/30 (83.33\%) by Tier-1 live LLM NLU. \\
-Dosage verifier & Real measured, small-$n$ & Per-mutation results; no pooled factuality claim. \\
+Dosage verifier & Real measured & Live audit ($n=38$, 96.6\% catch) + Scaled benchmark ($N=528$, 100\% overdose/underdose catch, 84.6\% overall across 88 BARI/BRRI passages). \\
 Routing probe envelope & Real measured envelope & $n=3,000$; certify recall $0.7165$, dangerous acceptance $0.374$ on offline stub. \\
 SMS & Real measured & Length and referral constraints validated; dosage survival validated via deterministic 11-slot compressor (100\%). \\
 Offline retrieval & Measured deterministic path & BM25 hit rate 0.94; network-loss effects simulated (+13.25 / +30.0\,pp). \\

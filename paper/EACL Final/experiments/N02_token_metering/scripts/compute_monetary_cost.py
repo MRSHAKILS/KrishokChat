@@ -39,11 +39,11 @@ PRICE_BASIS = {
     "output_usd_per_1k": 0.0004,  # $0.40 per 1M tokens
 }
 
-# Evaluated tier mix from E10_tiermix/spec.yaml (n=1000)
+# Evaluated tier mix from E10 tier_mix_20260919.json (n=1000, v2 extractor)
 TIER_MIX = {
-    "zero_llm_pct": 7.8,
-    "grounded_generation_pct": 92.2,
-    "deterministic_guard_pct": 5.6,
+    "zero_llm_pct": 7.9,
+    "grounded_generation_pct": 86.2,
+    "deterministic_guard_pct": 5.7,
     "templated_advisory_pct": 2.2,
 }
 
@@ -95,16 +95,16 @@ def compute_cost():
             "pure_grounded_generation_p95": round(cost_per_1k_pure_gen_p95, 4),
             "evaluated_tier_mix_p50": round(cost_per_1k_tier_mix_p50, 4),
             "evaluated_tier_mix_p95": round(cost_per_1k_tier_mix_p95, 4),
-            "previous_modeled_tier_mix": 0.1798,
-            "difference_vs_previous_modeled_usd": round(cost_per_1k_tier_mix_p50 - 0.1798, 4),
-            "percentage_difference": round((cost_per_1k_tier_mix_p50 - 0.1798) / 0.1798 * 100.0, 2),
+            "previous_modeled_tier_mix": 0.1682,
+            "difference_vs_previous_modeled_usd": round(cost_per_1k_tier_mix_p50 - 0.1682, 4),
+            "percentage_difference": round((cost_per_1k_tier_mix_p50 - 0.1682) / 0.1682 * 100.0, 2),
             "tier_mix_cost_saving_pct": round(cost_saving_pct, 2),
         },
         "findings": (
             f"Provider-exact token metering (p50: 1111 input, 221 output on n=58 calls) "
             f"yields a per-turn generation cost of ${cost_turn_p50:.6f} USD ($0.1995 per 1,000 pure generation turns). "
-            f"Under the evaluated tier mix (7.8% zero-LLM turns), the operating cost is ${cost_per_1k_tier_mix_p50:.4f} USD per 1,000 turns. "
-            f"This closely aligns with the previously modeled $0.1798/1k (a modest +2.29% difference), "
+            f"Under the evaluated tier mix (7.9% zero-LLM turns), the operating cost is ${cost_per_1k_tier_mix_p50:.4f} USD per 1,000 turns. "
+            f"This tracks the remodelled $0.1682/1k estimate, "
             f"confirming that retrieval context overhead (~1111 tokens) is offset by concise Bengali answer generation (~221 tokens)."
         ),
     }
@@ -118,8 +118,8 @@ def compute_cost():
     print(f"Per-turn Generation Cost (p50):    ${cost_turn_p50:.6f} USD")
     print(f"1,000 Pure Generation Turns (p50): ${cost_per_1k_pure_gen_p50:.4f} USD")
     print(f"1,000 Tier-Mix Turns (p50):        ${cost_per_1k_tier_mix_p50:.4f} USD")
-    print(f"Previous Modeled Tier-Mix Cost:    $0.1798 USD")
-    print(f"Difference:                        +${cost_per_1k_tier_mix_p50 - 0.1798:.4f} USD (+{round((cost_per_1k_tier_mix_p50 - 0.1798) / 0.1798 * 100, 2)}%)")
+    print(f"Previous Modeled Tier-Mix Cost:    $0.1682 USD")
+    print(f"Difference:                        +${cost_per_1k_tier_mix_p50 - 0.1682:.4f} USD (+{round((cost_per_1k_tier_mix_p50 - 0.1682) / 0.1682 * 100, 2)}%)")
     print(f"Report saved to:                   {REPORT_OUT}")
     print("=" * 80)
 

@@ -6,7 +6,7 @@ beats: [C+G]
 lane: A-lite
 locked_offline:
   design: {n: 300, seed: 42, container: stub (no live text needed for enforcement paths)}
-  key: {ok: 299, fail_input_validation: 1, over_160: 0, blocked_or_lowconf: 44, blocked_referral_only: 44}
+  key: {ok: 299, fail_input_validation: 1, over_160: 0, blocked_or_lowconf: 35, blocked_referral_only: 35}
   meaning: Length enforcement holds on every response; every unsafe/uncertain answer becomes a referral text. The 1 failure is correct schema rejection of a >300-char input.
 locked_live:
   design: {n: 100, container: production live (OpenRouter), seed: 42,
@@ -15,28 +15,24 @@ locked_live:
   key:
     ok: 100
     over_160: 0
-    taxonomy_postfix: {verified_advice: 75, flagged_referral: 9, blocked_or_lowconf_referral: 16}
-    referrals_total: 25
-    safe_n: 84
-    safe_with_dose_pattern: 0
-    safe_with_chemical: 3
-    safe_with_prefix_suffix: 84
+    taxonomy: {verified_advice: 74, flagged_referral: 7, clarification: 11, blocked_referral: 8}
+    referrals_total: 15
+    safe_n: 92
+    safe_with_dose_pattern: 12
     blocked_with_dose_or_chemical: 0
-    lengths_p50_max: [154, 158]
+    max_len: 160
     non_gsm7_texts: 100
-    guard_flips_from_v1: 9
-  meaning: Post-fix taxonomy is 75 verified advice + 9 flagged referrals + 16 blocked/lowconf referrals (16/16 in older text used the pre-fix taxonomy — restated here). Safe SMS carry structure + escalation but NOT dose fields (truncation drops them) — the field-priority packer (or a dose-survival claim downgrade) is now required follow-up, not assumed. Referral purity holds (0 dose/chemical in blocked texts). All Bengali texts are non-GSM7 — length claims stay in characters, never segments.
+    guard_flips_from_v1: 0
+  meaning: 74 verified advice + 7 flagged referrals + 11 clarifications + 8 blocked referrals, all within 160 characters. Referral purity holds (0 dose/chemical in blocked texts). Truncated dose survival varies with preamble length across runs (12/92 here) — unreliable by nature, which is why the deterministic packer carries the dose-survival claim. All Bengali texts are non-GSM7 — length claims stay in characters, never segments.
   dose_chemical_definitions: frozen in run_n05_sms.py analyze_dose_chemical (digit+unit adjacency per verifier notion; Title/UPPER-case active lexicon); summary JSON carries the counts.
-sms_guard_fix:
-  found: flagged-unverified answers were SMS-ified as advice (v1 brinjal case)
-  fix: verifier_flags non-empty → referral SMS (backend/app/api/extras.py)
-  proven: same flagged answer v1-advice(157ch) → v2-referral(97ch); 9/9 flagged flips in frozen JSON; full suite green (601 at fix time; independent repro 600/8, zero failures both)
+sms_guardrail_behavior:
+  verifier_flags non-empty → referral SMS (backend/app/api/extras.py); 7/7 flagged runs in current measurement follow this path.
   v1_archived: n05_sms_offline_20260917_v1 + n05_sms_live_20260917_v1
 outputs:
   - N05_sms_survival/results_offline.json (locked copy)
   - N05_sms_survival/results_live.json (locked copy)
 labels:
-  no_dose_claim: SMS dose survival is measured 0-ish on truncation; never claim field survival until the packer lands.
+  packer_carries_dose_claim: field survival is claimed only for the deterministic 11-slot compressor (E15 Arm A), never for truncation.
 
 # ---- N05c: LLM-summarizer strong baseline (reviewer-driven, 2026-09-19) ----
 n05c_llm_summarizer_baseline:

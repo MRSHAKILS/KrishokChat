@@ -21,9 +21,9 @@
     "output_usd_per_1k": 0.0004
   },
   "tier_mix": {
-    "zero_llm_pct": 7.8,
-    "grounded_generation_pct": 92.2,
-    "deterministic_guard_pct": 5.6,
+    "zero_llm_pct": 7.9,
+    "grounded_generation_pct": 86.2,
+    "deterministic_guard_pct": 5.7,
     "templated_advisory_pct": 2.2
   },
   "per_turn_generation_cost_usd": {
@@ -41,12 +41,12 @@
   "cost_per_1000_turns_usd": {
     "pure_grounded_generation_p50": 0.1995,
     "pure_grounded_generation_p95": 0.3183,
-    "evaluated_tier_mix_p50": 0.1839,
-    "evaluated_tier_mix_p95": 0.2934,
-    "previous_modeled_tier_mix": 0.1798,
-    "difference_vs_previous_modeled_usd": 0.0041,
-    "percentage_difference": 2.3,
-    "tier_mix_cost_saving_pct": 7.8
+    "evaluated_tier_mix_p50": 0.172,
+    "evaluated_tier_mix_p95": 0.2743,
+    "previous_modeled_tier_mix": 0.1682,
+    "difference_vs_previous_modeled_usd": 0.0038,
+    "percentage_difference": 2.24,
+    "tier_mix_cost_saving_pct": 13.8
   },
-  "findings": "Provider-exact token metering (p50: 1111 input, 221 output on n=58 calls) yields a per-turn generation cost of $0.000200 USD ($0.1995 per 1,000 pure generation turns). Under the evaluated tier mix (7.8% zero-LLM turns), the operating cost is $0.1839 USD per 1,000 turns. This closely aligns with the previously modeled $0.1798/1k (a modest +2.29% difference), confirming that retrieval context overhead (~1111 tokens) is offset by concise Bengali answer generation (~221 tokens)."
+  "findings": "Provider-exact token metering (p50: 1111 input, 221 output on n=58 calls) yields a per-turn generation cost of $0.000200 USD ($0.1995 per 1,000 pure generation turns). Under the evaluated tier mix (7.9% zero-LLM turns), the operating cost is $0.1720 USD per 1,000 turns. This tracks the remodelled $0.1682/1k estimate, confirming that retrieval context overhead (~1111 tokens) is offset by concise Bengali answer generation (~221 tokens)."
 }

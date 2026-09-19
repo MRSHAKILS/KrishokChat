@@ -38,7 +38,7 @@ from app.domain.concept_normalizer import ConceptNormalizer  # noqa: E402
 from app.domain.contracts import QueryContext  # noqa: E402
 from app.domain.enums import ResolutionTier, SafetyCategory  # noqa: E402
 from app.domain.intent import _CROP_ALIASES  # noqa: E402
-from app.domain.query_extractor import QueryExtractor, _ROMAN_CROP_ALIASES  # noqa: E402
+from app.domain.query_extractor import QueryExtractor  # noqa: E402
 from app.domain.working_memory import AgriculturalWorkingMemory  # noqa: E402
 from app.infrastructure.retrieval.bm25 import BM25Retriever  # noqa: E402
 
@@ -53,17 +53,13 @@ TOP_K = 5
 
 
 def build_crop_map() -> list[tuple[str, str]]:
-    """crop_map_v1: (alias_lower, crop_id), longest alias first (frozen)."""
+    """crop_map: (alias_lower, crop_id), longest alias first."""
     pairs: list[tuple[str, str]] = []
     for crop_id, aliases in _CROP_ALIASES.items():
         for alias in aliases:
             alias = str(alias).strip()
             if alias:
                 pairs.append((alias.lower(), crop_id))
-    for word, crop_id in _ROMAN_CROP_ALIASES.items():
-        word = str(word).strip()
-        if word:
-            pairs.append((word.lower(), crop_id))
     pairs.sort(key=lambda p: len(p[0]), reverse=True)
     seen: set[str] = set()
     deduped: list[tuple[str, str]] = []

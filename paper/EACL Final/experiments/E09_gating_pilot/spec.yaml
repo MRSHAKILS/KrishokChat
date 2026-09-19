@@ -17,7 +17,7 @@ design_det:
 design_live:
   n: 60
 pilot_values:
-  deterministic: {recall: 1.0, precision: 1.0, pass_through: 1.0, refusal: 1.0, leak: 0.0, overall: 0.9, dialectal: 0.8, ood_injection: 0.25}
+  deterministic: {recall: 1.0, precision: 0.7937, pass_through: 0.8143, refusal: 1.0, leak: 0.0, overall: 0.835, dialectal: 0.8, ood_injection: 0.25, ambiguous_halt: 100/100, specified_pass: 114/140}
   live_llm: {overall: 0.9167, recall: 0.8, pass_through: 1.0, refusal: 1.0, leak: 0.0, latency_mean_ms: 4168.73}
   modeled_not_metered: {token_reduction_ambiguous_pct: 88.0, token_reduction_overall_pct: 34.38, basis: assumed 1250/150 budgets}
   hardcoded_constant: {blind_hazard_pct: 38.5, note: constant in runner, provenance pending}

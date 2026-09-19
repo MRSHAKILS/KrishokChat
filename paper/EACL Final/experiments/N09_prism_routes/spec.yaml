@@ -11,9 +11,9 @@ locked:
     memory: seeded crop/symptom/temporal from gold (disease_candidate and candidate_hypotheses NEVER seeded); pipeline ran UNSEEDED (query only)
     mapping: pipeline tier for clarify/guard/refusal; router route otherwise (fact-grounding branch INACTIVE, resolver off — the 59 fact predictions arrive via router ROUTE_A)
   key:
-    overall_agreement: 0.458
+    overall_agreement: 0.478
     clarification: 0.86
-    concept_hypotheses: 0.5633
+    concept_hypotheses: 0.607
     conversational_follow_up: 0.0
     document_rag: 0.0952
     fact_base: 0.7297
@@ -22,9 +22,9 @@ locked:
     - concept-overrouting: router tests concept before document RAG by design order (verified — ConceptNormalizer hits 125/168 document_rag rows); router-only split on those rows is 126 concept / 22 document / 20 fact
     - followup_UNTESTED_not_failed: follow_up intent fired 80/100 G rows but memory gate needs crop-or-disease (0/100 seedable); ROUTE_D fired 0 times in 1000 rows; pipeline defines no D tier. The D path is intact but untested by this set.
     - deterministic_safety_lower_bound: harness safety is precheck-rules-only (44/100 J hits, exact row overlap with safety_gate predictions); production LLM branch would add recall
-  meaning: 45.8% is a gap map, not a grade. Each gap is a design question with a concrete fix direction; none blocks the paper, all three are disclosed.
+  meaning: 47.8% is a gap map, not a grade. Each gap is a design question with a concrete fix direction; none blocks the paper, all three are disclosed.
 outputs:
   - N09_prism_routes/results.json (locked copy)
-  - experiments/results/n09_prism_20260917.jsonl (1000 per-row records)
+  - experiments/results/n09_prism_20260919.jsonl (1000 per-row records)
 labels:
   conformance_not_accuracy: expected_route assigned by generator template arm (see prism_audit.md).

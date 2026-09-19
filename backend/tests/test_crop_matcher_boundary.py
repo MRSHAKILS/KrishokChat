@@ -1,13 +1,11 @@
-"""Regression tests for the token-start Bengali crop matcher (fix 2026-09-17).
+"""Boundary tests for the token-start Bengali crop matcher (45-crop gazetteer).
 
-Root cause: rice alias "ধান" fired inside the unrelated word "সমাধান"
-(solution) because Bengali vowel signs defeat regex \\b boundaries.
-Each such false positive set has_crop=true and suppressed safety clarification.
-
-v2 additions: leading-punctuation strip ("(ধানের)" matches); লঙ্কা/লংকা
-recognized as chilli (farmer_q_593).
-Documented residual (NOT asserted fixed): tokens merely STARTING with an
-alias (e.g. place name ধানসিড়ি, compound আলুপটল) still match.
+Matching rules under test: single-word aliases match at the START of a
+whitespace-delimited token (Bengali vowel signs defeat regex \\b, so plain
+substring matching would fire inside unrelated words such as rice "ধান"
+inside "সমাধান" = solution); 2-character names (আম/জাম/আতা) and jute match
+by exact token equality with explicit inflected forms; the generic collective
+শাকসবজি never matches; multi-word aliases match by substring.
 """
 from app.domain.intent import _match_crop_alias
 from app.domain.query_extractor import QueryExtractor
@@ -15,9 +13,10 @@ from app.domain.query_extractor import QueryExtractor
 
 def test_samadhan_alone_matches_no_crop():
     assert _match_crop_alias("সমাধান চাই") is None
-    assert _match_crop_alias("লেবু গাছে সমাধান কী?") is None
-    assert QueryExtractor.extract("লেবু গাছে সমাধান কী?").crop is None
-    assert QueryExtractor.extract("তরমুজ গাছের সমাধান চাই").crop is None
+    assert _match_crop_alias("গাছের সমাধান কী?") is None
+    assert _match_crop_alias("লেবু গাছে সমাধান কী?") == "lemon"
+    assert QueryExtractor.extract("লেবু গাছে সমাধান কী?").crop == "lemon"
+    assert QueryExtractor.extract("তরমুজ গাছের সমাধান চাই").crop == "watermelon"
 
 
 def test_true_crops_still_match():
@@ -56,3 +55,28 @@ def test_romanized_forms_hold():
     assert _match_crop_alias("dhaner jomi") == "rice"
     assert _match_crop_alias("begun e poka") == "brinjal"
     assert _match_crop_alias("moris gas") == "chilli"
+
+
+def test_short_names_match_exact_tokens_only():
+    # আম (mango) must not fire on the pronouns আমার/আমাকে/আমি.
+    assert _match_crop_alias("আমের পোকা") == "mango"
+    assert _match_crop_alias("আমার গাছে পোকা") is None
+    assert _match_crop_alias("আমি কৃষক") is None
+    # জাম (jamun) must not fire on জামা (shirt).
+    assert _match_crop_alias("Amar jam gacer") == "jamun"
+
+
+def test_collision_prone_aliases_stay_quiet():
+    # Patnitola (place) is not jute; symptom-yellow is not turmeric.
+    assert _match_crop_alias("Patnitola, Naogaon") is None
+    assert _match_crop_alias("পাটের জমি") == "jute"
+    assert _match_crop_alias("গাছ হলুদ হয়ে গেছে") is None
+    assert _match_crop_alias("হলুদগাছে পোকা") == "turmeric"
+    assert _match_crop_alias("শীতকালীন শাকসবজি চাষ") is None
+
+
+def test_expanded_taxonomy_spot_checks():
+    assert QueryExtractor.extract("সরিষা ক্ষেতে জাব পোকা").crop == "mustard"
+    assert QueryExtractor.extract("নারকেল গাছে পোকা").crop == "coconut"
+    assert QueryExtractor.extract("পেঁপে গাছের পাতা কুকড়ে যাচ্ছে").crop == "papaya"
+    assert _match_crop_alias("angor geser pata") == "grape"

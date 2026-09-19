@@ -96,18 +96,68 @@ _PLANT_PART_BN = {
 }
 
 
-# Crop aliases for deterministic keyword detection
+# Crop aliases for deterministic keyword detection (45 crops).
+# Single-word aliases match at the START of a whitespace-delimited token
+# (Bengali vowel signs defeat \b, so plain substring matching fires inside
+# unrelated words, e.g. rice "ধান" inside "সমাধান" = solution). Inflected
+# forms (ধানের/আলুর) match; multi-word aliases use substring matching.
+# SHORT_EXACT_CROPS match single-word aliases by exact token equality only:
+# 2-character names share prefixes with pronouns and common words
+# (আম vs আমার/আমি, জাম vs জামা). NEGATIVE_CROP_TOKENS are generic
+# collective nouns that never denote a specific crop.
 _CROP_ALIASES: dict[str, list[str]] = {
     "potato": ["potato", "আলু", "আলুর", "আলুত", "aloo", "alu", "aloor"],
     "maize": ["maize", "corn", "ভুট্টা", "ভুট্টায়", "ভুট্তার", "ভুট্টা ফসলে", "bhutta", "makai"],
-    "rice": ["rice", "ধান", "ধানের", "ধানক্ষেত", "ধান ক্ষেতে", "ধানর", "ধানত", "dhan", "paddy", "dhanor"],
-    "tomato": ["tomato", "টমেটো", "টমেটোর", "টমাটো", "টমাটোর"],
-    "wheat": ["wheat", "গম", "গমের", "গমে", "গমর"],
+    "rice": ["rice", "ধান", "ধানের", "ধানক্ষেত", "ধান ক্ষেতে", "ধানর", "ধানত", "dhan", "dhaner", "paddy", "dhanor"],
+    "tomato": ["tomato", "tomator", "টমেটো", "টমেটোর", "টমাটো", "টমাটোর"],
+    "wheat": ["wheat", "গম", "গমের", "গমে", "গমর", "gomer"],
     "brinjal": ["brinjal", "eggplant", "বেগুন", "বেগুনের", "বেগুনর", "বেগুন গাছের", "বাইঙ্গন", "baingon", "begun", "beguner"],
-    "chilli": ["chilli", "chili", "মরিচ", "মরিচের", "মরিচর", "মরিস", "মরিসর", "লঙ্কা", "লংকা", "moris", "morisor", "morich"],
+    "chilli": ["chilli", "chili", "মরিচ", "মরিচের", "মরিচর", "মরিস", "মরিসর", "লঙ্কা", "লংকা", "moris", "morisor", "morich", "moricer"],
     "cabbage": ["cabbage", "বাঁধাকপি", "বাঁধাকপির", "পাতাকপি", "বাধাকপি"],
     "cauliflower": ["cauliflower", "ফুলকপি", "ফুলকপির"],
+    "mango": ["আম", "আমের", "আমে", "আমটি", "আমগুলো", "আমগাছ", "আমগাছে", "আমগাছের", "আমবাগান", "আমবাগানে", "আম্রপালি", "আম্রপালির", "aam", "mango"],
+    "papaya": ["পেঁপে", "পেপে", "পেঁপের", "পেপের", "পেঁপেগাছ", "পেঁপেতে", "pepe", "papaw", "pawpaw", "papaya"],
+    "mustard": ["সরিষা", "সরষে", "সরিষার", "সরষের", "সরিষায়", "সরিষাক্ষেত", "সরিষা ক্ষেত", "shorisha", "sorisha", "mustard"],
+    "cucumber": ["শসা", "শসার", "শসাগাছ", "শসাক্ষেত", "shosha", "cucumber"],
+    "coconut": ["নারকেল", "নারিকেল", "নারকেলের", "নারিকেলের", "নারকেলগাছ", "ডাব", "ডাবের", "coconut", "narkel", "dab"],
+    "lemon": ["লেবু", "লেবুর", "লেবুগাছ", "লেবুবাগান", "lebu", "lemon"],
+    "guava": ["পেয়ারা", "পেয়ারা", "পেয়ারার", "পেয়ারার", "পেয়ারাগাছ", "peyara", "guava"],
+    "banana": ["কলা", "কলার", "কলাগাছ", "কলাবাগান", "kola", "banana"],
+    "bottle_gourd": ["লাউ", "লাউয়ের", "লাউতে", "লাউগাছ", "lau", "bottle gourd"],
+    "watermelon": ["তরমুজ", "তরমুজের", "তরমুজগাছ", "tormuj", "watermelon"],
+    "mushroom": ["মাশরুম", "মাশরুমের", "মাশরুমচাষ", "mashroom", "mushroom"],
+    "jackfruit": ["কাঁঠাল", "কাঠাল", "কাঁঠালের", "কাঠালের", "কাঁঠালগাছ", "kathal", "jackfruit"],
+    "jute": ["পাট", "পাটের", "পাটে", "পাটক্ষেত", "পাটখেতে", "jute"],
+    "strawberry": ["স্ট্রবেরি", "স্ট্রবেরির", "স্ট্রবেরিগাছ", "strawberry"],
+    "bamboo": ["বাঁশ", "বাঁশের", "বাঁশঝাড়", "বাঁশঝাড়ে", "bash", "bamboo"],
+    "cashew": ["কাজুবাদাম", "কাজুবাদামের", "কাজুবাদামগাছ", "কাজু", "কাজুর", "কাজুগাছ", "kaju", "cashew"],
+    "okra": ["ঢেঁড়স", "ঢেঁড়শ", "ঢেঁড়সের", "ঢেঁড়শের", "ঢেঁড়সগাছ", "ঢ্যাঁড়স", "ঢ্যাঁড়সের", "dherosh", "okra"],
+    "betelnut": ["সুপারি", "সুপারির", "সুপারিগাছ", "supari", "betelnut"],
+    "beans": ["শিম", "শিমের", "শিমগাছ", "বরবটি", "বরবটির", "বরবটিগাছ", "shim", "borboti", "beans"],
+    "onion": ["পেঁয়াজ", "পিঁয়াজ", "পেঁয়াজের", "পিঁয়াজের", "পেঁয়াজগাছ", "peyaj", "piyaj", "onion"],
+    "rose": ["গোলাপ", "গোলাপের", "গোলাপগাছ", "golap", "rose"],
+    "grape": ["আঙুর", "আঙুরের", "আঙুরগাছ", "angur", "angor", "grape"],
+    "pineapple": ["আনারস", "আনারসের", "আনারসগাছ", "anarosh", "pineapple"],
+    "pomegranate": ["ডালিম", "ডালিমের", "ডালিমগাছ", "আনার", "আনারের", "dalim", "anar", "pomegranate"],
+    "stem_amaranth": ["ডাঁটা", "ডাঁটার", "ডাঁটাগাছ", "ডাটা", "ডাটার", "ডাটাগাছ", "danta"],
+    "leafy_greens": ["শাক", "শাকের", "শাকে", "shak"],
+    "turmeric": ["হলুদগাছ", "হলুদগাছের", "হলুদ চাষ", "হলুদচাষ", "holud", "turmeric"],
+    "litchi": ["লিচু", "লিচুর", "লিচুগাছ", "lichu", "litchi", "lychee"],
+    "jamun": ["জাম", "জামের", "জামে", "জামগাছ", "jam", "jamun"],
+    "ata": ["আতা", "আতার", "আতায়", "আতাগাছ", "ata"],
+    "gladiolus": ["গ্ল্যাডিওলাস", "গ্ল্যাডিওলাসের", "gladiolus"],
+    "bitter_gourd": ["করলা", "করলার", "করলাগাছ", "korola", "bitter gourd"],
+    "hog_plum": ["আমড়া", "আমড়ার", "আমড়াগাছ", "amra", "hog plum"],
+    "dragon_fruit": ["ড্রাগন", "ড্রাগনের", "ড্রাগন ফল", "ড্রাগনফল", "dragon", "dragonfruit", "dragon fruit"],
+    "pomelo": ["জাম্বুরা", "জাম্বুরার", "জাম্বুরাগাছ", "বাতাবি", "বাতাবিলেবু", "jambura", "pomelo"],
+    "akashmoni": ["আকাশমণি", "আকাশমণির", "আকাশমনি", "আকাশমনির", "akashmoni"],
 }
+
+# Crops whose single-word aliases match by exact token equality only.
+SHORT_EXACT_CROPS = frozenset({"mango", "jamun", "ata", "jute"})
+
+# Generic collective nouns that never denote a specific crop.
+NEGATIVE_CROP_TOKENS = frozenset({"শাকসবজি"})
 
 
 CROP_NAMES_BN: dict[str, str] = {
@@ -120,30 +170,69 @@ CROP_NAMES_BN: dict[str, str] = {
     "chilli": "মরিচ",
     "cabbage": "বাঁধাকপি",
     "cauliflower": "ফুলকপি",
+    "mango": "আম",
+    "papaya": "পেঁপে",
+    "mustard": "সরিষা",
+    "cucumber": "শসা",
+    "coconut": "নারকেল",
+    "lemon": "লেবু",
+    "guava": "পেয়ারা",
+    "banana": "কলা",
+    "bottle_gourd": "লাউ",
+    "watermelon": "তরমুজ",
+    "mushroom": "মাশরুম",
+    "jackfruit": "কাঁঠাল",
+    "jute": "পাট",
+    "strawberry": "স্ট্রবেরি",
+    "bamboo": "বাঁশ",
+    "cashew": "কাজুবাদাম",
+    "okra": "ঢেঁড়স",
+    "betelnut": "সুপারি",
+    "beans": "শিম",
+    "onion": "পেঁয়াজ",
+    "rose": "গোলাপ",
+    "grape": "আঙুর",
+    "pineapple": "আনারস",
+    "pomegranate": "ডালিম",
+    "stem_amaranth": "ডাঁটা",
+    "leafy_greens": "শাক",
+    "turmeric": "হলুদ",
+    "litchi": "লিচু",
+    "jamun": "জাম",
+    "ata": "আতা",
+    "gladiolus": "গ্ল্যাডিওলাস",
+    "bitter_gourd": "করলা",
+    "hog_plum": "আমড়া",
+    "dragon_fruit": "ড্রাগন ফল",
+    "pomelo": "জাম্বুরা",
+    "akashmoni": "আকাশমণি",
 }
 
 
 def _match_crop_alias(lowered: str) -> str | None:
-    """Crop match with Bengali word-boundary safety (fix 2026-09-17).
+    """Crop match with Bengali word-boundary safety.
 
-    Plain substring/regex matching fires inside unrelated words because Bengali
-    vowel signs defeat ``\\b`` (e.g. rice alias "ধান" matched inside "সমাধান"
-    = solution). Rule: single-word aliases must match at the START of a
-    whitespace-delimited token (inflections like ধানের/আলুর still match);
-    multi-word aliases (contain a space) use substring matching.
-    Residual risk: tokens that merely START with an alias (e.g. place names).
-    Leading punctuation is stripped before matching (fix 2026-09-17b), so
-    "(ধানের)" matches; trailing punctuation was always safe.
+    Single-word aliases must match at the START of a whitespace-delimited
+    token (leading punctuation stripped), so inflections (ধানের/আলুর) match
+    while unrelated words containing an alias (সমাধান) do not. Crops in
+    SHORT_EXACT_CROPS match single-word aliases by exact token equality
+    only. Tokens in NEGATIVE_CROP_TOKENS never match. Multi-word aliases
+    use substring matching. Table order is longest-first within a crop;
+    more specific crops precede broader ones in table order.
     """
     import re as _re
     strip_pat = _re.compile(r"^[^\w\u0980-\u09FF]+")
     tokens = [strip_pat.sub("", t) for t in lowered.split()]
-    tokens = [t for t in tokens if t]
+    tokens = [t for t in tokens if t and t not in NEGATIVE_CROP_TOKENS]
     for crop, aliases in _CROP_ALIASES.items():
+        short_exact = crop in SHORT_EXACT_CROPS
         ordered = sorted((str(a).strip().lower() for a in aliases if str(a).strip()), key=len, reverse=True)
         for alias in ordered:
             if " " in alias:
                 if alias in lowered:
+                    return crop
+            elif short_exact:
+                if any(tok == alias for tok in tokens):
                     return crop
             elif any(tok == alias or tok.startswith(alias) for tok in tokens):
                 return crop

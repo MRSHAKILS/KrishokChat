@@ -80,8 +80,12 @@ def evaluate_answer_quality(query: str, answer: str, true_crop: str | None) -> d
 
 
 def main() -> int:
+    import argparse as _ap
+    _par = _ap.ArgumentParser()
+    _par.add_argument("--det-path", default=str(DET_PATH))
+    _det_path = Path(_par.parse_args().det_path)
     live = {r['id']: r for r in load_jsonl(LIVE_PATH)}
-    det = {r['id']: r for r in load_jsonl(DET_PATH)}
+    det = {r['id']: r for r in load_jsonl(_det_path)}
     
     rows_to_review = []
     for id_ in det:

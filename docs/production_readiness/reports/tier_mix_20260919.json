@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-09-19T18:13:43.578319+00:00",
+  "dataset": "farmer_benchmark_1000.jsonl",
+  "total_queries": 1000,
+  "pricing_basis": {
+    "provider": "openrouter",
+    "model": "google/gemini-2.5-flash-lite",
+    "input_usd_per_1k": 0.0001,
+    "output_usd_per_1k": 0.0004,
+    "pricing_source": "https://openrouter.ai/models/google/gemini-2.5-flash-lite"
+  },
+  "zero_llm_resolution_rate_pct": 7.9,
+  "zero_llm_count": 79,
+  "tier_counts": {
+    "deterministic_guard": 57,
+    "structured_fact": 0,
+    "templated_advisory": 22,
+    "grounded_generation": 862,
+    "progressive_guidance": 0,
+    "honest_refusal": 2,
+    "interactive_clarification": 57
+  },
+  "tier_percents": {
+    "deterministic_guard": 5.7,
+    "structured_fact": 0.0,
+    "templated_advisory": 2.2,
+    "grounded_generation": 86.2,
+    "progressive_guidance": 0.0,
+    "honest_refusal": 0.2,
+    "interactive_clarification": 5.7
+  },
+  "latency_stats": {
+    "deterministic_guard": {
+      "count": 57,
+      "p50_ms": 4.24,
+      "p90_ms": 6.08,
+      "p95_ms": 6.46,
+      "mean_ms": 4.24
+    },
+    "structured_fact": {
+      "count": 0,
+      "p50_ms": 0.0,
+      "p90_ms": 0.0,
+      "p95_ms": 0.0,
+      "mean_ms": 0.0
+    },
+    "templated_advisory": {
+      "count": 22,
+      "p50_ms": 1.86,
+      "p90_ms": 2.61,
+      "p95_ms": 2.7,
+      "mean_ms": 1.58
+    },
+    "grounded_generation": {
+      "count": 862,
+      "p50_ms": 26.45,
+      "p90_ms": 48.61,
+      "p95_ms": 57.74,
+      "mean_ms": 28.7
+    },
+    "progressive_guidance": {
+      "count": 0,
+      "p50_ms": 0.0,
+      "p90_ms": 0.0,
+      "p95_ms": 0.0,
+      "mean_ms": 0.0
+    },
+    "honest_refusal": {
+      "count": 2,
+      "p50_ms": 18.19,
+      "p90_ms": 20.26,
+      "p95_ms": 20.51,
+      "mean_ms": 18.19
+    },
+    "interactive_clarification": {
+      "count": 57,
+      "p50_ms": 19.52,
+      "p90_ms": 36.98,
+      "p95_ms": 40.65,
+      "mean_ms": 20.55
+    }
+  },
+  "overall_latency": {
+    "p50_ms": 25.15,
+    "p90_ms": 46.75,
+    "p95_ms": 55.37,
+    "mean_ms": 26.22
+  },
+  "cost_analysis": {
+    "token_estimation_method": "Documented benchmark estimation: ~600 prompt / ~250 gen tokens for T3; 0 for T0-T2",
+    "cost_per_1000_pessimistic_usd": 0.195,
+    "cost_per_1000_measured_usd": 0.1682,
+    "cost_per_1000_projected_multi_crop_usd": 0.1188,
+    "cost_savings_pct": 13.74
+  }
+}

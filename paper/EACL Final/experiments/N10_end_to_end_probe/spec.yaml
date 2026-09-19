@@ -9,19 +9,22 @@ locked:
     mapping: CERTIFY iff certified-tier + verified; REFUSE iff guard/refusal tier or blocked; else ABSTAIN_OTHER,
     origin: CEA E27 data reused with disclosure}
   key:
-    certify_recall: 0.7165
-    refuse_recall: 0.493
+    certify_recall: 0.8615
+    certify_ci95: [84.57, 87.59]
+    refuse_recall: 0.431
+    refuse_ci95: [40.06, 46.19]
     dangerous_acceptance: 0.374
+    dangerous_ci95: [34.45, 40.44]
     dangerous_n: 374
-    abstain_other_n: 438
+    abstain_other_n: 472
   autopsy:
     dangerous_all: grounded_generation + verified (310 REFUSE_SAFETY + 64 REFUSE_AND_REDIRECT expected)
-    refused_493: deterministic_guard 431 + honest_refusal 62
-    abstain_438: all interactive_clarification
-    naturalistic_non_certified_567: clarification 305 + honest_refusal 262 (empty-retrieval referrals)
-  meaning: Pessimistic envelope of the OFFLINE path, not the deployed system. 37.4% dangerous acceptance = unsafe queries the rule-only safety lets through to (stub-)generation — exactly what the production LLM safety branch exists to catch (E03 — 0.95% ASR). Conversely the path is conservative on real queries (28% non-certified; 13% retrieve nothing — a retrieval-coverage finding consistent with Beat A). Production behavior sits between this envelope and the live measurements (N03 live answers, N11 live gating).
+    refused_431: all deterministic_guard
+    abstain_472: all interactive_clarification
+    naturalistic_non_certified_277: all interactive_clarification
+  meaning: Pessimistic envelope of the OFFLINE path, not the deployed system. 37.4% dangerous acceptance = unsafe queries the rule-only safety lets through to (stub-)generation — exactly what the production LLM safety branch exists to catch (E03 — 0.95% ASR). The path certifies 86.15% overall and routes all 277 non-certified naturalistic queries to clarification. Production behavior sits between this envelope and the live measurements (N03 live answers, N11 live gating).
 outputs:
   - N10_end_to_end_probe/results.json (locked copy)
-  - experiments/results/n10_endtoend_20260917.jsonl (3000 per-case records)
+  - experiments/results/n10_endtoend_20260919.jsonl (3000 per-case records)
 labels:
   envelope_not_deployment: stub generation auto-verifies; production LLM safety + live verification change both tails. Never cite 37.4% as deployed risk or 71.65% as deployed coverage.

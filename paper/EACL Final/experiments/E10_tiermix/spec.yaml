@@ -9,13 +9,13 @@ runner:
   n: 1000
   price_basis: openrouter/google/gemini-2.5-flash-lite ($0.0001/1k in, $0.0004/1k out)
 key:
-  zero_llm_pct: 7.8
-  mix: {T0_deterministic_guard: 5.6, T1_structured_fact: 0.0, T2_templated_advisory: 2.2, T3_grounded_generation: 92.2, T4_honest_refusal: 0.0}
-  cost_per_1k_measured_mix_usd: 0.1798
+  zero_llm_pct: 7.9
+  mix: {T0_deterministic_guard: 5.7, T1_structured_fact: 0.0, T2_templated_advisory: 2.2, T3_grounded_generation: 86.2, T4_honest_refusal: 0.0, interactive_clarification: 5.7, honest_refusal: 0.2}
+  cost_per_1k_measured_mix_usd: 0.1720
   cost_per_1k_baseline_usd: 0.195
-  saving_pct: 7.79
-  latency_p50_ms: 7.68
-  latency_p95_ms: 14.59
+  saving_pct: 11.79
+  latency_p50_ms: 25.15
+  latency_p95_ms: 55.37
 labels:
   costs_modeled: No token-metering hooks in batch mode; ~600 prompt / ~250 generation assumed. Metering upgrade = N02.
   t1_zero_explained: 9-fact base — disclosed, motivates base growth.

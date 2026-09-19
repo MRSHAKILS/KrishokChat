@@ -12,6 +12,8 @@ from typing import Any
 
 from app.domain.intent import (
     CROP_NAMES_BN,
+    NEGATIVE_CROP_TOKENS,
+    SHORT_EXACT_CROPS,
     _CROP_ALIASES,
     _FERTILIZER_KW,
     _PLANT_PART_BN,
@@ -71,17 +73,6 @@ _DISTRICTS_BN: dict[str, str] = {
     "চট্টগ্রাম": "Chattogram", "চট্টগ্রামে": "Chattogram", "chattogram": "Chattogram",
 }
 
-# Romanized & dialectal crop mappings
-_ROMAN_CROP_ALIASES: dict[str, str] = {
-    "dhan": "rice", "dhaner": "rice", "ধানর": "rice", "ধানত": "rice",
-    "alu": "potato", "alor": "potato", "আলুত": "potato",
-    "tomato": "tomato", "tomator": "tomato",
-    "begun": "brinjal", "beguner": "brinjal", "বাইঙ্গন": "brinjal",
-    "moris": "chilli", "moricer": "chilli", "morich": "chilli", "মরিস": "chilli",
-    "gom": "wheat", "gomer": "wheat",
-    "bhutta": "maize",
-}
-
 # Temporal / Weather events
 _TEMPORAL_PATTERNS = [
     (r"(গত\s*সপ্তাহে\s*বৃষ্টি|বৃষ্টির\s*পর|বৃষ্টি\s*হইছিল|বৃষ্টি\s*হয়েছে|ভারী\s*বৃষ্টি|ঝড়\s*বৃষ্টি|বৃষ্টি)", "বৃষ্টির পর"),
@@ -109,22 +100,23 @@ class QueryExtractor:
         # 1. Follow-up detection
         is_follow_up = any(p in lowered for p in _FOLLOW_UP_PATTERNS)
 
-        # 2. Crop detection (token-start matching; see intent._match_crop_alias:
-        # Bengali vowel signs defeat \b, so substring/regex matching fired inside
-        # unrelated words, e.g. rice "ধান" inside "সমাধান" (solution). An alias
-        # must open a whitespace-delimited token (leading punctuation stripped);
-        # inflections (ধানের/আলুর) match. Fix 2026-09-17 (v2: punct-strip + লঙ্কা).
+        # 2. Crop detection (token-start matching with exact-only short names
+        # and negative tokens; see intent._match_crop_alias for the rule).
         import re as _re
         strip_pat = _re.compile(r"^[^\w\u0980-\u09FF]+")
         lowered_tokens = [t for t in (strip_pat.sub("", t) for t in lowered.split()) if t]
+        lowered_tokens = [t for t in lowered_tokens if t not in NEGATIVE_CROP_TOKENS]
         detected_crop: str | None = None
         detected_alias: str | None = None
         for crop_id, aliases in _CROP_ALIASES.items():
+            short_exact = crop_id in SHORT_EXACT_CROPS
             ordered = sorted((str(a).strip() for a in aliases if str(a).strip()), key=len, reverse=True)
             for alias in ordered:
                 alias_lower = alias.lower()
                 if " " in alias_lower:
                     hit = alias_lower in lowered
+                elif short_exact:
+                    hit = any(tok == alias_lower for tok in lowered_tokens)
                 else:
                     hit = any(tok == alias_lower or tok.startswith(alias_lower) for tok in lowered_tokens)
                 if hit:
@@ -134,20 +126,6 @@ class QueryExtractor:
                     break
             if detected_crop:
                 break
-
-        if not detected_crop:
-            for word, crop_id in _ROMAN_CROP_ALIASES.items():
-                word_lower = str(word).strip().lower()
-                if not word_lower:
-                    continue
-                if " " in word_lower:
-                    hit = word_lower in lowered
-                else:
-                    hit = any(tok == word_lower or tok.startswith(word_lower) for tok in lowered_tokens)
-                if hit:
-                    detected_crop = crop_id
-                    extracted_tokens.append(word)
-                    break
 
         # 3. Location detection
         detected_location: str | None = None
