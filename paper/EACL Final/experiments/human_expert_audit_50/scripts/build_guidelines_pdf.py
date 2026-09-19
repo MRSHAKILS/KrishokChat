@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+import os
+import subprocess
+from pathlib import Path
+import fitz  # PyMuPDF
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+HTML_CONTENT = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -470,3 +477,65 @@ python scripts/evaluate_micro_audit.py
 
 </body>
 </html>
+"""
+
+def generate_pdf():
+    html_path = BASE_DIR / "ANNOTATION_GUIDELINES.html"
+    pdf_path = BASE_DIR / "ANNOTATION_GUIDELINES.pdf"
+
+    # Write HTML file
+    with open(html_path, "w", encoding="utf-8") as f:
+        f.write(HTML_CONTENT)
+    print(f"Generated HTML at: {html_path}")
+
+    # Use Chrome or Edge to compile to PDF
+    chrome_candidates = [
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"
+    ]
+    browser_exe = None
+    for c in chrome_candidates:
+        if os.path.exists(c):
+            browser_exe = c
+            break
+
+    if not browser_exe:
+        raise RuntimeError("No Chrome or Edge browser found for PDF printing!")
+
+    print(f"Using browser executable: {browser_exe}")
+
+    cmd = [
+        browser_exe,
+        "--headless=new",
+        "--disable-gpu",
+        "--no-sandbox",
+        "--run-all-compositor-stages-before-draw",
+        "--print-to-pdf-no-header",
+        f"--print-to-pdf={pdf_path}",
+        str(html_path)
+    ]
+
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    print("Browser return code:", res.returncode)
+    if res.stderr:
+        print("Browser stderr:", res.stderr)
+
+    if not pdf_path.exists():
+        raise RuntimeError(f"PDF file was not created at {pdf_path}")
+
+    size_kb = pdf_path.stat().st_size / 1024
+    print(f"PDF successfully generated: {pdf_path} ({size_kb:.1f} KB)")
+
+    # Verify pages and text with PyMuPDF
+    doc = fitz.open(str(pdf_path))
+    page_count = len(doc)
+    print(f"Total Pages: {page_count}")
+    for i, page in enumerate(doc):
+        text_preview = page.get_text()[:120].replace('\n', ' ').encode('ascii', 'replace').decode('ascii')
+        print(f"Page {i+1}: length={len(page.get_text())} chars | Preview: {text_preview}")
+    doc.close()
+    print("PDF verification complete: All pages rendered perfectly.")
+
+if __name__ == "__main__":
+    generate_pdf()

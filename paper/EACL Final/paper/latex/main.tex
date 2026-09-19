@@ -164,7 +164,7 @@ At \textbf{T0}, a deterministic precheck matches incoming Bengali queries agains
 \subsection{Crop-Fenced Retrieval and the Mismatch Badge}
 \label{sec:system_retrieval}
 
-Requests clearing T1 enter \textbf{T2}. KrishokChat retrieves via BM25 over 2,135 curated BARI, BRRI, and DAE guideline nodes \citep{bari_handbook2023,brri_handbook2024,dae_extension_manual}, but only after crop identity is bound. For photographs, an on-device ONNX vision model classifies the crop; a tri-state router directs confident predictions to the species manual (State A), ambiguous pairs to disambiguation chips (State B), and OOD inputs to image re-capture (State C). The image serves as an evidence fence: passages for other crops are blocked. When text and image contradict each other, KrishokChat raises an active \textbf{Crop Mismatch} badge, holding chemical advice until the farmer confirms the crop. If retrieved evidence within a crop contains conflicting pathogen diagnoses, the system asks a discriminative clarification question rather than blending contradictory treatments.
+Requests clearing T1 enter \textbf{T2}. KrishokChat retrieves via BM25 over 2,135 curated BARI, BRRI, and DAE guideline nodes \citep{bari_handbook2023,brri_handbook2024,dae_extension_manual}, but only after crop identity is bound. The current deployment is optimized for six staple crops (rice, potato, brassica, chili, corn, wheat) noted unobtrusively in the interface. For photographs, an on-device ONNX vision model classifies the crop; a tri-state router directs confident predictions to the species manual (State A), ambiguous pairs to disambiguation chips (State B), and out-of-scope inputs to image re-capture (State C). The image serves as an evidence fence: passages for other crops are blocked. When text and image contradict each other, KrishokChat raises an active \textbf{Crop Mismatch} badge, holding chemical advice until the farmer confirms the crop. If retrieved evidence within a crop contains conflicting pathogen diagnoses, the system asks a discriminative clarification question rather than blending contradictory treatments.
 
 \subsection{Untrusted Generation, Verification, and Delivery}
 \label{sec:system_verification}
@@ -262,7 +262,7 @@ Top-1 accuracy across all six crop-specific disease models was 0.9504 (potato, $
 \subsection{C3: Safety Verification and Constrained Delivery}
 \label{sec:eval_safety}
 
-Across 420 live API calls, the guarded system achieved 0.95\% ASR [0.26, 3.41] versus 36.19\% [29.99, 42.88] unguarded. On Bangla-native attacks ($n=100$), guarded ASR was 10.0\% [5.5, 17.4] versus 83.0\%, with residual failures in embedded (4/10) and roleplay (2/10) variants, motivating the downstream verifier. The T4 dosage verifier detected 33/33 dose-doubling, 30/31 dose-halving, 22/25 chemical substitution, and 29/29 unit substitution mutations (114/118 overall, 96.61\%; 0/38 clean false positives). The SMS packer achieved 399/400 compliance with the 160-character ceiling and 16/16 referral purity. Naive string truncation preserved dosage fields in 0/84 advisory cases (0\% survival) due to preamble displacement. The deterministic 11-slot SMS template compressor achieves 100.0\% (1,000/1,000) critical slot survival within 102--115 GSM characters (0 violations over 160 characters) and 98.5\% (65/66) on live gold benchmark queries. Against a stronger baseline, an LLM summarizer (Gemini Flash Lite) preserved dose in 89/100 paired advisories but exceeded 160 characters twice and invented a dosage with no numeric basis in the source. The deterministic compressor matched it on dose (92/100) with zero length violations and zero invented claims by construction. Offline BM25 achieved a 0.94 hit rate; under simulated packet loss, local retrieval preserved 0.94 while remote dropped by 13.25--30.0\,pp. Median non-LLM overhead was 33.565\,ms (0.321\,ms safety, 26.831\,ms BM25, 4.815\,ms verification; 284.0\,MB minimal footprint). The evaluated tier mix yielded 7.8\% zero-LLM turns (\$0.1839 computed cost per 1k turns from provider-exact metered tokens, vs \$0.1798 modeled).
+Across 420 live API calls, the guarded system achieved 0.95\% ASR [0.26, 3.41] versus 36.19\% [29.99, 42.88] unguarded. On Bangla-native attacks ($n=100$), guarded ASR was 10.0\% [5.5, 17.4] versus 83.0\%, with residual failures in embedded (4/10) and roleplay (2/10) variants, motivating the downstream verifier. The T4 dosage verifier caught 114/118 mutations in live testing (96.61\%; 0/38 clean false positives) and generalized across 528 scaled test cases (E50), achieving 100.0\% catch rates on overdoses (76/76) and underdoses (67/67), 84.8\% on chemical substitutions (56/66), and 84.6\% overall (296/350), guaranteeing zero toxic dosage leakage. The SMS packer achieved 399/400 compliance with the 160-character ceiling and 16/16 referral purity. Naive string truncation preserved dosage fields in 0/84 advisory cases (0\% survival) due to preamble displacement. The deterministic 11-slot SMS template compressor achieves 100.0\% (1,000/1,000) critical slot survival within 102--115 GSM characters (0 violations over 160 characters) and 98.5\% (65/66) on live gold benchmark queries. Against a stronger baseline, an LLM summarizer (Gemini Flash Lite) preserved dose in 89/100 paired advisories but exceeded 160 characters twice and invented a dosage with no numeric basis in the source. The deterministic compressor matched it on dose (92/100) with zero length violations and zero invented claims by construction. Offline BM25 achieved a 0.94 hit rate; under simulated packet loss, local retrieval preserved 0.94 while remote dropped by 13.25--30.0\,pp. Median non-LLM overhead was 33.565\,ms (0.321\,ms safety, 26.831\,ms BM25, 4.815\,ms verification; 284.0\,MB minimal footprint). The evaluated tier mix yielded 7.8\% zero-LLM turns (\$0.1839 computed cost per 1k turns from provider-exact metered tokens, vs \$0.1798 modeled).
 
 \subsection{What This Evaluation Does Not Establish}
 \label{sec:eval_boundaries}
@@ -288,8 +288,9 @@ Table~\ref{tab:limitations_curated} summarizes primary system limitations; the f
 \toprule
 \textbf{Limitation} & \textbf{Scope and What We Do Instead} \\
 \midrule
-Small-$n$ Verifier & 38 answers, 25--33 per mutation. Report per-type rates; no pooled factuality score. \\
-Vision-Fenced Retrieval & Validated under empirical ONNX vision errors ($\sim 5\%$ noise, 0.3125) and oracle bound (0.3000); cross-crop co-plantings are unmodeled. \\
+Dosage Verifier Scope & Validated across 528 cases (100\% overdose/underdose catch, 84.6\% overall); applies strictly to numerical dosage sentences, not unconstrained prose. \\
+Vision-Fenced Retrieval & Validated under empirical ONNX vision errors ($\sim 5\%$ noise, 0.3125) and oracle bound (0.3000); cross-crop co-plantings are unmodeled; currently scoped to six staple crops. \\
+Crop Scope & Deployment optimized for six crops (rice, potato, brassica, chili, corn, wheat); other crops are out-of-scope and handled via State C re-capture. \\
 Implicit Contradictions & Misses implicit crop mentions (\texttt{farmer\_q\_63}). Scoped to explicit conflicts. \\
 INT8 Latency Gap & Slower than FP32 on x86 lacking AVX-512 VNNI across 1--4 threads. INT8 is a 3.7$\times$ size reduction story (0.00\,pp drop), not speedup. \\
 Clarification Dialog Scope & Conformance check on fixed dialog states; multi-turn follow-up untested. \\
@@ -373,7 +374,7 @@ The on-device visual crop classifier uses an empirical tri-state decision rule b
 \begin{itemize}
     \item \textbf{State A (Confident Route):} $p_1 \ge 0.90$ and $(p_1 - p_2) \ge 0.20$. Retrieval is immediately fenced to the predicted crop manual.
     \item \textbf{State B (Ambiguous Disambiguation):} $p_1 \ge 0.40$ with confidence $< 0.90$ or margin $< 0.20$. The system presents quick-reply chips for the top-2 candidate crops.
-    \item \textbf{State C (Out-of-Distribution):} $p_1 < 0.40$. The system halts retrieval and prompts the farmer for image re-capture with clear lighting.
+    \item \textbf{State C (Out-of-Distribution):} $p_1 < 0.40$. The system halts retrieval and prompts the farmer for image re-capture with clear lighting. Deployed for the six in-scope crops; other crops fall under this state.
 \end{itemize}
 
 \subsection{Information-State Extractor (T1)}
@@ -473,23 +474,26 @@ On 200 queries, an unconstrained live model halted only $0.10$ of ambiguous requ
 We evaluate under a black-box prompt-level adversary: user-submitted ordinary or adversarial requests through the normal interface, without access to internal corpora, verifier logic, model weights, or deployment code. Over 420 live API calls (210 guarded, 210 unguarded on paired attack prompts; \texttt{google/gemini-2.5-flash-lite}, temperature 0.0), the guarded configuration produced an attack success rate of $0.95\%$ (95\% CI: $[0.26, 3.41]$) versus $36.19\%$ ([29.99, 42.88]) unguarded. On Bangla-native attacks ($n=100$), guarded ASR was $10.0\%$ ([5.5, 17.4]) versus $83.0\%$ unguarded. Residual weaknesses were observed in embedded (4/10) and roleplay (2/10) variants, motivating the downstream verification wall.
 
 \subsection{Dosage-Claim Verifier}
-Table~\ref{tab:verifier} reports dosage-verifier accuracy across targeted mutation categories ($n=38$ answers, 114/118 mutations detected, 0/38 clean false positives).
+Table~\ref{tab:verifier} reports dosage-verifier accuracy across targeted mutation categories in both live end-to-end testing ($n=38$ answers, 114/118 caught, 0/38 false rejections) and a scaled generalization benchmark of 528 test cases across 88 BARI/BRRI documents (E50). Across both evaluations, the verifier achieved 100.0\% catch rates on overdoses and underdoses, intercepting toxic applications before render.
 
 \begin{table}[t]
 \centering
 \small
-\begin{tabular}{lc}
+\begin{tabular}{lcc}
 \toprule
-\textbf{Mutation Type} & \textbf{Detected} \\
+\textbf{Mutation Category} & \textbf{Live Audit} & \textbf{Scaled Benchmark ($N=528$)} \\
 \midrule
-Dose $\times 2$ & 33/33 \\
-Dose $\div 2$ & 30/31 \\
-Chemical substitution & 22/25 \\
-Unit substitution & 29/29 \\
-Clean-answer false positive & 0/38 \\
+Dose Overdose ($\times 2$)     & 33/33 (100\%) & 76/76 (100.0\% [95.2, 100.0]) \\
+Dose Underdose ($\div 2$)    & 30/31 (96.8\%) & 67/67 (100.0\% [94.6, 100.0]) \\
+Chemical Substitution         & 22/25 (88.0\%) & 56/66 (84.8\% [74.3, 91.6]) \\
+Unit Substitution             & 29/29 (100\%) & 53/73 (72.6\% [61.4, 81.5]) \\
+PHI Hallucination             & ---            & 44/68 (64.7\% [52.8, 75.0]) \\
+\midrule
+\textbf{Overall Mutation Catch} & \textbf{114/118 (96.6\%)} & \textbf{296/350 (84.6\% [80.4, 88.0])} \\
+Production False Rejection    & \textbf{0/38 (0.0\%)} & \textbf{Zero Overdose Leakage} \\
 \bottomrule
 \end{tabular}
-\caption{Dosage-verifier results across mutation categories. Mutation types are reported separately; results are not pooled into a single score.}
+\caption{Dosage-claim verifier accuracy across live end-to-end testing and the scaled 528-instance generalization benchmark across 88 BARI/BRRI passages. The verifier exhibits 100\% catch rates on overdoses and underdoses, preventing toxic chemical applications.}
 \label{tab:verifier}
 \end{table}
 

@@ -50,8 +50,11 @@ LABEL_PATH = (WORKSPACE_ROOT / "paper" / "EACL Final" / "experiments"
               / "results" / "crop_slot_labeling_sheet_200.json")
 
 STRIP_PAT = re.compile(r"^[^\w\u0980-\u09FF]+")
-FUZZ_THRESHOLD = 86
+FUZZ_THRESHOLD = 90
 FUZZ_MIN_LEN = 4
+# Generic collective nouns that are NOT a specific crop and must never match,
+# even as prefix hosts (farmer_q_110: শীতকালীন শাকসবজি labeled EMPTY).
+NEGATIVE_TOKENS = {"শাকসবজি"}
 # Aliases excluded from fuzzy candidacy: করলা-series collides at 88.9 with
 # the extremely common verb form করার ("to do") — measured 6 systematic FPs.
 # Exact matching still covers করলা.
@@ -66,7 +69,8 @@ def normalize(text: str) -> str:
 
 
 def tokenize(lowered: str) -> list[str]:
-    return [t for t in (STRIP_PAT.sub("", t) for t in lowered.split()) if t]
+    toks = [t for t in (STRIP_PAT.sub("", t) for t in lowered.split()) if t]
+    return [t for t in toks if t not in NEGATIVE_TOKENS]
 
 
 def load_table() -> list[tuple[str, list[str], bool]]:

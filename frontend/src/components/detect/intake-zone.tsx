@@ -250,6 +250,12 @@ export function IntakeZone({
 
       {/* Field Photography & Viewfinder Framing Guide */}
       <LeafFramingGuide />
+
+      {/* Scope note — polite, non-blocking */}
+      <p className="flex items-center justify-center gap-1.5 pt-1 text-center text-[11px] leading-relaxed text-ink-faint/60">
+        <Sprout className="h-3 w-3 shrink-0 opacity-50" />
+        <span>Optimized for 6 crops — ধান · আলু · বাঁধাকপি · ভুট্টা · গম · মরিচ — other crops coming soon</span>
+      </p>
     </div>
   );
 }

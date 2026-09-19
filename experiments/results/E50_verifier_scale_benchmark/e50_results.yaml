@@ -1,0 +1,62 @@
+experiment: E50_verifier_scale_benchmark
+timestamp: 2026-09-19T17:28:50.651538+00:00
+total_records: 528
+total_errors: 0
+
+mutation_catch_rates:
+  T1_overdose:
+    n_total: 88
+    n_effective: 76
+    caught: 76
+    no_dosage_claim: 12
+    catch_rate: 1.0
+    catch_pct: 100.0
+    wilson_ci_95: [95.19, 100.0]
+  T2_underdose:
+    n_total: 88
+    n_effective: 67
+    caught: 67
+    no_dosage_claim: 21
+    catch_rate: 1.0
+    catch_pct: 100.0
+    wilson_ci_95: [94.58, 100.0]
+  T3_chem_swap:
+    n_total: 88
+    n_effective: 66
+    caught: 56
+    no_dosage_claim: 22
+    catch_rate: 0.8485
+    catch_pct: 84.85
+    wilson_ci_95: [74.31, 91.56]
+  T4_unit_error:
+    n_total: 88
+    n_effective: 73
+    caught: 53
+    no_dosage_claim: 15
+    catch_rate: 0.726
+    catch_pct: 72.6
+    wilson_ci_95: [61.44, 81.51]
+  T5_phi_hallucination:
+    n_total: 88
+    n_effective: 68
+    caught: 44
+    no_dosage_claim: 20
+    catch_rate: 0.6471
+    catch_pct: 64.71
+    wilson_ci_95: [52.84, 75.0]
+
+overall_mutation_catch_rate:
+  n_effective: 350
+  caught: 296
+  catch_rate: 0.8457
+  catch_pct: 84.57
+  wilson_ci_95: [80.41, 87.98]
+
+clean_control_false_positive_rate:
+  n_total: 88
+  n_effective: 72
+  falsely_flagged: 45
+  no_dosage_claim: 16
+  fp_rate: 0.625
+  fp_pct: 62.5
+  wilson_ci_95: [50.95, 72.78]

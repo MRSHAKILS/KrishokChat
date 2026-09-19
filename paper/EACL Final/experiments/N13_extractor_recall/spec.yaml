@@ -1,0 +1,49 @@
+id: N13
+title: T1 extractor recall upgrade — taxonomy expansion + normalization + fuzzy fallback
+question: Can the 47.5% extractor miss rate be driven below 10% without
+  raising false positives, and which lever moves it?
+status: REAL_MEASURED
+beats: [B]
+lane: A-lite
+design:
+  n: 200
+  ground_truth: experiments/results/crop_slot_labeling_sheet_200.json (human_crop)
+  seed: N/A (deterministic; no sampling, full 200 re-measured)
+  alias_table: N13_extractor_recall/data/crop_alias_v2.json (v2.2, 45 crops)
+  layers:
+    L0_baseline: production QueryExtractor.extract, frozen backend code
+    L1_taxonomy: v2 table (9 + 36 crops), same exact/token-start rule
+    L2_plus_norm: L1 + NFKC/lowercase normalization
+    L3_plus_fuzzy: L2 + rapidfuzz fallback (ratio>=90, token>=4, alias>=4,
+      same first char; korla-series excluded — collides with common করার)
+key:
+  miss_rate: {L0: 95/200 (47.5% [40.7, 54.4]), L1_L2_L3: 3/200 (1.5% [0.5, 4.3])}
+  mismatch: {L0: 0, L1_L2_L3: 0}
+  fp: {L0: 1/200, L1_L2_L3: 6/200}
+  first_fix_attribution: {L1_taxonomy: 92, L2_norm: 0, L3_fuzzy: 0}
+  regressions_vs_L0: 0
+meaning: >
+  The miss audit (same 200) showed ~99% of misses are crops outside the
+  9-crop gazetteer, not spelling variants — so taxonomy expansion carries
+  essentially the whole fix (92/92 first-fixes at L1). Normalization and
+  fuzzy contribute zero additional fixes on this set; fuzzy at threshold 90
+  adds zero FPs and stays as insurance for unseen spelling variants.
+  Residual misses (3): farmer_q_63 (implicit "Aman season" rice reference),
+  farmer_q_57 (bare হলুদ turmeric — dropped deliberately: হলুদ is
+  predominantly a color/symptom token), q_79 grass (dropped deliberately:
+  weed-control queries dominate; no grass manual in the 2,135-node scope).
+  FP rises 1 -> 6, but all 6 contain a genuine crop mention (multi-crop
+  selection, sourcing, or business queries labeled EMPTY by convention);
+  none is a wrong-crop extraction on a treatment query. No regressions:
+  every query the old extractor got right still resolves identically.
+outputs:
+  - N13_extractor_recall/results/n13_records_20260919.jsonl (per-row, per-layer)
+  - N13_extractor_recall/results/n13_summary_20260919.json (aggregates + ablation)
+  - N13_extractor_recall/data/crop_alias_v2.json (frozen v2.2 alias table)
+labels:
+  closed_set: alias table developed against the same 200 it is measured on;
+    independent held-out validation is listed follow-up, not claimed.
+  production_frozen: backend/app/domain files untouched; N13 runs standalone.
+  paper_impact: adopting the v2 extractor changes N01/N01b operating numbers
+    (bad halts 48 -> ~15); re-freeze + paper table updates required before
+    any headline number changes.

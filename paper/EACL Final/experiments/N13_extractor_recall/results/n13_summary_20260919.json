@@ -6,7 +6,7 @@
     "ground_truth": "crop_slot_labeling_sheet_200.json",
     "alias_table": "data/crop_alias_v2.json",
     "n_crops": 45,
-    "fuzzy_threshold": 86
+    "fuzzy_threshold": 90
   },
   "layers": {
     "L0_baseline": {
@@ -126,27 +126,21 @@
       "fuzzy_hits": []
     },
     "L1_taxonomy": {
-      "agree": 188,
-      "miss": 5,
-      "miss_rate": 0.025,
+      "agree": 191,
+      "miss": 3,
+      "miss_rate": 0.015,
       "miss_ci95": [
-        0.0107,
-        0.0572
+        0.0051,
+        0.0432
       ],
       "mismatch": 0,
-      "fp": 7,
+      "fp": 6,
       "miss_ids": [
         "farmer_q_79",
-        "farmer_q_634",
         "farmer_q_57",
-        "farmer_q_63",
-        "farmer_q_710"
+        "farmer_q_63"
       ],
       "fp_ids": [
-        {
-          "id": "farmer_q_110",
-          "ext": "leafy_greens"
-        },
         {
           "id": "farmer_q_23",
           "ext": "bottle_gourd"
@@ -176,27 +170,21 @@
       "fuzzy_hits": []
     },
     "L2_plus_norm": {
-      "agree": 188,
-      "miss": 5,
-      "miss_rate": 0.025,
+      "agree": 191,
+      "miss": 3,
+      "miss_rate": 0.015,
       "miss_ci95": [
-        0.0107,
-        0.0572
+        0.0051,
+        0.0432
       ],
       "mismatch": 0,
-      "fp": 7,
+      "fp": 6,
       "miss_ids": [
         "farmer_q_79",
-        "farmer_q_634",
         "farmer_q_57",
-        "farmer_q_63",
-        "farmer_q_710"
+        "farmer_q_63"
       ],
       "fp_ids": [
-        {
-          "id": "farmer_q_110",
-          "ext": "leafy_greens"
-        },
         {
           "id": "farmer_q_23",
           "ext": "bottle_gourd"
@@ -226,27 +214,21 @@
       "fuzzy_hits": []
     },
     "L3_plus_fuzzy": {
-      "agree": 186,
-      "miss": 5,
-      "miss_rate": 0.025,
+      "agree": 191,
+      "miss": 3,
+      "miss_rate": 0.015,
       "miss_ci95": [
-        0.0107,
-        0.0572
+        0.0051,
+        0.0432
       ],
       "mismatch": 0,
-      "fp": 9,
+      "fp": 6,
       "miss_ids": [
         "farmer_q_79",
-        "farmer_q_634",
         "farmer_q_57",
-        "farmer_q_63",
-        "farmer_q_710"
+        "farmer_q_63"
       ],
       "fp_ids": [
-        {
-          "id": "farmer_q_110",
-          "ext": "leafy_greens"
-        },
         {
           "id": "farmer_q_23",
           "ext": "bottle_gourd"
@@ -254,14 +236,6 @@
         {
           "id": "farmer_q_232",
           "ext": "bottle_gourd"
-        },
-        {
-          "id": "farmer_q_860",
-          "ext": "banana"
-        },
-        {
-          "id": "farmer_q_702",
-          "ext": "wheat"
         },
         {
           "id": "farmer_q_989",
@@ -281,22 +255,11 @@
         }
       ],
       "mismatch_ids": [],
-      "fuzzy_hits": [
-        {
-          "id": "farmer_q_860",
-          "alias": "কলার",
-          "score": 88.9
-        },
-        {
-          "id": "farmer_q_702",
-          "alias": "wheat",
-          "score": 88.9
-        }
-      ]
+      "fuzzy_hits": []
     }
   },
   "first_fix_attribution": {
-    "L1_taxonomy": 90
+    "L1_taxonomy": 92
   },
   "regressions_vs_L0": [],
   "target": {

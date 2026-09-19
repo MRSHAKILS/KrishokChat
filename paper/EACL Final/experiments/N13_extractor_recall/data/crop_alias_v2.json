@@ -15,7 +15,7 @@
   "short_exact": "crops flagged short_exact match single-word aliases by exact token equality only",
   "single_word": "token equality or token startswith alias"
  },
- "version": "v2.1-2026-09-19",
+ "version": "v2.2-2026-09-19",
  "crops": {
   "potato": [
    "potato",
@@ -314,7 +314,8 @@
    "আঙুরের",
    "আঙুরগাছ",
    "angur",
-   "grape"
+   "grape",
+   "angor"
   ],
   "pineapple": [
    "আনারস",
@@ -361,7 +362,8 @@
     "জামের",
     "জামে",
     "জামগাছ",
-    "jamun"
+    "jamun",
+    "jam"
    ],
    "short_exact": true
   },
