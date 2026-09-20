@@ -348,12 +348,15 @@ export async function classifyCrop(file: File): Promise<ClassifyResponse> {
 
 export async function detectDisease(
   file: File,
-  opts?: { cropHint?: string; signal?: AbortSignal; timeoutMs?: number },
+  opts?: { cropHint?: string; diseaseHint?: string; signal?: AbortSignal; timeoutMs?: number },
 ): Promise<DetectResponse> {
   const form = new FormData();
   form.append("file", file);
   if (opts?.cropHint) {
     form.append("crop_hint", opts.cropHint);
+  }
+  if (opts?.diseaseHint) {
+    form.append("disease_hint", opts.diseaseHint);
   }
   const request = createTimedSignal(opts?.signal, opts?.timeoutMs ?? 90_000);
   try {

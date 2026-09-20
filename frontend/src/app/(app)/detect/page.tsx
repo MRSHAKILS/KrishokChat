@@ -16,7 +16,7 @@ import { SlideOverAdvisory } from "@/components/chat/slide-over-advisory";
 import { stagger, enter, dur, ease } from "@/lib/motion";
 import { prepareUploadImage } from "@/lib/image";
 
-const VISION_ONDEVICE_ENABLED = process.env.NEXT_PUBLIC_VISION_ONDEVICE_ENABLED === "true";
+const VISION_ONDEVICE_ENABLED = process.env.NEXT_PUBLIC_VISION_ONDEVICE_ENABLED !== "false";
 
 /* =========================================================================
    DetectPage — the hero page.
@@ -200,133 +200,97 @@ export default function DetectPage() {
     }
   }, [handleFile]);
 
-  const runDetect = useCallback(async () => {
-    if (!file || loading) return;
-    // Offline on-device path does not require `online`; the server fallback does.
-    const controller = new AbortController();
-    requestRef.current?.abort();
-    requestRef.current = controller;
-    setLoading(true);
-    setError(null);
-    setResult(null);
-    try {
-      // 1) Try on-device WASM inference when the flag is on. This module is
-      // dynamically imported so onnxruntime-web never enters the First Load chunk.
-      if (VISION_ONDEVICE_ENABLED) {
-        try {
-          const mod = await import("@/lib/vision-ondevice");
-          if (mod.isOnDeviceEnabled()) {
-            const od = await mod.detectDiseaseOnDevice(file, {
-              cropHint: cropHint || undefined,
-            });
-            if (controller.signal.aborted) return;
-            const mapped: DetectResponse = {
-              status: od.status as DetectResponse["status"],
-              detection_mode: "classification",
-              crop: od.crop,
-              crop_confidence: od.cropConfidence,
-              crop_source: od.cropSource as DetectResponse["crop_source"],
-              disease: od.disease,
-              disease_confidence: od.diseaseConfidence,
-              boxes: [],
-              disease_info: null,
-              top3_crops: od.top3Crops,
-              top3_diseases: od.top3Diseases,
-              // Advisory still comes from the server when online; offline shows
-              // classification only (honest per AGENTS.md rule 5).
-              treatment_advice: null,
-              treatment_confidence: null,
-              treatment_sources: [],
-              verifier_flags: [],
-              agent_trace: [
-                { stage: "intake", status: "complete", detail: `on-device ${od.latencyMs}ms` },
-                { stage: "crop_classification", status: od.crop ? "complete" : "skip", detail: od.crop ?? undefined },
-                { stage: "disease_classification", status: od.disease ? "complete" : "skip", detail: od.disease ?? undefined },
-              ],
-              quality_warnings: [],
-            };
-            // When online, enrich with server-side advisory (grounded generation).
-            // Fire-and-forget: classification is already shown; advisory fills in.
-            if (online && od.crop && od.disease && (od.status === "diagnosed" || od.status === "healthy")) {
+  const runDetect = useCallback(
+    async (overrideCropHint?: string) => {
+      if (!file || loading) return;
+      const effectiveCropHint = typeof overrideCropHint === "string" ? overrideCropHint : cropHint;
+      // Offline on-device path does not require `online`; the server fallback does.
+      const controller = new AbortController();
+      requestRef.current?.abort();
+      requestRef.current = controller;
+      setLoading(true);
+      setError(null);
+      setResult(null);
+      try {
+        // 1) Try on-device WASM inference when the flag is on. This module is
+        // dynamically imported so onnxruntime-web never enters the First Load chunk.
+        if (VISION_ONDEVICE_ENABLED) {
+          try {
+            const mod = await import("@/lib/vision-ondevice");
+            if (mod.isOnDeviceEnabled()) {
+              const od = await mod.detectDiseaseOnDevice(file, {
+                cropHint: effectiveCropHint || undefined,
+              });
+              if (controller.signal.aborted) return;
+              const mapped: DetectResponse = {
+                status: od.status as DetectResponse["status"],
+                detection_mode: "classification",
+                crop: od.crop,
+                crop_confidence: od.cropConfidence,
+                crop_source: od.cropSource as DetectResponse["crop_source"],
+                disease: od.disease,
+                disease_confidence: od.diseaseConfidence,
+                boxes: [],
+                disease_info: null,
+                top3_crops: od.top3Crops,
+                top3_diseases: od.top3Diseases,
+                // Advisory still comes from the server when online; offline shows
+                // classification only (honest per AGENTS.md rule 5).
+                treatment_advice: null,
+                treatment_confidence: null,
+                treatment_sources: [],
+                verifier_flags: [],
+                agent_trace: [
+                  { stage: "intake", status: "complete", detail: `on-device ${od.latencyMs}ms` },
+                  { stage: "crop_classification", status: od.crop ? "complete" : "skip", detail: od.crop ?? undefined },
+                  { stage: "disease_classification", status: od.disease ? "complete" : "skip", detail: od.disease ?? undefined },
+                ],
+                quality_warnings: [],
+              };
+              // When online, enrich with server-side advisory (grounded generation).
+              // Fire-and-forget: classification is already shown; advisory fills in.
+              if (online && od.crop && od.disease && (od.status === "diagnosed" || od.status === "healthy")) {
+                setResult(mapped);
+                if (mapped.crop && mapped.disease) setDetectedContext({ crop: mapped.crop, disease: mapped.disease });
+                try {
+                  const server = await detectDisease(file, {
+                    cropHint: od.crop || effectiveCropHint || undefined,
+                    diseaseHint: od.disease || undefined,
+                    signal: controller.signal,
+                  });
+                  if (controller.signal.aborted) return;
+                  setResult({
+                    ...mapped,
+                    disease_info: server.disease_info ?? null,
+                    treatment_advice: server.treatment_advice,
+                    treatment_confidence: server.treatment_confidence,
+                    treatment_sources: server.treatment_sources,
+                    verifier_flags: server.verifier_flags,
+                    agent_trace: [...mapped.agent_trace, ...server.agent_trace],
+                  });
+                  return;
+                } catch {
+                  // Advisory enrichment failed — keep the on-device classification alone.
+                  return;
+                }
+              }
               setResult(mapped);
               if (mapped.crop && mapped.disease) setDetectedContext({ crop: mapped.crop, disease: mapped.disease });
-              try {
-                const server = await detectDisease(file, {
-                  cropHint: cropHint || undefined,
-                  signal: controller.signal,
-                });
-                if (controller.signal.aborted) return;
-                setResult({
-                  ...mapped,
-                  disease_info: server.disease_info ?? null,
-                  treatment_advice: server.treatment_advice,
-                  treatment_confidence: server.treatment_confidence,
-                  treatment_sources: server.treatment_sources,
-                  verifier_flags: server.verifier_flags,
-                  agent_trace: [...mapped.agent_trace, ...server.agent_trace],
-                });
-                return;
-              } catch {
-                // Advisory enrichment failed — keep the on-device classification alone.
-                return;
-              }
+              else setDetectedContext(null);
+              return;
             }
-            setResult(mapped);
-            if (mapped.crop && mapped.disease) setDetectedContext({ crop: mapped.crop, disease: mapped.disease });
-            else setDetectedContext(null);
-            return;
+          } catch (e) {
+            if (controller.signal.aborted) return;
+            // On-device path failed; fall through to server. Log for debugging, do not surface.
+            console.warn("[on-device] fallback to server:", e);
           }
-        } catch (e) {
-          if (controller.signal.aborted) return;
-          // On-device path failed; fall through to server. Log for debugging, do not surface.
-          console.warn("[on-device] fallback to server:", e);
         }
-      }
-      if (!online) {
-        setError("ইন্টারনেট সংযোগ নেই। অন-ডিভাইস মোড বন্ধ থাকায় সার্ভারে পৌঁছানো যায়নি।");
-        return;
-      }
-      const r = await detectDisease(file, {
-        cropHint: cropHint || undefined,
-        signal: controller.signal,
-      });
-      if (controller.signal.aborted) return;
-      setResult(r);
-      if (r.crop && r.disease) {
-        setDetectedContext({ crop: r.crop, disease: r.disease });
-      } else {
-        setDetectedContext(null);
-      }
-    } catch (e: unknown) {
-      if (!controller.signal.aborted) {
-        const msg = e instanceof Error ? e.message : "বিশ্লেষণে সমস্যা হয়েছে";
-        if (msg.includes("Failed to fetch") || msg.includes("fetch")) {
-          setError("সার্ভারে পৌঁছানো যায়নি। নেটওয়ার্ক দেখে আবার চেষ্টা করুন।");
-        } else if (msg.includes("detect failed:")) {
-          setError("ছবিটি বিশ্লেষণ করা যায়নি। একই ছবি আবার দিন বা নতুন ছবি তুলুন।");
-        } else {
-          setError(msg);
+        if (!online) {
+          setError("ইন্টারনেট সংযোগ নেই। অন-ডিভাইস মোড বন্ধ থাকায় সার্ভারে পৌঁছানো যায়নি।");
+          return;
         }
-      }
-    } finally {
-      if (requestRef.current === controller) {
-        requestRef.current = null;
-        setLoading(false);
-      }
-    }
-  }, [file, cropHint, loading, online]);
-
-  const handleSelectCrop = useCallback(
-    async (selectedCrop: string) => {
-      setCropHint(selectedCrop);
-      if (!file || loading) return;
-      setError(null);
-      setLoading(true);
-      const controller = new AbortController();
-      requestRef.current = controller;
-      try {
         const r = await detectDisease(file, {
-          cropHint: selectedCrop,
+          cropHint: effectiveCropHint || undefined,
           signal: controller.signal,
         });
         if (controller.signal.aborted) return;
@@ -338,7 +302,14 @@ export default function DetectPage() {
         }
       } catch (e: unknown) {
         if (!controller.signal.aborted) {
-          setError(e instanceof Error ? e.message : "বিশ্লেষণে সমস্যা হয়েছে");
+          const msg = e instanceof Error ? e.message : "বিশ্লেষণে সমস্যা হয়েছে";
+          if (msg.includes("Failed to fetch") || msg.includes("fetch")) {
+            setError("সার্ভারে পৌঁছানো যায়নি। নেটওয়ার্ক দেখে আবার চেষ্টা করুন।");
+          } else if (msg.includes("detect failed:")) {
+            setError("ছবিটি বিশ্লেষণ করা যায়নি। একই ছবি আবার দিন বা নতুন ছবি তুলুন।");
+          } else {
+            setError(msg);
+          }
         }
       } finally {
         if (requestRef.current === controller) {
@@ -347,7 +318,17 @@ export default function DetectPage() {
         }
       }
     },
-    [file, loading]
+    [file, cropHint, loading, online]
+  );
+
+  const handleSelectCrop = useCallback(
+    (selectedCrop: string) => {
+      setCropHint(selectedCrop);
+      if (file && !loading) {
+        runDetect(selectedCrop);
+      }
+    },
+    [file, loading, runDetect]
   );
 
   return (
@@ -408,7 +389,7 @@ export default function DetectPage() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                onClick={runDetect}
+                onClick={() => { void runDetect(); }}
                 disabled={!online}
                 className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-leaf px-4 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:cursor-not-allowed disabled:opacity-50"
               >
@@ -455,7 +436,7 @@ export default function DetectPage() {
                 {file && (
                   <button
                     type="button"
-                    onClick={runDetect}
+                    onClick={() => { void runDetect(); }}
                     className="mt-2 flex min-h-11 items-center gap-2 rounded-lg font-semibold text-leaf"
                   >
                     <RotateCcw className="h-4 w-4" /> আবার চেষ্টা করুন

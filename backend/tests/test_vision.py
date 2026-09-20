@@ -243,6 +243,33 @@ class VisionPipelineTests(unittest.TestCase):
         self.assertFalse(result_retry.can_retry)
         self.assertIn("১৬১২৩", result_retry.clarification_prompt_bn)
 
+    def test_disease_hint_bypasses_runner_for_client_side_inference(self):
+        """When disease_hint is provided (from on-device WASM), runner is never invoked."""
+        class FailIfCalledRunner:
+            def predict(self, spec, image):
+                raise AssertionError("Runner must not be called when disease_hint is supplied")
+
+        pipeline = VisionPipeline(
+            registry=FakeRegistry(),
+            runner=FailIfCalledRunner(),
+            qa=FakeQA(),
+            audit=FakeAudit(),
+        )
+        result = asyncio.run(
+            pipeline.detect(
+                self._textured_image(),
+                crop_hint="Potato",
+                disease_hint="Potato__Early_Blight",
+            )
+        )
+        self.assertEqual(result.status, VisionStatus.DIAGNOSED)
+        self.assertEqual(result.crop, "Potato")
+        self.assertEqual(result.disease, "Potato__Early_Blight")
+        self.assertIsNotNone(result.treatment_advice)
+        self.assertEqual(result.treatment_advice, "উৎসভিত্তিক নিরাপদ ব্যবস্থাপনা।")
+        self.assertEqual(result.disease_info["class_name"], "Early Blight (আগাম ব্লাইট)")
+
 
 if __name__ == "__main__":
     unittest.main()
+

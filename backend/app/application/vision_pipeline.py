@@ -130,6 +130,7 @@ class VisionPipeline:
         image: Image.Image,
         *,
         crop_hint: str | None = None,
+        disease_hint: str | None = None,
         recovery_attempt: int = 0,
     ) -> VisionResult:
         quality = image_quality(
@@ -173,6 +174,107 @@ class VisionPipeline:
                 trace.append(
                     VisionTraceEvent(VisionStage.CROP_CLASSIFICATION, "skip", f"{crop_label} (নির্বাচিত)")
                 )
+
+        # When disease_hint is provided (e.g. from client on-device WASM inference),
+        # classification is already complete. Generate grounded advisory without
+        # invoking server-side vision models (zero PyTorch/YOLO footprint).
+        if disease_hint:
+            norm_disease = disease_hint.strip()
+            if not crop_label:
+                for spec_key, spec in self.registry.disease_models.items():
+                    if any(c.lower() == norm_disease.lower() for c in spec.class_names):
+                        crop_label = CROP_DISPLAY.get(spec_key, spec_key.title())
+                        candidates = (spec,)
+                        break
+            if not crop_label and crop_hint:
+                crop_label = CROP_DISPLAY.get(crop_hint.strip().lower(), crop_hint.title())
+
+            disease_spec = candidates[0] if candidates else None
+            if not disease_spec and crop_label:
+                cand = self.registry.disease_candidates(crop_label)
+                if cand:
+                    disease_spec = cand[0]
+
+            trace.append(
+                VisionTraceEvent(VisionStage.DISEASE_CLASSIFICATION, "complete", f"{norm_disease} (on-device)")
+            )
+            spec_key = disease_spec.key if disease_spec else (crop_hint or crop_label or "crop").lower()
+            info = self.registry.disease_info(spec_key, norm_disease) if spec_key else None
+
+            if self.registry.is_healthy(norm_disease):
+                result = VisionResult(
+                    status=VisionStatus.HEALTHY,
+                    crop=crop_label or crop_hint,
+                    crop_confidence=1.0,
+                    crop_source=crop_source,
+                    disease=norm_disease,
+                    disease_confidence=1.0,
+                    top3_crops=top3_crops,
+                    top3_diseases=(),
+                    disease_info=info,
+                    quality=quality,
+                    trace=tuple(trace),
+                )
+                self._audit(result)
+                return result
+
+            seed_sources = self._disease_source(spec_key, norm_disease, info)
+            advisory = None
+            try:
+                advisory = await self.qa.run(
+                    QAInput(
+                        query=f"{crop_label or crop_hint} {norm_disease} রোগের লক্ষণ, কারণ ও নিরাপদ ব্যবস্থাপনা কী?",
+                        crop=crop_label or crop_hint,
+                        disease=norm_disease,
+                        seed_sources=seed_sources,
+                        channel="vision_advisory",
+                    )
+                )
+            except Exception as exc:
+                logger.error("vision detect: advisory failed for %s/%s: %s", crop_label, norm_disease, exc)
+
+            treatment_advice: str | None = None
+            treatment_confidence: str | None = None
+            treatment_sources: tuple[str, ...] = ()
+            verifier_flags: tuple[str, ...] = ()
+
+            if advisory is not None:
+                trace.append(VisionTraceEvent(VisionStage.ADVISORY, "complete", advisory.confidence.value))
+                treatment_advice = advisory.answer
+                treatment_confidence = advisory.confidence.value
+                treatment_sources = tuple(source.id for source in advisory.sources)
+                verifier_flags = advisory.verifier_flags
+                if advisory.confidence.value in {"blocked", "low_confidence"} and info and info.get("solution_bn"):
+                    treatment_advice = str(info["solution_bn"])
+                    treatment_confidence = "low_confidence"
+                    treatment_sources = ()
+                elif advisory.confidence.value in {"blocked", "low_confidence"}:
+                    treatment_confidence = "low_confidence"
+            else:
+                trace.append(VisionTraceEvent(VisionStage.ADVISORY, "skip", "knowledge-base fallback"))
+                if info and info.get("solution_bn"):
+                    treatment_advice = str(info["solution_bn"])
+                    treatment_confidence = "low_confidence"
+
+            result = VisionResult(
+                status=VisionStatus.DIAGNOSED,
+                crop=crop_label or crop_hint,
+                crop_confidence=1.0,
+                crop_source=crop_source,
+                disease=norm_disease,
+                disease_confidence=1.0,
+                top3_crops=top3_crops,
+                top3_diseases=(),
+                disease_info=info,
+                treatment_advice=treatment_advice,
+                treatment_confidence=treatment_confidence,
+                treatment_sources=treatment_sources,
+                verifier_flags=verifier_flags,
+                quality=quality,
+                trace=tuple(trace),
+            )
+            self._audit(result)
+            return result
 
         if crop_label is None:
             try:

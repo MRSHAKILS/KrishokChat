@@ -63,10 +63,11 @@ async def classify_crop(file: UploadFile, container: ContainerDep) -> ClassifyRe
 async def detect_disease(
     file: UploadFile = File(...),
     crop_hint: str | None = Form(default=None),
+    disease_hint: str | None = Form(default=None),
     container: ContainerDep = None,  # type: ignore[assignment]  # FastAPI injects via Annotated dependency
 ) -> DetectResponse:
     image = await _read_image(file, max_bytes=container.vision.max_image_bytes)
-    result = await container.vision.detect(image, crop_hint=crop_hint)
+    result = await container.vision.detect(image, crop_hint=crop_hint, disease_hint=disease_hint)
     return DetectResponse(
         status=result.status.value,
         detection_mode="classification",

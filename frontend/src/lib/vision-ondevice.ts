@@ -30,7 +30,7 @@
  * `getOrt()`.
  */
 
-export const ONDEVICE_ENABLED = process.env.NEXT_PUBLIC_VISION_ONDEVICE_ENABLED === "true";
+export const ONDEVICE_ENABLED = process.env.NEXT_PUBLIC_VISION_ONDEVICE_ENABLED !== "false";
 
 export function isOnDeviceEnabled(): boolean {
   if (!ONDEVICE_ENABLED) return false;
