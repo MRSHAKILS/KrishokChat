@@ -72,7 +72,7 @@ We present \textbf{KrishokTech}, a Bengali agricultural advisory system structur
 First, \emph{the cheapest and safest retrieval is the one the system refuses to run} (\textbf{C1}): when a treatment query lacks a crop, a deterministic gate halts before search and serves clarification chips or helpline referral (halting 30/200 farmer queries with zero retrieval).
 Second, \emph{the photo is a fence around the evidence} (\textbf{C2}): on-device vision bounds retrieval to the identified crop; text--image conflicts raise an explicit confirmation badge (reducing wrong-crop advice from 36.25\% to 30.0\% in gold-routing simulation; catching 453/454 explicit contradictions).
 Third, \emph{the LLM is the mouthpiece; the evidence is the witness; the verifier is the judge} (\textbf{C3}): generated dosage claims remain untrusted until verified against supporting passages and permitted dose bands. Unsupported claims drop at render time across web, SMS, offline cards, or 16123 referral (cloud-model benchmark guarded ASR 0.95\% vs 36.19\%; verifier 114/118; deployed local model 52.5\% to 10.71\%).
-Failure handling is thus a visible interaction state. Interactive demo: \url{https://krishoktech.org} (screencast, \textless{}2.5\,min: \url{https://krishoktech.org/screencast}); source code and installable package (Apache-2.0): \url{https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System}.
+Failure handling is thus a visible interaction state. Interactive demo: \url{https://krishoktech-one.vercel.app} (screencast, \textless{}2.5\,min: \url{https://krishoktech-one.vercel.app/screencast}); source code and installable package (Apache-2.0): \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}.
 
 % =========================================================================
 % SECTION 2: RELATED WORK AND POSITIONING
@@ -281,17 +281,12 @@ We explicitly state evaluation boundaries: (1) longitudinal farmer adoption and 
 \subsection{Limitations}
 \label{sec:limitations}
 
-We summarize primary active system boundaries (full 18-row ledger in Appendix~\ref{app:limitations_full}):
-(1)~\textbf{Dosage Verifier}: Validated on 528 cases (100\% overdose/underdose catch, 84.6\% overall); applies strictly to numerical dosage sentences.
-(2)~\textbf{Crop \& Vision}: Optimized for six staple crops; others route to State~C re-capture.
-(3)~\textbf{Contradiction Gating}: Explicit contradictions caught (453/454, 99.8\%); implicit conflicts require explicit crop entry.
-(4)~\textbf{Clarification}: Conformance validated on fixed dialog states.
-(5)~\textbf{Offline Simulation}: Tested under simulated packet loss, not longitudinal field trials.
+Primary system boundaries (full 18-row ledger in Appendix~\ref{app:limitations_full}) include: (1)~dosage verification strictly governs numerical dosage sentences (100\% overdose/underdose catch across 528 cases); (2)~vision models cover six staple crops; (3)~contradiction gating targets explicit text--image conflicts (453/454, 99.8\%); (4)~clarification conforms on fixed dialog states; and (5)~offline resilience is evaluated under simulated packet loss rather than longitudinal trials.
 
 \subsection{Availability and Licensing}
 \label{sec:availability}
 
-KrishokTech is live at \url{https://krishoktech.org} (mirror: \url{https://huggingface.co/spaces/RaiyanKhaan/KrishokTech}; screencast: \url{https://krishoktech.org/screencast}). Code, models, and container scripts are licensed under Apache-2.0 at \url{https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System}. The model \texttt{krishoktech-4b} and 2,135 extension nodes are on HuggingFace under CC-BY-4.0 (BARI, BRRI, and DAE guidelines). Self-hosting runs locally via \texttt{llama-server} ($\ge 4$\,GB VRAM / $\ge 8$\,GB RAM); client-side edge vision and BM25 execute via WebAssembly without GPU dependencies ($<285$\,MB footprint, zero photo uploads).
+KrishokTech is live at \url{https://krishoktech-one.vercel.app} (mirror: \url{https://huggingface.co/spaces/RaiyanKhaan/KrishokTech}; screencast: \url{https://krishoktech-one.vercel.app/screencast}). Code, models, and container scripts are licensed under Apache-2.0 at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}. The model \texttt{krishoktech-4b} and 2,135 extension nodes are on HuggingFace under CC-BY-4.0 (BARI, BRRI, and DAE guidelines). Self-hosting runs locally via \texttt{llama-server} ($\ge 4$\,GB VRAM / $\ge 8$\,GB RAM); client-side edge vision and BM25 execute via WebAssembly without GPU dependencies ($<285$\,MB footprint, zero photo uploads).
 
 \subsection{Conclusion}
 \label{sec:final_conclusion}
