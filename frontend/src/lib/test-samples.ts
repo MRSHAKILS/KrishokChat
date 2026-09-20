@@ -1,0 +1,268 @@
+export interface TestSampleInstance {
+  id: string;
+  crop: "Rice" | "Potato" | "Wheat" | "Corn" | "Chilli" | "Brassica";
+  cropBn: string;
+  disease: string;
+  diseaseBn: string;
+  targetClass: string;
+  confidence: number;
+  imageSrc: string;
+  cropHint: string;
+}
+
+export const VERIFIED_TEST_SAMPLES: TestSampleInstance[] = [
+  // --- ধান (Rice) ---
+  {
+    id: "rice_brown_spot",
+    crop: "Rice",
+    cropBn: "ধান",
+    disease: "Brown_Spot",
+    diseaseBn: "বাদামী দাগ (Brown Spot)",
+    targetClass: "Rice__Brown_Spot",
+    confidence: 100.0,
+    imageSrc: "/samples/rice/rice_brown_spot.jpg",
+    cropHint: "Rice",
+  },
+  {
+    id: "rice_leaf_blast",
+    crop: "Rice",
+    cropBn: "ধান",
+    disease: "Leaf_Blast",
+    diseaseBn: "ব্লাস্ট রোগ (Leaf Blast)",
+    targetClass: "Rice__Leaf_Blast",
+    confidence: 100.0,
+    imageSrc: "/samples/rice/rice_leaf_blast.jpg",
+    cropHint: "Rice",
+  },
+  {
+    id: "rice_bacterial_leaf_blight",
+    crop: "Rice",
+    cropBn: "ধান",
+    disease: "Bacterial_Leaf_Blight",
+    diseaseBn: "ব্যাকটেরিয়াল পাতা পোড়া (Blight)",
+    targetClass: "Rice__Bacterial_Leaf_Blight",
+    confidence: 100.0,
+    imageSrc: "/samples/rice/rice_bacterial_blight.jpg",
+    cropHint: "Rice",
+  },
+  {
+    id: "rice_healthy_leaf",
+    crop: "Rice",
+    cropBn: "ধান",
+    disease: "Healthy_Leaf",
+    diseaseBn: "সুস্থ পাতা (Healthy Leaf)",
+    targetClass: "Rice__Healthy_Leaf",
+    confidence: 99.9,
+    imageSrc: "/samples/rice/rice_healthy_leaf.jpg",
+    cropHint: "Rice",
+  },
+
+  // --- আলু (Potato) ---
+  {
+    id: "potato_early_blight",
+    crop: "Potato",
+    cropBn: "আলু",
+    disease: "Early_Blight",
+    diseaseBn: "আগাম ধসা (Early Blight)",
+    targetClass: "Potato__Early_Blight",
+    confidence: 99.9,
+    imageSrc: "/samples/potato/potato_early_blight.jpg",
+    cropHint: "Potato",
+  },
+  {
+    id: "potato_late_blight",
+    crop: "Potato",
+    cropBn: "আলু",
+    disease: "Late_Blight",
+    diseaseBn: "নাবি ধসা (Late Blight)",
+    targetClass: "Potato__Late_Blight",
+    confidence: 100.0,
+    imageSrc: "/samples/potato/potato_late_blight.jpg",
+    cropHint: "Potato",
+  },
+  {
+    id: "potato_healthy_leaf",
+    crop: "Potato",
+    cropBn: "আলু",
+    disease: "Healthy_Leaf",
+    diseaseBn: "সুস্থ পাতা (Healthy Leaf)",
+    targetClass: "Potato__Healthy_Leaf",
+    confidence: 100.0,
+    imageSrc: "/samples/potato/potato_healthy_leaf.jpg",
+    cropHint: "Potato",
+  },
+
+  // --- গম (Wheat) ---
+  {
+    id: "wheat_leaf_rust",
+    crop: "Wheat",
+    cropBn: "গম",
+    disease: "Leaf_Rust",
+    diseaseBn: "লিফ রাস্ট / মরিচা রোগ (Leaf Rust)",
+    targetClass: "Leaf Rust",
+    confidence: 100.0,
+    imageSrc: "/samples/wheat/wheat_leaf_rust.jpg",
+    cropHint: "Wheat",
+  },
+  {
+    id: "wheat_blast",
+    crop: "Wheat",
+    cropBn: "গম",
+    disease: "Wheat_Blast",
+    diseaseBn: "গমের ব্লাস্ট রোগ (Wheat Blast)",
+    targetClass: "Blast",
+    confidence: 100.0,
+    imageSrc: "/samples/wheat/wheat_blast.jpg",
+    cropHint: "Wheat",
+  },
+  {
+    id: "wheat_healthy_leaf",
+    crop: "Wheat",
+    cropBn: "গম",
+    disease: "Healthy",
+    diseaseBn: "সুস্থ গমের পাতা (Healthy)",
+    targetClass: "HealthyLeaf",
+    confidence: 100.0,
+    imageSrc: "/samples/wheat/wheat_healthy_leaf.jpg",
+    cropHint: "Wheat",
+  },
+
+  // --- ভুট্টা (Corn) ---
+  {
+    id: "corn_common_rust",
+    crop: "Corn",
+    cropBn: "ভুট্টা",
+    disease: "Common_Rust",
+    diseaseBn: "কমন রাস্ট (Common Rust)",
+    targetClass: "Common_Rust",
+    confidence: 100.0,
+    imageSrc: "/samples/corn/corn_common_rust.jpg",
+    cropHint: "Corn",
+  },
+  {
+    id: "corn_gray_leaf_spot",
+    crop: "Corn",
+    cropBn: "ভুট্টা",
+    disease: "Gray_Leaf_Spot",
+    diseaseBn: "ধূসর পাতা দাগ (Gray Leaf Spot)",
+    targetClass: "Gray_Leaf_Spot",
+    confidence: 100.0,
+    imageSrc: "/samples/corn/corn_gray_leaf_spot.jpg",
+    cropHint: "Corn",
+  },
+  {
+    id: "corn_northern_leaf_blight",
+    crop: "Corn",
+    cropBn: "ভুট্টা",
+    disease: "Northern_Leaf_Blight",
+    diseaseBn: "উত্তরীয় পাতা পোড়া (NLB)",
+    targetClass: "Northern_Leaf_Blight",
+    confidence: 99.9,
+    imageSrc: "/samples/corn/corn_northern_leaf_blight.jpg",
+    cropHint: "Corn",
+  },
+  {
+    id: "corn_healthy",
+    crop: "Corn",
+    cropBn: "ভুট্টা",
+    disease: "Healthy",
+    diseaseBn: "সুস্থ পাতা (Healthy Leaf)",
+    targetClass: "Healthy",
+    confidence: 100.0,
+    imageSrc: "/samples/corn/corn_healthy_leaf.jpg",
+    cropHint: "Corn",
+  },
+
+  // --- মরিচ (Chilli) ---
+  {
+    id: "chilli_bacterial_spot",
+    crop: "Chilli",
+    cropBn: "মরিচ",
+    disease: "Bacterial_Spot",
+    diseaseBn: "ব্যাকটেরিয়াল দাগ (Bacterial Spot)",
+    targetClass: "Chili__Bacterial_Spot",
+    confidence: 100.0,
+    imageSrc: "/samples/chilli/chilli_bacterial_spot.jpg",
+    cropHint: "Chilli",
+  },
+  {
+    id: "chilli_curl_virus",
+    crop: "Chilli",
+    cropBn: "মরিচ",
+    disease: "Curl_Virus",
+    diseaseBn: "পাতা কোকড়ানো ভাইরাস (Curl Virus)",
+    targetClass: "Chili__Curl_Virus",
+    confidence: 100.0,
+    imageSrc: "/samples/chilli/chilli_curl_virus.jpg",
+    cropHint: "Chilli",
+  },
+  {
+    id: "chilli_cercospora_leaf_spot",
+    crop: "Chilli",
+    cropBn: "মরিচ",
+    disease: "Cercospora_Leaf_Spot",
+    diseaseBn: "সারকোস্পোরা দাগ (Cercospora)",
+    targetClass: "Chili__Cercospora_Leaf_Spot",
+    confidence: 100.0,
+    imageSrc: "/samples/chilli/chilli_cercospora_leaf_spot.jpg",
+    cropHint: "Chilli",
+  },
+  {
+    id: "chilli_healthy_leaf",
+    crop: "Chilli",
+    cropBn: "মরিচ",
+    disease: "Healthy_Leaf",
+    diseaseBn: "সুস্থ মরিচ পাতা (Healthy Leaf)",
+    targetClass: "Chili__Healthy_Leaf",
+    confidence: 99.9,
+    imageSrc: "/samples/chilli/chilli_healthy_leaf.jpg",
+    cropHint: "Chilli",
+  },
+
+  // --- সরিষা ও কপি (Brassica) ---
+  {
+    id: "brassica_alternaria_spot",
+    crop: "Brassica",
+    cropBn: "সরিষা ও কপি",
+    disease: "Alternaria_Spot",
+    diseaseBn: "বাঁধাকপির অল্টারনারিয়া দাগ",
+    targetClass: "Cabbage__Alternaria_Spot",
+    confidence: 100.0,
+    imageSrc: "/samples/brassica/brassica_alternaria_spot.jpg",
+    cropHint: "Brassica",
+  },
+  {
+    id: "brassica_cauliflower_alternaria",
+    crop: "Brassica",
+    cropBn: "সরিষা ও কপি",
+    disease: "Cauliflower_Alternaria",
+    diseaseBn: "ফুলকপির অল্টারনারিয়া রোগ",
+    targetClass: "Cauliflower__Alternaria_Disease",
+    confidence: 100.0,
+    imageSrc: "/samples/brassica/cauliflower_alternaria.jpg",
+    cropHint: "Brassica",
+  },
+  {
+    id: "brassica_healthy_leaf",
+    crop: "Brassica",
+    cropBn: "সরিষা ও কপি",
+    disease: "Healthy",
+    diseaseBn: "সুস্থ ফুলকপি পাতা (Healthy)",
+    targetClass: "Cauliflower__Healthy",
+    confidence: 100.0,
+    imageSrc: "/samples/brassica/brassica_healthy_leaf.jpg",
+    cropHint: "Brassica",
+  },
+];
+
+export const CROP_GROUPS: {
+  crop: "Rice" | "Potato" | "Wheat" | "Corn" | "Chilli" | "Brassica";
+  cropBn: string;
+}[] = [
+  { crop: "Rice", cropBn: "ধান (Rice)" },
+  { crop: "Potato", cropBn: "আলু (Potato)" },
+  { crop: "Wheat", cropBn: "গম (Wheat)" },
+  { crop: "Corn", cropBn: "ভুট্টা (Corn)" },
+  { crop: "Chilli", cropBn: "মরিচ (Chilli)" },
+  { crop: "Brassica", cropBn: "সরিষা ও কপি (Brassica)" },
+];

@@ -182,16 +182,18 @@ export default function DetectPage() {
     setAdvisoryOpen(true);
   }, []);
 
-  const handleSample = useCallback(async (samplePath: string, sampleName: string) => {
+  const handleSample = useCallback(async (samplePath: string, sampleName: string, sampleCropHint?: string) => {
     setSampleLoading(true);
     setError(null);
     try {
       const response = await fetch(samplePath);
       if (!response.ok) throw new Error("sample image unavailable");
       const blob = await response.blob();
-      // The verified sample is a rice leaf; the crop model cannot classify
-      // rice itself, so preselect it for a guaranteed rice diagnosis.
-      setCropHint("rice");
+      if (sampleCropHint) {
+        setCropHint(sampleCropHint.toLowerCase());
+      } else {
+        setCropHint("rice");
+      }
       handleFile(new File([blob], sampleName, { type: blob.type || "image/jpeg" }));
     } catch {
       setError("নমুনা ছবিটি এখন পাওয়া যাচ্ছে না। নিজের ছবি আপলোড করুন।");

@@ -60,7 +60,7 @@ export const MODEL_SPECS: Record<OnDeviceModelKey, ModelSpec> = {
     precision: "int8",
   },
   potato: { key: "potato", file: "potato.onnx", classesFile: "potato_classes.json", imgsz: 224, precision: "int8" },
-  rice: { key: "rice", file: "rice.onnx", classesFile: "rice_classes.json", imgsz: 320, precision: "fp32" },
+  rice: { key: "rice", file: "rice.onnx", classesFile: "rice_classes.json", imgsz: 224, precision: "fp32" },
   wheat: { key: "wheat", file: "wheat.onnx", classesFile: "wheat_classes.json", imgsz: 224, precision: "int8" },
   corn: { key: "corn", file: "corn.onnx", classesFile: "corn_classes.json", imgsz: 256, precision: "fp32" },
   brassica: { key: "brassica", file: "brassica.onnx", classesFile: "brassica_classes.json", imgsz: 256, precision: "int8" },
