@@ -196,20 +196,20 @@ The farmer returns to a fully specified question. KrishokTech now proceeds to ge
 
 \begin{figure*}[t]
 \centering
-\begin{subfigure}[b]{0.485\textwidth}
+\begin{subfigure}[b]{0.48\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{../screenshots/screenshot5_grounded_answer.png}
+  \includegraphics[width=\linewidth,height=2.8cm,keepaspectratio]{../screenshots/screenshot5_grounded_answer.png}
   \caption{Workspace view: grounded Bengali advisory with sentence-level citations and provenance badge.}
   \label{fig:workspace_view}
 \end{subfigure}
 \hfill
-\begin{subfigure}[b]{0.485\textwidth}
+\begin{subfigure}[b]{0.48\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{../screenshots/fig2_main_interface.png}
+  \includegraphics[width=\linewidth,height=2.8cm,keepaspectratio]{../screenshots/fig2_main_interface.png}
   \caption{Expanded Why/trace view: decision trace revealing verified evidence binding and dropped dosage claims.}
   \label{fig:why_panel}
 \end{subfigure}
-\caption{KrishokTech workspace and expanded Why panel. The workspace shows a grounded Bengali advisory with sentence-level citations and a provenance badge; the expanded trace makes a rejected dosage claim and its audit reason visible before delivery.}
+\caption{KrishokTech workspace (grounded advisory with sentence-level citations and provenance badge) and expanded Why panel (revealing verified evidence binding and rejected dosage claims before delivery).}
 \label{fig:demo_why_panel}
 \end{figure*}
 
@@ -226,7 +226,7 @@ The preceding section demonstrated how KrishokTech handles underspecified, multi
 \begin{table*}[t]
 \centering
 \scriptsize
-\renewcommand{\arraystretch}{0.78}
+\renewcommand{\arraystretch}{0.70}
 \setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\textwidth}{l l X X}
 \toprule
@@ -243,7 +243,7 @@ SMS 160-char enforcement (C3) & \textsc{Real\_Measured} & 399/400 $\le 160$ char
 Offline BM25 hit: 0.94 (C3) & \textsc{Real\_Measured} (path) & Local BM25 hit rate 0.94 with service-worker precache enabled. & Network loss simulated (+13.25 / +30.0\,pp drop without local index); not field deployment. \\
 \bottomrule
 \end{tabularx}
-\caption{Claim-honesty table: empirical status, validated scope, and explicit boundaries for headline claims (\textsc{Real\_Measured}, \textsc{Pilot}, \textsc{Real\_Measured\_SmallN}). Every claim is reported alongside its validated boundary.}
+\caption{Claim-honesty table: empirical status, validated scope, and explicit boundaries for headline claims (\textsc{Real\_Measured}, \textsc{Pilot}, \textsc{Real\_Measured\_SmallN}).}
 \label{tab:claim_honesty}
 \end{table*}
 
@@ -281,40 +281,27 @@ We explicitly state evaluation boundaries: (1) longitudinal farmer adoption and 
 \subsection{Limitations}
 \label{sec:limitations}
 
-Table~\ref{tab:limitations_curated} summarizes primary system limitations; the full validated boundaries ledger is detailed in Appendix~\ref{app:limitations_full}.
-
-\begin{table}[t]
-\centering
-\scriptsize
-\renewcommand{\arraystretch}{0.78}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-\toprule
-\textbf{Limitation} & \textbf{Scope and What We Do Instead} \\
-\midrule
-Dosage Verifier Scope & Validated on 528 cases (100\% overdose/underdose catch, 84.6\% overall); applies to numerical dosage sentences, not general prose. \\
-Crop \& Vision Scope & Optimized for six staple crops; out-of-scope crops routed to State~C re-capture. \\
-Contradiction Gating & Explicit contradictions caught (453/454, 99.8\%); implicit conflicts (\texttt{farmer\_q\_63}) require explicit crop entry. \\
-Clarification Dialog & Conformance validated on fixed dialog states; free conversation deferred to human extension officers. \\
-Offline Simulation & Evaluated under simulated packet loss for service-worker caching, not longitudinal field trials. \\
-\bottomrule
-\end{tabularx}
-\caption{Curated active system limitations and validated boundaries (full active ledger in Appendix~\ref{app:limitations_full}).}
-\label{tab:limitations_curated}
-\end{table}
+We summarize primary active system boundaries (full 18-row ledger in Appendix~\ref{app:limitations_full}):
+(1)~\textbf{Dosage Verifier}: Validated on 528 cases (100\% overdose/underdose catch, 84.6\% overall); applies strictly to numerical dosage sentences.
+(2)~\textbf{Crop \& Vision}: Optimized for six staple crops; others route to State~C re-capture.
+(3)~\textbf{Contradiction Gating}: Explicit contradictions caught (453/454, 99.8\%); implicit conflicts require explicit crop entry.
+(4)~\textbf{Clarification}: Conformance validated on fixed dialog states.
+(5)~\textbf{Offline Simulation}: Tested under simulated packet loss, not longitudinal field trials.
 
 \subsection{Availability and Licensing}
 \label{sec:availability}
 
-KrishokTech is live at \url{https://krishoktech.org} (demo mirror: \url{https://huggingface.co/spaces/RaiyanKhaan/KrishokTech}; screencast: \url{https://krishoktech.org/screencast}). Code, models, and container scripts are licensed under Apache-2.0 at \url{https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System}. The model \texttt{krishoktech-4b} and 2,135 extension nodes are on HuggingFace under CC-BY-4.0, reflecting BARI, BRRI, and DAE guidelines. Self-hosting runs locally via \texttt{krishoktech-4b} on \texttt{llama-server} ($\ge 4$\,GB VRAM / $\ge 8$\,GB RAM); in-browser edge vision and BM25 execute via WebAssembly without GPU dependencies ($<285$\,MB footprint) and zero client photo uploads.
+KrishokTech is live at \url{https://krishoktech.org} (mirror: \url{https://huggingface.co/spaces/RaiyanKhaan/KrishokTech}; screencast: \url{https://krishoktech.org/screencast}). Code, models, and container scripts are licensed under Apache-2.0 at \url{https://github.com/RaiyaanReza/KrishokTech-Agricultural-Advisory-System}. The model \texttt{krishoktech-4b} and 2,135 extension nodes are on HuggingFace under CC-BY-4.0 (BARI, BRRI, and DAE guidelines). Self-hosting runs locally via \texttt{llama-server} ($\ge 4$\,GB VRAM / $\ge 8$\,GB RAM); client-side edge vision and BM25 execute via WebAssembly without GPU dependencies ($<285$\,MB footprint, zero photo uploads).
 
 \subsection{Conclusion}
 \label{sec:final_conclusion}
 
-KrishokTech treats the boundary between model output and verified evidence as an interactive feature rather than a post-hoc filter. By halting before retrieval on underspecified queries, scoping search to verified crop identity, and checking dosage claims against source passages before display, the system turns an advisory request into a sequence of visible, inspectable decisions. What is demonstrated is not a more fluent generator, but generation whose safety boundaries are transparent and enforceable. The guard holds on the deployed local model (52.5\% to 10.71\%), with the cloud benchmark (0.95\% vs 36.19\%) as the architecture reference.
+KrishokTech treats the boundary between model output and verified evidence as an interactive feature rather than a post-hoc filter. By halting before retrieval on underspecified queries, scoping search to verified crop identity, and checking dosage claims against source passages before display, the system operationalizes an evidence-bounded workflow where safety boundaries are transparent and enforceable. The guard holds on the deployed local model (52.5\% to 10.71\% ASR), with the cloud benchmark (0.95\% vs 36.19\%) as the reference architecture.
 
 % =========================================================================
 % ETHICS AND BROADER IMPACT STATEMENT
 % =========================================================================
+\clearpage
 \section*{Ethics and Broader Impact Statement}
 \label{sec:ethics}
 
@@ -481,6 +468,7 @@ N14 repeats the E03/N12 design on \texttt{krishokchat-4b} (Gemma3 4.3B Q4\_K\_M,
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lcc}
 \toprule
 \textbf{Condition} & \textbf{Guarded} & \textbf{Unguarded} \\
@@ -490,7 +478,8 @@ Bangla-100 & 19/100 (19.0\% [12.51, 27.78]) & 77/100 (77.0\% [67.85, 84.16]) \\
 Per-family guarded hits & \multicolumn{2}{c}{direct 0/30; evidence 0/30; banglish 0/30; banned 0/30;} \\
 & \multicolumn{2}{c}{bangla-native 5/30; retrieval-poisoning 5/30; delimiter 6/30; topup 1--3/10 each} \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \caption{Deployed-model guard boundary on \texttt{krishokchat-4b} (N14): same E03/N12 design, prompts, judge, and CIs on the local production model.}
 \label{tab:n14}
 \end{table}
