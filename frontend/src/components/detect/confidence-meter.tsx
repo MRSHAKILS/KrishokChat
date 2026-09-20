@@ -2,12 +2,12 @@
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { bnPercent } from "@/lib/bn";
 import { dur, ease } from "@/lib/motion";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    ConfidenceMeter — a visual bar that fills from 0 to the actual percentage.
-   Farmers understand a bar more than a decimal. Bengali numerals throughout.
+   Adapts to current locale: Bengali numerals in BN, English in EN.
    ========================================================================= */
 
 type Tone = "leaf" | "ochre" | "clay";
@@ -34,6 +34,7 @@ export function ConfidenceMeter({
   tone?: Tone;
   compact?: boolean;
 }) {
+  const { locale, formatPercent } = useLanguage();
   const pct = Math.round(value * 100);
 
   return (
@@ -46,7 +47,7 @@ export function ConfidenceMeter({
       <div
         className="relative h-2 flex-1 overflow-hidden rounded-full bg-bone"
         role="progressbar"
-        aria-label={label ?? "নিশ্চিততা"}
+        aria-label={label ?? (locale === "bn" ? "নিশ্চিততা" : "Confidence")}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={pct}
@@ -60,7 +61,7 @@ export function ConfidenceMeter({
         />
       </div>
       <span className={cn("shrink-0 font-semibold tabular", TONE_TEXT[tone])}>
-        {bnPercent(value)}
+        {formatPercent(value)}
       </span>
     </div>
   );

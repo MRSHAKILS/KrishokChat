@@ -4,6 +4,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/layout/footer";
 import { OfflineIndicator } from "@/components/offline-indicator";
 import { PwaRegister } from "@/components/pwa-register";
+import { LanguageProvider } from "@/context/language-context";
 import "./globals.css";
 
 // F4: two families only. Noto Serif Bengali was dropped — it sat behind Tiro
@@ -45,13 +46,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${notoSansBn.variable} ${tiroBangla.variable}`}
     >
       <body className="font-bengali-sans antialiased">
-        <PwaRegister />
-        <OfflineIndicator />
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <LanguageProvider>
+          <PwaRegister />
+          <OfflineIndicator />
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </LanguageProvider>
       </body>
     </html>
   );

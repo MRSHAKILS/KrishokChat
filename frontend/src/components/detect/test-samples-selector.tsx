@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, CheckCircle2, ChevronRight, Loader2, FlaskConical } from "lucide-react";
+import { Sparkles, CheckCircle2, Loader2, FlaskConical } from "lucide-react";
 import { VERIFIED_TEST_SAMPLES, CROP_GROUPS, type TestSampleInstance } from "@/lib/test-samples";
+import { useLanguage } from "@/context/language-context";
 
 interface TestSamplesSelectorProps {
   onSelectSample: (path: string, name: string, cropHint?: string) => void;
@@ -17,6 +18,7 @@ export function TestSamplesSelector({
   sampleLoading = false,
   compact = false,
 }: TestSamplesSelectorProps) {
+  const { t, locale, formatNumber } = useLanguage();
   const [selectedId, setSelectedId] = useState<string>(VERIFIED_TEST_SAMPLES[0].id);
 
   const currentSample = VERIFIED_TEST_SAMPLES.find((s) => s.id === selectedId) ?? VERIFIED_TEST_SAMPLES[0];
@@ -35,6 +37,9 @@ export function TestSamplesSelector({
     }
   };
 
+  const currentCrop = locale === "bn" ? currentSample.cropBn : currentSample.cropEn;
+  const currentDisease = locale === "bn" ? currentSample.diseaseBn : currentSample.diseaseEn;
+
   return (
     <div className="rounded-xl border border-leaf/25 bg-leaf/5 p-3 sm:p-3.5 transition-all space-y-2.5">
       {/* Header bar */}
@@ -44,10 +49,10 @@ export function TestSamplesSelector({
             <FlaskConical className="h-3.5 w-3.5" />
           </span>
           <div>
-            <span className="text-xs font-bold text-ink">রিভিউয়ার টেস্ট সেট (Reviewer Samples)</span>
+            <span className="text-xs font-bold text-ink">{t.samples.title}</span>
             {!compact && (
               <span className="hidden sm:inline-block ml-2 text-[11px] text-ink-soft">
-                যাচাইকৃত ২১টি উচ্চ-নির্ভুলতার নমুনা
+                {t.samples.subtitle}
               </span>
             )}
           </div>
@@ -55,7 +60,7 @@ export function TestSamplesSelector({
 
         <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2 py-0.5 text-[10px] font-semibold text-leaf border border-leaf/20">
           <CheckCircle2 className="h-2.5 w-2.5" />
-          <span>২১ টি ভেরিফাইড কেস</span>
+          <span>{t.samples.badge}</span>
         </span>
       </div>
 
@@ -67,18 +72,24 @@ export function TestSamplesSelector({
             onChange={handleSelectChange}
             disabled={loading || sampleLoading}
             className="w-full appearance-none rounded-lg border border-leaf/30 bg-paper px-3 py-2 text-xs font-medium text-ink shadow-2xs transition-colors hover:border-leaf/60 focus:border-leaf focus:outline-hidden focus:ring-1 focus:ring-leaf disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
-            aria-label="ফসল ও রোগের টেস্ট সেট নমুনা বেছে নিন"
+            aria-label={t.samples.title}
           >
             {CROP_GROUPS.map((grp) => {
               const groupSamples = VERIFIED_TEST_SAMPLES.filter((s) => s.crop === grp.crop);
               if (!groupSamples.length) return null;
+              const groupLabel = locale === "bn" ? grp.cropBn : grp.cropEn;
               return (
-                <optgroup key={grp.crop} label={grp.cropBn}>
-                  {groupSamples.map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.cropBn} — {s.diseaseBn} ({s.confidence}%)
-                    </option>
-                  ))}
+                <optgroup key={grp.crop} label={groupLabel}>
+                  {groupSamples.map((s) => {
+                    const sampleCrop = locale === "bn" ? s.cropBn : s.cropEn;
+                    const sampleDisease = locale === "bn" ? s.diseaseBn : s.diseaseEn;
+                    const sampleConfidence = locale === "bn" ? formatNumber(s.confidence) : s.confidence;
+                    return (
+                      <option key={s.id} value={s.id}>
+                        {sampleCrop} — {sampleDisease} ({sampleConfidence}%)
+                      </option>
+                    );
+                  })}
                 </optgroup>
               );
             })}
@@ -96,18 +107,21 @@ export function TestSamplesSelector({
           ) : (
             <Sparkles className="h-3.5 w-3.5" />
           )}
-          <span>{sampleLoading ? "লোড হচ্ছে…" : "নমুনা লোড করুন"}</span>
+          <span>{sampleLoading ? t.samples.loading : t.samples.loadButton}</span>
         </button>
       </div>
 
       {/* Contextual Pill of Current Selection */}
       <div className="flex flex-wrap items-center justify-between gap-1.5 text-[11px] text-ink-faint border-t border-leaf/10 pt-2">
         <div className="flex items-center gap-1.5 truncate">
-          <span className="font-semibold text-leaf">নির্বাচিত:</span>
-          <span className="text-ink truncate">{currentSample.cropBn} • {currentSample.diseaseBn}</span>
+          <span className="font-semibold text-leaf">{t.samples.selectedLabel}</span>
+          <span className="text-ink truncate">
+            {currentCrop} • {currentDisease}
+          </span>
         </div>
         <span className="text-[10px] text-ink-soft bg-paper/60 px-1.5 py-0.5 rounded border rule">
-          মডেল প্রিডিকশন: {currentSample.confidence}%
+          {t.samples.confidenceLabel}{" "}
+          {locale === "bn" ? formatNumber(currentSample.confidence) : currentSample.confidence}%
         </span>
       </div>
     </div>

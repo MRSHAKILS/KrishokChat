@@ -4,42 +4,44 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Phone, ChevronDown, LogOut, Sun } from "lucide-react";
+import { Phone, ChevronDown, LogOut, Sun, Languages } from "lucide-react";
 import { APP, HELPLINE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { SessionArea } from "@/components/auth/session-area";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
-   Navbar — Clean, Spacious & Uncluttered Top Navigation.
+   Navbar — Clean, Spacious & Uncluttered Top Navigation with i18n Toggle.
    ========================================================================= */
-
-const NAV = [
-  { href: "/", label: "হোম" },
-  { href: "/detect", label: "রোগ নির্ণয়" },
-  { href: "/soil", label: "মাটি ও সেচ" },
-  { href: "/chat", label: "কৃষি পরামর্শ" },
-  { href: "/library", label: "লাইব্রেরি" },
-] as const;
-
-const MORE = [
-  { href: "/analytics", label: "লাইভ পরিসংখ্যান", desc: "এজেন্ট সিদ্ধান্ত ও স্থানীয় অডিট" },
-  { href: "/research", label: "গবেষণা ও ফলাফল", desc: "পেপার, বেঞ্চমার্ক ও নিরাপত্তা ফ্রেমওয়ার্ক" },
-  { href: "/business", label: "ব্যবসায়িক মডেল", desc: "টেকসই অর্থনৈতিক রূপরেখা ও অংশীদারিত্ব" },
-  { href: "/data", label: "উপাত্ত ও নলেজ গ্রাফ", desc: "উন্মুক্ত ডেটাসেট ও জ্ঞানভাণ্ডার" },
-  { href: "/about", label: "প্রকল্প পরিচিতি", desc: "উদ্দেশ্য ও সহযোগী প্রতিষ্ঠান" },
-  { href: "/team", label: "গবেষক দল", desc: "গবেষণা দল ও মাঠ পর্যায়ের কাজ" },
-  { href: "/contact", label: "সাহায্য ও যোগাযোগ", desc: "সরকারি হেল্পলাইন ও পরামর্শ" },
-] as const;
 
 export function Navbar() {
   const pathname = usePathname();
+  const { t, locale, toggleLocale } = useLanguage();
   const [open, setOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [sunlight, setSunlight] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
+
+  const NAV = [
+    { href: "/", label: t.nav.home },
+    { href: "/detect", label: t.nav.detect },
+    { href: "/soil", label: t.nav.soil },
+    { href: "/chat", label: t.nav.chat },
+    { href: "/library", label: t.nav.library },
+  ] as const;
+
+  const MORE = [
+    { href: "/analytics", label: t.nav.analytics, desc: t.nav.analyticsDesc },
+    { href: "/research", label: t.nav.research, desc: t.nav.researchDesc },
+    { href: "/business", label: t.nav.business, desc: t.nav.businessDesc },
+    { href: "/data", label: t.nav.data, desc: t.nav.dataDesc },
+    { href: "/about", label: t.nav.about, desc: t.nav.aboutDesc },
+    { href: "/team", label: t.nav.team, desc: t.nav.teamDesc },
+    { href: "/contact", label: t.nav.contact, desc: t.nav.contactDesc },
+  ] as const;
 
   useEffect(() => {
     try {
@@ -129,7 +131,7 @@ export function Navbar() {
                 moreActive || moreOpen ? "text-leaf font-medium" : "text-ink-soft hover:text-ink",
               )}
             >
-              প্রকল্প
+              {t.nav.project}
               <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", moreOpen && "rotate-180")} />
             </button>
             <AnimatePresence>
@@ -142,7 +144,7 @@ export function Navbar() {
                   className="absolute right-0 top-full mt-1.5 w-64 overflow-hidden rounded-xl border rule bg-paper p-1.5 shadow-lg shadow-ink/5 z-50"
                 >
                   <div className="px-3 py-2 text-xs font-semibold text-ink-faint">
-                    অন্যান্য পৃষ্ঠা ও গবেষণা
+                    {t.nav.otherPages}
                   </div>
                   {MORE.map((m) => {
                     const active = pathname === m.href || pathname.startsWith(`${m.href}/`);
@@ -169,32 +171,61 @@ export function Navbar() {
           </div>
         </nav>
 
-        {/* Right: Sunlight mode + session area + mobile toggle */}
-        <div className="flex shrink-0 items-center gap-2.5">
-          {/* Krishi Call Center — always reachable, desktop too (ui_audit §1) */}
+        {/* Right: Language switch + Sunlight mode + session area + mobile toggle */}
+        <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+          {/* Krishi Call Center — always reachable, desktop too */}
           <a
             href={`tel:${HELPLINE.krishiCallCenter}`}
-            title="কৃষি কল সেন্টার — জাতীয় কৃষি হেল্পলাইন"
+            title={t.nav.helplineTitle}
             className="control-press hidden items-center gap-1.5 rounded-full bg-leaf px-3.5 py-1.5 text-xs font-bold tabular text-paper whitespace-nowrap transition-opacity hover:opacity-90 md:inline-flex"
           >
             <Phone className="h-3.5 w-3.5" aria-hidden />
             <span>{HELPLINE.krishiCallCenter}</span>
           </a>
+
+          {/* Language Change Icon & Switcher Button */}
+          <button
+            type="button"
+            onClick={toggleLocale}
+            className="control-press inline-flex items-center gap-1.5 rounded-full border border-bone bg-paper-2/50 px-2.5 py-1.5 text-xs font-semibold text-ink-soft hover:border-leaf/40 hover:bg-paper hover:text-ink transition-all cursor-pointer"
+            title={t.nav.langToggleTitle}
+            aria-label={t.nav.langToggleTitle}
+          >
+            <Languages className="h-3.5 w-3.5 text-leaf" aria-hidden />
+            <span
+              className={cn(
+                "rounded-md px-1.5 py-0.5 text-[10px] font-bold uppercase transition-colors",
+                locale === "bn" ? "bg-leaf text-paper" : "text-ink-soft",
+              )}
+            >
+              বাং
+            </span>
+            <span className="text-ink-faint/60">/</span>
+            <span
+              className={cn(
+                "rounded-md px-1.5 py-0.5 text-[10px] font-bold uppercase transition-colors",
+                locale === "en" ? "bg-leaf text-paper" : "text-ink-soft",
+              )}
+            >
+              EN
+            </span>
+          </button>
+
           {/* Sunlight Mode Toggle */}
           <button
             type="button"
             onClick={toggleSunlight}
             className={cn(
-              "control-press inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-all cursor-pointer",
+              "control-press inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all cursor-pointer",
               sunlight
                 ? "border-ochre bg-ochre/20 text-ochre shadow-2xs ring-1 ring-ochre/50"
                 : "border-bone bg-paper-2/50 text-ink-soft hover:border-leaf/40 hover:bg-paper hover:text-ink"
             )}
-            title={sunlight ? "সাধারণ মোড চালু করুন" : "মাঠের মোড / তীব্র রোদের স্পষ্ট দৃশ্যমানতা (Sunlight Mode)"}
+            title={t.nav.sunlightTitle}
             aria-pressed={sunlight}
           >
             <Sun className={cn("h-3.5 w-3.5", sunlight && "text-ochre animate-spin-slow")} />
-            <span className="hidden sm:inline">{sunlight ? "মাঠের মোড অন" : "মাঠের মোড"}</span>
+            <span className="hidden sm:inline">{sunlight ? t.nav.sunlightOn : t.nav.sunlightOff}</span>
           </button>
 
           {/* Notifications (admin broadcasts) — renders nothing when disabled */}
@@ -207,7 +238,7 @@ export function Navbar() {
           <button
             onClick={() => setOpen((v) => !v)}
             className="flex h-10 w-10 items-center justify-center rounded-md text-ink-soft transition-colors hover:bg-paper-2 md:hidden"
-            aria-label="মেনু"
+            aria-label={t.nav.menu}
             aria-expanded={open}
           >
             <span className="text-lg leading-none">{open ? "✕" : "☰"}</span>
@@ -226,6 +257,21 @@ export function Navbar() {
             className="overflow-hidden border-t rule md:hidden"
           >
             <div className="space-y-0.5 px-5 py-3">
+              {/* Language Switch Row on Mobile */}
+              <div className="mb-2 flex items-center justify-between rounded-lg border rule bg-paper-2/40 px-3 py-2">
+                <span className="flex items-center gap-2 text-xs font-medium text-ink">
+                  <Languages className="h-4 w-4 text-leaf" />
+                  <span>{locale === "bn" ? "ভাষা (Language)" : "Language (ভাষা)"}</span>
+                </span>
+                <button
+                  type="button"
+                  onClick={toggleLocale}
+                  className="inline-flex items-center gap-1 rounded-full border border-leaf/30 bg-leaf/10 px-3 py-1 text-xs font-bold text-leaf hover:bg-leaf/20 cursor-pointer"
+                >
+                  <span>{locale === "bn" ? "English এ পরিবর্তন" : "বাংলায় পরিবর্তন"}</span>
+                </button>
+              </div>
+
               {/* Account row — additive, never blocking */}
               <MobileAccountRow />
               {NAV.map((item) => {
@@ -269,7 +315,7 @@ export function Navbar() {
                 className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-leaf px-3 py-3 text-sm font-semibold text-paper"
               >
                 <Phone className="h-4 w-4" />
-                কৃষি কল সেন্টার
+                {t.nav.callCenter}
                 <span className="tabular">{HELPLINE.krishiCallCenter}</span>
               </a>
             </div>
@@ -283,6 +329,7 @@ export function Navbar() {
 /* Mobile account row — shows login link or signed-in state with sign-out. */
 function MobileAccountRow() {
   const { user, loading } = useSupabaseSession();
+  const { t } = useLanguage();
   const [signingOut, setSigningOut] = useState(false);
   const router = useRouter();
 
@@ -294,7 +341,7 @@ function MobileAccountRow() {
         href="/auth"
         className="block rounded-md px-3 py-2.5 text-sm font-medium text-leaf transition-colors hover:bg-paper-2/60"
       >
-        লগইন / নিবন্ধন
+        {t.nav.login}
       </Link>
     );
   }
@@ -310,7 +357,7 @@ function MobileAccountRow() {
     <div className="mb-1 flex items-center justify-between gap-2 rounded-md bg-paper-2/40 px-3 py-2.5">
       <div className="min-w-0">
         <div className="truncate text-sm font-medium text-ink">{user.email}</div>
-        <div className="text-xs text-ink-faint">সাইন-ইন করা আছে</div>
+        <div className="text-xs text-ink-faint">{t.nav.signedIn}</div>
       </div>
       <button
         onClick={handleSignOut}
@@ -318,7 +365,7 @@ function MobileAccountRow() {
         className="flex shrink-0 items-center gap-1.5 rounded-md border rule px-2.5 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-ink disabled:opacity-50"
       >
         <LogOut className="h-3.5 w-3.5" />
-        {signingOut ? "..." : "লগ আউট"}
+        {signingOut ? "..." : t.nav.logout}
       </button>
     </div>
   );

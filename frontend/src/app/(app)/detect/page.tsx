@@ -15,6 +15,7 @@ import { TreatmentCard } from "@/components/detect/treatment-card";
 import { SlideOverAdvisory } from "@/components/chat/slide-over-advisory";
 import { stagger, enter, dur, ease } from "@/lib/motion";
 import { prepareUploadImage } from "@/lib/image";
+import { useLanguage } from "@/context/language-context";
 
 const VISION_ONDEVICE_ENABLED = process.env.NEXT_PUBLIC_VISION_ONDEVICE_ENABLED !== "false";
 
@@ -25,6 +26,7 @@ const VISION_ONDEVICE_ENABLED = process.env.NEXT_PUBLIC_VISION_ONDEVICE_ENABLED 
    ========================================================================= */
 
 export default function DetectPage() {
+  const { t, locale, formatNumber } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -152,11 +154,11 @@ export default function DetectPage() {
       setPreview(URL.createObjectURL(prepared));
       setResult(null);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "ছবিটি প্রস্তুত করা যায়নি।");
+      setError(e instanceof Error ? e.message : t.detect.prepFailed);
     } finally {
       setPreparing(false);
     }
-  }, []);
+  }, [t]);
 
   const handleClear = useCallback(() => {
     requestRef.current?.abort();
@@ -196,11 +198,11 @@ export default function DetectPage() {
       }
       handleFile(new File([blob], sampleName, { type: blob.type || "image/jpeg" }));
     } catch {
-      setError("নমুনা ছবিটি এখন পাওয়া যাচ্ছে না। নিজের ছবি আপলোড করুন।");
+      setError(t.detect.sampleUnavailable);
     } finally {
       setSampleLoading(false);
     }
-  }, [handleFile]);
+  }, [handleFile, t]);
 
   const runDetect = useCallback(
     async (overrideCropHint?: string) => {
@@ -288,7 +290,7 @@ export default function DetectPage() {
           }
         }
         if (!online) {
-          setError("ইন্টারনেট সংযোগ নেই। অন-ডিভাইস মোড বন্ধ থাকায় সার্ভারে পৌঁছানো যায়নি।");
+          setError(t.detect.offlineNotice);
           return;
         }
         const r = await detectDisease(file, {
@@ -304,11 +306,11 @@ export default function DetectPage() {
         }
       } catch (e: unknown) {
         if (!controller.signal.aborted) {
-          const msg = e instanceof Error ? e.message : "বিশ্লেষণে সমস্যা হয়েছে";
+          const msg = e instanceof Error ? e.message : t.detect.analysisFailed;
           if (msg.includes("Failed to fetch") || msg.includes("fetch")) {
-            setError("সার্ভারে পৌঁছানো যায়নি। নেটওয়ার্ক দেখে আবার চেষ্টা করুন।");
+            setError(t.detect.serverUnreachable);
           } else if (msg.includes("detect failed:")) {
-            setError("ছবিটি বিশ্লেষণ করা যায়নি। একই ছবি আবার দিন বা নতুন ছবি তুলুন।");
+            setError(t.detect.analysisFailed);
           } else {
             setError(msg);
           }
@@ -320,7 +322,7 @@ export default function DetectPage() {
         }
       }
     },
-    [file, cropHint, loading, online]
+    [file, cropHint, loading, online, t]
   );
 
   const handleSelectCrop = useCallback(
@@ -338,26 +340,31 @@ export default function DetectPage() {
       <UrgentAlertBanner />
       {!online && (
         <div role="status" className="sticky top-2 z-20 rounded-lg border border-ochre-soft bg-paper px-4 py-3 text-sm font-medium text-ink shadow-sm">
-          ইন্টারনেট সংযোগ নেই। ছবি ও লেখা এই পর্দায় থাকবে; সংযোগ এলে আবার চেষ্টা করুন।
+          {t.detect.offlineNotice}
         </div>
       )}
       {/* Page heading */}
       <div>
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-2 text-xs font-semibold text-ochre">ছবির মাধ্যমে ফসল পরামর্শ</p>
-            <h1 className="font-display text-3xl text-ink">ফসলের রোগ নির্ণয়</h1>
+            <p className="mb-2 text-xs font-semibold text-ochre">{t.detect.subtitle}</p>
+            <h1 className="font-display text-3xl text-ink">{t.detect.title}</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 text-xs text-ink-faint">
-            <span className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 py-1.5"><span className={`h-1.5 w-1.5 rounded-full ${online ? "bg-leaf" : "bg-clay"}`} />{online ? "সিস্টেম অনলাইন" : "অফলাইন"}</span>
-            <span className="rounded-full border rule bg-paper-2/40 px-2.5 py-1.5">শ্রেণিবিন্যাস মোড</span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 py-1.5">
+              <span className={`h-1.5 w-1.5 rounded-full ${online ? "bg-leaf" : "bg-clay"}`} />
+              {online ? t.detect.systemOnline : t.detect.offline}
+            </span>
+            <span className="rounded-full border rule bg-paper-2/40 px-2.5 py-1.5">{t.detect.classificationMode}</span>
             {VISION_ONDEVICE_ENABLED && (
-              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-500/10 px-2.5 py-1.5 font-mono text-[10px] leading-none text-emerald-700">On-Device INT8</span>
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-500/10 px-2.5 py-1.5 font-mono text-[10px] leading-none text-emerald-700">
+                On-Device INT8
+              </span>
             )}
           </div>
         </div>
         <p className="mt-1 text-sm text-ink-soft">
-          পাতার ছবি দিন — ফসল ও রোগ ডিভাইসেই শনাক্ত হবে — এরপর অনুমোদিত উৎস থেকে চিকিৎসা-পরামর্শ দেখানো হবে।
+          {t.detect.pageDescription}
         </p>
       </div>
 
@@ -393,10 +400,10 @@ export default function DetectPage() {
                 exit={{ opacity: 0 }}
                 onClick={() => { void runDetect(); }}
                 disabled={!online}
-                className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-leaf px-4 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-leaf px-4 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
               >
                 <Search className="h-4 w-4" />
-                নির্ণয় করুন
+                {t.detect.runDiagnosis}
               </motion.button>
             )}
           </AnimatePresence>
@@ -411,14 +418,14 @@ export default function DetectPage() {
                 className="mt-3 flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-leaf/10 py-3 text-sm text-leaf"
               >
                 <Loader2 className="h-4 w-4 animate-spin" />
-                {preparing ? "ছবি ছোট করে প্রস্তুত হচ্ছে…" : "বিশ্লেষণ হচ্ছে…"}
+                {preparing ? t.detect.preparingImage : t.detect.analyzingImage}
                 {loading && (
                   <button
                     type="button"
                     onClick={() => requestRef.current?.abort()}
-                    className="ml-2 flex min-h-11 items-center gap-1 rounded-lg px-2 font-medium text-clay"
+                    className="ml-2 flex min-h-11 items-center gap-1 rounded-lg px-2 font-medium text-clay cursor-pointer"
                   >
-                    <X className="h-4 w-4" /> বাতিল
+                    <X className="h-4 w-4" /> {t.detect.cancel}
                   </button>
                 )}
               </motion.div>
@@ -439,9 +446,9 @@ export default function DetectPage() {
                   <button
                     type="button"
                     onClick={() => { void runDetect(); }}
-                    className="mt-2 flex min-h-11 items-center gap-2 rounded-lg font-semibold text-leaf"
+                    className="mt-2 flex min-h-11 items-center gap-2 rounded-lg font-semibold text-leaf cursor-pointer"
                   >
-                    <RotateCcw className="h-4 w-4" /> আবার চেষ্টা করুন
+                    <RotateCcw className="h-4 w-4" /> {t.detect.tryAgain}
                   </button>
                 )}
               </motion.div>
@@ -463,8 +470,8 @@ export default function DetectPage() {
                 stages={VISION_STAGES}
                 events={railEvents}
                 active={loading}
-                title="রোগ বিশ্লেষণ প্রবাহ"
-                detail="ছবি থেকে শ্রেণিবিন্যাস ও grounded advisory তৈরি হচ্ছে"
+                title={t.detect.pipelineTitle}
+                detail={t.detect.pipelineSubtitle}
               />
             </motion.div>
           )}

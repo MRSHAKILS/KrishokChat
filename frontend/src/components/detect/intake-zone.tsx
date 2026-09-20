@@ -2,15 +2,16 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { RefreshCw, AlertCircle, Upload, ImageIcon, Loader2, Sprout } from "lucide-react";
+import { RefreshCw, AlertCircle, Upload, Sprout } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { dur, ease } from "@/lib/motion";
 import { VISION } from "@/lib/constants";
 import { TestSamplesSelector } from "./test-samples-selector";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    IntakeZone — the upload / preview / quality-warning area.
-   Designed as a field-notebook specimen card, not a generic dropzone.
+   Designed as a field-notebook specimen card with full i18n support.
    ========================================================================= */
 
 export function IntakeZone({
@@ -38,22 +39,23 @@ export function IntakeZone({
   cropHint: string;
   onCropHintChange: (value: string) => void;
 }) {
+  const { t, locale } = useLanguage();
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
 
   const handleSelect = useCallback(
     (f: File) => {
       if (!VISION.acceptedTypes.includes(f.type)) {
-        onValidationError?.("শুধু JPEG, PNG বা WebP ছবি দিন।");
+        onValidationError?.(t.detect.invalidType);
         return;
       }
       if (f.size > VISION.maxFileSizeMB * 1024 * 1024) {
-        onValidationError?.(`ছবিটি ${VISION.maxFileSizeMB}MB-এর ছোট হতে হবে।`);
+        onValidationError?.(t.detect.sizeExceeded);
         return;
       }
       onFile(f);
     },
-    [onFile, onValidationError],
+    [onFile, onValidationError, t]
   );
 
   return (
@@ -67,26 +69,26 @@ export function IntakeZone({
           className="flex items-center gap-1.5 text-xs font-semibold text-ink-soft"
         >
           <Sprout className="h-3.5 w-3.5 text-leaf" />
-          ফসল
+          {t.detect.cropLabel}
         </label>
         <select
           id="crop-hint"
           value={cropHint}
           onChange={(e) => onCropHintChange(e.target.value)}
-          className="min-h-9 flex-1 rounded-lg border rule bg-paper px-2.5 py-1.5 text-xs text-ink focus:border-leaf focus:outline-none sm:flex-none"
-          aria-label="ফসল নির্বাচন করুন"
+          className="min-h-9 flex-1 rounded-lg border rule bg-paper px-2.5 py-1.5 text-xs text-ink focus:border-leaf focus:outline-hidden sm:flex-none cursor-pointer"
+          aria-label={t.detect.cropLabel}
         >
-          <option value="">অটো — মডেল শনাক্ত করবে</option>
-          <option value="rice">ধান</option>
-          <option value="wheat">গম</option>
-          <option value="corn">ভুট্টা</option>
-          <option value="potato">আলু</option>
-          <option value="brassica">বাঁধাকপি / ফুলকপি</option>
-          <option value="chilli">মরিচ</option>
+          <option value="">{t.detect.cropAuto}</option>
+          <option value="rice">{t.detect.cropRice}</option>
+          <option value="wheat">{t.detect.cropWheat}</option>
+          <option value="corn">{t.detect.cropCorn}</option>
+          <option value="potato">{t.detect.cropPotato}</option>
+          <option value="brassica">{t.detect.cropBrassica}</option>
+          <option value="chilli">{t.detect.cropChilli}</option>
         </select>
         {cropHint && (
           <span className="w-full text-xs text-leaf sm:w-auto">
-            এই ফসলের রোগ মডেল দিয়ে বিশ্লেষণ হবে
+            {t.detect.cropHintHelp}
           </span>
         )}
       </div>
@@ -112,7 +114,7 @@ export function IntakeZone({
         onKeyDown={(e) => {
           if (!loading && (e.key === "Enter" || e.key === " ")) inputRef.current?.click();
         }}
-        aria-label={preview ? "আপলোড করা ছবি পরিবর্তন করুন" : "পাতার ছবি আপলোড করুন"}
+        aria-label={preview ? t.detect.changePhoto : t.detect.dropTitle}
         className={cn(
           "surface-lift relative cursor-pointer overflow-hidden rounded-xl border-2 p-8 text-center transition-colors focus-visible:ring-2 focus-visible:ring-leaf",
           dragging
@@ -147,21 +149,21 @@ export function IntakeZone({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={preview}
-                alt="আপলোড করা পাতার ছবি"
+                alt={preview ? t.detect.dropTitle : "Leaf Preview"}
                 className="mx-auto max-h-52 rounded-lg border border-bone object-contain shadow-sm"
               />
               <div className="mt-3 flex items-center justify-center gap-3 text-xs text-ink-faint">
-                <span className="max-w-[160px] truncate">{file?.name ?? "ছবি"}</span>
+                <span className="max-w-[160px] truncate">{file?.name ?? "Photo"}</span>
                 {!loading && (
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       onClear();
                     }}
-                    className="flex min-h-11 items-center gap-1 rounded-lg px-2 text-ink-soft transition-colors hover:text-leaf"
+                    className="flex min-h-11 items-center gap-1 rounded-lg px-2 text-ink-soft transition-colors hover:text-leaf cursor-pointer"
                   >
                     <RefreshCw className="h-3 w-3" />
-                    পরিবর্তন
+                    {t.detect.changePhoto}
                   </button>
                 )}
               </div>
@@ -176,13 +178,13 @@ export function IntakeZone({
               transition={{ duration: dur.fast }}
             >
               <LeafLine />
-              <div className="mt-4 font-display text-lg text-ink">পাতার ছবি দিন</div>
+              <div className="mt-4 font-display text-lg text-ink">{t.detect.dropTitle}</div>
               <div className="mt-1 flex items-center justify-center gap-1.5 text-xs text-ink-faint">
                 <Upload className="h-3 w-3" />
-                টানে দিন বা ক্লিক করুন
+                {t.detect.dropPrompt}
               </div>
               <div className="mt-1 text-xs text-ink-faint/70">
-                JPEG · PNG · WebP · সর্বোচ্চ {VISION.maxFileSizeMB}MB
+                {t.detect.dropSpecs}
               </div>
             </motion.div>
           )}
@@ -197,7 +199,7 @@ export function IntakeZone({
               exit={{ opacity: 0 }}
               className="pointer-events-none absolute inset-2 flex items-center justify-center rounded-lg border border-leaf/30 bg-paper/90 text-sm font-semibold text-leaf"
             >
-              ছবি ছেড়ে দিন
+              {t.detect.dropReady}
             </motion.div>
           )}
         </AnimatePresence>
@@ -242,13 +244,14 @@ export function IntakeZone({
       {/* Scope note — polite, non-blocking */}
       <p className="flex items-center justify-center gap-1.5 pt-1 text-center text-[11px] leading-relaxed text-ink-faint/60">
         <Sprout className="h-3 w-3 shrink-0 opacity-50" />
-        <span>Optimized for 6 crops — ধান · আলু · বাঁধাকপি · ভুট্টা · গম · মরিচ — other crops coming soon</span>
+        <span>{t.detect.cropsCoverage}</span>
       </p>
     </div>
   );
 }
 
 function LeafFramingGuide() {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
 
   return (
@@ -262,9 +265,9 @@ function LeafFramingGuide() {
           <span className="flex h-4 w-4 items-center justify-center rounded-full bg-leaf/12 text-xs font-bold text-leaf">
             ℹ
           </span>
-          সঠিক ছবি তোলার সহায়িকা (ভিউফাইন্ডার গাইড)
+          {t.detect.viewfinderTitle}
         </span>
-        <span className="text-xs text-leaf">{open ? "সংক্ষিপ্ত করুন ▲" : "দেখুন ▼"}</span>
+        <span className="text-xs text-leaf">{open ? t.detect.viewfinderOpen : t.detect.viewfinderClose}</span>
       </button>
 
       <AnimatePresence>
@@ -284,7 +287,7 @@ function LeafFramingGuide() {
                 <div className="absolute bottom-1 right-1 h-2.5 w-2.5 border-b-2 border-r-2 border-leaf" />
                 <div className="text-center">
                   <LeafLineSmall />
-                  <span className="block text-xs font-semibold text-leaf mt-0.5">আক্রান্ত অংশ কেন্দ্রে রাখুন</span>
+                  <span className="block text-xs font-semibold text-leaf mt-0.5">{t.detect.viewfinderCenter}</span>
                 </div>
               </div>
             </div>
@@ -292,15 +295,15 @@ function LeafFramingGuide() {
             <ul className="space-y-1.5 text-xs text-ink-soft">
               <li className="flex items-start gap-1.5">
                 <span className="text-leaf font-bold">✓</span>
-                <span><strong>দিনের আলো:</strong> ছায়া বা অতিরিক্ত ফ্ল্যাশ এড়িয়ে সরাসরি স্বাভাবিক আলোতে ছবি তুলুন।</span>
+                <span>{t.detect.viewfinderDaylight}</span>
               </li>
               <li className="flex items-start gap-1.5">
                 <span className="text-leaf font-bold">✓</span>
-                <span><strong>দূরত্ব:</strong> পাতা থেকে ১৫–২০ সেন্টিমিটার দূরত্বে ক্যামেরা স্থির রেখে তুলুন।</span>
+                <span>{t.detect.viewfinderDistance}</span>
               </li>
               <li className="flex items-start gap-1.5">
                 <span className="text-leaf font-bold">✓</span>
-                <span><strong>একক পাতা:</strong> পুরো গাছের বদলে আক্রান্ত একটি পাতার ক্ষত পরিষ্কারভাবে ফ্রেমে রাখুন।</span>
+                <span>{t.detect.viewfinderSingleLeaf}</span>
               </li>
             </ul>
           </motion.div>
@@ -330,7 +333,6 @@ function LeafLineSmall() {
   );
 }
 
-/* A simple botanical line-drawing — not an emoji, not a stock icon. */
 function LeafLine() {
   return (
     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden className="mx-auto">
