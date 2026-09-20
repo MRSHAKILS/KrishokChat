@@ -1,12 +1,10 @@
 import type { NextConfig } from "next";
 
-const backendUrl = process.env.BACKEND_URL ?? "http://localhost:8000";
+const backendUrl = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 const nextConfig: NextConfig = {
-  // P6: standalone output for Docker (copies public/ + .next/static into a
-  // self-contained runner; `next start` stays for dev). Reduces deploy size
-  // ~80-90% per PRODUCTION_ROLLOUT_PLAN W7.
-  output: "standalone",
+  // P6: standalone output for Docker when not on Vercel. Vercel natively optimizes output.
+  output: process.env.VERCEL ? undefined : "standalone",
   // The QA stream can take minutes when the local CPU model is selected
   // (llama-server at ~5 tok/s). The Next proxy defaults to a 30s timeout
   // (proxy-request.js: n || 30000) which kills long generations with a
