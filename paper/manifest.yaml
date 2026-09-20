@@ -1,8 +1,8 @@
-# paper/manifest.yaml — Single Source of Truth for the KrishokChat Paper Ecosystem.
+# paper/manifest.yaml — Single Source of Truth for the KrishokTech Paper Ecosystem.
 # Last audited: 2026-09-03 (Stage 2 KAERA / PRISM Architecture Synced)
 
 meta:
-  project: KrishokChat Agricultural Advisory System
+  project: KrishokTech Agricultural Advisory System
   framework: KAERA / PRISM (Answerability-Aware Progressive Advisory)
   active_venues:
     cea_journal:

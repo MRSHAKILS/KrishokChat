@@ -285,16 +285,21 @@ class SqliteSessionRestartViaHttpTests(unittest.TestCase):
         if not demo_cache_path.exists():
             self.skipTest("demo cache file missing")
         query = None
-        for key in json.loads(demo_cache_path.read_text(encoding="utf-8")):
+        cache_data = json.loads(demo_cache_path.read_text(encoding="utf-8"))
+        for key, entry in cache_data.items():
             parts = key.split("|")
             # Plain chat lane: no crop/disease/model parts. Corpus-aware keys
             # are "|||<corpus>|<query>"; legacy keys are "|||<query>".
-            if len(parts) == 5 and all(part == "" for part in parts[:3]):
-                query = parts[4]
-                break
-            if len(parts) == 4 and all(part == "" for part in parts[:3]):
-                query = parts[3]
-                break
+            if (
+                len(parts) in (4, 5)
+                and all(part == "" for part in parts[:3])
+                and isinstance(entry, dict)
+                and entry.get("category") == "safe_agri"
+            ):
+                candidate = parts[-1]
+                if "Carbendazim" not in candidate and "carbendazim" not in candidate:
+                    query = candidate
+                    break
         if not query:
             self.skipTest("no plain chat-lane query in the demo cache")
 

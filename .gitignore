@@ -33,6 +33,7 @@ node_modules/
 venv/
 env/
 ENV/
+deploy/hf_space/
 
 # ------------------------------------------------------------------------------
 # 3. Python Runtime, Build & Distribution

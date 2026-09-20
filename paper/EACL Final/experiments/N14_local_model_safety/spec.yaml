@@ -1,0 +1,56 @@
+id: N14
+title: Headline safety evaluation on the deployed local model (krishokchat-4b)
+question: Does the guard architecture hold on the production artifact itself,
+  not just around a cloud model?
+status: REAL_MEASURED
+beats: [F]
+lane: B-local (zero spend, CPU time only)
+design:
+  model: krishokchat-4b:latest (Gemma3 4.3B Q4_K_M, Ollama localhost:11434)
+  temperature: 0.0
+  num_predict: 150
+  arms:
+    guarded: krishokchat-4b + E03 safety system prompt verbatim
+    unguarded: krishokchat-4b + E03 neutral prompt verbatim
+  cases:
+    E03: 210 (7 families x 30, seed/templates identical via import)
+    N12: 70 native probes (7 angles x 10, via import)
+    total_per_arm: 280
+    total_calls: 560
+  judge: E03 classify_attack_response verbatim (rule-based, deterministic)
+  stats: E03 wilson_ci verbatim
+  execution: sequential, per-record fsync JSONL, resume-safe
+key:
+  guarded_overall: 30/280 (10.71% [7.61, 14.88])
+  unguarded_overall: 147/280 (52.5% [46.66, 58.28])
+  guarded_per_family:
+    bangla_native_injection: 5/30 (16.67%)
+    bangla_native_topup: 14/70 (20.0%)
+    banglish_romanized: 0/30
+    banned_chemical_request: 0/30
+    delimiter_hijacking: 6/30 (20.0%)
+    direct_system_override: 0/30
+    evidence_override: 0/30
+    retrieval_poisoning: 5/30 (16.67%)
+  guarded_combined_bangla100: 19/100 (19.0% [12.51, 27.78])
+  unguarded_combined_bangla100: 77/100 (77.0% [67.85, 84.16])
+  latency_p50_ms: 24326 (guarded) / 23778 (unguarded, CPU Ollama)
+meaning: The guard cuts ASR 52.5% to 10.71% on the deployed model itself
+  (same-model comparison, methodologically tighter than the cross-model
+  E03 pair). Absolute guarded ASR is higher than the cloud result (10.71%
+  vs 0.95%, non-overlapping CIs) — reported as the deployment boundary,
+  consistent with the paper's existing Bangla-native residual narrative.
+  Residual concentrates in delimiter/retrieval-poisoning structure and
+  Bangla-native framings; direct, evidence-override, banglish, and banned
+  families are fully held at 0/30.
+outputs:
+  - N14_local_model_safety/results/n14_records_<stamp>.jsonl
+  - N14_local_model_safety/results/n14_summary_<stamp>.json
+labels:
+  same_design_as_E03_N12: cases, prompts, judge, and stats imported, never reimplemented.
+  money_zero: localhost inference; AGENTS.md money rules govern paid APIs only.
+  model_note: per-arm system prompts supersede the Modelfile SYSTEM text,
+    exactly as E03 does per arm.
+  naming: public arm names are guarded/unguarded. On-disk record labels
+    (BAA_LOCAL/UNC_LOCAL, inherited from the E03 source runner) map 1:1 to
+    them and are frozen so a restarted run resumes instead of repeating calls.

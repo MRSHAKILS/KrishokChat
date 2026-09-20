@@ -1,4 +1,4 @@
-# KrishokChat — Paper-Ready Results (EACL 2027 System Demonstrations)
+# KrishokTech — Paper-Ready Results (EACL 2027 System Demonstrations)
 # Generated: 2026-09-18. SSOT source: experiments/ground_truth.yaml (2026-09-17 audit).
 # Rule: every number here traces to a frozen results.json in experiments/<ID>/.
 # Statuses: REAL_MEASURED / REAL_MEASURED_SMALLN / REAL_MEASURED_PARTIAL /
@@ -6,7 +6,7 @@
 #   REAL_MEASURED_DETERMINISTIC_AND_SIMULATED / REAL_MEASURED_WITH_CROSS_TRACK_BASELINES / PILOT
 
 meta:
-  system: KrishokChat Bengali agricultural advisory (fail-closed, BM25-first, ONNX on-device vision)
+  system: KrishokTech Bengali agricultural advisory (fail-closed, BM25-first, ONNX on-device vision)
   venue: EACL 2027 System Demonstrations (Athens, 9-14 Mar 2027)
   page_budget: 6 + unlimited refs/appendix/ethics
   desk_reject_gate:
