@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
-const backendUrl = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const backendUrl =
+  process.env.BACKEND_URL ??
+  process.env.NEXT_PUBLIC_BACKEND_URL ??
+  process.env.NEXT_PUBLIC_API_URL ??
+  "http://localhost:8000";
 
 const nextConfig: NextConfig = {
   // P6: standalone output for Docker when not on Vercel. Vercel natively optimizes output.
