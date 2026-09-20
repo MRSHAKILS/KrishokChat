@@ -13,11 +13,20 @@ import { NextResponse, type NextRequest } from "next/server";
  * IMPORTANT: do not run code between createServerClient and getUser().
  */
 export async function updateSession(request: NextRequest) {
+  // Guard: if Supabase env vars are missing (e.g. Vercel project without env
+  // vars configured), pass the request through unchanged rather than crashing
+  // the middleware edge worker and returning a Vercel-level 404 on every route.
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if (!supabaseUrl || !supabaseKey) {
+    return NextResponse.next({ request });
+  }
+
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    supabaseUrl,
+    supabaseKey,
     {
       cookies: {
         getAll() {
