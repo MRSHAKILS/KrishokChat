@@ -13,7 +13,10 @@ import json
 import threading
 from pathlib import Path
 
-import faiss
+try:
+    import faiss  # type: ignore[import-untyped]  # optional: not installed on Render Free
+except ImportError:  # pragma: no cover
+    faiss = None  # type: ignore[assignment]
 import httpx
 import numpy as np
 
@@ -49,7 +52,12 @@ class DenseRetriever:
 
     @property
     def available(self) -> bool:
-        return bool(self.api_key) and self.index_path.exists() and self.ids_path.exists()
+        return (
+            faiss is not None
+            and bool(self.api_key)
+            and self.index_path.exists()
+            and self.ids_path.exists()
+        )
 
     def _load(self) -> tuple[object, list[str], list[dict]]:
         if self._index is None or not self._ids or not self._corpus:

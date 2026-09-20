@@ -6,7 +6,10 @@ import threading
 
 import numpy as np
 from PIL import Image
-from ultralytics import YOLO
+try:
+    from ultralytics import YOLO  # type: ignore[import-untyped]  # optional: not installed on Render Free
+except ImportError:  # pragma: no cover
+    YOLO = None  # type: ignore[assignment]
 
 from app.domain.vision import VisionModelSpec, VisionPrediction
 from app.ports.vision import VisionInferenceError
@@ -17,7 +20,12 @@ class UltralyticsClassificationRunner:
         self._models: dict[str, YOLO] = {}
         self._lock = threading.Lock()
 
-    def _model(self, spec: VisionModelSpec) -> YOLO:
+    def _model(self, spec: VisionModelSpec) -> YOLO:  # type: ignore[return]
+        if YOLO is None:
+            raise VisionInferenceError(
+                "ultralytics is not installed on this deployment (Render Free). "
+                "Vision classification is handled client-side."
+            )
         if spec.key not in self._models:
             with self._lock:
                 if spec.key not in self._models:

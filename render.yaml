@@ -1,0 +1,50 @@
+services:
+  - type: web
+    name: krishokchat-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements-render.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.10
+
+      # --- LLM Provider ---
+      - key: LLM_PROVIDER
+        value: openrouter
+      - key: OPENROUTER_MODEL
+        value: google/gemini-2.5-flash-lite
+      - key: OPENROUTER_API_KEY
+        sync: false   # Set manually in Render dashboard
+
+      # --- Retrieval: BM25-only (no FAISS/sentence-transformers on free tier) ---
+      - key: RETRIEVAL_BM25_ONLY
+        value: "true"
+
+      # --- CORS: allow Vercel + custom domain ---
+      - key: FRONTEND_ORIGIN
+        value: "https://krishokchat.org,https://www.krishokchat.org,https://krishokchat.vercel.app"
+
+      # --- Supabase Auth + Storage ---
+      - key: SUPABASE_URL
+        value: https://xhrcwsmrckfvmfxlltvk.supabase.co
+      - key: SUPABASE_PUBLISHABLE_KEY
+        sync: false   # Set manually in Render dashboard
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false   # Set manually in Render dashboard
+
+      # --- App settings ---
+      - key: ENVIRONMENT
+        value: production
+      - key: DEMO_MODE
+        value: "true"
+      - key: DOCS_ENABLED
+        value: "true"
+      - key: LOG_LEVEL
+        value: INFO
+
+      # --- Optional: Groq ASR fallback for /api/transcribe ---
+      - key: GROQ_API_KEY
+        sync: false   # Set manually if desired; /api/transcribe returns 501 without it

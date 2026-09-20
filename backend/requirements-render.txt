@@ -1,0 +1,54 @@
+# KrishokChat Backend — Render Free deployment requirements
+# =========================================================
+# Excludes the heavy ML stack (torch, torchvision, ultralytics, onnxruntime,
+# sentence-transformers, faiss-cpu) that requires 5+ GB and exceeds Render Free's
+# 512 MB RAM ceiling. The full pyproject.toml is used locally and in Docker.
+#
+# What still works on Render Free:
+#   ✅ T0 safety precheck + T4 grounded advisory (OpenRouter/Gemini)
+#   ✅ BM25 retrieval (rank-bm25, pure Python)
+#   ✅ /api/soil analyzer (pure numpy regression)
+#   ✅ /api/tts Bengali TTS (edge-tts, keyless)
+#   ✅ Supabase auth, saved history, notifications, admin
+#   ⚠️ /api/detect: advisory text only (browser WASM handles classification)
+#   ⚠️ Dense FAISS retrieval: disabled (RETRIEVAL_BM25_ONLY=true)
+#   ❌ Local KrishokChat-4B: handled by RunPod Serverless (Step 3)
+
+# --- Web Framework ---
+fastapi[standard]>=0.141.1
+uvicorn[standard]>=0.52.3
+
+# --- HTTP + async ---
+httpx>=0.28.1
+anyio>=4.0.0
+
+# --- Configuration ---
+pydantic-settings>=2.0.0
+python-dotenv>=1.2.2
+
+# --- LLM Providers (cloud, no local models) ---
+google-genai>=2.17.0
+
+# --- BM25 Retrieval (pure Python, no torch) ---
+rank-bm25>=0.2.2
+
+# --- Bengali NLP ---
+bnunicodenormalizer>=0.1.7
+
+# --- Auth ---
+pyjwt[crypto]>=2.13.0
+
+# --- TTS (Bengali audio, keyless via Microsoft Edge) ---
+edge-tts>=7.2.8
+
+# --- PDF generation ---
+reportlab>=5.0.0
+
+# --- Data utils (soil regression uses numpy) ---
+numpy>=1.26.0
+
+# --- Image processing (vision/soil APIs use PIL) ---
+Pillow>=10.0.0
+
+# --- Pydantic (Settings + request/response models) ---
+pydantic>=2.0.0
