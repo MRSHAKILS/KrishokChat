@@ -3,6 +3,7 @@ Quality Spot Check: Send 100 representative refined nodes back to Gemini for eva
 Scores each node on 6 dimensions and reports pass/fail.
 """
 import json
+import os
 import random
 import statistics
 from pathlib import Path
@@ -18,7 +19,10 @@ REPORT_PATH = RAG_ROOT / "eval" / "quality_spot_check.jsonl"
 SUMMARY_PATH = RAG_ROOT / "eval" / "quality_summary.json"
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent"
-API_KEY = "AIzaSyBhHqS8SAk0d-Y5GuBHO9kJPCrBo8HlgCI"
+# API key must come from the environment (never commit a real key).
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
+if not API_KEY:
+    raise SystemExit("Set GEMINI_API_KEY in the environment to run this spot check.")
 
 random.seed(2026)
 

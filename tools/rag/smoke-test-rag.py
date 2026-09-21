@@ -1,5 +1,6 @@
 """Smoke test: refine ONE node with Gemini."""
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -12,8 +13,10 @@ SOURCE_MD_DIR = RAG_ROOT / "source_md"
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent"
 
-# Use first key
-API_KEY = "AIzaSyBhHqS8SAk0d-Y5GuBHO9kJPCrBo8HlgCI"
+# API key must come from the environment (never commit a real key).
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
+if not API_KEY:
+    raise SystemExit("Set GEMINI_API_KEY in the environment to run this smoke test.")
 
 
 def load_first_node():
