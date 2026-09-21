@@ -1,0 +1,302 @@
+{
+  "farmer_q_332": {
+    "item_no": 1,
+    "crop": "rice",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_607": {
+    "item_no": 2,
+    "crop": "rice",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_413": {
+    "item_no": 3,
+    "crop": "rice",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_379": {
+    "item_no": 4,
+    "crop": "rice",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_189": {
+    "item_no": 5,
+    "crop": "rice",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_403": {
+    "item_no": 6,
+    "crop": "rice",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_608": {
+    "item_no": 7,
+    "crop": "rice",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_549": {
+    "item_no": 8,
+    "crop": "rice",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_606": {
+    "item_no": 9,
+    "crop": "rice",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_565": {
+    "item_no": 10,
+    "crop": "rice",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_459": {
+    "item_no": 11,
+    "crop": "rice",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_366": {
+    "item_no": 12,
+    "crop": "rice",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_136": {
+    "item_no": 13,
+    "crop": "potato",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_441": {
+    "item_no": 14,
+    "crop": "potato",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_111": {
+    "item_no": 15,
+    "crop": "potato",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_287": {
+    "item_no": 16,
+    "crop": "potato",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_390": {
+    "item_no": 17,
+    "crop": "potato",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_174": {
+    "item_no": 18,
+    "crop": "tomato",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_185": {
+    "item_no": 19,
+    "crop": "tomato",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_518": {
+    "item_no": 20,
+    "crop": "tomato",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_214": {
+    "item_no": 21,
+    "crop": "tomato",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_414": {
+    "item_no": 22,
+    "crop": "tomato",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_125": {
+    "item_no": 23,
+    "crop": "tomato",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_964": {
+    "item_no": 24,
+    "crop": "brinjal",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_483": {
+    "item_no": 25,
+    "crop": "brinjal",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_193": {
+    "item_no": 26,
+    "crop": "brinjal",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_616": {
+    "item_no": 27,
+    "crop": "brinjal",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_114": {
+    "item_no": 28,
+    "crop": "brinjal",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_461": {
+    "item_no": 29,
+    "crop": "brinjal",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_186": {
+    "item_no": 30,
+    "crop": "chilli",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_499": {
+    "item_no": 31,
+    "crop": "chilli",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_527": {
+    "item_no": 32,
+    "crop": "chilli",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_16": {
+    "item_no": 33,
+    "crop": "chilli",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_775": {
+    "item_no": 34,
+    "crop": "chilli",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_593": {
+    "item_no": 35,
+    "crop": "chilli",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_301": {
+    "item_no": 36,
+    "crop": "mustard",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_406": {
+    "item_no": 37,
+    "crop": "mustard",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_331": {
+    "item_no": 38,
+    "crop": "mustard",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_623": {
+    "item_no": 39,
+    "crop": "mustard",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_181": {
+    "item_no": 40,
+    "crop": "mustard",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_148": {
+    "item_no": 41,
+    "crop": "mustard",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_51": {
+    "item_no": 42,
+    "crop": "mango",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_258": {
+    "item_no": 43,
+    "crop": "mango",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_49": {
+    "item_no": 44,
+    "crop": "mango",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_98": {
+    "item_no": 45,
+    "crop": "mango",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_282": {
+    "item_no": 46,
+    "crop": "papaya",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_116": {
+    "item_no": 47,
+    "crop": "papaya",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_620": {
+    "item_no": 48,
+    "crop": "cucumber",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  },
+  "farmer_q_535": {
+    "item_no": 49,
+    "crop": "cucumber",
+    "Response 1": "Unconstrained Baseline",
+    "Response 2": "Guarded KrishokTech"
+  },
+  "farmer_q_748": {
+    "item_no": 50,
+    "crop": "ata",
+    "Response 1": "Guarded KrishokTech",
+    "Response 2": "Unconstrained Baseline"
+  }
+}

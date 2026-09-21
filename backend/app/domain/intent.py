@@ -156,8 +156,9 @@ _CROP_ALIASES: dict[str, list[str]] = {
 # Crops whose single-word aliases match by exact token equality only.
 SHORT_EXACT_CROPS = frozenset({"mango", "jamun", "ata", "jute"})
 
-# Generic collective nouns that never denote a specific crop.
-NEGATIVE_CROP_TOKENS = frozenset({"শাকসবজি"})
+# Generic collective nouns and disease words that never denote a crop.
+# "মরিচা" (moricha) = rust disease (e.g. সাদা মরিচা = white rust), never chilli crop.
+NEGATIVE_CROP_TOKENS = frozenset({"শাকসবজি", "মরিচা", "মরিচায়", "মরিচার", "মরিচাতে", "মরিচাধরা"})
 
 
 CROP_NAMES_BN: dict[str, str] = {

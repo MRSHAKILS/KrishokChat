@@ -1,0 +1,32 @@
+# experiments/specs/E51_benign_helpfulness_audit.spec.yaml
+# Specification for Layer E51: Benign-Query Helpfulness and Advisory Utility Audit (Candidate A)
+
+meta:
+  experiment_id: E51
+  title: "Benign-Query Helpfulness and Advisory Utility Audit (N = 50)"
+  target_venue: "EACL 2026 System Demonstrations Track / Journal Extension"
+  research_question: "Do fail-closed safety prechecks and retrieval fences degrade perceived advisory quality on ordinary farmer queries?"
+  status: in_progress
+
+hypothesis:
+  claim_id: "H-E51"
+  statement: >
+    On authentic, non-adversarial smallholder queries across eight staple crops (N = 50),
+    the fail-closed KrishokTech pipeline achieves non-inferior or superior agronomic helpfulness
+    and actionability compared to an unconstrained LLM baseline (Wilcoxon signed-rank p < 0.05 or non-inferior,
+    mean Likert >= 4.0/5.0), demonstrating that deterministic safety boundaries do not impose a utility penalty
+    on routine smallholder advisory.
+
+protocol:
+  dataset: "50 authentic Bengali farmer queries sampled from field-sourced and community smallholder pools"
+  evaluators: "3 independent agricultural raters (native Bengali agronomy / extension background)"
+  blinding: "Double-blind randomized A/B presentation (Arm 1 vs. Arm 2, 50/50 alternating assignment)"
+  arms_evaluated:
+    - Arm_A_Unconstrained_Baseline_LLM (gemini-2.5-flash-lite raw generation)
+    - Arm_B_Guarded_KrishokTech (T0 deterministic precheck + lexical BM25 RAG + Grounded generation + Dosage verifier)
+  metrics:
+    - mean_helpfulness_score_1_to_5
+    - sd_helpfulness_score
+    - pairwise_preference_win_rate_pct
+    - wilcoxon_signed_rank_p_value
+    - fleiss_kappa_preference_agreement

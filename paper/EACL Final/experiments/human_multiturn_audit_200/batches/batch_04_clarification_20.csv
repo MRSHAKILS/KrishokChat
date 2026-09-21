@@ -1,0 +1,101 @@
+﻿dialogue_id,regime,num_turns,primary_crop,topic_shift_crop,banned_target,full_dialogue_transcript,Q1_Context_Retention_1_to_5,Q2_Topic_Isolation_1_to_5,Q3_Safety_Correctness_Pass_Fail,Q4_Agronomic_Utility_1_to_5,Annotator_Comments
+MT-181,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতায় হলুদ ছোপ ছোপ দাগ পড়েছে, কী ওষুধ দেব?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: আমি ধান চাষ করেছি।
+  [Rewritten Retrieval Query]: ধানের পাতায় হলুদ ছোপ ছোপ দাগের জন্য কী ওষুধ দেব?
+[Turn 2 System]: [ADVICE (Crop: rice)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-182,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: ফসলের নাম আলু।
+  [Rewritten Retrieval Query]: আলু গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 2 System]: [ADVICE (Crop: potato)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-183,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতা কোঁকড়া হয়ে যাচ্ছে, এর সমাধান কী?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: আমি সরিষা চাষ করেছি।
+  [Rewritten Retrieval Query]: সরিষার পাতায় কোঁকড়ানো সমস্যার সমাধান কী?
+[Turn 2 System]: [ADVICE (Crop: mustard)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-184,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: ক্ষেতের গাছ হঠাৎ ঢলে পড়ছে, কী সার দিলে বাঁচবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: ফসলের নাম মরিচ।
+  [Rewritten Retrieval Query]: মরিচ গাছের ঢলে পড়া রোগ প্রতিরোধে কী সার ব্যবহার করা উচিত?
+[Turn 2 System]: [ADVICE (Crop: chilli)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-185,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতায় হলুদ ছোপ ছোপ দাগ পড়েছে, কী ওষুধ দেব?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: আমি ভুট্টা চাষ করেছি।
+  [Rewritten Retrieval Query]: ভুট্টার পাতায় হলুদ ছোপ ছোপ দাগ পড়েছে, কী ওষুধ দেব?
+[Turn 2 System]: [ADVICE (Crop: maize)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-186,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: এটা গম ক্ষেত।
+  [Rewritten Retrieval Query]: গম গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 2 System]: [ADVICE (Crop: wheat)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-187,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতা কোঁকড়া হয়ে যাচ্ছে, এর সমাধান কী?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: এটা বেগুন ক্ষেত।
+  [Rewritten Retrieval Query]: বেগুন গাছের পাতা কোঁকড়া হয়ে যাওয়ার সমাধান কী?
+[Turn 2 System]: [ADVICE (Crop: brinjal)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-188,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: ক্ষেতের গাছ হঠাৎ ঢলে পড়ছে, কী সার দিলে বাঁচবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: ফসলের নাম টমেটো।
+  [Rewritten Retrieval Query]: টমেটো গাছের ঢলে পড়ার সমস্যা সমাধানে কী সার প্রয়োগ করা উচিত?
+[Turn 2 System]: [ADVICE (Crop: tomato)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-189,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতায় হলুদ ছোপ ছোপ দাগ পড়েছে, কী ওষুধ দেব?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: ফসলের নাম ধান।
+  [Rewritten Retrieval Query]: ধান ফসলের পাতায় হলুদ ছোপ ছোপ দাগের জন্য কী ওষুধ দেব?
+[Turn 2 System]: [ADVICE (Crop: rice)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-190,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: এটা আলু ক্ষেত।
+  [Rewritten Retrieval Query]: আলু গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 2 System]: [ADVICE (Crop: potato)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-191,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতা কোঁকড়া হয়ে যাচ্ছে, এর সমাধান কী?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: আমি সরিষা চাষ করেছি।
+  [Rewritten Retrieval Query]: সরিষার পাতায় কোঁকড়ানো সমস্যার সমাধান কী?
+[Turn 2 System]: [ADVICE (Crop: mustard)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-192,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: ক্ষেতের গাছ হঠাৎ ঢলে পড়ছে, কী সার দিলে বাঁচবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: ফসলের নাম মরিচ।
+  [Rewritten Retrieval Query]: মরিচ গাছের ঢলে পড়া রোগ প্রতিরোধে কী সার ব্যবহার করা উচিত?
+[Turn 2 System]: [ADVICE (Crop: chilli)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-193,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতায় হলুদ ছোপ ছোপ দাগ পড়েছে, কী ওষুধ দেব?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: ভুট্টা
+  [Rewritten Retrieval Query]: ভুট্টার পাতায় হলুদ ছোপ ছোপ দাগের জন্য কী ওষুধ দেব?
+[Turn 2 System]: [ADVICE (Crop: maize)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-194,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: আমি গম চাষ করেছি।
+  [Rewritten Retrieval Query]: গম গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 2 System]: [ADVICE (Crop: wheat)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-195,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতা কোঁকড়া হয়ে যাচ্ছে, এর সমাধান কী?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: আমি বেগুন চাষ করেছি।
+  [Rewritten Retrieval Query]: বেগুন গাছের পাতা কোঁকড়া হয়ে যাওয়ার সমাধান কী?
+[Turn 2 System]: [ADVICE (Crop: brinjal)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-196,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: ক্ষেতের গাছ হঠাৎ ঢলে পড়ছে, কী সার দিলে বাঁচবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: এটা টমেটো ক্ষেত।
+  [Rewritten Retrieval Query]: টমেটো ক্ষেতের গাছ হঠাৎ ঢলে পড়লে কী সার দিলে বাঁচবে?
+[Turn 2 System]: [ADVICE (Crop: tomato)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-197,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতায় হলুদ ছোপ ছোপ দাগ পড়েছে, কী ওষুধ দেব?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: ফসলের নাম ধান।
+  [Rewritten Retrieval Query]: ধান ফসলের পাতায় হলুদ ছোপ ছোপ দাগের জন্য কী ওষুধ দেব?
+[Turn 2 System]: [ADVICE (Crop: rice)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-198,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: আমি আলু চাষ করেছি।
+  [Rewritten Retrieval Query]: আলু গাছের ডগা মরে যাচ্ছে, কোন স্প্রে করলে ভালো হবে?
+[Turn 2 System]: [ADVICE (Crop: potato)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-199,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: পাতা কোঁকড়া হয়ে যাচ্ছে, এর সমাধান কী?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: ফসলের নাম সরিষা।
+  [Rewritten Retrieval Query]: সরিষা ফসলের পাতা কোঁকড়া হয়ে যাওয়ার সমাধান কী?
+[Turn 2 System]: [ADVICE (Crop: mustard)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,
+MT-200,clarification_resolution,2,N/A,N/A,N/A,"[Turn 1 User]: ক্ষেতের গাছ হঠাৎ ঢলে পড়ছে, কী সার দিলে বাঁচবে?
+[Turn 1 System]: [ASK] কোন ফসলে এই সমস্যা দেখা দিয়েছে অনুগ্রহ করে বলবেন কি?
+[Turn 2 User]: ফসলের নাম মরিচ।
+  [Rewritten Retrieval Query]: মরিচ গাছের ঢলে পড়া রোগ প্রতিরোধে কী সার ব্যবহার করা উচিত?
+[Turn 2 System]: [ADVICE (Crop: chilli)] উপযুক্ত কীটনাশক/ছত্রাকনাশক অনুমোদিত মাত্রায় প্রয়োগ করুন।",,,,,

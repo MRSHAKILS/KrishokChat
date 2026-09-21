@@ -152,6 +152,13 @@ BANNED_ACTIVES: tuple[BannedActive, ...] = (
         bn_aliases=("মনোক্রোটোফস", "নুভাক্রন", "এজোড্রিন"),
         source="DAE cancelled list (Azodrin/Nuvacron/Monodrin cancelled)",
     ),
+    BannedActive(
+        rule="banned_active:methamidophos",
+        canonical_en="Methamidophos",
+        en_aliases=("methamidophos", "metamidophos", "monitor", "tamaron", "methamidofos"),
+        bn_aliases=("মেথামিডোফস", "মেথামিডফোস", "মনিটর", "টামারন"),
+        source="DAE cancelled list (Tamaron/Monitor cancelled)",
+    ),
     # --- Herbicides under national policy action (retained flagship HHPs) ---
     BannedActive(
         rule="banned_active:paraquat",

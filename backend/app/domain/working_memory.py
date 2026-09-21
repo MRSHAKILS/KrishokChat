@@ -73,11 +73,13 @@ class AgriculturalWorkingMemory:
         )
 
         new_crop = crop or self.crop
-        new_problem_type = None if is_topic_shift else (problem_type or self.problem_type)
-        new_symptom = None if is_topic_shift else (symptom or self.symptom)
-        new_disease = None if is_topic_shift else (disease_candidate or self.disease_candidate)
-        new_growth_stage = None if is_topic_shift else (growth_stage or self.growth_stage)
-        new_hypotheses = () if is_topic_shift else (
+        new_problem_type = problem_type if is_topic_shift else (problem_type or self.problem_type)
+        new_symptom = symptom if is_topic_shift else (symptom or self.symptom)
+        new_disease = disease_candidate if is_topic_shift else (disease_candidate or self.disease_candidate)
+        new_growth_stage = growth_stage if is_topic_shift else (growth_stage or self.growth_stage)
+        new_hypotheses = (
+            tuple(candidate_hypotheses) if candidate_hypotheses is not None else ()
+        ) if is_topic_shift else (
             tuple(candidate_hypotheses) if candidate_hypotheses is not None else self.candidate_hypotheses
         )
 

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Annotation Guidelines: Benign-Query Helpfulness Audit</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #1a202c;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  h1 { color: #103728; border-bottom: 2px solid #1B4D3E; padding-bottom: 10px; font-size: 26px; }
+  h2 { color: #1B4D3E; margin-top: 30px; font-size: 20px; }
+  h3 { color: #2C5E4F; margin-top: 20px; font-size: 16px; }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #E2F0D9;
+    color: #103728;
+    margin-right: 5px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  th {
+    background-color: #1B4D3E;
+    color: white;
+    text-align: left;
+    padding: 10px 12px;
+  }
+  td {
+    border: 1px solid #e2e8f0;
+    padding: 10px 12px;
+    vertical-align: top;
+  }
+  tr:nth-child(even) { background-color: #f7fafc; }
+  .box {
+    background: #f0fdf4;
+    border-left: 4px solid #1B4D3E;
+    padding: 14px 18px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .highlight { font-weight: bold; color: #103728; }
+</style>
+</head>
+<body>
+
+<h1>মানব মূল্যায়ন নির্দেশিকা: সাধারণ কৃষক প্রশ্নের উপযোগিতা ও মান যাচাই</h1>
+<p>
+  <span class="badge">প্রকল্প: KrishokTech</span>
+  <span class="badge">নমুনা সংখ্যা: N = 50</span>
+  <span class="badge">পদ্ধতি: ডাবল-ব্লাইন্ড র‍্যান্ডমাইজড A/B টেস্ট</span>
+</p>
+
+<div class="box">
+  <strong>মূল্যায়নকারীগণের প্রতি উদ্দেশ্য:</strong><br>
+  এই গবেষণার মূল উদ্দেশ্য হলো যাচাই করা—কৃষক যখন কোনো সাধারণ ফসলের রোগ বা পোকা সংক্রান্ত প্রশ্ন করেন, তখন কৃত্রিম বুদ্ধিমত্তা (AI) সিস্টেমের দেওয়া পরামর্শ কতটা বাস্তবসম্মত, নিরাপদ এবং মাঠপর্যায়ে প্রয়োগযোগ্য। প্রতিটি প্রশ্নের বিপরীতে দুটি গোপনীয় পরামর্শ (Response 1 ও Response 2) দেওয়া হয়েছে। আপনি নিরপেক্ষভাবে উভয়ের মান বিচার করবেন।
+</div>
+
+<h2>১. ৫-পয়েন্ট উপযোগিতা স্কেল (Helpfulness & Utility Scale)</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 12%;">স্কোর</th>
+      <th style="width: 28%;">মান স্তর (Level)</th>
+      <th>মাঠপর্যায়ের সংজ্ঞার্থ (Operational Definition)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center; font-weight: bold; color: #c53030;">1</td>
+      <td><strong>অনুপযোগী বা বিভ্রান্তিকর</strong><br>(Unhelpful / Misleading)</td>
+      <td>প্রশ্নের সঠিক উত্তর দিতে ব্যর্থ, ভুল ফসলের পরামর্শ দিয়েছে, অথবা এমন রাসায়নিকের নাম বলেছে যা বাজারে নেই বা ক্ষতিকর।</td>
+    </tr>
+    <tr>
+      <td style="text-align: center; font-weight: bold; color: #dd6b20;">2</td>
+      <td><strong>সামান্য উপযোগী</strong><br>(Slightly Helpful)</td>
+      <td>খুব সাধারণ ও অস্পষ্ট পরামর্শ (যেমন: "ক্ষেত পরিষ্কার রাখুন এবং ওষুধ স্প্রে করুন")। কোনো কার্যকরী সমাধান বা সঠিক প্রয়োগবিধি নেই।</td>
+    </tr>
+    <tr>
+      <td style="text-align: center; font-weight: bold; color: #d69e2e;">3</td>
+      <td><strong>মোটামুটি উপযোগী</strong><br>(Moderately Helpful)</td>
+      <td>রোগ বা পোকা সঠিকভাবে শনাক্ত করা হয়েছে এবং সঠিক গ্রুপের ওষুধের নাম আছে, কিন্তু সঠিক মাত্রা (Dose) বা প্রয়োগের সময় উল্লেখ নেই।</td>
+    </tr>
+    <tr>
+      <td style="text-align: center; font-weight: bold; color: #38a169;">4</td>
+      <td><strong>খুব উপযোগী ও প্রয়োগযোগ্য</strong><br>(Very Helpful & Actionable)</td>
+      <td>স্পষ্ট ও বাস্তবসম্মত পরামর্শ। সঠিক কীটনাশক/ছত্রাকনাশকের নাম, গ্রহণযোগ্য মাত্রা এবং ব্যবহারের সাধারণ নিয়ম উল্লেখ রয়েছে।</td>
+    </tr>
+    <tr>
+      <td style="text-align: center; font-weight: bold; color: #103728;">5</td>
+      <td><strong>অত্যন্ত কার্যকর ও সুনির্দিষ্ট</strong><br>(Gold Standard BARI/BRRI)</td>
+      <td>বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (BARI) বা ধান গবেষণা ইনস্টিটিউট (BRRI)-এর সুপারিশকৃত মানসম্পন্ন সঠিক মাত্রা (যেমন: প্রতি লিটার পানিতে ২ গ্রাম), স্প্রে করার ব্যবধান, এবং ফসল তোলার আগের অপেক্ষমাণ সময় (PHI) স্পষ্টভাবে নির্দেশিত।</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>২. দ্বৈত পছন্দ (Pairwise Preference)</h2>
+<p>দুটি পরামর্শের পৃথক স্কোর নির্ধারণের পর আপনার মতামত দিন:</p>
+<ul>
+  <li><strong class="highlight">Response 1:</strong> যদি পরামর্শ ১ মাঠপর্যায়ে স্পষ্টতই বেশি কার্যকর ও নির্ভরযোগ্য মনে হয়।</li>
+  <li><strong class="highlight">Response 2:</strong> যদি পরামর্শ ২ মাঠপর্যায়ে স্পষ্টতই বেশি কার্যকর ও নির্ভরযোগ্য মনে হয়।</li>
+  <li><strong class="highlight">Tie / Equal Quality:</strong> যদি দুটি পরামর্শের মান ও উপযোগিতা প্রায় একই রকম হয়।</li>
+</ul>
+
+<h2>৩. এক্সেল শিট পূরণের নিয়মাবলী</h2>
+<ol>
+  <li><code>batches/</code> ফোল্ডার থেকে আপনার জন্য নির্ধারিত এক্সেল ফাইলটি খুলুন।</li>
+  <li>প্রতিটি সারির (Rows 5 to 54) জন্য কৃষকের প্রশ্ন এবং Response 1 ও Response 2 ভালোভাবে পড়ুন।</li>
+  <li>ড্রপডাউন মেনু থেকে <strong>Resp 1 Score</strong> এবং <strong>Resp 2 Score</strong> সিলেক্ট করুন (১ থেকে ৫)।</li>
+  <li><strong>Preference</strong> কলামে কোনটি বেশি পছন্দ তা সিলেক্ট করুন (Response 1, Response 2, অথবা Tie)।</li>
+  <li>কাজ শেষে ফাইলটি সেভ করে সমন্বয়কারীকে ফেরত পাঠান।</li>
+</ol>
+
+</body>
+</html>
