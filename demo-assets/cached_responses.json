@@ -1,249 +1,4 @@
 {
- "|||2026-08|মুগডাল ফসলে পাউডারি মিলডিউ দমনে Carbendazim এর অনুমোদিত প্রয়োগমাত্রা কত": {
-  "query": "মুগডাল ফসলে পাউডারি মিলডিউ দমনে Carbendazim এর অনুমোদিত প্রয়োগমাত্রা কত?",
-  "category": "safe_agri",
-  "answer": "মুগডাল ফসলে পাউডারি মিলডিউ দমনে Carbendazim এর অনুমোদিত প্রয়োগমাত্রা সম্পর্কে তথ্যটি জ্ঞানভান্ডারে নেই।\n\nতবে, শসা, টমেটো, পেঁয়াজ, মরিচ এবং চা গাছে বিভিন্ন ব্লাইট ও মৃদু চূর্ণী পোকার বিরুদ্ধে Carbendazim 17.5% + Iprodione 35% (যেমন Shelter 52.5WP, Hama 52.5WP) ব্যবহার করা হয় [DAE_PEST_77A00D_001]।\n\nএছাড়াও, চা, ধান এবং আম গাছে Carbendazim 25% + Iprodione 25% (যেমন Orazim Plus 50WP, Rodazima 50WP) ব্যবহার করা হয় [DAE_PEST_77A00D_001]।\n\nআমের পাউডারী মিলডিউ দমনের জন্য সালফার-ভিত্তিক কীটনাশক Nanthion 80DF এবং Microvit 80WG প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহার করা যেতে পারে [DAE_PEST_1BD2B0_001]।\n\nসঠিক তথ্যের জন্য, অনুগ্রহ করে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করুন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "answerability_level": "A2_strong_evidence",
-  "progressive_guidance": null,
-  "sources": [
-   {
-    "id": "DAE_PEST_77A00D_001",
-    "score": 0.0476,
-    "title_en": "Registered Pesticides for Crop Disease Management",
-    "title_bn": "",
-    "content_en": "This node provides a reference for registered pesticides used in Bangladesh for managing various crop diseases. Always follow the recommended dosage and safety guidelines provided by the registration holder. Key registered products include: - Carboxin 20% + Thiram 20% (e.g., Asavax 40WP): Used for Wheat (Foot rot, Seedling blight) at 3 g/L per kg seed. - Carbendazim 17.5% + Iprodione 35% (e.g., Shelter 52.5WP, Hama 52.5WP): Used for Cucumber, Tomato, Onion, Chili, and Tea against various blights and mildews. - Carbendazim 25% + Iprodione 25% (e.g., Orazim Plus 50WP, Rodazima 50WP): Used for Tea, Rice, and Mango. - Chlorothalonil (e.g., Daconil 500EC, Satez 50SC): Used for Potato, Tomato, and Tea. - Chlorothalonil 30% + Cymoxanil 6% (e.g., Bounty 36WP, Selfi 36WP): Used for Tomato, Tea, and Potato. - Copper hydroxide 77% (e.g., Champion 77WP, Dolphin 77WP): Used for a wide range of crops including Potato, Tomato, Mango, Chili, Citrus, Banana, Groundnut, and Tea.",
-    "content_bn": "এই নোডটি বাংলাদেশের বিভিন্ন ফসলের রোগ দমনে ব্যবহৃত নিবন্ধিত বালাইনাশকগুলির একটি রেফারেন্স প্রদান করে। সর্বদা নিবন্ধনধারীর প্রদত্ত প্রস্তাবিত ডোজ এবং সুরক্ষা নির্দেশিকা অনুসরণ করুন। প্রধান নিবন্ধিত পণ্যগুলির মধ্যে রয়েছে: - Carboxin 20% + Thiram 20% (যেমন Asavax 40WP): গম ফসলের জন্য (ফুট রট, চারা ব্লাইট) প্রতি কেজি বীজে 3 g/L হারে ব্যবহৃত হয়। - Carbendazim 17.5% + Iprodione 35% (যেমন Shelter 52.5WP, Hama 52.5WP): শসা, টমেটো, পেঁয়াজ, মরিচ এবং চা গাছে বিভিন্ন ব্লাইট ও মৃদু চূর্ণী পোকার বিরুদ্ধে ব্যবহৃত হয়। - Carbendazim 25% + Iprodione 25% (যেমন Orazim Plus 50WP, Rodazima 50WP): চা, ধান এবং আম গাছে ব্যবহৃত হয়। - Chlorothalonil (যেমন Daconil 500EC, Satez 50SC): আলু, টমেটো এবং চা গাছে ব্যবহৃত হয়। - Chlorothalonil 30% + Cymoxanil 6% (যেমন Bounty 36WP, Selfi 36WP): টমেটো, চা এবং আলু গাছে ব্যবহৃত হয়। - Copper hydroxide 77% (যেমন Champion 77WP, Dolphin 77WP): আলু, টমেটো, আম, মরিচ, লেবুজাতীয় ফসল, কলা, চীনাবাদাম এবং চা সহ বিভিন্ন ফসলে ব্যবহৃত হয়।",
-    "source": "List of Registered Agricultural Pesticides (DAE)",
-    "citation": "DAE. page_742. List of Registered Agricultural Pesticides (DAE). pp. 742-742.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "pesticide",
-      "fungicide",
-      "disease management",
-      "DAE",
-      "কৃষি বালাইনাশক"
-     ],
-     "title_en": "Registered Pesticides for Crop Disease Management",
-     "title_bn": "",
-     "section_title": "page_742",
-     "publisher": "DAE",
-     "citation": "DAE. page_742. List of Registered Agricultural Pesticides (DAE). pp. 742-742.",
-     "summary": "A list of registered agricultural pesticides in Bangladesh, including common names, brand names, recommended crops, target diseases, and dosage rates.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B8_FERT2018_B00380_001",
-    "score": 0.0476,
-    "title_en": "",
-    "title_bn": "বিবিধ ফসল, ফুল ও ঘাস ফসলের সার সুপারিশ",
-    "content_en": "",
-    "content_bn": "বিবিধ ফসল, ফুল এবং ঘাস ফসলের জন্য সার প্রয়োগের বিস্তারিত সুপারিশমালা সংশ্লিষ্ট সারণীতে উল্লেখ করা হয়েছে। পানের ক্ষেত্রে পানের সংখ্যা এবং অন্যান্য ফসলের ক্ষেত্রে সারের পরিমাণ কেজি এককে নির্দেশিত হয়েছে।",
-    "source": "Fertilizer Recommendation Guide 2018",
-    "citation": "BARC. ১৬. একক ফসল ভিত্তিক সার সুপারিশ. Fertilizer Recommendation Guide 2018. pp. 78-78.",
-    "metadata": {
-     "category": "fertilizer",
-     "tags": [
-      "সার সুপারিশ",
-      "বিবিধ ফসল",
-      "ফুল চাষ",
-      "ঘাস চাষ",
-      "Fertilizer Recommendation"
-     ],
-     "title_en": "",
-     "title_bn": "বিবিধ ফসল, ফুল ও ঘাস ফসলের সার সুপারিশ",
-     "section_title": "১৬. একক ফসল ভিত্তিক সার সুপারিশ",
-     "publisher": "BARC",
-     "citation": "BARC. ১৬. একক ফসল ভিত্তিক সার সুপারিশ. Fertilizer Recommendation Guide 2018. pp. 78-78.",
-     "summary": "এই নথিতে বিবিধ ফসল, ফুল এবং ঘাস ফসলের জন্য সার ব্যবহারের সুপারিশমালা প্রদান করা হয়েছে।",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B5_BARCAG_330DB9_004",
-    "score": 0.0455,
-    "title_en": "Cucumber Disease Management",
-    "title_bn": "",
-    "content_en": "Control measures for Powdery mildew and Downy mildew using cultural practices and fungicides.",
-    "content_bn": "শস্য পরিচর্যা পদ্ধতি এবং ছত্রাকনাশক ব্যবহারের মাধ্যমে পাউডারি মিলডিউ ও ডাউনি মিলডিউ রোগ নিয়ন্ত্রণের ব্যবস্থা।",
-    "source": "Hand Book of Agricultural Technology",
-    "citation": "BARC. Cucumber — Intercultural Operation. Hand Book of Agricultural Technology. pp. 119-120.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "Disease management",
-      "রোগ ব্যবস্থাপনা",
-      "Cucumber",
-      "শসা"
-     ],
-     "title_en": "Cucumber Disease Management",
-     "title_bn": "",
-     "section_title": "Cucumber — Intercultural Operation",
-     "publisher": "BARC",
-     "citation": "BARC. Cucumber — Intercultural Operation. Hand Book of Agricultural Technology. pp. 119-120.",
-     "summary": "Management strategies for Powdery mildew and Downy mildew in cucumber.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "DAE_PEST_89FC8E_001",
-    "score": 0.0435,
-    "title_en": "Registered Fungicides: Mancozeb Combinations",
-    "title_bn": "",
-    "content_en": "This section provides a list of registered agricultural fungicides containing Mancozeb combinations, specifically Mancozeb (63%) + Carbendazim (12%) and Mancozeb (12%) + Copper (30%). These products are registered for use against specific fungal diseases in crops such as Potato, Tomato, Mango, Tea, Cucurbits, Chili, and Groundnut.",
-    "content_bn": "এই বিভাগে ম্যানকোজেব সংমিশ্রণযুক্ত নিবন্ধিত কৃষি ছত্রাকনাশকগুলির একটি তালিকা প্রদান করা হয়েছে, বিশেষ করে ম্যানকোজেব (63%) + কার্বেন্ডাজিম (12%) এবং ম্যানকোজেব (12%) + কপার (30%)। এই পণ্যগুলি আলু, টমেটো, আম, চা, করলাজাতীয় সবজি, মরিচ এবং চীনাবাদাম এর মতো ফসলে নির্দিষ্ট ছত্রাকজনিত রোগ দমনের জন্য নিবন্ধিত।",
-    "source": "List of Registered Agricultural Pesticides (DAE)",
-    "citation": "DAE. page_756. List of Registered Agricultural Pesticides (DAE). pp. 756-756.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "fungicide",
-      "Mancozeb",
-      "Carbendazim",
-      "Copper",
-      "pesticide registration",
-      "DAE",
-      "কৃষি বালাইনাশক"
-     ],
-     "title_en": "Registered Fungicides: Mancozeb Combinations",
-     "title_bn": "",
-     "section_title": "page_756",
-     "publisher": "DAE",
-     "citation": "DAE. page_756. List of Registered Agricultural Pesticides (DAE). pp. 756-756.",
-     "summary": "A list of registered pesticide products containing Mancozeb combinations (Mancozeb + Carbendazim and Mancozeb + Copper) for various crops and diseases in Bangladesh.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "DAE_PEST_1BD2B0_001",
-    "score": 0.0435,
-    "title_en": "Registered Sulphur-based Pesticides for Mango Powdery Mildew",
-    "title_bn": "",
-    "content_en": "The following sulphur-based pesticide products are registered by the Department of Agricultural Extension (DAE) for the management of powdery mildew in mango: 1. Nanthion 80DF (Registration: AP-887, Holder: Hossain Enterprise C.C.Ltd.) - Dosage: 2 g/L of water. 2. Microvit 80WG (Registration: AP-987, Holder: Global Agrovet Limited) - Dosage: 2 g/L of water.",
-    "content_bn": "আমের পাউডারী মিলডিউ বা গুঁড়া ছাদ রোগ ব্যবস্থাপনার জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত সালফার-ভিত্তিক কীটনাশক পণ্যগুলো নিবন্ধিত রয়েছে: ১. Nanthion 80DF (নিবন্ধন: AP-887, স্বত্বাধিকারী: Hossain Enterprise C.C.Ltd.) - মাত্রা: প্রতি লিটার পানিতে ২ গ্রাম। ২. Microvit 80WG (নিবন্ধন: AP-987, স্বত্বাধিকারী: Global Agrovet Limited) - মাত্রা: প্রতি লিটার পানিতে ২ গ্রাম।",
-    "source": "List of Registered Agricultural Pesticides (DAE)",
-    "citation": "DAE. page_729. List of Registered Agricultural Pesticides (DAE). pp. 729-729.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "mango",
-      "powdery mildew",
-      "pesticide",
-      "sulphur",
-      "DAE",
-      "আম",
-      "পাউডারি মিলডিউ",
-      "কীটনাশক"
-     ],
-     "title_en": "Registered Sulphur-based Pesticides for Mango Powdery Mildew",
-     "title_bn": "",
-     "section_title": "page_729",
-     "publisher": "DAE",
-     "citation": "DAE. page_729. List of Registered Agricultural Pesticides (DAE). pp. 729-729.",
-     "summary": "This node lists DAE-registered sulphur-based pesticide products recommended for the control of powdery mildew in mango orchards.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources · ফসল→['ফসল', 'ফসল', 'ফসল', 'ফসল', 'ফসল']",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "মুগডাল ফসলে পাউডারি মিলডিউ দমনে Carbendazim এর অনুমোদিত প্রয়োগমাত্রা সম্পর্কে তথ্যটি জ্ঞানভান্ডারে নেই",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "তবে, শসা, টমেটো, পেঁয়াজ, মরিচ এবং চা গাছে বিভিন্ন ব্লাইট ও মৃদু চূর্ণী পোকার বিরুদ্ধে Carbendazim 17.5% + Iprodione 35% (যেমন Shelter 52.5WP, Hama 52.5WP) ব্যবহার করা হয় [DAE_PEST_77A00D_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "এছাড়াও, চা, ধান এবং আম গাছে Carbendazim 25% + Iprodione 25% (যেমন Orazim Plus 50WP, Rodazima 50WP) ব্যবহার করা হয় [DAE_PEST_77A00D_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "আমের পাউডারী মিলডিউ দমনের জন্য সালফার-ভিত্তিক কীটনাশক Nanthion 80DF এবং Microvit 80WG প্রতি লিটার পানিতে ২ গ্রাম হারে ব্যবহার করা যেতে পারে [DAE_PEST_1BD2B0_001]",
-    "verdict": "grounded",
-    "reason": ""
-   },
-   {
-    "text": "সঠিক তথ্যের জন্য, অনুগ্রহ করে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করুন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
  "|||2026-08|মুগডাল গাছে পাউডারি মিলডিউ আক্রমণ দেখা দিলে Carbendazim কী হারে স্প্রে করতে হবে": {
   "query": "মুগডাল গাছে পাউডারি মিলডিউ আক্রমণ দেখা দিলে Carbendazim কী হারে স্প্রে করতে হবে?",
   "category": "safe_agri",
@@ -27771,6 +27526,292 @@
    },
    {
     "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয়, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "||gemini|2026-08|আলুর লেট ব্লাইট কীভাবে প্রতিরোধ করব": {
+  "query": "আলুর লেট ব্লাইট কীভাবে প্রতিরোধ করব?",
+  "category": "safe_agri",
+  "answer": "আলুর লেট ব্লাইট বা মড়ক রোগ একটি সাধারণ এবং ধ্বংসাত্মক রোগ যা পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে। এর ফলে সেগুলো বাদামী বা কালো হয়ে পচে যেতে পারে এবং ফলন উল্লেখযোগ্যভাবে কমে যেতে পারে। [CABI_POTATO_834B4F_001]\n\nএই রোগটি ভেজা আবহাওয়ায় দ্রুত ছড়ায় এবং সংক্রামিত বীজ আলুর মাধ্যমেও ছড়াতে পারে। [CABI_POTATO_834B4F_001]\n\nআলুর লেট ব্লাইট দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কিছু কীটনাশক নিবন্ধিত করেছে। এই নিবন্ধিত কীটনাশকগুলির প্রতি লিটার জলে ২ গ্রাম হারে প্রয়োগ করা যেতে পারে। [DAE_PEST_1206A0_001]\n\nসারের ব্যবহার ফসলের ফলন বৃদ্ধিতে গুরুত্বপূর্ণ ভূমিকা রাখে। তবে, সারের কার্যকারিতা মাটি, ফসল এবং জলবায়ুর উপর নির্ভর করে। সঠিক পুষ্টি উপাদান সঠিক পরিমাণে ব্যবহার করা উচিত। [B4_FRG2024_973F4A_001]\n\nযদি আপনার আরও তথ্যের প্রয়োজন হয় বা নির্দিষ্ট কোনো পরামর্শ চান, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "answerability_level": "A2_strong_evidence",
+  "progressive_guidance": null,
+  "sources": [
+   {
+    "id": "B6_DOC_2FA541_001",
+    "score": 0.0476,
+    "title_en": "Earthwork Calculation for Pond Construction",
+    "title_bn": "",
+    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
+    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
+    "source": "Training Manual on Improved Carp Polyculture 2011",
+    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+    "metadata": {
+     "category": "cultivation_practice",
+     "tags": [
+      "pond construction",
+      "earth measurement",
+      "pond cost estimation",
+      "পুকুর খনন",
+      "মাটির পরিমাপ"
+     ],
+     "title_en": "Earthwork Calculation for Pond Construction",
+     "title_bn": "",
+     "section_title": "Earth measurement",
+     "publisher": "DoF",
+     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_POTATO_834B4F_001",
+    "score": 0.0476,
+    "title_en": "Potato Late Blight Management",
+    "title_bn": "",
+    "content_en": "Late blight is a common and potentially devastating disease of potatoes that affects leaves, stems, and tubers, causing them to turn brown or black and rot. It significantly reduces yield and causes storage rot. Unlike early blight, late blight spots do not have internal rings. The disease thrives in wet weather and can be transmitted through infected seed potatoes.",
+    "content_bn": "Publisher: CABI Section/Topic: Potato late blight লেট ব্লাইট বা মড়ক রোগ আলু গাছের পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে এমন একটি সাধারণ এবং সম্ভাব্য ধ্বংসাত্মক রোগ, যার কারণে সেগুলো বাদামী বা কালো হয়ে পচে যায়। এটি ফলন উল্লেখযোগ্যভাবে হ্রাস করে এবং সংরক্ষণের সময় পচন ধরায়। আর্লি ব্লাইটের বিপরীতে, লেট ব্লাইটের দাগগুলোতে কোনো অভ্যন্তরীণ বলয় থাকে না। রোগটি ভেজা আবহাওয়ায় দ্রুত বৃদ্ধি পায় এবং সংক্রামিত বীজ আলুর মাধ্যমে ছড়াতে পারে।",
+    "source": "Potato Disease Manuals (Plantwise)",
+    "citation": "CABI. Potato late blight. Potato Disease Manuals (Plantwise). pp. 232-232.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "potato",
+      "late blight",
+      "Phytophthora infestans",
+      "disease management",
+      "আলু",
+      "লেট ব্লাইট"
+     ],
+     "title_en": "Potato Late Blight Management",
+     "title_bn": "",
+     "section_title": "Potato late blight",
+     "publisher": "CABI",
+     "citation": "CABI. Potato late blight. Potato Disease Manuals (Plantwise). pp. 232-232.",
+     "summary": "Late blight is a devastating potato disease caused by Phytophthora infestans, characterized by brown or black rotting on leaves, stems, and tubers, especially in wet weather.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B4_FRG2024_973F4A_001",
+    "score": 0.0455,
+    "title_en": "Principles of Crop Response to Fertilizers",
+    "title_bn": "",
+    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
+    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "fertilizer",
+      "nutrient management",
+      "crop response",
+      "4R stewardship",
+      "সার ব্যবস্থাপনা",
+      "ফসলের পুষ্টি"
+     ],
+     "title_en": "Principles of Crop Response to Fertilizers",
+     "title_bn": "",
+     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
+     "publisher": "BARC",
+     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "DAE_PEST_1206A0_001",
+    "score": 0.0455,
+    "title_en": "Registered Pesticides for Potato Late Blight Management",
+    "title_bn": "",
+    "content_en": "The following pesticides are registered by the Department of Agricultural Extension (DAE) for the management of Late Blight in potatoes. The standard application rate for these products is 2 grams per liter of water.",
+    "content_bn": "আলুর Late Blight দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কর্তৃক নিম্নলিখিত কীটনাশকগুলি নিবন্ধিত হয়েছে। এই পণ্যগুলির আদর্শ প্রয়োগের মাত্রা প্রতি লিটার জলে ২ গ্রাম।",
+    "source": "List of Registered Agricultural Pesticides (DAE)",
+    "citation": "DAE. page_760. List of Registered Agricultural Pesticides (DAE). pp. 760-760.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "potato",
+      "late blight",
+      "pesticide",
+      "DAE",
+      "fungicide",
+      "আলু",
+      "লেট ব্লাইট",
+      "বালাইনাশক"
+     ],
+     "title_en": "Registered Pesticides for Potato Late Blight Management",
+     "title_bn": "",
+     "section_title": "page_760",
+     "publisher": "DAE",
+     "citation": "DAE. page_760. List of Registered Agricultural Pesticides (DAE). pp. 760-760.",
+     "summary": "A list of DAE-registered pesticides containing Metalaxyl-based formulations for the control of Late Blight in potatoes.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_BRASSICA_843B60_001",
+    "score": 0.0435,
+    "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+    "title_bn": "",
+    "content_en": "Soft rot, also known as Bacterial black stalk, is caused by the bacterium Pectobacterium carotovorum ssp. carotovorum. The disease causes the lower end of the mid-rib to rot and lose its structural integrity. The infection spreads along the leaf veins, and a characteristic extremely unpleasant smell is often present. Bacterial ooze can be observed leaking from the affected rotting areas.",
+    "content_bn": "সফট রট, যা ব্যাকটেরিয়াল ব্ল্যাক স্টাক নামেও পরিচিত, এটি *Pectobacterium carotovorum ssp. carotovorum* নামক ব্যাকটেরিয়ার কারণে ঘটে। রোগটি মধ্য-শিরার নিচের অংশকে পচিয়ে দেয় এবং এর গঠনগত অখণ্ডতা নষ্ট করে। সংক্রমণ পাতার শিরা বরাবর ছড়িয়ে পড়ে এবং প্রায়ই একটি বিশেষ অত্যন্ত দুর্গন্ধ উপস্থিত থাকে। আক্রান্ত পচা অংশগুলো থেকে ব্যাকটেরিয়ার আঠা জাতীয় রস নিঃসরিত হতে দেখা যায়।",
+    "source": "Brassica Disease Manuals (Plantwise)",
+    "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "cabbage",
+      "soft rot",
+      "bacterial black stalk",
+      "Pectobacterium carotovorum",
+      "disease"
+     ],
+     "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+     "title_bn": "",
+     "section_title": "Soft rot of cabbage / Bacterial black Stalk",
+     "publisher": "CABI",
+     "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+     "summary": "Soft rot, caused by Pectobacterium carotovorum ssp. carotovorum, is a bacterial disease in cabbage characterized by tissue decay, foul odor, and bacterial ooze.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "5 sources · লাই→জন্য; কী→['কিতা', 'কি / কিবা', 'কী / কি', 'ক্যা / কী', 'কী / কিতা']; ই→['ই', 'ই', 'এ / ই', 'ই', 'হি / হেই']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "আলুর লেট ব্লাইট বা মড়ক রোগ একটি সাধারণ এবং ধ্বংসাত্মক রোগ যা পাতা, কাণ্ড এবং কন্দকে আক্রমণ করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এর ফলে সেগুলো বাদামী বা কালো হয়ে পচে যেতে পারে এবং ফলন উল্লেখযোগ্যভাবে কমে যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_POTATO_834B4F_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই রোগটি ভেজা আবহাওয়ায় দ্রুত ছড়ায় এবং সংক্রামিত বীজ আলুর মাধ্যমেও ছড়াতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[CABI_POTATO_834B4F_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "আলুর লেট ব্লাইট দমনের জন্য কৃষি সম্প্রসারণ অধিদপ্তর (DAE) কিছু কীটনাশক নিবন্ধিত করেছে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই নিবন্ধিত কীটনাশকগুলির প্রতি লিটার জলে ২ গ্রাম হারে প্রয়োগ করা যেতে পারে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[DAE_PEST_1206A0_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "সারের ব্যবহার ফসলের ফলন বৃদ্ধিতে গুরুত্বপূর্ণ ভূমিকা রাখে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "তবে, সারের কার্যকারিতা মাটি, ফসল এবং জলবায়ুর উপর নির্ভর করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "সঠিক পুষ্টি উপাদান সঠিক পরিমাণে ব্যবহার করা উচিত",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[B4_FRG2024_973F4A_001]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয় বা নির্দিষ্ট কোনো পরামর্শ চান, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
     "verdict": "no_dosage",
     "reason": ""
    }
