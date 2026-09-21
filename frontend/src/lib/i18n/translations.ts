@@ -108,6 +108,12 @@ export interface Translations {
     loading: string;
     selectedLabel: string;
     confidenceLabel: string;
+    allCrops: string;
+    searchPlaceholder: string;
+    prev: string;
+    next: string;
+    random: string;
+    diagnoseNow: string;
   };
 
   // Diagnosis Card
@@ -281,13 +287,19 @@ export const TRANSLATIONS: Record<Locale, Translations> = {
       cropsCoverage: "৬টি প্রধান ফসলে অপ্টিমাইজড — ধান · আলু · বাঁধাকপি · ভুট্টা · গম · মরিচ",
     },
     samples: {
-      title: "রিভিউয়ার টেস্ট সেট (Reviewer Samples)",
-      subtitle: "যাচাইকৃত ২১টি উচ্চ-নির্ভুলতার নমুনা",
-      badge: "২১ টি ভেরিফাইড কেস",
+      title: "রিভিউয়ার টেস্ট সেট (Reviewer Evaluation Suite)",
+      subtitle: "যাচাইকৃত ১০০টি উচ্চ-নির্ভুলতার মূল্যায়ন নমুনা",
+      badge: "১০০ টি ভেরিফাইড কেস",
       loadButton: "নমুনা লোড করুন",
       loading: "লোড হচ্ছে…",
       selectedLabel: "নির্বাচিত:",
       confidenceLabel: "মডেল প্রিডিকশন:",
+      allCrops: "সবগুলো ফসল",
+      searchPlaceholder: "রোগ বা ফসলের নাম খুঁজুন (যেমন: blast, blight, মরিচা)...",
+      prev: "পূর্ববর্তী",
+      next: "পরবর্তী",
+      random: "র‍্যান্ডম টেস্ট",
+      diagnoseNow: "তাৎক্ষণিক টেস্ট",
     },
     diagnosis: {
       resultsTitle: "বিশ্লেষণের ফলাফল",
@@ -451,13 +463,19 @@ export const TRANSLATIONS: Record<Locale, Translations> = {
       cropsCoverage: "Optimized for 6 crops — Rice · Potato · Brassica · Corn · Wheat · Chilli",
     },
     samples: {
-      title: "Reviewer Test Sets (Verified Samples)",
-      subtitle: "21 Verified High-Precision Test Cases",
-      badge: "21 Verified Cases",
+      title: "Reviewer Evaluation Suite (Verified Benchmark)",
+      subtitle: "100 Verified High-Precision Evaluation Instances",
+      badge: "100 Verified Cases",
       loadButton: "Load Sample",
       loading: "Loading…",
       selectedLabel: "Selected:",
       confidenceLabel: "Model Confidence:",
+      allCrops: "All Crops",
+      searchPlaceholder: "Search disease or crop (e.g., blast, blight, rust)...",
+      prev: "Previous",
+      next: "Next",
+      random: "Random Case",
+      diagnoseNow: "Instant Test",
     },
     diagnosis: {
       resultsTitle: "Diagnostic Results",

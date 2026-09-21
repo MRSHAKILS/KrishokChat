@@ -14,6 +14,26 @@ import { useLanguage } from "@/context/language-context";
    Designed as a field-notebook specimen card with full i18n support.
    ========================================================================= */
 
+export interface IntakeZoneProps {
+  file: File | null;
+  preview: string | null;
+  onFile: (f: File) => void;
+  onValidationError?: (message: string) => void;
+  onClear: () => void;
+  onSample?: (
+    path: string,
+    name: string,
+    cropHint?: string,
+    diseaseHint?: string,
+    autoRun?: boolean
+  ) => void;
+  sampleLoading?: boolean;
+  qualityWarnings: string[];
+  loading: boolean;
+  cropHint: string;
+  onCropHintChange: (value: string) => void;
+}
+
 export function IntakeZone({
   file,
   preview,
@@ -26,19 +46,7 @@ export function IntakeZone({
   loading,
   cropHint,
   onCropHintChange,
-}: {
-  file: File | null;
-  preview: string | null;
-  onFile: (f: File) => void;
-  onValidationError?: (message: string) => void;
-  onClear: () => void;
-  onSample?: (path: string, name: string, cropHint?: string) => void;
-  sampleLoading?: boolean;
-  qualityWarnings: string[];
-  loading: boolean;
-  cropHint: string;
-  onCropHintChange: (value: string) => void;
-}) {
+}: IntakeZoneProps) {
   const { t, locale } = useLanguage();
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
