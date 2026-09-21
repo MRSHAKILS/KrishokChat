@@ -272,7 +272,7 @@ We first measure attack success rate (ASR), the share of adversarial prompts tha
 
 Next we look at the advice itself. In a blinded audit, three evaluators (two agronomy or botany undergraduates and one extension officer) rated 46 of 47 guarded outputs as safe and actionable, one as vague but harmless, and none as dangerous (Fleiss' $\kappa = 0.82$). All three unguarded control outputs were rated dangerous. For the dosage verifier, we inserted controlled errors into verified answers. On 38 live answers with 118 inserted errors, it caught 114 and rejected none of the unmodified answers. On a scaled benchmark of 528 cases from 88 BARI and BRRI passages, it caught 296 of 350 inserted errors (84.6\%): every overdose (76 of 76) and underdose (67 of 67), but only 85\% of chemical substitutions, 73\% of unit substitutions, and 65\% of invented pre-harvest intervals.
 
-Constrained channels must also preserve the dose. The SMS packer kept 399 of 400 messages within 160 characters. On 100 long advisories that carry a dose, naive truncation preserved the dose in 23, an LLM summarizer in 89 (with one invented dosage), and our deterministic compressor in 92, without length violations or invented values. Local BM25 retrieval, which serves the offline card, had a 0.94 hit rate and was unaffected by simulated packet loss, while remote retrieval lost 13 to 30 percentage points. The non-LLM stages add a median of 33.6\,ms per request. The controls thus reduce unsafe output without removing it: the deployed model keeps a residual ASR of 10.71\%, and the verifier is weaker on unit and interval errors than on dose magnitude. Appendices~\ref{app:safety} and~\ref{app:delivery} give the attack families, audit protocol, mutation table, and delivery measurements.
+Constrained channels must also preserve the dose. The SMS packer kept 399 of 400 messages within 160 characters. On 100 long advisories that carry a dose, naive truncation preserved the dose in 23, an LLM summarizer in 89 (with one invented dosage), and our deterministic compressor in 92, without length violations or invented values. Local BM25 retrieval, which serves the offline card, had a 0.94 hit rate and was unaffected by simulated packet loss, while remote retrieval lost 13 to 30 percentage points. The non-LLM stages add a median of 33.6\,ms per request. Appendices~\ref{app:safety} and~\ref{app:delivery} give the attack families, audit protocol, mutation table, and delivery measurements.
 
 \subsection{What This Evaluation Does Not Establish}
 \label{sec:eval-scope}
@@ -291,7 +291,7 @@ The results hold only under the conditions in which they were measured. We ran n
 Four limitations matter most; Appendix~\ref{app:limitations_full} gives the full ledger.
 
 \begin{itemize}\setlength{\itemsep}{0pt}\setlength{\topsep}{2pt}\setlength{\parsep}{0pt}
-\item Coverage is limited to six staple crops, 2,135 guideline nodes, and Bengali input. Retrieval is lexical (BM25), and dense retrieval was not evaluated.
+\item Coverage is limited to six staple crops and Bengali input. Retrieval is lexical (BM25), and dense retrieval was not evaluated.
 \item The mismatch badge detects explicit crop conflicts only, and it missed the one implicit reference in our test set.
 \item The safety controls lower attack success but do not remove it, and the deployed local model is more exposed than the cloud model (10.71\% against 0.95\% guarded attack success).
 \item SMS compression is lossy: on 100 long advisories it kept the dose in 92 but the chemical name in only 34. Generation with the local model on CPU takes about 24\,s per call.
@@ -644,7 +644,7 @@ Total pipeline & 33.565 & 67.833 \\
 \end{table}
 
 \subsection{Zero-LLM Operation and Modeled Cost}
-The evaluated tier mix yielded 7.9\% zero-LLM turns. Turns are bucketed by the pipeline stage at which they terminate: 5.7\% at T0 (deterministic guard), 0.0\% at T1 (fact lookup), 2.2\% at T2 (templated advisory), and 92.1\% reaching LLM-backed generation paths. Modeled cost was USD~0.1682 per 1,000 turns versus USD~0.1950 for unconstrained generation with every turn reaching T3 (a $13.7\%$ modeled saving). Cost is modeled from the tier mix, not billed expenditure. Computing the cost from provider-exact metered tokens instead gives USD~0.1720 per 1,000 turns.
+The evaluated tier mix yielded 7.9\% zero-LLM turns. Turns are bucketed by the pipeline stage at which they terminate: 5.7\% at T0 (deterministic guard), 0.0\% at T1 (guidance card), 2.2\% at T2 (fact lookup), and 92.1\% reaching LLM-backed generation paths. Modeled cost was USD~0.1682 per 1,000 turns versus USD~0.1950 for unconstrained generation with every turn reaching T3 (a $13.7\%$ modeled saving). Cost is modeled from the tier mix, not billed expenditure. Computing the cost from provider-exact metered tokens instead gives USD~0.1720 per 1,000 turns.
 
 \subsection{Trace Ordering}
 Across 100 evaluation cases, all 100 provenance traces preserved the required event ordering (median 9.0 events per turn).

@@ -22,7 +22,7 @@ export const HELPLINE = {
    researcher provides one. */
 export const LINKS = {
   huggingface: "https://huggingface.co/datasets/RaiyanKhaan/krishokChat",
-  github: "https://github.com/RaiyanKhaan/KrishokChat",
+  github: "https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System",
 } as const;
 
 /* Key research numbers — from the two papers (local copies in `paper/done papers/`),
