@@ -17,17 +17,15 @@
    Serwist migration is a TODO tracked in frontend/README or inline below.
    ========================================================================= */
 
-const CACHE_NAME = "krishokchat-cache-v1";
+const CACHE_NAME = "krishokchat-cache-v2";
 
-// P6 & R9: precache shell, library JSON, and static offline fact packs.
+// P6 & R9: precache static invariant assets, library JSON, and offline fact packs.
+// Note: Dynamic Next.js HTML routes (/, /chat, /soil, /detect) are NOT precached
+// here because their chunk hashes change with every deployment. Strategy C
+// handles them via Network-First.
 const STATIC_PRECACHE = [
-  "/",
   "/favicon.ico",
   "/manifest.webmanifest",
-  "/library",
-  "/detect",
-  "/chat",
-  "/soil",
   "/library/catalog.json",
   "/library/datasets.json",
   "/packs/manifest.json",
@@ -36,7 +34,14 @@ const STATIC_PRECACHE = [
   "/packs/facts_rice_v1.json"
 ];
 
-// Install: precache core shell, library JSON, and offline fact packs
+// Allow clients to trigger skipWaiting for immediate seamless updates
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+// Install: precache core invariant assets
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -48,7 +53,7 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
-// Activate: clean up older caches
+// Activate: clean up older caches (purges krishokchat-cache-v1 and any stale HTML)
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {

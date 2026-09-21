@@ -1,478 +1,4 @@
 {
- "|||2026-08|মুগডাল ফসলে হলুদ মোজাইক দমনে Imidacloprid এর অনুমোদিত প্রয়োগমাত্রা কত": {
-  "query": "মুগডাল ফসলে হলুদ মোজাইক দমনে Imidacloprid এর অনুমোদিত প্রয়োগমাত্রা কত?",
-  "category": "safe_agri",
-  "answer": "মুগডাল ফসলে হলুদ মোজাইক দমনে Imidacloprid এর অনুমোদিত প্রয়োগমাত্রা সম্পর্কে তথ্যটি জ্ঞানভান্ডারে নেই।\n\nতবে, আপনি যদি অন্য কোনো কীটনাশক বা রোগ দমনের বিষয়ে জানতে চান, তাহলে অনুগ্রহ করে জিজ্ঞাসা করুন।\n\nকৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করে আপনি এই বিষয়ে আরও তথ্য পেতে পারেন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "answerability_level": "A2_strong_evidence",
-  "progressive_guidance": null,
-  "sources": [
-   {
-    "id": "B4_FRG2024_973F4A_001",
-    "score": 0.0476,
-    "title_en": "Principles of Crop Response to Fertilizers",
-    "title_bn": "",
-    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
-    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
-    "source": "Fertilizer Recommendation Guide 2024",
-    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
-    "metadata": {
-     "category": "general",
-     "tags": [
-      "fertilizer",
-      "nutrient management",
-      "crop response",
-      "4R stewardship",
-      "সার ব্যবস্থাপনা",
-      "ফসলের পুষ্টি"
-     ],
-     "title_en": "Principles of Crop Response to Fertilizers",
-     "title_bn": "",
-     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
-     "publisher": "BARC",
-     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
-     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "DAE_PEST_86230E_001",
-    "score": 0.0476,
-    "title_en": "Registered Pesticides: Mancozeb (64%) + Cymoxanil (8%)",
-    "title_bn": "",
-    "content_en": "The following table lists registered pesticide products containing Mancozeb (64%) and Cymoxanil (8%). These products are recommended for controlling specific fungal diseases across various crops. Always follow the recommended dosage rates provided by the registration holder.",
-    "content_bn": "নিচের সারণীতে Mancozeb (64%) এবং Cymoxanil (8%) সম্বলিত নিবন্ধিত কীটনাশক পণ্যগুলির তালিকা দেওয়া হয়েছে। বিভিন্ন ফসলের নির্দিষ্ট ছত্রাকজনিত রোগ দমনে এই পণ্যগুলি সুপারিশ করা হয়। নিবন্ধনধারীর নির্ধারিত ডোজের হার সর্বদা অনুসরণ করুন।",
-    "source": "List of Registered Agricultural Pesticides (DAE)",
-    "citation": "DAE. page_757. List of Registered Agricultural Pesticides (DAE). pp. 757-757.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "Pesticide",
-      "Mancozeb",
-      "Cymoxanil",
-      "Fungicide",
-      "Late blight",
-      "DAE",
-      "বালাইনাশক",
-      "ছত্রাকনাশক"
-     ],
-     "title_en": "Registered Pesticides: Mancozeb (64%) + Cymoxanil (8%)",
-     "title_bn": "",
-     "section_title": "page_757",
-     "publisher": "DAE",
-     "citation": "DAE. page_757. List of Registered Agricultural Pesticides (DAE). pp. 757-757.",
-     "summary": "A list of registered pesticide products containing the active ingredients Mancozeb (64%) and Cymoxanil (8%) for the management of various fungal diseases in crops like potato, tomato, mango, and tea.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B6_DOC_2FA541_001",
-    "score": 0.0455,
-    "title_en": "Earthwork Calculation for Pond Construction",
-    "title_bn": "",
-    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
-    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
-    "source": "Training Manual on Improved Carp Polyculture 2011",
-    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
-    "metadata": {
-     "category": "cultivation_practice",
-     "tags": [
-      "pond construction",
-      "earth measurement",
-      "pond cost estimation",
-      "পুকুর খনন",
-      "মাটির পরিমাপ"
-     ],
-     "title_en": "Earthwork Calculation for Pond Construction",
-     "title_bn": "",
-     "section_title": "Earth measurement",
-     "publisher": "DoF",
-     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
-     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B5_BARCAG_61C0B0_004",
-    "score": 0.0455,
-    "title_en": "Mustard Aphid Management",
-    "title_bn": "",
-    "content_en": "To control aphids, use foliar insecticides such as Melathion 57 EC, Marshal 20 EC, Metasystox 25 EC, or Maladan 57 EC at a rate of 2ml per litre of water. Spraying should be conducted in the afternoon when pollinating bees are away from the field.",
-    "content_bn": "পোকা দমনের জন্য পাতার উপরিভাগে Melathion 57 EC, Marshal 20 EC, Metasystox 25 EC অথবা Maladan 57 EC এর মতো ফলিয়ার কীটনাশক প্রতি লিটার পানিতে 2ml হারে ব্যবহার করুন। পরাগায়নকারী মৌমাছিরা যখন মাঠ থেকে দূরে থাকে, তখন বিকালের দিকে স্প্রে করতে হবে।",
-    "source": "Hand Book of Agricultural Technology",
-    "citation": "BARC. Mustard — Intercultural Operation. Hand Book of Agricultural Technology. pp. 64-64.",
-    "metadata": {
-     "category": "pest",
-     "tags": [
-      "Mustard",
-      "Aphid",
-      "Pest Control"
-     ],
-     "title_en": "Mustard Aphid Management",
-     "title_bn": "",
-     "section_title": "Mustard — Intercultural Operation",
-     "publisher": "BARC",
-     "citation": "BARC. Mustard — Intercultural Operation. Hand Book of Agricultural Technology. pp. 64-64.",
-     "summary": "Control measures for aphid infestation in mustard crops.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "CABI_BRASSICA_997AAE_003",
-    "score": 0.0435,
-    "title_en": "Leaf spot / Black spot in Cabbage",
-    "title_bn": "",
-    "content_en": "Leaf spot (or black spot) is caused by Alternaria brassicicola. It appears as light brown to grey or dark brown spots surrounded by a yellow halo, up to 25 mm wide. Unlike ring spot, these lesions are not limited by leaf veins. They contain tiny black fruiting bodies arranged in concentric circles and are most common on older leaves of mature plants.",
-    "content_bn": "পাতার দাগ (বা কালো দাগ) Alternaria brassicicola দ্বারা হয়ে থাকে। এটি হালকা বাদামী থেকে ধুসর বা গাড় বাদামী রঙের দাগ হিসেবে দেখা যায় যা হলুদ হ্যালো দ্বারা পরিবেষ্টিত থাকে এবং ২৫ মিমি পর্যন্ত প্রশস্ত হয়। রিং স্পটের বিপরীতে, এই ক্ষতরোগ পাতার শিরা দ্বারা সীমাবদ্ধ থাকে না। এগুলোতে সমকেন্দ্রিক বৃত্তে সাজানো ক্ষুদ্র কালো ফলের দেহ থাকে এবং এটি পরিপক্ব উদ্ভিদের পুরোনো পাতায় সবচেয়ে বেশি দেখা যায়।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "cabbage",
-      "leaf spot",
-      "black spot",
-      "disease",
-      "Alternaria brassicicola"
-     ],
-     "title_en": "Leaf spot / Black spot in Cabbage",
-     "title_bn": "",
-     "section_title": "Common pests and diseases on cabbage in Ghana",
-     "publisher": "CABI",
-     "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
-     "summary": "Leaf spot, caused by Alternaria brassicicola, appears as large spots with concentric circles not limited by leaf veins.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources · ফসল→['ফসল', 'ফসল', 'ফসল', 'ফসল', 'ফসল']; ই→['ই', 'ই', 'এ / ই', 'ই', 'হি / হেই']",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "মুগডাল ফসলে হলুদ মোজাইক দমনে Imidacloprid এর অনুমোদিত প্রয়োগমাত্রা সম্পর্কে তথ্যটি জ্ঞানভান্ডারে নেই",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "তবে, আপনি যদি অন্য কোনো কীটনাশক বা রোগ দমনের বিষয়ে জানতে চান, তাহলে অনুগ্রহ করে জিজ্ঞাসা করুন",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করে আপনি এই বিষয়ে আরও তথ্য পেতে পারেন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
- "|||2026-08|মুগডাল গাছে হলুদ মোজাইক আক্রমণ দেখা দিলে Imidacloprid কী হারে স্প্রে করতে হবে": {
-  "query": "মুগডাল গাছে হলুদ মোজাইক আক্রমণ দেখা দিলে Imidacloprid কী হারে স্প্রে করতে হবে?",
-  "category": "safe_agri",
-  "answer": "আপনার মুগডাল গাছে হলুদ মোজাইক আক্রমণ দেখা দিলে Imidacloprid কী হারে স্প্রে করতে হবে, এই তথ্যটি জ্ঞানভান্ডারে নেই।\n\nফসলের আগাছানাশক বা Herbicide এর ক্ষয়ক্ষতি বিভিন্ন ধরনের লক্ষণ সৃষ্টি করতে পারে, যেমন গাছের বৃদ্ধি ব্যাহত হওয়া বা পাতা বেগুনি বর্ণ ধারণ করা। যেহেতু বিভিন্ন আগাছানাশক বা Herbicide রাসায়নিক ভিন্ন ভিন্ন লক্ষণ তৈরি করে, তাই সম্প্রতি প্রয়োগ করা রাসায়নিক সম্পর্কে আলোচনা করা সমস্যাটি নির্ণয় করার সবচেয়ে কার্যকর উপায়। [CABI_BRASSICA_36C696_001]\n\nযদি আপনার আরও তথ্যের প্রয়োজন হয়, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
-  "confidence": "verified",
-  "model": "google/gemini-2.5-flash-lite",
-  "error": null,
-  "matched_rules": [],
-  "safety_reason": null,
-  "resolution_tier": "grounded_generation",
-  "answerability_level": "A2_strong_evidence",
-  "progressive_guidance": null,
-  "sources": [
-   {
-    "id": "B6_DOC_2FA541_001",
-    "score": 0.0476,
-    "title_en": "Earthwork Calculation for Pond Construction",
-    "title_bn": "",
-    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
-    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
-    "source": "Training Manual on Improved Carp Polyculture 2011",
-    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
-    "metadata": {
-     "category": "cultivation_practice",
-     "tags": [
-      "pond construction",
-      "earth measurement",
-      "pond cost estimation",
-      "পুকুর খনন",
-      "মাটির পরিমাপ"
-     ],
-     "title_en": "Earthwork Calculation for Pond Construction",
-     "title_bn": "",
-     "section_title": "Earth measurement",
-     "publisher": "DoF",
-     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
-     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "CABI_BRASSICA_36C696_001",
-    "score": 0.0476,
-    "title_en": "Herbicide Damage in Brassica Crops",
-    "title_bn": "",
-    "content_en": "Herbicide damage can cause a variety of symptoms in crops, which are difficult to categorize comprehensively. Common indicators include plant stunting and the development of purple leaves. Because different herbicide chemicals produce distinct symptoms, discussing recent chemical applications with the farmer is often the most effective way to diagnose the issue.",
-    "content_bn": "আগাছানাশক বা Herbicide এর ক্ষয়ক্ষতি ফসলে বিভিন্ন ধরনের লক্ষণ সৃষ্টি করতে পারে, যা সার্বিকভাবে শ্রেণীবদ্ধ করা কঠিন। সাধারণ লক্ষণগুলোর মধ্যে রয়েছে গাছের বৃদ্ধি ব্যাহত হওয়া বা খর্বাকৃতি হওয়া এবং পাতা বেগুনি বর্ণ ধারণ করা। যেহেতু বিভিন্ন আগাছানাশক বা Herbicide রাসায়নিক ভিন্ন ভিন্ন লক্ষণ তৈরি করে, তাই কৃষকের সাথে সম্প্রতি প্রয়োগ করা রাসায়নিক সম্পর্কে আলোচনা করা প্রায়ই সমস্যাটি নির্ণয় করার সবচেয়ে কার্যকর উপায়।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Herbicide damage. Brassica Disease Manuals (Plantwise). pp. 90-90.",
-    "metadata": {
-     "category": "general",
-     "tags": [
-      "herbicide damage",
-      "crop health",
-      "stunting",
-      "purple leaves",
-      "শাকসবজির আগাছানাশক ক্ষতি"
-     ],
-     "title_en": "Herbicide Damage in Brassica Crops",
-     "title_bn": "",
-     "section_title": "Herbicide damage",
-     "publisher": "CABI",
-     "citation": "CABI. Herbicide damage. Brassica Disease Manuals (Plantwise). pp. 90-90.",
-     "summary": "Herbicide damage in crops can manifest through various symptoms, including stunting and leaf discoloration, often requiring farmer consultation for accurate diagnosis.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B4_FRG2024_973F4A_001",
-    "score": 0.0455,
-    "title_en": "Principles of Crop Response to Fertilizers",
-    "title_bn": "",
-    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
-    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
-    "source": "Fertilizer Recommendation Guide 2024",
-    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
-    "metadata": {
-     "category": "general",
-     "tags": [
-      "fertilizer",
-      "nutrient management",
-      "crop response",
-      "4R stewardship",
-      "সার ব্যবস্থাপনা",
-      "ফসলের পুষ্টি"
-     ],
-     "title_en": "Principles of Crop Response to Fertilizers",
-     "title_bn": "",
-     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
-     "publisher": "BARC",
-     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
-     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "B4_FRG2024_2EFBE5_002",
-    "score": 0.0455,
-    "title_en": "Fertilizer Recommendation for Dhal Grass",
-    "title_bn": "",
-    "content_en": "Fertilizer application for Dhal grass (Hymenachne amplexicaulis) with a yield goal of 100 ± 10 t/ha/year. Application method: Apply all P, K, S, Zn and 25% of N as basal during final land preparation. Top dress 25% of N after 25 days of sowing/planting. The remaining 50% of N should be top dressed in equal splits after each cut at 30–40 days' intervals.",
-    "content_bn": "Publisher: BARC Section/Topic: INDIAN OLIVE (*Elaeocarpus floribundus*) ঢাল ঘাসের (Hymenachne amplexicaulis) জন্য সার প্রয়োগ, যার ফলন লক্ষ্যমাত্রা ১০০ ± ১০ টনহেক্টরবছর। প্রয়োগ পদ্ধতি: শেষ চাষের সময় জমি তৈরির সময় সব P, K, S, Zn এবং ২৫ N বেসাল বা প্রাথমিক হিসেবে প্রয়োগ করুন। বপনরোপণের ২৫ দিন পর ২৫ N উপরি প্রয়োগ করুন। বাকি ৫০ N প্রতিটি কাটার পর ৩০-৪০ দিন বিরতিতে সমান কিস্তিতে উপরি প্রয়োগ করতে হবে।",
-    "source": "Fertilizer Recommendation Guide 2024",
-    "citation": "BARC. INDIAN OLIVE (*Elaeocarpus floribundus*). Fertilizer Recommendation Guide 2024. pp. 171-171.",
-    "metadata": {
-     "category": "fertilizer",
-     "tags": [
-      "Dhal grass",
-      "Hymenachne amplexicaulis",
-      "fertilizer",
-      "fodder"
-     ],
-     "title_en": "Fertilizer Recommendation for Dhal Grass",
-     "title_bn": "",
-     "section_title": "INDIAN OLIVE (*Elaeocarpus floribundus*)",
-     "publisher": "BARC",
-     "citation": "BARC. INDIAN OLIVE (*Elaeocarpus floribundus*). Fertilizer Recommendation Guide 2024. pp. 171-171.",
-     "summary": "Nutrient recommendation for Dhal grass (Hymenachne amplexicaulis) based on soil test values to achieve a yield goal of 100 t/ha/year.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   },
-   {
-    "id": "CABI_BRASSICA_997AAE_003",
-    "score": 0.0435,
-    "title_en": "Leaf spot / Black spot in Cabbage",
-    "title_bn": "",
-    "content_en": "Leaf spot (or black spot) is caused by Alternaria brassicicola. It appears as light brown to grey or dark brown spots surrounded by a yellow halo, up to 25 mm wide. Unlike ring spot, these lesions are not limited by leaf veins. They contain tiny black fruiting bodies arranged in concentric circles and are most common on older leaves of mature plants.",
-    "content_bn": "পাতার দাগ (বা কালো দাগ) Alternaria brassicicola দ্বারা হয়ে থাকে। এটি হালকা বাদামী থেকে ধুসর বা গাড় বাদামী রঙের দাগ হিসেবে দেখা যায় যা হলুদ হ্যালো দ্বারা পরিবেষ্টিত থাকে এবং ২৫ মিমি পর্যন্ত প্রশস্ত হয়। রিং স্পটের বিপরীতে, এই ক্ষতরোগ পাতার শিরা দ্বারা সীমাবদ্ধ থাকে না। এগুলোতে সমকেন্দ্রিক বৃত্তে সাজানো ক্ষুদ্র কালো ফলের দেহ থাকে এবং এটি পরিপক্ব উদ্ভিদের পুরোনো পাতায় সবচেয়ে বেশি দেখা যায়।",
-    "source": "Brassica Disease Manuals (Plantwise)",
-    "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
-    "metadata": {
-     "category": "disease",
-     "tags": [
-      "cabbage",
-      "leaf spot",
-      "black spot",
-      "disease",
-      "Alternaria brassicicola"
-     ],
-     "title_en": "Leaf spot / Black spot in Cabbage",
-     "title_bn": "",
-     "section_title": "Common pests and diseases on cabbage in Ghana",
-     "publisher": "CABI",
-     "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
-     "summary": "Leaf spot, caused by Alternaria brassicicola, appears as large spots with concentric circles not limited by leaf veins.",
-     "treatment_summary_bn": "",
-     "prevention_bn": ""
-    }
-   }
-  ],
-  "trace": [
-   {
-    "stage": "safety",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "safety",
-    "status": "complete",
-    "detail": "safe_agri",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "retrieval",
-    "status": "complete",
-    "detail": "5 sources · দেখা→['দেখা', 'দেয়া', 'দেওখা / দেহন', 'দেখা', 'দেখা']; গাছ→['গাছ', 'গাছ', 'গাছ', 'গাছ', 'গাছ']; কী→['কিতা', 'কি / কিবা', 'কী / কি', 'ক্যা / কী', 'কী / কিতা']",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "generation",
-    "status": "complete",
-    "detail": "google/gemini-2.5-flash-lite",
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "start",
-    "detail": null,
-    "event_type": "stage",
-    "text": null
-   },
-   {
-    "stage": "verifier",
-    "status": "complete",
-    "detail": "verified",
-    "event_type": "stage",
-    "text": null
-   }
-  ],
-  "verifier_flags": [],
-  "verifier_claims": [
-   {
-    "text": "আপনার মুগডাল গাছে হলুদ মোজাইক আক্রমণ দেখা দিলে Imidacloprid কী হারে স্প্রে করতে হবে, এই তথ্যটি জ্ঞানভান্ডারে নেই",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "ফসলের আগাছানাশক বা Herbicide এর ক্ষয়ক্ষতি বিভিন্ন ধরনের লক্ষণ সৃষ্টি করতে পারে, যেমন গাছের বৃদ্ধি ব্যাহত হওয়া বা পাতা বেগুনি বর্ণ ধারণ করা",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "যেহেতু বিভিন্ন আগাছানাশক বা Herbicide রাসায়নিক ভিন্ন ভিন্ন লক্ষণ তৈরি করে, তাই সম্প্রতি প্রয়োগ করা রাসায়নিক সম্পর্কে আলোচনা করা সমস্যাটি নির্ণয় করার সবচেয়ে কার্যকর উপায়",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "[CABI_BRASSICA_36C696_001]",
-    "verdict": "no_dosage",
-    "reason": ""
-   },
-   {
-    "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয়, তবে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
-    "verdict": "no_dosage",
-    "reason": ""
-   }
-  ]
- },
  "|||2026-08|মুগডাল ফসলে পাউডারি মিলডিউ দমনে Carbendazim এর অনুমোদিত প্রয়োগমাত্রা কত": {
   "query": "মুগডাল ফসলে পাউডারি মিলডিউ দমনে Carbendazim এর অনুমোদিত প্রয়োগমাত্রা কত?",
   "category": "safe_agri",
@@ -27595,6 +27121,656 @@
    },
    {
     "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয় বা রোগ নিয়ন্ত্রণে কোনো সমস্যা হয়, তাহলে **কৃষক কল সেন্টার ১৬১২৩** নম্বরে যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "Wheat|BlackPoint||2026-08|Wheat BlackPoint রোগের লক্ষণ, কারণ ও নিরাপদ ব্যবস্থাপনা কী": {
+  "query": "Wheat BlackPoint রোগের লক্ষণ, কারণ ও নিরাপদ ব্যবস্থাপনা কী?",
+  "category": "safe_agri",
+  "answer": "গমের কালোদাগ (Black Point) রোগটি মূলত গমের পরিপক্বতার পর্যায়ে বৃষ্টিপাত বা অতিরিক্ত আর্দ্রতার কারণে হয়ে থাকে। এই রোগে গমের শীষের দানাগুলো কালো দাগযুক্ত হয়ে যায়, যা বীজের গুণগত মানকে মারাত্মকভাবে ক্ষতিগ্রস্ত করে। এর ফলে অঙ্কুরোদগম ক্ষমতা কমে যায় এবং বাজার মূল্য হ্রাস পায়। [GEN_WHEAT_BlackPoint]\n\n**কারণ:**\nমূলত 'Alternaria alternata' নামক ছত্রাকের আক্রমণে এই রোগ দেখা দেয়। তবে, গমের পরিপক্বতার সময় অতিরিক্ত আর্দ্রতা, বৃষ্টিপাত এবং শীষে পানি জমে থাকা রোগটির বিস্তারকে ত্বরান্বিত করে। [GEN_WHEAT_BlackPoint]\n\n**লক্ষণ:**\n*   শীষ বের হওয়ার পর এবং দানা পরিপক্ব হওয়ার সময় রোগটি বেশি দেখা যায়।\n*   দানার উপর বিভিন্ন আকারের কালো বা বাদামী দাগ দেখা যায়।\n*   দাগগুলো প্রথমে ছোট এবং গোলাকার হলেও পরে তা বড় ও অনিয়মিত আকার ধারণ করতে পারে।\n*   গুরুতর অবস্থায় দানা সম্পূর্ণ কালো হয়ে যেতে পারে।\n*   আক্রান্ত দানা শুকিয়ে কুঁচকে যেতে পারে। [GEN_WHEAT_BlackPoint]\n\n**প্রতিকার:**\n১. **ছত্রাকনাশক প্রয়োগ:** শীষ বের হওয়ার সময় একবার এবং এর ১৫ দিন পর আর একবার, প্রতি লিটার পানিতে ০.৫ মিলি হারে Tilt 250 EC ছত্রাকনাশক স্প্রে করতে হবে। [GEN_WHEAT_BlackPoint]\n২. **বীজ শোধন:** বপনের পূর্বে প্রতি কেজি বীজে ৩ গ্রাম হারে Provax-200 ছত্রাকনাশক দিয়ে বীজ শোধন করে নিতে হবে। [GEN_WHEAT_BlackPoint]\n\nযদি আপনার আরও তথ্যের প্রয়োজন হয় বা কোনো বিষয়ে সন্দেহ থাকে, তাহলে কৃষক কল সেন্টার ১৬১২৩ নম্বরে যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "answerability_level": "A2_strong_evidence",
+  "progressive_guidance": null,
+  "sources": [
+   {
+    "id": "vision-details:wheat:BlackPoint",
+    "score": 100.0,
+    "title_en": "",
+    "title_bn": "BlackPoint (কালো দাগ রোগ)",
+    "content_en": "",
+    "content_bn": "গমের পরিপক্বতার পর্যায়ে বৃষ্টি হলে কালো দাগ (Black point) রোগ হতে পারে। এতে শীষের দানা কালো দাগযুক্ত হয়ে যায় এবং বীজের মান নষ্ট হয়।\nপ্রতি লিটার পানিতে 0.5 মিলি হারে Tilt 250 EC শীষ বের হওয়ার সময় এবং ১৫ দিন পর দুইবার স্প্রে করুন। প্রতি কেজি বীজে 3 গ্রাম হারে Provax-200 দিয়ে বীজ শোধন করুন।",
+    "source": "vision/wheat/disease_details.json",
+    "citation": "",
+    "metadata": {}
+   },
+   {
+    "id": "B6_DOC_2FA541_001",
+    "score": 0.0476,
+    "title_en": "Earthwork Calculation for Pond Construction",
+    "title_bn": "",
+    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
+    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
+    "source": "Training Manual on Improved Carp Polyculture 2011",
+    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+    "metadata": {
+     "category": "cultivation_practice",
+     "tags": [
+      "pond construction",
+      "earth measurement",
+      "pond cost estimation",
+      "পুকুর খনন",
+      "মাটির পরিমাপ"
+     ],
+     "title_en": "Earthwork Calculation for Pond Construction",
+     "title_bn": "",
+     "section_title": "Earth measurement",
+     "publisher": "DoF",
+     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "GEN_WHEAT_BlackPoint",
+    "score": 0.0476,
+    "title_en": "Wheat Black Point Disease",
+    "title_bn": "গমের কালোদাগ রোগ (Black Point)",
+    "content_en": "Black Point disease in wheat primarily occurs during the maturity stage due to rainfall or excessive humidity. This disease causes black spots on the grains in the earhead, severely damaging seed quality. It reduces germination potential and market value.\n\n**Cause:**\nThe disease is mainly caused by the fungus 'Alternaria alternata'. However, excessive humidity, rainfall, and water accumulation on the earheads during the maturity phase accelerate the spread of the disease.\n\n**Symptoms:**\n*   The disease is most prevalent after ear emergence and during grain maturation.\n*   Black or brown spots of varying sizes appear on the grains.\n*   Initially, the spots are small and round, later becoming larger and irregular.\n*   In severe cases, the entire grain can turn black.\n*   Affected grains may become shriveled and dry.\n\n**Treatment:**\n1.  **Fungicide Application:** Spray Tilt 250 EC at a rate of 0.5 ml per liter of water, once at the time of ear emergence and again 15 days later.\n2.  **Seed Treatment:** Before sowing, treat every kilogram of seed with 3 grams of Provax-200 fungicide.",
+    "content_bn": "গমের কালোদাগ (Black Point) রোগটি মূলত গমের পরিপক্বতার পর্যায়ে বৃষ্টিপাত বা অতিরিক্ত আর্দ্রতার কারণে হয়ে থাকে। এই রোগে গমের শীষের দানাগুলো কালো দাগযুক্ত হয়ে যায়, যা বীজের গুণগত মানকে মারাত্মকভাবে ক্ষতিগ্রস্ত করে। এর ফলে অঙ্কুরোদগম ক্ষমতা কমে যায় এবং বাজার মূল্য হ্রাস পায়।\n\n**কারণ:**\nমূলত 'Alternaria alternata' নামক ছত্রাকের আক্রমণে এই রোগ দেখা দেয়। তবে, গমের পরিপক্বতার সময় অতিরিক্ত আর্দ্রতা, বৃষ্টিপাত এবং শীষে পানি জমে থাকা রোগটির বিস্তারকে ত্বরান্বিত করে।\n\n**লক্ষণ:**\n*   শীষ বের হওয়ার পর এবং দানা পরিপক্ব হওয়ার সময় রোগটি বেশি দেখা যায়।\n*   দানার উপর বিভিন্ন আকারের কালো বা বাদামী দাগ দেখা যায়।\n*   দাগগুলো প্রথমে ছোট এবং গোলাকার হলেও পরে তা বড় ও অনিয়মিত আকার ধারণ করতে পারে।\n*   গুরুতর অবস্থায় দানা সম্পূর্ণ কালো হয়ে যেতে পারে।\n*   আক্রান্ত দানা শুকিয়ে কুঁচকে যেতে পারে।\n\n**প্রতিকার:**\n১. **ছত্রাকনাশক প্রয়োগ:** শীষ বের হওয়ার সময় একবার এবং এর ১৫ দিন পর আর একবার, প্রতি লিটার পানিতে ০.৫ মিলি হারে Tilt 250 EC ছত্রাকনাশক স্প্রে করতে হবে।\n২. **বীজ শোধন:** বপনের পূর্বে প্রতি কেজি বীজে ৩ গ্রাম হারে Provax-200 ছত্রাকনাশক দিয়ে বীজ শোধন করে নিতে হবে।",
+    "source": "Generated by Gemini-3.1-Flash-Lite (advisory workflow)",
+    "citation": "Generated for Wheat - BlackPoint",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Wheat",
+      "Black Point",
+      "Fungal Disease",
+      "Grain Quality",
+      "Alternaria alternata",
+      "ছত্রাক রোগ",
+      "গমের রোগ",
+      "বীজের মান"
+     ],
+     "title_en": "Wheat Black Point Disease",
+     "title_bn": "গমের কালোদাগ রোগ (Black Point)",
+     "section_title": "BlackPoint",
+     "publisher": "AI-Generated",
+     "citation": "Generated for Wheat - BlackPoint",
+     "summary": "গমের কালোদাগ (Black Point) রোগটি মূলত গমের পরিপক্বতার পর্যায়ে বৃষ্টিপাত বা অতিরিক্ত আর্দ্রতার কারণে",
+     "treatment_summary_bn": "শীষ বের হওয়ার সময় ও ১৫ দিন পর Tilt 250 EC (০.৫ মিলি/লিটার পানি) স্প্রে করুন। বপনের আগে Provax-200 (৩ গ্রাম/কেজি বীজ) দিয়ে বীজ শোধন করুন।",
+     "prevention_bn": "রোগ প্রতিরোধী জাত ব্যবহার করা। পরিপক্বতার সময় ক্ষেতে পানি জমে থাকতে না দেওয়া। রোগ দেখা দিলে দ্রুত অনুমোদিত ছত্রাকনাশক ব্যবহার করা।"
+    }
+   },
+   {
+    "id": "B4_FRG2024_973F4A_001",
+    "score": 0.0455,
+    "title_en": "Principles of Crop Response to Fertilizers",
+    "title_bn": "",
+    "content_en": "Crop response to added nutrients is influenced by soil, crop, and climatic variables, as well as production practices. Mathematically, the maximum crop growth or yield (Y) can be expressed as Y = a + bx + cx², where x is the added nutrient. The optimum nutrient rate (Ny) is calculated as Ny = -b / 2c, while the nutrient rate that maximizes profit (Np) is calculated as Np = (1 / 2c) * [(Pf / Py) - b], where Pf is the price of the nutrient and Py is the price of the crop product. General response patterns include: - Most crops are responsive to Nitrogen (N). - Upland and rabi crops in strongly acidic and alkaline soils are responsive to Phosphorus (P). - Oilseed crops and wetland rice are responsive to Sulfur (S). - Sugarcane and tuber crops, as well as crops in light-textured soils, are responsive to Potassium (K). - Crops in calcareous and saline soils are responsive to Zinc (Zn). Fertilizer response is generally higher under irrigated conditions compared to rainfed ecosystems. To maximize benefits, the '4R Nutrient Stewardship' approach should be followed: Right source, Right rate, Right time, and Right place.",
+    "content_bn": "Publisher: BARC Section/Topic: **AEZ 22: Northern and Eastern Piedmont Plains** প্রযুক্ত পুষ্টি উপাদানের প্রতি ফসলের সাড়া মাটি, ফসল এবং জলবায়ুগত চলকগুলোর পাশাপাশি উৎপাদন পদ্ধতির দ্বারা প্রভাবিত হয়। গাণিতিক হিসাবে, সর্বোচ্চ ফসলের বৃদ্ধি বা ফলন (Y) কে এভাবে প্রকাশ করা যেতে পারে: Y = a + bx + cx², যেখানে x হলো প্রযুক্ত পুষ্টি উপাদান। কাম্য পুষ্টির হার (Ny) এভাবে হিসাব করা হয়: Ny = -b / 2c, অন্যদিকে যে পুষ্টির হার মুনাফা সর্বাধিক করে (Np) তা এভাবে হিসাব করা হয়: Np = (1 / 2c) * [(Pf / Py) - b], যেখানে Pf হলো পুষ্টি উপাদানের দাম এবং Py হলো উৎপাদিত ফসলের দাম। সাধারণ সাড়ার ধরনগুলোর মধ্যে রয়েছে: - অধিকাংশ ফসল নাইট্রোজেন ()-এর প্রতি সাড়া দেয়। - প্রবলভাবে অম্লীয় ও ক্ষারীয় মাটির উঁচু জমির এবং রবি ফসলগুলো ফসফরাস ()-এর প্রতি সাড়া দেয়। - তেলবীজ ফসল এবং নিচু জমির ধান সালফার ()-এর প্রতি সাড়া দেয়। - আখ ও কন্দাল ফসল, সেইসাথে হালকা বা বুনটের মাটির ফসলগুলো পটাশিয়াম ()-এর প্রতি সাড়া দেয়। - চুনযুক্ত ও লবণাক্ত মাটির ফসলগুলো দস্তা বা জিংক ()-এর প্রতি সাড়া দেয়। বৃষ্টিনির্ভর ইকোসিস্টেমের তুলনায় সেচযুক্ত পরিস্থিতিতে সারের সাড়া সাধারণত বেশি হয়। সুফল সর্বাধিক করতে, '4R পুষ্টি ব্যবস্থাপনা' পদ্ধতি অনুসরণ করা উচিত: সঠিক উৎস, সঠিক হার, সঠিক সময় এবং সঠিক স্থান।",
+    "source": "Fertilizer Recommendation Guide 2024",
+    "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+    "metadata": {
+     "category": "general",
+     "tags": [
+      "fertilizer",
+      "nutrient management",
+      "crop response",
+      "4R stewardship",
+      "সার ব্যবস্থাপনা",
+      "ফসলের পুষ্টি"
+     ],
+     "title_en": "Principles of Crop Response to Fertilizers",
+     "title_bn": "",
+     "section_title": "**AEZ 22: Northern and Eastern Piedmont Plains**",
+     "publisher": "BARC",
+     "citation": "BARC. **AEZ 22: Northern and Eastern Piedmont Plains**. Fertilizer Recommendation Guide 2024. pp. 66-66.",
+     "summary": "This section outlines the mathematical basis for calculating optimal nutrient rates and describes the factors influencing crop response to fertilizers, including soil conditions and the 4R Nutrient Stewardship framework.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "B5_BARCAG_9331ED_003",
+    "score": 0.0455,
+    "title_en": "Major Wheat Diseases in Bangladesh",
+    "title_bn": "",
+    "content_en": "The major diseases affecting wheat in Bangladesh are Bipolaris leaf blight and leaf rust. Black point disease may also occur during years with rain at the maturity stage. Newly developed wheat varieties are generally resistant to leaf rust and tolerant to leaf blight.",
+    "content_bn": "বাংলাদেশে গমের প্রধান রোগগুলো হলো Bipolaris leaf blight এবং leaf rust। পরিপক্বতার পর্যায়ে বৃষ্টি হলে Black point -ও হতে পারে। নতুন উদ্ভাবিত গমের জাতগুলো সাধারণত leaf -এর বিরুদ্ধে প্রতিরোধী এবং leaf -এর প্রতি সহনশীল।",
+    "source": "Hand Book of Agricultural Technology",
+    "citation": "BARC. Wheat — Intercultural Operation. Hand Book of Agricultural Technology. pp. 40-40.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Wheat",
+      "Disease",
+      "Bipolaris leaf blight",
+      "Leaf rust",
+      "গম",
+      "রোগবালাই"
+     ],
+     "title_en": "Major Wheat Diseases in Bangladesh",
+     "title_bn": "",
+     "section_title": "Wheat — Intercultural Operation",
+     "publisher": "BARC",
+     "citation": "BARC. Wheat — Intercultural Operation. Hand Book of Agricultural Technology. pp. 40-40.",
+     "summary": "Overview of common wheat diseases including Bipolaris leaf blight, leaf rust, and black point disease.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "CABI_BRASSICA_843B60_001",
+    "score": 0.0435,
+    "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+    "title_bn": "",
+    "content_en": "Soft rot, also known as Bacterial black stalk, is caused by the bacterium Pectobacterium carotovorum ssp. carotovorum. The disease causes the lower end of the mid-rib to rot and lose its structural integrity. The infection spreads along the leaf veins, and a characteristic extremely unpleasant smell is often present. Bacterial ooze can be observed leaking from the affected rotting areas.",
+    "content_bn": "সফট রট, যা ব্যাকটেরিয়াল ব্ল্যাক স্টাক নামেও পরিচিত, এটি *Pectobacterium carotovorum ssp. carotovorum* নামক ব্যাকটেরিয়ার কারণে ঘটে। রোগটি মধ্য-শিরার নিচের অংশকে পচিয়ে দেয় এবং এর গঠনগত অখণ্ডতা নষ্ট করে। সংক্রমণ পাতার শিরা বরাবর ছড়িয়ে পড়ে এবং প্রায়ই একটি বিশেষ অত্যন্ত দুর্গন্ধ উপস্থিত থাকে। আক্রান্ত পচা অংশগুলো থেকে ব্যাকটেরিয়ার আঠা জাতীয় রস নিঃসরিত হতে দেখা যায়।",
+    "source": "Brassica Disease Manuals (Plantwise)",
+    "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "cabbage",
+      "soft rot",
+      "bacterial black stalk",
+      "Pectobacterium carotovorum",
+      "disease"
+     ],
+     "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+     "title_bn": "",
+     "section_title": "Soft rot of cabbage / Bacterial black Stalk",
+     "publisher": "CABI",
+     "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+     "summary": "Soft rot, caused by Pectobacterium carotovorum ssp. carotovorum, is a bacterial disease in cabbage characterized by tissue decay, foul odor, and bacterial ooze.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "6 sources · কী→['কিতা', 'কি / কিবা', 'কী / কি', 'ক্যা / কী', 'কী / কিতা']; না→['না', 'না', 'না', 'না', 'না']; ও→['ও', 'অ', 'অ / ও', 'ও', 'ও']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "গমের কালোদাগ (Black Point) রোগটি মূলত গমের পরিপক্বতার পর্যায়ে বৃষ্টিপাত বা অতিরিক্ত আর্দ্রতার কারণে হয়ে থাকে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এই রোগে গমের শীষের দানাগুলো কালো দাগযুক্ত হয়ে যায়, যা বীজের গুণগত মানকে মারাত্মকভাবে ক্ষতিগ্রস্ত করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "এর ফলে অঙ্কুরোদগম ক্ষমতা কমে যায় এবং বাজার মূল্য হ্রাস পায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[GEN_WHEAT_BlackPoint]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "**কারণ:**",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "মূলত 'Alternaria alternata' নামক ছত্রাকের আক্রমণে এই রোগ দেখা দেয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "তবে, গমের পরিপক্বতার সময় অতিরিক্ত আর্দ্রতা, বৃষ্টিপাত এবং শীষে পানি জমে থাকা রোগটির বিস্তারকে ত্বরান্বিত করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[GEN_WHEAT_BlackPoint]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "**লক্ষণ:**",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   শীষ বের হওয়ার পর এবং দানা পরিপক্ব হওয়ার সময় রোগটি বেশি দেখা যায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   দানার উপর বিভিন্ন আকারের কালো বা বাদামী দাগ দেখা যায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   দাগগুলো প্রথমে ছোট এবং গোলাকার হলেও পরে তা বড় ও অনিয়মিত আকার ধারণ করতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   গুরুতর অবস্থায় দানা সম্পূর্ণ কালো হয়ে যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   আক্রান্ত দানা শুকিয়ে কুঁচকে যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[GEN_WHEAT_BlackPoint]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "**প্রতিকার:**",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "১. **ছত্রাকনাশক প্রয়োগ:** শীষ বের হওয়ার সময় একবার এবং এর ১৫ দিন পর আর একবার, প্রতি লিটার পানিতে ০.৫ মিলি হারে Tilt 250 EC ছত্রাকনাশক স্প্রে করতে হবে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[GEN_WHEAT_BlackPoint]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "২. **বীজ শোধন:** বপনের পূর্বে প্রতি কেজি বীজে ৩ গ্রাম হারে Provax-200 ছত্রাকনাশক দিয়ে বীজ শোধন করে নিতে হবে",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[GEN_WHEAT_BlackPoint]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয় বা কোনো বিষয়ে সন্দেহ থাকে, তাহলে কৃষক কল সেন্টার ১৬১২৩ নম্বরে যোগাযোগ করতে পারেন",
+    "verdict": "no_dosage",
+    "reason": ""
+   }
+  ]
+ },
+ "Chilli|Chili__Bacterial_Spot||2026-08|Chilli Chili__Bacterial_Spot রোগের লক্ষণ, কারণ ও নিরাপদ ব্যবস্থাপনা কী": {
+  "query": "Chilli Chili__Bacterial_Spot রোগের লক্ষণ, কারণ ও নিরাপদ ব্যবস্থাপনা কী?",
+  "category": "safe_agri",
+  "answer": "চিলি গাছে ব্যাকটেরিয়াজনিত দাগ রোগ (Bacterial Spot) *Xanthomonas campestris pv. vesicatoria* নামক ব্যাকটেরিয়ার কারণে হয়। [vision-details:chilli:Chili__Bacterial_Spot]\n\n**লক্ষণ:**\n*   পাতায় ছোট ছোট পানিভেজা দাগ দেখা দেয় যা পরে গাঢ় বাদামী বা কালো রঙ ধারণ করে।\n*   দাগের চারপাশে হলুদ বলয় সৃষ্টি হয়।\n*   তীব্র আক্রমণে পাতা ঝরে পড়ে এবং ফলন কমে যায়। [vision-details:chilli:Chili__Bacterial_Spot]\n\n**কারণ ও বিস্তার:**\n*   আক্রান্ত বীজ, উষ্ণ ও আর্দ্র আবহাওয়া এবং বৃষ্টির ছিটায় এই ব্যাকটেরিয়া দ্রুত ছড়ায়।\n*   জমিতে অতিরিক্ত পানি জমে থাকলে রোগের তীব্রতা বাড়ে। [vision-details:chilli:Chili__Bacterial_Spot]\n\n**ব্যবস্থাপনা:**\n*   রোগমুক্ত বীজ ব্যবহার করুন।\n*   বীজ শোধনের জন্য গরম পানি (৫০° সে. ২৫ মিনিট) ব্যবহার করা যেতে পারে।\n*   রোগ দেখা দিলে কপার অক্সিক্লোরাইড (যেমন: কুপ্রোভিট) প্রতি লিটার পানিতে ২ গ্রাম হারে স্প্রে করুন। [vision-details:chilli:Chili__Bacterial_Spot]\n\nযদি আপনার আরও তথ্যের প্রয়োজন হয়, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন।",
+  "confidence": "verified",
+  "model": "google/gemini-2.5-flash-lite",
+  "error": null,
+  "matched_rules": [],
+  "safety_reason": null,
+  "resolution_tier": "grounded_generation",
+  "answerability_level": "A2_strong_evidence",
+  "progressive_guidance": null,
+  "sources": [
+   {
+    "id": "vision-details:chilli:Chili__Bacterial_Spot",
+    "score": 100.0,
+    "title_en": "",
+    "title_bn": "Bacterial Spot (ব্যাকটেরিয়াজনিত দাগ রোগ)",
+    "content_en": "",
+    "content_bn": "মরিচের ব্যাকটেরিয়াজনিত দাগ রোগ Xanthomonas campestris pv. vesicatoria দ্বারা ঘটে। পাতায় ছোট ছোট পানিভেজা দাগ দেখা দেয় যা পরবর্তীতে গাঢ় বাদামী বা কালো রঙ ধারণ করে এবং দাগের চারপাশে হলুদ বলয় সৃষ্টি হয়। তীব্র আক্রমণে পাতা ঝরে পড়ে এবং ফলন মারাত্মক হ্রাস পায়।\nআক্রান্ত বীজ, উষ্ণ ও আর্দ্র আবহাওয়া এবং বৃষ্টির ছিটায় এই ব্যাকটেরিয়া দ্রুত এক গাছ থেকে অন্য গাছে ছড়ায়। জমিতে অতিরিক্ত পানি জমে থাকলে রোগের তীব্রতা বাড়ে।\nরোগমুক্ত বীজ ব্যবহার করতে হবে। বীজ শোধনের জন্য গরম পানি (৫০° সে. ২৫ মিনিট) ব্যবহার করা যেতে পারে। আক্রমণ দেখা দিলে কপার অক্সিক্লোরাইড (যেমন: কুপ্রোভিট) প্রতি লিটার পানিতে ২ গ্রাম হারে স্প্রে করতে হবে।",
+    "source": "vision/chilli/disease_details.json",
+    "citation": "",
+    "metadata": {}
+   },
+   {
+    "id": "CABI_BRASSICA_843B60_001",
+    "score": 0.0476,
+    "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+    "title_bn": "",
+    "content_en": "Soft rot, also known as Bacterial black stalk, is caused by the bacterium Pectobacterium carotovorum ssp. carotovorum. The disease causes the lower end of the mid-rib to rot and lose its structural integrity. The infection spreads along the leaf veins, and a characteristic extremely unpleasant smell is often present. Bacterial ooze can be observed leaking from the affected rotting areas.",
+    "content_bn": "সফট রট, যা ব্যাকটেরিয়াল ব্ল্যাক স্টাক নামেও পরিচিত, এটি *Pectobacterium carotovorum ssp. carotovorum* নামক ব্যাকটেরিয়ার কারণে ঘটে। রোগটি মধ্য-শিরার নিচের অংশকে পচিয়ে দেয় এবং এর গঠনগত অখণ্ডতা নষ্ট করে। সংক্রমণ পাতার শিরা বরাবর ছড়িয়ে পড়ে এবং প্রায়ই একটি বিশেষ অত্যন্ত দুর্গন্ধ উপস্থিত থাকে। আক্রান্ত পচা অংশগুলো থেকে ব্যাকটেরিয়ার আঠা জাতীয় রস নিঃসরিত হতে দেখা যায়।",
+    "source": "Brassica Disease Manuals (Plantwise)",
+    "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "cabbage",
+      "soft rot",
+      "bacterial black stalk",
+      "Pectobacterium carotovorum",
+      "disease"
+     ],
+     "title_en": "Soft rot of cabbage / Bacterial black Stalk",
+     "title_bn": "",
+     "section_title": "Soft rot of cabbage / Bacterial black Stalk",
+     "publisher": "CABI",
+     "citation": "CABI. Soft rot of cabbage / Bacterial black Stalk. Brassica Disease Manuals (Plantwise). pp. 66-66.",
+     "summary": "Soft rot, caused by Pectobacterium carotovorum ssp. carotovorum, is a bacterial disease in cabbage characterized by tissue decay, foul odor, and bacterial ooze.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "GEN_BRASSICA_Cauliflower_Black_Spot",
+    "score": 0.0476,
+    "title_en": "Black Spot",
+    "title_bn": "কৈলীফ্লাওয়ারে কালো দাগ রোগ",
+    "content_en": "Black Spot in Cauliflower, caused by the fungus 'Alternaria brassicicola', is a common disease affecting Brassica crops, particularly cauliflower. It thrives in humid conditions and prolonged leaf wetness.\n\n**Cause:**\nThe primary cause is the 'Alternaria brassicicola' fungus, whose spores spread through wind, water splash, or contaminated tools and plant debris. High humidity, dew, and rainfall create ideal conditions for spore germination and infection.\n\n**Symptoms:**\n\n*   **Leaf Spots:** Small, water-soaked spots appear on leaves, which enlarge and turn dark brown to black. \n*   **Spot Characteristics:** Spots are typically round or irregular, often with concentric rings visible in the center of older lesions.\n*   **Necrosis:** The center of the spots may dry out and become brittle, sometimes leading to shot-hole effects.\n*   **Stunted Growth:** Severe infection can stunt plant growth and reduce yield.\n*   **Stem and Curd Infection:** In severe cases, the stem and the cauliflower curd (head) can also be affected, leading to blemishes and reduced marketability.\n\n**Treatment:**\n\n*   **Fungicides:** Apply approved fungicides like Mancozeb, Chlorothalonil, or copper-based fungicides at the first sign of disease. Follow label instructions for dosage and frequency. Systemic fungicides may also be effective.\n*   **Sanitation:** Remove and destroy infected plant debris promptly to reduce inoculum. \n*   **Cultural Practices:** Ensure good air circulation and proper drainage to minimize leaf wetness. Avoid overhead irrigation that keeps leaves wet for extended periods.\n*   **Seed Treatment:** Use certified, disease-free seeds. Seed treatment with fungicides can prevent early-season infection.",
+    "content_bn": "কৈলীফ্লাওয়ারের কালো দাগ রোগ (Black Spot) সাধারণত 'Alternaria brassicicola' নামক ছত্রাকের কারণে হয়ে থাকে। এই রোগটি বিশেষ করে আর্দ্র আবহাওয়ায় এবং গাছের পাতা ভেজা থাকলে দ্রুত ছড়ায়।\n\n**কারণ:**\nমূলত 'Alternaria brassicicola' ছত্রাকের স্পোর বা রেণু বাতাসের মাধ্যমে ছড়িয়ে পড়ে এবং উপযুক্ত পরিবেশে (যেমন - উচ্চ আর্দ্রতা, পাতার উপর দীর্ঘ সময় জল জমে থাকা) গাছের পাতায় আক্রমণ করে। বীজ বা গাছের আক্রান্ত অংশ থেকেও এই রোগ ছড়াতে পারে।\n\n**লক্ষণ:**\n\n*   **পাতায় দাগ:** রোগের প্রাথমিক অবস্থায় পাতায় ছোট ছোট জল ভেজা দাগ দেখা যায়, যা ধীরে ধীরে বড় হয়ে কালো বা গাঢ় বাদামী রঙের হয়।\n*   **দাগের ধরণ:** দাগগুলো সাধারণত গোলাকার বা অনিয়মিত আকারের হয় এবং অনেক সময় দাগের কেন্দ্রে বলয়াকার নকশা দেখা যায়।\n*   **নেক্রোসিস:** দাগের কেন্দ্র শুকিয়ে যেতে পারে এবং ছিদ্র হয়ে যেতে পারে।\n*   **গাছের বৃদ্ধি ব্যাহত:** মারাত্মকভাবে আক্রান্ত হলে গাছের বৃদ্ধি কমে যায় এবং ফলনও কমে যেতে পারে।\n*   **কান্ড ও ফুলে প্রভাব:** কিছু ক্ষেত্রে কান্ড এবং ফুলেরogyতেও দাগ দেখা যেতে পারে, যা পণ্যের গুণমান নষ্ট করে।\n\n**প্রতিকার:**\n\n*   **ছত্রাকনাশক ব্যবহার:** রোগ দেখা দেওয়ার সাথে সাথে অনুমোদিত ছত্রাকনাশক, যেমন - ম্যানকোজেব (Mancozeb), ক্লোরোথ্যালোনিল (Chlorothalonil), বা কপার-ভিত্তিক ছত্রাকনাশক (Copper-based fungicides) ব্যবহার করা যেতে পারে। সঠিক মাত্রায় এবং সঠিক সময়ে স্প্রে করা জরুরি।\n*   **আক্রান্ত অংশ অপসারণ:** রোগের প্রাথমিক পর্যায়ে আক্রান্ত পাতা বা গাছের অংশ সাবধানে সরিয়ে ফেলে ধ্বংস করে দেওয়া উচিত, যাতে রোগ ছড়াতে না পারে।\n*   **পরিচর্যা:** গাছের গোড়ায় জল জমে থাকতে দেওয়া যাবে না। জল নিষ্কাশনের সুব্যবস্থা রাখতে হবে।\n*   **বীজ শোধন:** ভালো মানের এবং রোগমুক্ত বীজ ব্যবহার করা উচিত। বীজ বপনের আগে শোধন করে নিলে ভালো হয়।",
+    "source": "Generated by Gemini-3.1-Flash-Lite (advisory workflow)",
+    "citation": "Generated for Brassica - Black Spot",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Black Spot",
+      "Alternaria brassicicola",
+      "Cauliflower",
+      "Brassica",
+      "fungal disease",
+      "leaf spot"
+     ],
+     "title_en": "Black Spot",
+     "title_bn": "কৈলীফ্লাওয়ারে কালো দাগ রোগ",
+     "section_title": "Black Spot",
+     "publisher": "AI-Generated",
+     "citation": "Generated for Brassica - Black Spot",
+     "summary": "কৈলীফ্লাওয়ারের কালো দাগ রোগ (Black Spot) সাধারণত 'Alternaria brassicicola' নামক ছত্রাকের কারণে হয়ে ",
+     "treatment_summary_bn": "ছত্রাকনাশক (ম্যানকোজেব, ক্লোরোথ্যালোনিল) স্প্রে করা, আক্রান্ত অংশ সরিয়ে ফেলা, এবং ভালো জল নিষ্কাশন ব্যবস্থা নিশ্চিত করা।",
+     "prevention_bn": "রোগমুক্ত বীজ ব্যবহার, বীজ শোধন, ভালো জল নিষ্কাশন, গাছের গোড়ায় জল জমতে না দেওয়া, এবং আক্রান্ত অংশ দ্রুত সরিয়ে ফেলা।"
+    }
+   },
+   {
+    "id": "CABI_BRASSICA_997AAE_003",
+    "score": 0.0455,
+    "title_en": "Leaf spot / Black spot in Cabbage",
+    "title_bn": "",
+    "content_en": "Leaf spot (or black spot) is caused by Alternaria brassicicola. It appears as light brown to grey or dark brown spots surrounded by a yellow halo, up to 25 mm wide. Unlike ring spot, these lesions are not limited by leaf veins. They contain tiny black fruiting bodies arranged in concentric circles and are most common on older leaves of mature plants.",
+    "content_bn": "পাতার দাগ (বা কালো দাগ) Alternaria brassicicola দ্বারা হয়ে থাকে। এটি হালকা বাদামী থেকে ধুসর বা গাড় বাদামী রঙের দাগ হিসেবে দেখা যায় যা হলুদ হ্যালো দ্বারা পরিবেষ্টিত থাকে এবং ২৫ মিমি পর্যন্ত প্রশস্ত হয়। রিং স্পটের বিপরীতে, এই ক্ষতরোগ পাতার শিরা দ্বারা সীমাবদ্ধ থাকে না। এগুলোতে সমকেন্দ্রিক বৃত্তে সাজানো ক্ষুদ্র কালো ফলের দেহ থাকে এবং এটি পরিপক্ব উদ্ভিদের পুরোনো পাতায় সবচেয়ে বেশি দেখা যায়।",
+    "source": "Brassica Disease Manuals (Plantwise)",
+    "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "cabbage",
+      "leaf spot",
+      "black spot",
+      "disease",
+      "Alternaria brassicicola"
+     ],
+     "title_en": "Leaf spot / Black spot in Cabbage",
+     "title_bn": "",
+     "section_title": "Common pests and diseases on cabbage in Ghana",
+     "publisher": "CABI",
+     "citation": "CABI. Common pests and diseases on cabbage in Ghana. Brassica Disease Manuals (Plantwise). pp. 19-19.",
+     "summary": "Leaf spot, caused by Alternaria brassicicola, appears as large spots with concentric circles not limited by leaf veins.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   },
+   {
+    "id": "GEN_BRASSICA_Cauliflower_Bacterial_Spot",
+    "score": 0.0455,
+    "title_en": "Bacterial Spot",
+    "title_bn": "কৈলিফ্লাওয়ারের ব্যাকটেরিয়াল স্পট",
+    "content_en": "Bacterial Spot of cauliflower, caused by the bacterium Xanthomonas campestris pv. armoraciae, is a significant disease affecting cauliflower crops. It primarily targets the leaves and curds of cauliflower. Initial symptoms on leaves appear as small, water-soaked spots that later turn brown or black. These spots are often circular and may be surrounded by a yellowish halo. In severe infections, spots can merge to form large lesions, leading to yellowing and premature shedding of leaves. The curds, when infected, become brown or black, rendering them unmarketable. The disease thrives in warm and humid conditions and spreads rapidly through rain splash, irrigation water, wind, and infected seeds or plant debris.",
+    "content_bn": "কৈলিফ্লাওয়ারের ব্যাকটেরিয়াল স্পট (Cauliflower Bacterial Spot) একটি ব্যাকটেরিয়া ঘটিত রোগ যা সাধারণত 'Xanthomonas campestris pv. armoraciae' নামক ব্যাকটেরিয়া দ্বারা সৃষ্ট হয়। এই রোগটি মূলত কৈলিফ্লাওয়ারের পাতা এবং ফুলকে আক্রমণ করে। রোগের প্রাথমিক পর্যায়ে পাতায় ছোট ছোট জলসিক্ত দাগ দেখা যায় যা পরবর্তীতে বাদামী বা কালো বর্ণ ধারণ করে। এই দাগগুলো প্রায়শই গোলাকার হয় এবং এদের চারপাশে একটি হলুদাভ বলয় থাকতে পারে। গুরুতর সংক্রমণে, দাগগুলো একত্রিত হয়ে বড় ক্ষত তৈরি করতে পারে এবং পাতা হলুদ হয়ে ঝরে পড়তে পারে। ফুলের ক্ষেত্রে, আক্রান্ত অংশগুলো বাদামী বা কালো হয়ে যায় এবং বাজারজাতকরণের অযোগ্য হয়ে পড়ে। রোগটি উষ্ণ ও আর্দ্র আবহাওয়ায় দ্রুত ছড়ায়, বিশেষ করে বৃষ্টির ফোঁটা, সেচের জল, বাতাসের মাধ্যমে এবং সংক্রমিত বীজ বা উদ্ভিদের অবশিষ্টাংশের মাধ্যমে এটি ছড়িয়ে পড়ে।",
+    "source": "Generated by Gemini-3.1-Flash-Lite (advisory workflow)",
+    "citation": "Generated for Brassica - Bacterial Spot",
+    "metadata": {
+     "category": "disease",
+     "tags": [
+      "Bacterial Spot",
+      "Xanthomonas campestris pv. armoraciae",
+      "Brassica",
+      "Cauliflower",
+      "Bacterial disease"
+     ],
+     "title_en": "Bacterial Spot",
+     "title_bn": "কৈলিফ্লাওয়ারের ব্যাকটেরিয়াল স্পট",
+     "section_title": "Bacterial Spot",
+     "publisher": "AI-Generated",
+     "citation": "Generated for Brassica - Bacterial Spot",
+     "summary": "কৈলিফ্লাওয়ারের ব্যাকটেরিয়াল স্পট (Cauliflower Bacterial Spot) একটি ব্যাকটেরিয়া ঘটিত রোগ যা সাধারণ",
+     "treatment_summary_bn": "রোগের প্রাথমিক পর্যায়ে আক্রান্ত পাতা সরিয়ে ফেলা এবং নির্দিষ্ট ছত্রাকনাশক (যেমন কপার-ভিত্তিক স্প্রে) ব্যবহার করা যেতে পারে।",
+     "prevention_bn": "রোগমুক্ত বীজ ব্যবহার, ফসলের পর জমি পরিষ্কার রাখা, জল নিকাশীর সুব্যবস্থা করা, এবং রোগ প্রতিরোধী জাত নির্বাচন করা উচিত।।"
+    }
+   },
+   {
+    "id": "B6_DOC_2FA541_001",
+    "score": 0.0435,
+    "title_en": "Earthwork Calculation for Pond Construction",
+    "title_bn": "",
+    "content_en": "To calculate the volume of earth for a pond, use the formula: (Average Length) x (Average Width) x (Depth). Example calculation: If the pond dimensions are (174' + 142') / 2 x (125' + 93') / 2 x 8', the volume is 158' x 109' x 8' = 137,776 cubic feet. Note: 1,000 cubic feet of earth is commonly referred to as '1000 earth'. Costs can be estimated based on the unit price per 1000 cubic feet.",
+    "content_bn": "একটি পুকুরের মাটির পরিমাণ (ভলিউম) হিসাব করতে এই সূত্রটি ব্যবহার করুন: (গড় দৈর্ঘ্য) x (গড় প্রস্থ) x (গভীরতা)। উদাহরণস্বরূপ হিসাব: যদি পুকুরের মাপ (174' + 142') / 2 x (125' + 93') / 2 x 8' হয়, তবে ভলিউম হলো 158' x 109' x 8' = 137,776 cubic feet। নোট: ১,০০০ ঘনফুট মাটিকে সাধারণত '1000 earth' বলা হয়। প্রতি ১,০০০ ঘনফুটের একক মূল্যের ওপর ভিত্তি করে খরচ প্রাক্কলন করা যেতে পারে।",
+    "source": "Training Manual on Improved Carp Polyculture 2011",
+    "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+    "metadata": {
+     "category": "cultivation_practice",
+     "tags": [
+      "pond construction",
+      "earth measurement",
+      "pond cost estimation",
+      "পুকুর খনন",
+      "মাটির পরিমাপ"
+     ],
+     "title_en": "Earthwork Calculation for Pond Construction",
+     "title_bn": "",
+     "section_title": "Earth measurement",
+     "publisher": "DoF",
+     "citation": "DoF. Earth measurement. Training Manual on Improved Carp Polyculture 2011. pp. 123-123.",
+     "summary": "A guide on calculating the volume of earth required for pond construction using the average dimensions method and estimating associated costs.",
+     "treatment_summary_bn": "",
+     "prevention_bn": ""
+    }
+   }
+  ],
+  "trace": [
+   {
+    "stage": "safety",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "safety",
+    "status": "complete",
+    "detail": "safe_agri",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "retrieval",
+    "status": "complete",
+    "detail": "6 sources · কী→['কিতা', 'কি / কিবা', 'কী / কি', 'ক্যা / কী', 'কী / কিতা']; না→['না', 'না', 'না', 'না', 'না']; ও→['ও', 'অ', 'অ / ও', 'ও', 'ও']",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "generation",
+    "status": "complete",
+    "detail": "google/gemini-2.5-flash-lite",
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "start",
+    "detail": null,
+    "event_type": "stage",
+    "text": null
+   },
+   {
+    "stage": "verifier",
+    "status": "complete",
+    "detail": "verified",
+    "event_type": "stage",
+    "text": null
+   }
+  ],
+  "verifier_flags": [],
+  "verifier_claims": [
+   {
+    "text": "চিলি গাছে ব্যাকটেরিয়াজনিত দাগ রোগ (Bacterial Spot) *Xanthomonas campestris pv. vesicatoria* নামক ব্যাকটেরিয়ার কারণে হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[vision-details:chilli:Chili__Bacterial_Spot]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "**লক্ষণ:**",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   পাতায় ছোট ছোট পানিভেজা দাগ দেখা দেয় যা পরে গাঢ় বাদামী বা কালো রঙ ধারণ করে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   দাগের চারপাশে হলুদ বলয় সৃষ্টি হয়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   তীব্র আক্রমণে পাতা ঝরে পড়ে এবং ফলন কমে যায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[vision-details:chilli:Chili__Bacterial_Spot]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "**কারণ ও বিস্তার:**",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   আক্রান্ত বীজ, উষ্ণ ও আর্দ্র আবহাওয়া এবং বৃষ্টির ছিটায় এই ব্যাকটেরিয়া দ্রুত ছড়ায়",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   জমিতে অতিরিক্ত পানি জমে থাকলে রোগের তীব্রতা বাড়ে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "[vision-details:chilli:Chili__Bacterial_Spot]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "**ব্যবস্থাপনা:**",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   রোগমুক্ত বীজ ব্যবহার করুন",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   বীজ শোধনের জন্য গরম পানি (৫০° সে. ২৫ মিনিট) ব্যবহার করা যেতে পারে",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "*   রোগ দেখা দিলে কপার অক্সিক্লোরাইড (যেমন: কুপ্রোভিট) প্রতি লিটার পানিতে ২ গ্রাম হারে স্প্রে করুন",
+    "verdict": "grounded",
+    "reason": ""
+   },
+   {
+    "text": "[vision-details:chilli:Chili__Bacterial_Spot]",
+    "verdict": "no_dosage",
+    "reason": ""
+   },
+   {
+    "text": "যদি আপনার আরও তথ্যের প্রয়োজন হয়, তাহলে কৃষক কল সেন্টার ১৬১২৩ এ যোগাযোগ করতে পারেন",
     "verdict": "no_dosage",
     "reason": ""
    }
