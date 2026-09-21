@@ -139,27 +139,25 @@ Delivered outputs carry a provenance badge and Why-panel trace and can be render
 \centering
 \begin{subfigure}[t]{0.32\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=2.9cm,keepaspectratio]{../screenshots/screenshot1_halt_clarification.png}
-  \caption{\textbf{ASK}. A crop-less treatment query halts before retrieval and prompts the farmer to bind the missing crop.}
+  \includegraphics[width=\linewidth,height=3.1cm,keepaspectratio]{../screenshots/fig2a_ask.png}
+  \caption{\textbf{ASK (S1)}. Missing crop halts retrieval ($sources\_retrieved = 0$); prompts farmer with 6 staple crop chips.}
   \label{fig:demo_ask}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.32\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=2.9cm,keepaspectratio]{../screenshots/screenshot4_mismatch_badge.png}
-  \caption{\textbf{CONFIRM}. The photograph indicates rice while the text names potato; chemical advice is withheld until the conflict is resolved.}
+  \includegraphics[width=\linewidth,height=3.1cm,keepaspectratio]{../screenshots/fig2b_mismatch.png}
+  \caption{\textbf{CONFIRM (S3)}. Rice photograph conflict with potato text triggers Clarification badge, withholding chemical advice.}
   \label{fig:demo_mismatch}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.32\textwidth}
   \centering
-  \IfFileExists{../screenshots/s5_why_panel.png}%
-    {\includegraphics[width=\linewidth,height=2.9cm,keepaspectratio]{../screenshots/s5_why_panel.png}}%
-    {\screenshotplaceholder{\linewidth}{3.2cm}{S5 Why panel}{Screenshot to be added}}
-  \caption{\textbf{DROP}. The \textit{Why} panel shows why an unsupported dosage claim was removed before the remaining answer was rendered.}
+  \includegraphics[width=\linewidth,height=3.1cm,keepaspectratio]{../screenshots/s5_why_panel.png}
+  \caption{\textbf{DROP (S5)}. Expanded \textit{Why} panel exposes filtered $10\times$ overdose claim and validates BARI p.~852 grounding.}
   \label{fig:demo_why}
 \end{subfigure}
-\caption{Live interface states for ASK, CONFIRM, and DROP; additional views in Appendix~\ref{app:ui}.}
+\caption{Live interface states for ASK, CONFIRM, and DROP; complete continuous demonstration S1--S5 in Appendix~\ref{app:ui}.}
 \label{fig:demo_states}
 \end{figure*}
 
@@ -417,7 +415,7 @@ Across 100 evaluation cases, all 100 provenance traces preserved the required ev
 \section{Demonstration Gallery}
 \label{app:ui}
 
-Figures~\ref{fig:app_halt}--\ref{fig:app_delivery} show the screens of the farmer session described in Section~\ref{sec:demonstration}, one control state at a time.
+Figures~\ref{fig:app_halt}--\ref{fig:app_drop} show the screens of the continuous farmer session described in Section~\ref{sec:demonstration}, covering all five stages (S1--S5).
 
 \begin{figure}[h]
 \centering
@@ -445,6 +443,13 @@ Figures~\ref{fig:app_halt}--\ref{fig:app_delivery} show the screens of the farme
 \includegraphics[width=\linewidth]{../screenshots/screenshot7_16123_safety_referral.png}
 \caption{REFER (S4): safety-policy warning with a 16123 call button.}
 \label{fig:app_delivery}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{../screenshots/screenshot5_grounded_answer.png}
+\caption{DROP (S5): dosage verification and grounded advisory delivery. At T4, an unsupported dosage claim is filtered, and the verified recommendation is rendered with BARI citations and an expanded Why audit panel.}
+\label{fig:app_drop}
 \end{figure}
 
 \section{Evidence Summary and Limitations Ledger}

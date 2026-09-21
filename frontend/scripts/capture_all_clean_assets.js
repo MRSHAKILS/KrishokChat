@@ -223,8 +223,15 @@ async function main() {
   console.log('1. Capturing Stage 0: Hero Interface...');
   await page.goto('http://localhost:3000/chat', { waitUntil: 'networkidle' });
   await page.addStyleTag({ content: CLEAN_CSS });
+  await page.evaluate(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+    localStorage.setItem('krishokchat:contrast', 'sunlight');
+    localStorage.setItem('krishokchat:locale', 'bn');
+    document.documentElement.setAttribute('data-contrast', 'sunlight');
+  });
   await removeFocus(page);
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1500);
 
   await page.screenshot({
     path: path.join(OUT_DIR, 'fig2_main_interface.png'),
@@ -246,11 +253,21 @@ async function main() {
   await page.waitForTimeout(1500);
   await removeFocus(page);
 
+  // Full viewport capture for appendix
   await page.screenshot({
     path: path.join(OUT_DIR, 'screenshot1_halt_clarification.png'),
     fullPage: false
   });
   console.log('✓ Saved screenshot1_halt_clarification.png');
+
+  // Focused crop for Figure 2(a)
+  const s1Turn = page.locator('.scrollbar-thin').first();
+  if (await s1Turn.isVisible()) {
+    await s1Turn.screenshot({
+      path: path.join(OUT_DIR, 'fig2a_ask.png')
+    });
+    console.log('✓ Saved fig2a_ask.png (focused S1 card crop)');
+  }
 
   // --------------------------------------------------------------------------
   // Stage 2: S2 Photo Crop Scoping (/detect with Rice diagnosis)
@@ -316,20 +333,37 @@ async function main() {
   await page.waitForTimeout(2000);
   await removeFocus(page);
 
+  // Full viewport capture
   await page.screenshot({
     path: path.join(OUT_DIR, 'screenshot4_mismatch_badge.png'),
     fullPage: false
   });
   console.log('✓ Saved screenshot4_mismatch_badge.png');
 
+  // Focused crop of drawer for Figure 2(b)
+  const drawerDialog = page.locator('div[role="dialog"]').first();
+  if (await drawerDialog.isVisible()) {
+    await drawerDialog.screenshot({
+      path: path.join(OUT_DIR, 'fig2b_mismatch.png')
+    });
+    console.log('✓ Saved fig2b_mismatch.png (focused S3 drawer crop)');
+  }
+
   // --------------------------------------------------------------------------
   // Stage 4: S4 REFER (Banned Chemical Precheck -> 16123)
   // --------------------------------------------------------------------------
   console.log('5. Capturing Stage 4: S4 REFER (High-Risk Chemical Referral)...');
-  // Navigate to fresh chat so S4 is front and center
+  // Clear conversation history before S4 so it is pristine and centered
+  await page.evaluate(() => {
+    localStorage.removeItem('krishokchat:conversation:v1');
+    sessionStorage.clear();
+  });
   await page.goto('http://localhost:3000/chat', { waitUntil: 'networkidle' });
   await page.addStyleTag({ content: CLEAN_CSS });
-  await page.waitForTimeout(1500);
+  await page.evaluate(() => {
+    localStorage.removeItem('krishokchat:conversation:v1');
+  });
+  await page.waitForTimeout(1200);
 
   const s4Input = page.locator('textarea, input[type="text"]').first();
   await s4Input.fill('প্যারাকোয়াট (Paraquat) দিয়ে কীভাবে স্প্রে করব?');
@@ -341,20 +375,37 @@ async function main() {
   await page.waitForTimeout(2000);
   await removeFocus(page);
 
+  // Full viewport capture for appendix
   await page.screenshot({
     path: path.join(OUT_DIR, 'screenshot7_16123_safety_referral.png'),
     fullPage: false
   });
   console.log('✓ Saved screenshot7_16123_safety_referral.png');
 
+  // Focused crop for S4
+  const s4Turn = page.locator('.scrollbar-thin').first();
+  if (await s4Turn.isVisible()) {
+    await s4Turn.screenshot({
+      path: path.join(OUT_DIR, 'fig2d_refer.png')
+    });
+    console.log('✓ Saved fig2d_refer.png (focused S4 card crop)');
+  }
+
   // --------------------------------------------------------------------------
   // Stage 5: S5 DROP (Dosage Verification with Expanded Why Audit Panel)
   // --------------------------------------------------------------------------
   console.log('6. Capturing Stage 5: S5 DROP (Dosage Verification & Why Audit Panel)...');
-  // Navigate to fresh chat so S5 is front and center
+  // Clear conversation history before S5 so it is pristine and centered
+  await page.evaluate(() => {
+    localStorage.removeItem('krishokchat:conversation:v1');
+    sessionStorage.clear();
+  });
   await page.goto('http://localhost:3000/chat', { waitUntil: 'networkidle' });
   await page.addStyleTag({ content: CLEAN_CSS });
-  await page.waitForTimeout(1500);
+  await page.evaluate(() => {
+    localStorage.removeItem('krishokchat:conversation:v1');
+  });
+  await page.waitForTimeout(1200);
 
   const s5Input = page.locator('textarea, input[type="text"]').first();
   await s5Input.fill('আলুর নাবি ধসা রোগ দমনে কোন ছত্রাকনাশক স্প্রে করতে হবে?');
@@ -375,19 +426,20 @@ async function main() {
 
   await removeFocus(page);
 
+  // Full viewport capture for appendix
   await page.screenshot({
     path: path.join(OUT_DIR, 'screenshot5_grounded_answer.png'),
     fullPage: false
   });
   console.log('✓ Saved screenshot5_grounded_answer.png');
 
-  // Capture focused Why panel card for Figure 2(c)
-  const assistantCard = page.locator('.space-y-3').first();
-  if (await assistantCard.isVisible()) {
-    await assistantCard.screenshot({
+  // Focused crop of S5 message card for Figure 2(c)
+  const s5Turn = page.locator('.scrollbar-thin').first();
+  if (await s5Turn.isVisible()) {
+    await s5Turn.screenshot({
       path: path.join(OUT_DIR, 's5_why_panel.png')
     });
-    console.log('✓ Saved s5_why_panel.png (focused Why panel proof)');
+    console.log('✓ Saved s5_why_panel.png (focused S5 card proof with Why panel)');
   }
 
   // --------------------------------------------------------------------------
