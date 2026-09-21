@@ -1,0 +1,16 @@
+# KrishokChat Advisory System — Machine Learning Models Dependencies
+# Compatible with Python 3.9, 3.10, 3.11, 3.12
+
+# Core Deep Learning & Vision Frameworks
+torch>=2.0.0
+torchvision>=0.15.0
+ultralytics>=8.0.0
+onnxruntime>=1.15.0
+timm>=0.9.0
+
+# Scientific & Image Processing
+numpy>=1.23.0
+pillow>=9.0.0
+
+# Optional: Cloud & Hugging Face Hub Integration
+huggingface_hub>=0.20.0
