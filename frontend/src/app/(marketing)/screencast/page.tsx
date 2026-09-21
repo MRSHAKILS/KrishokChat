@@ -134,7 +134,7 @@ export default function ScreencastPage() {
             </div>
             <h3 className="font-semibold text-foreground text-base">Text-Image Contradiction Gating</h3>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              লিখিত বর্ণনা ও ছবির মধ্যে অমিল দেখা দিলে (যেমন ধানের টেক্সট কিন্তু বেগুনের পাতা) লাল সতর্কবার্তা ব্যাজ প্রদর্শন করে ভুল চিকিৎসা প্রতিরোধ।
+              লিখিত বর্ণনা ও ছবির মধ্যে অমিল দেখা দিলে (যেমন আলুর টেক্সট কিন্তু ধানের পাতা) সতর্কবার্তা ব্যাজ প্রদর্শন করে ভুল চিকিৎসা প্রতিরোধ।
             </p>
           </div>
 

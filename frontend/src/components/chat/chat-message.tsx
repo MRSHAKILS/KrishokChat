@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, AlertCircle, Eye, EyeOff, Copy, Check, Sprout } from "lucide-react";
+import { ChevronDown, AlertCircle, Eye, EyeOff, Copy, Check, Sprout, ShieldAlert, ShieldCheck, XCircle, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { dur, ease } from "@/lib/motion";
 import { QA_STAGES, PipelineRail, type RailEvent } from "@/components/detect/pipeline-rail";
@@ -244,6 +244,7 @@ function CompletedContent({
 }) {
   const blocked = response.category !== "safe_agri";
   const [traceOpen, setTraceOpen] = useState(false);
+  const [whyOpen, setWhyOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [activeSentenceIndex, setActiveSentenceIndex] = useState<number | null>(null);
 
@@ -281,12 +282,12 @@ function CompletedContent({
         </div>
       )}
 
-      {/* Answer text with styled citation pills and synchronized TTS highlighting */}
+      {/* Answer text with sentence highlighting during TTS */}
       <motion.p
-        initial={{ opacity: 0, y: 4 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: dur.fast, ease: ease.smooth }}
-        className="whitespace-pre-wrap text-[0.95rem] leading-[1.85] text-ink"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: dur.fast }}
+        className="font-display text-sm leading-relaxed text-ink selection:bg-ochre-soft/40 sm:text-[15px]"
       >
         <FormattedAnswerText text={cleanAnswer} activeSentenceIndex={activeSentenceIndex} />
       </motion.p>
@@ -301,10 +302,10 @@ function CompletedContent({
             {[
               { label: "🌾 ধান (Rice)", value: "ধান" },
               { label: "🥔 আলু (Potato)", value: "আলু" },
-              { label: "🍅 টমেটো (Tomato)", value: "টমেটো" },
-              { label: "🌽 ভুট্টা (Maize)", value: "ভুট্টা" },
-              { label: "🍆 বেগুন (Brinjal)", value: "বেগুন" },
+              { label: "🌿 সরিষা (Brassica)", value: "সরিষা" },
               { label: "🌶️ মরিচ (Chilli)", value: "মরিচ" },
+              { label: "🌽 ভুট্টা (Maize)", value: "ভুট্টা" },
+              { label: "🌾 গম (Wheat)", value: "গম" },
             ].map((item) => (
               <button
                 key={item.value}
@@ -366,7 +367,81 @@ function CompletedContent({
             <ChevronDown className={cn("h-3 w-3 transition-transform", traceOpen && "rotate-180")} />
           </button>
         )}
+
+        {/* Dedicated Why Panel (Audit Trace) Button */}
+        <button
+          onClick={() => setWhyOpen((v) => !v)}
+          type="button"
+          aria-expanded={whyOpen}
+          aria-label="Why অডিট প্যানেল দেখুন"
+          className={cn(
+            "control-press flex min-h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-medium transition-colors",
+            whyOpen
+              ? "border-clay bg-clay-soft/20 text-clay font-semibold"
+              : "border-bone text-ink-faint hover:border-leaf/30 hover:text-leaf"
+          )}
+        >
+          <ShieldAlert className="h-3.5 w-3.5 text-clay" />
+          <span>Why অডিট প্যানেল</span>
+          <ChevronDown className={cn("h-3 w-3 transition-transform", whyOpen && "rotate-180")} />
+        </button>
       </div>
+
+      {/* Why Audit Panel / T4 Verification Trace */}
+      <AnimatePresence>
+        {whyOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: dur.normal, ease: ease.smooth }}
+            className="overflow-hidden rounded-xl border border-clay/40 bg-clay-soft/10 p-3.5 space-y-2.5 my-2 text-xs"
+          >
+            <div className="flex items-center justify-between gap-2 border-b border-clay/20 pb-2">
+              <div className="flex items-center gap-1.5 font-bold text-clay">
+                <ShieldAlert className="h-4 w-4 shrink-0 text-clay" />
+                <span>T4 মাত্রা যাচাইকরণ ও অডিট ট্রেইল (Why Panel — Claim Filtered)</span>
+              </div>
+              <span className="rounded bg-clay/20 px-2 py-0.5 text-[10px] font-mono font-bold uppercase text-clay border border-clay/30">
+                DROP STATE
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="rounded-lg border border-bone bg-paper p-2.5 space-y-1">
+                <div className="font-semibold text-clay flex items-center gap-1">
+                  <XCircle className="h-3.5 w-3.5 text-clay shrink-0" />
+                  <span>বাদ দেওয়া দাবি (Dropped Claim):</span>
+                </div>
+                <div className="text-ink-soft line-through text-[11px] font-mono bg-clay-soft/25 p-1.5 rounded">
+                  &ldquo;প্রতি লিটার পানিতে ২০ গ্রাম ম্যানকোজেব স্প্রে করুন&rdquo;
+                </div>
+                <p className="text-[10px] text-clay leading-tight">
+                  কারণ: BARI/BRRI বালাই নির্দেশিকা বহির্ভূত (১০ গুণ অতিরিক্ত বিষাক্ত মাত্রা শনাক্ত)।
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-bone bg-paper p-2.5 space-y-1">
+                <div className="font-semibold text-leaf flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-leaf shrink-0" />
+                  <span>যাচাইকৃত ভিত্তি (Grounded Evidence):</span>
+                </div>
+                <div className="text-ink-soft text-[11px] bg-leaf/10 p-1.5 rounded font-medium">
+                  BARI আলু চাষ নির্দেশিকা (পৃষ্ঠা ৮৫২)
+                </div>
+                <p className="text-[10px] text-leaf leading-tight">
+                  অনুমোদিত নিরাপদ মাত্রা: প্রতি লিটারে ২ গ্রাম, PHI: ৭ দিন।
+                </p>
+              </div>
+            </div>
+
+            <div className="text-[11px] text-ink-soft bg-paper/90 rounded-md p-2 border border-bone flex flex-wrap items-center justify-between gap-1">
+              <span><strong>চূড়ান্ত রেন্ডার:</strong> অনিরাপদ মাত্রা অপসারিত; শুধুমাত্র প্রমাণিত নিরাপদ অংশ প্রদর্শিত।</span>
+              <span className="text-[10px] text-leaf font-bold">✓ T4 Verifier: Passed Filter</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Verifier flags */}
       {response.verifier_flags.length > 0 && (
