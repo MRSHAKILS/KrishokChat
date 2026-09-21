@@ -397,6 +397,8 @@ function diseaseKeyForCrop(crop: string): OnDeviceModelKey | null {
   if (k === "wheat") return "wheat";
   if (k === "corn" || k === "maize") return "corn";
   if (k === "brassica" || k === "cabbage" || k === "cauliflower") return "brassica";
+  // crop_classifier outputs "Chili" (one 'l') — map both spellings and aliases
+  if (k === "chili" || k === "chilli" || k === "pepper" || k === "chilepepper") return "chilli";
   return null;
 }
 

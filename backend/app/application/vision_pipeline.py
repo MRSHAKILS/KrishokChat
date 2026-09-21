@@ -290,7 +290,7 @@ class VisionPipeline:
             p1 = crop_prediction.confidence
             p2 = float(crop_prediction.top3[1].get("confidence", 0.0)) if len(crop_prediction.top3) > 1 else 0.0
             margin = p1 - p2
-            top_crops = tuple(str(item.get("crop", "")) for item in crop_prediction.top3[:3] if item.get("crop"))
+            top_crops = tuple(str(item.get("class", "")) for item in crop_prediction.top3[:3] if item.get("class"))
 
             # State C: Out of distribution / Unknown crop
             if p1 < self.gate_config.crop_ood_threshold:

@@ -81,13 +81,9 @@ class Settings(BaseSettings):
     # B1: cap for the demo answer cache (exact-replay of curated questions).
     demo_cache_max_entries: int = 100
 
-    # Calibrated empirical thresholds from Layer E02
-    vision_crop_confidence_threshold: float = 0.90
     vision_crop_margin_threshold: float = 0.20
     vision_crop_ood_threshold: float = 0.40
-    vision_disease_confidence_threshold: float = 0.80
     vision_disease_margin_threshold: float = 0.15
-    vision_max_image_bytes: int = 10_000_000
 
     session_max_turns: int = Field(default=10, ge=1, le=100)
     session_ttl_seconds: int = Field(default=1800, ge=60)
