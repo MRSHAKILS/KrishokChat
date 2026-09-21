@@ -269,6 +269,25 @@ class QAPipeline:
                 or cached_result.error is not None
             ):
                 return None
+
+            # If the live NLU analysis identified this query as ambiguous (missing crop),
+            # do not replay a stale generated answer that guessed an arbitrary crop.
+            from app.domain.intent import _match_crop_alias
+            query_crop = _match_crop_alias(request.query.lower())
+            has_crop_ctx = bool(
+                request.crop
+                or context.crop
+                or working_memory.crop
+                or (decision.intent and decision.intent.crop)
+                or query_crop
+                or request.seed_sources
+            )
+            if (
+                decision.intent is not None
+                and decision.intent.is_ambiguous
+                and not has_crop_ctx
+            ):
+                return None
             post_safety_trace = tuple(
                 event
                 for event in cached_result.trace
@@ -460,6 +479,7 @@ class QAPipeline:
                     safety_reason="Interactive disambiguation: crop slot missing",
                     resolution_tier=ResolutionTier.INTERACTIVE_CLARIFICATION,
                     answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
+                    quick_reply_chips=tuple(decision.intent.suggested_crops or ["ধান", "আলু", "টমেটো", "ভুট্টা", "বেগুন", "মরিচ"]),
                 )
                 self._audit(
                     request,

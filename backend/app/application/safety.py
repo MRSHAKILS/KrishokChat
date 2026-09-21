@@ -6,7 +6,7 @@ from typing import Any
 
 from app.domain.contracts import QueryContext, SafetyDecision
 from app.domain.enums import SafetyCategory
-from app.domain.intent import Intent, keyword_intent
+from app.domain.intent import Intent, _PLANT_PART_BN, keyword_intent
 from app.domain.safety_policy import canned_response, precheck
 from app.ports.llm import LLMClient
 
@@ -118,12 +118,20 @@ class SafetyClassifier:
                     effective_kind = llm_kind
                     effective_source = "llm"
 
-                # Check if crop is missing for a treatment/problem query (trigger ambiguity)
-                if not llm_crop and effective_kind in ("treatment", "prevention", "diagnosis"):
+                # Check if crop is missing for a treatment/problem/fertilizer query (trigger ambiguity)
+                if not llm_crop and effective_kind in ("treatment", "prevention", "diagnosis", "fertilizer"):
                     llm_is_ambiguous = True
                     if not llm_clarification:
-                        part_text = f"{effective_plant_part}ে " if effective_plant_part else ""
-                        llm_clarification = f"কোন ফসলের {part_text}এই সমস্যা হয়েছে বলবেন কি? (যেমন: আলু, ধান, বা টমেটো)"
+                        if effective_kind == "fertilizer":
+                            llm_clarification = "কোন ফসলের সার প্রয়োগ বা মাত্রা সম্পর্কে জানতে চাচ্ছেন বলবেন কি? (যেমন: ধান, আলু, বা ভুট্টা)"
+                        else:
+                            part_bn = _PLANT_PART_BN.get(effective_plant_part or "", effective_plant_part or "")
+                            if part_bn in ("পাতা", "leaf"):
+                                part_bn = "পাতায়"
+                            elif part_bn and not part_bn.endswith(("ে", "য়")):
+                                part_bn = f"{part_bn}ে"
+                            part_text = f"{part_bn} " if part_bn else ""
+                            llm_clarification = f"কোন ফসলের {part_text}এই সমস্যা হয়েছে বলবেন কি? (যেমন: আলু, ধান, বা টমেটো)"
 
                 resolved_intent = Intent(
                     kind=effective_kind,

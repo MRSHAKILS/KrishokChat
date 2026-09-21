@@ -70,7 +70,7 @@ Bengali agricultural advisory systems face a particular difficulty: treatment re
 
 When yellow spots appear on potato leaves, a farmer often needs advice before an extension officer can visit. While digital advisory services bridge this gap \citep{dae_extension_manual,dlec_bangladesh,aker-2011-dial-a,fabregas-etal-2019-digital,campenhout-etal-2021-ict}, fluent conversation alone is unsafe in a treatment setting: an answer for the wrong crop or an unsupported dosage can turn an incomplete question into a harmful recommendation.
 
-These failures stem from compounding uncertainties. A farmer may ask ``which pesticide should I spray?'' without naming the crop, leaving retrieval to search across unrelated guidance. Farmers may also write in colloquial or Romanized Bangla, while technical guidance uses formal terminology \citep{bhuiyan-etal-2025-bhasabodh,our_bengali_retrieval}. A photograph and text can also disagree; a system that silently chooses one modality leaves the conflict unresolved, a known failure mode in vision-language models \citep{Deng_2025_CVPR,zhu2024cross}. Even when evidence is successfully retrieved, faithful generation is not guaranteed. Language models routinely produce claims unsupported by their context \citep{brown-etal-2025-rag,xu-etal-2025-mega-rag}, which is particularly dangerous for agricultural dosage, where a plausible numerical claim is directly actionable \citep{our_agricultural_safety}.
+A farmer may ask ``which pesticide should I spray?'' without naming the crop, leaving retrieval to search across unrelated guidance. Farmers may also write in colloquial or Romanized Bangla, while technical guidance uses formal terminology \citep{bhuiyan-etal-2025-bhasabodh,our_bengali_retrieval}. A photograph and text can also disagree; a system that silently chooses one modality leaves the conflict unresolved, a known failure mode in vision-language models \citep{Deng_2025_CVPR,zhu2024cross}. Even when evidence is successfully retrieved, faithful generation is not guaranteed. Language models can produce claims unsupported by their context \citep{brown-etal-2025-rag,xu-etal-2025-mega-rag}, which is particularly dangerous for agricultural dosage, where a plausible numerical claim is directly actionable \citep{our_agricultural_safety}.
 
 \textsc{KrishokTech} addresses these failures by making uncertainty and safety decisions explicit rather than leaving them to the language model. The system asks for missing information before retrieval, surfaces disagreements between text and images instead of silently resolving them, refers blocked safety-critical requests to human assistance, and checks generated safety-critical claims before they reach the farmer. These decisions appear as four farmer-visible states: \textbf{ASK}, \textbf{CONFIRM}, \textbf{REFER}, and \textbf{DROP}.
 
@@ -95,7 +95,7 @@ Digital agricultural advisors such as Farmer.Chat, KrishokBondhu, and Krishi Sat
 
 Classic information-seeking research shows that asking a clarifying question improves retrieval when a request is underspecified \citep{aliannejadi-etal-2019-clarifying}. More recently, LLM-based agents have been shown to guess or hedge under ambiguity instead of reliably asking for missing information \citep{chen2024act,gan2024clarqllm}. On the generation side, MiniCheck demonstrates efficient claim-level checking of generated text against grounding documents, and MedRAGChecker extends atomic claim verification to safety-sensitive biomedical RAG \citep{tang2024minicheck,ji2026medragchecker}. Interactive systems such as My Climate CoPilot, FactSearch, and RAGVUE likewise emphasize grounded answers, inspectable evidence, and fine-grained diagnosis rather than treating the generated response as a single opaque output \citep{nguyen-etal-2025-climate,fang-mackenzie-2026-factsearch,murugaraj-etal-2026-ragvue}. KrishokTech brings these ideas together around explicit pipeline boundaries: \textbf{ASK} can stop retrieval, \textbf{CONFIRM} can stop an unresolved multimodal conflict, and \textbf{DROP} can stop an unsupported safety-critical claim from reaching the user.
 
-The multimodal setting introduces a further failure mode. When text and visual evidence conflict, vision-language models frequently rely on misleading textual information rather than reconciling the sources \citep{Deng_2025_CVPR,zhu2024cross}. The linguistic reality of Bengali deployment---where farmers use regional dialects and Latin-script Banglish---means that safety gates tuned only for formal text will fail \citep{bhuiyan-etal-2025-bhasabodh,bangla_low_resource}. KrishokTech addresses both by refusing to silently select a modality when crop evidence disagrees, and by enforcing deterministic, script-agnostic prechecks before generation. Ultimately, our contribution is the integration of these boundaries into a single pipeline where uncertainty is an observable system state rather than a hidden model behavior.
+The multimodal setting introduces a further failure mode. When text and visual evidence conflict, vision-language models frequently rely on misleading textual information rather than reconciling the sources \citep{Deng_2025_CVPR,zhu2024cross}. The linguistic reality of Bengali deployment---where farmers use regional dialects and Latin-script Banglish---means that safety gates tuned only for formal text can be brittle \citep{bhuiyan-etal-2025-bhasabodh,bangla_low_resource}. KrishokTech addresses both by refusing to silently select a modality when crop evidence disagrees, and by enforcing deterministic, script-agnostic prechecks before generation. Ultimately, our contribution is the integration of these boundaries into a single pipeline where uncertainty is an observable system state rather than a hidden model behavior.
 
 \section{System Design}
 \label{sec:system}
@@ -127,7 +127,7 @@ Once the request has passed T0--T2, \textbf{T3} generates a response from the cr
 
 At \textbf{T4}, KrishokTech checks numerical claims that carry dosage information against the retrieved evidence and the permitted BARI/BRRI dose range. A claim is withheld when it cannot be grounded in the retrieved passage or falls outside the permitted range; the unsupported claim is \textbf{dropped} rather than rendered. This verifier is intentionally narrow: it checks dosage-bearing numerical claims and does not establish the factual correctness of every agronomic statement in the response. The mutation protocol and detailed verification results are given in Appendix~\ref{app:safety}.
 
-Verified responses are accompanied by a provenance badge that indicates how the response was produced, such as a fact lookup, grounded generation, guidance card, clarification, or referral. The badge and the \textit{Why} panel make the relevant evidence path and system decision visible in the interface rather than leaving the farmer to infer why a response was shown or withheld. The final response can then be delivered through the interactive web interface, a 160-character SMS message, an offline cached advisory card, or Bengali neural read-aloud.
+Delivered outputs are accompanied by a provenance badge that indicates how the response was produced, such as a fact lookup, grounded generation, guidance card, clarification, or referral. The badge and the \textit{Why} panel make the relevant evidence path and system decision visible in the interface rather than leaving the farmer to infer why a response was shown or withheld. The final response can then be delivered through the interactive web interface, a 160-character SMS message, an offline cached advisory card, or Bengali neural read-aloud.
 
 % =========================================================================
 % SECTION 4: DEMONSTRATION
@@ -135,36 +135,36 @@ Verified responses are accompanied by a provenance badge that indicates how the 
 \section{Demonstration}
 \label{sec:demonstration}
 
-The demonstration is intended for researchers and practitioners who build multilingual, multimodal, or safety-critical conversational systems. Attendees follow one farmer session on the live system in five steps, S1 to S5, and the screencast follows the same order. The steps cover all four states from Section~\ref{sec:introduction}: \textbf{ASK} (S1), \textbf{CONFIRM} (S3), \textbf{REFER} (S4), and \textbf{DROP} (S5). S2 shows the crop fence that S3 depends on. Attendees can start from the sample queries on the start screen, which include regional-dialect and safety-test sets, or enter their own queries and photographs.
+The demonstration is intended for researchers and practitioners building multilingual, multimodal, or safety-critical conversational systems. Attendees follow one continuous farmer session on the live system in five steps, S1--S5, in the same order as the screencast. Together, the steps expose the four control states introduced in Section~\ref{sec:introduction}: \textbf{ASK} (S1), \textbf{CONFIRM} (S3), \textbf{REFER} (S4), and \textbf{DROP} (S5). S2 establishes the visual crop context used by S3. Attendees can begin with pre-loaded regional-dialect and safety-test queries or enter their own text and photographs.
 
 \textbf{S1: Missing crop (ASK).}
-The farmer types a colloquial query that names no crop: \textit{``Patay holud dag hoyeche, ki bish dibo?''} (``Yellow spots have appeared on the leaves. Which pesticide should I use?''). A treatment request without a crop lacks a safety-critical detail, so the \textbf{T1} gate stops the request before retrieval ($sources\_retrieved = 0$) and asks which crop is affected. The reply shows crop chips (Figure~\ref{fig:demo_ask}). The farmer taps \textit{Alu} (Potato), which binds the crop, and the system answers from potato guidance with numbered citations.
+The farmer types a colloquial treatment query without naming the crop: \textit{``Patay holud dag hoyeche, ki bish dibo?''} (``Yellow spots have appeared on the leaves. Which pesticide should I use?''). Because the request lacks the crop needed for treatment advice, the \textbf{T1} gate stops the pipeline before retrieval ($sources\_retrieved = 0$) and asks which crop is affected. The interface presents Bengali crop chips (Figure~\ref{fig:demo_ask}). The farmer selects \textit{Alu} (potato), which binds the crop context, and the system then produces an answer grounded in potato guidance with numbered citations. The step demonstrates that retrieval does not begin until the missing safety-critical information is supplied.
 
 \textbf{S2: Photograph scopes the evidence.}
-The farmer then uploads a leaf photograph on the diagnosis page. The on-device classifier identifies the crop as rice and runs the rice disease model. The chat that opens from this page takes rice as its context, and the \textbf{T2} fence lets retrieval return only rice guidance. The photograph never leaves the device.
+The farmer next uploads a leaf photograph on the diagnosis page. The on-device vision model identifies the crop as rice and selects the corresponding disease model. The resulting conversation adopts rice as its crop context, and the \textbf{T2} fence restricts retrieval to rice guidance. The photograph remains on the device. Thus, the image does not merely provide additional input to the generator; it determines which evidence the downstream system can access.
 
 \textbf{S3: Photograph and text disagree (CONFIRM).}
-With the rice photograph still attached, the farmer asks how to control potato late blight. The system does not pick a crop. It raises a \textbf{Crop Mismatch} badge, states that the photograph shows rice while the message names potato, and withholds chemical advice until the farmer confirms the crop (Figure~\ref{fig:demo_mismatch}).
+With the rice photograph still attached, the farmer asks about controlling potato late blight. The system does not silently choose between the two inputs. Instead, it raises a \textbf{Crop Mismatch} badge, states that the photograph indicates rice while the message names potato, and withholds chemical advice until the farmer confirms the intended crop (Figure~\ref{fig:demo_mismatch}). The conflict is therefore exposed as an explicit interaction state rather than resolved implicitly by the language model.
 
-\textbf{S4: Banned pesticide (REFER).}
-The farmer next asks how to spray paraquat, a banned pesticide. The \textbf{T0} precheck matches the request before any retrieval or generation, so the system produces no advice. It shows a banned-chemical warning and a button to call the Krishi Call Centre (\textbf{16123}).
+\textbf{S4: High-risk chemical request (REFER).}
+The farmer then asks how to spray paraquat, which is blocked by KrishokTech's safety policy. The \textbf{T0} precheck matches the request before retrieval or generation begins, so the system produces no chemical advice. Instead, it displays a safety warning and provides a direct route to the Krishi Call Centre (\textbf{16123}). This step shows a terminal control path in which the system deliberately refers the case instead of attempting generation.
 
-\textbf{S5: Verified answer (DROP).}
-The farmer finally asks which fungicide to spray against potato late blight. The system retrieves evidence, drafts a Bengali answer, and checks each dosage sentence against a retrieved passage and a permitted dose range. In the demonstrated case, the \textbf{T4} verifier drops one sentence. The farmer sees the remaining answer with its citations and a provenance badge, and the Why panel shows the verification trace behind that decision (Figure~\ref{fig:demo_why}). The same verified answer can be read aloud in Bengali, formatted as a 160-character SMS, or opened as an offline card. Appendix~\ref{app:ui} shows the screens for each step.
+\textbf{S5: Dosage verification (DROP).}
+Finally, the farmer asks which fungicide to spray against potato late blight. The system retrieves the relevant evidence and generates a Bengali draft. At \textbf{T4}, each dosage-bearing claim is checked against a retrieved passage and the permitted dose range. In the demonstrated case, one unsupported dosage claim is \textbf{dropped} from the draft, while the remaining grounded content is retained. The farmer sees the resulting answer with citations and a provenance badge, and the \textit{Why} panel exposes the verification trace behind the decision (Figure~\ref{fig:demo_why}). The verified response can also be delivered as Bengali read-aloud, a 160-character SMS, or an offline advisory card. Appendix~\ref{app:ui} provides the remaining interface views.
 
 \begin{figure*}[t]
 \centering
 \begin{subfigure}[t]{0.32\textwidth}
   \centering
   \includegraphics[width=\linewidth,height=3.2cm,keepaspectratio]{../screenshots/screenshot1_halt_clarification.png}
-  \caption{S1 (ASK): no crop named, so the system asks and offers crop chips.}
+  \caption{\textbf{ASK}. A crop-less treatment query halts before retrieval and prompts the farmer to bind the missing crop.}
   \label{fig:demo_ask}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.32\textwidth}
   \centering
   \includegraphics[width=\linewidth,height=3.2cm,keepaspectratio]{../screenshots/screenshot4_mismatch_badge.png}
-  \caption{S3 (CONFIRM): the photo shows rice, the message names potato, and the system asks which is meant.}
+  \caption{\textbf{CONFIRM}. The photograph indicates rice while the text names potato; chemical advice is withheld until the conflict is resolved.}
   \label{fig:demo_mismatch}
 \end{subfigure}
 \hfill
@@ -173,10 +173,10 @@ The farmer finally asks which fungicide to spray against potato late blight. The
   \IfFileExists{../screenshots/s5_why_panel.png}%
     {\includegraphics[width=\linewidth,height=3.2cm,keepaspectratio]{../screenshots/s5_why_panel.png}}%
     {\screenshotplaceholder{\linewidth}{3.2cm}{S5 Why panel}{Screenshot to be added}}
-  \caption{S5 (DROP): the Why panel shows the verification trace behind the delivered answer.}
+  \caption{\textbf{DROP}. The \textit{Why} panel shows why an unsupported dosage claim was removed before the remaining answer was rendered.}
   \label{fig:demo_why}
 \end{subfigure}
-\caption{Live interface at three demonstration steps. Appendix~\ref{app:ui} shows the other steps.}
+\caption{Three live interface states showing the farmer-visible consequences of the KrishokTech control pipeline. S1 exposes pre-retrieval clarification, S3 exposes multimodal disagreement, and S5 exposes claim-level verification. Additional demonstration screens are provided in Appendix~\ref{app:ui}.}
 \label{fig:demo_states}
 \end{figure*}
 
