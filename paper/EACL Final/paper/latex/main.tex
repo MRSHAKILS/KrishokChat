@@ -86,50 +86,7 @@ KrishokTech is demonstrated end to end, from a colloquial crop-less query throug
 
 \begin{figure*}[t]
 \centering
-\begin{tikzpicture}[
-  font=\sffamily\footnotesize,
-  >=Stealth,
-  stage/.style={draw=black!70, fill=black!2, rounded corners=3pt, thick, align=center, inner sep=5pt, minimum width=3.7cm, minimum height=1.05cm},
-  exit/.style={draw, dashed, rounded corners=2pt, align=center, inner sep=3.5pt, font=\sffamily\scriptsize, minimum width=3.3cm}
-]
-  % Row 1: Intake, Screening, and Retrieval
-  \node[stage, draw=red!75!black] (t0) at (0,0) {\textbf{T0: Safety Precheck}\\Deterministic, no LLM};
-  \node[stage, draw=blue!75!black] (t1) at (5.3,0) {\textbf{T1: Intent \& Slots}\\Extractor \& Gate};
-  \node[stage, draw=orange!85!black] (t2) at (10.6,0) {\textbf{T2: Crop Fence}\\BM25 Scoped Search};
-
-  % Row 1 Exit Gates
-  \node[exit, draw=red!75!black, fill=red!10] (e0) at (0,-1.15) {\textbf{REFER (16123)}\\Crisis / Banned Chem};
-  \node[exit, draw=blue!75!black, fill=blue!10] (e1) at (5.3,-1.15) {\textbf{ASK (Chips)}\\Empty Crop on Treat};
-  \node[exit, draw=orange!85!black, fill=orange!10] (e2) at (10.6,-1.15) {\textbf{CONFIRM (Badge)}\\Text--Image Mismatch};
-
-  % Row 2: Generation, Verification, and Delivery
-  \node[stage, draw=purple!75!black] (t3) at (0,-3.1) {\textbf{T3: Grounded Drafting}\\\texttt{krishokchat-4b} / Gemini};
-  \node[stage, draw=green!60!black] (t4) at (5.3,-3.1) {\textbf{T4: Dosage Verifier}\\Passage \& Range Check};
-  \node[stage, draw=black!85] (out) at (10.6,-3.1) {\textbf{Constrained Delivery}\\Web / SMS / Offline / 16123};
-
-  % Row 2 Exit Gate
-  \node[exit, draw=green!60!black, fill=green!10] (e4) at (5.3,-4.25) {\textbf{DROP (Annotate)}\\Unsupported Dose};
-
-  % Row 1 Connections
-  \draw[->, thick] (t0) -- node[above, font=\sffamily\scriptsize, text=black!60] {pass} (t1);
-  \draw[->, thick] (t1) -- node[above, font=\sffamily\scriptsize, text=black!60] {crop resolved} (t2);
-
-  % Row 1 Exits
-  \draw[->, red!75!black, thick] (t0) -- (e0);
-  \draw[->, blue!75!black, thick] (t1) -- (e1);
-  \draw[->, orange!85!black, thick] (t2) -- (e2);
-
-  % Row 1 to Row 2 Transition
-  \draw[->, thick] (t2.east) -- ++(0.5,0) |- ($(t3.north)+(0,0.85)$) -- (t3.north);
-  \node[above, font=\sffamily\scriptsize\itshape, text=black!75] at (5.3,-2.15) {Grounded evidence passages \& crop boundary passed to generator};
-
-  % Row 2 Connections
-  \draw[->, thick] (t3) -- node[above, font=\sffamily\scriptsize, text=black!60] {draft} (t4);
-  \draw[->, thick] (t4) -- node[above, font=\sffamily\scriptsize, text=black!60] {verified} (out);
-
-  % Row 2 Exit
-  \draw[->, green!60!black, thick] (t4) -- (e4);
-\end{tikzpicture}
+\includegraphics[width=\textwidth,keepaspectratio]{figures/fig1_architecture.jpg}
 \caption{KrishokTech inserts explicit control points before and after generation. Each of the five stages can end a turn in a farmer-visible state: REFER at T0, ASK at T1, CONFIRM at T2, or DROP at T4.}
 \label{fig:architecture}
 \end{figure*}
