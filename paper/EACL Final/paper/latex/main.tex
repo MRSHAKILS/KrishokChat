@@ -44,7 +44,7 @@
   }%
 }
 
-\title{KrishokTech: A Safe, Multimodal System Demonstration for Bengali Agricultural Advisory}
+\title{KrishokTech: Deterministic-First, Evidence-Bounded Bengali Agricultural Advisory}
 
 \author{
   Khan Raiyan Ibne Reza \quad Sanjana Aktar Maria \quad Shakil Ahmed \quad Sumaiya Tabassum Nimi \\
@@ -59,7 +59,7 @@
 \maketitle
 
 \begin{abstract}
-We present \textsc{KrishokTech}, a Bengali agricultural advisory system for Bangladesh that treats uncertainty and unsafe requests as explicit interaction states rather than as prompts for unconstrained generation. The system uses three controls: it halts underspecified treatment requests before retrieval; it uses crop identification to scope evidence and surfaces conflicts between text and images; and it verifies dosage-bearing claims against retrieved sources and permitted dose ranges before rendering. \textsc{KrishokTech} also supports constrained web, SMS, and offline delivery and provides a human-referral path for unsafe cases. The demonstration follows a continuous farmer interaction from clarification through multimodal conflict, referral, and verified advice. On 200 farmer queries, the pre-retrieval gate halted 30 crop-less treatment requests before retrieval. In a multimodal stress benchmark, crop fencing with contradiction gating reduced wrong-crop advice from 36.25\% to 28.75\%. Across 420 benchmark calls to the live cloud model, guarded responses reduced attack success from 36.19\% to 0.95\%. These results show how explicit control points can constrain agricultural conversational systems without relying solely on model behavior.
+Bengali agricultural advisory systems face a particular difficulty: treatment requests arrive without a crop name, photographs contradict the accompanying text, and generated dosage claims can exceed what the retrieved evidence supports. \textsc{KrishokTech} treats these uncertainties as explicit control states rather than leaving them to the language model. A deterministic gate halts crop-less treatment queries before retrieval runs. Crop identification fences the evidence set, making off-target passages unreachable, and a confirmation state surfaces when text and image disagree. Before rendering, every dosage-bearing claim in the generated draft is checked against retrieved passages and permitted dose ranges; unsupported claims are dropped. The demonstration follows one farmer interaction through clarification (\textbf{ASK}), multimodal conflict (\textbf{CONFIRM}), safety referral (\textbf{REFER}), and claim filtering (\textbf{DROP}). On 200 authentic farmer queries, the gate halted all 30 crop-less requests before retrieval. Crop fencing with contradiction gating reduced off-target retrieval from 36.25\% to 28.75\% on a 400-query stress set. On the deployed local model, guarded attack success fell from 52.5\% to 10.71\%; on the cloud benchmark, from 36.19\% to 0.95\%. The dosage verifier caught 114 of 118 inserted errors in live answers without rejecting any unmodified response.
 \end{abstract}
 
 % =========================================================================
