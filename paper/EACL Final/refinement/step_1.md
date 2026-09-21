@@ -1,488 +1,597 @@
-Prompt:
-You are acting as a senior NLP researcher and reviewer preparing a manuscript for the EACL 2027 System Demonstrations Track.
+I reviewed the manuscript as a **system-demonstration artifact**, not as a generic NLP research paper. I also checked the current EACL 2027 Demo CFP, the EACL 2026/ACL 2026/2025/2024 demo proceedings, and the closest comparison systems including **My Climate CoPilot, LocalRQA, DialogGuard, FactSearch, and OpenGlass**.
 
-I will provide you with some or all of the following:
+My main conclusion is operational: **do not add another major experiment or redesign the architecture before submission.** The highest-value work now is to fix a small number of credibility/consistency issues and tighten the paper around the system itself.
 
-1. The current manuscript in text/Markdown/LaTeX form.
-2. A PDF of the current manuscript, if available.
-3. A ground-truth YAML describing the actual system, implementation, data, components, functionality, experiments, and other project facts.
-4. Potentially additional project materials.
+## 1. What the current EACL 2027 track actually asks for
 
-Your first task is NOT to rewrite the paper.
+The current official CFP is very favorable to what you are building, but it also gives you a very clear submission target:
 
-Your task is to perform a forensic audit of the current manuscript and determine what kind of paper it currently is, what kind of paper it should become for the EACL 2027 System Demonstrations Track, and where the current manuscript diverges from that target.
+* maximum **6 content pages**; extra space is available for ethics/broader impact, references, and informative appendices;
+* a **live demo website or downloadable installation package is mandatory** this year;
+* a **≤2.5-minute screencast** is required, with the link in both the PDF and OpenReview;
+* at least one author must present the live demo and poster;
+* one author must be nominated as a reciprocal reviewer;
+* comprehensive experimentation is explicitly **not required**, but the paper must contain some evidence of prototype usefulness/quality; the CFP explicitly lists benchmarks, simulations, expert evaluation, usage statistics, case studies, and qualitative feedback as acceptable forms of evidence;
+* the review criteria explicitly cover system/demonstration description, evaluation/availability/licensing, and presentation quality. ([EACL 2027][1])
 
-IMPORTANT: Do not assume what the system is about, what its main contribution is, or which functionality is most important. Infer these from the supplied ground-truth YAML and manuscript. Treat the YAML as the factual source of truth. If the manuscript claims something that is not supported by the YAML or supplied evidence, flag it rather than accepting it.
+The deadline is **22 September 2026, 11:59 pm UTC−12**, so this is genuinely a final-refinement situation rather than an opportunity for a new research cycle. ([EACL 2027][1])
 
-## STEP 1 — VERIFY THE CURRENT EACL 2027 REQUIREMENTS
+### What recent accepted demos suggest — observed pattern, not a rule
 
-Before analyzing the manuscript, search the current official EACL 2027 System Demonstrations Call for Papers and any other official EACL/ACL sources necessary to establish the current requirements.
+Across the recent EACL/ACL demo volumes, there is **no single accepted-paper template**. The 2026 EACL and 2026/2025/2024 ACL volumes contain everything from research toolkits to domain applications, safety interfaces, multimodal systems, and deployment platforms. ([ACL Anthology][2])
 
-Determine and explicitly record:
+Some particularly relevant examples:
 
-* maximum main-paper page limit;
-* what is excluded from that page limit;
-* appendix policy;
-* reference policy;
-* ethics/broader-impact policy;
-* required demonstration video and its maximum length;
-* live demo website/installable-package requirement;
-* evaluation requirement;
-* originality/multiple-submission requirements;
-* any other requirement that could cause desk rejection;
-* relevant submission and camera-ready dates.
+* **My Climate CoPilot** is very close in application domain: evidence-grounded agricultural QA, transparency, privacy, and system-level interaction, with evaluation involving 50 domain experts. ([ACL Anthology][3])
+* **LocalRQA** is useful as a system-paper precedent for treating training/testing/deployment infrastructure itself as the contribution rather than trying to turn every component into a separate research contribution. ([ACL Anthology][4])
+* **DialogGuard** combines an actual usable interface, explicit safety auditing, explanatory output, evaluation, and a practitioner study. ([ACL Anthology][5])
+* **OpenGlass** similarly makes system architecture, privacy, deployment constraints, measured latency, safety-aware behavior, and released artifacts part of the system story. ([ACL Anthology][6])
+* **FactSearch** emphasizes configurability, transparent inspection, and a practical interactive interface rather than presenting the system as a collection of isolated algorithms. ([ACL Anthology][7])
 
-Use the current official EACL 2027 sources whenever possible.
-
-Do not rely on remembered or outdated EACL/ACL requirements.
-
-## STEP 2 — STUDY REAL RECENT DEMONSTRATION PAPERS
-
-Search the ACL Anthology and other authoritative sources for recent accepted EACL and ACL System Demonstration papers, prioritizing EACL 2026 and ACL 2025/2026.
-
-Select a representative sample of accepted demonstrations, including systems with different types of contributions.
-
-Study their:
-
-* section structures;
-* introduction length and style;
-* treatment of related work;
-* treatment of novelty;
-* architecture descriptions;
-* screenshots and figures;
-* functionality descriptions;
-* evaluation;
-* comparison with existing systems;
-* system availability;
-* use of appendices;
-* level of implementation detail;
-* balance between research contribution and system demonstration.
-
-Do NOT simply imitate any one paper.
-
-Instead, infer recurring characteristics of successful recent System Demonstration papers.
-
-Clearly distinguish:
-A. requirements explicitly stated by the EACL CFP;
-B. recurring patterns observed in accepted papers;
-C. your own interpretation.
-
-Do not claim that a pattern is an official requirement unless the CFP actually says so.
-
-## STEP 3 — RECONSTRUCT THE CURRENT MANUSCRIPT
-
-Create a structured inventory of the current manuscript.
-
-For every section/subsection, identify:
-
-* its purpose;
-* the claim it is trying to establish;
-* whether it describes the problem, research contribution, system, implementation, evaluation, or background;
-* whether it is essential for a System Demonstration paper;
-* whether it is overly detailed;
-* whether it belongs in the main paper;
-* whether it belongs in an appendix;
-* whether it can be removed;
-* whether it should be represented visually instead of explained in prose.
-
-Do not rewrite the content.
-
-## STEP 4 — IDENTIFY "RESEARCH PAPER DRIFT"
-
-Specifically diagnose whether the manuscript behaves like a conventional research paper rather than a system demonstration.
-
-Look for:
-
-* excessive literature/background discussion;
-* excessive methodological detail;
-* research-question framing that is stronger than necessary;
-* detailed experimental analysis that does not establish system validity;
-* excessive ablations;
-* implementation details that could be moved to an appendix;
-* repeated explanations of the same contribution;
-* too many independent contributions;
-* features described as if each were a separate research contribution;
-* excessive theoretical explanation;
-* dataset details that do not matter to understanding the demonstrated system;
-* results that are interesting scientifically but not central to demonstrating the system;
-* functionality that is described but not shown;
-* claims of novelty that are not sufficiently grounded in related work;
-* places where a diagram or screenshot would communicate more efficiently than prose.
-
-## STEP 5 — INVENTORY ALL SYSTEM FUNCTIONALITIES
-
-From the YAML and manuscript, build a complete functionality inventory.
-
-For every functionality/component, classify it as:
-
-A. Core system functionality
-B. Important supporting functionality
-C. Optional/secondary functionality
-D. Implementation detail
-E. Research/evaluation component
-F. Appendix-only material
-G. Potentially removable material
-
-Do not decide based merely on how much space the current manuscript gives something.
-
-Instead, judge its importance to the demonstrated user-facing/system-facing contribution.
-
-## STEP 6 — IDENTIFY THE CURRENT STORY
-
-Describe the current paper's story in 5–10 sentences.
-
-Then describe the story that a strong System Demonstration paper would need to communicate, without rewriting the manuscript.
-
-Identify the mismatch.
-
-## STEP 7 — PAGE-BUDGET DIAGNOSIS
-
-Do NOT yet force the manuscript into six pages.
-
-Instead, estimate how the current manuscript's content would distribute across a six-page main paper.
-
-Identify:
-
-* content that must remain;
-* content that should be compressed;
-* content that should move to figures;
-* content that should move to appendices;
-* content that should disappear.
-
-The goal is not yet to achieve six pages.
-
-The goal is to understand what the six pages should be used for.
-
-## STEP 8 — OUTPUT
-
-Return a rigorous audit with these sections:
-
-1. Verified EACL 2027 Requirements
-2. Evidence from Recent Accepted Demonstration Papers
-3. Current Manuscript Structure
-4. Research-Paper Drift
-5. Complete Functionality Inventory
-6. Current Story
-7. Desired System-Demonstration Story
-8. Main-Paper vs Appendix vs Remove Table
-9. Six-Page Content Budget
-10. Major Problems That Must Be Fixed
-11. Information Still Needed From the Author
-12. Recommended Next Stage
-
-Do not rewrite any section of the paper yet.
-
-Do not invent facts.
-
-Do not invent novelty.
-
-Do not use generic statements such as "this paper presents a novel framework" unless the supplied evidence actually supports that claim.
-
-The goal of this stage is diagnosis, not writing.
-
-
-
-
-
-I'll start by checking the uploaded files, then verify the official EACL 2027 requirements.# Forensic audit: KrishokTech manuscript vs. EACL 2027 System Demonstrations
-
-## Read this first
-
-1. **No ground-truth YAML was attached**, only `main.pdf` and `main.tex`. Every statement about what the system does is therefore "claimed by the manuscript", not verified. Section 11 lists what I need.
-2. **Timing.** The paper deadline is 22 September 2026, all deadlines are 11:59 pm AoE, and there is no rebuttal stage. That is 11:59 UTC on 23 Sep, about three days from now.
-3. **Three items are each a desk-reject trigger.** I checked the LaTeX source directly.
-   - There is no demo URL and no video link anywhere in the source.
-   - The main body is about 11½ pages against a limit of 6.
-   - All 12 figures are `\placeholderbox` text boxes, not screenshots. Screenshot numbering also skips "Screenshot 6".
-4. **The highest-stakes finding is the bibliography.** All four competitor citations I checked have wrong authors, titles or venues (Section 10). EACL's integrity policy names hallucinated citations as grounds for desk rejection, and authors may be barred from committing to EACL 2027 and 2028. Fix this before anything else.
+So I would **not** try to make KrishokTech look like a 15-page research paper just because some older demo papers are long. The current EACL 2027 page limit is the controlling rule.
 
 ---
 
-## 1. Verified EACL 2027 requirements
+# 2. What the manuscript already does well
 
-Source: the official [Demo CFP](https://2027.eacl.org/calls/demos/). I cross-checked the main-conference CFP for the integrity policy.
+There is quite a lot here that I would deliberately preserve.
 
-| Item | Official requirement | Manuscript status |
-|---|---|---|
-| Length | Up to 6 pages; longer submissions are desk-rejected. | ≈11½ body pages (19 total): **fails** |
-| Excluded from the limit | Unlimited space for an optional ethics/broader-impact statement, plus unlimited references and informative appendices. Accepted papers get one extra page. | Limitations and Conclusion are inside the 6 pages unless the chairs say otherwise (my reading) |
-| Appendices | Unlimited (above) | 6 pages. The CFP does not say reviewers must read them (my interpretation) |
-| Ethics | The statement is optional, but papers on sensitive tasks that do not discuss ethics will not be accepted. Flagged papers go to an ethics committee. | None. Pesticide-dosage advice to farmers is a sensitive task |
-| Video | A screencast of at most 2.5 minutes. The link must be in the PDF and in the OpenReview form. | **Missing** |
-| Demo / package | A live demo link or installable package is strictly enforced; no link means desk rejection. Exceptions apply only where sharing is clearly impossible, and the link goes in both the PDF and the form. | **Missing** |
-| Evaluation | Comprehensive experiments are not required, but a paper with no validation evidence may be desk-rejected. Acceptable evidence includes user studies, simulations, benchmarks, expert evaluations, usage statistics, case studies and qualitative feedback. | Simulations and benchmarks only |
-| Originality | The work must be original and unpublished, and cannot be in review elsewhere (ARR included). Significant overlap with other published work is not considered, and two demo submissions may not overlap by more than 25%. | Needs a check (Section 10) |
-| Anonymity | Single-blind; names and affiliations are included. | OK |
-| Reviewer duty | Each paper must nominate one author as a reciprocal reviewer. | Unknown (OpenReview form) |
-| Format | PDF in the official EACL style; deviations in style or page limit are desk-rejected. | Uses `acl.sty`, A4, 11pt. I could not confirm the 2027 template version |
-| Presentation | At least one author registers and presents a live demo with a poster. | Plan for it |
-| Integrity | EACL-wide: hallucinated citations and thinly sliced contributions may be desk-rejected, with consequences for all authors. Whether the demo track applies this is my inference, since the main CFP frames it as EACL-wide. | **At risk** |
-| Dates | Submission opened 18 Aug 2026; deadline 22 Sep 2026; notification 18 Dec 2026; camera-ready 6 Jan 2027; conference 9–14 March 2027. | — |
+### A. The system has an actual demonstration narrative
 
-**The five reviewer questions in the CFP** are Motivation/Fit/Novelty, Related Work & Contribution, System & Demonstration Description, Evaluation/Availability/Licensing, and Presentation Quality. Reviewers are asked how clearly the architecture and the demonstration are described, how the system was validated, how it can be accessed, and under what license it is distributed. Current exposure per question:
+The S1→S5 sequence is unusually coherent for a system paper. It demonstrates:
 
-| Reviewer question | Current risk |
-|---|---|
-| Motivation, fit, novelty | Medium. The novelty table is contradicted by verified sources |
-| Related work | **High**. Citations do not match real records |
-| System & demo description | High. There are no real screenshots; PRISM-RAG is undescribed |
-| Evaluation, availability, license | **High**. No link, no license, no user or expert evidence |
-| Presentation | High. Length, redundancy, placeholder figures |
+**ASK → crop-scoped evidence → CONFIRM → REFER → DROP**
 
----
+rather than showing five unrelated features. The paper explicitly says the screencast follows the same sequence, and the examples cover all four farmer-visible states. 
 
-## 2. Evidence from recent accepted demonstration papers
+That is exactly the sort of thing a demo reviewer can understand quickly.
 
-**Sample and limits.** EACL 2026 received 102 demo submissions and accepted 44 (43.1%). I read all 44 abstracts (the volume lists toolkits, RAG applications, interpretability tools, tutoring systems and a Bangla NLP platform). I read three papers in full: BanSuite (EACL 2026), AI for Climate Finance (EACL 2026) and My Climate CoPilot (ACL 2025). I did not sample ACL 2026 or EMNLP 2025 demos. Three full texts is a thin basis for the B-patterns below.
+### B. The control points are concrete and user-visible
 
-**A. Explicit CFP requirements.** See Section 1.
+The paper does not merely say "we add safety." It describes explicit points before retrieval, before generation, before rendering, and exposes their consequences to the user. 
 
-**B. Recurring patterns in the sample**
-- **Access is stated up front.** Many abstracts end with a repo, live demo, package or video link and often a license. DeepPavlov cites Apache 2.0 and an online demo; AlignFix cites a live demo and Apache 2.0. BanSuite puts its YouTube link in the abstract.
-- **Six pages carry the story; detail goes to appendices.** Climate Finance's main paper runs pages 492–497, followed by appendices A–K (methods, demo details, deployment case studies, dataset statistics) through page 511. BanSuite moves UI screenshots, code snippets and energy analysis to appendices.
-- **Short related work.** My Climate CoPilot uses about half a page. Climate Finance uses roughly one paragraph.
-- **The stack is named.** My Climate CoPilot names Rust, Elasticsearch and Claude Sonnet 3.5. Climate Finance names FastAPI, Weaviate and the OpenAI API. KrishokTech never names its generator LLM.
-- **Evaluation is proportionate and comparative.** BanSuite compares against toolkits and LLMs and reports energy. Climate Finance compares against four baselines and two black-box assistants, and adds an ablation. My Climate CoPilot used over 50 domain experts, ratings and two long interviews.
-- **Modest novelty framing.** Climate Finance says its components are individually established and claims only their domain-specific integration.
-- **Ethics and limitations come after the main text.** My Climate CoPilot has an ethics-approval statement. Climate Finance has limitations, ethics and reproducibility statements.
-- **Both diagrams and UI figures appear.** Two of the three sampled papers put their UI screenshots in the appendix. The CFP accepts screenshots or diagrams, but I would not rely on that.
+The crop-mismatch behavior and Why panel are especially good demo material. The paper also gives a real public interface and screencast. 
 
-**C. My interpretation**
-- A demo submission is judged as a package of paper, video and live link, so the paper must be consistent with what a reviewer sees in the video.
-- The main text should stand alone even if appendices go unread.
-- A safety-critical domain warrants an explicit ethics/broader-impact statement, which costs no page budget.
+### C. The evaluation is mapped to system failures
+
+This is one of the strongest structural choices. C1, C2, C3 each has a corresponding failure mode and corresponding test rather than one generic "overall performance" table. The paper has evidence on gating, crop conflict, adversarial safety, dosage checking, and constrained delivery.  
+
+### D. The limitations section is appropriately explicit
+
+The manuscript openly says there is no field study, most contradiction cases are synthetic, the verifier covers numerical dosage claims rather than all agronomic facts, and the local model still has residual attack failures. 
+
+That is good evidence discipline, and I would **keep it**.
+
+### E. Ethics/privacy is not an afterthought
+
+The paper documents de-identification, consent/ethics review, on-device image processing, and the cloud/local-model boundary. 
+
+This is especially valuable for this track because the CFP explicitly says sensitive-data or sensitive-task papers need to address legitimate ethical concerns. ([EACL 2027][1])
 
 ---
 
-## 3. Current manuscript structure
+# 3. A — Submission-critical: fix these before submitting
 
-19 pages: about 11½ body, 1½ references, 6 appendix. Body prose is about 6,000 words, with 12 figures (all placeholders) and 7 tables. A six-page paper with 4–5 visuals holds roughly 3,000–3,300 words.
+## A1. Synchronize `main.tex` and `main(2).pdf`
 
-| § | Words | Purpose / claim | Type | Essential? | Disposition |
-|---|---|---|---|---|---|
-| Abstract | 190 | Four mechanisms plus three headline numbers | Summary | Yes | Compress; three overclaims (Section 10) |
-| 1 Intro | 1,100 | Farmer stats, prior-study recap, image conflict, routing literature, system and evaluation preview, 4 contributions | Problem + background | Partly | Compress hard; move stats and routing literature |
-| 2 (lead) | 60 | "Successive decision boundaries" | System | Yes | One sentence plus Fig. 1 |
-| 2.1 | 250 | T0 precheck, T1 slots, halt outcomes, DialectSelector, token medians | System + eval | Yes | Keep core; medians to appendix |
-| 2.2 | 280 | Crop-fenced BM25, router, per-crop top-1, fence simulation | System + eval | Yes | Compress; numbers to Evaluation |
-| 2.3 | 260 | Untrusted LLM, verifier, badges, verifier and ASR results | System + eval | Yes | Compress; duplicates §4.3 |
-| 2.4 | 360 | SMS, offline, TTS, footprint, tier mix, latency | System + eval + deployment | Partly | Compress hard |
-| 3.1–3.5 | 870 | Five scenarios narrated against placeholder figures | Demonstration | **Most important** | Replace prose with a screenshot and storyboard |
-| 3.6 | 190 | Restates 3.1–3.5 as a list | Demonstration | No | Cut or merge |
-| 4.1–4.3 | 1,270 | Gate, fence/mismatch, safety/delivery | Evaluation | Partly | One table plus one figure |
-| 5 | 600 + Table 1 | 13-feature comparison with 4 systems | Related work | Yes, but flawed | Rebuild from verified sources |
-| 6.1 | 440 | Limitations | Limits | Yes | Halve |
-| 6.2 | 310 | Restates abstract | Conclusion | No | 3–4 sentences |
-| App. A–G | ≈2,400 + 6 tables + 4 figures | Protocol, INT8, routing probe, failures, claim-status table | Detail | Mixed | Curate (Section 8) |
+This is the first thing I would fix.
 
----
+Your compiled PDF currently says:
 
-## 4. Research-paper drift
+> **KrishokTech: Deterministic-First, Evidence-Bounded Bengali Agricultural Advisory** 
 
-| Symptom | Evidence |
-|---|---|
-| Demo is the minority of the paper | Sections 2 and 4 together are about 2,500 words; the demonstration (§3) is about 1,060 |
-| The same results are retold everywhere | In the main text, 0.95% appears 7 times, "76" 6 times, and 0.3625 four times. They recur across abstract, intro, §2, §4, figures, conclusion and appendix |
-| Defensive scoping | About 43 hedging or "not a claim" phrases in the main text. It reads as written to survive a research review |
-| Features framed as research contributions | All four contributions begin "We introduce…". PRISM-RAG is contribution 2 but has no method subsection and no main-text evaluation |
-| Over-granular evaluation | Per-mutation counts, extractor agreement, miss and false-positive rates, a McNemar p-value for a simulation, and 40+ numbers in the main text |
-| Novelty argued by measurement gaps | Related work says prior systems did not report "the same operating measurements", which is not a system comparison |
-| Described but not shown | Voice-transcription toggle (Fig. 2 only), DialectSelector, PRISM routes and the Evidence Agreement Gate have no visual or evidence |
-| Prose where a figure would do | §2.1–2.4 walk through stages one by one; §3.6 lists six scenarios; Tables 5–7 could be one compact table |
-| Ungrounded novelty | "Typed working memory", "5-level answerability routing" and "colloquial concept normalizer" are claimed as extensions over prior work with no related-work support |
+But the uploaded `main.tex` contains:
+
+> **KrishokTech: A Safe, Multimodal System Demonstration for Bengali Agricultural Advisory**
+
+Those are clearly different title versions.
+
+This is not merely cosmetic. It means the source and the submitted artifact are not demonstrably the same revision.
+
+**Action:** decide which current title is intended, update the source, recompile, and inspect the newly generated PDF. Do not submit a PDF generated from one revision with a source repository containing another.
+
+There is a second source-level warning: your TeX explicitly falls back to a **“Screenshot to be added”** placeholder if `s5_why_panel.png` is absent. 
+
+The current PDF does contain the S5 image, so the PDF itself is fine; this is a **source-bundle integrity check**. Make sure the real screenshot and all figure assets are present in whatever repository/package you point reviewers to.
+
+**Priority: A1 / highest.**
 
 ---
 
-## 5. Complete functionality inventory
+## A2. Correct the “banned pesticide / paraquat” claim
 
-Class key: **A** core, **B** important supporting, **C** optional/secondary, **D** implementation detail, **E** research/evaluation component.
+This is the most important factual correction I found outside the manuscript itself.
 
-| # | Functionality | Class | Shown visually? | Evidence in manuscript |
-|---|---|---|---|---|
-| 1 | T0 deterministic safety precheck → 16123 | A | Placeholder | 10/10 injections blocked; 0/30 off-topic refused; routing-probe refuse recall 0.493 |
-| 2 | T1 slot extraction and pre-retrieval halt (clarify / cultural card / refuse) | A | Placeholder | 76/200 halted; extractor agreement 0.52, miss 0.475 |
-| 3 | Quick-reply crop-chip clarification | B | Placeholder | Conformance 86/100 (seeded memory) |
-| 4 | Non-chemical guidance card / partial-advice checklist | B | No | None |
-| 5 | DialectSelector (6 presets) | C | No | None; mechanism unstated |
-| 6 | Typed session working memory | B | Caption only | None; follow-up "untested" |
-| 7 | PRISM router (5-level routing, 4 routes) | B | No | Overall conformance 0.458; document-RAG route 16/168 |
-| 8 | ConceptNormalizer | B | No | Route agreement 258/458 |
-| 9 | Evidence Agreement Gate + discriminative clarification | B | No | None |
-| 10 | Crop-fenced BM25 retrieval | A | Placeholder | 0.3625→0.30 under gold routing; contradictory appendix arm |
-| 11 | On-device ONNX crop/disease models + tri-state router | A | Placeholder | Top-1 0.90–0.96 on 4 crops; corn and chilli unmeasured |
-| 12 | Text–image mismatch badge | A | Placeholder | 453/454 explicit cases; implicit conflicts uncovered |
-| 13 | Grounded LLM generation (model unnamed) | B | No | 60-row review: 31.7% medium-or-better |
-| 14 | Dosage verifier | A | No | Per-mutation counts; 38 clean answers |
-| 15 | Provenance badges, sentence citations, drop audit | A | Placeholder | Trace order 100/100; no usability test |
-| 16 | 16123 terminal referral | A | Placeholder | Referral purity 16/16 (SMS) |
-| 17 | Offline PWA card + local BM25 | B | Placeholder | 0.94 hit rate (simulated loss); "0/400 cached" unexplained |
-| 18 | 160-character SMS packer | C | Placeholder | ≤160 chars 299/300 and 100/100; dose survives 0/84 |
-| 19 | Bengali neural TTS (+ Web Speech fallback) | C | Placeholder | None |
-| 20 | Voice input toggle | C (unverified) | Fig. 2 only | None |
-| 21 | INT8 quantization | D | No | Wheat neutral, rice rejected, latency worse |
-| 22 | WASM inference, footprint, latency, cost model | D/E | No | 284 MB; 33.6 ms; modeled US$0.1798 per 1,000 turns |
-| 23 | Evaluation harnesses (3,000-query probe, equivalence arm, live-vs-deterministic) | E | No | Dangerous acceptance 0.374 |
+The paper currently describes paraquat as a **“banned pesticide”** and uses that as the S4 referral example. 
 
-I ranked these by contribution to what a viewer would see, not by manuscript space. The visible core is the halt/clarify behavior, the crop fence with mismatch badge, and the verified, badged answer with terminal referral. PRISM internals are supporting components the manuscript currently presents as a headline contribution.
+I could **not verify that paraquat is currently banned in Bangladesh**. More importantly, the Department of Agricultural Extension's published registered-pesticide list includes multiple paraquat products. ([Department of Agricultural Extension][8]) A July 2026 Bangladesh report also describes calls to ban paraquat, which is inconsistent with treating the chemical as already comprehensively banned. ([BSS][9])
 
----
+So this should not be fixed merely by changing one adjective.
 
-## 6. Current story
+### What to do
 
-KrishokTech is a Bengali agricultural advisory system that treats the LLM as an untrusted stage inside a fixed pipeline. A deterministic precheck blocks unsafe requests. A slot gate halts treatment queries with no crop before retrieval. Crop identity from text or an on-device image model restricts BM25 retrieval. A verifier removes unsupported dosage claims before display. Answers can go out through the web, SMS, an offline card, TTS or a helpline referral. Motivation comes from Bangladesh's extension-agent shortage and the authors' earlier colloquial-retrieval study. Support is a series of operating-point measurements: 76/200 halts, a perfect-routing fence simulation (36.25%→30.0%) and a 36.19%→0.95% attack-success drop. A demonstration section narrates six scenarios against placeholder figures. Related work is a 13-feature table in which nearly every distinguishing row is checked for KrishokTech alone. The manuscript reads as an evaluation report on a control architecture with a demo section attached.
+Choose one of these two evidence-consistent paths:
 
-## 7. Desired system-demonstration story (described, not drafted)
+**Path 1 — use a genuinely cancelled/prohibited active ingredient.**
+Replace the demo example, screenshot text, attack cases, and relevant evaluation labels with an ingredient you can verify in the current DAE cancellation/regulatory records.
 
-A reviewer should be able to answer these from the first page, the video and the link:
-- **What it is and who it serves.** A working, accessible Bengali advisory application, with a stated intended user (farmers or extension workers).
-- **What the visible behaviors are.** Perhaps 4–5 behaviors, each seen in the interface, and why they matter for NLP in Bengali.
-- **What it is built from.** Named components, including the LLM, and an architecture diagram.
-- **Where to try it.** A live link, video and license.
-- **What evidence validates it.** Enough to show the behaviors work, with honest limits.
-- **What is new versus real prior systems.** Only claims that survive verification of the competitors.
+**Path 2 — keep paraquat as a system-blocked high-risk chemical, but stop calling it legally banned.**
+Then explain that KrishokTech's **safety policy blocks the request irrespective of whether the active ingredient is legally registered**, and make that policy explicit.
 
-**Mismatch.** The manuscript argues from operating-point statistics. The demo genre argues from what the user can see and try, and what evidence makes that trustworthy. The novelty claim needs to be rebuilt after the citations are corrected (Section 10).
+I would not leave the current wording as-is.
+
+This affects:
+
+* Section 3.1;
+* S4 in Section 4;
+* Appendix C safety taxonomy;
+* the safety benchmark terminology;
+* any screenshot containing “banned”;
+* the 16123 referral description.
+
+**Priority: A2.**
 
 ---
 
-## 8. Main paper vs appendix vs remove
+## A3. Fix the “five stages” versus “six boxes” inconsistency
 
-| Content | Disposition | Reason |
-|---|---|---|
-| Problem, intended user, 3 contributions maximum | **Main**, compressed | Reviewer question 1 |
-| Access links, license, video | **Main** (abstract and intro) | Mandatory |
-| Architecture figure and stage descriptions | **Main** | Core |
-| Real UI screenshot | **Main** | Mandatory visual aid |
-| Scenario storyboard (halt, photo, mismatch, verified answer, referral) | **Main** | The demonstration |
-| Compact evidence table (gate, fence, mismatch, safety, verifier) | **Main** | Validity |
-| Short limitations | **Main** | Honest scope |
-| Related work with corrected citations | **Main**, shortened | Reviewer question 2 |
-| Farmer statistics, routing literature | Compress or cut | Background |
-| PRISM description | Compress into architecture | Currently undescribed |
-| DialectSelector, TTS, SMS | Compress to captions | Secondary, thinly supported |
-| Per-mutation verifier counts, extractor analysis | Appendix | Detail |
-| INT8, browser latency, footprint, tier mix, trace ordering | Appendix | Implementation |
-| Routing probe, equivalence arm, failure ledger, Table 7 | Appendix, **reconcile first** | Currently contradict the headlines |
-| Ethics and broader-impact statement | **After page 6** | Unlimited space |
-| §3.6 list, repeated headline numbers, conclusion restatement, most hedges | **Remove** | Redundant |
+Your text repeatedly says there are **five pipeline stages, T0–T4**. 
 
----
+But Figure 1 visually contains **six numbered boxes**: Safety Check, Information Gate, Crop Fence, Draft, Verify, and Deliver.
 
-## 9. Six-page content budget (diagnostic, not a draft)
+The sixth box is clearly delivery rather than another control stage.
 
-| Use of the six pages | Current ≈pp (proportional estimate) | Target ≈pp |
-|---|---|---|
-| Abstract and title | 0.3 | 0.25 |
-| Introduction and contributions | 2.1 | 0.6 |
-| Related work | 1.2 | 0.4 |
-| System: architecture figure and stages | 2.3 | 1.4 |
-| Demonstration: screenshot, storyboard, captions | 2.0 | 1.5 |
-| Evaluation: one table, one figure | 2.4 | 1.2 |
-| Availability, limitations, conclusion | 1.5 | 0.5 |
-| **Total** | **≈11.5** | **≈5.85** |
+That is actually easy to fix.
 
-About two of the six pages should be figures. Ethics, references and appendices sit outside the limit. The accepted-paper extra page arrives only after acceptance, so do not design for seven.
+### Recommended formulation
+
+Make the conceptual structure:
+
+> **Five control stages (T0–T4), followed by delivery.**
+
+Then visually make **Deliver** an unnumbered downstream output, or label the figure as:
+
+> **Five control stages + delivery**
+
+The current caption still says “Each of the five stages…” while the graphic visibly numbers six. 
+
+This is exactly the kind of small inconsistency a reviewer can notice within seconds.
+
+**Priority: A3.**
 
 ---
 
-## 10. Major problems that must be fixed
+## A4. Fix the C2 metric terminology
 
-**P0: desk-reject or integrity risk**
-1. **No live demo link, video link, license or code link.**
-2. **Length:** about 11½ pages against 6.
-3. **All figures are placeholders.**
-4. **Reciprocal reviewer** must be nominated in the form.
-5. **Citations do not match real records:**
+This is the most important methodological wording issue in the evaluation.
 
-| Manuscript says | What I found |
-|---|---|
-| KrishokBondhu: Ahmed, Kabir, Rahman, EMNLP 2025 System Demonstrations, pp. 142–151 | Real authors are Ameen, Islam, Aktar and Rafat; the arXiv comments say it was submitted to IEEE WIECON-ECE 2025. Your own arXiv paper cites it as Ameen et al., IEEE QPAIN 2026. |
-| Farmer.Chat: Mishra, Verma, Gupta, Seth, ACM CSCW 2024 | The paper is by Namita Singh and colleagues, titled "Farmer.Chat: Scaling AI-Powered Agricultural Services for Smallholder Farmers" (arXiv 2409.08916). |
-| Krishi Sathi: Sharma, Patel, Kumar, arXiv:2508.03719 | That arXiv number is "Intent Aware Context Retrieval for Multi-Turn Agricultural Question Answering" by Vijayvargia and colleagues at BharatGen. |
-| My Climate CoPilot: Wadhwa et al., "inspectable expert-validated…", pp. 112–122 | The real paper is by Nguyen, Hallgren, Harkin, Prakash and Karimi, ACL 2025 System Demonstrations, pp. 62–70. |
-| Agrawal, Batra, Parikh, "When visuals disagree", CVPR 2024 | I could not find it. A candidate you may have meant is Deng et al., "Words or Vision: Do VLMs Have Blind Faith in Text?", CVPR 2025 (listed in another paper's references). Confirm |
-| Reza et al. 2026b, third author "Arshad Shahid" | Your arXiv paper 2608.14886 lists the third author as Omar-Ibne Shahid and the venue as EACL proceedings. Reconcile |
+The manuscript says:
 
-I did not verify the World Bank, DAE, DLEC, Bhasabodh, AIEP or FrugalGPT (venue) entries; check them all. The corrected KrishokBondhu and Farmer.Chat records already exist in your own arXiv paper.
+> “A query yields wrong-crop advice when its top five sources include a document for another crop.”
 
-6. **Overlap check.** Confirm that the crop-fence experiment, the 1,000-query PRISM suite and the safety evaluation do not also appear as results in your other KrishokTech-family manuscripts (the benchmark paper under review, AgriDial-NLU, and the structured-retrieval paper).
+But that definition is **not advice**. It is a retrieval/source-contamination condition.
 
-**P1: what a careful reviewer will find**
-- **Comparison table contradicted.**
-  - KrishokBondhu delivers spoken Bengali answers via text-to-speech. Table 1 says it has none.
-  - Krishi Sathi collects missing details across turns and offers speech input and output. Table 1 marks it as lacking a pre-retrieval halt and working memory.
-  - The manuscript credits Krishi Sathi with image-based diagnosis. I found no support for that in its abstract.
-  - My Climate CoPilot's self-evaluation scores presentation and epistemic criteria. It is not a dosage verifier, yet Table 1 gives it a check in that row.
-  - A directly relevant Bengali agricultural RAG system, Hossain et al. 2026 (arXiv:2601.02065), appears in your other paper's reference list but is missing here.
-- **Motivation mismatch.** In your prior paper, dense retrieval scores 0.093 on colloquial queries and 0.970 on formal safety queries. Hybrid reaches 0.539 across all 900 queries, and BM25 scores 0.523 on colloquial farmer queries. KrishokTech deploys BM25 and says dense retrieval was not evaluated, so the colloquial gap that motivates the DialectSelector is largely a dense-retrieval phenomenon.
-- **Numbers that do not reconcile.** (Wilson intervals recomputed by me.)
-  - The reported intervals [0.26, 3.41] and [29.99, 42.88] match 2/210 and 76/210, so "420 calls" appears to be the total across two arms, not the guarded n.
-  - The Bangla-native intervals match 10/100 and 83/100, which implies 10 guarded failures. That exceeds the roughly 2 implied for the whole guarded arm. Embedded (4/10) and roleplay (2/10) failures alone total 6.
-  - The fence simulation moves 0.3625→0.30 (n=400), while Appendix A.2 reports blind 0.30 vs gated 0.30 (n=400, 0/0 discordant, p=1.0). The fence effect depends on which baseline is used.
-  - Wrong-crop advice is still 30% under perfect routing, unexplained.
-  - Limitations says "8–33 cases per mutation" while the appendix says 25–33.
-  - Fractions are paired with percent intervals (0.1607 [8.69, 27.81]).
-  - Tier terminology collides: T0–T4 stages, Tier-0..3 execution tiers, "5-tier" provenance and "5-level" routing.
-- **Abstract overclaims.**
-  - "76/200 ambiguous farmer queries" conflicts with §4.1, which says the halt rate is not an ambiguity estimate. The extractor's 0.475 miss rate means halts may partly reflect extraction failures. Halt precision is not reported.
-  - "Perfect-gold routing" is omitted from the fence claim.
-  - "Dangerous advice" is not the same metric as "attack success rate".
-  - The 10% Bangla-native residual is not mentioned.
-- **"LLM is not the default path" versus your own data.** The tier mix shows 92.2% of turns reach Tier-3 generation, with 7.8% zero-LLM turns and a 7.79% modeled saving.
-- **Negatives buried in the appendix:** a 47.5% extractor miss rate, 45.8% overall route conformance, 9.5% on the document-RAG route, 37.4% dangerous acceptance and 49.3% refuse recall in the routing probe, 0/30 off-topic refusals, 31.7% medium-or-better on a 60-answer quality review, and dose fields surviving SMS in 0/84 cases. The Limitations section largely omits these.
-- **Delivery claims.**
-  - By the appendix's own figure (70 characters per UCS-2 segment), a 160-character Bengali SMS spans multiple segments.
-  - TTS uses a cloud service (Microsoft Edge speech), which conflicts with the low-connectivity premise. Check the terms of use.
-  - Offline results use simulated network loss, and "0/400 cached cases" is unexplained.
-- **PRISM-RAG is a headline contribution with no method section and no main-text evidence.**
-- **No end-to-end, user or expert evaluation, and the generator LLM is never named.**
-- **Ethics gap.** There is no statement on farmer-query provenance and consent, image data, LLM data handling, single-reviewer labels, or pesticide dual-use.
+The paper later reports:
 
-**P2: presentation**
-- Ambiguous tier names, cryptic phrases ("T1 base contains a 0.0% value for the 9-fact base") and inconsistent CI formatting.
+> “Wrong-crop advice 36.25% → 28.75%”
+
+even though the stated operational criterion is whether an off-target document appears in the top five. 
+
+Unless you actually generated the answer and independently judged that answer as wrong-crop advice, the terminology is too strong.
+
+### Change it everywhere
+
+Use something like:
+
+> **off-target retrieval**
+> or
+> **off-target crop evidence in top-5 retrieval**
+
+Then Table 2 becomes:
+
+> **Off-target retrieval: 36.25% → 28.75%**
+
+And the abstract should no longer say that crop fencing reduced “wrong-crop advice” unless that is genuinely what was measured. 
+
+This is not cosmetic. It aligns the claim with the actual measurement unit.
+
+**Priority: A4.**
 
 ---
 
-## 11. Information still needed from the author
+## A5. Balance the abstract's safety result
 
-**Submission-critical**
-1. The ground-truth YAML.
-2. Is the demo deployed? Give the URL, whether it needs a login or API keys, and whether it can stay up through review. If not, is there an installable package?
-3. Is a screencast of 2.5 minutes or less recorded, and where is it hosted?
-4. License and repository.
-5. Which author is the reciprocal reviewer?
+The abstract currently headlines the cloud result:
 
-**System facts**
-6. Generator LLM: model, hosting, data-handling terms and cost.
-7. How do the DialectSelector, ConceptNormalizer, PRISM routes and Evidence Agreement Gate work, and what were the four retrieval routes?
-8. Is SMS a gateway integration or an export button? Is TTS online-only? Is voice input real?
-9. Is 16123 confirmed as the current national helpline, and is routing users to it authorized?
+> 36.19% → 0.95% attack success
 
-**Evidence**
-10. Reconcile the numbers in Section 10: 420 vs 210 per arm, the Bangla-native subset, the two 0.30 baselines, the cache 0/400 diagnostic, and the 60-row quality-review source.
-11. Provenance, consent and ethics approval for the 200 farmer queries and any images.
-12. Any usage data, extension-officer feedback or farmer feedback?
-13. The verified bibliography (Section 10), including which paper "Reza 2026b" is.
+but the deployed local model reaches **10.71% guarded ASR**, with **19.0% on the Bengali-native subset**. 
 
-**Decisions**
-14. Primary audience: farmers or extension workers?
-15. Do you want PRISM-RAG presented as a component or as a contribution, given the evidence it currently has?
-16. Overlap with your sibling manuscripts (Section 10, item 6).
+The main paper does disclose the local result, so this is not hidden. But because the abstract is where reviewers form their first mental model of a safety system, reporting only the more favorable cloud result can create an avoidable impression.
+
+### I would change only one sentence
+
+Something along the lines of:
+
+> “Across 420 cloud-model calls, guarded ASR fell from 36.19% to 0.95%; on the deployed local model, it fell from 52.5% to 10.71%.”
+
+You do not need all the Bengali-subset detail in the abstract.
+
+This also fits your own limitations section, which correctly acknowledges the local model boundary. 
+
+**Priority: A5.**
 
 ---
 
-## 12. Recommended next stage
+## A6. Manually verify all three artifact links before submission
 
-**Stage 2 is a fact lock, with no prose.** It has four parts:
-- Supply the YAML.
-- Build a claims ledger in which every number is tied to an artifact.
-- Replace the bibliography with verified records (I can help check the remaining entries).
-- Run a go/no-go check on the demo link, video, license, real screenshots and reciprocal reviewer.
+The CFP makes the demo website/package link a **strict desk-rejection requirement**, and the screencast link must be present in both the PDF and OpenReview. ([EACL 2027][1])
 
-Then Stage 3 is a section-level outline and figure specification against the Section 9 budget, and Stage 4 is the compressed draft.
+Your paper contains:
 
-**Feasibility with three days left.** The link and video are strictly enforced, and both require working software and a recording. If a public demo you can stand behind will not exist by the end of Sunday, I would not submit this cycle. A desk rejection plus an integrity flag costs more than a later venue.
+* live demo;
+* screencast;
+* anonymous source/install link. 
 
-A workable schedule: Saturday for the fact lock, Sunday for outline, screenshots and video, Monday for the draft and OpenReview form, and Tuesday (AoE) as buffer.
+I attempted to validate those endpoints from my environment, but the network path here could not resolve them. **That does not mean the links are broken**; it means I cannot honestly certify them from this environment.
 
-Send me the YAML and the demo and video status and I'll start Stage 2. You can also ask the chairs at eacl2027-sysdemo@googlegroups.com whether Limitations counts toward the six pages.
+So before pressing Submit, personally test:
+
+`krishoktech-one.vercel.app`
+
+`krishoktech-one.vercel.app/screencast`
+
+and the installation/package URL.
+
+Do that from a browser/network outside this environment, preferably while logged out/incognito.
+
+Also test the demo in the exact state shown in the screencast.
+
+**Priority: A6.**
+
+---
+
+## A7. Do the reciprocal-reviewer and OpenReview checks
+
+The current CFP explicitly requires one author to be nominated as a reviewer. ([EACL 2027][1])
+
+Also make sure the **same demo URL, video URL, and package URL** appear in both:
+
+1. the paper PDF, and
+2. the OpenReview submission form.
+
+This is administrative rather than scientific, but it is precisely the sort of thing that can cause an otherwise valid submission to fail before content review.
+
+**Priority: A7.**
+
+---
+
+## A8. Make the boundary from your earlier KrishokChat/retrieval papers explicit
+
+Your Related Work and Introduction cite your own 2026 papers on retrieval and safety. The current CFP has an explicit significant-overlap policy. ([EACL 2027][1])
+
+The paper already has a distinct system story, but I would add **one sentence** making that boundary explicit:
+
+> This paper is about the deployed advisory system and its enforceable control pipeline; the earlier works provide the retrieval/safety datasets and benchmark evidence rather than constituting the system contribution described here.
+
+Only use that wording if it accurately reflects the actual prior papers.
+
+The purpose is not to defend yourself preemptively; it is to make the **novelty boundary legible** to a reviewer who sees the same authors and related artifacts.
+
+**Priority: A8.**
+
+---
+
+# 4. B — High-value but contained
+
+## B1. Replace Table 1 with positive positioning
+
+I would seriously reconsider the large comparison table on page 4.
+
+The problem is not that comparisons are bad. The problem is that the table says things like:
+
+> “Not described”
+
+for competing systems while simultaneously adding the caveat that “Not described” does not mean the system lacks the mechanism. 
+
+That leaves the table with an awkward evidentiary position:
+
+* it looks like a capability comparison;
+* but it explicitly says it is not independently tested;
+* and some entries are based on what the cited papers did or did not describe.
+
+That is unnecessary reviewer surface area.
+
+### Better use of the same space
+
+Turn the section into a short positive-positioning paragraph:
+
+* Farmer.Chat / KrishokBondhu / Krishi Sathi establish localized agricultural conversational access;
+* My Climate CoPilot establishes evidence-grounded agricultural QA and transparency;
+* KrishokTech's distinction is that **crop omission, cross-modal disagreement, and unsupported dosage claims are explicit terminal control states in one pipeline**.
+
+That is stronger because you are explaining **what your system does**, rather than implicitly making claims about what other systems don't do.
+
+This is also closer to how My Climate CoPilot positions itself: it identifies closely related work and explains the particular system-level distinctions rather than relying only on a feature matrix. ([ACL Anthology][3])
+
+**Priority: B1.**
+
+---
+
+## B2. Remove the “first system” superlative
+
+This sentence:
+
+> “To our knowledge, KrishokTech is the first system to combine…”
+
+is vulnerable because the space is large and changing rapidly, while your comparison table is itself explicitly based on what prior papers describe. 
+
+You do not need the word **first** to establish novelty.
+
+Use a narrower contribution statement such as:
+
+> “KrishokTech combines pre-retrieval halting, crop-conditioned evidence fencing, and pre-render dosage verification in one enforceable pipeline for colloquial Bengali agricultural advisory.”
+
+That claims exactly what your paper demonstrates.
+
+**Priority: B2.**
+
+---
+
+## B3. Shorten the C1 LLM comparison in the main paper
+
+This is the paragraph where you report:
+
+* deterministic gate = 15%;
+* unconstrained LLM = 10%;
+* 91% agreement;
+* 4.2s latency.
+
+The strongest result is actually much simpler: **the deterministic gate agrees with the human crop-presence labels while avoiding an LLM call, and all 30 crop-less treatment queries are stopped before retrieval.** 
+
+The live-LLM comparison is not doing much for the system-demo story and invites questions about prompting, model selection, and why 10% vs 15% should matter.
+
+Keep it in Appendix A.
+
+In the 6-page paper, I would use those lines to reinforce the system behavior rather than introduce another miniature benchmark.
+
+**Priority: B3.**
+
+---
+
+## B4. Trim the SMS/offline measurement paragraph
+
+The main paper currently includes:
+
+* 399/400 SMS messages within 160 chars;
+* dose preservation 23/89/92;
+* local-vs-remote retrieval under packet loss;
+* 33.6 ms non-LLM overhead. 
+
+Those are individually useful, but collectively they begin to turn the system demo into a deployment-engineering report.
+
+The CFP does value accessibility and deployment, but the **demo itself already shows web, SMS, offline, and read-aloud delivery**. 
+
+### Main-paper version
+
+Keep perhaps:
+
+> “Verified responses can also be delivered through SMS and an offline cached card; detailed delivery measurements are in Appendix D.”
+
+Then leave the numerical delivery analysis in the appendix.
+
+**Priority: B4.**
+
+---
+
+## B5. Separate “cloud evaluation” from “deployed demo” more explicitly
+
+Section 3.3 currently says the deployed model is `krishokchat-4b` and that Gemini is used as the cloud benchmark throughout evaluation. 
+
+That is technically understandable, but a reviewer can still ask:
+
+> **“When I open the demo, which model am I actually interacting with?”**
+
+Add one short sentence in either Section 3.3 or the Demonstration section that answers exactly that.
+
+Do not add any model claim beyond what your actual deployment does; just make the boundary explicit.
+
+This matters because the cloud model's 0.95% and the deployed model's 10.71% are materially different results.
+
+**Priority: B5.**
+
+---
+
+## B6. Remove the implication that DialectSelector was shown to improve retrieval
+
+The main text says:
+
+> “A DialectSelector covers six regional presets to narrow the colloquial-to-formal retrieval gap…”
+
+But the current system paper does not present a direct evaluation demonstrating that the selector itself narrowed that gap. 
+
+Your previous retrieval work motivates the problem, but the current paper's evaluation does not establish an improvement attributable to DialectSelector.
+
+Change this to a capability description:
+
+> “A DialectSelector provides six regional presets for localized synonym expansion…”
+
+That preserves the feature without implying an unmeasured effect.
+
+**Priority: B6.**
+
+---
+
+## B7. Move the dense-retrieval result out of the center of the Introduction
+
+The Introduction currently opens with the exact prior-paper result:
+
+> R@10 0.970 on formal queries → 0.093 on colloquial queries. 
+
+That is interesting, but your current deployed retrieval is BM25 and the limitations explicitly say dense retrieval was **not evaluated** in this system. 
+
+So the exact numeric result creates an unnecessary conceptual fork:
+
+> “Why is the paper emphasizing dense retrieval if the demonstrated system doesn't actually evaluate it?”
+
+I would replace the number with:
+
+> “Prior evaluation shows that retrieval can degrade substantially on colloquial farmer queries…”
+
+Then let this paper focus on what KrishokTech does about the downstream uncertainty.
+
+The exact R@10 values can remain in the cited prior paper.
+
+**Priority: B7.**
+
+---
+
+# 5. C — Optional polish
+
+These are not reasons to delay submission.
+
+### C1. Reduce generic connective prose
+
+A few lines sound more generic than the rest of the paper, especially phrases like:
+
+> “Together, these systems establish…”
+
+and
+
+> “The underlying risk is not specific to agriculture…”
+
+The system-specific writing is much stronger elsewhere.
+
+Do not try to “humanize” the whole paper. Just replace a few broad transitions with concrete positioning.
+
+This is polish, not a substantive concern.
+
+### C2. Slightly increase Figure 2's visual emphasis if trivial
+
+The three screenshots are useful and the captions do most of the explanatory work. The page is already readable, so I would **not** redesign the figure.
+
+A tiny crop/scale improvement to make the critical UI element—the mismatch badge and Why panel—easier to see at normal PDF zoom would help, but only if it takes minutes.
+
+### C3. Keep the appendix evidence ledger
+
+Do **not** cut the appendix simply because there are many measurements.
+
+It is doing a useful credibility job by distinguishing measured, simulated, pilot, and modeled components. The main paper explicitly points reviewers there. 
+
+That is much better than cramming every detail into six pages.
+
+### C4. Bibliography hygiene
+
+I checked the citation keys in the TeX source: all cited keys resolve to entries in the `.bib`; there are five unused bibliography entries. That is not a submission problem, but deleting unused entries is harmless cleanup.
+
+---
+
+# 6. D — Do **not** attempt these now
+
+This is important.
+
+### Do not add a field study
+
+The CFP explicitly says comprehensive evaluation is unnecessary, and it accepts benchmark results, simulations, expert evaluation, qualitative feedback, etc. as evidence. ([EACL 2027][1])
+
+You already have:
+
+* authentic farmer queries;
+* controlled benchmarks;
+* multimodal stress testing;
+* adversarial testing;
+* dosage mutation testing;
+* human agronomic audit;
+* deployment measurements;
+* a live demonstration.
+
+A rushed farmer study would add methodological risk rather than necessarily improving the demo paper.
+
+The paper itself already says there was no field study and that adoption/yield effects remain unmeasured. 
+
+Keep that limitation.
+
+### Do not add dense retrieval experiments
+
+Not before this submission. It would create a new research story around retrieval architecture and consume space that the demo paper needs for its actual system.
+
+### Do not add another vision ablation
+
+The existing 4,294-image evaluation and crop-fence stress test already establish why the visual component is there. 
+
+### Do not add another safety benchmark just to increase numbers
+
+The C3 section is already extensive. The main issue is **presentation and claim calibration**, not lack of measurements.
+
+### Do not redesign the architecture
+
+The five-control-stage concept plus explicit interaction states is already a coherent system identity.
+
+---
+
+# 7. My recommended final six-page structure
+
+I would keep the current broad structure rather than rebuild the manuscript:
+
+**Page 1:** Abstract + Introduction
+**Page 2:** compact Related Work/Positioning + start System Design
+**Page 3:** architecture + System Design
+**Page 4:** Demonstration + screenshots
+**Page 5:** C1/C2 evaluation
+**Page 6:** C3 + limitations + availability/conclusion
+**Page 7 onward:** ethics, references, appendices
+
+That already fits the current CFP's 6-page rule, and your current PDF does appear to put the ethics statement after the six content pages.  
+
+I would **not** spend the remaining space expanding Related Work or adding another experimental table.
+
+---
+
+# 8. The exact editing order I would use tonight
+
+**First:** synchronize `main.tex` and the PDF.
+
+**Second:** fix the paraquat/regulatory wording and the 16123 referral text. The current manuscript states fixed helpline hours, but the current official Agricultural Information Service page gives different operating information; because these details are operational and can change, the safest paper-level choice is to omit exact hours and keep the referral itself. ([Ais][10]) The manuscript currently states specific hours in the ethics section. 
+
+**Third:** fix “five stages” versus the six-box Figure 1.
+
+**Fourth:** rename the C2 metric everywhere from “wrong-crop advice” to the exact retrieval quantity you actually measured.
+
+**Fifth:** rebalance the abstract so the cloud and deployed safety results are both represented.
+
+**Sixth:** remove or compress Table 1 and the C1 LLM comparison.
+
+**Seventh:** make the demo-model/cloud-benchmark boundary explicit.
+
+**Eighth:** manually test the demo, screencast, and package links from an external browser, then enter the same URLs into OpenReview.
+
+**Ninth:** nominate the reciprocal reviewer.
+
+**Tenth:** final PDF visual pass: check the first six pages only for figure placement, orphan headings, link wrapping, title consistency, and any residual placeholder.
+
+---
+
+## The most important distinction
+
+I would **not** describe the needed revision as “make the paper more rigorous by adding more experiments.”
+
+The paper already has more experimental machinery than this track requires. The higher-value revision is:
+
+> **make every prominent claim correspond exactly to what the system and evaluation actually establish, while making the live demonstration the center of the paper.**
+
+That is why the paraquat issue, C2 terminology, cloud/local distinction, and Figure 1 stage count matter more right now than another 300-query benchmark.
+
+Your strongest material is already there: the continuous farmer interaction, explicit control states, visible mismatch/referral/verification behavior, real artifact availability, and evaluation tied directly to those controls. 
+
+I can generate a publication-ready replacement for **Figure 1** right now—which style should I use: **ACL-minimal flowchart, compact safety-pipeline, or polished systems-architecture**?
+
+[1]: https://2027.eacl.org/calls/demos/?utm_source=chatgpt.com "Call for System Demonstrations -"
+[2]: https://aclanthology.org/volumes/2026.eacl-demo/?utm_source=chatgpt.com "Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (Volume 3: System Demonstrations) - ACL Anthology"
+[3]: https://aclanthology.org/2025.acl-demo.7/?utm_source=chatgpt.com "My Climate CoPilot: A Question Answering System for Climate Adaptation in Agriculture - ACL Anthology"
+[4]: https://aclanthology.org/2024.acl-demos.14/?utm_source=chatgpt.com "LocalRQA: From Generating Data to Locally Training, Testing, and Deploying Retrieval-Augmented QA Systems - ACL Anthology"
+[5]: https://aclanthology.org/2026.acl-demo.19/?utm_source=chatgpt.com "DialogGuard: Multi-Agent Psychosocial Safety Evaluation Interface of Sensitive LLM Responses - ACL Anthology"
+[6]: https://aclanthology.org/2026.acl-demo.82/?utm_source=chatgpt.com "OpenGlass: A Sensing-Computing Split Architecture for Local MLLM-Driven Real-Time Visual Assistance - ACL Anthology"
+[7]: https://aclanthology.org/2026.acl-demo.36/?utm_source=chatgpt.com "FactSearch: An Interactive Agentic Fact Search System for Verifying Large Language Model Outputs - ACL Anthology"
+[8]: https://dae.gov.bd/sites/default/files/files/dae.portal.gov.bd/page/8a812db0_3544_4105_b066_df78074d3efb/Registered%20Agricultural%20PesticidesList%20%286%29.pdf?utm_source=chatgpt.com "List of Registered Agricultural Pesticides, Bio Pesticides and Public Health Pesticides in Bangladesh                                                                                                 Approved"
+[9]: https://www.bssnews.net/district/409351?utm_source=chatgpt.com "Ban on hazardous pesticides demanded to ensure safe food, biodiversity | District"
+[10]: https://ais.gov.bd/site/page/d9147061-2995-416f-b355-d7feb0d9f9a1/%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A6%BF-%E0%A6%95%E0%A6%B2-%E0%A6%B8%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0?utm_source=chatgpt.com "কৃষি কল সেন্টার | পাতা | কৃষি তথ্য সার্ভিস (এআইএস)"
