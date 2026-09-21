@@ -53,11 +53,17 @@
   year      = {2020}
 }
 
-@inproceedings{bangla_dialects,
-  title     = {BhasaBodh: A Multidialectal Corpus and Benchmark for Bengali Language Processing},
-  author    = {Chowdhury, Shammur Absar and others},
-  booktitle = {Proceedings of the 2025 Conference on Natural Language Processing for Low-Resource Languages (BanglaLP)},
-  year      = {2025}
+@inproceedings{bhuiyan-etal-2025-bhasabodh,
+  title     = {BhasaBodh: Bridging Bangla Dialects and Romanized Forms through Machine Translation},
+  author    = {Bhuiyan, Md. Tofael Ahmed and Rahman, Md. Abdur and Masum, Abdul Kadar Muhammad},
+  booktitle = {Proceedings of the Second Workshop on Bangla Language Processing (BLP-2025)},
+  month     = dec,
+  year      = {2025},
+  pages     = {113--118},
+  publisher = {Association for Computational Linguistics},
+  address   = {Mumbai, India},
+  doi       = {10.18653/v1/2025.banglalp-1.9},
+  url       = {https://aclanthology.org/2025.banglalp-1.9/}
 }
 
 % ---- Multimodal Conflict & Vision-Language Grounding ----
@@ -327,15 +333,15 @@
   url = {https://arxiv.org/abs/2507.23248}
 }
 
-% ---- Modality conflict (verified via Consensus reference dump, Sep 2026) ----
-@article{Zhu_2024,
-  title = {Unraveling Cross-Modality Knowledge Conflicts in Large Vision-Language Models},
-  author = {Zhu, T. and Liu, Q. and Wang, F. and Tu, Z. and Chen, M.},
-  journal = {arXiv preprint arXiv:2410.03659},
-  year = {2024},
-  eprint = {2410.03659},
+% ---- Modality conflict (verified via arXiv API + Consensus dump, Sep 2026) ----
+@article{zhu2024cross,
+  title         = {Unraveling Cross-Modality Knowledge Conflicts in Large Vision-Language Models},
+  author        = {Zhu, Tinghui and Liu, Qin and Wang, Fei and Tu, Zhengzhong and Chen, Muhao},
+  journal       = {arXiv preprint arXiv:2410.03659},
+  year          = {2024},
+  eprint        = {2410.03659},
   archivePrefix = {arXiv},
-  url = {https://arxiv.org/abs/2410.03659}
+  url           = {https://arxiv.org/abs/2410.03659}
 }
 
 % ---- Bangla multimodal benchmarks (verified via arXiv + Hugging Face, Sep 2026) ----
@@ -357,6 +363,76 @@
   eprint = {2609.12509},
   archivePrefix = {arXiv},
   url = {https://arxiv.org/abs/2609.12509}
+}
+
+% ---- Related-work clarification + verification literature (verified via arXiv API, Sep 2026) ----
+@article{chen2024act,
+  title         = {Learning to Clarify: Multi-turn Conversations with Action-Based Contrastive Self-Training},
+  author        = {Chen, Maximillian and Sun, Ruoxi and Pfister, Tomas and Arik, Sercan O.},
+  journal       = {arXiv preprint arXiv:2406.00222},
+  year          = {2024},
+  eprint        = {2406.00222},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2406.00222}
+}
+
+@article{gan2024clarqllm,
+  title         = {ClarQ-LLM: A Benchmark for Models Clarifying and Requesting Information in Task-Oriented Dialog},
+  author        = {Gan, Yujian and Li, Changling and Xie, Jinxia and Wen, Luou and Purver, Matthew and Poesio, Massimo},
+  journal       = {arXiv preprint arXiv:2409.06097},
+  year          = {2024},
+  eprint        = {2409.06097},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2409.06097}
+}
+
+@inproceedings{tang2024minicheck,
+  title     = {MiniCheck: Efficient Fact-Checking of LLMs on Grounding Documents},
+  author    = {Tang, Liyan and Laban, Philippe and Durrett, Greg},
+  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  month     = nov,
+  year      = {2024},
+  pages     = {8818--8847},
+  publisher = {Association for Computational Linguistics},
+  address   = {Miami, Florida, USA},
+  doi       = {10.18653/v1/2024.emnlp-main.499},
+  url       = {https://aclanthology.org/2024.emnlp-main.499/}
+}
+
+@article{ji2026medragchecker,
+  title         = {MedRAGChecker: Claim-Level Verification for Biomedical Retrieval-Augmented Generation},
+  author        = {Ji, Yuelyu and Kwak, Min Gu and Zhang, Hang and Wu, Xizhi and Li, Chenyu and Wang, Yanshan},
+  journal       = {arXiv preprint arXiv:2601.06519},
+  year          = {2026},
+  eprint        = {2601.06519},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2601.06519}
+}
+
+@inproceedings{fang-mackenzie-2026-factsearch,
+  title     = {FactSearch: An Interactive Agentic Fact Search System for Verifying Large Language Model Outputs},
+  author    = {Fang, Meng and Mackenzie, Harry},
+  booktitle = {Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 3: System Demonstrations)},
+  month     = jul,
+  year      = {2026},
+  pages     = {367--373},
+  publisher = {Association for Computational Linguistics},
+  address   = {San Diego, California, United States},
+  doi       = {10.18653/v1/2026.acl-demo.36},
+  url       = {https://aclanthology.org/2026.acl-demo.36/}
+}
+
+@inproceedings{murugaraj-etal-2026-ragvue,
+  title     = {RAGVUE: A Diagnostic View for Explainable and Automated Evaluation of Retrieval-Augmented Generation},
+  author    = {Murugaraj, Keerthana and Lamsiyah, Salima and Theobald, Martin},
+  booktitle = {Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (Volume 3: System Demonstrations)},
+  month     = mar,
+  year      = {2026},
+  pages     = {512--526},
+  publisher = {Association for Computational Linguistics},
+  address   = {Rabat, Morocco},
+  doi       = {10.18653/v1/2026.eacl-demo.35},
+  url       = {https://aclanthology.org/2026.eacl-demo.35/}
 }
 
 % ---- RAG claim repair (verified via arXiv abs page, Sep 2026) ----
