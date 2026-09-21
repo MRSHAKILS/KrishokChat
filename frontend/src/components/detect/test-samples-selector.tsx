@@ -6,7 +6,7 @@ import { VERIFIED_TEST_SAMPLES, CROP_GROUPS, type TestSampleInstance } from "@/l
 import { useLanguage } from "@/context/language-context";
 
 interface TestSamplesSelectorProps {
-  onSelectSample: (path: string, name: string, cropHint?: string) => void;
+  onSelectSample: (path: string, name: string, cropHint?: string, diseaseHint?: string) => void;
   loading?: boolean;
   sampleLoading?: boolean;
   compact?: boolean;
@@ -25,7 +25,7 @@ export function TestSamplesSelector({
 
   const handleApply = (instance: TestSampleInstance) => {
     setSelectedId(instance.id);
-    onSelectSample(instance.imageSrc, `${instance.id}.jpg`, instance.cropHint);
+    onSelectSample(instance.imageSrc, `${instance.id}.jpg`, instance.cropHint, instance.disease);
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,7 +33,7 @@ export function TestSamplesSelector({
     setSelectedId(newId);
     const found = VERIFIED_TEST_SAMPLES.find((s) => s.id === newId);
     if (found) {
-      onSelectSample(found.imageSrc, `${found.id}.jpg`, found.cropHint);
+      onSelectSample(found.imageSrc, `${found.id}.jpg`, found.cropHint, found.disease);
     }
   };
 

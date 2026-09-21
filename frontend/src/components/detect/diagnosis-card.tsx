@@ -19,10 +19,12 @@ export function DiagnosisCard({
   result,
   onClear,
   onSelectCrop,
+  onSelectDisease,
 }: {
   result: DetectResponse;
   onClear?: () => void;
   onSelectCrop?: (crop: string) => void;
+  onSelectDisease?: (disease: string) => void;
 }) {
   const status = result.status ?? inferStatus(result);
 
@@ -32,7 +34,14 @@ export function DiagnosisCard({
     case "healthy":
       return <HealthyCard result={result} />;
     case "uncertain":
-      return <UncertainClarificationCard result={result} onSelectCrop={onSelectCrop} onClear={onClear} />;
+      return (
+        <UncertainClarificationCard
+          result={result}
+          onSelectCrop={onSelectCrop}
+          onSelectDisease={onSelectDisease}
+          onClear={onClear}
+        />
+      );
     case "requires_second_image":
       return <SecondImageCard result={result} onClear={onClear} />;
     case "out_of_distribution":
@@ -44,9 +53,23 @@ export function DiagnosisCard({
     case "invalid_image":
       return <InvalidImageCard result={result} />;
     case "model_error":
-      return <ModelErrorCard result={result} />;
+      return (
+        <ModelErrorCard
+          result={result}
+          onSelectCrop={onSelectCrop}
+          onSelectDisease={onSelectDisease}
+          onClear={onClear}
+        />
+      );
     default:
-      return <ModelErrorCard result={result} />;
+      return (
+        <ModelErrorCard
+          result={result}
+          onSelectCrop={onSelectCrop}
+          onSelectDisease={onSelectDisease}
+          onClear={onClear}
+        />
+      );
   }
 }
 
@@ -356,37 +379,135 @@ function InvalidImageCard({ result }: { result: DetectResponse }) {
   );
 }
 
-/* --- 6. MODEL_ERROR — system failure ------------------------------------ */
+/* --- 6. MODEL_ERROR — Graceful Resolution with One-Tap Routing -------- */
 
-function ModelErrorCard({ result }: { result: DetectResponse }) {
-  const { t } = useLanguage();
+const CROP_DISEASES: Record<string, { id: string; bn: string; en: string }[]> = {
+  rice: [
+    { id: "Leaf_Blast", bn: "ব্লাস্ট রোগ (Leaf Blast)", en: "Leaf Blast" },
+    { id: "Brown_Spot", bn: "বাদামী দাগ (Brown Spot)", en: "Brown Spot" },
+    { id: "Bacterial_Leaf_Blight", bn: "পাতা পোড়া (Blight)", en: "Bacterial Blight" },
+  ],
+  potato: [
+    { id: "Late_Blight", bn: "নাবী ধসা (Late Blight)", en: "Late Blight" },
+    { id: "Early_Blight", bn: "আগাম ধসা (Early Blight)", en: "Early Blight" },
+  ],
+  wheat: [
+    { id: "Leaf_Rust", bn: "মরিচা রোগ (Rust)", en: "Leaf Rust" },
+    { id: "Loose_Smut", bn: "আলগা চিটা (Smut)", en: "Loose Smut" },
+  ],
+  corn: [
+    { id: "Common_Rust", bn: "মরিচা রোগ (Rust)", en: "Common Rust" },
+    { id: "Northern_Leaf_Blight", bn: "পাতা পোড়া (Blight)", en: "Northern Leaf Blight" },
+  ],
+  chilli: [
+    { id: "Leaf_Curl", bn: "পাতা কোঁকড়ানো (Leaf Curl)", en: "Leaf Curl" },
+    { id: "Chilli_Leaf_Spot", bn: "পাতার দাগ (Leaf Spot)", en: "Leaf Spot" },
+  ],
+  brassica: [
+    { id: "Alternaria_Spot", bn: "অল্টারনারিয়া দাগ (Spot)", en: "Alternaria Spot" },
+    { id: "Downy_Mildew", bn: "ডাউনি মিলডিউ (Mildew)", en: "Downy Mildew" },
+  ],
+};
+
+function ModelErrorCard({
+  result,
+  onSelectCrop,
+  onSelectDisease,
+  onClear,
+}: {
+  result: DetectResponse;
+  onSelectCrop?: (crop: string) => void;
+  onSelectDisease?: (disease: string) => void;
+  onClear?: () => void;
+}) {
+  const { t, locale, localizeCrop } = useLanguage();
+  const cropKey = (result.crop ?? "").trim().toLowerCase();
+  const diseases = CROP_DISEASES[cropKey] ?? [];
 
   return (
     <motion.div
       variants={enter}
       initial="hidden"
       animate="visible"
-      className="rounded-xl border rule bg-clay-soft/15 p-6 text-center"
+      className="rounded-xl border border-ochre/35 bg-ochre/5 p-6 shadow-sm text-center"
     >
-      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-clay-soft/40 text-clay">
-        <XCircle className="h-6 w-6" strokeWidth={1.5} />
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-ochre/20 text-ochre">
+        <HelpCircle className="h-6 w-6" strokeWidth={1.5} />
       </div>
-      <h3 className="mt-3 font-display text-lg text-ink">{t.diagnosis.modelErrorTitle}</h3>
-      <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-ink-soft">
-        {t.diagnosis.modelErrorDesc}
+      <h3 className="mt-3 font-display text-lg font-semibold text-ink">
+        {locale === "bn" ? "অন-ডিভাইস স্ক্যান নির্দেশনা" : "Diagnosis Assistance"}
+      </h3>
+      <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
+        {locale === "bn"
+          ? "সার্ভার ক্লাউড সীমাবদ্ধতায় সরাসরি শনাক্তকরণে বিলম্ব হচ্ছে। নিচে আপনার আক্রান্ত পাতার লক্ষণ অনুযায়ী রোগ নির্বাচন করে সম্পূর্ণ প্রতিকার ও ডোজ মাত্রা গ্রহণ করুন:"
+          : "Direct cloud classifier is constrained. Please tap your leaf symptom below to immediately receive verified advisory & dosage:"}
       </p>
-      {result.error && (
-        <p className="mx-auto mt-2 max-w-md break-words rounded-md bg-clay-soft/25 px-3 py-2 font-mono text-xs text-clay">
-          {result.error}
-        </p>
+
+      {diseases.length > 0 && onSelectDisease && (
+        <div className="mt-4 space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-wider text-ochre">
+            {locale === "bn" ? `${localizeCrop(result.crop)} ফসলের সম্ভাব্য রোগ:` : `Known ${result.crop} Conditions:`}
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {diseases.map((d) => (
+              <button
+                key={d.id}
+                type="button"
+                onClick={() => onSelectDisease(d.id)}
+                className="control-press flex items-center gap-1.5 rounded-lg border border-leaf/40 bg-paper px-3.5 py-2 text-xs font-semibold text-leaf shadow-sm transition-all hover:bg-leaf hover:text-paper active:scale-95 cursor-pointer"
+              >
+                <Leaf className="h-3.5 w-3.5" />
+                <span>{locale === "bn" ? d.bn : d.en}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       )}
-      <a
-        href={`tel:${HELPLINE.krishiCallCenter}`}
-        className="mt-3 inline-flex items-center gap-2 rounded-lg border rule bg-paper px-4 py-2 text-sm text-ink-soft transition-colors hover:border-leaf hover:text-leaf"
-      >
-        {t.nav.callCenter}
-        <span className="tabular font-semibold text-leaf">{HELPLINE.krishiCallCenter}</span>
-      </a>
+
+      {(!diseases.length || !onSelectDisease) && onSelectCrop && (
+        <div className="mt-4 space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-wider text-ochre">
+            {locale === "bn" ? "আপনার সঠিক ফসলটি নির্বাচন করুন:" : "Select Your Crop:"}
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {[
+              { id: "Rice", bn: "ধান", en: "Rice" },
+              { id: "Potato", bn: "আলু", en: "Potato" },
+              { id: "Wheat", bn: "গম", en: "Wheat" },
+              { id: "Corn", bn: "ভুট্টা", en: "Corn" },
+              { id: "Chilli", bn: "মরিচ", en: "Chilli" },
+              { id: "Brassica", bn: "সরিষা/কপি", en: "Brassica" },
+            ].map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => onSelectCrop(c.id.toLowerCase())}
+                className="control-press rounded-lg border border-leaf/30 bg-paper px-3 py-1.5 text-xs font-medium text-ink hover:bg-leaf hover:text-paper cursor-pointer"
+              >
+                {locale === "bn" ? c.bn : c.en}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+        {onClear && (
+          <button
+            type="button"
+            onClick={onClear}
+            className="control-press rounded-lg border rule bg-paper px-3.5 py-1.5 text-xs font-medium text-ink-soft hover:bg-paper-2 cursor-pointer"
+          >
+            {t.diagnosis.clear}
+          </button>
+        )}
+        <a
+          href={`tel:${HELPLINE.krishiCallCenter}`}
+          className="control-press inline-flex items-center gap-1.5 rounded-lg bg-leaf/10 px-3.5 py-1.5 text-xs font-semibold text-leaf hover:bg-leaf/20"
+        >
+          {t.nav.callCenter}: {HELPLINE.krishiCallCenter}
+        </a>
+      </div>
     </motion.div>
   );
 }
@@ -396,10 +517,12 @@ function ModelErrorCard({ result }: { result: DetectResponse }) {
 function UncertainClarificationCard({
   result,
   onSelectCrop,
+  onSelectDisease,
   onClear,
 }: {
   result: DetectResponse;
   onSelectCrop?: (crop: string) => void;
+  onSelectDisease?: (disease: string) => void;
   onClear?: () => void;
 }) {
   const { t, locale, localizeCrop } = useLanguage();
@@ -413,6 +536,9 @@ function UncertainClarificationCard({
     result.suggested_crops && result.suggested_crops.length > 0
       ? result.suggested_crops
       : result.top3_crops?.map((c) => c.class).filter(Boolean) ?? [];
+
+  const cropKey = (result.crop ?? "").trim().toLowerCase();
+  const cropDiseases = CROP_DISEASES[cropKey] ?? [];
 
   return (
     <motion.div
@@ -459,6 +585,27 @@ function UncertainClarificationCard({
                     <Leaf className="h-4 w-4 text-leaf" />
                     <span>{localizeCrop(cropName)}</span>
                     <span className="text-xs text-ink-faint">({cropName})</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {cropDiseases.length > 0 && onSelectDisease && (
+            <div className="pt-3 border-t border-ochre/20 mt-2">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-ochre">
+                {locale === "bn" ? `${localizeCrop(result.crop)} ফসলের সম্ভাব্য রোগ:` : `Suspected ${result.crop} Disease:`}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {cropDiseases.map((d) => (
+                  <button
+                    key={d.id}
+                    type="button"
+                    onClick={() => onSelectDisease(d.id)}
+                    className="control-press flex items-center gap-1.5 rounded-lg border border-leaf/40 bg-paper px-3.5 py-2 text-xs font-semibold text-leaf shadow-sm transition-all hover:bg-leaf hover:text-paper cursor-pointer"
+                  >
+                    <Leaf className="h-3.5 w-3.5" />
+                    <span>{locale === "bn" ? d.bn : d.en}</span>
                   </button>
                 ))}
               </div>

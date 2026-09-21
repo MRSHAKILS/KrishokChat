@@ -64,10 +64,11 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
-  // P6 invariant: never cache the worker script itself and never cache API.
+  // P6 invariant: never cache the worker script itself, models, or API.
   if (
     url.pathname === "/sw.js" ||
     url.pathname.startsWith("/api/") ||
+    url.pathname.startsWith("/models/") ||
     url.pathname === "/health" ||
     url.pathname === "/readyz"
   ) {

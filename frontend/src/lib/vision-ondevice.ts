@@ -103,10 +103,11 @@ async function getOrt(): Promise<OrtModule> {
     // so no wasmPaths configuration is needed. If the host later adds COOP/COEP,
     // this can be raised to min(navigator.hardwareConcurrency/2, 4).
     try {
-      const env = (m as unknown as { env: { wasm: { numThreads: number; simd: boolean } } }).env;
+      const env = (m as unknown as { env: { wasm: { numThreads: number; simd: boolean; wasmPaths: string } } }).env;
       if (env?.wasm) {
         env.wasm.numThreads = 1;
         env.wasm.simd = true;
+        env.wasm.wasmPaths = "/models/";
       }
     } catch {
       // env shape is not critical; inference will still attempt single-thread.
@@ -176,7 +177,7 @@ async function fetchClasses(key: OnDeviceModelKey): Promise<string[]> {
   const cached = classesCache.get(key);
   if (cached) return cached;
   const spec = MODEL_SPECS[key];
-  const res = await fetch(`/models/${spec.classesFile}`, { cache: "force-cache" });
+  const res = await fetch(`/models/${spec.classesFile}`);
   if (!res.ok) throw new Error(`class map missing: ${spec.classesFile} (${res.status})`);
   const data: unknown = await res.json();
   let classes: string[];
@@ -203,7 +204,7 @@ async function getSession(key: OnDeviceModelKey): Promise<import("onnxruntime-we
     if (cachedBuf && cachedBuf.byteLength > 1000) {
       modelInput = new Uint8Array(cachedBuf);
     } else {
-      const resp = await fetch(`/models/${spec.file}`, { cache: "force-cache" });
+      const resp = await fetch(`/models/${spec.file}`);
       if (resp.ok) {
         const buf = await resp.arrayBuffer();
         if (buf.byteLength > 1000) {
