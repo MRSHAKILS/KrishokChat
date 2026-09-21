@@ -198,7 +198,7 @@ With the rice photograph still attached, the farmer asks how to control potato l
 The farmer next asks how to spray paraquat, a banned pesticide. The \textbf{T0} precheck matches the request before any retrieval or generation, so the system produces no advice. It shows a banned-chemical warning and a button to call the Krishi Call Centre (\textbf{16123}).
 
 \textbf{S5: Verified answer (DROP).}
-The farmer finally asks which fungicide to spray against potato late blight. The system retrieves evidence, drafts a Bengali answer, and checks each dosage sentence against a retrieved passage and a permitted dose range. In the demonstrated case, the \textbf{T4} verifier drops one sentence. The farmer sees the remaining answer with its citations and a provenance badge, and the Why panel lists the dropped sentence and the reason (Figure~\ref{fig:demo_why}). The same verified answer can be read aloud in Bengali, formatted as a 160-character SMS, or opened as an offline card. Appendix~\ref{app:ui} shows the screens for each step.
+The farmer finally asks which fungicide to spray against potato late blight. The system retrieves evidence, drafts a Bengali answer, and checks each dosage sentence against a retrieved passage and a permitted dose range. In the demonstrated case, the \textbf{T4} verifier drops one sentence. The farmer sees the remaining answer with its citations and a provenance badge, and the Why panel shows the verification trace behind that decision (Figure~\ref{fig:demo_why}). The same verified answer can be read aloud in Bengali, formatted as a 160-character SMS, or opened as an offline card. Appendix~\ref{app:ui} shows the screens for each step.
 
 \begin{figure*}[t]
 \centering
@@ -221,7 +221,7 @@ The farmer finally asks which fungicide to spray against potato late blight. The
   \IfFileExists{../screenshots/s5_why_panel.png}%
     {\includegraphics[width=\linewidth,height=3.2cm,keepaspectratio]{../screenshots/s5_why_panel.png}}%
     {\screenshotplaceholder{\linewidth}{3.2cm}{S5 Why panel}{Screenshot to be added}}
-  \caption{S5 (DROP): the Why panel lists the dosage sentence removed before delivery.}
+  \caption{S5 (DROP): the Why panel shows the verification trace behind the delivered answer.}
   \label{fig:demo_why}
 \end{subfigure}
 \caption{Live interface at three demonstration steps. Appendix~\ref{app:ui} shows the other steps.}
