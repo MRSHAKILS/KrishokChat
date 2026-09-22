@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { Phone, ExternalLink } from "lucide-react";
-import { APP, HELPLINE, LINKS } from "@/lib/constants";
+import { APP, HELPLINE, HELPLINE_EN, LINKS } from "@/lib/constants";
 import { useLanguage } from "@/context/language-context";
 
 export function Footer() {
   const { t, locale, formatNumber } = useLanguage();
+  const helplineShown = locale === "en" ? HELPLINE_EN : HELPLINE;
 
   const NAV_SECTIONS = [
     {
@@ -97,12 +98,12 @@ export function Footer() {
                 title={t.nav.helplineTitle}
               >
                 <Phone className="h-3 w-3" />
-                <span className="tabular font-medium">{HELPLINE.krishiCallCenter}</span>
+                <span className="tabular font-medium">{helplineShown.krishiCallCenter}</span>
                 <span className="text-ink-faint">{t.footer.agriHelpline}</span>
               </a>
               <a href={`tel:${HELPLINE.emergency}`} className="flex items-center gap-1 text-xs text-clay">
                 <Phone className="h-3 w-3" />
-                <span className="tabular font-medium">{HELPLINE.emergency}</span>
+                <span className="tabular font-medium">{helplineShown.emergency}</span>
                 <span className="text-ink-faint">{t.footer.emergency}</span>
               </a>
             </div>

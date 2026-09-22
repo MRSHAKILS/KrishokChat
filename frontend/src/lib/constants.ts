@@ -16,6 +16,13 @@ export const HELPLINE = {
   emergency: "৯৯৯",
 } as const;
 
+/* Same helpline numbers in Latin digits, for display in English mode only.
+   tel: links keep using HELPLINE above (unchanged). */
+export const HELPLINE_EN = {
+  krishiCallCenter: "16123",
+  emergency: "999",
+} as const;
+
 /* Hugging Face dataset — verified public.
    No public paper link here by policy (docs/PAPER_POLICY.md): authoritative papers
    are local files at `paper/done papers/`; add a real public link (TODO) once the

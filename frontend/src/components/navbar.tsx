@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Phone, ChevronDown, LogOut, Sun, Languages } from "lucide-react";
-import { APP, HELPLINE } from "@/lib/constants";
+import { APP, HELPLINE, HELPLINE_EN } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { SessionArea } from "@/components/auth/session-area";
 import { NotificationBell } from "@/components/notifications/notification-bell";
@@ -20,6 +20,7 @@ import { useLanguage } from "@/context/language-context";
 export function Navbar() {
   const pathname = usePathname();
   const { t, locale, toggleLocale } = useLanguage();
+  const helplineShown = locale === "en" ? HELPLINE_EN : HELPLINE;
   const [open, setOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [sunlight, setSunlight] = useState(false);
@@ -90,8 +91,12 @@ export function Navbar() {
         <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label={APP.nameEn}>
           <Mark />
           <div className="leading-none">
-            <div className="font-display text-[17px] text-ink">{APP.name}</div>
-            <div className="mt-0.5 text-xs text-ink-faint">{APP.nameEn}</div>
+            {locale === "en" ? (
+              <div className="font-display text-[14px] text-ink">{APP.nameEn}</div>
+            ) : (
+              <div className="font-display text-[17px] text-ink">{APP.name}</div>
+            )}
+            {locale !== "en" && <div className="mt-0.5 text-xs text-ink-faint">{APP.nameEn}</div>}
           </div>
         </Link>
 
@@ -180,7 +185,7 @@ export function Navbar() {
             className="control-press hidden items-center gap-1.5 rounded-full bg-leaf px-3.5 py-1.5 text-xs font-bold tabular text-paper whitespace-nowrap transition-opacity hover:opacity-90 md:inline-flex"
           >
             <Phone className="h-3.5 w-3.5" aria-hidden />
-            <span>{HELPLINE.krishiCallCenter}</span>
+            <span>{helplineShown.krishiCallCenter}</span>
           </a>
 
           {/* Language Change Icon & Switcher Button */}
@@ -316,7 +321,7 @@ export function Navbar() {
               >
                 <Phone className="h-4 w-4" />
                 {t.nav.callCenter}
-                <span className="tabular">{HELPLINE.krishiCallCenter}</span>
+                <span className="tabular">{helplineShown.krishiCallCenter}</span>
               </a>
             </div>
           </motion.nav>
