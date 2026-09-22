@@ -25,7 +25,7 @@ from app.infrastructure.verification.dosage import DosageVerifier
 
 from tests.test_pipeline import FakeAudit, FakeLLM, FakeRetriever, FakeSessions
 
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 GOLDEN = REPO_ROOT / "dataset_release" / "benchmark" / "golden_qa_v1.jsonl"
 
 TERMINAL_GOLDEN = {"unanswerable", "off_topic", "injection"}

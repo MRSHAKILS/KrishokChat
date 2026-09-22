@@ -20,7 +20,7 @@ from typing import Any
 
 import pytest
 
-BACKEND = Path(__file__).resolve().parent.parent
+BACKEND = Path(__file__).resolve().parent.parent.parent
 INDEX = BACKEND / "ml_assets" / "rag_index" / "indexes" / "bm25_index.pkl"
 CORPUS = BACKEND / "ml_assets" / "rag_index" / "processed" / "knowledge_nodes_clean.jsonl"
 
