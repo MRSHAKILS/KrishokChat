@@ -1,0 +1,10 @@
+{
+  "name": "krishokchat-root",
+  "private": true,
+  "scripts": {
+    "vercel-build": "npm --prefix frontend install && npm --prefix frontend run build"
+  },
+  "dependencies": {
+    "next": "16.3.0"
+  }
+}
