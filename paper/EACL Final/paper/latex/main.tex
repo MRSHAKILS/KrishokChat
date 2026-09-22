@@ -450,42 +450,44 @@ We inspected the provenance traces for 100 evaluation cases. All 100 preserved t
 \section{Demonstration Gallery}
 \label{app:ui}
 
-Figures~\ref{fig:app_halt}--\ref{fig:app_drop} show full-size screens for the five steps (S1--S5) in Section~\ref{sec:demonstration}.
+Figures~\ref{fig:app_halt}--\ref{fig:app_drop} show the complete interface for S1--S5. Each caption identifies the attendee action, the resulting state, and the visible evidence of that decision. The full-width layout preserves the Bengali prompts, badges, and \textit{Why} panel at normal PDF zoom.
 
-\begin{figure}[h]
+\begin{figure*}[p]
 \centering
-\includegraphics[width=0.92\linewidth]{../screenshots/screenshot1_halt_clarification.png}
-  \caption{ASK (S1): a colloquial treatment query that names no crop halts before retrieval, and the system offers Bengali crop chips.}
+\includegraphics[width=0.98\textwidth]{../screenshots/screenshot1_halt_clarification.png}
+\caption{\textbf{ASK (S1).} The attendee enters a treatment question without naming a crop. T1 stops before retrieval and displays six Bengali crop choices. Selecting one of these choices binds the crop and permits the request to continue.}
 \label{fig:app_halt}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[h]
+\begin{figure*}[p]
 \centering
-\includegraphics[width=0.92\linewidth]{../screenshots/screenshot3_photo_crop_scope.png}
-  \caption{S2: the on-device classifier predicts the crop from a leaf photograph, and retrieval is scoped to that crop's guidance.}
+\includegraphics[width=0.98\textwidth]{../screenshots/screenshot3_photo_crop_scope.png}
+\caption{\textbf{Photo routing (S2).} The attendee uploads a rice-leaf photograph with rice as the active crop. The browser-side model runs on the device and reports a rice brown-spot prediction. The crop becomes an input to T2 for the subsequent evidence-routing decision.}
 \label{fig:app_fence}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[h]
+\begin{figure*}[p]
 \centering
-\includegraphics[width=0.92\linewidth]{../screenshots/screenshot4_mismatch_badge.png}
-  \caption{CONFIRM (S3): photograph and text name different crops. The mismatch badge appears, and chemical advice is held until the farmer picks one.}
+\includegraphics[width=0.98\textwidth]{../screenshots/screenshot4_mismatch_badge.png}
+\caption{\textbf{CONFIRM (S3).} With the rice photograph still active, the attendee asks about potato late blight. T2 displays the text--image mismatch and presents crop choices instead of chemical advice. The request remains paused until the attendee selects one crop.}
 \label{fig:app_mismatch}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[h]
+\begin{figure*}[p]
 \centering
-\includegraphics[width=0.92\linewidth]{../screenshots/screenshot7_16123_safety_referral.png}
-\caption{REFER (S4): safety notice with a 16123 call button.}
+\includegraphics[width=0.98\textwidth]{../screenshots/screenshot7_16123_safety_referral.png}
+\caption{\textbf{REFER (S4).} The attendee submits a paraquat request covered by the T0 policy. The interface displays a referral card and the Krishi Call Centre number, 16123, without showing retrieved passages or generated application advice.}
 \label{fig:app_delivery}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[h]
+\begin{figure*}[p]
 \centering
-\includegraphics[width=0.92\linewidth]{../screenshots/screenshot5_grounded_answer.png}
-\caption{DROP (S5): T4 removes an unsupported dosage claim, and the rest of the answer is shown with BARI citations and the expanded \textit{Why} panel.}
+\includegraphics[width=0.98\textwidth]{../screenshots/screenshot5_grounded_answer.png}
+\caption{\textbf{DROP (S5).} The generated draft contains a dosage claim of 20\,g/L, while the admitted BARI passage supports 2\,g/L. T4 removes the unsupported sentence and delivers the remaining answer. The expanded \textit{Why} panel shows the removed claim, the supporting passage, and the retained range.}
 \label{fig:app_drop}
-\end{figure}
+\end{figure*}
+
+\clearpage
 
 \section{Multi-Turn State Tests}
 \label{sec:eval-multiturn}
