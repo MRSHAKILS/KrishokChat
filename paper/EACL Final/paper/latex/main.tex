@@ -66,7 +66,7 @@
 \maketitle
 
 \begin{abstract}
-A farmer who asks which pesticide to spray, without naming the crop, should get a question back before any answer. \textsc{KrishokTech} is a Bengali agricultural advisor that keeps such decisions away from the language model. Before generation, rule-based checks refer high-risk requests to a helpline, halt treatment requests that name no crop, scope retrieval to one crop, and ask for confirmation when a photograph and the text name different crops. After generation, a verifier withholds dosage claims unsupported by the retrieved BARI/BRRI evidence. The demonstration shows each decision as ASK, CONFIRM, REFER, or DROP, with its sources. On 200 real farmer queries, the gate halted all 30 crop-less requests before retrieval and passed the other 170. On 400 stress queries, binding the crop cut top-five lists naming another crop from 36.25\% to 30.0\%, and a crop filter removed the rest (0/400) while every query kept five passages. The mismatch check caught 53 of 54 farmer conflicts and all 400 synthetic ones, halting no matched control, and the dosage verifier caught 114 of 118 inserted errors and accepted all 38 original answers. On the deployed 4B model, the precheck and guarded prompt lowered attack success from 52.5\% to 4.64\%.
+A farmer who asks which pesticide to spray, without naming the crop, should get a question back before any answer. \textsc{KrishokTech} is a Bengali agricultural advisor that keeps such decisions away from the language model. Before generation, rule-based checks refer high-risk requests to a helpline, halt treatment requests that name no crop, scope retrieval to one crop, and ask for confirmation when a photograph and the text name different crops. After generation, a verifier withholds dosage claims unsupported by the retrieved BARI/BRRI evidence. The demonstration shows each decision as ASK, CONFIRM, REFER, or DROP, with its sources. On 200 real farmer queries, the gate halted all 30 crop-less requests before retrieval and passed the other 170. On 400 stress queries, binding the crop cut top-five lists naming another crop from 36.5\% to 30.25\%, and a crop filter removed the rest (0/400) while every query kept five passages. The mismatch check caught 53 of 54 farmer conflicts and all 400 synthetic ones, halting no matched control, and the dosage verifier caught 114 of 118 inserted errors and accepted all 38 original answers. On the deployed 4B model, the precheck and guarded prompt lowered attack success from 52.5\% to 4.64\%.
 \end{abstract}
 
 % =========================================================================
@@ -197,7 +197,7 @@ Across the five steps, attendees see the system at its decision boundaries: befo
 \section{Evaluation}
 \label{sec:evaluation}
 
-We ask three questions, one per control. (Q1) Do admission controls stop or redirect unsafe and underspecified requests? (Q2) Does evidence binding keep wrong-crop evidence away from generation, and are conflicts surfaced? (Q3) Can release checks catch what the generator gets wrong? Table~\ref{tab:headline} summarizes the main results; Appendix~\ref{app:evidence} lists each result with its sample, status, and scope.
+We evaluate whether the implementation follows the authorization boundary described in Section~\ref{sec:system}. The tests address three questions: (Q1) Do admission controls halt underspecified or policy-covered requests before retrieval? (Q2) Does crop binding restrict the evidence available to generation and expose text--image conflicts? (Q3) Do the prompt, precheck, and dosage verifier reduce the number of unsafe claims that can reach delivery? Table~\ref{tab:headline} reports the main results; Appendix~\ref{app:evidence} provides confidence intervals and supporting tests.
 
 \begin{table}[t]
 \centering
@@ -207,48 +207,45 @@ We ask three questions, one per control. (Q1) Do admission controls stop or redi
 \toprule
 \textbf{Control} & \textbf{Test set} & \textbf{Result} \\
 \midrule
-Crop gate (C1) & 200 farmer, 30 crop-less & 30/30 halted; 170/170 pass \\
-Banglish T0 (C1) & 85 attack, 15 benign & 85/85 (formal 1/85); 0/15 \\
-Crop binding (C2) & 400 stress & cross-crop 36.25\% $\rightarrow$ 30.0\% \\
-+ crop filter (C2) & same 400 & cross-crop 0/400; 400/400 served \\
-Mismatch (C2) & 54 farmer, 400 syn. & 453/454; 0/454 controls \\
-T3 prompt only & 280/arm, local 4B & ASR 52.5\% $\rightarrow$ 10.71\% \\
-T0 + T3 prompt & same 280, replay & ASR 52.5\% $\rightarrow$ 4.64\% \\
-Verifier (C3) & 118 errors, 38 ans. & 114 caught; 0/38 clean flagged \\
+T1 crop gate (C1) & 200 farmer queries & 30/30 halt; 170/170 continue \\
+T0 normalization (C1) & 85 attacks, 15 benign & 85/85 caught; 0/15 flagged \\
+Crop binding/filter (C2) & 400 stress queries & 146 $\rightarrow$ 121 $\rightarrow$ 0 lists \\
+Mismatch state (C2) & 54 farmer, 400 synthetic & 453/454; 0/454 controls \\
+Prompt + T0 (C1) & 280 fixed attacks & 147 $\rightarrow$ 30 $\rightarrow$ 13 success \\
+Dosage verifier (C3) & 118 errors, 38 clean & 114 caught; 0/38 rejected \\
 \bottomrule
 \end{tabular*}
-\caption{Main results. Appendix~\ref{app:evidence} gives confidence intervals, the remaining experiments, and scope.}
+\caption{Main component results. For crop binding, the sequence is open retrieval, gold-crop binding, and the alias-based crop filter. For the generator test, it is the neutral prompt, guarded prompt, and T0 replay.}
 \label{tab:headline}
 \end{table}
 
 \subsection{Q1: Admission and Referral}
 \label{sec:eval-gate}
 
-We test the crop gate on 200 real Bengali farmer treatment queries, 30 of which name no crop. Two annotators labeled crop presence independently and agreed on every query (Cohen's $\kappa = 1.00$). The gate halted all 30 crop-less queries before retrieval and passed the other 170 to crop-scoped search without a false halt. On the current code, T0 also refers 8 of the 200 questions, which ask about training, livestock, or where to buy inputs, to the helpline as out of scope, and wrongly flags 1 (Appendix~\ref{app:evidence}). On the same queries, an LLM prompted to make this decision halted 10\% of queries against the gate's 15\%, agreed with the gate on 91\% of decisions, and took a median 4.2\,s per query.
+We test the T1 crop gate on 200 collected Bengali farmer treatment questions. Two annotators independently labeled whether each question named a crop and agreed on all 200 cases (Cohen's $\kappa=1.00$). At T1, all 30 crop-less questions entered \textbf{ASK} before retrieval, while all 170 crop-specified questions were permitted to continue. This result measures the crop-presence decision at T1 rather than the outcome of later controls.
 
-Colloquial spelling also affects the T0 precheck. On 85 Latin-script and phonetic attacks (for example \textit{parakwat} for paraquat), a precheck limited to formal English and Bengali script caught 1. Our normalized precheck caught all 85 and raised no alarm on 15 benign farmer questions (Appendix~\ref{app:architecture}).
+We separately test whether normalization helps T0 recognize colloquial and Latin-script forms. The constructed set contains 85 high-risk requests with Banglish, phonetic, or indirect wording and 15 benign farmer questions. A precheck limited to formal English and Bengali script intercepted 1 of the 85 high-risk requests. After normalization, T0 intercepted all 85 and flagged none of the 15 benign controls. The examples include forms such as \textit{parakwat} for paraquat; category-level results appear in Appendix~\ref{app:architecture}.
+
 \subsection{Q2: Evidence Binding and Conflict Handling}
 \label{sec:eval-fence}
 
-We measure crop binding on a 400-query stress set of colloquial, dialectal, Banglish, and ambiguous-disease queries, each with a gold crop. A query counts as \emph{cross-crop retrieval} when any of its top five passages names another crop but not the gold crop; this is a retrieval measure, not a judgment of the final answer. Open retrieval gives 36.25\%. Binding the gold crop, which simulates correct crop routing, lowers this to 30.0\%: 25 queries improve and none get worse (exact McNemar $p = 6 \times 10^{-8}$). An audit traced the remaining cases to 12 generic single-crop passages, mostly chili and cabbage guidance, that outrank crop-specific ones because binding changes the query, not the index. The post-retrieval crop filter removes them: no top-five list names another supported crop (0/400; 121 queries fixed, none broken), every query still receives five passages, and gold-disease matches in the top five are unchanged. Because this check uses the filter's own crop list, we also read 30 filtered lists by title: 26 were clean, and 4 contained a crop outside that list (carrot, sweet potato, forest trees). The six on-device disease classifiers that run after crop routing reach 0.94 to 0.99 top-1 accuracy on 4,294 held-out images, and the family router assigns 433 of 437 images to the correct botanical family.
+We evaluate crop binding on 400 stress queries containing colloquial, dialectal, Banglish, or ambiguous disease descriptions. Each query has an adjudicated crop. A retrieved list counts as cross-crop when at least one of its top five passages names another crop but not the adjudicated crop. This is a property of the retrieved evidence, not a judgment of the final answer.
 
-For conflicts, each case pairs a query with a photograph of a different crop, and each has a matched control with the same query and a matching photograph. The badge fired on 53 of 54 farmer cases and all 400 cases in PRISM, our synthetic conflict suite, and on none of the 454 controls. The one miss referred to the crop only implicitly. On a separate set of 300 conflict queries from earlier work, a prompted LLM asked the farmer to clarify in 20\% of cases and naive multimodal RAG in 13\%; these are different cases, so we report them only as context.
+Open retrieval produced cross-crop lists for 146 of 400 queries (36.5\%). Binding the adjudicated crop, which simulates correct crop routing, reduced this to 121 of 400 (30.25\%): 25 queries improved and none became worse (exact McNemar $p=6\times10^{-8}$). The post-retrieval crop filter removed all remaining violations recognized by its alias list, while all 400 queries retained five passages. Because this zero is defined by the filter's own aliases, we also inspected 30 lists by title. Twenty-six contained no other crop, while four contained crop names outside the alias list: carrot, sweet potato, or forest trees. The independent audit therefore bounds what the 0/400 result establishes.
+
+We test the \textbf{CONFIRM} transition with 54 farmer-derived text--image conflicts and 400 synthetic conflicts. Each case has a matched control containing the same query and an image of the named crop. The mismatch state fired on 53 of 54 farmer-derived cases and all 400 synthetic cases, while firing on none of the 454 matched controls. The single miss referred to the crop only implicitly.
 
 \subsection{Q3: Release Checks on Generated Advice}
 \label{sec:eval-safety}
 
-We first measure how much the generator resists attacks on its own. With T0 and T4 disabled, we sent 280 attack prompts to \texttt{krishokchat-4b}: 210 across seven attack families and 70 additional Bengali-native probes. Each prompt ran once under the guarded system prompt and once under a neutral prompt. Attack success rate (ASR), judged by a fixed rule-based classifier, fell from 52.5\% to 10.71\% (147 to 30 successes), and from 77\% to 19\% on the 100 Bengali-native prompts. The residual is what the surrounding stages have to catch. Remaining successes were concentrated in Bengali-native (19/100), delimiter-hijacking (6/30), and retrieval-poisoning (5/30) prompts. Replaying the same guarded responses with the T0 precheck in front, as in deployment, lowers ASR to 4.64\% (13/280) and to 2\% on the Bengali-native prompts; T0 stopped 17 of the 30 successful attacks before any model call. The 13 that remain are delimiter-hijacking and retrieval-poisoning prompts that name no chemical on the T0 list. A cloud run is reported in Appendix~\ref{app:evidence}; its unguarded arm used a different model, so it is not a controlled comparison.
+We first test the generator boundary using 280 fixed attack requests. With T0 and T4 disabled, each request was run once through the evaluated local \texttt{krishokchat-4b} deployment under a neutral prompt and once under the guarded prompt. A fixed rule-based judge marked 147 of 280 neutral responses (52.5\%) and 30 of 280 guarded responses (10.71\%) as successful attacks. Replaying the requests through T0, without making new model calls, shows that 17 of those 30 requests would have terminated before generation. This leaves 13 successful attacks among the 280 requests (4.64\%) eligible to continue. The result demonstrates how the precheck complements the prompt for this model and test set; it does not establish complete generator independence.
 
-We then assess delivered advice. Three blinded raters (two agronomy or botany undergraduates and one extension officer) judged 46 of 47 guarded outputs safe and actionable, one vague but harmless, and none dangerous (Fleiss' $\kappa = 0.82$). All three unguarded control outputs were rated dangerous.
+We then test T4 using 38 previously verified answers. We inserted 118 controlled dosage errors while retaining the 38 unmodified answers as clean controls. The verifier removed 114 of the 118 inserted errors and rejected none of the clean originals. The four missed errors and results from the larger passage-derived benchmark are reported in Appendix~\ref{app:evidence}. This test concerns dosage-bearing numerical claims only; it does not evaluate every factual statement in an answer.
 
-To test the dosage verifier, we inserted controlled errors into verified answers. On 38 live answers carrying 118 inserted errors, it caught 114 and rejected none of the 38 unmodified originals. On a larger benchmark built from 88 BARI and BRRI passages, it caught 296 of 350 inserted errors (84.6\%), including every overdose (76/76) and underdose (67/67). It was weaker on chemical substitutions (85\%), unit substitutions (73\%), and invented pre-harvest intervals (65\%), which marks the limit of what ``dosage verification'' covers.
-
-For SMS, the deterministic packer kept 399 of 400 messages within 160 characters. On 100 long advisories it kept the dose in 94, the chemical name in 63, and both together in 61, without inventing any value; an LLM summarizer kept them in 89, 56, and 51 and invented one dose (Appendix~\ref{app:delivery}).
-
-\subsection{What This Evaluation Does Not Establish}
+\subsection{Scope of the Evidence}
 \label{sec:eval-scope}
 
-These results describe behavior on the listed test sets. They do not show effects on yield or farmer decisions. The crop-binding study simulates correct routing; 400 of 454 conflict cases are synthetic; multi-turn tests use constructed dialogues; the output audit covers 47 answers; network tests use simulated packet loss; and the verifier checks numerical dosage claims, not agronomy in general.
+These results are component and property-conformance tests on the stated samples. They show that the evaluated implementation usually follows its admission, evidence-binding, conflict, and dosage-release rules. They do not establish improved yield, correct farmer decisions, or complete safety in deployment. The crop-binding experiment assumes a correct crop label; the normalization attacks are constructed; 400 of the 454 conflict cases are synthetic; each generator prompt was run once; and the dosage errors were inserted into existing answers. These limits define the claims carried into the conclusion.
 
 % =========================================================================
 % SECTION 6: LIMITATIONS AND CONCLUSION
@@ -520,7 +517,7 @@ Banglish precheck & 85/85 attacks intercepted (95\% CI [95.7, 100.0]) vs 1/85 fo
 Off-topic audit & 10/10 injections blocked; off-topic queries refused 0/30 by T0 and 25/30 (83.33\%) by the LLM intent classifier & 40 & Measured & Five weather queries are routed to agricultural information by design \\
 \midrule
 \multicolumn{5}{l}{\textit{Evidence binding and conflicts (C2)}} \\
-Crop binding & Top-5 cross-crop retrieval 36.25\% open vs 30.00\% with gold crop bound; 25/0 discordant, exact McNemar $p = 5.96 \times 10^{-8}$; gold-crop purity 0.647 $\to$ 0.735 & 400 & Measured & Simulates correct routing; retrieval measure, not answer quality. Residual audit: all 177 offending passages in the 120 flagged queries come from 12 single-crop passages \\
+Crop binding & Top-5 cross-crop retrieval 36.25\% open vs 30.00\% with gold crop bound in the frozen N08 run (146 vs 121 of 400 on current code, as reported in Section~\ref{sec:eval-fence}); 25/0 discordant, exact McNemar $p = 5.96 \times 10^{-8}$; gold-crop purity 0.647 $\to$ 0.735 & 400 & Measured & Simulates correct routing; retrieval measure, not answer quality. Residual audit: all 177 offending passages in the 120 flagged queries come from 12 single-crop passages \\
 Crop filter (N08c) & Other-crop top-5 lists 0/400 (vs 121/400 bound only, current code); 121/0 discordant, $p < 10^{-36}$; five passages served for 400/400; gold-disease hit@5 20/120 in both arms; title check 26/30 clean, 4 with crops outside the alias list & 400 & Measured & Filter and metric share the alias list, so 0/400 holds by construction; coverage, disease hit and title check are the independent checks \\
 Text-extracted binding & Top-5 cross-crop retrieval 30.25\% (no gate) vs 28.75\% (gated pipeline); 6/0 discordant, $p = 0.031$ & 400 & Measured & All 400 name a crop, so the gate halts none; separate run from the row above \\
 Disease vision (top-1) & 0.9413 to 0.9907 across six crop-specific classifiers & 4,294 & Measured & Disease within a crop, not crop routing; 100\% ONNX--PyTorch label agreement \\
