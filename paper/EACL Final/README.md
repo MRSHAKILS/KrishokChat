@@ -5,7 +5,7 @@ This directory contains the complete publication package, experimental records, 
 > **KrishokTech: Deterministic-First, Evidence-Bounded Bengali Agricultural Advisory**  
 > *Khan Raiyan Ibne Reza, Sanjana Aktar Maria, Shakil Ahmed, Sumaiya Tabassum Nimi*  
 > Department of Computer Science and Engineering, North South University, Dhaka, Bangladesh  
-> Interactive Demo: [https://krishoktech-one.vercel.app](https://krishoktech-one.vercel.app) | Screencast: [https://krishoktech-one.vercel.app/screencast](https://krishoktech-one.vercel.app/screencast)
+> Interactive Demo: [https://krishoktech.vercel.app](https://krishoktech.vercel.app) | Screencast: [https://krishoktech.vercel.app/screencast](https://krishoktech.vercel.app/screencast)
 
 ---
 
