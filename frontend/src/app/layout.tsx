@@ -33,7 +33,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "কৃষক চ্যাট — KrishokChat | প্রমাণভিত্তিক ও নিরাপদ কৃষি এআই পরামর্শদাতা",
+  title: "কৃষক টেক — KrishokTech | প্রমাণভিত্তিক ও নিরাপদ কৃষি এআই পরামর্শদাতা",
   description:
     "বাংলাদেশের কৃষকদের জন্য নির্ভরযোগ্য এআই কৃষি পরামর্শদাতা — পাতার ছবি থেকে রোগ নির্ণয়, সার ও সেচ ব্যবস্থাপনা এবং সরকারি কৃষি নির্দেশিকাভিত্তিক তথ্য।",
   manifest: "/manifest.webmanifest",

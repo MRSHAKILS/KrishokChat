@@ -4,8 +4,8 @@
    ========================================================================= */
 
 export const APP = {
-  name: "কৃষক চ্যাট",
-  nameEn: "KrishokChat",
+  name: "কৃষক টেক",
+  nameEn: "KrishokTech",
   tagline: "নিরাপদ ও প্রমাণভিত্তিক বাংলা কৃষি এআই",
   taglineEn: "Safety-aware Bengali Agri-AI Advisory",
   version: "0.2.0",

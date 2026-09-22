@@ -2,9 +2,9 @@ import Link from "next/link";
 import { ShieldCheck, Database, Clock, EyeOff, Phone, FileText } from "lucide-react";
 
 export const metadata = {
-  title: "গোপনীয়তা নীতি — KrishokChat",
+  title: "গোপনীয়তা নীতি — KrishokTech",
   description:
-    "KrishokChat কী তথ্য সংরক্ষণ করে, কতদিন রাখে এবং কীভাবে স্থানীয়ভাবে প্রক্রিয়া করে — PDP 2025-সম্মত নীতি।",
+    "KrishokTech কী তথ্য সংরক্ষণ করে, কতদিন রাখে এবং কীভাবে স্থানীয়ভাবে প্রক্রিয়া করে — PDP 2025-সম্মত নীতি।",
 };
 
 export default function PrivacyPage() {
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
           গোপনীয়তা নীতি
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-          কৃষক চ্যাট একটি গবেষণা প্রোটোটাইপ। এই পাতায় সত্যভাবে বর্ণনা করা হয়েছে
+          কৃষক টেক একটি গবেষণা প্রোটোটাইপ। এই পাতায় সত্যভাবে বর্ণনা করা হয়েছে
           সিস্টেম কী তথ্য সংরক্ষণ করে, কতদিন রাখে এবং কোথায় প্রক্রিয়া করে —
           কোনো অতিরঞ্জন ছাড়া। কার্যকর তারিখ: ২১ আগস্ট ২০২৬।
         </p>

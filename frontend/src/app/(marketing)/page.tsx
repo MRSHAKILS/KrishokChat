@@ -355,7 +355,7 @@ function RagPipelineDemo() {
       </motion.div>
 
       <motion.div variants={enter} className="mt-6">
-        <AgentTrace stages={QA_STAGES} events={traceEvents} active={running} title="কৃষক চ্যাট এজেন্ট প্রবাহ" detail="একই trace chat ও diagnosis workspace-এ দেখা যায়" />
+        <AgentTrace stages={QA_STAGES} events={traceEvents} active={running} title="কৃষক টেক এজেন্ট প্রবাহ" detail="একই trace chat ও diagnosis workspace-এ দেখা যায়" />
       </motion.div>
 
       {/* Results panel */}
@@ -439,7 +439,7 @@ function ComparisonSection() {
           <thead><tr className="bg-paper-2">
             <th className="px-4 py-2.5 text-left font-display text-ink">দিক</th>
             <th className="px-4 py-2.5 text-left font-display text-ink-soft">সাধারণ চ্যাটবট</th>
-            <th className="px-4 py-2.5 text-left font-display text-leaf">কৃষক চ্যাট</th>
+            <th className="px-4 py-2.5 text-left font-display text-leaf">কৃষক টেক</th>
           </tr></thead>
           <tbody className="divide-y divide-bone">
             {rows.map((r, i) => (
@@ -925,7 +925,7 @@ function AgriFAQSection() {
 
   const FAQS = [
     {
-      q: "কৃষক চ্যাট এআই এর পরামর্শ কতটা নির্ভুল ও নিরাপদ?",
+      q: "কৃষক টেক এআই এর পরামর্শ কতটা নির্ভুল ও নিরাপদ?",
       a: "আমাদের সিস্টেমটি ৪-ধাপের মাল্টি-এজেন্ট সিকিউরিটি পাইপলাইন অনুসরণ করে। প্রতিটি পরামর্শ দেওয়ার আগে সরকারি DAE, BARC ও BRRI নির্দেশিকা থেকে রিট্রিভাল করা হয় এবং রাসায়নিকের মাত্রা Verifier Agent দ্বারা যাচাই করা হয়।",
     },
     {

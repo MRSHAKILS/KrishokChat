@@ -216,7 +216,7 @@ function HeroSection() {
           ব্যবসায়িক মডেল · BUSINESS MODEL
         </motion.div>
         <motion.h1 variants={enter} className="mt-5 max-w-2xl font-display text-3xl leading-tight text-ink sm:text-5xl">
-          কীভাবে টেকসই হবে <span className="text-leaf">কৃষক চ্যাট?</span>
+          কীভাবে টেকসই হবে <span className="text-leaf">কৃষক টেক?</span>
         </motion.h1>
         <motion.p variants={enter} className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft">
           কৃষকের জন্য সব পরামর্শ সর্বদা বিনামূল্যে। আয় আসবে প্রাতিষ্ঠানিক খাত থেকে —
@@ -415,7 +415,7 @@ function UnitEconomicsSection() {
       <motion.div variants={enter} className="overflow-hidden rounded-2xl border rule bg-paper">
         <div className="border-b rule bg-paper-2/40 px-5 py-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">
-            এক LLM প্রশ্নের খরচ · ~৮০০ ইনপুট + ৩০০ আউটপুট টোকেন (বাস্তব KrishokChat প্রশ্ন)
+            এক LLM প্রশ্নের খরচ · ~৮০০ ইনপুট + ৩০০ আউটপুট টোকেন (বাস্তব KrishokTech প্রশ্ন)
           </p>
         </div>
         <div className="divide-y rule">

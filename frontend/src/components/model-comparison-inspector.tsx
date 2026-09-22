@@ -155,7 +155,7 @@ const SCENARIOS: BenchmarkScenario[] = [
         ],
       },
       grounded_rag: {
-        modelName: "KrishokChat (Agentic RAG + Verifier)",
+        modelName: "KrishokTech (Agentic RAG + Verifier)",
         badge: "মাল্টি-এজেন্ট ভেরিফাইড",
         badgeColor: "bg-leaf/15 text-leaf border-leaf/30",
         chemicalSafetyScore: 99.4,
@@ -267,7 +267,7 @@ const SCENARIOS: BenchmarkScenario[] = [
         ],
       },
       grounded_rag: {
-        modelName: "KrishokChat (Agentic RAG + Verifier)",
+        modelName: "KrishokTech (Agentic RAG + Verifier)",
         badge: "মাল্টি-এজেন্ট ভেরিফাইড",
         badgeColor: "bg-leaf/15 text-leaf border-leaf/30",
         chemicalSafetyScore: 98.8,
@@ -372,7 +372,7 @@ const SCENARIOS: BenchmarkScenario[] = [
         ],
       },
       grounded_rag: {
-        modelName: "KrishokChat (Agentic RAG + Verifier)",
+        modelName: "KrishokTech (Agentic RAG + Verifier)",
         badge: "মাল্টি-এজেন্ট ভেরিফাইড",
         badgeColor: "bg-leaf/15 text-leaf border-leaf/30",
         chemicalSafetyScore: 100,
@@ -472,7 +472,7 @@ const SCENARIOS: BenchmarkScenario[] = [
         ],
       },
       grounded_rag: {
-        modelName: "KrishokChat (Agentic RAG + Verifier)",
+        modelName: "KrishokTech (Agentic RAG + Verifier)",
         badge: "মাল্টি-এজেন্ট ভেরিফাইড",
         badgeColor: "bg-leaf/15 text-leaf border-leaf/30",
         chemicalSafetyScore: 100,
@@ -679,7 +679,7 @@ export function ModelComparisonInspector() {
               >
                 <option value="zero_shot">Generic LLM (Zero-Shot)</option>
                 <option value="sft">KrishokChat-4B (SFT Baseline)</option>
-                <option value="grounded_rag">KrishokChat (Agentic RAG + Verifier)</option>
+                <option value="grounded_rag">KrishokTech (Agentic RAG + Verifier)</option>
               </select>
             </div>
 
@@ -690,7 +690,7 @@ export function ModelComparisonInspector() {
                 onChange={(e) => setRightModelKey(e.target.value as ModelKey)}
                 className="rounded-md border border-bone bg-paper-2 px-3 py-1 text-xs font-medium text-ink focus:border-leaf focus:outline-none"
               >
-                <option value="grounded_rag">KrishokChat (Agentic RAG + Verifier)</option>
+                <option value="grounded_rag">KrishokTech (Agentic RAG + Verifier)</option>
                 <option value="sft">KrishokChat-4B (SFT Baseline)</option>
                 <option value="zero_shot">Generic LLM (Zero-Shot)</option>
               </select>
@@ -834,7 +834,7 @@ export function ModelComparisonInspector() {
           </div>
         </div>
 
-        {/* The KrishokChat Stage 4 Verifier Solution Breakdown */}
+        {/* The KrishokTech Stage 4 Verifier Solution Breakdown */}
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* Left: The Problem Illustrated */}
           <div className="rounded-xl border rule bg-paper p-5 sm:p-6 space-y-3">
@@ -858,7 +858,7 @@ export function ModelComparisonInspector() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-leaf">
                 <ShieldCheck className="h-5 w-5" />
-                <h4 className="font-display text-base text-ink">কৃষক চ্যাটের সমাধান: স্টেজ ৪ ভেরিফায়ার</h4>
+                <h4 className="font-display text-base text-ink">কৃষক টেকের সমাধান: স্টেজ ৪ ভেরিফায়ার</h4>
               </div>
               <span className="rounded-full bg-leaf/20 px-2.5 py-0.5 text-[10px] font-mono font-bold text-leaf">
                 নেট ঝুঁকি: &lt; ০.২%

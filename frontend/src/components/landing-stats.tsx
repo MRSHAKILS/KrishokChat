@@ -98,7 +98,7 @@ export function LandingStats() {
               গবেষণা যাচাইকৃত ফলাফল • Certified Empirical Breakthroughs
             </span>
             <h4 className="text-sm sm:text-base font-display font-bold text-ink mt-0.5">
-              কৃষকচ্যাট বনাম জেনারেটিভ এলএলএম বেসলাইন
+              কৃষক টেক বনাম জেনারেটিভ এলএলএম বেসলাইন
             </h4>
           </div>
           <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2.5 py-1 text-[11px] font-semibold text-leaf w-fit">
