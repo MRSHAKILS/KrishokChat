@@ -40,7 +40,7 @@ export default function ScreencastPage() {
             playsInline
             preload="metadata"
             className="w-full h-full object-contain"
-            src="/krishokchat_demo_video.mp4"
+            src="/screencast.mp4"
           >
             আপনার ব্রাউজার ভিডিও প্লে করতে সমর্থন করে না। অনুগ্রহ করে নিচের লিংক থেকে ডাউনলোড করুন।
           </video>
@@ -56,7 +56,7 @@ export default function ScreencastPage() {
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="/krishokchat_demo_video.mp4"
+              href="/screencast.mp4"
               download="krishoktech_eacl_screencast.mp4"
               className="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
             >
