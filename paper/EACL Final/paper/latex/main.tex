@@ -454,14 +454,14 @@ Figures~\ref{fig:app_halt}--\ref{fig:app_drop} show the complete interface for S
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=0.98\textwidth]{../screenshots/screenshot1_halt_clarification.png}
+\adjincludegraphics[width=0.98\textwidth,trim={{.2\width} 0 {.2\width} 0},clip]{../screenshots/screenshot1_halt_clarification.png}
 \caption{\textbf{ASK (S1).} The attendee enters a treatment question without naming a crop. T1 stops before retrieval and displays six Bengali crop choices. Selecting one of these choices binds the crop and permits the request to continue.}
 \label{fig:app_halt}
 \end{figure*}
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=0.98\textwidth]{../screenshots/screenshot3_photo_crop_scope.png}
+\adjincludegraphics[width=0.98\textwidth,trim={{.2\width} 0 {.2\width} 0},clip]{../screenshots/screenshot3_photo_crop_scope.png}
 \caption{\textbf{Photo routing (S2).} The attendee uploads a rice-leaf photograph with rice as the active crop. The browser-side model runs on the device and reports a rice brown-spot prediction. The crop becomes an input to T2 for the subsequent evidence-routing decision.}
 \label{fig:app_fence}
 \end{figure*}
@@ -475,19 +475,17 @@ Figures~\ref{fig:app_halt}--\ref{fig:app_drop} show the complete interface for S
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=0.98\textwidth]{../screenshots/screenshot7_16123_safety_referral.png}
+\adjincludegraphics[width=0.98\textwidth,trim={{.2\width} 0 {.2\width} 0},clip]{../screenshots/screenshot7_16123_safety_referral.png}
 \caption{\textbf{REFER (S4).} The attendee submits a paraquat request covered by the T0 policy. The interface displays a referral card and the Krishi Call Centre number, 16123, without showing retrieved passages or generated application advice.}
 \label{fig:app_delivery}
 \end{figure*}
 
 \begin{figure*}[p]
 \centering
-\includegraphics[width=0.98\textwidth]{../screenshots/screenshot5_grounded_answer.png}
+\adjincludegraphics[width=0.98\textwidth,trim={{.2\width} 0 {.2\width} 0},clip]{../screenshots/screenshot5_grounded_answer.png}
 \caption{\textbf{DROP (S5).} The generated draft contains a dosage claim of 20\,g/L, while the admitted BARI passage supports 2\,g/L. T4 removes the unsupported sentence and delivers the remaining answer. The expanded \textit{Why} panel shows the removed claim, the supporting passage, and the retained range.}
 \label{fig:app_drop}
 \end{figure*}
-
-\clearpage
 
 \section{Multi-Turn State Tests}
 \label{sec:eval-multiturn}
@@ -521,7 +519,7 @@ In \textit{anaphoric carryover}, farmers ask follow-ups such as ``\textit{tahole
 \label{app:evidence}
 \label{app:limitations_full}
 
-Tables~\ref{tab:evidence_a} and~\ref{tab:evidence_b} list each measured result with its sample size, status, and scope. Status is \emph{measured} (direct measurement on benchmark or logged data), \emph{pilot} (small controlled check), \emph{simulated} (part of the condition, such as packet loss, is simulated), \emph{modeled} (derived from a cost model), or \emph{stated} (a limitation without a measurement).
+Tables~\ref{tab:evidence_a} and~\ref{tab:evidence_b} list each measured result with its sample size, status, and scope. Status is \emph{measured} (direct measurement on benchmark or logged data), \emph{pilot} (small controlled check), \emph{simulated} (part of the condition, such as packet loss, is simulated), or \emph{stated} (a limitation without a measurement).
 
 \begin{table*}[t]
 \centering
@@ -581,7 +579,7 @@ SMS comparison & Dose kept in 23 (naive), 89 (LLM), 92 (Comp.\,1), 94 (Comp.\,2)
 Offline retrieval & Local BM25 hit rate 0.94, 0/400 cache misses; remote retrieval loses 13.25\,pp (15\% loss) and 30.0\,pp (30\% loss) & 400 & Measured, loss simulated & Retrieval only \\
 Non-LLM overhead & Median 33.565\,ms (p95 67.833\,ms): safety 0.321, BM25 26.831, verifier 4.815\,ms & 400 & Measured & Stub LLM; local generation about 24\,s per call \\
 Installation footprint & 95.64\,MB ONNX vision assets; 284.0\,MB minimal; 339.6\,MB with PyTorch checkpoints & n/a & Measured & Excludes the language-model weights \\
-Knowledge update (X5) & 10/10 withheld passages at rank 1 after re-insertion; index rebuild 0.2\,s (median); rebuilt index matches deployed top-5 on 400/400 queries & 10 & Measured & Leave-one-out on real passages; no model loaded; not evidence for adding new crops \\
+Knowledge update & 10/10 withheld passages at rank 1 after re-insertion; index rebuild 0.2\,s (median); rebuilt index matches deployed top-5 on 400/400 queries & 10 & Measured & Leave-one-out on real passages; no model loaded; not evidence for adding new crops \\
 Retrieval backend & BM25 only; dense retrieval not evaluated & n/a & Stated & All retrieval numbers are BM25-only \\
 \bottomrule
 \end{tabularx}
