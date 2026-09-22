@@ -15,6 +15,21 @@ export function numLocale(value: number | string, en: boolean): string {
   return en ? String(value) : bn(value);
 }
 
+const LATIN_DIGITS: Record<string, string> = {
+  "০": "0", "১": "1", "২": "2", "৩": "3", "৪": "4",
+  "৫": "5", "৬": "6", "৭": "7", "৮": "8", "৯": "9",
+};
+
+/** Convert Bengali numerals inside a string back to Latin digits, leaving other characters untouched. */
+export function toLatinDigits(value: string): string {
+  return value.replace(/[০-৯]/g, (d) => LATIN_DIGITS[d]);
+}
+
+/** A pre-formatted Bengali-numeral stat string, in Latin digits when `en` is true. */
+export function statLocale(value: string, en: boolean): string {
+  return en ? toLatinDigits(value) : value;
+}
+
 /** Format a 0-1 confidence as a Bengali percentage, e.g. 0.976 → "৯৮%". */
 export function bnPercent(confidence: number): string {
   return bn(Math.round(confidence * 100)) + "%";

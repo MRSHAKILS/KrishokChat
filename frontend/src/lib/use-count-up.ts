@@ -15,6 +15,12 @@ export function toBn(n: number): string {
   return n.toLocaleString("en-IN").replace(/\d/g, (d) => BN_DIGITS[Number(d)]);
 }
 
+/** 2882 -> "২,৮৮২" in Bengali mode, "2,882" (en-IN grouping, Latin digits) in English mode. */
+export function toLocaleCount(n: number, en: boolean): string {
+  const grouped = n.toLocaleString("en-IN");
+  return en ? grouped : grouped.replace(/\d/g, (d) => BN_DIGITS[Number(d)]);
+}
+
 export function useCountUp(to: number, active: boolean, duration = 0.9) {
   const reduced = useReducedMotion();
   const [val, setVal] = useState(() => (reduced ? to : 0));
