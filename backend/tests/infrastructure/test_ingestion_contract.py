@@ -214,7 +214,7 @@ def test_load_fail_open_never_raises(tmp_path: Path) -> None:
 
 
 CORPUS = (
-    Path(__file__).resolve().parents[1]
+    Path(__file__).resolve().parents[2]
     / "ml_assets"
     / "rag_index"
     / "processed"
@@ -222,7 +222,7 @@ CORPUS = (
 )
 
 DOSE_REF = (
-    Path(__file__).resolve().parents[1]
+    Path(__file__).resolve().parents[2]
     / "ml_assets"
     / "rag_index"
     / "derived"
@@ -230,14 +230,14 @@ DOSE_REF = (
 )
 
 CROP_CAL = (
-    Path(__file__).resolve().parents[1]
+    Path(__file__).resolve().parents[2]
     / "ml_assets"
     / "agronomy"
     / "crop_calendars_v1.json"
 )
 
 CURATED_CAL = (
-    Path(__file__).resolve().parents[1]
+    Path(__file__).resolve().parents[2]
     / "ml_assets"
     / "agronomy"
     / "curated_calendars_v1.json"
@@ -253,7 +253,7 @@ def test_dose_reference_builder_zero_diff(tmp_path: Path) -> None:
     out = tmp_path / "dose_reference_v1.json"
     result = subprocess.run(
         [sys.executable, "scripts/build_dose_reference.py", "--output", str(out)],
-        cwd=Path(__file__).resolve().parents[1],
+        cwd=Path(__file__).resolve().parents[2],
         capture_output=True,
         text=True,
     )
@@ -272,7 +272,7 @@ def test_crop_calendars_builder_zero_diff(tmp_path: Path) -> None:
     out = tmp_path / "crop_calendars_v1.json"
     result = subprocess.run(
         [sys.executable, "scripts/build_crop_calendars.py", "--output", str(out)],
-        cwd=Path(__file__).resolve().parents[1],
+        cwd=Path(__file__).resolve().parents[2],
         capture_output=True,
         text=True,
     )

@@ -274,12 +274,19 @@ class QAPipeline:
             # do not replay a stale generated answer that guessed an arbitrary crop.
             from app.domain.intent import _match_crop_alias
             query_crop = _match_crop_alias(request.query.lower())
+            hist_crop = None
+            for h in reversed(context.history or ()):
+                found = _match_crop_alias(h.get("content", "").lower())
+                if found:
+                    hist_crop = found
+                    break
             has_crop_ctx = bool(
                 request.crop
                 or context.crop
                 or working_memory.crop
                 or (decision.intent and decision.intent.crop)
                 or query_crop
+                or hist_crop
                 or request.seed_sources
             )
             if (
@@ -447,12 +454,20 @@ class QAPipeline:
             # NLU Disambiguation & Clarification Intercept:
             # If the query is an ambiguous crop-specific problem/treatment inquiry with NO crop context,
             # do NOT retrieve blindly across unrelated crops. Intercept with a targeted clarification turn.
+            history_crop = None
+            for h in reversed(context.history or ()):
+                found = _match_crop_alias(h.get("content", "").lower())
+                if found:
+                    history_crop = found
+                    break
+
             has_crop = bool(
                 request.crop
                 or context.crop
                 or working_memory.crop
                 or (decision.intent and decision.intent.crop)
                 or _match_crop_alias(request.query.lower())
+                or history_crop
                 or request.seed_sources
             )
             if (

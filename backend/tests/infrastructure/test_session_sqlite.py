@@ -280,7 +280,7 @@ class SqliteSessionRestartViaHttpTests(unittest.TestCase):
         session that a fresh app (new container over the same DB file) still
         reads, with history intact and continued."""
         demo_cache_path = (
-            Path(__file__).resolve().parent.parent.parent / "demo-assets" / "cached_responses.json"
+            Path(__file__).resolve().parent.parent.parent.parent / "demo-assets" / "cached_responses.json"
         )
         if not demo_cache_path.exists():
             self.skipTest("demo cache file missing")

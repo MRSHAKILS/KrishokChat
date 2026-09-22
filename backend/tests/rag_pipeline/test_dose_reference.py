@@ -30,7 +30,7 @@ from app.infrastructure.verification.dose_reference import (
 )
 from app.core.config import Settings
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 CORPUS = PROJECT_ROOT / "ml_assets" / "rag_index" / "processed" / "knowledge_nodes_clean.jsonl"
 ARTIFACT = PROJECT_ROOT / "ml_assets" / "rag_index" / "derived" / "dose_reference_v1.json"
 

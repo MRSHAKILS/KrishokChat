@@ -36,7 +36,7 @@ from app.domain.contracts import (
 from app.domain.enums import ResolutionTier, SafetyCategory, VerificationConfidence
 from app.ports.verifier import Verifier
 
-TOOLS_RAG = Path(__file__).resolve().parents[2] / "tools" / "rag" / "15_build_chunk_index.py"
+TOOLS_RAG = Path(__file__).resolve().parents[3] / "tools" / "rag" / "15_build_chunk_index.py"
 
 
 def _load_builder():

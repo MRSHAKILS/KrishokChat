@@ -21,7 +21,7 @@ from pathlib import Path
 from app.domain.crop_calendar import CropCalendarLibrary
 from app.infrastructure.agronomy.calendar_store import load_crop_calendars
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 COMMITTED_ARTIFACT = PROJECT_ROOT / "ml_assets" / "agronomy" / "crop_calendars_v1.json"
 CURATED_SEED = PROJECT_ROOT / "ml_assets" / "agronomy" / "curated_calendars_v1.json"
 

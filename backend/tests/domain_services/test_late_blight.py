@@ -31,7 +31,7 @@ from app.infrastructure.auth.jwks import SupabaseJWKSVerifier
 from app.infrastructure.weather.snapshot import load_weather_snapshot
 from app.main import create_app
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 COMMITTED_SNAPSHOT = PROJECT_ROOT / "ml_assets" / "weather" / "late_blight_snapshot.json"
 
 
@@ -193,7 +193,7 @@ class AdminRouteTests(unittest.TestCase):
         verifier = SupabaseJWKSVerifier("http://unused.invalid/jwks")
         verifier._fetch_jwks = lambda: {"keys": [self.jwk]}  # type: ignore[method-assign]
 
-        from tests.test_admin_authz import FakeAdminStore
+        from tests.api_routes.test_admin_authz import FakeAdminStore
 
         app = create_app(config=config) if config else create_app()
         with TestClient(app) as client:

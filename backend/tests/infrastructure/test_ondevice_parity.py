@@ -15,8 +15,8 @@ from pathlib import Path
 import onnxruntime as ort
 import pytest
 
-MODELS_DIR = Path(__file__).resolve().parents[2] / "frontend" / "public" / "models"
-REPORT_PATH = Path(__file__).resolve().parents[2] / "docs" / "production_readiness" / "reports" / "ondevice_vision_parity_20260826.json"
+MODELS_DIR = Path(__file__).resolve().parents[3] / "frontend" / "public" / "models"
+REPORT_PATH = Path(__file__).resolve().parents[3] / "docs" / "production_readiness" / "reports" / "ondevice_vision_parity_20260826.json"
 
 
 def test_exported_onnx_models_exist_and_load() -> None:

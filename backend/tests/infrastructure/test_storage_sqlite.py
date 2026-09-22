@@ -22,7 +22,7 @@ from app.infrastructure.storage.sqlite import (
     open_db,
 )
 
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 
 MIGRATION_1 = (1, "CREATE TABLE demo_items (id INTEGER PRIMARY KEY, name TEXT NOT NULL)")
 MIGRATION_2 = (2, "CREATE TABLE demo_notes (id INTEGER PRIMARY KEY, body TEXT NOT NULL)")

@@ -26,7 +26,7 @@ from app.infrastructure.knowledge.fact_base_store import load_fact_base
 # ---------------------------------------------------------------------------
 
 ARTIFACT = (
-    Path(__file__).resolve().parents[1]
+    Path(__file__).resolve().parents[2]
     / "ml_assets"
     / "rag_index"
     / "derived"
@@ -34,7 +34,7 @@ ARTIFACT = (
 )
 
 SEED = (
-    Path(__file__).resolve().parents[1]
+    Path(__file__).resolve().parents[2]
     / "ml_assets"
     / "rag_index"
     / "derived"
@@ -228,7 +228,7 @@ def _run_validate(row: dict, stages: set[str], bands: dict) -> "str | None":
     # Import the private validation function from the builder.
     import sys
     from pathlib import Path
-    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
     from scripts.build_fact_base import _validate_row
     return _validate_row(row, stages, bands)
 
@@ -301,7 +301,7 @@ def test_builder_is_deterministic(tmp_path: Path) -> None:
     out_b = tmp_path / "b.json"
     rejected_a = tmp_path / "rej_a.json"
     rejected_b = tmp_path / "rej_b.json"
-    backend = Path(__file__).resolve().parents[1]
+    backend = Path(__file__).resolve().parents[2]
 
     for out, rej in [(out_a, rejected_a), (out_b, rejected_b)]:
         r = subprocess.run(
@@ -351,12 +351,12 @@ def test_committed_artifact_banned_agreement() -> None:
 def test_committed_artifact_no_outlier_doses() -> None:
     """No row may exceed 3× the dose_reference band max."""
     from pathlib import Path
-    dose_ref = Path(__file__).resolve().parents[1] / "ml_assets" / "rag_index" / "derived" / "dose_reference_v1.json"
+    dose_ref = Path(__file__).resolve().parents[2] / "ml_assets" / "rag_index" / "derived" / "dose_reference_v1.json"
     if not dose_ref.exists():
         pytest.skip("dose_reference_v1.json not present")
 
     import sys
-    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
     from scripts.build_fact_base import _load_dose_bands, OUTLIER_FACTOR
     from app.infrastructure.verification.dosage_claims import normalize_chemical
 

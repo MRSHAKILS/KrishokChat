@@ -19,7 +19,7 @@ from app.domain.enums import ResolutionTier
 from app.infrastructure.knowledge.fact_base_store import load_fact_base
 
 FACT_BASE_PATH = (
-    Path(__file__).resolve().parents[1]
+    Path(__file__).resolve().parents[2]
     / "ml_assets"
     / "rag_index"
     / "derived"

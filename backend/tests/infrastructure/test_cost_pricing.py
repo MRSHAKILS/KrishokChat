@@ -118,7 +118,7 @@ def test_load_model_prices_valid_file(tmp_path: Path) -> None:
 
 
 def test_committed_model_prices_schema() -> None:
-    artifact_path = Path(__file__).resolve().parents[1] / "config" / "model_prices.json"
+    artifact_path = Path(__file__).resolve().parents[2] / "config" / "model_prices.json"
     assert artifact_path.exists(), "backend/config/model_prices.json must exist"
 
     with open(artifact_path, encoding="utf-8") as fh:
