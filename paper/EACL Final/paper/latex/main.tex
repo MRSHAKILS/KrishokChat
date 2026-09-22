@@ -455,50 +455,43 @@ We inspected the provenance traces for 100 evaluation cases. All 100 preserved t
 
 Figures~\ref{fig:app_halt}--\ref{fig:app_drop} show full-size screens for the five steps (S1--S5) in Section~\ref{sec:demonstration}.
 
-\begin{figure}[!ht]
+\begin{figure*}[!t]
 \centering
-\begin{subfigure}[t]{\linewidth}
+\begin{subfigure}[t]{0.31\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot1_halt_clarification.png}
+  \includegraphics[width=\linewidth,height=3.65cm,keepaspectratio]{../screenshots/screenshot1_halt_clarification.png}
   \caption{\textbf{ASK (S1):} missing crop halts before retrieval; offers crop chips.}
   \label{fig:app_halt}
-\end{subfigure}
-\par\vspace{2pt}
-\begin{subfigure}[t]{\linewidth}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.31\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot3_photo_crop_scope.png}
-  \caption{\textbf{BIND (S2):} on-device classifier bounds retrieval to predicted crop.}
+  \includegraphics[width=\linewidth,height=3.65cm,keepaspectratio]{../screenshots/screenshot3_photo_crop_scope.png}
+  \caption{\textbf{BIND (S2):} on-device classifier bounds retrieval to the predicted crop.}
   \label{fig:app_fence}
-\end{subfigure}
-\par\vspace{2pt}
-\begin{subfigure}[t]{\linewidth}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.31\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot4_mismatch_badge.png}
+  \includegraphics[width=\linewidth,height=3.65cm,keepaspectratio]{../screenshots/screenshot4_mismatch_badge.png}
   \caption{\textbf{CONFIRM (S3):} mismatch badge holds advice on conflicting inputs.}
   \label{fig:app_mismatch}
 \end{subfigure}
-\caption{Demonstration gallery: admission and cross-modal controls (S1--S3).}
-\label{fig:app_gallery_1}
-\end{figure}
 
-\begin{figure}[!ht]
-\centering
-\begin{subfigure}[t]{\linewidth}
+\vspace{0.5em}
+\begin{subfigure}[t]{0.31\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot7_16123_safety_referral.png}
+  \includegraphics[width=\linewidth,height=3.65cm,keepaspectratio]{../screenshots/screenshot7_16123_safety_referral.png}
   \caption{\textbf{REFER (S4):} safety notice with 16123 helpline call button.}
   \label{fig:app_delivery}
-\end{subfigure}
-\par\vspace{2pt}
-\begin{subfigure}[t]{\linewidth}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.31\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot5_grounded_answer.png}
-  \caption{\textbf{DROP (S5):} T4 verifier strips unsupported dosage claim; retains BARI evidence.}
+  \includegraphics[width=\linewidth,height=3.65cm,keepaspectratio]{../screenshots/screenshot5_grounded_answer.png}
+  \caption{\textbf{DROP (S5):} T4 strips the unsupported dosage claim and retains BARI evidence.}
   \label{fig:app_drop}
 \end{subfigure}
-\caption{Demonstration gallery: safety referral and dosage release controls (S4--S5).}
-\label{fig:app_gallery_2}
-\end{figure}
+\caption{Demonstration gallery: the five website states expose admission, crop binding, conflict confirmation, safety referral, and dosage release. The two-row, three-column layout enlarges the screenshots while preserving their aspect ratios.}
+\label{fig:app_gallery}
+\end{figure*}
 
 \section{Multi-Turn State Tests}
 \label{sec:eval-multiturn}

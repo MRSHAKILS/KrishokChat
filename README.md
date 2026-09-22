@@ -7,6 +7,10 @@ verification) and diagnoses crop diseases from photos using a crop-classifier +
 per-crop vision model workflow. It is a research capstone demo prototype, not a
 production service.
 
+> 🌐 **Interactive Demo Preview:** [https://krishoktech.vercel.app](https://krishoktech.vercel.app)  
+> 🎥 **Demonstration Screencast:** [https://krishoktech.vercel.app/screencast](https://krishoktech.vercel.app/screencast)  
+> ▶️ **Screencast on YouTube (2:24):** [https://youtu.be/a4cibXlvGdQ](https://youtu.be/a4cibXlvGdQ)
+
 ## 🚀 EACL 2027 Reviewer Quick Start (5-Minute Reproduction Guide)
 
 KrishokTech provides an **independently runnable, 100% offline (zero API keys required, CPU-only)** replication suite for all quantitative tables, safety gates, and empirical claims reported in the EACL 2027 paper.
