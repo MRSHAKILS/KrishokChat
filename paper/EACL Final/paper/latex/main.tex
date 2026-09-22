@@ -55,11 +55,11 @@
 \author{
   \mdseries
   Khan Raiyan Ibne Reza, \enspace Sanjana Aktar Maria, \enspace Shakil Ahmed, \\
-  Faiyad Hasan, \enspace Sumaiya Tabassum Nimi \\[2pt]
+  Faiyad Hossain, \enspace Sumaiya Tabassum Nimi \\[2pt]
   Department of Computer Science and Engineering \\
   North South University, Dhaka 1229, Bangladesh \\
   \texttt{\{raiyan.reza, sanjana.maria, shakil.ahmed2,} \\
-  \texttt{faiyad.hasan, sumaiya.nimi\}@northsouth.edu}
+  \texttt{faiyad.hossain, sumaiya.nimi\}@northsouth.edu}
 }
 
 \date{}
@@ -266,7 +266,7 @@ The evaluation measures component behavior on bounded datasets. Several tests us
 
 \paragraph{Availability and Licensing.}
 \label{sec:availability}
-The public interface preview is available at \url{https://krishoktech.vercel.app}, and the demonstration video is at \url{https://krishoktech.vercel.app/screencast}. The downloadable implementation, installation instructions, deterministic controls, and tests are released under immutable tag \texttt{v1.0.0-eacl2027} at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}. All principal evaluation results and safety gates are independently verifiable offline from a clean environment using a single command (\texttt{python reproduce.py} or \texttt{bash reproduce.sh}) with zero external API keys; an automated continuous-integration workflow runs this suite on every release. The package can use a configured online generator or a compatible local runtime; continuous access to a paid hosted backend is not required to inspect the code or control logic.
+The interface preview is at \url{https://krishoktech.vercel.app} and the video is at \url{https://krishoktech.vercel.app/screencast}. Code, controls, and tests are released under tag \texttt{v1.0.0-eacl2027} at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}. All evaluation results and safety gates are verifiable offline without API keys via a single command (\texttt{python reproduce.py}); an automated CI workflow verifies every release. Continuous access to a paid backend is not required to inspect code or controls.
 
 Browser-side vision classifiers are released at \url{https://huggingface.co/RaiyanKhaan/KrishokTech-Models}. The generator's LoRA adapter and evidence-index artifacts are available at \url{https://huggingface.co/RaiyanKhaan/KrishokChat-Advisory-System}. The MIT license in the GitHub repository applies to the application code. Model files remain subject to the licenses and base-model terms stated on their respective model cards. BARI, BRRI, and DAE passages retain their original source attribution and are not relicensed by the software license. The public interface retains the KrishokChat product label; KrishokTech denotes the controlled demonstration configuration evaluated here.
 
@@ -455,39 +455,49 @@ We inspected the provenance traces for 100 evaluation cases. All 100 preserved t
 
 Figures~\ref{fig:app_halt}--\ref{fig:app_drop} show full-size screens for the five steps (S1--S5) in Section~\ref{sec:demonstration}.
 
-\begin{figure}[h]
+\begin{figure}[!ht]
 \centering
-\includegraphics[width=0.78\linewidth]{../screenshots/screenshot1_halt_clarification.png}
-  \caption{ASK (S1): a colloquial treatment query that names no crop halts before retrieval, and the system offers Bengali crop chips.}
-\label{fig:app_halt}
+\begin{subfigure}[t]{\linewidth}
+  \centering
+  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot1_halt_clarification.png}
+  \caption{\textbf{ASK (S1):} missing crop halts before retrieval; offers crop chips.}
+  \label{fig:app_halt}
+\end{subfigure}
+\par\vspace{2pt}
+\begin{subfigure}[t]{\linewidth}
+  \centering
+  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot3_photo_crop_scope.png}
+  \caption{\textbf{BIND (S2):} on-device classifier bounds retrieval to predicted crop.}
+  \label{fig:app_fence}
+\end{subfigure}
+\par\vspace{2pt}
+\begin{subfigure}[t]{\linewidth}
+  \centering
+  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot4_mismatch_badge.png}
+  \caption{\textbf{CONFIRM (S3):} mismatch badge holds advice on conflicting inputs.}
+  \label{fig:app_mismatch}
+\end{subfigure}
+\caption{Demonstration gallery: admission and cross-modal controls (S1--S3).}
+\label{fig:app_gallery_1}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!ht]
 \centering
-\includegraphics[width=0.78\linewidth]{../screenshots/screenshot3_photo_crop_scope.png}
-  \caption{S2: the on-device classifier predicts the crop from a leaf photograph, and retrieval is scoped to that crop's guidance.}
-\label{fig:app_fence}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.78\linewidth]{../screenshots/screenshot4_mismatch_badge.png}
-  \caption{CONFIRM (S3): photograph and text name different crops. The mismatch badge appears, and chemical advice is held until the farmer picks one.}
-\label{fig:app_mismatch}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.78\linewidth]{../screenshots/screenshot7_16123_safety_referral.png}
-\caption{REFER (S4): safety notice with a 16123 call button.}
-\label{fig:app_delivery}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.78\linewidth]{../screenshots/screenshot5_grounded_answer.png}
-\caption{DROP (S5): T4 removes an unsupported dosage claim, and the rest of the answer is shown with BARI citations and the expanded \textit{Why} panel.}
-\label{fig:app_drop}
+\begin{subfigure}[t]{\linewidth}
+  \centering
+  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot7_16123_safety_referral.png}
+  \caption{\textbf{REFER (S4):} safety notice with 16123 helpline call button.}
+  \label{fig:app_delivery}
+\end{subfigure}
+\par\vspace{2pt}
+\begin{subfigure}[t]{\linewidth}
+  \centering
+  \includegraphics[width=\linewidth,height=2.9cm]{../screenshots/screenshot5_grounded_answer.png}
+  \caption{\textbf{DROP (S5):} T4 verifier strips unsupported dosage claim; retains BARI evidence.}
+  \label{fig:app_drop}
+\end{subfigure}
+\caption{Demonstration gallery: safety referral and dosage release controls (S4--S5).}
+\label{fig:app_gallery_2}
 \end{figure}
 
 \section{Multi-Turn State Tests}
