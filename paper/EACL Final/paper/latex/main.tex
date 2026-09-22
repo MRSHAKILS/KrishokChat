@@ -369,10 +369,12 @@ Benign control & 15 & 15 passed & 15 passed & none \\
 \label{app:deployment}
 \label{app:delivery}
 
-\subsection{SMS Enforcement}
-Bengali-script messages use UCS-2 encoding (70 characters for a single SMS, 67 per part when concatenated), so a 160-character advisory is sent as two or three segments (mean 2.5 on the 100 advisories below); only the Latin-script tuple test uses GSM-7. The SMS packer produced 299/300 offline and 100/100 live messages within 160 characters (399/400 overall), and all 8 referral messages carried only the referral. In a live audit of 92 long advisories, naive truncation kept the dose in 12, because conversational preamble pushed it past the 160-character limit. The deterministic 11-slot compressor kept dose, application interval, and pre-harvest interval in all 1,000 constructed input tuples (102--115 GSM-7 characters, one segment each) and kept 65 of 66 dosage claims on live gold advisories. It copies slots from the verified answer and does not write new values, although copying cannot guard against a wrongly extracted slot.
+This section reports implementation measurements that clarify how an authorized result is rendered and operated. These measurements are supplementary: they do not establish usability on farmers' devices or performance under real rural network conditions.
 
-Table~\ref{tab:n05c} compares the arms on 100 long dose-carrying advisories. The first compressor kept the dose but often lost the chemical name (34/100), because the dose sentence usually refers to the chemical indirectly. The current compressor copies the nearest active ingredient named earlier in the verified answer into the message (\textit{``Cartap: 1\,ml/L''}); it never adds a name that the answer does not contain. It keeps the chemical in 63 of the 67 advisories that name one from the scorer's list. The active-ingredient list comes from the verifier's dose reference and overlaps with the scorer's list, so part of this gain is expected by design. The LLM summarizer is only a baseline; the deployed path uses the compressor.
+\subsection{SMS Rendering}
+Bengali-script SMS uses UCS-2 encoding, which permits 70 characters in one message and 67 characters per part in a concatenated message. A 160-character Bengali advisory therefore occupies two or three SMS segments rather than one. Across separate offline and connected test sets, the deterministic packer kept 399 of 400 outputs within its configured 160-character limit. All eight referral cases contained only the referral message.
+
+Table~\ref{tab:n05c} compares four rendering methods on the same 100 long, dosage-bearing advisories. The current compressor copies detected values from the verified answer and does not generate new quantities. It improved preservation of both the dose and chemical name from 14/100 under naive truncation to 61/100. This remains insufficient for treating the compact SMS as semantically equivalent to the full answer. The SMS view is therefore a constrained rendering whose source and full verified response should remain available when exact chemical details matter.
 
 \begin{table}[t]
 \centering
@@ -382,45 +384,47 @@ Table~\ref{tab:n05c} compares the arms on 100 long dose-carrying advisories. The
 \toprule
 \textbf{Measure} & \textbf{Naive} & \textbf{LLM} & \textbf{Comp.\,1} & \textbf{Comp.\,2} \\
 \midrule
-Dose survival & 23/100 & 89/100 & 92/100 & 94/100 \\
-Chemical survival & 20/100 & 56/100 & 34/100 & 63/100 \\
-Dose + chemical & 14/100 & 51/100 & 32/100 & 61/100 \\
-Length $\le 160$ chars & 100/100 & 98/100 & 100/100 & 100/100 \\
+Dose retained & 23/100 & 89/100 & 92/100 & 94/100 \\
+Chemical retained & 20/100 & 56/100 & 34/100 & 63/100 \\
+Both retained & 14/100 & 51/100 & 32/100 & 61/100 \\
+Length $\leq160$ chars & 100/100 & 98/100 & 100/100 & 100/100 \\
 UCS-2 segments (mean) & 3.0 & 2.1 & 2.5 & 2.5 \\
-Invented dose/chem. & 0 (copies) & 1 (+1 bord.) & 0 & 0 \\
+Invented value & 0 & 1 & 0 & 0 \\
 \bottomrule
 \end{tabularx}
-\caption{SMS comparison on 100 paired long dose-carrying advisories (N05c/N05d, seed 42): naive truncation, LLM summarizer, first compressor (Comp.\,1), and current compressor with the chemical-name slot (Comp.\,2). All arms share the same frozen detectors; 67 of the 100 gold advisories name a chemical from the scorer's list.}
+\caption{Paired SMS comparison on 100 long dosage-bearing advisories (seed 42). Comp.\,1 is the original deterministic compressor; Comp.\,2 additionally copies the nearest recognized active ingredient from the verified answer. Sixty-seven reference advisories contain a chemical recognized by the scorer.}
 \label{tab:n05c}
 \end{table}
 
 \subsection{Offline Retrieval}
-Local BM25 retrieval reached a hit rate of $0.94$, and service-worker precaching recorded 0 cache misses over 400 requests. Under simulated packet loss, local retrieval stayed at 0.94, while remote retrieval lost 13.25\,pp at 15\% loss and 30.0\,pp at 30\% loss. This covers retrieval only; offline generation depends on the local model.
+The local BM25 path obtained a hit rate of 0.94 on the 400-query retrieval benchmark. With service-worker precaching enabled, the test recorded no cache miss in 400 requests. In a network simulation, remote retrieval lost 13.25 percentage points at 15\% packet loss and 30.0 points at 30\% packet loss, while local retrieval was unchanged. Packet loss was simulated rather than measured in a field deployment. This result applies to retrieval; offline generation additionally requires a compatible local model and sufficient hardware.
 
 \subsection{Installation Footprint}
-Table~\ref{tab:footprint} lists measured sizes. They cover the application and vision assets and exclude the \texttt{krishokchat-4b} weights, which add several gigabytes.
+Table~\ref{tab:footprint} reports measured application and vision-asset sizes. The minimal installation occupies 284.0\,MB, including 95.64\,MB of unique ONNX vision files. These totals exclude language-model weights, which require several additional gigabytes. The footprint therefore supports browser-side vision and local retrieval, not a claim that the complete generator fits on a low-end phone.
 
 \begin{table}[t]
 \centering
 \small
 \begin{tabular}{lr}
 \toprule
-\textbf{Artifact (excluding LLM weights)} & \textbf{Size (MB)} \\
+\textbf{Artifact, excluding LLM weights} & \textbf{Size (MB)} \\
 \midrule
 Unique ONNX vision assets (11 files) & 95.64 \\
 Minimal installation & 284.0 \\
 Installation with PyTorch checkpoints & 339.6 \\
 \bottomrule
 \end{tabular}
-\caption{Measured installation footprint, excluding the language model.}
+\caption{Measured installation footprint. Language-model weights are excluded from every row.}
 \label{tab:footprint}
 \end{table}
 
-\subsection{Knowledge Update Without Retraining}
-We removed each of 10 real guideline passages from the index, rebuilt it, and then re-inserted the passage. The 10 passages were chosen by a fixed rule: each is the top result for one of the 400 stress queries, contains a dose, and names the query's crop. Without the passage, its query could not retrieve it; after re-insertion it returned at rank 1 in 10 of 10 cases. A rebuild took 0.2\,s on a laptop CPU (median), and a rebuilt full index reproduced the deployed index's top five on all 400 queries. No model was loaded at any point, so the generator weights cannot change. This shows that revising a passage needs no retraining; adding a new crop still needs a classifier, aliases, and policy rules.
+\subsection{Updating the Evidence Index}
+Agricultural passages are stored outside the generator. As an implementation check, we removed and reinserted 10 guideline passages selected from the top-ranked results of the stress queries. Rebuilding the index took a median of 0.2\,s on the evaluation laptop, and the rebuilt full index reproduced the deployed top five for all 400 queries. After reinsertion, each of the 10 selected passages again appeared at rank 1 for its original query.
 
-\subsection{Latency Breakdown}
-Table~\ref{tab:latency} lists non-generation latency ($n=400$, median 33.565\,ms). Generation is excluded: the local model takes about 24\,s per call on CPU, and the gate comparison LLM took a median 4.2\,s per decision.
+This check confirms that passages can be replaced and the index rebuilt without loading or modifying the generator. It does not measure whether newly added guidance is correct, sufficiently complete, or retrieved well for a new topic. Adding a crop still requires supporting evidence, aliases, routing rules, and any corresponding vision component.
+
+\subsection{Latency}
+Table~\ref{tab:latency} reports non-generation latency over 400 requests. The median total was 33.565\,ms. Generation is excluded from this total: on the evaluated CPU setup, the local generator required a median of 24.3\,s for 150 output tokens and is therefore intended for queued or kiosk workflows rather than interactive low-latency chat.
 
 \begin{table}[t]
 \centering
@@ -431,20 +435,17 @@ Table~\ref{tab:latency} lists non-generation latency ($n=400$, median 33.565\,ms
 \midrule
 Safety processing & 0.321 & 0.705 \\
 BM25 retrieval & 26.831 & 61.248 \\
-Verification & 4.815 & 11.220 \\
+Dosage verification & 4.815 & 11.220 \\
 \midrule
-Total pipeline & 33.565 & 67.833 \\
+Non-generation total & 33.565 & 67.833 \\
 \bottomrule
 \end{tabular}
-\caption{Safety, retrieval, and verification latency ($n=400$ requests, BM25 only, stub LLM). Component medians need not sum to the total median.}
+\caption{Latency over 400 requests with BM25 retrieval and generation stubbed out. Component medians need not sum to the median total.}
 \label{tab:latency}
 \end{table}
 
-\subsection{Zero-LLM Turns and Modeled Cost}
-On a 1,000-query benchmark mix, 7.9\% of turns needed no LLM: 5.7\% ended at T0 and 2.2\% were answered from the T2 fact base, while 92.1\% reached generation. Using provider-metered token counts from 58 live calls and published API prices, this mix costs USD~0.1720 per 1,000 turns against USD~0.1995 if every turn reached generation. This is a model of API cost on a benchmark mix, not billed expenditure or farmer traffic.
-
 \subsection{Trace Ordering}
-Across 100 evaluation cases, all 100 provenance traces kept the required event order (median 9 events per turn).
+We inspected the provenance traces for 100 evaluation cases. All 100 preserved the required order among the stages present in the turn, with a median of nine recorded events. This is a conformance check on event ordering; it does not establish that every recorded source causally determined the generated text.
 
 \section{Demonstration Gallery}
 \label{app:ui}
@@ -578,7 +579,6 @@ SMS comparison & Dose kept in 23 (naive), 89 (LLM), 92 (Comp.\,1), 94 (Comp.\,2)
 Offline retrieval & Local BM25 hit rate 0.94, 0/400 cache misses; remote retrieval loses 13.25\,pp (15\% loss) and 30.0\,pp (30\% loss) & 400 & Measured, loss simulated & Retrieval only \\
 Non-LLM overhead & Median 33.565\,ms (p95 67.833\,ms): safety 0.321, BM25 26.831, verifier 4.815\,ms & 400 & Measured & Stub LLM; local generation about 24\,s per call \\
 Installation footprint & 95.64\,MB ONNX vision assets; 284.0\,MB minimal; 339.6\,MB with PyTorch checkpoints & n/a & Measured & Excludes the language-model weights \\
-Tier mix and cost & 7.9\% zero-LLM turns; USD~0.1720 per 1,000 turns vs 0.1995 with every turn generated & 1,000 & Modeled & Metered tokens from 58 calls; not billed expenditure \\
 Knowledge update (X5) & 10/10 withheld passages at rank 1 after re-insertion; index rebuild 0.2\,s (median); rebuilt index matches deployed top-5 on 400/400 queries & 10 & Measured & Leave-one-out on real passages; no model loaded; not evidence for adding new crops \\
 Retrieval backend & BM25 only; dense retrieval not evaluated & n/a & Stated & All retrieval numbers are BM25-only \\
 \bottomrule
