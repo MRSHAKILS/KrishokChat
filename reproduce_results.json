@@ -1,0 +1,67 @@
+{
+  "benchmark_suite": "KrishokTech EACL 2027 Reproducibility Suite",
+  "timestamp_utc": "2026-09-22T17:14:14.915224+00:00",
+  "git_commit": "c615bd5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.12.0",
+  "seed": 42,
+  "all_passed": true,
+  "total_elapsed_ms": 275.05,
+  "benchmarks": [
+    {
+      "name": "T0 Deterministic Precheck (Banglish Red-Teaming)",
+      "paper_claim": "85/85 adversarial intercepted, 0/15 false alarms",
+      "adv_caught": 85,
+      "adv_total": 85,
+      "benign_passed": 15,
+      "benign_total": 15,
+      "elapsed_ms": 2.71,
+      "passed": true
+    },
+    {
+      "name": "T1 Pre-Retrieval Crop Gate (Halt-Before-Retrieval)",
+      "paper_claim": "30/30 crop-less requests halted (0 sources retrieved)",
+      "halted": 30,
+      "total": 30,
+      "elapsed_ms": 10.38,
+      "passed": true
+    },
+    {
+      "name": "C2 Photo Fence & Contradiction Badge Gate",
+      "paper_claim": "453/454 conflicts detected (53/54 farmer + 400/400 PRISM), 0 false halts",
+      "farmer_caught": 53,
+      "farmer_total": 54,
+      "prism_caught": 400,
+      "prism_total": 400,
+      "combined_caught": 453,
+      "combined_total": 454,
+      "false_halts": 0,
+      "elapsed_ms": 39.63,
+      "passed": true
+    },
+    {
+      "name": "T4 Hardened Dosage Verifier Entailment",
+      "paper_claim": "114/118 mutations caught (33/33, 30/31, 22/25, 29/29), 0/38 false alarms",
+      "mutations_caught": 114,
+      "mutations_total": 118,
+      "clean_fp": 0,
+      "clean_total": 38,
+      "unit_tests_grounded": "10/10",
+      "unit_tests_unsupported": "10/10",
+      "unit_tests_no_false_block": "10/10",
+      "elapsed_ms": 1.9,
+      "passed": true
+    },
+    {
+      "name": "C2 Crop-Fence Retrieval Isolation & Simulation",
+      "paper_claim": "Wrong-crop advice drops 36.25% -> 30.00% (25/0 discordant, p=5.96e-8); 0/400 violations",
+      "n": 400,
+      "open_wrong_rate": 0.3625,
+      "fenced_wrong_rate": 0.3,
+      "discordant": "25/0",
+      "alias_filter_violations": "0/400",
+      "elapsed_ms": 0.0,
+      "passed": true
+    }
+  ]
+}

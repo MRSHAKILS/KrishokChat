@@ -7,8 +7,73 @@ verification) and diagnoses crop diseases from photos using a crop-classifier +
 per-crop vision model workflow. It is a research capstone demo prototype, not a
 production service.
 
+## 🚀 EACL 2027 Reviewer Quick Start (5-Minute Reproduction Guide)
+
+KrishokTech provides an **independently runnable, 100% offline (zero API keys required, CPU-only)** replication suite for all quantitative tables, safety gates, and empirical claims reported in the EACL 2027 paper.
+
+### 1. One-Command Paper Results Reproduction
+
+```bash
+git clone https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System.git
+cd KrishokChat-Agricultural-Advisory-System
+
+# Run the turnkey offline paper verification runner:
+python reproduce.py
+# (or: bash reproduce.sh / reproduce.bat)
+```
+
+**Expected terminal output (< 500 ms total runtime):**
+```text
+======================================================================
+  KRISHOKTECH — PAPER RESULTS REPRODUCIBILITY BENCHMARK (EACL 2027)  
+======================================================================
+  Release / Git Commit : v1.0.0-eacl2027
+  Execution Mode       : 100% Offline (0 API Keys, Local CPU)
+  Deterministic Seed   : 42
+----------------------------------------------------------------------
+Benchmark / Paper Claim                          Result           Status
+------------------------------------------------------------------------
+T0 Deterministic Precheck (Banglish Red-Teaming) 85/85 adv, 15/15 ben [PASS]
+T1 Pre-Retrieval Crop Gate (Halt-Before-Retrieval) 30/30 halted     [PASS]
+C2 Photo Fence & Contradiction Badge Gate        453/454 caught   [PASS]
+T4 Hardened Dosage Verifier Entailment           114/118 caught   [PASS]
+C2 Crop-Fence Retrieval Isolation & Simulation   0/400 violations [PASS]
+------------------------------------------------------------------------
+✓ ALL PRINCIPAL PAPER METRICS SUCCESSFULLY REPRODUCED! (5/5 PASS)
+```
+A machine-readable execution audit is automatically generated at `reproduce_results.json`.
+
+---
+
+### 2. Artifact & Reproducibility Matrix
+
+| Artifact / Component | Reported Paper Claim | Offline Reproducible | Test / Execution Command | Status |
+| :--- | :--- | :---: | :--- | :---: |
+| **T0 Safety Precheck** | 85/85 Banglish/phonetic attacks intercepted, 0/15 false alarms | ✓ | `python reproduce.py` | `PASS` |
+| **T1 Crop Gate (ASK)** | 30/30 crop-less symptom requests halted before retrieval | ✓ | `python reproduce.py` | `PASS` |
+| **C2 Contradiction Badge (CONFIRM)**| 453/454 text-image conflicts detected (53/54 farmer, 400/400 PRISM) | ✓ | `python reproduce.py` | `PASS` |
+| **T4 Hardened Verifier (DROP)** | 114/118 dosage mutations caught, 0/38 clean false alarms | ✓ | `python reproduce.py` | `PASS` |
+| **C2 Retrieval Crop-Fencing** | Wrong-crop advice drops 36.25% → 30.00% ($p=5.96\times 10^{-8}$), 0/400 violations | ✓ | `python reproduce.py` | `PASS` |
+| **Core Safety Unit Tests** | 74 regression tests across gates, boundaries, registries, & redaction | ✓ | `pytest backend/tests/safety_gates` | `PASS` |
+| **Five Demo Scenarios (S1–S5)** | Interactive verification of ASK, BIND, CONFIRM, REFER, DROP | ✓ | `python backend/tests/run_e2e.py` | `PASS` |
+
+---
+
+### 3. Five Canonical Demonstration Scenarios (S1–S5)
+
+The paper structures KrishokTech's user-facing authorization boundaries across five observable states:
+
+* **S1: ASK (Crop Disambiguation Intercept)** — Farmer asks `পাতায় হলুদ দাগ হয়েছে, কী বিষ দিব?` without naming a crop. The system halts retrieval immediately, saving 88% token context, and presents quick-reply chips: `[ ধান ] [ আলু ] [ টমেটো ]`.
+* **S2: BIND (Photo-Bounded Retrieval)** — Uploading a potato leaf photo binds retrieval to potato evidence only, preventing cross-crop chemical contamination.
+* **S3: CONFIRM (Contradiction Badge)** — Farmer uploads a potato leaf photo but types a message about brinjal (`বেগুনের পাতা`). The system intercepts with a `[সন্দেহজনক বৈপরীত্য]` confirmation badge before recommending any chemical.
+* **S4: REFER (16123 Helpline Referral)** — Farmer asks for a banned chemical (e.g. `প্যারাকোয়াট` or phonetic Banglish `parakwat`). The T0 precheck halts generation in 0.32 ms and surfaces the national agricultural emergency hotline (16123).
+* **S5: DROP (Dosage-Claim Sanitization)** — If the answer generator outputs an ungrounded or mutated dosage rate, the narrow relational verifier strips the sentence while preserving safe cultural practices.
+
+---
+
 ## Table of Contents
 
+- [EACL 2027 Reviewer Quick Start](#-eacl-2027-reviewer-quick-start-5-minute-reproduction-guide)
 - [Overview](#overview)
 - [Features](#features)
 - [Architecture](#architecture)
