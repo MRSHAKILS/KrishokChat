@@ -29,7 +29,7 @@ export const LINKS = {
    verified 2026-08-13 by text extraction; NOT fabricated */
 export const RESEARCH_STATS = {
   benchmarkInstances: "৮৫,৯৭৯",
-  knowledgeNodes: "২,৮৮২",
+  knowledgeNodes: "২,১০০+",
   publications: "২৮৪",
   institutions: "১৩",
   dialects: "৬",
@@ -70,7 +70,7 @@ export const RESEARCH_STATS = {
    animations (toBn() re-produces the exact Bengali formatting from the number). */
 export const RESEARCH_STATS_N = {
   benchmarkInstances: 85979,
-  knowledgeNodes: 2882,
+  knowledgeNodes: 2100,
   publications: 284,
   institutions: 13,
   dialects: 6,
