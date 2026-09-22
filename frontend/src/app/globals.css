@@ -94,6 +94,25 @@
     letter-spacing: -0.01em;
   }
 
+  /* English uses a Latin text face. Tiro Bangla and Noto Sans Bengali stay
+     on the Bangla path; their Latin cuts are too loose for interface copy. */
+  html[data-lang="en"] {
+    --font-display: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+    --font-body: "Segoe UI", "Helvetica Neue", system-ui, sans-serif;
+  }
+
+  html[data-lang="en"] body {
+    font-family: var(--font-body);
+  }
+
+  html[data-lang="en"] h1,
+  html[data-lang="en"] h2,
+  html[data-lang="en"] h3,
+  html[data-lang="en"] .font-display {
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+
   /* Bengali যুক্তাক্ষর becomes harder to read when Latin-style tracking is
      applied. Keep the default script spacing natural; English eyebrow copy
      can opt into tracking explicitly where it is genuinely useful. */

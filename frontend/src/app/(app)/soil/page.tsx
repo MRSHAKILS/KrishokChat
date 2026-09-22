@@ -11,6 +11,7 @@ import { SoilDatasetCard } from "@/components/soil/soil-dataset-card";
 import { SoilLockedCard } from "@/components/soil/soil-locked-card";
 import { stagger, enter, dur, ease } from "@/lib/motion";
 import { prepareUploadImage } from "@/lib/image";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    SoilPage — the soil moisture field console.
@@ -21,12 +22,14 @@ import { prepareUploadImage } from "@/lib/image";
    ========================================================================= */
 
 const SOIL_SAMPLES = [
-  { path: "/assets/soil_samples/P0001_Doash_8.0kpa.jpg", name: "দোআঁশ · ৮ kPa" },
-  { path: "/assets/soil_samples/P0064_Bele_0.0kpa.jpg", name: "বেলে · ০ kPa" },
-  { path: "/assets/soil_samples/P0406_Atel_16.5kpa.jpg", name: "এঁটেল · ১৬.৫ kPa" },
+  { path: "/assets/soil_samples/P0001_Doash_8.0kpa.jpg", name: "দোআঁশ · ৮ kPa", nameEn: "Loam · 8 kPa" },
+  { path: "/assets/soil_samples/P0064_Bele_0.0kpa.jpg", name: "বেলে · ০ kPa", nameEn: "Sandy · 0 kPa" },
+  { path: "/assets/soil_samples/P0406_Atel_16.5kpa.jpg", name: "এঁটেল · ১৬.৫ kPa", nameEn: "Clay · 16.5 kPa" },
 ];
 
 export default function SoilPage() {
+  const { t, locale } = useLanguage();
+  const en = locale === "en";
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -157,23 +160,25 @@ export default function SoilPage() {
     <div className="mx-auto max-w-4xl space-y-7 pb-16">
       {!online && (
         <div role="status" className="sticky top-2 z-20 rounded-lg border border-ochre-soft bg-paper px-4 py-3 text-sm font-medium text-ink shadow-sm">
-          ইন্টারনেট সংযোগ নেই। ছবি ও লেখা এই পর্দায় থাকবে; সংযোগ এলে আবার চেষ্টা করুন।
+          {en ? "You are offline. The photo stays on this screen; try again when the connection returns." : "ইন্টারনেট সংযোগ নেই। ছবি ও লেখা এই পর্দায় থাকবে; সংযোগ এলে আবার চেষ্টা করুন।"}
         </div>
       )}
       {/* Page heading */}
       <div>
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-2 text-xs font-semibold text-ochre">মাঠের মাটি পরীক্ষা</p>
-            <h1 className="font-display text-3xl text-ink">মাটি ও সেচ</h1>
+            <p className="mb-2 text-xs font-semibold text-ochre">{en ? t.soil.subtitle : "মাঠের মাটি পরীক্ষা"}</p>
+            <h1 className="font-display text-3xl text-ink">{en ? t.soil.title : "মাটি ও সেচ"}</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2 text-xs text-ink-faint">
-            <span className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 py-1.5"><span className={`h-1.5 w-1.5 rounded-full ${online ? "bg-leaf" : "bg-clay"}`} />{online ? "সিস্টেম অনলাইন" : "অফলাইন"}</span>
-            <span className="rounded-full border rule bg-paper-2/40 px-2.5 py-1.5">ডেটাসেট প্রকাশিত · মডেল উন্নয়নে</span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 py-1.5"><span className={`h-1.5 w-1.5 rounded-full ${online ? "bg-leaf" : "bg-clay"}`} />{online ? (en ? "Online" : "সিস্টেম অনলাইন") : (en ? "Offline" : "অফলাইন")}</span>
+            <span className="rounded-full border rule bg-paper-2/40 px-2.5 py-1.5">{en ? "Dataset published · model in development" : "ডেটাসেট প্রকাশিত · মডেল উন্নয়নে"}</span>
           </div>
         </div>
         <p className="mt-1 text-sm text-ink-soft">
-          পাবনার মাঠ থেকে সংগৃহীত ৭২২টি মাটির ছবি ও টেনশিওমিটার তথ্যভিত্তিক গবেষণা ডেটাসেট। এখানে মাটির বৈজ্ঞানিক আর্দ্রতা টান (kPa)-কে কৃষকের পরিচিত 'জো অবস্থা' ও সেচ নির্দেশনায় রূপান্তর করে দেখানো হয়েছে।
+          {en
+            ? t.soil.pageDescription
+            : "পাবনার মাঠ থেকে সংগৃহীত ৭২২টি মাটির ছবি ও টেনশিওমিটার তথ্যভিত্তিক গবেষণা ডেটাসেট। এখানে মাটির বৈজ্ঞানিক আর্দ্রতা টান (kPa)-কে কৃষকের পরিচিত 'জো অবস্থা' ও সেচ নির্দেশনায় রূপান্তর করে দেখানো হয়েছে।"}
         </p>
       </div>
 
@@ -208,7 +213,7 @@ export default function SoilPage() {
                 className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-leaf px-4 py-3 text-sm font-medium text-paper transition-colors hover:bg-leaf-2 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Search className="h-4 w-4" />
-                আর্দ্রতা নির্ণয় করুন
+                {en ? "Estimate moisture" : "আর্দ্রতা নির্ণয় করুন"}
               </motion.button>
             )}
           </AnimatePresence>
@@ -304,10 +309,10 @@ export default function SoilPage() {
       <SlideOverAdvisory
         open={advisoryOpen}
         onToggle={setAdvisoryOpen}
-        triggerEyebrow="মাটি ও সেচ বিশেষজ্ঞ"
-        triggerLabel="মাটি ও সেচ পরামর্শ · প্রশ্ন করুন"
-        title="মাটি ও সেচ পরামর্শদাতা"
-        subtitle="মাটির আর্দ্রতা, সেচ ও ফসল নির্বাচন সম্পর্কিত প্রশ্নোত্তর"
+        triggerEyebrow={en ? "Soil and irrigation" : "মাটি ও সেচ বিশেষজ্ঞ"}
+        triggerLabel={en ? "Ask about soil" : "মাটি ও সেচ পরামর্শ · প্রশ্ন করুন"}
+        title={en ? "Soil and irrigation advisor" : "মাটি ও সেচ পরামর্শদাতা"}
+        subtitle={en ? "Questions on moisture, irrigation, and crop choice" : "মাটির আর্দ্রতা, সেচ ও ফসল নির্বাচন সম্পর্কিত প্রশ্নোত্তর"}
       />
     </div>
   );
@@ -332,6 +337,8 @@ function SoilDropzone({
   onSample?: (path: string, name: string) => void;
   loading: boolean;
 }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
 
@@ -426,12 +433,12 @@ function SoilDropzone({
               transition={{ duration: dur.fast }}
             >
               <SoilLine />
-              <div className="mt-4 font-display text-lg text-ink">মাটির ছবি দিন</div>
+              <div className="mt-4 font-display text-lg text-ink">{en ? "Add a soil photo" : "মাটির ছবি দিন"}</div>
               <div className="mt-1 flex items-center justify-center gap-1.5 text-xs text-ink-faint">
-                টানে দিন বা ক্লিক করুন
+                {en ? "Drop or click" : "টানে দিন বা ক্লিক করুন"}
               </div>
               <div className="mt-1 text-xs text-ink-faint/70">
-                JPEG · PNG · WebP · সর্বোচ্চ ১০MB
+                {en ? "JPEG · PNG · WebP · up to 10MB" : "JPEG · PNG · WebP · সর্বোচ্চ ১০MB"}
               </div>
             </motion.div>
           )}
@@ -446,7 +453,7 @@ function SoilDropzone({
               exit={{ opacity: 0 }}
               className="pointer-events-none absolute inset-2 flex items-center justify-center rounded-lg border border-leaf/30 bg-paper/90 text-sm font-semibold text-leaf"
             >
-              ছবি ছেড়ে দিন
+              {en ? "Drop the photo" : "ছবি ছেড়ে দিন"}
             </motion.div>
           )}
         </AnimatePresence>
@@ -455,8 +462,8 @@ function SoilDropzone({
       {/* Released dataset sample photos — real field images from the release */}
       {!preview && onSample && (
         <div className="rounded-lg border border-leaf/20 bg-leaf/5 p-3">
-          <div className="text-sm font-medium text-ink">ডেটাসেটের নমুনা দিয়ে চেষ্টা করুন</div>
-          <p className="mt-0.5 text-xs text-ink-soft">পাবনা মাঠক্যাম্পেইনের প্রকৃত ছবি (মুক্ত ডেটাসেট থেকে)</p>
+          <div className="text-sm font-medium text-ink">{en ? "Try a published sample" : "ডেটাসেটের নমুনা দিয়ে চেষ্টা করুন"}</div>
+          <p className="mt-0.5 text-xs text-ink-soft">{en ? "Field photos from the Pabna campaign" : "পাবনা মাঠক্যাম্পেইনের প্রকৃত ছবি (মুক্ত ডেটাসেট থেকে)"}</p>
           <div className="mt-3 grid grid-cols-3 gap-2">
             {SOIL_SAMPLES.map((s) => (
               <button
@@ -467,8 +474,8 @@ function SoilDropzone({
                 className="group overflow-hidden rounded-lg border rule bg-paper text-left transition-colors hover:border-leaf disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.path} alt={s.name} className="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
-                <div className="px-2 py-1.5 text-xs text-ink-soft">{s.name}</div>
+                <img src={s.path} alt={en ? s.nameEn : s.name} className="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+                <div className="px-2 py-1.5 text-xs text-ink-soft">{en ? s.nameEn : s.name}</div>
               </button>
             ))}
           </div>

@@ -6,6 +6,7 @@ import { Lock, ChevronDown, FlaskConical, MessageCircle, Droplets, CheckCircle2,
 import type { SoilDatasetInfo, SoilAnalyzeResponse } from "@/lib/api";
 import { bn } from "@/lib/bn";
 import { dur, ease } from "@/lib/motion";
+import { useLanguage } from "@/context/language-context";
 
 interface AgronomicSoilState {
   badgeTitle: string;
@@ -15,7 +16,43 @@ interface AgronomicSoilState {
   squeezeTest: string;
 }
 
-function getSoilAgronomicState(kpa: number): AgronomicSoilState {
+function getSoilAgronomicState(kpa: number, english = false): AgronomicSoilState {
+  if (english) {
+    if (kpa < 2.0) {
+      return {
+        badgeTitle: "Waterlogged",
+        badgeDesc: "The soil is saturated. Extra water can rot roots.",
+        tone: "sky",
+        irrigationAction: "Stop irrigation and open the drains",
+        squeezeTest: "A squeezed handful drips muddy water.",
+      };
+    }
+    if (kpa <= 10.0) {
+      return {
+        badgeTitle: "Good working moisture",
+        badgeDesc: "Moisture is in a range plants can use.",
+        tone: "leaf",
+        irrigationAction: "No irrigation needed now",
+        squeezeTest: "A handful forms a ball without coating the hand in mud.",
+      };
+    }
+    if (kpa <= 15.0) {
+      return {
+        badgeTitle: "Drying — watch",
+        badgeDesc: "The surface is drying and moisture is falling.",
+        tone: "ochre",
+        irrigationAction: "Plan a light irrigation in the next one or two days",
+        squeezeTest: "A ball forms, then crumbles under light pressure.",
+      };
+    }
+    return {
+      badgeTitle: "Severe dry stress",
+      badgeDesc: "Available moisture is exhausted. Plants may wilt quickly.",
+      tone: "clay",
+      irrigationAction: "Irrigate with a moderate amount now",
+      squeezeTest: "A handful will not form a ball. It falls apart as dust.",
+    };
+  }
   if (kpa < 2.0) {
     return {
       badgeTitle: "অতিরিক্ত আর্দ্র / জলমগ্ন অবস্থা",
@@ -63,6 +100,8 @@ export function SoilLockedCard({
   message?: string | null;
   onAskChat?: () => void;
 }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const [showTable, setShowTable] = useState(false);
   const [showSqueezeGuide, setShowSqueezeGuide] = useState(false);
   const models = info?.model_results ?? [];
@@ -71,14 +110,14 @@ export function SoilLockedCard({
   if (result && result.status === "analyzed") {
     const isReplay = Boolean(result.sample_id);
     const kpa = result.kpa;
-    const soilType = result.soil_type_bn ?? result.soil_type ?? "";
+    const soilType = en ? (result.soil_type ?? result.soil_type_bn ?? "") : (result.soil_type_bn ?? result.soil_type ?? "");
     const advisory = result.advisory_bn ?? "";
     if (kpa == null || !soilType || !advisory) {
       // Defensive: a malformed analyzed payload must not invent values.
       return null;
     }
 
-    const agro = getSoilAgronomicState(kpa);
+    const agro = getSoilAgronomicState(kpa, en);
     const toneBorder =
       agro.tone === "clay"
         ? "border-clay/40"
@@ -113,7 +152,7 @@ export function SoilLockedCard({
               </div>
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-display text-lg font-bold text-ink">মাটির আর্দ্রতা ও সেচ বিশ্লেষণ</h3>
+                  <h3 className="font-display text-lg font-bold text-ink">{en ? "Soil moisture and irrigation" : "মাটির আর্দ্রতা ও সেচ বিশ্লেষণ"}</h3>
                   {isReplay ? (
                     <span
                       className="inline-flex items-center gap-1 rounded-full bg-sky-600/10 px-2.5 py-0.5 text-xs font-semibold text-sky-700"

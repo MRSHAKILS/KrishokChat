@@ -7,6 +7,7 @@ import { MessageCircle, X, ArrowUpRight, Leaf, Sparkles } from "lucide-react";
 import { QAPanel } from "@/components/qa-panel";
 import { ContextBanner } from "@/components/detect/context-banner";
 import { humanizeLabel } from "@/lib/bn";
+import { useLanguage } from "@/context/language-context";
 import { cn } from "@/lib/utils";
 
 /* =========================================================================
@@ -23,10 +24,10 @@ export function SlideOverAdvisory({
   detectedCrop,
   detectedDisease,
   prefillQuestion,
-  title = "এআই কৃষি পরামর্শদাতা",
-  subtitle = "তথ্যভিত্তিক বাংলা কৃষি প্রশ্নোত্তর ও চিকিৎসা",
-  triggerEyebrow = "কৃষি বিশেষজ্ঞ",
-  triggerLabel = "এআই সহকারী · প্রশ্ন করুন",
+  title,
+  subtitle,
+  triggerEyebrow,
+  triggerLabel,
 }: {
   open: boolean;
   onToggle: (v: boolean) => void;
@@ -38,6 +39,12 @@ export function SlideOverAdvisory({
   triggerEyebrow?: string;
   triggerLabel?: string;
 }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
+  const heading = title ?? (en ? "Agri advisor" : "এআই কৃষি পরামর্শদাতা");
+  const sub = subtitle ?? (en ? "Checked answers on crops, pests, and care" : "তথ্যভিত্তিক বাংলা কৃষি প্রশ্নোত্তর ও চিকিৎসা");
+  const eyebrow = triggerEyebrow ?? (en ? "Advisor" : "কৃষি বিশেষজ্ঞ");
+  const label = triggerLabel ?? (en ? "Ask a question" : "এআই সহকারী · প্রশ্ন করুন");
   const hasContext = Boolean(detectedCrop && detectedDisease);
 
   // Close on Escape key
@@ -80,7 +87,7 @@ export function SlideOverAdvisory({
             <button
               onClick={() => onToggle(true)}
               type="button"
-              aria-label={hasContext ? `${humanizeLabel(detectedDisease!)} নিয়ে প্রশ্ন` : triggerEyebrow}
+              aria-label={hasContext ? (en ? `Ask about ${humanizeLabel(detectedDisease!)}` : `${humanizeLabel(detectedDisease!)} নিয়ে প্রশ্ন`) : eyebrow}
               className={cn(
                 "flex items-center gap-2 rounded-full border border-bone bg-paper px-3 py-2 text-sm text-ink shadow-sm transition-colors cursor-pointer hover:border-leaf/40",
               )}
@@ -88,8 +95,8 @@ export function SlideOverAdvisory({
               <MessageCircle className="h-4 w-4 shrink-0 text-leaf" />
               <span className="text-left leading-tight">
                 {hasContext
-                  ? `${humanizeLabel(detectedDisease!)} নিয়ে প্রশ্ন`
-                  : triggerLabel}
+                  ? (en ? `Ask about ${humanizeLabel(detectedDisease!)}` : `${humanizeLabel(detectedDisease!)} নিয়ে প্রশ্ন`)
+                  : label}
               </span>
             </button>
           </motion.div>
@@ -131,12 +138,12 @@ export function SlideOverAdvisory({
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h2 className="font-display text-base text-ink">{title}</h2>
+                        <h2 className="font-display text-base text-ink">{heading}</h2>
                         <span className="rounded-full bg-leaf/10 px-2 py-0.5 text-xs font-semibold text-leaf">
                           সক্রিয়
                         </span>
                       </div>
-                      <p className="text-xs text-ink-soft">{subtitle}</p>
+                      <p className="text-xs text-ink-soft">{sub}</p>
                     </div>
                   </div>
 

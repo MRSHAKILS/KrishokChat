@@ -93,9 +93,12 @@ export function TreatmentCard({
   if (!result.treatment_advice) return null;
 
   const cleanAdvice = formatTreatmentAdvice(result.treatment_advice, result.treatment_sources);
-  const dosage = findDosage(cleanAdvice);
-
   const localizedKnowledge = getLocalizedDisease(result.disease, locale);
+  const shownAdvice =
+    locale === "en" && localizedKnowledge?.solutionEn
+      ? localizedKnowledge.solutionEn
+      : cleanAdvice;
+  const dosage = findDosage(locale === "en" ? shownAdvice : cleanAdvice);
 
   const handleToggleSpeak = () => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
@@ -113,7 +116,7 @@ export function TreatmentCard({
         ? `${cropName} এর ${diseaseName} এর চিকিৎসা। ${cleanAdvice}. ${
             dosage ? `প্রস্তাবিত মাত্রা: ${dosage}.` : ""
           } নিরাপদ অপেক্ষমাণ সময়: বালাইনাশক স্প্রে করার পর কমপক্ষে ৭ থেকে ১৪ দিন ফসল তোলা বন্ধ রাখুন।`
-        : `Treatment for ${cropName} ${diseaseName}. ${cleanAdvice}. ${
+        : `Treatment for ${cropName} ${diseaseName}. ${shownAdvice}. ${
             dosage ? `Recommended dosage: ${dosage}.` : ""
           } Pre-harvest interval: withhold crop harvesting for at least 7 to 14 days after pesticide application.`;
 
@@ -199,7 +202,7 @@ export function TreatmentCard({
         <div className="mb-1 text-xs font-semibold text-ink-faint">
           {locale === "bn" ? "তাৎক্ষণিক ব্যবস্থা" : "Immediate Action Plan"}
         </div>
-        <p className="text-sm leading-relaxed text-ink whitespace-pre-wrap">{cleanAdvice}</p>
+        <p className="text-sm leading-relaxed text-ink whitespace-pre-wrap">{shownAdvice}</p>
       </div>
 
       {/* Dosage, Spray Timing & Pre-Harvest Interval (PHI) */}

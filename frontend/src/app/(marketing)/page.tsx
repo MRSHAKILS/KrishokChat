@@ -17,6 +17,7 @@ import { QA_STAGES, type RailEvent } from "@/components/detect/pipeline-rail";
 import { BusinessModelSection } from "@/components/landing/business-model-section";
 import { getWeather, registerHelpline } from "@/lib/api";
 import { safetyLabel, TONE_BADGE, AGRI_DISTRICTS } from "@/lib/safety-labels";
+import { useLanguage } from "@/context/language-context";
 
 /* Stats section (recharts) is lazy-loaded — keeps the chart library out of the
    landing page's first-load JS for rural 2G/3G visitors. */
@@ -84,36 +85,38 @@ export default function LandingPage() {
 
 /* === Task-First Decision Hub (R11) === */
 function TaskFirstDecisionSection() {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <section id="task-hub" className="mx-auto max-w-6xl px-4 sm:px-6">
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
         <div>
           <span className="text-xs font-semibold uppercase tracking-wider text-leaf">
-            কৃষক সিদ্ধান্ত কেন্দ্র • Task-First Decisions
+            {en ? "Today's field decisions" : "কৃষক সিদ্ধান্ত কেন্দ্র • Task-First Decisions"}
           </span>
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-ink mt-1">
-            আমার ফসলের আজকের করণীয়
+            {en ? "What this crop needs today" : "আমার ফসলের আজকের করণীয়"}
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-ink-soft max-w-md">
-          আপনার ফসলের বর্তমান বয়স ও স্থানীয় আবহাওয়া ঝুঁকির ভিত্তিতে নির্ধারিত সরাসরি পদক্ষেপ।
+          {en ? "A direct next step from crop age and the local weather risk." : "আপনার ফসলের বর্তমান বয়স ও স্থানীয় আবহাওয়া ঝুঁকির ভিত্তিতে নির্ধারিত সরাসরি পদক্ষেপ।"}
         </p>
       </div>
 
       <FarmProfileBanner
-        crop="আলু (Potato — ডায়মন্ট)"
-        district="বগুড়া"
+        crop={en ? "Potato (Diamond)" : "আলু (Potato — ডায়মন্ট)"}
+        district={en ? "Bogura" : "বগুড়া"}
         das={45}
         offlinePackVersion={1}
       />
 
       <DecisionCards
-        farmCrop="আলু (Potato)"
-        farmDistrict="বগুড়া"
+        farmCrop={en ? "Potato" : "আলু (Potato)"}
+        farmDistrict={en ? "Bogura" : "বগুড়া"}
         farmDas={45}
-        stageName="কন্দ বৃদ্ধি পর্যায় (Tuber Bulking)"
-        stageAction="কন্দ গঠনের এই সময়ে মাটিতে পর্যাপ্ত রস নিশ্চিত করতে হালকা সেচ দিন এবং নাবি ধসা রোগ নিয়মিত পর্যবেক্ষণ করুন।"
-        weatherRiskDistrict="বগুড়া"
+        stageName={en ? "Tuber bulking" : "কন্দ বৃদ্ধি পর্যায় (Tuber Bulking)"}
+        stageAction={en ? "Give a light irrigation so the tubers keep moisture, and keep watching for late blight." : "কন্দ গঠনের এই সময়ে মাটিতে পর্যাপ্ত রস নিশ্চিত করতে হালকা সেচ দিন এবং নাবি ধসা রোগ নিয়মিত পর্যবেক্ষণ করুন।"}
+        weatherRiskDistrict={en ? "Bogura" : "বগুড়া"}
         weatherRiskLevel="watch"
       />
     </section>
@@ -122,34 +125,38 @@ function TaskFirstDecisionSection() {
 
 /* === A. Hero === */
 function HeroSection() {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <motion.section initial="hidden" animate="visible" variants={stagger} className="surface-lift relative mx-auto max-w-6xl overflow-hidden rounded-[24px] border rule bg-paper shadow-[0_14px_40px_rgba(52,39,23,0.08)]">
       <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
         <div className="flex flex-col justify-between px-7 py-9 sm:px-12 sm:py-12 lg:min-h-[510px]">
           <div>
             <motion.div variants={enter} className="flex flex-wrap items-center gap-2 text-xs font-semibold text-leaf">
-              <span className="h-2 w-2 rounded-full bg-ochre" /> {APP.tagline}
+              <span className="h-2 w-2 rounded-full bg-ochre" /> {en ? APP.taglineEn : APP.tagline}
             </motion.div>
             <motion.h1 variants={enter} className="mt-6 max-w-xl font-display text-4xl leading-[1.16] text-ink sm:text-6xl">
-              নিরাপদ ও প্রমাণভিত্তিক<br /><span className="text-leaf">বাংলা কৃষি এআই</span>
+              {en ? <>Evidence-backed<br /><span className="text-leaf">farm advice</span></> : <>নিরাপদ ও প্রমাণভিত্তিক<br /><span className="text-leaf">বাংলা কৃষি এআই</span></>}
             </motion.h1>
             <motion.p variants={enter} className="mt-5 max-w-lg text-base leading-relaxed text-ink-soft">
-              ২৮৪টি সরকারি প্রকাশনা ও মাঠ গবেষণায় গ্রাউন্ডেড—পাতার ছবি থেকে অফলাইন রোগ নির্ণয় ও যাচাইকৃত নিরাপদ বাংলা কৃষি পরামর্শ।
+              {en
+                ? "Grounded in 284 government publications and field studies. Diagnose a leaf from the published test set, then read a checked advisory — without a model server on this demo."
+                : "২৮৪টি সরকারি প্রকাশনা ও মাঠ গবেষণায় গ্রাউন্ডেড—পাতার ছবি থেকে অফলাইন রোগ নির্ণয় ও যাচাইকৃত নিরাপদ বাংলা কৃষি পরামর্শ।"}
             </motion.p>
           </div>
           <motion.div variants={enter} className="mt-10 flex flex-wrap items-center gap-3">
             <Link href="/detect" className="control-press group flex min-h-12 items-center gap-2 rounded-xl bg-leaf px-5 py-3 text-sm font-semibold text-paper shadow-sm hover:bg-leaf-2">
-              <Camera className="h-4 w-4" /> লাইভ ডেমো শুরু করুন <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              <Camera className="h-4 w-4" /> {en ? "Open the live demo" : "লাইভ ডেমো শুরু করুন"} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link href="#workflow" className="control-press flex min-h-12 items-center gap-2 rounded-xl border rule px-5 py-3 text-sm font-medium text-ink-soft hover:border-leaf/50 hover:bg-paper-2">
-              <Play className="h-4 w-4" /> কীভাবে কাজ করে
+              <Play className="h-4 w-4" /> {en ? "How it works" : "কীভাবে কাজ করে"}
             </Link>
           </motion.div>
           <motion.div variants={enter} className="mt-9 grid max-w-md grid-cols-2 gap-4 border-t rule pt-5 sm:grid-cols-4">
-            <HeroMetric value={RESEARCH_STATS.benchmarkInstances} label="বেঞ্চমার্ক প্রশ্নোত্তর" />
-            <HeroMetric value={RESEARCH_STATS.knowledgeNodes} label="জ্ঞানভাণ্ডার নোড" />
-            <HeroMetric value={RESEARCH_STATS.dialects} label="আঞ্চলিক উপভাষা" />
-            <HeroMetric value={RESEARCH_STATS.soilImages} label="মাটির মাঠের ছবি" />
+            <HeroMetric value={RESEARCH_STATS.benchmarkInstances} label={en ? "Benchmark questions" : "বেঞ্চমার্ক প্রশ্নোত্তর"} />
+            <HeroMetric value={RESEARCH_STATS.knowledgeNodes} label={en ? "Knowledge nodes" : "জ্ঞানভাণ্ডার নোড"} />
+            <HeroMetric value={RESEARCH_STATS.dialects} label={en ? "Regional dialects" : "আঞ্চলিক উপভাষা"} />
+            <HeroMetric value={RESEARCH_STATS.soilImages} label={en ? "Field soil photos" : "মাটির মাঠের ছবি"} />
           </motion.div>
         </div>
         <div className="relative flex min-h-[350px] flex-col justify-end bg-paper-2 p-4 sm:p-6 lg:min-h-full lg:p-8">
@@ -173,13 +180,13 @@ function HeroSection() {
           />
           <motion.div variants={enter} className="relative z-10 ml-auto w-[min(100%,22rem)] rounded-xl border rule bg-paper p-4 shadow-[0_10px_24px_rgba(52,39,23,0.12)]">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-xs font-semibold text-ink-faint">মাঠের এআই সেবা</span>
-              <span className="flex items-center gap-1.5 text-xs font-semibold text-leaf"><span className="h-1.5 w-1.5 rounded-full bg-leaf" /> সিস্টেম সক্রিয়</span>
+              <span className="text-xs font-semibold text-ink-faint">{en ? "Field service" : "মাঠের এআই সেবা"}</span>
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-leaf"><span className="h-1.5 w-1.5 rounded-full bg-leaf" /> {en ? "Ready" : "সিস্টেম সক্রিয়"}</span>
             </div>
-            <p className="mt-3 font-display text-lg leading-snug text-ink">অফলাইন রোগ নির্ণয় ও পরামর্শ</p>
+            <p className="mt-3 font-display text-lg leading-snug text-ink">{en ? "Recorded diagnosis and advice" : "অফলাইন রোগ নির্ণয় ও পরামর্শ"}</p>
             <div className="mt-3 grid grid-cols-2 gap-2">
-              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><Camera className="mb-1 h-4 w-4 text-leaf" />রোগ নির্ণয় — ডিভাইসেই দ্রুত</div>
-              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><MessageSquare className="mb-1 h-4 w-4 text-leaf" />যাচাইকৃত উত্তর</div>
+              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><Camera className="mb-1 h-4 w-4 text-leaf" />{en ? "Leaf diagnosis from test images" : "রোগ নির্ণয় — ডিভাইসেই দ্রুত"}</div>
+              <div className="rounded-lg bg-paper-2 px-3 py-2.5 text-xs text-ink-soft"><MessageSquare className="mb-1 h-4 w-4 text-leaf" />{en ? "Checked answers" : "যাচাইকৃত উত্তর"}</div>
             </div>
           </motion.div>
         </div>

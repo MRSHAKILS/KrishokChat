@@ -6,6 +6,7 @@ import type { SoilDatasetInfo } from "@/lib/api";
 import { bn } from "@/lib/bn";
 import { SOIL_TYPES, LAND_TYPES } from "@/lib/constants";
 import { stagger, enter, dur, ease } from "@/lib/motion";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    SoilDatasetCard — the released-asset showcase.
@@ -15,12 +16,14 @@ import { stagger, enter, dur, ease } from "@/lib/motion";
    ========================================================================= */
 
 export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   if (!info.available) {
     return (
       <div className="rounded-2xl border rule bg-paper p-6 text-center">
         <Database className="mx-auto h-8 w-8 text-ink-faint" />
         <p className="mt-3 text-sm text-ink-soft">
-          ডেটাসেট তথ্য বর্তমানে লোড করা যায়নি। পরে আবার চেষ্টা করুন।
+          {en ? "The dataset details are not available right now." : "ডেটাসেট তথ্য বর্তমানে লোড করা যায়নি। পরে আবার চেষ্টা করুন।"}
         </p>
       </div>
     );
@@ -42,15 +45,15 @@ export function SoilDatasetCard({ info }: { info: SoilDatasetInfo }) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-xs font-semibold text-ochre">
-              প্রকাশিত ডেটাসেট · প্রথম বাংলাদেশি মাটি-আর্দ্রতা ডেটাসেট
+              {en ? "Published dataset · Bangladesh soil-moisture images" : "প্রকাশিত ডেটাসেট · প্রথম বাংলাদেশি মাটি-আর্দ্রতা ডেটাসেট"}
             </p>
-            <h2 className="mt-1 font-display text-xl text-ink">বাংলাদেশ মাটি-আর্দ্রতা ডেটাসেট</h2>
+            <h2 className="mt-1 font-display text-xl text-ink">{en ? "Bangladesh soil-moisture dataset" : "বাংলাদেশ মাটি-আর্দ্রতা ডেটাসেট"}</h2>
             <p className="mt-1 text-xs text-ink-faint">
-              RGB → kPa · টেনসিওমিটার ভিত্তিক মাঠপর্যায়ের তথ্য
+              {en ? "RGB to kPa · field tensiometer readings" : "RGB → kPa · টেনসিওমিটার ভিত্তিক মাঠপর্যায়ের তথ্য"}
             </p>
           </div>
           <span className="flex shrink-0 items-center gap-1.5 rounded-full border border-leaf/30 bg-leaf/10 px-3 py-1.5 text-xs font-semibold text-leaf">
-            <Database className="h-3.5 w-3.5" /> প্রকাশিত
+            <Database className="h-3.5 w-3.5" /> {en ? "Published" : "প্রকাশিত"}
           </span>
         </div>
 

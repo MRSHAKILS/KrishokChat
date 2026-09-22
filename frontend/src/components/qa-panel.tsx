@@ -11,6 +11,7 @@ import { SuggestedQuestions } from "@/components/chat/suggested-questions";
 import { dur, ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { CHAT } from "@/lib/constants";
+import { useLanguage } from "@/context/language-context";
 
 const getSpeechSupported = () => {
   if (typeof window === "undefined") return false;
@@ -59,6 +60,8 @@ export function QAPanel({
   const streamingRef = useRef(false);
   const storageKey = "krishokchat:conversation:v1";
   const { session } = useSupabaseSession();
+  const { locale } = useLanguage();
+  const en = locale === "en";
 
   // P2: signed-in farmer's stage-aware context (one line), auto-attached to
   // outgoing questions. Anonymous users leave this null → prompts unchanged.
@@ -199,7 +202,7 @@ export function QAPanel({
       start: () => void;
       stop: () => void;
     })();
-    rec.lang = "bn-BD";
+    rec.lang = en ? "en-US" : "bn-BD";
     rec.continuous = false;
     rec.interimResults = true;
     rec.onstart = () => {
@@ -217,13 +220,13 @@ export function QAPanel({
     rec.onerror = (event) => {
       setListening(false);
       if (event.error === "not-allowed" || event.error === "service-not-allowed") {
-        setVoiceInputError("মাইক্রোফোনের অনুমতি দিন");
+        setVoiceInputError(en ? "Allow microphone access" : "মাইক্রোফোনের অনুমতি দিন");
       } else if (event.error !== "aborted") {
-        setVoiceInputError("আবার চেষ্টা করুন");
+        setVoiceInputError(en ? "Try again" : "আবার চেষ্টা করুন");
       }
     };
     recognitionRef.current = rec;
-  }, []);
+  }, [en]);
 
   const toggleMic = useCallback(() => {
     const rec = recognitionRef.current as { start: () => void; stop: () => void } | null;
@@ -370,7 +373,7 @@ export function QAPanel({
         if (requestRef.current?.signal.aborted) {
           setMessages((prev) => [
             ...prev,
-            { role: "assistant", content: "", error: "অনুরোধটি বাতিল করা হয়েছে। প্রশ্নটি আবার পাঠাতে পারেন।", retryQuery: q },
+            { role: "assistant", content: "", error: en ? "The request was cancelled. You can send the question again." : "অনুরোধটি বাতিল করা হয়েছে। প্রশ্নটি আবার পাঠাতে পারেন।", retryQuery: q },
           ]);
           return;
         }
@@ -381,7 +384,7 @@ export function QAPanel({
             {
               role: "assistant",
               content: "",
-              error: "ব্যাকএন্ড সার্ভারে সংযোগ ব্যর্থ। নিশ্চিত করুন যে ব্যাকএন্ড চলছে।",
+              error: en ? "Could not reach the server. Check that it is running and try again." : "ব্যাকএন্ড সার্ভারে সংযোগ ব্যর্থ। নিশ্চিত করুন যে ব্যাকএন্ড চলছে।",
               retryQuery: q,
             },
           ]);
@@ -399,7 +402,7 @@ export function QAPanel({
         setTraceEvents([]);
       }
     },
-    [messages, detectedCrop, detectedDisease, sessionId, applyEvent, model, pushStreamToken, flushStreamBuffer, resetStreamBuffer],
+    [messages, detectedCrop, detectedDisease, sessionId, applyEvent, model, pushStreamToken, flushStreamBuffer, resetStreamBuffer, en],
   );
 
   const clear = useCallback(() => {
@@ -475,7 +478,7 @@ export function QAPanel({
       <div className="mt-4 flex min-h-8 items-center justify-between gap-3 border-t rule pt-3">
         <div className="flex min-w-0 items-center gap-1.5 text-xs text-ink-faint">
           <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-leaf" />
-          <span className="truncate">তথ্যসূত্র মিলিয়ে নিরাপদ উত্তর</span>
+          <span className="truncate">{en ? "Answers stay tied to cited sources" : "তথ্যসূত্র মিলিয়ে নিরাপদ উত্তর"}</span>
         </div>
 
         <div className="flex shrink-0 items-center gap-3">
@@ -486,20 +489,20 @@ export function QAPanel({
             className="flex items-center gap-1.5 text-xs text-ink-faint"
             title={
               localAvailable
-                ? "গবেষণা: লোকাল ফাইন-টিউনড মডেল"
-                : "গবেষণা (অফলাইন): লোকাল সার্ভার চালু হলে পাওয়া যাবে"
+                ? en ? "Research: local fine-tuned model" : "গবেষণা: লোকাল ফাইন-টিউনড মডেল"
+                : en ? "Research is offline until the local server is running" : "গবেষণা (অফলাইন): লোকাল সার্ভার চালু হলে পাওয়া যাবে"
             }
           >
-            <span className="hidden sm:inline">উত্তরের ধরন</span>
+            <span className="hidden sm:inline">{en ? "Answer" : "উত্তরের ধরন"}</span>
             <select
               value={model}
               onChange={(event) => setModel(event.target.value as "gemini" | "krishokchat-4b")}
               className="rounded-md border rule bg-paper px-2 py-1 text-xs text-ink-soft focus:border-leaf focus:outline-none"
-              aria-label="উত্তরের ধরন নির্বাচন করুন"
+              aria-label={en ? "Choose answer type" : "উত্তরের ধরন নির্বাচন করুন"}
             >
-              <option value="gemini">সাধারণ</option>
+              <option value="gemini">{en ? "Standard" : "সাধারণ"}</option>
               <option value="krishokchat-4b" disabled={!localAvailable}>
-                গবেষণা{!localAvailable ? " (অফলাইন)" : ""}
+                {en ? "Research" : "গবেষণা"}{!localAvailable ? en ? " (offline)" : " (অফলাইন)" : ""}
               </option>
             </select>
           </label>
@@ -507,11 +510,11 @@ export function QAPanel({
           {!isEmpty && !streaming && (
             <button
               onClick={clear}
-              title="নতুন কথোপকথন শুরু করুন"
+              title={en ? "Start a new conversation" : "নতুন কথোপকথন শুরু করুন"}
               className="flex min-h-8 items-center gap-1 rounded-md px-1.5 text-xs font-medium text-ink-faint transition-colors hover:text-clay"
             >
               <RotateCcw className="h-3 w-3" />
-              <span className="hidden sm:inline">নতুন করে শুরু</span>
+              <span className="hidden sm:inline">{en ? "New" : "নতুন করে শুরু"}</span>
             </button>
           )}
         </div>
@@ -532,7 +535,7 @@ export function QAPanel({
             }}
             rows={1}
             maxLength={CHAT.maxMessageLength}
-            placeholder={listening ? "শুনছি… কথা বলুন…" : "আপনার কৃষি প্রশ্ন লিখুন (বাংলায়)…"}
+            placeholder={listening ? (en ? "Listening…" : "শুনছি… কথা বলুন…") : (en ? "Ask a crop or soil question" : "আপনার কৃষি প্রশ্ন লিখুন (বাংলায়)…")}
             className="min-h-[52px] w-full resize-none rounded-2xl border-0 bg-transparent px-4 py-3 pr-12 text-sm leading-relaxed text-ink placeholder:text-ink-faint focus:outline-none"
             style={{ maxHeight: "6rem" }}
           />
@@ -540,7 +543,7 @@ export function QAPanel({
             <button
               onClick={toggleMic}
               type="button"
-              aria-label={listening ? "রেকর্ড বন্ধ করুন" : "ভয়েস ইনপুট"}
+              aria-label={listening ? (en ? "Stop recording" : "রেকর্ড বন্ধ করুন") : (en ? "Voice input" : "ভয়েস ইনপুট")}
               className={cn(
                 "control-press absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-xl transition-colors",
                 listening
@@ -562,7 +565,7 @@ export function QAPanel({
         <button
           onClick={() => streaming ? requestRef.current?.abort() : send(query)}
           disabled={!streaming && !query.trim()}
-          title={streaming ? "উত্তর তৈরি বন্ধ করুন" : "জিজ্ঞাসা করুন"}
+          title={streaming ? (en ? "Stop" : "উত্তর তৈরি বন্ধ করুন") : (en ? "Ask" : "জিজ্ঞাসা করুন")}
           className={cn(
             "control-press flex h-14 shrink-0 items-center justify-center gap-2 rounded-2xl px-4 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40 sm:min-w-[116px]",
             "bg-leaf text-paper shadow-sm hover:bg-leaf-2",
@@ -573,7 +576,7 @@ export function QAPanel({
           ) : (
             <Send className="h-4 w-4" />
           )}
-          <span className="hidden sm:inline">{streaming ? "থামান" : "জিজ্ঞাসা করুন"}</span>
+          <span className="hidden sm:inline">{streaming ? (en ? "Stop" : "থামান") : (en ? "Ask" : "জিজ্ঞাসা করুন")}</span>
         </button>
       </div>
       {voiceInputError && (
@@ -602,6 +605,8 @@ function SaveAnswerButton({
   onSaved: () => void;
 }) {
   const [state, setState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const { locale } = useLanguage();
+  const en = locale === "en";
 
   if (!accessToken) return null;
 
@@ -643,14 +648,14 @@ function SaveAnswerButton({
           <Bookmark className="h-3 w-3" />
         )}
         {state === "saving"
-          ? "সংরক্ষণ হচ্ছে…"
+          ? (en ? "Saving…" : "সংরক্ষণ হচ্ছে…")
           : state === "saved"
-            ? "সংরক্ষিত"
+            ? (en ? "Saved" : "সংরক্ষিত")
             : state === "error"
-              ? "আবার চেষ্টা করুন"
-              : "সংরক্ষণ করুন"}
+              ? (en ? "Try again" : "আবার চেষ্টা করুন")
+              : (en ? "Save" : "সংরক্ষণ করুন")}
       </button>
-      {state === "idle" && <span className="text-xs text-ink-faint">আমার হিসাবে রাখুন</span>}
+      {state === "idle" && <span className="text-xs text-ink-faint">{en ? "Keep in my account" : "আমার হিসাবে রাখুন"}</span>}
     </div>
   );
 }
@@ -666,6 +671,8 @@ function EmptyState({
   detectedDisease?: string | null;
   compact?: boolean;
 }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   if (compact) {
     return (
       <motion.div
@@ -683,9 +690,9 @@ function EmptyState({
             />
           </svg>
         </div>
-        <h3 className="font-display text-base text-ink">কৃষি জিজ্ঞাসা</h3>
+        <h3 className="font-display text-base text-ink">{en ? "Ask a question" : "কৃষি জিজ্ঞাসা"}</h3>
         <p className="mt-0.5 text-xs text-ink-soft max-w-xs mx-auto">
-          ফসলের রোগ বা পরিচর্যা নিয়ে প্রশ্ন করুন
+          {en ? "Ask about a crop disease or how to care for the field" : "ফসলের রোগ বা পরিচর্যা নিয়ে প্রশ্ন করুন"}
         </p>
         <div className="mt-4 w-full text-left">
           <SuggestedQuestions
@@ -721,10 +728,10 @@ function EmptyState({
           />
         </svg>
       </div>
-      <p className="mb-0.5 text-xs font-semibold text-leaf">তথ্যভিত্তিক কৃষি সহায়তা</p>
-      <h3 className="font-display text-xl text-ink">কী জানতে চান?</h3>
+      <p className="mb-0.5 text-xs font-semibold text-leaf">{en ? "Grounded farm advice" : "তথ্যভিত্তিক কৃষি সহায়তা"}</p>
+      <h3 className="font-display text-xl text-ink">{en ? "What do you need to know?" : "কী জানতে চান?"}</h3>
       <p className="mt-1 max-w-sm text-xs sm:text-sm leading-relaxed text-ink-soft">
-        ফসলের রোগ, পরিচর্যা বা নিরাপদ বালাই ব্যবস্থাপনা নিয়ে প্রশ্ন করুন।
+        {en ? "Ask about a disease, field care, or a safe way to manage pests." : "ফসলের রোগ, পরিচর্যা বা নিরাপদ বালাই ব্যবস্থাপনা নিয়ে প্রশ্ন করুন।"}
       </p>
       <div className="mt-6 w-full text-left">
         <SuggestedQuestions

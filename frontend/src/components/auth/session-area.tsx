@@ -8,6 +8,7 @@ import { ChevronDown, LogOut, Bookmark, UserRound } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useSupabaseSession } from "@/lib/supabase/hooks";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    SessionArea — navbar auth surface (additive, never blocking).
@@ -18,6 +19,8 @@ import { cn } from "@/lib/utils";
    ========================================================================= */
 
 export function SessionArea() {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const router = useRouter();
   const { user, loading } = useSupabaseSession();
   const [open, setOpen] = useState(false);
@@ -42,11 +45,11 @@ export function SessionArea() {
     return (
       <Link
         href="/auth"
-        aria-label="লগইন / নিবন্ধন"
+        aria-label={en ? "Log in or register" : "লগইন / নিবন্ধন"}
         className="flex items-center justify-center gap-1.5 rounded-full border rule bg-paper-2/40 px-2.5 py-2 text-sm font-medium text-ink-soft transition-colors hover:border-leaf hover:text-ink sm:px-4"
       >
         <UserRound className="h-4 w-4" aria-hidden />
-        <span className="hidden sm:inline">লগইন</span>
+        <span className="hidden sm:inline">{en ? "Log in" : "লগইন"}</span>
       </Link>
     );
   }
