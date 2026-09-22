@@ -2,9 +2,9 @@
   "name": "krishokchat-root",
   "private": true,
   "scripts": {
-    "vercel-build": "npm --prefix frontend install && npm --prefix frontend run build"
+    "vercel-build": "corepack pnpm@9.15.9 --dir frontend install --frozen-lockfile && corepack pnpm@9.15.9 --dir frontend build"
   },
   "dependencies": {
-    "next": "16.3.0"
+    "next": "16.3.3"
   }
 }
