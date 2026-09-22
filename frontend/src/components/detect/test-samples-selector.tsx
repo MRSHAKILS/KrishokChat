@@ -2,15 +2,11 @@
 
 import { useState, useMemo, useCallback } from "react";
 import {
-  Sparkles,
-  CheckCircle2,
   Loader2,
-  FlaskConical,
   Search,
   ChevronLeft,
   ChevronRight,
   Shuffle,
-  Zap,
 } from "lucide-react";
 import { VERIFIED_TEST_SAMPLES, CROP_GROUPS, type TestSampleInstance } from "@/lib/test-samples";
 import { useLanguage } from "@/context/language-context";
@@ -97,43 +93,20 @@ export function TestSamplesSelector({
     handleApply(target);
   }, [filteredSamples, handleApply]);
 
-  const handleSelectChange = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      const newId = e.target.value;
-      setSelectedId(newId);
-      const found = VERIFIED_TEST_SAMPLES.find((s) => s.id === newId);
-      if (found) {
-        onSelectSample(found.imageSrc, `${found.id}.jpg`, found.cropHint, found.disease, false);
-      }
-    },
-    [onSelectSample]
-  );
-
   const currentCrop = locale === "bn" ? currentSample.cropBn : currentSample.cropEn;
   const currentDisease = locale === "bn" ? currentSample.diseaseBn : currentSample.diseaseEn;
 
+  const confidence =
+    locale === "bn" ? formatNumber(currentSample.confidence) : String(currentSample.confidence);
+
   return (
-    <div className="rounded-xl border border-leaf/25 bg-leaf/5 p-3 sm:p-4 transition-all space-y-3 shadow-2xs">
-      {/* Header bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-leaf/10 pb-2.5">
-        <div className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-leaf/15 text-leaf shadow-2xs">
-            <FlaskConical className="h-4 w-4" />
-          </span>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-ink">{t.samples.title}</span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2 py-0.5 text-[10px] font-semibold text-leaf border border-leaf/20">
-                <CheckCircle2 className="h-2.5 w-2.5" />
-                <span>{t.samples.badge}</span>
-              </span>
-            </div>
-            {!compact && (
-              <p className="text-[11px] text-ink-soft">
-                {t.samples.subtitle}
-              </p>
-            )}
-          </div>
+    <div className="space-y-3 rounded-xl border rule bg-paper px-3 py-3 sm:px-4">
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-sm font-medium text-ink">{t.samples.title}</p>
+          {!compact && (
+            <p className="text-xs text-ink-faint">{t.samples.subtitle}</p>
+          )}
         </div>
 
         {/* Quick Stepper Controls for Reviewers */}
@@ -175,21 +148,17 @@ export function TestSamplesSelector({
         </div>
       </div>
 
-      {/* Crop Filter Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none">
+      <div className="flex gap-1 overflow-x-auto text-xs">
         <button
           type="button"
           onClick={() => setActiveCrop("all")}
           className={cn(
-            "shrink-0 rounded-lg px-2.5 py-1 text-xs font-medium transition-colors cursor-pointer",
-            activeCrop === "all"
-              ? "bg-leaf text-paper shadow-2xs font-semibold"
-              : "bg-paper/70 text-ink-soft hover:bg-paper hover:text-ink border border-leaf/15"
+            "shrink-0 cursor-pointer rounded-full px-2.5 py-1 transition-colors",
+            activeCrop === "all" ? "bg-leaf text-paper" : "text-ink-soft hover:text-ink"
           )}
         >
-          {t.samples.allCrops} (100)
+          {t.samples.allCrops}
         </button>
-
         {CROP_GROUPS.map((grp) => {
           const isActive = activeCrop.toLowerCase() === grp.crop.toLowerCase();
           const label = locale === "bn" ? grp.cropBn : grp.cropEn;
@@ -199,120 +168,83 @@ export function TestSamplesSelector({
               type="button"
               onClick={() => setActiveCrop(grp.crop.toLowerCase())}
               className={cn(
-                "shrink-0 rounded-lg px-2.5 py-1 text-xs font-medium transition-colors cursor-pointer flex items-center gap-1",
-                isActive
-                  ? "bg-leaf text-paper shadow-2xs font-semibold"
-                  : "bg-paper/70 text-ink-soft hover:bg-paper hover:text-ink border border-leaf/15"
+                "shrink-0 cursor-pointer rounded-full px-2.5 py-1 transition-colors",
+                isActive ? "bg-leaf text-paper" : "text-ink-soft hover:text-ink"
               )}
             >
-              <span>{grp.icon}</span>
-              <span>{label}</span>
-              <span className="text-[10px] opacity-75">({grp.count})</span>
+              {label}
             </button>
           );
         })}
       </div>
 
-      {/* Search Input & Dropdown Selector */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-        {/* Search input */}
-        <div className="relative flex-1 sm:max-w-xs">
-          <Search className="pointer-events-none absolute left-2.5 top-2.5 h-3.5 w-3.5 text-ink-faint" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={t.samples.searchPlaceholder}
-            className="w-full rounded-lg border border-leaf/30 bg-paper pl-8 pr-2.5 py-1.5 text-xs text-ink placeholder:text-ink-faint/70 focus:border-leaf focus:outline-hidden focus:ring-1 focus:ring-leaf shadow-2xs"
+      <div className="relative">
+        <Search className="pointer-events-none absolute left-2.5 top-2.5 h-3.5 w-3.5 text-ink-faint" />
+        <input
+          type="search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder={t.samples.searchPlaceholder}
+          className="w-full rounded-lg border rule bg-paper py-1.5 pl-8 pr-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-leaf focus:outline-hidden"
+        />
+      </div>
+
+      {filteredSamples.length === 0 ? (
+        <p className="text-xs text-ink-faint">{t.samples.searchPlaceholder}</p>
+      ) : (
+        <div className="flex items-center gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            key={currentSample.id}
+            src={currentSample.imageSrc}
+            alt=""
+            className="h-14 w-14 shrink-0 rounded-lg border rule object-cover"
+            loading="lazy"
           />
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm text-ink">
+              {currentCrop}
+              <span className="text-ink-faint"> · </span>
+              {currentDisease}
+            </p>
+            <p className="mt-0.5 text-xs text-ink-faint">
+              {t.samples.confidenceLabel} {confidence}%
+            </p>
+          </div>
         </div>
+      )}
 
-        {/* Dropdown Selector */}
-        <div className="relative flex-1">
-          <select
-            value={currentSample.id}
-            onChange={handleSelectChange}
-            disabled={loading || sampleLoading || filteredSamples.length === 0}
-            className="w-full appearance-none rounded-lg border border-leaf/30 bg-paper px-3 py-1.5 text-xs font-medium text-ink shadow-2xs transition-colors hover:border-leaf/60 focus:border-leaf focus:outline-hidden focus:ring-1 focus:ring-leaf disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
-            aria-label={t.samples.title}
-          >
-            {filteredSamples.length === 0 ? (
-              <option value="">কোনো নমুনা পাওয়া যায়নি (No matches)</option>
-            ) : (
-              filteredSamples.map((s, idx) => {
-                const sampleCrop = locale === "bn" ? s.cropBn : s.cropEn;
-                const sampleDisease = locale === "bn" ? s.diseaseBn : s.diseaseEn;
-                const sampleConfidence = locale === "bn" ? formatNumber(s.confidence) : s.confidence;
-                return (
-                  <option key={s.id} value={s.id}>
-                    #{idx + 1 < 10 ? `0${idx + 1}` : idx + 1} · {sampleCrop} — {sampleDisease} ({sampleConfidence}%)
-                  </option>
-                );
-              })
-            )}
-          </select>
-        </div>
-
-        {/* Load Sample Button */}
-        <button
-          type="button"
-          onClick={() => handleApply(currentSample, false)}
-          disabled={loading || sampleLoading}
-          className="inline-flex shrink-0 min-h-8.5 items-center justify-center gap-1.5 rounded-lg border border-leaf/30 bg-leaf text-paper px-3 py-1.5 text-xs font-semibold shadow-2xs transition-colors hover:bg-leaf/90 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
-        >
-          {sampleLoading ? (
-            <Loader2 className="h-3.5 w-3.5 animate-spin" />
-          ) : (
-            <Sparkles className="h-3.5 w-3.5" />
-          )}
-          <span>{sampleLoading ? t.samples.loading : t.samples.loadButton}</span>
-        </button>
-
-        {/* Instant Test (1-Click Diagnose) */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <button
           type="button"
           onClick={() => handleApply(currentSample, true)}
-          disabled={loading || sampleLoading}
-          className="inline-flex shrink-0 min-h-8.5 items-center justify-center gap-1 rounded-lg border border-ochre/30 bg-ochre/15 text-ochre-deep font-semibold px-2.5 py-1.5 text-xs transition-colors hover:bg-ochre/25 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
-          title="তাৎক্ষণিক বেঞ্চমার্ক পরীক্ষা (Zero Latency)"
+          disabled={loading || sampleLoading || filteredSamples.length === 0}
+          className="inline-flex min-h-9 cursor-pointer items-center gap-2 rounded-lg bg-leaf px-3 text-sm text-paper transition-colors hover:bg-leaf/90 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <Zap className="h-3 w-3 fill-ochre" />
-          <span>{t.samples.diagnoseNow}</span>
+          {sampleLoading && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
+          {sampleLoading ? t.samples.loading : t.samples.diagnoseNow}
+        </button>
+        <button
+          type="button"
+          onClick={() => handleApply(currentSample, false)}
+          disabled={loading || sampleLoading || filteredSamples.length === 0}
+          className="cursor-pointer text-sm text-ink-soft underline-offset-2 hover:text-ink hover:underline disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {t.samples.loadButton}
         </button>
       </div>
 
-      {/* Selected Specimen Preview Card */}
-      <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-ink-faint border-t border-leaf/10 pt-2 bg-paper/40 rounded-lg p-2">
-        <div className="flex items-center gap-2.5 min-w-0">
-          {/* Thumbnail preview */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={currentSample.imageSrc}
-            alt={currentSample.id}
-            className="h-8 w-8 rounded-md border border-leaf/25 object-cover shrink-0 shadow-2xs"
-            loading="lazy"
-          />
-          <div className="min-w-0">
-            <div className="flex items-center gap-1.5 truncate">
-              <span className="font-semibold text-leaf">{currentCrop}:</span>
-              <span className="font-medium text-ink truncate">{currentDisease}</span>
-            </div>
-            <div className="text-[10px] text-ink-faint font-mono truncate">
-              ID: {currentSample.id}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-1.5 shrink-0">
-          <span className="text-[10px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full font-semibold">
-            BARI/BRRI Verified
-          </span>
-          <span className="text-[10px] text-ink-soft bg-paper px-2 py-0.5 rounded border border-leaf/20 font-medium">
-            {t.samples.confidenceLabel}{" "}
-            {locale === "bn" ? formatNumber(currentSample.confidence) : currentSample.confidence}%
-          </span>
-        </div>
-      </div>
+      <p className="text-[11px] leading-relaxed text-ink-faint">
+        {t.samples.reviewerNote}{" "}
+        <a
+          href="https://huggingface.co/RaiyanKhaan/KrishokTech-Models"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-ink-soft underline decoration-ink-faint/40 underline-offset-2 hover:text-ink"
+        >
+          {t.samples.modelsLink}
+        </a>
+      </p>
     </div>
   );
 }

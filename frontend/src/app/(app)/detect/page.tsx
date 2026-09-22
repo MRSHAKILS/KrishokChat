@@ -158,6 +158,8 @@ export default function DetectPage() {
       setFile(prepared);
       setPreview(URL.createObjectURL(prepared));
       setResult(null);
+      setDiseaseHint(null);
+      setDetectedContext(null);
     } catch (e) {
       setError(e instanceof Error ? e.message : t.detect.prepFailed);
     } finally {
@@ -279,6 +281,8 @@ export default function DetectPage() {
           );
 
           if (foundSample?.cachedResult) {
+            // Published benchmark cases replay a recorded result. Reviewers
+            // never need the model server for these images.
             setResult(foundSample.cachedResult);
             setDetectedContext({
               crop: foundSample.cachedResult.crop ?? effectiveCropHint,
@@ -621,7 +625,7 @@ export default function DetectPage() {
 
           {/* Action button */}
           <AnimatePresence>
-            {(file || preview) && !result && !loading && !preparing && (
+            {(file || preview) && !result && !loading && !preparing && !diseaseHint && (
               <motion.button
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}

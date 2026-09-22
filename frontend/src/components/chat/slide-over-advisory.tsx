@@ -80,37 +80,16 @@ export function SlideOverAdvisory({
             <button
               onClick={() => onToggle(true)}
               type="button"
-              aria-label="এআই কৃষি সহকারী ওপেন করুন"
+              aria-label={hasContext ? `${humanizeLabel(detectedDisease!)} নিয়ে প্রশ্ন` : triggerEyebrow}
               className={cn(
-                "group relative flex items-center gap-2.5 rounded-full px-4 py-3 text-sm font-semibold shadow-xl transition-all cursor-pointer",
-                "bg-leaf text-paper hover:bg-leaf-2 hover:shadow-2xl hover:scale-102",
-                "border border-leaf-2/30",
+                "flex items-center gap-2 rounded-full border border-bone bg-paper px-3 py-2 text-sm text-ink shadow-sm transition-colors cursor-pointer hover:border-leaf/40",
               )}
             >
-              {/* Pulsing indicator when context is detected */}
-              <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-paper/20">
-                <MessageCircle className="h-4 w-4 text-paper" />
-                {hasContext && (
-                  <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ochre opacity-75" />
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-ochre" />
-                  </span>
-                )}
-              </span>
-
-              <span className="flex flex-col text-left">
-                <span className="text-xs font-medium text-paper/80 leading-none">
-                  {hasContext ? "আক্রান্ত ফসল নিয়ে" : triggerEyebrow}
-                </span>
-                <span className="text-sm font-bold leading-tight mt-0.5">
-                  {hasContext
-                    ? `${humanizeLabel(detectedDisease!)} নিয়ে প্রশ্ন করুন`
-                    : triggerLabel}
-                </span>
-              </span>
-
-              <span className="ml-1 rounded-full bg-paper/15 px-2 py-0.5 text-xs font-mono text-paper/90 group-hover:bg-paper/25">
-                বার্তা ↵
+              <MessageCircle className="h-4 w-4 shrink-0 text-leaf" />
+              <span className="text-left leading-tight">
+                {hasContext
+                  ? `${humanizeLabel(detectedDisease!)} নিয়ে প্রশ্ন`
+                  : triggerLabel}
               </span>
             </button>
           </motion.div>
