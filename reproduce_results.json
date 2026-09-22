@@ -1,12 +1,12 @@
 {
   "benchmark_suite": "KrishokTech EACL 2027 Reproducibility Suite",
-  "timestamp_utc": "2026-09-22T17:14:14.915224+00:00",
-  "git_commit": "c615bd5",
+  "timestamp_utc": "2026-09-22T17:21:50.615923+00:00",
+  "git_commit": "f79d6c3",
   "platform": "Windows-11-10.0.26200-SP0",
   "python_version": "3.12.0",
   "seed": 42,
   "all_passed": true,
-  "total_elapsed_ms": 275.05,
+  "total_elapsed_ms": 615.81,
   "benchmarks": [
     {
       "name": "T0 Deterministic Precheck (Banglish Red-Teaming)",
@@ -15,7 +15,7 @@
       "adv_total": 85,
       "benign_passed": 15,
       "benign_total": 15,
-      "elapsed_ms": 2.71,
+      "elapsed_ms": 2.56,
       "passed": true
     },
     {
@@ -23,7 +23,7 @@
       "paper_claim": "30/30 crop-less requests halted (0 sources retrieved)",
       "halted": 30,
       "total": 30,
-      "elapsed_ms": 10.38,
+      "elapsed_ms": 13.24,
       "passed": true
     },
     {
@@ -36,7 +36,7 @@
       "combined_caught": 453,
       "combined_total": 454,
       "false_halts": 0,
-      "elapsed_ms": 39.63,
+      "elapsed_ms": 44.95,
       "passed": true
     },
     {
@@ -49,7 +49,7 @@
       "unit_tests_grounded": "10/10",
       "unit_tests_unsupported": "10/10",
       "unit_tests_no_false_block": "10/10",
-      "elapsed_ms": 1.9,
+      "elapsed_ms": 2.15,
       "passed": true
     },
     {
