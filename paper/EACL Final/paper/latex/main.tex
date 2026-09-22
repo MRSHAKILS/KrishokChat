@@ -321,19 +321,29 @@ KrishokTech is intended to help farmers and extension workers inspect an advisor
 \label{app:architecture}
 \label{app:gate}
 
-This section gives the decision rules behind the five stages (Figure~\ref{fig:architecture}) and the evaluation detail for the pre-retrieval gate.\footnote{The T0 pattern lists and chemical registry are part of the released code (\texttt{backend/app/domain/safety\_policy.py}).}
+This section specifies the state transitions behind T0--T4 and provides supporting results for the pre-retrieval controls. The released implementation includes the T0 rules and chemical registry in \texttt{backend/app/domain/safety\_policy.py} and \texttt{backend/app/domain/chemical\_registry.py}.
 
-\paragraph{State transitions.} \textbf{REFER} (T0) ends the turn; the next message is processed from T0 again. \textbf{ASK} (T1) ends the turn with crop chips; a chip or a typed crop binds the crop and the request resumes at T2. \textbf{CONFIRM} (T2) holds chemical advice until the farmer picks one crop, which then becomes the bound crop. \textbf{DROP} (T4) acts on single claims: the unsupported sentence is removed and the rest of the draft is delivered.
+\paragraph{State transitions.}
+\textbf{REFER} is terminal for the current turn: T0 returns the appropriate referral without retrieval or generation, and a later message begins again at T0. \textbf{ASK} ends the current turn with a request for the missing crop; selecting a chip or typing a crop binds that value and allows the request to continue to T2. \textbf{CONFIRM} holds chemical advice when the typed and predicted crops conflict; the farmer's selection becomes the bound crop. \textbf{DROP} applies at claim level after generation: T4 removes an unsupported dosage-bearing sentence and delivers any remaining authorized content.
 
-\paragraph{Information-state extractor (T1).} The extractor uses gazetteers and pattern rules, with no language model, to fill five slots: crop (mapped to a 45-crop taxonomy), growth stage, location, intent (treatment, prevention, general), and symptom tokens. A treatment or problem intent with an empty crop slot halts before retrieval. On the 200 farmer queries, the extractor's crop label matched the adjudicated gold label on 95.5\% of queries (miss 1.5\%, false positive 3.0\%; each false positive contains a genuine crop mention in a multi-crop or sourcing query). Annotator agreement on the same queries was 100\% for crop presence ($\kappa = 1.00$), 99.5\% for the 37-crop normalized label ($\kappa = 0.99$), and 93.5\% for intent ($\kappa = 0.90$). A constructed pilot halted 100 of 100 crop-less requests; of 140 crop-specified requests, 114 passed directly and 26 received a bounded clarification for another slot.
+\paragraph{Information-state extractor (T1).}
+The extractor uses gazetteers and pattern rules, without a language-model call, to fill five fields: crop, growth stage, location, intent, and symptom terms. Its internal taxonomy contains 45 normalized crop labels. Thirty-seven of these labels occurred in the 200-query evaluation set, while the demonstrated crop-specific retrieval and vision path covers six crop groups.
 
-\paragraph{Vision crop router (T2).} With top-1 probability $p_1$ and top-2 probability $p_2$: if $p_1 \ge 0.90$ and $p_1 - p_2 \ge 0.20$, the predicted crop is bound; if $p_1 \ge 0.40$ but either condition fails, the top two crops are offered as chips; if $p_1 < 0.40$, retrieval halts and the farmer is asked to retake the photograph.
+For the 200 farmer questions, the extractor matched the adjudicated normalized crop label on 95.5\% of cases. The remaining errors concerned crop identity rather than crop presence: the T1 presence decision still separated all 30 crop-less questions from the 170 crop-specified questions. Annotator agreement was 100\% for crop presence ($\kappa=1.00$), 99.5\% for normalized crop identity ($\kappa=0.99$), and 93.5\% for intent ($\kappa=0.90$).
 
-\paragraph{Dialect presets.} The \textit{DialectSelector} offers Standard Bengali, Sylheti, Chittagonian, Noakhali, Rangpuri, and Barishali presets. Each adds regional synonyms during query normalization while leaving chemical names unchanged. The presets are implemented features; we have not measured accuracy per dialect.
+A separate constructed pilot contained 100 crop-less and 140 crop-specified treatment requests. T1 halted all 100 crop-less requests. All 140 crop-specified requests avoided the missing-crop halt; 114 continued directly, while 26 requested another bounded field such as growth stage or location.
 
-\paragraph{Provenance badges.} Each rendered response carries one badge: \emph{Fact lookup} (T2, exact match in a nine-fact base, no generation), \emph{Grounded generation} (T3/T4, draft passed the dosage verifier), \emph{Guidance card} (T1, non-chemical advice on a crop-less halt), \emph{Clarification} (T1/T2, crop chips or mismatch warning), or \emph{Referral} (T0, helpline routing).
+\paragraph{Vision crop router (T2).}
+Let $p_1$ and $p_2$ be the highest and second-highest crop probabilities. If $p_1\geq0.90$ and $p_1-p_2\geq0.20$, the router binds the top prediction. If $p_1\geq0.40$ but either confidence condition fails, the interface presents the top two crops for confirmation. If $p_1<0.40$, retrieval remains halted and the interface asks for another photograph. These thresholds govern the demonstrated router and are not calibrated estimates of correctness for crops outside the evaluated data.
 
-\paragraph{Banglish red-teaming.} Table~\ref{tab:banglish_eval} gives the constructed T0 benchmark. For attack rows the outcome is the number intercepted; for benign rows it is the number passed.
+\paragraph{Dialect presets.}
+The \textit{DialectSelector} offers Standard Bengali, Sylheti, Chittagonian, Noakhali, Rangpuri, and Barishali presets. A preset adds known regional synonyms during normalization while leaving recognized chemical names unchanged. These are lookup-based interface features; we have not measured general understanding or accuracy for any dialect.
+
+\paragraph{Provenance badges.}
+Each rendered result carries one interface badge: \emph{Fact lookup} for an exact match in the nine-fact base without generation; \emph{Grounded generation} for a generated draft processed by T4; \emph{Guidance card} for non-chemical information shown during ASK; \emph{Clarification} for crop selection or a mismatch; or \emph{Referral} for T0 routing. The \emph{Grounded generation} badge records that the dosage check ran. It does not mean that every factual statement was independently verified.
+
+\paragraph{Banglish red-teaming.}
+Table~\ref{tab:banglish_eval} reports the constructed normalization test used for T0. For the three attack sets, the outcome is the number intercepted before retrieval. For the benign set, it is the number allowed to continue.
 
 \begin{table}[t]
 \centering
@@ -344,14 +354,14 @@ This section gives the decision rules behind the five stages (Figure~\ref{fig:ar
 \textbf{Set} & \textbf{\textit{n}} & \textbf{Formal} & \textbf{Normalized} & \textbf{Route} \\
 \midrule
 Phonetic chemical & 35 & 0 blocked & 35 blocked & 16123 \\
-Banglish crisis   & 25 & 1 blocked & 25 blocked & 999 \\
+Banglish crisis & 25 & 1 blocked & 25 blocked & 999 \\
 Indirect sabotage & 25 & 0 blocked & 25 blocked & 16123 \\
 \midrule
 \textbf{All attacks} & \textbf{85} & \textbf{1 (1.2\%)} & \textbf{85 (100\%)} & \\
-Benign control    & 15 & 15 passed & 15 passed & none \\
+Benign control & 15 & 15 passed & 15 passed & none \\
 \bottomrule
 \end{tabular*}
-\caption{Banglish and phonetic red-teaming of the T0 precheck ($N=100$): a precheck limited to formal English and Bengali script versus the normalized precheck. The 95\% Wilson interval for 85/85 is [95.7, 100].}
+\caption{Constructed Banglish and phonetic test for T0 ($N=100$). The formal condition recognizes only formal English and Bengali-script terms; the normalized condition adds the supported variants. The 95\% Wilson interval for 85/85 intercepted attacks is [95.7, 100].}
 \label{tab:banglish_eval}
 \end{table}
 
