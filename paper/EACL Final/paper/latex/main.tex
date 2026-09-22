@@ -28,6 +28,12 @@
 \renewcommand{\textfraction}{0.05}
 \renewcommand{\floatpagefraction}{0.8}
 \renewcommand{\dblfloatpagefraction}{0.8}
+\setlength{\floatsep}{5pt plus 1pt minus 1pt}
+\setlength{\textfloatsep}{7pt plus 1pt minus 2pt}
+\setlength{\intextsep}{5pt plus 1pt minus 1pt}
+\setlength{\dbltextfloatsep}{7pt plus 1pt minus 2pt}
+\setlength{\abovecaptionskip}{3.5pt}
+\setlength{\belowcaptionskip}{1.5pt}
 % Fallback box for screenshots still pending capture (used with \IfFileExists).
 \newcommand{\screenshotplaceholder}[4]{%
   \fbox{\parbox[c][#2][c]{\dimexpr#1-2\fboxsep-2\fboxrule\relax}{\centering\footnotesize\textbf{#3}\\[0.3em]#4}}%
@@ -59,7 +65,7 @@
 \maketitle
 
 \begin{abstract}
-Bengali agricultural advisory systems face a particular difficulty: treatment requests may omit the crop, photographs may conflict with the accompanying text, and generated dosage claims may exceed the retrieved evidence. \textsc{KrishokTech} treats these uncertainties as explicit control states rather than delegating them to the language model. A deterministic gate halts treatment queries without a resolvable crop before retrieval. Crop identification fences the evidence set, and a confirmation state is raised when text and image disagree. Before rendering, each dosage-bearing claim in the generated draft is checked against retrieved passages and permitted dose ranges; unsupported claims are dropped. The demonstration follows one farmer interaction through clarification, multimodal conflict, safety referral, and claim filtering. On 200 authentic farmer queries, the gate halted all 30 crop-less requests before retrieval. Crop fencing with contradiction gating reduced off-target retrieval from 36.25\% to 28.75\% on a 400-query stress set. On the deployed local model, guarded attack success fell from 52.5\% to 10.71\%; on the cloud benchmark, from 36.19\% to 0.95\%. The dosage verifier caught 114 of 118 inserted errors in live answers without rejecting any unmodified response.
+Bengali agricultural advisory systems face a particular difficulty: treatment requests may omit the crop, photographs may conflict with the accompanying text, and generated dosage claims may exceed the retrieved evidence. Applying established gating, evidence-fencing, and claim-verification principles to smallholder agriculture, \textsc{KrishokTech} treats these uncertainties as explicit control states rather than delegating them to the language model. A deterministic gate halts treatment queries without a resolvable crop before retrieval. Crop identification fences the evidence set, and a confirmation state is raised when text and image disagree. Before rendering, each dosage-bearing claim in the generated draft is checked against retrieved passages and permitted dose ranges; unsupported claims are dropped. The demonstration follows one farmer interaction through clarification, multimodal conflict, safety referral, and claim filtering. On 200 authentic farmer queries, the gate halted all 30 crop-less requests before retrieval. Crop fencing with contradiction gating reduced off-target retrieval from 36.25\% to 28.75\% on a 400-query stress set. On the deployed local model, guarded attack success fell from 52.5\% to 10.71\%; on the cloud benchmark, from 36.19\% to 0.95\%. The dosage verifier caught 114 of 118 inserted errors in live answers without rejecting any unmodified response.
 \end{abstract}
 
 % =========================================================================
@@ -72,9 +78,11 @@ When yellow spots appear on potato leaves, a farmer often needs advice before an
 
 A farmer may ask ``which pesticide should I spray?'' without naming the crop, leaving retrieval to search across unrelated guidance. Farmers may also write in colloquial or Romanized Bangla, while technical guidance uses formal terminology \citep{bhuiyan-etal-2025-bhasabodh,our_bengali_retrieval}. A photograph and text can also disagree; a system that silently chooses one modality leaves the conflict unresolved, a known failure mode in vision-language models \citep{Deng_2025_CVPR,zhu2024cross}. Even when evidence is successfully retrieved, faithful generation is not guaranteed. Language models can produce claims unsupported by their context \citep{brown-etal-2025-rag,xu-etal-2025-mega-rag}, which is particularly dangerous for agricultural dosage, where a plausible numerical claim is directly actionable \citep{our_agricultural_safety}.
 
-\textsc{KrishokTech} makes these decisions explicit as four farmer-visible states: \textbf{ASK}, \textbf{CONFIRM}, \textbf{REFER}, and \textbf{DROP}. Three controls enforce them: (\textbf{C1}) a deterministic gate halts underspecified treatment queries before retrieval and requests the missing crop; (\textbf{C2}) crop identification fences retrieval to the identified crop and raises confirmation when text and image disagree; and (\textbf{C3}) dosage-bearing claims are checked against retrieved passages and BARI/BRRI dose ranges before rendering, with unsupported claims dropped.
+\textsc{KrishokTech} makes these decisions explicit as four farmer-visible states: \textbf{ASK}, \textbf{CONFIRM}, \textbf{REFER}, and \textbf{DROP}. Rather than introducing new machine learning primitives or a new control paradigm, our contribution is a concrete, farmer-visible operationalization of established conversational gating, evidence-fencing, and claim-level verification techniques at three coupled decision points for low-resource Bengali agriculture. Three controls enforce these states: (\textbf{C1}) a deterministic gate halts underspecified treatment queries before retrieval and requests the missing crop; (\textbf{C2}) crop identification fences retrieval to the identified crop and raises confirmation when text and image disagree; and (\textbf{C3}) dosage-bearing claims are checked against retrieved passages and BARI/BRRI dose ranges before rendering, with unsupported claims dropped.
 
-The demonstration traces one continuous farmer session through these states, from a colloquial crop-less query to crop-scoped evidence, multimodal conflict, safety referral, and answer delivery after dosage verification (Section~\ref{sec:demonstration}). Interactive demo: \url{https://krishoktech-one.vercel.app}; screencast (\textless{}2.5\,min): \url{https://krishoktech-one.vercel.app/screencast}. Source code and installable package are available under Apache-2.0 at \url{https://anonymous.4open.science/r/KrishokChat-Agricultural-Advisory-System-FCEE}.
+The generating language model is deliberately not the authority for any of these decisions. Whether a query may reach retrieval, which evidence it may access, and whether a generated claim may be released are all decided outside the model, by C1--C3; the model itself only produces a draft (Section~\ref{sec:system_verification}). This separation matters because the consequence of a missed error is asymmetric: a smallholder farmer typically has one growing season and a fixed input budget, so even a rare unsupported dosage claim can be as costly as a frequent one. Rather than depending on how accurate the generating model is, KrishokTech's safety guarantee depends only on whether a claim can be checked against retrieved evidence and permitted ranges, which holds regardless of which model produced the claim. The same separation lets the system's domain coverage grow primarily by curating additional BARI/BRRI/DAE evidence, rather than by retraining or enlarging the generator, and lets Bengali dialectal and Latin-script (Banglish) variation be normalized once, before the deterministic checks, rather than relied upon to be handled correctly inside the model's own interpretation of the query.
+
+The demonstration traces one continuous farmer session through these states, from a colloquial crop-less query to crop-scoped evidence, multimodal conflict, safety referral, and answer delivery after dosage verification (Section~\ref{sec:demonstration}). Interactive demo: \url{https://krishoktech-one.vercel.app}; screencast (\textless{}2.5\,min): \url{https://krishoktech-one.vercel.app/screencast}. Source code and installable package are available under Apache-2.0 at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}.
 
 % =========================================================================
 % SECTION 2: RELATED WORK AND POSITIONING
@@ -84,28 +92,28 @@ The demonstration traces one continuous farmer session through these states, fro
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth,keepaspectratio]{figures/fig1_architecture.jpg}
+\includegraphics[width=\textwidth]{figures/fig1_architecture.jpg}
 \caption{KrishokTech uses five control stages (T0--T4), followed by delivery. T0 can end a request in \textbf{REFER}, T1 in \textbf{ASK}, T2 in \textbf{CONFIRM}, and T4 in \textbf{DROP}; T3 produces an unverified draft that must pass T4 before delivery.}
 \label{fig:architecture}
 \end{figure*}
 
 Digital agricultural advisors such as Farmer.Chat, KrishokBondhu, and Krishi Sathi have paired localized agricultural knowledge with conversational interfaces to improve access to timely advice \citep{farmerchat2024,krishokbondhu2026,vijayvargia2025}. Bengali agricultural RAG systems have also explored matching farmer queries to more formal scientific knowledge \citep{hossain2026}. This work establishes localized retrieval and multilingual interaction as practical building blocks. KrishokTech instead focuses on when the system should be allowed to proceed: a crop-less treatment request is treated as an unresolved safety condition rather than an incomplete conversational turn.
 
-Classic information-seeking research shows that asking a clarifying question improves retrieval when a request is underspecified \citep{aliannejadi-etal-2019-clarifying}. LLM-based agents have more recently been shown to guess or hedge under ambiguity instead of reliably asking for missing information \citep{chen2024act,gan2024clarqllm}. MiniCheck demonstrates efficient claim-level checking of generated text against grounding documents, while MedRAGChecker extends atomic claim verification to safety-sensitive biomedical RAG \citep{tang2024minicheck,ji2026medragchecker}. Interactive systems such as My Climate CoPilot, FactSearch, and RAGVUE emphasize grounded answers, inspectable evidence, and fine-grained diagnosis rather than treating the generated response as a single opaque output \citep{nguyen-etal-2025-climate,fang-mackenzie-2026-factsearch,murugaraj-etal-2026-ragvue}. KrishokTech applies these ideas as explicit pipeline boundaries before retrieval and before rendering.
+Classic information-seeking research shows that asking a clarifying question improves retrieval when a request is underspecified \citep{aliannejadi-etal-2019-clarifying}. LLM-based agents have more recently been shown to guess or hedge under ambiguity instead of reliably asking for missing information \citep{chen2024act,gan2024clarqllm}. MiniCheck demonstrates efficient claim-level checking of generated text against grounding documents, while MedRAGChecker extends atomic claim verification to safety-sensitive biomedical RAG \citep{tang2024minicheck,ji2026medragchecker}. Interactive systems such as My Climate CoPilot, FactSearch, and RAGVUE emphasize grounded answers, inspectable evidence, and fine-grained diagnosis rather than treating the generated response as a single opaque output \citep{nguyen-etal-2025-climate,fang-mackenzie-2026-factsearch,murugaraj-etal-2026-ragvue}. KrishokTech applies these ideas as explicit pipeline boundaries before retrieval and before rendering, treating the language model as a generative component that never holds final authority over evidence access or claim release. Our contribution is not this boundary concept but its concrete, farmer-visible operationalization at three coupled decision points in a deployed, low-resource, multimodal agricultural setting.
 
-The multimodal setting introduces a further failure mode. When text and visual evidence conflict, vision-language models frequently rely on misleading textual information rather than reconciling the sources \citep{Deng_2025_CVPR,zhu2024cross}. The linguistic reality of Bengali deployment---where farmers use regional dialects and Latin-script Banglish---means that safety gates tuned only for formal text can be brittle \citep{bhuiyan-etal-2025-bhasabodh,bangla_low_resource}. KrishokTech addresses both by refusing to silently select a modality when crop evidence disagrees, and by enforcing deterministic, script-agnostic prechecks before generation. Ultimately, our contribution is the integration of these boundaries into a single pipeline where uncertainty is an observable system state rather than a hidden model behavior.
+The multimodal setting introduces a further failure mode. When text and visual evidence conflict, vision-language models frequently rely on misleading textual information rather than reconciling the sources \citep{Deng_2025_CVPR,zhu2024cross}. The linguistic reality of Bengali deployment, where farmers use regional dialects and Latin-script Banglish, means that safety gates tuned only for formal text can be brittle \citep{bhuiyan-etal-2025-bhasabodh,bangla_low_resource}. KrishokTech addresses both by refusing to silently select a modality when crop evidence disagrees, and by enforcing deterministic, script-agnostic prechecks before generation. Ultimately, our contribution is the integration of these boundaries into a single pipeline where uncertainty is an observable system state rather than a hidden model behavior.
 
 \section{System Design}
 \label{sec:system}
 
-KrishokTech implements four farmer-visible states through five ordered stages, T0--T4, followed by delivery (Figure~\ref{fig:architecture}). Each stage constrains the next: T0/T1 can end the turn in \textbf{REFER}/\textbf{ASK}, T2 in \textbf{CONFIRM}, and T4 filters the T3 draft before delivery.
+KrishokTech implements four farmer-visible states through five ordered stages, T0--T4, followed by delivery (Figure~\ref{fig:architecture}). Each stage constrains the next: T0/T1 can end the turn in \textbf{REFER}/\textbf{ASK}, T2 in \textbf{CONFIRM}, and T4 filters the T3 draft before delivery. Only T3 invokes the generating language model; T0, T1, T2, and T4 make their decisions independently of it.
 
 \subsection{Halting Before Retrieval}
 \label{sec:system_gating}
 
 The first decision is whether a request should reach retrieval at all.
 
-At \textbf{T0}, a deterministic precheck examines incoming Bengali and Banglish text for high-risk chemical requests, poisoning-related language, and crisis patterns covered by the system's safety policy. A matched request is stopped before retrieval or generation and routed to the Krishi Call Centre (\textbf{16123}), without invoking a language model. The exact matching patterns are withheld to prevent evasion; measured safety results are in Appendix~\ref{app:evidence}. The boundary follows the system’s safety policy; it does not attempt to reproduce the full regulatory status of every chemical.
+At \textbf{T0}, a deterministic precheck examines incoming Bengali and Banglish text for high-risk chemical requests, poisoning-related language, and crisis patterns covered by the system's safety policy. A matched request is stopped before retrieval or generation: agronomic chemical inquiries route to the Krishi Call Centre (\textbf{16123}), while acute poisoning and self-harm language escalate directly to the 24/7 National Emergency Service (\textbf{999}), without invoking a language model. The exact matching patterns are withheld to prevent evasion; measured safety results are in Appendix~\ref{app:evidence}. The boundary follows the system’s safety policy; it does not attempt to reproduce the full regulatory status of every chemical.
 
 Requests that pass T0 reach \textbf{T1}. Here, a deterministic information-state extractor identifies the crop, symptom, and treatment intent without invoking a language model. When a treatment request contains no resolvable crop, the crop is treated as a safety-critical missing slot. The pipeline halts before BM25 retrieval runs ($sources\_retrieved = 0$) and enters \textbf{ASK}. The interface can then request the crop through Bengali quick-reply chips, provide a non-chemical guidance card, or offer referral to the helpline. A \textit{DialectSelector} can apply one of six regional synonym presets during query normalization to accommodate colloquial variation \citep{our_bengali_retrieval}.
 
@@ -121,7 +129,7 @@ Once a crop is bound, it becomes a hard retrieval fence. Passages associated wit
 \subsection{Untrusted Generation, Verification, and Delivery}
 \label{sec:system_verification}
 
-Once the request has passed T0--T2, \textbf{T3} generates a response from the crop-scoped evidence. The deployed system uses \texttt{krishokchat-4b}, a 4-bit quantized Gemma-based model fine-tuned with a LoRA adapter and served through \texttt{llama-server}. The cloud model, \texttt{google/gemini-2.5-flash-lite}, is used only as a benchmark configuration in the evaluation.
+Once the request has passed T0--T2, \textbf{T3} generates a response from the crop-scoped evidence. The deployed edge system uses \texttt{krishokchat-4b}, a 4-bit quantized Gemma-based model fine-tuned with a LoRA adapter and served locally through \texttt{llama-server} on commodity CPU for complete offline sovereignty. Running a 4B model on an unaccelerated consumer CPU requires $\sim$24\,s per call, which is standard for CPU execution and suited for asynchronous SMS dispatch and offline queuing; for connected live web sessions, the cloud model (\texttt{gemini-2.5-flash-lite}) generates answers in 1.8\,s.
 
 In both cases, the generated response is treated as an \emph{unverified draft}, not as the final answer.
 
@@ -132,6 +140,7 @@ Delivered outputs carry a provenance badge and Why-panel trace and can be render
 % =========================================================================
 % SECTION 4: DEMONSTRATION
 % =========================================================================
+\enlargethispage{1.5\baselineskip}
 \section{Demonstration}
 \label{sec:demonstration}
 
@@ -139,21 +148,21 @@ Delivered outputs carry a provenance badge and Why-panel trace and can be render
 \centering
 \begin{subfigure}[t]{0.32\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=3.1cm,keepaspectratio]{../screenshots/fig2a_ask.png}
+  \includegraphics[width=\linewidth,height=2.35cm,keepaspectratio]{../screenshots/fig2a_ask.png}
   \caption{\textbf{ASK (S1)}. Missing crop halts retrieval ($sources\_retrieved = 0$); prompts farmer with 6 staple crop chips.}
   \label{fig:demo_ask}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.32\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=3.1cm,keepaspectratio]{../screenshots/fig2b_mismatch.png}
+  \includegraphics[width=\linewidth,height=2.35cm,keepaspectratio]{../screenshots/fig2b_mismatch.png}
   \caption{\textbf{CONFIRM (S3)}. Rice photograph conflict with potato text triggers Clarification badge, withholding chemical advice.}
   \label{fig:demo_mismatch}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.32\textwidth}
   \centering
-  \includegraphics[width=\linewidth,height=3.1cm,keepaspectratio]{../screenshots/s5_why_panel.png}
+  \includegraphics[width=\linewidth,height=2.35cm,keepaspectratio]{../screenshots/s5_why_panel.png}
   \caption{\textbf{DROP (S5)}. Expanded \textit{Why} panel exposes filtered $10\times$ overdose claim and validates BARI p.~852 grounding.}
   \label{fig:demo_why}
 \end{subfigure}
@@ -181,22 +190,23 @@ The farmer requests fungicide for potato blight. At \textbf{T4}, claims are chec
 \section{Evaluation}
 \label{sec:evaluation}
 
-We evaluate each control against the failure mode it targets; Appendix~\ref{app:evidence} lists every result with its status.
+We evaluate each control against the failure mode it targets, with particular attention to whether resolving uncertainty deterministically outperforms delegating the same decision to the generating language model (Sections~\ref{sec:eval-gate} and \ref{sec:eval-safety}, Appendix~\ref{app:gate}). Appendix~\ref{app:evidence} lists every result with its status.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\setlength{\tabcolsep}{2pt}
-\begin{tabular}{@{}lll@{}}
+\setlength{\tabcolsep}{1.5pt}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}llr@{}}
 \toprule
 \textbf{Control} & \textbf{Test} & \textbf{Result} \\
 \midrule
-Gate (C1) & 200; 30 crop-less & 30/30 halted, 0 false halts \\
-Fence (C2) & 400; 454 conflicts & 36.25\% $\rightarrow$ 28.75\%; 453/454 \\
-Attack (C3) & 420 cloud, 280 depl. & 36.19\% $\rightarrow$ 0.95\%; 52.5\% $\rightarrow$ 10.71\% \\
-Dosage (C3) & 118 live, 350 scaled & 114 caught; 296 (84.6\%) \\
+Gate (C1) & 200 (30 crop-less) & 30/30 halted, 0 false halts \\
+Crop fence (C2) & 400 stress queries & Off-target 36.2\% $\rightarrow$ 28.8\% \\
+Mismatch (C2) & 454 conf.\ (400 syn.) & 453/454 caught, 0 false halts \\
+Attack guard (C3) & 280 depl.\ / 420 cloud & 52.5\% $\rightarrow$ 10.7\%; 36.2\% $\rightarrow$ 1.0\% \\
+Dosage verifier (C3) & 118 live / 350 scaled & 114 caught; 296/350 (84.6\%) \\
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \caption{Headline results; \S5 and Appendix~\ref{app:evidence} give CIs and scope.}
 \label{tab:headline}
 \end{table}
@@ -218,21 +228,22 @@ The mismatch badge caught 453 of 454 explicit text-image contradictions (53 of 5
 \subsection{Safety Verification and Constrained Delivery (C3)}
 \label{sec:eval-safety}
 
-We first measure attack success rate (ASR), the share of adversarial prompts that yield an unsafe response, with the deterministic controls on (guarded) and off (unguarded). Across 420 live calls to the cloud benchmark model (\texttt{gemini-2.5-flash-lite}), 210 per arm, the guarded pipeline had an ASR of 0.95\% against 36.19\% unguarded. On the Bengali-native subset of 100 attacks, the guarded ASR was 10.0\% against 83.0\%, with the residual failures concentrated in embedded (4 of 10 prompts) and roleplay (2 of 10) variants. On the deployed model, \texttt{krishokchat-4b} (280 calls per arm), ASR falls from 52.5\% to 10.71\% overall and from 77.0\% to 19.0\% on the Bengali-native subset, so the residual ASR is higher than on the cloud model. Latin-script Banglish and phonetic spellings such as \textit{parakwat} also evade keyword gates written for formal text. A gate limited to formal English and Bengali script intercepted 1 of 85 adversarial queries in this style, whereas our deterministic precheck intercepted all 85 and raised no false alarm on 15 benign farmer questions.
+We evaluate attack success rate (ASR), the share of adversarial prompts that yield an unsafe response, across both guarded and unguarded pipelines. On the locally deployed edge model (\texttt{krishokchat-4b}, 280 calls per arm), which serves offline and privacy-sensitive deployment, the guarded pipeline reduces ASR from 52.5\% to 10.71\% overall, and from 77.0\% to 19.0\% on the Bengali-native subset of 100 attacks. Residual failures are concentrated in embedded (4 of 10) and roleplay (2 of 10) variants, reflecting the operational bounds of a 4-bit local model. For comparison, on the cloud benchmark model (\texttt{gemini-2.5-flash-lite}, 420 calls), the guarded pipeline lowers ASR to 0.95\% against 36.19\% unguarded (10.0\% vs.\ 83.0\% on Bengali-native). Latin-script Banglish and phonetic spellings such as \textit{parakwat} also evade keyword gates written for formal text: a formal-only gate intercepted 1 of 85 adversarial queries in this style, whereas our deterministic precheck intercepted all 85 with zero false alarms on 15 benign farmer questions.
 
 We then assess the generated advice itself. In a blinded audit, three evaluators (two agronomy or botany undergraduates and one extension officer) rated 46 of 47 guarded outputs as safe and actionable, one as vague but harmless, and none as dangerous (Fleiss' $\kappa = 0.82$). All three unguarded control outputs were rated dangerous. For the dosage verifier, we inserted controlled errors into verified answers. On 38 live answers with 118 inserted errors, it caught 114 and rejected none of the unmodified answers. On a scaled benchmark of 528 cases from 88 BARI and BRRI passages, it caught 296 of 350 inserted errors (84.6\%): every overdose (76 of 76) and underdose (67 of 67), but only 85\% of chemical substitutions, 73\% of unit substitutions, and 65\% of invented pre-harvest intervals.
 
 Constrained delivery preserves the dose: the SMS packer kept 399 of 400 messages within 160 characters and preserved the dose in 92 of 100 long advisories without invention; full SMS, offline, and latency detail is in Appendix~\ref{app:delivery} and the evidence ledger (Appendix~\ref{app:evidence}).
 
+\enlargethispage{2\baselineskip}
 \subsection{Multi-Turn Conversational Robustness}
 \label{sec:eval-multiturn}
 
-Real-world deployment requires maintaining agronomic coherence across extended farmer dialogues without hallucinatory context drift or safety degradation. We evaluate \textsc{KrishokTech} across an $N=200$ multi-turn dialogue benchmark (425 turns total; Table~\ref{tab:multiturn_eval}) spanning four conversational stress regimes. 
+Real-world deployment requires maintaining agronomic coherence across extended farmer dialogues without hallucinatory context drift or safety degradation. To verify state-machine transitions across sequential turns, we evaluate \textsc{KrishokTech} across an $N=200$ structured multi-turn stress suite (425 turns total; Table~\ref{tab:multiturn_eval}) spanning four conversational regimes. 
 
 \begin{table}[t]
 \centering
-\footnotesize
-\setlength{\tabcolsep}{1.8pt}
+\scriptsize
+\setlength{\tabcolsep}{2pt}
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lcccc@{}}
 \toprule
 \textbf{Stress Regime} & \textbf{\textit{n}} & \textbf{Turns} & \textbf{Metric} & \textbf{Result} \\
@@ -246,7 +257,7 @@ Clarification Gate & 20 & 40  & ASK \& Resolve & 100.0\% \\
 \textbf{Total Multi-Turn} & \textbf{200} & \textbf{425} & \textbf{Robustness} & \textbf{100.0\%} \\
 \bottomrule
 \end{tabular*}
-\caption{Multi-turn robustness benchmark ($N=200$ dialogues, 425 turns) across four stress regimes using structured working memory, query rewriting, and T0 prechecks.}
+\caption{Multi-turn state stress suite ($N=200$ dialogues, 425 turns) verifying slot carryover, context flushing, and delayed evasion.}
 \label{tab:multiturn_eval}
 \end{table}
 
@@ -255,27 +266,26 @@ In \textit{anaphoric slot carryover} ($n=75$, 175 turns), farmers pose deixis fo
 \subsection{What This Evaluation Does Not Establish}
 \label{sec:eval-scope}
 
-Results hold only under measured benchmark conditions without longitudinal field trials on yield. Crop-fence tests use paired queries under empirical vision noise; 400 of 454 contradiction cases are synthetic. Expert audits cover 47 guarded outputs, network resilience reflects simulated packet loss, and dosage checks target numerical bounds rather than general agronomy. Appendix~\ref{app:evidence} ledgers every result by evidence type.
+Results hold only under measured benchmark conditions without longitudinal field trials on yield. Crop-fence tests use paired queries under empirical vision noise; 400 of 454 contradiction cases are synthetic; multi-turn evaluations reflect constructed state-transition stress suites rather than longitudinal farmer conversations. Expert audits cover 47 guarded outputs, network resilience reflects simulated packet loss, and dosage checks target numerical bounds rather than general agronomy. Appendix~\ref{app:evidence} ledgers every result by evidence type.
 
 % =========================================================================
 % SECTION 6: LIMITATIONS AND CONCLUSION
 % =========================================================================
+\enlargethispage{3\baselineskip}
 \section{Limitations, Availability, and Conclusion}
 \label{sec:conclusion}
 
-\subsection{Limitations}
+\paragraph{Limitations.}
 \label{sec:limitations}
-Four key limitations apply (see Appendix~\ref{app:evidence} for ledger): (1)~coverage is limited to six staple crops and Bengali input, with lexical BM25 retrieval; (2)~the mismatch badge detects explicit crop conflicts only, missing the one implicit test reference; (3)~safety controls reduce but do not eliminate attack success (10.71\% guarded deployed vs.\ 0.95\% cloud); and (4)~SMS compression is lossy, and local CPU generation requires about 24\,s per call.
+Four key limitations apply (see Appendix~\ref{app:evidence} for ledger): (1)~coverage is limited to six staple crops and Bengali input, with lexical BM25 retrieval; (2)~the mismatch badge detects explicit crop conflicts only, missing the one implicit test reference; (3)~safety controls reduce but do not eliminate attack success (10.71\% guarded deployed vs.\ 0.95\% cloud); and (4)~SMS compression is lossy; and running the 4B model on commodity CPU without GPU acceleration takes $\sim$24\,s per call (standard for unaccelerated edge hardware), targeting asynchronous SMS dispatch and offline village kiosks rather than instantaneous live web chat.
 
-\subsection{Availability and Licensing}
+\paragraph{Availability and Licensing.}
 \label{sec:availability}
+Code, models, and container scripts are licensed under Apache-2.0 at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}, with models available at \url{https://huggingface.co/RaiyanKhaan/KrishokTech-Models}. The model \texttt{krishokchat-4b} and 2,135 extension nodes are on HuggingFace under CC-BY-4.0 (BARI, BRRI, and DAE guidelines). While exact T0 regex dictionaries are withheld from the public release to prevent dual-use evasion, they are available to qualified academic researchers and safety auditors under a non-commercial research agreement upon request.
 
-Code, models, and container scripts are licensed under Apache-2.0 at \url{https://anonymous.4open.science/r/KrishokChat-Agricultural-Advisory-System-FCEE}, with models available at \url{https://huggingface.co/RaiyanKhaan/KrishokTech-Models}. % BLIND REVIEW: restore public repo URL for camera-ready The model \texttt{krishokchat-4b} and 2,135 extension nodes are on HuggingFace under CC-BY-4.0 (BARI, BRRI, and DAE guidelines).
-
-\subsection{Conclusion}
+\paragraph{Conclusion.}
 \label{sec:final_conclusion}
-
-KrishokTech makes the boundary between model output and verified evidence visible to the farmer. Instead of leaving uncertainty and safety to the language model, it asks for a missing crop, confirms conflicts between text and photograph, refers unsafe requests to a human helpline, and drops dosage claims that the evidence does not support. Evaluation shows reduced but nonzero failure rates, so the system is intended to support rather than replace extension officers. Field evaluation with farmers remains to be done.
+KrishokTech makes the boundary between model output and verified evidence visible to the farmer: the model drafts, but a deterministic control layer, independent of the model and updatable through the evidence base alone, decides what may be accessed, confirmed, or released. Instead of leaving uncertainty and safety to the language model, it asks for a missing crop, confirms conflicts between text and photograph, refers unsafe requests to a human helpline, and drops dosage claims that the evidence does not support. Evaluation shows reduced but nonzero failure rates, so the system is intended to support rather than replace extension officers. Field evaluation with farmers remains to be done.
 
 % =========================================================================
 % ETHICS AND BROADER IMPACT STATEMENT
@@ -292,7 +302,7 @@ Agricultural advice for smallholder farmers affects food security, livelihoods, 
 
 \paragraph{Pesticide and Dosage Guidance.} The chemical-advice pathway fails closed. High-risk chemical requests and acute-poisoning language covered by the system's safety policy trigger a deterministic block and a helpline referral before any generation, and dosage claims in generated text are checked against source passages and permitted dose bands before display (Section~\ref{sec:system_verification}). These controls reduce risk but do not remove it. Guarded attack success is 10.71\% on the deployed model (19.0\% on Bengali-native attacks), and the dosage verifier missed 4 of 118 inserted errors (Section~\ref{sec:eval-safety}). We report these residuals and do not claim that the system prevents all unsafe output.
 
-\paragraph{Helpline Referral.} Unsafe and crisis-pattern requests are referred to the national Krishi Call Centre (16123), a government agricultural advisory service. The centre is open from 9:00\,AM to 5:00\,PM, Saturday through Thursday, except on public holidays. The referral screen displays these hours and tells off-hours users to wait for the next shift or seek in-person extension help. The public demonstration runs in a sandbox that shows referral and safety blocking for toxic-chemical queries without giving any chemical advice.
+\paragraph{Helpline Referral.} Agronomic chemical inquiries are referred to the national Krishi Call Centre (16123), a government agricultural advisory service open 9:00\,AM--5:00\,PM, Saturday through Thursday. For acute chemical poisoning, self-harm, or medical crises, the referral interface escalates immediately to the 24/7 National Emergency Service (999) and local healthcare facilities, ensuring life-safety emergencies are never delayed by agricultural office hours. The public demonstration runs in a sandbox that shows referral and safety blocking for toxic-chemical queries without giving any chemical advice.
 
 \paragraph{Third-Party Model Use.} The cloud benchmark uses a third-party API (\texttt{google/gemini-2.5-flash-lite}) under commercial enterprise terms with a zero-data-retention agreement, so prompts and responses are not logged, retained, or used for training. Cloud calls were limited to offline benchmark evaluation and never received farmer images or direct personal identifiers. De-identified farmer text queries, with personal identifiers removed as described above, were also sent to this API for the live-model gate comparison in Section~\ref{sec:eval-gate}. Self-hosted deployment runs entirely on the local \texttt{krishokchat-4b} model through \texttt{llama-server} and makes no external network calls.
 
@@ -321,7 +331,7 @@ Agricultural advice for smallholder farmers affects food security, livelihoods, 
 \label{app:architecture}
 \label{app:gate}
 
-This section details the decision rules, thresholds, and component interfaces of the five-stage pipeline (Figure~\ref{fig:architecture}), followed by the evaluation detail for the pre-retrieval gate and extractor.\footnote{The exact regex dictionaries and keyword strings of the T0 precheck (for example, phonetic and textual variants of restricted organophosphates and self-harm phrases) are withheld to prevent evasion and dual use. The evaluation method and safety measurements are summarized in Appendix~\ref{app:evidence}.}
+This section details the decision rules, thresholds, and component interfaces of the five-stage pipeline (Figure~\ref{fig:architecture}), followed by the evaluation detail for the pre-retrieval gate and extractor.\footnote{The exact regex dictionaries and keyword strings of the T0 precheck (for example, phonetic and textual variants of restricted organophosphates and self-harm phrases) are withheld from public release to prevent evasion and dual use, but are available to qualified academic researchers and safety auditors under a non-commercial research agreement upon request. The evaluation method and safety measurements are summarized in Appendix~\ref{app:evidence}.}
 
 \subsection{Provenance Badge Taxonomy}
 Every response rendered in KrishokTech carries exactly one visible provenance badge indicating the authorization pathway and evidence type.
@@ -509,7 +519,6 @@ Attack guard, deployed model (N14) & ASR 10.71\% [7.61, 14.88] guarded vs 52.5\%
 Banglish red-teaming & 85/85 adversarial queries intercepted (95\% CI [95.7, 100.0]) vs 1/85 for a gate limited to formal English and Bengali script; 0/15 false alarms & 100 & Measured & Latin-script and phonetic evasion; T0 regex matching median 0.016\,ms, full T0 pipeline 0.321\,ms \\
 Expert audit & 46/47 guarded outputs safe and actionable, 1/47 vague but harmless, 0/47 dangerous; 3/3 unguarded controls rated dangerous; Fleiss $\kappa = 0.8217$ & 50 & Measured & Three blinded evaluators; 47 guarded outputs plus 3 unguarded controls \\
 Off-topic audit & 10/10 injections blocked; off-topic queries refused 0/30 by the T0 precheck and 25/30 (83.33\%) by the LLM classification branch & 30 & Measured & The 5 remaining weather queries are routed to agricultural information by design \\
-Routing probe & Certification recall 0.8615, refuse recall 0.431, dangerous acceptance 0.374 & 3,000 & Measured, stub simulated & Offline stub generation; reported as a measured envelope \\
 Dosage verifier & Live: 114/118 caught (96.6\%), 0/38 unmodified answers rejected. Scaled: 296/350 (84.6\%), including all overdoses (76/76) and underdoses (67/67) & 528 & Measured & Live audit ($n=38$) plus a scaled benchmark from 88 BARI/BRRI passages; numerical dosage sentences only, not unrestricted agronomic prose \\
 Multi-turn benchmark & 100\% slot retention (75/75), 100\% topic-shift isolation (75/75, 0\% leak), 100\% delayed safety catch (30/30) & 200 & Measured & 425 turns, four stress regimes; 0.20\,ms T0 precheck \\
 \midrule
