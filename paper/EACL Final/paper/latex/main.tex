@@ -321,7 +321,7 @@ KrishokTech is intended to help farmers and extension workers inspect an advisor
 \label{app:architecture}
 \label{app:gate}
 
-This section specifies the state transitions behind T0--T4 and provides supporting results for the pre-retrieval controls. The released implementation includes the T0 rules and chemical registry in \texttt{backend/app/domain/safety\_policy.py} and \texttt{backend/app/domain/chemical\_registry.py}.
+This section specifies the state transitions behind T0--T4 and provides supporting results for the pre-retrieval controls. The released implementation includes the T0 rules and chemical registry in \url{backend/app/domain/safety_policy.py} and \url{backend/app/domain/chemical_registry.py}.
 
 \paragraph{State transitions.}
 \textbf{REFER} is terminal for the current turn: T0 returns the appropriate referral without retrieval or generation, and a later message begins again at T0. \textbf{ASK} ends the current turn with a request for the missing crop; selecting a chip or typing a crop binds that value and allows the request to continue to T2. \textbf{CONFIRM} holds chemical advice when the typed and predicted crops conflict; the farmer's selection becomes the bound crop. \textbf{DROP} applies at claim level after generation: T4 removes an unsupported dosage-bearing sentence and delivers any remaining authorized content.
