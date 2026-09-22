@@ -86,6 +86,23 @@ class RewriterUnitTests(unittest.TestCase):
         result = asyncio.run(rewriter.rewrite("তাহলে কী করব?", HISTORY))
         self.assertEqual(result, "তাহলে কী করব?")
 
+    def test_crop_chip_binds_without_calling_the_rewriter_model(self) -> None:
+        class BoomLLM(FakeLLM):
+            async def generate(self, prompt: str, *, metadata: dict[str, Any] | None = None) -> str:
+                raise RuntimeError("provider down")
+
+        history = [
+            {"role": "user", "content": "Patay holud dag hoyeche, ki bish dibo?"},
+            {"role": "assistant", "content": "কোন ফসলের পাতায় এই সমস্যা হয়েছে বলবেন কি?"},
+        ]
+        rewriter = ConversationalQueryRewriter(BoomLLM())
+        query, changed = asyncio.run(rewriter.maybe_rewrite("আলু", history))
+        self.assertTrue(changed)
+        self.assertIn("Patay holud dag", query)
+        self.assertIn("potato", query)
+        self.assertFalse(rewriter.last_used_llm)
+        self.assertEqual(rewriter.rewrite_calls, 0)
+
     def test_empty_rewrite_returns_raw_query(self) -> None:
         rewriter = ConversationalQueryRewriter(FakeLLM(answer="   "))
         result = asyncio.run(rewriter.rewrite("তাহলে কী করব?", HISTORY))

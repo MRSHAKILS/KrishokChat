@@ -1,0 +1,2610 @@
+{
+ "experiment": "N08b_residual_audit",
+ "reproduction": {
+  "open_flagged": 146,
+  "fenced_flagged": 121,
+  "n": 400,
+  "matches_N08": false,
+  "note": "Current backend reproduces 120/120 frozen N08 residual cases; PRISM_C_005 additionally flags on current code (post-freeze backend commits). frozen_120_summary excludes it."
+ },
+ "residual_cases": 121,
+ "by_category": {
+  "B_colloquial_bengali": "47/100",
+  "C_dialect": "29/100",
+  "D_banglish": "20/100",
+  "I_ambiguous_disease": "25/100"
+ },
+ "by_gold_crop": {
+  "rice": 43,
+  "brinjal": 33,
+  "potato": 20,
+  "chilli": 9,
+  "wheat": 7,
+  "tomato": 6,
+  "maize": 3
+ },
+ "query_text_names_other_crop": 0,
+ "first_offending_rank_1": 20,
+ "first_offending_rank_4_or_5": 25,
+ "cases_with_single_offending_passage": 81,
+ "offending_passages_total": 178,
+ "offending_passages_multi_crop_without_gold": 0,
+ "offending_crop_counts": {
+  "chilli": 74,
+  "cabbage": 46,
+  "wheat": 23,
+  "brinjal": 21,
+  "maize": 13,
+  "turmeric": 1
+ },
+ "top_gold_offending_pairs": [
+  [
+   "brinjal",
+   "chilli",
+   32
+  ],
+  [
+   "potato",
+   "cabbage",
+   20
+  ],
+  [
+   "rice",
+   "brinjal",
+   20
+  ],
+  [
+   "rice",
+   "wheat",
+   17
+  ],
+  [
+   "potato",
+   "maize",
+   13
+  ],
+  [
+   "rice",
+   "chilli",
+   12
+  ],
+  [
+   "wheat",
+   "chilli",
+   12
+  ],
+  [
+   "potato",
+   "chilli",
+   9
+  ],
+  [
+   "chilli",
+   "cabbage",
+   6
+  ],
+  [
+   "tomato",
+   "chilli",
+   6
+  ],
+  [
+   "rice",
+   "cabbage",
+   6
+  ],
+  [
+   "brinjal",
+   "cabbage",
+   5
+  ]
+ ],
+ "distinct_offending_nodes": 13,
+ "most_frequent_offending_nodes": [
+  [
+   "B2B_MORICH2_83F400_002",
+   "",
+   31
+  ],
+  [
+   "CABI_BRASSICA_997AAE_001",
+   "Black rot in Cabbage",
+   20
+  ],
+  [
+   "B5_BARCAG_706F27_002",
+   "Brinjal Fertilizer Management",
+   20
+  ],
+  [
+   "B2B_MORICH2_D3E1A8_003",
+   "",
+   17
+  ],
+  [
+   "B2B_MORICH2_D3E1A8_001",
+   "",
+   15
+  ],
+  [
+   "CABI_BRASSICA_F7F28F_001",
+   "Control of Black Rot in Cabbage",
+   14
+  ],
+  [
+   "GEN_WHEAT_WheatBlast",
+   "Wheat Blast Disease",
+   14
+  ],
+  [
+   "CABI_CORN_4A0AAE_001",
+   "Anthracnose head rot and stalk red rot",
+   13
+  ],
+  [
+   "CABI_BRASSICA_160EA1_001",
+   "Cabbage leaf curl virus (CaLCuV)",
+   12
+  ],
+  [
+   "B2B_MORICH2_244683_001",
+   "",
+   11
+  ]
+ ],
+ "cases": [
+  {
+   "id": "PRISM_B_001",
+   "category": "B_colloquial_bengali",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "GEN_WHEAT_LeafBlight",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Leaf Blight"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_002",
+   "category": "B_colloquial_bengali",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_005",
+   "category": "B_colloquial_bengali",
+   "gold": "chilli",
+   "text_crop": "chilli",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_007",
+   "category": "B_colloquial_bengali",
+   "gold": "maize",
+   "text_crop": "maize",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_010",
+   "category": "B_colloquial_bengali",
+   "gold": "tomato",
+   "text_crop": "tomato",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_011",
+   "category": "B_colloquial_bengali",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 4,
+     "node": "GEN_WHEAT_LeafBlight",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Leaf Blight"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_012",
+   "category": "B_colloquial_bengali",
+   "gold": "chilli",
+   "text_crop": "chilli",
+   "offending": [
+    {
+     "rank": 4,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_015",
+   "category": "B_colloquial_bengali",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_017",
+   "category": "B_colloquial_bengali",
+   "gold": "tomato",
+   "text_crop": "tomato",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_020",
+   "category": "B_colloquial_bengali",
+   "gold": "wheat",
+   "text_crop": "wheat",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_022",
+   "category": "B_colloquial_bengali",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 4,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_025",
+   "category": "B_colloquial_bengali",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_026",
+   "category": "B_colloquial_bengali",
+   "gold": "chilli",
+   "text_crop": "chilli",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_LeafBlight",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Leaf Blight"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_027",
+   "category": "B_colloquial_bengali",
+   "gold": "wheat",
+   "text_crop": "wheat",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_030",
+   "category": "B_colloquial_bengali",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_032",
+   "category": "B_colloquial_bengali",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_036",
+   "category": "B_colloquial_bengali",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "GEN_WHEAT_LeafBlight",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Leaf Blight"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_037",
+   "category": "B_colloquial_bengali",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_040",
+   "category": "B_colloquial_bengali",
+   "gold": "chilli",
+   "text_crop": "chilli",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_042",
+   "category": "B_colloquial_bengali",
+   "gold": "maize",
+   "text_crop": "maize",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_045",
+   "category": "B_colloquial_bengali",
+   "gold": "tomato",
+   "text_crop": "tomato",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_046",
+   "category": "B_colloquial_bengali",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 4,
+     "node": "GEN_WHEAT_LeafBlight",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Leaf Blight"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_047",
+   "category": "B_colloquial_bengali",
+   "gold": "chilli",
+   "text_crop": "chilli",
+   "offending": [
+    {
+     "rank": 4,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_050",
+   "category": "B_colloquial_bengali",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_052",
+   "category": "B_colloquial_bengali",
+   "gold": "tomato",
+   "text_crop": "tomato",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_055",
+   "category": "B_colloquial_bengali",
+   "gold": "wheat",
+   "text_crop": "wheat",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_057",
+   "category": "B_colloquial_bengali",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 4,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_060",
+   "category": "B_colloquial_bengali",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_061",
+   "category": "B_colloquial_bengali",
+   "gold": "chilli",
+   "text_crop": "chilli",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_LeafBlight",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Leaf Blight"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_062",
+   "category": "B_colloquial_bengali",
+   "gold": "wheat",
+   "text_crop": "wheat",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_065",
+   "category": "B_colloquial_bengali",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_067",
+   "category": "B_colloquial_bengali",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_071",
+   "category": "B_colloquial_bengali",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "GEN_WHEAT_LeafBlight",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Leaf Blight"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_072",
+   "category": "B_colloquial_bengali",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_075",
+   "category": "B_colloquial_bengali",
+   "gold": "chilli",
+   "text_crop": "chilli",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_077",
+   "category": "B_colloquial_bengali",
+   "gold": "maize",
+   "text_crop": "maize",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_080",
+   "category": "B_colloquial_bengali",
+   "gold": "tomato",
+   "text_crop": "tomato",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_081",
+   "category": "B_colloquial_bengali",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 4,
+     "node": "GEN_WHEAT_LeafBlight",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Leaf Blight"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_082",
+   "category": "B_colloquial_bengali",
+   "gold": "chilli",
+   "text_crop": "chilli",
+   "offending": [
+    {
+     "rank": 4,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_085",
+   "category": "B_colloquial_bengali",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_087",
+   "category": "B_colloquial_bengali",
+   "gold": "tomato",
+   "text_crop": "tomato",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_090",
+   "category": "B_colloquial_bengali",
+   "gold": "wheat",
+   "text_crop": "wheat",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_092",
+   "category": "B_colloquial_bengali",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 4,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_095",
+   "category": "B_colloquial_bengali",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_096",
+   "category": "B_colloquial_bengali",
+   "gold": "chilli",
+   "text_crop": "chilli",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_LeafBlight",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Leaf Blight"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_097",
+   "category": "B_colloquial_bengali",
+   "gold": "wheat",
+   "text_crop": "wheat",
+   "offending": [
+    {
+     "rank": 1,
+     "node": "CABI_BRASSICA_997AAE_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Black rot in Cabbage"
+    },
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_003",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "B2B_MORICH2_244683_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 5,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_B_100",
+   "category": "B_colloquial_bengali",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_D3E1A8_001",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    },
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_160EA1_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Cabbage leaf curl virus (CaLCuV)"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_004",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "B4_FRG2024_3A484A_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Fertilizer Recommendation for Radish (BARI Mula-1, 2, 3, 4)"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_005",
+   "category": "C_dialect",
+   "gold": "wheat",
+   "text_crop": "wheat",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "B4_FRG2024_D249CD_001",
+     "crops": [
+      "turmeric"
+     ],
+     "title": "Fertilizer Management for Turmeric"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_006",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_011",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 4,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 5,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_013",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_018",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_020",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_025",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 5,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_027",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_032",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_034",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_039",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_041",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_046",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_048",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_053",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_055",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_060",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_062",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_067",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_069",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_074",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_076",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_081",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_083",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_088",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_090",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_095",
+   "category": "C_dialect",
+   "gold": "potato",
+   "text_crop": "potato",
+   "offending": [
+    {
+     "rank": 3,
+     "node": "CABI_BRASSICA_F7F28F_001",
+     "crops": [
+      "cabbage"
+     ],
+     "title": "Control of Black Rot in Cabbage"
+    },
+    {
+     "rank": 4,
+     "node": "CABI_CORN_4A0AAE_001",
+     "crops": [
+      "maize"
+     ],
+     "title": "Anthracnose head rot and stalk red rot"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_C_097",
+   "category": "C_dialect",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 5,
+     "node": "GEN_WHEAT_WheatBlast",
+     "crops": [
+      "wheat"
+     ],
+     "title": "Wheat Blast Disease"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_005",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_010",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_015",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_020",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_025",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_030",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_035",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_040",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_045",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_050",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_055",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_060",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_065",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_070",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_075",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_080",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_085",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_090",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_095",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_D_100",
+   "category": "D_banglish",
+   "gold": "rice",
+   "text_crop": "rice",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B5_BARCAG_706F27_002",
+     "crops": [
+      "brinjal"
+     ],
+     "title": "Brinjal Fertilizer Management"
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_003",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_007",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_011",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_015",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_019",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_023",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_027",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_031",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_035",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_039",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_043",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_047",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_051",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_055",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_059",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_063",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_067",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_071",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_075",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_079",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_083",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_087",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_091",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_095",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  },
+  {
+   "id": "PRISM_I_099",
+   "category": "I_ambiguous_disease",
+   "gold": "brinjal",
+   "text_crop": "brinjal",
+   "offending": [
+    {
+     "rank": 2,
+     "node": "B2B_MORICH2_83F400_002",
+     "crops": [
+      "chilli"
+     ],
+     "title": ""
+    }
+   ]
+  }
+ ],
+ "frozen_120_summary": {
+  "n_cases": 120,
+  "offending_passages": 177,
+  "distinct_nodes": 12,
+  "multi_crop_without_gold": 0,
+  "single_offending_case": 80,
+  "rank1": 20,
+  "share_top3_nodes": 0.401,
+  "share_top5_nodes": 0.582,
+  "cases_explained_only_by_top5_nodes": 60,
+  "nodes": [
+   [
+    "B2B_MORICH2_83F400_002",
+    31
+   ],
+   [
+    "CABI_BRASSICA_997AAE_001",
+    20
+   ],
+   [
+    "B5_BARCAG_706F27_002",
+    20
+   ],
+   [
+    "B2B_MORICH2_D3E1A8_003",
+    17
+   ],
+   [
+    "B2B_MORICH2_D3E1A8_001",
+    15
+   ],
+   [
+    "CABI_BRASSICA_F7F28F_001",
+    14
+   ],
+   [
+    "GEN_WHEAT_WheatBlast",
+    14
+   ],
+   [
+    "CABI_CORN_4A0AAE_001",
+    13
+   ],
+   [
+    "CABI_BRASSICA_160EA1_001",
+    12
+   ],
+   [
+    "B2B_MORICH2_244683_001",
+    11
+   ],
+   [
+    "GEN_WHEAT_LeafBlight",
+    9
+   ],
+   [
+    "B4_FRG2024_3A484A_002",
+    1
+   ]
+  ]
+ }
+}

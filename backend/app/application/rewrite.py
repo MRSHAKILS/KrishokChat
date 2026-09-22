@@ -19,6 +19,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
+from app.domain.intent import clarification_followup, crop_selection
 from app.ports.llm import LLMClient
 
 # Follow-up deixis markers: their presence (with history) suggests the query
@@ -46,6 +47,7 @@ class ConversationalQueryRewriter:
         self.markers = tuple(markers)
         self.max_history = max_history
         self.rewrite_calls = 0
+        self.last_used_llm = False
 
     def should_rewrite(self, query: str, history: Sequence[dict[str, str]]) -> bool:
         if not history:
@@ -93,11 +95,26 @@ class ConversationalQueryRewriter:
         except Exception:
             return query
 
+    @staticmethod
+    def _bind_crop_reply(query: str, history: Sequence[dict[str, str]]) -> str | None:
+        """Gazetteer bind: a crop chip resumes the question that ASK halted."""
+        crop = crop_selection(query)
+        prior = clarification_followup(history)
+        if not crop or not prior or crop_selection(prior):
+            return None
+        return f"{prior} ({crop})"
+
     async def maybe_rewrite(self, query: str, history: Sequence[dict[str, str]]) -> tuple[str, bool]:
         """(retrieval_query, was_rewritten) — never raises, never costs without a gate."""
+        bound = self._bind_crop_reply(query, history)
+        if bound:
+            self.last_used_llm = False
+            return bound, True
         if not self.should_rewrite(query, history):
+            self.last_used_llm = False
             return query, False
         self.rewrite_calls += 1
+        self.last_used_llm = True
         rewritten = await self.rewrite(query, history)
         if rewritten == query:
             return query, False

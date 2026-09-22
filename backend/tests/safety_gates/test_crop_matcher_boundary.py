@@ -72,6 +72,12 @@ def test_collision_prone_aliases_stay_quiet():
     assert _match_crop_alias("পাটের জমি") == "jute"
     assert _match_crop_alias("গাছ হলুদ হয়ে গেছে") is None
     assert _match_crop_alias("হলুদগাছে পোকা") == "turmeric"
+    # Paper S1: "holud dag" is yellow spots, and the production extractor
+    # must agree with the gazetteer.
+    paper = "Patay holud dag hoyeche, ki bish dibo?"
+    assert _match_crop_alias(paper.lower()) is None
+    assert QueryExtractor.extract(paper).crop is None
+    assert _match_crop_alias("holud gach e poka") == "turmeric"
     assert _match_crop_alias("শীতকালীন শাকসবজি চাষ") is None
 
 

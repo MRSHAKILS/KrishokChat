@@ -12,11 +12,7 @@ from typing import Any
 
 from app.domain.intent import (
     CROP_NAMES_BN,
-    NEGATIVE_CROP_TOKENS,
-    SHORT_EXACT_CROPS,
-    _CROP_ALIASES,
     _FERTILIZER_KW,
-    _PLANT_PART_BN,
     _PLANT_PART_MAP,
     _PREVENTION_KW,
     _TREATMENT_KW,
@@ -100,32 +96,11 @@ class QueryExtractor:
         # 1. Follow-up detection
         is_follow_up = any(p in lowered for p in _FOLLOW_UP_PATTERNS)
 
-        # 2. Crop detection (token-start matching with exact-only short names
-        # and negative tokens; see intent._match_crop_alias for the rule).
-        import re as _re
-        strip_pat = _re.compile(r"^[^\w\u0980-\u09FF]+")
-        lowered_tokens = [t for t in (strip_pat.sub("", t) for t in lowered.split()) if t]
-        lowered_tokens = [t for t in lowered_tokens if t not in NEGATIVE_CROP_TOKENS]
-        detected_crop: str | None = None
-        detected_alias: str | None = None
-        for crop_id, aliases in _CROP_ALIASES.items():
-            short_exact = crop_id in SHORT_EXACT_CROPS
-            ordered = sorted((str(a).strip() for a in aliases if str(a).strip()), key=len, reverse=True)
-            for alias in ordered:
-                alias_lower = alias.lower()
-                if " " in alias_lower:
-                    hit = alias_lower in lowered
-                elif short_exact:
-                    hit = any(tok == alias_lower for tok in lowered_tokens)
-                else:
-                    hit = any(tok == alias_lower or tok.startswith(alias_lower) for tok in lowered_tokens)
-                if hit:
-                    detected_crop = crop_id
-                    detected_alias = alias
-                    extracted_tokens.append(alias)
-                    break
-            if detected_crop:
-                break
+        # 2. Crop detection uses the same gazetteer as T1, including the
+        # yellow-spot exception ("holud dag" is a color, not turmeric).
+        detected_crop = _match_crop_alias(lowered)
+        if detected_crop:
+            extracted_tokens.append(detected_crop)
 
         # 3. Location detection
         detected_location: str | None = None

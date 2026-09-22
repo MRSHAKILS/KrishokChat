@@ -58,7 +58,7 @@ _TREATMENT_KW = (
     "দমন", "সমাধান", "উপায়", "উপায়", "করণীয়", "করনীয়", "বাঁচাব", "বাঁচানো",
     "বাঁচামু", "দাবা", "বিখ", "কী করণ যায়", "কি করমু",
     "treatment", "cure", "spray", "apply", "shomadhan", "bachamu", "kormu", "osudh", "dava",
-    "fungicide", "pesticide", "medicine",
+    "fungicide", "pesticide", "medicine", "bish", "ki bish",
 )
 
 # Prevention keywords
@@ -75,7 +75,7 @@ _FERTILIZER_KW = (
 
 # Plant part keywords
 _PLANT_PART_MAP = {
-    "পাতা": "leaf", "পাতায়": "leaf", "পাতাত": "leaf", "পাতার": "leaf", "leaf": "leaf", "leaves": "leaf", "pata": "leaf", "patat": "leaf",
+    "পাতা": "leaf", "পাতায়": "leaf", "পাতাত": "leaf", "পাতার": "leaf", "leaf": "leaf", "leaves": "leaf", "pata": "leaf", "patay": "leaf", "patat": "leaf",
     "কাণ্ড": "stem", "কান্ড": "stem", "ডাল": "stem", "stem": "stem", "branch": "stem",
     "মূল": "root", "শিকড়": "root", "শিকড়": "root", "root": "root",
     "ফল": "fruit", "ফলে": "fruit", "fruit": "fruit", "fol": "fruit",
@@ -225,6 +225,14 @@ def _match_crop_alias(lowered: str) -> str | None:
     strip_pat = _re.compile(r"^[^\w\u0980-\u09FF]+")
     tokens = [strip_pat.sub("", t) for t in lowered.split()]
     tokens = [t for t in tokens if t and t not in NEGATIVE_CROP_TOKENS]
+    # "holud dag" is the color yellow (yellow spots), not the turmeric crop.
+    kept: list[str] = []
+    for index, token in enumerate(tokens):
+        nxt = tokens[index + 1] if index + 1 < len(tokens) else ""
+        if token == "holud" and nxt.startswith(("dag", "daag", "spot")):
+            continue
+        kept.append(token)
+    tokens = kept
     for crop, aliases in _CROP_ALIASES.items():
         short_exact = crop in SHORT_EXACT_CROPS
         ordered = sorted((str(a).strip().lower() for a in aliases if str(a).strip()), key=len, reverse=True)
@@ -277,6 +285,49 @@ def detect_cross_modal_conflict(
         return True, img_norm, query_norm, prompt
 
     return False, img_norm, query_norm, None
+
+
+def crop_selection(query: str) -> str | None:
+    """Return the crop when the message is only a crop name, as from a chip.
+
+    A new treatment question that happens to name a crop is not a selection.
+    """
+    lowered = query.strip().lower()
+    if not lowered:
+        return None
+    if any(kw in lowered for kw in (*_TREATMENT_KW, *_PREVENTION_KW, *_FERTILIZER_KW)):
+        return None
+    crop = _match_crop_alias(lowered)
+    if crop is None:
+        return None
+    tokens = [token for token in lowered.replace("?", " ").replace("।", " ").split() if token]
+    if len(tokens) > 2:
+        return None
+    return crop
+
+
+def clarification_followup(history: object) -> str | None:
+    """Prior user question when the last assistant turn asked which crop."""
+    if not history:
+        return None
+    try:
+        turns = list(history)  # type: ignore[arg-type]
+    except TypeError:
+        return None
+    if not turns:
+        return None
+    last = turns[-1]
+    if not isinstance(last, dict) or last.get("role") != "assistant":
+        return None
+    content = str(last.get("content") or "")
+    if "কোন ফসল" not in content and "বলবেন কি" not in content:
+        return None
+    for turn in reversed(turns[:-1]):
+        if isinstance(turn, dict) and turn.get("role") == "user":
+            text = str(turn.get("content") or "").strip()
+            if text:
+                return text
+    return None
 
 
 def keyword_intent(query: str) -> Intent | None:

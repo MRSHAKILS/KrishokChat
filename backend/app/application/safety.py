@@ -6,7 +6,13 @@ from typing import Any
 
 from app.domain.contracts import QueryContext, SafetyDecision
 from app.domain.enums import SafetyCategory
-from app.domain.intent import Intent, _PLANT_PART_BN, keyword_intent
+from app.domain.intent import (
+    Intent,
+    _PLANT_PART_BN,
+    clarification_followup,
+    crop_selection,
+    keyword_intent,
+)
 from app.domain.safety_policy import canned_response, precheck
 from app.ports.llm import LLMClient
 
@@ -157,7 +163,40 @@ class SafetyClassifier:
                 intent=resolved_intent,
             )
         except Exception as exc:
-            # A classifier outage must never become permission to retrieve/generate.
+            # A classifier outage must never become permission to retrieve or
+            # generate. A local treatment query that names no crop can still
+            # ask for the crop: that turn ends before retrieval.
+            if (
+                kw_intent is not None
+                and kw_intent.is_ambiguous
+                and kw_intent.kind in {"treatment", "prevention", "fertilizer"}
+            ):
+                return SafetyDecision(
+                    category=SafetyCategory.SAFE_AGRI,
+                    confidence=0.0,
+                    reason="Classifier unavailable; asked for the crop before retrieval",
+                    requires_escalation=False,
+                    response=None,
+                    intent=kw_intent,
+                )
+            # A chip or a typed crop name after ASK binds that crop and resumes.
+            # The original question already passed T0; this turn only fills the slot.
+            selected = crop_selection(query)
+            prior = clarification_followup(context.history)
+            if selected and prior:
+                return SafetyDecision(
+                    category=SafetyCategory.SAFE_AGRI,
+                    confidence=1.0,
+                    reason="Crop reply bound the missing crop",
+                    requires_escalation=False,
+                    response=None,
+                    intent=Intent(
+                        kind="treatment",
+                        crop=selected,
+                        is_ambiguous=False,
+                        source="keyword",
+                    ),
+                )
             return SafetyDecision(
                 category=SafetyCategory.LOW_CONFIDENCE,
                 confidence=0.0,

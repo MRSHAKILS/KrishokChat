@@ -130,6 +130,8 @@ class SMSCompressor:
 
         raw_answer = qa_res.answer or ""
         clean_ans = _CITE_RE.sub("", raw_answer).strip()
+        if _chem_slot_enabled():
+            clean_ans = clean_ans.replace("**", "").replace("__", "")
         clean_ans = _WS_RE.sub(" ", clean_ans)
 
         prefix = f"{institution} পরামর্শ: "
@@ -151,6 +153,19 @@ class SMSCompressor:
             primary_dose_sent = dosage_sentences[0]
             # Clean up leading bullets or symbols
             primary_dose_sent = re.sub(r"^[\*\-\•\d\.\s]+", "", primary_dose_sent).strip()
+
+            # Chemical-name slot: a dose without its chemical is not an instruction.
+            # If the dose sentence names no chemical, prepend the nearest one named
+            # earlier in the verified answer (never invented: copied from the answer).
+            if _chem_slot_enabled():
+                chem = _nearest_chemical(clean_ans, primary_dose_sent)
+                if chem:
+                    labelled = f"{chem}: {primary_dose_sent}"
+                    if len(labelled) <= avail:
+                        return f"{prefix}{labelled}{suffix}"[:max_chars]
+                    body = _truncate_keep_dose(labelled, avail)
+                    if body:
+                        return f"{prefix}{body}{suffix}"[:max_chars]
 
             if len(primary_dose_sent) <= avail:
                 # If there is space, check if a brief context sentence can precede it
@@ -178,3 +193,75 @@ class SMSCompressor:
                 body = body[:last_space]
 
         return f"{prefix}{body}{suffix}"[:max_chars]
+
+
+
+_GENERIC_CHEM_WORDS = frozenset({"সার", "কীটনাশক", "ছত্রাকনাশক", "আগাছানাশক", "ঔষধ", "ওষুধ"})
+_KNOWN_ACTIVES: tuple[str, ...] | None = None
+
+
+def _chem_slot_enabled() -> bool:
+    import os
+
+    return os.getenv("SMS_CHEM_SLOT", "1").strip() != "0"
+
+
+def _known_actives() -> tuple[str, ...]:
+    """Active ingredients from the verifier's dose reference + specific Bengali names."""
+    global _KNOWN_ACTIVES
+    if _KNOWN_ACTIVES is None:
+        import json
+        from pathlib import Path
+
+        from app.infrastructure.verification.dosage_claims import _CHEMICAL_BN
+
+        names: set[str] = {n for n in _CHEMICAL_BN if n not in _GENERIC_CHEM_WORDS}
+        ref = Path(__file__).resolve().parents[2] / "ml_assets/rag_index/derived/dose_reference_v1.json"
+        try:
+            for e in json.loads(ref.read_text(encoding="utf-8")).get("entries", []):
+                if e.get("active"):
+                    names.add(str(e["active"]).lower())
+        except (OSError, ValueError):
+            pass
+        _KNOWN_ACTIVES = tuple(sorted(names, key=len, reverse=True))
+    return _KNOWN_ACTIVES
+
+
+def _known_in(text: str) -> list[tuple[int, str]]:
+    low = text.lower()
+    out = []
+    for name in _known_actives():
+        pos = low.find(name)
+        if pos >= 0:
+            out.append((pos, text[pos:pos + len(name)]))
+    return sorted(out)
+
+
+def _nearest_chemical(answer: str, dose_sentence: str) -> str | None:
+    """Known active ingredient the dose refers to, copied from the answer.
+
+    Returns None if the dose sentence already names a known active, or if no
+    known active appears in the answer. Brand words are never used as labels.
+    Search order: nearest mention before the dose sentence, then first after it.
+    """
+    if _known_in(dose_sentence):
+        return None
+    pos = answer.find(dose_sentence[:30])
+    before = _known_in(answer[:pos]) if pos > 0 else []
+    if before:
+        return before[-1][1]
+    after = _known_in(answer[pos + len(dose_sentence):]) if pos >= 0 else []
+    return after[0][1] if after else None
+
+
+def _truncate_keep_dose(text: str, avail: int) -> str | None:
+    """Cut at a word boundary within `avail` chars without cutting the first dose span."""
+    m = _DOSE_RE.search(text)
+    if not m or m.end() > avail:
+        return None
+    body = text[:avail].strip()
+    if len(text) > avail:
+        cut = body.rfind(" ")
+        if cut >= m.end():
+            body = body[:cut]
+    return body

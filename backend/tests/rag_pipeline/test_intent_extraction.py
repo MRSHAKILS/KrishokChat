@@ -37,6 +37,14 @@ class TestKeywordIntent:
         i = keyword_intent("কীভাবে স্প্রে করব?")
         assert i is not None and i.kind == "treatment"
 
+    def test_paper_banglish_crop_less_treatment_asks(self) -> None:
+        i = keyword_intent("Patay holud dag hoyeche, ki bish dibo?")
+        assert i is not None
+        assert i.kind == "treatment"
+        assert i.crop is None
+        assert i.is_ambiguous is True
+        assert i.plant_part == "leaf"
+
     def test_prevention_bengali(self) -> None:
         i = keyword_intent("রোগ প্রতিরোধ করব কীভাবে?")
         assert i is not None and i.kind == "prevention"

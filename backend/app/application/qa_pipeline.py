@@ -24,6 +24,7 @@ from app.application.telemetry import (
 )
 from app.core.config import settings
 from app.domain.answerability import AnswerabilityEvaluator
+from app.domain.intent import clarification_followup, crop_selection
 from app.domain.contracts import (
     PipelineEvent,
     QAResult,
@@ -45,6 +46,7 @@ from app.domain.safety_policy import canned_response
 from app.application.adaptive_router import AdaptiveRetrievalRouter, RetrievalRoute
 from app.application.evidence_agreement import EvidenceAgreementGate
 from app.domain.concept_normalizer import ConceptNormalizer
+from app.domain.crop_scope import crop_filter_enabled, filter_by_crop
 from app.domain.query_extractor import QueryExtractor
 from app.domain.working_memory import AgriculturalWorkingMemory
 from app.infrastructure.cache.demo import DemoAnswerCache, qa_result_from_dict, qa_result_to_dict
@@ -329,6 +331,41 @@ class QAPipeline:
                             if on_event:
                                 await on_event(event)
                         return result
+                    # Local gates still run. They end the turn before retrieval.
+                    from app.domain.intent import detect_cross_modal_conflict
+
+                    outage_conflict, _, _, conflict_prompt = detect_cross_modal_conflict(
+                        request.crop or context.crop, request.query
+                    )
+                    if outage_conflict and conflict_prompt:
+                        for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
+                            await emit(stage, StageStatus.SKIP, "cross-modal contradiction — clarification requested")
+                        result = QAResult(
+                            query=request.query,
+                            category=SafetyCategory.SAFE_AGRI,
+                            answer=conflict_prompt,
+                            sources=(),
+                            confidence=VerificationConfidence.VERIFIED,
+                            trace=tuple(trace),
+                            matched_rules=decision.matched_rules,
+                            safety_reason="Cross-modal contradiction: image and text crop mismatch",
+                            resolution_tier=ResolutionTier.INTERACTIVE_CLARIFICATION,
+                            answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
+                        )
+                        self._audit(
+                            request,
+                            result,
+                            verifier_flags=(),
+                            decision=decision,
+                            retrieved=[],
+                            cached=False,
+                            retrieval_query=retrieval_query,
+                            rewritten=False,
+                            timings=timings,
+                            generation_lane=None,
+                            llm_calls=llm_calls,
+                        )
+                        return result
                 for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
                     await emit(stage, StageStatus.SKIP, "terminal safety decision")
                 # R3: LLM was called if the classifier had no precheck match.
@@ -354,7 +391,12 @@ class QAPipeline:
             # safety decision. A stored answer may never bypass a newer safety
             # rule, classifier update, or changed interpretation of the raw
             # query. Cache hits skip retrieval/generation/verification only.
-            replay = _cached_replay()
+            # A crop chip is not its own question: the cache key is only the
+            # chip text, so replaying it would ignore the halted symptom.
+            chip_resume = bool(
+                crop_selection(request.query) and clarification_followup(context.history)
+            )
+            replay = None if chip_resume else _cached_replay()
             if replay is not None:
                 cached_hit = True
                 result, post_safety_trace = replay
@@ -367,7 +409,7 @@ class QAPipeline:
             # STRUCTURED_RESOLVER_ENABLED=true (resolver is not None).
             # Inserted after the cache-replay check, before retrieval.
             # On any miss, falls through to T3 with zero observable difference.
-            if self.resolver is not None:
+            if self.resolver is not None and not chip_resume:
                 resolved = self.resolver.resolve(
                     request.query,
                     stage=getattr(context, "stage", None),
@@ -528,12 +570,23 @@ class QAPipeline:
                     retrieval_query, rewritten = await self.rewriter.maybe_rewrite(
                         base_query, context.history
                     )
-                    if rewritten:
+                    # A crop chip is bound by the gazetteer. Only an LLM rewrite
+                    # counts as a model call.
+                    if rewritten and getattr(self.rewriter, "last_used_llm", False):
                         llm_calls += 1  # R3: rewriter consumed one LLM call
                 else:
                     retrieval_query = base_query
                 retrieval_query = build_retrieval_query(retrieval_query, context, decision.category.value)
-                retrieved = await asyncio.to_thread(self.retriever.retrieve, retrieval_query, top_k=self.top_k)
+                bound_crop = request.crop or context.crop or effective_crop
+                crop_removed = 0
+                if bound_crop and crop_filter_enabled():
+                    # Hard crop fence: over-fetch, then drop passages naming only other crops.
+                    wide = await asyncio.to_thread(
+                        self.retriever.retrieve, retrieval_query, top_k=self.top_k * 4
+                    )
+                    retrieved, crop_removed = filter_by_crop(wide, bound_crop, self.top_k)
+                else:
+                    retrieved = await asyncio.to_thread(self.retriever.retrieve, retrieval_query, top_k=self.top_k)
                 seen_ids: set[str] = set()
                 sources = []
                 for source in [*request.seed_sources, *retrieved]:
@@ -556,6 +609,8 @@ class QAPipeline:
                 # P3: surface the dialect expansion in the agent trace (honest
                 # evidence the mapping ran; nothing shown when no terms matched).
                 detail = f"{len(sources)} sources"
+                if crop_removed:
+                    detail += f" · crop filter removed {crop_removed}"
                 if rewritten:
                     detail += " · rewritten"
                 expansion = getattr(self.retriever, "last_expansion", None)
@@ -615,9 +670,15 @@ class QAPipeline:
                 async with self._local_lane_guard(request.model):
                     generator = self._generator_for(request.model)
                     generation_lane = getattr(generator, "client", None) or generator
+                    # A crop chip is not a new question. Answer the halted one.
+                    generation_query = (
+                        retrieval_query
+                        if rewritten and crop_selection(request.query)
+                        else request.query
+                    )
                     if on_event and sources:
                         chunks: list[str] = []
-                        async for chunk in generator.stream(request.query, context, sources):
+                        async for chunk in generator.stream(generation_query, context, sources):
                             chunks.append(chunk)
                             await on_event(
                                 PipelineEvent(
@@ -631,7 +692,7 @@ class QAPipeline:
                             "".join(chunks), sources, mode="grounded_stream"
                         )
                     else:
-                        generated = await generator.generate(request.query, context, sources)
+                        generated = await generator.generate(generation_query, context, sources)
                 await emit(PipelineStage.GENERATION, StageStatus.COMPLETE, generated.model)
 
             await emit(PipelineStage.VERIFIER, StageStatus.START)

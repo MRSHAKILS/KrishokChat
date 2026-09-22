@@ -66,7 +66,7 @@
 \maketitle
 
 \begin{abstract}
-A farmer who asks which pesticide to spray, without naming the crop, should get a question back before any answer. \textsc{KrishokTech} is a Bengali agricultural advisory system that keeps such decisions away from the language model. Before generation, rule-based checks refer policy-covered high-risk requests to a helpline, halt treatment requests that name no crop, scope retrieval to one crop, and ask the farmer to confirm when a photograph and the text name different crops. After generation, a verifier withholds dosage claims that the retrieved BARI/BRRI evidence does not support. The demonstration shows each decision as ASK, CONFIRM, REFER, or DROP, together with the sources behind it. On 200 real farmer queries, the gate halted all 30 crop-less requests before retrieval and passed the other 170. Binding the crop lowered top-five cross-crop retrieval from 36.25\% to 30.0\% on 400 stress queries. The mismatch check caught 53 of 54 farmer conflicts and all 400 synthetic ones without halting any matched control, and the dosage verifier caught 114 of 118 inserted errors while accepting all 38 original answers.
+A farmer who asks which pesticide to spray, without naming the crop, should get a question back before any answer. \textsc{KrishokTech} is a Bengali agricultural advisory system that keeps such decisions away from the language model. Before generation, rule-based checks refer policy-covered high-risk requests to a helpline, halt treatment requests that name no crop, scope retrieval to one crop, and ask the farmer to confirm when a photograph and the text name different crops. After generation, a verifier withholds dosage claims that the retrieved BARI/BRRI evidence does not support. The demonstration shows each decision as ASK, CONFIRM, REFER, or DROP, together with the sources behind it. On 200 real farmer queries, the gate halted all 30 crop-less requests before retrieval and passed the other 170. On 400 stress queries, binding the crop and filtering candidates by crop reduced the share of top-five lists containing another supported crop from 36.25\% to 0\%, with every query still receiving five passages. The mismatch check caught 53 of 54 farmer conflicts and all 400 synthetic ones without halting any matched control, and the dosage verifier caught 114 of 118 inserted errors while accepting all 38 original answers. On the deployed local model, the precheck and the guarded prompt together lowered attack success from 52.5\% to 4.64\%.
 \end{abstract}
 
 % =========================================================================
@@ -123,9 +123,9 @@ Requests that pass T0 reach \textbf{T1}, where a gazetteer-based extractor ident
 \subsection{Crop-Scoped Retrieval and the Mismatch Badge}
 \label{sec:system_retrieval}
 
-Requests that pass the information gate enter \textbf{T2}, where crop identity determines what evidence retrieval is allowed to access. KrishokTech uses BM25 over 2,135 curated passages from BARI, BRRI, and DAE guidelines \citep{bari_handbook2023,brri_handbook2024,dae_extension_manual}, a transparent choice for a small domain collection \citep{huly-etal-2024-old-ir}. The deployment covers six crop groups: rice, potato, brassica, chili, corn, and wheat.
+Requests that pass the information gate enter \textbf{T2}, where crop identity determines what evidence retrieval is allowed to access. KrishokTech uses BM25 over 2,135 curated passages from BARI, BRRI, and DAE guidelines \citep{bari_handbook2023,brri_handbook2024,dae_extension_manual}, a transparent choice for a small domain collection \citep{huly-etal-2024-old-ir}. The deployment covers six crop groups: rice, potato, brassica, chili, corn, and wheat. Updating guidance only means rebuilding this index, which takes about 0.2\,s and leaves the generator untouched; in a leave-one-out test, all 10 withheld guideline passages returned at rank 1 once re-inserted (Appendix~\ref{app:deployment}).
 
-When a farmer attaches a photograph, the on-device classifier predicts the crop. A confident prediction binds that crop, an ambiguous one shows the top two candidates as chips, and an out-of-scope image triggers a request to retake the photograph (thresholds in Appendix~\ref{app:architecture}). The bound crop, whether typed, chosen, or predicted, conditions query construction and ranking so that retrieval draws on that crop's guidance. This scoping narrows the evidence but does not guarantee exclusion: many guideline passages discuss several crops, and passages tagged to another crop still appear in the top five for some queries even when the correct crop is bound (Section~\ref{sec:eval-fence}).
+When a farmer attaches a photograph, the on-device classifier predicts the crop. A confident prediction binds that crop, an ambiguous one shows the top two candidates as chips, and an out-of-scope image triggers a request to retake the photograph (thresholds in Appendix~\ref{app:architecture}). The bound crop, whether typed, chosen, or predicted, conditions query construction and ranking so that retrieval draws on that crop's guidance. After retrieval, a crop filter removes passages that name only other crops; passages that name no crop, such as soil guidance, are kept (Section~\ref{sec:eval-fence}).
 
 If the typed crop differs from the photographed one, the system does not choose between them. It shows a \textbf{Crop Mismatch} warning under the \textbf{Clarification} badge and enters \textbf{CONFIRM}, withholding chemical advice until the farmer picks one crop.
 
@@ -210,8 +210,10 @@ We ask three questions, one per control. (Q1) Do admission controls stop or redi
 Crop gate (C1) & 200 farmer, 30 crop-less & 30/30 halted; 170/170 pass \\
 Banglish T0 (C1) & 85 attack, 15 benign & 85/85 (formal 1/85); 0/15 \\
 Crop binding (C2) & 400 stress & cross-crop 36.25\% $\rightarrow$ 30.0\% \\
++ crop filter (C2) & same 400 & cross-crop 0/400; 400/400 served \\
 Mismatch (C2) & 54 farmer, 400 syn. & 453/454; 0/454 controls \\
 T3 prompt only & 280/arm, local 4B & ASR 52.5\% $\rightarrow$ 10.71\% \\
+T0 + T3 prompt & same 280, replay & ASR 52.5\% $\rightarrow$ 4.64\% \\
 Verifier (C3) & 118 errors, 38 ans. & 114 caught; 0/38 clean flagged \\
 \bottomrule
 \end{tabular*}
@@ -228,20 +230,20 @@ Colloquial spelling also affects the T0 precheck. On 85 Latin-script and phoneti
 \subsection{Q2: Evidence Binding and Conflict Handling}
 \label{sec:eval-fence}
 
-We measure crop binding on a 400-query stress set of colloquial, dialectal, Banglish, and ambiguous-disease queries, each with a gold crop. A query counts as \emph{cross-crop retrieval} when any of its top five passages is tagged to another crop; this is a retrieval measure, not a judgment of the final answer. Open retrieval gives 36.25\%. Binding the gold crop, which simulates correct crop routing, lowers this to 30.0\%: 25 queries improve and none get worse (exact McNemar $p = 6 \times 10^{-8}$). The remaining 30\% shows that binding reduces cross-crop evidence without removing it (Section~\ref{sec:system_retrieval}). The six on-device disease classifiers that run after crop routing reach 0.94 to 0.99 top-1 accuracy on 4,294 held-out images, and the family router assigns 433 of 437 images to the correct botanical family.
+We measure crop binding on a 400-query stress set of colloquial, dialectal, Banglish, and ambiguous-disease queries, each with a gold crop. A query counts as \emph{cross-crop retrieval} when any of its top five passages is tagged to another crop; this is a retrieval measure, not a judgment of the final answer. Open retrieval gives 36.25\%. Binding the gold crop, which simulates correct crop routing, lowers this to 30.0\%: 25 queries improve and none get worse (exact McNemar $p = 6 \times 10^{-8}$). An audit traced the remaining cases to 12 generic single-crop passages, mostly chili and cabbage guidance, that outrank crop-specific ones because binding changes the query, not the index. The post-retrieval crop filter removes them: no top-five list names another supported crop (0/400; 121 queries fixed, none broken), every query still receives five passages, and gold-disease matches in the top five are unchanged. Because this check uses the filter's own crop list, we also read 30 filtered lists by title: 26 were clean, and 4 contained a crop outside that list (carrot, sweet potato, forest trees). The six on-device disease classifiers that run after crop routing reach 0.94 to 0.99 top-1 accuracy on 4,294 held-out images, and the family router assigns 433 of 437 images to the correct botanical family.
 
 For conflicts, each case pairs a query with a photograph of a different crop, and each has a matched control with the same query and a matching photograph. The badge fired on 53 of 54 farmer cases and all 400 cases in PRISM, our synthetic conflict suite, and on none of the 454 controls. The one miss referred to the crop only implicitly. On a separate set of 300 conflict queries from earlier work, a prompted LLM asked the farmer to clarify in 20\% of cases and naive multimodal RAG in 13\%; these are different cases, so we report them only as context.
 
 \subsection{Q3: Release Checks on Generated Advice}
 \label{sec:eval-safety}
 
-We first measure how much the generator resists attacks on its own. With T0 and T4 disabled, we sent 280 attack prompts to \texttt{krishokchat-4b}: 210 across seven attack families and 70 additional Bengali-native probes. Each prompt ran once under the guarded system prompt and once under a neutral prompt. Attack success rate (ASR), judged by a fixed rule-based classifier, fell from 52.5\% to 10.71\% (147 to 30 successes), and from 77\% to 19\% on the 100 Bengali-native prompts. The residual is what the surrounding stages have to catch. Remaining successes were concentrated in Bengali-native (19/100), delimiter-hijacking (6/30), and retrieval-poisoning (5/30) prompts. Adding the T0 precheck, as in the deployed pipeline, lowers ASR on the same 280 prompts to 4.64\% [2.73, 7.78] (13/280) and to 2.0\% [0.55, 7.00] on the Bengali-native prompts; T0 intercepted 207 of 280 attack prompts (194 banned-chemical matches, 12 injection patterns). Of 200 real farmer queries, 9 were blocked as out-of-scope coverage (livestock, training, and availability queries); none were crop-treatment queries. A cloud run is reported in Appendix~\ref{app:evidence}; its unguarded arm used a different model, so it is not a controlled comparison.
+We first measure how much the generator resists attacks on its own. With T0 and T4 disabled, we sent 280 attack prompts to \texttt{krishokchat-4b}: 210 across seven attack families and 70 additional Bengali-native probes. Each prompt ran once under the guarded system prompt and once under a neutral prompt. Attack success rate (ASR), judged by a fixed rule-based classifier, fell from 52.5\% to 10.71\% (147 to 30 successes), and from 77\% to 19\% on the 100 Bengali-native prompts. The residual is what the surrounding stages have to catch. Remaining successes were concentrated in Bengali-native (19/100), delimiter-hijacking (6/30), and retrieval-poisoning (5/30) prompts. Replaying the same guarded responses with the T0 precheck in front, as in deployment, lowers ASR to 4.64\% (13/280) and to 2\% on the Bengali-native prompts; T0 stopped 17 of the 30 successful attacks before any model call. The 13 that remain are delimiter-hijacking and retrieval-poisoning prompts that name no chemical on the T0 list. A cloud run is reported in Appendix~\ref{app:evidence}; its unguarded arm used a different model, so it is not a controlled comparison.
 
 We then assess delivered advice. Three blinded raters (two agronomy or botany undergraduates and one extension officer) judged 46 of 47 guarded outputs safe and actionable, one vague but harmless, and none dangerous (Fleiss' $\kappa = 0.82$). All three unguarded control outputs were rated dangerous.
 
 To test the dosage verifier, we inserted controlled errors into verified answers. On 38 live answers carrying 118 inserted errors, it caught 114 and rejected none of the 38 unmodified originals. On a larger benchmark built from 88 BARI and BRRI passages, it caught 296 of 350 inserted errors (84.6\%), including every overdose (76/76) and underdose (67/67). It was weaker on chemical substitutions (85\%), unit substitutions (73\%), and invented pre-harvest intervals (65\%), which marks the limit of what ``dosage verification'' covers.
 
-SMS delivery loses information. The deterministic packer kept 399 of 400 messages within 160 GSM-7 characters and kept the dose in 92 of 100 long advisories, but the chemical name in only 34 (Appendix~\ref{app:delivery}).
+For SMS, the deterministic packer kept 399 of 400 messages within 160 characters. On 100 long advisories it kept the dose in 94, the chemical name in 63, and both together in 61, without inventing any value; an LLM summarizer kept them in 89, 56, and 51 and invented one dose (Appendix~\ref{app:delivery}).
 
 \subsection{What This Evaluation Does Not Establish}
 \label{sec:eval-scope}
@@ -256,11 +258,11 @@ These results describe behavior on the listed test sets. They do not show effect
 
 \paragraph{Limitations.}
 \label{sec:limitations}
-\emph{Coverage.} The system supports six crop groups and Bengali input over a BM25 index. Revising guidance means editing the index, but adding a crop also needs a classifier, aliases, and policy rules. \emph{Ambiguity.} The mismatch check handles explicit crop names only, and crop binding leaves 30\% cross-crop retrieval even with the correct crop. \emph{Residual unsafe output.} With the guarded prompt alone, 10.71\% of attacks succeed on the local model (19\% Bengali-native); with T0 in front, as deployed, this falls to 4.64\% (2.0\% Bengali-native). The remaining 13 failures are concentrated in delimiter-hijacking (6/30) and retrieval-poisoning (5/30) families that do not name banned chemicals, and the verifier misses some unit, chemical, and interval errors. \emph{Delivery.} SMS compression drops chemical names, and local generation takes about 24\,s per call.
+\emph{Coverage.} The system supports six crop groups and Bengali input over a BM25 index. Revising guidance means editing the index, but adding a crop also needs a classifier, aliases, and policy rules. \emph{Ambiguity.} The mismatch check handles explicit crop names only, and the crop filter only recognizes crops in its alias list, so passages about other crops (for example carrot) can still pass. \emph{Residual unsafe output.} With T0 and the guarded prompt, 4.64\% of attacks still succeed on the local model (2\% of Bengali-native ones), T0 wrongly flagged 1 of 200 farmer queries, and the verifier misses some unit, chemical, and interval errors. \emph{Delivery.} SMS compression still loses the chemical name in some advisories, a 160-character Bengali message spans two or three SMS segments, and local generation takes about 24\,s per call.
 
 \paragraph{Availability and Licensing.}
 \label{sec:availability}
-Code is released under the MIT license at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}. The on-device vision models are released under Apache-2.0 at \url{https://huggingface.co/RaiyanKhaan/KrishokTech-Models}. The \texttt{krishokchat-4b} weights and the 2{,}135-passage evidence index, derived from BARI, BRRI, and DAE guidelines, are released at the same model repository under Apache-2.0. The T0 pattern lists are withheld from the public release; the public package therefore does not reproduce the full T0 precheck. They are available to qualified researchers and safety auditors under a non-commercial research agreement.
+Code is released under the MIT license at \url{https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System}. The on-device vision models are released under Apache-2.0 at \url{https://huggingface.co/RaiyanKhaan/KrishokTech-Models}. The \texttt{krishokchat-4b} weights and the 2,135-passage evidence index, derived from BARI, BRRI, and DAE guidelines, will be added to the same model repository with their licenses. The T0 pattern lists are withheld from the public release; the public package therefore does not reproduce the full T0 precheck. They are available to qualified researchers and safety auditors under a non-commercial research agreement.
 
 \paragraph{Conclusion.}
 \label{sec:final_conclusion}
@@ -279,7 +281,7 @@ Agricultural advice for smallholder farmers affects food security, livelihoods, 
 
 \paragraph{Agricultural Image Data.} Farmer photographs are classified on the device (WebAssembly and ONNX) and are not uploaded in either deployment mode. The held-out images used to measure vision accuracy (Section~\ref{sec:eval-fence}) come from open datasets: PlantVillage, the Bangladesh Rice Knowledge Bank, and Kaggle agricultural datasets under CC-BY and open research licenses.
 
-\paragraph{Pesticide and Dosage Guidance.} Recognized high-risk chemical requests and poisoning language trigger a rule-based block and a helpline referral before any generation, and dosage claims are checked against source passages and dose ranges before display (Section~\ref{sec:system_verification}). Requests or claims that the rules do not recognize can still pass. On the deployed model the T0 precheck and guarded prompt together leave a 4.64\% attack success rate (2.0\% on Bengali-native attacks), down from 10.71\% with the prompt alone; the dosage verifier missed 4 of 118 inserted errors (Section~\ref{sec:eval-safety}). We report these residuals and do not claim that the system prevents all unsafe output.
+\paragraph{Pesticide and Dosage Guidance.} Recognized high-risk chemical requests and poisoning language trigger a rule-based block and a helpline referral before any generation, and dosage claims are checked against source passages and dose ranges before display (Section~\ref{sec:system_verification}). Requests or claims that the rules do not recognize can still pass. On the deployed model, T0 and the guarded prompt together leave a 4.64\% attack success rate (2\% on Bengali-native attacks), and the dosage verifier missed 4 of 118 inserted errors (Section~\ref{sec:eval-safety}). We report these residuals and do not claim that the system prevents all unsafe output.
 
 \paragraph{Helpline Referral.} Agronomic chemical inquiries are referred to the national Krishi Call Centre (16123), which operates 9:00\,AM--5:00\,PM, Saturday through Thursday. Because those hours do not cover emergencies, poisoning, self-harm, and medical-crisis language is instead referred to the 24/7 National Emergency Service (999) and local health facilities. The system displays these routes immediately; it cannot ensure that help is reached. The public sandbox shows the block and referral for toxic-chemical queries without giving advice on them.
 
@@ -349,25 +351,27 @@ Benign control    & 15 & 15 passed & 15 passed & none \\
 \label{app:delivery}
 
 \subsection{SMS Enforcement}
-Lengths are counted in GSM-7 characters on Latin-script SMS output; a Bengali-script message would need UCS-2 encoding (70 characters per segment) and more segments. The SMS packer produced 299/300 offline and 100/100 live messages within 160 characters (399/400 overall), and all 8 referral messages carried only the referral. In a live audit of 92 long advisories, naive truncation kept the dose in 12, because conversational preamble pushed it past the 160-character limit. The deterministic 11-slot compressor kept dose, application interval, and pre-harvest interval in all 1,000 constructed input tuples (102--115 characters, none over 160) and kept 65 of 66 dosage claims on live gold advisories. It copies slots from the verified answer and does not write new values, although copying cannot guard against a wrongly extracted slot.
+Bengali-script messages use UCS-2 encoding (70 characters for a single SMS, 67 per part when concatenated), so a 160-character advisory is sent as two or three segments (mean 2.5 on the 100 advisories below); only the Latin-script tuple test uses GSM-7. The SMS packer produced 299/300 offline and 100/100 live messages within 160 characters (399/400 overall), and all 8 referral messages carried only the referral. In a live audit of 92 long advisories, naive truncation kept the dose in 12, because conversational preamble pushed it past the 160-character limit. The deterministic 11-slot compressor kept dose, application interval, and pre-harvest interval in all 1,000 constructed input tuples (102--115 GSM-7 characters, one segment each) and kept 65 of 66 dosage claims on live gold advisories. It copies slots from the verified answer and does not write new values, although copying cannot guard against a wrongly extracted slot.
 
-Table~\ref{tab:n05c} compares three compression arms on 100 long dose-carrying advisories. The compressor kept the dose most often, but the LLM summarizer kept the chemical name more often (56 vs.\ 34), so a retained dose alone does not make a complete instruction. The LLM summarizer is only a baseline; the deployed path uses the compressor.
+Table~\ref{tab:n05c} compares the arms on 100 long dose-carrying advisories. The first compressor kept the dose but often lost the chemical name (34/100), because the dose sentence usually refers to the chemical indirectly. The current compressor copies the nearest active ingredient named earlier in the verified answer into the message (\textit{``Cartap: 1\,ml/L''}); it never adds a name that the answer does not contain. It keeps the chemical in 63 of the 67 advisories that name one from the scorer's list. The active-ingredient list comes from the verifier's dose reference and overlaps with the scorer's list, so part of this gain is expected by design. The LLM summarizer is only a baseline; the deployed path uses the compressor.
 
 \begin{table}[t]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
-\begin{tabularx}{\columnwidth}{@{}Xccc@{}}
+\begin{tabularx}{\columnwidth}{@{}Xcccc@{}}
 \toprule
-\textbf{Measure} & \textbf{Naive} & \textbf{LLM} & \textbf{Compressor} \\
+\textbf{Measure} & \textbf{Naive} & \textbf{LLM} & \textbf{Comp.\,1} & \textbf{Comp.\,2} \\
 \midrule
-Dose survival & 23/100 & 89/100 & 92/100 \\
-Chemical survival & 20/100 & 56/100 & 34/100 \\
-Length $\le 160$ chars & 100/100 & 98/100 & 100/100 \\
-Invented dosage & 0 (copies) & 1 (+1 bord.) & 0 \\
+Dose survival & 23/100 & 89/100 & 92/100 & 94/100 \\
+Chemical survival & 20/100 & 56/100 & 34/100 & 63/100 \\
+Dose + chemical & 14/100 & 51/100 & 32/100 & 61/100 \\
+Length $\le 160$ chars & 100/100 & 98/100 & 100/100 & 100/100 \\
+UCS-2 segments (mean) & 3.0 & 2.1 & 2.5 & 2.5 \\
+Invented dose/chem. & 0 (copies) & 1 (+1 bord.) & 0 & 0 \\
 \bottomrule
 \end{tabularx}
-\caption{Three-arm SMS comparison (N05c) on 100 paired long dose-carrying advisories (seed 42). All arms share the same frozen dose and chemical detectors.}
+\caption{SMS comparison on 100 paired long dose-carrying advisories (N05c/N05d, seed 42): naive truncation, LLM summarizer, first compressor (Comp.\,1), and current compressor with the chemical-name slot (Comp.\,2). All arms share the same frozen detectors; 67 of the 100 gold advisories name a chemical from the scorer's list.}
 \label{tab:n05c}
 \end{table}
 
@@ -392,6 +396,9 @@ Installation with PyTorch checkpoints & 339.6 \\
 \caption{Measured installation footprint, excluding the language model.}
 \label{tab:footprint}
 \end{table}
+
+\subsection{Knowledge Update Without Retraining}
+We removed each of 10 real guideline passages from the index, rebuilt it, and then re-inserted the passage. The 10 passages were chosen by a fixed rule: each is the top result for one of the 400 stress queries, contains a dose, and names the query's crop. Without the passage, its query could not retrieve it; after re-insertion it returned at rank 1 in 10 of 10 cases. A rebuild took 0.2\,s on a laptop CPU (median), and a rebuilt full index reproduced the deployed index's top five on all 400 queries. No model was loaded at any point, so the generator weights cannot change. This shows that revising a passage needs no retraining; adding a new crop still needs a classifier, aliases, and policy rules.
 
 \subsection{Latency Breakdown}
 Table~\ref{tab:latency} lists non-generation latency ($n=400$, median 33.565\,ms). Generation is excluded: the local model takes about 24\,s per call on CPU, and the gate comparison LLM took a median 4.2\,s per decision.
@@ -513,7 +520,8 @@ Banglish precheck & 85/85 attacks intercepted (95\% CI [95.7, 100.0]) vs 1/85 fo
 Off-topic audit & 10/10 injections blocked; off-topic queries refused 0/30 by T0 and 25/30 (83.33\%) by the LLM intent classifier & 40 & Measured & Five weather queries are routed to agricultural information by design \\
 \midrule
 \multicolumn{5}{l}{\textit{Evidence binding and conflicts (C2)}} \\
-Crop binding & Top-5 cross-crop retrieval 36.25\% open vs 30.00\% with gold crop bound; 25/0 discordant, exact McNemar $p = 5.96 \times 10^{-8}$; gold-crop purity 0.647 $\to$ 0.735 & 400 & Measured & Simulates correct routing; retrieval measure, not answer quality \\
+Crop binding & Top-5 cross-crop retrieval 36.25\% open vs 30.00\% with gold crop bound; 25/0 discordant, exact McNemar $p = 5.96 \times 10^{-8}$; gold-crop purity 0.647 $\to$ 0.735 & 400 & Measured & Simulates correct routing; retrieval measure, not answer quality. Residual audit: all 177 offending passages in the 120 flagged queries come from 12 single-crop passages \\
+Crop filter (N08c) & Other-crop top-5 lists 0/400 (vs 121/400 bound only, current code); 121/0 discordant, $p < 10^{-36}$; five passages served for 400/400; gold-disease hit@5 20/120 in both arms; title check 26/30 clean, 4 with crops outside the alias list & 400 & Measured & Filter and metric share the alias list, so 0/400 holds by construction; coverage, disease hit and title check are the independent checks \\
 Text-extracted binding & Top-5 cross-crop retrieval 30.25\% (no gate) vs 28.75\% (gated pipeline); 6/0 discordant, $p = 0.031$ & 400 & Measured & All 400 name a crop, so the gate halts none; separate run from the row above \\
 Disease vision (top-1) & 0.9413 to 0.9907 across six crop-specific classifiers & 4,294 & Measured & Disease within a crop, not crop routing; 100\% ONNX--PyTorch label agreement \\
 Family router & Botanical family correct for 433/437 (0.9908, [97.67, 99.64]) & 437 & Measured & Six target crops, wheat-800 excluded; not open-world identification \\
@@ -536,7 +544,7 @@ Mismatch badge & Fired on 53/54 farmer conflicts [90.2, 99.7] and 400/400 PRISM 
 \midrule
 \multicolumn{5}{l}{\textit{Generation and release (C3)}} \\
 Guarded prompt, local model & ASR 10.71\% [7.61, 14.88] guarded vs 52.5\% [46.66, 58.28] neutral (30 vs 147 of 280); Bengali-native 19/100 vs 77/100 & 280 per arm & Measured & \texttt{krishokchat-4b}, T0 and T4 disabled; 210 prompts in seven families plus 70 Bengali-native probes; rule-based judge \\
-T0 + guarded prompt, local & ASR 4.64\% [2.73, 7.78] (13/280); Bengali-native 2.0\% [0.55, 7.00] (2/100); T0 intercepted 207/280 attack prompts (194 banned-chemical, 12 injection) & 280 & Measured & Replay of N14 guarded responses with T0 applied; 0 new model calls; 9/200 real farmer queries blocked as out-of-scope coverage (livestock, training, availability); no crop-treatment queries blocked \\
+T0 + guarded prompt, local & ASR 4.64\% [2.73, 7.78] (13/280); Bengali-native 2/100 [0.55, 7.0]; T0 stopped 207/280 prompts and 17 of the 30 prompt-level successes & 280 & Measured & Replay of the guarded N14 responses with T0 applied (no new model calls); T4 not applied. On 200 farmer queries T0 matched 9: 8 out-of-scope requests (training, livestock, input sourcing) sent to 16123 by the coverage rule, 1 false safety match \\
 Guarded prompt, cloud & Guarded \texttt{gemini-2.5-flash-lite} 2/210 (0.95\%) vs neutral \texttt{gpt-4o-mini} 76/210 (36.19\%); Bengali-native 10/100 vs 83/100 & 210 per arm & Measured & Arms use different models, so not a controlled comparison; Bengali-100 = 30 main-suite + 70 top-up probes; top-up residuals in embedded (4/10) and roleplay (2/10) \\
 Output audit & 46/47 guarded outputs safe and actionable, 1/47 vague but harmless, 0/47 dangerous; 3/3 unguarded controls dangerous; Fleiss $\kappa = 0.82$ & 50 & Measured & Three blinded raters (two undergraduates, one extension officer) \\
 Dosage verifier, live & 114/118 inserted errors caught (96.6\%); 0/38 unmodified answers rejected & 38 & Measured & Errors inserted into 38 live answers, so they are not independent natural errors \\
@@ -545,13 +553,14 @@ Multi-turn state & Slot kept in 100/100 follow-ups; 75/75 crop shifts flushed; 3
 Trace ordering & 100/100 traces in required event order (median 9 events) & 100 & Measured & Sampled evaluation cases \\
 \midrule
 \multicolumn{5}{l}{\textit{Delivery and deployment}} \\
-SMS length & 399/400 messages within 160 GSM-7 characters; 8/8 referral messages carried only the referral & 400 & Measured & Latin-script output; Bengali script needs UCS-2 (70 per segment) \\
+SMS length & 399/400 messages within 160 characters; 8/8 referral messages carried only the referral & 400 & Measured & Bengali output uses UCS-2, so 160 characters is 2--3 segments \\
 SMS slot survival & Dose, interval, and PHI kept in 1,000/1,000 constructed tuples; dose kept in 65/66 live gold advisories vs 12/92 for naive truncation & 1,000 & Measured & Different denominators, not a paired comparison \\
-SMS comparison & Dose kept in 23/100 (naive), 89/100 (LLM), 92/100 (compressor); chemical name in 20, 56, and 34 of 100 & 100 & Measured & Seed 42; a kept dose is not a complete instruction \\
+SMS comparison & Dose kept in 23 (naive), 89 (LLM), 92 (Comp.\,1), 94 (Comp.\,2) of 100; chemical name in 20, 56, 34, 63; both in 14, 51, 32, 61; 0 invented values for Comp.\,2 & 100 & Measured & Seed 42; no model calls for the compressors; active-ingredient list overlaps the scorer's list \\
 Offline retrieval & Local BM25 hit rate 0.94, 0/400 cache misses; remote retrieval loses 13.25\,pp (15\% loss) and 30.0\,pp (30\% loss) & 400 & Measured, loss simulated & Retrieval only \\
 Non-LLM overhead & Median 33.565\,ms (p95 67.833\,ms): safety 0.321, BM25 26.831, verifier 4.815\,ms & 400 & Measured & Stub LLM; local generation about 24\,s per call \\
 Installation footprint & 95.64\,MB ONNX vision assets; 284.0\,MB minimal; 339.6\,MB with PyTorch checkpoints & n/a & Measured & Excludes the language-model weights \\
 Tier mix and cost & 7.9\% zero-LLM turns; USD~0.1720 per 1,000 turns vs 0.1995 with every turn generated & 1,000 & Modeled & Metered tokens from 58 calls; not billed expenditure \\
+Knowledge update (X5) & 10/10 withheld passages at rank 1 after re-insertion; index rebuild 0.2\,s (median); rebuilt index matches deployed top-5 on 400/400 queries & 10 & Measured & Leave-one-out on real passages; no model loaded; not evidence for adding new crops \\
 Retrieval backend & BM25 only; dense retrieval not evaluated & n/a & Stated & All retrieval numbers are BM25-only \\
 \bottomrule
 \end{tabularx}

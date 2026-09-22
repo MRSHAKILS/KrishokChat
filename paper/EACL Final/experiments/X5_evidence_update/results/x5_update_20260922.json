@@ -1,0 +1,241 @@
+{
+ "experiment": "X5_evidence_update_leave_one_out",
+ "provenance": {
+  "git_head": "d0a4b5c6d490e096a68db407ab08987a39d83b70",
+  "frozen_index_sha256": "2ab484aca38b694937a92a4a27bb2779c9e2ffb89f397d3fa168f7ca19e836c5",
+  "model_calls": 0,
+  "tokenizer": "str.lower().split() (BM25Retriever._tokenize)",
+  "generator_loaded": false
+ },
+ "equivalence": {
+  "queries": 400,
+  "top5_mismatches": 0,
+  "full_rebuild_seconds": 0.34
+ },
+ "candidates": 10,
+ "targets": 10,
+ "absent_before_and_rank1_after": "10/10",
+ "median_rebuild_seconds": 0.22,
+ "results": [
+  {
+   "query_id": "PRISM_B_034",
+   "gold_crop": "wheat",
+   "node_id": "B5_BARCAG_DF7B1C_002",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "B5_BARCAG_4AD140_002",
+    "CABI_WHEAT_D35AA4_001",
+    "DAE_PEST_FEC939_001",
+    "DAE_PEST_B8F156_001",
+    "B8_FERT2018_35DB9A_004"
+   ],
+   "top5_after": [
+    "B5_BARCAG_DF7B1C_002",
+    "B5_BARCAG_4AD140_002",
+    "CABI_WHEAT_D35AA4_001",
+    "DAE_PEST_FEC939_001",
+    "DAE_PEST_B8F156_001"
+   ],
+   "rebuild_seconds": 0.31
+  },
+  {
+   "query_id": "PRISM_B_020",
+   "gold_crop": "wheat",
+   "node_id": "DAE_PEST_FEC939_001",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "B2B_MORICH2_D3E1A8_001",
+    "CABI_WHEAT_D35AA4_001",
+    "B5_BARCAG_9331ED_003",
+    "GEN_WHEAT_LeafBlight",
+    "CABI_WHEAT_49F8AB_001"
+   ],
+   "top5_after": [
+    "DAE_PEST_FEC939_001",
+    "B2B_MORICH2_D3E1A8_001",
+    "CABI_WHEAT_D35AA4_001",
+    "B5_BARCAG_9331ED_003",
+    "GEN_WHEAT_LeafBlight"
+   ],
+   "rebuild_seconds": 0.23
+  },
+  {
+   "query_id": "PRISM_B_011",
+   "gold_crop": "brinjal",
+   "node_id": "B5_BARCAG_706F27_002",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "B8_FERT2018_627A2F_004",
+    "B5_BARCAG_E6109D_001",
+    "GEN_WHEAT_LeafBlight",
+    "B5_BARCAG_EFC54C_002",
+    "B5_BARCAG_706F27_003"
+   ],
+   "top5_after": [
+    "B5_BARCAG_706F27_002",
+    "B8_FERT2018_627A2F_004",
+    "B5_BARCAG_E6109D_001",
+    "GEN_WHEAT_LeafBlight",
+    "B5_BARCAG_EFC54C_002"
+   ],
+   "rebuild_seconds": 0.22
+  },
+  {
+   "query_id": "PRISM_D_003",
+   "gold_crop": "potato",
+   "node_id": "DAE_PEST_1206A0_001",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "CABI_POTATO_834B4F_001",
+    "DAE_PEST_B3531E_001",
+    "CABI_POTATO_42D248_001",
+    "DAE_PEST_135B8A_001",
+    "DAE_PEST_FA463D_001"
+   ],
+   "top5_after": [
+    "DAE_PEST_1206A0_001",
+    "CABI_POTATO_834B4F_001",
+    "DAE_PEST_B3531E_001",
+    "CABI_POTATO_42D248_001",
+    "DAE_PEST_135B8A_001"
+   ],
+   "rebuild_seconds": 0.28
+  },
+  {
+   "query_id": "PRISM_B_024",
+   "gold_crop": "tomato",
+   "node_id": "DAE_PEST_1183CB_001",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "DAE_PEST_E2BC36_001",
+    "DAE_PEST_82EB36_001",
+    "DAE_PEST_C25C79_001",
+    "B5_BARCAG_5B90FC_002",
+    "B5_BARCAG_5B90FC_001"
+   ],
+   "top5_after": [
+    "DAE_PEST_1183CB_001",
+    "DAE_PEST_E2BC36_001",
+    "DAE_PEST_82EB36_001",
+    "DAE_PEST_C25C79_001",
+    "B5_BARCAG_5B90FC_002"
+   ],
+   "rebuild_seconds": 0.21
+  },
+  {
+   "query_id": "PRISM_B_029",
+   "gold_crop": "rice",
+   "node_id": "DAE_PEST_55BD2F_001",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "DAE_PEST_03593C_001",
+    "DAE_PEST_EE5D8B_001",
+    "DAE_PEST_C80495_001",
+    "DAE_PEST_458D1E_001",
+    "B2B_COTTON_729B80_002"
+   ],
+   "top5_after": [
+    "DAE_PEST_55BD2F_001",
+    "DAE_PEST_03593C_001",
+    "DAE_PEST_EE5D8B_001",
+    "DAE_PEST_C80495_001",
+    "DAE_PEST_458D1E_001"
+   ],
+   "rebuild_seconds": 0.21
+  },
+  {
+   "query_id": "PRISM_D_005",
+   "gold_crop": "rice",
+   "node_id": "B5_BARCAG_467CF2_002",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "B5_BARCAG_706F27_002",
+    "B5_BARCAG_83F539_002",
+    "B4_FRG2024_771BD5_002",
+    "B4_FRG2024_506847_002",
+    "B5_BARCAG_ED5A3F_001"
+   ],
+   "top5_after": [
+    "B5_BARCAG_467CF2_002",
+    "B5_BARCAG_706F27_002",
+    "B5_BARCAG_83F539_002",
+    "B4_FRG2024_771BD5_002",
+    "B4_FRG2024_506847_002"
+   ],
+   "rebuild_seconds": 0.21
+  },
+  {
+   "query_id": "PRISM_B_023",
+   "gold_crop": "potato",
+   "node_id": "B5_BARCAG_E89FD1_001",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "B5_BARCAG_E89FD1_003",
+    "NARS_PESTINFO_987C32_001",
+    "NARS_PESTINFO_605206_001",
+    "BARC_SHATA_10B3C5_003",
+    "BARC_SHATA_10B3C5_004"
+   ],
+   "top5_after": [
+    "B5_BARCAG_E89FD1_001",
+    "B5_BARCAG_E89FD1_003",
+    "NARS_PESTINFO_987C32_001",
+    "NARS_PESTINFO_605206_001",
+    "BARC_SHATA_10B3C5_003"
+   ],
+   "rebuild_seconds": 0.22
+  },
+  {
+   "query_id": "PRISM_B_004",
+   "gold_crop": "brinjal",
+   "node_id": "B5_BARCAG_EFC54C_001",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "DAE_PEST_E5366C_002",
+    "B5_BARCAG_706F27_002",
+    "B8_FERT2018_627A2F_004",
+    "B5_BARCAG_E6109D_001",
+    "B5_BARCAG_EFC54C_002"
+   ],
+   "top5_after": [
+    "B5_BARCAG_EFC54C_001",
+    "DAE_PEST_E5366C_002",
+    "B5_BARCAG_706F27_002",
+    "B8_FERT2018_627A2F_004",
+    "B5_BARCAG_E6109D_001"
+   ],
+   "rebuild_seconds": 0.21
+  },
+  {
+   "query_id": "PRISM_B_006",
+   "gold_crop": "wheat",
+   "node_id": "GEN_WHEAT_LeafBlight",
+   "retrieved_before": false,
+   "rank_after": 1,
+   "top5_before": [
+    "DAE_PEST_FEC939_001",
+    "B5_BARCAG_9331ED_003",
+    "GEN_WHEAT_WheatBlast",
+    "B8_FERT2018_35DB9A_004",
+    "B5_BARCAG_DF7B1C_002"
+   ],
+   "top5_after": [
+    "GEN_WHEAT_LeafBlight",
+    "DAE_PEST_FEC939_001",
+    "B5_BARCAG_9331ED_003",
+    "GEN_WHEAT_WheatBlast",
+    "B8_FERT2018_35DB9A_004"
+   ],
+   "rebuild_seconds": 0.22
+  }
+ ]
+}

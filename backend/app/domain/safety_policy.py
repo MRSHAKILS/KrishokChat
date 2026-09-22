@@ -10,7 +10,12 @@ from app.domain.enums import SafetyCategory
 
 PATTERNS: dict[SafetyCategory, tuple[tuple[str, re.Pattern[str]], ...]] = {
     SafetyCategory.SELF_HARM_OR_POISONING_RISK: (
-        ("self_harm_bn", re.compile(r"আত্মহত্যা|মরতে চাই|জীবন শেষ|নিজেকে ক্ষতি|বিষ\s*(?:খাবো|খাব|খেলে|পান|খেয়েছে|খেয়ে|খাইছে|গিলে|লাগা|গেলে)|কীটনাশক\s*(?:খাবো|খাব|খেলে|পান|খেয়েছে|খেয়ে|খাইছে|গিলে|লাগা|গেলে)|মারা যাওয়া|মৃত্যু হবে|কীভাবে মরব|মানুষ মারার|গরু মারার|মানুষের ক্ষতি|চোখে বিষ|চোখে কীটনাশক|বিষক্রিয়া|বিষাক্ত")),
+        ("self_harm_bn", re.compile(
+            "আত্মহত্যা|মরতে চাই|জীবন শেষ|নিজেকে ক্ষতি|"
+            "বিষ\\s*(?:খাবো|খাব|খেলে|পান|খে\u09df\u09c7ছে|খে\u09df\u09c7|খে\u09af\u09bc\u09c7ছে|খে\u09af\u09bc\u09c7|খাইছে|গিলে|লাগা|গেলে)|"
+            "কীটনাশক\\s*(?:খাবো|খাব|খেলে|পান|খে\u09df\u09c7ছে|খে\u09df\u09c7|খে\u09af\u09bc\u09c7ছে|খে\u09af\u09bc\u09c7|খাইছে|গিলে|লাগা|গেলে)|"
+            "মারা যাওয়া|মৃত্যু হবে|কীভাবে মরব|মানুষ মারার|গরু মারার|মানুষের ক্ষতি|চোখে বিষ|চোখে কীটনাশক|বিষক্রিয়া|বিষাক্ত"
+        )),
         ("self_harm_en", re.compile(r"\b(?:suicide|kill myself|end my life|self[- ]harm|poison myself|want to die|kill someone|lethal dose|human death|drank pesticide|swallowed pesticide|pesticide poisoning|pesticide in eyes|accidental poisoning)\b", re.I)),
         ("self_harm_banglish", re.compile(r"\b(?:bish|beesh|bisha)\s*(?:khabo|khab|khele|pan|kheye|khaise|gile|lagle|gele|khete)\b|\b(?:gile|kheye|khele)\s*(?:felse|phelse)?\s*(?:bish|beesh|kitnashok|kitnasok)\b|\b(?:kitnashok|kitnasok|balainashok)\s*(?:khabo|khab|khele|pan|kheye|khaise|gile)\b|\b(?:manush|goru|chagol)\s*(?:marar|marbo|marte)\b|\b(?:morte\s*chai|morbo|morar\s*jonno|nijeke\s*shesh)\b", re.I)),
     ),
