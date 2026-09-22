@@ -117,6 +117,20 @@ export const STAGE_LABELS = {
   soil_classification: "মাটি শনাক্ত",
 } as const;
 
+/* Same stage labels in English, for display in English mode only. */
+export const STAGE_LABELS_EN = {
+  intake: "Photo received",
+  crop_classification: "Crop identified",
+  disease_classification: "Disease identified",
+  advisory: "Advisory",
+  safety: "Safety check",
+  retrieval: "Retrieval",
+  generation: "Answer generation",
+  verifier: "Verification",
+  moisture_regression: "Moisture estimate",
+  soil_classification: "Soil identified",
+} as const;
+
 /* Soil type map — Bengali transliteration key → Bengali + USDA class.
    Keys match the frozen manifest in dataset_release/soil_moisture/. */
 export const SOIL_TYPES = {

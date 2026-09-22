@@ -10,6 +10,11 @@ export function bn(value: number | string): string {
   return String(value).replace(/[0-9]/g, (d) => BN_DIGITS[Number(d)]);
 }
 
+/** Bengali numeral in Bengali mode, plain Latin-digit string in English mode. */
+export function numLocale(value: number | string, en: boolean): string {
+  return en ? String(value) : bn(value);
+}
+
 /** Format a 0-1 confidence as a Bengali percentage, e.g. 0.976 → "৯৮%". */
 export function bnPercent(confidence: number): string {
   return bn(Math.round(confidence * 100)) + "%";

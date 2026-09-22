@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Lock, ChevronDown, FlaskConical, MessageCircle, Droplets, CheckCircle2, AlertTriangle, Info, Sparkles } from "lucide-react";
 import type { SoilDatasetInfo, SoilAnalyzeResponse } from "@/lib/api";
-import { bn } from "@/lib/bn";
+import { bn, numLocale } from "@/lib/bn";
 import { dur, ease } from "@/lib/motion";
 import { useLanguage } from "@/context/language-context";
 
@@ -156,29 +156,29 @@ export function SoilLockedCard({
                   {isReplay ? (
                     <span
                       className="inline-flex items-center gap-1 rounded-full bg-sky-600/10 px-2.5 py-0.5 text-xs font-semibold text-sky-700"
-                      title="পাবনা রিসার্চ সাইটের মাঠে পরিমাপিত রেকর্ড"
+                      title={en ? "Record measured in the field at the Pabna research site" : "পাবনা রিসার্চ সাইটের মাঠে পরিমাপিত রেকর্ড"}
                     >
-                      <FlaskConical className="h-3 w-3" /> ডেটাসেট নমুনা {result.sample_id}
+                      <FlaskConical className="h-3 w-3" /> {en ? "Dataset sample" : "ডেটাসেট নমুনা"} {result.sample_id}
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-1 rounded-full bg-leaf/15 px-2.5 py-0.5 text-xs font-semibold text-leaf">
-                      <Sparkles className="h-3 w-3" /> নির্ণীত
+                      <Sparkles className="h-3 w-3" /> {en ? "Estimated" : "নির্ণীত"}
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-ink-soft">পাবনা ফিল্ড সেন্সর গ্রাউন্ডেড · বৈজ্ঞানিক টেনশন ও কৃষকের 'জো' অবস্থা</p>
+                <p className="text-xs text-ink-soft">{en ? "Grounded in Pabna field sensors · scientific tension and the farmer's familiar ‘jo’ state" : "পাবনা ফিল্ড সেন্সর গ্রাউন্ডেড · বৈজ্ঞানিক টেনশন ও কৃষকের 'জো' অবস্থা"}</p>
               </div>
             </div>
             <div className="text-right">
-              <span className="text-xs font-medium text-ink-faint">উৎস</span>
-              <div className="font-display text-sm font-bold text-leaf">{isReplay ? "মাঠ রেকর্ড" : bn(Math.round((result.confidence ?? 0) * 100)) + "%"}</div>
+              <span className="text-xs font-medium text-ink-faint">{en ? "Source" : "উৎস"}</span>
+              <div className="font-display text-sm font-bold text-leaf">{isReplay ? (en ? "Field record" : "মাঠ রেকর্ড") : numLocale(Math.round((result.confidence ?? 0) * 100), en) + "%"}</div>
             </div>
           </div>
 
           {/* Practical Agronomic Condition Headline Banner */}
           <div className={`mt-4 rounded-xl border ${toneBorder} ${toneBg} p-4`}>
             <div className="flex items-center justify-between gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider">মাঠের বর্তমান অবস্থা:</span>
+              <span className="text-xs font-bold uppercase tracking-wider">{en ? "Current field condition:" : "মাঠের বর্তমান অবস্থা:"}</span>
               <span className="rounded-full bg-paper px-2.5 py-0.5 text-xs font-bold shadow-2xs">
                 {agro.irrigationAction}
               </span>
@@ -191,7 +191,7 @@ export function SoilLockedCard({
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {/* Metric 1: Agronomic 'Jo' Status */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-xs font-medium text-ink-faint">কৃষক নির্দেশক</span>
+              <span className="text-xs font-medium text-ink-faint">{en ? "Farmer indicator" : "কৃষক নির্দেশক"}</span>
               <div className="mt-1 font-display text-base font-bold text-ink">
                 {agro.badgeTitle.split("(")[0].trim()}
               </div>
@@ -202,18 +202,18 @@ export function SoilLockedCard({
 
             {/* Metric 2: Soil Classification */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-xs font-medium text-ink-faint">{isReplay ? "নমুনা মাটির ধরন" : "শনাক্তকৃত মাটির ধরন"}</span>
+              <span className="text-xs font-medium text-ink-faint">{isReplay ? (en ? "Sample soil type" : "নমুনা মাটির ধরন") : (en ? "Identified soil type" : "শনাক্তকৃত মাটির ধরন")}</span>
               <div className="mt-1 font-display text-lg font-bold text-ink">{soilType}</div>
               <span className="mt-1 inline-block text-xs text-ink-soft">{result.soil_type || ""}</span>
             </div>
 
             {/* Metric 3: Scientific Tension in kPa */}
             <div className="rounded-xl border rule bg-paper-2 p-3.5 text-center">
-              <span className="text-xs font-medium text-ink-faint">বৈজ্ঞানিক আর্দ্রতা টান</span>
+              <span className="text-xs font-medium text-ink-faint">{en ? "Scientific moisture tension" : "বৈজ্ঞানিক আর্দ্রতা টান"}</span>
               <div className="mt-1 font-display text-2xl font-black text-ink">
-                {bn(kpa.toFixed(1))} <span className="text-xs font-normal text-ink-soft">kPa</span>
+                {numLocale(kpa.toFixed(1), en)} <span className="text-xs font-normal text-ink-soft">kPa</span>
               </div>
-              <span className="mt-1 inline-block text-[11px] text-ink-faint">আদর্শ মাত্রা: ২.০–১০.০ kPa</span>
+              <span className="mt-1 inline-block text-[11px] text-ink-faint">{en ? "Ideal range: 2.0–10.0 kPa" : "আদর্শ মাত্রা: ২.০–১০.০ kPa"}</span>
             </div>
           </div>
 
@@ -221,7 +221,7 @@ export function SoilLockedCard({
           <div className="mt-4 rounded-xl border border-leaf/30 bg-leaf/5 p-4">
             <h4 className="flex items-center gap-1.5 text-xs font-bold text-ink">
               <Info className="h-4 w-4 text-leaf" />
-              মাঠ পর্যায়ের সেচ ও পরিচর্যা সুপারিশ:
+              {en ? "Field-level irrigation and care recommendation:" : "মাঠ পর্যায়ের সেচ ও পরিচর্যা সুপারিশ:"}
             </h4>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">{advisory}</p>
           </div>
@@ -231,24 +231,34 @@ export function SoilLockedCard({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-xs font-bold text-ink">
                 <CheckCircle2 className="h-4 w-4 text-leaf" />
-                মাঠে দাঁড়িয়ে মাটি মুঠো পরীক্ষা (Squeeze Test Guide):
+                {en ? "Standing-in-the-field soil squeeze test (Squeeze Test Guide):" : "মাঠে দাঁড়িয়ে মাটি মুঠো পরীক্ষা (Squeeze Test Guide):"}
               </div>
               <button
                 type="button"
                 onClick={() => setShowSqueezeGuide((v) => !v)}
                 className="text-xs font-semibold text-leaf hover:underline cursor-pointer"
               >
-                {showSqueezeGuide ? "সংক্ষেপ করুন" : "কীভাবে পরীক্ষা করবেন?"}
+                {showSqueezeGuide ? (en ? "Collapse" : "সংক্ষেপ করুন") : (en ? "How to test?" : "কীভাবে পরীক্ষা করবেন?")}
               </button>
             </div>
             <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">
-              <strong>এই মাটির স্পর্শ লক্ষণ:</strong> {agro.squeezeTest}
+              <strong>{en ? "This soil's feel:" : "এই মাটির স্পর্শ লক্ষণ:"}</strong> {agro.squeezeTest}
             </p>
             {showSqueezeGuide && (
               <div className="mt-3 border-t border-dashed border-bone pt-2 text-xs leading-relaxed text-ink-faint space-y-1">
-                <p>১. ফসলের মূল এলাকা (মাটির ২-৩ ইঞ্চি গভীর) থেকে একমুঠো মাটি নিন।</p>
-                <p>২. হাতের তালুতে শক্ত করে চেপে গোল লাড্ডু বানানোর চেষ্টা করুন।</p>
-                <p>৩. লাড্ডু স্বাভাবিকভাবে জমে থাকলে জমিতে পর্যাপ্ত রস ('জো') আছে; মুঠো খুলতেই ভেঙে গুঁড়ো হয়ে গেলে জরুরি সেচ দিন।</p>
+                {en ? (
+                  <>
+                    <p>1. Take a handful of soil from the root zone (2–3 inches deep).</p>
+                    <p>2. Squeeze it firmly in your palm and try to form a ball.</p>
+                    <p>3. If the ball holds together, the field has enough moisture (‘jo’); if it crumbles apart as soon as you open your hand, irrigate right away.</p>
+                  </>
+                ) : (
+                  <>
+                    <p>১. ফসলের মূল এলাকা (মাটির ২-৩ ইঞ্চি গভীর) থেকে একমুঠো মাটি নিন।</p>
+                    <p>২. হাতের তালুতে শক্ত করে চেপে গোল লাড্ডু বানানোর চেষ্টা করুন।</p>
+                    <p>৩. লাড্ডু স্বাভাবিকভাবে জমে থাকলে জমিতে পর্যাপ্ত রস ('জো') আছে; মুঠো খুলতেই ভেঙে গুঁড়ো হয়ে গেলে জরুরি সেচ দিন।</p>
+                  </>
+                )}
               </div>
             )}
           </div>
@@ -260,7 +270,7 @@ export function SoilLockedCard({
               className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-leaf px-4 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-leaf-2"
             >
               <MessageCircle className="h-4 w-4" />
-              এই মাটির সেচ ও সার ব্যবস্থাপনা নিয়ে চ্যাটে কথা বলুন
+              {en ? "Talk in chat about irrigation and fertilizer management for this soil" : "এই মাটির সেচ ও সার ব্যবস্থাপনা নিয়ে চ্যাটে কথা বলুন"}
             </button>
           )}
         </div>
@@ -287,10 +297,12 @@ export function SoilLockedCard({
             <Lock className="h-5 w-5" strokeWidth={1.5} />
           </motion.div>
           <div className="flex-1">
-            <h3 className="font-display text-lg font-bold text-ink">সরাসরি ক্যামেরা নির্ণয় পরীক্ষাধীন · ফিল্ড ডেটাসেট বিশ্লেষণ চালু</h3>
+            <h3 className="font-display text-lg font-bold text-ink">{en ? "Live camera diagnosis in testing · field dataset analysis is live" : "সরাসরি ক্যামেরা নির্ণয় পরীক্ষাধীন · ফিল্ড ডেটাসেট বিশ্লেষণ চালু"}</h3>
             <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
               {message ??
-                "ছবি দেখে মাটির সঠিক আর্দ্রতা নির্ণয়ের কম্পিউটার ভিশন মডেল বর্তমানে মাঠ গবেষণাধীন। অসত্য বা ঝুঁকিপূর্ণ সেচ পরামর্শ রোধে শুধুমাত্র পাবনা ফিল্ড টেনশিওমিটারের পরিমাপিত নমুনাসমূহের বিশ্লেষণ ও চ্যাটে পরামর্শ সরাসরি চালু রয়েছে।"}
+                (en
+                  ? "The computer-vision model that reads a photo to determine exact soil moisture is still under field research. To avoid false or risky irrigation advice, only analysis of the measured Pabna field tensiometer samples and chat-based advice are live for now."
+                  : "ছবি দেখে মাটির সঠিক আর্দ্রতা নির্ণয়ের কম্পিউটার ভিশন মডেল বর্তমানে মাঠ গবেষণাধীন। অসত্য বা ঝুঁকিপূর্ণ সেচ পরামর্শ রোধে শুধুমাত্র পাবনা ফিল্ড টেনশিওমিটারের পরিমাপিত নমুনাসমূহের বিশ্লেষণ ও চ্যাটে পরামর্শ সরাসরি চালু রয়েছে।")}
             </p>
           </div>
         </div>
@@ -299,10 +311,12 @@ export function SoilLockedCard({
         <div className="mt-4 rounded-xl border border-leaf/30 bg-paper p-4">
           <div className="flex items-center gap-2 text-xs font-bold text-leaf">
             <CheckCircle2 className="h-4 w-4" />
-            মাঠে দাঁড়িয়ে মাটির আর্দ্রতা বোঝার সহজ কৌশল (মাটি মুঠো পরীক্ষা):
+            {en ? "A simple way to gauge soil moisture in the field (soil squeeze test):" : "মাঠে দাঁড়িয়ে মাটির আর্দ্রতা বোঝার সহজ কৌশল (মাটি মুঠো পরীক্ষা):"}
           </div>
           <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">
-            ফসলের গোড়ার ২-৩ ইঞ্চি গভীর থেকে একমুঠো মাটি হাতে নিয়ে শক্ত করে চেপে দেখুন। যদি মাটি স্বাভাবিক গোল বল বাঁধে এবং হাত কাদা না হয়, তবে জমিতে উপযুক্ত 'জো' অবস্থা রয়েছে এবং এখনই সেচের প্রয়োজন নেই। মাটি মুঠো না বেঁধে ভেঙে গুঁড়ো হয়ে ঝরে গেলে সেচ দিন।
+            {en
+              ? "Take a handful of soil from 2–3 inches below the base of the crop and squeeze it firmly. If it forms a normal ball and your hand doesn't get muddy, the field has adequate ‘jo’ moisture and no irrigation is needed right now. If it won't hold together and crumbles apart, irrigate."
+              : "ফসলের গোড়ার ২-৩ ইঞ্চি গভীর থেকে একমুঠো মাটি হাতে নিয়ে শক্ত করে চেপে দেখুন। যদি মাটি স্বাভাবিক গোল বল বাঁধে এবং হাত কাদা না হয়, তবে জমিতে উপযুক্ত 'জো' অবস্থা রয়েছে এবং এখনই সেচের প্রয়োজন নেই। মাটি মুঠো না বেঁধে ভেঙে গুঁড়ো হয়ে ঝরে গেলে সেচ দিন।"}
           </p>
         </div>
 
@@ -312,19 +326,19 @@ export function SoilLockedCard({
             <div className="flex items-center justify-between gap-2">
               <span className="flex items-center gap-1.5 text-xs font-semibold text-ink">
                 <FlaskConical className="h-3.5 w-3.5 text-ochre" />
-                গবেষণার বর্তমান ফলাফল ও ডেটাসেট মেট্রিক্স
+                {en ? "Current research results and dataset metrics" : "গবেষণার বর্তমান ফলাফল ও ডেটাসেট মেট্রিক্স"}
               </span>
               <button
                 onClick={() => setShowTable((v) => !v)}
                 className="flex items-center gap-1 text-xs font-medium text-leaf hover:text-leaf-2"
                 aria-expanded={showTable}
               >
-                {showTable ? "লুকান" : `${bn(models.length)}টি মডেল দেখুন`}
+                {showTable ? (en ? "Hide" : "লুকান") : (en ? `View ${models.length} models` : `${bn(models.length)}টি মডেল দেখুন`)}
                 <ChevronDown className={`h-3 w-3 transition-transform ${showTable ? "rotate-180" : ""}`} />
               </button>
             </div>
             <p className="mt-1.5 text-xs leading-relaxed text-ink-faint">
-              ৭২২টি ডিজিটাল টেনশিওমিটার পরিমাপের সাথে ইমেজ ফিচারের তুলনামূলক আরএমএসই (RMSE) স্কোর।
+              {en ? "Comparative RMSE scores of image features against 722 digital tensiometer measurements." : "৭২২টি ডিজিটাল টেনশিওমিটার পরিমাপের সাথে ইমেজ ফিচারের তুলনামূলক আরএমএসই (RMSE) স্কোর।"}
             </p>
             <AnimatePresence initial={false}>
               {showTable && (
@@ -339,7 +353,7 @@ export function SoilLockedCard({
                     <table className="w-full text-left text-xs">
                       <thead>
                         <tr className="border-b rule text-xs text-ink-faint">
-                          <th className="py-2 pr-3 font-medium">মডেল</th>
+                          <th className="py-2 pr-3 font-medium">{en ? "Model" : "মডেল"}</th>
                           <th className="py-2 pr-3 text-right font-medium">RMSE (kPa)</th>
                           <th className="py-2 text-right font-medium">R²</th>
                         </tr>
@@ -348,8 +362,8 @@ export function SoilLockedCard({
                         {models.map((m) => (
                           <tr key={m.model} className="border-b border-bone/50 last:border-0">
                             <td className="py-2 pr-3 text-ink-soft">{m.model}</td>
-                            <td className="py-2 pr-3 text-right tabular text-ink">{bn(m.rmse_kpa.toFixed(2))}</td>
-                            <td className="py-2 text-right tabular text-clay">{bn(m.r2.toFixed(2))}</td>
+                            <td className="py-2 pr-3 text-right tabular text-ink">{numLocale(m.rmse_kpa.toFixed(2), en)}</td>
+                            <td className="py-2 text-right tabular text-clay">{numLocale(m.r2.toFixed(2), en)}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -368,7 +382,7 @@ export function SoilLockedCard({
             className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-leaf px-4 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-leaf-2"
           >
             <MessageCircle className="h-4 w-4" />
-            মাটি ও পানি নিয়ে চ্যাটে প্রশ্ন করুন
+            {en ? "Ask about soil and water in chat" : "মাটি ও পানি নিয়ে চ্যাটে প্রশ্ন করুন"}
           </button>
         )}
       </div>

@@ -3,7 +3,8 @@
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { stagger, enter, dur, ease } from "@/lib/motion";
-import { STAGE_LABELS } from "@/lib/constants";
+import { STAGE_LABELS, STAGE_LABELS_EN } from "@/lib/constants";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    PipelineRail — the agentic workflow visualization.
@@ -47,6 +48,8 @@ export function PipelineRail({
   events: RailEvent[];
   active?: boolean; // true while the pipeline is running
 }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <motion.div
       initial="hidden"
@@ -78,7 +81,7 @@ export function PipelineRail({
                   status === "error" && "text-clay",
                 )}
               >
-                {stage.label}
+                {en ? STAGE_LABELS_EN[stage.key as keyof typeof STAGE_LABELS_EN] ?? stage.label : stage.label}
               </div>
               {ev?.detail && status === "complete" && (
                 <div className="mt-0.5 max-w-[100px] truncate text-xs text-ink-faint">
