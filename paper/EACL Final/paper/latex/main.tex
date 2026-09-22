@@ -147,50 +147,52 @@ Delivered responses show their source, decision state, and verification path thr
 \begin{subfigure}[t]{0.49\textwidth}
   \centering
   \includegraphics[width=\linewidth,height=3.6cm,keepaspectratio]{../screenshots/fig2a_ask.png}
-  \caption{\textbf{ASK (S1)}. A crop-less treatment query retrieves no sources; six crop chips ask for the crop.}
+  \caption{\textbf{ASK (S1).} T1 retrieves no evidence and asks the farmer to identify the crop.}
   \label{fig:demo_ask}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.49\textwidth}
   \centering
   \includegraphics[width=\linewidth,height=3.6cm,keepaspectratio]{../screenshots/fig2b_mismatch.png}
-  \caption{\textbf{CONFIRM (S3)}. A rice photograph with a potato question raises the Clarification badge; chemical advice waits.}
+  \caption{\textbf{CONFIRM (S3).} T2 holds chemical advice when the photographed and typed crops disagree.}
   \label{fig:demo_mismatch}
 \end{subfigure}
 \\[3pt]
 \begin{subfigure}[t]{0.49\textwidth}
   \centering
   \includegraphics[width=\linewidth,height=3.6cm,keepaspectratio]{../screenshots/fig2d_refer.png}
-  \caption{\textbf{REFER (S4)}. A paraquat request is stopped at T0 and routed to the 16123 helpline.}
+  \caption{\textbf{REFER (S4).} T0 stops a policy-covered paraquat request and displays the 16123 referral.}
   \label{fig:demo_refer}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.49\textwidth}
   \centering
   \includegraphics[width=\linewidth,height=3.6cm,keepaspectratio]{../screenshots/s5_why_panel.png}
-  \caption{\textbf{DROP (S5)}. The \textit{Why} panel lists the dropped $10\times$ overdose and the BARI passage (p.~852) that grounds the kept dose.}
+  \caption{\textbf{DROP (S5).} T4 removes a $10\times$ dosage error and shows the BARI evidence supporting the retained advice.}
   \label{fig:demo_why}
 \end{subfigure}
-\caption{Interface states for ASK, CONFIRM, REFER, and DROP. Full-size screens for S1--S5 are in Appendix~\ref{app:ui}.}
+\caption{The interface exposes four decisions at the authorization boundary. Each panel shows what stopped or changed the pipeline rather than presenting only its final answer. Full-size screens for S1--S5 appear in Appendix~\ref{app:ui}.}
 \label{fig:demo_states}
 \end{figure*}
 
-The demonstration is aimed at researchers and practitioners who build multilingual, multimodal, or safety-critical conversational systems. Attendees walk through five steps, S1--S5, on the live system. Each step shows what the farmer does, what the system displays, and what it allows next. Attendees can start from preset regional-dialect and safety-test queries, or type their own text and upload photographs.
+The demonstration is intended for researchers and practitioners building multilingual, multimodal, or safety-sensitive advisory systems. It uses five steps to show when KrishokTech proceeds, pauses, or withholds content. The public website provides a preview of the interface, while the downloadable package contains the implementation. Attendees can follow the prepared sequence and, when a generator is configured, enter their own text and photographs.
 
-\textbf{S1: Missing crop (ASK).}
-The farmer writes, without naming a crop: \textit{``Patay holud dag hoyeche, ki bish dibo?''} (``Yellow spots on the leaves. What pesticide should I use?''). \textbf{T1} halts before retrieval ($sources\_retrieved = 0$) and shows crop chips (Figure~\ref{fig:demo_ask}). Tapping \textit{Alu} (potato) binds the crop, and potato-scoped retrieval returns an answer with numbered citations.
+\textbf{S1: A missing crop produces ASK.}
+The attendee enters \textit{``Patay holud dag hoyeche, ki bish dibo?''} (``The leaves have yellow spots. Which pesticide should I use?''). Because the request asks for treatment without naming a crop, \textbf{T1} stops before retrieval. The interface displays \texttt{sources\_retrieved}\,=\,0, Bengali crop choices, and non-chemical guidance (Figure~\ref{fig:demo_ask}). Selecting \textit{Alu} (potato) binds the crop and resumes the request with potato-scoped retrieval. The step shows that missing information is resolved before evidence is selected.
 
-\textbf{S2: A photograph scopes the evidence.}
-In a new consultation, the farmer uploads a rice leaf photograph. The on-device classifier predicts rice, and \textbf{T2} scopes retrieval to rice guidance. The image stays on the device.
+\textbf{S2: A photograph binds retrieval to a crop.}
+In a new consultation, the attendee uploads a rice-leaf photograph without naming the crop. The browser-side classifier predicts rice, and \textbf{T2} binds retrieval to rice guidance. The interface displays the predicted crop and the resulting evidence scope. This step shows how a visual prediction constrains which passages may reach generation.
 
-\textbf{S3: Text--image conflict (CONFIRM).}
-Keeping the rice photograph attached, the farmer asks about potato late blight. The system raises the \textbf{Clarification} badge and withholds chemical advice (Figure~\ref{fig:demo_mismatch}) until the farmer picks one crop.
+\textbf{S3: Conflicting modalities produce CONFIRM.}
+With the rice photograph attached, the attendee asks about potato late blight. The typed and predicted crops disagree, so \textbf{T2} enters \textbf{CONFIRM}. The interface displays a \textbf{Crop Mismatch} warning and asks the attendee to select rice or potato (Figure~\ref{fig:demo_mismatch}). Chemical advice remains unavailable until one crop is chosen. The conflict is therefore shown to the user rather than resolved silently.
 
-\textbf{S4: High-risk chemical request (REFER).}
-The farmer asks how to apply paraquat, which the safety policy blocks. The \textbf{T0} precheck stops the turn before retrieval or generation and shows a safety notice with a one-tap call to the Krishi Call Centre (\textbf{16123}; Figure~\ref{fig:demo_refer}).
+\textbf{S4: A high-risk request produces REFER.}
+The attendee asks how to apply paraquat, a request covered by the system's referral policy. The \textbf{T0} precheck ends the turn before retrieval or generation. The interface displays a safety notice and a one-tap link to the Krishi Call Centre (\textbf{16123}; Figure~\ref{fig:demo_refer}). This step makes referral a terminal system state rather than a warning appended to generated advice.
 
-\textbf{S5: Dosage verification (DROP).}
-The farmer asks a new question about fungicide for potato blight. In the recorded session the draft contains one dose ten times above the BARI range. \textbf{T4} drops that sentence and delivers the rest with citations, a provenance badge, and an expandable \textit{Why} panel that names the removed claim (Figure~\ref{fig:demo_why}).
+\textbf{S5: An unsupported dosage claim produces DROP.}
+The attendee submits a fully specified potato-blight question. In the recorded test case, the draft contains a dosage value ten times above the permitted BARI range. \textbf{T4} removes that sentence and delivers the remaining text. The provenance badge and expandable \textit{Why} panel identify the removed claim and display the passage supporting the retained advice (Figure~\ref{fig:demo_why}). This final step shows that completing generation does not itself authorize every generated claim.
+
+Across the five steps, attendees see the system at its decision boundaries: before retrieval, while evidence is being scoped, when text and images conflict, and after generation. The walkthrough therefore demonstrates the control path itself, not only successful advisory answers.
 
 \section{Evaluation}
 \label{sec:evaluation}
