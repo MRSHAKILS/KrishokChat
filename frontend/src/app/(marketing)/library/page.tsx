@@ -33,7 +33,9 @@ import { paletteState } from "@/components/command-menu";
 import { LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { fetchWithOfflineFallback, CACHE_KEYS } from "@/lib/offline-cache";
-import { useCountUp, toBn } from "@/lib/use-count-up";
+import { useCountUp, toLocaleCount } from "@/lib/use-count-up";
+import { numLocale } from "@/lib/bn";
+import { useLanguage } from "@/context/language-context";
 
 type Tab = "books" | "datasets";
 
@@ -52,37 +54,37 @@ type Dataset = {
 };
 
 const CATEGORIES = [
-  { id: "all", label: "সব বিষয়" },
-  { id: "disease", label: "রোগ ও প্রতিকার" },
-  { id: "pest", label: "পোকা দমন" },
-  { id: "fertilizer", label: "সার ও পুষ্টি" },
-  { id: "cultivation", label: "চাষাবাদ পদ্ধতি" },
-  { id: "fisheries", label: "মৎস্য সম্পদ" },
-  { id: "livestock", label: "প্রাণিসম্পদ" },
-  { id: "pesticide", label: "বালাইনাশক বিধি" },
-  { id: "soil", label: "মাটি ও সেচ" },
-  { id: "regulation", label: "সরকারি নীতিমালা" },
+  { id: "all", label: "সব বিষয়", en: "All Topics" },
+  { id: "disease", label: "রোগ ও প্রতিকার", en: "Disease and Treatment" },
+  { id: "pest", label: "পোকা দমন", en: "Pest Control" },
+  { id: "fertilizer", label: "সার ও পুষ্টি", en: "Fertilizer and Nutrition" },
+  { id: "cultivation", label: "চাষাবাদ পদ্ধতি", en: "Cultivation Practices" },
+  { id: "fisheries", label: "মৎস্য সম্পদ", en: "Fisheries" },
+  { id: "livestock", label: "প্রাণিসম্পদ", en: "Livestock" },
+  { id: "pesticide", label: "বালাইনাশক বিধি", en: "Pesticide Regulations" },
+  { id: "soil", label: "মাটি ও সেচ", en: "Soil and Irrigation" },
+  { id: "regulation", label: "সরকারি নীতিমালা", en: "Government Policy" },
 ];
 
 const DATASET_CATEGORIES = [
-  { id: "all", label: "সব ডেটাসেট" },
-  { id: "vision", label: "কম্পিউটার ভিশন" },
-  { id: "qa", label: "কৃষি প্রশ্নোত্তর (QA)" },
-  { id: "safety", label: "নিরাপত্তা ও গার্ডরেইল" },
-  { id: "benchmark", label: "বেঞ্চমার্ক মূল্যায়ন" },
-  { id: "multimodal", label: "মাল্টিমোডাল" },
-  { id: "retrieval", label: "তথ্য সংগ্রহ (RAG)" },
-  { id: "corpus", label: "মূল কর্পাস" },
+  { id: "all", label: "সব ডেটাসেট", en: "All Datasets" },
+  { id: "vision", label: "কম্পিউটার ভিশন", en: "Computer Vision" },
+  { id: "qa", label: "কৃষি প্রশ্নোত্তর (QA)", en: "Agricultural QA" },
+  { id: "safety", label: "নিরাপত্তা ও গার্ডরেইল", en: "Safety and Guardrails" },
+  { id: "benchmark", label: "বেঞ্চমার্ক মূল্যায়ন", en: "Benchmark Evaluation" },
+  { id: "multimodal", label: "মাল্টিমোডাল", en: "Multimodal" },
+  { id: "retrieval", label: "তথ্য সংগ্রহ (RAG)", en: "Retrieval (RAG)" },
+  { id: "corpus", label: "মূল কর্পাস", en: "Core Corpus" },
 ];
 
 /* Repo-level HF download command (the catalog lives in one dataset repo). */
 const HF_DOWNLOAD_CMD = "hf download RaiyanKhaan/krishokChat --repo-type dataset";
 
 const SORTS = [
-  { id: "curated", label: "বৈশিষ্ট্যযুক্ত" },
-  { id: "records", label: "রেকর্ড" },
-  { id: "size", label: "আকার" },
-  { id: "name", label: "নাম" },
+  { id: "curated", label: "বৈশিষ্ট্যযুক্ত", en: "Featured" },
+  { id: "records", label: "রেকর্ড", en: "Records" },
+  { id: "size", label: "আকার", en: "Size" },
+  { id: "name", label: "নাম", en: "Name" },
 ] as const;
 type SortKey = (typeof SORTS)[number]["id"];
 
@@ -113,6 +115,10 @@ const SPLIT_COLORS: Record<string, string> = {
 };
 
 const CAT_LABELS: Record<string, string> = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
+const CAT_LABELS_EN: Record<string, string> = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.en]));
+function catLabel(id: string, en: boolean) {
+  return en ? (CAT_LABELS_EN[id] ?? id) : (CAT_LABELS[id] ?? id);
+}
 
 export default function LibraryPage() {
   const [tab, setTab] = useState<Tab>("books");
@@ -120,6 +126,8 @@ export default function LibraryPage() {
   const [datasets, setDatasets] = useState<Dataset[]>([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
+  const { locale } = useLanguage();
+  const en = locale === "en";
 
   useEffect(() => {
     fetchWithOfflineFallback<{ books: Book[] }>("/library/catalog.json", CACHE_KEYS.CATALOG).then((d) => {
@@ -137,17 +145,21 @@ export default function LibraryPage() {
         <motion.section initial="hidden" animate="visible" variants={stagger} className="text-center">
           <motion.div variants={enter} className="flex items-center justify-center gap-2 text-xs text-ochre">
             <BookMarked className="h-3.5 w-3.5" />
-            লাইব্রেরি ও ডেটা
+            {en ? "Library and Data" : "লাইব্রেরি ও ডেটা"}
           </motion.div>
           <motion.h1 variants={enter} className="mt-4 font-display text-3xl leading-tight text-ink md:text-4xl">
-            কৃষি <span className="text-leaf">জ্ঞান ভান্ডার</span>
+            {en ? (
+              <>Agricultural <span className="text-leaf">Knowledge Base</span></>
+            ) : (
+              <>কৃষি <span className="text-leaf">জ্ঞান ভান্ডার</span></>
+            )}
           </motion.h1>
           <motion.p variants={enter} className="mx-auto mt-3 max-w-xl text-sm text-ink-soft md:text-base">
-            সরকারি প্রকাশনা ও প্রশিক্ষণ ডেটাসেট — অনুসন্ধান, পড়া ও ডাউনলোড। গবেষকদের জন্য উন্মুক্ত, সাইটেশন-গ্রাউন্ডেড বাংলা সম্পদ।
+            {en ? "Government publications and training datasets — search, read, and download. Open, citation-grounded Bengali resources for researchers." : "সরকারি প্রকাশনা ও প্রশিক্ষণ ডেটাসেট — অনুসন্ধান, পড়া ও ডাউনলোড। গবেষকদের জন্য উন্মুক্ত, সাইটেশন-গ্রাউন্ডেড বাংলা সম্পদ।"}
           </motion.p>
           <motion.p variants={enter} className="mt-5">
             <a href="/data" className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper px-4 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf">
-              জ্ঞান গ্রাফ ও উপাত্ত পরিসংখ্যান দেখুন<ArrowRight className="h-3 w-3" />
+              {en ? "View knowledge graph and data statistics" : "জ্ঞান গ্রাফ ও উপাত্ত পরিসংখ্যান দেখুন"}<ArrowRight className="h-3 w-3" />
             </a>
           </motion.p>
         </motion.section>
@@ -155,8 +167,8 @@ export default function LibraryPage() {
         {/* Tab switcher — sliding shared-layout indicator */}
         <motion.div initial="hidden" animate="visible" variants={stagger} className="flex justify-center">
           <motion.div variants={enter} className="inline-flex rounded-xl border rule bg-paper p-1 shadow-sm">
-            <TabButton active={tab === "books"} onClick={() => { setTab("books"); setCategory("all"); setSearch(""); }} icon={BookOpen} label="বই ও প্রকাশনা" count={books.length} />
-            <TabButton active={tab === "datasets"} onClick={() => { setTab("datasets"); setCategory("all"); setSearch(""); }} icon={Database} label="ডেটাসেট" count={datasets.length} />
+            <TabButton active={tab === "books"} onClick={() => { setTab("books"); setCategory("all"); setSearch(""); }} icon={BookOpen} label={en ? "Books and Publications" : "বই ও প্রকাশনা"} count={books.length} />
+            <TabButton active={tab === "datasets"} onClick={() => { setTab("datasets"); setCategory("all"); setSearch(""); }} icon={Database} label={en ? "Datasets" : "ডেটাসেট"} count={datasets.length} />
           </motion.div>
         </motion.div>
 
@@ -174,6 +186,8 @@ export default function LibraryPage() {
 
 /* === Tab button — shared-layout sliding pill === */
 function TabButton({ active, onClick, icon: Icon, label, count }: { active: boolean; onClick: () => void; icon: React.ComponentType<{ className?: string }>; label: string; count: number; }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <button
       onClick={onClick}
@@ -196,7 +210,7 @@ function TabButton({ active, onClick, icon: Icon, label, count }: { active: bool
         {label}
         {count > 0 && (
           <span className={cn("rounded-full px-1.5 py-0.5 text-xs tabular", active ? "bg-paper/20" : "bg-bone")}>
-            {toBn(count)}
+            {toLocaleCount(count, en)}
           </span>
         )}
       </span>
@@ -208,6 +222,8 @@ function TabButton({ active, onClick, icon: Icon, label, count }: { active: bool
 function BooksSection({ books, search, setSearch, category, setCategory }: { books: Book[]; search: string; setSearch: (v: string) => void; category: string; setCategory: (v: string) => void; }) {
   const [collapsedPublishers, setCollapsedPublishers] = useState<Set<string>>(new Set());
   const searchRef = useRef<HTMLInputElement>(null);
+  const { locale } = useLanguage();
+  const en = locale === "en";
 
   /* "/" focuses search from anywhere (unless typing or palette open). */
   useEffect(() => {
@@ -251,9 +267,9 @@ function BooksSection({ books, search, setSearch, category, setCategory }: { boo
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: dur.normal, ease: ease.smooth }} className="space-y-6">
       {/* Stats strip — count-up */}
       <div ref={statsRef} className="grid grid-cols-3 gap-px overflow-hidden rounded-xl border rule bg-bone">
-        <CountStat value={books.length} label="মোট বই" tone="leaf" active={statsInView} />
-        <CountStat value={availableCount} label="পঠনযোগ্য" tone="ochre" active={statsInView} />
-        <CountStat value={institutionCount} label="প্রতিষ্ঠান" tone="ink" active={statsInView} />
+        <CountStat value={books.length} label={en ? "Total Books" : "মোট বই"} tone="leaf" active={statsInView} />
+        <CountStat value={availableCount} label={en ? "Readable" : "পঠনযোগ্য"} tone="ochre" active={statsInView} />
+        <CountStat value={institutionCount} label={en ? "Institutions" : "প্রতিষ্ঠান"} tone="ink" active={statsInView} />
       </div>
 
       {/* Search */}
@@ -265,12 +281,12 @@ function BooksSection({ books, search, setSearch, category, setCategory }: { boo
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Escape") setSearch(""); }}
-          placeholder="বই, প্রকাশক, বা বিষয় খুঁজুন... (/)"
-          aria-label="বই খুঁজুন"
+          placeholder={en ? "Search books, publishers, or topics... (/)" : "বই, প্রকাশক, বা বিষয় খুঁজুন... (/)"}
+          aria-label={en ? "Search books" : "বই খুঁজুন"}
           className="w-full rounded-xl border rule bg-paper py-3.5 pl-12 pr-11 text-sm text-ink placeholder:text-ink-faint transition-colors focus:border-leaf focus:outline-none"
         />
         {search && (
-          <button onClick={() => setSearch("")} aria-label="অনুসন্ধান মুছুন" className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-faint transition-colors hover:text-ink">
+          <button onClick={() => setSearch("")} aria-label={en ? "Clear search" : "অনুসন্ধান মুছুন"} className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-faint transition-colors hover:text-ink">
             <X className="h-4 w-4" />
           </button>
         )}
@@ -280,7 +296,7 @@ function BooksSection({ books, search, setSearch, category, setCategory }: { boo
       <ChipRow>
         {CATEGORIES.map((cat) => (
           <Chip key={cat.id} active={category === cat.id} onClick={() => setCategory(cat.id === category ? "all" : cat.id)}>
-            {cat.label}
+            {en ? cat.en : cat.label}
           </Chip>
         ))}
       </ChipRow>
@@ -289,15 +305,15 @@ function BooksSection({ books, search, setSearch, category, setCategory }: { boo
       <AnimatePresence>
         {hasFilters && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-ink-faint">সক্রিয় ফিল্টার:</span>
-            {category !== "all" && <FilterChip onClear={() => setCategory("all")}>{CAT_LABELS[category] ?? category}</FilterChip>}
+            <span className="text-xs text-ink-faint">{en ? "Active filters:" : "সক্রিয় ফিল্টার:"}</span>
+            {category !== "all" && <FilterChip onClear={() => setCategory("all")}>{catLabel(category, en)}</FilterChip>}
             {search && <FilterChip onClear={() => setSearch("")}>“{search}”</FilterChip>}
-            <button onClick={() => { setSearch(""); setCategory("all"); }} className="text-xs text-leaf transition-colors hover:text-leaf-2">সব মুছুন</button>
+            <button onClick={() => { setSearch(""); setCategory("all"); }} className="text-xs text-leaf transition-colors hover:text-leaf-2">{en ? "Clear all" : "সব মুছুন"}</button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <p className="text-sm text-ink-soft">{toBn(filtered.length)}টি বই পাওয়া গেছে</p>
+      <p className="text-sm text-ink-soft">{en ? `${toLocaleCount(filtered.length, en)} books found` : `${toLocaleCount(filtered.length, en)}টি বই পাওয়া গেছে`}</p>
 
       {/* Publisher-grouped card grids */}
       <div className="space-y-6">
@@ -327,7 +343,7 @@ function BooksSection({ books, search, setSearch, category, setCategory }: { boo
                     </div>
                     <div className="text-left">
                       <span className="font-display text-base text-ink">{publisher}</span>
-                      <span className="ml-2 text-xs text-ink-faint">{toBn(pubBooks.length)}টি বই</span>
+                      <span className="ml-2 text-xs text-ink-faint">{en ? `${toLocaleCount(pubBooks.length, en)} books` : `${toLocaleCount(pubBooks.length, en)}টি বই`}</span>
                     </div>
                   </div>
                   <motion.span animate={{ rotate: isCollapsed ? 0 : 180 }} transition={{ duration: dur.fast, ease: ease.smooth }}>
@@ -372,6 +388,8 @@ function BooksSection({ books, search, setSearch, category, setCategory }: { boo
 
 /* === Book card === */
 function BookCard({ book, color }: { book: Book; color: string }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <motion.article
       layout
@@ -390,14 +408,14 @@ function BookCard({ book, color }: { book: Book; color: string }) {
             className="rounded-full px-2 py-0.5 text-xs font-medium"
             style={{ backgroundColor: `color-mix(in srgb, ${color} 12%, transparent)`, color }}
           >
-            {CAT_LABELS[book.category] ?? book.category}
+            {catLabel(book.category, en)}
           </span>
           <span className="text-xs text-ink-faint">{book.language}</span>
         </div>
 
         {/* Titles */}
-        <h3 className="mt-2.5 font-display text-sm leading-snug text-ink">{book.title_bn}</h3>
-        <p className="mt-0.5 text-xs text-ink-faint">{book.title_en}</p>
+        <h3 className="mt-2.5 font-display text-sm leading-snug text-ink">{en ? book.title_en : book.title_bn}</h3>
+        {!en && <p className="mt-0.5 text-xs text-ink-faint">{book.title_en}</p>}
 
         {/* Excerpt */}
         <p className="mt-2 text-xs leading-relaxed text-ink-soft line-clamp-2">{book.excerpt}</p>
@@ -405,8 +423,8 @@ function BookCard({ book, color }: { book: Book; color: string }) {
         {/* Footer meta + action — pinned to bottom for equal heights */}
         <div className="mt-auto pt-3">
           <div className="flex flex-wrap items-center gap-2.5 text-xs text-ink-faint">
-            <span className="flex items-center gap-1"><FileText className="h-3 w-3" />{toBn(book.pages)} পৃঃ</span>
-            <span className="tabular">{toBn(Number(book.year))}</span>
+            <span className="flex items-center gap-1"><FileText className="h-3 w-3" />{toLocaleCount(book.pages, en)} {en ? "pp." : "পৃঃ"}</span>
+            <span className="tabular">{numLocale(Number(book.year), en)}</span>
             <span className="rounded bg-bone/50 px-1.5 py-0.5 font-mono text-xs">{book.id}</span>
           </div>
           <div className="mt-3">
@@ -417,10 +435,10 @@ function BookCard({ book, color }: { book: Book; color: string }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-lg border rule px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf"
               >
-                <FileText className="h-3.5 w-3.5" />পড়ুন<ExternalLink className="h-3 w-3" />
+                <FileText className="h-3.5 w-3.5" />{en ? "Read" : "পড়ুন"}<ExternalLink className="h-3 w-3" />
               </a>
             ) : (
-              <span className="inline-flex items-center rounded-lg border border-dashed border-bone px-3 py-1.5 text-xs text-ink-faint">শীঘ্রই</span>
+              <span className="inline-flex items-center rounded-lg border border-dashed border-bone px-3 py-1.5 text-xs text-ink-faint">{en ? "Coming soon" : "শীঘ্রই"}</span>
             )}
           </div>
         </div>
@@ -433,6 +451,8 @@ function BookCard({ book, color }: { book: Book; color: string }) {
 function DatasetsSection({ datasets, search, setSearch, category, setCategory }: { datasets: Dataset[]; search: string; setSearch: (v: string) => void; category: string; setCategory: (v: string) => void; }) {
   const [sort, setSort] = useState<SortKey>("curated");
   const searchRef = useRef<HTMLInputElement>(null);
+  const { locale } = useLanguage();
+  const en = locale === "en";
 
   /* "/" focuses search from anywhere (unless typing or the command palette is open). */
   useEffect(() => {
@@ -480,13 +500,13 @@ function DatasetsSection({ datasets, search, setSearch, category, setCategory }:
           variants={stagger}
           className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-xl border rule bg-paper px-4 py-3 shadow-sm"
         >
-          <MastheadStat value={datasets.length} label="ডেটাসেট" tone="leaf" active={statsInView} />
+          <MastheadStat value={datasets.length} label={en ? "Datasets" : "ডেটাসেট"} tone="leaf" active={statsInView} />
           <span className="hidden h-4 w-px bg-bone sm:block" aria-hidden />
-          <MastheadStat value={totalRecords} label="মোট রেকর্ড" tone="ochre" active={statsInView} format={(n) => (n >= 1000 ? `${toBn(Math.round(n / 1000))}K+` : toBn(n))} />
+          <MastheadStat value={totalRecords} label={en ? "Total Records" : "মোট রেকর্ড"} tone="ochre" active={statsInView} format={(n) => (n >= 1000 ? `${toLocaleCount(Math.round(n / 1000), en)}K+` : toLocaleCount(n, en))} />
           <span className="hidden h-4 w-px bg-bone sm:block" aria-hidden />
-          <MastheadStat value={0} label="মোট আকার" tone="ink" active={statsInView} staticValue={sizeLabel} />
+          <MastheadStat value={0} label={en ? "Total Size" : "মোট আকার"} tone="ink" active={statsInView} staticValue={sizeLabel} />
           <span className="hidden h-4 w-px bg-bone sm:block" aria-hidden />
-          <MastheadStat value={0} label="লাইসেন্স" tone="leaf" active={statsInView} staticValue="CC-BY-4.0" />
+          <MastheadStat value={0} label={en ? "License" : "লাইসেন্স"} tone="leaf" active={statsInView} staticValue="CC-BY-4.0" />
         </motion.div>
       )}
 
@@ -500,12 +520,12 @@ function DatasetsSection({ datasets, search, setSearch, category, setCategory }:
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Escape") setSearch(""); }}
-            placeholder="ডেটাসেট, বিষয়, বা ব্যবহার খুঁজুন... (/)"
-            aria-label="ডেটাসেট খুঁজুন"
+            placeholder={en ? "Search datasets, topics, or use cases... (/)" : "ডেটাসেট, বিষয়, বা ব্যবহার খুঁজুন... (/)"}
+            aria-label={en ? "Search datasets" : "ডেটাসেট খুঁজুন"}
             className="w-full rounded-xl border rule bg-paper py-3.5 pl-12 pr-11 text-sm text-ink placeholder:text-ink-faint transition-colors focus:border-leaf focus:outline-none"
           />
           {search && (
-            <button onClick={() => setSearch("")} aria-label="অনুসন্ধান মুছুন" className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-faint transition-colors hover:text-ink">
+            <button onClick={() => setSearch("")} aria-label={en ? "Clear search" : "অনুসন্ধান মুছুন"} className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-faint transition-colors hover:text-ink">
               <X className="h-4 w-4" />
             </button>
           )}
@@ -517,7 +537,7 @@ function DatasetsSection({ datasets, search, setSearch, category, setCategory }:
       <ChipRow>
         {DATASET_CATEGORIES.map((cat) => (
           <Chip key={cat.id} active={category === cat.id} onClick={() => setCategory(cat.id === category ? "all" : cat.id)}>
-            {cat.label}
+            {en ? cat.en : cat.label}
           </Chip>
         ))}
       </ChipRow>
@@ -526,19 +546,19 @@ function DatasetsSection({ datasets, search, setSearch, category, setCategory }:
       <AnimatePresence>
         {hasFilters && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-ink-faint">সক্রিয় ফিল্টার:</span>
+            <span className="text-xs text-ink-faint">{en ? "Active filters:" : "সক্রিয় ফিল্টার:"}</span>
             {category !== "all" && (
               <FilterChip onClear={() => setCategory("all")}>
-                {DATASET_CATEGORIES.find((c) => c.id === category)?.label ?? category}
+                {en ? (DATASET_CATEGORIES.find((c) => c.id === category)?.en ?? category) : (DATASET_CATEGORIES.find((c) => c.id === category)?.label ?? category)}
               </FilterChip>
             )}
             {search && <FilterChip onClear={() => setSearch("")}>“{search}”</FilterChip>}
-            <button onClick={() => { setSearch(""); setCategory("all"); }} className="text-xs text-leaf transition-colors hover:text-leaf-2">সব মুছুন</button>
+            <button onClick={() => { setSearch(""); setCategory("all"); }} className="text-xs text-leaf transition-colors hover:text-leaf-2">{en ? "Clear all" : "সব মুছুন"}</button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <p className="text-sm text-ink-soft">{toBn(filtered.length)}টি ডেটাসেট পাওয়া গেছে</p>
+      <p className="text-sm text-ink-soft">{en ? `${toLocaleCount(filtered.length, en)} datasets found` : `${toLocaleCount(filtered.length, en)}টি ডেটাসেট পাওয়া গেছে`}</p>
 
       {/* Uniform equal-height card grid */}
       <motion.div initial="hidden" animate="visible" variants={stagger} className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -554,10 +574,10 @@ function DatasetsSection({ datasets, search, setSearch, category, setCategory }:
 
       {/* Download-all CTA */}
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: dur.normal, ease: ease.smooth }} className="rounded-xl border rule bg-paper-2/30 p-5 text-center">
-        <p className="text-sm text-ink-soft">সম্পূর্ণ ডেটাসেট রিপোজিটরি Hugging Face-এ উপলব্ধ — গবেষণা ও ট্রেনিং-এ ব্যবহারের জন্য উন্মুক্ত।</p>
+        <p className="text-sm text-ink-soft">{en ? "The complete dataset repository is available on Hugging Face — open for research and training use." : "সম্পূর্ণ ডেটাসেট রিপোজিটরি Hugging Face-এ উপলব্ধ — গবেষণা ও ট্রেনিং-এ ব্যবহারের জন্য উন্মুক্ত।"}</p>
         <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
           <a href={LINKS.huggingface} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-leaf px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-leaf-2">
-            <Download className="h-4 w-4" />Hugging Face থেকে ডাউনলোড<ExternalLink className="h-3 w-3" />
+            <Download className="h-4 w-4" />{en ? "Download from Hugging Face" : "Hugging Face থেকে ডাউনলোড"}<ExternalLink className="h-3 w-3" />
           </a>
           <CliCopy className="rounded-lg px-4 py-2.5 text-sm" />
         </div>
@@ -569,6 +589,8 @@ function DatasetsSection({ datasets, search, setSearch, category, setCategory }:
 /* === Dataset card — with split-composition bar === */
 function DatasetCard({ ds }: { ds: Dataset }) {
   const [showAllFields, setShowAllFields] = useState(false);
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const color = COLOR_MAP[ds.color] || "var(--color-leaf)";
   const Icon = DATASET_ICONS[ds.category] || Database;
   const splitEntries = Object.entries(ds.splits);
@@ -608,8 +630,8 @@ function DatasetCard({ ds }: { ds: Dataset }) {
               <Icon className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-display text-base text-ink">{ds.name_bn}</h3>
-              <p className="text-xs text-ink-faint">{ds.name}</p>
+              <h3 className="font-display text-base text-ink">{en ? ds.name : ds.name_bn}</h3>
+              {!en && <p className="text-xs text-ink-faint">{ds.name}</p>}
             </div>
           </div>
           <span className="shrink-0 rounded-md bg-bone/50 px-2 py-0.5 font-mono text-xs text-ink-soft">{ds.format}</span>
@@ -617,13 +639,13 @@ function DatasetCard({ ds }: { ds: Dataset }) {
 
         {/* Stats row */}
         <div className="mt-4 grid grid-cols-3 gap-2">
-          <MiniStat value={ds.count >= 1000 ? `${toBn(Math.round(ds.count / 1000))}K` : toBn(ds.count)} label="রেকর্ড" color={color} />
-          <MiniStat value={ds.size_mb >= 1024 ? `${toBn(Number((ds.size_mb / 1024).toFixed(1)))}GB` : `${toBn(Math.round(ds.size_mb))}MB`} label="আকার" color={color} />
-          <MiniStat value={toBn(splitEntries.length)} label="স্প্লিট" color={color} />
+          <MiniStat value={ds.count >= 1000 ? `${toLocaleCount(Math.round(ds.count / 1000), en)}K` : toLocaleCount(ds.count, en)} label={en ? "Records" : "রেকর্ড"} color={color} />
+          <MiniStat value={ds.size_mb >= 1024 ? `${toLocaleCount(Number((ds.size_mb / 1024).toFixed(1)), en)}GB` : `${toLocaleCount(Math.round(ds.size_mb), en)}MB`} label={en ? "Size" : "আকার"} color={color} />
+          <MiniStat value={toLocaleCount(splitEntries.length, en)} label={en ? "Splits" : "স্প্লিট"} color={color} />
         </div>
 
         {/* Description */}
-        <p className="mt-3 text-xs leading-relaxed text-ink-soft">{ds.description}</p>
+        <p className="mt-3 text-xs leading-relaxed text-ink-soft">{en ? ds.description_en : ds.description}</p>
 
         {/* Split-composition bar — visual train/val/test proportions */}
         {splitEntries.length > 1 && (
@@ -648,7 +670,7 @@ function DatasetCard({ ds }: { ds: Dataset }) {
           {splitEntries.map(([split, count]) => (
             <span key={split} className="inline-flex items-center gap-1.5 rounded-md border rule px-2 py-0.5 text-xs text-ink-soft">
               <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: SPLIT_COLORS[split] || "var(--color-leaf-3)" }} />
-              <span className="font-mono text-ochre">{split}</span>: <span className="tabular">{toBn(count)}</span>
+              <span className="font-mono text-ochre">{split}</span>: <span className="tabular">{toLocaleCount(count, en)}</span>
             </span>
           ))}
         </div>
@@ -662,7 +684,7 @@ function DatasetCard({ ds }: { ds: Dataset }) {
         {/* Vision dataset — honest locked-model disclosure */}
         {ds.id === "soil_moisture" && (
           <p className="mt-3 text-xs text-ink-faint">
-            লকড-মডেল নীতি: ডেটাসেট প্রকাশিত; স্বয়ংক্রিয় আর্দ্রতা নির্ণয় যাচাইয়ের পরে চালু হবে।
+            {en ? "Locked-model policy: dataset published; automatic moisture detection will launch after validation." : "লকড-মডেল নীতি: ডেটাসেট প্রকাশিত; স্বয়ংক্রিয় আর্দ্রতা নির্ণয় যাচাইয়ের পরে চালু হবে।"}
           </p>
         )}
 
@@ -676,7 +698,7 @@ function DatasetCard({ ds }: { ds: Dataset }) {
               onClick={() => setShowAllFields((v) => !v)}
               className="rounded bg-bone/40 px-1.5 py-0.5 font-mono text-xs text-leaf transition-colors hover:bg-leaf/10"
             >
-              {showAllFields ? "কম দেখান" : `সব ${toBn(ds.fields.length)}টি`}
+              {showAllFields ? (en ? "Show less" : "কম দেখান") : (en ? `All ${toLocaleCount(ds.fields.length, en)}` : `সব ${toLocaleCount(ds.fields.length, en)}টি`)}
             </button>
           )}
         </div>
@@ -687,11 +709,11 @@ function DatasetCard({ ds }: { ds: Dataset }) {
         <div className="flex items-center gap-3">
           {ds.id === "soil_moisture" && (
             <a href="/soil" className="inline-flex items-center gap-1.5 text-xs font-medium text-ochre transition-colors hover:text-ochre-soft">
-              <Box className="h-3.5 w-3.5" />মাটি কনসোলে দেখুন
+              <Box className="h-3.5 w-3.5" />{en ? "View in Soil Console" : "মাটি কনসোলে দেখুন"}
             </a>
           )}
           <a href={LINKS.huggingface} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-medium text-leaf transition-colors hover:text-leaf-2">
-            <Download className="h-3.5 w-3.5" />ডাউনলোড<ExternalLink className="h-3 w-3" />
+            <Download className="h-3.5 w-3.5" />{en ? "Download" : "ডাউনলোড"}<ExternalLink className="h-3 w-3" />
           </a>
         </div>
         <CliCopy />
@@ -703,10 +725,12 @@ function DatasetCard({ ds }: { ds: Dataset }) {
 /* === Count-up stat (books strip) === */
 function CountStat({ value, label, tone, active }: { value: number; label: string; tone: "leaf" | "ochre" | "ink"; active: boolean }) {
   const n = useCountUp(value, active);
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const color = tone === "leaf" ? "text-leaf" : tone === "ochre" ? "text-ochre" : "text-ink";
   return (
     <div className="bg-paper px-4 py-3 text-center">
-      <div className={cn("font-display text-xl tabular leading-none", color)}>{toBn(n)}</div>
+      <div className={cn("font-display text-xl tabular leading-none", color)}>{toLocaleCount(n, en)}</div>
       <div className="mt-1.5 text-xs text-ink-faint">{label}</div>
     </div>
   );
@@ -715,8 +739,10 @@ function CountStat({ value, label, tone, active }: { value: number; label: strin
 /* === Masthead stat (datasets) — count-up or static === */
 function MastheadStat({ value, label, tone, active, format, staticValue }: { value: number; label: string; tone: "leaf" | "ochre" | "ink"; active: boolean; format?: (n: number) => string; staticValue?: string }) {
   const n = useCountUp(value, active);
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const color = tone === "leaf" ? "text-leaf" : tone === "ochre" ? "text-ochre" : "text-ink";
-  const display = staticValue ?? (format ? format(n) : toBn(n));
+  const display = staticValue ?? (format ? format(n) : toLocaleCount(n, en));
   return (
     <div className="text-center">
       <div className={cn("font-display text-lg tabular leading-none", color)}>{display}</div>
@@ -765,6 +791,8 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 function CliCopy({ className }: { className?: string }) {
   const [copied, setCopied] = useState(false);
   const timer = useRef<number | null>(null);
+  const { locale } = useLanguage();
+  const en = locale === "en";
 
   useEffect(() => () => { if (timer.current) window.clearTimeout(timer.current); }, []);
 
@@ -782,8 +810,8 @@ function CliCopy({ className }: { className?: string }) {
   return (
     <button
       onClick={copy}
-      aria-label="CLI কমান্ড কপি করুন"
-      title="CLI কমান্ড কপি করুন"
+      aria-label={en ? "Copy CLI command" : "CLI কমান্ড কপি করুন"}
+      title={en ? "Copy CLI command" : "CLI কমান্ড কপি করুন"}
       className={cn(
         "inline-flex items-center justify-center gap-1.5 rounded-lg border font-medium transition-colors",
         copied ? "border-leaf/50 bg-leaf/10 text-leaf" : "rule text-ink-soft hover:border-leaf hover:text-leaf",
@@ -791,7 +819,7 @@ function CliCopy({ className }: { className?: string }) {
       )}
     >
       {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-      {copied ? "কপি হয়েছে" : "CLI"}
+      {copied ? (en ? "Copied" : "কপি হয়েছে") : "CLI"}
     </button>
   );
 }
@@ -809,10 +837,12 @@ function legacyCopy(text: string) {
 
 /* === Sort segmented control === */
 function SortControl({ sort, setSort }: { sort: SortKey; setSort: (s: SortKey) => void }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <div className="flex items-center gap-1.5 self-start sm:self-auto">
       <ArrowDownUp className="h-4 w-4 shrink-0 text-ink-faint" aria-hidden />
-      <div className="inline-flex rounded-lg border rule bg-paper p-0.5" role="group" aria-label="সাজান">
+      <div className="inline-flex rounded-lg border rule bg-paper p-0.5" role="group" aria-label={en ? "Sort" : "সাজান"}>
         {SORTS.map((s) => (
           <button
             key={s.id}
@@ -823,7 +853,7 @@ function SortControl({ sort, setSort }: { sort: SortKey; setSort: (s: SortKey) =
               sort === s.id ? "bg-leaf text-paper" : "text-ink-soft hover:text-ink",
             )}
           >
-            {s.label}
+            {en ? s.en : s.label}
           </button>
         ))}
       </div>
@@ -833,31 +863,37 @@ function SortControl({ sort, setSort }: { sort: SortKey; setSort: (s: SortKey) =
 
 /* === Removable filter chip === */
 function FilterChip({ children, onClear }: { children: React.ReactNode; onClear: () => void }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full border border-leaf/30 bg-leaf/10 px-3 py-1 text-xs font-medium text-leaf">
       {children}
-      <button onClick={onClear} aria-label="ফিল্টার মুছুন" className="transition-colors hover:text-leaf-2"><X className="h-3 w-3" /></button>
+      <button onClick={onClear} aria-label={en ? "Clear filter" : "ফিল্টার মুছুন"} className="transition-colors hover:text-leaf-2"><X className="h-3 w-3" /></button>
     </span>
   );
 }
 
 /* === Empty state === */
 function EmptyState({ onReset }: { onReset: () => void }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-20 text-center">
       <Search className="mx-auto h-10 w-10 text-ink-faint" />
-      <p className="mt-4 text-sm text-ink-soft">কিছু পাওয়া যায়নি।</p>
-      <button onClick={onReset} className="mt-3 text-sm text-leaf transition-colors hover:text-leaf-2">ফিল্টার মুছুন</button>
+      <p className="mt-4 text-sm text-ink-soft">{en ? "Nothing found." : "কিছু পাওয়া যায়নি।"}</p>
+      <button onClick={onReset} className="mt-3 text-sm text-leaf transition-colors hover:text-leaf-2">{en ? "Clear filters" : "ফিল্টার মুছুন"}</button>
     </motion.div>
   );
 }
 
 /* === Loading === */
 function LoadingState() {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <div className="py-20 text-center">
       <Database className="mx-auto h-10 w-10 animate-pulse text-ink-faint" />
-      <p className="mt-4 text-sm text-ink-faint">লোড হচ্ছে…</p>
+      <p className="mt-4 text-sm text-ink-faint">{en ? "Loading…" : "লোড হচ্ছে…"}</p>
     </div>
   );
 }
