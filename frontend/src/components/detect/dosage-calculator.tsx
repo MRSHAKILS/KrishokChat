@@ -2,9 +2,10 @@
 
 import { useState, useMemo } from "react";
 import { Calculator, Droplets, ShieldCheck, Phone } from "lucide-react";
-import { HELPLINE } from "@/lib/constants";
-import { toBn } from "@/lib/use-count-up";
+import { HELPLINE, HELPLINE_EN } from "@/lib/constants";
+import { toLocaleCount } from "@/lib/use-count-up";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    DosageCalculator — Interactive Spray Tank & Land Dosage Calculator.
@@ -22,15 +23,15 @@ interface DosageCalculatorProps {
 
 // Preset standard sprayer knapsack tank capacities in Bangladesh
 const TANK_PRESETS = [
-  { liters: 10, label: "১০ লিটার", desc: "ছোট স্প্রেয়ার" },
-  { liters: 16, label: "১৬ লিটার", desc: "স্ট্যান্ডার্ড ন্যাপস্যাক", standard: true },
-  { liters: 20, label: "২০ লিটার", desc: "বড় ব্যাটারি স্প্রেয়ার" },
+  { liters: 10, label: "১০ লিটার", labelEn: "10 liters", desc: "ছোট স্প্রেয়ার", descEn: "Small sprayer" },
+  { liters: 16, label: "১৬ লিটার", labelEn: "16 liters", desc: "স্ট্যান্ডার্ড ন্যাপস্যাক", descEn: "Standard knapsack", standard: true },
+  { liters: 20, label: "২০ লিটার", labelEn: "20 liters", desc: "বড় ব্যাটারি স্প্রেয়ার", descEn: "Large battery sprayer" },
 ];
 
 const LAND_UNITS = [
-  { id: "shotok", name: "শতক / ডেসিমাল", multiplier: 1, waterLitersPerUnit: 4 },
-  { id: "katha", name: "কাঠা", multiplier: 1.65, waterLitersPerUnit: 6.6 },
-  { id: "bigha", name: "বিঘা (৩৩ শতক)", multiplier: 33, waterLitersPerUnit: 132 },
+  { id: "shotok", name: "শতক / ডেসিমাল", nameEn: "Shotok / Decimal", multiplier: 1, waterLitersPerUnit: 4 },
+  { id: "katha", name: "কাঠা", nameEn: "Katha", multiplier: 1.65, waterLitersPerUnit: 6.6 },
+  { id: "bigha", name: "বিঘা (৩৩ শতক)", nameEn: "Bigha (33 shotok)", multiplier: 33, waterLitersPerUnit: 132 },
 ];
 
 // Helper to extract a reasonable default dose per liter from raw text (defaults to 2g/L if unspecified)
@@ -55,8 +56,10 @@ function parseDosePerLiter(text?: string | null): { dose: number; unit: "g" | "m
 export function DosageCalculator({
   defaultDosageText,
 }: DosageCalculatorProps) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const parsed = useMemo(() => parseDosePerLiter(defaultDosageText), [defaultDosageText]);
-  
+
   const [calcMode, setCalcMode] = useState<"tank" | "land">("tank");
   const [selectedTank, setSelectedTank] = useState<number>(16);
   const [dosePerLiter, setDosePerLiter] = useState<number>(parsed.dose);
@@ -93,46 +96,58 @@ export function DosageCalculator({
       const spoons = Math.round((calculatedTotalDose / 2) * 10) / 10;
       const matchboxes = Math.round((calculatedTotalDose / 10) * 10) / 10;
       if (calculatedTotalDose >= 10) {
-        return `${toBn(spoons)} চা চামচ (বা প্রায় ${toBn(matchboxes)} দিয়াশলাই/ম্যাচ বাক্স — প্রতি বাক্সে প্রায় ১০ গ্রাম)`;
+        return en
+          ? `${toLocaleCount(spoons, en)} tea spoons (or about ${toLocaleCount(matchboxes, en)} matchboxes — roughly 10 grams per box)`
+          : `${toLocaleCount(spoons, en)} চা চামচ (বা প্রায় ${toLocaleCount(matchboxes, en)} দিয়াশলাই/ম্যাচ বাক্স — প্রতি বাক্সে প্রায় ১০ গ্রাম)`;
       }
-      return `${toBn(spoons)} চা চামচ (প্রতি চামচ প্রায় ২ গ্রাম পাউডার)`;
+      return en
+        ? `${toLocaleCount(spoons, en)} tea spoons (about 2 grams of powder per spoon)`
+        : `${toLocaleCount(spoons, en)} চা চামচ (প্রতি চামচ প্রায় ২ গ্রাম পাউডার)`;
     } else {
       const caps = Math.round((calculatedTotalDose / 10) * 10) / 10;
-      return `${toBn(caps)} বোতলের ছিপি (প্রতি ছিপি প্রায় ১০ মিলি তরল ওষুধ)`;
+      return en
+        ? `${toLocaleCount(caps, en)} bottle caps (about 10 ml of liquid per cap)`
+        : `${toLocaleCount(caps, en)} বোতলের ছিপি (প্রতি ছিপি প্রায় ১০ মিলি তরল ওষুধ)`;
     }
-  }, [calculatedTotalDose, unitType]);
+  }, [calculatedTotalDose, unitType, en]);
 
   // Safety concentration level
   const safetyStatus = useMemo(() => {
     if (dosePerLiter > 4) {
       return {
         level: "danger",
-        label: "অতিরিক্ত ঘন মাত্রা (Overdose Warning)",
+        label: en ? "Overdose Warning" : "অতিরিক্ত ঘন মাত্রা (Overdose Warning)",
         color: "text-clay",
         bg: "bg-clay-soft/20",
         border: "border-clay-soft",
-        desc: "গাছ পুড়ে যাওয়ার বা বিষক্রিয়ার উচ্চ ঝুঁকি রয়েছে। মাত্রা কমিয়ে আনুন।",
+        desc: en
+          ? "There is a high risk of leaf burn or toxicity. Reduce the dose."
+          : "গাছ পুড়ে যাওয়ার বা বিষক্রিয়ার উচ্চ ঝুঁকি রয়েছে। মাত্রা কমিয়ে আনুন।",
       };
     }
     if (dosePerLiter >= 1.5 && dosePerLiter <= 3) {
       return {
         level: "safe",
-        label: "অনুমোদিত আদর্শ মাত্রা (Safe Recommended Ratio)",
+        label: en ? "Safe Recommended Ratio" : "অনুমোদিত আদর্শ মাত্রা (Safe Recommended Ratio)",
         color: "text-leaf",
         bg: "bg-leaf/10",
         border: "border-leaf/30",
-        desc: "সরকারি বালাই ব্যবস্থাপনা নির্দেশিকা অনুসারে সঠিক মাত্রা।",
+        desc: en
+          ? "The correct dose, per official pest management guidelines."
+          : "সরকারি বালাই ব্যবস্থাপনা নির্দেশিকা অনুসারে সঠিক মাত্রা।",
       };
     }
     return {
       level: "caution",
-      label: "হালকা মাত্রা (Light Dose)",
+      label: en ? "Light Dose" : "হালকা মাত্রা (Light Dose)",
       color: "text-ochre",
       bg: "bg-ochre-soft/20",
       border: "border-ochre-soft",
-      desc: "প্রাথমিক রোগ প্রতিরোধে কার্যকর, তবে তীব্র আক্রমণে কৃষি বিশেষজ্ঞের পরামর্শ নিন।",
+      desc: en
+        ? "Effective for early-stage prevention, but consult an agriculture specialist for severe infestations."
+        : "প্রাথমিক রোগ প্রতিরোধে কার্যকর, তবে তীব্র আক্রমণে কৃষি বিশেষজ্ঞের পরামর্শ নিন।",
     };
-  }, [dosePerLiter]);
+  }, [dosePerLiter, en]);
 
   return (
     <div className="overflow-hidden rounded-xl border border-leaf/20 bg-paper shadow-sm">
@@ -140,7 +155,7 @@ export function DosageCalculator({
       <div className="flex items-center justify-between border-b border-leaf/15 bg-leaf/5 px-4 py-3 sm:px-5">
         <div className="flex items-center gap-2 text-xs font-semibold text-leaf">
           <Calculator className="h-4 w-4" />
-          <span>সঠিক মাত্রা ও স্প্রে গণক (Dosage Calculator)</span>
+          <span>{en ? "Dosage & Spray Calculator" : "সঠিক মাত্রা ও স্প্রে গণক (Dosage Calculator)"}</span>
         </div>
         <div className="flex rounded-lg border rule bg-paper p-0.5 text-xs font-medium text-ink-soft">
           <button
@@ -151,7 +166,7 @@ export function DosageCalculator({
               calcMode === "tank" ? "bg-leaf text-paper font-semibold shadow-xs" : "hover:text-ink"
             )}
           >
-            স্প্রেয়ার ট্যাংক
+            {en ? "Sprayer Tank" : "স্প্রেয়ার ট্যাংক"}
           </button>
           <button
             type="button"
@@ -161,7 +176,7 @@ export function DosageCalculator({
               calcMode === "land" ? "bg-leaf text-paper font-semibold shadow-xs" : "hover:text-ink"
             )}
           >
-            জমির পরিমাণ
+            {en ? "Land Area" : "জমির পরিমাণ"}
           </button>
         </div>
       </div>
@@ -171,7 +186,7 @@ export function DosageCalculator({
         {calcMode === "tank" ? (
           <div>
             <label className="text-xs font-semibold text-ink-faint">
-              আপনার স্প্রেয়ার ট্যাংকের ধারণক্ষমতা নির্বাচন করুন:
+              {en ? "Select your sprayer tank capacity:" : "আপনার স্প্রেয়ার ট্যাংকের ধারণক্ষমতা নির্বাচন করুন:"}
             </label>
             <div className="mt-2 grid grid-cols-3 gap-2">
               {TANK_PRESETS.map((preset) => {
@@ -189,10 +204,10 @@ export function DosageCalculator({
                     )}
                   >
                     <span className="font-display text-sm font-semibold sm:text-base">
-                      {preset.label}
+                      {en ? preset.labelEn : preset.label}
                     </span>
                     <span className="mt-0.5 text-xs text-ink-faint">
-                      {preset.desc}
+                      {en ? preset.descEn : preset.desc}
                     </span>
                   </button>
                 );
@@ -204,7 +219,7 @@ export function DosageCalculator({
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <label className="text-xs font-semibold text-ink-faint">
-                জমির পরিমাণ:
+                {en ? "Land area:" : "জমির পরিমাণ:"}
               </label>
               <div className="mt-1 flex items-center gap-2">
                 <input
@@ -219,7 +234,7 @@ export function DosageCalculator({
             </div>
             <div>
               <label className="text-xs font-semibold text-ink-faint">
-                পরিমাপের একক:
+                {en ? "Unit of measure:" : "পরিমাপের একক:"}
               </label>
               <select
                 value={landUnit}
@@ -228,7 +243,7 @@ export function DosageCalculator({
               >
                 {LAND_UNITS.map((u) => (
                   <option key={u.id} value={u.id}>
-                    {u.name}
+                    {en ? u.nameEn : u.name}
                   </option>
                 ))}
               </select>
@@ -240,14 +255,14 @@ export function DosageCalculator({
         <div className="rounded-xl border rule bg-paper-2/25 p-3.5">
           <div className="flex items-center justify-between text-xs">
             <span className="font-semibold text-ink">
-              প্রস্তাবিত প্রয়োগ মাত্রা (প্রতি লিটার পানিতে):
+              {en ? "Recommended application dose (per liter of water):" : "প্রস্তাবিত প্রয়োগ মাত্রা (প্রতি লিটার পানিতে):"}
             </span>
             <div className="flex items-center gap-1.5">
               <span className="font-display text-base font-bold tabular text-leaf">
-                {toBn(dosePerLiter)}
+                {toLocaleCount(dosePerLiter, en)}
               </span>
               <span className="text-xs font-semibold text-ink-soft">
-                {unitType === "g" ? "গ্রাম / লিটার" : "মিলি / লিটার"}
+                {en ? (unitType === "g" ? "g / liter" : "ml / liter") : (unitType === "g" ? "গ্রাম / লিটার" : "মিলি / লিটার")}
               </span>
             </div>
           </div>
@@ -268,14 +283,14 @@ export function DosageCalculator({
                 onClick={() => setUnitType("g")}
                 className={cn("px-2 py-1 rounded-l-md cursor-pointer", unitType === "g" ? "bg-leaf text-paper" : "text-ink-faint")}
               >
-                পাউডার (গ্রাম)
+                {en ? "Powder (g)" : "পাউডার (গ্রাম)"}
               </button>
               <button
                 type="button"
                 onClick={() => setUnitType("ml")}
                 className={cn("px-2 py-1 rounded-r-md cursor-pointer", unitType === "ml" ? "bg-leaf text-paper" : "text-ink-faint")}
               >
-                তরল (মিলি)
+                {en ? "Liquid (ml)" : "তরল (মিলি)"}
               </button>
             </div>
           </div>
@@ -286,21 +301,21 @@ export function DosageCalculator({
           <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
             <div>
               <span className="text-xs font-semibold text-leaf">
-                মোট মিশ্রণ হিসাব
+                {en ? "Total Mixture Calculation" : "মোট মিশ্রণ হিসাব"}
               </span>
               <div className="mt-1 flex items-baseline gap-2">
                 <span className="font-display text-2xl font-bold tabular text-ink sm:text-3xl">
-                  {toBn(calculatedTotalDose)}
+                  {toLocaleCount(calculatedTotalDose, en)}
                 </span>
                 <span className="font-semibold text-leaf text-base">
-                  {unitType === "g" ? "গ্রাম কীটনাশক / ছত্রাকনাশক" : "মিলি তরল ওষুধ"}
+                  {en ? (unitType === "g" ? "g of pesticide / fungicide" : "ml of liquid medicine") : (unitType === "g" ? "গ্রাম কীটনাশক / ছত্রাকনাশক" : "মিলি তরল ওষুধ")}
                 </span>
               </div>
             </div>
             <div className="rounded-lg border border-leaf/20 bg-paper px-3 py-2 text-right">
-              <div className="text-xs text-ink-faint">প্রয়োজনীয় পানি</div>
+              <div className="text-xs text-ink-faint">{en ? "Water needed" : "প্রয়োজনীয় পানি"}</div>
               <div className="font-display text-lg font-bold tabular text-ink">
-                {toBn(totalWaterRequired)} <span className="text-xs font-normal">লিটার</span>
+                {toLocaleCount(totalWaterRequired, en)} <span className="text-xs font-normal">{en ? "liters" : "লিটার"}</span>
               </div>
             </div>
           </div>
@@ -309,7 +324,7 @@ export function DosageCalculator({
           <div className="mt-3 flex items-center gap-2 border-t border-leaf/15 pt-3 text-xs text-ink-soft">
             <Droplets className="h-4 w-4 shrink-0 text-ochre" />
             <span>
-              সহজ পরিমাপ: <strong>{practicalHouseholdMeasure}</strong>
+              {en ? "Easy measure: " : "সহজ পরিমাপ: "}<strong>{practicalHouseholdMeasure}</strong>
             </span>
           </div>
         </div>
@@ -326,9 +341,9 @@ export function DosageCalculator({
           <a
             href={`tel:${HELPLINE.krishiCallCenter}`}
             className="inline-flex shrink-0 items-center gap-1 rounded-md border border-leaf/30 bg-paper px-2 py-1 text-xs font-semibold text-leaf hover:bg-leaf/5"
-            title="কৃষি কল সেন্টারে যোগাযোগ করুন"
+            title={en ? "Contact the agriculture call center" : "কৃষি কল সেন্টারে যোগাযোগ করুন"}
           >
-            <Phone className="h-3 w-3" /> ১৬১২৩
+            <Phone className="h-3 w-3" /> {en ? HELPLINE_EN.krishiCallCenter : HELPLINE.krishiCallCenter}
           </a>
         </div>
       </div>

@@ -315,7 +315,7 @@ export default function MethodologyPage() {
               className="flex items-center gap-3 rounded-lg border rule bg-paper px-4 py-2.5"
             >
               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-leaf/10 font-display text-xs text-leaf tabular">
-                {numLocale(step.step, en)}
+                {step.step}
               </div>
               <div className="flex-1">
                 <div className="text-sm font-medium text-ink">{en ? step.label.en : step.label.bn}</div>

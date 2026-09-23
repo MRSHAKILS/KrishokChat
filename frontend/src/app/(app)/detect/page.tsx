@@ -28,7 +28,7 @@ const VISION_ONDEVICE_ENABLED = process.env.NEXT_PUBLIC_VISION_ONDEVICE_ENABLED 
    ========================================================================= */
 
 export default function DetectPage() {
-  const { t, locale, formatNumber } = useLanguage();
+  const { t, locale, formatNumber, formatPercent1, localizeCrop, localizeDisease } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -113,12 +113,21 @@ export default function DetectPage() {
      with the intake node complete and the rest pending. */
   const railEvents: RailEvent[] = useMemo(() => {
     if (!result) return [];
-    return (result.agent_trace ?? []).map((e) => ({
-      stage: e.stage,
-      status: e.status,
-      detail: e.detail,
-    }));
-  }, [result]);
+    return (result.agent_trace ?? []).map((e) => {
+      if (locale === "en" && e.stage === "crop_classification" && result.crop) {
+        return { stage: e.stage, status: e.status, detail: localizeCrop(result.crop) };
+      }
+      if (locale === "en" && e.stage === "disease_classification" && result.disease) {
+        const name = localizeDisease(result.disease);
+        const pct =
+          typeof result.disease_confidence === "number"
+            ? ` [${formatPercent1(result.disease_confidence)}]`
+            : "";
+        return { stage: e.stage, status: e.status, detail: `${name}${pct}` };
+      }
+      return { stage: e.stage, status: e.status, detail: e.detail };
+    });
+  }, [result, locale, localizeCrop, localizeDisease, formatPercent1]);
 
   useEffect(() => {
     const update = () => setOnline(navigator.onLine);

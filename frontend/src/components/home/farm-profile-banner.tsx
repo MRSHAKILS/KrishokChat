@@ -49,7 +49,7 @@ export function FarmProfileBanner({
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-leaf" />
               {en
                 ? `Advice customized to your farm profile • Offline data pack v${offlinePackVersion} active`
-                : `আপনার খামারের প্রোফাইল অনুযায়ী পরামর্শ কাস্টমাইজ করা হয়েছে • অফলাইন তথ্যপ্যাক v${offlinePackVersion} সক্রিয়`}
+                : `আপনার খামারের প্রোফাইল অনুযায়ী পরামর্শ কাস্টমাইজ করা হয়েছে • অফলাইন তথ্যপ্যাক v${offlinePackVersion} সক্রিয়`}
             </p>
           </div>
         </div>

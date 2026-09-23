@@ -729,7 +729,7 @@ function ValueFlowSection() {
           {/* Three outputs */}
           <div className="flex flex-col gap-2 sm:gap-2.5">
             <FlowArrow label={en ? "Revenue" : "আয়"} vertical />
-            <FlowNode icon={Landmark} title="16123 / DAE" subtitle={en ? "B2G (First)" : "B2G (প্রথম)"} color="ochre" subtitleColor="ochre" small />
+            <FlowNode icon={Landmark} title={en ? "16123 / DAE" : "১৬১২৩ / DAE"} subtitle={en ? "B2G (First)" : "B2G (প্রথম)"} color="ochre" subtitleColor="ochre" small />
             <FlowNode icon={Building2} title={en ? "Dealers / Seed Companies" : "ডিলার / বীজ কোম্পানি"} subtitle={en ? "B2B (Second)" : "B2B (দ্বিতীয়)"} color="leaf" subtitleColor="leaf" small />
             <FlowNode icon={Database} title={en ? "Researchers / Fintech" : "গবেষক / ফিনটেক"} subtitle={en ? "License" : "লাইসেন্স"} color="clay" subtitleColor="clay" small />
           </div>

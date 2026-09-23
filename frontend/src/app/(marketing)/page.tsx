@@ -18,7 +18,7 @@ import { BusinessModelSection } from "@/components/landing/business-model-sectio
 import { getWeather, registerHelpline } from "@/lib/api";
 import { safetyLabel, TONE_BADGE, AGRI_DISTRICTS } from "@/lib/safety-labels";
 import { useLanguage } from "@/context/language-context";
-import { statLocale, numLocale } from "@/lib/bn";
+import { statLocale } from "@/lib/bn";
 
 /* Stats section (recharts) is lazy-loaded — keeps the chart library out of the
    landing page's first-load JS for rural 2G/3G visitors. */
@@ -541,7 +541,7 @@ function TimelineSection() {
             {milestones.map((m, i) => (
               <motion.div key={i} initial={{ opacity: 0, x: 12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: dur.normal, ease: ease.smooth }} className="flex gap-4">
                 <div className="flex flex-col items-center">
-                  <div className={`flex h-9 w-9 items-center justify-center rounded-full font-display text-xs tabular ${i === milestones.length - 1 ? "bg-leaf text-paper" : "border border-leaf/30 bg-leaf/5 text-leaf"}`}>{numLocale(i + 1, en)}</div>
+                  <div className={`flex h-9 w-9 items-center justify-center rounded-full font-display text-xs tabular ${i === milestones.length - 1 ? "bg-leaf text-paper" : "border border-leaf/30 bg-leaf/5 text-leaf"}`}>{i + 1}</div>
                   {i < milestones.length - 1 && <div className="my-1 h-10 w-px bg-bone" />}
                 </div>
                 <div className={`flex-1 ${i < milestones.length - 1 ? "pb-5" : "pb-0"}`}>
