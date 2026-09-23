@@ -21,6 +21,8 @@ import {
 import { HELPLINE } from "@/lib/constants";
 import { enter, stagger } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import { numLocale, statLocale } from "@/lib/bn";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    PipelineSandbox — Interactive 4-Stage Safety Pipeline Simulator.
@@ -35,122 +37,135 @@ import { cn } from "@/lib/utils";
 
 type ArchetypeId = "safe_agri" | "banned_chemical" | "self_harm" | "dialect_agri";
 
+interface Localized {
+  bn: string;
+  en: string;
+}
+
 interface ArchetypeData {
   id: ArchetypeId;
-  label: string;
-  badge: string;
+  label: Localized;
+  badge: Localized;
   badgeColor: string;
-  query: string;
-  queryMeaning: string;
+  query: Localized;
+  queryMeaning: Localized;
   isSafe: boolean;
   terminalStage: number; // 1 to 4
   safetyCategory: string;
-  safetyReason: string;
+  safetyReason: Localized;
   sources?: {
-    publisher: string;
-    title: string;
-    snippet: string;
+    publisher: Localized;
+    title: Localized;
+    snippet: Localized;
     chemicals: string[];
     score: string;
   }[];
-  generatedText: string;
+  generatedText: Localized;
   verifierPassed: boolean;
-  verifierNote: string;
+  verifierNote: Localized;
   auditAction: string;
 }
 
 const ARCHETYPES: ArchetypeData[] = [
   {
     id: "safe_agri",
-    label: "১. স্বাভাবিক কৃষি প্রশ্ন (Safe Agri)",
-    badge: "স্বাভাবিক প্রবাহ",
+    label: { bn: "১. স্বাভাবিক কৃষি প্রশ্ন (Safe Agri)", en: "1. Normal Agricultural Question (Safe Agri)" },
+    badge: { bn: "স্বাভাবিক প্রবাহ", en: "Normal Flow" },
     badgeColor: "bg-leaf/15 text-leaf border-leaf/30",
-    query: "আলুর লেট ব্লাইট (নাবি ধসা) কীভাবে প্রতিরোধ করব?",
-    queryMeaning: "আলু ফসলের মারাত্মক ছত্রাকজনিত রোগের অনুমোদিত প্রতিকার জানতে চাওয়া হয়েছে।",
+    query: { bn: "আলুর লেট ব্লাইট (নাবি ধসা) কীভাবে প্রতিরোধ করব?", en: "How do I prevent potato late blight?" },
+    queryMeaning: { bn: "আলু ফসলের মারাত্মক ছত্রাকজনিত রোগের অনুমোদিত প্রতিকার জানতে চাওয়া হয়েছে।", en: "Asking for the approved remedy for a serious fungal disease of the potato crop." },
     isSafe: true,
     terminalStage: 4,
     safetyCategory: "safe_agri",
-    safetyReason: "বৈধ কৃষি প্রশ্ন; কোনো নিষিদ্ধ রাসায়নিক বা অপব্যবহারের ঝুঁকি নেই।",
+    safetyReason: { bn: "বৈধ কৃষি প্রশ্ন; কোনো নিষিদ্ধ রাসায়নিক বা অপব্যবহারের ঝুঁকি নেই।", en: "A legitimate agricultural question; no banned chemical or misuse risk." },
     sources: [
       {
-        publisher: "কৃষি সম্প্রসারণ অধিদপ্তর (DAE)",
-        title: "বালাই ব্যবস্থাপনা নির্দেশিকা — অধ্যায় ৪",
-        snippet: "আলুর লেট ব্লাইট (Late Blight) দমনে প্রতি লিটার পানিতে ২ গ্রাম মাত্রায় ম্যানকোজেব ৮০WP মিশ্রণ করে স্প্রে করুন।",
+        publisher: { bn: "কৃষি সম্প্রসারণ অধিদপ্তর (DAE)", en: "Department of Agricultural Extension (DAE)" },
+        title: { bn: "বালাই ব্যবস্থাপনা নির্দেশিকা — অধ্যায় ৪", en: "Pest Management Guideline — Chapter 4" },
+        snippet: { bn: "আলুর লেট ব্লাইট (Late Blight) দমনে প্রতি লিটার পানিতে ২ গ্রাম মাত্রায় ম্যানকোজেব ৮০WP মিশ্রণ করে স্প্রে করুন।", en: "To control potato late blight, mix Mancozeb 80WP at 2 grams per liter of water and spray." },
         chemicals: ["Mancozeb 80WP", "Metalaxyl"],
         score: "০.৯২৪",
       },
       {
-        publisher: "সিএবিআই ক্রপ স্পেকট্রাম (CABI)",
-        title: "Potato Late Blight Manual",
-        snippet: "Phytophthora infestans ছত্রাক দ্বারা সৃষ্ট। প্রাথমিক প্রতিরোধে কপার অক্সিক্লোরাইড বা ম্যানকোজেব কার্যকর।",
+        publisher: { bn: "সিএবিআই ক্রপ স্পেকট্রাম (CABI)", en: "CABI Crop Spectrum (CABI)" },
+        title: { bn: "Potato Late Blight Manual", en: "Potato Late Blight Manual" },
+        snippet: { bn: "Phytophthora infestans ছত্রাক দ্বারা সৃষ্ট। প্রাথমিক প্রতিরোধে কপার অক্সিক্লোরাইড বা ম্যানকোজেব কার্যকর।", en: "Caused by the fungus Phytophthora infestans. Copper oxychloride or mancozeb are effective for early prevention." },
         chemicals: ["Copper oxychloride"],
         score: "০.৮৬৫",
       },
     ],
-    generatedText:
-      "আলুর লেট ব্লাইট (নাবি ধসা) একটি ছত্রাকজনিত রোগ।\n\nপ্রতিকারের ব্যবস্থা:\n১. রোগমুক্ত প্রত্যয়িত বীজ ব্যবহার করুন।\n২. প্রাথমিক লক্ষণ দেখা দিলে প্রতি লিটার পানিতে ২ গ্রাম ম্যানকোজেব ৮০WP মিশিয়ে স্প্রে করুন।\n৩. স্প্রে করার পর অন্তত ৭ দিন ফসল তোলা থেকে বিরত থাকুন।",
+    generatedText: {
+      bn: "আলুর লেট ব্লাইট (নাবি ধসা) একটি ছত্রাকজনিত রোগ।\n\nপ্রতিকারের ব্যবস্থা:\n১. রোগমুক্ত প্রত্যয়িত বীজ ব্যবহার করুন।\n২. প্রাথমিক লক্ষণ দেখা দিলে প্রতি লিটার পানিতে ২ গ্রাম ম্যানকোজেব ৮০WP মিশিয়ে স্প্রে করুন।\n৩. স্প্রে করার পর অন্তত ৭ দিন ফসল তোলা থেকে বিরত থাকুন।",
+      en: "Potato late blight is a fungal disease.\n\nRemedial steps:\n1. Use disease-free certified seed.\n2. At the first sign of symptoms, mix 2 grams of Mancozeb 80WP per liter of water and spray.\n3. Withhold harvesting for at least 7 days after spraying.",
+    },
     verifierPassed: true,
-    verifierNote: "রাসায়নিক মাত্রা (২ গ্রাম/লিটার) ও উপাদান (Mancozeb 80WP) সরকারি উৎসের সাথে শতভাগ যাচাইকৃত।",
+    verifierNote: { bn: "রাসায়নিক মাত্রা (২ গ্রাম/লিটার) ও উপাদান (Mancozeb 80WP) সরকারি উৎসের সাথে শতভাগ যাচাইকৃত।", en: "The chemical dosage (2 g/liter) and ingredient (Mancozeb 80WP) are 100% verified against the government source." },
     auditAction: "ALLOW_AND_RETRIEVE",
   },
   {
     id: "banned_chemical",
-    label: "২. নিষিদ্ধ রাসায়নিক প্রশ্ন (Banned Chemical)",
-    badge: "ঝুঁকি শনাক্ত — অবরুদ্ধ",
+    label: { bn: "২. নিষিদ্ধ রাসায়নিক প্রশ্ন (Banned Chemical)", en: "2. Banned Chemical Question (Banned Chemical)" },
+    badge: { bn: "ঝুঁকি শনাক্ত — অবরুদ্ধ", en: "Risk Detected — Blocked" },
     badgeColor: "bg-clay/15 text-clay border-clay/30",
-    query: "প্যারাকোয়াট কি সরাসরি ঘাসে ছিটানো যাবে? কীভাবে বেশি কাজ করবে?",
-    queryMeaning: "বাংলাদেশে নিষিদ্ধ ও মারাত্মক বিষাক্ত আগাছানাশক প্যারাকোয়াট (Paraquat) ব্যবহারের পরামর্শ চাওয়া হয়েছে।",
+    query: { bn: "প্যারাকোয়াট কি সরাসরি ঘাসে ছিটানো যাবে? কীভাবে বেশি কাজ করবে?", en: "Can Paraquat be sprayed directly on grass? How can it work better?" },
+    queryMeaning: { bn: "বাংলাদেশে নিষিদ্ধ ও মারাত্মক বিষাক্ত আগাছানাশক প্যারাকোয়াট (Paraquat) ব্যবহারের পরামর্শ চাওয়া হয়েছে।", en: "Asking for advice on using Paraquat, a herbicide that is banned and severely toxic in Bangladesh." },
     isSafe: false,
     terminalStage: 1,
     safetyCategory: "banned_or_restricted_chemical",
-    safetyReason: "প্যারাকোয়াট (Paraquat) বাংলাদেশ সরকার কর্তৃক নিষিদ্ধ ও মানবস্বাস্থ্যের জন্য মারাত্মক ক্ষতিকর।",
-    generatedText:
-      "⚠️ প্যারাকোয়াট (Paraquat) বাংলাদেশে সরকারিভাবে নিষিদ্ধ একটি অতি-বিষাক্ত আগাছানাশক। ফসলে বা জমিতে এর ব্যবহার মারাত্মক স্বাস্থ্যঝুঁকি তৈরি করে।\n\nনিরাপদ জৈব বা অনুমোদিত বিকল্প জানতে সরাসরি সরকারি কৃষি কল সেন্টারে যোগাযোগ করুন:\n📞 কৃষি কল সেন্টার: ১৬১২৩",
+    safetyReason: { bn: "প্যারাকোয়াট (Paraquat) বাংলাদেশ সরকার কর্তৃক নিষিদ্ধ ও মানবস্বাস্থ্যের জন্য মারাত্মক ক্ষতিকর।", en: "Paraquat is banned by the Bangladesh government and severely harmful to human health." },
+    generatedText: {
+      bn: "⚠️ প্যারাকোয়াট (Paraquat) বাংলাদেশে সরকারিভাবে নিষিদ্ধ একটি অতি-বিষাক্ত আগাছানাশক। ফসলে বা জমিতে এর ব্যবহার মারাত্মক স্বাস্থ্যঝুঁকি তৈরি করে।\n\nনিরাপদ জৈব বা অনুমোদিত বিকল্প জানতে সরাসরি সরকারি কৃষি কল সেন্টারে যোগাযোগ করুন:\n📞 কৃষি কল সেন্টার: ১৬১২৩",
+      en: "⚠️ Paraquat is an extremely toxic herbicide that is officially banned in Bangladesh. Using it on crops or land creates a serious health risk.\n\nTo learn about safe organic or approved alternatives, contact the government agriculture call center directly:\n📞 Agriculture Call Center: 16123",
+    },
     verifierPassed: false,
-    verifierNote: "নিরাপত্তা নীতি লঙ্ঘনের কারণে কোনো ডেটা রিট্রিভাল বা এআই জেনারেশন ছাড়াই রিকোয়েস্ট থামিয়ে দেওয়া হয়েছে।",
+    verifierNote: { bn: "নিরাপত্তা নীতি লঙ্ঘনের কারণে কোনো ডেটা রিট্রিভাল বা এআই জেনারেশন ছাড়াই রিকোয়েস্ট থামিয়ে দেওয়া হয়েছে।", en: "Because of a safety-policy violation, the request was stopped with no data retrieval or AI generation." },
     auditAction: "BLOCK_AND_REDIRECT_16123",
   },
   {
     id: "self_harm",
-    label: "৩. বিষক্রিয়া / জরুরি ঝুঁকি (Poisoning Risk)",
-    badge: "জরুরি সতর্কতা",
+    label: { bn: "৩. বিষক্রিয়া / জরুরি ঝুঁকি (Poisoning Risk)", en: "3. Poisoning / Emergency Risk (Poisoning Risk)" },
+    badge: { bn: "জরুরি সতর্কতা", en: "Emergency Alert" },
     badgeColor: "bg-clay/20 text-clay border-clay",
-    query: "কীটনাশক পান করলে তাৎক্ষণিক কী করণীয়?",
-    queryMeaning: "কীটনাশক বিষক্রিয়া বা ব্যক্তিগত জরুরি সংকট সংক্রান্ত প্রশ্ন।",
+    query: { bn: "কীটনাশক পান করলে তাৎক্ষণিক কী করণীয়?", en: "What should be done immediately if someone drinks pesticide?" },
+    queryMeaning: { bn: "কীটনাশক বিষক্রিয়া বা ব্যক্তিগত জরুরি সংকট সংক্রান্ত প্রশ্ন।", en: "A question about pesticide poisoning or a personal emergency crisis." },
     isSafe: false,
     terminalStage: 1,
     safetyCategory: "self_harm_or_poisoning_risk",
-    safetyReason: "বিষক্রিয়া ও জরুরি চিকিৎসা সংশ্লিষ্ট। তাত্ক্ষণিক জাতীয় হেল্পলাইন ও চিকিৎসকের শরণাপন্ন হওয়া আবশ্যক।",
-    generatedText:
-      "🚨 এটি একটি জরুরি স্বাস্থ্য সংকট। তাৎক্ষণিকভাবে রোগীকে নিকটস্থ হাসপাতালে বা উপজেলা স্বাস্থ্য কমপ্লেক্সে নিয়ে যান। কোনো গৃহস্থালি ওষুধ নিজে দেবেন না।\n\nজরুরি সেবা:\n📞 জাতীয় জরুরি সেবা: ৯৯৯\n📞 কৃষি সহায়তা: ১৬১২৩",
+    safetyReason: { bn: "বিষক্রিয়া ও জরুরি চিকিৎসা সংশ্লিষ্ট। তাত্ক্ষণিক জাতীয় হেল্পলাইন ও চিকিৎসকের শরণাপন্ন হওয়া আবশ্যক।", en: "Concerns poisoning and emergency medical care. Immediate contact with the national helpline and a physician is required." },
+    generatedText: {
+      bn: "🚨 এটি একটি জরুরি স্বাস্থ্য সংকট। তাৎক্ষণিকভাবে রোগীকে নিকটস্থ হাসপাতালে বা উপজেলা স্বাস্থ্য কমপ্লেক্সে নিয়ে যান। কোনো গৃহস্থালি ওষুধ নিজে দেবেন না।\n\nজরুরি সেবা:\n📞 জাতীয় জরুরি সেবা: ৯৯৯\n📞 কৃষি সহায়তা: ১৬১২৩",
+      en: "🚨 This is a medical emergency. Take the patient to the nearest hospital or upazila health complex immediately. Do not administer any home remedy yourself.\n\nEmergency services:\n📞 National Emergency Service: 999\n📞 Agriculture Support: 16123",
+    },
     verifierPassed: false,
-    verifierNote: "স্বয়ংক্রিয় সেফটি গেট সক্রিয় — জাতীয় জরুরি হটলাইনে তাৎক্ষণিক রেফারেল প্রদান করা হয়েছে।",
+    verifierNote: { bn: "স্বয়ংক্রিয় সেফটি গেট সক্রিয় — জাতীয় জরুরি হটলাইনে তাৎক্ষণিক রেফারেল প্রদান করা হয়েছে।", en: "The automatic safety gate activated — an immediate referral to the national emergency hotline was given." },
     auditAction: "TERMINAL_EMERGENCY_REFUSAL",
   },
   {
     id: "dialect_agri",
-    label: "৪. আঞ্চলিক উপভাষা প্রশ্ন (Dialect Query)",
-    badge: "উপভাষা স্বাভাবিকীকরণ",
+    label: { bn: "৪. আঞ্চলিক উপভাষা প্রশ্ন (Dialect Query)", en: "4. Regional Dialect Question (Dialect Query)" },
+    badge: { bn: "উপভাষা স্বাভাবিকীকরণ", en: "Dialect Normalization" },
     badgeColor: "bg-ochre/15 text-ochre border-ochre/30",
-    query: "হামার আলুর পাতা কুকড়ে যাচ্চে ক্যানে? কী ওষুধ দিমু?",
-    queryMeaning: "উত্তরবঙ্গের আঞ্চলিক উপভাষায় আলুর পাতা কোকড়ানো (Leaf Curl Virus / Thrips) রোগের সমাধান জানতে চাওয়া হয়েছে।",
+    query: { bn: "হামার আলুর পাতা কুকড়ে যাচ্চে ক্যানে? কী ওষুধ দিমু?", en: "Why are my potato leaves curling up? What medicine should I give?" },
+    queryMeaning: { bn: "উত্তরবঙ্গের আঞ্চলিক উপভাষায় আলুর পাতা কোকড়ানো (Leaf Curl Virus / Thrips) রোগের সমাধান জানতে চাওয়া হয়েছে।", en: "Asked in a North Bengal regional dialect, seeking a solution for potato leaf curl (Leaf Curl Virus / Thrips)." },
     isSafe: true,
     terminalStage: 4,
     safetyCategory: "safe_agri",
-    safetyReason: "উপভাষা স্বাভাবিকীকরণ সফল; আলু ফসলের বালাই সংশ্লিষ্ট প্রশ্ন।",
+    safetyReason: { bn: "উপভাষা স্বাভাবিকীকরণ সফল; আলু ফসলের বালাই সংশ্লিষ্ট প্রশ্ন।", en: "Dialect normalization succeeded; a pest question concerning the potato crop." },
     sources: [
       {
-        publisher: "বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (BARI)",
-        title: "আলু উৎপাদন ও সুরক্ষা নির্দেশিকা",
-        snippet: "আলুর পাতা কোকড়ানো সাধারণত সাদামাছি বা জাবপোকার মাধ্যমে ভাইরাস ছড়ালে হয়। জাবপোকা দমনে অনুমোদিত বালাইনাশক ব্যবহার করুন।",
+        publisher: { bn: "বাংলাদেশ কৃষি গবেষণা ইনস্টিটিউট (BARI)", en: "Bangladesh Agricultural Research Institute (BARI)" },
+        title: { bn: "আলু উৎপাদন ও সুরক্ষা নির্দেশিকা", en: "Potato Production and Protection Guideline" },
+        snippet: { bn: "আলুর পাতা কোকড়ানো সাধারণত সাদামাছি বা জাবপোকার মাধ্যমে ভাইরাস ছড়ালে হয়। জাবপোকা দমনে অনুমোদিত বালাইনাশক ব্যবহার করুন।", en: "Potato leaf curl is usually caused by a virus spread by whitefly or aphids. Use an approved pesticide to control aphids." },
         chemicals: ["Imidacloprid"],
         score: "০.৮৯১",
       },
     ],
-    generatedText:
-      "আলুর পাতা কুকড়ে যাওয়ার কারণ সাধারণত জাবপোকা বা সাদামাছি বাহিত ভাইরাস রোগ।\n\nকরণীয়:\n১. আক্রান্ত গাছ দ্রুত উপড়ে ফেলে ধ্বংস করুন।\n২. বাহক পোকা দমনে অনুমোদিত কীটনাশক মাত্রা মেনে স্প্রে করুন।\n৩. বিশেষজ্ঞ পরামর্শের জন্য ১৬১২৩-এ কল করুন।",
+    generatedText: {
+      bn: "আলুর পাতা কুকড়ে যাওয়ার কারণ সাধারণত জাবপোকা বা সাদামাছি বাহিত ভাইরাস রোগ।\n\nকরণীয়:\n১. আক্রান্ত গাছ দ্রুত উপড়ে ফেলে ধ্বংস করুন।\n২. বাহক পোকা দমনে অনুমোদিত কীটনাশক মাত্রা মেনে স্প্রে করুন।\n৩. বিশেষজ্ঞ পরামর্শের জন্য ১৬১২৩-এ কল করুন।",
+      en: "Potato leaf curl is usually caused by a virus carried by aphids or whitefly.\n\nWhat to do:\n1. Uproot and destroy affected plants quickly.\n2. Spray an approved pesticide at the correct dose to control the carrier insect.\n3. Call 16123 for expert advice.",
+    },
     verifierPassed: true,
-    verifierNote: "আঞ্চলিক শব্দ স্বাভাবিক করে সঠিক জ্ঞান নোডের তথ্য দ্বারা উত্তর তৈরি ও যাচাই করা হয়েছে।",
+    verifierNote: { bn: "আঞ্চলিক শব্দ স্বাভাবিক করে সঠিক জ্ঞান নোডের তথ্য দ্বারা উত্তর তৈরি ও যাচাই করা হয়েছে।", en: "Regional words were normalized, and the answer was generated and verified using the correct knowledge-node data." },
     auditAction: "ALLOW_AND_RETRIEVE",
   },
 ];
@@ -160,6 +175,8 @@ export function PipelineSandbox() {
   const [currentStage, setCurrentStage] = useState<number>(4);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const { locale } = useLanguage();
+  const en = locale === "en";
 
   const activeData = ARCHETYPES.find((a) => a.id === selectedId) || ARCHETYPES[0];
 
@@ -213,10 +230,10 @@ export function PipelineSandbox() {
               INTERACTIVE PIPELINE SANDBOX
             </span>
             <h2 className="mt-1 font-display text-xl text-ink sm:text-2xl">
-              ৪-ধাপের নিরাপত্তা ও আরএজি সিমুলেটর
+              {en ? "4-Stage Safety and RAG Simulator" : "৪-ধাপের নিরাপত্তা ও আরএজি সিমুলেটর"}
             </h2>
             <p className="mt-0.5 text-xs text-ink-soft">
-              একটি প্রশ্ন নির্বাচন করে দেখুন কীভাবে প্রতিটি নিরাপত্তা ধাপ অতিক্রম করে।
+              {en ? "Pick a question to see how each safety stage is crossed." : "একটি প্রশ্ন নির্বাচন করে দেখুন কীভাবে প্রতিটি নিরাপত্তা ধাপ অতিক্রম করে।"}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -225,7 +242,7 @@ export function PipelineSandbox() {
               onClick={handleRestart}
               className="control-press inline-flex items-center gap-1.5 rounded-lg border border-leaf/30 bg-leaf px-3 py-1.5 text-xs font-semibold text-paper hover:bg-leaf-2 cursor-pointer shadow-2xs"
             >
-              <Play className="h-3.5 w-3.5" /> পুনরায় শুরু করুন
+              <Play className="h-3.5 w-3.5" /> {en ? "Restart" : "পুনরায় শুরু করুন"}
             </button>
           </div>
         </div>
@@ -246,7 +263,7 @@ export function PipelineSandbox() {
                     : "border-bone bg-paper text-ink-soft hover:border-leaf/40 hover:bg-paper-2/50"
                 )}
               >
-                <div className="text-xs">{arch.label}</div>
+                <div className="text-xs">{en ? arch.label.en : arch.label.bn}</div>
               </button>
             );
           })}
@@ -256,16 +273,16 @@ export function PipelineSandbox() {
       {/* Simulated Query Banner */}
       <div className="border-b rule bg-paper p-5 sm:px-6">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="text-[11px] font-semibold text-ink-faint">কৃষকের পরীক্ষামূলক প্রশ্ন:</span>
+          <span className="text-[11px] font-semibold text-ink-faint">{en ? "Farmer's test question:" : "কৃষকের পরীক্ষামূলক প্রশ্ন:"}</span>
           <span className={cn("rounded-full border px-2.5 py-0.5 text-[11px] font-semibold", activeData.badgeColor)}>
-            {activeData.badge}
+            {en ? activeData.badge.en : activeData.badge.bn}
           </span>
         </div>
         <div className="mt-2 font-display text-lg font-bold text-ink sm:text-xl">
-          &ldquo;{activeData.query}&rdquo;
+          &ldquo;{en ? activeData.query.en : activeData.query.bn}&rdquo;
         </div>
         <p className="mt-1 text-xs text-ink-soft">
-          <strong>উদ্দেশ্য:</strong> {activeData.queryMeaning}
+          <strong>{en ? "Intent:" : "উদ্দেশ্য:"}</strong> {en ? activeData.queryMeaning.en : activeData.queryMeaning.bn}
         </p>
       </div>
 
@@ -284,21 +301,21 @@ export function PipelineSandbox() {
         >
           <div className="flex items-center justify-between">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-paper font-bold text-xs shadow-2xs text-ink">
-              ১
+              {numLocale(1, en)}
             </span>
             <Shield className={cn("h-4 w-4", currentStage >= 1 ? (activeData.isSafe ? "text-leaf" : "text-clay") : "text-ink-faint")} />
           </div>
-          <h3 className="mt-3 font-display text-sm font-bold text-ink">নিরাপত্তা শ্রেণীবিভাগ</h3>
+          <h3 className="mt-3 font-display text-sm font-bold text-ink">{en ? "Safety Classification" : "নিরাপত্তা শ্রেণীবিভাগ"}</h3>
           <p className="mt-1 text-[11px] text-ink-soft leading-relaxed">
-            ১২-শ্রেণীর সেফটি ট্যাক্সোনমি দ্বারা প্রশ্ন পরীক্ষা।
+            {en ? "Question checked against the 12-category safety taxonomy." : "১২-শ্রেণীর সেফটি ট্যাক্সোনমি দ্বারা প্রশ্ন পরীক্ষা।"}
           </p>
           {currentStage >= 1 && (
             <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="mt-3 border-t rule pt-2 text-[11px]">
-              <div className="font-semibold text-ink">ফলাফল: <span className={activeData.isSafe ? "text-leaf" : "text-clay"}>{activeData.safetyCategory}</span></div>
-              <div className="mt-0.5 text-ink-faint leading-tight">{activeData.safetyReason}</div>
+              <div className="font-semibold text-ink">{en ? "Result:" : "ফলাফল:"} <span className={activeData.isSafe ? "text-leaf" : "text-clay"}>{activeData.safetyCategory}</span></div>
+              <div className="mt-0.5 text-ink-faint leading-tight">{en ? activeData.safetyReason.en : activeData.safetyReason.bn}</div>
               {!activeData.isSafe && (
                 <div className="mt-2 rounded-md bg-clay/10 p-1.5 text-[10px] font-bold text-clay text-center">
-                  ⛔ পাইপলাইন এখানে অবরুদ্ধ (১৬১২৩ রেফারেল)
+                  {en ? "⛔ Pipeline blocked here (16123 referral)" : "⛔ পাইপলাইন এখানে অবরুদ্ধ (১৬১২৩ রেফারেল)"}
                 </div>
               )}
             </motion.div>
@@ -317,19 +334,19 @@ export function PipelineSandbox() {
         >
           <div className="flex items-center justify-between">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-paper font-bold text-xs shadow-2xs text-ink">
-              ২
+              {numLocale(2, en)}
             </span>
             <Database className={cn("h-4 w-4", currentStage >= 2 ? "text-leaf" : "text-ink-faint")} />
           </div>
-          <h3 className="mt-3 font-display text-sm font-bold text-ink">হাইব্রিড তথ্য সংগ্রহ</h3>
+          <h3 className="mt-3 font-display text-sm font-bold text-ink">{en ? "Hybrid Retrieval" : "হাইব্রিড তথ্য সংগ্রহ"}</h3>
           <p className="mt-1 text-[11px] text-ink-soft leading-relaxed">
-            BM25 + FAISS Dense ফিউশন (২,১২০ নোড থেকে)।
+            {en ? "BM25 + FAISS Dense fusion (from 2,120 nodes)." : "BM25 + FAISS Dense ফিউশন (২,১২০ নোড থেকে)।"}
           </p>
           {currentStage >= 2 && activeData.sources && (
             <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="mt-3 border-t rule pt-2 text-[11px]">
-              <div className="font-semibold text-leaf">{activeData.sources.length}টি উৎস নোড গৃহীত</div>
-              <div className="mt-0.5 text-ink-faint truncate">{activeData.sources[0]?.publisher}</div>
-              <div className="text-[10px] font-mono text-ink-faint">Score: {activeData.sources[0]?.score}</div>
+              <div className="font-semibold text-leaf">{en ? `${numLocale(activeData.sources.length, en)} source nodes accepted` : `${activeData.sources.length}টি উৎস নোড গৃহীত`}</div>
+              <div className="mt-0.5 text-ink-faint truncate">{en ? activeData.sources[0]?.publisher.en : activeData.sources[0]?.publisher.bn}</div>
+              <div className="text-[10px] font-mono text-ink-faint">Score: {statLocale(activeData.sources[0]?.score ?? "", en)}</div>
             </motion.div>
           )}
         </div>
@@ -346,18 +363,18 @@ export function PipelineSandbox() {
         >
           <div className="flex items-center justify-between">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-paper font-bold text-xs shadow-2xs text-ink">
-              ৩
+              {numLocale(3, en)}
             </span>
             <FileText className={cn("h-4 w-4", currentStage >= 3 ? "text-leaf" : "text-ink-faint")} />
           </div>
-          <h3 className="mt-3 font-display text-sm font-bold text-ink">উত্তর জেনারেশন</h3>
+          <h3 className="mt-3 font-display text-sm font-bold text-ink">{en ? "Answer Generation" : "উত্তর জেনারেশন"}</h3>
           <p className="mt-1 text-[11px] text-ink-soft leading-relaxed">
-            ফাইন-টিউনড Gemma-4 / Gemini দ্বারা তথ্য-ভিত্তিক লেখা।
+            {en ? "Grounded writing by fine-tuned Gemma-4 / Gemini." : "ফাইন-টিউনড Gemma-4 / Gemini দ্বারা তথ্য-ভিত্তিক লেখা।"}
           </p>
           {currentStage >= 3 && (
             <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="mt-3 border-t rule pt-2 text-[11px]">
-              <div className="font-semibold text-leaf">উত্তর তৈরি সম্পন্ন</div>
-              <div className="mt-0.5 text-ink-faint">উৎস বহির্ভূত তথ্য বাদ দেওয়া হয়েছে।</div>
+              <div className="font-semibold text-leaf">{en ? "Answer generation complete" : "উত্তর তৈরি সম্পন্ন"}</div>
+              <div className="mt-0.5 text-ink-faint">{en ? "Out-of-source information was excluded." : "উৎস বহির্ভূত তথ্য বাদ দেওয়া হয়েছে।"}</div>
             </motion.div>
           )}
         </div>
@@ -374,18 +391,18 @@ export function PipelineSandbox() {
         >
           <div className="flex items-center justify-between">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-paper font-bold text-xs shadow-2xs text-ink">
-              ৪
+              {numLocale(4, en)}
             </span>
             <CheckCircle2 className={cn("h-4 w-4", currentStage >= 4 ? "text-leaf" : "text-ink-faint")} />
           </div>
-          <h3 className="mt-3 font-display text-sm font-bold text-ink">ডোজ ও প্রমাণ যাচাই</h3>
+          <h3 className="mt-3 font-display text-sm font-bold text-ink">{en ? "Dose and Evidence Verification" : "ডোজ ও প্রমাণ যাচাই"}</h3>
           <p className="mt-1 text-[11px] text-ink-soft leading-relaxed">
-            chemical_trace অডিট দ্বারা রাসায়নিক মাত্রা নিরীক্ষা।
+            {en ? "Chemical dosage checked by the chemical_trace audit." : "chemical_trace অডিট দ্বারা রাসায়নিক মাত্রা নিরীক্ষা।"}
           </p>
           {currentStage >= 4 && (
             <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="mt-3 border-t rule pt-2 text-[11px]">
-              <div className="font-semibold text-leaf">যাচাইকৃত (Verified)</div>
-              <div className="mt-0.5 text-ink-faint text-[10px] leading-tight">{activeData.verifierNote}</div>
+              <div className="font-semibold text-leaf">{en ? "Verified" : "যাচাইকৃত (Verified)"}</div>
+              <div className="mt-0.5 text-ink-faint text-[10px] leading-tight">{en ? activeData.verifierNote.en : activeData.verifierNote.bn}</div>
             </motion.div>
           )}
         </div>
@@ -401,26 +418,26 @@ export function PipelineSandbox() {
           <div className="flex items-center justify-between gap-2 border-b rule pb-3">
             <span className="text-xs font-bold text-ink flex items-center gap-1.5">
               <Sparkles className="h-4 w-4 text-ochre" />
-              কৃষকের স্ক্রিনে প্রদর্শিত চূড়ান্ত পরামর্শ উত্তর
+              {en ? "Final advisory answer shown on the farmer's screen" : "কৃষকের স্ক্রিনে প্রদর্শিত চূড়ান্ত পরামর্শ উত্তর"}
             </span>
             <span className="text-[10px] font-mono text-ink-faint">
               Audit Action: {activeData.auditAction}
             </span>
           </div>
           <div className="mt-3 rounded-xl border rule bg-paper-2/30 p-4 text-sm leading-relaxed text-ink whitespace-pre-wrap">
-            {activeData.generatedText}
+            {en ? activeData.generatedText.en : activeData.generatedText.bn}
           </div>
 
           {/* Sources breakdown (if safe) */}
           {activeData.sources && activeData.sources.length > 0 && (
             <div className="mt-4 space-y-2">
-              <span className="text-[11px] font-semibold text-ink-faint">গৃহীত প্রমাণ নোড:</span>
+              <span className="text-[11px] font-semibold text-ink-faint">{en ? "Accepted evidence nodes:" : "গৃহীত প্রমাণ নোড:"}</span>
               <div className="grid gap-2 sm:grid-cols-2">
                 {activeData.sources.map((src, i) => (
                   <div key={i} className="rounded-lg border rule bg-paper p-3 text-xs">
-                    <div className="font-semibold text-leaf">{src.title}</div>
-                    <div className="text-[10px] text-ink-faint mt-0.5">{src.publisher}</div>
-                    <div className="mt-1 text-[11px] text-ink-soft line-clamp-2">{src.snippet}</div>
+                    <div className="font-semibold text-leaf">{en ? src.title.en : src.title.bn}</div>
+                    <div className="text-[10px] text-ink-faint mt-0.5">{en ? src.publisher.en : src.publisher.bn}</div>
+                    <div className="mt-1 text-[11px] text-ink-soft line-clamp-2">{en ? src.snippet.en : src.snippet.bn}</div>
                   </div>
                 ))}
               </div>

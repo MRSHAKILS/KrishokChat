@@ -519,7 +519,7 @@ export const TRANSLATIONS: Record<Locale, Translations> = {
       prescriptionButton: "Prescription Slip",
       dosageCalculator: "Dosage Calculator",
       sourcesTitle: "Verified Evidence Sources",
-      askFollowUp: "Ask Agri-Chat for more details",
+      askFollowUp: "Ask KrishokTech for more details",
       preHarvestInterval: "Pre-Harvest Interval (PHI): Withhold harvesting for at least 7–14 days after pesticide application.",
       readAloud: "Read Aloud",
       stopReading: "Stop",

@@ -13,9 +13,11 @@ import {
   ChevronDown,
   Phone,
 } from "lucide-react";
-import { HELPLINE, RESEARCH_STATS } from "@/lib/constants";
+import { HELPLINE, HELPLINE_EN, RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
 import { PipelineSandbox } from "@/components/pipeline-sandbox";
+import { statLocale } from "@/lib/bn";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    Safety Design Page — THE product demo, not a paper figure.
@@ -74,15 +76,17 @@ const REAL_ANSWER = `আলুর লেট ব্লাইট (Late Blight / �
 নিশ্চিত হতে কৃষক কল সেন্টারে যোগাযোগ করুন: ১৬১২৩।`;
 
 const SAFETY_CATEGORIES = [
-  { id: "chemical_misuse", bn: "রাসায়নিক অপব্যবহার", trigger: "রোগ নিশ্চিত ছাড়া রাসায়নিক চাওয়া", severe: true },
-  { id: "dosage_safety", bn: "মাত্রা নিরাপত্তা", trigger: "প্রয়োগের প্রেক্ষিত ছাড়া ডোজ", severe: true },
-  { id: "human_medical_scope", bn: "মানব চিকিৎসা", trigger: "মানব স্বাস্থ্য/বিষক্রিয়া", severe: true },
-  { id: "scope_missing_crop", bn: "ফসল অনুপস্থিত", trigger: "ফসলের নাম ছাড়া চিকিৎসা", severe: false },
-  { id: "diagnostic_overshoot", bn: "অতিরিক্ত নির্ণয়", trigger: "একটি অস্পষ্ট লক্ষণ থেকে নির্ণয়", severe: false },
-  { id: "over_promise", bn: "অতিরঞ্জিত প্রতিশ্রুতি", trigger: "ফলন/নিরাময় গ্যারান্টি", severe: false },
-];
+  { id: "chemical_misuse", label: { bn: "রাসায়নিক অপব্যবহার", en: "Chemical Misuse" }, trigger: { bn: "রোগ নিশ্চিত ছাড়া রাসায়নিক চাওয়া", en: "Asking for a chemical without disease confirmation" }, severe: true },
+  { id: "dosage_safety", label: { bn: "মাত্রা নিরাপত্তা", en: "Dosage Safety" }, trigger: { bn: "প্রয়োগের প্রেক্ষিত ছাড়া ডোজ", en: "A dose requested without application context" }, severe: true },
+  { id: "human_medical_scope", label: { bn: "মানব চিকিৎসা", en: "Human Medical Scope" }, trigger: { bn: "মানব স্বাস্থ্য/বিষক্রিয়া", en: "Human health / poisoning" }, severe: true },
+  { id: "scope_missing_crop", label: { bn: "ফসল অনুপস্থিত", en: "Missing Crop" }, trigger: { bn: "ফসলের নাম ছাড়া চিকিৎসা", en: "A treatment asked for without naming the crop" }, severe: false },
+  { id: "diagnostic_overshoot", label: { bn: "অতিরিক্ত নির্ণয়", en: "Diagnostic Overshoot" }, trigger: { bn: "একটি অস্পষ্ট লক্ষণ থেকে নির্ণয়", en: "A diagnosis drawn from one vague symptom" }, severe: false },
+  { id: "over_promise", label: { bn: "অতিরঞ্জিত প্রতিশ্রুতি", en: "Over-Promise" }, trigger: { bn: "ফলন/নিরাময় গ্যারান্টি", en: "A yield or cure guarantee" }, severe: false },
+] as const;
 
 export default function SafetyPage() {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <div className="mx-auto max-w-4xl space-y-16 py-14">
       {/* Hero */}
@@ -91,10 +95,14 @@ export default function SafetyPage() {
           Safety-Critical Agentic RAG
         </motion.p>
         <motion.h1 variants={enter} className="mt-4 font-display text-4xl leading-tight text-ink">
-          নিরাপত্তা-সচেতন <span className="text-leaf">এজেন্টিক পাইপলাইন</span>
+          {en ? (
+            <>Safety-Aware <span className="text-leaf">Agentic Pipeline</span></>
+          ) : (
+            <>নিরাপত্তা-সচেতন <span className="text-leaf">এজেন্টিক পাইপলাইন</span></>
+          )}
         </motion.h1>
         <motion.p variants={enter} className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
-          একটি প্রশ্ন নির্বাচন করে দেখুন কীভাবে আমাদের চার-ধাপের এজেন্টিক ব্যবস্থা প্রতিটি সিদ্ধান্ত গ্রহণ করে।
+          {en ? "Pick a question to see how our four-stage agentic system makes each decision." : "একটি প্রশ্ন নির্বাচন করে দেখুন কীভাবে আমাদের চার-ধাপের এজেন্টিক ব্যবস্থা প্রতিটি সিদ্ধান্ত গ্রহণ করে।"}
         </motion.p>
       </motion.section>
 
@@ -113,6 +121,8 @@ export default function SafetyPage() {
 }
 
 function HelplineCallout() {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <motion.a
       href={`tel:${HELPLINE.krishiCallCenter}`}
@@ -126,11 +136,11 @@ function HelplineCallout() {
         <Phone className="h-5 w-5" />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="font-display text-lg text-ink">কৃষি পরামর্শে নিশ্চিত হতে কল করুন</div>
-        <p className="mt-0.5 text-xs text-ink-soft">নিষিদ্ধ রাসায়নিক, মাত্রা বা জরুরি স্বাস্থ্য ঝুঁকিতে সরকারি কৃষি সহায়তা নিন।</p>
+        <div className="font-display text-lg text-ink">{en ? "Call to confirm agricultural advice" : "কৃষি পরামর্শে নিশ্চিত হতে কল করুন"}</div>
+        <p className="mt-0.5 text-xs text-ink-soft">{en ? "Get government agricultural support for banned chemicals, dosage, or an urgent health risk." : "নিষিদ্ধ রাসায়নিক, মাত্রা বা জরুরি স্বাস্থ্য ঝুঁকিতে সরকারি কৃষি সহায়তা নিন।"}</p>
       </div>
       <span className="relative shrink-0 rounded-full bg-leaf px-3 py-1.5 text-sm font-semibold text-paper tabular transition-transform group-hover:scale-105">
-        {HELPLINE.krishiCallCenter}
+        {en ? HELPLINE_EN.krishiCallCenter : HELPLINE.krishiCallCenter}
       </span>
     </motion.a>
   );
@@ -400,6 +410,8 @@ function StagePanel({
 /* === Safety taxonomy (compact, collapsible) === */
 function SafetyTaxonomy() {
   const [open, setOpen] = useState(false);
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger}>
       <motion.button
@@ -410,8 +422,8 @@ function SafetyTaxonomy() {
         <div className="flex items-center gap-3">
           <Shield className="h-5 w-5 text-leaf" />
           <div className="text-left">
-            <div className="font-display text-lg text-ink">১২-শ্রেণী নিরাপত্তা ট্যাক্সোনমি</div>
-            <div className="text-xs text-ink-faint">অনিরাপদ প্রশ্ন কীভাবে আটকে যায়</div>
+            <div className="font-display text-lg text-ink">{en ? "12-Category Safety Taxonomy" : "১২-শ্রেণী নিরাপত্তা ট্যাক্সোনমি"}</div>
+            <div className="text-xs text-ink-faint">{en ? "How an unsafe question gets caught" : "অনিরাপদ প্রশ্ন কীভাবে আটকে যায়"}</div>
           </div>
         </div>
         <ChevronDown className={`h-5 w-5 text-ink-faint transition-transform ${open ? "rotate-180" : ""}`} />
@@ -433,13 +445,13 @@ function SafetyTaxonomy() {
                   }`}
                 >
                   <div>
-                    <div className="text-sm font-medium text-ink">{cat.bn}</div>
-                    <div className="text-[11px] text-ink-faint">{cat.trigger}</div>
+                    <div className="text-sm font-medium text-ink">{en ? cat.label.en : cat.label.bn}</div>
+                    <div className="text-[11px] text-ink-faint">{en ? cat.trigger.en : cat.trigger.bn}</div>
                   </div>
                   <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${
                     cat.severe ? "bg-clay/15 text-clay" : "bg-ochre-soft/30 text-ochre"
                   }`}>
-                    {cat.severe ? "তীব্র" : "সামান্য"}
+                    {en ? (cat.severe ? "Severe" : "Minor") : (cat.severe ? "তীব্র" : "সামান্য")}
                   </span>
                 </div>
               ))}
@@ -453,6 +465,8 @@ function SafetyTaxonomy() {
 
 /* === Audit trail === */
 function AuditTrail() {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <motion.section
       initial="hidden"
@@ -463,15 +477,34 @@ function AuditTrail() {
     >
       <motion.div variants={enter}>
         <AlertTriangle className="mx-auto h-8 w-8 text-clay" />
-        <h2 className="mt-3 font-display text-lg text-ink">অমীমাংসিত সমস্যা</h2>
+        <h2 className="mt-3 font-display text-lg text-ink">{en ? "Unresolved Problem" : "অমীমাংসিত সমস্যা"}</h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft">
-          পরিপূর্ণ অরাকল তথ্য থাকা সত্ত্বেও{" "}
-          <span className="font-medium text-clay">{RESEARCH_STATS.hallucinationFloor}</span>{" "}
-          রাসায়নিক হ্যালুসিনেশন থেকে যায় — সব মডেলে।
+          {en ? (
+            <>
+              Even with perfectly correct oracle information,{" "}
+              <span className="font-medium text-clay">{statLocale(RESEARCH_STATS.hallucinationFloor, en)}</span>{" "}
+              chemical hallucination remains — across all models.
+            </>
+          ) : (
+            <>
+              পরিপূর্ণ অরাকল তথ্য থাকা সত্ত্বেও{" "}
+              <span className="font-medium text-clay">{RESEARCH_STATS.hallucinationFloor}</span>{" "}
+              রাসায়নিক হ্যালুসিনেশন থেকে যায় — সব মডেলে।
+            </>
+          )}
         </p>
         <p className="mt-3 text-xs text-ink-faint">
-          প্রতিটি সিদ্ধান্ত স্থানীয়ভাবে লগ হয় —{" "}
-          <a href="/analytics" className="text-leaf hover:text-leaf-2">পরিসংখ্যান দেখুন →</a>
+          {en ? (
+            <>
+              Every decision is logged locally —{" "}
+              <a href="/analytics" className="text-leaf hover:text-leaf-2">View the analytics →</a>
+            </>
+          ) : (
+            <>
+              প্রতিটি সিদ্ধান্ত স্থানীয়ভাবে লগ হয় —{" "}
+              <a href="/analytics" className="text-leaf hover:text-leaf-2">পরিসংখ্যান দেখুন →</a>
+            </>
+          )}
         </p>
       </motion.div>
     </motion.section>

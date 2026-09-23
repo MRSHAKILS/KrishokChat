@@ -4,20 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BookOpen, FlaskConical, BarChart3, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 const ITEMS = [
-  { href: "/research", label: "গবেষণা সারসংক্ষেপ", icon: BookOpen },
-  { href: "/research/methodology", label: "কর্পাস ও পদ্ধতি", icon: FlaskConical },
-  { href: "/research/benchmark", label: "বেঞ্চমার্ক ফলাফল", icon: BarChart3 },
-  { href: "/research/safety", label: "নিরাপত্তা ও গার্ডরেইল", icon: ShieldCheck },
+  { href: "/research", label: { bn: "গবেষণা সারসংক্ষেপ", en: "Research Summary" }, icon: BookOpen },
+  { href: "/research/methodology", label: { bn: "কর্পাস ও পদ্ধতি", en: "Corpus and Methodology" }, icon: FlaskConical },
+  { href: "/research/benchmark", label: { bn: "বেঞ্চমার্ক ফলাফল", en: "Benchmark Results" }, icon: BarChart3 },
+  { href: "/research/safety", label: { bn: "নিরাপত্তা ও গার্ডরেইল", en: "Safety and Guardrails" }, icon: ShieldCheck },
 ] as const;
 
 export function ResearchSubnav() {
   const pathname = usePathname();
+  const { locale } = useLanguage();
+  const en = locale === "en";
 
   return (
     <nav
-      aria-label="গবেষণা বিভাগ"
+      aria-label={en ? "Research section" : "গবেষণা বিভাগ"}
       className="sticky top-16 z-40 -mx-5 border-b rule bg-paper/90 px-5 py-2 backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-4xl items-center gap-1 overflow-x-auto scrollbar-thin">
@@ -35,7 +38,7 @@ export function ResearchSubnav() {
               )}
             >
               <Icon className="h-3.5 w-3.5" />
-              {item.label}
+              {en ? item.label.en : item.label.bn}
             </Link>
           );
         })}

@@ -17,7 +17,7 @@
    Serwist migration is a TODO tracked in frontend/README or inline below.
    ========================================================================= */
 
-const CACHE_NAME = "krishokchat-cache-v2";
+const CACHE_NAME = "krishokchat-cache-v3";
 
 // P6 & R9: precache static invariant assets, library JSON, and offline fact packs.
 // Note: Dynamic Next.js HTML routes (/, /chat, /soil, /detect) are NOT precached
@@ -53,7 +53,7 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
-// Activate: clean up older caches (purges krishokchat-cache-v1 and any stale HTML)
+// Activate: clean up older caches (purges older krishokchat-cache-* versions and any stale HTML)
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {

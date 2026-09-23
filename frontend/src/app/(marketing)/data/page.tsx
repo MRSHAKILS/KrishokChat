@@ -21,8 +21,10 @@ import {
 } from "lucide-react";
 import { RESEARCH_STATS, LINKS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
-import { useCountUp, toBn } from "@/lib/use-count-up";
+import { useCountUp, toLocaleCount } from "@/lib/use-count-up";
+import { statLocale, numLocale } from "@/lib/bn";
 import { KnowledgeGraphExplorer } from "@/components/knowledge-graph-explorer";
+import { useLanguage } from "@/context/language-context";
 
 /* ---- real data (all verified against AgriTrust paper) ---- */
 
@@ -42,6 +44,10 @@ const NODE_CATEGORIES = [
   { name: "Fertilizer", bn: "সার", count: 280 },
   { name: "Other", bn: "অন্যান্য", count: 527 },
 ] as const;
+
+function catLabel(cat: { name: string; bn: string }, en: boolean) {
+  return en ? cat.name : cat.bn;
+}
 
 const CAT_COLORS: Record<string, string> = {
   Variety: "var(--color-leaf)", "Cultivation Practice": "var(--color-leaf-2)",
@@ -72,50 +78,52 @@ const SAMPLE_NODE = {
   citation: "DAE. Late blight. Potato Disease Manuals. p. 852.",
   content_bn:
     "আলুর লেট ব্লাইট (Late Blight / নাবি ধসা) একটি মারাত্মক ছত্রাকজনিত রোগ যা Phytophthora infestans দ্বারা সৃষ্ট। এটি পাতার ও কাণ্ডের নিচে ছোট ছোট সবুজ-বাদামি দাগ হিসেবে শুরু হয়।",
+  content_en:
+    "Potato late blight is a serious fungal disease caused by Phytophthora infestans. It begins as small green-brown spots on the underside of leaves and stems.",
   entities: ["Phytophthora infestans", "potato", "late blight"],
   chemical_trace: ["Mancozeb 80WP", "Metalaxyl"],
 };
 
 const DATASET_STATS = [
-  { value: STAT_NUMS.nodes, label: "জ্ঞানভাণ্ডার নোড", icon: Boxes },
-  { value: STAT_NUMS.entities, label: "চিহ্নিত এনটিটি", icon: Tag },
-  { value: STAT_NUMS.triples, label: "সম্পর্ক ট্রিপল", icon: Database },
-  { value: STAT_NUMS.imageLinked, label: "চিত্রযুক্ত জ্ঞান নোড", icon: FileText, ratio: `মোট নোডের ${RESEARCH_STATS.imageLinkedShare}` },
-  { value: STAT_NUMS.crops, label: "স্বতন্ত্র ফসল", icon: Tag },
-  { value: STAT_NUMS.variants, label: "রোগ ও বালাই রূপভেদ", icon: Tag },
-  { value: STAT_NUMS.chemicals, label: "রাসায়নিক উপাদান", icon: Tag },
-  { value: STAT_NUMS.pdfs, label: "সরকারি প্রকাশনা (PDF)", icon: FileText },
+  { value: STAT_NUMS.nodes, label: { bn: "জ্ঞানভাণ্ডার নোড", en: "Knowledge Base Nodes" }, icon: Boxes },
+  { value: STAT_NUMS.entities, label: { bn: "চিহ্নিত এনটিটি", en: "Identified Entities" }, icon: Tag },
+  { value: STAT_NUMS.triples, label: { bn: "সম্পর্ক ট্রিপল", en: "Relation Triples" }, icon: Database },
+  { value: STAT_NUMS.imageLinked, label: { bn: "চিত্রযুক্ত জ্ঞান নোড", en: "Image-Linked Nodes" }, icon: FileText, ratio: { bn: `মোট নোডের ${RESEARCH_STATS.imageLinkedShare}`, en: `${statLocale(RESEARCH_STATS.imageLinkedShare, true)} of total nodes` } },
+  { value: STAT_NUMS.crops, label: { bn: "স্বতন্ত্র ফসল", en: "Distinct Crops" }, icon: Tag },
+  { value: STAT_NUMS.variants, label: { bn: "রোগ ও বালাই রূপভেদ", en: "Disease and Pest Variants" }, icon: Tag },
+  { value: STAT_NUMS.chemicals, label: { bn: "রাসায়নিক উপাদান", en: "Chemical Entities" }, icon: Tag },
+  { value: STAT_NUMS.pdfs, label: { bn: "সরকারি প্রকাশনা (PDF)", en: "Government Publications (PDF)" }, icon: FileText },
 ] as const;
 
 /* Data card groups — values all from RESEARCH_STATS (paper-verified) */
 const CARD_GROUPS = [
   {
-    name: "কর্পাস ও জ্ঞানভাণ্ডার",
+    name: { bn: "কর্পাস ও জ্ঞানভাণ্ডার", en: "Corpus and Knowledge Base" },
     rows: [
-      ["সরকারি মূল প্রকাশনা", RESEARCH_STATS.publications],
-      ["উৎস প্রতিষ্ঠান", RESEARCH_STATS.institutions],
-      ["জ্ঞানভাণ্ডার নোড", RESEARCH_STATS.knowledgeNodes],
-      ["চিত্রযুক্ত নোড", `${RESEARCH_STATS.imageLinkedNodes} (${RESEARCH_STATS.imageLinkedShare})`],
-      ["শনাক্তকৃত এনটিটি", RESEARCH_STATS.entities],
-      ["সম্পর্ক ট্রিপল", RESEARCH_STATS.triples],
-      ["স্বতন্ত্র ফসল শ্রেণি", RESEARCH_STATS.uniqueCrops],
-      ["রোগ ও বালাই রূপভেদ", RESEARCH_STATS.diseaseVariants],
-      ["রাসায়নিক উপাদান", RESEARCH_STATS.chemicalEntities],
-    ] as [string, string][],
+      [{ bn: "সরকারি মূল প্রকাশনা", en: "Primary Government Publications" }, RESEARCH_STATS.publications],
+      [{ bn: "উৎস প্রতিষ্ঠান", en: "Source Institutions" }, RESEARCH_STATS.institutions],
+      [{ bn: "জ্ঞানভাণ্ডার নোড", en: "Knowledge Base Nodes" }, RESEARCH_STATS.knowledgeNodes],
+      [{ bn: "চিত্রযুক্ত নোড", en: "Image-Linked Nodes" }, `${RESEARCH_STATS.imageLinkedNodes} (${RESEARCH_STATS.imageLinkedShare})`],
+      [{ bn: "শনাক্তকৃত এনটিটি", en: "Identified Entities" }, RESEARCH_STATS.entities],
+      [{ bn: "সম্পর্ক ট্রিপল", en: "Relation Triples" }, RESEARCH_STATS.triples],
+      [{ bn: "স্বতন্ত্র ফসল শ্রেণি", en: "Distinct Crop Classes" }, RESEARCH_STATS.uniqueCrops],
+      [{ bn: "রোগ ও বালাই রূপভেদ", en: "Disease and Pest Variants" }, RESEARCH_STATS.diseaseVariants],
+      [{ bn: "রাসায়নিক উপাদান", en: "Chemical Entities" }, RESEARCH_STATS.chemicalEntities],
+    ] as [{ bn: string; en: string }, string][],
   },
   {
-    name: "বেঞ্চমার্ক মূল্যায়ন",
+    name: { bn: "বেঞ্চমার্ক মূল্যায়ন", en: "Benchmark Evaluation" },
     rows: [
-      ["কৃষক প্রশ্ন (মোট)", RESEARCH_STATS.farmerQueries],
-      ["মূল্যায়নযোগ্য প্রশ্ন", RESEARCH_STATS.answerableQueries],
-    ] as [string, string][],
+      [{ bn: "কৃষক প্রশ্ন (মোট)", en: "Farmer Queries (Total)" }, RESEARCH_STATS.farmerQueries],
+      [{ bn: "মূল্যায়নযোগ্য প্রশ্ন", en: "Answerable Queries" }, RESEARCH_STATS.answerableQueries],
+    ] as [{ bn: string; en: string }, string][],
   },
   {
-    name: "বিশেষজ্ঞ যাচাই — ইন্টার-অ্যানোটেটর κ",
+    name: { bn: "বিশেষজ্ঞ যাচাই — ইন্টার-অ্যানোটেটর κ", en: "Expert Validation — Inter-Annotator κ" },
     rows: [
-      ["κ (কৃষক প্রশ্ন + নিরাপত্তা)", RESEARCH_STATS.interAnnotatorKappa, 72],
-      ["κ (নলেজ-গ্রাফ গ্রাউন্ডেড)", RESEARCH_STATS.kgGroundedKappa, 78],
-    ] as [string, string, number][],
+      [{ bn: "κ (কৃষক প্রশ্ন + নিরাপত্তা)", en: "κ (Farmer Queries + Safety)" }, RESEARCH_STATS.interAnnotatorKappa, 72],
+      [{ bn: "κ (নলেজ-গ্রাফ গ্রাউন্ডেড)", en: "κ (Knowledge-Graph Grounded)" }, RESEARCH_STATS.kgGroundedKappa, 78],
+    ] as [{ bn: string; en: string }, string, number][],
   },
 ] as const;
 
@@ -131,16 +139,18 @@ function SectionHeading({ no, title, sub }: { no: string; title: string; sub?: s
   );
 }
 
-function StatCell({ value, label, icon: Icon, ratio, delay }: { value: number; label: string; icon: React.ComponentType<{ className?: string }>; ratio?: string; delay: number }) {
+function StatCell({ value, label, icon: Icon, ratio, delay }: { value: number; label: { bn: string; en: string }; icon: React.ComponentType<{ className?: string }>; ratio?: { bn: string; en: string }; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const n = useCountUp(value, inView);
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <motion.div ref={ref} variants={enter} transition={{ delay }} className="bg-paper p-5 text-center">
       <Icon className="mx-auto h-5 w-5 text-leaf" />
-      <div className="mt-3 font-display text-2xl tabular text-ink">{toBn(n)}</div>
-      <div className="mt-1 text-[10px] font-medium text-ink-faint">{label}</div>
-      {ratio && <div className="mt-1 font-mono text-[10px] tabular text-ochre">{ratio}</div>}
+      <div className="mt-3 font-display text-2xl tabular text-ink">{toLocaleCount(n, en)}</div>
+      <div className="mt-1 text-[10px] font-medium text-ink-faint">{en ? label.en : label.bn}</div>
+      {ratio && <div className="mt-1 font-mono text-[10px] tabular text-ochre">{en ? ratio.en : ratio.bn}</div>}
     </motion.div>
   );
 }
@@ -152,6 +162,8 @@ function StatCell({ value, label, icon: Icon, ratio, delay }: { value: number; l
 export default function DataPage() {
   const [nodeOpen, setNodeOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { locale } = useLanguage();
+  const en = locale === "en";
 
   const selected = NODE_CATEGORIES.find((c) => c.name === selectedCategory);
   const selectedFrac = selected ? (selected.count / NODE_TOTAL) * 100 : 0;
@@ -165,15 +177,24 @@ export default function DataPage() {
             Knowledge Base & Dataset
           </motion.p>
           <motion.h1 variants={enter} className="mt-4 font-display text-3xl leading-tight text-ink md:text-4xl">
-            জ্ঞান গ্রাফ <span className="text-leaf">ও উপাত্ত</span>
+            {en ? (
+              <>Knowledge Graph <span className="text-leaf">and Data</span></>
+            ) : (
+              <>জ্ঞান গ্রাফ <span className="text-leaf">ও উপাত্ত</span></>
+            )}
           </motion.h1>
           <motion.p variants={enter} className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
-            {RESEARCH_STATS.publications}টি সরকারি প্রকাশনা থেকে নির্মিত {RESEARCH_STATS.knowledgeNodes}টি জ্ঞান নোড —
-            প্রমাণ-ভিত্তিক, উৎস-সংযুক্ত, প্রতিটি ট্রেসযোগ্য।
+            {en ? (
+              <>{statLocale(RESEARCH_STATS.publications, en)} government publications built into {statLocale(RESEARCH_STATS.knowledgeNodes, en)} knowledge nodes —
+              evidence-grounded, source-linked, every one traceable.</>
+            ) : (
+              <>{RESEARCH_STATS.publications}টি সরকারি প্রকাশনা থেকে নির্মিত {RESEARCH_STATS.knowledgeNodes}টি জ্ঞান নোড —
+              প্রমাণ-ভিত্তিক, উৎস-সংযুক্ত, প্রতিটি ট্রেসযোগ্য।</>
+            )}
           </motion.p>
           <motion.p variants={enter} className="mt-5">
             <a href="/library" className="inline-flex items-center gap-1.5 rounded-full border rule bg-paper px-4 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf">
-              বই ও ডেটাসেট ব্রাউজ করুন<ArrowRight className="h-3 w-3" />
+              {en ? "Browse books and datasets" : "বই ও ডেটাসেট ব্রাউজ করুন"}<ArrowRight className="h-3 w-3" />
             </a>
           </motion.p>
         </motion.section>
@@ -185,10 +206,14 @@ export default function DataPage() {
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
         >
-          <SectionHeading no="০১" title="উপাত্ত পরিসংখ্যান" sub="কর্পাসের আকার — সব সংখ্যা গবেষণাপত্র-যাচাইকৃত।" />
+          <SectionHeading
+            no={en ? "01" : "০১"}
+            title={en ? "Dataset Statistics" : "উপাত্ত পরিসংখ্যান"}
+            sub={en ? "The size of the corpus — every number is paper-verified." : "কর্পাসের আকার — সব সংখ্যা গবেষণাপত্র-যাচাইকৃত।"}
+          />
           <motion.div variants={enter} className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone sm:grid-cols-4">
             {DATASET_STATS.map((stat, i) => (
-              <StatCell key={stat.label} {...stat} delay={i * 0.04} />
+              <StatCell key={stat.label.en} {...stat} delay={i * 0.04} />
             ))}
           </motion.div>
         </motion.section>
@@ -201,7 +226,11 @@ export default function DataPage() {
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
         >
-          <SectionHeading no="০২" title="জ্ঞান গ্রাফ" sub="১৩-ক্যাটাগরি কৃষি ট্যাক্সোনমি — জাত, চাষ, রোগ, পোকা, সার থেকে খাদ্য নিরাপত্তা পর্যন্ত। নিচের চিত্রটি বাস্তব সংখ্যা থেকে আঁকা।" />
+          <SectionHeading
+            no={en ? "02" : "০২"}
+            title={en ? "Knowledge Graph" : "জ্ঞান গ্রাফ"}
+            sub={en ? "A 13-category agricultural taxonomy — from variety, cultivation, disease, pest, and fertilizer through to food safety. The chart below is drawn from real numbers." : "১৩-ক্যাটাগরি কৃষি ট্যাক্সোনমি — জাত, চাষ, রোগ, পোকা, সার থেকে খাদ্য নিরাপত্তা পর্যন্ত। নিচের চিত্রটি বাস্তব সংখ্যা থেকে আঁকা।"}
+          />
 
           <div className="mt-6 grid grid-cols-1 items-center gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
             {/* Real donut — category share, animated draw */}
@@ -226,10 +255,10 @@ export default function DataPage() {
                   />
                 ))}
                 <text x={120} y={114} textAnchor="middle" className="fill-ink font-display" fontSize={26}>
-                  {toBn(NODE_TOTAL)}
+                  {toLocaleCount(NODE_TOTAL, en)}
                 </text>
                 <text x={120} y={136} textAnchor="middle" className="fill-ink-faint" fontSize={10}>
-                  জ্ঞান নোড
+                  {en ? "Knowledge Nodes" : "জ্ঞান নোড"}
                 </text>
               </svg>
               <div className="mt-4 w-full space-y-1.5">
@@ -243,9 +272,9 @@ export default function DataPage() {
                       className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left transition-colors ${active ? "bg-bone" : "hover:bg-bone/60"}`}
                     >
                       <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: CAT_COLORS[cat.name] }} />
-                      <span className="flex-1 text-sm text-ink">{cat.bn}</span>
-                      <span className="font-mono text-[10px] text-ink-faint">{cat.name}</span>
-                      <span className="font-display text-sm tabular text-ink">{toBn(cat.count)}</span>
+                      <span className="flex-1 text-sm text-ink">{catLabel(cat, en)}</span>
+                      {!en && <span className="font-mono text-[10px] text-ink-faint">{cat.name}</span>}
+                      <span className="font-display text-sm tabular text-ink">{toLocaleCount(cat.count, en)}</span>
                       <span className="w-10 text-right font-mono text-[10px] tabular text-ink-faint">
                         {((cat.count / NODE_TOTAL) * 100).toFixed(1)}%
                       </span>
@@ -257,13 +286,13 @@ export default function DataPage() {
 
             {/* Absolute counts — recharts bar chart (real y-axis) */}
             <motion.div variants={enter} className="rounded-xl border rule bg-paper p-6">
-              <div className="mb-2 text-xs font-semibold text-ochre">ক্যাটাগরি অনুযায়ী নোড — পরম সংখ্যা</div>
+              <div className="mb-2 text-xs font-semibold text-ochre">{en ? "Nodes by Category — Absolute Counts" : "ক্যাটাগরি অনুযায়ী নোড — পরম সংখ্যা"}</div>
               <ResponsiveContainer width="100%" height={280}>
-                <BarChart data={[...NODE_CATEGORIES]} layout="vertical" margin={{ left: 8, right: 44 }}>
-                  <XAxis type="number" domain={[0, 700]} tickFormatter={(v) => toBn(Number(v))} tick={{ fontSize: 11, fill: "var(--color-ink-faint)" }} axisLine={false} tickLine={false} />
-                  <YAxis type="category" dataKey="bn" width={72} tick={{ fontSize: 12, fill: "var(--color-ink)" }} axisLine={false} tickLine={false} />
+                <BarChart data={NODE_CATEGORIES.map((c) => ({ ...c, chartLabel: catLabel(c, en) }))} layout="vertical" margin={{ left: 8, right: 44 }}>
+                  <XAxis type="number" domain={[0, 700]} tickFormatter={(v) => numLocale(Number(v), en)} tick={{ fontSize: 11, fill: "var(--color-ink-faint)" }} axisLine={false} tickLine={false} />
+                  <YAxis type="category" dataKey="chartLabel" width={72} tick={{ fontSize: 12, fill: "var(--color-ink)" }} axisLine={false} tickLine={false} />
                   <Tooltip
-                    formatter={(v) => [toBn(Number(v)), "নোড"]}
+                    formatter={(v) => [numLocale(Number(v), en), en ? "Nodes" : "নোড"]}
                     cursor={{ fill: "var(--color-bone)" }}
                     contentStyle={{ borderRadius: 12, border: "1px solid var(--color-bone)", background: "var(--color-paper)", fontSize: 12 }}
                   />
@@ -271,11 +300,15 @@ export default function DataPage() {
                     {NODE_CATEGORIES.map((d) => (
                       <Cell key={d.name} fill={CAT_COLORS[d.name]} />
                     ))}
-                    <LabelList dataKey="count" position="right" formatter={(v) => toBn(Number(v))} fill="var(--color-ink-soft)" fontSize={11} />
+                    <LabelList dataKey="count" position="right" formatter={(v) => numLocale(Number(v), en)} fill="var(--color-ink-soft)" fontSize={11} />
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
-              <p className="mt-2 text-[11px] text-ink-faint">মোট {toBn(NODE_TOTAL)} নোড — {RESEARCH_STATS.publications}টি প্রকাশনা থেকে নির্যাসিত, উৎস আইডি ও পৃষ্ঠা নম্বরসহ।</p>
+              <p className="mt-2 text-[11px] text-ink-faint">
+                {en
+                  ? <>Total {toLocaleCount(NODE_TOTAL, en)} nodes — extracted from {statLocale(RESEARCH_STATS.publications, en)} publications, with source ID and page number.</>
+                  : <>মোট {toLocaleCount(NODE_TOTAL, en)} নোড — {RESEARCH_STATS.publications}টি প্রকাশনা থেকে নির্যাসিত, উৎস আইডি ও পৃষ্ঠা নম্বরসহ।</>}
+              </p>
             </motion.div>
           </div>
 
@@ -291,19 +324,19 @@ export default function DataPage() {
               >
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-xl border rule bg-paper-2/40 px-5 py-4">
                   <div>
-                    <div className="font-display text-2xl tabular text-ink">{toBn(selected.count)}</div>
-                    <div className="text-[10px] text-ink-faint">{selected.bn} নোড</div>
+                    <div className="font-display text-2xl tabular text-ink">{toLocaleCount(selected.count, en)}</div>
+                    <div className="text-[10px] text-ink-faint">{catLabel(selected, en)} {en ? "nodes" : "নোড"}</div>
                   </div>
                   <div>
                     <div className="font-display text-2xl tabular text-ochre">{selectedFrac.toFixed(1)}%</div>
-                    <div className="text-[10px] text-ink-faint">মোট কর্পাসের অংশ</div>
+                    <div className="text-[10px] text-ink-faint">{en ? "Share of total corpus" : "মোট কর্পাসের অংশ"}</div>
                   </div>
                   <div className="flex-1 text-sm leading-relaxed text-ink-soft">
-                    প্রতিটি নোড একটি সরকারি প্রকাশনার নির্দিষ্ট পৃষ্ঠা থেকে নির্যাসিত — উৎস আইডি ও পৃষ্ঠা নম্বরসহ।
+                    {en ? "Every node is extracted from a specific page of a government publication — with source ID and page number." : "প্রতিটি নোড একটি সরকারি প্রকাশনার নির্দিষ্ট পৃষ্ঠা থেকে নির্যাসিত — উৎস আইডি ও পৃষ্ঠা নম্বরসহ।"}
                   </div>
                   {selected.name === "Disease" && (
                     <a href="#sample-node" className="inline-flex items-center gap-1.5 rounded-lg border rule bg-paper px-3 py-2 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf">
-                      <FlaskConical className="h-3.5 w-3.5" />নমুনা নোড দেখুন: আলুর লেট ব্লাইট
+                      <FlaskConical className="h-3.5 w-3.5" />{en ? "View sample node: Potato Late Blight" : "নমুনা নোড দেখুন: আলুর লেট ব্লাইট"}
                     </a>
                   )}
                 </div>
@@ -325,7 +358,11 @@ export default function DataPage() {
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
         >
-          <SectionHeading no="০৩" title="নমুনা জ্ঞান নোড" sub="একটি বাস্তব জ্ঞান নোড — প্রমাণ-লকড, উৎস-ট্রেসযোগ্য, রাসায়নিক-অডিটযোগ্য।" />
+          <SectionHeading
+            no={en ? "03" : "০৩"}
+            title={en ? "Sample Knowledge Node" : "নমুনা জ্ঞান নোড"}
+            sub={en ? "A real knowledge node — provenance-locked, source-traceable, chemically auditable." : "একটি বাস্তব জ্ঞান নোড — প্রমাণ-লকড, উৎস-ট্রেসযোগ্য, রাসায়নিক-অডিটযোগ্য।"}
+          />
 
           <motion.div variants={enter} className="mt-6 rounded-xl border rule bg-paper">
             {/* Header */}
@@ -335,10 +372,12 @@ export default function DataPage() {
             >
               <div className="flex-1">
                 <div className="font-mono text-xs text-ink-faint">{SAMPLE_NODE.id}</div>
-                <div className="mt-1 font-display text-lg text-ink">{SAMPLE_NODE.title_bn}</div>
-                <div className="text-sm text-ochre">{SAMPLE_NODE.title_en}</div>
+                <div className="mt-1 font-display text-lg text-ink">{en ? SAMPLE_NODE.title_en : SAMPLE_NODE.title_bn}</div>
+                {!en && <div className="text-sm text-ochre">{SAMPLE_NODE.title_en}</div>}
                 <div className="mt-1 font-mono text-[10px] text-ink-faint">
-                  {SAMPLE_NODE.entities.length} এনটিটি · {SAMPLE_NODE.chemical_trace.length} রাসায়নিক ট্রেস
+                  {en
+                    ? <>{numLocale(SAMPLE_NODE.entities.length, en)} entities &middot; {numLocale(SAMPLE_NODE.chemical_trace.length, en)} chemical traces</>
+                    : <>{SAMPLE_NODE.entities.length} এনটিটি · {SAMPLE_NODE.chemical_trace.length} রাসায়নিক ট্রেস</>}
                 </div>
               </div>
               <ChevronDown className={`h-5 w-5 shrink-0 text-ink-faint transition-transform ${nodeOpen ? "rotate-180" : ""}`} />
@@ -357,7 +396,7 @@ export default function DataPage() {
                   {i < arr.length - 1 && <ChevronRight className="h-3 w-3 text-ink-faint" />}
                 </motion.span>
               ))}
-              <span className="ml-auto font-mono text-[10px] text-ink-faint">উৎস → পৃষ্ঠা → নোড</span>
+              <span className="ml-auto font-mono text-[10px] text-ink-faint">{en ? "Source → Page → Node" : "উৎস → পৃষ্ঠা → নোড"}</span>
             </motion.div>
 
             {/* Expandable content */}
@@ -373,30 +412,30 @@ export default function DataPage() {
                   <div className="space-y-4 px-5 py-4">
                     <div className="grid grid-cols-2 gap-3 text-xs sm:grid-cols-4">
                       <div>
-                        <div className="text-ink-faint">ক্যাটাগরি</div>
+                        <div className="text-ink-faint">{en ? "Category" : "ক্যাটাগরি"}</div>
                         <div className="font-medium text-ink">{SAMPLE_NODE.category}</div>
                       </div>
                       <div>
-                        <div className="text-ink-faint">প্রকাশক</div>
+                        <div className="text-ink-faint">{en ? "Publisher" : "প্রকাশক"}</div>
                         <div className="font-medium text-ink">{SAMPLE_NODE.publisher}</div>
                       </div>
                       <div>
-                        <div className="text-ink-faint">উৎস নথি</div>
+                        <div className="text-ink-faint">{en ? "Source Document" : "উৎস নথি"}</div>
                         <div className="font-medium text-ink">{SAMPLE_NODE.source_document}</div>
                       </div>
                       <div>
-                        <div className="text-ink-faint">সাইটেশন</div>
+                        <div className="text-ink-faint">{en ? "Citation" : "সাইটেশন"}</div>
                         <div className="font-medium text-ink">{SAMPLE_NODE.citation}</div>
                       </div>
                     </div>
 
                     <div>
-                      <div className="text-xs text-ink-faint">কনটেন্ট (বাংলা)</div>
-                      <p className="mt-1 text-sm leading-relaxed text-ink-soft">{SAMPLE_NODE.content_bn}</p>
+                      <div className="text-xs text-ink-faint">{en ? "Content" : "কনটেন্ট (বাংলা)"}</div>
+                      <p className="mt-1 text-sm leading-relaxed text-ink-soft">{en ? SAMPLE_NODE.content_en : SAMPLE_NODE.content_bn}</p>
                     </div>
 
                     <div>
-                      <div className="text-xs text-ink-faint">এনটিটি</div>
+                      <div className="text-xs text-ink-faint">{en ? "Entities" : "এনটিটি"}</div>
                       <div className="mt-1 flex flex-wrap gap-1.5">
                         {SAMPLE_NODE.entities.map((entity) => (
                           <span key={entity} className="rounded-md bg-leaf/10 px-2 py-0.5 font-mono text-[11px] text-leaf">
@@ -407,7 +446,7 @@ export default function DataPage() {
                     </div>
 
                     <div>
-                      <div className="text-xs text-ink-faint">রাসায়নিক ট্রেস</div>
+                      <div className="text-xs text-ink-faint">{en ? "Chemical Trace" : "রাসায়নিক ট্রেস"}</div>
                       <div className="mt-1 flex flex-wrap gap-1.5">
                         {SAMPLE_NODE.chemical_trace.map((chem) => (
                           <span key={chem} className="rounded-md bg-clay-soft/20 px-2 py-0.5 font-mono text-[11px] text-clay">
@@ -430,7 +469,11 @@ export default function DataPage() {
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
         >
-          <SectionHeading no="০৪" title="উপাত্ত অ্যাক্সেস" sub="ডেটাসেট রিপোজিটরি ও লাইসেন্স — সব প্রকাশ্যে, কোনো লগইন নেই।" />
+          <SectionHeading
+            no={en ? "04" : "০৪"}
+            title={en ? "Dataset Access" : "উপাত্ত অ্যাক্সেস"}
+            sub={en ? "Dataset repositories and license — all public, no login." : "ডেটাসেট রিপোজিটরি ও লাইসেন্স — সব প্রকাশ্যে, কোনো লগইন নেই।"}
+          />
           <motion.div variants={enter} className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <a
               href={LINKS.huggingface}
@@ -466,7 +509,7 @@ export default function DataPage() {
 
           <motion.div variants={enter} className="mt-4 flex items-center justify-center gap-3 rounded-lg border rule bg-paper-2/40 px-5 py-3">
             <span className="flex h-7 w-7 items-center justify-center rounded-md bg-ochre/10 font-display text-xs font-bold text-ochre">CC</span>
-            <span className="text-xs text-ink-faint">লাইসেন্স: CC-BY-4.0 | গবেষণা প্রোটোটাইপ | উৎপাদন ব্যবহারের জন্য নয়</span>
+            <span className="text-xs text-ink-faint">{en ? "License: CC-BY-4.0 | Research Prototype | Not for Production Use" : "লাইসেন্স: CC-BY-4.0 | গবেষণা প্রোটোটাইপ | উৎপাদন ব্যবহারের জন্য নয়"}</span>
           </motion.div>
         </motion.section>
 
@@ -477,19 +520,23 @@ export default function DataPage() {
           viewport={{ once: true, margin: "-60px" }}
           variants={stagger}
         >
-          <SectionHeading no="০৫" title="ডেটা কার্ড" sub="কর্পাস, বেঞ্চমার্ক ও গুণমান — সংক্ষিপ্ত, সোর্স-লকড সারাংশ।" />
+          <SectionHeading
+            no={en ? "05" : "০৫"}
+            title={en ? "Data Card" : "ডেটা কার্ড"}
+            sub={en ? "Corpus, benchmark, and quality — a brief, source-locked summary." : "কর্পাস, বেঞ্চমার্ক ও গুণমান — সংক্ষিপ্ত, সোর্স-লকড সারাংশ।"}
+          />
           <motion.div variants={enter} className="mt-6 overflow-hidden rounded-xl border rule bg-paper">
             <table className="w-full text-sm">
               {CARD_GROUPS.map((g) => (
-                <tbody key={g.name}>
+                <tbody key={g.name.en}>
                   <tr className="bg-paper-2/60">
                     <th colSpan={2} className="px-5 py-2 text-left font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ochre">
-                      {g.name}
+                      {en ? g.name.en : g.name.bn}
                     </th>
                   </tr>
                   {g.rows.map(([label, value, bar]) => (
-                    <tr key={label} className="border-t border-bone">
-                      <td className="px-5 py-2.5 text-ink-faint">{label}</td>
+                    <tr key={label.en} className="border-t border-bone">
+                      <td className="px-5 py-2.5 text-ink-faint">{en ? label.en : label.bn}</td>
                       <td className="px-5 py-2.5 text-right">
                         {bar ? (
                           <span className="inline-flex items-center gap-2.5">
@@ -502,10 +549,10 @@ export default function DataPage() {
                                 transition={{ duration: dur.normal, ease: ease.smooth }}
                               />
                             </span>
-                            <span className="font-medium tabular text-ink">{value}</span>
+                            <span className="font-medium tabular text-ink">{statLocale(value, en)}</span>
                           </span>
                         ) : (
-                          <span className="font-medium tabular text-ink">{value}</span>
+                          <span className="font-medium tabular text-ink">{statLocale(value, en)}</span>
                         )}
                       </td>
                     </tr>

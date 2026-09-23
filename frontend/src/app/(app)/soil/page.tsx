@@ -41,6 +41,10 @@ export default function SoilPage() {
   const [datasetError, setDatasetError] = useState(false);
   const [result, setResult] = useState<SoilAnalyzeResponse | null>(null);
   const requestRef = useRef<AbortController | null>(null);
+  const localeRef = useRef(locale);
+  useEffect(() => {
+    localeRef.current = locale;
+  }, [locale]);
 
   /* Load the frozen dataset info once — never computed live. */
   useEffect(() => {
@@ -74,7 +78,8 @@ export default function SoilPage() {
       setPreview(URL.createObjectURL(prepared));
       setResult(null);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "ছবিটি প্রস্তুত করা যায়নি।");
+      const en = localeRef.current === "en";
+      setError(e instanceof Error ? e.message : en ? "The photo could not be prepared." : "ছবিটি প্রস্তুত করা যায়নি।");
     } finally {
       setPreparing(false);
     }
@@ -103,7 +108,8 @@ export default function SoilPage() {
         setPreview(samplePath);
         setResult(null);
       } catch {
-        setError("নমুনা ছবিটি এখন পাওয়া যাচ্ছে না। নিজের ছবি আপলোড করুন।");
+        const en = localeRef.current === "en";
+        setError(en ? "The sample photo is unavailable right now. Upload your own photo." : "নমুনা ছবিটি এখন পাওয়া যাচ্ছে না। নিজের ছবি আপলোড করুন।");
       } finally {
         setPreparing(false);
       }
@@ -126,11 +132,12 @@ export default function SoilPage() {
       else setDataset(r.dataset);
     } catch (e: unknown) {
       if (!controller.signal.aborted) {
-        const msg = e instanceof Error ? e.message : "বিশ্লেষণে সমস্যা হয়েছে";
+        const en = localeRef.current === "en";
+        const msg = e instanceof Error ? e.message : en ? "The analysis ran into a problem" : "বিশ্লেষণে সমস্যা হয়েছে";
         if (msg.includes("Failed to fetch") || msg.includes("fetch")) {
-          setError("সার্ভারে পৌঁছানো যায়নি। নেটওয়ার্ক দেখে আবার চেষ্টা করুন।");
+          setError(en ? "Could not reach the server. Check your network and try again." : "সার্ভারে পৌঁছানো যায়নি। নেটওয়ার্ক দেখে আবার চেষ্টা করুন।");
         } else if (msg.includes("soil analyze failed:")) {
-          setError("ছবিটি বিশ্লেষণ করা যায়নি। একই ছবি আবার দিন বা নতুন ছবি তুলুন।");
+          setError(en ? "The photo could not be analyzed. Try the same photo again or take a new one." : "ছবিটি বিশ্লেষণ করা যায়নি। একই ছবি আবার দিন বা নতুন ছবি তুলুন।");
         } else {
           setError(msg);
         }
@@ -228,14 +235,16 @@ export default function SoilPage() {
                 className="mt-3 flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-leaf/10 py-3 text-sm text-leaf"
               >
                 <Loader2 className="h-4 w-4 animate-spin" />
-                {preparing ? "ছবি ছোট করে প্রস্তুত হচ্ছে…" : "আর্দ্রতা যাচাই হচ্ছে…"}
+                {preparing
+                  ? (en ? "Shrinking the photo…" : "ছবি ছোট করে প্রস্তুত হচ্ছে…")
+                  : (en ? "Checking moisture…" : "আর্দ্রতা যাচাই হচ্ছে…")}
                 {loading && (
                   <button
                     type="button"
                     onClick={() => requestRef.current?.abort()}
                     className="ml-2 flex min-h-11 items-center gap-1 rounded-lg px-2 font-medium text-clay"
                   >
-                    <X className="h-4 w-4" /> বাতিল
+                    <X className="h-4 w-4" /> {en ? "Cancel" : "বাতিল"}
                   </button>
                 )}
               </motion.div>
@@ -258,7 +267,7 @@ export default function SoilPage() {
                     onClick={runAnalyze}
                     className="mt-2 flex min-h-11 items-center gap-2 rounded-lg font-semibold text-leaf"
                   >
-                    <RotateCcw className="h-4 w-4" /> আবার চেষ্টা করুন
+                    <RotateCcw className="h-4 w-4" /> {en ? "Try again" : "আবার চেষ্টা করুন"}
                   </button>
                 )}
               </motion.div>
@@ -280,8 +289,8 @@ export default function SoilPage() {
                 stages={SOIL_STAGES}
                 events={railEvents}
                 active={loading}
-                title="আর্দ্রতা বিশ্লেষণ প্রবাহ"
-                detail="ছবি গ্রহণ → আর্দ্রতা নির্ণয় → মাটি শনাক্ত → পরামর্শ"
+                title={en ? "Moisture analysis flow" : "আর্দ্রতা বিশ্লেষণ প্রবাহ"}
+                detail={en ? "Photo received → moisture estimate → soil identified → advisory" : "ছবি গ্রহণ → আর্দ্রতা নির্ণয় → মাটি শনাক্ত → পরামর্শ"}
               />
             </motion.div>
           )}
@@ -300,7 +309,7 @@ export default function SoilPage() {
         {dataset && <SoilDatasetCard info={dataset} />}
         {datasetError && !dataset && (
           <div className="rounded-2xl border rule bg-paper p-6 text-center text-sm text-ink-soft">
-            ডেটাসেট তথ্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।
+            {en ? "The dataset details could not be loaded. Try again later." : "ডেটাসেট তথ্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।"}
           </div>
         )}
       </motion.div>
@@ -339,17 +348,22 @@ function SoilDropzone({
 }) {
   const { locale } = useLanguage();
   const en = locale === "en";
+  const localeRef = useRef(locale);
+  useEffect(() => {
+    localeRef.current = locale;
+  }, [locale]);
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
 
   const handleSelect = useCallback(
     (f: File) => {
+      const isEn = localeRef.current === "en";
       if (!["image/jpeg", "image/png", "image/webp"].includes(f.type)) {
-        onValidationError?.("শুধু JPEG, PNG বা WebP ছবি দিন।");
+        onValidationError?.(isEn ? "Only JPEG, PNG, or WebP photos are allowed." : "শুধু JPEG, PNG বা WebP ছবি দিন।");
         return;
       }
       if (f.size > 10 * 1024 * 1024) {
-        onValidationError?.("ছবিটি ১০MB-এর ছোট হতে হবে।");
+        onValidationError?.(isEn ? "The photo must be smaller than 10MB." : "ছবিটি ১০MB-এর ছোট হতে হবে।");
         return;
       }
       onFile(f);
@@ -376,7 +390,7 @@ function SoilDropzone({
         onKeyDown={(e) => {
           if (!loading && (e.key === "Enter" || e.key === " ")) inputRef.current?.click();
         }}
-        aria-label={preview ? "আপলোড করা মাটির ছবি পরিবর্তন করুন" : "মাটির ছবি আপলোড করুন"}
+        aria-label={preview ? (en ? "Change the uploaded soil photo" : "আপলোড করা মাটির ছবি পরিবর্তন করুন") : (en ? "Upload a soil photo" : "মাটির ছবি আপলোড করুন")}
         className={`surface-lift relative cursor-pointer overflow-hidden rounded-xl border-2 p-8 text-center transition-colors focus-visible:ring-2 focus-visible:ring-leaf ${
           dragging
             ? "border-leaf bg-leaf/5"
@@ -409,17 +423,17 @@ function SoilDropzone({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={preview}
-                alt="আপলোড করা মাটির ছবি"
+                alt={en ? "Uploaded soil photo" : "আপলোড করা মাটির ছবি"}
                 className="mx-auto max-h-52 rounded-lg border border-bone object-contain shadow-sm"
               />
               <div className="mt-3 flex items-center justify-center gap-3 text-xs text-ink-faint">
-                <span className="max-w-[160px] truncate">{file?.name ?? "ছবি"}</span>
+                <span className="max-w-[160px] truncate">{file?.name ?? (en ? "Photo" : "ছবি")}</span>
                 {!loading && (
                   <button
                     onClick={(e) => { e.stopPropagation(); onClear(); }}
                     className="flex min-h-11 items-center gap-1 rounded-lg px-2 text-ink-soft transition-colors hover:text-leaf"
                   >
-                    <RotateCcw className="h-3 w-3" /> পরিবর্তন
+                    <RotateCcw className="h-3 w-3" /> {en ? "Change" : "পরিবর্তন"}
                   </button>
                 )}
               </div>

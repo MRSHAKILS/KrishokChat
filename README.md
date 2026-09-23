@@ -8,7 +8,8 @@ per-crop vision model workflow. It is a research capstone demo prototype, not a
 production service.
 
 > 🌐 **Interactive Demo Preview:** [https://krishoktech.vercel.app](https://krishoktech.vercel.app)  
-> 🎥 **Demonstration Screencast:** [https://krishoktech.vercel.app/screencast](https://krishoktech.vercel.app/screencast)
+> 🎥 **Demonstration Screencast:** [https://krishoktech.vercel.app/screencast](https://krishoktech.vercel.app/screencast)  
+> ▶️ **Screencast on YouTube (2:24):** [https://youtu.be/a4cibXlvGdQ](https://youtu.be/a4cibXlvGdQ)
 
 ## 🚀 EACL 2027 Reviewer Quick Start (5-Minute Reproduction Guide)
 

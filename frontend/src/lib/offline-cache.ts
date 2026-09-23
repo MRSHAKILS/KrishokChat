@@ -1,7 +1,7 @@
 "use client";
 
 /* =========================================================================
-   Offline Cache & Connectivity Utilities for KrishokChat PWA
+   Offline Cache & Connectivity Utilities for KrishokTech PWA
    ========================================================================= */
 
 import { useState, useEffect, useSyncExternalStore } from "react";

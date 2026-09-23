@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ShieldCheck, ShieldAlert, ShieldX, FileText, AlertCircle, Phone, CloudRain, MessageCircle, ChevronDown, ClipboardCheck, FileSpreadsheet, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { enter, dur, ease } from "@/lib/motion";
-import { HELPLINE } from "@/lib/constants";
+import { HELPLINE, HELPLINE_EN } from "@/lib/constants";
 import { cropBn, translateDiseaseToBn } from "@/lib/bn";
 import type { DetectResponse } from "@/lib/api";
 import { DosageCalculator } from "@/components/detect/dosage-calculator";
@@ -38,7 +38,7 @@ const PUBLISHER_NAMES_EN: Record<string, string> = {
   IRRI: "International Rice Research Institute (IRRI)",
 };
 
-function formatTreatmentAdvice(text: string, sources: string[]) {
+function formatTreatmentAdvice(text: string, sources: string[], en: boolean = false) {
   if (!text) return text;
   const clean = text
     .replaceAll(/\[cite:\s*\d+\]/gi, "")
@@ -51,7 +51,7 @@ function formatTreatmentAdvice(text: string, sources: string[]) {
   return clean.replace(tagRegex, (match, id) => {
     const idx = sources.findIndex((s) => s === id);
     if (idx >= 0) {
-      const digit = bnDigits[idx] || String(idx + 1);
+      const digit = en ? String(idx + 1) : (bnDigits[idx] || String(idx + 1));
       return ` [${digit}] `;
     }
     return "";
@@ -92,7 +92,7 @@ export function TreatmentCard({
 
   if (!result.treatment_advice) return null;
 
-  const cleanAdvice = formatTreatmentAdvice(result.treatment_advice, result.treatment_sources);
+  const cleanAdvice = formatTreatmentAdvice(result.treatment_advice, result.treatment_sources, locale === "en");
   const localizedKnowledge = getLocalizedDisease(result.disease, locale);
   const shownAdvice =
     locale === "en" && localizedKnowledge?.solutionEn
@@ -272,7 +272,7 @@ export function TreatmentCard({
             href={`tel:${HELPLINE.krishiCallCenter}`}
             className="mt-1 inline-flex min-h-9 items-center gap-1 font-semibold text-leaf hover:text-leaf-2"
           >
-            <Phone className="h-3.5 w-3.5" /> {HELPLINE.krishiCallCenter}
+            <Phone className="h-3.5 w-3.5" /> {locale === "en" ? HELPLINE_EN.krishiCallCenter : HELPLINE.krishiCallCenter}
           </a>
         </div>
       </div>
@@ -313,7 +313,7 @@ export function TreatmentCard({
                 >
                   {locale === "bn"
                     ? `নিশ্চিত হতে কৃষক কল সেন্টারে যোগাযোগ করুন: ${HELPLINE.krishiCallCenter}`
-                    : `To verify with an agronomist, call: ${HELPLINE.krishiCallCenter}`}
+                    : `To verify with an agronomist, call: ${HELPLINE_EN.krishiCallCenter}`}
                 </a>
               </div>
             </div>
@@ -397,7 +397,7 @@ export function TreatmentCard({
             href={`tel:${HELPLINE.krishiCallCenter}`}
             className="inline-flex min-h-11 items-center rounded-full border border-bone px-3 text-xs font-medium text-ink-soft transition-colors hover:border-leaf hover:text-leaf"
           >
-            {locale === "bn" ? "কৃষি বিশেষজ্ঞ:" : "Agri Specialist:"} {HELPLINE.krishiCallCenter}
+            {locale === "bn" ? "কৃষি বিশেষজ্ঞ:" : "Agri Specialist:"} {locale === "en" ? HELPLINE_EN.krishiCallCenter : HELPLINE.krishiCallCenter}
           </a>
         </div>
       </div>

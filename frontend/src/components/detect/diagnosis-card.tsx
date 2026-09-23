@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { CheckCircle, HelpCircle, ImageIcon, XCircle, AlertTriangle, Leaf, X } from "lucide-react";
 import { enter } from "@/lib/motion";
 import { bnPercent, humanizeLabel, diseaseCore, cleanKnowledgeText, translateDiseaseToBn, cropBn } from "@/lib/bn";
-import { HELPLINE } from "@/lib/constants";
+import { HELPLINE, HELPLINE_EN } from "@/lib/constants";
 import { ConfidenceMeter } from "./confidence-meter";
 import type { DetectResponse } from "@/lib/api";
 import { useLanguage } from "@/context/language-context";
@@ -256,7 +256,7 @@ function HealthyCard({ result }: { result: DetectResponse }) {
 /* --- 3. NOT_RECOGNIZED — honest uncertainty ----------------------------- */
 
 function NotRecognizedCard({ result }: { result: DetectResponse }) {
-  const { t, formatPercent } = useLanguage();
+  const { t, locale, formatPercent } = useLanguage();
 
   return (
     <motion.div
@@ -282,7 +282,7 @@ function NotRecognizedCard({ result }: { result: DetectResponse }) {
           className="flex items-center gap-2 rounded-lg border rule bg-paper p-3 text-xs text-ink-soft transition-colors hover:border-leaf hover:text-leaf"
         >
           {t.diagnosis.stepCallHelpline}
-          <span className="ml-auto tabular font-semibold text-leaf">{HELPLINE.krishiCallCenter}</span>
+          <span className="ml-auto tabular font-semibold text-leaf">{locale === "en" ? HELPLINE_EN.krishiCallCenter : HELPLINE.krishiCallCenter}</span>
         </a>
       </div>
     </motion.div>
@@ -292,7 +292,7 @@ function NotRecognizedCard({ result }: { result: DetectResponse }) {
 /* --- 4. NO_DISEASE_MODEL — honest gap ----------------------------------- */
 
 function NoModelCard({ result }: { result: DetectResponse }) {
-  const { t, formatPercent, localizeCrop } = useLanguage();
+  const { t, locale, formatPercent, localizeCrop } = useLanguage();
   const cropDisplay = localizeCrop(result.crop);
 
   return (
@@ -323,7 +323,7 @@ function NoModelCard({ result }: { result: DetectResponse }) {
           className="mt-3 flex items-center justify-between rounded-lg border rule bg-paper px-4 py-2.5 text-sm text-ink-soft transition-colors hover:border-leaf hover:text-leaf"
         >
           {t.nav.callCenter}
-          <span className="tabular font-semibold text-leaf">{HELPLINE.krishiCallCenter}</span>
+          <span className="tabular font-semibold text-leaf">{locale === "en" ? HELPLINE_EN.krishiCallCenter : HELPLINE.krishiCallCenter}</span>
         </a>
       </div>
     </motion.div>
@@ -505,7 +505,7 @@ function ModelErrorCard({
           href={`tel:${HELPLINE.krishiCallCenter}`}
           className="control-press inline-flex items-center gap-1.5 rounded-lg bg-leaf/10 px-3.5 py-1.5 text-xs font-semibold text-leaf hover:bg-leaf/20"
         >
-          {t.nav.callCenter}: {HELPLINE.krishiCallCenter}
+          {t.nav.callCenter}: {locale === "en" ? HELPLINE_EN.krishiCallCenter : HELPLINE.krishiCallCenter}
         </a>
       </div>
     </motion.div>
@@ -713,7 +713,7 @@ function OutOfDistributionCard({
           href={`tel:${HELPLINE.krishiCallCenter}`}
           className="control-press inline-flex min-h-11 items-center gap-2 rounded-lg bg-leaf/10 px-4 py-2 text-sm font-semibold text-leaf hover:bg-leaf/20"
         >
-          {t.nav.callCenter}: {HELPLINE.krishiCallCenter}
+          {t.nav.callCenter}: {locale === "en" ? HELPLINE_EN.krishiCallCenter : HELPLINE.krishiCallCenter}
         </a>
       </div>
     </motion.div>

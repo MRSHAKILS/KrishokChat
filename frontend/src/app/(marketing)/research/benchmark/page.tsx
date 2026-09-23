@@ -7,8 +7,9 @@ import { TrendingUp, AlertTriangle, Globe, ShieldCheck, Hourglass } from "lucide
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, LabelList } from "recharts";
 import { RESEARCH_STATS } from "@/lib/constants";
 import { enter, stagger, dur, ease } from "@/lib/motion";
-import { useCountUp, toBn } from "@/lib/use-count-up";
+import { useCountUp, toLocaleCount } from "@/lib/use-count-up";
 import goldenStats from "@/lib/golden_stats.json";
+import { useLanguage } from "@/context/language-context";
 
 /* The inspector is a 1,200+ line interactive component — lazy-loaded so it
    stays out of this page's first-load bundle. */
@@ -56,9 +57,9 @@ const RETRIEVAL_RESULTS = [
 ];
 
 const REGISTER_GAP = [
-  { category: "ফার্মার (colloquial)", dense: 0.093, bm25: 0.523, color: "clay" },
-  { category: "নিরাপত্তা (formal)", dense: 0.970, bm25: 0.539, color: "leaf" },
-  { category: "KG-grounded", dense: 0.489, bm25: 0.478, color: "ochre" },
+  { category: "ফার্মার (colloquial)", categoryEn: "Farmer (colloquial)", dense: 0.093, bm25: 0.523, color: "clay" },
+  { category: "নিরাপত্তা (formal)", categoryEn: "Safety (formal)", dense: 0.970, bm25: 0.539, color: "leaf" },
+  { category: "KG-grounded", categoryEn: "KG-grounded", dense: 0.489, bm25: 0.478, color: "ochre" },
 ];
 
 const CROSS_LINGUAL = [
@@ -88,6 +89,7 @@ const GENF1_LABELS: Record<string, string> = {
 
 /* Section kickers — indexed structure, same system as /data */
 const KICKERS = ["০১ · মূল ফলাফল", "০২ · তথ্য সংগ্রহ", "০৩ · রেজিস্টার গ্যাপ", "০৪ · ক্রস-লিঙ্গুয়াল", "০৫ · ফার্মার বেঞ্চমার্ক", "০৬ · হ্যালুসিনেশন ফ্লোর ও মডেল তুলনা", "০৭ · গোল্ডেন ইভাল"] as const;
+const KICKERS_EN = ["01 · Main Results", "02 · Retrieval", "03 · Register Gap", "04 · Cross-Lingual", "05 · Farmer Benchmark", "06 · Hallucination Floor & Model Comparison", "07 · Golden Eval"] as const;
 
 /* Section G — live-system golden eval. Numbers come from the PRECOMPUTED
    artifact generated offline (scripts/08..11 in backend/ml_assets/rag_index/
@@ -123,6 +125,14 @@ const CATEGORY_BN: Record<string, string> = {
   off_topic: "অপ্রাসঙ্গিক",
   unanswerable: "উত্তরযোগ্য নয়",
 };
+const CATEGORY_EN: Record<string, string> = {
+  dosage: "Dosage",
+  timing: "Timing",
+  pest_disease: "Pest / disease",
+  general: "General",
+  off_topic: "Off-topic",
+  unanswerable: "Unanswerable",
+};
 const CATEGORY_ORDER = ["dosage", "timing", "pest_disease", "general", "off_topic", "unanswerable"];
 
 const SCORE_BN: Record<string, string> = {
@@ -131,20 +141,29 @@ const SCORE_BN: Record<string, string> = {
   unsupported: "অসমর্থিত",
   refused: "অস্বীকৃত",
 };
+const SCORE_EN: Record<string, string> = {
+  correct: "Correct",
+  partial: "Partial",
+  unsupported: "Unsupported",
+  refused: "Refused",
+};
+const SCORE_KEYS = ["correct", "partial", "unsupported", "refused"];
 
-function StatCell({ value, label, delay }: { value: number; label: string; delay: number }) {
+function StatCell({ value, label, delay, en }: { value: number; label: string; delay: number; en: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const n = useCountUp(value, inView);
   return (
     <motion.div ref={ref} variants={enter} transition={{ delay }} className="bg-paper p-5 text-center">
-      <div className="font-display text-3xl tabular text-ink">{toBn(n)}</div>
+      <div className="font-display text-3xl tabular text-ink">{toLocaleCount(n, en)}</div>
       <div className="mt-1 text-[10px] font-medium text-ink-faint">{label}</div>
     </motion.div>
   );
 }
 
 export default function BenchmarkPage() {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const [condition, setCondition] = useState<Condition>("cb");
 
   return (
@@ -160,10 +179,12 @@ export default function BenchmarkPage() {
           BENCHMARK RESULTS
         </motion.p>
         <motion.h1 variants={enter} className="mt-4 font-display text-3xl leading-tight text-ink md:text-4xl">
-          মূল্যায়ন <span className="text-leaf">ফলাফল</span>
+          {en ? <>Evaluation <span className="text-leaf">Results</span></> : <>মূল্যায়ন <span className="text-leaf">ফলাফল</span></>}
         </motion.h1>
         <motion.p variants={enter} className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
-          ৬টি মডেল, ৫টি তথ্য-সংগ্রহ আর্কিটেকচার, ৯০০টি কোয়েরি — সব সংখ্যা গবেষণাপত্র থেকে, কোনো তথ্য তৈরি নয়।
+          {en
+            ? "6 models, 5 retrieval architectures, 900 queries — every number from the paper, nothing fabricated."
+            : "৬টি মডেল, ৫টি তথ্য-সংগ্রহ আর্কিটেকচার, ৯০০টি কোয়েরি — সব সংখ্যা গবেষণাপত্র থেকে, কোনো তথ্য তৈরি নয়।"}
         </motion.p>
       </motion.section>
 
@@ -176,12 +197,12 @@ export default function BenchmarkPage() {
       >
         <motion.div variants={enter} className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone sm:grid-cols-4">
           {[
-            { value: 6, label: "মডেল" },
-            { value: 5, label: "তথ্য-সংগ্রহ আর্কিটেকচার" },
-            { value: 900, label: "মূল্যায়ন কোয়েরি" },
-            { value: 284, label: "সোর্স PDF" },
+            { value: 6, label: "মডেল", labelEn: "Models" },
+            { value: 5, label: "তথ্য-সংগ্রহ আর্কিটেকচার", labelEn: "Retrieval architectures" },
+            { value: 900, label: "মূল্যায়ন কোয়েরি", labelEn: "Evaluation queries" },
+            { value: 284, label: "সোর্স PDF", labelEn: "Source PDFs" },
           ].map((s, i) => (
-            <StatCell key={s.label} value={s.value} label={s.label} delay={i * 0.04} />
+            <StatCell key={s.label} value={s.value} label={en ? s.labelEn : s.label} delay={i * 0.04} en={en} />
           ))}
         </motion.div>
       </motion.section>
@@ -193,12 +214,12 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[0]}</motion.div>
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{en ? KICKERS_EN[0] : KICKERS[0]}</motion.div>
         <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
-          মূল ফলাফল — General & Treatment QA
+          {en ? "Main Results — General & Treatment QA" : "মূল ফলাফল — General & Treatment QA"}
         </motion.h2>
         <motion.p variants={enter} className="mb-4 text-sm text-ink-soft">
-          ৫টি জিরো-শট বেসলাইন + ১টি ফাইন-টিউনড মডেল।
+          {en ? "5 zero-shot baselines + 1 fine-tuned model." : "৫টি জিরো-শট বেসলাইন + ১টি ফাইন-টিউনড মডেল।"}
         </motion.p>
 
         {/* Condition toggle */}
@@ -224,7 +245,7 @@ export default function BenchmarkPage() {
         {/* Chart + table — side by side on lg */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <motion.div variants={enter} className="rounded-xl border rule bg-paper p-6">
-          <div className="mb-2 text-xs font-semibold text-ochre">GenF1 তুলনা — {condition === "cb" ? "Closed-Book" : "Oracle"}</div>
+          <div className="mb-2 text-xs font-semibold text-ochre">{en ? "GenF1 comparison" : "GenF1 তুলনা"} — {condition === "cb" ? "Closed-Book" : "Oracle"}</div>
           <ResponsiveContainer width="100%" height={280}>
             <BarChart
               data={MAIN_RESULTS.map((m) => ({
@@ -263,7 +284,9 @@ export default function BenchmarkPage() {
             </BarChart>
           </ResponsiveContainer>
           <p className="mt-2 text-[11px] text-ink-faint">
-            ফাইন-টিউনড KrishokChat-4B — সেরা জিরো-শটের চেয়ে {condition === "cb" ? "১.৯×" : "১.২×"} বেশি GenF1 (০.৩১৪ vs ০.১৬৫ / ০.৩০০ vs ০.২৫৩)।
+            {en
+              ? <>Fine-tuned KrishokChat-4B — {condition === "cb" ? "1.9×" : "1.2×"} higher GenF1 than the best zero-shot (0.314 vs 0.165 / 0.300 vs 0.253).</>
+              : <>ফাইন-টিউনড KrishokChat-4B — সেরা জিরো-শটের চেয়ে {condition === "cb" ? "১.৯×" : "১.২×"} বেশি GenF1 (০.৩১৪ vs ০.১৬৫ / ০.৩০০ vs ০.২৫৩)।</>}
           </p>
         </motion.div>
         <motion.div variants={enter} className="relative">
@@ -271,7 +294,7 @@ export default function BenchmarkPage() {
             <table className="w-full min-w-[620px] text-xs sm:text-sm">
             <thead>
               <tr className="bg-paper-2">
-                <th className="px-3 py-3 text-left font-display text-ink">মডেল</th>
+                <th className="px-3 py-3 text-left font-display text-ink">{en ? "Model" : "মডেল"}</th>
                 <th className="px-3 py-3 text-right font-display text-ink">GenF1</th>
                 <th className="px-3 py-3 text-right font-display text-ink">GenHal%</th>
                 <th className="px-3 py-3 text-right font-display text-ink">TrtCor%</th>
@@ -296,7 +319,7 @@ export default function BenchmarkPage() {
                      <td className={`px-3 py-2.5 ${row.sft ? "font-medium text-leaf" : "text-ink"}`}>
                        <div className="flex items-center gap-2">
                          <span>{row.model}</span>
-                         {row.sft && <span className="shrink-0 rounded-full bg-leaf/10 px-2 py-0.5 text-[9px] font-semibold text-leaf">★ সেরা ফলাফল</span>}
+                         {row.sft && <span className="shrink-0 rounded-full bg-leaf/10 px-2 py-0.5 text-[9px] font-semibold text-leaf">★ {en ? "Best result" : "সেরা ফলাফল"}</span>}
                        </div>
                     </td>
                     <td className="px-3 py-2.5 text-right tabular text-ink">{f1.toFixed(3)}</td>
@@ -312,11 +335,13 @@ export default function BenchmarkPage() {
             </table>
           </div>
           <div className="pointer-events-none absolute right-0 top-0 h-full w-10 rounded-r-xl bg-gradient-to-l from-paper via-paper/70 to-transparent sm:hidden" aria-hidden />
-          <p className="mt-2 text-right text-[10px] text-ink-faint sm:hidden">ডানে টানুন →</p>
+          <p className="mt-2 text-right text-[10px] text-ink-faint sm:hidden">{en ? "Swipe right →" : "ডানে টানুন →"}</p>
         </motion.div>
         </div>
         <motion.p variants={enter} className="mt-2 text-[11px] text-ink-faint">
-          KrishokChat-4B ফাইন-টিউনড — GenF1 তীব্রভাবে উন্নত (০.৩১৪ vs সেরা জিরো-শট ০.১৬৫)।
+          {en
+            ? "KrishokChat-4B fine-tuned — a sharp GenF1 improvement (0.314 vs best zero-shot 0.165)."
+            : "KrishokChat-4B ফাইন-টিউনড — GenF1 তীব্রভাবে উন্নত (০.৩১৪ vs সেরা জিরো-শট ০.১৬৫)।"}
         </motion.p>
       </motion.section>
 
@@ -327,12 +352,12 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[1]}</motion.div>
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{en ? KICKERS_EN[1] : KICKERS[1]}</motion.div>
         <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
-          তথ্য সংগ্রহ ফলাফল — ৯০০ কোয়েরি
+          {en ? "Retrieval Results — 900 Queries" : "তথ্য সংগ্রহ ফলাফল — ৯০০ কোয়েরি"}
         </motion.h2>
         <motion.p variants={enter} className="mb-6 text-sm text-ink-soft">
-          ৫টি আর্কিটেকচার, BN→BN। হাইব্রিড RRF সর্বোচ্চ, BM25 সেরা একক।
+          {en ? "5 architectures, BN→BN. Hybrid RRF is highest, BM25 is the best single method." : "৫টি আর্কিটেকচার, BN→BN। হাইব্রিড RRF সর্বোচ্চ, BM25 সেরা একক।"}
         </motion.p>
 
         {/* R@10 bar chart */}
@@ -364,7 +389,7 @@ export default function BenchmarkPage() {
           <table className="w-full min-w-[560px] text-xs sm:text-sm">
             <thead>
               <tr className="bg-paper-2">
-                <th className="px-3 py-2.5 text-left font-display text-ink">আর্কিটেকচার</th>
+                <th className="px-3 py-2.5 text-left font-display text-ink">{en ? "Architecture" : "আর্কিটেকচার"}</th>
                 <th className="px-3 py-2.5 text-right font-display text-ink">R@1</th>
                 <th className="px-3 py-2.5 text-right font-display text-ink">R@5</th>
                 <th className="px-3 py-2.5 text-right font-display text-ink">R@10</th>
@@ -377,7 +402,7 @@ export default function BenchmarkPage() {
                      <td className={`px-3 py-2.5 ${row.best ? "bg-leaf/5 font-medium text-leaf" : "text-ink"}`}>
                      <div className="flex items-center gap-2">
                        <span>{row.arch}</span>
-                       {row.best && <span className="shrink-0 rounded-full bg-leaf/10 px-2 py-0.5 text-[9px] font-semibold text-leaf">★ সেরা ফলাফল</span>}
+                       {row.best && <span className="shrink-0 rounded-full bg-leaf/10 px-2 py-0.5 text-[9px] font-semibold text-leaf">★ {en ? "Best result" : "সেরা ফলাফল"}</span>}
                      </div>
                   </td>
                   <td className="px-3 py-2.5 text-right tabular text-ink">{row.r1.toFixed(3)}</td>
@@ -390,7 +415,7 @@ export default function BenchmarkPage() {
           </table>
           </div>
           <div className="pointer-events-none absolute right-0 top-0 h-full w-10 rounded-r-xl bg-gradient-to-l from-paper via-paper/70 to-transparent sm:hidden" aria-hidden />
-          <p className="mt-2 text-right text-[10px] text-ink-faint sm:hidden">ডানে টানুন →</p>
+          <p className="mt-2 text-right text-[10px] text-ink-faint sm:hidden">{en ? "Swipe right →" : "ডানে টানুন →"}</p>
         </motion.div>
       </motion.section>
 
@@ -401,19 +426,21 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[2]}</motion.div>
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{en ? KICKERS_EN[2] : KICKERS[2]}</motion.div>
         <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
-          রেজিস্টার গ্যাপ আবিষ্কার
+          {en ? "The Register Gap Discovery" : "রেজিস্টার গ্যাপ আবিষ্কার"}
         </motion.h2>
         <motion.p variants={enter} className="mb-6 text-sm text-ink-soft">
-          Dense তথ্য-সংগ্রহ ফার্মার ভাষায় প্রায় ব্যর্থ (০.০৯৩), কিন্তু আনুষ্ঠানিক নিরাপত্তা কোয়েরিতে প্রায় নিখুঁত (০.৯৭০)।
+          {en
+            ? "Dense retrieval nearly fails on farmer language (0.093), but is nearly perfect on formal safety queries (0.970)."
+            : "Dense তথ্য-সংগ্রহ ফার্মার ভাষায় প্রায় ব্যর্থ (০.০৯৩), কিন্তু আনুষ্ঠানিক নিরাপত্তা কোয়েরিতে প্রায় নিখুঁত (০.৯৭০)।"}
         </motion.p>
 
         {/* Diverging bar chart */}
         <motion.div variants={enter} className="space-y-4 rounded-xl border rule bg-paper p-6">
           {REGISTER_GAP.map((item, i) => (
             <div key={item.category} className="flex items-center gap-3">
-              <div className="w-32 shrink-0 text-right text-xs text-ink">{item.category}</div>
+              <div className="w-32 shrink-0 text-right text-xs text-ink">{en ? item.categoryEn : item.category}</div>
               <div className="relative h-8 flex-1 overflow-hidden rounded-md bg-bone">
                 {/* Dense bar */}
                 <motion.div
@@ -436,7 +463,9 @@ export default function BenchmarkPage() {
           ))}
         </motion.div>
         <motion.p variants={enter} className="mt-2 text-[11px] text-ink-faint">
-          ৯৬.৪% কোয়েরির জ্যাকার্ড {"<"} ০.১০ — ফার্মার ভাষা আনুষ্ঠানিক ভাষার চেয়ে আলাদা।
+          {en
+            ? <>96.4% of queries have a Jaccard {"<"} 0.10 — farmer language differs sharply from formal language.</>
+            : <>৯৬.৪% কোয়েরির জ্যাকার্ড {"<"} ০.১০ — ফার্মার ভাষা আনুষ্ঠানিক ভাষার চেয়ে আলাদা।</>}
         </motion.p>
       </motion.section>
 
@@ -447,23 +476,25 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[3]}</motion.div>
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{en ? KICKERS_EN[3] : KICKERS[3]}</motion.div>
         <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
           <Globe className="mr-2 inline h-6 w-6 text-leaf" />
-          ক্রস-লিঙ্গুয়াল কলাপস
+          {en ? "Cross-Lingual Collapse" : "ক্রস-লিঙ্গুয়াল কলাপস"}
         </motion.h2>
         <motion.p variants={enter} className="mb-6 text-sm text-ink-soft">
-          BM25 স্ক্রিপ্ট সীমা পার হলে প্রায় ব্যর্থ (০.৫০৬ → ০.০০৪), Dense টিকে থাকে (০.৪৬৪ → ০.৪২৫)।
+          {en
+            ? "BM25 nearly fails once it crosses the script boundary (0.506 → 0.004); Dense holds up (0.464 → 0.425)."
+            : "BM25 স্ক্রিপ্ট সীমা পার হলে প্রায় ব্যর্থ (০.৫০৬ → ০.০০৪), Dense টিকে থাকে (০.৪৬৪ → ০.৪২৫)।"}
         </motion.p>
 
         <motion.div variants={enter} className="overflow-hidden rounded-xl border rule">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-paper-2">
-                <th className="px-4 py-3 text-left font-display text-ink">সেটিং</th>
+                <th className="px-4 py-3 text-left font-display text-ink">{en ? "Setting" : "সেটিং"}</th>
                 <th className="px-4 py-3 text-right font-display text-ink">Dense</th>
                 <th className="px-4 py-3 text-right font-display text-ink">BM25</th>
-                <th className="px-4 py-3 text-right font-display text-ink">বিজয়ী</th>
+                <th className="px-4 py-3 text-right font-display text-ink">{en ? "Winner" : "বিজয়ী"}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-bone">
@@ -485,7 +516,9 @@ export default function BenchmarkPage() {
           </table>
         </motion.div>
         <motion.p variants={enter} className="mt-2 text-[11px] text-ink-faint">
-          BM25: ৯৯% ড্রপ | Dense: মাত্র ৮% ড্রপ — আর্কিটেকচার পছন্দ ভাষা পরিস্থিতি থেকে আলাদা নয়।
+          {en
+            ? "BM25: 99% drop | Dense: only an 8% drop — architecture choice isn't separate from language conditions."
+            : "BM25: ৯৯% ড্রপ | Dense: মাত্র ৮% ড্রপ — আর্কিটেকচার পছন্দ ভাষা পরিস্থিতি থেকে আলাদা নয়।"}
         </motion.p>
       </motion.section>
 
@@ -496,20 +529,20 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[4]}</motion.div>
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{en ? KICKERS_EN[4] : KICKERS[4]}</motion.div>
         <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
           <TrendingUp className="mr-2 inline h-6 w-6 text-leaf" />
-          রিয়েল-ওয়ার্ল্ড ফার্মার বেঞ্চমার্ক
+          {en ? "Real-World Farmer Benchmark" : "রিয়েল-ওয়ার্ল্ড ফার্মার বেঞ্চমার্ক"}
         </motion.h2>
         <motion.p variants={enter} className="mb-6 text-sm text-ink-soft">
-          ৩৫০টি প্রকৃত ফার্মার কোয়েরি — ৩০০টি মাঠ সাক্ষাৎকার থেকে।
+          {en ? "350 real farmer queries — from 300 field interviews." : "৩৫০টি প্রকৃত ফার্মার কোয়েরি — ৩০০টি মাঠ সাক্ষাৎকার থেকে।"}
         </motion.p>
 
         <motion.div variants={enter} className="overflow-hidden rounded-xl border rule">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-paper-2">
-                <th className="px-4 py-3 text-left font-display text-ink">মডেল</th>
+                <th className="px-4 py-3 text-left font-display text-ink">{en ? "Model" : "মডেল"}</th>
                 <th className="px-4 py-3 text-right font-display text-ink">Token F1</th>
                 <th className="px-4 py-3 text-right font-display text-ink">Halluc %</th>
               </tr>
@@ -553,12 +586,14 @@ export default function BenchmarkPage() {
         className="space-y-6"
       >
         <motion.div variants={enter}>
-          <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[5]}</div>
+          <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{en ? KICKERS_EN[5] : KICKERS[5]}</div>
           <h2 className="mt-1 mb-2 font-display text-2xl text-ink">
-            রাসায়নিক হ্যালুসিনেশন ফ্লোর ও মডেল তুলনা (A/B Diff Inspector)
+            {en ? "Chemical Hallucination Floor & Model Comparison (A/B Diff Inspector)" : "রাসায়নিক হ্যালুসিনেশন ফ্লোর ও মডেল তুলনা (A/B Diff Inspector)"}
           </h2>
           <p className="text-sm text-ink-soft max-w-3xl">
-            একই বেঞ্চমার্ক প্রশ্নে জিরো-শট বনাম ফাইন-টিউনড বনাম মাল্টি-এজেন্ট গ্রাউন্ডেড মডেলের পাশাপাশি ফলাফল, রাসায়নিক নিরাপত্তা স্কোর এবং কেন স্টেজ ৪ ভেরিফায়ার গেট আবশ্যক তার ইন্টারঅ্যাক্টিভ বিশ্লেষণ।
+            {en
+              ? "An interactive, side-by-side analysis of zero-shot vs. fine-tuned vs. multi-agent grounded model results on the same benchmark questions, chemical safety scores, and why the Stage 4 Verifier gate is necessary."
+              : "একই বেঞ্চমার্ক প্রশ্নে জিরো-শট বনাম ফাইন-টিউনড বনাম মাল্টি-এজেন্ট গ্রাউন্ডেড মডেলের পাশাপাশি ফলাফল, রাসায়নিক নিরাপত্তা স্কোর এবং কেন স্টেজ ৪ ভেরিফায়ার গেট আবশ্যক তার ইন্টারঅ্যাক্টিভ বিশ্লেষণ।"}
           </p>
         </motion.div>
 
@@ -574,25 +609,26 @@ export default function BenchmarkPage() {
         viewport={{ once: true, margin: "-60px" }}
         variants={stagger}
       >
-        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{KICKERS[6]}</motion.div>
+        <motion.div variants={enter} className="font-mono text-[11px] uppercase tracking-[0.22em] text-ochre">{en ? KICKERS_EN[6] : KICKERS[6]}</motion.div>
         <motion.h2 variants={enter} className="mt-1 mb-3 font-display text-2xl text-ink">
           <ShieldCheck className="mr-2 inline h-6 w-6 text-leaf" />
-          লাইভ সিস্টেম — গোল্ডেন ইভাল
+          {en ? "Live System — Golden Eval" : "লাইভ সিস্টেম — গোল্ডেন ইভাল"}
         </motion.h2>
         <motion.p variants={enter} className="mb-6 text-sm text-ink-soft">
-          ১,০০০টি প্রকৃত ফার্মার প্রশ্ন থেকে ৪৬টি নির্বাচিত, ৩ ধাপে মানব-পর্যালোচিত ক্যাটাগরি।
-          প্রশ্নগুলো এই সিস্টেমের প্রকৃত পাইপলাইন দিয়ে চালানো হয়; সব সংখ্যা অফলাইনে প্রি-কম্পিউটেড।
+          {en
+            ? "46 selected from 1,000 real farmer questions, categorized through 3 rounds of human review. Questions are run through the system's actual pipeline; all numbers are precomputed offline."
+            : "১,০০০টি প্রকৃত ফার্মার প্রশ্ন থেকে ৪৬টি নির্বাচিত, ৩ ধাপে মানব-পর্যালোচিত ক্যাটাগরি। প্রশ্নগুলো এই সিস্টেমের প্রকৃত পাইপলাইন দিয়ে চালানো হয়; সব সংখ্যা অফলাইনে প্রি-কম্পিউটেড।"}
         </motion.p>
 
         {/* Mini stat strip */}
         <motion.div variants={enter} className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border rule bg-bone sm:grid-cols-4">
           {[
-            { value: STATS.items, label: "গোল্ডেন প্রশ্ন" },
-            { value: STATS.mechanical.per_category.unanswerable?.n ?? 0, label: "উত্তরযোগ্য নয়" },
-            { value: STATS.evaluators, label: "স্বাধীন মূল্যায়নকারী" },
-            { value: STATS.status === "pending_scores" ? 0 : (STATS.kappa ?? 0), label: STATS.status === "pending_scores" ? "কাপা (পেন্ডিং)" : "ইন্টার-রেটার কাপা (κ)" },
+            { value: STATS.items, label: "গোল্ডেন প্রশ্ন", labelEn: "Golden questions" },
+            { value: STATS.mechanical.per_category.unanswerable?.n ?? 0, label: "উত্তরযোগ্য নয়", labelEn: "Unanswerable" },
+            { value: STATS.evaluators, label: "স্বাধীন মূল্যায়নকারী", labelEn: "Independent evaluators" },
+            { value: STATS.status === "pending_scores" ? 0 : (STATS.kappa ?? 0), label: STATS.status === "pending_scores" ? "কাপা (পেন্ডিং)" : "ইন্টার-রেটার কাপা (κ)", labelEn: STATS.status === "pending_scores" ? "Kappa (pending)" : "Inter-rater kappa (κ)" },
           ].map((s, i) => (
-            <StatCell key={s.label} value={s.value} label={s.label} delay={i * 0.04} />
+            <StatCell key={s.label} value={s.value} label={en ? s.labelEn : s.label} delay={i * 0.04} en={en} />
           ))}
         </motion.div>
 
@@ -602,10 +638,10 @@ export default function BenchmarkPage() {
             <table className="w-full min-w-[480px] text-xs sm:text-sm">
               <thead>
                 <tr className="bg-paper-2">
-                  <th className="px-3 py-2.5 text-left font-display text-ink">ক্যাটাগরি</th>
+                  <th className="px-3 py-2.5 text-left font-display text-ink">{en ? "Category" : "ক্যাটাগরি"}</th>
                   <th className="px-3 py-2.5 text-right font-display text-ink">n</th>
-                  <th className="px-3 py-2.5 text-right font-display text-ink">অস্বীকৃত (রেফারাল)</th>
-                  <th className="px-3 py-2.5 text-right font-display text-ink">ভেরিফায়ার উত্তীর্ণ</th>
+                  <th className="px-3 py-2.5 text-right font-display text-ink">{en ? "Refused (referral)" : "অস্বীকৃত (রেফারাল)"}</th>
+                  <th className="px-3 py-2.5 text-right font-display text-ink">{en ? "Verifier passed" : "ভেরিফায়ার উত্তীর্ণ"}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-bone">
@@ -613,7 +649,7 @@ export default function BenchmarkPage() {
                   const s = STATS.mechanical.per_category[cat];
                   return (
                     <tr key={cat} className="bg-paper">
-                      <td className="px-3 py-2.5 font-medium text-ink">{CATEGORY_BN[cat] ?? cat}</td>
+                      <td className="px-3 py-2.5 font-medium text-ink">{en ? (CATEGORY_EN[cat] ?? cat) : (CATEGORY_BN[cat] ?? cat)}</td>
                       <td className="px-3 py-2.5 text-right tabular text-ink">{s.n}</td>
                       <td className={`px-3 py-2.5 text-right tabular ${cat === "unanswerable" && s.refused === 0 ? "text-clay" : "text-ink"}`}>
                         {s.refused}
@@ -626,7 +662,9 @@ export default function BenchmarkPage() {
             </table>
           </div>
           <p className="mt-2 text-[11px] text-ink-faint">
-            যান্ত্রিক পাইপলাইন আচরণ — মানব স্কোরই চূড়ান্ত বিচার। ক্যাটাগরি ট্রেনিং/রপ্তানি/যোগাযোগ-ধরনের প্রশ্ন মানে "উত্তরযোগ্য নয়"।
+            {en
+              ? <>Mechanical pipeline behavior — human scoring is the final judge. The category training/export/contact-type question means &quot;unanswerable&quot;.</>
+              : <>যান্ত্রিক পাইপলাইন আচরণ — মানব স্কোরই চূড়ান্ত বিচার। ক্যাটাগরি ট্রেনিং/রপ্তানি/যোগাযোগ-ধরনের প্রশ্ন মানে &quot;উত্তরযোগ্য নয়&quot;।</>}
           </p>
         </motion.div>
 
@@ -644,18 +682,21 @@ export default function BenchmarkPage() {
                 )}
                 <div>
                   <div className={`text-sm font-semibold ${met ? "text-leaf" : "text-ink"}`}>
-                    উত্তরযোগ্য নয় এমন ১২টি প্রশ্নে রেফারাল-হার: {Math.round(rate * 100)}% (যান্ত্রিক)
+                    {en
+                      ? `Referral rate on the 12 unanswerable questions: ${Math.round(rate * 100)}% (mechanical)`
+                      : `উত্তরযোগ্য নয় এমন ১২টি প্রশ্নে রেফারাল-হার: ${Math.round(rate * 100)}% (যান্ত্রিক)`}
                   </div>
                   {met ? (
                     <p className="mt-1 text-xs leading-relaxed text-ink-soft">
-                      কর্পাস-কভারেজ গেট (D1a) সক্রিয়: প্রশিক্ষণ, রপ্তানি, ভেন্ডর/চারা প্রাপ্যতা, প্রতিষ্ঠানগত
-                      ও সরকারি-সহায়তা সংক্রান্ত প্রশ্নে সরাসরি ১৬১২৩ রেফারাল — কোনো জল্পনা-কল্পনা নয়।
-                      অফ-টপিক ২/২-ও প্রত্যাখ্যাত। লক্ষ্য পূরণ হয়েছে (≥৯০%)।
+                      {en
+                        ? "The corpus-coverage gate (D1a) is active: questions about training, exports, vendor/seedling availability, institutional matters, and government assistance get a direct 16123 referral — no speculation. Off-topic 2/2 also refused. The target is met (≥90%)."
+                        : "কর্পাস-কভারেজ গেট (D1a) সক্রিয়: প্রশিক্ষণ, রপ্তানি, ভেন্ডর/চারা প্রাপ্যতা, প্রতিষ্ঠানগত ও সরকারি-সহায়তা সংক্রান্ত প্রশ্নে সরাসরি ১৬১২৩ রেফারাল — কোনো জল্পনা-কল্পনা নয়। অফ-টপিক ২/২-ও প্রত্যাখ্যাত। লক্ষ্য পূরণ হয়েছে (≥৯০%)।"}
                     </p>
                   ) : (
                     <p className="mt-1 text-xs leading-relaxed text-ink-soft">
-                      কর্পাসে নেই এমন প্রশ্নে সিস্টেম এখনও উত্তরের চেষ্টা করে — এটিই বর্তমান খোলা সমস্যা।
-                      লক্ষ্য: এই হার ৯০%-এ উন্নীত করা।
+                      {en
+                        ? "The system still attempts to answer questions outside the corpus — this is the current open problem. Target: raise this rate to 90%."
+                        : "কর্পাসে নেই এমন প্রশ্নে সিস্টেম এখনও উত্তরের চেষ্টা করে — এটিই বর্তমান খোলা সমস্যা। লক্ষ্য: এই হার ৯০%-এ উন্নীত করা।"}
                     </p>
                   )}
                 </div>
@@ -670,11 +711,11 @@ export default function BenchmarkPage() {
             <div className="flex items-start gap-3">
               <Hourglass className="mt-0.5 h-5 w-5 shrink-0 text-ochre" />
               <div>
-                <div className="text-sm font-semibold text-ink">স্কোরিং পেন্ডিং — ২ স্বাধীন মূল্যায়নকারী</div>
+                <div className="text-sm font-semibold text-ink">{en ? "Scoring pending — 2 independent evaluators" : "স্কোরিং পেন্ডিং — ২ স্বাধীন মূল্যায়নকারী"}</div>
                 <p className="mt-1 text-xs leading-relaxed text-ink-soft">
-                  প্রতিটি উত্তর correct / partial / unsupported / refused স্কেলে মূল্যায়িত হয়।
-                  স্কোর শেষ হলে এখানে κ (ইন্টার-রেটার এগ্রিমেন্ট), ক্যাটাগরি-ভিত্তিক ফলাফল এবং
-                  অস্বীকৃতির নিশ্চিত হার স্বয়ংক্রিয়ভাবে প্রকাশ পাবে।
+                  {en
+                    ? "Every answer is scored on a correct / partial / unsupported / refused scale. Once scoring is complete, κ (inter-rater agreement), category-level results, and the validated refusal rate will publish here automatically."
+                    : "প্রতিটি উত্তর correct / partial / unsupported / refused স্কেলে মূল্যায়িত হয়। স্কোর শেষ হলে এখানে κ (ইন্টার-রেটার এগ্রিমেন্ট), ক্যাটাগরি-ভিত্তিক ফলাফল এবং অস্বীকৃতির নিশ্চিত হার স্বয়ংক্রিয়ভাবে প্রকাশ পাবে।"}
                 </p>
               </div>
             </div>
@@ -683,14 +724,14 @@ export default function BenchmarkPage() {
           <motion.div variants={enter} className="mt-6 space-y-4">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {[
-                { label: "ইন্টার-রেটার κ", value: STATS.kappa ?? 0, color: "text-leaf" },
-                { label: "র-এগ্রিমেন্ট", value: STATS.raw_agreement ?? 0, color: "text-leaf" },
-                { label: "রেফারাল-হার (নিশ্চিত)", value: STATS.unanswerable_refusal_rate_validated ?? 0, color: "text-clay" },
-                { label: "অসম্মতি", value: STATS.disagreement_count ?? 0, color: "text-ochre" },
+                { label: "ইন্টার-রেটার κ", labelEn: "Inter-rater κ", value: STATS.kappa ?? 0, color: "text-leaf" },
+                { label: "র-এগ্রিমেন্ট", labelEn: "Raw agreement", value: STATS.raw_agreement ?? 0, color: "text-leaf" },
+                { label: "রেফারাল-হার (নিশ্চিত)", labelEn: "Referral rate (validated)", value: STATS.unanswerable_refusal_rate_validated ?? 0, color: "text-clay" },
+                { label: "অসম্মতি", labelEn: "Disagreements", value: STATS.disagreement_count ?? 0, color: "text-ochre" },
               ].map((chip) => (
                 <div key={chip.label} className="rounded-xl border rule bg-paper p-4 text-center">
-                  <div className={`font-display text-2xl tabular ${chip.color}`}>{toBn(chip.value)}</div>
-                  <div className="mt-1 text-[10px] font-medium text-ink-faint">{chip.label}</div>
+                  <div className={`font-display text-2xl tabular ${chip.color}`}>{toLocaleCount(chip.value, en)}</div>
+                  <div className="mt-1 text-[10px] font-medium text-ink-faint">{en ? chip.labelEn : chip.label}</div>
                 </div>
               ))}
             </div>
@@ -698,12 +739,12 @@ export default function BenchmarkPage() {
               <table className="w-full min-w-[560px] text-xs sm:text-sm">
                 <thead>
                   <tr className="bg-paper-2">
-                    <th className="px-3 py-2.5 text-left font-display text-ink">ক্যাটাগরি</th>
+                    <th className="px-3 py-2.5 text-left font-display text-ink">{en ? "Category" : "ক্যাটাগরি"}</th>
                     <th className="px-3 py-2.5 text-right font-display text-ink">n</th>
-                    {Object.values(SCORE_BN).map((label) => (
-                      <th key={label} className="px-3 py-2.5 text-right font-display text-ink">{label}</th>
+                    {SCORE_KEYS.map((key) => (
+                      <th key={key} className="px-3 py-2.5 text-right font-display text-ink">{en ? SCORE_EN[key] : SCORE_BN[key]}</th>
                     ))}
-                    <th className="px-3 py-2.5 text-right font-display text-ink">সঠিক-হার</th>
+                    <th className="px-3 py-2.5 text-right font-display text-ink">{en ? "Correct rate" : "সঠিক-হার"}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-bone">
@@ -711,7 +752,7 @@ export default function BenchmarkPage() {
                     const s = STATS.category_results![cat];
                     return (
                       <tr key={cat} className="bg-paper">
-                        <td className="px-3 py-2.5 font-medium text-ink">{CATEGORY_BN[cat] ?? cat}</td>
+                        <td className="px-3 py-2.5 font-medium text-ink">{en ? (CATEGORY_EN[cat] ?? cat) : (CATEGORY_BN[cat] ?? cat)}</td>
                         <td className="px-3 py-2.5 text-right tabular text-ink">{s.n}</td>
                         <td className="px-3 py-2.5 text-right tabular text-ink">{s.correct}</td>
                         <td className="px-3 py-2.5 text-right tabular text-ink-soft">{s.partial}</td>

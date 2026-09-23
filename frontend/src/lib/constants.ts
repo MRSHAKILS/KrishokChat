@@ -4,8 +4,8 @@
    ========================================================================= */
 
 export const APP = {
-  name: "কৃষক চ্যাট",
-  nameEn: "KrishokChat",
+  name: "কৃষক টেক",
+  nameEn: "KrishokTech",
   tagline: "নিরাপদ ও প্রমাণভিত্তিক বাংলা কৃষি এআই",
   taglineEn: "Safety-aware Bengali Agri-AI Advisory",
   version: "0.2.0",
@@ -14,6 +14,13 @@ export const APP = {
 export const HELPLINE = {
   krishiCallCenter: "১৬১২৩", // Government of Bangladesh Krishi Call Center — verified
   emergency: "৯৯৯",
+} as const;
+
+/* Same helpline numbers in Latin digits, for display in English mode only.
+   tel: links keep using HELPLINE above (unchanged). */
+export const HELPLINE_EN = {
+  krishiCallCenter: "16123",
+  emergency: "999",
 } as const;
 
 /* Hugging Face dataset — verified public.
@@ -108,6 +115,20 @@ export const STAGE_LABELS = {
   verifier: "যাচাই",
   moisture_regression: "আর্দ্রতা নির্ণয়",
   soil_classification: "মাটি শনাক্ত",
+} as const;
+
+/* Same stage labels in English, for display in English mode only. */
+export const STAGE_LABELS_EN = {
+  intake: "Photo received",
+  crop_classification: "Crop identified",
+  disease_classification: "Disease identified",
+  advisory: "Advisory",
+  safety: "Safety check",
+  retrieval: "Retrieval",
+  generation: "Answer generation",
+  verifier: "Verification",
+  moisture_regression: "Moisture estimate",
+  soil_classification: "Soil identified",
 } as const;
 
 /* Soil type map — Bengali transliteration key → Bengali + USDA class.
