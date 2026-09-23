@@ -129,9 +129,26 @@ const RULE_MAP: Record<string, string> = {
   injection_roleplay: "নির্দেশ অনুপ্রবেশ",
 };
 
-/** Resolve a deterministic rule id into a short Bengali refusal-reason chip. */
-export function refusalRuleLabel(rule: string): string {
-  return RULE_MAP[rule] ?? "নির্দিষ্ট নিয়ম";
+/* English equivalents, for display in English mode only. */
+const RULE_MAP_EN: Record<string, string> = {
+  coverage_training: "Training-related",
+  coverage_export: "Export-related",
+  coverage_availability: "Availability/address",
+  coverage_institutional: "Institutional info",
+  coverage_livestock: "Livestock-related",
+  coverage_assistance: "Government assistance",
+  self_harm_bn: "Emergency health risk",
+  self_harm_en: "Emergency health risk",
+  restricted_chemical_bn: "Banned chemical",
+  restricted_chemical_en: "Banned chemical",
+  injection_en: "Prompt injection",
+  injection_bn: "Prompt injection",
+  injection_roleplay: "Prompt injection",
+};
+
+/** Resolve a deterministic rule id into a short refusal-reason chip. */
+export function refusalRuleLabel(rule: string, en?: boolean): string {
+  return en ? (RULE_MAP_EN[rule] ?? "Specific rule") : (RULE_MAP[rule] ?? "নির্দিষ্ট নিয়ম");
 }
 
 /** Tone → Tailwind class fragments for a filled badge. */
