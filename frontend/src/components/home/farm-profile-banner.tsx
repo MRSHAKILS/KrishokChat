@@ -4,6 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { MapPin, Sprout, ShieldAlert, WifiOff, CheckCircle2, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/context/language-context";
+import { numLocale } from "@/lib/bn";
 
 export interface FarmProfileBannerProps {
   crop?: string;
@@ -20,6 +22,8 @@ export function FarmProfileBanner({
   isGuest = true,
   offlinePackVersion = 1,
 }: FarmProfileBannerProps) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <div className="relative overflow-hidden rounded-2xl border border-bone/80 bg-gradient-to-r from-white/95 via-paper to-leaf/5 p-4 sm:p-5 my-4 shadow-[0_4px_20px_-4px_rgba(52,39,23,0.05)] hover:shadow-[0_8px_30px_-6px_rgba(52,39,23,0.09)] transition-all duration-300">
       {/* Soft ambient blur effect */}
@@ -38,12 +42,14 @@ export function FarmProfileBanner({
                 {district}
               </span>
               <span className="inline-flex items-center text-xs font-mono font-semibold text-leaf bg-leaf/10 px-2.5 py-0.5 rounded-lg border border-leaf/20">
-                বয়স: {das} দিন
+                {en ? `Age: ${numLocale(das, en)} days` : `বয়স: ${das} দিন`}
               </span>
             </div>
             <p className="text-xs text-ink-soft/80 mt-1.5 flex items-center gap-1.5">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-leaf" />
-              আপনার খামারের প্রোফাইল অনুযায়ী পরামর্শ কাস্টমাইজ করা হয়েছে • অফলাইন তথ্যপ্যাক v{offlinePackVersion} সক্রিয়
+              {en
+                ? `Advice customized to your farm profile • Offline data pack v${offlinePackVersion} active`
+                : `আপনার খামারের প্রোফাইল অনুযায়ী পরামর্শ কাস্টমাইজ করা হয়েছে • অফলাইন তথ্যপ্যাক v${offlinePackVersion} সক্রিয়`}
             </p>
           </div>
         </div>
@@ -55,7 +61,7 @@ export function FarmProfileBanner({
               size="sm"
               className="h-8.5 rounded-xl border-bone bg-white/90 px-3.5 text-xs font-medium text-ink-soft hover:border-leaf/40 hover:bg-leaf/5 hover:text-leaf transition-all shadow-2xs"
             >
-              <span>প্রোফাইল পরিবর্তন</span>
+              <span>{en ? "Edit profile" : "প্রোফাইল পরিবর্তন"}</span>
               <ChevronRight className="w-3.5 h-3.5 ml-1 text-leaf" />
             </Button>
           </Link>

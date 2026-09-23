@@ -13,10 +13,16 @@ export type BadgeTone = "leaf" | "ochre" | "clay" | "ink";
 export interface SafetyLabel {
   /** Farmer-facing Bengali label. */
   label: string;
+  /** English label, for display in English mode only. */
+  labelEn: string;
   /** Short badge text shown in compact chips. */
   badge: string;
+  /** English badge text, for display in English mode only. */
+  badgeEn: string;
   /** One-line human description for the trace rail. */
   detail: string;
+  /** English description, for display in English mode only. */
+  detailEn: string;
   /** Color tone for badges / dots. */
   tone: BadgeTone;
 }
@@ -24,52 +30,76 @@ export interface SafetyLabel {
 const MAP: Record<string, SafetyLabel> = {
   safe_agri: {
     label: "অনুমোদিত কৃষি প্রশ্ন",
+    labelEn: "Approved agri question",
     badge: "নিরাপদ",
+    badgeEn: "Safe",
     detail: "নিরাপদ, তথ্য সংগ্রহে যান",
+    detailEn: "Safe — proceeding to retrieval",
     tone: "leaf",
   },
   banned_or_restricted_chemical: {
     label: "নিষিদ্ধ রাসায়নিক সতর্কতা",
+    labelEn: "Banned chemical alert",
     badge: "নিষিদ্ধ",
+    badgeEn: "Banned",
     detail: "অনুমোদনহীন রাসায়নিক — আটককৃত",
+    detailEn: "Unapproved chemical — blocked",
     tone: "clay",
   },
   self_harm_or_poisoning_risk: {
     label: "জরুরি স্বাস্থ্য সহায়তা",
+    labelEn: "Emergency health support",
     badge: "জরুরি",
+    badgeEn: "Emergency",
     detail: "জরুরি স্বাস্থ্য রিসক — ১৬১২৩",
+    detailEn: "Emergency health risk — 16123",
     tone: "clay",
   },
   prompt_injection: {
     label: "নির্দেশ অনুপ্রবেশ প্রচেষ্টা",
+    labelEn: "Prompt injection attempt",
     badge: "অনুপ্রবেশ",
+    badgeEn: "Injection",
     detail: "নির্দেশ অনুপ্রবেশ — আটককৃত",
+    detailEn: "Prompt injection — blocked",
     tone: "clay",
   },
   off_topic: {
     label: "কৃষি-বহির্ভূত প্রশ্ন",
+    labelEn: "Off-topic question",
     badge: "বিষয়বহির্ভূত",
+    badgeEn: "Off-topic",
     detail: "কৃষি বিষয়ক নয় — আটককৃত",
+    detailEn: "Not agriculture-related — blocked",
     tone: "ink",
   },
   low_confidence: {
     label: "তথ্য অপর্যাপ্ত",
+    labelEn: "Insufficient evidence",
     badge: "অনিশ্চিত",
+    badgeEn: "Uncertain",
     detail: "কৃষি সম্পর্কিত, কিন্তু তথ্য অপর্যাপ্ত",
+    detailEn: "Agriculture-related, but insufficient evidence",
     tone: "ochre",
   },
   vision_advisory: {
     label: "চিত্রভিত্তিক রোগ নির্ণয়",
+    labelEn: "Image-based disease diagnosis",
     badge: "রোগ স্ক্যান",
+    badgeEn: "Disease scan",
     detail: "কম্পিউটার ভিশন রোগ বিশ্লেষণ",
+    detailEn: "Computer-vision disease analysis",
     tone: "leaf",
   },
 };
 
 const FALLBACK: SafetyLabel = {
   label: "চিত্রভিত্তিক বালাই স্ক্যান",
+  labelEn: "Image-based pest scan",
   badge: "রোগ নির্ণয়",
+  badgeEn: "Diagnosis",
   detail: "ছবি বিশ্লেষণ স্ক্যান",
+  detailEn: "Image analysis scan",
   tone: "leaf",
 };
 
