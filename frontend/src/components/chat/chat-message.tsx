@@ -12,8 +12,9 @@ import { ResolutionBadge } from "./resolution-badge";
 import { SourceList } from "./source-list";
 import { SafetyNotice } from "./safety-notice";
 import { ReadAloudButton, splitBengaliSentences } from "./read-aloud";
-import { HELPLINE } from "@/lib/constants";
+import { HELPLINE, HELPLINE_EN, STAGE_LABELS_EN } from "@/lib/constants";
 import { type QAResponse, type SourceNode, type AgentStageEvent } from "@/lib/api";
+import { useLanguage } from "@/context/language-context";
 
 /* =========================================================================
    ChatMessage — renders one message in the conversation.
@@ -90,6 +91,8 @@ export function ChatMessage({
 /* --- Streaming state: pipeline rail + typing indicator --- */
 
 function StreamingContent({ events, text }: { events: AgentStageEvent[]; text: string }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const railEvents: RailEvent[] = events.map((e) => ({
     stage: e.stage,
     status: e.status,
@@ -103,7 +106,8 @@ function StreamingContent({ events, text }: { events: AgentStageEvent[]; text: s
   const activeEvent = [...events]
     .reverse()
     .find((event) => event.status === "start" || event.status === "active");
-  const activeLabel = QA_STAGES.find((stage) => stage.key === activeEvent?.stage)?.label;
+  const activeStage = QA_STAGES.find((stage) => stage.key === activeEvent?.stage);
+  const activeLabel = activeStage ? (en ? (STAGE_LABELS_EN[activeStage.key as keyof typeof STAGE_LABELS_EN] ?? activeStage.label) : activeStage.label) : undefined;
 
   return (
     <div className="space-y-4">
@@ -122,15 +126,19 @@ function StreamingContent({ events, text }: { events: AgentStageEvent[]; text: s
         stages={QA_STAGES}
         events={railEvents}
         active={true}
-        title="উত্তর তৈরির এজেন্ট প্রবাহ"
-        detail={activeLabel ? `${activeLabel} ধাপ চলছে` : undefined}
+        title={en ? "Agent flow generating the answer" : "উত্তর তৈরির এজেন্ট প্রবাহ"}
+        detail={activeLabel ? (en ? `${activeLabel} stage in progress` : `${activeLabel} ধাপ চলছে`) : undefined}
       />
       <motion.div
         animate={{ opacity: [0.55, 1, 0.55] }}
         transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
         className="flex items-center gap-2 text-sm text-ink-soft"
       >
-        <span>{genActive ? "উত্তর তৈরি হচ্ছে" : activeLabel ? `${activeLabel} চলছে` : "উত্তর প্রস্তুত হচ্ছে"}</span>
+        <span>
+          {en
+            ? (genActive ? "Generating the answer" : activeLabel ? `${activeLabel} in progress` : "Preparing the answer")
+            : (genActive ? "উত্তর তৈরি হচ্ছে" : activeLabel ? `${activeLabel} চলছে` : "উত্তর প্রস্তুত হচ্ছে")}
+        </span>
         <span className="flex gap-0.5">
           <Dot /> <Dot delay={0.15} /> <Dot delay={0.3} />
         </span>
@@ -152,16 +160,18 @@ function Dot({ delay = 0 }: { delay?: number }) {
 /* --- Error state --- */
 
 function ErrorContent({ error, onRetry }: { error: string; onRetry?: () => void }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   return (
     <div className="rounded-md border border-clay-soft/40 bg-clay-soft/15 px-3 py-3 text-sm text-clay">
-      <p>ত্রুটি: {error}</p>
+      <p>{en ? "Error: " : "ত্রুটি: "}{error}</p>
       {onRetry && (
         <button
           type="button"
           onClick={onRetry}
           className="mt-2 flex min-h-11 items-center rounded-lg font-semibold text-leaf"
         >
-          আবার চেষ্টা করুন
+          {en ? "Try again" : "আবার চেষ্টা করুন"}
         </button>
       )}
     </div>
@@ -170,7 +180,7 @@ function ErrorContent({ error, onRetry }: { error: string; onRetry?: () => void 
 
 /* --- Completed state: answer + confidence + sources + flags + voice --- */
 
-function formatAnswerWithCleanCitations(text: string, sources: SourceNode[] = []) {
+function formatAnswerWithCleanCitations(text: string, sources: SourceNode[] = [], en: boolean = false) {
   if (!text) return text;
   // Match [ID] including uppercase, lowercase, numbers, underscores, hyphens
   const tagRegex = /\[([A-Za-z0-9_\-]+)\]/g;
@@ -179,7 +189,7 @@ function formatAnswerWithCleanCitations(text: string, sources: SourceNode[] = []
   return text.replace(tagRegex, (match, id) => {
     const idx = sources.findIndex((s) => s.id === id);
     if (idx >= 0) {
-      const digit = bnDigits[idx] || String(idx + 1);
+      const digit = en ? String(idx + 1) : (bnDigits[idx] || String(idx + 1));
       return ` [${digit}] `;
     }
     return "";
@@ -189,9 +199,11 @@ function formatAnswerWithCleanCitations(text: string, sources: SourceNode[] = []
 function FormattedAnswerText({
   text,
   activeSentenceIndex,
+  en,
 }: {
   text: string;
   activeSentenceIndex?: number | null;
+  en: boolean;
 }) {
   if (!text) return null;
   const sentences = splitBengaliSentences(text);
@@ -218,7 +230,7 @@ function FormattedAnswerText({
                 return (
                   <span
                     key={pIdx}
-                    title={`উৎস [${num}] দেখুন`}
+                    title={en ? `View source [${num}]` : `উৎস [${num}] দেখুন`}
                     className="mx-0.5 inline-flex items-center justify-center rounded bg-leaf/12 px-1.5 py-0.5 font-mono text-xs font-bold text-leaf transition-colors hover:bg-leaf hover:text-paper cursor-pointer"
                   >
                     [{num}]
@@ -242,6 +254,8 @@ function CompletedContent({
   response: QAResponse;
   onSelectSuggestion?: (text: string) => void;
 }) {
+  const { locale } = useLanguage();
+  const en = locale === "en";
   const blocked = response.category !== "safe_agri";
   const [traceOpen, setTraceOpen] = useState(false);
   const [whyOpen, setWhyOpen] = useState(false);
@@ -259,7 +273,7 @@ function CompletedContent({
     );
   }
 
-  const cleanAnswer = formatAnswerWithCleanCitations(response.answer, response.sources);
+  const cleanAnswer = formatAnswerWithCleanCitations(response.answer, response.sources, en);
   const isClarification = response.resolution_tier === "interactive_clarification";
 
   const copyAnswer = async () => {
@@ -278,7 +292,7 @@ function CompletedContent({
       {response.progressive_guidance && (
         <div className="flex items-center gap-2 rounded-xl bg-leaf/10 border border-leaf/20 px-3.5 py-2 text-xs font-semibold text-leaf shadow-2xs">
           <Sprout className="h-4 w-4 shrink-0" />
-          <span>পরিবেশবান্ধব ও সাধারণ পরিচর্যা নির্দেশিকা (নন-কেমিক্যাল)</span>
+          <span>{en ? "Eco-friendly, general care guidance (non-chemical)" : "পরিবেশবান্ধব ও সাধারণ পরিচর্যা নির্দেশিকা (নন-কেমিক্যাল)"}</span>
         </div>
       )}
 
@@ -289,23 +303,23 @@ function CompletedContent({
         transition={{ duration: dur.fast }}
         className="font-display text-sm leading-relaxed text-ink selection:bg-ochre-soft/40 sm:text-[15px]"
       >
-        <FormattedAnswerText text={cleanAnswer} activeSentenceIndex={activeSentenceIndex} />
+        <FormattedAnswerText text={cleanAnswer} activeSentenceIndex={activeSentenceIndex} en={en} />
       </motion.p>
 
       {/* Interactive Crop Chips on Clarification Turns */}
       {isClarification && onSelectSuggestion && (
         <div className="rounded-xl border border-ochre-soft/40 bg-ochre-soft/10 p-3">
           <div className="mb-2 text-xs font-semibold text-ink-soft">
-            নির্দিষ্ট ফসল নির্বাচন করে দ্রুত উত্তর পান:
+            {en ? "Select a specific crop to get a quick answer:" : "নির্দিষ্ট ফসল নির্বাচন করে দ্রুত উত্তর পান:"}
           </div>
           <div className="flex flex-wrap gap-2">
             {[
-              { label: "🌾 ধান (Rice)", value: "ধান" },
-              { label: "🥔 আলু (Potato)", value: "আলু" },
-              { label: "🌿 সরিষা (Brassica)", value: "সরিষা" },
-              { label: "🌶️ মরিচ (Chilli)", value: "মরিচ" },
-              { label: "🌽 ভুট্টা (Maize)", value: "ভুট্টা" },
-              { label: "🌾 গম (Wheat)", value: "গম" },
+              { label: "🌾 ধান (Rice)", labelEn: "🌾 Rice", value: "ধান" },
+              { label: "🥔 আলু (Potato)", labelEn: "🥔 Potato", value: "আলু" },
+              { label: "🌿 সরিষা (Brassica)", labelEn: "🌿 Brassica", value: "সরিষা" },
+              { label: "🌶️ মরিচ (Chilli)", labelEn: "🌶️ Chilli", value: "মরিচ" },
+              { label: "🌽 ভুট্টা (Maize)", labelEn: "🌽 Maize", value: "ভুট্টা" },
+              { label: "🌾 গম (Wheat)", labelEn: "🌾 Wheat", value: "গম" },
             ].map((item) => (
               <button
                 key={item.value}
@@ -313,7 +327,7 @@ function CompletedContent({
                 onClick={() => onSelectSuggestion(item.value)}
                 className="control-press inline-flex items-center gap-1.5 rounded-full border border-leaf/30 bg-paper px-3 py-1.5 text-xs font-medium text-leaf shadow-2xs transition-colors hover:bg-leaf hover:text-paper"
               >
-                <span>{item.label}</span>
+                <span>{en ? item.labelEn : item.label}</span>
               </button>
             ))}
           </div>
@@ -330,7 +344,7 @@ function CompletedContent({
         {/* Institutional Evidence Grounding Badge */}
         {response.sources && response.sources.length > 0 && response.confidence === "verified" && (
           <span
-            title="জাতীয় কৃষি গবেষণা প্রতিষ্ঠানের সত্যায়িত তথ্যভিত্তিক"
+            title={en ? "Grounded in certified data from national agricultural research institutions" : "জাতীয় কৃষি গবেষণা প্রতিষ্ঠানের সত্যায়িত তথ্যভিত্তিক"}
             className="inline-flex items-center gap-1.5 rounded-full border border-leaf/30 bg-leaf/10 px-2.5 py-0.5 text-xs font-semibold text-leaf shadow-2xs"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-leaf" />
@@ -339,7 +353,7 @@ function CompletedContent({
               response.sources.some((s) => s.citation?.includes("BRRI") || s.id?.includes("BRRI")) ? "BRRI" :
               response.sources.some((s) => s.citation?.includes("DAE") || s.id?.includes("DAE")) ? "DAE" :
               response.sources.some((s) => s.citation?.includes("BARC") || s.id?.includes("BARC")) ? "BARC" :
-              "জাতীয় কৃষি উৎস"
+              (en ? "National agricultural source" : "জাতীয় কৃষি উৎস")
             )}
           </span>
         )}
@@ -349,11 +363,11 @@ function CompletedContent({
         <button
           onClick={copyAnswer}
           type="button"
-          aria-label="উত্তর কপি করুন"
+          aria-label={en ? "Copy the answer" : "উত্তর কপি করুন"}
           className="control-press flex min-h-9 items-center gap-1.5 rounded-lg border border-bone px-3 text-xs font-medium text-ink-faint hover:border-leaf/30 hover:text-leaf"
         >
           {copied ? <Check className="h-3.5 w-3.5 text-leaf" /> : <Copy className="h-3.5 w-3.5" />}
-          <span>{copied ? "কপি হয়েছে" : "কপি"}</span>
+          <span>{copied ? (en ? "Copied" : "কপি হয়েছে") : (en ? "Copy" : "কপি")}</span>
         </button>
 
         {response.agent_trace.length > 0 && (
@@ -363,7 +377,7 @@ function CompletedContent({
             className="flex min-h-9 items-center gap-1 rounded-lg px-2 text-xs font-medium text-ink-faint transition-colors hover:text-leaf"
           >
             {traceOpen ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
-            প্রক্রিয়া দেখুন
+            {en ? "View process" : "প্রক্রিয়া দেখুন"}
             <ChevronDown className={cn("h-3 w-3 transition-transform", traceOpen && "rotate-180")} />
           </button>
         )}
@@ -373,7 +387,7 @@ function CompletedContent({
           onClick={() => setWhyOpen((v) => !v)}
           type="button"
           aria-expanded={whyOpen}
-          aria-label="Why অডিট প্যানেল দেখুন"
+          aria-label={en ? "View the Why audit panel" : "Why অডিট প্যানেল দেখুন"}
           className={cn(
             "control-press flex min-h-9 items-center gap-1.5 rounded-lg border px-3 text-xs font-medium transition-colors",
             whyOpen
@@ -382,7 +396,7 @@ function CompletedContent({
           )}
         >
           <ShieldAlert className="h-3.5 w-3.5 text-clay" />
-          <span>Why অডিট প্যানেল</span>
+          <span>{en ? "Why audit panel" : "Why অডিট প্যানেল"}</span>
           <ChevronDown className={cn("h-3 w-3 transition-transform", whyOpen && "rotate-180")} />
         </button>
       </div>
@@ -400,7 +414,7 @@ function CompletedContent({
             <div className="flex items-center justify-between gap-2 border-b border-clay/20 pb-2">
               <div className="flex items-center gap-1.5 font-bold text-clay">
                 <ShieldAlert className="h-4 w-4 shrink-0 text-clay" />
-                <span>T4 মাত্রা যাচাইকরণ ও অডিট ট্রেইল (Why Panel — Claim Filtered)</span>
+                <span>{en ? "T4 Dosage Verification & Audit Trail (Why Panel — Claim Filtered)" : "T4 মাত্রা যাচাইকরণ ও অডিট ট্রেইল (Why Panel — Claim Filtered)"}</span>
               </div>
               <span className="rounded bg-clay/20 px-2 py-0.5 text-[10px] font-mono font-bold uppercase text-clay border border-clay/30">
                 DROP STATE
@@ -411,32 +425,32 @@ function CompletedContent({
               <div className="rounded-lg border border-bone bg-paper p-2.5 space-y-1">
                 <div className="font-semibold text-clay flex items-center gap-1">
                   <XCircle className="h-3.5 w-3.5 text-clay shrink-0" />
-                  <span>বাদ দেওয়া দাবি (Dropped Claim):</span>
+                  <span>{en ? "Dropped Claim:" : "বাদ দেওয়া দাবি (Dropped Claim):"}</span>
                 </div>
                 <div className="text-ink-soft line-through text-[11px] font-mono bg-clay-soft/25 p-1.5 rounded">
-                  &ldquo;প্রতি লিটার পানিতে ২০ গ্রাম ম্যানকোজেব স্প্রে করুন&rdquo;
+                  {en ? <>&ldquo;Spray 20 grams of Mancozeb per liter of water&rdquo;</> : <>&ldquo;প্রতি লিটার পানিতে ২০ গ্রাম ম্যানকোজেব স্প্রে করুন&rdquo;</>}
                 </div>
                 <p className="text-[10px] text-clay leading-tight">
-                  কারণ: BARI/BRRI বালাই নির্দেশিকা বহির্ভূত (১০ গুণ অতিরিক্ত বিষাক্ত মাত্রা শনাক্ত)।
+                  {en ? "Reason: outside the BARI/BRRI pest guideline (detected a 10× excessive toxic dose)." : "কারণ: BARI/BRRI বালাই নির্দেশিকা বহির্ভূত (১০ গুণ অতিরিক্ত বিষাক্ত মাত্রা শনাক্ত)।"}
                 </p>
               </div>
 
               <div className="rounded-lg border border-bone bg-paper p-2.5 space-y-1">
                 <div className="font-semibold text-leaf flex items-center gap-1">
                   <CheckCircle2 className="h-3.5 w-3.5 text-leaf shrink-0" />
-                  <span>যাচাইকৃত ভিত্তি (Grounded Evidence):</span>
+                  <span>{en ? "Grounded Evidence:" : "যাচাইকৃত ভিত্তি (Grounded Evidence):"}</span>
                 </div>
                 <div className="text-ink-soft text-[11px] bg-leaf/10 p-1.5 rounded font-medium">
-                  BARI আলু চাষ নির্দেশিকা (পৃষ্ঠা ৮৫২)
+                  {en ? "BARI Potato Cultivation Guideline (page 852)" : "BARI আলু চাষ নির্দেশিকা (পৃষ্ঠা ৮৫২)"}
                 </div>
                 <p className="text-[10px] text-leaf leading-tight">
-                  অনুমোদিত নিরাপদ মাত্রা: প্রতি লিটারে ২ গ্রাম, PHI: ৭ দিন।
+                  {en ? "Approved safe dose: 2 grams per liter, PHI: 7 days." : "অনুমোদিত নিরাপদ মাত্রা: প্রতি লিটারে ২ গ্রাম, PHI: ৭ দিন।"}
                 </p>
               </div>
             </div>
 
             <div className="text-[11px] text-ink-soft bg-paper/90 rounded-md p-2 border border-bone flex flex-wrap items-center justify-between gap-1">
-              <span><strong>চূড়ান্ত রেন্ডার:</strong> অনিরাপদ মাত্রা অপসারিত; শুধুমাত্র প্রমাণিত নিরাপদ অংশ প্রদর্শিত।</span>
+              <span>{en ? <><strong>Final render:</strong> The unsafe dose was removed; only the verified-safe portion is shown.</> : <><strong>চূড়ান্ত রেন্ডার:</strong> অনিরাপদ মাত্রা অপসারিত; শুধুমাত্র প্রমাণিত নিরাপদ অংশ প্রদর্শিত।</>}</span>
               <span className="text-[10px] text-leaf font-bold">✓ T4 Verifier: Passed Filter</span>
             </div>
           </motion.div>
@@ -459,7 +473,7 @@ function CompletedContent({
             href={`tel:${HELPLINE.krishiCallCenter}`}
             className="inline-block text-xs font-medium text-leaf transition-colors hover:text-leaf-2"
           >
-            নিশ্চিত হতে কৃষক কল সেন্টারে যোগাযোগ করুন: {HELPLINE.krishiCallCenter}
+            {en ? `Contact the farmer call center to confirm: ${HELPLINE_EN.krishiCallCenter}` : `নিশ্চিত হতে কৃষক কল সেন্টারে যোগাযোগ করুন: ${HELPLINE.krishiCallCenter}`}
           </a>
         </div>
       )}
