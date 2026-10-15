@@ -303,9 +303,9 @@ def test_legacy_shim_uses_decision_intent() -> None:
     def run_in_thread() -> None:
         with patch("app.services.advisory.intent_classifier.SafetyClassifier", return_value=mock_classifier_instance):
             with patch("app.services.advisory.intent_classifier.create_llm_client", return_value=MagicMock()):
-                import importlib
+                # No importlib.reload here: reloading re-binds the real SafetyClassifier
+                # and discards both patches, which made this test hit a live provider.
                 from app.services.advisory import intent_classifier
-                importlib.reload(intent_classifier)
                 try:
                     result_box.append(intent_classifier.classify_intent("আলুর প্রতিকার?"))
                 except Exception as exc:

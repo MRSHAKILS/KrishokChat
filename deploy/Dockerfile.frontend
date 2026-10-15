@@ -6,8 +6,8 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# pnpm version comes from the packageManager field in package.json
+RUN corepack enable
 
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
@@ -18,13 +18,26 @@ RUN pnpm install --frozen-lockfile
 # ----------------------------------------------------------------------
 FROM base AS builder
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# NEXT_PUBLIC_* values and the /api rewrite target are inlined at build time,
+# so they must be build args, not only runtime environment.
+ARG BACKEND_URL=http://backend:8000
+ARG NEXT_PUBLIC_SUPABASE_URL=
+ARG NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+ARG NEXT_PUBLIC_VISION_ONDEVICE_ENABLED=false
+ARG NEXT_PUBLIC_GOOGLE_OAUTH_ENABLED=false
+
 ENV NEXT_TELEMETRY_DISABLED=1 \
-    NODE_ENV=production
+    NODE_ENV=production \
+    BACKEND_URL=$BACKEND_URL \
+    NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL \
+    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY \
+    NEXT_PUBLIC_VISION_ONDEVICE_ENABLED=$NEXT_PUBLIC_VISION_ONDEVICE_ENABLED \
+    NEXT_PUBLIC_GOOGLE_OAUTH_ENABLED=$NEXT_PUBLIC_GOOGLE_OAUTH_ENABLED
 
 RUN pnpm build
 
@@ -54,6 +67,6 @@ USER nextjs
 EXPOSE 3000
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/ || exit 1
 
 CMD ["node", "server.js"]

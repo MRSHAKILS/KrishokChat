@@ -32,9 +32,9 @@ jobs:
         working-directory: frontend
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v1
+      - uses: pnpm/action-setup@v4
         with:
-          version: 11
+          package_json_file: frontend/package.json
           run_install: false
       - uses: actions/setup-node@v4
         with:
@@ -45,6 +45,14 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm build
+
+  docker-demo:
+    name: Keyless demo images build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build demo stack
+        run: docker compose -f docker-compose.demo.yml build
 
   golden:
     name: Golden replay invariants (offline)

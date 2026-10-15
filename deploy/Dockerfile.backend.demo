@@ -1,0 +1,59 @@
+# syntax=docker/dockerfile:1
+# Lightweight keyless demo backend. Build from the repo root (see docker-compose.demo.yml).
+# Torch-free: no GPU, no API keys. Answers come from the curated demo cache, the
+# deterministic safety precheck, and referrals; live LLM generation needs a provider key.
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+WORKDIR /app
+
+COPY backend/requirements-render.txt ./requirements.txt
+RUN pip install -r requirements.txt
+
+COPY backend/app ./app
+COPY backend/ml_assets/vision/crop_classifier ./ml_assets/vision/crop_classifier
+COPY backend/ml_assets/rag_index/indexes/bm25_index.pkl ./ml_assets/rag_index/indexes/bm25_index.pkl
+COPY backend/ml_assets/rag_index/indexes/term_map.json ./ml_assets/rag_index/indexes/term_map.json
+COPY backend/ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl ./ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl
+COPY backend/ml_assets/rag_index/derived ./ml_assets/rag_index/derived
+COPY backend/ml_assets/agronomy ./ml_assets/agronomy
+COPY backend/ml_assets/weather ./ml_assets/weather
+COPY backend/config/model_prices.json ./config/model_prices.json
+COPY demo-assets/cached_responses.json ./demo/cached_responses.json
+COPY dataset_release/soil_moisture ./dataset_release/soil_moisture
+
+RUN groupadd -r krishok && useradd -r -g krishok -d /app -s /sbin/nologin krishok \
+    && mkdir -p /app/data \
+    && chown -R krishok:krishok /app/data
+
+ENV KRISHOKCHAT_ENV=production \
+    ENVIRONMENT=production \
+    ML_ASSETS_DIR=/app/ml_assets \
+    DEMO_MODE=true \
+    DEMO_CACHE_PATH=/app/demo/cached_responses.json \
+    RETRIEVAL_BM25_ONLY=true \
+    SOIL_RELEASE_DIR=/app/dataset_release/soil_moisture \
+    MODEL_PRICES_PATH=/app/config/model_prices.json \
+    SESSION_BACKEND=memory \
+    AUDIT_BACKEND=jsonl \
+    AUDIT_LOG_PATH=/app/data/audit.jsonl \
+    SQLITE_DB_PATH=/app/data/krishokchat.sqlite3 \
+    LLM_PROVIDER=openrouter \
+    LLM_MAX_RETRIES=0 \
+    LLM_TIMEOUT_SECONDS=5 \
+    FRONTEND_ORIGIN=http://localhost:8080 \
+    LOG_LEVEL=INFO
+
+USER krishok
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+  CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/liveness', timeout=4)" || exit 1
+
+# One worker: session memory is per-process, so multiple workers would split chat history.
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

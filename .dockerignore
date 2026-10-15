@@ -1,0 +1,24 @@
+# Whitelist build context for deploy/Dockerfile.backend.demo (context = repo root).
+# Everything is excluded first, then only the keyless-demo files are re-included.
+*
+
+!backend/app
+!backend/requirements-render.txt
+!backend/ml_assets/vision/crop_classifier/model.pt
+!backend/ml_assets/vision/crop_classifier/class_names.json
+!backend/ml_assets/rag_index/indexes/bm25_index.pkl
+!backend/ml_assets/rag_index/indexes/term_map.json
+!backend/ml_assets/rag_index/processed/knowledge_nodes_clean.jsonl
+!backend/ml_assets/rag_index/derived/dose_reference_v1.json
+!backend/ml_assets/rag_index/derived/fact_base_v1.json
+!backend/ml_assets/agronomy/crop_calendars_v1.json
+!backend/ml_assets/agronomy/problem_aliases_v1.json
+!backend/ml_assets/weather/late_blight_snapshot.json
+!backend/config/model_prices.json
+!demo-assets/cached_responses.json
+!dataset_release/soil_moisture/dataset_summary.json
+!dataset_release/soil_moisture/model_status.json
+!dataset_release/soil_moisture/samples_manifest.json
+
+**/__pycache__
+**/*.pyc
