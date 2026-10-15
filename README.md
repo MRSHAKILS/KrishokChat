@@ -39,6 +39,22 @@ What needs a provider key (not included in this image):
 The image is torch-free (`backend/requirements-render.txt`). The full stack (torch, FAISS,
 YOLO, local LLM) is a separate build and needs the model weights.
 
+### Model weights
+
+Weights are published at
+[RaiyanKhaan/KrishokTech-Models](https://huggingface.co/RaiyanKhaan/KrishokTech-Models) on Hugging Face.
+The per-crop vision weights are also checked into `backend/ml_assets/vision`; the local LLM
+(`krishokchat.f16.gguf`, about 1.3 GB) is not, and is gitignored.
+
+```bash
+python backend/scripts/fetch_models.py --check   # verify local vision files, download nothing
+python backend/scripts/fetch_models.py vision    # restore any missing or corrupt vision files
+python backend/scripts/fetch_models.py llm       # download the GGUF to backend/ml_assets/gemma/model.gguf
+```
+
+Files are verified by SHA-256 (weights) or git blob hash (JSON sidecars) and written through a
+`.part` file, so an interrupted download never leaves a truncated model in place.
+
 ## 🚀 EACL 2027 Reviewer Quick Start (5-Minute Reproduction Guide)
 
 KrishokTech provides an **independently runnable, 100% offline (zero API keys required, CPU-only)** replication suite for all quantitative tables, safety gates, and empirical claims reported in the EACL 2027 paper.
