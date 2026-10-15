@@ -46,6 +46,14 @@ jobs:
       - name: Build
         run: pnpm build
 
+  docker-demo:
+    name: Keyless demo images build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build demo stack
+        run: docker compose -f docker-compose.demo.yml build
+
   golden:
     name: Golden replay invariants (offline)
     runs-on: ubuntu-latest

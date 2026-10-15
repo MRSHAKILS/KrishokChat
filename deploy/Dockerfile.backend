@@ -48,8 +48,8 @@ ENV PATH="/app/.venv/bin:$PATH" \
 COPY app ./app
 COPY ml_assets ./ml_assets
 
-# Permissions
-RUN chown -R krishok:krishok /app
+# Permissions (data dir must exist before chown so the named volume inherits krishok ownership)
+RUN mkdir -p /app/data && chown -R krishok:krishok /app
 
 USER krishok
 

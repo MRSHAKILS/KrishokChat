@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   backend:
     build:
@@ -30,6 +28,12 @@ services:
     build:
       context: ./frontend
       dockerfile: ../deploy/Dockerfile.frontend
+      args:
+        BACKEND_URL: http://backend:8000
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-}
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:-}
+        NEXT_PUBLIC_VISION_ONDEVICE_ENABLED: ${NEXT_PUBLIC_VISION_ONDEVICE_ENABLED:-false}
+        NEXT_PUBLIC_GOOGLE_OAUTH_ENABLED: ${NEXT_PUBLIC_GOOGLE_OAUTH_ENABLED:-false}
     container_name: krishokchat_frontend
     restart: unless-stopped
     environment:
