@@ -62,8 +62,8 @@ KrishokTech provides an **independently runnable, 100% offline (zero API keys re
 ### 1. One-Command Paper Results Reproduction
 
 ```bash
-git clone https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System.git
-cd KrishokChat-Agricultural-Advisory-System
+git clone https://github.com/MRSHAKILS/KrishokChat.git
+cd KrishokChat
 
 # Run the turnkey offline paper verification runner:
 python reproduce.py

@@ -45,6 +45,7 @@ export default function AdminUsersPage() {
   );
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch the user page on mount and on page or search change
     void load(page, search);
   }, [load, page, search]);
 

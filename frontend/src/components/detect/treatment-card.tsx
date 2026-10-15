@@ -90,6 +90,14 @@ export function TreatmentCard({
   const [prescriptionOpen, setPrescriptionOpen] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
   if (!result.treatment_advice) return null;
 
   const cleanAdvice = formatTreatmentAdvice(result.treatment_advice, result.treatment_sources, locale === "en");
@@ -142,14 +150,6 @@ export function TreatmentCard({
     setIsSpeaking(true);
     window.speechSynthesis.speak(utterance);
   };
-
-  useEffect(() => {
-    return () => {
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-    };
-  }, []);
 
   return (
     <motion.div

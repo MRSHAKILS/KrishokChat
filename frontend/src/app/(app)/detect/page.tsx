@@ -68,6 +68,7 @@ export default function DetectPage() {
         cropHint: string;
         savedAt: number;
       };
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- restore the last detection from sessionStorage after mount
       if (parsed?.result) setResult(parsed.result);
       if (parsed?.cropHint) setCropHint(parsed.cropHint);
       const r = parsed?.result;

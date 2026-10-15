@@ -85,6 +85,7 @@ export default function AdminOverviewPage() {
   }, [token]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch the admin overview on mount
     void load();
   }, [load]);
 

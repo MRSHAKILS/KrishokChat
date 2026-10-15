@@ -839,7 +839,7 @@ export function ModelComparisonInspector() {
                   {en ? "Tested Farmer Query (Input Prompt)" : "পরীক্ষিত ফার্মার কোয়েরি (Input Prompt)"}
                 </span>
               </div>
-              <p className="font-display text-base text-ink sm:text-lg">"{en ? scenario.queryEn : scenario.query}"</p>
+              <p className="font-display text-base text-ink sm:text-lg">&quot;{en ? scenario.queryEn : scenario.query}&quot;</p>
             </div>
             <div className="shrink-0 rounded-lg border border-leaf/30 bg-leaf/10 px-3 py-2 text-xs">
               <span className="font-semibold text-leaf block">{en ? "Core agricultural challenge:" : "মূল কৃষি চ্যালেঞ্জ:"}</span>

@@ -12,6 +12,7 @@ export function OfflineIndicator() {
 
   useEffect(() => {
     if (!isOnline) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- derive reconnect banner state from the online/offline transition
       setHasBeenOffline(true);
     } else if (hasBeenOffline) {
       setShowReconnected(true);

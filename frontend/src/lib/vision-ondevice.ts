@@ -277,9 +277,9 @@ export async function preprocessToNCHW(file: File, imgsz: number): Promise<Float
     const { data } = imageData; // RGBA, 0-255
     const chw = new Float32Array(1 * 3 * imgsz * imgsz);
     // NCHW, R/G/B planes, /255 (Normalize mean 0 std 1 is a no-op)
-    let rOff = 0;
-    let gOff = imgsz * imgsz;
-    let bOff = 2 * imgsz * imgsz;
+    const rOff = 0;
+    const gOff = imgsz * imgsz;
+    const bOff = 2 * imgsz * imgsz;
     for (let i = 0, j = 0; i < data.length; i += 4, j += 1) {
       chw[rOff + j] = data[i] / 255;
       chw[gOff + j] = data[i + 1] / 255;

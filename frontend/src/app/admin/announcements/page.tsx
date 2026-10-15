@@ -80,6 +80,7 @@ export default function AdminAnnouncementsPage() {
   }, [token]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch announcements on mount
     void load();
   }, [load]);
 
