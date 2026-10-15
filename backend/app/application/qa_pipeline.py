@@ -10,6 +10,7 @@ from dataclasses import replace
 
 from app.application.chunk_fallback import ChunkFallbackResolver
 from app.application.generation import GroundedAnswerGenerator, REFERRAL, format_progressive_guidance_text
+from app.application.offline_evidence import render_answer, select_excerpts, specific_terms
 from app.application.query_builder import build_retrieval_query
 from app.application.rewrite import ConversationalQueryRewriter
 from app.application.safety import SafetyClassifier
@@ -46,7 +47,7 @@ from app.domain.safety_policy import canned_response
 from app.application.adaptive_router import AdaptiveRetrievalRouter, RetrievalRoute
 from app.application.evidence_agreement import EvidenceAgreementGate
 from app.domain.concept_normalizer import ConceptNormalizer
-from app.domain.crop_scope import crop_filter_enabled, filter_by_crop
+from app.domain.crop_scope import crop_filter_enabled, filter_by_crop, passage_crops
 from app.domain.query_extractor import QueryExtractor
 from app.domain.working_memory import AgriculturalWorkingMemory
 from app.infrastructure.cache.demo import DemoAnswerCache, qa_result_from_dict, qa_result_to_dict
@@ -108,8 +109,11 @@ class QAPipeline:
         # R13: optional grounded chunk fallback (None = off). Only consulted on
         # the zero-node-source branch that today refuses (Amendment 03).
         chunk_fallback: ChunkFallbackResolver | None = None,
+        # Keyless evidence lane (default off). See app.application.offline_evidence.
+        offline_evidence: bool = False,
     ) -> None:
         self.safety = safety
+        self.offline_evidence = offline_evidence
         self.retriever = retriever
         self.generator = generator
         self.verifier = verifier
@@ -353,6 +357,60 @@ class QAPipeline:
                             answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
                         )
                         return result
+                if decision.classifier_outage and self.offline_evidence and effective_crop:
+                    # Keyless evidence lane. The deterministic precheck already ran and did
+                    # not match. Answer only when the crop fence is on and still leaves
+                    # sources whose sentences are free of doses, chemicals and instructions.
+                    if crop_filter_enabled():
+                        await emit(PipelineStage.RETRIEVAL, StageStatus.START)
+                        with stage_timer("retrieval", timings):
+                            wide = await asyncio.to_thread(
+                                self.retriever.retrieve, retrieval_query, top_k=self.top_k * 4
+                            )
+                            fenced, _ = filter_by_crop(wide, effective_crop, self.top_k)
+                            # Stricter than the normal fence: a source must name exactly the
+                            # bound crop. Crop-neutral, multi-crop and unknown-crop passages
+                            # are not enough without a classifier.
+                            fenced = [s for s in fenced if passage_crops(s) == frozenset({effective_crop})]
+                        terms = specific_terms(request.query)
+                        excerpts = select_excerpts(list(fenced), terms)
+                        if excerpts:
+                            used_ids = {e.source_id for e in excerpts}
+                            used = tuple(s for s in fenced if s.id in used_ids)
+                            await emit(
+                                PipelineStage.RETRIEVAL,
+                                StageStatus.COMPLETE,
+                                f"{len(used)} sources · keyless evidence lane",
+                            )
+                            await emit(PipelineStage.GENERATION, StageStatus.SKIP, "no LLM: verbatim excerpts")
+                            await emit(
+                                PipelineStage.VERIFIER,
+                                StageStatus.SKIP,
+                                "dose, chemical and instruction sentences withheld",
+                            )
+                            if not decision.matched_rules:
+                                llm_calls += 1
+                            sources = list(used)
+                            retrieved = list(fenced)
+                            result = QAResult(
+                                query=request.query,
+                                category=decision.category,
+                                answer=render_answer(excerpts),
+                                sources=used,
+                                confidence=VerificationConfidence.LOW_CONFIDENCE,
+                                trace=tuple(trace),
+                                matched_rules=decision.matched_rules,
+                                safety_reason=(
+                                    "Classifier unavailable: keyless evidence lane "
+                                    "(no LLM, chemical and dose sentences withheld)"
+                                ),
+                                resolution_tier=ResolutionTier.PROGRESSIVE_GUIDANCE,
+                                answerability_level=AnswerabilityLevel.A3_PARTIAL_EVIDENCE,
+                            )
+                            return result
+                        await emit(
+                            PipelineStage.RETRIEVAL, StageStatus.SKIP, "keyless evidence lane: nothing safe to show"
+                        )
                 for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
                     await emit(stage, StageStatus.SKIP, "terminal safety decision")
                 # R3: LLM was called if the classifier had no precheck match.
