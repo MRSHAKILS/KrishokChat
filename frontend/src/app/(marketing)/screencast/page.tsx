@@ -131,7 +131,7 @@ export default function ScreencastPage() {
           </Link>
 
           <a
-            href="https://github.com/RaiyaanReza/KrishokChat-Agricultural-Advisory-System"
+            href="https://github.com/MRSHAKILS/KrishokChat"
             target="_blank"
             rel="noopener noreferrer"
             className="p-4 rounded-xl border border-border/60 bg-muted/30 hover:border-emerald-500/50 hover:bg-muted/60 transition-all space-y-2 group"
