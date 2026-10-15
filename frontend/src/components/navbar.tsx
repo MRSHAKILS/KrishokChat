@@ -48,6 +48,7 @@ export function Navbar() {
     try {
       const isSun = localStorage.getItem("krishokchat:contrast") === "sunlight";
       if (isSun) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- read the persisted contrast preference from localStorage after mount
         setSunlight(true);
         document.documentElement.setAttribute("data-contrast", "sunlight");
       }

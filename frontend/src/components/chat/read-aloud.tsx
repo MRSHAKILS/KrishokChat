@@ -147,6 +147,7 @@ export function ReadAloudButton({
       mounted.current = true;
       return;
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- stop playback when the parent bumps stopTick
     if (stopTickValue > 0) stop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stopTickValue]);

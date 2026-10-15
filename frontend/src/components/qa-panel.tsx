@@ -69,6 +69,7 @@ export function QAPanel({
   useEffect(() => {
     const token = session?.access_token;
     if (!token) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- clear the farmer context when the session has no token
       setFarmerContext(null);
       return;
     }

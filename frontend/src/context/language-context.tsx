@@ -29,6 +29,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY) as Locale | null;
       if (saved === "en" || saved === "bn") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate persisted locale after mount; the server render must stay on the default locale
         setLocaleState(saved);
         document.documentElement.lang = saved;
         document.documentElement.setAttribute("data-lang", saved);

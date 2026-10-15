@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
@@ -43,6 +43,8 @@ export function PrescriptionModal({
   const [copied, setCopied] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const printRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line react-hooks/purity -- reference id is time-based and memoized per opening of the modal
+  const referenceId = useMemo(() => (open ? Date.now().toString().slice(-6) : ""), [open]);
 
   useEffect(() => {
     return () => {
@@ -231,7 +233,7 @@ export function PrescriptionModal({
                   <span>{en ? `Date: ${todayDisplay}` : `তারিখ: ${todayDisplay}`}</span>
                 </div>
                 <div>
-                  {en ? "Reference ID: " : "রেফারেন্স আইডি: "}<span className="font-mono text-ink">KC-{Date.now().toString().slice(-6)}</span>
+                  {en ? "Reference ID: " : "রেফারেন্স আইডি: "}<span className="font-mono text-ink">KC-{referenceId}</span>
                 </div>
               </div>
             </div>

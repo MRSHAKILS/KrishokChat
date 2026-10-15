@@ -237,7 +237,7 @@ export function DialectSelector({
               </span>
             </div>
             <div className="mt-1 text-xs sm:text-[13px] font-medium text-ink leading-snug">
-              "{q.colloquial}"
+              &quot;{q.colloquial}&quot;
             </div>
             <div className="mt-1.5 text-xs text-ink-faint flex items-center gap-1">
               <ArrowRight className="h-2.5 w-2.5 text-ochre shrink-0" />

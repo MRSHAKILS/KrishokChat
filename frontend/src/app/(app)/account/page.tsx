@@ -85,6 +85,7 @@ export default function AccountPage() {
   }, [token]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- stop the loading flag when there is no token to fetch with
     if (token) void load();
     else setFetching(false);
   }, [token, load]);
