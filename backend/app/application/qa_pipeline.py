@@ -352,19 +352,6 @@ class QAPipeline:
                             resolution_tier=ResolutionTier.INTERACTIVE_CLARIFICATION,
                             answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
                         )
-                        self._audit(
-                            request,
-                            result,
-                            verifier_flags=(),
-                            decision=decision,
-                            retrieved=[],
-                            cached=False,
-                            retrieval_query=retrieval_query,
-                            rewritten=False,
-                            timings=timings,
-                            generation_lane=None,
-                            llm_calls=llm_calls,
-                        )
                         return result
                 for stage in (PipelineStage.RETRIEVAL, PipelineStage.GENERATION, PipelineStage.VERIFIER):
                     await emit(stage, StageStatus.SKIP, "terminal safety decision")
@@ -475,22 +462,6 @@ class QAPipeline:
                     resolution_tier=ResolutionTier.INTERACTIVE_CLARIFICATION,
                     answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
                 )
-                self._audit(
-                    request,
-                    result,
-                    verifier_flags=(),
-                    decision=decision,
-                    retrieved=[],
-                    cached=False,
-                    retrieval_query=retrieval_query,
-                    rewritten=False,
-                    timings=timings,
-                    generation_lane=None,
-                    llm_calls=llm_calls,
-                )
-                if request.session_id:
-                    self.sessions.append(request.session_id, "user", request.query)
-                    self.sessions.append(request.session_id, "assistant", result.answer)
                 return result
 
             # NLU Disambiguation & Clarification Intercept:
@@ -538,22 +509,6 @@ class QAPipeline:
                     answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
                     quick_reply_chips=tuple(decision.intent.suggested_crops or ["ধান", "আলু", "টমেটো", "ভুট্টা", "বেগুন", "মরিচ"]),
                 )
-                self._audit(
-                    request,
-                    result,
-                    verifier_flags=(),
-                    decision=decision,
-                    retrieved=[],
-                    cached=False,
-                    retrieval_query=retrieval_query,
-                    rewritten=False,
-                    timings=timings,
-                    generation_lane=None,
-                    llm_calls=llm_calls,
-                )
-                if request.session_id:
-                    self.sessions.append(request.session_id, "user", request.query)
-                    self.sessions.append(request.session_id, "assistant", result.answer)
                 return result
 
             # Stage 2B: Adaptive Retrieval Routing (PRISM-RAG Module 2B.4)
@@ -644,22 +599,6 @@ class QAPipeline:
                     answerability_level=AnswerabilityLevel.A4_MISSING_CRITICAL_INFO,
                     quick_reply_chips=list(agreement_res.quick_reply_chips),
                 )
-                self._audit(
-                    request,
-                    result,
-                    verifier_flags=(),
-                    decision=decision,
-                    retrieved=retrieved,
-                    cached=False,
-                    retrieval_query=retrieval_query,
-                    rewritten=rewritten,
-                    timings=timings,
-                    generation_lane=None,
-                    llm_calls=llm_calls,
-                )
-                if request.session_id:
-                    self.sessions.append(request.session_id, "user", request.query)
-                    self.sessions.append(request.session_id, "assistant", result.answer)
                 return result
 
             await emit(PipelineStage.GENERATION, StageStatus.START)
