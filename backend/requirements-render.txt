@@ -32,17 +32,11 @@ google-genai>=2.17.0
 # --- BM25 Retrieval (pure Python, no torch) ---
 rank-bm25>=0.2.2
 
-# --- Bengali NLP ---
-bnunicodenormalizer>=0.1.7
-
 # --- Auth ---
 pyjwt[crypto]>=2.13.0
 
 # --- TTS (Bengali audio, keyless via Microsoft Edge) ---
 edge-tts>=7.2.8
-
-# --- PDF generation ---
-reportlab>=5.0.0
 
 # --- Data utils (soil regression uses numpy) ---
 numpy>=1.26.0
