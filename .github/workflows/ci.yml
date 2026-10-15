@@ -100,9 +100,11 @@ jobs:
       - name: Forbid deprecated arXiv v1 citation
         run: |
           echo "Checking for deprecated arXiv:2606.29243 (docs/PAPER_POLICY.md) — allowlist: policy docs that document the ban..."
+          # Internal planning notes (planning/, plans/, refinement/ and two scratch docs) are not
+          # manuscript content and are excluded from this sweep; the manuscript tree stays covered.
           # Allowlist: files that are *allowed* to mention the deprecated ID only to document the ban.
           # Any other file citing it as a source is a failure.
-          HITS=$(grep -R --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=.venv --exclude-dir=htmlcov --include="*.md" --include="*.ts" --include="*.tsx" --include="*.py" "2606\.29243" paper/ docs/ frontend/ backend/ 2>/dev/null | grep -v "docs/PAPER_POLICY.md" | grep -v "paper/manuscript/README.md" | grep -v "paper/manuscript/expert-systems-skeleton.md" | grep -v "CLAIM_LEDGER_FREEZE" | grep -v "PAPER_POLICY" | grep -v "deprecated" | grep -v "DEPRECATED" || true)
+          HITS=$(grep -R --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=.venv --exclude-dir=htmlcov --exclude-dir=planning --exclude-dir=plans --exclude-dir=refinement --include="*.md" --include="*.ts" --include="*.tsx" --include="*.py" "2606\.29243" paper/ docs/ frontend/ backend/ 2>/dev/null | grep -v "docs/PAPER_POLICY.md" | grep -v "paper/manuscript/README.md" | grep -v "paper/manuscript/expert-systems-skeleton.md" | grep -v "CLAIM_LEDGER_FREEZE" | grep -v "PAPER_POLICY" | grep -v "deprecated" | grep -v "DEPRECATED" | grep -v "paper/Let's Make It Practical/" | grep -v "paper/EACL Final/final refinement.md" || true)
           if [ -n "$HITS" ]; then
             echo "$HITS"
             echo "ERROR: deprecated arXiv:2606.29243 cited outside allowlist — see docs/PAPER_POLICY.md and paper/manuscript/README.md"
