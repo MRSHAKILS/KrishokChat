@@ -43,6 +43,8 @@ jobs:
           cache-dependency-path: frontend/pnpm-lock.yaml
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Lint (errors fail the build)
+        run: pnpm exec eslint src
       - name: Build
         run: pnpm build
 
