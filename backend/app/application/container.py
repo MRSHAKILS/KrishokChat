@@ -236,6 +236,7 @@ def build_container(settings: Settings) -> AppContainer:
         corpus_version=settings.corpus_version,
         resolver=resolver,
         chunk_fallback=chunk_fallback,
+        offline_evidence=settings.offline_evidence_enabled,
     )
     vision_gate_config = VisionGateConfig(
         crop_confidence_threshold=settings.vision_crop_confidence_threshold,

@@ -168,6 +168,17 @@ class Settings(BaseSettings):
     chunk_fallback_enabled: bool = False
     chunk_fallback_top_k: int = Field(default=4, ge=1, le=10)
 
+    # Keyless evidence lane: when the safety classifier is unreachable (no provider
+    # key), a crop-identified question may be answered with verbatim, non-chemical
+    # sentences from crop-fenced retrieval instead of a bare referral. Nothing is
+    # generated. The deterministic precheck still runs first and dose, chemical and
+    # application sentences are withheld. Default off: behavior is unchanged.
+    # Experimental: on the 1,000-question farmer benchmark it answers about 11% of
+    # questions with 0 dose or chemical leaks, but a read-through found a large
+    # minority of excerpts only loosely related to the question. Lexical matching
+    # cannot tell "mentions the crop and a word" from "answers the question".
+    offline_evidence_enabled: bool = False
+
     # R7: model pricing table path and budget guard settings.
     # Default off (budget guard disabled; demo mode unaffected).
     model_prices_path: str = ""

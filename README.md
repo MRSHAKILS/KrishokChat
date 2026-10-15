@@ -36,6 +36,19 @@ What needs a provider key (not included in this image):
   safety classifier calls an LLM first and the pipeline stops when that call fails.
 - BM25 retrieval over the knowledge base, and server-side vision classification.
 
+### Optional keyless evidence lane (experimental)
+
+Set `OFFLINE_EVIDENCE_ENABLED=true` and, when no provider key is configured, the backend
+answers crop-identified questions with verbatim sentences from crop-fenced retrieval instead
+of a referral. Nothing is generated. The deterministic precheck still runs first, and any
+sentence with a dose, a number, a chemical or an instruction is withheld.
+
+Measured on the 1,000-question farmer benchmark: 11% of questions get excerpts, the 57
+precheck blocks are unchanged, and no emitted sentence contained a dose, digit, chemical or
+verifier flag. It is **off by default** because lexical matching cannot guarantee that an
+excerpt is about the farmer's actual problem; a read-through found a sizeable minority that
+were only loosely related. Treat it as an offline convenience, not an advisory answer.
+
 The image is torch-free (`backend/requirements-render.txt`). The full stack (torch, FAISS,
 YOLO, local LLM) is a separate build and needs the model weights.
 
